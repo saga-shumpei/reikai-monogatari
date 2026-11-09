@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: Ogre 娘 [685] - Volume 21 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 21 Table of Contents</a>
+      <span>Volume 21</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 21 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: Ogre 娘 [685]</h1>
+      <p class="chapter-title-ja">鬼娘〔685〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hakusetsu gaigai to shimen no sanya, shironuno no shitone o kabutta gotoku manmokushōzen to shite itsuten no chiri o todomezu, michi tou hito mo ara kaze ni mukatte susumu Tatsukuniwake no sendenshi wa, kokukoku ni furitsumoru yuki o fumiwake, yōyaku tani to tani to no hosoki jifujirotō ni idetari.</p>
+          <p class="en-p">Taiyō wa yukigumo ni shikira rete hikari o chiukū ni tsutsumi, tōzainanboku no haukau sae mo wakaranaku natte kita. Hi wa yōyaku yukigumo no seiten ni bosshita to miete, nan to wa nashi ni usugura samushi. Saredo yuki no hikari ni shimen wa tsukiyo no gotoku mōrō to hikatte iru. Tatsukuniwake wa goshiyaku iuyo no yuki ni tozasare shintai kiwamatte, mohaya tōshi sen bakari ni kurushimi tsutsu, Kototama no tsuzuku kagiri Amatsunorito o sōjiyō shi, yo no akuru o matsu no yamu naki hame to wa narinu.</p>
+          <p class="en-p">Wazuka ichiri bakari no yamaji ni ichinichi o tsuiyashitaru o mireba, ikani tsūro no konnan narishi ka o sassuru ni amari ari. Masshiro no yuki no naka yori shiroki kage, mukumuku to fukuredashi, ikkai no shiroki tachisugata to natte Tatsukuniwake ga tatazumu mae ni araware kitari, mono o mo iwazu tsumetaki te o nobashite, Tatsukuniwake no te o tori susunde yuku.</p>
+          <p class="en-p">Tatsukuniwake wa kokoro no naka ni ayashimi nagara, mohaya ikan tomo suru koto atawazu, kaibutsu ni te o hikaretaru mama ni fuan no nen ni kararete susumi yuku. Kaibutsu wa koyama no fumoto no araya no naka ni, Tatsukuniwake o izanōta.</p>
+          <p class="en-p">Tatsukuniwake: 'Ikanaru kata ka zonjimasenu ga, yuki ni tozasare miugoki mo narazu, konnan no tokoro e oide kudasaimashite, sayō na anzen chitai e go-annai kudasaimashita no wa, makoto ni arigatō zonjimasu.'</p>
+          <p class="en-p">Kaibutsu: 'Nanji wa Mukadehime no buka ka, mata wa Kotoyoriwake-no-Mikoto no buka naru ka, hentō shidai de wareware ni mo hitotsu no kangae ga aru kara, teki ka, mikata ka kikashite hoshii.'</p>
+          <p class="en-p">Tatsukuniwake: 'Sayū iu anata wa, nan to iu gofujin de gozaimasu ka.'</p>
+          <p class="en-p">Kaibutsu: 'Anata no hentō o kiku made mōsumai. Wareware no teki naraba ima koko de, nanji o seibatsu shinakereba narazu, moshi mikata naraba doko made mo tasukeru kakugo da yo. Saa, Baramon-kyō ka Sangyō-kyō ka, futatsu ni hitotsu no hentō o kikimashō.'</p>
+          <p class="en-p">Tatsukuniwake: 'Tatoe Baramon-kyō demo, Sangyō-kyō demo makoto no michi ni kawari wa arimasenu. Watashi wa makoto no michi no sendenshi desu. Sangyō-kyō, Baramon-kyō, mata Arupusu-kyō to iu yō na kubun shita meishō ni, amari omoki o oite wa orimasenu.'</p>
+          <p class="en-p">Kaibutsu: 'Sore wa dare shimo onaji koto. Shikashi ima nanji no zokushite iru kyōha wa, nan-kyō da to tazunete iru no da.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">白雪皚々として四面の山野、白布の褥を被つた如く満目蕭然として一点の塵を留めず、道問ふ人もあら風に向つて進む竜国別の宣伝使は、刻々に降り積る雪を踏み分け、漸く谷と谷との細き十字路頭に出でたり。</p>
+            <p class="ja-classical-line">太陽は雪雲にしきられて光を中空に包み、東西南北の方向さへも判らなくなつて来た。日は漸く雪雲の西天に没したと見えて、何とはなしに薄暗く寂し。されど雪の光に四面は月夜の如く朦朧と光つてゐる。竜国別は五尺有余の雪に鎖され進退谷まつて、最早凍死せむばかりに困しみつつ、言霊の続く限り天津祝詞を奏上し、夜の明くるを待つの止むなき破目とはなりぬ。</p>
+            <p class="ja-classical-line">僅か一里許りの山路に一日を費やしたるを見れば、如何に通路の困難なりしかを察するに余りあり。真白の雪の中より白き影、むくむくと膨れ出し、一塊の白き立姿となつて竜国別が佇む前に現はれ来り、物をも言はず冷たき手を伸ばして、竜国別の手を執り進んで行く。</p>
+            <p class="ja-classical-line">竜国別は心の中に怪しみ乍ら、最早如何ともすること能はず、怪物に手を引かれたる儘に不安の念に駆られて進み行く。怪物は小山の麓の荒屋の中に、竜国別を誘うた。</p>
+            <p class="ja-classical-line">『如何なる方か存じませぬが、雪に鎖され身動きもならず、困難の処へお出で下さいまして、斯様な安全地帯へ御案内下さいましたのは、誠に有難う存じます』</p>
+            <p class="ja-classical-line">『汝は蜈蚣姫の部下か、但は言依別命の部下なるか、返答次第で吾々にも一つの考へがあるから、敵か、味方か聞かして欲しい』</p>
+            <p class="ja-classical-line">『さう云ふ貴方は、何と云ふ御婦人でございますか』</p>
+            <p class="ja-classical-line">『貴方の返答を聞くまで申すまい。吾々の敵ならば今此処で、汝を征伐せなければならず、もし味方ならば何処迄も助ける覚悟だよ。サア、バラモン教か三五教か、二つに一つの返答を聞きませう』</p>
+            <p class="ja-classical-line">『仮令バラモン教でも、三五教でも誠の道に変りはありませぬ。私は誠の道の宣伝使です。三五教、バラモン教、又アルプス教と云ふやうな区分した名称に、余り重きを置いては居りませぬ』</p>
+            <p class="ja-classical-line">『それは誰しも同じこと。併し今汝の属して居る教派は、何教だと尋ねてゐるのだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'Is it not fine regardless of what Nanikyō it may be? I understand that it is the Tenshiyoku of a Sendenshi to do one's Saizen for the sake of the Tenka and Kokuka.'</p>
+          <p class="en-p">Speaker: 'Ahahaha, what a Hikefu-senban man you are. Why do you not say clearly if it is Ananai-kyō or not?'</p>
+          <p class="en-p">The creature roared like thunder, putting strength into that final word. Looking at it, the Kuwaibutsu was rotating its Medama, which were like fists, round and round.</p>
+          <p class="en-p">Speaker: 'I had thought you were a strange Kuwaibutsu asking peculiar things since a while ago, but you are indeed a suspicious fellow. You must be a Furudanuki, are you not? You have been snowed in, are suffering for Shiyokureu, and have come here because you want the Bentau at our waists, I suppose. While it would be easy to give it to you, it would cause us some Meiwaku. Well, I pity you, but you had better Tachisa from here quickly. Such a Seikiu is Dame.'</p>
+          <p class="en-p">Speaker: 'Are you not a Sendenshi who saves people? While you are in a Shiyokumu where you must abandon your own self to save others, you leave us who are currently starving to die, and as long as your own belly is full, is that enough? Do you still think you are a Sendenshi who saves people? You are a fake who deceives this world. You call us Bakemono, but you are the true Bakemono. Although you wear the skin of a human, your Mitama is no different from a four-legged beast.'</p>
+          <p class="en-p">Speaker: 'Oi, I do not know if you are a fox or a Tanuki, but is there such an arrogant way of speaking when begging for food from others?'</p>
+          <p class="en-p">Speaker: 'Who said I wanted the food possessed by a filthy human like you? Excuse me, but we do not act like beggars. There is only one thing I want. It will be fine if you give me that.'</p>
+          <p class="en-p">Speaker: 'What on earth is it that you say you want?'</p>
+          <p class="en-p">Speaker: 'It is nothing else. I want you to shave off the tip of that high nose of yours.'</p>
+          <p class="en-p">Speaker: 'This nose is a precious item entrusted to me by my parents. This, at least, I cannot give you.'</p>
+          <p class="en-p">Speaker: 'Then there is something I want to exchange. Since I am exchanging a large thing for a small thing, if anything, I am the one who loses quite a bit, but it is an unwritten law of modern humans that the one who makes the request provides two or three times the actual value, so although my thing is large, I want you to exchange it with me.'</p>
+          <p class="en-p">Speaker: 'How could I possibly exchange it for an eight-mat size? It would be a hindrance to walking and I could not bear it.'</p>
+          <p class="en-p">Speaker: 'Ahahaha, humans are filthy things, are they not? You immediately turn your thoughts to such places. What I am requesting is not such a thing. Your eyes are too small, so you are a Bakemono equivalent to a blind person who cannot see what lies ahead. Therefore, I am asking you to exchange my eyes for your eyes.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『何教でも好いぢやありませぬか。兎角天下国家の為に最善を尽くすのが、宣伝使の天職だと心得てゐます』</p>
+            <p class="ja-classical-line">『アハヽヽヽ、どうも卑怯千万な男だこと。三五教なら三五教だと、キツパリ云つたら如何ですか』</p>
+            <p class="ja-classical-line">と最後の一言に力を籠め雷の如く呶鳴り立てた。見ればその怪物は拳のやうな目玉をクルクルと廻転させてゐる。</p>
+            <p class="ja-classical-line">『先程より妙なことを尋ねる怪物だと思つて居たら、いよいよ怪しき奴だ。其方は古狸であらうがなア。雪に鎖され食料に苦しみ、吾々が腰の弁当が欲しさにやつて来たのだらう。貴様に与へるのは易いこと乍ら、聊か此方が迷惑を致す。マア気の毒乍ら、此処を早く立去つたがよからうぞ。そんな請求は駄目だから』</p>
+            <p class="ja-classical-line">『お前は人を救ふ宣伝使ぢやないか。わが身を捨てて人を救はねばならぬ職務にあり乍ら、現在飢ゑたる吾々を見殺しに致し、自分さへ腹が膨れたら、それで好いのか、それでも人を救ふ宣伝使と思うて居るか。此世を誑る偽物奴、吾々を化物と申すが、汝こそ真の化物だ。人間の皮を被つては居るものの、汝が身魂は四足同然ぢや』</p>
+            <p class="ja-classical-line">『オイ狐か、狸か知らないが、人に食物をねだるのに、そんな驕慢な言葉があるかい』</p>
+            <p class="ja-classical-line">『誰が貴様のやうな穢れた人間の所持する食物をくれいと云つたか。吾々は失礼乍ら乞食の真似は致さぬ。唯一つ欲しいものがある。それを頂戴すれば好いのだ』</p>
+            <p class="ja-classical-line">『お前の欲しいと云ふのは一体何だ』</p>
+            <p class="ja-classical-line">『外でも無い。其の高い鼻の先を削つて貰ひたいのだ』</p>
+            <p class="ja-classical-line">『此鼻は親から預かつた一つの貴重品だ。こればかりは遣ることは出来ない』</p>
+            <p class="ja-classical-line">『そんなら一つ交換して欲しいものがある。大きな物と、小さい物と交換するのだから、どちらかと云へば俺の方が余程損がゆくやうなものだが、申込んだ方から実物の二倍三倍を提供すると云ふことは、現代人間の不文律だから、俺の物は大きいが交換をして貰ひたい』</p>
+            <p class="ja-classical-line">『八畳敷と交換して堪るものかい。歩くのに妨害になつて仕方が無いワ』</p>
+            <p class="ja-classical-line">『アハヽヽヽ、人間と云ふものは汚いものだな。直にそんなとこへ気を廻しよる。俺の要望するのは、そんなものぢやない。貴様は余り目が小さいから、向ふ先が見えぬ盲目同様の化物だ。それで俺の目と貴様の目と交換して呉れと云ふのだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">If you were to press such large eyes against my face, one would be enough to fill it entirely.</p>
+          <p class="en-p">I hear there is a monster called a one-eyed Kozō. Your soul is perfectly suited for that. Since your spirit and body are in unity, let us exchange them.</p>
+          <p class="en-p">Wouldn't one eye be too many?</p>
+          <p class="en-p">You could attach the remaining one to the back of your head. That would be convenient, as you would be able to see both front and back clearly. Come, shall I forcefully pluck out your eyeballs and swap them?</p>
+          <p class="en-p">I am a Ningensama. These eyes of mine are quite sufficient for my needs. I must decline this exchange.</p>
+          <p class="en-p">I am one who does not retreat once I have spoken. In that case, there is no help for it. I shall take your rotten soul.</p>
+          <p class="en-p">Do not talk nonsense. My soul is a Suishiyōdama. Where is it rotten? Are you blind, with those large eyes of yours wide open?</p>
+          <p class="en-p">Are you not that creature who turned into a four-legged beast at the mansion of Matsuhime at the foot of Takashiroyama? You should know my true nature.</p>
+          <p class="en-p">Well now, who on earth are you? You seem to know a great deal about me.</p>
+          <p class="en-p">Ahahaha.</p>
+          <p class="en-p">As she laughed and swiftly removed her head covering, it was none other than Matsuhime, beyond any doubt.</p>
+          <p class="en-p">Oh, you are Matsuhime-sama, you certainly do play cruel pranks. My heart nearly jumped out of my chest.</p>
+          <p class="en-p">Ohohoho, do I look like Matsuhime to you? That is precisely why I said I would exchange those eyeballs of yours.</p>
+          <p class="en-p">Then who are you?</p>
+          <p class="en-p">I am one called Yukihime, who has manifested from the spirit of snow.</p>
+          <p class="en-p">Does snow have a spirit, I wonder?</p>
+          <p class="en-p">As long as the sun of Truth does not shine across the sky of your heart, the mystery of this Yukihime cannot be solved. With a soul as clouded as today's sky, poor thing, you cannot even see properly.</p>
+          <p class="en-p">Because you appeared with eyes like balls, I thought you were a Matokiri-tanuki monster. Can Yukihime really transform into such various forms?</p>
+          <p class="en-p">When you are at a dead end and swing a stick in frustration, even you would likely open your eyes wide in distress, would you not? That is why I said you would encounter such large, harsh eyes. If you wish for one more, shall I open my large eyes and show you?</p>
+          <p class="en-p">No, that is quite enough. It is a terrible nuisance, so I shall refrain from any more.</p>
+          <p class="en-p">How about this?</p>
+          <p class="en-p">Saying this, she opened her eyes wide, like a snake-eye umbrella, to show him. As Tatsukuniwake was startled and fell backward, Yukihime instantly turned into a white fox and ran off, dashing down the mountain path at full speed.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『その様な大きな目を俺の面に当てやうものなら、一つで一杯になつて了ふワ』</p>
+            <p class="ja-classical-line">『一つ目小僧と云ふ化物があるそうだ。お前は恰度それに魂が適合して居る。霊肉一致だから交換してくれ』</p>
+            <p class="ja-classical-line">『一つの目は余るぢやないか』</p>
+            <p class="ja-classical-line">『残り一つは後頭部へ付けたらよからう。さうすれば前も後ろも、よくわかつて調法だぞ。サア強圧的に眼玉を抜いて付け替へてやらうか』</p>
+            <p class="ja-classical-line">『俺は人間様だ。此目で十分に用を足して居るのだ。此の交換は御免蒙る』</p>
+            <p class="ja-classical-line">『一旦言ひ出した事は後へ退かぬ某だ。そんなら仕方がない。お前の腐つた魂を受取らう』</p>
+            <p class="ja-classical-line">『馬鹿云ふな。俺の魂は水晶玉だ。何処が腐つて居るか。大きな目を剥きよつて、それが見えぬのか』</p>
+            <p class="ja-classical-line">『貴様は高城山の山麓、松姫の館に於て四足になつた代物ぢやないか。俺の素性が判らぬ筈はあるまい』</p>
+            <p class="ja-classical-line">『ハテナー、一体貴様は何者だ。俺の事をよく知つてるぢやないか』</p>
+            <p class="ja-classical-line">『アハヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ひ乍ら、被物をツツと脱げばこは如何に、擬ふ方なき松姫であつた。</p>
+            <p class="ja-classical-line">『ヤア貴女は松姫さま、随分悪戯をなさいますな。本当に肝玉が転宅しかけましたよ』</p>
+            <p class="ja-classical-line">『オホヽヽヽ、私が松姫に見えますかな。それだから其の眼の玉を交換しようと云つたのだよ』</p>
+            <p class="ja-classical-line">『そんならお前は何者だ』</p>
+            <p class="ja-classical-line">『雪の精から現はれた雪姫と云ふものだよ』</p>
+            <p class="ja-classical-line">『雪にでも霊があるのかなア』</p>
+            <p class="ja-classical-line">『お前の心の空に真如の太陽が輝き渡らぬ限り、此の雪姫の謎は解けないよ。曇り切つた今日の空のやうな身魂では、可愛相に目も碌に見えまい』</p>
+            <p class="ja-classical-line">『毬のやうな目を剥いて現はれて来るものだから、的切り狸のお化と思つたのだ。雪姫はそんなに種々に変化出来るものかなア』</p>
+            <p class="ja-classical-line">『ゆき詰つて、行くに行かれぬ橡麺棒を振つた時は、お前でも大きな目を剥き出して困るだらうがなア。さうだからデカイきつい目に遇うたと言ふのだ。モー一つ御望みなら大きな目を剥いて、御覧に入れようか』</p>
+            <p class="ja-classical-line">『いやモー沢山だ。めい惑千万、これで御遠慮申して置かう』</p>
+            <p class="ja-classical-line">雪姫は、</p>
+            <p class="ja-classical-line">『これでもかア』</p>
+            <p class="ja-classical-line">と言ひ乍ら、蛇の目の傘のやうな、大きな目を剥いて見せる。竜国別は驚いて後に倒れる途端に、雪姫は忽ち白狐となつて一目散に山道を駆出し逃げて行く。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ah, what a great surprise that was. Now that the true form of that Dogitsune fellow is known, there is nothing to fear. If I do not pursue him and bring him to his Ōjiyō, I cannot fulfill my role as a Sendenshi. However, in this heavy Ōyuki, while a Yotsuashi might walk well, it is a bit difficult for a Ningen.</p>
+          <p class="en-p">As he spoke this Dokugo and looked around, the snow, which he thought had piled up to over six Rokushiyaku, had only Itsusun of fox Ashikata upon it.</p>
+          <p class="en-p">Tatsukuniwake folded his arms and sat down heavily.</p>
+          <p class="en-p">Ah, what is this? That fox fellow has bewitched me. I thought I had spent Ichinichi breaking my bones and advancing along the deep Yukimichi, but it was just the same Ihakage as before. It seems something is wrong with me. Well, I shall now recite the Amatsunorito, receive the Goshinriki of the Ōkami, and proceed forward. I have had an unexpected dream in an unexpected place. It seems the night has broken. If I follow these fox footprints, I should be able to find the path.</p>
+          <p class="en-p">Saying this, he relied on the footprints marked in the Hakusetsu and marched forward.</p>
+          <p class="en-p">When he thought he had advanced about seven or eight chō, a wild boar appeared and crossed in front of him.</p>
+          <p class="en-p">How strange. First I thought there were fox footprints, and now a boar. I might even encounter a real tanuki fellow next.</p>
+          <p class="en-p">Just as he stood there, a stray arrow whistled through the air from nowhere, grazed over his head, and struck the face of the boar with a thud.</p>
+          <p class="en-p">The boar panicked and rolled about, finally crossing a bald mountain and hiding its form in the valley beyond.</p>
+          <p class="en-p">Ah, what a pitiful thing. It is our role to save even birds and beasts. Perhaps the Kami is trying to draw our attention. It would be terrible to abandon this. Fortunately, I must search for the boar's dwelling by following the footprints left in the Hakusetsu, perform Chinkon, and save it. Also, if I do not pull out that arrow, it will surely not survive. In any case, saving this creature is the priority.</p>
+          <p class="en-p">He climbed up the bald mountain with a steady pace.</p>
+          <p class="en-p">This place was the foot of Ōtani-yama, a grassy plain overgrown with pampas grass called Iwagaya, where no human had ever set foot. As he followed the bloodstains that had fallen here and there, he found a rock cave, and the aforementioned boar had already expired.</p>
+          <p class="en-p">Tatsukuniwake: 'Haha, so this was the boar's dwelling. Still, it is fortunate for the boar that it did not die on the way but managed to return to its own home before collapsing. I shall bury it deeply somewhere here.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『アヽ偉いビツクリさせよつた。奴狐の野郎、彼奴の正体がモウ斯う判つた以上は別に怖れることもない。跡追つかけて往生させねば宣伝使の役が勤まらぬ。併しこの大雪の中、四足は歩きよからうが、人間は一寸困るワイ』</p>
+            <p class="ja-classical-line">と独語し乍ら四辺を見れば六尺有余もタマつたと思ふ雪は、僅か一寸許り、狐の足形がついて居る。</p>
+            <p class="ja-classical-line">竜国別は手を組んでドツカと坐り、</p>
+            <p class="ja-classical-line">『アヽ何の事だ、狐の奴、俺を魅み居つたなア。一日骨を折つて深い雪路を進んだ積りだつたが、矢張元の岩蔭だつたワイ。俺はどうかして居ると見える。サアこれから一つ天津祝詞を奏上し、大神の御神力を頂戴して前進することにしよう。思はぬ所で思はぬ夢を見たものだ。どうやら夜が明けたらしい。此の狐の足跡を踏むで行けば、道路が分るだらう』</p>
+            <p class="ja-classical-line">と薄雪に印した足跡を頼りにドシドシ進み行く。</p>
+            <p class="ja-classical-line">七八丁許り前進したと思ふ時、一頭の猪が現はれ前を横ぎる。</p>
+            <p class="ja-classical-line">『ハテ不思議だ。狐の足跡があると思へば又猪だ。今度目は本当の狸の野郎に出会すのかも知れないぞ』</p>
+            <p class="ja-classical-line">と佇む折しも、何処ともなく空を切つてヒユウと唸り乍ら、頭上を掠めて一本の流れ矢が猪の面部に発止と突立つ。</p>
+            <p class="ja-classical-line">猪は狼狽へ騒いで転げ廻り、終に一つの禿山を越えて、向ふの谷に姿を隠したり。</p>
+            <p class="ja-classical-line">『アヽ可愛相なことだ。鳥、獣でも助けるのが吾々の役だ。これや神様が吾々の気を惹いて御座るのかも知れない。之を見捨てて行つては大変だ。幸ひ薄雪に残つた足跡を索ねて、猪のお宿を探し、鎮魂を施して助けてやらねばならぬ。又彼の矢を抜いてやらねば到底助かるまい。何は兎もあれこれを救ふが第一だ』</p>
+            <p class="ja-classical-line">と禿山をトントン登り進み行く。</p>
+            <p class="ja-classical-line">此処は大谷山の山麓、岩ケ谷といふ芒の生ひ茂つた、人の行つたことのないやうな草原である。彼方此方に落ちたる血糊を索ねて進んで行くと、其処に一つの岩穴があり、以前の猪は既に縡切れてゐる。</p>
+            <p class="ja-classical-line">竜国別『ハヽア此処が猪の棲処だつたなア。それでも途中で死なずに、自分の棲処まで帰つて倒れたのはまだしも、猪に取つては幸福だ。何処ぞ此処に厚く葬つてやらう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He picked up a stone of a moderate size and began to dig the earth with a clattering sound.</p>
+          <p class="en-p">From within the rock cave, a woman of twenty-five or six, with horns growing from her head, came out smiling broadly and immediately clung to the carcass of the wild boar, beginning to suck its blood. As Tatsukuniwake watched this scene in silence, the Onimusume, having finished sucking every drop of blood from the body with a smacking sound as if it were delicious, stroked her belly with both hands. It appeared she had just noticed Tatsukuniwake standing there, for she widened her eyes, pursed her lips, and glared at him with a terrifying intensity, saying:</p>
+          <p class="en-p">Onimusume: 'Ya! Are you not Tatsuwaka?'</p>
+          <p class="en-p">Tatsukuniwake replied:</p>
+          <p class="en-p">Tatsukuniwake: 'Oi, are you not Omitsu? Your parents did not know your whereabouts and were worried sick every single day. They even made pilgrimages to the mansion on Takashiroyama of the Uranai-kyo many times, but since they could not find you no matter what, they set the day you disappeared as the anniversary of your death and held a grand funeral, at which I even served as a ritualist. Come now, hurry home to your parents' house. It is unbearable for you to become an Onimusume in a place like this. I am on my way to Takaharuyama for a subjugation mission, and while it would be easy to take you along, I am not permitted to travel with a woman. Why do you not hurry home now?'</p>
+          <p class="en-p">Onimusume: 'Look here, Tatsuwaka-san. When I was shaving my grandmother's eyebrows, I accidentally cut her face. So much blood flowed out that I was startled and licked it, and ever since then, I acquired a taste for raw blood. I began to crave the blood of humans and beasts, and in the end, horns grew on my head like this, and I became an Onimusume. How could I return to my home in such a state? Now that you know where I am, you will surely go back to the village and talk about it. If you do that, it will be the end of me, so for the sake of protecting my own body, I must, however regretfully, take your life. Prepare yourself.'</p>
+          <p class="en-p">Tatsukuniwake: 'Do not say such unreasonable things. Surely you know something of gratitude. Do you not remember that when you were a child, this uncle of yours carried you on his back, held you in his arms, let you urinate, and even cleaned up your excrement? Can you really say you will eat me, even out of a sense of duty for that? One who does not know gratitude is not a human. Is it not said that even a crow has the filial piety to feed its parents, and a dog never forgets the master who fed it for three days for its entire life?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と手頃の石を拾つて、土をカチカチ掘り初める。</p>
+            <p class="ja-classical-line">岩穴の中より二十五六の女、角を生やして莞爾々々し乍ら出で来り、矢庭に猪の屍骸に取つき血を吸ひ初める。竜国別は黙つて此様子を眺めて居ると鬼娘は、美味さうにチウチウと音をさせて全身の血をスツカリと吸つて了ひ、腹を両手で撫で乍ら竜国別の立つて居るのに気がついたと見え、目を丸くし、口を尖らし、</p>
+            <p class="ja-classical-line">『ヤアお前は竜若ぢやないか』</p>
+            <p class="ja-classical-line">と睨めつける物すごさに、竜国別は、</p>
+            <p class="ja-classical-line">『オイ、お前はお光ぢやないか。お前の両親は行方が知れぬので毎日日日心配して居つたよ。ウラナイ教の高城山の館へも幾度か参拝して来たが、如何しても知れないので、出た日を命日と定めて立派な葬式を営まれたが、其の時に俺も祭官に列したことがある。サアサアお前は早く親の家へ帰れ。こんな処で鬼娘になつては堪らないぞ。高春山に俺は征伐に行くものだが、これから伴れて行つてやるのは易いけれど、女と同道は許されないから、これから早く家へ帰つたら如何だ』</p>
+            <p class="ja-classical-line">『コレ竜若さん、私は祖母さんの眉毛を剃つて居ました時、誤つて顔を斬り、沢山の血が出たので、驚いて嘗めて見たところ、それから生血の味をおぼえて、人間や獣の血が吸ひたくなり、到頭こんなに頭に角が生えて鬼娘になつて了つたのだ。斯んな態して如何して我家へ帰れませう。お前さんも私の所在を知つた以上は、村に帰つて喋るであらう。さうすれば私は最早身の終りだから、自分の肉体保護の上から、気の毒乍らお前の生命を貰ふのだ。覚悟を為され』</p>
+            <p class="ja-classical-line">『そんな無茶な事を云ふない。チツとはお前も恩義と云ふことを知つて居るだらう。此の小父さんが貴様の子供の時には、負うたり、抱いたり、小便をさしてやつたり、うんこの掃除まで世話をやいてやつたのを覚えて居るだらう。ちつとは其の義理ででも、俺を喰ふなんて云ふことが出来るものか。恩を知らぬものは、人間ぢやないぞ。烏に反哺の孝あり、犬は三日飼うて貰つた主人を、一生忘れぬと云ふぢやないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Onimusume: 'If you understand such things, how can you become an Onimusume? If you concern yourself with the Giri and Ninjiyō of the world, you cannot complete the Shiugiyō of an ogre. Come now, Oji-san, meeting me here is the end of your luck. Ah, the scent of delicious blood is in the air. I am sorry, but I shall partake of you.'</p>
+          <p class="en-p">Tatsukuniwakenomikoto: 'Hey, hey, I am different from the Tatsuwaka of the past. I am Tatsukuniwakenomikoto, favored by Kotoyoriwakenomikoto-sama, the Sendenshi of the Ananai-kyō with infinite Shinriki. If you do something foolish, you will be cast into the bottom of Jigoku and meet the Seibai of the ogres. Do you not fear the Mirai?'</p>
+          <p class="en-p">Onimusume: 'Ho ho ho ho, if an Onimusume fears the ogres of Jigoku, what will become of her? Even if I go to Jigoku, they will say a splendid Onimusume has arrived and I will be Motehaya. My Guwanbau is to become an ogre. If I drink your Ikichi, I can become an even more splendid Onimusume. I have already grown tired of drinking the Ikichi of boars.'</p>
+          <p class="en-p">Tatsukuniwakenomikoto: 'Are you saying that you will eat me no matter what? Or rather, are you saying you will drink my blood?'</p>
+          <p class="en-p">Onimusume: 'If I do not drink it, my Karada will burn. I am suffering too, so I have no time to reflect on Giri and Ninjiyō. However, since you have taken such good care of me, I feel a sense of pity for you, though I know not why. I shall drink only a little and spare you.'</p>
+          <p class="en-p">She then took a stone of a convenient size and struck the forehead of Tatsukuniwake with a sharp clatter. Tatsukuniwake lost consciousness and collapsed on the spot.</p>
+          <p class="en-p">Onimusume: 'Ah, poor Oji-san. If I drink too much, your life will be in danger, so I shall drink only a sho or two and spare you.'</p>
+          <p class="en-p">She placed her mouth to the wound and began to drink with a slurping sound.</p>
+          <p class="en-p">Onimusume: 'Ah, what is this? This blood is acrid. It has quite a bitter taste. It seems your Mitama is clouded, and perhaps that is why even your flowing blood tastes bad. Come now, Oji-san, I shall spare you now. Wake up.'</p>
+          <p class="en-p">Being shaken awake, Tatsukuniwake returned to his senses.</p>
+          <p class="en-p">Tatsukuniwake: 'Ah, somehow I feel refreshed. My Karada has suddenly become light, and even my eyes have become clear.'</p>
+          <p class="en-p">Onimusume: 'I have sucked out the evil spirits that were passing through your blood vessels, so you have now become nothing but fine, red, sincere blood. From here on, you are beyond my reach. You have become the pure essence of the Yamato-damashii. However, you must not tell anyone about this. If you do, my ears will hear it even from a thousand ri away; I will fly through the void and pull off your head, so be prepared for that. It would be easy to kill you here, but because I have the weakness of having been helped by you, even a wicked Onimusume like me cannot do anything. However, if you make a promise with me now and break it, then for the first time you will have committed the sin of breaking a vow, and at that time I will go to take your life with full justification, so please return with that resolve. With this, you should be able to carry out the conquest of Takaharu-yama splendidly. In human affairs, all is like the horse of the old man at the frontier. Because you were treated harshly by me, you will end up showing true merit as a result; so to speak, I am like your guardian deity. Be grateful.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『そんな事が解つて居つて、如何して鬼娘になれますか。世の中の義理や、人情を構つて居つたら、鬼の修行は出来るものぢやない。サア小父さん、此処で逢うたがお前の運の尽きだ。アヽ美味さうな血の香がして居る。済まないけれどよばれませう』</p>
+            <p class="ja-classical-line">『コラコラ俺は今迄の竜若とは違ふぞ。神力無限の三五教の宣伝使、言依別命様の御覚え芽出度き竜国別命ぢや。馬鹿な事を致すと地獄のどん底へ落されて、鬼の成敗に遇はねばならぬぞ。未来を怖れぬか』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、鬼娘が地獄の鬼が恐くて、如何なりませう。これでも地獄へ行つたら、立派な鬼娘が来たと云つて、持囃されるのだ。私は鬼になるのが願望だ。お前の生血を吸へば、もう一層立派な鬼娘になれる。猪の生血は最早呑み飽いたから』</p>
+            <p class="ja-classical-line">『如何しても俺を喰ふと云ふのか。イヤ血を吸はうと申すのか』</p>
+            <p class="ja-classical-line">『如何しても吸はねば私の身体が燃えて来る。私も苦しいから、義理、人情を省みる遑がない。併しあんまり御世話になつたのだから、何処とはなしに気の毒なやうな感じがする。ちつとばかり吸うてこらへて上げませう』</p>
+            <p class="ja-classical-line">と手頃の石を以て、竜国別の額をカツカツと打つた。竜国別は気が遠くなり、其の場に倒れた。</p>
+            <p class="ja-classical-line">『アヽ気の毒な小父さんだ。沢山呑むと生命が危いから、一二升許り呑んでこらへて上げよう』</p>
+            <p class="ja-classical-line">と傷口に口を当て、チウチウと呑み始めた。</p>
+            <p class="ja-classical-line">『アヽ如何したものか、此の血はエグイ。なかなか苦味がある。矢張身魂が曇つて居ると見えて、流れる血まで味が悪いのかなア。サアサア小父さん、モーこらへて上げよう。起きなさい』</p>
+            <p class="ja-classical-line">と揺り起されて竜国別は吾に帰り、</p>
+            <p class="ja-classical-line">『アヽなんだか気分がスイツとした。俄に身体が軽くなり、目までハツキリして来たやうだ』</p>
+            <p class="ja-classical-line">『お前の血管を通つて居る悪霊を薩張吸うて上げたのだから、モーお前さんは結構な赤い誠の血計りになつて了つたのだよ。此上は最早私の手に合はぬ。お前さんは愈大和魂の生粋になつて了つた。併し此事を誰にも話してはなりませぬぞや。話すが最後千里向かふからでも私の耳は聞えるから、宙を駆つて行き、お前の素首を引抜くから、其の覚悟でゐて下さいや。此処で殺すのは易いけれど、お前に助けられたと云ふ弱味があるので、如何に悪党な鬼娘でも如何する事も出来ない。併し私と今約束して、それを破れば、初めてお前さんに破約の罪が出来たのだから、其時は堂々と生命を取りに行くから、其の覚悟で帰つて下さい。これで高春山の征伐も立派に出来るだらう。人間万事塞翁の馬だ。私に酷い目に遇はされて、其結果誠の手柄を現はす様になるので、謂はば私はお前さんの守護神のやうなものだ。感謝しなさい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'What a strange Rikutsu that is. To be struck on the head and have one's blood sucked, only to be grateful for it—I have never heard of such a thing since the Kaibiyaku. I wonder where the Kanjiyō went so wrong.'</p>
+          <p class="en-p">Speaker: 'It is a settled matter. When the place changes, the goods change; when the house changes, the customs change; when you enter a village, you follow the village. In this Sekai, there are even countries that take a cut from Bakuchi to assist the national Kuwaikei, allowing the Kokumin to live in Anraku. On the other hand, there are countries where Bakuchi is considered a Zaiaku; thus, when the Shiyakuwai differs, the Heujiyun of Zenaku also differs. However, no matter where you go, breaking a Yakusoku is a Zaiaku. Did not Amaterasuōkami-sama and Susanōnomikoto-mikoto perform a Seiyaku with the Ama no Yasu no Kahara between them? In this world, without distinction between Genkai, Iukai, and Shinkai, keeping a Yakusoku is the most Taisetsu thing. To break it is the Kotsuchiyō of Zaiaku. You, too, must make a Seiyaku that you will not tell anyone of my Arika. If not, I shall take your life here and now.'</p>
+          <p class="en-p">Ryūkokuwake: 'What, I am not the sort to have my life taken by the likes of you, but even if I were to take your life, it would be of no use. In short, it would only make me a criminal, so let us compromise here and make a Yakusoku that neither of us will speak of it.'</p>
+          <p class="en-p">Omitsu: 'If that is the case, I shall spare you. Be off with you at once. You will surely not speak of it, will you?'</p>
+          <p class="en-p">Ryūkokuwake: 'Un, I am a man. I will surely keep my Yakusoku, so rest assured.'</p>
+          <p class="en-p">Omitsu: 'Sayōnara.'</p>
+          <p class="en-p">With those words, she vanished deep into the shadows of the rocky cavern.</p>
+          <p class="en-p">Ryūkokuwake, while stroking the wound on his forehead, returned to the path he had originally taken, and from there, turning to the left, he walked dejectedly up a narrow path overgrown with withered grass.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『妙な理屈もあるものだなア。頭をこつかれ、血を吸はれて感謝するとは、開闢以来聞いたことがない。何処で斯うも勘定が違つたのだらう』</p>
+            <p class="ja-classical-line">『定つた事だ。処変れば品変る、お家が変れば風変る、郷に入つては郷に随へだ。世界には賭博のアラを取つて国の会計を助け、国民が安楽に暮して居る国さへもあるぢやないか。また一方の国では賭博を罪悪としてゐるやうなもので、社会が違へば善悪の標準も違ふのだ。併し何処へ行つても約束を破ると云ふ事は罪悪だぞえ。天照大神様と素盞嗚尊様が、天の安の河原を中に置いて誓約を遊ばしたではないか。世の中には現界、幽界、神界の区別なく、約束を守ると云ふことが最も大切なことだ。之を破るのは罪悪の骨頂だ。お前も私の所在を誰にも言はないと云ふことを誓約なされ。さうでなければ、今此処でお前の生命を奪つて了ふ』</p>
+            <p class="ja-classical-line">竜国別『なに、お前達に生命を奪られるやうな俺では無いが、お前の生命を奪つた所で仕方がない。つまり俺が罪人になるだけだから、此処はうまく妥協して互に言はないと云ふ約束をしよう』</p>
+            <p class="ja-classical-line">お光『そんなら助けて上げよう。トツトとお帰りなさい。屹度言ひませぬな』</p>
+            <p class="ja-classical-line">竜国別『ウン、俺も男だ。屹度約束を守るから安心して呉れ』</p>
+            <p class="ja-classical-line">お光『左様なら』</p>
+            <p class="ja-classical-line">と云つた限り、岩窟の中深く影を没したり。</p>
+            <p class="ja-classical-line">竜国別は額の傷を撫で乍ら、元来し路へ引返し、それより左に取つて枯草茂る小径を悄々と上り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: 女権拡張 [684]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: 奇の女 [686]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 18: 解決 [692] - Volume 21 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 21 Table of Contents</a>
+      <span>Volume 21</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 21 &bull; Chapter 18</span>
+      <h1 class="chapter-title-en">Chapter 18: 解決 [692]</h1>
+      <p class="chapter-title-ja">解決〔692〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Terisutan appeared before the Mitsushitsuzen,</p>
+          <p class="en-p">Terisutan: 'Excuse me, it is I, Terisutan. Takahime-sama, Kurohime-sama, how is your Gokigen?'</p>
+          <p class="en-p">Takahime: 'You are Terisutan, are you not? You always treat us with Keibetsu, so what is the meaning of this Teinei way of speaking only today? It is likely because the Sendenshi of Ananai-kyō have arrived that you are saying such Tsuishiyō. Isn't that right, Kurohime-sama? Is he not a man with no Nukeme?'</p>
+          <p class="en-p">Terisutan: 'No, that is certainly not the case, but I have been moved from the bottom of my heart by your Goshintoku. Dōzo, please come out quickly.'</p>
+          <p class="en-p">Kurohime: 'Even if you say come out, did you not lock it with an Ebijiyō as if we were mere Kamisama? You may think you have put the two of us into an Ihamuro, but these are the Ketsukō Omito of Takahimedaimiyōjin and Kurohimedaimiyōjin, you know. What do you think you are doing? Unless you bring an Ōnusa to purify us thoroughly, offer many gifts, recite the Amatsu-norito in full ceremonial attire, and perform the dance of the Iwato-biraki, these Megamisama will not come out so easily, you know.'</p>
+          <p class="en-p">Terisutan rattled the stone door with the key and threw it open,</p>
+          <p class="en-p">Terisutan: 'Now, Dōzo, please come out.'</p>
+          <p class="en-p">Kurohime: 'Ah, thank you. Now, Takahime-sama, shall we go out?'</p>
+          <p class="en-p">Takahime: 'Kurohime-sama, what are you saying? Are you senile? Hey, hey, Terisutan, you have opened the door of someone's residence without permission; whose authorization did you receive? How about I sue you for trespassing?'</p>
+          <p class="en-p">Terisutan: 'Takahime-sama, please do not be so stubborn; I beg of you, please come out.'</p>
+          <p class="en-p">Takahime: 'If you beg me to come out, I might consider it. Today, I shall exempt you from the offerings and the Norito. In truth, I have no desire to remain in such a dark place for even a moment longer. Now, now, Kurohime-sama, you go out first. You have seemed to want to go out for quite some time now.'</p>
+          <p class="en-p">Kurohime: 'Please go out first, Sensei. It would be too rude otherwise.'</p>
+          <p class="en-p">Takahime: 'In that case, I shall take the liberty of going first. Thank you for your trouble for so long. Now that I have come out this far, I, this Takahime who has swallowed the miraculous purple jewel and the wish-granting luminous jewel, even if tens of thousands of heroes were to attack, I could scatter them all with a single snort. Shall I now go and bring Takayorihime to submission through the power of Kototama?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">テーリスタンは密室前に現はれて、</p>
+            <p class="ja-classical-line">『モシモシ私はテーリスタンで御座います。高姫様、黒姫様、御機嫌は如何で御座いますか』</p>
+            <p class="ja-classical-line">『お前はテーリスタンだな。いつも我々を軽蔑して置きながら、今日に限つて其丁寧な物云ひは何事だい。大方三五教の宣伝使がやつて来たものだから、そんなお追従を云ふのだらう。なア黒姫さま、抜目のない男ぢやありませぬか』</p>
+            <p class="ja-classical-line">『イエ決してさうぢや御座いませぬが、どうも貴方の御神徳に心の底から感動しました。何卒早く出て下さいませ』</p>
+            <p class="ja-classical-line">『出いと云つたつて、神様のやうに海老錠をかけて置いたぢやないか。お前は妾等二人を石室に入れた積りか知らぬが、高姫大明神、黒姫大明神の結構な御扉ぢやぞエ、何と心得て居る。大幣でも持つて来て十分に祓ひ清め、お供へ物を沢山と奉つて冠装束で天津祝詞を奏上し、岩戸開きの舞を舞はぬ事には、此女神さまは滅多に出はせぬぞエ』</p>
+            <p class="ja-classical-line">テーリスタンは鍵を以て、ガタガタ云はせながら石の戸をパツと開き、</p>
+            <p class="ja-classical-line">『サア何卒お出まし下さいませ』</p>
+            <p class="ja-classical-line">『アヽ有り難う、サア、高姫さま出ませうか』</p>
+            <p class="ja-classical-line">『黒姫さま、何を云ひなさる、お前さまは呆けて居るのか。コレヤコレヤ、テーリスタン、貴様は人の住家の戸を勝手に開けよつて、誰の許可を受けたのだ。家宅侵入罪で訴へてやるがどうだい』</p>
+            <p class="ja-classical-line">『高姫さま、さういちやつかずに、御頼みぢや、出て下さいな』</p>
+            <p class="ja-classical-line">『出て呉れいと頼むなら聞いてやらぬ事もない。今日はお供へ物も、祝詞も免除してやらう。実は妾も一刻も早く、こんな暗い所へ居りたい事は無い事は無い事は無いのだ。サアサア黒姫さま、お前さまから先に出なさい。大分此間から出たさうだつたから』</p>
+            <p class="ja-classical-line">『先生からお先へ出て下さいませ。あまり失礼ですから』</p>
+            <p class="ja-classical-line">『そんならお先へ御免蒙りませう。長らく御厄介になりました。サアもう此処まで出た以上は、神変不思議の紫の玉に、如意宝珠の夜光の玉を呑み込んだ此高姫、仮令何万人の豪傑攻め来るとも、フンと一つ鼻息をしたら飛び散つて仕舞ふ位なものだ。これから鷹依姫を一つ言向け和してやらうかなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Teristan: 'Anata, are you not hungry? You have become quite thin. I am worried.'</p>
+          <p class="en-p">Takahime: 'I am somewhat different from Takahime, who would grow thin even if she did not eat for a hundred or two hundred days. No, I have not grown thin. I have merely made my body slender. Come, come, Teristan, show me the way to the old woman.'</p>
+          <p class="en-p">Teristan: 'No, Karins and I have already been drinking and rambling on since earlier, and we have finished our rambling. We are now believers of the Ananai-kyō, so please be at ease.'</p>
+          <p class="en-p">Takahime: 'If someone like you becomes a believer, far from being at ease, I must be all the more careful. Who gave you permission to become a believer of the Ananai-kyō?'</p>
+          <p class="en-p">Teristan: 'I asked Ohatsu-sama.'</p>
+          <p class="en-p">Takahime: 'Who is this Ohatsu-sama?'</p>
+          <p class="en-p">Teristan: 'She is a tiny girl of five or six years old. She came all by herself, saying that she must rescue you from the Gankutsu.'</p>
+          <p class="en-p">Takahime: 'And so, you all surrendered to that child?'</p>
+          <p class="en-p">Teristan: 'Yes, yes. She is endowed with Goshinriki from somewhere, so we had no choice but to surrender and rescue you.'</p>
+          <p class="en-p">Takahime: 'What a remarkable child there is. I have never heard since ancient times of an adult being saved by a child. Jisetsu is a Ketsukō thing indeed.'</p>
+          <p class="en-p">Teristan: 'Takahime-sama, is it not as the Kamisama has shown in the Ofude, that the world is upside down?'</p>
+          <p class="en-p">Takahime: 'Kurohime-sama, stay silent for a while. If your Kotobajiri are caught, it will be to your Furieki instead. It is better for a woman to speak as little as possible to appear noble, but I am an exception. Because it is my role to speak out first and foremost... Now then, Kyōshu-dono of the Alps-kyō, I thank you for letting me stay in this Ketsukō Gankutsu hotel for so long, though I have not been able to partake of any feasts daily, I cannot thank you enough for your kindness.'</p>
+          <p class="en-p">Kyōshu-dono: 'As it is in the mountains, there were no feasts to offer, and I had ordered Teristan and Karins to serve you proper food three times a day, but I suppose I could not offer you anything that would please you.'</p>
+          <p class="en-p">Teristan: 'Hey, old woman, are you shifting your responsibility onto us? When I tried to hide food and offer it to Takahime-sama or Kurohime-sama, you glared at me with eyes like a falcon, and said that not a single drop of water or a grain of rice should be given. You said that if we kept them like this, Takahime would become shriveled. Did you not say that when she conveniently dried up, you would cut open her belly to extract the purple jewel and the Nyoi-hōju she had swallowed? Now that it has come to this, do not use such cowardly double-talk. Right, Karins, there is no mistake in what I am saying, is there?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『貴女はお腹は空きませぬか。大分にお瘠せになりましたな。テーは心配ですワ』</p>
+            <p class="ja-classical-line">『百日や二百日食はいでも瘠るやうな高姫とは些と違います。イヤ瘠たのぢやない。体を細くして置いたのだよ。サアサア　テーリスタン、案内をしなさい、婆アの傍へ』</p>
+            <p class="ja-classical-line">『イヤ、もう最前からカーリンスと二人酔つて管をまいてまいて、まき潰した所です。もはや我々は三五教の信者ですから安心して下さい』</p>
+            <p class="ja-classical-line">『お前のやうな者が信者になれば、安心所か、益々気をつけねばなるまい。誰に許されて三五教の信者になつたのだい』</p>
+            <p class="ja-classical-line">『私はお初さまに頼みました』</p>
+            <p class="ja-classical-line">『お初さまて誰の事だえ』</p>
+            <p class="ja-classical-line">『五つ六つのちつぽけな娘の子です。貴女を岩窟から救ひ出さねばならぬと云つて唯一人子供だてらやつて来たのですよ』</p>
+            <p class="ja-classical-line">『さうしてお前達は其子供に降参したのかい』</p>
+            <p class="ja-classical-line">『ハイハイ何処ともなしに御神力が備はつて居るので、止むを得ず降参をして貴女をお救ひ申したのです』</p>
+            <p class="ja-classical-line">『何と偉い子供もあればあるものぢやなア。子供に大人が助けられるなんて昔から聞いた事がない。時節と云ふものは結構なものだな』</p>
+            <p class="ja-classical-line">『高姫様、それで世が逆さまになつて居ると、神様がお筆にお示しになつて居るぢやありませぬか』</p>
+            <p class="ja-classical-line">『黒姫さまは暫く沈黙して居なさい。言葉尻を捉まへられちや却て不利益ですよ。女と云ふものは成る可く喋舌らぬ方が高尚に見えて宜敷い、併し妾は例外だ。何うしても率先して云はねばならぬ役廻りだから……これこれアルプス教の教主どの、長らく結構な岩窟ホテルに逗留さして頂きまして、日々御馳走を根つから頂戴致しませず、御親切の段有りがたくお礼申上げませぬワイ』</p>
+            <p class="ja-classical-line">『別に山中の事とて御馳走も御座りませず、テーリスタンやカーリンスに申付けて、三度々々、相当の食物をお上げ申すやう命令して置きましたが、何うせお気に召すやうなものは上げられませぬでしたらう』</p>
+            <p class="ja-classical-line">『コレ婆アさん、自分の責任を我々に転嫁するのかい。私がそつと隠して高姫さまや黒姫さまに進上しようと思へば、隼のやうな目でジロジロと私を睨みつけ、さうして水一滴、飯一粒やつてはならない。斯うして置けば、高姫がカンピンタンになるだらう。都合よく干からびた時に、腹に呑んだ紫の玉も如意宝珠も刳り抜いて取ると云つたのでは無かつたのではないか。今となつて、そんな卑怯な二枚舌を使ふものぢや無いワ。なア、カーリンス、俺の云ふ事は間違ひはあるまい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Oh, indeed, indeed. There is no way that she, being such an Akutaubaba, would not even let us drink enough sake while being stingy with us; how could she possibly be serving food and drink to Takahime-sama and Kurohime-sama, whom she hated so much?'</p>
+          <p class="en-p">'What kind of lies are you telling? You intend to corner me by launching a Hatsupaukōgeki against me, don't you?'</p>
+          <p class="en-p">'It is a settled matter. The Kami of Ananai-kyō has said that if you keep troubling Ōzei of people, that Meguri will emerge, and a situation will arise where you yourself must suffer in return. This is what it means when Kami appears in the world to distinguish between good and evil. Actually, Ohatsu-sama is only six years old, but she is a reincarnation of a noble Kamisama. If we ask this Kamisama, Zenakuseijiya will be understood at Itsupen... Please judge whether I am in the wrong or the old woman is in the wrong.'</p>
+          <p class="en-p">'Obaa-sama is not very good either. Neither Teristan nor Karlins are very Zennin, you know. Hurry and perform Kaishin. If you only perform Kaishin, you can all return to being Zennin as you were before.'</p>
+          <p class="en-p">Ter and Kar turned bright Matsuka and scratched their heads, looking down. Just then, from the Omoteguchi, singing a Sendenka, Tatsukuniwake, Tamaharuwake, and Kuniyoriwake entered in the Sentō, followed by Chikarazuyo no Mokusuke and six other believers of the Alps religion, crowding into the room.</p>
+          <p class="en-p">Tamaharuwake: 'Yo, you are Takahime-sama and Kurohime-sama. Yo, well, I am glad you have remained safe. We received the inner command of Kotoyoriwake-no-Mikoto-sama and finally climbed up to this mountain from three directions, heading for the Kototama battle. Ah, this is wonderful. This is Mokusuke-sama from Yunotani-ga-tani, who is actually the transformed name of Tokiokishi-no-Kami-sama, and he has taken great care of us.'</p>
+          <p class="en-p">'That is truly, truly, thank you all for your hard work. You have come well. Mokusuke-sama, it seems Tamaharuwake-sama has been greatly indebted to you. I offer you my deepest gratitude.'</p>
+          <p class="en-p">'Everyone, you have come well. By the way, has this Obaa-sama not yet performed Kaishin?'</p>
+          <p class="en-p">'Come now, Obaa-sama, now that it has come to this, it is useless to be stubborn. Repent of everything completely, return to a heart of sincerity, and live in this world purely and beautifully as a living shrine of the glorious Kamisama.'</p>
+          <p class="en-p">With these words, determined by the small lips of Ohatsu in a voice that somehow possessed a deep power, even the stubborn Takayorihime shed tears, and finally, she burst into tears and collapsed on the spot.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『オヽ、さうとも　さうとも、俺達にさへけちけち云つて酒も碌に呑まさない事は無い、悪党婆アだから、どうしてあれだけ憎んで居た高姫さまや黒姫さまに、飲食物を差上げる筈があらうかい』</p>
+            <p class="ja-classical-line">『お前達は何と云ふ嘘を云ふのだ。私を八方攻撃喰はして困らす積りだな』</p>
+            <p class="ja-classical-line">『定つた事だ。大勢の人を困らせて置くと其罪障が出て来て、自分も又困らねばならぬ事が出来致すぞよ、と三五教の神様が仰有つた。神が表に現はれて善と悪とを立て別けると云ふのは此事だ。現にお初さまはまだ年は六つだが、尊い神様のお生れ代りだ。此神様に聞いて見れば善悪正邪が一遍に分るのだ……私が悪いですか婆が悪いですか判断して下さいな』</p>
+            <p class="ja-classical-line">『お婆アさまもあんまり良い事はない。テーリスタンもカーリンスもあまり善人でもありませぬよ。早う改心をしなさい。改心さへすれば皆元の善人になれますよ』</p>
+            <p class="ja-classical-line">テー、カーの二人は顔を真赤に頭を掻いて俯むく。斯かる所へ表口より、宣伝歌を歌ひながら、竜国別、玉治別、国依別を先頭に、力強の杢助、其他六人のアルプス教の信者を従へ、どやどやと這入つて来る。</p>
+            <p class="ja-classical-line">玉治別『ヨー、貴女は高姫さま、黒姫さま、ヨウ、マア無事で居て下さつた。我々は言依別命様の内命を受けて、漸く三方より当山に攻め登り、言霊戦に向つたのです。あゝこれで結構だ。此方は湯谷ケ谷の杢助さまと云つて、実は時置師神様の御変名、大変なお世話になつたのですワ』</p>
+            <p class="ja-classical-line">『それはそれは皆さま御苦労でした。よう来て下さつた。杢助様とやら、玉治別さまがいかいお世話になられたさうです。私から厚くお礼申上げます』</p>
+            <p class="ja-classical-line">『皆様よくこそお越し下さいました。時にこの婆アさまはまだ改心せないのかな』</p>
+            <p class="ja-classical-line">『サアお婆アさま、モウ斯うなつては我を張つても駄目ですよ。何も彼もすつかり懺悔して誠の心に立ち帰り、結構な神様の生宮として、此世を清く麗しくお暮しなさい』</p>
+            <p class="ja-classical-line">とお初の小さき唇より、何となく底力のある声にて極めつけられ、さしもに頑固な鷹依姫も涙をハラハラと流し、遂には声を放つて其場に泣き伏しにける。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ohatsu: 'Now, from here on, it is Takahime-sama. You, when you established the Uranai-kyō and opposed Lord Susanōnomikoto, trespassed into Akiyamahiko's mansion, stole the key to the treasure house of Kamurijima, and snatched away the Niyoihotsushiyu jewel and swallowed it; for that sin, you have been locked away in this Gankutsu for a long time and have suffered. No matter how much you tried to be unyielding and put on a show of Karagenki, it must have been painful, must it not? Now, spit out that jewel before me. And then, there was once an evil god called Takekuma, who invited the Shishin of the Riugūjiyō to the Yahirodono and took the purple jewel that Yoshihiko possessed; but among the ten jewels that fell into the Shikai along with the Shiyūen of Takekuma, this jewel alone was not defiled, but flew into the Chiukū and fell onto Onokorojima. Takayorihime obtained it and established the Alps-kyō with it as her Goshintai, but you have swallowed that jewel as well, have you not? No matter how many jewels you say you have in your stomach, since you swallowed them with such an evil heart, not a glimmer of light shines forth. Come, I shall bring them out for you here. Return the Niyoihotsushiyu jewel to Susanōnokami, and return the purple jewel to Takayorihime-sama.'</p>
+          <p class="en-p">Speaker: 'Yes, there is no help for it. How shall I make the swallowed jewels come out?'</p>
+          <p class="en-p">Speaker: 'There is no need to worry. I shall bring them out for you easily now.'</p>
+          <p class="en-p">Saying this, at the moment Takahime struck her waist with a shout of 'E!', the purple jewel flew out from her mouth with a pop. At the moment she struck her waist with her left hand, the Niyoihotsushiyu jewel flew out. Takahime collapsed on the spot, utterly exhausted.</p>
+          <p class="en-p">Speaker: 'Takahime-sama may look like this, but there is no need for concern; if she rests for a while, her energy will return to its original state. Now, Riugokuwake-sama, you take good care of the Niyoihotsushiyu and return to the sacred land. Takayorihime-sama, the purple jewel is what you possessed; please, do accept it.'</p>
+          <p class="en-p">Speaker: 'Now that I have repented, I have no need for the jewel. I wish to offer this to the sacred land. I will also confess: I had one son. That son was a scoundrel who caused trouble for the neighbors, got into fights, gambled, and was obsessed with women. When I gave him advice, he would strike me, saying, "What, do not put on a parent's face and nag me!" In the end, he abandoned his parent and hid himself away somewhere. They say a wayward child is even more precious, and all the more so for my only son, who was irreplaceable in heaven or on earth. I prayed to the gods with all my might, wishing to see him once more, and eventually, I joined the Brahmanism and ended up establishing the Alps-kyō. There is no one in the world as unfortunate as I.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お初『サア、これからは高姫さまだ。お前さまはウラナイ教を樹てて素盞嗚尊様に反対をして居つた時、秋山彦の館に立ち入り、冠島の宝庫の鍵を盗み出し、如意宝珠の玉を奪ひ取つて呑み込んだその罪で、こんな岩窟へ長らく閉じ籠められ、苦しんだのですよ。何程負けぬ気になつて空元気を出しても矢張辛かつたでせう。今妾の前にその玉を吐き出しなさい。さうして又、昔竹熊と云ふ悪神が居つて、八尋殿へ竜宮城の使神を招待し、芳彦の持つて居つた紫の玉を取つたが、竹熊の終焉と共に死海へ落ち込んだ十個の玉の中で、この玉ばかりは汚されず、中空に飛んで自転倒島へ落ちて来た玉ですよ。それをこの鷹依姫が手に入れて、それを御神体としてアルプス教を樹てて居つたのだが、其玉をお前さまは又呑み込んで仕舞つたぢやないか。腹の中に何程玉があると云つても、さう云ふ悪い心で呑み込んだのだから、少しも光が出ない。サア私が此所で出して上げよう。如意宝珠の玉は素盞嗚神様に御返し申し、紫の玉は鷹依姫さまに返してお上げなさいませ』</p>
+            <p class="ja-classical-line">『ハイ仕方が御座いませぬ、如何したら呑み込んだ玉が出ませうかなア』</p>
+            <p class="ja-classical-line">『心配は要りませぬ。私が今楽に出してあげませう』</p>
+            <p class="ja-classical-line">と云ひつつ、高姫の腰を一つエヽと声かけ打つた機に、ポイと口から飛んで出たのは紫の玉である。もう一つ左の手で腰を打つた機に飛んで出たのが如意宝珠の玉であつた。高姫はグタリと疲れて其場に倒れる。</p>
+            <p class="ja-classical-line">『高姫さまは斯う見えても心配は要りませぬ、暫く休息なされば元気は元の通りになります。サア竜国別さま、貴方は如意宝珠を大切に預つて聖地へお帰りなさい。鷹依姫さま、紫の玉は貴方の持つて居たものだ、何うか受取つて下さい』</p>
+            <p class="ja-classical-line">『私も最早改心致しました以上は玉の必要は御座いませぬ。何卒これを聖地へ献上致したう御座います。私も白状を致しまするが、私には唯一人の伜が御座いました。その伜が極道者で近所の人に迷惑をかけたり、喧嘩をする、賭博はうつ、女にずぼる、妾が意見をすれば「何、親顔をしてゴテゴテ云ふな」と撲りつける、終の果には親をふり捨てて、何処ともなく姿を隠して仕舞ひました。極道の子は尚可愛とか申しまして、況して一人の天にも地にもかけ替へのない伜、も一度会ひたい事だと一生懸命に神様にお願ひ致し、とうとうバラモン教に入信し、遂にアルプス教を樹てる事になつたので御座います。妾のやうな不運なものは世界に御座いませぬ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamaharuwake: 'And what was the name of that son of yours?'</p>
+          <p class="en-p">Takayorihime: 'Yes, I do not know what has become of him or where he is now, but as for his features, his nose was ten percent higher than other people's. His name is Tatsuwaka. He was quite a scoundrel and caused his parents much worry, but I wonder how he is doing now, ah me.'</p>
+          <p class="en-p">Tamaharuwake: 'Now, now, Tatsukuniwake, did you not say your name was Tatsuwaka? And you once told me that you had a mother. There is something about the eyes and the high-bridged nose that resembles this old woman. Could it be that she is indeed your mother?'</p>
+          <p class="en-p">Tatsukuniwake clasps his hands together, sighs deeply, and lets tears fall one by one.</p>
+          <p class="en-p">Ohatsu: 'There is no mistake that the son of Takayorihime is Tatsukuniwake, the Sendenshi of the Ananai-kyō. Kami has arranged this to bring you to this mountain for the reunion of parent and child. In consideration of Tatsukuniwake's Kaishin, I shall forgive the sins of Takayorihime. Tatsukuniwake, the woman you met in front of the old shrine last night was a Keshin of mine.'</p>
+          <p class="en-p">Tatsukuniwake remains silent, presses his hands together, and is overcome with tears of joy.</p>
+          <p class="en-p">Takayorihime wipes away her tears and says: 'Ah, so you were my son Tatsuwaka? Oh, I am so glad you have undergone Kaishin. You have become a splendid Sendenshi. From this moment on, I too shall undergo Kaishin, so please, I beg you to forgive my sins.'</p>
+          <p class="en-p">Tatsukuniwake: 'Was it you, Mother? I am so happy to see you.'</p>
+          <p class="en-p">Takayorihime: 'You, what happened to the scar on your forehead? I fear you were hated by someone and injured, were you not?'</p>
+          <p class="en-p">Tatsukuniwake: 'Yes.'</p>
+          <p class="en-p">Ohatsu: 'Through this scar on his forehead, Tatsukuniwake has had the sins of his Mitama completely removed and has been reborn with a crystal Mitama. It is by virtue of this that the reunion of parent and child has been permitted. He has by no means engaged in any strife, so Takayorihime, you may rest assured. If we continue to speak forever, there will be no end to it, so come, everyone, let us recite the Amatsu-Norito together, offer words of gratitude and prayer, and proceed to the sacred ground all together.'</p>
+          <p class="en-p">At these words, everyone bows their heads in surprise, rinses their mouths, washes their hands, recites the Amatsu-Norito, and sings the Sendenshi-ka in a loud voice, led by Tamaharuwake.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『さうしてその伜の名は何と云ふ方でしたか』</p>
+            <p class="ja-classical-line">と玉治別の問ひに、</p>
+            <p class="ja-classical-line">『ハイ、今は如何なつたか行方は分りませぬが、顔の特徴と云へば一割人より鼻の高いもので御座いました。そして名は竜若と申します。偉いまあ極道で親に心配をかけよつたが、今頃はどうして居る事か、アーア』</p>
+            <p class="ja-classical-line">と袖を絞る。玉治別は不審さうに、</p>
+            <p class="ja-classical-line">『コレコレ竜国別、お前も竜若と云つたぢやないか。そして一人の母があると話した事があるなア。何処やら此婆アさまに目許、鼻の高い具合がよく似て居るやうだ。もしや此婆アさまぢやあるまいかな』</p>
+            <p class="ja-classical-line">竜国別は両手を組み、ウンと吐息しながら涙をホロホロと流して居る。</p>
+            <p class="ja-classical-line">お初『鷹依姫の伜は三五教の宣伝使竜国別に間違ひはない。親子の対面させるために、神が仕組んで当山へ差し向けられたのです。竜国別の改心に免じ、鷹依姫の罪を赦して上げよう。竜国別の宣伝使、昨夜古き社の前にて汝の逢うた女は妾の化身であつたぞや』</p>
+            <p class="ja-classical-line">竜国別は無言の儘両手を合せ、嬉し涙にかき暮れる。鷹依姫は涙を払ひ、</p>
+            <p class="ja-classical-line">『アヽ、其方は伜の竜若であつたか。ヨウ、マア改心して下さつた。立派な宣伝使になつたものだ。もう是限り母も改心するから、何卒妾の罪をお詫して下さい』</p>
+            <p class="ja-classical-line">『母様で御座いましたか、お懐かしう存じます』</p>
+            <p class="ja-classical-line">『お前、額の疵は如何なさつた。矢張人に憎まれて怪我をしたのぢやないかな』</p>
+            <p class="ja-classical-line">『エヽ』</p>
+            <p class="ja-classical-line">『竜国別は此額の疵によつて、身魂の罪をすつかり取払はれ、水晶の身魂と生れ変れり。其徳に依り親子の対面を許したのである。決して争ひなどを致したのではないから、鷹依姫御安心なさるがよからう。何時まで云うても果しがなければ、サア皆さま、一緒に天津祝詞を奏上し、感謝祈願の詞を捧げて、聖地へ一同うち揃うて参りませう』</p>
+            <p class="ja-classical-line">との言葉に一同ハツと頭を下げ、口を嗽ぎ、手を洗つて天津祝詞を奏上し、宣伝歌を玉治別の音頭に連れて高唱する。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c17.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 17: 酒の息 [691]</span>
+      </a>
+      <a href="../vol22/index.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Volume 22</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

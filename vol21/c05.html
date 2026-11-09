@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 言の疵 [679] - Volume 21 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 21 Table of Contents</a>
+      <span>Volume 21</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 21 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: 言の疵 [679]</h1>
+      <p class="chapter-title-ja">言の疵〔679〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Due to the prompt wit of Tamaharuwake, the six Konusuto began to realize their errors, joyfully surrendered to the way of Kami, and decided to follow the Sendenshi toward Takaharuyama. The sun was gradually setting, and the Tanimichi, surrounded by mountains and appearing as a Tsukishiro, began to brighten in some inexplicable way. However, the Tanimichi, burdened by high Kauzan to the east and west, did not reveal the Kaukau moonlight. After a while, a strange growling sound was heard ahead, and then, the sound of what seemed to be the footsteps of hundreds of people, if not more, began to be heard moment by moment.</p>
+          <p class="en-p">Tamaharuwake: 'Yo, a strange Monōto has become audible. This appears to be the Gotsūkuwa of a Daishifudan of Sanzoku. Let us wait here, Kotomukeyaha them one by one, and become a splendid Ōoyabun. Ah, how interesting, how interesting. Has the season of Heaven arrived? Now, Ryū, Kuni, Enshū, and the other subordinates, make preparations without fail.'</p>
+          <p class="en-p">Kuniyorawake: 'Haha, is it another change of business?'</p>
+          <p class="en-p">Tamaharuwake: 'To face the occasion and respond to changes is the instinct of a hero and a man of valor.'</p>
+          <p class="en-p">Enshū: 'Excuse me, those footsteps are not human. Those are fierce beasts called Senbiki-ōkami that occasionally pass through this road. No matter how much of a hero or man of valor one may be, one cannot prevail against Senbiki-ōkami. Come, come, everyone, scatter and hide yourselves in the forest. If we are too densely packed, it will be a disaster if we catch the eyes of the wolves.'</p>
+          <p class="en-p">Tamaharuwake: 'What are you saying? I shall Kotomukeyaha every last one of those wolves with the Kototama of good words and beautiful phrases.'</p>
+          <p class="en-p">Ryūkokubake: 'Is this a time to be saying such foolish things? Come, quickly, everyone prepare yourselves. We cannot afford to deal with beasts. If we get injured, it would be like being bitten by a dog... No, if we are bitten by wolves, we cannot even sue for damages, and there is no place to get money for medical expenses. Hey, Kuniyorawake, Enshū, Sunshū, all of you, there is no need to listen to what Tama-kō says. Today, I am the temporary commander. Come, quickly, quickly!'</p>
+          <p class="en-p">He ran into the forest where trees grew thick nearby. Kuniyorawake and the other six acted in concert with Ryūkokubake. Tamaharuwake remained standing on the road.</p>
+          <p class="en-p">Tamaharuwake: 'Ahahaha, everyone is such a weakling. What is there to fear from a few thousand four-legged beasts? Hey, you wolves, come out as many as you like!'</p>
+          <p class="en-p">He shouted thus. The wolves came in a line up to five or six ken ahead, but perhaps daunted by the vigor of Tamaharuwake, who stood blocking the middle of the road and making a racket while wearing a twisted headband, they turned their path, aimed for the mountain on the opposite side of the valley, and passed by like the wind, making a rustling sound. Tamaharuwake,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玉治別が早速の頓智に、六人の小盗人は始めて其非を悟り、喜んで神の道に帰順し、宣伝使に従つて高春山に向ふ事となつた。日は漸く暮れかかり、月背と見えて山と山とに囲まれし谷道も、どことなく明るくなつて来た。されど東西に高山を負ひたる谷路には、皎々たる月の影は見えなかつた。暫くすると怪しき唸り声が前方に聞え、次いで幾百人とも知れぬ人の足音らしきもの、刻々に聞えて来た。</p>
+            <p class="ja-classical-line">玉治別『ヨー怪しき物音が聞えて来たぞ。コレヤ大方山賊の大集団の御通過と見える。我々は此処に待受して、片つ端から言向和し、天晴大親分となつてやらう。アヽ面白い面白い。天の時節が到来したか。サア竜、国、遠州、其他の乾児共、抜目なく準備を致すのだよ』</p>
+            <p class="ja-classical-line">国依別『ハハア、又商売替ですかな』</p>
+            <p class="ja-classical-line">玉治別『機に臨み変に応ずるは英雄豪傑の本能だよ』</p>
+            <p class="ja-classical-line">遠州『モシモシあの足音は人間ぢやありませぬ。あれは千匹狼と云つて、時々此路を通過する猛獣です。何程英雄豪傑でも、千匹狼にかかつては叶ひませぬ。サアサア皆さま、散り散りバラバラになつて、山林に姿を隠して下さい。余り密集して居ると狼の目に付いたら大変です』</p>
+            <p class="ja-classical-line">玉治別『ナアニ、善言美詞の言霊を以て、狼の奴残らず言向け和すのだ』</p>
+            <p class="ja-classical-line">竜国別『そんな馬鹿言つてる所か、サア早く、各自に覚悟をせよ。畜生に相手になつて堪るものかい。怪我でもしたら、それこそ犬に咬まれた様なものだ……否狼に咬まれては損害賠償を訴へる訳にも行かず、治療代もどつからも出やせぬぞ。オイ国依別、遠州、駿州、一同、玉公の言ふ事を聞くに及ばぬ。今日は俺が臨時の大将だ。サア早く早く』</p>
+            <p class="ja-classical-line">と傍の樹木密生せる森林の中へ駆込む。国依別外六人は竜国別と行動を共にした。玉治別は依然として路上に立ち、</p>
+            <p class="ja-classical-line">玉治別『アハヽヽヽ、何奴も此奴も弱い奴だなア。多寡が知れた四つ足の千匹万匹何が怖いのだ。オイ狼の奴、幾らでも出て来い』</p>
+            <p class="ja-classical-line">と呶鳴つて居る。狼は五六間前まで列を組んでやつて来たが、路の真ん中に立ちはだかり、捻鉢巻をしながら噪やいで居る玉治別の勢に辟易したか、途を転じて谷の向側の山を目がけ、ガサガサと音させ乍ら、風の如くに過ぎ去つて了つた。玉治別は、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamaharuwake: 'Ahahaha, what a weakling. How could such a person ever manage to defeat the fierce Onibaba of Takaharuyama? Eh, what a burden you are; I shall set out on a solo Shingun.'</p>
+          <p class="en-p">He climbed the mountain pass, shouting in a loud voice on purpose so that it could be heard all around. Tatsukuniwake and the other seven had already scrambled up the mountain with all their might and were hiding their figures on the opposite side. Because of this, they did not hear the voice of Tamaharuwake.</p>
+          <p class="en-p">Tamaharuwake reached the summit of the pass while humming a Hanauta, and discovered a rather large Ganseki protruding, upon which the Ashigata of an Akago were formed all over, known as the Akagoiha.</p>
+          <p class="en-p">Tamaharuwake: 'Ah, what a splendid Tennenisu, sitting there with a Hitomachigaho as if waiting for someone. Hey, Sensei Ihaisu, you are a very fortunate fellow. Tamaharuwake-no-Mikoto, also known as Tagosaku-Daimyōjin, the Great Propagator of the Sangōkyō and the great boss of the mountain bandits, shall lower his hips for a short while to rest. You must not forget this honor for ten million kalpas, even after this rock has crumbled into dust. A stone one stumbles upon is a connection, and a rock one sits upon is also a connection... Ah, I have seen the face of the Moon for the first time. Truly, a magnificent and beautiful figure.'</p>
+          <p class="en-p">While muttering this to himself, he began to feel a little sleepy and swayed his body unsteadily. Two rough men came walking up to that spot.</p>
+          <p class="en-p">Man A: 'Hey, he is here, he is here.'</p>
+          <p class="en-p">Man B: 'Is he not dozing off? It seems he has grown quite tired. Hey, Genshū, you take this and hand it over to Teristan. I am going to make preparations because many followers of the Sangōkyō propagandist are coming to Takaharuyama, so you must firmly hand over this, which contains money and the name list recording all the operational plans.'</p>
+          <p class="en-p">Tamaharuwake did not make a sound on purpose, and received the package by nodding his head two or three times. The two rough men ran down the pass toward the south with a momentum as if a giant rock were falling from the mountaintop, making the ground tremble as if they were being chased by pursuers.</p>
+          <p class="en-p">Tamaharuwake: 'Those fellows appear to be subordinates of the Alps-kyō. They mistook me for an ally and left important items in my care. It seems that some of the Alps-kyō fellows are also disguised as pilgrims. However, if I stay here, it will not be amusing if they come back and discover me. I wonder if I should change my position and take my time to examine the documents inside.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『アハヽヽヽ、弱い奴だな。そんな事で高春山の猛悪な鬼婆が、どうして退治が出来るかい。エーいい足手纏ひだ、単騎進軍と出かけよう』</p>
+            <p class="ja-classical-line">と四辺に聞ゆる様にワザと大声で喚き乍ら峠を登り行く。竜国別外七人は早くも山を一生懸命に駆あがり、向側に姿を隠して居た。為に玉治別の声も聞えなかつた。玉治別は鼻唄を唄ひ乍ら、峠の頂上に達し赤児岩と云ふ赤子の足型の一面に出来た、カナリ大きな岩石が突き出て居るのを見付け、</p>
+            <p class="ja-classical-line">『アヽ結構な天然椅子が人待顔にチヨコナンとやつて居るワイ。オイ岩椅子先生、貴様は余程幸福な奴だ。三五教の大宣伝使兼山賊の大親分たる玉治別命又の御名は田吾作大明神が、少時尻をおろして休息してやらう。此光栄を堅磐常磐に、此岩の粉微塵になる千万劫の後迄も忘れてはならぬぞよ。躓づく石も縁の端、腰掛け岩椅子もヤツパリ縁の端だ。……ヤア始めてお月様のお顔を拝んだ。実に立派な美しい御姿だなア』</p>
+            <p class="ja-classical-line">と独ごちつつ少しく眠気を催し、フラフラと体を揺つて居る。其処へスタスタと上つて来た二人の荒男、</p>
+            <p class="ja-classical-line">甲『ヤア来て居る来て居る』</p>
+            <p class="ja-classical-line">乙『居眠つて居るぢやないか。大分に草臥れよつたと見えるワイ。オイ源州、貴様はこれを持つて、テーリスタンに渡すのだ。俺は今三五教の宣伝使が沢山な乾児を連れて、高春山へやつて来よるから、其準備の為に行くのだから、貴様は此処に金もあれば、一切の作戦計画を記した人名簿もある…しつかりと渡して呉れよ』</p>
+            <p class="ja-classical-line">玉治別はワザとに声をも出さず、首を二三度上下に振つて包みを受取つた。二人の荒男は追手にでも追ひかけられたやうな調子で、峠を南へ地響きさせ乍ら、巨岩が山上から落下する様な勢で駆下り行く。</p>
+            <p class="ja-classical-line">玉治別『彼奴はアルプス教の……部下の者と見えるな。俺を味方と見違へて、大切な物を預けて行きよつた。ヤツパリ、アルプス教の奴も巡礼姿になつて居るのがあると見えるワイ。併し乍ら此処に居つては、又やつて来よつて発覚されては面白くない。なんとか位置を転じて、ユツクリと中の書類を調べて見ようかな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Saying this in a low voice, he trod along the mountain ridge for about twenty or thirty ken, and began to walk while admiring the moonlight. A faint fire was flickering between the trees, hitting the bottom of the valley. Tamaharuwake, having gazed at this, said:</p>
+          <p class="en-p">Tamaharuwake: 'Ah, it is strange that someone is lighting a fire in this deep mountain. Perhaps it is the den of mountain bandits, or maybe a woodcutter. In any case, I shall approach aiming for that firelight and try to peek at the situation. Traveling is indeed a very interesting thing.'</p>
+          <p class="en-p">Aiming at the single point of fire, he descended toward the bottom of the valley through the steep, densely wooded mountain. Looking closely, it was a small woodcutter's hut with a roof covered in bamboo grass and tree bark. The coughing of a man could be heard from inside.</p>
+          <p class="en-p">Tamaharuwake: 'Excuse me, I am a pilgrim, but I have lost my way and do not know the path ahead, so I have come here aiming for the faint fire. Please, I am not a suspicious person, so pray let me stay the night.'</p>
+          <p class="en-p">A man's voice from inside replied:</p>
+          <p class="en-p">Man: 'Yes, yes, as you can see, this is a filthy woodcutter's hut, but if you are a pilgrim, that is perfectly fine. Please, come inside.'</p>
+          <p class="en-p">Saying this, he gladly opened the rough door, which rattled from the inside, and guided him to the back. Tamaharuwake was led by the guide into a beautiful room that did not seem to belong in such a deep mountain.</p>
+          <p class="en-p">Tamaharuwake: 'Do you live here all alone in these deep mountains? When I was at the gate, I thought I heard a man crying; who on earth was crying?'</p>
+          <p class="en-p">Man: 'I am Mokusuke the woodcutter. My wife, Osugi, passed away about two hours ago, and because of that, I was crying for my wife at the pillow of the dead, as a final farewell in this world. However, being suddenly widowed, there is nothing I can do, and having nothing to offer before the spirit, I made rice balls to offer to the spirit, and instead of a posthumous name, I shaved a piece of wood and enshrined her like this. I heard that you are a pilgrim, so would you please stay here and watch the house while I go to prepare offerings and inform my close friends and the temple priest? I will be back in a moment...'</p>
+          <p class="en-p">Tamaharuwake: 'Well, that is truly a pitiful thing. Although I am on a hurried journey, seeing this, I cannot just abandon you. I will keep watch over the dead, so come, come, go quickly and return.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と小声に言ひ乍ら、二三十間許り山の尾を踏んで、月の光を賞めつつ歩み出した。谷底に当つて幽かな火が、木の間に瞬いて居る。これを眺めた玉治別は、</p>
+            <p class="ja-classical-line">『アヽ此山奥に火を点して居るのは、此奴ア不思議だ。ヒヨツとしたら山賊の棲家か、但は樵夫か。何は兎もあれ、あの火光を目当に近寄つて、様子を窺うて見よう。旅と云ふものは随分面白いものだなア』</p>
+            <p class="ja-classical-line">と一点の火を目標に、樹木茂れる嶮しき山を、谷底目蒐けて下りついた。見れば笹や木の皮をもつて屋根を蔽ひたる、小さき木挽小屋である。中には男のしはぶきが聞えて居る。</p>
+            <p class="ja-classical-line">玉治別『モシモシ、私は巡礼で御座いますが、道に踏みまよひ、行手は分らず、幽かな火を目あてに此処まで参りました。どうぞ、怪しい者ではありませぬから、一晩泊めて下さいな』</p>
+            <p class="ja-classical-line">中より男の声、</p>
+            <p class="ja-classical-line">『ハイハイ、此処は御存じの通り、穢苦しい木挽小屋で御座いますが、巡礼様なれば大変結構で御座います。どうぞ御這入り下さいませ』</p>
+            <p class="ja-classical-line">と快く荒くたい戸を、中からガタつかせ乍ら漸く開いて、奥に案内する。玉治別は案内に連れて、一寸した山中に似合はぬ美しい座敷に通つた。</p>
+            <p class="ja-classical-line">『此深山にお前さま、たつた一人暮して居るのかい。門にて聞けば男の泣き声がして居つたやうだが、アレヤ一体、誰が泣いてゐたのですか』</p>
+            <p class="ja-classical-line">男『私は木挽の杢助で御座いますが、家内のお杉が二時許り前に国替を致しまして、それが為に死人の枕許で、此世の名残に女房に向つて泣いてやりました。併し乍ら俄やもをでどうする事も出来ず、霊前に供へる物もないので、握飯を拵へて霊前に供へ、戒名の代りに板切れを削つて、斯うして祀つて置きましたが、あなたは巡礼様ぢやと聞きましたが、どうぞ私がお供へ物の準備や、其外親友や寺の坊さまに知らして来る間、此処に留守して居て下さいますまいか。一寸行つて参りますから……』</p>
+            <p class="ja-classical-line">玉治別『ヘエそれは真にお気の毒な事ですな。私も急ぐ旅ではあるが、これを見ては、見棄てておく訳にも行かぬ。死人の夜伽をして居るから、サアサア早く行て来なさい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mokusuke: 'I am relieved by this. I humbly ask for your kind favor.'</p>
+          <p class="en-p">He then hurried out to the Koguwai in high spirits. Tamaharuwake said,</p>
+          <p class="en-p">'Ah, it cannot be helped. To think that I would be ordered to keep a Yotogi for a Shinin just when I thought I had a home; it is not a very pleasant Kibun. I would much rather be at Sensō with the Senbikiōkami; that would surely be more spirited and feel better. However, this too is the turn of the times. I received money from a Dorobau and thought I had successfully obtained the Himitsu Shiyorui, yet before a Hitotoki has passed, I am suddenly a substitute for a Bauzu. Left here all alone in this place without even a Kaya to keep the mosquitoes away, must I perform the Segiyō for the mosquitoes this Konban? I wonder if there is any hot water boiling somewhere around Koko.'</p>
+          <p class="en-p">As he searched all over Sokorajiu, his hand touched a Dobin with a chipped spout.</p>
+          <p class="en-p">'Yo, there is a Daibun amount of water drawn here. Itsuso, perhaps I shall boil some water in the Dobin and drink it.'</p>
+          <p class="en-p">He picked up some Hatsurikuzu, hung the Dobin over the hearth, and began to kindle a fire, making it crackle. In the blink of an eye, the water began to Tagi.</p>
+          <p class="en-p">'Now, I shall drink this and try to stay awake through the night.'</p>
+          <p class="en-p">When he cast his eyes toward the Shigai of his Niyōbau, he saw a blank memorial tablet placed at the head, incense sticks lit, and rice balls offered in front of it. A thin hand reached out from within the futon, grabbed a rice ball, and then grabbed another.</p>
+          <p class="en-p">Tamaharuwake: 'Eh, the ghost is eating the rice balls that were offered. This one must have died of a stomach ailment or something. What a spirit with a deep attachment to food. Somehow, the area around my neck is starting to feel cold and shivering. Eh, it does not matter; I shall drink some hot water and try to muster some energy.'</p>
+          <p class="en-p">He poured the scalding water into a chipped teacup, blew on it, and began to drink,</p>
+          <p class="en-p">'Ya, what is this? Does the water here contain carbonic acid or something? It has a strange odor. It is likely that the Dobin was one my Niyōbau used for medicine or perhaps she had put baking soda in it. I was too flustered and forgot to inspect the inside. Ya, it feels sticky. This is water with a very high viscosity.'</p>
+          <p class="en-p">When he held it up to the light to look, faint characters emerged from the soot. Upon closer inspection, it was labeled as 'Osugi's substitute spittoon.'</p>
+          <p class="en-p">'Eh, how disgusting, I have made a mistake. The ghost reaches out a thin hand to eat rice balls, and I am made to swallow phlegm; there is nothing as strange as this. ...Could this package that the man gave me earlier also contain a centipede or something? They say that if something happens once, it will happen three times, so I cannot be careless with this. If I open it and a bomb is inside, it would be a disaster. Ya, how unpleasant, it is grabbing the rice balls with its thin hand again. It has almost finished eating them all. This one appears to be a spirit that fell directly into the Gakidō without entering the Chūu. I cannot stand to be in such a disgusting place. However, since I have promised the man that I would keep watch, I cannot be a coward and run away. He will surely return soon. Until then, I shall wander around the nearby woods and pay my respects to the face of the moon. When it comes to this, the only one who shows sympathy for us is the moon. Ryūkokuwake, Kuniyorawake, and the other cowards have all vanished somewhere, and it has become a lonely affair.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">杢助『是れで安心致しました。どうぞ宜しうお願致します』</p>
+            <p class="ja-classical-line">とイソイソ戸外に駆出して了つた。玉治別は、</p>
+            <p class="ja-classical-line">『エー仕方がない。偶家があると思へば死人の夜伽を命ぜられ、あんまり気分の良いものぢやないワ。それよりも千匹狼と戦争する方が、なんぼ気が勇んで、心持が良いか知れない。併しこれも時の廻り合せだ。泥棒から金を貰ひ、秘密書類を巧く手に入れたと思へば、一時経つか経たぬ間に、忽ち坊主の代りだ。蚊の喰ふのに蚊帳も吊らずに、こんな所にシヨビンと残されて、蚊の施行を今晩はやらねばならぬか。どこぞ此処らに湯でも沸いては居りませぬかな』</p>
+            <p class="ja-classical-line">と其処辺中を探して見ると、口の欠けた土瓶が一つ手に触つた。</p>
+            <p class="ja-classical-line">『ヨー、水も大分に汲んであるワイ。一層のこと、土瓶に湯でも沸かして飲んでやらうかな』</p>
+            <p class="ja-classical-line">と木の破片屑を拾うて竈に土瓶を懸け、コトコトと焚き出した。瞬く間に湯は沸騰つた。</p>
+            <p class="ja-classical-line">『サアこれでも飲んで、一つ夜を徹かさうかな』</p>
+            <p class="ja-classical-line">フト女房の死骸の方に目を注けると、頭の先に無字の位牌を据ゑ、線香を立て、其前に握り飯が供へてある。蒲団の中から細い手を出して握り飯をグツと掴んでは取り、又掴んでは取るものがある。</p>
+            <p class="ja-classical-line">玉治別『エー幽霊の奴、供へてある握り飯を喰つて居やがる。此奴ア、胃病かなんぞで死んだ奴だらう。喰物に執着心の深い亡者だなア。何だか首の辺りがゾクゾクと寒うなつて来居つた。エー構はぬ、熱い湯でも呑んで元気でも出さうかい』</p>
+            <p class="ja-classical-line">と口の焼ける様な湯を、欠けた茶碗に注いで、フウフウと吹きもつて飲み始め、</p>
+            <p class="ja-classical-line">『ヤア何だ。ここの水は炭酸でも含んで居るのか、怪体な臭気がするぞ。大方女房が薬入れか、炭酸曹達でも入れて居つた土瓶かも知れないぞ。あんまり慌てて中を調査るのを忘れて居つた。ヤア何だか粘つくぞ。大変に粘着性のある水だなア』</p>
+            <p class="ja-classical-line">と明りに透かして見ると、燻つた中からホンノリと文字が浮いて居る。よくよく見れば「お杉の痰壺代用」としてある。</p>
+            <p class="ja-classical-line">『エー怪つ体の悪い、此奴ア失策つた。幽霊は細い手を出して握り飯を食ふ、此方は痰を呑まされる、怪つ体なこともあればあるものだ。……コレヤ最前の男が俺に与れた此包みもヒヨツトしたら蜈蚣か何かが出て来るのぢやあるまいかな。一度ある事は三度あると云ふから、ウツカリ此奴は手が付けられぬぞ。開けたが最後、爆裂弾でも這入つて居つたら大変だ。ヤア厭らしい、又細い手で握り飯を掴んで居やがる。大方喰うて了ひよつた。此奴ア、中有なしに直に餓鬼道へ落ちた精霊と見えるワイ。こんな所に厭らしうて居れるものぢやない。併し一旦男が留守してやらうと請合つた以上は、卑怯にも逃げ出す訳にも行くまい。やがて帰つて来るだらう。それまで其処辺の林をぶらついて、お月様のお顔でも拝んで来よう。斯うなると、我々に同情を表して呉れるのはお月様丈ぢや。竜国別、国依別其他の腰抜は、どつかへ滅尽して了ひ、寂しい事になつて来たワイ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He stepped over the threshold, and without knowing when, walked two or three chō, scooped up water from the stream in the valley, and took it into his mouth, vigorously, like a chicken drinking water; he would take a mouthful, lift his head, gargle 'gara-gara-gara' and spit 'bu-bu', then drink another mouthful and look upward, repeating the 'gara-gara-gara-gara' and 'bu-bu-bu' countless times.</p>
+          <p class="en-p">Tatsukuniwake, Kuniyoriwake, Enshiu, Bushiu, and four others, who had been searching with the firelight as their target, caught sight of the figure of Tamaharuwake in the night, and stood still in the shadows of the trees, watching the situation, thinking him a suspicious person.</p>
+          <p class="en-p">Enshiu: 'Excuse me, Sendenshi-sama, the gargling and spitting has appeared. This is a solitary woodcutter's hut; one never knows what might emerge. That must surely be a Bakeshiu.'</p>
+          <p class="en-p">Kuniyoriwake: 'What, it is a ghost drinking water. In other words, he is gargling. You, go and investigate.'</p>
+          <p class="en-p">Tamaharuwake caught the sound of people whispering in the tree shadows, and said:</p>
+          <p class="en-p">Tamaharuwake: 'Hey, I do not know who you are or where you are from, but I have no company and am troubled by loneliness. Whether you are wolves or thieves, I do not care. Do not be reserved. Come in, for the hot water is boiled, so you had better drink at your leisure.'</p>
+          <p class="en-p">Tatsukuniwake: 'Ah, does that voice not sound very much like Tamaharuwake?'</p>
+          <p class="en-p">Kuniyoriwake: 'Indeed, indeed, it is likely the master of Tama-kō... Hey, is that not Tama?'</p>
+          <p class="en-p">Tamaharuwake: 'That voice is Kuni, is it not? You have come to a good place. Since I am in the mood to see an interesting spectacle and there is plenty of hot water boiled, come along with me quickly. Today, I am the temporary master of this solitary house in the mountains. Now, this way...'</p>
+          <p class="en-p">He beckoned with his hand and walked back along the valley path where the moonlight leaked through.</p>
+          <p class="en-p">Enshiu: 'Oh, this house is a woodcutter's hut where a strong man named Mokusuke lives. Our companions have suffered terribly at his hands. He is a master of swordsmanship and jujutsu, a fellow who can toss thirty or fifty men about like handballs. Furthermore, he has a splendid wife. That wife is also quite a formidable person, possessing strength equal to Mokusuke, so this is a place that no one dared to approach out of fear. As for us, our faces have been seen by them before, so it is dangerous. Please, you go in. We shall wait in the tree shadows for a while.'</p>
+          <p class="en-p">Tatsukuniwake: 'What, if we are with you, it is safe. Do not be reserved. Since Tama-kō is acting as the head of the household today, you had better go in quickly.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と門口を跨げ、何時とはなしに二三丁も歩み出し、谷水の流れに水を掬ひ、口に含んで盛に、家鶏が水を飲む様に、一口入れては首を挙げ、ガラガラガラ　ブーブーと吹き、又一口飲んでは仰向き、ガラガラガラガラ、ブーブーブーと、幾度ともなく繰返して居る。</p>
+            <p class="ja-classical-line">火影を目標に探つて来た竜国別、国依別、遠州、武州外四人は、玉治別の姿を夜目に見て、怪しき者と木蔭に佇み、様子を窺つて居る。</p>
+            <p class="ja-classical-line">遠州『モシ宣伝使様、ガラガラブーブーが現はれました。ここは一つ家の木挽小屋、何が出るやら知れませぬ。アレヤきつと化州でせう』</p>
+            <p class="ja-classical-line">国依別『ナニ幽霊が水を飲んでゐるのだ。つまり含嗽をしてるのだよ。貴様行つてしらべて来い』</p>
+            <p class="ja-classical-line">玉治別は木蔭にヒソビソ語る人声を聞きつけ、</p>
+            <p class="ja-classical-line">『オイ何処の何者か知らぬが、俺も連れがなくて、淋しくつて困つて居るのだ。狼でも泥棒でも何でも構はぬ。遠慮は要らぬ。這入つて、マア湯が沸かしてあるから、ゆつくりと飲んだがよからうよ』</p>
+            <p class="ja-classical-line">竜国別『アヽあの声は玉治別によく似て居るぢやないか』</p>
+            <p class="ja-classical-line">国依別『左様々々、大方玉公の先生でせう……オイ玉ぢやないか』</p>
+            <p class="ja-classical-line">『その声は国だなア。好い所へ来て呉れた。マア面白い見せ物も見ようと儘だし、湯も沢山に沸いてるから、トツトと俺に従いて来い。今日は山中の一つ家の臨時御主人公だ。サア此方へ……』</p>
+            <p class="ja-classical-line">と手招きし乍ら、月光漏るる谷路を帰つて行く。</p>
+            <p class="ja-classical-line">遠州『ヤア此家は杢助と云ふ強力者の住まつて居る木挽小屋です。彼奴に随分、我々の仲間は酷い目に遭うたものです。剣術、柔術の達人で、三十人や五十人は手毬の様に投げ付ける奴ですよ。さうして立派な嬶アを持つて居るのです。その嬶アが又中々の強者で、杢助に相当した腕力を持つて居るのだから、誰も此処ばつかりは、怖くてよう窺はなかつた所です。私等は顔をこれまでに見られて居るから剣呑です。貴方がたどうぞお這入り下さいませ。暫時木蔭で待つて居ますから』</p>
+            <p class="ja-classical-line">竜国別『何、我々が付いて居れば大丈夫だ。遠慮は要らぬ。今日は玉公親分の家長権を持つて居る日だから、トツトと這入つたがよからう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Enshiu: 'Even so, the threshold is too high for me to step over.'</p>
+          <p class="en-p">Tatsukuniwake: 'Haha, it seems that even you still have some sense of shame remaining within you. In that case, the Dorobaugumi shall wait in the shade for a while.'</p>
+          <p class="en-p">Enshiu: 'Calling us the Dorobaugumi is quite cruel, is it not? We are no longer the Puritan-gumi, are we?'</p>
+          <p class="en-p">Tatsukuniwake: 'Whether you are the Puritan-gumi or the Dorobaugumi, it matters not. Just vanish into the shadows around there for a while and wait.'</p>
+          <p class="en-p">Having said this, Tatsukuniwake and Kuniyoriwake stepped into the house, and said, 'Oh, this house is quite neat and elegant, unlike what one would expect in the mountains.'</p>
+          <p class="en-p">'Yes, that is a given. Since it is a large household where I hold the authority of the head of the family, every corner is well-maintained. However, my wife suddenly fell ill and passed away. It seems my attachment to her remains, for even after her death, she reaches out with thin hands and has already consumed about eight of the ten rice balls. Well, please drink some hot water and keep watch over my wife for the night.'</p>
+          <p class="en-p">Kuniyoriwake: 'Again, this is absurd. Is there truly a dead person in this house? Thinking you have become the temporary leader of the Dorobau, did you not commit robbery and kill the precious wife of this house?'</p>
+          <p class="en-p">Tamajiwake: 'I am Tamajiwake, who has been nicknamed since my youth as a killer of women, a destroyer of widows, and a killer of princesses. As I am like Narihira-asomi who can kill with a word or a glance, it is only natural that I would kill a woman or two while acting as a robber.'</p>
+          <p class="en-p">Tatsukuniwake: 'I did not think you were such a villain as to kill another man's wife, but perhaps the spirit of the demon hag of Mikunigadake has possessed you. You have done a terrible thing.'</p>
+          <p class="en-p">'Well, it matters not. The water is boiling, so why not have a cup? This is fine hot water that Tamaji-ko has boiled with his own hands. I tested it for poison for a moment, and it is quite coal-smelling water. However, it might be good medicine for stomach ailments.'</p>
+          <p class="en-p">Kuniyoriwake: 'Lend me that earthenware teapot for a moment. I need to examine it. If one carelessly comes to a house one does not know and drinks water, one never knows what kind of poison might be mixed in.'</p>
+          <p class="en-p">'What are you saying? The sharp-witted Tamaji-ko has already checked it properly. It is certainly not poison. This is a container for Hōtan. That is why it smells a little like Hōtan.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">遠州『それでもあんまり閾が高く跨れませぬワ』</p>
+            <p class="ja-classical-line">竜国別『ハハア、ヤツパリお前にも羞悪の心がどつかに残つて居るな。そんなら暫く泥棒組は木蔭に待つて居て呉れ』</p>
+            <p class="ja-classical-line">遠州『泥棒組とは酷いぢやありませぬか。最早我々はピユリタン組とは違ひますかいな』</p>
+            <p class="ja-classical-line">竜国別『ピユリタン組でも泥棒組でも良いワ。暫く其処辺へドロンと消えて、待つてゐるのだよ』</p>
+            <p class="ja-classical-line">と云ひ棄て、竜、国の両人はヌツと家中に這入り、</p>
+            <p class="ja-classical-line">『ヤア割りとは山中に似ず、小瀟洒とした家だなア』</p>
+            <p class="ja-classical-line">『エヽ定つた事だい。俺が家長権を握つた大家庭だから、隅から隅まで能く行届いて居らうがな。併し俺の嬶が俄の罹病で死亡しよつたのだ。就ては俺に恋着心が残つたと見えて、死んでからでも細い手を出して、十許りの握り飯を既に八つ許り平らげて了ひよつたのだ。マア湯でも呑んでユツクリと嬶アの夜伽をしてやつて呉れ』</p>
+            <p class="ja-classical-line">国依別『又しても、しようもない。本当に当家に死人があつたのか。貴様泥棒の臨時親方になつたと思うて、強盗をやつて此家の大切な嬶アを殺したのぢやないか』</p>
+            <p class="ja-classical-line">玉治別『若い時から、女殺しの後家倒し、姫殺しと綽名を取つた玉治別ぢや。口でも殺せば、目でも殺すと云ふ業平朝臣だから、女の一人位、強盗になつて殺すのは当然だよ』</p>
+            <p class="ja-classical-line">竜国別『マサカ人の女房を殺す様な、貴様も悪人ではなかつたが、三国ケ嶽の鬼婆の霊でも憑きよつたのかなア。エライ事をして呉れたものだワイ』</p>
+            <p class="ja-classical-line">『マアどうでも良い。湯が沸いて居るから一杯飲んだらどうだ。これも玉治公がお手づからお沸し遊ばした結構なお湯だ。チヨツと毒試をして見たが、随分セキタン臭い水だ。併し胃病の薬には良いかも知れないわ』</p>
+            <p class="ja-classical-line">国依別『一寸其土瓶を俺に貸して呉れ。調査る必要があるから。ウツカリ知らぬ宅へ来て、湯でも飲まうものなら、どんな毒薬が仕込んであるか分つたものぢやないわ』</p>
+            <p class="ja-classical-line">『ナアニ、抜目のない玉治公がチヤンと査べてある。決して毒ぢやない。これは宝丹の入れ物だ。それで宝丹の匂ひが少しはして居る』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He grinned. Kuniyoriwake said, 'What, Hautan? No, this is becoming more and more suspicious.'</p>
+          <p class="en-p">He forcibly snatched it up, held it against the light to examine it, and said, 'Oh, there is some kind of mark on it... a substitute for Osugi's Tantsubo... Ugh, how nauseating.'</p>
+          <p class="en-p">So saying, he released his hand that was gripping the Dobin as if it were filthy. The Dobin fell with a thud into the garden and shattered into Metsuchiya, and the Nieyu splashed in all directions, paying a visit to the faces of the three men with that hot, foul-smelling stuff to their heart's content.</p>
+          <p class="en-p">Tatsukuniwake: 'You have smeared phlegm, not ink, on a man's face. Hey, hey, isn't the Shinin starting to move about? It cannot be an Eikiu Shinin. It must be a Suimin Jiyōtai where one dies temporarily when it becomes Yabun.'</p>
+          <p class="en-p">Tamaharuwake: 'If that is the way of dying, does not everyone do it every Maiban? Lazy people like you say the day is long and die for Hitotoki or Futatoki in the shade of a tree, do you not? This is a little different from that kind of dying. It is in the midst of a Seirei journey to Jifumanokudo, having fallen into a Tetsuteiteki long sleep.'</p>
+          <p class="en-p">Tatsukuniwake: 'For that, it is sticking out its thin hands to grab and eat rice, and moving about, is it not?'</p>
+          <p class="en-p">Tamaharuwake: 'Hey Kuniyoriwake, they say you are called Munehiko and have made many wives cry and even killed them, but perhaps the Bōnen of those wives is possessing the Shinin in this house.'</p>
+          <p class="en-p">Kuniyoriwake: 'In any case, it is a house with a bad atmosphere. And where has the master of this house gone?'</p>
+          <p class="en-p">Tamaharuwake: 'He said he was going out for a moment to do some shopping and asked us to look after the house until he returned, but he has not come back yet. That is quite a time-consuming errand.'</p>
+          <p class="en-p">The bedding where the Shinin had been laid began to move. A girl of five or six years old sat up abruptly...</p>
+          <p class="en-p">Child: 'Father, Father, Father.'</p>
+          <p class="en-p">She was looking around the surroundings with a restless gaze. The three men stroked their chests in relief,</p>
+          <p class="en-p">Sannin: 'Ah, with this, the thin hands and the grabbing of rice balls are resolved.'</p>
+          <p class="en-p">Just then, the master, Mokusuke, came walking back.</p>
+          <p class="en-p">Mokusuke: 'Pilgrim-sama, I have caused you great trouble. I went in such a hurry, but as it was Yabun, the person ahead would not wake up easily, so I ended up taking time and caused you great inconvenience.'</p>
+          <p class="en-p">Tamaharuwake: 'Oh, not at all, not at all... The two who are here are our brothers. Please get to know them.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">とニヤリと笑ふ。国依別は、</p>
+            <p class="ja-classical-line">『ナニ放痰、いやマスマス怪しいぞ』</p>
+            <p class="ja-classical-line">と無理に取り上げ、灯にすかして見て、</p>
+            <p class="ja-classical-line">『ヤア何だか印が付いて居る……お杉の痰壺代用……エイ胸の悪い』</p>
+            <p class="ja-classical-line">と云ひなり、不潔さうに土瓶を握つた手を放した。土瓶は庭にバタリと落ちて滅茶々々に破れ、煮湯はパツと四方に飛び散り、三人の顔に熱い臭い奴が、厭と云ふ程御見舞申した。</p>
+            <p class="ja-classical-line">竜国別『サツパリ男の顔に墨ではなうて、痰を塗りやがつたな。ヤアヤア死人がムクムクと動き出したぢやないか。永久の死人ぢやあるまい。夜分になつたら臨時死ぬると云ふ睡眠状態だらう』</p>
+            <p class="ja-classical-line">玉治別『そんな死方なら、誰でも毎晩やつて居るぢやないか。お前達の様な怠惰者は日が永いとか云つて、木の蔭で一時も二時も、チヨコチヨコ死ぬぢやないか。そんな死にやうとはチツト違ふのだい。徹底的の永き眠に就いて十万億土へ精霊の旅立の最中だ』</p>
+            <p class="ja-classical-line">竜国別『それにしては、細い手を出して飯を掴んで食つたり、ムクムク動いて居るぢやないか』</p>
+            <p class="ja-classical-line">玉治別『オイ国依別、お前は宗彦と云つて、随分に嬶アを沢山に泣かしたり、殺したと云ふ事だが、大方其亡念が此家の死人に憑いて居るのかも知れないぞ』</p>
+            <p class="ja-classical-line">国依別『何にしても気分の悪い家だ。さうして此家の主人は何処へ行つたのだい』</p>
+            <p class="ja-classical-line">玉治別『一寸買物に行つて来るから、帰るまで留守を頼むと云つて出たなり、まだ帰つて来ないのだ。随分暇の要る事だなア』</p>
+            <p class="ja-classical-line">死人を寝かした夜具は、ムクムクと動き出した。五つ六つの女の児がムクツと起きあがり……</p>
+            <p class="ja-classical-line">子供『お父さん　お父さん　お父さん』</p>
+            <p class="ja-classical-line">と四辺をキヨロキヨロ見廻して居る。三人はヤツと胸撫でおろし、</p>
+            <p class="ja-classical-line">三人『ヤアこれで細い手も、握り飯掴みも解決がついた』</p>
+            <p class="ja-classical-line">斯かる所へスタスタと帰つて来たのは主人の杢助、</p>
+            <p class="ja-classical-line">杢助『巡礼さま、エライ御厄介になりました。何分急いで行つたのですけれど、夜分の事とて先が容易に起きてくれませぬので、つい手間取りまして、エライ御迷惑を掛けました』</p>
+            <p class="ja-classical-line">玉治別『エー滅相な、どう致しまして……ここに二人居りますのは、我々の兄弟分で御座います。どうぞお見知り置かれますやうに』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec08">
+        <div class="sec-header">
+          <span class="para-num">&sect; 8</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The Kodomo runs and embraces him, saying, 'Father.'</p>
+          <p class="en-p">Mokusuke: 'Ah, you are a clever child. You kept the house well. To sleep silently beside your dead mother like that, you are a brave one. In this world, there are grown men who go about preaching, yet they are so afraid of the dead that they cannot keep a Yotogi unless three or five of them are present; but a child is indeed innocent.'</p>
+          <p class="en-p">Tamaharuwake scratches his head and says, 'Ya, I am humbled. I am not afraid in the least either.'</p>
+          <p class="en-p">Mokusuke: 'Did you chant a sutra before the Reizen of my Niyōbau?'</p>
+          <p class="en-p">Tamaharuwake: 'Yes, I was thinking of offering Chiyatau, but I have already performed an Enkiyori Dokiyō. It was a Mukeimusei, Ankimokutau, and I am just about to begin it now.'</p>
+          <p class="en-p">He is confused about what is what, offering a Shiri-Metsuretsu Aisatsu. Here, the three face the Reizen, recite the Kamigoto, pray for the Meifuku of Osugi, and with the help of five people from Enshiu, they complete the Nobe-no-okuri safely.</p>
+          <p class="en-p">Tamaharuwake: 'Ya, with this it is safely finished, and first of all, congratulations... though it is not a thing to be congratulated. Kannagara Tamachihaese, Kannagara Tamachihaese, Kannagara Tamachihaese.'</p>
+          <p class="en-p">Mokusuke: 'Thank you very much.'</p>
+          <p class="en-p">The group says, 'If so... please live in good health,' and they are about to leave. Mokusuke says:</p>
+          <p class="en-p">Mokusuke: 'Wait, wait, there is a Furoshiki-zutsumi left here. Is this not yours, sir?'</p>
+          <p class="en-p">Tamaharuwake: 'Ya, I had forgotten it after all. This is mine.'</p>
+          <p class="en-p">Mokusuke: 'Are you sure it is yours?'</p>
+          <p class="en-p">Tamaharuwake: 'The truth is, when I was resting on the rock at the mountain pass, a foster child came and handed it to me, saying, "Master, here it is." There must be quite a lot of money in it, too.'</p>
+          <p class="en-p">Mokusuke: 'You pretend to be a pilgrim, but you are a scoundrel who commits great thefts. Look here, this Furoshiki is currently the property of Mokusuke. Look at this. It has the Moku mark on it. The other night, five or six men broke in with drawn swords and, taking advantage of my Rusu, stole this bundle. If my Niyōbau had been herself, she would not have been moved even if thirty or fifty petty thieves had come in a pack, but since she was reduced to skin and bones from tuberculosis, she let it be stolen right before her eyes. That being the case, you are indeed the leader of the thieves. Now that you have appeared, this is the end of the line; I, Mokusuke, will pull your heads off one by one. ...All of you, prepare yourselves.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">子供は、</p>
+            <p class="ja-classical-line">『お父さん』</p>
+            <p class="ja-classical-line">と走つて抱きつく。</p>
+            <p class="ja-classical-line">杢助『アーお前は賢い子だ。よう留守をして居つた。あんな死んだお母アの側に黙つて寝て居るとは、肝の太い奴だ。世の中には大きな男が、宣伝をしに歩いて居つても、死人の側には怖がつて、三人も五人も居らねば、夜伽をようせぬものだが、子供はヤツパリ罪が無いワイ』</p>
+            <p class="ja-classical-line">玉治別は頭を掻き、</p>
+            <p class="ja-classical-line">『ヤア恐れ入りました。私もチツとも怖くはありませぬ』</p>
+            <p class="ja-classical-line">『女房の霊前にお経を唱へて下さいましたか』</p>
+            <p class="ja-classical-line">『ハイ、お茶湯を献げませうと思つて、つい考へて居りました。併し遠距離読経をやつて置きました。それも無形無声の、暗祈黙祷、愈これから始める所で御座います』</p>
+            <p class="ja-classical-line">と何が何やら間誤ついて、支離滅裂の挨拶をやつて居る。ここに三人は霊前に向ひ、神言を奏上し、お杉の冥福を祈り、遠州外五人の手伝の下に、野辺の送りを無事に済ました。</p>
+            <p class="ja-classical-line">玉治別『ヤアこれで無事終了、先づ先づお芽出……たくもありませぬ。惟神霊幸はへ坐せ惟神霊幸はへ坐せ惟神霊幸はへ坐せ』</p>
+            <p class="ja-classical-line">杢助『有難う御座いました』</p>
+            <p class="ja-classical-line">一同は、</p>
+            <p class="ja-classical-line">『左様ならば……随分御壮健でお暮しなさいませ』</p>
+            <p class="ja-classical-line">と立つて行かむとする。杢助は、</p>
+            <p class="ja-classical-line">杢助『モシモシ、此処にこんな風呂敷包が残つて居ます。コレはお前さまのぢやあるまいかな』</p>
+            <p class="ja-classical-line">玉治別『ヤア到頭忘れて居た。これは私ので御座います』</p>
+            <p class="ja-classical-line">杢助『お前さまのに間違ひはないか』</p>
+            <p class="ja-classical-line">玉治別『実の所は峠の岩に休息して居つた時に、乾児がやつて来て、お頭様此通りと言つて渡して行きやがつたのだ。金も随分沢山あるだらう』</p>
+            <p class="ja-classical-line">杢助『其方は巡礼に見せかけ、大泥棒を働く奴だ。コレヤ此の風呂敷は現在杢助の所持品だ。これを見よ。杢の印が付いて居る。此間の晩に、五六人抜刀で躍り込んで、俺の留守を幸に、包みを持つて帰つた小盗人がある。女房は何時もならば木端盗人の三十や五十、束になつて来た所が感応へぬのだが、何分労咳で骨と皮とになつて居た所だから、ミスミス盗られて了つたのだ。さうすると貴様はヤツパリ泥棒の親分だな。サア斯く現はれし上は百年目、此杢助が片つ端から素首を引抜いてやらう。……何れも皆覚悟せい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec09">
+        <div class="sec-header">
+          <span class="para-num">&sect; 9</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He brandished his axe and advanced with sharp momentum.</p>
+          <p class="en-p">Tamaharuwake: 'Wait, wait. It is a lie, a lie. Yazen the thief gave it to me. I am certainly not a thief or anything of the sort. Now, wait, wait...'</p>
+          <p class="en-p">Mokusuke: 'Is there any such thing as a thief giving money to someone who is not a thief? You are also clearly the mastermind of the theft. Now, prepare yourself!'</p>
+          <p class="en-p">Just at this moment, as he was about to split Tamaharuwake's head from above, he began to chant the heavenly Kazūta of 'One, two, three, four...' with all his might. From the tips of Tamaharuwake's clasped index fingers, five-colored spiritual light radiated, and Mokusuke's body stiffened, instantly becoming like a bronze statue.</p>
+          <p class="en-p">Tamaharuwake: 'Ha ha ha ha ha!'</p>
+          <p class="en-p">Tatsukuniwake: 'Hey, Tamakō, I wondered where you had gone after leaving us, but you were busy being a thief. I am cutting ties with you as of today, so keep that in mind.'</p>
+          <p class="en-p">Kuniyoriwake: 'Hey, what a base character you have become. I have no face to show you anymore.'</p>
+          <p class="en-p">He spoke with a tearful voice. Tamaharuwake recounted every detail from beginning to end, and finally, the suspicions of the two were dispelled. Mokusuke, remaining frozen, witnessed this reality and realized Tamaharuwake's innocence. Tamaharuwake gave a single 'Un' and released the spiritual binding with his fingertips. Mokusuke returned to his former state.</p>
+          <p class="en-p">Mokusuke: 'Guest-sama, I have said something rude. Please, forgive me.'</p>
+          <p class="en-p">Tamaharuwake: 'If you understand, that is fine... There is nothing more to say. However, please examine this bundle.'</p>
+          <p class="en-p">Mokusuke: 'In that case, I shall examine it before everyone.'</p>
+          <p class="en-p">When he untied the furoshiki bundle that had been bound tightly, golden, brilliant small coins of gold and silver appeared with a clatter. Then, a notebook came out. When opened, it was revealed to be secret documents of the Alps religion. The three of them, thinking this a stroke of luck, tucked it into their bosoms, returned the rest to Mokusuke, and the nine of them left the house, proceeding vigorously toward the shores of Lake Tsuda while singing propaganda songs.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と鉞を揮つて勢鋭く進んで来る。</p>
+            <p class="ja-classical-line">玉治別『待つた待つた。嘘だ嘘だ。夜前泥棒が俺に渡したのだよ。俺や決して泥棒でも何でもない。マア待て待て……』</p>
+            <p class="ja-classical-line">杢助『泥棒が泥棒でない者に金を渡すと云ふ事があるかい。貴様もヤツパリ泥棒の張本人だ。サア量見致さぬ』</p>
+            <p class="ja-classical-line">と今や頭上より玉治別を梨割にせむとする此刹那『一二三四……』の天の数歌を一生懸命に称へ始めた。玉治別の手を組んだ食指の尖端より五色の霊光放射し、杢助は身体強直して其場に忽ち銅像の様になつて了つた。</p>
+            <p class="ja-classical-line">玉治別『ハヽヽヽヽ』</p>
+            <p class="ja-classical-line">竜国別『オイ玉公、我々に離れて何処へ行つたかと思へば、泥棒をやつて居たのだな。モウ今日限り貴様と縁を絶るから、さう思へ』</p>
+            <p class="ja-classical-line">国依別『オイお前は何とした卑しい根性になつたのだ。俺はモウ合はす顔が無いワイ』</p>
+            <p class="ja-classical-line">と涙声になる。玉治別は一伍一什を詳細に物語り、漸く二人の疑ひは氷解した。杢助は固まつた儘、此実地を目撃して、玉治別の無実を悟つた。玉治別は「ウン」と一声指頭を以て霊縛を解いた。杢助は旧の身体に復し、</p>
+            <p class="ja-classical-line">杢助『お客さま、失礼な事を申上げました。どうぞ御勘弁下さいませ』</p>
+            <p class="ja-classical-line">玉治別『分つたらそれで結構です……何も言ふ事はありませぬ。併し此包みはあなた調べて下さい』</p>
+            <p class="ja-classical-line">杢助『そんなら皆様の前で検べて見ませう』</p>
+            <p class="ja-classical-line">とガンヂガラミに括つた風呂敷包を解き開いて見れば、金色燦然たる金銀の小玉ザラザラと現はれて来た。さうして一冊の手帳が出て来た。開いて見れば、アルプス教の秘密書類である。三人はこれ幸ひと懐中に収め、後は杢助に返し、九人連れ此家を発つて津田の湖辺に向つて宣伝歌を歌ひ乍ら勢よく進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: 砂利喰 [678]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: Small 杉の Forest [680]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

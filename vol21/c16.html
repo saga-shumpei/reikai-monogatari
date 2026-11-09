@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 16: 約束履行 [690] - Volume 21 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 21 Table of Contents</a>
+      <span>Volume 21</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 21 &bull; Chapter 16</span>
+      <h1 class="chapter-title-en">Chapter 16: 約束履行 [690]</h1>
+      <p class="chapter-title-ja">約束履行〔690〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamaharuwake, Mokusuke, and Ohatsu, the three who had finally climbed up to the side of the shrine in the forest of Ame located on the mountainside of Takaharuyama, rested their legs on the flat rocks arranged in a row in the surroundings and indulged in whispering.</p>
+          <p class="en-p">Tamaharuwake: 'It has been almost two futatoki since we arrived here, but Tatsukuniwake has not appeared, nor has Kuniyoriwake shown his face; I wonder what on earth has happened. There should be no concern that they have gone ahead. Since the plan was to meet in this forest and ascend as a group, they surely would not ignore our promise and go up alone. Ah, how slow they are.'</p>
+          <p class="en-p">Mokusuke: 'What, there is no need for worry; they will appear before long. As the saying goes, speak of the devil and he shall appear; when one is talking about a person, they just happen to come. They will surely come climbing up here majestically before long.'</p>
+          <p class="en-p">Tamaharuwake: 'Both Kuniyoriwake and Tatsukuniwake have quite the physiognomy of being prone to trouble with women, so I wonder if they have been deceived by some demonic woman on the way and have forgotten the essential Goshingefu.'</p>
+          <p class="en-p">Mokusuke: 'Never, never, such worry should be unnecessary. When we parted at the shore of the lake of Tsuda, they showed signs of a very firm resolve. They should have no dealings whatsoever with women. They are as firm as a withered tree leaning against a cold cliff in the middle of winter, so I cannot recognize them as the kind of people who would cast their eyes on women.'</p>
+          <p class="en-p">Tamaharuwake: 'No, one cannot be too reassured. After all, their past is their past, and they were quite flamboyant when they were young. Even if they appear to be as rigid as Ishibekinkichi in front of many people, like a golden helmet that will not budge even with a lever or a pole, once the rogue called the fire of passion in their hearts begins to spew smoke, they are the sort of things that might be enveloped in that soot and smoke, lose their sight, and derail to some outrageous place. Kyōshu Kototamayoriwake-no-Mikoto-sama perceived their inner feelings and even said at the time of their departure that they must never get involved with women, as this Kototama battle is a trial for you missionaries, so they are truly unreliable things. Even an ogre or Enma would not have the concern of getting angry upon seeing the face of a beautiful woman. How much more so for humans. No matter what one says, their history up to now is their history.'</p>
+          <p class="en-p">Mokusuke: 'There should be no concern that such women are wandering about on this mountain path where ranges of mountains overlap. As for living creatures, there are only wild boars, wolves, snakes, foxes, and badgers. As for humans, there are only the members of the Alps sect wandering about; what I worry about more than women is whether they might be encountering the groups of the Alps sect and repeating hard battle after hard battle, and are spending their time because of that. Ōtaniyama is also a place with quite a lot of evil gods, and Rokkōsan is a point where the followers of Thelistan are sometimes stationed leading their subordinates, so they might be dealing with them. Since there are many of those fellows wandering about just as they bullied the woman last night, they must be fighting a hard battle.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高春山の中腹なる天の森の祠の傍に漸う登り着いた玉治別、杢助、お初の三人は、周囲に碁列せる平岩に脚を休め乍ら、ひそひそ話に耽る。</p>
+            <p class="ja-classical-line">玉治別『此処へ着いてから殆ど二時ばかりになるが、まだ竜国別も見えず、国依別も顔を見せないが一体如何したものだらうなア。先へ行つて居る気遣ひは無い筈だ。此の森に落ち合ひ、一団となつて上ると云ふ計画だから、マサカ約束を無視して一人上る筈もなからう。アヽ遅いことだワイ』</p>
+            <p class="ja-classical-line">杢助『ナニ心配は要りませぬよ、軈て見えませう。噂をすれば影とやら、其の人のことを云つてをると、ツイ来るものだ。軈て堂々と登つて来られるでせう』</p>
+            <p class="ja-classical-line">玉治別『あの国依別にしても、竜国別にしても随分女難の相があるから、途中で魔性の女にチヨロ魔化されて、肝腎の御神業を忘却して居るのではあるまいかなア』</p>
+            <p class="ja-classical-line">杢助『決して決して左様な御心配は要りますまい。津田の湖辺で別れた時には、余程の堅い決心の色が見えて居ましたよ。女に対しては何の交渉もありますまい。枯木寒巌に倚る三冬暖気無し程の堅家だから、屹度女なんかに目をくれるやうな人物とは認められませぬワ』</p>
+            <p class="ja-classical-line">玉治別『イヤ余り安心は出来ますまい。何分元が元ですから、随分若い時は発展したものです。大勢の前では石部金吉、金兜、梃子でも棒でも、女位に動かない堅造のやうに見えて居つても、心の中の情火と云ふ曲者が煙を噴出すと、ツイその煤煙に包まれて目が眩み途方も無い所へ脱線する虞のある代物です。教主言依別命様は彼等が心情を御洞察遊ばして、出立の際にも、決して女にかかり合つてはいけない、今度の言霊戦は汝等宣伝使の試練だと仰有つた位ですから、実に心許ない代物ですよ。鬼でも閻魔でも美人の顔を見て怒る気遣ひはない。況んや人間に於てをや。何と云つても今迄の経歴が経歴ですからなア』</p>
+            <p class="ja-classical-line">杢助『此の連山重畳たる山道に、そんな女が迂路ついて居る気遣ひはありますまい。生物と云つたら猪、狼、蛇、狐、狸位なものでせう。人間と言へばアルプス教の連中が徘徊してゐる位なもの、私は女よりも案じるのは、アルプス教の集団に出会し苦戦に苦戦を重ね、其の為に時間を費やして居られるのではあるまいかと思ひます。大谷山も随分魔神の多い所、六甲山も時々テーリスタンが部下を率ゐて構へて居る地点ですから、それ等に対手になつてゐるかも知れますまい。昨夜の女を虐めたやうに、あの通り沢山な奴が徘徊して居るのですから、随分に苦戦をやつてゐられるのでせうよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamaharuwake: 'Be that as it may, since we have discerned the enemy's haichi through those himitsu shiyorui, and they are supposed to be advancing only through kandau, I do not think it likely that we shall metsuta ni dea to the enemy.'</p>
+          <p class="en-p">Mokusuke: 'If that is so, it will take a zuibun hima. However, since we came straight here by boat, it is dauri that we are yohodo faster. It may even be tauzen if they are two or three futatoki late.'</p>
+          <p class="en-p">Tamaharuwake: 'We took various amounts of hima upon the kojiyō, so on heikin, the mukafu side should have arrived here earlier.'</p>
+          <p class="en-p">At this moment, the shadows of minokasa rise and emerge from within the mist, bobbing up and down.</p>
+          <p class="en-p">Mokusuke: 'Ah, someone is coming up. It is likely Tatsukuniwake-sama.'</p>
+          <p class="en-p">Tamaharuwake stretches his neck and stares at them. One man approaches ohi-ohi.</p>
+          <p class="en-p">Tatsukuniwake: 'Ah, I have kept you waiting for a long time, have I not? The yamasaka were steeper than I thought, and I was eating up time with various distractions, so I was delayed.'</p>
+          <p class="en-p">Tamaharuwake: 'Ya, that is splendid, splendid. In truth, I was worried that you might have sunk to the bottom of a valley or something.'</p>
+          <p class="en-p">Tatsukuniwake: 'Has Kuniyoriwake-sama not arrived yet?'</p>
+          <p class="en-p">Tamaharuwake: 'He has not appeared yet. I wonder what has happened.'</p>
+          <p class="en-p">Tatsukuniwake: 'Things do not always proceed according to plan, you see. I, too, have encountered something very interesting.'</p>
+          <p class="en-p">He takes off his kasa. When they look, there is a wound on his forehead where it was split by a stone.</p>
+          <p class="en-p">Tamaharuwake: 'Ya, what happened to your forehead? Is that not a terrible wound?'</p>
+          <p class="en-p">Tatsukuniwake: 'The moment I stumbled and fell on a stone, I struck my forehead.'</p>
+          <p class="en-p">Tamaharuwake: 'That is strange. One would think you would strike your nose, which is one part higher, so why on earth were you struck on the forehead?'</p>
+          <p class="en-p">Tatsukuniwake: 'Ah, there is a slight reason for this, and I cannot clearly explain it. Please, as there is a firm promise regarding this matter, do not ask me about it.'</p>
+          <p class="en-p">Tamaharuwake: 'It is not a matter of a promise. You were surrounded by the subordinates of the Alps sect and had your head struck, were you not? We have gone to such lengths to gather the three of us, hoping to return unscathed and having achieved a splendid victory, so it is truly regrettable that we have produced a wounded man.'</p>
+          <p class="en-p">Tatsukuniwake: 'No, no. I have not met a single person from the Alps sect. The journey was extremely safe and peaceful.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玉治別『それはさうと、あの秘密書類に依つて敵の配置を覚り、間道ばかり進んで来る筈だから、滅多に敵に出会す筈はなからうと思はれます』</p>
+            <p class="ja-classical-line">杢助『さうだとすれば随分暇の要ることだなア。併し此方は船に乗つて真直に来たのだから、余程早いのは道理だ。二時や、三時遅れたつて寧当然かも知れますまい』</p>
+            <p class="ja-classical-line">玉治別『我々は湖上に於ていろいろと時間をとりましたから、平均すれば向方の方が早く此処へ到着してゐなければならないのですワ』</p>
+            <p class="ja-classical-line">斯る処へ蓑笠の影、霧の中よりポコポコと浮き上り登り来る。</p>
+            <p class="ja-classical-line">杢助『アー誰か登つて来ましたよ。大方竜国別様でせう』</p>
+            <p class="ja-classical-line">玉治別は首を伸ばして見つめてゐる。追々近寄つて来る一人の男。</p>
+            <p class="ja-classical-line">竜国別『アヽ長らく待たしたでせう。思ひの外嶮しい山坂、それにいろいろの道草を喰つて居たものですから、ツイ遅れました』</p>
+            <p class="ja-classical-line">玉治別『ヤア結構々々、又谷底へでも沈澱したのぢやなからうかと、実は心配して居ました』</p>
+            <p class="ja-classical-line">竜国別『国依別さまはまだお見えになりませぬか』</p>
+            <p class="ja-classical-line">玉治別『まだ見えませぬワ、如何したのでせう』</p>
+            <p class="ja-classical-line">竜国別『中々予定通りには進めないものでしてなア。私も大変な面白いことに出会つて来ましたよ』</p>
+            <p class="ja-classical-line">と笠を脱ぐ。見れば額を石で割られた傷、</p>
+            <p class="ja-classical-line">玉治別『ヤア貴方の額は如何なさつた。大変な傷ぢやありませぬか』</p>
+            <p class="ja-classical-line">竜国別『石に躓き倒けた途端に、額を打ちました』</p>
+            <p class="ja-classical-line">玉治別『それは又妙ぢやなア。一割高い鼻を打ちさうなものだのに、如何して又その額を打たれたのでせう』</p>
+            <p class="ja-classical-line">竜国別『アヽこれは一寸訳があつて、明白に申上げ兼ねます。どうぞ此の事だけは堅い約束がしてあるのだから、聞いて下さいますな』</p>
+            <p class="ja-classical-line">玉治別『約束ぢやありますまい。貴方はアルプス教の部下に取り巻かれ、頭をこつかれたのでせう。折角三人揃つて、無疵で、天晴勝利を得て帰らうと思つて居るのに、負傷者を出したと云ふことは実に残念だ』</p>
+            <p class="ja-classical-line">竜国別『イエイエ　アルプス教の連中には、一人も逢うたことが御座いませぬ。道中は至極無事平穏でした』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamaharuwake: 'How did that wound come about in the midst of peace and tranquility? We are closer than parent and child or brothers, so why do you hide it from me?'</p>
+          <p class="en-p">Tatsukuniwake: 'No matter what, a secret is a secret. This is the one thing I cannot speak of for the rest of my life. If I were to say even half a word, it would be a disaster. Because they will come, you see.'</p>
+          <p class="en-p">Tamaharuwake: 'What do you mean by saying they will come? As a Sendenshi who must bring all the demons, Orochi, Akuko, Shikome, and Sagume of the world to peace through Kototama, there is no reason to fear anything that might come. You are saying something quite strange.'</p>
+          <p class="en-p">Tatsukuniwake: 'This is because a Ukehi has been made, and if I break the promise, it will surely be a crime of breach of contract.'</p>
+          <p class="en-p">Tamaharuwake: 'Ha ha ha ha, what a grand way to be love-struck. You must have met a fine nice on the way, made a promise of marriage, and the woman, thinking that a manly man like you with a high nose would be a trouble if other women fell for him, decided to leave a mark on you, had the nice crack your head, and thus you made a vow of marriage. In return, you must have taken the woman's little finger, I suppose?'</p>
+          <p class="en-p">Tatsukuniwake: 'No, it is a terrible nuisance; do you think it is such a carefree matter as becoming engaged to a nice? A great and extraordinary event has occurred. I would love to tell you, but if I say such things, the demon girl will come.'</p>
+          <p class="en-p">Mokusuke: 'Ha ha ha ha, you met O-Hikari, the demon girl who has her nest in the valley bottom of Mt. Otani, and had your blood sucked, didn't you?'</p>
+          <p class="en-p">Tatsukuniwake: 'No, no, that is absurd; I have never met such a thing.'</p>
+          <p class="en-p">Mokusuke: 'Are you, while being a Sendenshi, deceiving us? The sin of deception is quite heavy, you know.'</p>
+          <p class="en-p">Tatsukuniwake: 'If I break the promise, it becomes a crime. If I deceive, it becomes a crime. Ah, it cannot be helped; the truth is, I met a demon girl named O-Hikari, she tapped my head, and after having about two sho of blood sucked, I felt refreshed for some reason. However, I feel somewhat dispirited. She said that since my ears can hear even from a thousand ri away, if I told anyone, she would take my life. I am a man, so I do not fear one or two demon girls, but if she comes, will you do something about it?'</p>
+          <p class="en-p">Tamaharuwake: 'Tatsukuniwake-sama, do not worry. I will instantly cause the demon girl to vanish by using Kototama.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玉治別『無事平穏の途中に其の傷は又如何なさつたのだ。吾々は親子兄弟よりも親密にして居る仲、何故御隠しなさるか』</p>
+            <p class="ja-classical-line">竜国別『何うしても斯うしても秘密は秘密です。これ計りは私一生の間云ふことは出来ませぬ。もしも半口でも言はうものなら大変です。やつて来ますからなア』</p>
+            <p class="ja-classical-line">玉治別『やつて来るとは、そりや又何ですか。世界の鬼、大蛇、悪狐、醜女、探女を悉く言向け和さねばならぬ宣伝使、何がやつて来たところで怖ろしいものがある道理はない。怪体なことを仰有るのですな』</p>
+            <p class="ja-classical-line">竜国別『これは誓約がしてありますから、約束を破れば矢張違約の罪になりますワ』</p>
+            <p class="ja-classical-line">玉治別『ハヽヽヽヽ、エライ惚気方だなア。途中に於て立派なナイスに出会し、夫婦の約束を結び、女の方からお前様の様な男らしい男、鼻の高い方は他の女に惚れられると困るから、傷をつけて置かうなんて、ナイスに頭を割らせ、さうして夫婦の誓約をしたのでせう。その代り貴方も女の小指位は預かつたでせうなア』</p>
+            <p class="ja-classical-line">竜国別『イヤもう迷惑千万、ナイスと婚約を結ぶやうな、そんな気楽なことですかい。大変な椿事が突発したのですよ。言ひ度いは山々なれど斯んなことを言ふと、鬼娘がやつて来ますよ』</p>
+            <p class="ja-classical-line">杢助『ハヽヽヽヽ、大谷山の谷底に巣を構へて居る鬼娘のお光に逢うて、血を吸はれたのだなア』</p>
+            <p class="ja-classical-line">竜国別『メヽヽ滅相な、そんなものに逢うたことはありませぬワ』</p>
+            <p class="ja-classical-line">杢助『貴方は宣伝使であり乍ら、我々を偽るのですか。偽りの罪は随分重いものですよ』</p>
+            <p class="ja-classical-line">竜国別『約束を破つても罪になる。偽つても罪になる。エー仕方がない、実はお光と云ふ鬼娘に出会し、頭をこづかれ、血を二升許り吸ひとられ、何処ともなしに気分がサツパリとしました。併し何となく意気沮喪したやうな感じが致します。千里向ふでも私の耳は聞えるから、人に言つたが最後、生命を奪ると云ひました。私も男だから鬼娘の一人や二人は怖れませぬが、やつて来たら何とかして下さいますか』</p>
+            <p class="ja-classical-line">玉治別『竜国別さま、御心配なさいますな。言霊を以て忽ち鬼娘を消滅させて了ひますよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mokusuke: 'If by any chance they come here, I, Mokusuke, will trample them underfoot and make them surrender. Do not have any Goshinpai.'</p>
+          <p class="en-p">At that moment, raising a Kurokumo, an Onimusume appeared from the Sanroku, showing only her face, and ascended with the clouds, making a nu-nu sound.</p>
+          <p class="en-p">Tatsukuniwake: 'Ah, it seems an Onimusume I recognize has come. Please, Mokusuke-sama, I am counting on you.'</p>
+          <p class="en-p">Mokusuke: 'Do not have any Shinpai. You, quickly begin the Kototamasen. As for everything else, I, Mokusuke, will take care of it all.'</p>
+          <p class="en-p">Just as he said this, the Onimusume opened her mouth, which was torn to her ears, with a gwa sound, and while sticking her tongue out slowly,</p>
+          <p class="en-p">Onimusume: 'The Sendenshi of Tatsukuniwake should have come here; I wonder where he is.'</p>
+          <p class="en-p">Mokusuke: 'There is surely one person here. And what do you intend to do by looking for Tatsukuniwake? It is unsightly. Even if you have come with small horns growing and a huge mouth open, there is not Tarehitori who will feel Dōjiyō for you. Do not make such a Baka of me. Go and consult with your own face. If you are going to chase after a man, why do you not come with a dainty, feminine mouth? Opening a mouth as Bukatsukau as a Daikagura, most men, upon seeing such a face, would not be able to have Anmin at Yabun for fear of being attacked. Why do you not transform yourself to look feminine and graceful?'</p>
+          <p class="en-p">Omitsu: 'I have no business with you. I have made a firm, firm promise with Tatsukuniwake. I have come out to fulfill that promise, so do not get in my way.'</p>
+          <p class="en-p">Mokusuke: 'Ahahahaha, what a strange thing to happen. Hey, Tatsukuniwake-sama, no matter how much you are starving for a woman while traveling alone, is this not too much? Did you make some kind of firm promise with an Onimusume who looks like a Hannya mask?'</p>
+          <p class="en-p">Omitsu: 'As proof of the firm promise, look at the forehead of Tatsukuniwake; there should be a stone seal stamped as proof that he is my possession. The life of Tatsukuniwake is already mine. Do not get in my way.'</p>
+          <p class="en-p">Mokusuke: 'I am not such a boorish person by nature that I would interfere with the love between two people, but my, my, this is truly astonishing. To bet even your life on such an Onimusume and make a promise, is that not too much? On top of that, to have a stone seal stamped on you, that is a thorough romance indeed.'</p>
+          <p class="en-p">Omitsu: 'Please move aside quickly. The fire in my heart is burning, so I will end up like Omitsu in a frenzy.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">杢助『万一やつて来居つたなら、此の杢助が足で踏み躙り降参させて呉れます。御心配なさるな』</p>
+            <p class="ja-classical-line">斯る所へ黒雲を起し、山麓より鬼娘、面ばかり現はし、ヌーヌーと雲と共に上つて来る。</p>
+            <p class="ja-classical-line">竜国別『ヤアどうやら見覚えのある鬼娘がやつて来たやうだ。モシ杢助さま、頼みますよ』</p>
+            <p class="ja-classical-line">杢助『心配なさるな。貴方は早く言霊戦を始めなさい。其の他のことは、みんな此杢助が御引受け申す』</p>
+            <p class="ja-classical-line">と云ふ折しも鬼娘はグワツと耳迄引裂けた口を開き、舌をノロノロ出し乍ら、</p>
+            <p class="ja-classical-line">鬼娘『竜国別の宣伝使は、此処へ来た筈だが、何処に居るかな』</p>
+            <p class="ja-classical-line">杢助『此処に確かたつた一人居る。さうして貴様は竜国別を探して何をする積りだ。見つともない。小ぽけな角を生やし、大きな口を開けてやつて来たところで、誰一人貴様に同情するものはありやしないぞ。あんまり馬鹿にすな。貴様の顔と相談して来い。男の尻を追ふのなら女らしいオチヨボ口をして来たら如何だ。大神楽のやうな無恰好な口を開けよつて、そないな顔を見ると大抵の男は、夜分には襲はれて安眠が出来はしないぞ。何故女らしく淑やかに化けて来ぬか』</p>
+            <p class="ja-classical-line">お光『お前に用はない。俺は竜国別に堅い堅い約束がしてある。約束履行のために出て来たのだから、邪魔して下さるな』</p>
+            <p class="ja-classical-line">杢助『アハヽヽヽヽ、何と物好きもあればあるものだな。コレ竜国別さま、何程一人旅で女に飢ゑて居ると言つても、あんまりぢやないか。般若の面みたやうな鬼娘と、なんぞ堅い約束でもしたのか』</p>
+            <p class="ja-classical-line">お光『堅い約束した証拠には竜国別の額口を御覧なさい、俺の所有物と云ふ証拠に石の刻印が捺してある筈だ。竜国別の生命は最早此方の物だ。邪魔をして下さるな』</p>
+            <p class="ja-classical-line">杢助『二人の恋仲を、俺もさう野暮な生れ付きぢやないから、別に邪魔する積りぢやないが、さてもさても呆れたものだなア。生命までも斯んな鬼娘に賭けて、約束するとは余りぢやないか。おまけに石の刻印まで捺して貰ふとは、何処までも徹底した恋愛だなア』</p>
+            <p class="ja-classical-line">お光『早く除いて下さい。俺は胸の火が燃えて来て居るから、お光狂乱のやうになつて了ひますよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mokusuke: 'Ahahaha, having been in seclusion in the mountains for so long, I have had no opportunity to see a play, so I would like to be allowed to watch this performance of Okitsu's madness for free right here.'</p>
+          <p class="en-p">Tatsukuniwake: 'Hey Okitsu, yesterday's promise is cancelled now. Who would ever make a firm promise with an ogre-girl like you? It was just an excuse to escape the situation. You are quite a fool, too.'</p>
+          <p class="en-p">With Mokusuke's strength as his backing, he gradually began to raise his volume.</p>
+          <p class="en-p">Okitsu: 'Hmph, acting so grand, just because Mokusuke is here, you are a fox borrowing the tiger's authority. You are good at deceiving people. Even this ogre-girl is so stunned that she cannot speak. However, even if you cancel it, I will not. I will take your life no matter what, so prepare yourself.'</p>
+          <p class="en-p">Mokusuke picked up a jagged stone from his feet, gripped it tightly, and said,</p>
+          <p class="en-p">Mokusuke: 'Hey, Okitsu, I will fulfill the promise for you. I will let you take my life. In return, you must return the written pledge. Come, I will stamp a seal on your forehead with this stone with all my might. This will be proof that you will never again make any complaints regarding the person of Tatsukuniwake. Come, stick out your forehead quickly.'</p>
+          <p class="en-p">Tatsukuniwake: 'Okitsu, look at that. Present that forehead before Mokusuke-sama.'</p>
+          <p class="en-p">Okitsu: 'Oh, what a pity. Tatsukuniwake, you will not be walking with Mokusuke all year round. There will be a time when you are alone again. I will surely fulfill the promise at that time, so keep that in mind.'</p>
+          <p class="en-p">Ohatsu, in a small voice,</p>
+          <p class="en-p">Ohatsu: 'Ohohoho, Okitsu-dono, the ogre-girl, do you remember my face?'</p>
+          <p class="en-p">The moment Okitsu suddenly looked at the six-year-old Ohatsu's face, she shrieked and vanished into white smoke. The black clouds that had been enveloping them until now were swept away by the wind blowing down from Mount Takaharu and scattered in all directions, and even the water in the valley stream at the foot of the mountain began to be clearly visible.</p>
+          <p class="en-p">Mokusuke: 'Ahahaha, even if one calls her an ogre-girl, she is fragile. In the end, she has vanished like smoke and mist. Ah, she must have attained enlightenment with this. Come, Tatsukuniwake-sama, please be at ease now.'</p>
+          <p class="en-p">Tatsukuniwake: 'I have caused you great trouble, but thanks to you, I have been saved.'</p>
+          <p class="en-p">Tamajiwake: 'Tatsukuniwake-sama, you have shown us quite a bizarre romance. It is well said that there is no accounting for taste.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">杢助『アハヽヽヽ、山家に長らく蟄居して居つたので、芝居を見る機会がなかつたが、一つ此処で其のお光狂乱の演劇を、無料拝観さして貰ひたいものだなア』</p>
+            <p class="ja-classical-line">竜国別『オイお光、昨日の約束はモー取消だ。誰が貴様のやうな鬼娘と堅い約束を結んでたまらうか。其場遁れの遁げ口上だつた。貴様も好い馬鹿だなア』</p>
+            <p class="ja-classical-line">と杢助の力強を後楯に徐々メートルを上げ出した。</p>
+            <p class="ja-classical-line">お光『ヘン、偉さうに、杢助が居ると思つて、お前は虎の威を借る奴狐だ。欺すことは上手だなア。この鬼娘でさへも呆れて物が云はれませぬワイ。併し乍ら其方は取消しても、此方は取消さぬのだ。何処までも生命を貰ふから覚悟をしなさい』</p>
+            <p class="ja-classical-line">杢助は足許のギザギザした石を一つ拾ひ、グツと握つて、</p>
+            <p class="ja-classical-line">杢助『オイ、お光、約束は履行してやらう。生命も奪らしてやらう。其代りに証文は返して貰はねばならぬ。サア、此石で貴様の額に力一杯刻印を捺してやらう。これで再び竜国別の身の上に関しては、毛頭苦情は申しませぬと言ふ証拠だぞ。サア早く凸凹を突き出せ』</p>
+            <p class="ja-classical-line">竜国別『お光、ざまア見やがれ。其の凸を杢助さまの御前に提出するのだ』</p>
+            <p class="ja-classical-line">お光『エー残念な、竜国別、お前も杢助と年が年中歩いて居るのぢやあるまい。又一人出る時もあらう。その時に約束を屹度履行するから、さう思つてゐらつしやい』</p>
+            <p class="ja-classical-line">お初、小さい声で、</p>
+            <p class="ja-classical-line">お初『オホヽヽヽ、鬼娘のお光どの、私の顔を見覚えて居ますか』</p>
+            <p class="ja-classical-line">お光は不図六歳のお初の顔を見るなり、キヤツと叫んで白煙となり消えて了つた。今迄包んで居た黒雲は、高春山の吹颪に払拭されて四方に飛散し、山麓の谷川の水までハツキリと見えるやうになつて来た。</p>
+            <p class="ja-classical-line">杢助『アハヽヽヽ、鬼娘と云つても脆いものだなア。到頭煙散霧消して了ひ居つた。アヽ彼奴もこれで成仏しただらう。さア、モウ竜国別さま御安心なさい』</p>
+            <p class="ja-classical-line">竜国別『エライ御厄介をかけましたが、御かげで助かりました』</p>
+            <p class="ja-classical-line">玉治別『竜国別さま、随分奇抜なローマンスを見せて呉れたものだな。蓼喰ふ虫も好き好きとはよく言つたものだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tatsukuniwake: 'Do not mock people so much, even you. Please try to understand my feelings a little.'</p>
+          <p class="en-p">Ichidō: 'Hahaha!'</p>
+          <p class="en-p">They burst into laughter, appearing to enjoy themselves, forgetting that they were in enemy territory.</p>
+          <p class="en-p">Tamaharuwake: 'By the way, has Kuniyoriwake not come yet? I wonder if he is dallying with the Onimusume on the way again.'</p>
+          <p class="en-p">Tatsukuniwake: 'Since he requires such gaps, some trouble must have occurred. He has accumulated quite a lot of Meguri, so traveling alone is dangerous.'</p>
+          <p class="en-p">Just as he said this, Kuniyoriwake came climbing up, looking triumphant and accompanied by several men.</p>
+          <p class="en-p">Tamaharuwake: 'Ah, is that Kuniyoriwake-sama? We were kept waiting for quite a while. What were you doing?'</p>
+          <p class="en-p">Kuniyoriwake: 'A huge incident broke out on the way, and that is why it took time. I ended up traveling as far as the eighth street of Jigoku, and I was surrounded and attacked by my former Niyōbau, which troubled me greatly. As a retribution for having made wives cry and widows fall, and for being a woman-killer without needing a blade since I was young, I wandered and fell into the Yūmeikai. There, a total of about ten ghosts appeared at once, repeating a million curses of resentment. I could not help but recall the past, and I was drooling profusely, so I was late and I am sorry. You must have been quite bored.'</p>
+          <p class="en-p">Tamaharuwake: 'I was not bored or anything of the sort. That fellow Tatsukuniwake made a firm promise with the Onimusume of the highest quality, and the Onimusume named Omitsu came here demanding he fulfill the contract, so we have just finished the scene of lamentation. If you had come just one step earlier, you could have seen an interesting drama. And you were supposed to come alone, but are you not bringing quite a lot of people with you?'</p>
+          <p class="en-p">Kuniyoriwake: 'These are vessels possessed by the spirits of my dead wives.'</p>
+          <p class="en-p">Tamaharuwake: 'Even if they are spirits, was there not a rule that you cannot bring women until the conquest of Takaharuyama is finished?'</p>
+          <p class="en-p">Kuniyoriwake: 'That is the same for both of us. You also brought Ohatsu-sama with you, did you not? Even if she is a child, a woman is still a woman. They say Tatsukuniwake also started some trouble with the Onimusume on the way by making some kind of firm contract. It is a bit cruel to blame only me. Those I have brought here are actually subordinates of the Alps sect, and even the elder brother of Matsuhime-sama, Tsunekō, has come out. My spoils of war are roughly like this for now.'</p>
+          <p class="en-p">Ohatsu: 'Hey, hey, Tatsukuniwake, Kuniyoriwake, Tamaharuwake, Mokusuke, and the rest of you, I shall now convey my operational plan to you. Keep silent for a while and listen carefully to my words.'</p>
+          <p class="en-p">As she called out in a solemn voice filled with power, unlike that of a child, the four men replied 'Yes' and prostrated themselves on the ground, waiting for the declaration.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">竜国別『お前まで余り人をひやかすものぢやない。俺の心もチツとは推量して呉れ』</p>
+            <p class="ja-classical-line">一同『アハヽヽヽ』</p>
+            <p class="ja-classical-line">と声を放つて敵地にあるを忘れて面白さうに笑ふ。</p>
+            <p class="ja-classical-line">玉治別『時に、国依別はまだ来ないのかなア。又鬼娘と途中に狎戯いて居るのぢやなからうかな』</p>
+            <p class="ja-classical-line">竜国別『斯う隙が要るからは何か一つの故障が起つたのだらう。彼奴も随分罪業を積んで居るから、一人旅行は剣呑だ』</p>
+            <p class="ja-classical-line">と語る時しも、国依別は意気揚々として数人の男を伴ひ登つて来た。</p>
+            <p class="ja-classical-line">玉治別『アヽ国依別さまか、随分待呆けに逢うたよ。如何して居つたのだい』</p>
+            <p class="ja-classical-line">国依別『大変な大事件が途中で勃発して、それが為に時間が要つたのだよ。到頭地獄の八丁目迄旅行して、昔の女房に包囲攻撃され困つて了つた。若い時から嬶ア泣かしの後家倒し、刃物要らずの女殺しをやつて来た報いで、幽冥界に彷徨ひ落ち込んだところ、合計十打ばかりのレコが一時に現はれて、百万陀羅恨みの数々繰返し、俺も已むを得ず昔の事を思ひ出し、涎を沢山に繰返して居つたのだから、ツイ遅れて済まなかつた。随分退屈であつたらうなア』</p>
+            <p class="ja-classical-line">玉治別『別に退屈でも何でも無かつた。竜国別の奴、天下一品の鬼娘と堅い約束を結び、其の契約を履行せよと云つて、お光の鬼娘がやつて来て、今既に愁歎場の幕を下ろしたところだ。モー一足早く来ると面白い活劇が見られるところだつたよ。さうしてお前は一人で来る筈だつたのに、随分沢山に人間を伴れて居るではないか』</p>
+            <p class="ja-classical-line">国依別『これは死んだ女房の亡霊が憑依した容器だ』</p>
+            <p class="ja-classical-line">玉治別『仮令亡霊でも、高春山の征伐が済む迄女を伴れることは出来ないと云ふ規則ではなかつたか』</p>
+            <p class="ja-classical-line">国依別『それは御互様だ。お前もお初さまを伴うて来ただらう。たとへ小供でも女は矢張女だ。竜国別も又鬼娘と途中に於て、何だか堅い契約を結んで一悶着をおつ始めたと云ふではないか。俺ばかり責めるのはチツと惨酷だよ。此処へ伴れて来て居るのは、実際はアルプス教の部下で、松姫さまの兄の常公迄が出て来て居るのだ。俺の戦利品は先づザツト斯んなものだよ』</p>
+            <p class="ja-classical-line">お初『ヤアヤア竜国別、国依別、玉治別、杢助、其他の者ども、これより妾が作戦計画を汝らに伝ふる。暫く沈黙を守り、わが言葉を謹聴せよ』</p>
+            <p class="ja-classical-line">と子供に似合はず、荘重な力の籠つた声で呼ばはるにぞ、四人は「ハイ」と答へた儘大地に平伏して宣示を待つ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c15.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 15: 化地蔵 [689]</span>
+      </a>
+      <a href="c17.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 17: 酒の息 [691]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: 奇の女 [686] - Volume 21 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 21 Table of Contents</a>
+      <span>Volume 21</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 21 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: 奇の女 [686]</h1>
+      <p class="chapter-title-ja">奇の女〔686〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tatsukuniwake enters deep into the valley of Ōtaniyama while singing a Sendenka in a low voice.</p>
+          <p class="en-p">The sound of the bell announcing the evening rings out, echoing the Shiyogiyōmujiyō. In the sky, thousands of crows cry out languidly, cawing as they seek their roosts. The wind that pierces the body sways the treetops in a Shichigosan pattern. Tatsukuniwake stops by a grove of aged pine trees to shelter from the night's rain and dew, and upon looking to the side, he finds a small shrine.</p>
+          <p class="en-p">Tatsukuniwake: 'Ah, how grateful I am; a shrine to some Kamisama stands here. In all likelihood, the Kamisama of the Yamaguchi is enshrined here.'</p>
+          <p class="en-p">While murmuring this to himself, he respectfully claps his hands and bows before the shrine, recites the Amatsunorito, sings a Sendenka, and lies down behind the shrine. The song goes:</p>
+          <p class="en-p">A Sendenshi of the Ananai-kyō,
+Together with Tamaharuwake and Kuniyoriwake,
+As messengers of the Kami,
+Arrived at the shores of Lake Tsuda.
+As the strength and the staff,
+Upon which Takayorihime relies,
+I obtained the secret text by chance,
+And explored the enemy's positions,
+As if they were in the palm of my hand.
+While sneaking through secret paths here,
+And traveling over mountains and fields,
+The sun gradually set completely,
+And as the path ahead became invisible,
+I stopped quietly at the base of the Senbiki-no-iwa,
+And while spending the night sheltering from the falling snow,
+A young woman appeared,
+Surpassing even the flowers in beauty,
+Holding a baby to her breast,
+And as she was shut in by the cold, unable to move her hands or feet,
+She asked me to give her warmth for the night,
+And approached close to my side.
+I, a Sendenshi of the Kami's teachings,
+Who says I will save this world,
+Refused with a single word,
+Saying I must not touch a woman's skin,
+Until I have brought the Magakami of Takaharuyama to submission and peace.
+The woman then pressed her hands together again,
+And begged me to build a fire for her.
+When I suddenly cast my eyes nearby,
+I found withered brushwood, perhaps a gift from Heaven,
+I immediately struck a spark,
+And when I lit the fire, it blazed up,
+Making the surroundings as bright as midday.
+The woman's face became clearly visible,
+Even her true nature was fully revealed.
+With arguments of male dominance and female subordination,
+And debates of female dominance and male subordination,
+I sharpened my tongue like the Heavenly Nuboko,
+And fought, scattering sparks.
+The woman was no ordinary person, and quite formidable,
+She was not afraid of my Kototama.
+Just when things looked dangerous,
+A large man blowing a conch shell,
+Came advancing, making the echoes of the valleys here and there resound,
+He suddenly appeared at this place,
+And glared at the demonic woman.
+The woman was startled, and threw the child she was holding,
+Straight into the fire,
+And fled, vanishing like clouds and mist.
+I was attacked by sleepiness,
+And just as I was following the path of dreams,
+I was shaken awake and opened my eyes,
+And as I looked around the surroundings, there were,
+Onibukehiko's Byakkoshin who appeared on Mount Ōe,
+Followed by Yoriyorihime-kami.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">竜国別は小声に宣伝歌を歌ひながら、大谷山の谷深く進み入る。</p>
+            <p class="ja-classical-line">夕べを告ぐる鐘の声、諸行無常と鳴り響く。空に烏の幾千羽、塒求めてカアカアと物憂げに啼き立つる。身に沁む風は樹々の梢を七五三に揺つて居る。竜国別は年古りたる松の木立に立ち寄りて一夜の雨露を凌がんと、傍を見れば小さき祠がある。</p>
+            <p class="ja-classical-line">竜国別『アヽ有難い、何れかの神様のお社が建つて居る。大方、山口の神様が祭つてあるのだらう』</p>
+            <p class="ja-classical-line">と独言ちつつ神前に恭しく拍手叩頭し、天津祝詞を奏上し、宣伝歌をうたつて祠の後に横はる。其歌、</p>
+            <p class="ja-classical-line">『三五教の宣伝使
+玉治別や国依別の
+神の使と諸共に
+津田の湖辺に到着し
+鷹依姫が力とも
+杖とも頼む秘密文
+ふとした事より手に入れて
+敵の配置を悉く
+手に取る如く探索し
+茲に間道潜りつつ
+山野を伝ひて来るうち
+日は漸くに暮れ果てて
+行手も見えずなりければ
+千引の岩の岩が根に
+そつと立ち寄り降る雪を
+凌ぎて一夜を明かすうち
+現はれ来る妙齢の
+花をあざむく一婦人
+赤子を胸に抱きつつ
+寒気に閉ぢられ手も足も</p>
+            <p class="ja-classical-line">儘にならねば一夜の
+我に暖気を与へよと
+身辺近く襲ひ来る
+我は此世を救うてふ
+神の教の宣伝使
+高春山の曲神を
+言向け和し帰るまで
+女に肌は触れまじと
+唯一言に断れば
+女は又もや手を合せ
+火を焚き呉れよと願ひ入る
+ふと傍に目をやれば
+天の与へか枯小柴
+忽ち燧を打ち出でて
+火を点ずれば炎々と
+四辺は真昼の如くなり
+女の顔はありありと
+生地迄スツカリ見えて来た
+男尊女卑の言論と
+女尊男卑の弁舌に</p>
+            <p class="ja-classical-line">天の瓊鉾（舌）を磨ぎ澄まし
+火花を散らして戦へば
+女もさるもの中々に
+我言霊に怖れない
+既に危く見えし時
+彼方此方の谷々の
+木霊を響かせ進み来る
+法螺貝吹いた大男
+忽ち此場に現はれて
+魔性の女を一睨み
+女は驚き抱きし子を
+直に火中に投げ捨てて
+雲を霞と逃げて行く
+我は睡魔に襲はれて
+夢路を辿る折柄に
+揺り起されて目を開き
+四辺きよろきよろ見廻せば
+大江の山に現はれし
+鬼武彦の白狐神
+続いて言依姫神</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Appearing before my eyes, saving me in this emergency, and vanishing from this place along with the music of Meuonbosatsu, Tatsukuniwake remained all alone, dozing off with his back against a rock, waiting for the dawn. The snow fell incessantly, blocking the path and leaving him unable to move freely, trapped in a dead end. Regardless of the situation, he summoned his Aramitama and courage, trudging forward through the snow, when suddenly, he was led by the hand by a mysterious woman who appeared from within the snow, taken to a dilapidated hut, and troubled by being bombarded with various miscellaneous questions, wondering what he should do, when she peeled her eyes wide like umbrellas.</p>
+          <p class="en-p">Thinking she had vanished in a flash, she suddenly transformed into an Ōbiyakuko and dashed off, aiming for the mountain path. When he looked closely, how strange it was; the mountain path, where snow had piled up more than five shaku, had vanished, leaving only a thin layer of snow. While holding a heart full of suspicion, he suddenly looked to his side, and to his surprise, he found himself at the foot of a rock, having been following a worthless dream path with his inner eyes closed. Bathed in the light of the Asahi, he stood up from that place and walked away, and just as he was searching for the footprints he had left in the snow, he encountered a Nojishi that came running, trampling through the snow, and for a while, he stood still on the path, gazing at it.</p>
+          <p class="en-p">As a white-feathered arrow flew from somewhere, grazing the sky, and struck the head of the boar, the boar was startled, running wild to the right and left, back and forth, crossing over the ridge of the peak, and hiding its body in the valley. Even to the end of birds and beasts, the way of the Lord God is to save and assist; how could he leave it abandoned? Thinking he would help it, he searched for the footprints and went down into the valley. In the bottom of the valley, where reeds grew thick and human footprints were absent, he came following the trail of blood, and seeing a naturally hollowed rock cave, he pitied the corpse of the boar lying beside it, recited the Amatsu Norito, and just as he thought to revive and save it, an Onimusume emerged from the rock cave.</p>
+          <p class="en-p">She immediately bit into the boar and drank its blood with a disgusting air. Wondering what this meant, he looked closely and saw that she looked just like O-Hikari, who was born as the daughter of O-Ryu in a village near Mount Takagi. O-Hikari finished drinking the blood, stared intently at his face, and said, 'Are you the uncle from next door?' He replied, 'Are you O-Hikari? Why are you living in hiding in these deep mountains? Go home quickly.' As he urged her, O-Hikari shook her head and said, 'I have grown tired of drinking the blood of the boar. You, who smell so delicious, let me eat you,' and she pressed him. Thinking this was a disaster, he was startled, and as he tried to soothe and appease her, teaching her about duty and human feelings...</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">我が眼前に現はれて
+急場を救ひ給ひつつ
+妙音菩薩の音楽に
+連れて此場を消えたまふ
+竜国別は唯一人
+巌を背にうとうとと
+睡りながらに明けを待つ
+雪は頻りに降り来り
+道も塞がり進退の
+自由を失ひユキ詰まる
+中をも厭はず荒魂
+勇気を鼓してザクザクと
+進む折しもむくむくと
+雪の中より現はれし
+不思議の女に手をひかれ
+破れた小屋に伴はれ
+種々雑多の問題を
+吹きかけられて困り入り
+如何はせんと思ふうち
+傘のやうなる目を剥いて</p>
+            <p class="ja-classical-line">パツと消えたと思ひきや
+忽ち変る大白狐
+山路を目蒐けて駆出だす
+よくよく見ればこは如何に
+五尺有余も積りたる
+雪の山路はいつとなく
+消えて僅かな薄雪に
+不審の胸を抱きながら
+ふと傍を眺むれば
+豈図らんや岩の根に
+くだらぬ夢路を辿りつつ
+心の眼を閉ぢて居た
+朝日の光を身に沿びて
+此処を立ち出でスタスタと
+雪に印した足跡を
+索ねて進む折もあれ
+雪踏み分けて駆来る
+野猪に出遇ひ暫くは
+道に佇み眺め入る
+空を掠めて何処よりか</p>
+            <p class="ja-classical-line">白羽の征矢の飛び来り
+猪の頭に突き立てば
+猪は驚き右左
+前や後に狂ひつつ
+峰の尾上を打ち渡り
+谷間に身をば隠したり
+鳥獣の末までも
+救ひ助くる神の道
+これが見捨てて置かれうか
+助けやらんと足跡を
+探りて谷間に下り往く
+萱茫々と生ひ茂り
+人跡絶えし谷の底
+血糊を標べに来て見れば
+自然に穿てる岩の洞
+其傍に横はる
+猪の屍を愍れみて
+天津祝詞を奏上し
+蘇らせて助けんと
+思ふ折しも岩窟の</p>
+            <p class="ja-classical-line">中より出づる鬼娘
+忽ち猪にかぶりつき
+血汐を吸ひ込む嫌らしさ
+はて訝かしとよく見れば
+高城山の近村に
+お竜が娘と生れたる
+お光の顔によく似たり
+お光は血汐を吸ひ終り
+我顔じつと打ち眺め
+お前は隣の小父さまか
+お前はお光か何として
+この山奥に忍び住む
+早く帰れと促せば
+お光は首をふりながら
+猪の血糊は吸ひ飽いた
+美味い香のするお前
+喰はしておくれと強要よる
+これや大変と驚いて
+なだめ慊しついろいろと
+義理人情を教ふれば</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Omitsu, with a huff, let it pass by like Bajitōfū, and thinking of Giri and Ninjiyō, asked, 'How could I ever become a demon?' While saying, 'Let me drink your Ikichi just Ichido,' she took a Tegoro stone in her hand and suddenly shattered my forehead. The Chishiho gushed forth like a river, and I, fragile as I was, fell into a state of Kizetsu, losing all Zengo. However, when I awoke to a Kanpū blowing suddenly, what a surprise it was; though my forehead ached a little, my Reiniku felt Sugasuga, as if washed clean, and I made an Ukehi with the demon girl. Having barely escaped the Kokō, I followed the Kiku Yamaji and finally arrived Koko.</p>
+          <p class="en-p">Though the moon shines in the Misora, the thicket of the Kodachi is deep, and even my own shadow is hard to see. Beneath the shrine in the forest of camellias, tomorrow I shall finally cross the mountains of Ōtani and head toward the fortress of Magari on Takaharuyama. Ah, Kamunagara, Kamunagara. May the Mitama Sachihahe, and may You save the two, Takahime and Kurohime, the Sendenshi of the Ananai-kyō. Nodatehiko and Nodatehime, before the presence of the Lord God Susanoo and Konohanahime, I, Tatsukuniwake no Kamitsukasa, pray from afar.'</p>
+          <p class="en-p">Having finished singing, he lay down under the floor of the old shrine.</p>
+          <p class="en-p">The night deepened, and in the hour of the ox, when all was silent and even the rustling of the leaves had ceased, the weeping of a woman, sounding as if she were tormenting a monkey, drew closer by the moment. Tatsukuniwake awoke, pricked up his ears, and held his breath, wondering who it could be. With the sound of many footsteps, several men brought a woman to this place.</p>
+          <p class="en-p">Men: 'Now, since it has come to this, it is useless to struggle. It would be happier for you to gracefully become the wife of the Sendenshi of Kārinsu and live a life of ease, commanding many followers with a nod. What is the point of remaining faithful to a rustic country bumpkin? Come, say yes quickly.'</p>
+          <p class="en-p">Woman: 'You are all fine men, yet you gather together to force a weak woman like me into this; is that not somewhat cowardly? If this person called Kārinsu had any virtue, women of the world would flock to him like bees, even if he tried to brush them away. Who would ever yield to a man rumored by the world to be the demon Kārinsu of Takaharuyama, and loathed like a centipede or a snake? You are men who are commanded by that centipede, which makes you even more insufferable. Ugh, how filthy! Do not touch me anymore.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お光はフンと鼻の先
+馬耳東風と聞き流し
+義理人情を弁へて
+如何して鬼になれますか
+お前の生血を唯一度
+飲ましてくれいと云ひながら
+手頃の石を手に持つて
+忽ち砕く我が額
+血潮は川と迸る
+我は脆くも気絶して
+前後も知らずなりけるが
+俄に吹き来る寒風に
+眼覚ませばこは如何に
+額は少し痛けれど
+霊肉共に清々と
+洗つたやうな心地して
+鬼の娘と誓約しつ
+やつと虎口を逃れ出で
+崎嶇たる山路辿りつつ
+漸く此処につきにけり</p>
+            <p class="ja-classical-line">月は御空に輝けど
+木立の茂み深くして
+我影だにも見えかぬる
+椿の森の宮の下
+明日はいよいよ大谷の
+山を踏み越え高春山の
+曲の砦に向ふなり
+あゝ惟神々々
+御霊幸倍ましまして
+三五教の宣伝使
+高姫黒姫両人を
+救ひ出させ給へかし
+野立の彦や野立姫
+神素盞嗚大御神
+木花姫の御前に
+竜国別の神司
+遥に祈り奉る』</p>
+            <p class="ja-classical-line">と歌ひ終つて古社の床下に横はり居る。</p>
+            <p class="ja-classical-line">夜は深々と更け渡り、寂然として木の葉のそよぎもピタリと止まつた丑満の頃、猿を責めるやうな女の泣き声、刻々に近づき来る。竜国別は目を醒まし耳を傾けて、何者なるかと息を凝らして考へて居る。バタバタと数人の足音、女を一人此場に連れ来り、</p>
+            <p class="ja-classical-line">『サア、もう斯うなつた上は、じたばたしても駄目だ。体よくカーリンスの宣伝使の奥さまになつて、左団扇で数多の乾児を頤で使ふ身分となるのが、却つてお前の身に取つて幸福だらう。土臭い田舎者に心中立てをしたつて何になるか、サア早うウンと云へ』</p>
+            <p class="ja-classical-line">『お前は立派な男の癖に、私のやうな繊弱き一人の女を寄つて集つて、無理往生をさせようとは些と卑怯ではありませぬか。カーリンスとか云ふ人に、それだけの徳望があれば、天下の女は何程袖で蜂を掃ふやうにして居つても、獅噛みついてゆきます。世間から高春山のカーリンスの鬼と噂され、蚰蜒か蛇のやうに嫌はれて居るお方に、誰が靡くものが有りませう。お前等はその蚰蜒に頤で使はれて居る人間だから、なほ更鼻持のならぬ男だ。エヽ汚らはしい、もう触つて下さるな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Unknown Speaker: 'Koitsu is a nakanaka gaujiyō woman; very well, if kisama comes at me like that, I have my own kakugo as well.'</p>
+          <p class="en-p">Unknown Speaker: 'I should like to hear what that kakugo is.'</p>
+          <p class="en-p">Unknown Speaker: 'Such things are our himitsu; where is the hitsueu for you to hear them?'</p>
+          <p class="en-p">Unknown Speaker: 'There is indeed; I am your mokutekibutsu, or if you will, the taukiyokushiya. How could I remain settled for even an ichinichi without knowing your himitsu?'</p>
+          <p class="en-p">Unknown Speaker: 'Eh, what are you blathering about, you woman? Shall I tear you apart?'</p>
+          <p class="en-p">Unknown Speaker: 'You may tear my mouth if you wish. However, if by any manmanichi it is decided that I shall become the niyōbau of Kārinsu, are you not my kerai? If that happens, how will you apologize to Kārinsu for tearing your shiyujin’s mouth and turning a woman who was settsukaku kirei into a kizumono? There would be no shikata for such an apology.'</p>
+          <p class="en-p">Unknown Speaker: 'I do not insist on tearing you apart. However, will you accept our eukiu and become our okusama?'</p>
+          <p class="en-p">Unknown Speaker: 'Ho ho ho ho, how disgusting; if I were to become the bride of Kārinsu, I would rather go and be the bride of a crow.'</p>
+          <p class="en-p">Unknown Speaker: 'Are you going to honrō a shichishiyaku danshi?'</p>
+          <p class="en-p">Unknown Speaker: 'That is a settled matter. Women are strong things. A woman possesses the mariyoku to tether even a daizau with a single hitosuji of her hair. Even if five or six fellows like you, you hyottoko-yarō, were to come in a bundle, it would be utterly useless; you had better stop such a rebellion. It is the power of a woman to make mountains, fields, houses, and storehouses vanish or collapse in an instant with the tip of her tongue or a glance of her eyes. You act so arrogant because you were born as men, but you are spineless cowards who are satisfied with being used so filthily and cruelly by Kārinsu, who looks like a mere ghost of a green gourd; when I think of it, I truly pity you.'</p>
+          <p class="en-p">Unknown Speaker: 'Hey you woman, if you have such a knack for spouting gōtaku, why did you let out a shriek of kiyatsukiyatsu? It is no use putting on such a false show of bravado.'</p>
+          <p class="en-p">Unknown Speaker: 'Ho ho ho ho, do you call the sound of kiyakiyā a cry? You are the one who is like a rotten woman, a creature that one cannot distinguish as either a monkey or a human, who would cry out kiyakiyā; I was laughing, saying kiyatsukiyatsu, because what you are doing is so ridiculous.'</p>
+          <p class="en-p">Unknown Speaker: 'What a gutsy woman she is, to be sure. I have never encountered such a woman since I was born.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『此奴中々剛情な女だ、よしよし貴様がさう出れば此方にも覚悟がある』</p>
+            <p class="ja-classical-line">『其覚悟を聞かして貰ひませう』</p>
+            <p class="ja-classical-line">『そんな事は俺達の秘密だ、貴様に聞かす必要が何処にあるか』</p>
+            <p class="ja-classical-line">『ありますとも、私は貴方等の目的物、云はば当局者である。秘密を知らずにどうして一日だつて治まつて行きますか』</p>
+            <p class="ja-classical-line">『エヽ、女の癖に何をツベコベと吐くのだ、引き裂いてやらうか』</p>
+            <p class="ja-classical-line">『口を引き裂きなさつても宜しい。併し乍ら万々一私がカーリンスの女房になると定つたら、お前は私の家来ぢやないか。さうすれば主人の口を引き裂き、折角綺麗な女を傷者にしたと云ふ罪を、何うしてカーリンスにお詫をなさるか、お詫の仕方がありますまい』</p>
+            <p class="ja-classical-line">『たつて引き裂かうとは申しませぬ。併し乍ら我々の要求を容れて、奥さまになつて下さいますか』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、好かんたらしい、カーリンスの嫁になる位なら烏の嫁に行きますワ』</p>
+            <p class="ja-classical-line">『七尺の男子を貴様は翻弄するのか』</p>
+            <p class="ja-classical-line">『定つた事ですよ。女と云ふものは強いものです。女の髪の毛一条あれば大象も繋ぐと云ふ魔力をもつて居る。ヒヨツトコ野郎の五人や六人、束になつて来た所が到底駄目ですワ、そんな謀反は大抵にしてお止めなさい。山も田も家も倉も、舌の先や目の先で一遍に消滅させたり、顛覆させたりするのは女の力です。お前達は男に生れたと言つてエラさうにして居るが、多寡の知れた青瓢箪のお化見た様なカーリンスに、口汚なく酷き使はれて、満足をして居るやうな腰抜けだから、思へば思へば気の毒なものだよ』</p>
+            <p class="ja-classical-line">『これや女、そんな劫託を並べる癖に、何故キヤツキヤツと悲鳴を挙げたのだ。そんな空威張りをしたつて駄目だぞ』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、キヤアキヤアと云ふ声は泣き声ですか。お前こそ女の腐つたやうな猿とも人間とも弁別のつかぬ代物は、キヤアキヤアと云うて泣くだらうが、私はお前等のする事が余り可笑しいので、キヤツキヤツと云つて笑つたのですよ』</p>
+            <p class="ja-classical-line">『何とマア強太い女もあればあるものだなア。俺は生れてからこんな女に出遇つた事がないワ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">You should never have encountered her; even if the women of the Sekai saw your form, or if a breeze blew from your direction, they would all loathe you and flee. It is not that they flee because they say you are strong or frightening. They flee because you are filthy, emit a Ketsutai odor that is Hanamo, and they think you are a Bakemono.</p>
+          <p class="en-p">What a hopeless woman. If we were to take such a woman home and make her a wife of Karinsu, it might even become a Meiwaku for us Oretachi.</p>
+          <p class="en-p">What, it will never be a Meiwaku. If you go around Mago, looking this way and that, I will just give your heads a little greeting with my Nagakiseru. But there will be no Betsudeu to your Inochi, so be Anshin, ho ho ho ho.</p>
+          <p class="en-p">Niyoshi and Shōjin are difficult to nurture; we are Tautei defeated by her Benzetsu. Fugenjitsukau is the only way. Come, Meimei, take hold of her Teashi, and let us return to Takaharuyama. Hey, woman, no matter how skilled your chin may be, you will not be able to match Chiyokusetsu Kaudō; men are Heta with their mouths, but their Jitsuchi strength is great.</p>
+          <p class="en-p">Ho ho ho ho, how unsightly to be against just one frail woman; that five or six rough men wearing one-jō loincloths must act like ants gathering to drag an earthworm into their nest, unable to capture one woman and achieve their purpose—how men are truly the most troublesome things.</p>
+          <p class="en-p">Do not speak so haughtily; it is said that a man is worth a hundred kan when naked, and if one has a body, one can pass as a splendid, full-fledged hero in this world. Women are shadows. Why do you not act more womanly and graceful? The virtue of a woman lies in obedience.</p>
+          <p class="en-p">I hate obedience greatly. My virtue as a woman is Jujutsu. Shall I show you a sample by throwing you six up to the world of the moon?</p>
+          <p class="en-p">Hey, everyone, what shall we do? If we were to carelessly take such a woman home, there is no telling what kind of great commotion might erupt.</p>
+          <p class="en-p">Having said that, if we do not take her home, we have no face to show the master of Karinsu; this has become a troublesome matter.</p>
+          <p class="en-p">Shall I show you a bit of Jujutsu, oho ho ho.</p>
+          <p class="en-p">Hey, from here on it is Chiyokusetsu Kaudō. Otsu, Hei, Tei, Bo, Ki, attack all at once.</p>
+          <p class="en-p">Very well, understood.</p>
+          <p class="en-p">The six men took her by the hands and feet, trying to carry the woman away by force. The woman screamed repeatedly, 'Kya! Kya!' From behind the shrine,</p>
+          <p class="en-p">Wait a moment! Daijizaiten Ōkuniwake-no-Mikoto is here, and I have details to declare.</p>
+          <p class="en-p">He roared like thunder. The six men threw the woman down on the spot and scattered, vanishing like clouds and mist. The woman walked quietly to the front of the shrine, clapped her hands, and was offering silent prayers.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『出遇つた事がない筈、世界の女はお前の姿を見ても、お前の方から風が吹いても、嫌がつて皆逃げて仕舞ふ。それもお前が強いとか、怖いとか云うて逃げるのではない。汚らはしくつて、怪体な臭がして鼻持ちがならないから、化物だと思つて逃げるのですよ』</p>
+            <p class="ja-classical-line">『仕方のない女だなア。こんな女を連れて帰つて、カーリンスの奥さまにでもしようものなら、俺達の却つて迷惑になるかも知れやしないぞ』</p>
+            <p class="ja-classical-line">『ナニ決して迷惑にやなりませぬ。キヨロキヨロ間誤ついて居ると、ちよいちよい長煙管がお前等のお頭にお見舞申す位なものだよ。けれども生命には別条はないから安心なさい、ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">『女子と小人は養ひ難し、到底弁舌では俺達は敗軍だ。不言実行に限る。サア各自に手足を取り、高春山に帰つてゆかう。これや女、何んぼ頤が達者でも直接行動には叶ふまい、男は口は下手だが実地の力は強いぞ』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、たつた一人の繊弱い女に対し見つともない、五人も六人も一丈の褌をかいた荒男が、蚯蚓を蟻が寄つて集つて巣へ引き込むやうにせねば、一人の女を引捉へて、その目的を達する事が出来ないとは、何と男程困つたものはないものだなア』</p>
+            <p class="ja-classical-line">『偉さうに云ふない、男は裸百貫と云つて、体が一つあれば世の中に立派な一人前の大丈夫として通用するのだ。女は蔭ものだ。もつと女らしく淑やかにしたら如何だい。女の徳は柔順にあるのだぞ』</p>
+            <p class="ja-classical-line">『私は柔順なんか大の嫌ひだ。私の女としての徳は柔術だ。一つ見本にお前達六人を、お月さまの世界迄も放りあげて見ようか』</p>
+            <p class="ja-classical-line">『オイ皆の奴、如何しようかなア。こんな女を迂濶連れて帰らうものなら、何んな大騒動が勃発するか知れたものぢやないぞ』</p>
+            <p class="ja-classical-line">『それだと云つて、連れて帰らねばカーリンスの親方に合す顔がなし、困つた事になつたものだなア』</p>
+            <p class="ja-classical-line">『一つ柔術をお目にかけませうかな、オホヽヽヽ』</p>
+            <p class="ja-classical-line">『エヽ、この上は直接行動だ。乙、丙、丁、戊、己、一度にかかれ』</p>
+            <p class="ja-classical-line">『ヨシ、合点だ』</p>
+            <p class="ja-classical-line">と六人の男は手取り足取り無理に女を担ぎ行かむとする。女は又もやキヤツ　キヤツと頻りに叫ぶ。祠の後より、</p>
+            <p class="ja-classical-line">『暫く待てツ、大自在天大国別命これにあり、申し渡す仔細がある』</p>
+            <p class="ja-classical-line">と雷の如く呶鳴りつけた。六人は女を其場に投げ捨て雲を霞と逃げ散つた。女は静々と神前に詣で、拍手しながら何事か暗祈黙祷をして居る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: Ogre 娘 [685]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: Dream の女 [687]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
