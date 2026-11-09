@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: Truth か偽か [634] - Volume 18 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 18 Table of Contents</a>
+      <span>Volume 18</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 18 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: Truth か偽か [634]</h1>
+      <p class="chapter-title-ja">真か偽か〔634〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Murasakihime, arrayed in purple, prostrates herself before the rare Seichi of Misenzan, the mountains of Yotsuo and Okefuse; leaving the Nishisakatauge behind, she proceeds along the spring path accompanied by Wakahiko, amidst the rustling young leaves, and the faithful Umakō and Shikakō. As the mountains gradually press closer, they traverse the narrow valley paths; viewing the village of Kaumori to the Yunde and Funaokayama to the right, the sun at last reaches the hour of the Rooster. The veil of darkness being lowered, the Itsukau lose their way; as they stop to rest at a small shrine of Kami by the wayside, suddenly there is the sound of a woman's cry.</p>
+          <p class="en-p">Murasakihime rises and, having inclined her ear to listen, dispatches the three—Wakahiko, Umakō, and Shikakō—toward the direction of the voice; when they search and investigate the state of affairs, they find her beloved Manamusume unexpectedly bound in the dark forest. Rescuing her from the midst of her gasping agony, the three return, their hearts illuminated by the suddenly rising Tsukikage. When asked from whence she came, the young woman tells her Monogatari; the astonished Wakahiko and all the others, while mutually caring for and protecting one another, take the moonlight as their strength and, paying Chiui to the Atari, head toward the rare Seichi at the foot of Kensakiyama.</p>
+          <p class="en-p">The party of three men and two women finally managed to arrive safely before the Great Shrine where the Sumera-Ōkami is enshrined, along the mountain path through which the moon filters. The night gradually deepens into the hour of the Rat and the hour of the Ox; overpowering the sound of the murmuring mountain stream, the voices of prayer are heard, bearing a weirdness—a turbidity of Kototama where many spirits of demons, giant serpents, and Magatsumi draw near, an incongruous harmony for the pure flow of the valley river.</p>
+          <p class="en-p">Murasakihime: 'Everyone, according to the revelation of Kami, I must receive the Divine Decree within this shrine for about half a day; in the meantime, please perform the Misogi in the valley waters of the riverbed at the Ubagama and Ubadarai, and wait while chanting the Kamigoto.'</p>
+          <p class="en-p">Wakahiko: 'I have understood the details. Come, Umakō, Shikakō, and Lady Osetsu, let us go.'</p>
+          <p class="en-p">Thus finishing the worship before the Kami, they proceed to the place designated by Murasakihime, below the Heavenly Rock Dwelling. The night begins to break faintly. Looking toward the opposite bank of the valley, a woman, together with two who appear to be attendants, is scooping up the water of the Ubagama and Ubadarai with a ladle, pouring it over her head, and with all her might squeezing out a withered voice to chant the propaganda songs of the Uranai religion. As the four step closer, the old woman continues to perform the water purification, utterly unaware that the four have come.</p>
+          <p class="en-p">Umakō: 'I say, I know not what manner of old woman thou art, but coming to this Seichi, recklessly pouring the august font of Kami over thy head and singing strange songs—what art thou doing? Have a little more discernment.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">紫姫は紫の
+姿を装ふ弥仙山
+四尾の山や桶伏の
+珍の聖地を伏し拝み
+西坂峠を後に見て
+若葉もそよぐ若彦や
+心の馬公鹿公を
+伴ひ進む春の道
+山追々と迫り来る
+心も細き谷道を
+伝ひ伝ひて河守の
+里を左手に打ち眺め
+船岡山を右に見て
+日もやうやうに酉の刻
+暗の帳はおろされて
+一行ゆくてに迷ひつつ
+道のかたへの小やけき
+神の祠に立寄りて
+息を休むる折柄に
+俄に女の叫び声</p>
+            <p class="ja-classical-line">紫姫は立ち上り
+耳を傾け聞き終り
+若彦、馬、鹿三人を
+声する方に遣はして
+様子探らせ調ぶれば
+思ひがけなき愛娘
+闇の林に縛られて
+息絶え絶えと苦しみの
+中を助けて三人が
+忽ち登る月影に
+心照らして帰り来る
+何処の方と訪へば
+若き女の物語
+驚く若彦一同は
+互に労りかばいつつ
+月の光を力とし
+四辺に注意を為し乍ら
+剣尖山の麓なる
+珍の聖地に立向ふ。</p>
+            <p class="ja-classical-line">三男二女の一隊は、月もる山道を漸くにして皇大神を斎き祀れる大宮の前に無事参向する事を得たり。水も子の刻丑の刻と夜は段々と更け渡り、淙々たる谷川の水の音を圧して聞え来る祈りの声、凄味を帯びて許々多久の、鬼や大蛇や曲津見の、霊寄り来む言霊の濁り、清き流れの谷川にふさはしからぬ配合なり。</p>
+            <p class="ja-classical-line">紫姫『皆様、妾は神様のお告により、半日許り此お宮の中で御神勅を承はらねばなりませぬ、何卒其間、産釜、産盥の河原の谷水に御禊をなし、神言を奏上して待つて居て下さいませ』</p>
+            <p class="ja-classical-line">若彦『委細承知仕りました。サアサア馬公、鹿公、お節殿、参りませう』</p>
+            <p class="ja-classical-line">と神前の礼拝を終り天の岩戸の下方、紫姫が指定の場所に進み往く。夜はほのぼのと明けかかる。谷の向岸を見れば一人の女、二人の従者らしき者と共に産釜、産盥の水を杓にて汲み上げ、頭上より浴び、一生懸命皺枯れた声を絞つてウラナイ教の宣伝歌を唱へ居る。四人はつかつかと進み寄るを、婆アは頻りに四人の来たのも知らずに水垢離を取り居たり。</p>
+            <p class="ja-classical-line">馬公『モシモシ何処の婆アさまか知らぬが、この聖地へやつて来て、勿体ない神様の御手洗を無雑作に頭から被り、怪体な歌を謡うて何をして居るのだ、些と心得なさい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The old woman, while being drenched with water, said:</p>
+          <p class="en-p">‘I know not from whence thou comest, but by the Meirei of the Shiyugojin of the true Suishiyōdama, of the pure Yamatodamashihi, who stands firm with Itsushin of sincerity for the sake of the Kamisama and for the Sekai, I am purifying my Mitama with this Ketsukō water and proclaiming Ketsukō songs to the Kamigami of the Uchiu; what is it that thou sayest? Canst thou not hear the Ketsukō Kototama?’</p>
+          <p class="en-p">Umakō: ‘I hear them not at all; somehow, when I hear those Kototama, it seemeth as though Akuma are drawing nigh.’</p>
+          <p class="en-p">Shikakō: ‘Ho, Umakō, speak not such Yabo things; though it be not the hoof of a cow, is it not understood from the beginning? The Taishiyō of the Akuma, intending to gather the Kobun of the Akuma, is exerting Zenriyoku and performing Shiyarin-like Kuwatsudō; one must not perform Baugai against another’s Shiyōbai.’</p>
+          <p class="en-p">Umakō: ‘I do not particularly intend to perform Baugai, but when such a voice is let out, it somehow toucheth a nerve, and I feel as though Hedo shall come forth. Ho, old woman, would it not be well to cease now in good Kagen? This birth-tub is not thy sole possession; how would it be if thou didst retreat in good Kagen?’</p>
+          <p class="en-p">Old Woman: ‘I know not what manner of youths ye are, but an old person is undergoing training at the risk of life for the sake of the Sekai and for the sake of the Way. It seemeth that my Kototama greatly offendeth thy mind, but that is no wonder; the Akuma possessed of thee is in fear. Endure that and listen reverently to my Kototama for a while; then, taking my method of training as a model, wash away the filth from the tip of thy head to the soles of thy feet until not a fraction of a grain of impurity remaineth; if thou doest so, I shall permit thine initiation into the Ketsukō, Ketsukō Way of the Kamisama of the Uranai-kyō. The youths of these days desire only that which is new in everything, knowing not the affinity or the nature of the original, fundamental Kamisama of old; when told the truth, they are but those who make light of it and chuckle. They are but those who shall be cast down into the Root-Country and the Bottom-Country of the hundred billion worlds, meeting such a fate that they cannot rise for ten thousand ages and all eternity; because that is piteous and I cannot bear to see it with open eyes, this is the Ketsukō Way that renovateth and reconstructeth the Mitama of the people of the Sekai, and saveth them by explaining everything from the affinity of the Great Ancestors to the matters of the karmic hindrances of the Mitama. It is because thou hast a connection that thou hast been allowed to see this Ketsukō practice of mine. Even if thou feelest a little unwell, endure and listen.’</p>
+          <p class="en-p">Umakō: ‘That is a great kindness, and I thank thee. I also was originally born in the capital, but while I was on my way intending to worship at Mount Manai of Hinu with the daughter of my master, I was deceived by the Kobun of the ogre of Mount Ōe and cast into a cavern, where I met with a terrible fate. Then a great personage appeared and rescued me; having heard that a Ketsukō Kamisama is Goza in this vicinity, I have come to make a pilgrimage of thanks.’</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">婆、水を被りながら、</p>
+            <p class="ja-classical-line">『何処の方か知らぬが、神様のため世界のために誠一心を立てぬく、日本魂の生粋の真正の水晶魂の守護神さまの命令によつて、この結構なお水で身魂を清め、結構な歌を宇宙の神々に宣べて居るのに、お前は何を云ふのだい、結構な言霊がお前には聞えぬのかい』</p>
+            <p class="ja-classical-line">馬公『一向トンと聞えませぬ哩、何だか其言霊を聞くと悪魔が寄つて来るやうだ』</p>
+            <p class="ja-classical-line">鹿公『オイ馬公、野暮の事を云ふない、牛の爪ぢやないが先から分つて居るぢやないか。悪魔の大将が、悪魔の乾児を集めやうと思つて全力を尽し、車輪の活動をやつて御座るのだ、人の商売を妨害するものでないぞ』</p>
+            <p class="ja-classical-line">馬公『別に妨害はしようとは思はぬが、アンナ声出しやがると何だか癪に触つて、反吐が出さうになつて来た。オイ婆アさま、もう好い加減にやめたらどうだい。この産盥はお前一人の専有物ぢやないぞ、好い加減に退却したらどうだ』</p>
+            <p class="ja-classical-line">婆『何処の若い衆か知らぬが老人が世界のため道のため、命がけで修業をして居るのだ。私の言霊が偉いお気に触ると見えるが、それは無理もない、お前に憑いて居る悪魔が恐れて居るのだ、其処を辛抱して暫く私の言霊を謹聴しなされ、さうして修業の仕方も私のやり方を手本として頭の先から足の裏まで、一分一厘の垢もない処まで落しなされ、さうしたら結構な結構なウラナイ教の神様のお道へ入信を許して上げる。今時の若い者は何でも彼でも新しがつて昔の元の根本の神様の因縁や性来を知らず、誠の事を云うてやれば馬鹿にしてホクソ笑ひをする者許りぢや、十万億土の根の国、底の国へと落されて、万劫末代上られぬやうな目に遇ふもの許りぢやから、それが可憐相で目を開けて見て居れぬから、世界の人民の身魂を立替立直し、大先祖の因縁から身魂の罪障の事から、何も彼も説いて聞かして助けてやる結構のお道ぢやぞよ。お前も縁があればこそ、コンナ結構な私の行を見せて貰うたのぢや。ちと気分が悪うても辛抱して聞きなされ』</p>
+            <p class="ja-classical-line">馬公『それは大きに御親切に有難う、私も元は都で生れたものだが、御主人の娘さまと比沼の真名井山へ参拝しようと思うて行く途中で、大江山の鬼の乾児に欺され、岩窟の中に放り込まれ、エライ目に遇うた。そこへ偉い人が出て来て私を助けて下さつたので、何でも此辺に結構な神様が御座ると聞いてお礼詣りに来たのだよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The old woman, while drenching herself with water with all her might, did not even look toward them but directed her voice toward them, saying:</p>
+          <p class="en-p">‘Is it not so, is it not so? Far from receiving blessings by visiting Manaisan, thou hast been lured into the Ihaya of a demon. To call it Manaisan is a slip of the tongue; that is called Magaisama, a mere imitation of the Kamisama. Under the name of the three Mitama of Henjiyōniyoshi, a formidable Akugami mimiceth the original and pure Kamisama of the Yamatodamashihi of Henjiyōnanshi, performing evil while appearing as good. Wait a while; I shall teach thee of a Ketsukō matter. The teaching called Ananai-kyō claimeth to be the Ananahi moon, but if it be the Ananahi moon, it must be the Mangetsu. What can a teaching of only the Katawa moon of Henjiyōniyoshi avail? Hidden by clouds, here is but Hanbun. If thou desirest to hear the true Shigumi, come and follow me. Depending upon thy Shinkau, I may not refuse to let thee hear the Shigumi of the Ichirin, born of three thousand years of long Kurau and Kannan. Now, crouch down in Sokora and wait until my ascetic training is finished.’</p>
+          <p class="en-p">Thus the old woman again drenched herself incessantly with water. The two men, as if shadows following a form, drew up water and splashed it over her black body with a sound of zabu-zabu. The old woman finally finished her water austerity, wiped away the moisture completely from the tip of her head to the soles of her feet, meticulously adjusted her appearance, donned her crested haori, and accompanied by the two men, crossed the stones of the mountain stream with a gaze like a serpent eyeing a frog, leaping lightly like a rabbit. Oshizu bent her waist and rubbed both hands together, saying:</p>
+          <p class="en-p">‘Great Teacher of Kurohime, it hath been a long time since I last beheld thee; I congratulate thee on thy health.’</p>
+          <p class="en-p">Kurohime: ‘Ha, so it was thou, Oshizu. No matter what is said or done, even if by binding or seizing, the single-mindedness of a woman will not rest until she hath heard. With a heart of great mercy and compassion, I sent the two, Taki and Ita, to pursue thy tracks, but where hadst thou been wandering? Come, come, follow me. Ha, art thou not Aohiko? Art thou still dazed by Ananai-kyō and not yet awakened?’</p>
+          <p class="en-p">Wakahiko: ‘Yes, thank thee; by thy grace, my eyes have clearly awakened.’</p>
+          <p class="en-p">Kurohime: ‘Is it not so? The young are ever prone to change their minds, wandering hither and thither to no avail. Thou knowest not how much I have labored, desiring to save thee. Now, come slowly with Oshizu to my place. Ananai-kyō also speaketh things that seem somewhat plausible, but in the end the gilding shall peel away, and even for one such as thou, Kintarō, thy patience must have been exhausted. By slighting the main house of the essential Mitama of Izu and being dazed by a half-baked Ananai-kyō, even if thou triest to eat, there are bones in the rice and it shall not pass thy throat. One or two bowls may be novel and thou mayest swallow them whole without touching the throat, but from the third bowl onward, it becometh sticky and grate-like against the tip of the tongue; if thou forcest it down, the condition of thy belly shall worsen, inducing diarrhea, and in the end, thou shalt stroke thy belly crying Hannya-haramitta, and even the condition of thy backside shall worsen so that thou must perform a thousand pilgrimages to the privy, until thy backside seemeth to chant the Dharani: On-abokya-birushanabutsu-makamodaranibutsu-jinraba-harabaritaya. Thus, one knoweth not until one hath eaten. Having long eaten the rice of the well-tempered Uranai-kyō, and in an excess of luxury peeling the skin of the rice cake, thinking there might be yet something sweeter, thou didst enter to see if there were novel food in Ananai-kyō, but there is neither taste nor savor. It is not Ananai-kyō, but a tasteless teaching. Ah, thou hast performed a good training. Surely thou shalt not turn back now.’</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">婆は、一生懸命に水を被りながら此方も向かず声を当に、</p>
+            <p class="ja-classical-line">『さうだらう、さうだらう、真名井山に詣つてお蔭どころか、鬼の岩窟へ釣り込まれたのだな。真名井山と云ふのは、それや云ひ損ひぢや、あれは魔が井さまと云うて神様の擬ひぢや、変性女子の三つの御霊と云うて、どてらい悪神が変性男子の日本魂の根本の生粋の神様の真似をしよつて、善に見せて悪を働いとるのぢや、暫く待ちなさい、私が結構の事を教へて上げる、三五教とやら云ふ教は三五の月ぢやと云うて居るが、三五の月なら満月ぢや、片割れ月の変性女子だけの教が何になるものか、雲に隠れて此処に半分、誠の経綸が聞きたければ私について御座れ、三千年の長い苦労艱難の一厘の経綸を、信仰次第に依つて聞かして上げぬ事もない、マア其辺にヘタつて此方の修業がすむまで待つて居なさい』</p>
+            <p class="ja-classical-line">と又もや婆は頻りに水を被る。二人の男も影の形に従ふやうに、水を汲み上げてはザブザブと黒い体に浴びせて居る。婆は漸く水行を終り、頭の先から足の裏迄すつくり水気を拭ひ取り、念入りにチヤンと風を整へ、紋付羽織を着用に及び、二人の男を伴ひ、谷川の足のかかる石を、蛇が蛙を狙ふやうな眼つきで、ポイポイポイと兎渡りに渡りつく。お節は腰を折り両手をもみながら、</p>
+            <p class="ja-classical-line">『黒姫の先生様、久しうお目に掛りませぬ、お健康でお目出度う』</p>
+            <p class="ja-classical-line">黒姫『ヤアお前はオヽお節ぢやつたか、何と云つてもかと云うても、ひつ括つてでも捉へてでも、聞かさにや置かぬは女の一心、大慈大悲の心をもつて助けてやらうと、滝、板の二人に跡を追はせたが、何処をお前は迂路ついとつたのだエ、サアサア私について御座れ。ヤアお前は青彦ぢやないか、三五教に呆けてまだ目が醒めぬか』</p>
+            <p class="ja-classical-line">若彦『ハイ有難う、お蔭ではつきり目が醒めました』</p>
+            <p class="ja-classical-line">黒姫『さうだらう、若い者は能う気の変るもので、彼方へ迂路々々、此方へ迂路々々して仕方の無いものぢや、お前を助けてやり度いと思うて、どれだけ骨を折つたか知れたものぢやない。サア悠くりと私の所までお節と一緒に出て来なされ、三五教も、一寸尤もらしい事を云ひよるが、終には箔が剥げて何程金太郎のお前でも愛想が尽きたらう、肝腎要の厳の霊の本家を蔑にして、新米の出来損ひのやうな三五教に呆けて見た処で、飯に骨があつて喉に通りやせまいがな。一杯や二杯は珍らしいので喉にも触らないで鵜呑みにするが、三杯目位からは、ニチヤづいて舌の先にザラザラ触り、それを無理に呑み込めば腹の具合が悪くなつて下痢を催し、終の果にはソレ般若波羅蜜多と云うて腹を撫でたり、尻の具合迄悪くして雪隠へお千度を踏み、オンアボキヤ、ビルシヤナブツ、マカモダラニブツ、ヂンラバ、ハラバリタヤと、陀羅尼を尻が称へるやうになつて仕舞ふ、さうぢやから食つてみにや分らぬのだ。加減の好いウラナイ教の御飯を長らく食べて居つて、栄耀に剰つて餅の皮を剥ぎ、まだ甘い事があるかと思うて、三五教に珍しい食物があるかと這入つて見たところ、味もしやしやりも有りやせまいがな、三五教ぢやなく、味無い教ぢや、アヽよい修業をして御座つた。よもや後戻りはしやしまいなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Wakahiko said, 'Nay, how could I ever believe in such a thing as Ananai-kyō? Henceforth, I am prepared to follow your Ishi and spare no labor, even as a Kenba.'</p>
+          <p class="en-p">Kurohime replied, 'That is Ketsukō. Osetsu, that those stubborn old man and woman have undergone Kunigahe is both a sorrow and a joy; that you have come to be able to live at ease with your beloved Aohiko is entirely thanks to the Uranai-kyō. Ah, what a well-matched Wakafūfu they are.'</p>
+          <p class="en-p">With this, she changed her demeanor, regained her Kigen, patted Aohiko on the Senaka, and laughed.</p>
+          <p class="en-p">Umakō said, 'Having been permitted to Haiken such a place that is not easily seen, I am filled with Senbaumanbau.'</p>
+          <p class="en-p">Shikakō said, 'Is this not strange? Here, there are what are called Ubugama and Ubudarahi, where two pools of water for a Meoto spring forth beautifully like Megane. Across the river are Osetsu-san and Wakahiko, and—oops, pardon me—Aohiko-sama; what a fine Haigafu! I, too, wish to be wed through the mediation of someone soon. Is that not so, Umakō...?'</p>
+          <p class="en-p">Kurohime said, 'You are one I see for the first time, but you are a disciple of Aohiko, are you not? And what is your name? I have been listening for some time, and you call each other by names that sound like those of four-legged beasts; pray, let me hear your true names. They are likely the names of your deputy guardian deities. At a glance, you have a foolish face. No matter how much you say you desire a fine wife, with that style, it will not do. I shall cast out your four-legged guardian deities through the Uranai-kyō, and I shall replace them with the guardian deities of the attendants of the magnificent Princess of the Dragon Palace. How is that? Are you happy? You hang your head like a man in shame; how faint-hearted you are. Yet, that is your good point; you are gentle. Humans, too, must not forget the sense of shame. Come, come, all four of you, approach me. These two men also—one of them was a great devotee of the deity Konohanasakuya-hime of Mount Misen, but he has realized the existence of another great deity, the Hinode-no-kami, the Princess of the Dragon Palace, and thus he is now devoted to the faith with all his might.'</p>
+          <p class="en-p">Aohiko said, 'Ah, is that so? That is indeed a fervent matter.'</p>
+          <p class="en-p">Umakō said, 'Obā-sama, pray wait a moment; I have a companion with me.'</p>
+          <p class="en-p">Kurohime said, 'That is settled; is your companion not a deer?'</p>
+          <p class="en-p">Umakō said, 'Nay, nay, there is yet another; there is a magnificent person named Murasaki-hime, who was originally my master.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">若彦『ヘイ、何うして何うして三五教ナンか信じますものか、これから貴方の頤使に従つて、犬馬の労をも惜しまぬ覚悟でございます』</p>
+            <p class="ja-classical-line">黒姫『それは結構ぢや、お節、あの頑固な爺や婆アが、国替したので悲しいやら嬉しいやら、好な青彦と気楽に添はれるやうになつたのも、全くウラナイ教のお蔭ぢやぞエ、あのマア何と好う揃うた若夫婦ぢやなア』</p>
+            <p class="ja-classical-line">と打つて変つて機嫌を直し、青彦の背中をポンと叩いて笑ふ。</p>
+            <p class="ja-classical-line">馬公『お安くない所を拝見さして貰ひましてイヤもう羨望万望の次第で御座います哩』</p>
+            <p class="ja-classical-line">鹿公『何と妙ぢやないか、此処には産釜、産盥と云うて眼鏡のやうに夫婦の水溜りが綺麗に湧いて居る、河を隔ててお節サンに若彦、オツトドツコイ青彦さま、何と好い配合だ、俺等も早く誰人かの媒妁で配偶したいものだ、ナア馬公………』</p>
+            <p class="ja-classical-line">黒姫『お前は初めて見た方ぢやが、青彦の弟子ぢやな、さうして名は何と云ふのぢや、最前から聞いて居れば四足のやうな名を呼びて御座るが、本当の名で聞かして下さい、大方副守護神の名だらう、一寸見たところでは馬鹿らしいお顔ぢや、何程立派な女房が欲しいと云うても、そのスタイルでは駄目ぢやなア、四足の守護神をこれからウラナイ教で追つ放り出して、結構な竜宮の乙姫様の御眷属を守護神に入れ替て上げよう、何うぢや嬉しいか、恥かしさうに男だてら俯むいて、気の弱い事だ。併し其処が良い所ぢや、優しいものぢや、人間も恥かしい事を忘れては駄目ぢや、サアサア四人とも私の処へお出なさい。此二人の男も一人は弥仙山の、ではない弥仙山の木花咲耶姫の神様が好きと云つて大変に信仰をして居つたが、モウ一つ偉い日の出神様、竜宮の乙姫様のある事を悟つて、かうして一生懸命に信神をして居るのぢや』</p>
+            <p class="ja-classical-line">青彦『アヽさうですか、それは熱心な事ですなア』</p>
+            <p class="ja-classical-line">馬公『お婆アさま、一寸待つて下さい、私には一人連が御座います』</p>
+            <p class="ja-classical-line">黒姫『極つたこつちや、お前の連は鹿ぢやないか』</p>
+            <p class="ja-classical-line">馬公『イヤイヤま一人、元は私の御主人であつた紫姫と云ふ結構なお方が居られます』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kurohime: 'Where is he dwelling? Make haste and summon him hither.'</p>
+          <p class="en-p">Umakō: 'He has but recently become a Sendenshi of the Ananai-kyō, and this day he has made his first Gosanpai to Ōkamisama. Even now, he is engaged in Gokinen within the shrine.'</p>
+          <p class="en-p">Kurohime: 'Ah, is that so? Hearken, Aohiko, as a token of your Kaishin and return to the Uranai-kyō, go and bring that Murasakihime to Kijiyun. Since she has also been Hai into the Ananai-kyō for a time, you must know well both her Chiyōshiyo and her Tanshiyo. Relate to her the Keireki of how you grew weary of the Ananai-kyō, and bring that Murasakihime here with all speed.'</p>
+          <p class="en-p">Aohiko: 'I shall Ukea it with certainty and bring her to Kijiyun; I beseech you, will you not employ us as you did of old?'</p>
+          <p class="en-p">Kurohime: 'I shall indeed employ you; nay, it is not I who employ you, but the Otohime of the Riugū who deigns to employ you.'</p>
+          <p class="en-p">At this juncture, it was Murasakihime who approached with Shizushizu steps.</p>
+          <p class="en-p">Murasakihime: 'Wakahiko-sama, Umakō, Shikakō, oh, I have kept you waiting. Come, let us Gekau.'</p>
+          <p class="en-p">The Ichidō replied with a 'Hai,' their voices sounding as if they were Tamerahi, from no certain place.</p>
+          <p class="en-p">Kurohime: 'So, you are the one called Murasakihime? It is said you are a Sendenshi of the Ananai-kyō; I thank you for your labors on behalf of the divine realm. I pray you, exert yourself to the utmost for the sake of the world.'</p>
+          <p class="en-p">Murasakihime, with a countenance of joy, replied: 'Ah, you are the living shrine of the Otohime of the Riugū; it is a fortunate place to have met you. As it has been but a short time since I became a Sendenshi of the Ananai-kyō, I know nothing; I beseech you, wise lady, to grant me your instruction.'</p>
+          <p class="en-p">Kurohime: 'Ah, very well, very well; the Ananai-kyō is also acceptable. Whenever you hear my words, you shall surely cast off your helmet and must needs become of the Uranai-kyō. Until your heart is fully convinced, it is well that you retain the title of Sendenshi of the Ananai-kyō; I do not ask that you enter the Uranai-kyō by force. Ōkamisama says that unless the spirit opens, it shall not open, and that one must not be dragged in by force; for without a Kaishin from the depths of the heart, there is no blessing.'</p>
+          <p class="en-p">Murasakihime: 'Even at a brief glance, I can perceive the noble divinity of your person; even to a foolish woman such as I, it is evident that the path you serve is superior. I humbly request your guidance.'</p>
+          <p class="en-p">Kurohime: 'Ah, what a wise lady you are! How is it that one who understands such things so well came to enter a teaching such as the Ananai-kyō? Since such persons are hidden here and there in the world, we must search for them to the ends of the earth and gather the people of truth. To draw only those of truth and accomplish the great divine plan—these are the words of Ōkamisama. Ah, I am humbled. Spirit of the Hensei-danshi, spirit of the Hensei-joshi who is the root of truth, come, let us all offer our thanks to the gods.'</p>
+          <p class="en-p">With these words, Kurohime, in high spirits, chanted the Norito, her face filled with triumph, her nose twitching, her shoulders swaying, and her gait altered from the usual; with a light heart, she took the lead along the rugged mountain path, and the party of eight proceeded toward the hidden dwelling in the Makutsu-ga-hara.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">黒姫『その方は何処に居られるのだ、早う呼びて来なさい』</p>
+            <p class="ja-classical-line">馬公『三五教の宣伝使に、つい此間からなられまして、今日初めて大神様へ御参拝なされました。今お宮で御祈念をして居られます』</p>
+            <p class="ja-classical-line">黒姫『アーさうかな、コレコレ青彦、お前は改心をしてウラナイ教に戻つた土産に、其紫姫とやらを帰順させて来なさい、三五教へも暫く這入つて居つたから、長所もあるけれど、短所も沢山知つて居るだらう、其お前が三五教に愛想を尽かした経歴でも説いて聞かして、その紫姫を早く連れて来なさい』</p>
+            <p class="ja-classical-line">青彦『確に請合つて帰順さして来ます、どうぞ私達を元の如くお使ひ下さいませぬか』</p>
+            <p class="ja-classical-line">黒姫『使うて上げるとも、ヤア私が使ふのではない、竜宮の乙姫様がお使ひ遊ばすのだ』</p>
+            <p class="ja-classical-line">斯かる所へ静々とやつて来たのは紫姫なり。</p>
+            <p class="ja-classical-line">紫姫『若彦さま、馬公、鹿公、エローお待たせ致しました。サアサア下向致しませう』</p>
+            <p class="ja-classical-line">一同は、</p>
+            <p class="ja-classical-line">『ハイ』</p>
+            <p class="ja-classical-line">と、どことも無く躊躇気味の生返事をして居る。</p>
+            <p class="ja-classical-line">黒姫『ヤアお前が紫姫と云ふのか、三五教の宣伝使と云ふ事ぢやが、神界のために御苦労様で御座います、どうぞ精々、世界のために活動して下さい』</p>
+            <p class="ja-classical-line">紫姫、嬉しさうな顔つきで、</p>
+            <p class="ja-classical-line">『ハア貴方は竜宮の乙姫様の生宮、好い所でお目にかかりました。妾は三五教の宣伝使になりましてから、まだ日も浅う御座いますので、何も存じませぬ、何卒老練な貴女様、宜しく御教授を願ひます』</p>
+            <p class="ja-classical-line">黒姫『アヽ宜しい宜しい、三五教でも結構だ、何れ私の話を聞いたらきつと兜を脱いでウラナイ教にならねばならぬ。発根の合点のゆく迄、お前は矢張三五教の宣伝使の肩書をもつて居なさるが宜敷からう、無理にウラナイ教に入つて下さいとは申しませぬ、神が開かにや開けぬぞよ、無理に引張には行つて下さるなと大神様が仰有つてござる、心から発根の改心でなければお蔭はないから』</p>
+            <p class="ja-classical-line">紫姫『一寸お見受け申しても、立派な貴女の神格、一目見れば貴女の奉じたまふお道は優れて居ることは愚かな妾にも観測が出来ます。何卒宜敷く御指導を願ひます』</p>
+            <p class="ja-classical-line">黒姫『ヤア何と賢明な淑女ぢやなア、コンナ物の好う分る方が何うして三五教のやうな教に入つたのだらう、世の中にはコンナ人がちよいちよい隠れて居るから、何処迄も探し求めて、誠の人を集めねばならぬ。誠の者許り引き寄せて大望な経綸を成就致させるぞよとは、大神様のお言葉、アヽ恐れ入りました。変性男子の霊様、真実の根本の変性女子の霊様、サアサア皆様、神様にお礼を申しませう』</p>
+            <p class="ja-classical-line">と黒姫は意気揚々として祝詞を奏上し、得意の色を満面に浮べ、鼻をぴこつかせ、肩を揺り、歩み振も常とは変つて、いそいそと崎嶇たる山道を先に立ち、魔窟ケ原の隠家さして一行八人進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 赤 Bird 居 [633]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: Kami か Demon か [635]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

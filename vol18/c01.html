@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 1: Spring Field の Journey [629] - Volume 18 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 18 Table of Contents</a>
+      <span>Volume 18</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 18 &bull; Chapter 1</span>
+      <h1 class="chapter-title-en">Chapter 1: Spring Field の Journey [629]</h1>
+      <p class="chapter-title-ja">春野の旅〔629〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Warm is the wind, and layered is the mist,
+Haruhi and the aunt seem about to darken,
+Enfolding in crimson the Yayohizora;
+The hazy moon is in the Chiuten,
+Neither shining nor clouded, but dimly suspended,
+At such evening dusk of a Yamaga;
+The flow of the river is Sōsō,
+Resounding across the village of Wachi;
+Stand in a line, sealing the sky,
+Along the path beneath the Raujiyu,
+Trudging along comes the Sendenshi,
+Unto the furthest ends the Oshihe of Kami
+To convey, at the bridge of Higo in the Yamaga;
+Taking the moonlight as strength,
+Taking the grace of Kami as a staff,
+Where crows sleep in Takanosu,
+Unto the village by the Kahabe they advance;
+In face and form Yoshikohime,
+As the flow of the water Otohiko,
+And ere long to come, Natsuhiko.</p>
+          <p class="en-p">Along the Tsukumomaga Yamamichi, with bent waist, trudging so as almost to crawl, while rubbing his feet in his Waraji, Kamehiko came unto the foot of the Mikosakabashi, at which very moment, from the opposite direction, Futari came walking briskly, whispering something in low tones, and peering through the Yome at the Itsukau, gazing upon them with apparent intent.</p>
+          <p class="en-p">"Pray, excuse me; I would ask you Chiyotsuto. Hearing your voices from Saizen, it appeared that you were walking along singing propagation songs; might you perchance be the Sendenshi-sama of Anagyo?"</p>
+          <p class="en-p">Kamehiko replied:</p>
+          <p class="en-p">"Oh, you who speak thus, I feel as though your voice is somehow familiar to me. As it is an Oboroyo, I cannot clearly distinguish your face, but who might you be?"</p>
+          <p class="en-p">"I am a Sendenshi of Anagyo named Kamehiko, and the other person is Eikohime, the daughter of Susanoo-no-Mikoto."</p>
+          <p class="en-p">"Ah, how I have longed to see you! Were you Eikohime-sama? I am Yoshiko. We have met in a most welcome place. Since I parted from you at the foot of Mount Kentsuru, I paid homage at the sacred throne of Manaigahara, and thence pacified by speech the rock cave of Mitake; together with four or five comrades, I launched a siege by means of Kototama upon the rock cave of Mount Onigajo where Onikumawake held sway; thereafter, crossing Ikuno and Osadano, I subjugated the evil kami of Mount Kamichichi, faced Mount Takagi, turned my steps once more, and returned toward the holy land along the stream of Wachi; desiring to meet with you and to consult regarding the course we should henceforth take, I have braved the night from afar and traveled unto this place."</p>
+          <p class="en-p">Eikohime, rejoicing, said:</p>
+          <p class="en-p">"Ah, is that so? Since I parted from you, in accordance with the command of Kami, I ascended the deep mountain of Misen bearing a certain mission; now again, by the revelation of the divine spirit of my father the Ōkami, accompanied by Kamehiko, I am on my way to Mount Ibuki. Ah, we have met in a most welcome place. I know not who your companion may be, but doubtless one of Anagyo. Listening to the sound of this river, let us take advantage of our meeting to rest at leisure."</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">風暖かく八重霞
+春日と伯母はクレさうで
+クレナイに包む弥生空
+朧の月は中天に
+照らず曇らずボンヤリと
+かかる山家の夕まぐれ
+川の流れは淙々と
+轟き渡る和知の里
+空を封じて立並ぶ
+老樹の下の小径を
+トボトボ来る宣伝使
+神の教をどこまでも
+伝へにや山家の肥後の橋
+月の光を力とし
+神の恵を杖となし
+烏は眠る鷹栖の
+川辺の里に進み来る
+顔も容も悦子姫
+水の流れの音彦や
+やがては来る夏彦の</p>
+            <p class="ja-classical-line">九十九曲りの山路を
+曲つた腰のトボトボと
+這はぬばかりに加米彦が
+草鞋に足を擦り乍ら
+神子坂橋の袂まで
+来る折しも向ふより
+スタスタ来る二人連れ
+何かヒソヒソ囁きつ
+夜目に透かして一行を
+心有りげに眺めゐる。</p>
+            <p class="ja-classical-line">『モシモシ、一寸お尋ね致します。最前から承はれば、路々宣伝歌を謡ひつつお出になつた様で御座いますが、若しやあなたは、三五教の宣伝使様では御座いますまいか』</p>
+            <p class="ja-classical-line">加米彦は、</p>
+            <p class="ja-classical-line">『ヤアさう仰有るあなたは、何だか聞覚えのあるやうな感じが致します。朧夜の事とてハツキリお顔は分りませぬが、どなたで御座いましたかなア』</p>
+            <p class="ja-classical-line">『私は三五教の宣伝使亀彦と申す者、今一人の方は素盞嗚尊様のお娘子英子姫と云ふ方で御座います』</p>
+            <p class="ja-classical-line">『アヽお懐しや、英子姫様で御座いましたか、妾は悦子で厶ります。好い所でお目にかかりました。妾は剣尖山の麓に於てお別れ申しましてより、真奈井ケ原の貴の宝座を拝礼致し、それより三岳の岩窟を言向和し、鬼熊別の割拠する鬼ケ城山の岩窟を、四五の同志と共に言霊を以て包囲攻撃致し、それから生野、長田野を越え、神知地山の魔神を征服し、高城山に立向ひ、再び道を転じ、和知の流れに沿うて聖地に引返し、あなた様に御目にかかり、今後の妾等が取るべき方法を、御相談申上げたいと思ひまして、遥々夜を冒し、此処まで参りました』</p>
+            <p class="ja-classical-line">英子姫は喜び乍ら、</p>
+            <p class="ja-classical-line">『アヽ左様ですか、妾は其方に別れてより、神様の命に依り、弥仙の深山に、或使命を帯びて登山し、今又父大神の神霊のお告に依りて、亀彦を伴ひ、伊吹山に参る途中で御座います。アヽ好い所でお目にかかりました。お連れの方は何方か存じませぬが、何れ三五教の方でせう。此川音を聞き乍ら、出会うたを幸ひ悠くりと休息致しませう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">"That is my very wish. I also was thinking that I would like to take a rest if there were some good place. ... Here present are the Sendenshi Otohiko and Kamehiko, and the one person is a man named Natsuhiko, who was for a while converted to the Uranai-kyō."</p>
+          <p class="en-p">"I am Kamehiko. Are you Sir Kamehiko, whom I met before the gate of Akiyamahiko, the ruler of Hitogo at the harbor of Yura? Well, well, we have met in a strange place. And as for Sir Otohiko, are you not my old friend with whom I parted in the province of Fusa?"</p>
+          <p class="en-p">"Indeed, I am that Otohiko."</p>
+          <p class="en-p">"Your coming from afar to this Onokorojima must surely be due to some deep reason."</p>
+          <p class="en-p">"Concerning this, there are various strange tales, but I shall tell you at leisure later. Come, everyone, shall we all gather together upon this lawn and rest our weary bones?"</p>
+          <p class="en-p">"That would be well."</p>
+          <p class="en-p">Thus all of them unbent their hearts in the shade of the old tree, and stretching out their arms and legs, took their rest.</p>
+          <p class="en-p">Here are six Sendenshi;
+The winter wherein the six flowers scatter hath passed away,
+And bathing in the fragrance
+Of the mountain cherry blossoms scattered upon the wind,
+They make flowers bloom upon a hundred tales of bygone days,
+Unawares letting the time pass by.</p>
+          <p class="en-p">"I say, Princess Hideko, according to your words just now, you stated that you climbed Mount Misen bearing a divine mission. Otohiko also desires by all means to climb that sacred mountain once. It must be quite a steep place, I suppose."</p>
+          <p class="en-p">"As you guess, it is indeed a steep and deep mountain. It is dark even in the daytime, and dense old trees seal the heavens, so that one can by no means behold the light of the sun and moon. However, if you should climb it, there is a very convenient thing. By the divine decree of my father, I have executed a certain divine plan. Please go there once."</p>
+          <p class="en-p">"What kind of duty was that divine plan? Will you not tell us beforehand? Otohiko must also prepare his mind for it."</p>
+          <p class="en-p">"Even if I do not speak of it now, when you go... 'Aha, so it was this!'... it will naturally become clear to you. Let us for a while reserve this talk as something to look forward to."</p>
+          <p class="en-p">Kamehiko said, "Oh, Princess Hideko, you should not be so grudging; please speak of it plainly."</p>
+          <p class="en-p">Princess Hideko said, "Nay, nay, there are no double words in the speech of a Sendenshi. That which I have once declared I will not say, I can by no means divulge."</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『それは願うてもないこと。妾もどこか良い所があれば一休み致したいと思うて居ました。……此方は音彦加米彦の宣伝使、一人はウラナイ教に暫く入信して居た夏彦と云ふ男で御座います』</p>
+            <p class="ja-classical-line">『私は亀彦です。貴下は由良の湊の人子の司、秋山彦の門前に於てお目にかかつた加米彦さまですか、コレハコレハ妙な所でお目にかかりました。又音彦さまとは、フサの国でお別れ致しました私の旧友ぢやありませぬか』</p>
+            <p class="ja-classical-line">『左様その音彦で御座いますよ』</p>
+            <p class="ja-classical-line">『遥々と此自転倒島へお越しになつたのは、何か深い仔細が御座いませう』</p>
+            <p class="ja-classical-line">『これに就いては、種々珍談も御座いまするが、ユルリと後から申上げませう。サアサア皆さま、打揃うて此芝生の上で骨休めを致しませうかい』</p>
+            <p class="ja-classical-line">『宜しからう』</p>
+            <p class="ja-classical-line">と一同は老樹の蔭に打解け、手足を延ばして休息したり。</p>
+            <p class="ja-classical-line">茲に六人の宣伝使
+六つの花散る冬も過ぎ
+風に散り布く山桜
+香りを浴びて来し方の
+百の話に花咲かせ
+思はず時を移しける。</p>
+            <p class="ja-classical-line">『モシ英子姫様、最前あなたの御言葉に依れば、弥仙山へ神務を帯びて御登山になつたと仰せられましたなア。音彦も一度其霊山へ、是非登山致したいと存じて居ます。随分嶮岨な所でせうなア』</p>
+            <p class="ja-classical-line">『お察しの通り、実に嶮峻な深山で御座います。昼猶暗く、鬱蒼たる老樹天を封じ、到底日月の光は拝む事は出来ませぬ。併し乍ら、貴方方は登山なされますならば、大変都合の好い事が御座います。妾は父の神勅に依りて、一つの経綸を行うて置きました。どうぞあなた方一度行つて下さいませ』</p>
+            <p class="ja-classical-line">『其御経綸とは、如何なる御用で御座いました。予め仰有つて下さいませぬか。音彦も其覚悟を致さねばなりませぬ』</p>
+            <p class="ja-classical-line">『只今申上げずとも、お出になれば、……ハハア之であつたかなア……と自然にお判りになりませう。先楽しみに、此お話は暫く保留して置きませう』</p>
+            <p class="ja-classical-line">加米彦『エー英子姫様さう出し惜みをなさるものぢやない、アツサリと云つて下さいナ』</p>
+            <p class="ja-classical-line">英子姫『イエイエ宣伝使の言葉に二言は御座いませぬ。一旦申上げぬと云つた事は、金輪際口外する事は出来ませぬ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">"Though you resemble a Kirei Megami, you speak in a Zuibun ungracious manner. Refusing to grant the very first Kame no Onega instantly, do you thus discharge a Krupp-style Haudan to Gekitai our Yokukiu? Now then, do you know the Teigi of grace?"</p>
+          <p class="en-p">"Oh dear, you bring forth such difficult Giron. Pray, ascend the mountain step by step. A Shigumi is prepared there, Goza, that shall truly make one gasp in astonishment."</p>
+          <p class="en-p">"She is a Hime who subtly employs Jiyunjiyun and Kiben. With Kiben-banjiyō, Kame is utterly invincible, ahaha!"</p>
+          <p class="en-p">"Now, now, Kamehiko-sama, you must not speak so rudely and without Buenriyo. Will you not exercise a little composure?"</p>
+          <p class="en-p">"Yes, yes, let us exercise composure, Yoshiko-sama. Between Burei, Kenson, Enriyo, composure, and various other Gagau that exist in Takusan, I am almost at my wit's end trying to choose among them."</p>
+          <p class="en-p">Otohiko frowned and said:</p>
+          <p class="en-p">"Ah, what an ominous thing to say! Do not speak such foolishness as being at your wit's end. Because you dabble in such unfilial and impolite studies as philosophy and moral doctrine, you are beyond control; it were best to obey meekly and say 'yes, yes' as Eiko-hime-sama says. Among the six of us, she is the most noble, so to speak, our teacher. It is said that one should not tread even six feet behind a teacher's shadow."</p>
+          <p class="en-p">"You too speak of ominous things. While reproving Kame for mentioning being at his wit's end, you yourself talk about the shadow of death and such; is that not binding yourself with your own rope?"</p>
+          <p class="en-p">Otohiko burst out laughing and said:</p>
+          <p class="en-p">"Hahaha, you are a man who well kneads inexplicable, lumpish logic!"</p>
+          <p class="en-p">"It is you who speak lumpish logic! Ours is rice-cake logic. A gnat pounds the rice-cake, Kamehiko kneads it, and Otohiko makes a popping sound—is that not how the saying goes? Ahaha!"</p>
+          <p class="en-p">Kamehiko stood up and said:</p>
+          <p class="en-p">"Now, everyone, no matter how long we talk, there will be no end to it. From jesting comes leisure, and from a gourd comes a horse. Let us whip the horse and set out toward our destination as soon as possible, shall we not, Eiko-hime-sama...?"</p>
+          <p class="en-p">"Just as I felt glad to meet you at last, the divine command of the Divine Realm leaves us no choice. Eiko too shall depart Sugusama. Farewell, everyone; surely an opportunity to meet again shall arise Goza."</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『あなた様は綺麗な女神にも似ず、随分愛嬌のない事を仰有いますなア。初めて加米の御願ひしたことを、直様お聞き容れ下されず、クルツプ式砲弾を発射し、加米等の欲求を撃退なされますか。シテ、あなたは愛嬌の定義を知つて居ますか』</p>
+            <p class="ja-classical-line">『イヤもう　おむつかしい議論を吹つかけられますこと。マアマアぼつぼつと御登山なされませ。それはそれはアツと言ふ様な仕組がして御座いますワ』</p>
+            <p class="ja-classical-line">『何だか諄々として詭弁を弄するお姫さまだナア。キベン万丈加米当る可からずだ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">『コレコレ加米彦さま、さうヅケヅケと無遠慮に物を仰有るものでない。チトたしなみなさらぬか』</p>
+            <p class="ja-classical-line">『ハイハイたしなみませうよ、悦子さま。無礼ぢやとか、謙遜ぢやとか、遠慮ぢやとか、たしなみぢやとか、種々の雅号が沢山有つて、取捨選択に殆ど閉口頓死致します』</p>
+            <p class="ja-classical-line">音彦は顔をシカメ、</p>
+            <p class="ja-classical-line">『エー縁起の悪い。閉口頓死なぞと、せうもない事を言ふものでない。お前達は哲学とか道学とか云ふ親不孝、不作法の学問をかぢつて居るから、仕末にをへない、マアマア英子姫様の仰有る通りハイハイと温順しくして居れば良いのだ。吾々六人の中では、最もお偉い方だ、言はば吾々のお師匠様だ。師の影は六尺下つても踏むなと云ふ位だ』</p>
+            <p class="ja-classical-line">『あなたも縁起の悪い事を言ひますネ。加米が閉口頓首と云つた事を咎め乍ら、あなたは死の影がどうの斯うのつて、夫れこそ自縄自縛ぢやありませぬか』</p>
+            <p class="ja-classical-line">音彦は吹き出し、</p>
+            <p class="ja-classical-line">『ハヽヽヽ、訳の分らぬ団子理屈を能く捏ねる男だなア』</p>
+            <p class="ja-classical-line">『お前こそ団子理屈だ。吾々のは餅理屈だ。蚋が餅搗きや加米彦が捏ねる、ポンポンと音彦がすると云ふぢやないか、アハヽヽヽ』</p>
+            <p class="ja-classical-line">亀彦は立ち上がり、</p>
+            <p class="ja-classical-line">『サア皆さま、何時まで御話を致して居つても際限が有りませぬ。冗談から暇が出る、瓢箪から駒が出る。駒に鞭打ち、一日も早く目的地へ向つて発足致しませう。ナア英子姫様……』</p>
+            <p class="ja-classical-line">『折角お目にかかつて嬉しいと思へば、神界の御命令、止むにやまれませぬ。英子も直様お別れ致しませう。皆様左様なら、何れ又お目にかかる機会が御座いませう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Thus he offered his greeting, and forthwith stepped out.</p>
+          <p class="en-p">Yoshikohime, while offering her greeting, said:</p>
+          <p class="en-p">"If that be so, my Lady, may you fare in good health. Kamehiko-sama, though I doubt there shall be any negligence on your part, pray take heed of the Lady's person."</p>
+          <p class="en-p">"I, Kamehiko, have fully understood. By no means, by no means let your heart be troubled. Now, from here on, let us pour oil into the compass and advance. Yoshikohime-sama, Otohiko, Kame the Sendenshi-dono, Natsuhiko-sama, if that be so, farewell..."</p>
+          <p class="en-p">"May you two fare happily, and we pray that you may display preeminent and glorious deeds of merit; Ariyōsu."</p>
+          <p class="en-p">Thus they parted ways on both sides. Only two white staves go ascending up the mountain path toward the riverhead beneath the hazy moonlit night.</p>
+          <p class="en-p">The spring night broke open in the twinkling of an eye, and pushing through the misty sky, the Ōkami of the Amatsu Sun offered His perfectly round, warm face, and shone upon the heads of the four persons. Amid the pleasant spring wind, the mountain cherry blossoms fall and scatter so as to narrow the road; Yoshikohime, who puts the flowers to shame, walking along the mountain path in her refined charm, is like a person in a painting.</p>
+          <p class="en-p">Otohiko, looking up at the steep slope, said:</p>
+          <p class="en-p">"Ah, it is a quite steep slope indeed. That Hidekohime-sama kept complete silence was surely out of her solicitude lest, there being many such chest-striking steep slopes, we might conceive fear, and our spirit, though raised with great effort, might turn back into a journey of weak will and feeble action; nay, I am truly filled with awe. The mind of a Sendenshi who seeks to lead and elevate people is indeed exceptional, is it not?"</p>
+          <p class="en-p">Yoshikohime said:</p>
+          <p class="en-p">"Nay, by no means, by no means could Hidekohime-sama's heart be so; there must surely be a somewhat deeper meaning. Even in the fragments of Hidekohime-sama's words, I instantly felt the deep, deep meaning touch the chords of my heart. Well, well, we shall not know until we go as far as we can go."</p>
+          <p class="en-p">"Is that so? A simple and honest person like Otohiko does not notice such minute points; after all, I am a man like a rough-hewn Niō, ha, ha, ha, ha, ha."</p>
+          <p class="en-p">Kamehiko said in a loud voice:</p>
+          <p class="en-p">"Hey, hey, Otohiko-sama, are you not saying something clever? Walking so close together with Yoshikohime-sama along this narrow road, talking about matching or not matching—look, what are you saying? The demons will laugh, ah-ha-ha-ha-ha! Hey, Natsuhiko, are you not dripping with sweat as if in distress?"</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と会釈し、早くも歩み出したり。</p>
+            <p class="ja-classical-line">悦子姫は会釈しながら、</p>
+            <p class="ja-classical-line">『左様ならば、姫様、ご機嫌よくお出で下さいませ。亀彦様、御如才は御座いますまいが、どうぞ姫様の御身辺に注意を払つて下さいませやア』</p>
+            <p class="ja-classical-line">『亀彦、委細承知仕りました。必ず必ず御煩慮下さいますな。サアこれからコンパスに油を注して進みませう。悦子姫さま、音彦、加米の宣伝使殿、夏彦さま、左様ならば御機嫌よう……』</p>
+            <p class="ja-classical-line">『お二人様、お仕合せよう抜群の功名手柄を現はし給はむ事を念願致します、アリヨース』</p>
+            <p class="ja-classical-line">と双方に袂を分つ。二本の白い杖のみ朧月夜の山路を、川上指して上り行く。</p>
+            <p class="ja-classical-line">春の夜は瞬く中に明け放れ、霞の空を押し分けて、天津日の大神は、まん円き温顔を差し出して、四人が頭を照し給ふ。心持よき春風に、道も狭きまで散り布く山桜、花を欺く悦子姫、山路通る床しさは、画中の人の如くなり。</p>
+            <p class="ja-classical-line">音彦は急坂を打ち仰ぎ、</p>
+            <p class="ja-classical-line">『アヽ随分嶮しい坂ですなア。英子姫さまが一切沈黙を守つて居られたのも、斯う云ふ胸突坂が沢山あるので、吾々が恐怖心を起し、折角張詰めた精神を、薄志弱行の逆転旅行と出かけるかと思つての御心配り、イヤもう恐れ入りました。人を導き、向上させてやらうと思ふ宣伝使の御心は、又格別なものですなア』</p>
+            <p class="ja-classical-line">悦子姫は、</p>
+            <p class="ja-classical-line">『イヤ決して決して英子姫様の御心中は、さうではありますまい、モ少し意味の深い事があるのでせう。妾も英子姫様の御言葉の端に、深い深い意味があると、直に胸の琴線に触れました。マアマア行く所まで行つて見なくては分りますまい』</p>
+            <p class="ja-classical-line">『さうですかなア。音彦の様な木訥な人間は、ソンナ微細な点まで気が付きませぬ、何分仁王の荒削り然たる男ですからなア、ハヽヽヽヽ』</p>
+            <p class="ja-classical-line">加米彦は大声で、</p>
+            <p class="ja-classical-line">『コレコレ音彦さま、巧妙い事言つてるぢやないか。悦子姫さまと、此細い道を引つ付く様にして歩き乍ら、似合うの似合はぬのつて、ソラ何を言ふのだ、鬼が笑ふぞよ、アツハヽヽヽ。オイ夏彦、貴様は苦しさうに、汗をたらたらと流して居るぢやないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">"It is a settled matter. Whenever one encounters Natsuhiko, the sweat streameth forth like unto a waterfall; such hath been the ordained Gokisoku of Tenchi since ancient times. If one sweateth not, he shall be charged with the crime of Tensokuihan, O Kame-sama."</p>
+          <p class="en-p">"What sayest thou? Puffing thy great Hanaiki, as though a soft-shelled turtle were biting into smartweed..."</p>
+          <p class="en-p">"Kamehiko, soft-shelled turtle or Kamehiko—is it not one and the same? Even as a soft-shelled turtle draweth rough breath, so a single tortoise somewhere seemeth likewise to be huffing and puffing his Iki while indulging in Hafukairinki, ha-ha-ha-ha-ha!"</p>
+          <p class="en-p">"Ah, Natsu-chan, how lawless indeed!"</p>
+          <p class="en-p">"Ho there, Kamehiko and Natsuhiko, ye Futari, come ye not quickly? What, to grow Hekota upon such a tiny slope... how exceedingly slow of foot ye are!"</p>
+          <p class="en-p">"Speak not so noisily, O Otohiko-sama; the upward slope is high before us. But on the other hand, when it cometh to the downward slope, how thinkest thou? With the force of Itsushiyasenri shall we send thee breathless. Yet, while the day is thus long, there is no need to hasten so; how were it if we committed Setsupuku once beneath the Kokage over there?"</p>
+          <p class="en-p">Otohiko said,</p>
+          <p class="en-p">"Ah, what an ill-omened thing this Kame speaketh! Well, it cannot be helped. O Yoshikohime-sama, shall we take Itsupuku upon this Hirachi? For those Futari fellows seem to be greatly Hekota."</p>
+          <p class="en-p">Yoshikohime said with a light Kiga,</p>
+          <p class="en-p">"Well, let us wait for them at Koko at our ease."</p>
+          <p class="en-p">Kamehiko, along the Komichi overgrown with Koshiba, rustling and panting, giving forth a Hanaiki like unto a Teohijishi, and wringing out beads of sweat, at last climbed up unto the side of the Futari.</p>
+          <p class="en-p">Along the narrow path barely wide enough to set foot upon, there were Futari women coming down, bearing bundles of firewood upon their backs; beholding the forms of the four persons, they said,</p>
+          <p class="en-p">"Oh dear, oh dear, good sirs! Carrying such bulky loads along this narrow path, we are truly sorry; pray forgive us."</p>
+          <p class="en-p">Kamehiko said,</p>
+          <p class="en-p">"Well, that cannot be helped. It is the high road under heaven's leave—nay, a winding mountain road like a sheep's intestine... Come, come, everyone, let us submerge ourselves into the woods for a while. And thus shall we let the two enemy vessels pass through the safe sea-lane, avoiding the hidden reefs!"</p>
+          <p class="en-p">When the four of them rustled into the thicket of trees to give way, the Futari women, wiping their sweat with hand-towels in one hand, said,</p>
+          <p class="en-p">"Oh dear, oh dear, good sirs, we are sorry,"</p>
+          <p class="en-p">and went down the steep, narrow slope, straight as a standing board.</p>
+          <p class="en-p">Kamehiko, gazing after the departing figures of the Futari,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『きまつた事ですよ。夏ヒコに当れば、汗は滝の如く流れ出るのが、昔からきまりきつた、天地の御規則。汗をかかねば、天則違反の罪に問はれるよ加米さま』</p>
+            <p class="ja-classical-line">『何を言ふのだ。鼈に蓼を咬ました様に、大きな鼻息をしよつて……』</p>
+            <p class="ja-classical-line">『加米彦、鼈だつて、カメ彦だつて同じ事ぢやないか。鼈が荒い息をする様に、亀が一匹、どこやらで、ヤツパリ、フースーフースーと呼吸をし乍ら、法界悋気をやつて居るやうだワイ、ハツハヽヽヽ』</p>
+            <p class="ja-classical-line">『アヽ夏チヤン、ホーカイなア』</p>
+            <p class="ja-classical-line">『オイオイ加米彦、夏彦の両人、早う来ぬか、ナンダ、斯ンなチツポケな坂に屁古垂れよつて………随分足の遅い奴だなア』</p>
+            <p class="ja-classical-line">『喧しい言うて呉れない音彦さま、上り坂は前が高いワイ。其代りに下り坂になつたら、ドンナものだ、一瀉千里の勢で、アフンとさしてやるぞ。併し乍ら此日の永いのに、さう急ぐにも及ばぬぢやないか、そこらの木蔭で一つ切腹したらどうだい』</p>
+            <p class="ja-classical-line">音彦は、</p>
+            <p class="ja-classical-line">『エー又縁起の悪い事を云ふ加米だナア。エヽ仕方がない。悦子姫様、此の平地で一服致しませうか、両人の奴、大変に屁古垂れて居る様ですから』</p>
+            <p class="ja-classical-line">悦子姫は気軽るげに、</p>
+            <p class="ja-classical-line">『マア此処で悠くりと待つてあげませう』</p>
+            <p class="ja-classical-line">加米彦は小柴の茂る小径を、ガサガサ喘ぎ喘ぎ、手負猪の様な鼻息を立て、玉の汗を絞りつつ、漸く二人の側に登り着きける。</p>
+            <p class="ja-classical-line">足を容るる許りの細路を、粗朶を背に負うて降り来る二人の女あり、四人の姿を見て、</p>
+            <p class="ja-classical-line">『コレハコレハ皆様、狭い路を量のたかい物を負うて通りまして、誠に済みませぬ、どうぞ御勘弁下さいませ』</p>
+            <p class="ja-classical-line">加米彦は、</p>
+            <p class="ja-classical-line">『サアそれは仕方がありませぬ、天下御免の大道、否、羊腸の山路、………サアサア皆さま、林の中へ暫く沈没致しませう。そして敵艦二隻、暗礁を避けた安全海路を通過させてやりませうかい』</p>
+            <p class="ja-classical-line">四人はガサガサと、木の茂みへ避けると、二人の女は汗を片手に、手拭にて拭ひ乍ら、</p>
+            <p class="ja-classical-line">『コレハコレハ皆さま、済みませぬ』</p>
+            <p class="ja-classical-line">と板を立てし如き細き坂路をエチエチ降り行く。</p>
+            <p class="ja-classical-line">加米彦は二人の後姿を見送りて、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">"Ah, the Goshinyo hath passed by safely. Come now, everyone, let us have our respite once again..."</p>
+          <p class="en-p">Otohiko: "That woman hath returned bearing a heavy burden of Soda; what might her Gamei be?"</p>
+          <p class="en-p">Kamehiko: "That one? It is surely settled. An Ōharame hath passed by bearing firewood."</p>
+          <p class="en-p">"What! How could an Ōharame possibly pass through such a place as this? It is not as though this were the foot of Eizan."</p>
+          <p class="en-p">"Yet did she not possess a large belly?"</p>
+          <p class="en-p">"That was a Yaseonna. It is said, Yaseōhara, which is the Sanchi of the Oba of the fields. Koko also is without Machiga a Sanchi. The former woman was a Taihen Yaseonna, and the latter was a pregnant woman. Thus, one was a Yaseonna and the other an Ōharame; if we restate it in this manner, the Giron of Sauhau shall be established, and no Fukuzatsu Giron shall arise."</p>
+          <p class="en-p">"Pray, Yoshikohime, earlier you were walking exceedingly intimately with Otohiko. Do take care. As for this Otohiko, his Niyōbau Isokohime hath gone to the solitary island of Ryūgū, wherefore he is even as a widower-bird; if you are off your guard, though you be a Yaseonna now, not unlike the woman who just passed, before you know it you shall become a woman of large belly."</p>
+          <p class="en-p">Yoshikohime: "Ohohoho, pray do not be anxious; I shall never, ever cause you concern."</p>
+          <p class="en-p">Kamehiko: "Ah, if that be so, then I too am at ease."</p>
+          <p class="en-p">Otohiko: "Hey, Kamehiko, will you not put a fair measure to your jesting? The long spring day shall draw to a close once more."</p>
+          <p class="en-p">Yoshikohime: "Come, everyone, let us proceed."</p>
+          <p class="en-p">Thus they ascend the steep, winding path of ninety-nine turns.</p>
+          <p class="en-p">Otohiko: "This time, Kamehiko, Natsuhiko, go ye ahead; for if such troublesome questions be raised again, I shall be at a loss how to deal with them."</p>
+          <p class="en-p">Kamehiko: "Indeed. As expected, one who hath something to hide is ever prudent to the utmost, ihihi."</p>
+          <p class="en-p">Kamehiko followeth behind Yoshikohime at a distance of about three feet. When they think they have ascended seven or eight chō, the figures of two persons ascending the steep slope appear, their straw hats alone swaying about half a chō down in the valley floor.</p>
+          <p class="en-p">Kamehiko: "Ya, a large white Matsutake is ascending! Hey, Otohiko, Natsuhiko, are ye so ashamed before Yoshikohime? What is this, hiding your faces and bodies entirely with your hats..."</p>
+          <p class="en-p">Yoshikohime: "Kamehiko, are you mocking again? Do put an end to your jesting in good measure."</p>
+          <p class="en-p">Kamehiko: "On this lonely mountain path, to have a noisy instrument such as myself must surely be useful. However, if it be not to your liking, it cannot be helped. Let us make this the end of jokes, Yoshikohime, ahhahhaha!"</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『アヽ無事に御神輿通過も済ンだ。サアサア皆さま、一服のやり直しを致しませう……』</p>
+            <p class="ja-classical-line">音彦『あの女は沢山の粗朶をムクムクと負うて帰りよつたが、一体何と云ふ雅名だらう』</p>
+            <p class="ja-classical-line">加米彦『あれかい、きまつて居るワイ。オハラ女が柴を負うて通つたのだ』</p>
+            <p class="ja-classical-line">『ナニ、斯ンな所に大原女が通つてたまるものか。叡山の麓ぢやあるまいし』</p>
+            <p class="ja-classical-line">『それでも大きな腹をして居つたぢやないか』</p>
+            <p class="ja-classical-line">『あれはヤセの女だよ。八瀬大原と云つて、畑の小母の産地だよ。此処もヤツパリ山地には間違ひない。前の女は大変な痩女、後のは孕み女だ。それで一人はヤセ女、一人はオハラ女だ、斯う宣り直せば、双方の意見が成立して、複雑な議論も起らぬだらう』</p>
+            <p class="ja-classical-line">『モシ悦子姫さま、あなた最前音彦と、大変仲ようして歩いて居ましたなア。気をつけなされませや。此音彦は、女房の五十子姫は竜宮の一つ島へ行つて居るものですから、やもめ鳥も同様、ウツカリして居ると、今行つた女ぢやないが、今はヤセ女のあなたでも、何時の間にか大腹女になりますよ』</p>
+            <p class="ja-classical-line">悦子姫『オツホヽヽヽ、お気遣ひ下さいますな、決して決して御心配はかけませぬから』</p>
+            <p class="ja-classical-line">加米彦『アヽそれならマア私も御安心だ』</p>
+            <p class="ja-classical-line">音彦『オイ加米彦、冗談も良い加減にせぬか、永い春日が又暮れて了ふぞ』</p>
+            <p class="ja-classical-line">悦子姫『サア皆さま、参りませう』</p>
+            <p class="ja-classical-line">と九十九折の嶮しき小径を登り行く。</p>
+            <p class="ja-classical-line">音彦『今度は加米彦、夏彦、先へ行け、又煩雑い問題を提起されては処置に困るから』</p>
+            <p class="ja-classical-line">加米彦『さうだらう。ヤツパリ物がある奴は、何処までも注意深いものだ、イヒヽ』</p>
+            <p class="ja-classical-line">加米彦は悦子姫の後に、三尺許り離れて随いて行く。七八丁登つたと思うと、胸突坂を登り来る二人の姿、半丁許り谷底に、笠ばつかり揺ついて居る。</p>
+            <p class="ja-classical-line">加米彦『ヤア、大きな白い松茸が登つて来るワイ。オイ音彦、夏彦、悦子姫さまが夫程恥かしいのか。何だ、笠で顔も体もみな隠しよつて……』</p>
+            <p class="ja-classical-line">悦子姫『加米彦さま、又貴方は嘲弄ふのかい、良い加減、冗談はよしにしなさいよ』</p>
+            <p class="ja-classical-line">加米彦『此さみしい山路、私の様な鳴り物が一つあるのも亦重宝でせう。併し乍ら、お気に入らぬとあれば仕方がない。冗談はこれ限りヨシコ姫に致しませう、アツハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yoshikohime said, 'There you speak in jest again.'</p>
+          <p class="en-p">Kamehiko said, 'Say not so. The guardian deity of Hibarihiko, who possesseth Kamehiko, deemeth that he hath returned unto his kin upon coming to the mountains, and his mirth cannot be restrained, uhuhu.'</p>
+          <p class="en-p">Yoshikohime said, 'It seemeth that Otohiko has lagged considerably behind. Shall we wait a little while for him?'</p>
+          <p class="en-p">Kamehiko said, 'Doth it truly weigh upon your mind? It is not Otohiko alone who laggeth behind. Cast your eyes also a little upon Natsuhiko, whose waist is bent. Something is amiss with your Hakuaishin, is it not?'</p>
+          <p class="en-p">Yoshikohime said, 'Is there not a sound of ken-ken chirping over there?'</p>
+          <p class="en-p">Kamehiko said, 'Ah, that is a Kiji. It is the sworn brother of Otohiko. At the second turn, saying ken-ken kon-kon, it hath its head struck, its waist struck, and receiveth naught but the arrows of kōgeki. They say, Had the Kiji not cried, it had not been shot...'</p>
+          <p class="en-p">Yoshikohime said, 'What doth the bird called Kiji eat, dwelling in such deep mountains?'</p>
+          <p class="en-p">Kamehiko said, 'Like the Hebitsukami of Mount Altai, it eateth naught but serpents.'</p>
+          <p class="en-p">Yoshikohime said, 'It is a bird entirely like unto you, Kamehiko-sama.'</p>
+          <p class="en-p">Kamehiko said, 'Lo, what say you? When did I ever eat a serpent?'</p>
+          <p class="en-p">Yoshikohime said, 'Not serpents. Are you not ever suffering blunders, ho-ho-ho-ho?'</p>
+          <p class="en-p">Kamehiko said, 'What now, you arrange trifles of herikutsu right well. You have indeed practiced Kototama so much that in mouth alone, you are no longer Yoshikohime, but have become Warukohime.'</p>
+          <p class="en-p">Yoshikohime said, 'Ho-ho-ho-ho.'</p>
+          <p class="en-p">Kamehiko said, 'Ah, somehow my kautsūkikuwan hath grown weary. Shall we wait until Otohiko cometh?'</p>
+          <p class="en-p">Yoshikohime said, 'What a convenient mouth; your shintai being trapped in a dilemma, you shall wait for him, I suppose.'</p>
+          <p class="en-p">Kamehiko said, 'Haha, take heed. An akugami possesseth you... your Kototama hath become exceedingly muddy. Shall I administer a divine spiritual injection unto you?'</p>
+          <p class="en-p">Yoshikohime said, 'Thank you. I shall request it later, at leisure, after consultation with everyone.'</p>
+          <p class="en-p">Thus Yoshikohime spread her straw raincoat and sat heavily upon the frost-withered miscanthus of a year past.</p>
+          <p class="en-p">Old pines, cedars, and cypresses of a thousand years,
+Zelkovas, maples, and miscellaneous trees moss-grown,
+Dense forests on the left and right standing solemn and divine;
+Azalea flowers here and there,
+In white, crimson, blue, and yellow,
+Vying in splendor, amidst which
+Bush warblers, varied tits,
+And great tits cry aloud;
+Crossing the mountain path, before one knoweth,
+Emerging beside a small, broad field;
+Tales of the ancient age of the gods,
+Without missing even a single word,
+To write down and convey, the field horsetails,
+Sharpening their pencils by the roadside,
+Wait in readiness with lovely grace;
+The green leaves of barley put forth their top leaves,
+Hiding their pens, verdantly,
+Tucking up their garments, they stand waiting;
+Flowers all over the surface of the fields,
+Vying in splendor, bloom in fullness,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">悦子姫『それまた、冗談を仰有るワ』</p>
+            <p class="ja-classical-line">加米彦『仰有いますな。加米彦に憑依して居る雲雀彦の守護神奴、山へ来ると親類へ帰つた様に思つて、はしやいでなりませぬワイ、ウフヽ』</p>
+            <p class="ja-classical-line">悦子姫『大分音彦さまが遅れなさつたよな塩梅ぢや。少し待ち合はせませうか』</p>
+            <p class="ja-classical-line">加米彦『ヤツパリ気に懸りますかな、遅れとるのは音彦ばつかりぢやありませぬ。腰の曲つた夏彦にもチツとは目を呉れてやつて下さいナ。あなたは博愛心がどうかしてますネー』</p>
+            <p class="ja-classical-line">悦子姫『何だかケンケン言つてるぢやありませぬか』</p>
+            <p class="ja-classical-line">加米彦『エーあれや雉子ですよ。音彦の兄弟分ですがなア。二つ目にはケンケンコンコンと言つては頭を打たれ、腰を打たれ、攻撃の矢ばつかり喰つて居ます。雉子も鳴かねば撃たれまい………と云ひましてなア……』</p>
+            <p class="ja-classical-line">悦子姫『雉子と云ふ鳥はコンナ深い山に棲みて、何を喰つてるのでせう』</p>
+            <p class="ja-classical-line">加米彦『アルタイ山の蛇掴の様に、蛇ばつかり喰つて居よるのです』</p>
+            <p class="ja-classical-line">悦子姫『丸で加米彦さまの様な鳥ですネー』</p>
+            <p class="ja-classical-line">加米彦『ソラ何を仰有います。私が何時蛇を喰ひましたか』</p>
+            <p class="ja-classical-line">悦子姫『蛇ぢやありませぬ。あなたは何時も、ヘマばつかり喰つてるぢやありませぬか、ホヽヽヽ』</p>
+            <p class="ja-classical-line">加米彦『ナアンダ、屁でもない屁理屈を能く並べなさる。あなたも随分言霊の練習が出来て、お口丈は悦子姫ぢやなくて、悪子姫になりましたなア』</p>
+            <p class="ja-classical-line">悦子姫『ホツホヽヽヽ』</p>
+            <p class="ja-classical-line">加米彦『アヽ何だか交通機関が倦怠して来ました。音彦の来るまで待つてやりませうかい』</p>
+            <p class="ja-classical-line">悦子姫『重宝なお口だこと、進退維れ谷まりて、待つておあげなさるのでせう』</p>
+            <p class="ja-classical-line">加米彦『ハハア、あなた用心しなさいよ。悪神が憑いて居ますで………随分言霊が濁つて来ました。一つ神霊注射をやつてあげませうか』</p>
+            <p class="ja-classical-line">悦子姫『有難う。またユルユル皆さまの御協議の上で、御願致します』</p>
+            <p class="ja-classical-line">と悦子姫が蓑を敷いて、一年越の霜枯れの萱の上にドツカとすわる。</p>
+            <p class="ja-classical-line">千歳の老松杉檜
+槻楓雑木も苔蒸して
+神さび立る左右の密林
+躑躅の花の此処彼処
+白に紅青黄色
+艶を争ふ其中を
+藪鶯や山雀
+四十雀ガラ鳴き立つる
+山路を越えて何時しかに
+小広き田圃に流れ出る
+古き神代の物語
+唯一言も漏らさずに
+書き伝へむと土筆
+鉛筆尖らし道の辺に
+待構へ居るしほらしさ
+麦の青葉は止め葉うち
+筆を隠して青々と
+手具脛ひいて待つて居る
+花は一面田の面に
+艶を競ふて咲きぬれど</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec08">
+        <div class="sec-header">
+          <span class="para-num">&sect; 8</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Place it not upon the floor;
+As expected, view the Gengebana in the field,
+Here and there the Itandōri,
+Budding like fountain pens,
+With faces prepared for dictation and Seishiyo.
+The Shiyujinkō of this Monogatari,
+As well as Yoshikohime amidst the Atari Keshiki,
+Cared for Otohiko, Kamehiko, and Natsuhiko
+Even as Her own Wagako,
+And with the Kido of having become a parent,
+Advanced making the mountain Her Mea.</p>
+          <p class="en-p">Kamehiko: 'Ah, what a fine Keshiki it is.... Otohiko-sama, is not that exceedingly tall Kauzan over there, wearing a Kazuki of clouds, the very one?'</p>
+          <p class="en-p">Otohiko: 'That is so; that is Mount Misen, the Mokuteki, where the Gobunrei of Konohana-no-hime is enshrined.'</p>
+          <p class="en-p">Kamehiko: 'No wonder the fellow called cloud hath completely wrapped it from the neck up, obscuring the peak's form... it is indeed the mountain of Misen; yet, when I behold that figure standing Taizenjijiyaku and unmoving, it truly stirreth my vexation, doth it not? Making only us walk on foot, moving not even a Hitoashi, remaining still as if to say, "If thou wishest to see me, come unto Koko"; such is its Anbaishiki. It is as though it looketh down upon us from above and treateth us as slaves, is it not? I feel somewhat as if we are being despised.'</p>
+          <p class="en-p">Otohiko: 'Ahahaha, thou art a man who must say something or other when thou hast nothing to say. Do not be so anxious; ere long, no matter how arrogantly Mount Misen may deport itself, the time shall come when we trample its very summit beneath our feet. Therefore is it said... await the appointed time.'</p>
+          <p class="en-p">Natsuhiko: 'Everyone, shall we open our lunches in this beautiful field of Gengebana, and rest while worshiping the mountain from afar?'</p>
+          <p class="en-p">Kamehiko: 'Wait, wait; after I have inquired of Her Majesty's pleasure, I shall grant permission. Wait and stand by for a short while.'</p>
+          <p class="en-p">Natsuhiko: 'How easily the kettle boileth; nay, how easily the Kame boileth, ahahaha.'</p>
+          <p class="en-p">Yoshikohime: 'Everyone, how shall it be? Shall we relax in this beautiful field while worshiping the mountain from afar?'</p>
+          <p class="en-p">Natsuhiko: 'Lo, how is that? It is communication from mind to mind; my Mitama was secretly responding to Her Majesty. Looking at it thus, though our physical bodies are master and servant, our spirits are...'</p>
+          <p class="en-p">Kamehiko: 'Wilt thou not say what followeth? What of the spirit? Thou art a fellow who uttereth somewhat suspicious things with the Mitama of a badger and the Mitama of a weasel; sporting such a strange style, how canst thou utter such things!'</p>
+          <p class="en-p">Natsuhiko: 'Nay, by style a woman... no, mumble, mumble.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">床には置くな、矢張野で見よ紫雲英
+虎杖草のここかしこ
+万年筆の芽を吹いて
+書き取り清書の準備顔
+此物語の主人公
+四辺の景色も悦子姫は
+音彦、加米彦、夏彦を
+吾子の如く労はりつ
+親になつたる気取りにて
+お山を見当てに進み行く。</p>
+            <p class="ja-classical-line">加米彦『アーアナント云ふ佳い景色だらう。……音彦さま、向ふに雲の被衣を着て居るズンと高い高山がそれぢやないか』</p>
+            <p class="ja-classical-line">音彦『さうだ、あれが目的の木の花姫の御分霊の祀られてある弥仙のお山だ』</p>
+            <p class="ja-classical-line">加米彦『道理で、首から上は、雲の奴、スツカリ包みて、峰の姿を……ミセンの山だな、併し乍ら泰然自若として動かないあの姿を見ると、実に癪に障るぢやないか。俺達ばつかりにテクらせよつて、一歩も動かず、ヂツとして、俺が見たけら此処まで御座れ、と云ふ塩梅式だ。丸で吾々を眼下に見くだし、奴隷視して居るぢやないか。何だか軽蔑せられる様な心持がしてきたワイ』</p>
+            <p class="ja-classical-line">音彦『アハヽヽヽ、云ふ事が無いと、何なと言はねば気の済まぬ男だなア。さう心配するな、今に、何程威張つて居る弥仙山でも、頭の頂辺を、吾々の足で踏みにじる様になるのだよ。さうだから、時節を待て……と云ふのだよ』</p>
+            <p class="ja-classical-line">夏彦『皆さま、此美しい紫雲英野で、お弁当でも開いて、お山を拝み乍ら休息致しませうか』</p>
+            <p class="ja-classical-line">加米彦『待て待て、女王様の御機嫌を伺つた上、認可してやらう。暫く控へて待つて居らう』</p>
+            <p class="ja-classical-line">夏彦『随分薬鑵が能く沸騰りますなア、否かめは能く沸騰しますナア、アハヽヽヽ』</p>
+            <p class="ja-classical-line">悦子姫『皆さま、どうでせう、此麗しい野原で、お山を遥拝し乍ら、くつろぎませうか』</p>
+            <p class="ja-classical-line">夏彦『ソラ、どうだい、以心伝心、吾輩の身魂は暗々裡に、女王様に感応して居たのだ。斯うして見ると、肉体は主従だが、霊は……』</p>
+            <p class="ja-classical-line">加米彦『その次を言はぬかい、霊魂が何だい、狸身魂の鼬みたまをして、何だか物臭い事を言ふ奴だ、斯ンな怪体なスタイルをして、能うソンナ事が云はれたものだワイ』</p>
+            <p class="ja-classical-line">夏彦『ナーニ、スタイルで女が……ウンニヤ、ムニヤムニヤ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec09">
+        <div class="sec-header">
+          <span class="para-num">&sect; 9</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kamehiko: 'We have come to a dead end again; before the Mirror of Jiyōhari of Enma-sama, the very depths of your heart shall be illuminated, and for sheer shame, you must instantly be struck mute. If you tarry and dither, your tongue shall be yanked out entirely.'</p>
+          <p class="en-p">Natsuhiko: 'Even if a tongue or two were pulled out, I have laid in a bountiful supply, so all is perfectly Daijiyōbu. Among modern Ningen, any person who contents himself with merely one or two tongues is truly nothing but a most inconvenient, crippled Ninsoku.'</p>
+          <p class="en-p">Kamehiko: 'What a glibly spinning tongue indeed! Even I am a bit startled by Koitsu—nay, rather, filled with Kanpuku of tongue! Ahaha!'</p>
+          <p class="en-p">Unto such a place, clad in a hanten dyed in sayaguzome and leaning upon a staff of goosefoot, an old Rauō appeared stumbling along before the four persons, and spake:</p>
+          <p class="en-p">'I perceive that you all are worshipers making Gosanpai unto Mount Misen; will you not kindly step into my humble home? There is a certain matter I wish to inquire of you, and a request I fain would make.'</p>
+          <p class="en-p">Kamehiko thrust himself forward and said: 'Oho, you are an old gentleman possessing a sublime countenance, resembling the Kami Kitateru! For an elder to inquire of such young sendenshi and young men—is that not somewhat amiss? He who leaped forth into this world even a year earlier ought to have accumulated experience and attained knowledge of society; you are an old gentleman who utters strange things indeed. Ever since your figure flickered into view beneath the shade of the trees, I had been looking forward to slipping a sandal onto your foot, hoping to be bestowed the military arts of Taikōbō, much like Chō Shibō!'</p>
+          <p class="en-p">Rauō: 'As for the affairs of the world, having been born even a single day earlier makes me an elder brother, so I could well instruct you; yet to this old man who has lived so long and fully comprehended all the sours and sweets of society, there is one matter that defies my understanding no matter how I ponder it. Thinking that this is something that cannot be understood unless asked of a person walking in the Way of Kami, my old woman and I have invited travelers visiting the mountain into our thatched cottage to inquire of them in various ways, yet not a single person hath granted us a complete solution. The other day as well, a lady called Eiko-hime... a messenger of Kami far more beautiful than this young lady here, passed by accompanied by a valiant-looking attendant; so when I inquired of them, the two of them merely smiled with a grin and answered nothing, but told me that before long a party of one woman and three men would make a pilgrimage to the mountain, and bade me meet those persons and ask them. Therefore, day after day, I have been stretching out my neck waiting for you, thinking that perchance it might refer to your good selves, and so I have dragged my heavy feet out here to meet you.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">加米彦『又行詰りよつたナ、閻魔さまの浄玻璃の鏡の前では、心の奥まで照されて、恥かしさに忽ち唖とならねばなるまい。グヅグヅして居ると、舌を抜かれて了ふぞ』</p>
+            <p class="ja-classical-line">夏彦『舌の一枚や二枚抜かれたとて、沢山に仕入れてあるから大丈夫だよ。今の人間に一枚や二枚の舌で甘ンじて居る様な者は、それこそ不便極まる片輪人足だ』</p>
+            <p class="ja-classical-line">加米彦『本当に能う廻る舌だなア。俺も此奴には一寸ビツクリ舌、イヤ感服舌、アツハヽヽヽ』</p>
+            <p class="ja-classical-line">斯かる所へ、小夜具染の半纒をまとひ、あかざの杖を突き乍ら、ヒヨコリヒヨコリと一人の老翁、四人が前に立現はれ、</p>
+            <p class="ja-classical-line">『皆さま達は、弥仙のお山へ御参拝のお方と見受けますが、どうぞ私の家へお寄り下さいませぬか。一つお尋ねをしたり、お願ひしたい事が御座います』</p>
+            <p class="ja-classical-line">加米彦はシヤシヤり出で、</p>
+            <p class="ja-classical-line">『ヤアお前さまは、北光の神さまの様な、崇高な容貌をしたお爺さまだな、コンナ若い宣伝使や、若い男に、老人が物を尋ねるとは、チツと間違つては居やせぬか。一年でも先へ此世へ飛び出した者は、経験が積み、社会学に達して居る筈だ、怪体な事を言ふお爺さまだなア。わしは又、お前さまの姿が木蔭にチラと見えた時から……ヤア占た、一つ沓でも穿かして上げて、張子房ぢやないが、太公望の兵法でも伝授して貰はうと思うて楽しみて居たのだ』</p>
+            <p class="ja-classical-line">爺『世界の事なら、一日でも先へ生れた丈わしは兄貴だ、教へても上げるが、これ丈長生をして、世の中の酸いも甘いも悟りきつた此爺に、どう考へても合点のいかぬ事が一つあるのだ。これはどうしても神様のお道の人に聞かなくては、分らぬ事だと思うて、お山へ詣るお方を、婆アと二人が、茅屋へ寄つて貰ひ、種々と尋ねて見るけれども、どのお方も完全な解決を与へて下さらぬのだ。此間も英子姫さまとやら……此お女中よりもズツと綺麗な、神様のお使ひのお方が凛々し相なお従者を連れて通らしやつたので、一つ尋ねてみた所、二人のお方はニヤツと笑うて、何にも仰有つて下さらず、やがて女一人男三人の一行が、お山詣りをするから、其者に会うて尋ねて呉れいと仰有つたので、毎日日日首を長うして待つて居つたのだ、もしや、お前さま等の事ではあるまいかと思うて、重い足を引きずつて出て来たのだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec10">
+        <div class="sec-header">
+          <span class="para-num">&sect; 10</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kamehiko: 'Ah, so it was! Though Shiyakuwaigaku is as yet mikuwansei, if it be a matter of the Kamisama, I shall bring kaiketsu to whatever it may be. Truly, Hidekohime-sama is grand as well. Thinking to cede the tegara unto us, she said nothing even when we met yūbe. Truly, she possesses senken. Having emptied kokon, exhausted tōzai, stepped even beyond the sekai of the sekai, and thoroughly seen through the shinsau of uchiu, that this Kamehiko would be present—Hidekohime-sama of meichi had surely expected it, so it appears. Now, now, ask whatever you will. If it be a matter concerning the shinkai, I shall by no means make taikiyaku, for unto Ananai-kyō the niji of taikiyaku exist not… Ahem!'</p>
+          <p class="en-p">Old Man: 'Is that so? Unsuited to one so young, you have benkiyōed so far; kanshin, kanshin! The youth of present times are all of ill mindset, saying such audacious things as, "How can such a thing as a Kamisama exist in this world? Man is the Kamisama! If there be a God, let me meet Him once, and then I shall recognize the existence of God!" Amidst such a season, that you should know everything—you are indeed a grand person! This old man also has been wishing to meet such a person until now, and was waiting… Ah, Kamisama, thank you! All this is entirely due to the deep protection of Konohanahime-sama of Mount Misen…'</p>
+          <p class="en-p">Thus saying, he wiped his tears with his sleeve.</p>
+          <p class="en-p">Natsuhiko: 'Hello, hello, old man! This fellow is a man who was serving as the gatekeeper of Akiyamahiko at Yura no Minato. He merely opens a big mouth boastfully! Since opening the gate from morning till night is his trade, that momentum still remains with him, and he opens a mouth as huge as a great gate. Do not engage with him. Regarding what this man says, even for me, the merit of age is bean flour, bean flour is yellow soybean flour, and yellow soybean flour is after all bean flour! A dog that ate a wild boar has a superior point somewhere in the dog, I say. I shall teach you!'</p>
+          <p class="en-p">Kamehiko: 'Now, now, old man! This fellow was trained to blow big talk from morning till night for ten years by a creature named Kurohime of the Uranai religion who is clever only with her mouth; therefore, what he speaks is oranges, kumquats measured by the peck—he is a fellow who understands nothing at all!'</p>
+          <p class="en-p">Old Man: 'Even though this old man has been pleading with all my heart since a short while ago, do you people make light of this old person? Ah, surely the grand person of whom Hidekohime-sama spoke cannot be this company! Ah, how foolish! Had I known it would be such a thing, this old man would not have dragged these heavy feet here…'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">加米彦『アヽさうだつたか、社会学はまだ未完成だが、神様の事ならば、ドンナ事でも解決をつけてあげよう。英子姫さまも流石は偉いワイ。手柄を俺達に譲つてやらうと思召して、昨夜会うた時にも仰有らなかつたのだ。流石は先見の明ありだ。古今来を空しうして東西位を尽したる、世界の外の世界迄踏み込んで、宇宙の真相を悉皆看破したる、此加米彦がお出でになると云ふ事を、流石は明智の英子姫様、予期して御座つたと見える。サアサア何なりとお尋ねなされ。神界に関する事ならば決して退却は致さぬ、三五教には退却の二字は有りませぬから………オツホン』</p>
+            <p class="ja-classical-line">爺『さうかな、若いにも似合はず、能うそこまで勉強をなさつた、感心々々。今時の若い者は、皆心得が悪くて、神さまなンテ、此世の中に有るものか、人間が神さまだ、神があるのなら、一遍会はして呉れ、そしたら神の存在を認めてやるなンテ、大ソレた事を云ふ時節だ。それにお前さまは、何も彼も御存じとは、実に偉いお方だ、此爺も今迄コンナ方に会ひたいと思うて、待つて居ました……アヽ神様、有難う御座います、これと云ふのも全く弥仙のお山の木の花姫様の篤き御守護……』</p>
+            <p class="ja-classical-line">と袖に涙を拭ふ。</p>
+            <p class="ja-classical-line">夏彦『モシモシお爺さま、此奴ア、由良の湊の秋山彦の門番をして居つた男です。偉さうに口ばつかり開くのですよ。朝から晩まで門を開くのが商売だから、其惰力が未だに残つて居つて、大門の様な大けな口を開きよるのだ。相手になりなさるな。此男の云ふ位な事は、私だつて、年の功は豆の粉だ、豆の粉は黄な粉だ、黄な粉はヤツパリ豆の粉だ。猪喰た犬は、犬のどこやらに勝れた所が有りますワイ。私が教へてあげませう』</p>
+            <p class="ja-classical-line">加米彦『コレコレお爺さま、此奴はなア、ウラナイ教の黒姫と云ふ、口ばつかり達者な奴に十年間も朝から晩まで、法螺を仕込まれて来た奴だから、何を言ふやら、蜜柑やら、金柑桝で量るやら、なにも分つた代物ぢやありませぬワイ』</p>
+            <p class="ja-classical-line">爺『最前から此老爺が一生懸命に頼みて居るのに、お前さま達は、此老人を飜弄するのかい、エーエやつぱり英子姫さまの仰有つた偉いお方は、此御連中ぢや有るまい。アーア阿呆らしい、コンナ事なら此重い足を、老人が引摺つて来るのぢやなかつたのに……』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec11">
+        <div class="sec-header">
+          <span class="para-num">&sect; 11</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otohiko said, 'Hello, old grandfather, please do not be so angry. Since these two are relatives of skylarks and swallows, please tell me whatever you desire. To the best of my strength, I shall inquire of the Kamisama and give you an answer.'</p>
+          <p class="en-p">The old man said, 'Ah, is that so? I thought that you were somehow a firm and steady man. Since we cannot talk here, please come alone to my house, where my old wife and my daughter are waiting.'</p>
+          <p class="en-p">Otohiko said, 'Grandfather, I am grateful for that, but here is Yoshikohime, whom I look up to as my master and teacher. Since this lady is our Daisensei, I cannot abandon her and go by myself.'</p>
+          <p class="en-p">The old man said, 'Ah, that must be so, that must be so. If so, then you and Yoshikohime's teacher come; it would be fine to leave such young men waiting here.'</p>
+          <p class="en-p">Otohiko said, 'However, an unwritten law has been established that the four of us must never be separated, so we cannot abandon these two men here. All four of us shall go. If that is not to your liking, it cannot be helped, and we have no choice but to decline.'</p>
+          <p class="en-p">The old man said, 'Ah, if so, then please come. Hey, you two young ones, I do not mind if you come to my house, but do not speak so noisily, for it would be troublesome if it affected my daughter's body...'</p>
+          <p class="en-p">Kamehiko said, 'Hey, Natsu, if you do not treat us to a cup, it will be bad Miyōga! You are the eldest among us, yet were you not called a "young one"? This too is because you were seen as young owing to the virtue of my handsome face. That is why the old man set up a defensive line, saying it would be troublesome if it affected his daughter's body... He must have taken us for dangerous goods, ahahaha!'</p>
+          <p class="en-p">Otohiko said, 'Now, Yoshikohime, though it may be a trouble, please drop by the old man's house for a moment.'</p>
+          <p class="en-p">Yoshikohime said, 'If such an ungraceful person as I will suffice, grandfather, I shall go.'</p>
+          <p class="en-p">The old man said, 'Ah, I am grateful, I am grateful! I shall give my thanks later. The old man's house is just around that grove over there. From my sitting room, your resting here was so clearly visible that it seemed within reach of my hands, so it is just a very short way around.'</p>
+          <p class="en-p">So saying, he took the lead and totteringly guided them toward his own home.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">音彦『モシモシお爺さま、さう腹を立てて下さるな。此等二人は雲雀や燕の親類ですから、どうぞお望みの事を、私に仰有つて下さいませ。私の力限り神様に伺つて御答を致しませう』</p>
+            <p class="ja-classical-line">爺『アヽさうかなア、お前さまはどこやらが、締りのある男だと思うて居つた。此処では話が出来ませぬから、お前さま一人、私の宅へ来て下され、婆アや娘が待つて居ります』</p>
+            <p class="ja-classical-line">音彦『お爺さま、それは有難う御座いますが、私の……此処に御主人とも先生とも仰ぐ悦子姫さまがいらつしやいます。此お方は吾々の大先生で御座いますから、此方を捨てて私ばつかり参る訳にはゆきませぬ』</p>
+            <p class="ja-classical-line">爺『アーさうだらうさうだらう、ソンナラ、悦子姫さまの先生とお前さまと来て下され、斯ンな若い男は此処に待たして置いたら宜しからう』</p>
+            <p class="ja-classical-line">音彦『併し乍ら、四人はどうしても離れないと云ふ不文律が定められてあるので、此男二人を此処に放棄して置く訳にはゆきませぬ、四人共参りませう。それがお気に入らねば仕方がありませぬから御断り申すより途は御座いませぬ』</p>
+            <p class="ja-classical-line">爺『アヽソンナラ来て下さいませ。コレコレ二人のお若いの、私の家へ来て下さるのは構ひませぬが、あまり喧しう言つて下さるな、娘の身体に障ると困りますから……』</p>
+            <p class="ja-classical-line">加米彦『オイ夏、貴様一杯奢らぬと冥加が悪いぞ、此中で一番の年長だ、それに「お若いの」と云はれよつたぢやないか、是れと云ふのも、俺の好男子の余徳に依りて若く見られたのだよ。それだから老爺さまが、娘の体に障ると困ります……ナンテ予防線を張るのだよ。険呑な代物と見込まれたものだなア、アツハヽヽヽ』</p>
+            <p class="ja-classical-line">音彦『サア悦子姫さま、御苦労乍ら、一寸老爺さまの宅まで寄つてあげて下さいませ』</p>
+            <p class="ja-classical-line">悦子姫『不束な妾でもお間に合ひますれば、お爺さま参ります』</p>
+            <p class="ja-classical-line">爺『ハア有難い有難い、御礼は後で致します。老爺の家は此向ふの森を一つ廻つた所で御座います。私の座敷から、あなた方が此処に御休息になつて御座るのが、手に取る様に見えました位ですから、ホンの一寸の廻りで御座います』</p>
+            <p class="ja-classical-line">と先に立ち、ヨボヨボと己が家路へ伴ひ行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="preface.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Preface & Introduction</span>
+      </a>
+      <a href="c02.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 2: 厳の Flower [630]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
