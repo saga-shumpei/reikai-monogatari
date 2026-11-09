@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: Ogre 婆 [673] - Volume 20 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 20 Table of Contents</a>
+      <span>Volume 20</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 20 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: Ogre 婆 [673]</h1>
+      <p class="chapter-title-ja">鬼婆〔673〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The night gradually broke, and escorted by the voices of the Morotori chirping among the trees, the Sannin proceeded, leaving their feet to lead the way. Against the background of a Daigankutsu, thirty or forty houses with Kayabu Yane stood with their eaves aligned.</p>
+          <p class="en-p">Tagosaku: 'Well, at last the great city of the Onibaba of Mikunigadake has come into view. It is a grand city, with a number of households beyond counting, some thirty-odd myriad, and a population of almost eight hundred myriad lies. Since our feet have become quite strange, surely there must be elevated Tetsudau, and the facilities for Jidōshiya and Denshiya must be perfectly complete in the city; I wonder if I should try riding one.'</p>
+          <p class="en-p">Harahiko, shaking Tagosaku's shoulder,</p>
+          <p class="en-p">Harahiko: 'Hey, Tagosaku-sama, from here on is what is Kanjin; why are you acting senile now? Pull yourself together. Is it not just thirty or forty straw huts leaning against the Gankutsu? When you say such mad things, I too begin to feel lonely.'</p>
+          <p class="en-p">Tagosaku: 'Ahahaha, you are quite foolish here. I just advertised it in an exaggerated way to liven things up. It is a den of half-beast, half-ogre creatures that eat snakes and frogs. From now on, I shall refrain from foolish talk and proceed to act without words.'</p>
+          <p class="en-p">Munehiko: 'Since you two are finally heading to the battlefield, I will be in trouble if you do not pull yourselves together. Also, you must never commit any violence, so please be cautious. If you raise your eyes or twist your mouths just because you have been struck on the head three or four times, you will not be able to fulfill this mission; in any case, keep the character for endurance in your hearts. The character for endurance is a heart beneath a blade. You must pass even beneath the enemy's blade with a sincere heart to make the enemy repent, so please keep this well in mind.'</p>
+          <p class="en-p">Both Tagosaku and Harahiko answered 'Hai, hai' in low voices as they advanced. About two hundred men and women, old and young, formed a single village. And every one of the people here had become mute. It was because the Onibaba, Mukade-hime, had poisoned their tea to enforce a gag order instead of issuing one. It was just as if they had come to a land of mutes. Tagosaku, not knowing this situation in the slightest, jumped into one of the houses,</p>
+          <p class="en-p">Tagosaku: 'Excuse me, I am asking for information, but which way should I go to reach the mansion of the Baba?'</p>
+          <p class="en-p">From inside, four or five men and women ran out to the doorway in a sluggish manner, and with puzzled faces, all of them opened their mouths agape, saying 'Aaaa' like mutes. Tagosaku raised his voice,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">夜は漸くに明け離れ、木の間に囀る諸鳥の声に送られて、三人は足に任せて進み行く。大岩窟を背景に茅葺き屋根の三四十、軒を並べて立つて居る。</p>
+            <p class="ja-classical-line">田吾作『サア、とうとう三国ケ岳の鬼婆の大都会が見えて来た。戸数無慮三十余万、人口殆ど嘘八百万と云ふ、一大都会だ。大分に俺達も足が変になつたから、定めし都会には高架鉄道もあるだらうし、自動車、電車の設備も完全に出来て居るだらう、一つ乗つて見ようかなア』</p>
+            <p class="ja-classical-line">原彦、田吾作の肩を揺り、</p>
+            <p class="ja-classical-line">原彦『オイ、田吾作さま、これからが肝腎だ、今から呆けてどうするのだ、確りせぬかいな。片方は岩窟にたてかけた藁小屋が三四十並んで居るだけぢやないか、そんな狂気じみた事を云うて呉れると俺も淋しうなつて来た』</p>
+            <p class="ja-classical-line">田吾作『アハヽヽヽ、此処は余つ程馬鹿だなア、一寸景気をつけるために、誇大的に広告して見たのだ。蛇喰ひや蛙喰ひの半獣半鬼の巣窟だ。これからもう馬鹿口は慎んで不言実行にかからう』</p>
+            <p class="ja-classical-line">宗彦『お前たち二人はいよいよ戦場に向つたのだから確りしてくれないと困るよ。又決して乱暴な事はしてはならないから、慎んでくれ。頭の三つや四つ撲られた位で、目を釣り上げたり、口を歪めるやうでは、此度の御用は勤まらぬから、兎に角忍と云ふ字を心に離さぬやうにするのだ。忍と云ふ字は刃の下に心だ。敵の刃の下も誠の心で潜つて敵を改心させるのだから、くれぐれも心得てくれ』</p>
+            <p class="ja-classical-line">田吾、原の両人は小声で『ハイハイ』と答へながら進んで行く。二百人許りの老若男女が一つの部落を作つて居る。さうして此処の人間はどれもこれも皆唖ばかりになつて居る。蜈蚣姫の鬼婆が計略で篏口令を布くかはりに、皆茶に毒を入れて呑まされたものばかりだ。恰度唖の国へ来たも同様である。田吾作は些しも此事情を知らず、一つの家に飛び込み、</p>
+            <p class="ja-classical-line">田吾作『一寸、物を尋ねますが、婆アの館はどう往つたら宜敷いかな』</p>
+            <p class="ja-classical-line">中より四五人の男女、ダラダラと戸口に走り出で、不思議な顔をして何れも口をポカンと開けて、アヽヽヽと唖のやうに云つて居る。田吾作は声を張上げて、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tagosaku: 'I am asking you where the old woman's place is.'</p>
+          <p class="en-p">The group, having had their divine Genreiki and Chiyōseiki destroyed, understood nothing of the matter and could only open their mouths and cry out, 'Ah, ah, ah, ah.'</p>
+          <p class="en-p">Tagosaku: 'Excuse me, Sendenshi-sama, no matter what I say, they give no reply; they are just like mutes, only opening their mouths and saying, "Ah, ah, ah." Shall we go to the next house and try asking there?'</p>
+          <p class="en-p">Munehiko: 'I leave it to you, so please, do go door-to-door so that I may be elected, and ask for their pure votes politely; since bowing requires no capital, I beg of you.'</p>
+          <p class="en-p">Tagosaku: 'Even if you say it requires no capital, my head will ache if I keep bowing like that. Do not speak of things like voting; how can I endure it when I am suffering from a headache over someone else's election? No matter how hard I try, once the order for Kaisan is issued, it will truly be back to Mokuami.'</p>
+          <p class="en-p">Munehiko: 'In any case, I leave it to you.'</p>
+          <p class="en-p">Tagosaku: 'I understand. Please do not interfere with the election, thinking I am from the Zaiyatau. Hello, people of this house, where does the old woman live? Won't you tell me? I am certainly not a vote-beggar, so please rest assured and tell me.'</p>
+          <p class="en-p">From inside the house, four or five men and women appeared at the gate with puzzled faces, only opening their mouths to say, 'Ah, ah, ah.' Thinking, "Ah, these ones are useless too," Tagosaku went on to the next. No matter where he went, he was met with the 'Ah' torture and could not grasp the situation at all. Finally, he finished the door-to-door survey of every single house without incident. However, he gained nothing, and the old woman's figure was nowhere to be found.</p>
+          <p class="en-p">The three of them, having no other choice, looked for a convenient rock to sit on, sat down with a thud, and rested for a while. A woman holding a baby in her bosom, along with dozens of others, appeared before the three with curious looks, opening their mouths and repeating the sound, 'Ah, ah, ah, ah.'</p>
+          <p class="en-p">Tagosaku: 'What a strange place this is. It seems that the area around Mikunigadake is a barbaric and uncivilized land, so they must have no language.'</p>
+          <p class="en-p">As they were talking, a woman of excellent appearance appeared, bowed to the Sendenshi, and while also repeating, 'Ah, ah, ah,' pointed toward the northern valley and ran off. This woman was Otama, the biological mother of Tamateruhime. She had been kidnapped by the old woman's subordinates and brought into these deep mountains.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">田吾作『婆アの所は何処だと問うてゐるのだ』</p>
+            <p class="ja-classical-line">天賦の言霊器と聴声器を破壊された一同は、何の事だか少しも分らず、唯口を開けて、アヽヽヽと叫ぶのみである。</p>
+            <p class="ja-classical-line">田吾作『モシ、宣伝使さま、何と言つても返事もせず、唯口を開けてアヽヽヽと云うて居る唖見たやうな奴許りですな、次の家へ行つて尋ねて見ませうか』</p>
+            <p class="ja-classical-line">宗彦『お前に一任するから、何卒、私が当選するやうに戸別訪問をして、清き一票をと丁寧に、お辞儀に資本は要らぬから頼んでくれい』</p>
+            <p class="ja-classical-line">田吾作『何ぼ資本が要らぬと云つても、さうペコペコ頭を下げては頭痛がします哩。投票もない事を仰有るな、人の選挙（疝気）を頭痛にやんで、耐りますかい。何程気張つたつて解散の命令が下つたら、それこそ元の黙阿弥ですよ』</p>
+            <p class="ja-classical-line">宗彦『兎も角お前に一任する』</p>
+            <p class="ja-classical-line">田吾作『承知致しました。在野党と思つて選挙干渉をやらぬやうにして下さいや。モシモシ此の家のお方、婆アのお住居は何処だ、知らしてくれないか、決して投票乞食ぢやないから安心して云つておくれ』</p>
+            <p class="ja-classical-line">家の中から又もや四五人の男女、怪訝な顔して門口に立ち現はれ、口を開けてアヽヽヽと云ふばかり。あゝ此奴も駄目だと、田吾作はまた次へ行く。行つても行つても、アヽ責に遇はされて一向要領を得ない。とうとう一戸も残らず戸口調査を無事終了して仕舞つた。されど何の得る所もなく、婆アの姿も見当らなかつた。</p>
+            <p class="ja-classical-line">三人は是非なく腰掛に都合の好い岩を探して、ドシンと尻を下ろし、暫く息を休める。赤ん坊を懐中に抱いた女、幾十人ともなく、不思議さうに三人の前に立ち現はれ、口を開けて、アヽヽヽヽとア声の連発をやつて居る。</p>
+            <p class="ja-classical-line">田吾作『エヽ怪つ体な所だな、矢張三国ケ岳の辺は野蛮未開の土地だから、言語が無いと見える哩』</p>
+            <p class="ja-classical-line">と話して居る。其処へ容色優れたる一人の女が現はれ来り、宣伝使に会釈し、是亦アヽヽヽを連発しながら北の谷間を指ざし走り行く。この女は玉照姫の生母お玉であつた。婆の手下の者に誘拐され、この山奥に連れ込まれてゐたのである。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The old woman's plan was to first successfully abduct Otama, the biological mother, and bring her here as a means to seize Tamateruhime. Since the three of them had never seen Otama's face, they did not even dream that such a secret lay hidden, and they set off quickly, following in Otama's tracks.</p>
+          <p class="en-p">After proceeding along the valley to the left for about four or five chō, they found countless giant rocks, like upright walls, standing in rows in the valley. Beckoning with her hand, Otama slipped through a hole in a rocky cave and hid herself. The three of them followed after her, quickening their pace, and advanced about five or six ken into the cave. This was the second operational base on Onokorojima for Mukadehime, the wife of Onikumawake, who had entrenched herself at Onigajiyōzan. The meat of snakes, frogs, mountain crabs, and other beasts was well dried and hung in countless numbers inside the cave.</p>
+          <p class="en-p">Tagosaku: 'Ah, I beg your pardon, is this the dwelling of the Ogre-hag of the Brahman religion?'</p>
+          <p class="en-p">Old Woman: 'This is the dwelling of the Ogre-hag Mukadehime.'</p>
+          <p class="en-p">Tagosaku: 'Ah, is that so? My apologies. What a magnificent mansion this is; with this, one would be safe even from wind, rain, thunder, lightning, and earthquakes. I would like to live in such a splendid mansion for at least half a day, if nothing else.'</p>
+          <p class="en-p">Old Woman: 'Where are you from, and why have you brought two companions along with you?'</p>
+          <p class="en-p">Tagosaku: 'Yes, the truth is, I have been appointed as a preliminary missionary for the Sangokyō, and today is my first campaign. As you see, I have brought along these two stingy fellows named Munehiko and Harahiko. They say they are very hungry, so please, spare them some dried frogs.'</p>
+          <p class="en-p">Old Woman: 'Since you have come all this way, I shall treat you to these frogs, though they are precious. These frogs are the specialty of this mountain, known as Lord-frogs; they serve as medicine for insects and are a miraculous cure for all kinds of illnesses. They are somewhat different from the green frogs or dung frogs that go hopping about in the rice fields, so taste them with that in mind. You are a frog-leaping, earthworm-cutter, after all.'</p>
+          <p class="en-p">Tagosaku: 'Hey, you are making a fool of me!'</p>
+          <p class="en-p">Harahiko: 'Hey, hey, you fake missionary-san, it is troublesome if you say things like that, isn't it?'</p>
+          <p class="en-p">Tagosaku: 'I asked you to be troubled. They say that long ago, when Takekuma invited the envoy from the Dragon Palace, he served a feast of centipedes, lizards, and slugs, don't they? It is fine as long as you eat them thinking they are flounder or dried squid. You are not a picky eater, but you are a frog-hater, so that is the problem. Hahaha!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">婆の考へとしては、玉照姫を占奪する手段として、先づ生母のお玉をうまうまと此処へ奪ひ帰つたのである。三人はお玉の顔を一度も見た事がないので、そんな秘密の伏在する事は夢にも知らず、お玉の跡を追つて、スタスタと駆出した。</p>
+            <p class="ja-classical-line">四五丁ばかり谷に沿うて左へ進むと、壁を立てたやうな巨岩が幾つともなく谷間に碁列して居る。お玉は手招きしながら、岩窟の穴を潜つて姿を隠した。三人は其後から、ドンドンと足を速めて岩窟の中を五六間許り進む。此処が鬼ケ城山に割拠して居た鬼熊別の妻蜈蚣姫が自転倒島に於ける第二の作戦地であつた。蛇、蛙、山蟹、其他獣類の肉はよく乾燥さして岩窟の中に幾つともなく釣り下げられてある。</p>
+            <p class="ja-classical-line">田吾作『アイ御免なさい、バラモン教の鬼婆アの住家は此処で御座いますか』</p>
+            <p class="ja-classical-line">婆『此処が鬼婆蜈蚣姫の住家だよ』</p>
+            <p class="ja-classical-line">田吾作『アヽ、左様で御座いましたか、これは失礼致しました。なんと立派なお館ですな、これでは風雨雷電、地震も大丈夫でせう。吾々もせめて半日なりと、こんな結構な館に暮したいものです哩』</p>
+            <p class="ja-classical-line">婆『お前は一体何処の人ぢや、そして又二人も伴を連れて来て居るのかな』</p>
+            <p class="ja-classical-line">田吾作『ハイ、実の所は三五教の予備宣伝使を拝命致しまして、今日が初陣で御座います。此通り、宗彦、原彦と云ふケチな野郎を連れて居ります。大変腹を減らして居るさうですから、蛙の干乾でも恵んでやつて下さいな』</p>
+            <p class="ja-classical-line">婆『折角の御入来だから、大切な蛙ぢやけれど、饗応であげませう。この蛙は当山の名物お殿蛙と云つて、虫の薬にもなり、一切の病気の妙薬だ。田圃にヒヨコヒヨコ飛んで居る青蛙や糞蛙とは些と撰を異にして居るのだから、其積りで味はつて食がりなさい。お前さんは蛙飛ばしの蚯蚓切りだからなア』</p>
+            <p class="ja-classical-line">田吾作『チヨツ、馬鹿にして居やがる哩』</p>
+            <p class="ja-classical-line">原彦『オイオイ宣伝使の化サン、そんな事を言うてくれては困るぢやないか』</p>
+            <p class="ja-classical-line">田吾作『困るやうにお願ひしたのだよ、昔、竹熊が竜宮城の使臣を招待した時には、百足や蜴蜥、なめくじなどの御馳走を食はしたと云ふぢやないか、鰈か鯣だと思うて食ひさへすりやよいのだ。お前は食はず嫌ひだなくて、蛙嫌ひだから困る、アハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Baba: 'Do not stand there, all three of you; come, wash your feet and step up. Let us talk at leisure tonight. You said that you are a Sendenshi of the Ananai-kyō on your Uhijin, did you not?'</p>
+          <p class="en-p">Tagosaku: 'Yes, I said so; that is exactly the case.'</p>
+          <p class="en-p">Baba: 'That is all the more Ketsukō. Those moss-covered Sendenshi who are half-baked and stubborn are difficult to bring to Kaishin. Since you are still fresh, you surely have not heard the full doctrine.'</p>
+          <p class="en-p">Tagosaku: 'I have just left my hometown, but you say such strange things.'</p>
+          <p class="en-p">Baba: 'Ha ha ha ha, you appear to be quite a Mugakushiya. By Kyō, I do not mean your hometown; I am asking what the essence of the Ananai-kyō is.'</p>
+          <p class="en-p">Tagosaku: 'I was just feeling bewildered, so I do not understand the essence or anything else.'</p>
+          <p class="en-p">Baba: 'Ah, I thought so, I thought so. If you understood the essence, it would be too Ahau for you to remain in the Ananai-kyō. It is Ketsukō that you do not understand the essence. Now, you shall perform the silent practice here for about a hundred days, and after that, you shall open the Kototama and become a Sendenshi of the Brahmanism. You must have seen many houses on the road here, did you not? They are all under the silent practice.'</p>
+          <p class="en-p">Tagosaku: 'Does that not mean they will become unable to speak? They seem to be deaf.'</p>
+          <p class="en-p">Baba: 'Being deaf is all the more Ketsukō. If you perform one more Aragiyō, you will end up unable to see as well. However, I have left their eyes alone, as it would be a Fujiyū, so I have looked at it with Ōme. There are those for whom a hundred days of practice is good, and those for whom ten days is enough. Once the Shiugefu is complete, I have arranged it so that they can speak and hear properly.'</p>
+          <p class="en-p">Tagosaku: 'Baba-san, that is not a silent practice. They do not speak because they cannot, do they? If they had mouths that could speak and chose not to, or ears that could hear and chose not to, that might be a practice, but to be unable to speak or hear because they have no choice—is that not hardly a practice at all?'</p>
+          <p class="en-p">Baba: 'You should not speak such Rikutsu; Rikutsu is forbidden on the path of Shinkau. As a human being, you should not rattle on with petty Rikutsu like a monster of a bell.'</p>
+          <p class="en-p">Tagosaku: 'Hee.'</p>
+          <p class="en-p">The man tilts his head.</p>
+          <p class="en-p">Munehiko: 'I am a Sendenshi of the Ananai-kyō. The man who was just called a Sendenshi is still an egg, so he does not know what he is saying.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">婆『三人ともそんな所に立つて居ずに、サアサア足を洗つてお上りなさい。今晩は悠くりと話しませう。お前は三五教の宣伝使が初陣だと云つたな』</p>
+            <p class="ja-classical-line">田吾作『ハイ、申しました、全く其通りです』</p>
+            <p class="ja-classical-line">婆『そんなら尚結構だ、なまりはんぢやくの、苔の生えた宣伝使は何うも強太うて改心が出来ぬ。お前はまだまだほやほやだから、十分の教理も聞いて居やせまい』</p>
+            <p class="ja-classical-line">田吾作『私は郷里を立つて来たところですが、何と妙な事を仰有いますな』</p>
+            <p class="ja-classical-line">婆『ハヽヽヽヽ、お前は余つ程無学者と見える哩、けうりと云ふ事は故郷の意味ぢやない、三五教の筋はどうだと問ふのだ』</p>
+            <p class="ja-classical-line">田吾作『つい、きよりきよりして居ましたので筋も何も分りませぬ』</p>
+            <p class="ja-classical-line">婆『アヽそうだらうそうだらう、筋が分つたら阿呆らしうて三五教に居れたものぢやない。筋が分らぬのが結構だ。サアこれから此処で百日ばかり無言の行をして、其上言霊を開いて、バラモン教の宣伝使になるのだよ。お前、此処へ来る道に沢山の家があつたらうがな、皆無言の行がさしてあるのだ』</p>
+            <p class="ja-classical-line">田吾作『あの儘ものが言へなくなるのぢやないのですか、どうやら聾のやうですが』</p>
+            <p class="ja-classical-line">婆『聾は尚更結構だ。モ一つ荒行をすれば目も見えぬやうになつて仕舞ふ。だけれど目だけは退けて置かぬと、不自由だと思つて大目に見てあるのだ。百日の行をして好いものもある、十日で好いものもある、修業さへ出来たら口も利けるやうに、耳も聞えるやうにチヤンとしてあるのだ』</p>
+            <p class="ja-classical-line">田吾作『婆アサン、そりあ無言の行ぢやない、云はれぬから云はぬのだらう、云へる口を持つて居つて云はぬやうにし、聞える耳を持つて居て聞かぬやうにして居るのなら、行にもならうが、しよう事なしに云はざる聞かざるはあまり行にもならないぢやないか』</p>
+            <p class="ja-classical-line">婆『そんな理屈を云ふものぢやない、信仰の道には理屈は禁物だ。人間の分際として、さうガラガラと鈴の化物のやうに小理屈を云ふものぢやない哩』</p>
+            <p class="ja-classical-line">田吾作『ヘエ』</p>
+            <p class="ja-classical-line">と首を傾ける。</p>
+            <p class="ja-classical-line">宗彦『私は三五教の宣伝使です。今宣伝使と云つて居つた男はまだ卵ですから、何を云ふか分りませぬ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Baba: 'Ah, I thought as much. You are a person who concocts logic that lacks Mabeushi. When a Ningen attains Taigo and Tetsutei, they come to understand the Kuōdaimuhen Goitoku of the Kamisama, and they reach a state where they cannot say anything, remaining silent and coming to Kaishin. As expected, you are great; you have been listening to what this old woman says since a while ago. You are truly great. It is said that if one has many Kotoba, one has little substance, and that empty Kibutsu make a Kiyōdai Onkiyō; those men who go rattling and thundering are the very ones who lack both Chie and Shinkau. If you are a Sendenshi of the Ananai-kyō, you must know those Wakarazuya called Aohiko, Murasakihime, Tsunehiko, Kamehiko, and Yoshikohime, must you not?'</p>
+          <p class="en-p">Munehiko: 'No, no, we three are people from Uzuyamamura; we have visited the holy land only once and practiced for a while, but we have never met such people. Perhaps they are out somewhere on a mission of propagation.'</p>
+          <p class="en-p">Baba: 'How about it? Why don't you quit the Ananai-kyō and become my disciple?'</p>
+          <p class="en-p">Munehiko: 'I am grateful for the offer, but everyone sees their own sect as the best. I have come all this way thinking that I would like you to undergo Kaishin and submit to the Ananai-kyō. How about it? Why don't you listen to what I have to say, and then, upon that, decide to join the faith?'</p>
+          <p class="en-p">Baba: 'Ah, no, no, who would be the person to join a foolish religion like the Ananai-kyō? Asking me to undergo Kaishin—what are you saying? I am an Onibaba with a soul as clear and free of dust as this; how could there be any need for Kaishin? It is you people who should be undergoing Kaishin.'</p>
+          <p class="en-p">Munehiko claps his hands and begins to recite the Amatsu Norito. The Baba is startled and says,</p>
+          <p class="en-p">Baba: 'Hey, hey, everyone, the Norito is fine, but if the frog meal I went to the trouble of preparing is not to your liking, you do not have to eat it; but at least, since it was offered to the Kamisama, please partake of the Omiki and the tea. Then you may recite the Norito at your leisure. I shall join you in the recitation as well.'</p>
+          <p class="en-p">She tries to force them to stay.</p>
+          <p class="en-p">Munehiko: 'As for our bento, we have bread here, so please just give us some tea.'</p>
+          <p class="en-p">Baba: 'You like Omiki, don't you? I have some delicious sake brewed from wild yam. How about having a cup?'</p>
+          <p class="en-p">Munehiko: 'No, tea is quite enough for us.'</p>
+          <p class="en-p">Tagosaku: 'Baba-sama, let us suspend this debate for now and have some warm tea. Tonight, let us leisurely begin a battle of Kototama, neither side yielding to the other. And shall we agree that the one who loses will follow the other?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">婆『アヽさうだらうと思つた。何だか間拍子の抜けた理屈を捏ねる人だ。人間も大悟徹底すると、神様の広大無辺の御威徳が分つて、何とも云はれぬやうになつて仕舞うて黙つて居て改心するやうになるものぢや、流石にお前は偉い、最前から婆の云ふ事を耳を傾けて聞きなさつた。偉いものだ、言葉多ければ品少し、空虚なる器物は強大なる音響を発すと云うて、ガラガラドンドン云ふ男に限り、智慧もなければ信仰も無いものだ。お前は三五教の宣伝使なら、あの青彦、紫姫、常彦、亀彦、悦子姫と云ふ没分暁漢を知つて居るだらうなア』</p>
+            <p class="ja-classical-line">宗彦『イエイエ私達三人は、宇都山村の者で御座いまして、唯一度聖地へ参り、暫く修業を致しましたが、そんなお方にはお目にかかつた事も御座いませぬ、何処か宣伝に廻つて御座るのでせう』</p>
+            <p class="ja-classical-line">婆『どうぢや、お前も三五教を止めて、私の弟子になつたら』</p>
+            <p class="ja-classical-line">宗彦『有難う御座いますが、各自に自分の宗旨は良く見えるものです。私は貴女に改心をして貰つて、三五教に帰順して頂かうと思ひ、遥々と参つたのですよ。何うです、私の云ふ事を一通りお聞き下さつて、其上で入信なさつたら』</p>
+            <p class="ja-classical-line">婆『アヽ、いやいや誰人が三五教のやうな馬鹿な教に入る奴があるものか、改心をしてくれなんて、そりやお前、何を云ふのだい。是程澄み切つた塵一つない御霊の鬼婆だ、改心があつて耐るものか、改心するのはお前等の事だ』</p>
+            <p class="ja-classical-line">宗彦は拍手し、天津祝詞を奏上し初める。婆は驚いて、</p>
+            <p class="ja-classical-line">『コレコレ皆様、祝詞も結構だが折角拵へた蛙の御飯、お気に入らねば食べて貰はいでもよいが、せめて神様に供へたのだから、御神酒とお茶をお食り下さい、それで悠くりとお祝詞を上げなさい。私も一緒に上げさせて頂くから』</p>
+            <p class="ja-classical-line">と無理に引き留る。</p>
+            <p class="ja-classical-line">宗彦『弁当は此処にパンを所持して居ますからお茶を下さいませ』</p>
+            <p class="ja-classical-line">婆『お神酒は好だらう、自然薯で醸造へた美味い酒がある。一つあがつたら何うだな』</p>
+            <p class="ja-classical-line">宗彦『イヤ、茶さへ頂けば結構です』</p>
+            <p class="ja-classical-line">田吾作『婆アさま、論戦は一先づ中止して、そんなら暖かいお茶をよんで下さい、今晩悠くりと言霊戦を負ず劣らず開始しませう。そして負た方が従ふと云ふ事に致しませうか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Baba: 'Ah, how interesting, how interesting; then let us do so. Since the Kami of the Brahman religion possess strong Goshintoku, if you say anything Utsukari or Goburei, you will be punished and lose the ability to speak, so be sure to have the Kokoroe when you speak. Ah, let me see, let me warm some tea for you with my own hands.'</p>
+          <p class="en-p">She then stands and goes to the next room. After a while, the old woman boils tea in an earthenware teapot, and says, Baba: 'Come, come, the tea is Tagi; everyone, please drink Dotsusari, this is also my Kokorozashi. Whether it is the Brahman religion or the Ananai-kyō, there are not two characters for Kami. You should join hands and Kijiyun to the Kami who possesses Goshintoku. Depending on the Tsugafu, this old woman might also Kijiyun to the Ananai-kyō, ho ho ho ho.'</p>
+          <p class="en-p">The Sannin, without noticing anything, drink the tea poured by the old woman and eat bread, drinking and eating, and appearing to be thirsty, they finish every last drop of the Itsupai of tea in the teapot.</p>
+          <p class="en-p">The Sannin suddenly become Ikiguru, and though they try to utter Gengo, they find themselves unable to utter even a Hitokoto. The Sannin look at each other, repeating the sound of 'Ah, ah, ah.'</p>
+          <p class="en-p">Baba: 'Aha, ha, ha, ha... It is good to have things when you need them. They have finally fallen into my Keiriyaku. Unable to speak, unable to hear, what a pitiful sight. I have successfully obtained the jewel, and also harvested three Sendenshi and eggs. No matter how stubborn the Ananai-kyō may be, they will not be able to remain silent now that I have taken the parent of Tamateruhime and also their important Sendenshi. They will surely come to apologize and ask for them back. At that time, I shall receive Tamateruhime and Tamateruhiko here, and then it would be fine to return them. However, if Tamateruhime is gold, these fellows are only worth silver, so the other side will likely not be forced into submission by this alone. Well, I shall wait for the season, and like a mouse pulling a rice cake, I will drag them in two or three at a time, and I want to make at least Tamateruhiko my own through sheer persistence. The general Onigumohiko was fragile and fled back to the country of Persia in a panic. However, I am a woman whose single-mindedness can pierce even a rock. Waiting for the season here like this, the Keiriyaku of Mukadehime to recover Ōeyama and Onigajō, and to force the Nishiki no Miya of the Ananai-kyō into submission, thereby making it the Brahman religion, has begun to unfold smoothly. Ah, what a grateful thing. Shall I have the jewel serve me some sake here and drink it, and perhaps use these three as a side dish? Hey, hey, jewel, it is time for sake. Why do you not answer when I call you so much? Oh, that is right, I had you drink medicine to make your ears deaf. It is no wonder you cannot hear. I must have been so happy that my spirit wheel seems to have derailed somewhere, ho ho ho ho.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">婆『アヽ面白からう面白からう、そんならさう致しませう。バラモン教の神様は、御神徳が強いから、迂濶御無礼な事を云はうものなら罰が当つて口が利けなくなるから、心得て物を云ひなさいや。アヽどれどれ手づからお茶を温めて上げよう』</p>
+            <p class="ja-classical-line">と次の間に立つて行く。暫くあつて婆アは土瓶に茶を沸騰らせ、</p>
+            <p class="ja-classical-line">婆『サアサア茶が沸いた、皆さま沢山呑んで下さい、これも婆の寸志だ。バラモン教だつて、三五教だつて、神と云ふ字に二つはない。互に手を引合うて御神徳のある神様の方へ帰順するのだな。此婆も都合によつては三五教に帰順せぬものでもない、オホヽヽヽ』</p>
+            <p class="ja-classical-line">三人は何の気も付かず、婆の注いだ茶を呑んではパンを食ひ、呑んでは食ひ、喉が乾いたと見えて土瓶に一杯の茶を残らず平らげて仕舞つた。</p>
+            <p class="ja-classical-line">三人は俄に息苦しくなり、言語を発せむとすれども、一言も発する事が出来なくなつた。三人は顔を見合せ、アヽヽヽとア声の連発をやつて居る。</p>
+            <p class="ja-classical-line">婆『アハヽヽヽ……好いけれまたもあればあるものだ。とうとう婆の計略にかかりよつた。口も利けず、耳も聞えず、憐れなものだ。お玉を首尾好く手に入れ、又三五教の宣伝使や卵を三人収穫した。如何に頑強な三五教でも、玉照姫の親を取られ、又大切な宣伝使を取られ、黙つて居る事は出来まい。屹度謝罪つて返して貰ひに来るのだらう。其時には玉照姫と玉照彦とを此方へ受取り、其上に返してやつたらよいのだ。併し乍ら玉照姫が黄金なら、此奴は洋銀位なものだから先方も此位では往生致すまい。マア時節を待つて鼠が餅をひくやうに二人三人と引張込み、往生づくめで仮令玉照彦だけでも此方のものに仕度いものだ。鬼雲彦の大将は脆くも波斯の国に泡食つて逃げ帰つて仕舞はれた。併し乍ら私は女の一心岩でも突き貫くのだ。此処で斯うして時節を待ち、大江山、鬼ケ城を回復し、三五教の錦の宮も往生させて、バラモン教として仕舞ふ蜈蚣姫の計略は旨々と端緒が開けかけた。アヽ有難い事だ。一つ此処でお玉に酌でもさして酒でも飲まうかい、そして三人を肴にしてやらうかい。これこれお玉、お酒だよ。これ程呼んで居るに何故返事をせぬのか、オヽさうさう、耳の聾になる薬を呑まして置いた。聞えぬも無理はない。つい私も余り嬉しくて、精神車が何処かに脱線したと見える、オホヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Saying this Hitorigoto, she sits inside the Etsubo. The Sannin grind their teeth in Munen, leaping up in desperation, determined to beat the old woman to a pulp, yet for some reason, their bodies cannot move even an inch. Even if they were to apply the Kototama, the oil in the essential Hatsuseiki has run dry, and the Tsutsuguchi is Heisoku, so there is nothing they can do; their mouths naturally come unfastened, and along with their chins, they hang down, opening wide. The Sannin all at once drool, look at each other, shake their heads, and can only emit a faint sound of 'Ah, ah, ah.'</p>
+          <p class="en-p">The old woman sits in Agura with a look of Yukuwai, smokes tobacco with a long Kiseru, drinks sake, and says,</p>
+          <p class="en-p">Baba: 'Hey you, you foolish Sendenshi, this is the extent of my Chie. It is like a Higurashi flying into a place where a Kumo has spun a web and waiting to be caught; if you want to move, then move, and if you can use the Kototama, then use it; you probably cannot even hear.'</p>
+          <p class="en-p">She then thrusts the Gankubi of her long Kiseru into his ear hole. Munehiko becomes enraged at having his ear hole poked, but there is nothing he can do. This time, the old woman blows the burning embers of the tobacco into Munehiko's mouth,</p>
+          <p class="en-p">Baba: 'It must be hot, that is a little hot, for it is fire. Furthermore, it must be bitter, and the bitterness is the dregs. Since it is the dregs of tobacco and the treat of a bitter old woman, shall I let you drink this sake as well? No, no, wait, wait; if I let you drink this, the amount I have to drink will decrease by that much. Well, well, if I keep you frozen like this for two or three months, it will be fine; the young ones will probably return from the direction of Ōeyama in two or three days, so at that time, I may have these living wooden statues stored away in a cellar or somewhere. Well, until then, I will tap your heads and thrust my Kiseru into your ears, making you undergo training according to the rules of Brahmanism. How pleasant it is. With this, Lord Yamata no Orochi must surely be satisfied. Ah, Lord Orochi Daimyōjin, rejoice and be brave. My skill is just as you see, so please, by this achievement, forgive the sin of the failure of Onikumawake. My husband, who is like no other in heaven or on earth, shirked the work of the gods, died, and suffered divine punishment, and I cannot bear to see him being made into the burnt scrapings of a hellish cauldron as his wife; please, together with me, though not now, when his life span ends, send him to heaven. Namu Yamata no Orochi Daimyōjin, forgive the sins of my husband, wash them away, purify them, O Kinmō Kyūbi no Mikoto.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と独言を云ひながら笑壺に入つて居る。三人は無念の歯噛みをなし、躍り上がつて破れかぶれ、婆を叩き伸めしてやらうと心に定めて見たが、何うしたものか体がビクとも動けなくなつて居る。言霊を応用するにも肝腎の発生器の油が切れて、且つ筒口が閉塞して居るのだから、如何ともする事が出来ず、口は自然に紐が解どけて、頤と一緒に垂れ下り、ポカンと開いて来る。三人は一度に涎をタラタラ流し、顔を見合せ、首を振り、アヽヽヽと僅に声を発する許りであつた。</p>
+            <p class="ja-classical-line">婆は愉快げに安坐をかき、長い煙管で煙草を燻べ、酒を呑み、</p>
+            <p class="ja-classical-line">婆『オイこりや、阿呆宣伝使、俺の智慧はこんなものだぞ。蜘蛛が巣をかけて待つて居る処へ茅蝉が飛んで来て引かかるやうなものだ、動くなら動いて見い、言霊が使へるなら使つて見い、耳も聞えまい』</p>
+            <p class="ja-classical-line">と長煙管の雁首で耳の穴をグツと突いて見る。宗彦は耳の穴を突かれてカツと怒り出した。されど何うする事も出来ぬ。此度は婆は煙草の吸殻を宗彦の口の中にフツと吹いて放り込み、</p>
+            <p class="ja-classical-line">婆『熱からう、そりや些と熱い、火だからのう。加之にえぐいだらう、えぐいのはズだ。煙草のズに、えぐい婆の御馳走だから、序に此酒も飲ましてやろか。イヤイヤ待て待てこいつを飲ましてやると私の飲むのがそれだけ減る道理ぢや、マアマア斯うして二ケ月も三ケ月も固めて置けば大丈夫だ、若い奴が二三日したら大江山の方から帰つて来るだらうから、其時この生木像を穴庫へでも格納さしてもよい哩、マアマアそれ迄は頭を叩いたり、耳に煙管を突つ込んだりして、バラモン教の御規則通りの修業をさしてやるのだ。なんと心地好い事だ。是で八岐の大蛇さまもさぞ御満足だらう。嗚呼大蛇大明神様、喜びたまへ勇みたまへ。婆の腕前は此の通りで御座います、何うぞ此手柄により、鬼熊別の失敗の罪を赦して下さいませ。天にも地にも無い私の夫、神様の御用を縮尻つて、死んで神罰を蒙り、地獄の釜の焦起しにせられるのも女房として見て居られませぬ、何卒私と一緒に、今ぢや御座いませぬが、命数の尽きた時は天国にやつて下さい。南無八岐大蛇大明神様、ハズバンドの罪を許したまへ、払ひたまへ、清めたまへ、金毛九尾の命』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec08">
+        <div class="sec-header">
+          <span class="para-num">&sect; 8</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He is offering a Kiguwan. At this moment, from the mouth of the Gankutsu, there came a man singing a Sendenka in a clear voice.</p>
+          <p class="en-p">Man: 'The Kami appear in the world, / Distinguishing between good and evil. / The Kamunahohi who created this world, / And the Ōnahohi of vast heart. / In this human world, whatever may happen, / Through Nahohi, look again and listen again. / Correct the errors of your body. / The Oshihe of the Kami of Ananai-kyō, / Appearing in the Seichi of Aya, / Through Kotoyoriwakenomikoto, / To subdue and harmonize / The Magatsumi of Mikunigadake. / Munehiko of Ananai-kyō, / Leaving behind the village of Uzu, / Walking step by step as his feet lead him, / When I come to this Gankutsu, / There is the wife of the dwelling of Onikumawake, / Who is cunning in all things evil, / Mukadehime with a dark complexion, / A middle-aged woman of petty Kojie.</p>
+          <p class="en-p">Taking up a position in this Gankutsu, / Deceiving the Hitobito of the four directions. / Hearing the voices of Akago, / Ten ri, twenty ri, thirty ri, / Without wearying of the long road, / Distributing her Teshita of evil Kami, / Bringing them back to this Gankutsu, / Tormenting them morning and evening, / Exhausting every limit of evil, / Drunk and mad with sake day and night. / Munehiko, Tagosaku, and Harahiko, / By the glib tongue of the old woman, / Unknowingly led astray, / They drank a great deal of poisoned tea, / Unable to speak or hear, / Their five bodies stiffened, / Unable to move even an inch, / Only rolling their eyes round and round, / And on top of that, mouths hanging open, / Drooling and crying out, Ah, ah, ah.</p>
+          <p class="en-p">To hear them repeatedly utter / Kototama that do not even harmonize, is pitiful. / The Kami-tsukasa of Ama no Maura, / Knowing the heart of this Tome-kō, / Has secretly revealed to me / The essential divine strategy. / Munehiko, Harahiko, and Tagosaku, / Have unknowingly fallen / Into the trap of the evil Kami, and are in this state today. / If I do not save them, the Oshihe of the Kami / Of Ananai will not be able to stand. / Now, from here on, I, Tome-kō, / Borrowing the divine power / Of the Kototama received from the Kami, / Will save the three from their crisis, / And rescue Otama-no-kata, / Who gave birth to Tamateruhime-sama.</p>
+          <p class="en-p">I will subdue the Ogre-baba, / Reform this Gankutsu, / And while enshrining the spirit / Of the Sumerakami of Ananai-kyō, / I will serve as the pioneer / Of the era of Miroku, how reliable it is. / Ah, Kannagara-kamu-nagara, / May the spirits be blessed.'</p>
+          <p class="en-p">Singing thus, he appeared before the three. The old woman's body stiffened, unable to move, and she was suffering, blinking her eyes. At this time, from the depths of the Gankutsu, a cool woman's voice spoke:</p>
+          <p class="en-p">Woman: 'The Kami appear in the world, / Distinguishing between good and evil, / The time for them to admonish has come. / At the sacred foot of the mountain of Yotsugi-ō, / Serving as the Nishiki-no-miya, / I am the mother who gave birth to Tamateruhime, / I am Otama-no-kata. / Having stolen the rare treasure / That was hidden on Mount Oke-fuse, / As I saw the figure fleeing, / I was startled and forgot myself, / Chasing after them over mountains and slopes, / Just as I was running, from the shade of a tree, / I was discovered by the underlings / Of the Magatsumi who appeared, / And while my hands and feet were bound, / And I was subjected to various painful lashes, / Upon the mountain of Ure-no-mikuni, / I was shoved into this Gankutsu, / By the Ogre-baba called Mukadehime.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と祈願して居る。此時岩窟の口より、声も涼しく宣伝歌を謡ひ来る男があつた。</p>
+            <p class="ja-classical-line">男『神が表に現はれて
+善と悪とを立て分ける
+此世を造りし神直日
+心も広き大直日
+唯何事も人の世は
+直日に見直し聞き直し
+身の過ちは宣り直す
+三五教の神の教
+綾の聖地に現れませる
+言依別命もて
+三国ケ岳の曲津見を
+言向け和すそのために
+三五教の宗彦が
+宇都の里をば後にして
+足に任せてテクテクと
+これの岩窟に来て見れば
+悪にかけては抜け目なき
+鬼熊別が宿の妻
+顔色黒き蜈蚣姫
+小智慧の廻る中年増</p>
+            <p class="ja-classical-line">此岩窟に陣取りて
+四方の人々欺きつ
+赤子の声を聞きつけて
+十里二十里三十里
+遠き道をば厭ひなく
+手下の魔神を配り置き
+此岩窟に連れ帰り
+朝な夕なにさいなみて
+悪の限りを尽しつつ
+日に夜に酒に酔ひ狂ふ
+宗彦、田吾作、原彦は
+婆が引き出す口車
+知らず識らずに乗せられて
+毒茶をどつさり飲みまはし
+口も利かねば耳利かず
+五体すくみて一寸も
+動きの取れぬ破目となり
+眼ばかりきよろきよろきよろつかせ
+其上ポカンと口あけて
+涎を流しアヽヽヽと</p>
+            <p class="ja-classical-line">鳴りも合はざる言霊を
+連発するこそいとしけれ
+天の真浦の神司
+この留公の腹を知り
+肝腎要の神策を
+そつと知らして下さつた
+宗彦、原彦、田吾作は
+知らず識らずに魔が神の
+罠に陥り今日の態
+助けてやらねば三五の
+神の教が立ち兼ねる
+サアこれからは留公が
+神に貰うた言霊の
+御稜威をかりて三人の
+危難を救ひ玉照の
+姫の命を生みませる
+お玉の方を救ひ出し
+鬼のお婆を言向けて
+この岩窟を改良し
+三五教の皇神の</p>
+            <p class="ja-classical-line">御霊を斎祀りつつ
+ミロクの御代の魁を
+仕へまつらむ頼もしさ
+嗚呼惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">と謡ひつつ三人が前に現はれ来たる。婆は身体竦み、身動きならず、目をぱちつかせ苦しみ居る。この時、岩窟の奥の方より涼しき女の声、</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立て別けて
+誡め給ふ時は来ぬ
+四継王の山の聖麓に
+錦の宮と仕へたる
+玉照姫の生みの母
+お玉の方は妾なり
+桶伏山に隠されし
+珍の宝を奪ひ取り
+逃げ行く姿を見るよりも
+妾は驚き身を忘れ
+跡を追ひかけ山坂を
+駆ける折しも木影より
+現はれ出でたる曲神の
+手下の奴に見つけられ
+手足を縛ばりいろいろと
+苦しき笞を受けながら
+憂をみくにの山の上
+この岩窟に押し込まれ
+蜈蚣の姫てふ鬼婆に</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec09">
+        <div class="sec-header">
+          <span class="para-num">&sect; 9</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Being offered tea, for a moment my breath was stifled, and in the agony of being unable to turn the wheel of Kototama, I prayed in silence before the presence of the Ananahi Kami morning and evening; then, suddenly, my throat opened, and my chest felt cool and clear. Yet, I remained cautious, not uttering a single word of Kotoa, feigning to be mute, while I had been searching for the whereabouts of the precious treasure until now. Blessed by the grace of Kami, Munehiko, having received the divine decree of Kotoyoriwake-no-mikoto, finally appeared here. Perhaps because we had no Ichimenshiki, he did not realize it was I, and he did not fix his mind upon the eyes with which I was watching him.</p>
+          <p class="en-p">He drank the poisonous tea in the dark, and my heart, seeing that sight, was more painful than swallowing a sword. Ah, Kamunagara, Kamunagara. Thinking, 'Is there no Kami in this world?' I repeated the foolish, grumbling repetitions of an Onnagokoro. Just at that moment, from outside, a Sendenka was heard clearly. When I strained my ears to listen, it was the voice of the Nori of Ananai-kyō. Like meeting a Buddha in Jigoku, my heart was filled with joy, and Otama, who appeared here now, was so delightful that it seemed as if the Ama-no-Ihato would open in an Ichiji. Ah, Kamunagara, Kamunagara. May the Mitama Sachihahe, and may you heal the illnesses of Munehiko, Tagosaku, and Harahiko.</p>
+          <p class="en-p">May you assist us in our troubles,' she sang as she appeared on the scene. It was a wonder; the three men suddenly regained the freedom of their bodies, their ears could hear, and their mouths began to move with complete freedom.</p>
+          <p class="en-p">Tagosaku: 'Oh, Tome-san-sama, you have come at a good time. If you had been one step earlier, we would not have met with such an experience. However, the lady we saw on the way earlier, I hear now that she is the biological mother of Tamateruhime-sama. My, how one cannot understand the divine plan of the Kami.'</p>
+          <p class="en-p">Otama: 'It is wonderful that you have all come to such a good place. In truth, the subordinates of this old hag stole the treasure of the Miroku divine government from Okefuse-yama and had hidden it in this cave. I learned of its Arika this morning and was thinking of how to escape, but the old hag's surveillance was so severe that I could do nothing, and I was just wishing that someone would come to assist me when you arrived. There is nothing more wonderful than this. Now, let us take this treasure and return to the sacred land as quickly as an Ichiji.'</p>
+          <p class="en-p">With these words, her voice became clouded with tears of joy.</p>
+          <p class="en-p">Munehiko: 'Ah, is that so? I was told by Kotoyoriwake-no-mikoto that I must go to Mikuni-ga-take, so I came out to conquer the evil Kami. Until this very moment, I did not even dream that you were imprisoned here. Now, let us bring this old hag to Koto-muke-yawasu, and let us return in triumph, relaxing and at ease.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">茶を勧められ一時は
+息塞がりて言霊の
+車も廻らぬ苦しさに
+朝な夕なに三五の
+神の御前に黙祷し
+居たるに忽ち喉開き
+胸は涼しく晴渡る
+されど妾は慎みて
+唯一言も言挙げを
+なさず唖をば装ひつ
+珍の宝の所在をば
+今迄探り居たりしぞ
+神の恵の幸ひて
+いよいよ茲に宗彦が
+言依別のみことのり
+身に受けまして出でたまひ
+顔を合せて居ながらも
+一面識もなき故か
+悟り給はず吾配る
+眼に心留めまさず</p>
+            <p class="ja-classical-line">やみやみ毒茶を飲み玉ふ
+その様見たる我が心
+剣を呑むよりつらかりし
+あゝ惟神々々
+神は此世に在さずやと
+女心の愚にも
+愚痴の繰事繰返す
+時しもあれや表より
+涼しく聞えし宣伝歌
+耳をすまして伺へば
+三五教の教の声
+地獄で仏に遇ひしごと
+心いそいそ今此処に
+現はれ来るお玉こそ
+天の岩戸も一時に
+開くばかりの嬉しさよ
+あゝ惟神々々
+御霊幸倍ましまして
+宗彦、田吾作、原彦の
+病を癒やし給へかし</p>
+            <p class="ja-classical-line">悩みを助け給へかし』</p>
+            <p class="ja-classical-line">と歌ひつつ此場に現はれたり。不思議や三人は俄に身体自由となり、耳も聞え、口も縦横無碍に動き出した。</p>
+            <p class="ja-classical-line">田吾作『イヤ、留公さま、よう来てくれた。もう一足早ければこんな目に遇ふのだ無かつたに、しかし乍ら最前途中で見たお女中さまが、今聞けば玉照姫さまの御生母と云ふ事だ、何とマア神様の御経綸は分らぬものですなア』</p>
+            <p class="ja-classical-line">お玉『皆さま、良い処へ来て下さいまして結構で御座いました。実はこの婆アの手下の者共が、ミロク神政成就の御宝を、桶伏山から盗み出し、此岩窟に秘蔵して居たのを、今朝になつて所在を知り、何とかして逃げ出さうと思つて居たのですが、婆アの監視が酷いので、どうする事も出来ず、誰人か助太刀に来て下さつたらと思うて居た矢先、貴方のお出で、こんな結構な事はありませぬ。サア一時も早くこのお宝を持つて聖地へ帰りませう』</p>
+            <p class="ja-classical-line">と後は嬉し涙に声さへ曇る。</p>
+            <p class="ja-classical-line">宗彦『アヽさうで御座いましたか、私は言依別命様より、是非共三国ケ岳へ行つて来いと仰せられて、魔神を征服せむと出て来たのです。貴方が此処に囚はれて御座る事も、今の今迄夢にも知らなかつた。サア是からこの婆アを言向け和はし、寛る寛ると凱旋致しませう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec10">
+        <div class="sec-header">
+          <span class="para-num">&sect; 10</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otama: 'Tautei, there is no hope for the old hag to undergo Kaishin, for she is bound by Reibaku of her own doing; let us take this opportunity to return to the Seichi. I have sealed this treasure securely, and I shall Hōji it as we return. Please guard the front and the rear. If I pray that this old hag remains unable to break free from the Reibaku for about half a day, there will be no need to worry about her chasing after us. That her fifty or sixty Teshita ruffians have all gone away to work in Enpau just today, while she is left Rusu, must surely be a blessing bestowed by Ten. Come, come, it is dangerous to make a long Nagai.'</p>
+          <p class="en-p">Otama urged them toward Kireu.</p>
+          <p class="en-p">With Munehiko at the Sentō, followed in order by Otama, Tagosaku, Tomekō, and Harahiko, they sang the Sendenka aloud, causing it to echo through the Kodama of the Atari, and thus they made a Medeta triumphant return toward the Seichi.</p>
+          <p class="en-p">Inside the rocky cave, the old hag remained all alone, having lost the freedom of movement, while in the distance across the valley, a cuckoo sang lonesomely.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お玉『到底婆アには改心の望みはありませぬ、自分から斯うして霊縛にかかつて居るのですから、これを幸ひに皆さん聖地へ帰りませう。此お宝は厳重に封をして置きました、私が捧持して帰ります。前後を警固して下さい。此婆アは半日許り霊縛の解けないやうに願ひ置けば、追ひかけて来る気遣ひもありませぬ。五六十人の手下の荒くれ男が、今日に限つて、何れも遠方へ出稼ぎに行つた留守の間、これ全く天の恵みたまふ時でせう。サアサア長居はおそれ』</p>
+            <p class="ja-classical-line">とお玉の方は帰綾を促す。</p>
+            <p class="ja-classical-line">宗彦を先頭にお玉、田吾作、留公、原彦と云ふ順序で、宣伝歌を高く謡ひ、四辺の木魂に響かせながら、聖地を指して目出度く凱旋することとはなりける。</p>
+            <p class="ja-classical-line">岩窟の中には進退自由を失つた婆ア唯一人、谷の彼方には淋しげに閑古鳥が鳴いて居る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: Mountain 中の Monster [672]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: The Wish-Fulfilling Jewel [674]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

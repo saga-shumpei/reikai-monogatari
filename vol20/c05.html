@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 親不知 [667] - Volume 20 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 20 Table of Contents</a>
+      <span>Volume 20</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 20 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: 親不知 [667]</h1>
+      <p class="chapter-title-ja">親不知〔667〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The waves of Kogane flow through the valley between the mountains of Uzuyama, winding along the Uzu River. As the water warms, the Magohi, Higohi, Funa, and Moroko swim upstream. The season for Ayu has finally arrived, and fishermen are here and there. Among them, a white-haired, strange-looking old man, taller than the rest and possessing an indefinable strength, stands with a thin rod to which he has attached bait, intending to spend the long spring day enjoying fishing. Just as he is doing so, two people wearing Minokasa come walking up along the riverbank. They wear Sedge Ogasa inscribed with 'Shiyogiyōmujiyō Zeshiyōmetsupofu Shiyōmetsumetsui Jiyakumetsuiraku,' and are supported by Kongauzue.</p>
+          <p class="en-p">They stand before the fishing Okina, and with an Ahauzura, ask, 'Are you catching anything?' The Okina is so absorbed in his fishing that he does not even look their way, which is frustrating. The Giyōjiya walks right up to his side, taps him on the back, and says, 'Hey, hey, old man,' and asks again, 'Are you catching anything?' The Okina replies, 'I am a solitary person in this miserable Ukiyo. My old woman fell into the river and became Jiyakumetsuiraku. Lamenting a life that cannot escape the principle of Zeshiyōmetsupofu in this Shiyōmiyōmujiyō world, I am Matsutakahiko-okina, spending my remaining days by this river. You are a married couple of Shugenja. Originally, this world has no east or west; where is there a north or south? This is the universe. Because you are lost, it is the castle of the three realms; because you are enlightened, it is the emptiness of the ten directions.'</p>
+          <p class="en-p">'Eating, excreting, sleeping, and waking; after that, there is only death. This is the path of human life. Why have you become a Giyōjiya, despite your young age? There must be a reason for this. Tell me the details,' he urges. The young man removes his hat, casts off his Minokasa, sits down heavily on the riverbank, wipes his eyes, and says, 'We are Shugenja of the Brahman religion, Munehiko and Okatsu. In the sadness of being predeceased by our only beloved child, we vowed to pray for the baby's happiness in the next world. My wife and I, bound for two lives, set out on a journey, leaving our fate to our feet, wandering like clouds and water, with no fixed destination, using grass as our pillow. Since the day we left, we have been a married couple living in sorrow for three years.'</p>
+          <p class="en-p">'The horse of time flows away, abandoning me. The end of us two is like the sound of the Sayanokinu. The sound of the water of the Uzuyama River is also a sad, heartless cry. Hearing that the spirits of the Amatsu-mikami dwell in the fish that float and play in the rivers and seas, as we protect the teachings of universal love, the sight of the Okina fishing makes the feeling of Shiyōgiyōmujiyō deep. Although it is said to be the custom of the world that the living must die and those who meet must part, the lamentation of the caught fish is right before my eyes. It is painful for me to see. I wish to pray for the happiness of my child by mourning the soul of that fish, and Matsutakahiko, with all his heart, fished it up.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">黄金の波も宇都山の
+山と山との谷間を
+縫うて流るる宇都の川
+水も温みて遡り来る
+真鯉緋鯉や鮒雑魚
+鮎の季節も漸くに
+漁る人の此処彼処
+中に勝れて背も高く
+何とはなしに逞しき
+白髪異様の老人は
+立つる煙も細竿の
+先に餌をば取りつけて
+永き春日を過ごさむと
+釣を楽しむ折柄に
+川辺を伝ひ上り来る
+蓑笠着けた二人連れ
+諸行無常是生滅法
+生滅滅已寂滅為楽と記したる
+菅の小笠を頂きつ
+金剛杖に助けられ</p>
+            <p class="ja-classical-line">釣する翁の前に立ち
+釣れますかなと阿呆面
+翁は釣に気を取られ
+見向きもやらぬもどかしさ
+行者はツカツカ側に寄り
+コレコレ爺さまと背叩き
+釣れますかなと又問へば
+情無い浮世の一人者
+婆アは川に誤つて
+寂滅為楽となりました
+諸行無常の世の中の
+是生滅法の道理に
+洩れぬ人生を果敢なみて
+余生を送る川の辺の
+吾れは松鷹彦翁
+汝は夫婦の修験者
+本来この世は無東西
+何処有南北此れ宇宙
+迷ふが故に三界城
+悟るが故に十方空</p>
+            <p class="ja-classical-line">食うて糞して寝て起きて
+さて其後は死ぬるのみ
+是れが人生の通路ぞや
+汝は若い年に似ず
+行者になるは何故ぞ
+此れには仔細あるならむ
+委曲に語れと促せば
+若き男は笠を除り
+蓑脱ぎ捨てて川の辺に
+どつかと坐して目を拭ひ
+バラモン教の修験者
+宗彦お勝の両人が
+一粒種の愛し子に
+先立たれたる悲しさに
+赤児の冥福祈らむと
+二世を契つた妹と背が
+足に任せて雲水の
+行衛定めぬ草枕
+旅に出でたる其日より
+憂きを三年の夫婦連れ</p>
+            <p class="ja-classical-line">月日の駒は矢の如く
+吾れを見棄てて流れ行く
+二人の果ては小夜砧
+宇都山川の水音も
+悲しき無情の叫び声
+万有愛護の御教を
+守る吾等は河海に
+泛び遊べるうろくづの
+天津御神の精霊の
+宿り玉うと聞くからに
+翁の釣を見るにつけ
+諸行無常の感深し
+生者必滅会者定離
+世の慣習と云ひ乍ら
+釣魚の歎きは目のあたり
+見る吾こそは痛ましく
+彼れが菩提を弔ひて
+せめて吾子の冥福を
+祈りやらむと松鷹彦が
+心をこめて釣りあげし</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Matsutakahiko, seeing the Nakigara of crucian carp and Moroko, joined his Riyōte in prayer. He cast aside his fishing rod, released the fish he had caught into the shallows of the river, and with tears flowing, walked dejectedly toward the Abaraya. Munehiko and Okatsu, the Riyōnin, while darkened by tears of Hiai, followed the Toiki-sighing Okina as they searched for him.</p>
+          <p class="en-p">Munehiko and Okatsu, the Riyōnin, finally found the Abaraya built on the Kahaberi and called out from outside the door, 'Is anyone there? Is anyone there?' From within, the Okina from before replied,</p>
+          <p class="en-p">Okina: 'You must be the pilgrim of the Brahman Kyō I met just before. I dislike the Brahman Kyō. However, there is something in what you said earlier that makes me tilt my head and think. This village was composed only of believers of the Brahman Kyō, but just about a year ago, the entire village converted to Ananai-kyō, so I cannot let you enter through the front. But since this is a solitary house on the Kahaberi and no one is watching, please enter quietly. I am the one who serves as the Kamunushi of the Takeshi-no-miya in this village. Having been predeceased by my old woman, I am so lonely that I enjoy fishing Mainichihinichi, offering fresh fish to her Reizen as a small comfort. Regarding that, there is something I wish to ask you. Come, come, please enter.'</p>
+          <p class="en-p">Munehiko: 'Whether it be the Brahman Kyō or Ananai-kyō, there should not be two kinds of truth. From the beginning of the creation, it has been firmly established that fire is hot and water is cold. If you reject the Brahman Kyō to that extent, I shall stop entering your house. Come, Okatsu, let us go.'</p>
+          <p class="en-p">Matsutakahiko: 'You are young, so you get angry immediately, but why not sit down, have some tea, calm your spirits, and exchange words? I, too, live alone, and like a willow on the riverbank, I am one who spends my life worrying while watching the flow of the water.'</p>
+          <p class="en-p">Okatsu: 'Munehiko-sama, as the Ojii-sama says, shall we have a cup of tea?'</p>
+          <p class="en-p">Munehiko: 'That is true. In that case, I shall concede and enter.'</p>
+          <p class="en-p">Matsutakahiko: 'Come, come, please enter... (in a low voice) ...The fellows of the Brahman Kyō are stubborn to the end.'</p>
+          <p class="en-p">So muttering, he poured tea made of shinobugusa from a pitch-black earthenware teapot and offered it to them.</p>
+          <p class="en-p">Matsutakahiko: 'Looking at you, you appear to be a young couple, but you have managed to set out on such a journey; there must be a deep reason for this, and I would like you to tell me about it.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鮒や雑魚の死骸に
+両手を合せ拝み居る
+松鷹彦は驚いて
+竿投げ棄てて釣りし魚を
+川の瀬目蒐けて放ちやり
+涙流してスゴスゴと
+茅屋さして帰り行く
+宗彦お勝の両人は
+悲哀の涙に暮れ乍ら
+吐息つくづく老人が
+後を慕うて探り行く。</p>
+            <p class="ja-classical-line">川辺に建てる茅屋を、宗彦お勝の両人は、漸く見つけだし、戸の外面より、</p>
+            <p class="ja-classical-line">『頼もう頼もう』</p>
+            <p class="ja-classical-line">と訪へば、中より以前の翁、</p>
+            <p class="ja-classical-line">翁『お前は、最前逢うたバラモン教の巡礼だらう。わしはバラモン教は嫌だ。けれど最前お前の言つた事に少しばかり首を傾けて考へねばならぬ事が有るやうだ。此里はバラモン教の信者許りであつたが、つい一年許り前から、三五教に全村挙つてなつたのだから、表向這入つて貰ふ事は出来ないのだが、川辺の一つ家を幸ひ、誰も見て居ないから、そつと這入つて下され。わしも此村の武志の宮の神主をして居る者だ。婆アに先立たれ、余り淋しいので、毎日日々、漁りを楽しみ、婆アの霊前に清鮮な魚を供へて、せめてもの慰めとして居るのだ。それに就てお前に聞きたい事がある。サアサアお這入りなさい』</p>
+            <p class="ja-classical-line">宗彦『バラモン教でも、三五教でも、道理に二つはない筈だ。開闢の初から、火は熱い水は冷たいと云ふ事は、チヤンと定つて居る。それ程バラモン教を排斤するのならば、お前の宅へ這入る事は中止致しませう。サアお勝、行かうぢやないか』</p>
+            <p class="ja-classical-line">松鷹彦『お前は年が若いので直に腹を立てるが、マアじつくりとお茶でも飲んで、気を落ち着け、話の交換をしたらどうだな。わしも一人暮しで、川端柳ぢやないが、水の流れを見て、クヨクヨと世を送る者だから』</p>
+            <p class="ja-classical-line">お勝『宗彦さま、お爺さまの仰有る通り、一服さして貰ひませうか』</p>
+            <p class="ja-classical-line">宗彦『そうだなア、そんならドツと譲歩して這入つてやらうか』</p>
+            <p class="ja-classical-line">松鷹彦『サアサア這入つてやらつしやい……（小声で）……バラモン教の奴は、どこまでも剛腹な奴だなア』</p>
+            <p class="ja-classical-line">と呟き乍ら真黒けの土瓶から、忍草の茶を汲んで勧める。</p>
+            <p class="ja-classical-line">松鷹彦『お前は、見ればまだ若い夫婦と見えるが、能う其処まで発起したものだなア、是れには深い訳が有るだらう、一つ聞かして貰ひたいものだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Munehiko: 'In truth, I have also come to fear the afterlife, so to atone for my sins, I became a pilgrim and have been visiting sacred mountains and holy sites in various regions; today marks almost three years since I began traveling around this Onokorojima. Though I have become as docile as a cat now, I was once a notoriously wicked man. I would take a wife, strip her naked, and drive her out; I would become a forced son-in-law, only to ruin that household; I have exhausted every possible evil deed, such as being a home-wrecker who made wives weep, a destroyer of families, and one who swindled widows and defaulted on debts. Eventually, my last wife, distressed by my dissolute conduct, plunged into the Tameike pond behind our house, and with a splash and bubbles rising on the water, she attained Jiyakumetsuiraku. Immediately after that, I took this Okatsu as my wife, and while we were living harmoniously, counting on the assets of my adoptive family and drinking nothing but sake from morning till night, a pale blue fire would begin to burn from the altar where I enshrined the spirit of my wife around midnight. When we, as a couple, would cover ourselves with our bedclothes and tremble, holding our breath, a cold hand would stroke our faces—how repulsive it was. I realized this was the ghost of my first wife, Okuni, and though I thought to offer an apology, for some reason, no voice would come out. Throughout the long night, there was a loathsome sound, and those cold hands would stroke us. Thinking I could not bear this, I chanted the sutras of Brahmanism from morning till night, and thanks to that, the hauntings at the altar ceased that night. While things were like this, there came a sound of rain shutters being beaten with a thud, and that, too, sounded like the voice of my dead wife. When I peered stealthily through the window, thick white smoke was rising from the garden pond where Okuni had fallen, and the pale face of my wife with disheveled hair was staring resentfully into the house. I begged my wife, saying, "Please, separate from me; if you do, perhaps Okuni will also find liberation," but such is the deep-seated attachment of this Okatsu that she would not leave me no matter what. She would spit out such repulsive things as, "If you want to sever our ties, then do it yourself. I will throw myself into the pond, become a ghost, and organize a ghost alliance with Okuni to attack you." I could no longer stay in the house, so I disguised myself in pilgrim's attire and fled my home. About a year later, in the spring, as I was passing in front of a roadside shrine, I saw a woman suffering from a stomach cramp. I approached her, saying, "Hey, young lady, you must be in great distress at this deserted roadside shrine; let me nurse you," but to my surprise, this tenacious Okatsu had disguised herself as a pilgrim and was searching for my whereabouts, and I ran right into her. Ah, what a terrible way to be loved; it was as if I had been targeted by a snake. If I had known it would come to this, I should have just passed by in silence. Being a mere mortal, not a god... ah, there is no help for it, I sighed, looking up at the heavens. She should have just died, but the moment that wretch Okatsu saw my face, she forgot all about her cramps and blurted out, "Ouch, ouch... it hurts, but what hurts most is that I wanted to see you." Well, there is no help for it; it is my misfortune to have been born a handsome man, so I resigned myself to my fate, and though she is a wife I do not particularly like... it is not as if it is a shameful situation... I am walking along with her like this.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宗彦『私も実の所は、来世が怖ろしくなつて来たので、罪亡ぼしに巡礼となつて、各地の霊山霊場を巡拝し、今日で殆ど三年、この自転倒島を廻つて来ました。私も今こそ、斯うして猫の様に温順しくなつて了つたが、随分名代の悪者でしたよ。家妻を貰つては赤裸にして追出し、押かけ婿にいつては、其家を潰し、何度となく嬶泣かせの家潰しや、後家倒し借り倒しなど、悪い事の有らむ限りを尽して来た所、最後の女房が私の不身持を苦にして、裏の溜池へドンブリコとやつて、ブルブルブル、波立つ泡と共に寂滅為楽となつて了つた。それから直に此お勝を女房となし、睦じう養家の財産を当に、朝から晩まで差向ひで、酒ばつかり飲んで居つた所、嬶アの霊を祀つた霊壇から夜半頃になると、ポーツポーツと青白い火が燃えて来る。夫婦の者は夜着を被つて、息を凝らして慄へて居ると、冷たい手で二人の顔を撫で廻す厭らしさ。此奴ア先妻のお国の亡霊ぢやと合点し、一言謝罪らうと思うても、どうしたものか声が出て来ぬ。長い夜中厭らしい声がする。冷たい手で撫でる。こいつア堪らぬと、朝から晩までバラモン教のお経を唱へ通して居ると、其夜はお蔭で霊壇の怪は止んだ。さう斯うする間に、ザアザアと雨戸を叩く音、それが又死んだ女房の声に聞えて来る。ソツと窓から透して見れば、お国の陥つた前栽の池から、白い煙が盛に立昇り、髪振り乱した青白い女房の顔、恨めし相に家の中を見詰めて居る。そこで女房に「別れて呉れ、さうしたらお国も解脱するであらうから」と何程頼んでも、此お勝の執念深さ、何うしても斯うしても離れて呉れませぬ。「お前が縁を切るなら切つて下さい。池に身を投げて幽霊になり、お国と一緒に幽霊同盟会を組織して襲撃してやる」……とアタ厭らしい事を吐しやがるので、家に居る事もならず、巡礼姿に化けて我家を飛び出しました。さうすると一年程経つた春の頃、辻堂の前を通れば、一人の女が癪気を起して苦んで居る。……「オイお女中、此人通りのない辻堂で嘸御難儀であらう、介抱してあげませう」と近寄り見れば豈図らむや執念深い此お勝が巡礼姿になつて、私の行衛を探して居るのにベツタリ出会し、アーア何とした甚い惚方だらう、蛇に狙はれた様なものだ。こんな事と知つたなら黙つて通つたらよかつたのに……神ならぬ身の……アヽ是非もなやと、天を仰いで歎息して居ました。死ねばよいのに、お勝の奴、私の顔を見るなり、癪も何もケロリと忘れ、「アイタ、アイタ……イタイはイタイが逢いたかつたのぢや」とぬかしやがる。……エ、仕方がない、色男に生れたが我身の不仕合せ、と因果腰を定め、嫌ひでもない女房を……アタ恰好の悪くも何ともない……かうして伴れて歩いて居りますのだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Okatsu: 'Hey, Sō-sama, what are you saying? That must be about you, surely. It was I who flew out of the house, was it not? You must think that the reason Okuni's Baurei appears is because I, the Gosai, have entered the house and it displeases her. If only I leave, the house will be in Buji and Taihei, and Okuni's spirit will surely attain Gedatsu. Since you are an old man so infatuated with me, no matter what I say, there is no chance you will give me a divorce; therefore, I decided that the Jiyōfunbetsu was for me to fly out on my own. I made you drink plenty of sake, and under the cover of Yain, I took on the Jiyunreisugata. While I was wandering, reciting the sutras of the Brahman Kyō, praying for the Meifuku of Okuni, and visiting Reizan and Reichi, I came upon a man in a Tsujidau who suddenly drew out a shining object about Itsushiyaku long, exposing his belly and attempting Jisatsu. I did not know Izuko no Tarebito he was, but I could not Misu and walk away. Forgetting myself, I leaped at him, snatched the shining Tantau, and... "Moshi-moshi, I do not know what your Jijiyō is, but life is hard and death is easy; first, please calm yourself," ...I said, putting the strength of my whole Zenshin into my Hosōde to stop him. He replied, "Iya, I do not know what Jiyochiu you are, but I have a deep Wake for which I must die. Your Jihi is, on the contrary, Mujihi. Please, let go of my arm," ...and he tried to shake me off by force. As I was chanting the Brahman Kyō sutras with all my might, the man said... "My lovely wife ran out of the house because she was afraid of ghosts, and her whereabouts became unknown. I have seen many women until now, but I have never had a wife as kind and beautiful as her. If I cannot be with that wife, there is no joy in living in this world. Even if I search this wide world for ten or twenty years, I do not know if I will ever meet her or not. To escape the suffering of this Shaba, I am going to cut open my belly here and make a pilgrimage to the Jōdo. Perhaps my wife has gone there ahead of me," ...he said. I wondered what kind of foolish fellow would throw away his life for the sake of one woman, so I looked closely at him in the moonlight, and ah, it was not someone unpleasant, it was you. It was like a frog targeted by a snake; I accepted the Inga and have followed you all the way here.'</p>
+          <p class="en-p">Sōhiko hangs his head with a bright red face. Matsutakahiko says,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お勝『コレ宗さま、何を言ひなさる。そりやお前の事ぢやらう。飛んで出たのは妾ぢやないか。お前、お国の亡霊が出るのは、妾が後妻に入り込んだのがお気に容らぬのであらう。妾さへ出れば家は無事太平、お国の霊も解脱遊ばすに違ない。是れ丈惚れた爺、何と言つても暇を呉れる気遣はない、妾から飛び出すのが上分別だと、お前に酒をドツサリ飲まし、夜陰に紛れて巡礼姿となり、バラモン教のお経を称へつつ、お国の冥福を祈つて、霊山霊地を参拝して彷徨ふ折しも、辻堂の中で一人の男が、一尺位な光る物をニユツと出し、腹を出して自殺を図らうとして居る者がある。何処の誰人かは知らねども、是れが見捨てて行かれようかと、吾身を忘れて躍りかかり、其光る短刀をひつたくり、……「モシモシ如何なる事情か知りませぬが生は難く死は易し、先づ先づ気を落ち着けなさいませ」……と女の細腕に全身の力を籠めて止むれば、「イヤどこのお女中か知りませぬが、私はどうしても死なねばならぬ深い理由が有る。お慈悲は却て無慈悲となる。どうぞ此腕放しやンせい」……と無理に振放さうとする。妾はバラモン教のお経を一生懸命に唱へて居ると、其男は……「可愛い女房は幽霊が怖さに家を飛び出し、行衛不明となりました。今迄沢山女も有つて見たが、あの位気の好い、綺麗な女房は持つた事がない。あの女房と添はれぬのなら此世の中に生て居つても、何楽みも無い。此広い世の中を十年や二十年探し廻つた所で会へるとも会へぬとも分りませぬ。娑婆の苦を遁れる為に、此場で腹掻き切つて浄土参りをするのだ。ヒヨツとしたら女房も先にいつてるかも知れませぬ」……と云つて見つともない、女の一人位に生命を捨てようとする馬鹿な奴は、どこの何者かと能く能く月影に照して見れば、アタ気色の悪く無い、此人でしたよ。まるで蛇に狙はれた蛙の様なものだと、因果を定めて、此処まで随いて来てやつたのですよ』</p>
+            <p class="ja-classical-line">宗彦は真赤な顔して俯向く。松鷹彦は、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Aha, ha, ha, ha! I have listened to a great many auspicious romances. It is something my old woman would enjoy hearing more than the sutra chanting of a thousand or ten thousand monks. Even this old man is not made of wood or stone, after all. In my youth, I too sowed many seeds of romantic tales. But let us put aside the troubles of the past. It would be dull if you thought I was merely boasting of my eighteen years as a mother-in-law, aha, ha! However, it must be quite amusing for you two to travel the world, billing and cooing and bickering as a married couple. ...Seeing the state of you two sharing the joys and sorrows of life has made me envious. Truly, if a human does not have a partner of the opposite sex, the world feels somehow lonely, and even a warm spring day feels as if it were cold.'</p>
+          <p class="en-p">Munehiko: 'Even for an old man like you, whose years are advanced and whose remaining path is short, is a wife still necessary?'</p>
+          <p class="en-p">Matsutakahiko: 'That is a certainty. As they say, a sparrow never forgets the hen until it is a hundred; the older one gets, the more one longs for even a wrinkled old hag. A married couple becomes a true source of strength more in their later years than in their youth. In youth, like spring butterflies fluttering between white flowers over there and yellow flowers here, kissing the lips of the blossoms, the flowers too receive them with joy. But when one is covered in wrinkles, skin hanging loose, reduced to nothing but skin and bone like a bamboo hat, and withered away like a signboard for a stomach ailment, no one will even look at you. At such a time, the one who becomes your true strength is the old woman for the old man, and the old man for the old woman. No matter how many lovely children you may have, when it comes to important matters, there is no one with whom you can speak as openly as with your spouse. ...Ah, there is no one as unfortunate as one who becomes a widower in middle age.'</p>
+          <p class="en-p">Munehiko: 'Are the heart of youth and the heart of old age really that different? From our perspective, seeing an old man dote on a wrinkled old hag, and seeing the old woman shed tears from her eyes, let her nose run, and cherish a filthy old man who has become like a withered tree with tartar on his teeth—it makes one feel quite sick. It is truly incomprehensible how humans are.'</p>
+          <p class="en-p">Matsutakahiko: 'You two, like the retainers of Kōshin, perch on one branch and urinate, then perch on another and urinate, treating excellent human beings as if they were mere playthings, complaining about whether their skin is white or black, or whether they are tall or short. But once you become a hermit like me, there is no one left to be your companion. Even mosquitoes will not come to suck your blood, saying you taste bad. It is truly lonely. And so, wishing at least to be with the ghost of my old woman, I offer her favorite fish every day and reminisce. It seems my sincerity has reached her, for she appears in the alcove every night; she eats rice with me and drinks tea, and she treats me with such great care. Yet, it is somehow unreliable. She shows an expression of happiness, but she does not say a single word, not even "Grandfather" or "Master." This is likely because our realms of existence are different, but why don't you stay the night and see the ghost of my old woman for yourself? She might pour you some tea, or if you are a young man like you, she might even shake your hand with her cold fingers. She is, after all, a kind soul. Since she comes to yearn for an old man who drips with eye mucus and nasal discharge even after death, I suppose there must be some good in me somewhere, aha, ha, ha, ha!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『アハヽヽヽ、随分おめでたいローマンスを沢山に拝聴致しました。千僧万僧の読経よりも、宅の婆アが聴いて喜ぶ事でせう。此爺だつて素より木や石では無い。若い時にや、随分情話の種を蒔いたものだ。しかし過越苦労は止めて置きませうかい。また姑の十八を言つて誇ると思はれても詰らぬからな、アハヽヽ。併しお前達はさうして夫婦仲良く意茶つき喧嘩をチヨコチヨコやつて、天下を遍歴して居れば随分面白からう。……わしもお前等夫婦の苦楽を共にする状態を見て羨ましうなつて来た。どうしても人間は異性が付いて居らねば、世の中が何ともなしに寂しくて、春の暖かい日も冷たい様な気分がするものだ』</p>
+            <p class="ja-classical-line">宗彦『あなたのやうに年が寄つて、行先の短い爺さまでも、ヤツパリ女房が要りますかなア』</p>
+            <p class="ja-classical-line">松鷹彦『定つた事だよ。雀百まで牝鳥忘れぬと云つて、年が寄れば寄る程、皺苦茶婆でも恋しうなるものだ。夫婦と云ふものは、若い時よりも年が寄つてから本当の力になるものだ。若い時には春の蝶が彼方の白い花や此方の黄色の花に飛び交ひて、花の唇にキツスをする様に、花も亦喜んで受けてくれるが、斯う体中に皺が寄り、皮が余つて来、竹笠の様に骨と皮ばつかりになつて、胃病の看板然と痩衰へては、誰だつて見向いてもくれやしない。其時には本当の力になつてくれる者は、爺に対しては婆ア、婆アの力になる者は爺だ。何程可愛い子が沢山有つてもヤツパリ大事の話は、夫婦でなければ、打解けて話せるものぢやない。……アヽ中年にやもを鳥になる者程不幸な者は有りませぬワイ』</p>
+            <p class="ja-classical-line">宗彦『若い時の心と、年の寄つた時の心とは、それ丈違ふものですかいな。我々から見ると、爺さまが皺苦茶婆を可愛がり、婆アが又目から汁を出し、水ばなを垂れ、歯糞をためて枯木の様になつた、不潔い爺を大切にするのを見ると胸が悪い様な気がするものだが、なんと人間と云ふものは合点のゆかぬものですなア』</p>
+            <p class="ja-classical-line">松鷹彦『お前達は庚申の眷属の様に、あつちやの枝に止まつては小便を掛け、こつちやの枝に止まつては小便を垂れて、結構な人間を弄物の様に取扱ひ、色が白いの、黒いの、背が高いの短いのと、小言を云つて居られるが、わしの様な世捨人になつて了へば、誰も相手になる者はありやしない。蚊だつて味が悪いと云つて吸ひ付きにも来てくれやしない。本当に寂しいものだ。それで、せめて婆アの幽霊になりと、好な魚を毎日供へてやつて、追懐して居るのだ。わしの真心が通うたと見えて、婆アは毎晩床の間に現はれ、わしと一緒に飯も食ひ、茶も飲み、それはそれは大切にしてくれるが、併し何となしに便りないものだ。嬉しいと云ふ表情は見せるが、唯の一言も爺さまとも、爺どのとも言やアしない。是れ丈が現幽処を異にした為でもあらうが、どうぞお前さまも今晩泊つて、婆アの幽霊を一遍見なさつたらどうだ。お茶位は汲んでくれるなり、冷たい手でお前の様な若い男なら握手して呉れるかも知れやしないぞ。そりやマア親切な者だ。死んでからでも、斯んな目脂、鼻汁を垂れる爺を慕うて来るのだから、わしもドツかに好い所があるのだらう、アハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Munehiko: 'Grandfather, will she really appear? ...No, will she manifest herself? I have had quite enough of ghosts, thank you very much. But you certainly have become quite senile, haven't you?'</p>
+          <p class="en-p">Matsutakahiko: 'It is a settled matter. Listening to such flirtatious, amorous talk in front of a lonely widower has made me feel quite young again. I opened my secret storehouse just to show you my gratitude. That is, roughly speaking, what a married couple is like. The love between a husband and wife is not something a young person can understand at a glance. But did you not say earlier, while I was fishing by the willow tree, that you were on a pilgrimage because of the sorrow of being separated from your only child? Now that I hear you, the story about being separated from your child must be a complete lie, must it not? You go around telling a pack of lies, saying such pitiful things, hoping to win the sympathy of the world and be called a virtuous young couple, don't you?'</p>
+          <p class="en-p">Munehiko: 'Honraimutōzai, Kashiyōnanboku, Shikisokuzekū, Kūsokuzeshiki; if you think it exists, it exists; if you think it does not, it does not. If you think it is dead, then it is indeed dead. However, the one I said killed my child is not a child that sings "hogyahogya." Waiting impatiently for the sun to set, making strange gestures... "Now, now, Munehiko-sama, the night has grown quite late. It seems O-Take-sama next door has already gone to bed, as the sound of the fulling block has stopped. You should also go to bed at a reasonable hour. Tomorrow is important, after all..." she says, with a strange look in her eyes as she spreads out the bedding for me... She says the cat has died. Sometimes I think it is a cat, and sometimes it squeaks like a mouse. Whether it is a cat, a mouse, or a baby, I do not know, but I think, "Nyan-chu, what a miserable fate." The god who appears when one crawls to the feet and crawls to the head, weeping, is called the God Nakisawame who dwells at the base of the Uneo.'</p>
+          <p class="en-p">Matsutakahiko: 'Hahahaha, is that not just a rehash of the Kojiki?'</p>
+          <p class="en-p">Munehiko: 'It is because it is a rehash of the Kojiki that a young couple is walking about as beggars. You are a man who is slow to understand, despite your age. It seems you have become quite senile. Even if you act like Taikōbō and fish by the river forever, you will never catch Seihaku Bun-ō. Even the ghost of an old woman will not bite your hook. Give it up at a reasonable point and stop the killing. Your five lives are precious; if you do such reckless things, you will not be saved even after seven lives. Now, as we are talking about O-Take-sama like this, O-Take-sama, who is in the underworld, is probably sneezing about eight or nine times right about now. She must be resenting you as an old man who does not even have ten lives left, but when I think about it, Grandfather, I too am overwhelmed by the situation, and I feel neither sad nor anything else. ...An, an, an.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宗彦『お爺さま本当に出るのかい。……イヤお出ましになるのかい。私はもう幽サン丈は真平御免だ。併し随分よう惚けたものですな』</p>
+            <p class="ja-classical-line">松鷹彦『きまつた事だよ。淋しいやもをの前で艶つぽい意茶つき話を聞かされて、大変にわしも若やいだ。返礼の為に一寸秘密の倉を開けて見せたのだ。夫婦と云ふものはマアざつと斯んなものだ。夫婦の中の愛情は若いお方には一寸には分るものぢやない。併しお前さまは最前柳の木の側で、私が釣して居る時に、一粒種の子に放れたのが悲しさに巡礼に廻つたと云うたぢやないか。今聞けば子に別れたと言ふのは全くの嘘だらう。そんな憐れつぽい事を云つて、世人の同情を買ひ、殊勝な若夫婦だと言はれようと思つて嘘八百を言ひ並べて歩くのだらう』</p>
+            <p class="ja-classical-line">宗彦『本来無東西、何処有南北、色即是空、空即是色、有ると思へば有る、無いと思へば無い。死んだと思へばヤツパリ死んだのぢや。併し私の子を殺したと云ふのは、ホギヤホギヤと唄ふ子ぢやない。日が暮れるのを待ち兼ねて妙な手つきをして…コレコレ宗彦さま、夜も大分に更けました。隣のお竹さまはモウ就寝しやつたと見えて砧の音が止まつた。あんたも好い加減にお就寝みなさいませ。又明日が大事ですから……と妙な目付して褥を布いて呉れる……猫が死んだと云ふのだ。猫かと思へばチウチウと啼く事もある。猫か鼠か赤ん坊か知らぬが、わしはマア、ニヤンチウ運の悪いものだと、ミカシラベにハラバヒ、御足辺にハラバヒテ泣き給ふ時現れませる神は、ウネヲのコノモトにます泣沢女の神と云ふ』</p>
+            <p class="ja-classical-line">松鷹彦『アハヽヽヽ、それは古事記の焼き直しぢやないか』</p>
+            <p class="ja-classical-line">宗彦『古事記の焼き直しぢやから、若夫婦が乞食に歩いとるのだ。お前さまも年を老つた癖に合点の悪い人だな。余程耄碌したと見えるワイ。太公望気取りで、何時まで川の縁で魚を釣つて居つても、西伯文王は釣れやしない。婆アの幽霊だつて喰ひ付きやしませぬぞえ。良い加減に諦めて、殺生は廃めなされ。五生が大事だ、そんな六生な事をすると七生迄浮ばれぬからなア。今斯うして婆アさまの噂をして居ると、冥土に御座るお竹さまが今頃にや八九生と嚔でもして居るだらう。十生も無い爺だと恨んで御座るであらうのに、思へば思へばお爺さま、私も身に詰されて、悲しうも何ともありませぬワイ。……アンアンアン』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He applies saliva to his eyes and pretends to weep.</p>
+          <p class="en-p">Matsutakahiko: 'Thinking that I am old and my eyes are dim, you show me such feigned tears of sympathy, but it is revealed in the tone of your voice. You are filthy. I would like you to stop such hypocritical and formalistic flattery, rubbing saliva into eyes that should be likened to the sun and the moon. Truly, the despicable state of mind is that of a habitual beggar, a wandering ascetic, a foolish couple... wait, hold on, a young couple; I am starting to feel sick to my stomach. Come, come, I would like you to leave this place quickly.'</p>
+          <p class="en-p">Munehiko: 'Haha, thinking that I am Munehiko, you say you feel sick; you are quite ill-tempered, old man.'</p>
+          <p class="en-p">Matsutakahiko: 'It is because I am ill-tempered that I feel nauseated. Do you think I can stand having such an unpleasant romance displayed before me, here at the place of an old man as lonely as these winter-withered trees? If you have traveled the world and understand the taste of hardship, why don't you be sensible and leave at once? However, though it is not a saying of the Ural religion, the future is dark as the night, and all things are impermanent. Do be careful of your footing as you go. Farewell...'</p>
+          <p class="en-p">Okatsu: 'Excuse me, Grandfather, this Munehiko has lost a bit of his wits, so please do not take offense. Even I feel sick traveling with such an unreasonable person, but if I shake my hips, Mune-sama gets angry, and if I stand my ground, he is stubborn, and since he is neither here nor there, I regretfully close my eyes and walk around with a man who smells unbearable. He is truly a detestable fellow.'</p>
+          <p class="en-p">Munehiko: 'Hey, hey, Okatsu, are you going to make a fool of your husband to the very end?'</p>
+          <p class="en-p">Okatsu: 'Hmph, husband? Even a fur seal would be astonished to hear that. You, a man with a wife, came to peep through the lattice windows of people's houses every single night, fell into a sluice gate and made a fool of yourself, and in the end, you cried like a man with no pride, saying you would die or run away if you did not get Okatsu-sama, causing trouble for the whole neighborhood, did you not? Because of that, your first wife, Okuni-sama, suffered and fell ill, and finally departed on a journey from which she would never return. You are such a doting fool who forcibly dragged me in, saying you must have me before the soil on her grave was even dry, so I have completely lost all affection for you. It is not as if you ever helped me with even a single mon. You pawned off all the kimonos and obis I brought with me when I married into the Rokuichi Bank for an indefinite term; you are truly a hopeless man. From morning until night, I continue to pray in silence, hoping that some woman with a face will appear and take you away, but it seems that even Kanakatsu-no-Kami-sama has been acting strangely lately; despite the fact that He says He will let us be together if it is a bond to be kept, or sever it if it is a bond to be cut, it seems that even the Gods have become deaf these days and will not even look my way. ...Ah, how regrettable, how vexing... I am the soul of Okuni, an-an-an.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と目に唾を付け泣いて見せる。</p>
+            <p class="ja-classical-line">松鷹彦『年が寄つて目がウトイと思つて、そんな俄作りの同情の涙を零して見せても、声の色に現れて居る。お前さまアタむさくるしい。唾を日月にも譬ふべき両眼にこすりつけて、そんな虚礼虚式的な巧言は廃めて貰ひませうかい。本当に唾棄すべき心事と云ふのは常習乞食の遍歴行者の馬鹿夫婦……オツトドツコイ若夫婦連れ、モウモウわしも何だか胸が悪くなつて来た。サアサア早く此処を立つて貰ひませう』</p>
+            <p class="ja-classical-line">宗彦『ハハア、俺が宗彦ぢやと思つて、胸が悪うなつたなぞと、爺さま随分腹が悪いな』</p>
+            <p class="ja-classical-line">松鷹彦『腹が悪いから、ムカつくのだよ。此冬枯れの木の様な寂しい爺イの所へ出て来て、お安くもないローマンスを見せ付けられて堪るものかい。お前も世界を遍歴して、苦労の味が分つて居るなら、気を利かして、トツトと帰つたらどうだ。併し乍らウラル教の言ひ草だないが、一寸先や暗の夜だ、諸行無常だ。随分足許に気を付けて行きなされ。左様なら……』</p>
+            <p class="ja-classical-line">お勝『モシモシお爺さま、此宗彦はチツト智慧を落して来てますから、どうぞ気に障へて下さいますな。妾だつて斯んな分らずやと旅行するのは、胸が悪いのだけれど、妾が尻を振れば宗さまが腹を立て、腰を据ゑて頑張り、手にも足にも合はないから、口惜し乍ら目を塞いで、鼻持ならぬ香のする男を連れて歩いて居るのだ。本当に好かぬたらしい野郎ですよ』</p>
+            <p class="ja-classical-line">宗彦『コラコラお勝、貴様は何処までも夫を馬鹿にするのか』</p>
+            <p class="ja-classical-line">お勝『ヘン、夫なんて、膃肭臍が聞いて呆れますワイ。お前さまは人の宅を、女房の有る身を以て、毎晩々々連子の窓を覗きに来て、水門壺へ落込み恥ぢをかき、結局にはお勝さまを呉れねば、死ぬとか、走るとか、男らしうもない吠面かわいて、近所合壁に迷惑を掛けたぢやないか。それを先妻のお国さまが苦にして病気を起し、とうとう帰らぬ旅に赴かしやつた。墓の土のまだ乾かぬ前に、無理矢理に妾を是非共と言つて、ひつぱり込んだと云ふデレさんだから、妾もホトホトと愛想が尽きて来た。三文一文助けて貰うたのでもなし。嫁入に持つていつた着物も帯も、何も何も六一銀行へ無期徒刑に落して了ひ、本当に仕方のない男だよ。誰か目鼻のついた女が出て来て、お前を喰はへて帰んで呉れるものがないかと、朝から晩まで聞えぬ様に暗祈黙祷を続けて居るのだが、根つから、金勝要大神さまもどうなさつたのか、添ひたい縁なら添はしてもやらう、切りたい縁なら切つてもやらうと仰有る癖に、此頃は神さまも聾になられたと見えて、見向きもして下さらない。……アヽ残念な、口惜しい、……わしはお国の霊魂ぢや、アンアンアン』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec08">
+        <div class="sec-header">
+          <span class="para-num">&sect; 8</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Munehiko: 'What is this? I was wondering why you have been doing nothing but taking inventory of my... not-so-good deeds since a while ago, and now I see you are here with Okuni. You have certainly brought along a disgusting person to walk with.'</p>
+          <p class="en-p">Okatsu: 'It is half-manifest and half-hidden. In the unity of the hidden and manifest, Okuni-sama is settled deep within my Mitama. If one were to ask where Okuni is, she would say... "I am in Aha, Tokushima,"... it is something like that, ho ho ho.'</p>
+          <p class="en-p">Munehiko: 'Grandfather, could you... since you are the Kamunushi of the Takeshi Shrine, would you please perform Saniha on this one just once? Please cast out Okuni and leave only the true Nikutai of Okatsu.'</p>
+          <p class="en-p">Matsutakahiko: 'That, you must not do. It is a magnificent Okamugaka of a Kamisama. It might even be a Gobunrei of Kunitokotachinomikoto. Since it is a Kamisama who protects this world by transforming into various forms... it is called Amakatsukunikatsu, and Okuni-sama is possessing you and providing Goshiyugo. And you are spoiled by your wife, Okatsu, are you not? That is why it is Amakatsu, Kunikatsu. ...Since you have left a magnificent Kunitoko, it is the Goshiyugo of the Kunitoko-tachinoki-no-Mikoto. If someone like me were to carelessly perform Saniha, I would be possessed in turn, and in my old age, I would have to leave my second home where I have grown accustomed to living and become a Kunitoko-tachinoki-no-Mikoto myself, so I shall decline this judgment.'</p>
+          <p class="en-p">Okatsu suddenly shakes her body, entering a state of divine possession,</p>
+          <p class="en-p">Okatsu: 'I am Kanakatsukana-Ōkami. If there is a bond you wish to sever, I shall sever it. If there is a bond you wish to keep, I shall not allow you to keep it. Due to the retribution for the sins of Munehiko, who has deceived many women until now, I shall sever the bond with Okatsu as of this moment. Ugh, ugh, ugh.'</p>
+          <p class="en-p">Matsutakahiko: 'Ha ha ha ha, Okatsu-sama, well done, well done, please perform the divine possession for one more round. No matter how I think about it, this fellow is possessed by a personal spirit. Hey, Munehiko-sama, place your hand on your chest and think carefully about everything you have done so far. A Kamisama would never say anything unreasonable.'</p>
+          <p class="en-p">Munehiko: 'Even so, it is too much to sever the bond with my own wife without me even asking. Even if you say you will sever it, I will never be the one to sever it from my side.'</p>
+          <p class="en-p">Okatsu: 'Eh, what a man who cannot make up his mind. That is why this Nikutai hates you. For a man, the single character of "decisiveness" is essential. How about this? From now on, the former wife Okuni, along with Omitsu, Ofuku, Osan, Oyotsu, Oichi, and Otaka, will form an allied force and possess this Nikutai; even then, do you still have lingering attachments? How is it? Is it not disgusting?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宗彦『何だ、最前から俺の……善くもない事の棚卸ばつかりやりやがると思へば、お国と二人連だな。随分厭らしい奴を連れて歩いたものだワい』</p>
+            <p class="ja-classical-line">お勝『半顕半幽だよ。幽顕一致、霊魂の奥にはおくにさまが納まつて御座るのだ。お国は何処と尋ねて見れば、……アイわたしは阿波の徳島で御座ります、……と云ふ様なものです、オホヽヽヽ』</p>
+            <p class="ja-classical-line">宗彦『爺さま、一つ……あなたも武志の宮の神主さまと云ふ事だから、一遍此奴を審神して下さらぬか。お国を放り出して、お勝の本当の肉体ばつかりにして下さいな』</p>
+            <p class="ja-classical-line">松鷹彦『ソリヤお前さま可けませぬぞえ。結構な神様の御神懸りだ。国常立尊様の御分霊かも知れんぞや。イロイロに化けて化けて此世を御守護なさる神様ぢやから……天勝国勝と云つて、お国様がお懸りなさつて御守護して御座るのだ。さうしてお前は女房のお勝に甘いだらう。そこでアマカツ、国カツだ。……結構な国所を立ち退いて来たから、国所立ち退きの命様の御守護だよ。俺の様な者がウツカリ審神でもしようものなら、それこそ又俺が憑りうつられて、年が寄つてから住み慣れし第二の故郷を後に国所立退きの命にならねばならぬから、マア此審判は御免蒙らうかい』</p>
+            <p class="ja-classical-line">お勝俄に体を振り、神懸り状態になり、</p>
+            <p class="ja-classical-line">お勝『金勝要大神であるぞよ。切りたい縁なら切つてもやらう。添ひたい縁なら添はしてはやらぬぞよ。宗彦は今迄沢山な女をチヨロまかした罪悪の報いに依りて、唯今限りお勝との縁を切るぞよ。ウーンウンウン』</p>
+            <p class="ja-classical-line">松鷹彦『アハヽヽヽ、お勝さま、ウマイウマイ、モウ一しきり神懸りをやつて下さい。此奴アどう考へても私憑だ。コレコレ宗彦さま、胸に手を当てて、今迄の事を能う考へて見るが宜い。神様は決して無理な事は仰有いませぬぞ』</p>
+            <p class="ja-classical-line">宗彦『そうだつて、私の女房を、頼みもせぬのに、縁を切るとはあまりだ。切ると云つても、金輪際こつちから切りませぬワイ』</p>
+            <p class="ja-classical-line">お勝『エー思ひ切りの悪い男だなア。それだから此肉体が嫌ふのだ。男は断の一字が肝腎だ。どうだ是れから此肉体に先妻のお国に、お光、お福、お三、お四つ、お市、お高が同盟軍を作つて憑依して来るが、それでも其方はまだ未練があるか、どうだ厭らしい事はないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec09">
+        <div class="sec-header">
+          <span class="para-num">&sect; 9</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Munehiko: 'What is so unpleasant about it? Since everything has its Innen, even if we were a Fūfu for only three Mitsuka, having many Niyōbau with a Nikutai is a burden on my economy, but if they are wives who do not even eat, then let a Sennin or even a Mannin come forth. Ah, to be an Irōtoko is a grand thing indeed. It seems that even from the Iumeikai, they send out Denpa. I know not why, but when I feel my shoulders grow heavy, it is no wonder, for I bear the Sekinin for so many Niyōbau upon my Sauken. Let the spirits of the Seishiki Ketsukon wives, the Jiyunseishiki, the Zatsushiki, and the Yagafu, let them all come. These days are a Jisetsu where Tasūketsu is in vogue. No matter how great one may be, one cannot accomplish a Meza Shigoto as a Shōsūtau.'</p>
+          <p class="en-p">Matsutakahiko: 'Ohohoho, Munehiko-sama, look just behind you; are there not Gari-hōshi dancing with arms like mantises, formed of the Mōnen of wire?'</p>
+          <p class="en-p">Munehiko: 'Ah, do not say such things. It is enough if I do not see them. There is nothing as unclean or as terrifying as the eyes.'</p>
+          <p class="en-p">Okatsu sat down with a 'Uun, dosun,' and with a nonchalant face,</p>
+          <p class="en-p">Okatsu: 'Mune-san, did I say something? I wonder if you were having a dream. A Takusan number of unpleasant ghosts were consulting at the foot of the willow tree, saying, "Munehiko treated us like machines while he was alive, so tonight, even Gaki are people. Let us join our strength and pull off his head." At that time, they told me to join their alliance as well. However, because I felt so sorry for you, I tried to escape the situation for the moment by saying, "There is no need for you all to be in such a hurry. Since he will eventually come here when he gets old, you can just torment him then," but the group of ghosts would not listen at all. They said that if they do not take Mune-san's life now, and wait until he dies, we will be reborn into the Genkai, and the Iumeikai will be left empty. Therefore, they said that now is the time to take revenge, and their momentum was truly immense. You had better be careful.'</p>
+          <p class="en-p">Munehiko: 'Is that true, you, or is it a lie?'</p>
+          <p class="en-p">Okatsu: 'Whether it is a lie or the truth, you will know by tonight.'</p>
+          <p class="en-p">Munehiko: 'Well, I suppose I will know, but... which is it? Tell me if it is reality or a falsehood.'</p>
+          <p class="en-p">Okatsu: 'I heard the voice of the Lord God from nowhere, saying that the secrets of the Iumeikai must not be spoken of lightly. Well, consider it the payment of your annual tribute until now, and enjoy waiting for the sun to set. That pale face of yours, ohohoho.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宗彦『何が厭らしいかい。どれもこれも因縁あつて仮令三日でも夫婦になつた仲ぢや、肉体の有る女房を数多連れて居ると、経済上困るが、物も喰はん嬶アなら、千人でも万人でも出て来い。アーア色男と云ふものは偉いものだ。幽冥界からまでもヤツパリ電波を送ると見える。何だか知らぬが、肩が重くなつたと思へば、此れ丈沢山な女房に対し、責任を双肩に担つて居るのだから無理もないワイ。正式結婚の女房の霊も、準正式も、雑式も、野合も何も彼もやつて来い。此頃は多数決の流行る時節だ。何程偉い者だつて少数党では目醒ましい仕事は出来やしないワ』</p>
+            <p class="ja-classical-line">松鷹彦『オホヽヽヽ、宗彦さま、お前の背後を一寸御覧、針金の妄念の様な、蟷螂腕を出して餓利法師が踊つて居るぢやないか』</p>
+            <p class="ja-classical-line">宗彦『アヽそんな事言うて下さるな。見さへせねば良いのだ。目程不潔いものの、恐ろしいものはない』</p>
+            <p class="ja-classical-line">お勝は『ウーン、ドスン』を腰を下し、ケロリとした顔で、</p>
+            <p class="ja-classical-line">お勝『宗サン、妾何か言ひましたかな。夢でも見とつたのか知らぬ。沢山な厭らしい亡者が、柳の木の麓で、「宗彦は生前に我々を機械扱ひにしよつたから、今晩は餓鬼も人数だ。力を協して、素首を引き抜いてやらう」と相談して居りましたよ。その時に妾にも同盟せいと言はれたのです。けれども、あまりお前さまが可哀相だから「さう皆さま慌るに及びませぬ。何れ彼奴も年が寄つたら此処へ来るのだから、其時に苛めてやりさへすれば良いだないか」と一時遁れに其場を切り抜けようとしたが、中々亡者の連中聞きませぬがな。今の間に宗サンの生命を取らねば、死ぬ迄待つて居つたら我々は又もや現界に生れ替り、幽冥界は不在になつて了ふ。そうだから讎を討つのは今の内だと言つて、それはそれはエライ勢でしたよ。用心しなさいや』</p>
+            <p class="ja-classical-line">宗彦『そりや貴様、本当か、嘘ぢやないか』</p>
+            <p class="ja-classical-line">お勝『嘘か本真か、今晩中に分りますわいな』</p>
+            <p class="ja-classical-line">宗彦『そら分るだらうが……どちらだ。実際か、虚言か聞かして呉れ』</p>
+            <p class="ja-classical-line">お勝『幽冥の秘、妄りに語る可らずと、どこともなしに神様の声が聞えました。マア今迄の年貢納めだと思つて、楽んで日の暮れるのを待ちなさい。あのマア青い顔、オホヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec10">
+        <div class="sec-header">
+          <span class="para-num">&sect; 10</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Munehiko: 'Grandfather, things have become terrible. If we keep dawdling, a widower will be made here in an instant. Please, do something to help me.'</p>
+          <p class="en-p">Matsutakahiko: 'I have been living in this village without a companion, suffering from loneliness, so you should just die quickly so that you may become a widower too; that would be much more carefree in the end.'</p>
+          <p class="en-p">Munehiko: 'I have no idea what is going on anymore. I wonder if I am dreaming.'</p>
+          <p class="en-p">He is pinching his cheeks repeatedly to see. Just then, two men wearing twisted headbands enter in a flurry.</p>
+          <p class="en-p">Tomekō: 'Kamunushi-sama Matsutakahiko, I hear that you have once again dragged in a practitioner of the Brahman religion and are listening to his useless sermons. If you keep changing your mind as quickly as a cat's eyes, the villagers will be confused and it will be troublesome. What on earth is your intention? Ever since Otake-sama died, have you not become increasingly strange?'</p>
+          <p class="en-p">Matsutakahiko: 'Is it any wonder that I have become strange?'</p>
+          <p class="en-p">Tomekō: 'What do you mean, is it any wonder? Why don't you repent, stop the killing, and serve the duties of the shrine in a godly manner? Your conduct is so poor that the villagers gathered at the Kaushinmachi the other day and discussed throwing you out and installing Maura-sama of the Ananai-kyō as your successor. If the villagers were to hear of such things, you would be driven out this very day. I came to warn you because I thought it would be pitiful for you. Oharu and Oyumi knew it well and told me, so I have sworn them to secrecy and told them not to tell anyone. How about it, will you stop?'</p>
+          <p class="en-p">Matsutakahiko: 'I serve the God of Takeshi-no-miya. I am by no means a servant to the people of the village. Even if you humans gather together to try to move what has been commanded by God, it will be of no use. If you do such things, divine punishment will fall upon the whole village, and a famine will come where neither rice nor wheat can be harvested.'</p>
+          <p class="en-p">Tagosaku: 'Grandfather, what you say is reasonable to a point, but as long as you are wearing human skin, you must follow human rules a little. Why don't you reflect on yourself a little instead of being so headstrong?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宗彦『お爺さま、大変な事になつて来た。愚図々々して居ると、忽ち此処にやもめが一人出来ますワイ。何とかして助けて下さいなア』</p>
+            <p class="ja-classical-line">松鷹彦『わしも此村でやもをの連れが無うて、寂しうて困つて居つたのだから、お前さまも早くやもめが出来る様に死なつしやい、それの方が結句気楽で宜からうぞい』</p>
+            <p class="ja-classical-line">宗彦『何が何だか、サツパリ分らぬ様になつて来たワイ。夢でも見とるのでは有るまいかなア』</p>
+            <p class="ja-classical-line">と頻りに頬を抓つて見て居る。かかる所へ捻鉢巻をした二人の男、慌ただしく入り来り、</p>
+            <p class="ja-classical-line">留公『松鷹彦の神主さま、お前は聞く所に依れば、又してもバラモン教の行者を引張込んで、しやうもないお説教を聴聞しとると云ふ事だ。さう猫の目の様にクレクレと精神を変へて貰うと、村の者が迷つて仕方がない。一体どうする量見だ。お竹さまが死んでから、お前さまは益々変になつたぢやないか』</p>
+            <p class="ja-classical-line">松鷹彦『チツトは変にならうかい』</p>
+            <p class="ja-classical-line">留公『変にもならうかいも有つたものかい。改心して殺生を止め、神妙にお宮さまの御用を勤めたらどうだ。あんまりお前の行ひが悪いので、村の者が此間も庚申待に集つてお前をおつ放り出し、三五教の真浦さまを跡釜に据わつて貰はうと云ふ相談があつたぞ。こんな事ども村の連中に聞えようものなら、それこそ今日限り叩き払だ。そうなればお前さまも可哀相だからと思つて、気を注けに来たのだ。お春やお弓の奴、チヤンと知つて、俺に話しよつたから、俺は決して誰にも言ふぢやないと口止めをして来たのぢや。どうだ止めて下さるか』</p>
+            <p class="ja-classical-line">松鷹彦『わしは武志の宮の神様にお仕へして居るのだ。決して村の人間のお給仕役ぢやない。神様から命じられたものを人間が寄つて集つて動かさうとした所で、そいつア駄目だ。そう云ふ事をすると村中に神罰が当つて、米も麦も穫れぬ様な饑饉が出て来るぞや』</p>
+            <p class="ja-classical-line">田吾作『お爺さま、お前の仰有るこたア一応尤もだが、ヤツパリ人間の皮を被つて居る以上は、人間の規則にもチツトは従はねばなるまい。そんな我の強い事を言はずに、チツトは省みたらどうだい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec11">
+        <div class="sec-header">
+          <span class="para-num">&sect; 11</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Matsutakahiko: 'Do not make a fool of me. To say that I am wearing the skin of a Ningen... from my bones to my intestines, and even my soul, I am entirely a Ningen. It is you lot who are wearing skins.'</p>
+          <p class="en-p">Tomekō: 'Grandfather-sama, it is you whose soul is that of a four-legged beast. As proof, like a Kahauso or something similar, you push the Kamisama aside and devote yourself entirely to Sakanatori, living your life gazing longingly at the water like a ghost after the Bon festival. Is it ever the case that one who serves the Kamisama commits Setsushiyō?'</p>
+          <p class="en-p">Matsutakahiko: 'I catch fish because I serve the Kamisama. Since there is no one who offers even a single fish before the Goshinzen, while calling them the Umashimono of the Umikahayamanu, or the Hiromono and Samono of the fins, I, this Raujin, have no choice but to fish and offer them myself.'</p>
+          <p class="en-p">Tomekō: 'Hmph, you speak so cleverly. You are likely offering them to the Kamisama of your own throat. A Kamunushi should just act like a Kamunushi. It is the Tensoku that is properly established: a cat’s Shiyōbai is catching mice, a Refushi catches beasts, and a Giyofu catches fish.'</p>
+          <p class="en-p">Matsutakahiko: 'Even so, whether I catch them or a fisherman catches them, the loss of life is the same thing; do not say such unenlightened things. You lot are young and have pleasures, saying your sons will take wives and your daughters will take husbands, but an old man like me cannot take a wife because it would look too bad, so I have no choice but to catch fish. Look upon me with a little leniency and respect your elder. Do you know that there is an order to seniority? Today, they are holding Yōrōkai, meetings to cherish the elderly, here and there, are they not? Furthermore, the people of this village think as if it would be better to throw the elderly away to a Ubasuteyama, which is why things become troublesome. The elderly are the treasure of the village, living dictionaries. It is precisely because I am in this village that the old ways are understood. My body is not mine alone. One part is a servant of the shrine, and the other is an antique of this village... nay, a wish-fulfilling jewel. Right now, you lot say I am a filthy old man and think of me as a nuisance, but just wait until I die; there will be so many things you will remember. "Ah, if only Matsutakahiko-sama were still alive, we could ask him... if only we had done this while he was alive... we should have asked him about that, we should have had him teach us this..." and you will regret it, and even if you cry and repent, it will be too late. Even if you say it is to honor the virtues of the deceased and build a memorial stone in the shrine precincts or by the river and pray to it however much you like, once it has turned to stone, it will not speak a word.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">松鷹彦『馬鹿にするない。人間の皮被つとるなんぞと……骨から腸まで、魂まで、皆人間だ。皮被つとる奴はお前達ぢや』</p>
+            <p class="ja-classical-line">留公『爺さま、お前さまこそ魂が四つ足ぢやで。其証拠にや、川獺か何ぞの様に、神様の方はそつち除けにして、魚捕ばつかりに憂身をやつし、盆過の幽霊の様に、水ばつかり羨りさうに眺めて暮して居るぢやないか。一体神様にお仕へする者が、殺生をすると云ふ事が有るものかい』</p>
+            <p class="ja-classical-line">松鷹彦『わしは神様に仕へて居るから魚を捕るのだ。御神前で海河山野の珍味物だとか、鰭の広物、鰭の狭物と称へ乍ら、魚一匹、誰もお供へする者がないのだから、仕方なしに此老人が魚を漁つてお供へするのだ』</p>
+            <p class="ja-classical-line">留公『ヘン、うまい事言つてるワイ。大方自分の喉の神さまに供へるのだらう。神主は神主らしうやつて居ればいいのだ。猫は鼠を捕るのが商売、猟師は獣を獲り、漁夫は魚を漁ると、チヤンと天則が定まつて居るのだ』</p>
+            <p class="ja-classical-line">松鷹彦『それだつて、わしが漁つても、漁師が漁つても、生命の無くなるのは同じ事だ、そんな開けぬ事を言ふものだないワイ。息子は嫁取る、娘は婿取ると云つて、お前達は若いから楽しみだが、俺の様な老爺は、あんまり外分が悪くつて、嫁を取る訳にも行かず、仕方が無いから魚を漁るのだ。チツトは大目に見て、長老を敬ふのだぞ。長幼序ありと云ふ事を知つて居るか。今日は養老会と云つて、老人を大切にする会が、彼方にも此方にも開けて居るぢやないか。それに此村の奴ア、年が老つたら姥捨山へでも捨てたら良いものの様に思つて居るから、事が面倒になるのだ。老人は村の宝、生字引だ。俺が此村に居ればこそ、古い事が分るのだないか。俺の体は俺一人のものぢやない。一方はお宮様の召使、一方は此村の骨董品だ……否如意宝珠の玉だ。今こそ貴様達は不潔い爺いだと云つて、沢山さうに思うて居るが、俺が死んでみい、思ひ出す事が幾らでも出来る。……アーア松鷹彦様がモウちつと生きて御座つたら、御尋ねするのに…斯んな事なら生存中に…あれも聞いて置いたら良かつたに、此れも教へて貰つて置けば宜かつたのに………と後悔をして、泣いても、悔んでも後の祭りだ。せめては故人の徳を忘れぬ為だと云つて、宮の境内か川の縁に記念碑を建てて何程拝んだつて、石になつてから物は言やしないぞ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec12">
+        <div class="sec-header">
+          <span class="para-num">&sect; 12</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tomekō: 'What could a geezer like you possibly know, even if I asked? However, there is one thing I must ask. That is... in which pool do the fish gather the most? Eh, Sensei Kahauso?'</p>
+          <p class="en-p">Matsutakahiko: 'Aha, you are teasing an Otona. If you keep mumbling, when you die, your eyes will rot away so you cannot speak, and your Karada will become unable to move even an inch.'</p>
+          <p class="en-p">Tomekō shrugs his shoulders, sways his body in a manner like a hawk spreading its wings, and sticks out his tongue.</p>
+          <p class="en-p">Tomekō: 'Ufufufu.'</p>
+          <p class="en-p">He laughs.</p>
+          <p class="en-p">Matsutakahiko: 'What is that Zama of yours? Acting like a kite...'</p>
+          <p class="en-p">Tomekō: 'Hey, you are the Kakeochi Jiyunrei of the Brahman Kyō, aren't you? What is with that unpopular Shiyachizura of yours... did you come to this Sensei Kahauso to beg for Mushin? ...Listen, the Brahman Kyō is Kinmotsu in this village. This is a Bashiyo where Fukyō is Kinsei. And yet, you bring your Niyōbau along so Kiraku-ly, what is the meaning of this? Do you think you can perform the Goyō of the Shinsei Kamisama with such an attitude? Leave as quickly as you can, while it is still light enough to see your Ashimoto. If you do not want to leave, then jump into this river with a splash. That would settle things quickly and be for the best.'</p>
+          <p class="en-p">Munehiko: 'Yes, yes, as you know, I am one who travels on a pilgrimage, chanting the sutras of the Brahman Kyō, and I am merely praying for the happiness of my child in the afterlife; I would never preach to others. A terrible natural disaster has erupted within my Karada, so I am in no state to worry about anything else. But since my Niyōbau is now saying she wants a divorce and all sorts of things...'</p>
+          <p class="en-p">Tomekō: 'Hahaha, a natural disaster, you say? If that is all it is, it just means your wife has turned her back on you, how pitiful. I have memories of that myself. In that case, I raise both hands in sympathy... no, in agreement. Hey, hey, Okusama, while having such a splendid, pale-gourd-like husband, for a nice lady like you with such a pretty face to come all the way here and give him the cold shoulder, is that not a bit lacking in human feeling?'</p>
+          <p class="en-p">Okatsu: 'I cannot understand it unless I have someone listen to my reasons, but it was too much, and I have already given up on him. If it is all the same... um... I would like to do such-and-such with that... someone I have seen before.'</p>
+          <p class="en-p">She hides her face behind her hat.</p>
+          <p class="en-p">Tomekō: 'Hahahaha, I understand. Your heart is sending amorous glances toward a man whose name ends in "Tome", is it not? Unfortunately for you, Tō-sama already has a fine wife named Okara, who is as black as a crow.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">留公『お前の様な爺さまに聞いたつて、何が分らうかい。併し一つ聞いて置かねばならぬ事がある。其奴ア、どこの淵には魚が余計寄つとるか……と云ふ事だ。なア川獺の先生』</p>
+            <p class="ja-classical-line">松鷹彦『エー大人嬲りの骨なぶりだ。グヅグヅ言うと、死んだら目が潰れて物が言へなくなり、身体がビクとも動かなくなつて了ふぞ』</p>
+            <p class="ja-classical-line">留公、肩を上げ下げし、鷹が羽を拡げた様な調子で、体を揺り、舌を出し、</p>
+            <p class="ja-classical-line">留公『ウフヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ふ。</p>
+            <p class="ja-classical-line">松鷹彦『貴様の其状態は何だ。鳶の様なスタイルをしやがつて……』</p>
+            <p class="ja-classical-line">留公『オイ、お前がバラモン教の駆落巡礼だなア。何だ人気の悪い鯱面をしよつて……此川獺先生の所へ無心に来よつたのか。……コリヤ此村はバラモン教は禁物だ。布教禁制の場所だぞ。而も気楽さうに女房を連れて何の事だい。そんな事で神聖な神様の御用が出来ると思うて居るのか。一時も早う、足許の明かるい間に帰つて了へ。帰るのが厭なら、此川へドブンと飛び込め。さうすりや寧埒が明いて良いワ』</p>
+            <p class="ja-classical-line">宗彦『ハイハイ、私は御存じの通りバラモン教のお経を唱へて、巡礼に廻つて居る者で吾子の冥福を祈る丈の者、人さんに宣伝なぞは決して致しませぬ。私の身体には大変な地異天変が勃発したので、何所の騒ぎじや御座いませぬワイ。女房が今となつて暇を呉れの、何のと言ふものだから…』</p>
+            <p class="ja-classical-line">留公『ハツハア、地異天変て、どんな事かと思へば、嬶アにお尻を向けられたのだなア、そりや気の毒だ。俺も覚えが有る。それなら両手を挙げて同情…否賛成だ。オイオイ奥さま、斯んな結構な、青瓢箪然たるハズバンドを持ち乍ら、そんな綺麗な顔したナイスのお前が、こんな所までやつて来て、肱鉄砲を噛ますとはチツト人情に外れては居やせぬかい』</p>
+            <p class="ja-classical-line">お勝『妾は訳を聞いて貰はねば分りませぬが、あまりの事で、モウ見切りを付けました。同じ事なら…あの…見た様な何々に、何々したう御座います』</p>
+            <p class="ja-classical-line">と笠に顔を隠す。</p>
+            <p class="ja-classical-line">留公『ハツハツハア、分つた。お前のホの字とレの字は、トの字とメの字の付く男に秋波を送つて居るのだな。生憎様乍らトーさまには、立派な烏の様な色の黒いおからと云ふ奥さまが御座んすわいな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec13">
+        <div class="sec-header">
+          <span class="para-num">&sect; 13</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Okatsu: 'No, no, I am a young person, and I do not like earthy Kahazuki. If I am to be with someone, I want to become the wife of this grandfather. Even though you are aged, you have a somehow Sūkau Goyōbau, and for these three years, I have traveled across the wide Sekai searching, but I have never met a person of such Ritsupa and high Kihin. You are truly an Okata like Taikōbau. The moment I came Koko, I became sick of my husband, ho ho ho ho.'</p>
+          <p class="en-p">Tomekō: 'This is quite a Monozuki thing to have happened, hmph.'</p>
+          <p class="en-p">Having said that, he stuck his tongue out to the side, rolled his Shirome, and with a manner as if he did not know what to do with his Riyōte, he hung his hands down toward the Kazenpau, stretching them out with a hiss, and pretended to be astonished.</p>
+          <p class="en-p">Tagosaku: 'I am still Hitorimi, you know. Ah, if there is an Ahikuchi somewhere, I would like to buy one.'</p>
+          <p class="en-p">Tomekō: 'Hey, hey, what are you going to do buying an Ahikuchi? In these times when the Kuwagekiha Torishimari is strict, if you go to buy such a thing, you will be Tsuiseki by the police, and in the Shimahi, you will end up registered in the Kautōkeisatsu list of persons under surveillance.'</p>
+          <p class="en-p">Tagosaku: 'If one gets a wife and gets followed by the police, then everyone in the village is a person under surveillance by the high police, aren't they?'</p>
+          <p class="en-p">Tomekō: 'You are a fellow who does not understand the point. They say a broken pot gets a patched lid, and if you do not take a wife who is appropriate, you will eventually have to taste the sorrow of a broken mirror. Sending amorous glances to such a Ritsupa nice person is like a paper lantern trying to match a temple bell. However, grandfather, it is as if flowers have bloomed on a withered tree. As expected, you are great. In that case, I approve. Go ahead and take her. In return, I will come by now and then to help you with things like drawing water.'</p>
+          <p class="en-p">Okatsu: 'Oho ho ho.'</p>
+          <p class="en-p">Munehiko spun around and cast off his kimono, removed even his loincloth, and without a hint of regret, threw his hat, straw raincoat, and staff all together into the rapids of the river.</p>
+          <p class="en-p">Munehiko: 'Ya, grandfather, now I have peeled off all the labels of Brahmanism and have become a newborn babe. Please, make me your disciple. And please, take this woman as your wife. From today, I shall revere your wife as my own lady. Now, Okatsu, you need not be reserved, so call him Mune-so and treat him as you please.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お勝『イエイエ妾は若い人や、土臭い蛙切りは虫がすきませぬ。同じ添ふのなら此お爺さまの女房になりたいのですよ。年は老つて居られても、どこともなしに崇高な御容貌、今年で三年が間、広い世界を股にかけて探して見ましたが、こんな立派な気品の高いお方に逢うた事は有りませぬ。まるで太公望の様な御方ですワ。此処へ来るなり、宅のハズバンドが厭になつて了つたのですよ、ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">留公『是れは又エライ物好も有つたものだナア、ヘーン』</p>
+            <p class="ja-classical-line">と言つた限り、舌を斜かひに噛み出し、白眼を剥いて、両手の遣り場が無い様な調子で、下前方へ俯向けに手を垂らしシユーツと延ばし、呆れたふりをして見せる。</p>
+            <p class="ja-classical-line">田吾作『わしは未だ独身だがなア。アーアどつかに合口があつたら、一つ買ひたいものだ』</p>
+            <p class="ja-classical-line">留公『コリヤコリヤ短刀なんか買つて如何するのだい。過激派取締の喧しい時に、そんな物でも買ひに往かうものなら、それこそポリスに追跡され、終局には高等警察要視察人簿に登録されて了ふぞ』</p>
+            <p class="ja-classical-line">田吾作『女房を貰つて、警察につけられるのなら、村中の奴ア、みんな高警要視察人ぢやないか』</p>
+            <p class="ja-classical-line">留公『貴様も訳の分らぬ奴ぢやなア。……破れ鍋に綴蓋と云つて、それ相当の女房を持たねば、遂には破鏡の悲しみを味ははねばならぬぞ。こんな立派なナイスに対して秋波を送るのは、チツと提灯に釣鐘だ。併しお爺さま、枯木に花が咲いたやうなものだ。流石はエライ。それなれば私も賛成だ。貰ひなさい。其代りに私がチヨイチヨイと水汲み位、手伝ひに来てあげるワ』</p>
+            <p class="ja-classical-line">お勝『オホヽヽヽ』</p>
+            <p class="ja-classical-line">宗彦はクルクルと着物を脱ぎ棄て、褌まで除つて、川の早瀬へ惜し気も無く、笠も蓑も杖も一緒に投げ込んで了つた。</p>
+            <p class="ja-classical-line">宗彦『ヤアお爺さま、モウ是れでバラモン教のレツテルを残らず剥がし、生れ赤児になつて了つた。どうぞお前さまの弟子にして下さい。さうして女房は貰つてやつて下さいませ。今日からは女房をあなたの奥さまとして敬ひます。ナアお勝、遠慮は要らぬから宗々と呼びつけにするのだよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec14">
+        <div class="sec-header">
+          <span class="para-num">&sect; 14</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Okatsu once again spun around, stripped off even her Shitaobi, and threw her Mino, Kasa, and Kongauzue all together into the water with a splash.</p>
+          <p class="en-p">Munehiko: 'Ah, a wife is a wife after all. When it comes to this, I feel as if a bit of beauty and lotus still remain. However, Grandfather-sama, please bestow some Kimono upon me. Anything will do...'</p>
+          <p class="en-p">Matsutakahiko: 'Even if you say so, I am not Hokukokukaminari, and I am wearing only what I have on. Like Sanshō on a tree with Meshitsubu, I am wearing only what I have, and there is nothing I can do. You two must be patient for a while in your Senzo-inherited Yōfuku.'</p>
+          <p class="en-p">Tomekō: 'Hey, I will go and fetch my wife's Kimono and present them to the naked ones. Tagosaku, you must offer up your Itsuchiyōra.'</p>
+          <p class="en-p">Tagosaku: 'I wonder if they will accept it. I am a bit short, so I wonder if it will fit them.'</p>
+          <p class="en-p">Tomekō: 'Whether it fits or not, it is better than having nothing.'</p>
+          <p class="en-p">Matsutakahiko: 'Hey, Tomekō-sama, Tagosaku-sama, the world is Ahimitaga. It must be so. This too is the Kage of the Kankuwariyoku of Ananai-kyō...'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お勝は又もやクルクルと下帯まで脱ぎ棄て、同じく蓑も笠も、金剛杖も一括にしてザンブとばかり投げ込んだ。</p>
+            <p class="ja-classical-line">宗彦『アヽやつぱり女房は女房だ。斯うなるとチツとチツと、ミとレンが残つとる様な気がする。併し乍らお爺さま、着物を私に恵んで下さい。何でも宜しいから……』</p>
+            <p class="ja-classical-line">松鷹彦『さうだと云つて、わしも北国雷ぢやないが着たなりだ。山椒の木に飯粒で、着の実着の儘、どうする事も出来やしない。先祖譲りの洋服で、二人共暫く辛抱するのだなア』</p>
+            <p class="ja-classical-line">留公『ヤア宅の嬶アの着物を、俺が取つて来て、裸ナイスに進上しよう。田吾作、貴様はお前の一張羅を献上せい』</p>
+            <p class="ja-classical-line">田吾作『貰うて下さるだらうかな。わしはチツと背が低いから、身に合ふだらうか』</p>
+            <p class="ja-classical-line">留公『合うても合はいでも、無いより優しだ』</p>
+            <p class="ja-classical-line">松鷹彦『ヤア留さま田吾作さま、世の中は相身互ひぢや。さうなくてはならぬ。是れもヤツパリ三五教の感化力のお神徳だ……』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: 六六六 [666]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: Plum Flower の痣 [668]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

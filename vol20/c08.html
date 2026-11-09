@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: 心の Ogre [670] - Volume 20 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 20 Table of Contents</a>
+      <span>Volume 20</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 20 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: 心の Ogre [670]</h1>
+      <p class="chapter-title-ja">心の鬼〔670〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Munehiko bade farewell to his siblings, ascended to the sacred site, and was commanded by Kotoyoriwakenomikoto to serve as a glorious Sendenshi. With a heart full of joy, he returned to the village of Uzuyama, performed a Haukokusai before the shrine of Takeshi, and bid farewell to the villagers. He then prepared his travel gear and set out on his first journey of Senden to conquer the Magami who had entrenched themselves deep in the mountains of Mikunigadake.</p>
+          <p class="en-p">Tomekō and Tagosaku had gone ahead and were waiting at the edge of the village.</p>
+          <p class="en-p">Munehiko: 'Are you not my brother-in-law Tagosaku? Oh, Tomekō-sama, you are there too. Where are you going?'</p>
+          <p class="en-p">Tagosaku: 'Please, take me with you as your companion on this Senden journey for just two or three days. I consulted with Tomekō-sama and we have been lying in wait for you here.'</p>
+          <p class="en-p">Munehiko: 'I appreciate the offer, but I have received word from Kotoyoriwakenomikoto-sama that the Sendenshi must travel alone. If it were any other matter, I would gladly go with you, but as this is my first Senden mission, I must decline your kind offer, however difficult it may be.'</p>
+          <p class="en-p">Tagosaku: 'If I am not a Sendenshi, there should be no harm in accompanying you as a believer, should there?'</p>
+          <p class="en-p">Tomekō: 'Please, just two or three days will suffice, so do take us with you.'</p>
+          <p class="en-p">Munehiko: 'If you go on your own accord using your own feet, there is no harm in it, as we are traveling the same path... However, as a Sendenshi, Munehiko must travel alone from beginning to end.'</p>
+          <p class="en-p">Tomekō: 'Where are you headed?'</p>
+          <p class="en-p">Munehiko: 'Let me see. Kotoyoriwakenomikoto-sama told me to cross Akashi Pass, pass through Yamakuni, and conquer the demons of Mikunigadake. It must be a very high mountain, I suppose.'</p>
+          <p class="en-p">Tomekō: 'It is a high mountain that spans the three provinces of Omi, Wakasa, and Taniwa. They say it is inhabited by fierce beasts, monkeys, and giant serpents.'</p>
+          <p class="en-p">Tagosaku: 'Hearing that, I cannot let you go alone. Please, let us accompany you.'</p>
+          <p class="en-p">Munehiko: 'That is absolutely out of the question.'</p>
+          <p class="en-p">He shook his head repeatedly and walked on ahead.</p>
+          <p class="en-p">It was the beginning of autumn, and due to the thick fog for which Taniwa is famous, one could not see even six feet ahead. Munehiko quickened his pace and advanced toward Akashi Pass. The two men, hidden by the fog, hurried ahead and, at a great waterfall falling at the foot of Akashi Pass, stripped naked and waited for Munehiko to approach while performing Misogi. Munehiko, obstructed by the fog, did not notice the two men being struck by the waterfall.</p>
+          <p class="en-p">Munehiko: 'I hear a tremendous sound of water, it seems.'</p>
+          <p class="en-p">He whispered to himself and climbed the slope. The two men did not notice at all that Munehiko was passing just two or three ken ahead of them. Munehiko reached the summit of Akashi Pass. The fog filled the valleys, and only the peaks of the high mountains floated here and there like a painting.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宗彦は親兄妹に別れを告げ一旦聖地に参ゐのぼり、言依別命より天晴れ宣伝使の役を命ぜられ、心いそいそとして再び宇都山の里に立ち帰り、武志の宮の前に報告祭を行ひ里人に別れを告げて、山奥深く三国ケ岳に割拠する魔神を征服せむと、旅装を整へ宣伝の初旅に就いた。留公、田吾作の二人は村の外れに先廻りして待つて居た。</p>
+            <p class="ja-classical-line">宗彦『お前は義弟の田吾作ぢやないか、おゝ留さまも其処に居るなア、何処へ行くのだ』</p>
+            <p class="ja-classical-line">田吾作『何卒私を二三日、宣伝使のお伴に連れて行つて下さいな、留さまと相談の上此処に待伏して居りました』</p>
+            <p class="ja-classical-line">宗彦『それは折角だが宣伝使は一人のものだと言依別命様より承はつて居る。外の事なら一緒に行かうが、今日は宣伝の初陣だから、御親切は有難いが是非なくお断り申す』</p>
+            <p class="ja-classical-line">田吾作『私は宣伝使でない以上は、信者としてお伴しても差支ありますまい』</p>
+            <p class="ja-classical-line">留公『何卒二三日で宜敷いから連れて行つて下さい』</p>
+            <p class="ja-classical-line">宗彦『お前の足でお前が勝手に行くのなら差支無からう、同じ一条の道を通るのだから……然し宣伝使として宗彦は徹頭徹尾一人旅だ』</p>
+            <p class="ja-classical-line">留公『貴方は何処を指してお出でになるのですか』</p>
+            <p class="ja-classical-line">宗彦『そうだなア、言依別命様は明石峠を越え、それから山国を経て三国ケ岳の悪魔を征服して来いとの事だつた。随分高い山だらうなア』</p>
+            <p class="ja-classical-line">留公『近江の国と若狭、田庭三国に跨る高山です、大変な猛獣や猿が棲み大蛇が居ると云ふ事です』</p>
+            <p class="ja-classical-line">田吾作『さう聞くと私は貴方一人をやる訳にはゆきませぬ、是非お伴をさして下さいな』</p>
+            <p class="ja-classical-line">宗彦『絶対になりませぬ』</p>
+            <p class="ja-classical-line">と首を振り振り先に立つて行く。</p>
+            <p class="ja-classical-line">折しも秋の初め、田庭名物の深霧に六尺先は少しも見えない。宗彦は足を速めて明石峠をさして進み行く。二人の男は霧に隠れて足を速め、先廻りして明石峠の麓に落つる大瀑布に真裸となり、身禊し乍ら宗彦の進み来るを待つて居た。宗彦は二人の滝にうたれて居るのを霧にさへぎられて気がつかず、</p>
+            <p class="ja-classical-line">宗彦『何だか大変な水音がして居るなア』</p>
+            <p class="ja-classical-line">と小声に囁き乍ら坂を登り行く。二人の男は宗彦が我二三間前の道を通過して居るのに少しも気がつかなかつた。宗彦は明石峠の頂上に登り着いた。霧は谷間を埋めて処々に高山の頂きのみ画の様に浮いて居る。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Munehiko: 'Ah, how beautiful the scenery of this sea of mist is; it is a sight that could never be seen in the land of Kii. The feeling of gazing upon this scenery is exactly like the mood of wandering in the Daiichitengoku.'</p>
+          <p class="en-p">He is speaking in a Monorogu.</p>
+          <p class="en-p">Just then, a woman of about Shijifu, looking worn out and in a shabby Minari, appeared as if floating out from the mist, walking briskly.</p>
+          <p class="en-p">Munehiko: 'Yo, a strange woman has come along. She is walking as if she is in a great hurry; there seems to be some Yōsu to this. I shall try asking her when she approaches Koko.'</p>
+          <p class="en-p">He thinks this in his heart. The woman notices Munehiko's figure, stops abruptly, and stares at Konata with suspicious, wide-open eyes.</p>
+          <p class="en-p">Munehiko: 'Anata, you are a woman all Hitori, crossing this high mountain pass; Doko are you going?'</p>
+          <p class="en-p">The woman, looking frightened, says:</p>
+          <p class="en-p">Woman: 'Hai, I am a person from a small village called Kumada below here. I am going to the Akashi waterfall to be struck by the water from now.'</p>
+          <p class="en-p">Munehiko: 'Doko is this place called Akashi waterfall?'</p>
+          <p class="en-p">Woman: 'It is located about Shichihatsuchiyō down this mountain.'</p>
+          <p class="en-p">Munehiko: 'I also just climbed up this slope, but because of the deep Fukagiri, I did not notice it. Dauri, I thought there was a Kashiyo where I heard the Minaoto. And to go to be struck by the waterfall must have some deep Wake; tell me about it.'</p>
+          <p class="en-p">Woman: 'Hai, my husband is a person named Harahiko, and for two or three years he has been ailing, and lately it has become a very serious illness. Therefore, I am going to immerse my body in the waterfall, wishing to pray to the God of Akashi waterfall to save my husband's illness.'</p>
+          <p class="en-p">Munehiko: 'What kind of illness is it? Depending on the circumstances, I am thinking of praying to the God to help him...'</p>
+          <p class="en-p">Woman: 'Hai, thank you very much. When night comes, various things appear and torment him. Each time that happens, he breaks out in a cold sweat and grows thinner day by day; now he has become so shabby that he looks like nothing but skin and bones.'</p>
+          <p class="en-p">Munehiko: 'That must be an illness caused by a Mononoke. Come, I will examine him once, so please guide me.'</p>
+          <p class="en-p">Woman: 'That is thank you very much. From here, we go down this mountain slope, and in a small village about four or five Chō away, my thatched hut stands at the foot of the mountain. I beg for your trouble.'</p>
+          <p class="en-p">She stands in front and guides him. They finally arrived at the woman's house. Under a forest of large trees, there is a fairly large house with a Kabukimon gate; that is this woman's residence.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宗彦『アヽ何と霧の海の景色と云ふものは綺麗なものだなア、到底紀の国では見られぬ図だ。此景色を眺めて居る心持は全で第一天国へ遊楽して居る様な気分だ』</p>
+            <p class="ja-classical-line">と独語して居る。</p>
+            <p class="ja-classical-line">時しも窶れ果てた四十位の一人の女、見すぼらしき風姿をしてスタスタと霧の中から浮いた様に現はれて来た。</p>
+            <p class="ja-classical-line">宗彦『イヨー、妙な女がやつて来よつたぞ、大変に忙し相に歩いて居る、何か之には様子があり相だ、一つ此処へ近づいたら訊ねて見よう』</p>
+            <p class="ja-classical-line">と心に思つて居る。女は宗彦の姿に気がつきキツト立ち止り、怪しの目をぎよろつかせ此方を見詰めて居る。</p>
+            <p class="ja-classical-line">宗彦『貴女は此高い峠を越えて女の身の只一人、何処へ行くのだ』</p>
+            <p class="ja-classical-line">女は怖相に、</p>
+            <p class="ja-classical-line">女『ハイ、私は此下の熊田と云ふ小村の者で御座います。明石の滝へ是から打たれに参ります』</p>
+            <p class="ja-classical-line">宗彦『明石の滝と云ふのは何処にあるのだ』</p>
+            <p class="ja-classical-line">女『此山を七八丁許り下つた処に御座います』</p>
+            <p class="ja-classical-line">宗彦『私も今此坂を登つて来たのだが余りの深霧で気がつかなかつた。道理で水音のした箇所があつた様に思つた。して又滝に打たれに行くと云ふのは何か深い理由があるであらう、それを言つて見なさい』</p>
+            <p class="ja-classical-line">女『ハイ、私の夫は原彦と申すもの、二三年前からフラフラと患ひつき此頃では大変な大病で御座います。それで明石の滝の神様へお願ひ申して夫の病気を助けたさに、滝に身を浸しに参る者で御座います』</p>
+            <p class="ja-classical-line">宗彦『何んな病気だな、都合に依つたら神様に願つて助けて上げようと思ふのだが…』</p>
+            <p class="ja-classical-line">女『ハイ、有難う御座います、夜分になると色々のものが出て参ります、さうして苦めるのです、その度毎に冷汗をグツスリかき日に日に痩衰へ、今は最早骨と皮ばかりに見すぼらしくなつて居ります』</p>
+            <p class="ja-classical-line">宗彦『そりや何か物の怪の病気であらう。サア一遍調べて見るから案内をしてお呉れ』</p>
+            <p class="ja-classical-line">女『それは有難う御座います。之から此山坂を下り、四五丁許り行つた所の小さき村で、山の麓に私の茅屋が建つて居ります。御苦労乍らお頼み申します』</p>
+            <p class="ja-classical-line">と先に立つて案内する。漸く女の家に着いた。大樹の森の下に冠木門をあしらつた一棟の相当に広い家がある、それが此女の邸宅。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Woman: 'It is but a shabby Abaraya, but please, do come in.'</p>
+          <p class="en-p">She bowed and entered the house. The voice of her husband Harahiko, suffering as he was tormented by something, leaked even to the outside. The woman muttered in a low voice, 'He has been possessed again,' and rushed into the house in a panic, running to the bedside of the sick man. Munehiko stepped over the threshold a little later, climbed onto the Shiyōjiyō, and began to recite the Amatsunorito; upon this, the sick man let out cries of even greater agony and began to writhe about. Four or five villagers were waiting in the next room, whispering about something. As soon as they heard the sound of the Norito, two or three men appeared on the scene.</p>
+          <p class="en-p">Man: 'I do not know who you are, but you must be the one whom Otsuyu-sama brought back with her; come, please, do come this way and rest.'</p>
+          <p class="en-p">Munehiko said, 'Gomen,' and as he was invited, he stepped into the room and sat down. Though he could not hear exactly what was being said, the sick man was shouting very loudly at Otsuyu. Hearing this voice, Munehiko turned to the villagers.</p>
+          <p class="en-p">Munehiko: 'Is the illness always like that?'</p>
+          <p class="en-p">Villager A: 'Since four or five days ago, it has become even more violent. He started saying, "Tago is coming, Tago is coming," and... he suffers terribly. And then, he sometimes recovers as if nothing had happened, as if he had been telling a lie. It is an illness with no known cause... they say it is the curse of a dead spirit.'</p>
+          <p class="en-p">Munehiko: 'The curse of a dead spirit... do you have any idea why that might be?'</p>
+          <p class="en-p">Villager A: 'We villagers did not know the cause of the illness at all at first, but lately we have begun to understand that it is a dead spirit. He keeps raving that it will take his life within these two or three days, and his struggling is truly terrible.'</p>
+          <p class="en-p">Villager B: 'It seems the master of this house, Harahiko, is from the Kamigata region, but although it has been thirteen years since he became the husband of Otsuyu-san, he has never revealed his background, so we did not know where he was from or what he had been doing. But listening to the delirious ravings of the sick man, though I cannot say it in a loud voice, it seems this man is a thief who killed someone. And he himself is revealing that the spirit of the man he killed is cursing him. The retribution of Heaven is a fearful thing, indeed.'</p>
+          <p class="en-p">Munehiko: 'Human beings commit sins quite often without even realizing it; those who kill people, set fires, or commit crimes such as robbery and fraud are truly to be detested for the sake of the world. However, there is a saying that one should hate the sin but not the person; the impartial and selfless Lord God would likely not punish the physical body. He is surely being tormented by his own sins. If only his sins could be removed, Harahiko-sama would surely recover before long. In this world, there are many sinners invisible to the human eye, and among them, the heaviest sins are those of scholars and religious leaders. Those who cloud, rot, and kill the magnificent soul received from the Lord God—those who spread erroneous theories, those who misunderstand the heart of the Lord God and propagate it as if it were true, or those pseudo-religious leaders and pseudo-scholars who imitate the Lord God—are the ones committing the gravest sins against the Kingdom of God.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">女『見すぼらしき茅屋で御座いますが、何卒お這入り下さいませ』</p>
+            <p class="ja-classical-line">と会釈して内に入る。夫原彦の何物にか魘されて苦しむ声は戸外に迄洩れて来た。女は『又来よつたなア』と小声でつぶやき乍ら、慌てて屋内に飛び込み、病人の枕許に駆け寄つた。宗彦は少し遅れて閾を跨げ、床上に上り天津祝詞を奏上するや、病人は益々苦悶の声を放ち狂ひ廻る。四五人の村人は次の間に控へて何事か話し合つて居た。祝詞の声を聞くより二三人の男其場に現はれ、</p>
+            <p class="ja-classical-line">男『何処の方かは知りませぬが、定めてお露さまがお連れ申して帰つた方でせう、サア何卒此方へ来て御休息下さいませ』</p>
+            <p class="ja-classical-line">宗彦は『御免』と云ひつつ招かれて一間に踏込み座に着いた。何事か確とは聞きとれないが、非常に病人はお露を相手に呶鳴つて居る。此声を聞いて宗彦は村人に向ひ、</p>
+            <p class="ja-classical-line">宗彦『何時も病気はあの通りですか』</p>
+            <p class="ja-classical-line">甲『此四五日前から一層烈しく成つて来ました「田吾が来る田吾が来る」と云ひ出しまして……それはそれは随分苦しむのです。さうして又ケロリと嘘を吐いた様に癒る事もあるのです。理由の分らぬ病気……何でも死霊の祟りだと云ふ事です』</p>
+            <p class="ja-classical-line">宗彦『死霊の祟りとは、……そりや又何か心当りがあるのですか』</p>
+            <p class="ja-classical-line">甲『吾々村人も初めはちつとも病気の原因が分りませなんだが、此頃そろそろ死霊だと云ふ事が分り出したのです。何でも茲二三日の間に生命を取らねば措かぬと口走り、それはそれは大変な藻掻き様です』</p>
+            <p class="ja-classical-line">乙『何でも此処の主人の原彦は上方の者らしいが、お露さんの婿になつてから早十三年にもなりますのに素姓を明かさないので、何処の人だか、何をして居つたのか分らなかつたのだが、病人の囈言を云ふのを聞いて見れば、大きな声では言はれませぬが、此男は泥棒をして人を殺した奴らしいですよ。そして殺された男の死霊が祟つて居るのだと云ふ事、病人自ら現になつて喋ります。天罰と云ふものは恐ろしいものですなア』</p>
+            <p class="ja-classical-line">宗彦『人間と云ふものは随分不知不識の間に罪を作つて居るものだ、人を殺し火を放ち、或は強盗、詐偽等の罪悪を犯す者は実に天下の為に憎むべき者であります。然し乍ら其罪を憎んで人を憎まずと云ふ事がある、公平無私な神様は肉体を罰し給ふ様な事はありますまい、屹度其罪の為めに苦しめられて居るのでせう。罪さへとれれば原彦さまも間も無く本復するでせう。世の中には人間の目に見えぬ罪人が沢山ある、中でも一番罪の重いのは学者と宗教家だ。神様から頂いた結構な霊魂を曇らせ、腐らせ、殺すのは、誤つた学説を流布したり、神様の御心を取違へて誠しやかに宣伝したり、或は神様の真似をするデモ宗教家、デモ学者が最も重罪を神の国に犯して居るものですよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kō: 'Hey, is that so? Where are the sins committed in the heart, or the sins of scholars and religious figures, judged as good or evil?'</p>
+          <p class="en-p">Munehiko: 'It is impossible for incomplete humans to judge things like good and evil, or merit and demerit. That is why Kami appear in the world to distinguish between good and evil; humans have no choice but to interpret everything with good intentions, pray to the Nahohi-no-Kami, and have their sins seen anew, heard anew, and rectified anew by Kamunahohi and Ōnahohi. We often unknowingly contain grave sins within the things we do every day, thinking they are for the sake of the nation, for the sake of the Way, and for the sake of society. If one says that, one must carry out what one believes to be good to the very end, or one cannot fulfill one's heavenly duty as an administrator of the governance of heaven and earth; yet if one remains still, saying one must not commit sins, one commits the great sin of a sluggard. Therefore, one has no choice but to carry out what one believes to be the best to the very end, and morning and evening, recite the Norito and pray to Kami to see and hear our sins anew.'</p>
+          <p class="en-p">Otsu: 'Current laws only punish sins of action and do not punish sins of the spirit. If, by any chance, a soul commits a sin and the body is used as a tool, is it not a truly extreme contradiction from the perspective of the divine world that the body is still treated as the sinner?'</p>
+          <p class="en-p">Munehiko: 'That is where you are human. In any case, laws treat everything that is inconvenient for the life of humans among one another as a sin... Even if one becomes a sinner under the law, there are times when one is praised in the divine world for doing excellent service; and conversely, things recognized as exemplary conduct under the law are sometimes recognized as great sins in the divine world. That is why, unless Kami appear and judge, it is impossible for humans, in their station, to distinguish between good and evil with absolute fairness. Furthermore, human laws and the sanctioning power of the state are finite, not absolute. When Mount Asama erupts and ravages forests and fields, destroying houses; when Sakurajima explodes and destroys many human lives; when the catfish of earthquakes leaps, turning mountains into seas and seas into mountains, burning houses, killing people, and plundering all property—there is no place to sue Mount Asama, earthquakes, or Sakurajima as defendants under laws made by humans, no prison to throw them into, and no way to put them on trial. It is utterly futile. There is no choice but to leave everything to the great will of Kami.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">甲『ヘイ、そんなものですかなア、心に犯した罪や、学者や宗教家の罪は何処で善悪を調べるのですか』</p>
+            <p class="ja-classical-line">宗彦『到底不完全な人間が善悪ぢやとか、功罪だとか云ふ事は判断のつくものぢやありませぬ。それだから神が表に現はれて善と悪とを立別け遊ばすので、人間は只何事でも善意に解釈し、直霊の神にお願し、神直日大直日に罪を見直し聞直し詔直して貰ふより仕方がありませぬよ。我々は日々一生懸命に国家の為め、お道の為め、社会の為めと思つてやつてる事に大変な罪悪を包含して居ることが不知不識に出来て居るものです。それだと云つて善だと信じた事は何処迄も敢行せねば、天地経綸の司宰者としての天職が務まらず、罪悪になつてはならぬと云つてジツとして居れば、怠惰者の大罪を犯すものですから、最善と信じた事は飽迄も決行し、朝夕に祝詞を奏上し神様に見直し聞直しを願ふより仕方はありませぬ』</p>
+            <p class="ja-classical-line">乙『今の法律は行為の上の罪許りを罰して、精神上の罪を罰する事はせないのですが、万一霊魂が罪を犯し、肉体が道具に使はれても矢張其肉体が罪人になると云ふのは、神界の上から見れば実に矛盾の甚しいものではありますまいか』</p>
+            <p class="ja-classical-line">宗彦『そこが人間ですよ、兎も角法律と云ふものは人間相互の生活上、都合の悪い事は皆罪とするのですから……仮令法律上の罪人になつても神界に於ては結構な御用として褒めらるる事もあり、法律上立派な行ひだと認められて居る事が、神界に於て大罪悪と認められる事もあるのです。それだから何事も神様が現はれてお裁き下さらぬ事には善と悪との立別けは人間の分際として、絶対に公平に出来るものではありませぬ。又人間の法律や国家の制裁力と云ふものは、有限的のものであつて、絶対的のものでは無い、浅間山が噴火して山林田畑を荒し、人家を倒し、桜島が爆発して数多の人命を毀損し、地震の鯰が躍動して山を海にし、海に山を拵へ家を焼き人を殺し、財産を全然掠奪して仕舞つても、人間の作つた法律で浅間山や地震や桜島を被告として訴へる処もなし、放り込む刑務所も無し、裁判する事も出来ぬ様なもので到底駄目です。只何事も神様の大御心に任すより仕方がありませぬなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Just as they were speaking, the Biyōnin in the next room let out a hideous voice.</p>
+          <p class="en-p">Harahiko: 'Ya, Tagosaku, Tagosaku, forgive me, I was wrong. You must be resentful for having been dropped by me into the Ōigaha and dying, but now there is nothing that can be done. Resign yourself to the fact that this is some kind of Innen, and please, I beg you, spare at least my Inochi. Ah, I was wrong, I was wrong, forgive me, forgive me.'</p>
+          <p class="en-p">Munehiko: 'Strange, was there a person called Tagosaku in this area?'</p>
+          <p class="en-p">Otsu: 'When you say Tagosaku, it is a Gamei for all of us. Tagosaku is like a Daimeishi for humans who till the Tahata, and Mokubee is for those who enter the Sanrin to work as Kikori or cut Takimono, so there are so many Tagosakus that I cannot tell who was killed.'</p>
+          <p class="en-p">Munehiko: 'I understand that, but is there not a man specifically named Tagosaku?'</p>
+          <p class="en-p">Kō and Otsu simultaneously,</p>
+          <p class="en-p">Kō, Otsu: 'Well, we have not heard of one. It is said that there is a great Awatemono in the village of Uzuyama who is called Tagosaku, but whether that is his Jitsusai name or just an Itsupanteki name for a Hiyakushiyō, that is not Hatsukiri. In this area, we call a man who is a bit flustered and makes mistakes a fellow like the Tagosaku of Uzuyama; we have only heard of it vaguely, and we do not even know if such a person actually exists or not.'</p>
+          <p class="en-p">From the next room, the Biyōnin's shouting voice:</p>
+          <p class="en-p">Harahiko: 'Tagosaku-dono, the ghost, I was wrong, I was wrong, please spare me... What? Why should I spare a wicked man like you? You are the one who took my Inochi. I will dwell in your body, eat your intestines, gouge out your lungs, twist your stomach, and torment you, torment you, and kill you by inches. Do you think I will let this grudge go unavenged?'</p>
+          <p class="en-p">Harahiko was shouting this as if asking and answering himself.</p>
+          <p class="en-p">Kō: 'He is a mysterious Biyōnin, is he not? It appears that a dead spirit enters and leaves his stomach. It seems it must have entered his stomach now, as he is speaking in a voice different from his own... That must surely be the Onryō of the murdered Tagosaku. Would you please perform a prayer for him? We in the village are taking turns, five of us at a time, keeping watch like this without sleeping, so while I feel sorry for Otsuyu-san, we villagers are also having a Taihen difficult time and are troubled.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">斯く話す折しも次の間の病人、いやらしい声を出して、</p>
+            <p class="ja-classical-line">原彦『ヤア田吾作田吾作、赦して呉れ、俺が悪かつた、お前は大井川から俺に落されて死んで悔しからうが、今となつて如何する事も出来ない、之も何かの因縁ぢやと諦めて何卒俺の生命丈けは助けて呉れ、アヽ悪かつた悪かつた、赦して赦して』</p>
+            <p class="ja-classical-line">と叫び出した。</p>
+            <p class="ja-classical-line">宗彦『ハテナ、此辺に田吾作と云ふ人があつたのですか』</p>
+            <p class="ja-classical-line">乙『田吾作と云つたら皆我々の雅名です。田吾作は田畑を耕し、杢兵衛は山林にわけ入つて樵夫をやつたり薪物を刈つて来る人間の代名詞見た様なものですから、あまり沢山の田吾作で誰が殺されたのやら訳が分りませぬ』</p>
+            <p class="ja-classical-line">宗彦『それは分りましたが、然し一人に特定の名の付いた田吾作と云ふ男はありますまいかな』</p>
+            <p class="ja-classical-line">甲、乙一時に、</p>
+            <p class="ja-classical-line">甲、乙『サア余り聞きませぬなア、何でも宇都山の里に大変な周章者があつて、その男を田吾作と云ふさうですが、それも実際の名か、一般的の百姓の名か、そいつア判然致しませぬ。少し慌ててやり損ひをする男を、此辺では宇都山の田吾作みた様な奴だと云つて居ます、仄に話に聞いて居る許りで実際そんな方が有るのか無いのかそれも分りませぬ』</p>
+            <p class="ja-classical-line">隣の室より病人の叫び声、</p>
+            <p class="ja-classical-line">原彦『田吾作の幽霊どの、悪かつた悪かつた、何卒助けて呉れ……何、貴様の様な悪人を助けて堪らうかい、俺の生命をとつた奴だ、貴様の肉体に宿り腸を喰ひ、肺臓を抉り、胃袋を捻切り、苦しめて苦しめて嬲殺しにしてやるのだ。此怨みを晴らさな措かうか』</p>
+            <p class="ja-classical-line">と原彦は自問自答的に呶鳴つて居る。</p>
+            <p class="ja-classical-line">甲『不思議な病人でせうがな、何でも腹の中に死霊が這入つたり出たりすると見えます。今は屹度腹へ這入つて居ると見えて本人と変つた声で云つて居ます…あれが殺された田吾作の怨霊に違ひありませぬなア、何卒一つ祈祷をしてやつて下さいますまいか、私達も村中が代る代る五人づつ斯うして不寝の番をして居るのですから、お露さんも気の毒ぢやが、吾々村中の者も大変に手間が取れて困つて居るのです』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Munehiko nodded, rinsed his mouth and washed his hands at the valley stream behind the house, recited the Amatsunorito, entered the sickroom shizushizu, sat in the tanza position at the bedside, clasped his hands, chanted the name of the Hōsaishiyushin of Ananai-kyō, and no sooner had he repeated the Kazūta two or three times than the patient sat up abruptly, rolled his eyes, twitched his nose from side to side like a horse, and stuck out his tongue.</p>
+          <p class="en-p">Harahiko: 'Ah, how hateful! I am the onriyō of Tagosaku. I shall torment this nikutai to the very end and will not leave until I have taken his inochi!'</p>
+          <p class="en-p">The patient, who had been so weak and unable to move, suddenly stood up and began to make a scene with strange tetsuki. Munehiko recited the Kazūta with itsushiyōkenmei.</p>
+          <p class="en-p">Munehiko: 'Now, now, Harahiko-sama, it is by no means the onriyō of Tagosaku that is causing this calamity; it is the oni of your own heart that is tormenting your body. I shall apologize to the Kamisama for you, and your sins have already been saved by the virtue of the Chiza-no-Okido atonement of Lord Kamususanōnomikoto. Be at peace.'</p>
+          <p class="en-p">Harahiko, with a fierce expression, replied:</p>
+          <p class="en-p">Harahiko: 'Ah, how hateful! No matter how much you say I am saved, I, Tagosaku, whose inochi was taken, will haunt you to the end. I killed your parents, and not to mention the person himself, I took the inochi of your wife, and I will haunt your whole family, relatives, and the entire village...'</p>
+          <p class="en-p">Munehiko: 'You say Tagosaku, but where is that Tagosaku now?'</p>
+          <p class="en-p">Harahiko: 'Tagosaku's nikutai perished under the great bridge of the Ōigawa, but my spirit is here, possessing you as a devil. How hateful, how hateful!'</p>
+          <p class="en-p">Munehiko: 'Does Tagosaku's face have any distinguishing features?'</p>
+          <p class="en-p">Harahiko: 'The feature is nothing other than a large mole right in the middle of the forehead. Look at my face; this is the proof.'</p>
+          <p class="en-p">With that, Harahiko thrust his forehead in front of Munehiko.</p>
+          <p class="en-p">Munehiko: 'There is no mole or anything of the sort, is there?'</p>
+          <p class="en-p">Harahiko: 'Since your spiritual eyes are not open, you are likely only looking at the nikutai of Harahiko. If you open your eyes and look at my true form, you will see the mole on my forehead. Ah, how hateful, kya-tsu, kya-tsu!'</p>
+          <p class="en-p">Saying this, he exposed his repulsive countenance to the fullest, crawled back into his original bed with a giggle, and continued to groan in agony, 'Un, un.'</p>
+          <p class="en-p">Otsuyu: 'Excuse me, Sendenshi-sama, will this patient recover?'</p>
+          <p class="en-p">Munehiko: 'He will certainly recover. Tagosaku, who has a mole on his forehead, is not dead; he is alive and kicking. He will surely come here soon. In short, it is a nervous disorder; he is being tormented by the oni of the sins he committed in his heart. Once the person himself comes here and says the single word "forgive," his full recovery is guaranteed.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宗彦は打ち頷き裏の谷川にて口を嗽ぎ手を洗ひ、天津祝詞を奏上し、徐々と病人の居間に入り来り枕頭に端坐し、両手を組み三五教の奉斎主神の御名を唱へ、天の数歌を二三回繰返すや否や、病人はムクムクと起き上り、目を剥き鼻を左右に馬の様にムケムケと廻転させ、舌を出し、</p>
+            <p class="ja-classical-line">原彦『アーラ怨めしやなア、俺は田吾作の怨霊だ、此肉体を何処迄も苦しめ生命をとらいで措くものかア』</p>
+            <p class="ja-classical-line">と妙な手付をなし衰弱しきつて動けない病人が俄に立つて騒ぎ出す。宗彦は一生懸命に天の数歌を奏上し、</p>
+            <p class="ja-classical-line">宗彦『これこれ原彦さま、決して田吾作の怨霊が殃をして居るのではない、お前の心の鬼が身を責るのだ。神様にお詫をしてやるから、お前の罪は神素盞嗚尊様の千座の置戸の贖ひの御徳に依つて最早救はれた、安心なされ』</p>
+            <p class="ja-classical-line">原彦は形相凄じく、</p>
+            <p class="ja-classical-line">原彦『アラ怨めしやなア、何程救はれたと云つても、生命をとられた田吾作は何処までも祟らにやおかぬ。親を殺し、本人は申すに及ばず、女房の生命をとり、一家親類村中までも祟つてやるぞよ……』</p>
+            <p class="ja-classical-line">宗彦『お前は田吾作と云ふがその田吾作は今何処に居るのだ』</p>
+            <p class="ja-classical-line">原彦『田吾作は大井川の大橋の下で肉体は亡びたが、精霊は此処に悪魔となつて憑いて居るのぢや哩のう、怨めしやア怨めしやア』</p>
+            <p class="ja-classical-line">宗彦『田吾作の顔には何か特徴があるか』</p>
+            <p class="ja-classical-line">原彦『特徴と云ふのは外でもない、眉間の真ん中に大きな黒子があるばつかりだ、俺の顔を見て呉れ、之が証拠だ』</p>
+            <p class="ja-classical-line">と原彦は宗彦の前に額を突き出す。</p>
+            <p class="ja-classical-line">宗彦『別に黒子も何もないぢやないか』</p>
+            <p class="ja-classical-line">原彦『お前は霊眼が開けて居ないから大方原彦の肉体を見て居るのだらう、私の正体を目を光らして見て呉れたら眉間の黒子が分るだらう。あゝ怨めしい、キヤツキヤツ』</p>
+            <p class="ja-classical-line">と云ひ乍ら嫌らしい相好を遺憾なく曝して、又元の寝間へクスクス這込み『ウンウン』と苦しさうに呻りを続けて居る。</p>
+            <p class="ja-classical-line">お露『もうし、宣伝使様、此病人は癒るでせうか』</p>
+            <p class="ja-classical-line">宗彦『癒りますとも、眉間に黒子のある田吾作は死んでは居ませぬよ、確にピンピンして生きて居ます、今に此処へやつて来るでせう、要するに神経病だ、心に犯した罪悪の鬼に責られて居るのです。今に当人がやつて来て「許す」と一言云つたら全快は請合です』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otsuyu: 'What do you say? Is that Tagosaku-san still alive? How could that possibly be?'</p>
+          <p class="en-p">Munehiko: 'It does not matter how; he is truly alive, so I shall show you the real person presently. Until Tagosaku arrives here, let us rest in the next room and wait.'</p>
+          <p class="en-p">Otsuyu: 'You have had a difficult journey. Please, go to the back room, have some tea, and rest at your leisure.'</p>
+          <p class="en-p">Munehiko said, 'Thank you,' bowed once, and went to the back room to rest.</p>
+          <p class="en-p">Kō: 'My, Sendenshi-sama, that is a strange patient, is he not? He must be one in a thousand. And now that I hear Tagosaku-sama is alive, what a mystery that is!'</p>
+          <p class="en-p">Munehiko: 'The entire space between heaven and earth is filled with nothing but mysteries. Even a single leaf of greens is truly mysterious when you think about it. Modern humans marvel at things like warts being removed or beriberi being cured by praying to stone Jizō statues, but such things are not worth calling mysteries. First of all, is it not a mystery that humans can speak? No matter how thoroughly you examine it through the lens of advanced anatomy or physiology, there is no vocal sac, yet various Kototama of the seventy-five sounds emerge without end; there is nothing more mysterious than this.'</p>
+          <p class="en-p">Otsu: 'When you put it that way, it is true. There is nothing in all of creation that is not a mystery.'</p>
+          <p class="en-p">Just as they were talking, Tagosaku and Tomekō knocked on the gate.</p>
+          <p class="en-p">Tagosaku, Tomekō: 'Excuse me, may I ask a question? Is the splendid Sendenshi of the Sangyō-kyō named Munehiko by any chance stopping at this house?'</p>
+          <p class="en-p">At this voice, Otsuyu rushed to the gate in a flurry, and the moment she saw Tagosaku's face,</p>
+          <p class="en-p">Otsuyu: 'Ah! You have a mole between your eyebrows. Are you not Tagosaku-sama? Oh, my husband has been so rude to you. Please, I beg you, forgive him.'</p>
+          <p class="en-p">Tagosaku, not understanding what was going on, followed Otsuyu with Tomekō into the living room where Munehiko was resting.</p>
+          <p class="en-p">Munehiko: 'Ah, you have come well. However, please come this way for a moment.'</p>
+          <p class="en-p">He led them to Harahiko's sickroom and shook Harahiko awake. Harahiko, with a body exhausted by illness, managed to sit up, opened his eyes, and the moment he saw Tagosaku's figure, he let out a cry of 'Ah!' and collapsed back onto the bedding, writhing in agony. Tagosaku, despite Harahiko's haggard appearance, stared at him in half-doubt, thinking that the look in his eyes, the shape of his nose, and the set of his mouth bore a striking resemblance to the thief he had pushed into the river on the bridge over the Ōigawa more than ten years ago.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お露『何と仰有います、あの田吾作さんが生きて居られますか、そりや又如何した訳でせう』</p>
+            <p class="ja-classical-line">宗彦『どうでも有りませぬ、実際生きて居るのですから今に実物をお目に掛けませう、田吾作が此処へ参る迄、次の室で休息して待つ事に致しませう』</p>
+            <p class="ja-classical-line">お露『御苦労様で御座いました、何卒奥でお茶なりと召し上り緩々御休息下さいませ』</p>
+            <p class="ja-classical-line">宗彦は『有難う』と一礼し奥の間に行つて休息した。</p>
+            <p class="ja-classical-line">甲『何と宣伝使様、妙な病人で御座いますなア、マア千人に一人位な者でせうか、さうして承はれば田吾作さまは生きて御座るとは、そりや又何と云ふ不思議でせう』</p>
+            <p class="ja-classical-line">宗彦『凡て天地の間は不思議ばかりで満たされて居るのです、菜の葉一枚だつて考へてみれば実に不思議なものです。今の人間は石地蔵を祈つて疣がとれたとか、脚気が癒つたとか云つて不思議がつて居るが、そんな事は不思議とするに足りませぬ。第一人間は、ものを云ふのが不思議ではありますまいか、何程立派な解剖学や生理学の上から調べてみても、声の袋もなし、それに色々の言霊が七十五声際限もなく出て来るのですから、是位不思議な事はありませぬよ』</p>
+            <p class="ja-classical-line">乙『さう聞けばさうですな、森羅万象一として不思議ならざるは無しですなア』</p>
+            <p class="ja-classical-line">斯く話す折しも田吾作、留公の両人は門の戸を敲き、</p>
+            <p class="ja-classical-line">田、留『モシモシ、一寸お尋ね致します、宗彦と云ふ三五教の立派な宣伝使は若しや此家にお立寄りでは御座いませぬか』</p>
+            <p class="ja-classical-line">此声にお露は慌てて門口に走り出で、田吾作の顔を見るより、</p>
+            <p class="ja-classical-line">お露『アツ、貴方の眉間に黒子がある、田吾作さまでは御座いませぬか、エライ私の夫が貴方に対し御無礼を致したさうです、何卒堪忍してやつて下さい』</p>
+            <p class="ja-classical-line">田吾作は何が何やら合点ゆかず、留公と共にお露の後に引添ひ、宗彦の憩へる居間に入つた。</p>
+            <p class="ja-classical-line">宗彦『アヽ能う来てくれた、さはさり乍ら一寸此方へ来ておくれ』</p>
+            <p class="ja-classical-line">と原彦の病室に伴ひ原彦を揺すり起した。原彦は病に疲れた身体を漸く起き上り、目を開き田吾作の姿を見るなり『アツ』と一声、又もや寝具の上に打倒れ藻掻き苦しむ。田吾作は原彦の窶れたとは言へ何処とはなしに目付、鼻の恰好、口許の具合の十数年前大井川の橋の上に於て、河中に突き落した泥棒によく似て居るなアと半信半疑の態で打ち見まもつて居る。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec08">
+        <div class="sec-header">
+          <span class="para-num">&sect; 8</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Munehiko: 'Look here, Harahiko-sama, Tagosaku, who you thought had died after being pushed off the bridge, is alive and well right here; it is your own delusion, so you had better pull yourself together.'</p>
+          <p class="en-p">Tagosaku: 'Hey, Biyōnin-sama, it has been a long time. It was a moonlit night thirteen years ago. You tried to rob me of the jewel in my pocket on the narrow bridge. I struggled, refusing to let it be taken, and after fighting back and forth, I finally lost my footing and fell headlong into the surging, muddy waters of the Ōigaha. Since then, my mind became distant, and as I walked to the mouth of the mountain at the boundary between Konoyo and Anoyo, I heard a great crowd calling my name from behind. The moment I turned around, I regained consciousness and found myself lying on the grass at the foot of Takashiroyama, where many people had built a fire and were caring for me. Thanks to them, my Inochi was saved. Since then, I have become a Jiunin of Uzuyamamura and have been jumping around as lively as you see me now. I do not resent you in the slightest, not even a dewdrop's worth. If only I had let go of my Shifuchiyakushin at that time, I would not have met with such an ordeal. Oh, I am sorry; I had been thinking all along that I should have just given it to that person, and I kept it in my pocket, always passing by that bridge, hoping that if I met you, I would gladly give it to you. Here... is this the jewel?'</p>
+          <p class="en-p">Saying this, he took it out from his pocket and handed it to the hand of the Biyōnin. The moment Harahiko felt relieved for the first time, his Biyōki began to improve, and as the days passed, he recovered, gradually regained flesh, and after about ten days, he became completely his old, healthy self.</p>
+          <p class="en-p">Harahiko, his wife, and all the villagers realized from the bottom of their hearts the truth that the most fearful sins arise from Shifuchiyakushin, and that such sins instantly turn into evil spirits that torment one's own body. The small village of Kumada, as a whole, came to believe in the teachings of Munehiko and eventually became followers of the Sangyōkyō.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宗彦『コレ原彦さま、お前に橋から突き落されて死んだ筈の田吾作は此通りピンピンして居る、お前の迷ひだから気を取り直したが宜からうぜ』</p>
+            <p class="ja-classical-line">田吾作『オイ、病人さま、久し振りだつたなア、十三年前の月夜の晩だつた、お前は狭い橋の上で俺の懐中の玉を強奪しようとする、俺はとられてはならんと争ひ、遂には組みつ組まれつ戦うた末、足踏外し濁流漲る大井川に真逆様に顛落し、それより心は疎くなり、現世と幽界の境界の山の口迄歩いて行くと、後から大勢の俺を呼ぶ声、振り返る途端に気がついて見れば、高城山の麓の芝生の上に横たはり、大勢の人が火を焚いて介抱をして居てくれた、お蔭で私は生命が助かつた。それから宇都山村の住人となつて此通りピンピンと跳廻つて居るのだ、決して決して露程も怨んでは居らぬ。其時に私が執着心を離しさへすれば斯んな目に遇ふのでは無かつたのだ。エヽ済まぬ事をした、あの人に渡せばよかつたと始終懐中離さず其橋の辺を通り、その方に会うたら心好う進ぜようと思つてゐたのだ、それ……この玉だらう』</p>
+            <p class="ja-classical-line">と懐中から出して、病人の手に渡した。原彦は初めてヤツと安心した刹那に病気は軽快に向ひ、日を追うて恢復し、漸々肉もつき、十日程の後には全く元の壮健体となつて仕舞つた。</p>
+            <p class="ja-classical-line">原彦夫婦を初め村人一同は執着心より恐るべき罪の発生し、其罪は忽ち邪気となつて我身を責むると云ふ真理を心の底より悟り、熊田の小村は挙つて宗彦の教を信じ、遂に三五教の信者となつて仕舞つた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 再生の歓 [669]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 童子 Teaching [671]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
