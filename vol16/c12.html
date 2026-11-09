@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: 捜索隊 [602] - Volume 16 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 16 Table of Contents</a>
+      <span>Volume 16</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 16 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: 捜索隊 [602]</h1>
+      <p class="chapter-title-ja">捜索隊〔602〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Akiyamahiko, the administrator of the Hitogo of Yura port, gathered many of his household retainers in a secluded room with a fine view, and while gazing at the full moon rising at that moment, held a celebratory feast for the subjugation of Onikumohiko of Ōeyama.</p>
+          <p class="en-p">In the deep azure sky, there was not a single shadow of a cloud; the stars were sparse, and the moon was clear and cool, as if a silver mirror were suspended in the heavens.</p>
+          <p class="en-p">Akiyamahiko spoke: 'Ah, what a fine moon. Though there are many moons in every month, the moon of this night is the moon to behold; it is a more beautiful and pleasant feeling than even the moon of the mid-autumn festival. In the joy of subjugating the Akuma, the countenance of Miroku-sama appears to be smiling. To gaze upon such a beautiful and noble moon and hold a moon-viewing banquet seems truly extravagant. Yet, this is the Kuōdaimuhen Gojikuō of the Miroku-Nokami. Without distinction of Kisen or age, there is no one who does not feel pleasure in gazing at the moon. No matter how magnificent one may say the Nichirin-sama is, there is no one who drinks sake while looking at the Nichirin-sama in the midst of the day, nor is it possible to perform moon-viewing of the sun. If one were to gaze at the sun in the mid-heaven for a while, one's eyes would instantly be dazzled. Even seeing this, the distinction in the workings of the moon and sun is clear. I have heard that Susanoo-Ōkami is the spirit of the moon; truly a noble, beautiful, and benevolent countenance. Where is Momijihime? I wish to let her behold this magnificent figure.'</p>
+          <p class="en-p">So saying, he rose from his seat, and from the room next to the entrance, he called out, 'Momijihime, Momijihime, Momijihime.'</p>
+          <p class="en-p">Momijihime, at the voice of her husband, left the two guests waiting and appeared at the moon-viewing seat, and upon informing Akiyamahiko of the visit of the propagandists of the Uranai religion, Akiyamahiko's complexion changed instantly.</p>
+          <p class="en-p">'What, the visit of the propagandists of the Uranai religion? That is a serious matter; it would be best to greet them politely and send them away safely. No, Momijihime, you must refuse the guests at the entrance as quickly as possible.'</p>
+          <p class="en-p">Momijihime felt caught between the two propagandists and Akiyamahiko, and when she finally appeared at the entrance, the figures of the two were nowhere to be seen. Wondering at this, as she looked around the surroundings, she noticed that the tassel of the jewel-key, which had been hidden behind the lintel, was not visible; startled, she examined the back of the lintel, and behold, how could this be, the key to the treasure house of Kaburashima and Kutsujima, which had been kept there until just before, had been stolen by someone. Momijihime, surprised and flustered, entered the inner palace and fearfully informed her husband, Akiyamahiko, of the loss of the jewel-key, to which Akiyamahiko...</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">由良の港の人子の司秋山彦は、見晴らしよき奥の一間に、数多の家子郎党を集め、折柄昇る三五の月を眺めて、大江山の鬼雲彦退治の祝宴を挙げ居たり。紺碧の青空には一点の雲影も無く、星は疎に、月は清く涼しく、銀鏡を懸けたるが如し。</p>
+            <p class="ja-classical-line">秋山彦『アヽ佳い月だ、月々に月てふ月は多けれど、月見る月は今日の夜の月、といふ仲秋の月よりも、麗しい好い心持だ、悪魔退治の嬉しさにみろく様のお顔もにこにことしてござる、かかる麗しき尊き月を眺めて、月見の宴を張るは実に勿体ないやうだ。然し乍らこれがみろく神の広大無辺の御慈光といふものだ、貴賤老幼の区別なく、月を眺めて快感を覚えない者はない、何程日輪様が立派だと言つても、昼の最中に日輪様を見て酒を飲む者はない、また日輪見物をするといふ事は到底出来ない、中天の太陽を暫く見詰めて居れば忽ち目が眩みてしまう、これを見ても月日の働きの区別は歴然たるものだ、素盞嗚大神様は月の御魂と承はる、実に尊い麗しい仁慈に富めるお顔、紅葉姫は何処にゐるか、この立派なお姿を拝ましたいものだ』</p>
+            <p class="ja-classical-line">と自ら座を起ち、玄関の次の間より、</p>
+            <p class="ja-classical-line">『紅葉姫々々々』</p>
+            <p class="ja-classical-line">と呼ばはりける。紅葉姫は夫の声に、二人の来客を待たせ置き、月見の席に現はれ、秋山彦に向ひ、ウラナイ教の宣伝使の来訪を告げたるに、秋山彦は顔色忽ち変り、</p>
+            <p class="ja-classical-line">『ナニ、ウラナイ教の宣伝使の来訪とナ、夫こそ大変、体よく挨拶を致して無事に帰すがよからう。イヤ紅葉姫、汝は一刻も早く玄関の客に対しお断りを申せ』</p>
+            <p class="ja-classical-line">紅葉姫は、二人の宣伝使と秋山彦の板挟となつた心地し、漸く玄関に立現はれ見れば、二人の影もなし。ハテ訝かしと四辺を見廻す途端に額の裏に匿しありし玉鍵の房の見えざるに気がつき、驚き額裏を検め見れば、這は如何に、最前までここに納ひ置きし冠島、沓島の宝庫の鍵は、何者かに盗まれてゐる。紅葉姫は驚き慌て、奥殿に入つて、夫秋山彦に、玉鍵の紛失せし事を怖る怖る告げたるに、秋山彦は、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">"Lo, a great calamity! Is this not the doing of the two Sendenshi? Ho, you men, this is no time for a Shiyuen! Let the women search every corner of the Keidai, and let the men rush outside the Monguwai to inquire after the Arika of the Sendenshi and investigate the Umu of the key."</p>
+          <p class="en-p">Upon this Gechi, the Amata Danjiyo began to search for the whereabouts of the key, while arranging themselves both within and without the gate.</p>
+          <p class="en-p">Akiyamahiko summoned the Monban, Ginkō and Kamekō, to his side and asked, "While you were charged with guarding the Omotemon, did you not notice the Datsushiyutsu of the two Danjiyo? Tell me the Yōsu."</p>
+          <p class="en-p">Ginkō replied, "We two, holding our Yakume in Taisetsu regard, have kept watch with eyes as keen as the Niō of the Sanmon, so that we would be aware even of the coming and going of a mouse. Yet, the two Danjiyo who entered earlier have not passed through the Omotemon. They must surely be lurking within the residence; I pray you, conduct a thorough investigation."</p>
+          <p class="en-p">Akiyamahiko asked, "What of the back gate?"</p>
+          <p class="en-p">Kamekō, scratching his head, answered, "Indeed, of that back gate, I know nothing from root to leaf."</p>
+          <p class="en-p">Akiyamahiko said, "To be a Monban means not only the front, but the back gate is also within your charge; is that not why two Monban are stationed there? In all likelihood, they have slipped out through the back gate."</p>
+          <p class="en-p">Kamekō replied, "The Omotemon is for all things entering, while the back gate is for all things that are but dregs to pass out."</p>
+          <p class="en-p">Akiyamahiko shouted, his face changing color, "Fool! Make haste and search the direction of the back gate!"</p>
+          <p class="en-p">As the two approached the entrance of the back gate, they saw something black lying at the threshold; picking it up quickly and gazing upon it, they found it to be the tassel of the jewel key.</p>
+          <p class="en-p">Ginkō exclaimed, "Ah, with this, all is well! We were on the verge of letting the two thieves escape and being dismissed from our posts; with this, we may at last offer an excuse."</p>
+          <p class="en-p">So saying, he shut the back gate firmly and, in high spirits, proceeded to the living quarters of Akiyamahiko.</p>
+          <p class="en-p">Akiyamahiko was leaning against a side pillar, his eyes closed, sunk in deep meditation.</p>
+          <p class="en-p">Ginkō, placing the tassel of the jewel key into his bosom and letting a small portion of it show, said, "My Lord, do not be troubled. It is certain that the thieves have fled, but the item they had stolen was left behind at the entrance of the back gate. I, Ginkō, though it was a moonlit night, perceived it with sharp eyes and picked it up; I have brought it here now. Pray, examine it."</p>
+          <p class="en-p">He spoke with a spirited air, and Akiyamahiko raised his face, opened his eyes, and filled his countenance with a smile.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『すわこそ大変、二人の宣伝使の所為にはあらざるか、ヤアヤア者共、酒宴どころではない、女共は境内隈なく捜索せよ、男共は門外に駆け出し、宣伝使の所在を詮ね鍵の有無を調べ来れ』</p>
+            <p class="ja-classical-line">と下知すれば、数多の男女は門の内と外とに手配りしながら、鍵の行方を捜索する事となりぬ。秋山彦は門番の銀公、加米公を傍近く招き、</p>
+            <p class="ja-classical-line">『其方は表門を守る身であり乍ら、二人の男女の脱出するを気づかざりしか、様子を聞かせよ』</p>
+            <p class="ja-classical-line">銀公『吾々両人はお役目大切と山門の仁王の如く、厳しく眼を見張り警護致して居れば、鼠の出入さへも委しく存じて居ります。然るに最前入り来りし男女の二人は、まだ表門をくぐりませぬ。大方邸内に潜伏致して居りませうから、篤と御詮議下されませ』</p>
+            <p class="ja-classical-line">秋山彦『裏門は如何致した』</p>
+            <p class="ja-classical-line">加米公は頭を掻き乍ら、</p>
+            <p class="ja-classical-line">『ハイ其裏門は根ツから葉ツから存じませぬ』</p>
+            <p class="ja-classical-line">秋山彦『門番と申せば、表ばかりでない、裏門も矢張門のうちだ、それがために二人の門番が置いてあるのではないか、大方裏門より抜け出たのであらう』</p>
+            <p class="ja-classical-line">加米公『表門は何でも彼でも這入るのが商売、裏門は何でも彼でも皆粕の出るところ』</p>
+            <p class="ja-classical-line">秋山彦『馬鹿、早く裏門の方面を捜索致せ』</p>
+            <p class="ja-classical-line">と血相変へて呶鳴り入る。二人は裏門口に差しかかりけるに、何物か黒きものが門の入口に落ちゐたり、手早く拾ひ上げ眺むれば、玉鍵の房なりき。</p>
+            <p class="ja-classical-line">銀公『ヤア、これさへあれば、もう大丈夫だ、スンデのことで二人の賊を取り逃がし、免職を喰うところだつた、これで漸く申し訳が立つ』</p>
+            <p class="ja-classical-line">と裏門を固く閉め、意気揚々として、秋山彦の居間に進み入りぬ。秋山彦は脇足に凭れ眼を塞ぎ、深き思案に沈みゐる。銀公は懐に玉鍵の房を入れ、少しく其端を見せ乍ら、</p>
+            <p class="ja-classical-line">『旦那様、御心配なされますな、慥に賊は逃げ去りましたが、彼が奪ひ取つた品物は裏門口に遺失して居りました。此銀公は月夜にも拘はらず目敏く悟つて拾ひ上げ、今ここに持参いたしてございます、サアお検め下されませ』</p>
+            <p class="ja-classical-line">と元気さうに言ふ。秋山彦は顔を上げ眼を開き、満面に笑を湛へ乍ら、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">What, has the Tamakagi been lost? That is indeed Chiyōdeu; it is a Deka, a Deka! Come, bring it before me at once.</p>
+          <p class="en-p">Ginkō pointed with his fingertip to the tassel in his bosom.</p>
+          <p class="en-p">Heh, heh, heh, heh! It is exactly as you see; it is a magnificent tassel, made of pure silk, so heavy and lustrous that it feels substantial. With this in hand, there shall be no need for you to be so alarmed.</p>
+          <p class="en-p">Akiyamahiko replied, That is Arigata; bring it before me.</p>
+          <p class="en-p">Ginkō, shrugging his shoulders, said,</p>
+          <p class="en-p">Here it is, pray examine it well.</p>
+          <p class="en-p">So saying, he presented it with a Motsutai air.</p>
+          <p class="en-p">Akiyamahiko exclaimed, Ah, this is the tassel of the Tamakagi, but where is the key?</p>
+          <p class="en-p">Ginkō replied, Dannasama, such a rusted key is of no consequence; pray do not feel Shinpai. If I have but a Hitokire of iron, I shall forge it anew for you. Since you have obtained this magnificent tassel, pray do not concern yourself with such a filthy object.</p>
+          <p class="en-p">Akiyamahiko cried, Ah, a Shima! I cannot remain here like this. Ho, Ginkō, Kamekō, make preparations for the ship.</p>
+          <p class="en-p">We have understood the Isai, they replied, and departed from that place.</p>
+          <p class="en-p">Momijihime searched the Shitsunai thoroughly, but as the Arika of the key remained unknown, she appeared in that place, exhaling a sigh of Tauwaku.</p>
+          <p class="en-p">Dannasama, Ikaga shall we do? I have no excuse to offer to Susanōnōokami and Kunitakehikonomikoto.</p>
+          <p class="en-p">Akiyamahiko replied, Now that it has come to this, it is of no avail to repeat such complaints. There is no doubt they have crossed to Kammurijima and Kutsujima by ship. We must prepare a ship as quickly as possible, pursue them, and reclaim the key.</p>
+          <p class="en-p">At that moment, the front of the house suddenly became clamorous once more. The husband and wife looked at each other, and straining their ears, they listened intently to the state of affairs outside.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ナニ、玉鍵が遺失してあつたか、それは重畳、出来した出来した、サア早く、吾前に出せよ』</p>
+            <p class="ja-classical-line">銀公は指の先で懐の房を一寸指さし、</p>
+            <p class="ja-classical-line">『ヘヽヽヽ、真ツこの通り、立派な房でござります、総絹で、ぼとぼとするほど重たい麗しい光沢、これさへあれば、お騒ぎ召さるにも及びますまい』</p>
+            <p class="ja-classical-line">秋山彦『それは有難い、吾前に持ち来れ』</p>
+            <p class="ja-classical-line">銀公は肩を聳やかせ乍ら、</p>
+            <p class="ja-classical-line">『サア、これでございます、よくよくお検め下さいませ』</p>
+            <p class="ja-classical-line">と勿体振つて、前に突き出したり。</p>
+            <p class="ja-classical-line">秋山彦『ヤア、これは玉鍵の房だ、鍵は何処にあるか』</p>
+            <p class="ja-classical-line">銀公『旦那様、彼のやうな錆た鍵はどうでも宜しい、ご心配なされますな、鉄の一片もあれば、直に鍛ち直して上げませう。立派な此の房が手に入るからは、あのやうな汚いものにお構ひ遊ばすな』</p>
+            <p class="ja-classical-line">秋山彦『ヤア失敗つた、これや斯うしては居られぬ哩、ヤア銀公、加米公、船の用意を致せ』</p>
+            <p class="ja-classical-line">『委細承知仕りました』</p>
+            <p class="ja-classical-line">と此場を立出でる。紅葉姫は室内隈なく捜索し、鍵の所在の知れざるに、当惑の息を吐き乍ら、此場に現れ来り、</p>
+            <p class="ja-classical-line">『旦那様、如何致しませう、素盞嗚大神様、国武彦命様に、申訳がございませぬ』</p>
+            <p class="ja-classical-line">秋山彦『今となつて、繰言いつた所で追つ付かない、彼等は冠島沓島に船にて渡りしに相違ない、一時も早く船の用意をなし、後追かけて鍵を取返さねばなるまい』</p>
+            <p class="ja-classical-line">斯る所へ表の方再もや俄に騒がしくなり来たりぬ。夫婦は互に顔を見合せ、何事ならむと耳を澄して表の様子を聴き入りにける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: Treasure 庫の鍵 [601]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: Kami 集の Jewel [603]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

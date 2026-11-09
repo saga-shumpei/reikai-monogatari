@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: Treasure 庫の鍵 [601] - Volume 16 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 16 Table of Contents</a>
+      <span>Volume 16</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 16 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: Treasure 庫の鍵 [601]</h1>
+      <p class="chapter-title-ja">宝庫の鍵〔601〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The Mizumitama of Kamususanō, the Izumitama of Kunitakehiko, and the Sendenshi of Ananai-kyō, together with Kamehiko, whose name is auspicious, and Hidekohime, who illuminates the darkness, and the Hime Yoshiko, under the protection of Onitakehiko, subdued the fierce Magatsukami and the clan of Onikumohiko; the many demons who would not submit fled in all directions like clouds and mist, and Onikumohiko, riding upon the clouds, escaped toward the direction of Mount Ibuki; such were the various rumors that arose as the Sango moon of the ninth month ascended, illuminating the sky, and at the twilight hour, two man and woman appeared before the gate of Akiyamahiko.</p>
+          <p class="en-p">Disguised in hoods and veils, fearing the surroundings, they knocked upon the gate in low voices, calling out to be let in; at the sound, Kamekō and Ginkō emerged, answering with a start, and peering through the gap in the door, they grew suspicious of the two figures and asked who they were; the voice replied with grace, saying, 'I am the Hinode Ōkami, and this is the shrine of the god Yukunarihiko; pray, open the gate with haste, for there is a matter of detail to be reported to the god-official Akiyamahiko,' and they urged them on with such haste and an unsettling air that Kamekō, pouting and shouting, replied that he did not recognize any god of sunrise.</p>
+          <p class="en-p">As the Sango moon began to rise in its brilliance at twilight, he said, 'Is it not the god of sunset who knocks at the gate? Yukunarihiko is but a mask of lies; are you not the ugly Magatsukami, the god of the dead-end, who has lost his dwelling? Even if the gate is closed, this is the mansion of the god-official Akiyamahiko; the ugly vessels of the Magatsumi that have not yet opened within your hearts shall be shattered; without saying that this is a gate of friction, it would be better for you to return quickly; a fellow who knocks at the gate at sunset cannot be a decent one; if you have business, come tomorrow, for this great gate is one that we guard night and day without sleep, and the opening of the great gate is at the hour of sunrise.'</p>
+          <p class="en-p">The gatekeeper who lives by the day also said, 'The gate of sunset shall not open; return, return,' and urged them to depart.</p>
+          <p class="en-p">Takahime raised a shrill voice, tinged with trembling, and stood with a fierce countenance: 'Ten ri in every direction is the inner sanctum of the palace; I am the Hinode-gami of the great gate opening; convey at once to the great commander Akiyamahiko the arrival of the Hinode-gami, the god Yukunarihiko; as a mere gatekeeper, you cannot refuse the opening and closing of the gate; do not dally, lest you regret it later; what do you take the Hinode-gami to be, who has appeared as a saving god against the great calamity approaching this house tonight?'</p>
+          <p class="en-p">Kamekō said, 'Oi, Ginkō, take a look; there is one woman with her face plastered in white powder, looking quite unpleasant, and one man with a face like a pale gourd; they say they have come to inform us of some great event at the mansion, and that if we do not open this gate, we shall regret it tomorrow; what should we do?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">神素盞嗚の瑞霊
+国武彦の厳霊
+三五教の宣伝使
+名さへ目出度き亀彦が
+闇を照して英子姫
+悦子の姫と諸共に
+鬼武彦の守護りにて
+さしもに猛き曲津神
+鬼雲彦の一族を
+言向け和し服従はぬ
+数多の鬼は四方八方に
+雲を霞と逃げ散りて
+鬼雲彦は雲に乗り
+伊吹の山の方面に
+逃げ失せたりと取り取りの
+高き噂を菊月の
+空を照して昇り来る
+三五の月の夕間暮
+秋山彦の門前に
+現はれ出でたる二人の男女</p>
+            <p class="ja-classical-line">覆面頭巾の扮装に
+四辺を憚り声低に
+そつと門戸を叩きつつ
+頼も頼もと訪へば
+ハツと答へて出で来る
+加米公銀公の両人は
+戸の隙間より垣間見て
+二人の姿を怪しみつ
+何人なるかと訊ぬれば
+声淑やかに答へらく
+我は日の出大神ぞ
+行成彦の神の宮
+早く開けさせ給へかし
+秋山彦の神司に
+申上ぐべき仔細あり
+早く早くと急き立てて
+何とはなしに落ち付かぬ
+怪しき風情に加米公は
+口を尖らし呶鳴り立て
+日の出神とは心得ぬ</p>
+            <p class="ja-classical-line">三五の月の皎々と
+上り初めたる夕間暮
+門戸を叩き訪ふは
+日暮の神に非ざるか
+行成彦とは嘘の皮
+宿を失ひ行詰り彦の
+醜の命の曲神か
+門は締めても秋山彦の
+神の司の御館
+汝等二人の胸の内
+未だ開かぬ曲津見の
+醜の容れもん砕け門
+摺つた門だと申さずに
+早く帰るがよからうぞ
+日暮に門を叩く奴
+碌な奴ではあるまいぞ
+用事があれば明日来れ
+此の大門は吾々が
+夜昼寝ずに守る門
+大門開きは日の出時</p>
+            <p class="ja-classical-line">其日暮しの門番も
+日暮の門は開かない
+帰れ帰れと急き立つる。</p>
+            <p class="ja-classical-line">高姫『十里四方は宮の内、大門開きの日の出神、一時も早く秋山彦の御大将に、日の出神行成彦の神の御入来と申し伝へよ、門番の分際として門の開閉を拒む事はなるまい、愚図々々致して、後で後悔するな、今宵に迫る当家の大難、救ひの神と現はれた日の出神を何と心得る』</p>
+            <p class="ja-classical-line">と慄ひを帯びた癇声を張上げ、形相凄じく突立ち居る。</p>
+            <p class="ja-classical-line">加米公『オイ銀公、一寸覗いて見よ、顔に白粉をべたりとつけて何だか嫌らしい女が一人、青瓢箪のやうな面をした男が一人だ。何でも大変な事がお館にあるので知らしに来たとか、此門開けねば明日になつて後悔をするとか云つて居る、どうしたら好からうかな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ginkō said, 'No matter what you say, it is the strict command of Goshiyujinsama that once the hour of Kuremu has passed, we shall open the gate for no Nanibito whatsoever; leave them be, leave them be.'</p>
+          <p class="en-p">Kamekō replied, 'Yet they are no Futsū Ningen; they claim to be Kami.'</p>
+          <p class="en-p">Ginkō answered, 'There are Iroiro of Kami; there are wolves that devour men, there are Magatsukami, and there are even Hanakami, Chirikami, and Shirifu. One must distinguish them well and exercise Handan, or else a Shiyutsutai will arise that shall leave one gnashing one's teeth in regret later. Let me see, I shall peer through and examine their Yōsu.'</p>
+          <p class="en-p">Ginkō closed one eye and pressed the other against the Sukima of the gate, peering through.</p>
+          <p class="en-p">Ginkō exclaimed, 'Ha, ha, ha! That fellow is certainly a Kami, but he is a mere ginger; he would be fit only as a remedy for Seki and phlegm. Look, he is pressing his mouth to the other's ear and engaging in Hisohisobanashi. That man with the pale Kahoiro must be the husband of that woman; what a Kiraku fellow he is. To stand before another's Monzen and act in such an Ichiya manner—is he not ashamed before the moon?'</p>
+          <p class="en-p">Aohiko said, 'Excuse me, a grave matter shall erupt against the Oyakata within this Konya. The night is dark where one cannot see an inch ahead; we are the messengers of propaganda to save the world, so please, open the gate.'</p>
+          <p class="en-p">Ginkō retorted, 'What are you spouting? To speak of a night where one cannot see an inch ahead under such a bright moon—that must be the state of your own heart. If you have business, come tomorrow. Even if some emergency were to erupt in this mansion, it is not for you to interfere. Be off with you at once.'</p>
+          <p class="en-p">Takahime said, 'That may be so, but by the urgent divine decree of the Hinode no Kami, whatever the case may be, please convey this matter to the master, Akiyama-hiko.'</p>
+          <p class="en-p">Ginkō said, 'Ah, there is no help for it. I shall at least report this to Goshiyujinsama, so until then, you must wait here. Hey, Kamekō, you must not open the gate for any reason until I return.'</p>
+          <p class="en-p">So saying, he cast the words aside and ran off toward the inner chambers.</p>
+          <p class="en-p">Aohiko said, 'Excuse me, gatekeeper, will you not open the gate quickly? If you dally, your own fate shall be in peril. It is by the divine decree of the Kami that I have come, wishing to warn you, for it would be pitiful if you were cast headlong into the Ne no Kuni and Soko no Kuni.'</p>
+          <p class="en-p">Kamekō replied, 'Even by divine decree, I cannot open it without the permission of my master. I know not if I shall fall into the hell called Ne no Kuni and Soko no Kuni, but even the judgments of hell depend upon gold. If I open this gate and fall into hell, it would be a trouble; therefore, you too must produce something. If you do so, I shall open it for you. It is said that if one has gold, one can even open the lid of the cauldron of hell; one must give sake money to the demons to find the wisdom to escape hell, so come, produce it, produce it! When one asks a newt if there is anything other than a love potion, it shows its finger in a circle; even a newt is like that, so you, Kamekō who lives in the same water, produce something round, and I shall open it for you quietly.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">銀公『何と云うても御主人様の云ひつけ、暮六つ過ぎたなら、何人が来ても開ける事はならぬとの厳命だ。ほつとけほつとけ』</p>
+            <p class="ja-classical-line">加米公『それでも普通の人間ではない、神だとか云つて居るやうだ』</p>
+            <p class="ja-classical-line">銀公『神にも種々ある、人を喰ふ狼もあれば曲津神もあり、鼻紙、塵紙、尻拭き紙もあるワ、ようかみ分けて判断をせないと後になつて歯がみをなして悔しがらねばならぬ事が出来するぞ、どれどれ一つ俺が覗いて様子を調べてやらう』</p>
+            <p class="ja-classical-line">銀公は門の隙間より片目を塞ぎ、片目を当てて覗きながら、</p>
+            <p class="ja-classical-line">銀公『ハヽヽヽヽ、彼奴ア神に間違ひないが、薑だ、咳嗽や痰の薬なら持つてこいだ。よう何だか耳に口を当てて密々話をやつて居よるワ、あの顔色の青い男はあの女のハズバンドだな、気楽な奴もあればあるものだ、人の門前に立つて意茶ついて居やがる。お月さまに恥かしくは無いだらうかなア』</p>
+            <p class="ja-classical-line">青彦『モシモシ、御館に対して今夜の中に大事が突発致します、一寸先は闇の夜だ、吾々は天下を助ける宣伝使だ、どうぞ開けて下さい』</p>
+            <p class="ja-classical-line">銀公『ナヽヽ何を吐すのだ、今夜のやうな明月に、一寸先は闇の夜だとはそれや貴様の心の中の事だらう、用事があらば明日来い。仮令此館に如何なる変事が突発せうとも、貴様の容喙する所ぢやない、トツトと帰れ』</p>
+            <p class="ja-classical-line">高姫『左様では御座いませうが日の出神様より強つての御神勅、何は兎もあれ秋山彦の御主人に此由お伝へ下さいませ』</p>
+            <p class="ja-classical-line">銀公『アヽ仕方がないな、兎も角御主人様に申し上げて来るから、それまで、貴様は此処に待つてけつかりませ、オイオイ加米公、俺が出て来るまで邪が非でも開けてはならぬぞ』</p>
+            <p class="ja-classical-line">と言ひ捨て奥を目蒐けて駆け出したり。</p>
+            <p class="ja-classical-line">青彦『もしもし門番さま、早く開けないか、愚図々々して居るとお前の身の上が危ないぞ。根の国底の国へ真逆様に落されると可憐さうだから気をつけてやり度いと神様の御神勅で出て来たのだ』</p>
+            <p class="ja-classical-line">加米公『神勅でも何でも主人の許しなきまでは開けられぬ、根の国底の国と云ふ地獄に落ちるか知らぬが、地獄の沙汰も金次第だ、もし此門あけて地獄にでも落ちては困るから、お前さまも何々を出しなさい、さうしたら開けて上げやう、金さへあれば地獄の釜の蓋でも開くと云ふ事、鬼に酒代をやつて地獄を逃れる分別をさせなくてはならぬからサア出したり出したり、惚薬外にないかと蠑〓__34696__に問へば指を輪にして見せたげな、蠑〓__34696__でさへもそれだもの、同じ水に住む加米公に円いものを出しなさい、そつと開けてやるから』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahime said, 'See, this is why it is said that the teachings of the Spirit of Mizu are the ways of evil; even the Monban is governed by the Shiyugi of Kanetori. Look here, Aohiko-sama, does not this single Ichiji show how the Ananai-kyō is a matter of Genkin-shiyugi, Rikoshiyugi, and the Yarikata of self-interest? If you do not awaken to a reasonable Kagen, you shall be plucked clean by the Spirit of Mizu, even to the last hair upon your backside.'</p>
+          <p class="en-p">Aohiko replied, 'Indeed, I had thought you to be one who was sharp in every corner, yet the Ananai-kyō is truly an Aniki.'</p>
+          <p class="en-p">Kamekō exclaimed, 'Hey, what a fellow to be so Guzuguzu and stingy! I know not from Doko you are Sendenshi, but the Ananai-kyō is generous with Zenibara; even for a Yakuza-like Monban such as Wareware, they would slip two or three Koban into one's Futokoro without us saying a word. This fellow appears to be of the Uranai-kyō, for even when we make a Rokotsu Seikiu, he is a miser who will not bring it forth. That is why he thinks only of snatching away the believers of the Ananai-kyō without any labor of his own, to bring them into the Uranai-kyō. Hey, you two Sendenshi, have you no forgotten items? Surely you have forgotten something; do you not need small change even to board a ferry? Is there any law that says one may pass through a gate without such things? What witless Sendenshi you are! I had intended to take advantage of the situation while that fellow Ginkō was away, but since the other party is a witless Donbei, success is uncertain.'</p>
+          <p class="en-p">At such a moment, Ginkō came running and said,</p>
+          <p class="en-p">'Hey, Kamekō, it is the order of our master; open the gate at once and let them pass.'</p>
+          <p class="en-p">'Ah, is that so?'</p>
+          <p class="en-p">So saying, he removed the bolt, opened the gates to the left and right, and changing his tone, Kamekō said,</p>
+          <p class="en-p">'Ah, these are indeed two Sendenshi-sama who seem to possess most magnificent divine virtues. I was away in the back on urgent business, and it seems my servant, that fellow, spoke nonsense about the gate being closed and demanded money, acting in a stingy manner. By no means; as this house consists of believers in the Ananai-kyō, from the highest to the lowest, we are pure and clean, and we consider even touching money to be a defilement. We have recently hired a Monban, and as that fellow has hitherto been a believer in the Brahmanism, he spoke of money, which is a source of great shame. It was by no means I who said such things; pray, do not take it ill. When you meet our master, I beg you to explain that it was not Kamekō who spoke thus. In this world where misunderstandings are so frequent, it is not a pleasant gate where even the pure and clean Kamekō must suffer the side-blows of a Monban and have his belly searched for a crime he did not commit.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高姫『サアこれだから瑞の霊の教は悪のやり方だと云ふのだよ、門番までが金取主義ぢや。これこれ青彦さま、この一事を見ても如何に三五教が現金主義、利己主義、吾よしの遣方と云ふ事が分るぢやないか。お前さまもよい加減に目を醒まさぬと瑞の霊に尻の毛が一本も無いところ迄抜かれて仕舞ひますぞゑ』</p>
+            <p class="ja-classical-line">青彦『さうですな、隅から隅まで抜け目のないお前さまと思つて居たのに、三五教はも一つ哥兄ですなア』</p>
+            <p class="ja-classical-line">加米公『エヽ、愚図々々と出し惜みをする奴だなア、何処の宣伝使か知らぬが、三五教が銭払ひがよい、吾々のやうな門番のやくざものでも、此方から何も云はぬに小判の二枚や三枚はそつと懐中に入れて呉れる、此奴はウラナイ教と見えて此方から露骨に請求しても出しやがらぬ吝嗇坊だ、それだから三五教の信者を自分が苦労もせずに掻き落しに廻つてウラナイ教に入れる事許り考へて居やがるのだ。オイオイ二人の宣伝使、忘れものはないか、何かお前は忘れて居るだらう、渡し船に乗つてもはし銭が要るぢやないか、門を潜るのに何々で潜ると云ふ法があるか、エヽ気の利かぬ宣伝使ぢやな、銀公の奴が居らぬ間に一つ権兵る積りで居たのに、先方が気の利かぬドンベイだから成功覚束なしと云ふものだ』</p>
+            <p class="ja-classical-line">斯かる所へ銀公は走り来り、</p>
+            <p class="ja-classical-line">『ヤア加米公、御主人の申つけだ、直に門を開いてお通し申せ』</p>
+            <p class="ja-classical-line">『アヽさうか』</p>
+            <p class="ja-classical-line">と閂を外し左右に開いて声を変へ、</p>
+            <p class="ja-classical-line">加米『アヽこれはこれは立派な立派な御神徳のありさうな二人の宣伝使様、私は奥に急用あつて居りませなかつたものだから家来の奴、摺つた門だと理屈を申し、吝嗇な事を申してお金を強請つたさうで御座います、決して、当家は三五教の信者ですから、上から下まで清浄潔白お金などは手に触れるのも汚がつて居るものばかりです、此頃傭うた門番が一人御座いまして、其奴が今迄バラモン教の信者であつたものですから、二つ目にはお金の事を申しまして恥かしう御座います、決して私が申たのでは御座いませぬ、悪しからず、御主人にお会ひになつても加米公が云つたのではないと弁解して置いて下さい、兎角誤解の多い世の中、清浄潔白の加米公迄が、門番の傍杖を喰つて痛くない腹を探られるのも余り心持の好い門ぢや御座いませぬ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Unwittingly, the initial feigned voice was forgotten, and it returned to the original Jigoe.</p>
+          <p class="en-p">Takahime said, 'Ho ho ho, even so, your voice resembles it well. At first, I thought it was someone else, but as expected, you are the owner of the voice from before. My, what a transformation you play; being the Kobun of the Ōbakemono Mizumitama, your ability to transform is indeed Kimeu. Ho ho ho ho ho.'</p>
+          <p class="en-p">Kamekō, returning once again to a feigned voice, replied:</p>
+          <p class="en-p">'Nay, nay, never, never. In the beginning, it was my own Jigoe. In the midst of it, the Ikiriyō of a Shinmai Monban possessed me and spoke; thus, the voice of the Shinmai Monban emerged just as it was. Aha ha ha ha.'</p>
+          <p class="en-p">He attempted to gloss over it with laughter.</p>
+          <p class="en-p">Ginkō said, 'Aha ha ha ha, the Sata of Jigoku depends upon Kame, indeed.'</p>
+          <p class="en-p">Kamekō replied, 'The Sata of Jigoku is a matter that can be settled by Kame and Ginkō in this world. Aha ha ha ha. Come, come, you two, pray enter quickly.'</p>
+          <p class="en-p">As if to say it was a settled matter, the two swung their arms wide and, with Ōmata, marched forward in high spirits, sauntering along slowly.</p>
+          <p class="en-p">The two stood abruptly at the Genkuwan, listening intently with an air of peering into the state of the house, or perhaps not peering at all.</p>
+          <p class="en-p">A man appeared, suddenly sliding open the shoji of the Genkuwan:</p>
+          <p class="en-p">'Oh, you are Takahime-sama and Aohiko-sama. You suffered a most pitiable disaster some time ago. I have thought of coming to offer my sympathies since then, but I hear you were severely burned—the water torture, the fire torture, the smoke torture, the God of fire emerging from the eyes, and you, Aohiko-sama, with a face pale as death and sighing in despair. My, how you have taken the trouble to visit. Well, well, if you have such reservations, do not enter so hastily without business.'</p>
+          <p class="en-p">No sooner had he spoken than his figure vanished entirely.</p>
+          <p class="en-p">As the two stood at the Genkuwan, Takahime said, 'This is why they call it the Bakemono-kyō. Aohiko-sama, this is why I say it is useless unless you follow me and receive practical training. The insight of the Hinode-no-Kami cannot be mistaken, can it?'</p>
+          <p class="en-p">Aohiko replied, 'It is truly so. Alas, I am struck with awe.'</p>
+          <p class="en-p">Takahime said, 'You must not speak such frivolous things. It appears that you, too, have been possessed by an evil spirit of the Mizumitama. Will you not compose yourself?'</p>
+          <p class="en-p">At this moment, Momijihime appeared gracefully from the inner chambers to this place:</p>
+          <p class="en-p">'Oh, you two. Is it not because of some unusual matter that you have come in the middle of the night? In any case, pray come up and rest, and then let me hear the nature of your business.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と初めの作り声をいつしか忘れて元の地声になつて仕舞ひける。</p>
+            <p class="ja-classical-line">高姫『ホヽヽそれでも貴方のお声が好く似てますナア、初の方は違ふ方かと思ひましたが、矢張最前のお声の持主、ようマアお化け遊ばすなア、大化物の瑞霊の乾児だけあつて化ける事は奇妙なものだ。ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">加米公は又もや作り声になつて、</p>
+            <p class="ja-classical-line">『イエイエ決して決して、初の内は私の地声で御座いました、中途に新米門番の生霊が憑きやがつて云つたのです、夫れで新米門番其儘の声が出ました。アハヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ひに紛らさうとする。</p>
+            <p class="ja-classical-line">銀公『アハヽヽヽ、地獄の沙汰も加米次第だな』</p>
+            <p class="ja-classical-line">加米公『地獄の沙汰も加米と銀公とで埒が明く世の中だ。アハヽヽヽ、サアサアお二人のお方、トツトとお入り遊ばせ』</p>
+            <p class="ja-classical-line">二人は定つた事だと云はぬ許りに大手を振り大股に意気揚々として、のそりのそりとのさばり行く。二人は玄関にヌツと立つて家の様子を覗き込むやうな、覗かぬやうな体に聞き耳立てて居る。玄関の障子をさつと開いて現はれ出でたる一人の男、</p>
+            <p class="ja-classical-line">『オー貴方は高姫さま、青彦さま、此間は豪いお気の毒な御災難が御座いまして、其後一度お見舞に参らうと思つては居ませぬが、随分お火傷なさいましたさうで、水責、火責、煙責、眼から火の出の神様、青息吐息の顔真青な青彦さま、ようマア態々、お尋ね下さりやがつた。マアマア御遠慮がありますれば、御用事無く、とつとと入りやがるな』</p>
+            <p class="ja-classical-line">と云ふかと見ればプスリと姿は消えにける。二人は玄関に立ちながら、</p>
+            <p class="ja-classical-line">高姫『これだから化物教だと云ふのだよ、青彦さま、これだから私に随いて実地教育を受けねば駄目だと云ふのだよ、日の出神の眼力は違やしよまいがな』</p>
+            <p class="ja-classical-line">青彦『本当にさうです、いやもう恐れ入谷の鬼子母神ですワ』</p>
+            <p class="ja-classical-line">高姫『ソンナ剽軽な事を云うてはなりませぬ。お前も何うやらすると瑞の霊の悪霊に憑依されたと見える、些と確りなさらぬかい』</p>
+            <p class="ja-classical-line">此時奥の方より紅葉姫は淑やかに此場に現はれ、</p>
+            <p class="ja-classical-line">『これはこれはお二人のお方、夜中にお越し下さいましたのは何か変はつた事が在すのでは御座いませぬか、兎も角お上り下さいまして御休息の上、御用の趣仰せ聞け下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahime said, 'If that be the case, I shall accept your offer without reserve; come now, Aohiko, you must follow me, and be sure to keep your eyes cast in all directions, that you may not be caught off your guard.'</p>
+          <p class="en-p">Momijihime replied, 'We are followers of the Ananai-kyō, who abide by the path of righteousness; pray, do not trouble yourself, for there are no traps to be found here, nor have we constructed any hidden dens like the Makutsugahara in the depths of the earth; pray, be at ease and settle your heart in peace.'</p>
+          <p class="en-p">Takahime said, 'It was a most pitiable fate that befell your master the other day; I pray you, let me at least pay my respects to his spirit, for it seems that even by believing in the Ananai-kyō, one cannot prevail against the Akuma; I heard that he was captured by the subordinates of Onikumohiko of Ōeyama and put to a cruel death, and the very hearing of it brings tears to my eyes, let alone for you, his Niyōbau, whose sorrow I can well imagine.'</p>
+          <p class="en-p">With these words, she secretly moistened her eyes with saliva and began to wail with a hollow, feigned grief. Aohiko stood agape, staring fixedly at the face of Momijihime. Takahime tugged gently at the hem of Aohiko’s garment, signaling him to mimic her weeping, but Aohiko, understanding nothing of this, replied, 'Eh, what is it? Is there something upon my clothes? Pray, do not pull at me so.'</p>
+          <p class="en-p">Momijihime said, 'Ho, ho, ho, I thank you for your kindness; my master has returned in safety, and this is entirely due to the divine virtue of the Ananai-kyō; it is said that because the influence of the Ananai-kyō is so potent, a sect called the Uranai-kyō has arisen out of envy and jealousy, and is now stirring up trouble everywhere; in this world where the imitation of others is so prevalent, even if one thinks to rival another because they have met with success, one cannot achieve one's desires if it be contrary to the destiny and nature of one's own Mitama; I perceive that you are a missionary of the Uranai-kyō, but tell me, what manner of teaching is this Uranai-kyō?'</p>
+          <p class="en-p">Takahime replied, 'The Ananai-kyō was good in its origin, but now it is utterly worthless; the true and essential foundation of the Ananai-kyō is the living shrine of the Hinode-no-Kami, and I, this Takahime, know everything from the very beginning of the opening of this world unto the end of eternity, for such is the Uranai-kyō; therefore, without asking anyone, I am well aware of the calamity that befell your master, Akiyama-hiko; is the Uranai-kyō not a magnificent teaching?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高姫『左様ならば遠慮なく御免蒙ります、サア青彦、貴方も随いて来なさい、随分気をつけて油断せぬやう眼を八方に配るのだよ』</p>
+            <p class="ja-classical-line">紅葉姫『私方は三五教の信者、善の道を遵奉するもの、御心配下さるな、滅多に陥穽もありませぬ、又地の底に魔窟ケ原のやうな隠れ場所も造つては御座いませぬ、マア悠くりと、安心して胴を据ゑて下さいませ』</p>
+            <p class="ja-classical-line">高姫『此間は御主人様はお気の毒な事で御座いましたなア、何うぞ霊様なりと拝まして下さい、三五教を信仰なさつても矢張悪魔には叶はぬと見えます、大江山の鬼雲彦の部下に捕へられ嬲殺しにお遭ひなさつたさうだが、私が聞いても涙が澪れる、况して女房の貴女、御愁傷の程お察し申します』</p>
+            <p class="ja-classical-line">と、そつと目に唾をつけ、オンオンと空泣きに泣き立てる。青彦はポカンとして紅葉姫の顔を見詰めて居る。高姫は青彦の裾をそつと引き、泣き真似をせよと合図をする、青彦は些しも合点行かず、</p>
+            <p class="ja-classical-line">『エ何ですか、私の着物に何ぞ着いて居りますか、甚う引つ張りなさいますな』</p>
+            <p class="ja-classical-line">紅葉姫『オホヽヽヽ、それは御親切有難う御座います、私の主人は無事帰つて参りました、これも全く三五教の御神徳で御座います、余り三五教の勢力が強いので嫉み猜みから、ウラナイ教とやらが出来て、其処ら中を掻き廻して歩くと云ふ事で御座います、よう人の真似の流行る世の中、人が成功したからと云うて自分が其真似をして向ふを張らうと思つても、身魂の因縁性来で到底思惑は立つものぢやありませぬ、貴女はウラナイ教の宣伝使とお見受致しますが、一体ウラナイ教はドンナ教で御座いますか』</p>
+            <p class="ja-classical-line">高姫『三五教はあれは元は好かつたが、今は薩張り駄目です、三五教の誠生粋の根本は、日の出神の生宮、この高姫が何も彼もこの世の開けた根本の初りから、万劫末代の世の事、何一つ知らぬと云ふものはないウラナイ教です、それだから誰にも聞かずにお家の御主人秋山彦様の御遭難もチヤンと分つて居るのです、ナンとウラナイ教は立派なものでせうがナ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Momijihime said, 'To treat my husband Akiyamahiko, who is not even dead, as a Shinin is indeed the act of a most wise and great Kamisama; Akiyamahiko is alive and well.'</p>
+          <p class="en-p">Takahime replied, 'You speak such Rikutsu because you do not know the Innen of your own Mitama, but after he was once captured at Ōeyama and died, I, this Takahime, cast the Iki of the Denokami from an Enkaku place and administered an injection of Shinrei, by which he was Ikikahe; now, change your heart and convert to the Uranai-kyō.'</p>
+          <p class="en-p">Momijihime recited, 'Though the Asahi may shine or cloud, though the moon may wax or wane, though the Daichi itself may sink, the Ananai-kyō shall save the world, the Onoshihe of the true Kami; as for the Uranai-kyō, I cannot bring myself to like it, for Ahienkien, even the insect that eats the Tade has its own preferences, and even the bitter leaves of the Tabako attract insects; I shall refrain from converting, nay, I absolutely refuse, ho ho ho ho.'</p>
+          <p class="en-p">From the inner chamber, the voice of Akiyamahiko was heard, saying, 'Momijihime, Momijihime.'</p>
+          <p class="en-p">Answering 'Hai,' Momijihime bowed lightly to the two and proceeded into the inner chamber.</p>
+          <p class="en-p">As the two watched the back of Momijihime as she departed, they turned their eyes to a framed tablet and saw the edge of a key appearing from behind it. Takahime stood up, took it in her hand, and saw it inscribed as the key to the treasure house of Kanmurijima and Kutsujima. Takahime smiled with a grin, thinking that with this, her great vow would be fulfilled, and she quickly tucked it into her bosom with an indifferent face, while Aohiko began to tremble violently.</p>
+          <p class="en-p">Aohiko said, 'Excuse me, Takahime-sama, wh-what are you doing? I cannot comprehend why you would place the heirlooms of this house into your own bosom.'</p>
+          <p class="en-p">Takahime replied, 'Shh, what a man lacking in flexibility you are; it is the command of the Hinodewake, and I have clearly perceived with my divine vision that this house possessed the key to Kanmurijima and Kutsujima, and I have come specifically to unearth it; come, come, while it is still night, let us depart from this place, prepare a boat, and cross to Kanmurijima.'</p>
+          <p class="en-p">She then attempted to lead the way.</p>
+          <p class="en-p">Aohiko said, 'We must at least offer our greetings to the people of this house; I feel somehow uneasy about this.'</p>
+          <p class="en-p">Takahime replied, 'Oh, you are slow to understand; this is no time for dawdling, for the time is pressing and brooks no delay; a great achievement does not regard minor details, and a wife does not regard her husband; for the sake of the fulfillment of the divine nation, bathe in the rain and comb with the wind, and come quickly with the great activity of a lion in fury.'</p>
+          <p class="en-p">With these words, they slipped out of the house through the back gate. Not a single person within the residence of Akiyamahiko noticed that the two had fled. The two rushed to the port of Yura, secured a small boat, and while Aohiko handled the scull and Takahime rowed with the oar, they rowed with all their might out onto the moonlit sea.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">紅葉姫『死ンでも居ない吾夫秋山彦を死人扱ひなさるのは、如何にも好く分つた偉い神様ですなア、秋山彦はピンピンして居りますよ』</p>
+            <p class="ja-classical-line">高姫『それは貴女身魂の因縁をご存じないからソンナ理屈を仰有るが、三五教で一旦大江山に囚はれ死ンだ処を、此高姫が日の出神の水火を遠隔の地よりかけて、神霊の注射をやつたから生返つたのだよ、サアこれからは心を改めてウラナイ教に改宗なされ』</p>
+            <p class="ja-classical-line">紅葉姫『朝日は照るとも曇るとも、月は盈つとも虧くるとも、仮令大地は沈むとも、三五教は世を救ふ、誠の神の御教、ウラナイ教はどうしても虫が好きませぬ、合縁奇縁蓼喰ふ虫も好き好き、えぐい煙草の葉にも虫がつく、改宗するのは見合しませう、いや絶対に嫌ですワ、ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">奥の方より秋山彦の声がして、</p>
+            <p class="ja-classical-line">『紅葉姫紅葉姫』</p>
+            <p class="ja-classical-line">と聞え来る。</p>
+            <p class="ja-classical-line">『ハイ』と答へて紅葉姫は二人に軽く会釈して奥の間さして進み入る。</p>
+            <p class="ja-classical-line">二人は紅葉姫の後姿を目送しながら眼を転じて額を見れば、額の裏に鍵の端が現はれて居る。高姫は立上り、手に取り見れば冠島沓島の宝庫の鍵と記されてある。高姫はニヤリと笑ひ、これさへあれば大願成就と手早く懐中に捻込み素知らぬ顔、青彦はがたがた慄ひ出し、</p>
+            <p class="ja-classical-line">青彦『もしもし高姫さま、ソヽそれは何と云ふ事をなされます、当家の什物を貴女の懐中にお入れ遊ばすとは合点が参りませぬ』</p>
+            <p class="ja-classical-line">高姫『シーツ、エヽ融通の利かぬ男だな、日の出神の御命令だ、此家に冠島沓島の鍵を持つて居る事は天眼通でチヤンと睨みてある、之をかぎ出す為にやつて来たのだよ、サアサア今の中に夜に紛れて此処を立ち去り船を拵へ冠島に渡りませう』</p>
+            <p class="ja-classical-line">と先に立つて行かむとする。</p>
+            <p class="ja-classical-line">青彦『一応当家の方々に御挨拶を申上げねばなりますまい、何だか心懸りでなりませぬわい』</p>
+            <p class="ja-classical-line">高姫『エヽ合点の悪い、愚図々々して居る時ぢやない、時期切迫間髪を容れずと云ふこの場合だ。大功は細瑾を顧みず細君は夫を顧みず、神国成就の為に沐雨櫛風、獅子奮迅の大活動早く御座れ』</p>
+            <p class="ja-classical-line">と裏門よりそつと此家を逃出したり。秋山彦邸内の者は一人として二人の者の逃走せし事に気が付かざりける。二人は由良の港に駆けつけ一艘の小船を○○し、青彦は艪を操り、高姫は櫂を漕ぎ一生懸命月照る海原を漕ぎ出したりける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: White Fox の出現 [600]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: 捜索隊 [602]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

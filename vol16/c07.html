@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: 空籠 [597] - Volume 16 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 16 Table of Contents</a>
+      <span>Volume 16</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 16 &bull; Chapter 7</span>
+      <h1 class="chapter-title-en">Chapter 7: 空籠 [597]</h1>
+      <p class="chapter-title-ja">空籠〔597〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Moved by the Sendenka into which Akiyamahiko had poured his heart, Onihiko, Onitora, Ishikuma, Kumataka, and the others repented of their past wrongs from the depths of their souls; they prostrated themselves before the party, joined their Riyōte, and, steadying their breath with the uncertain Kototama, followed behind Akiyamahiko to recite the Amatsunorito, chanting the Sendenka to manifest their intent of Kijiyun.</p>
+          <p class="en-p">Onihiko spoke: 'We offer our Orei to Susanōnomikoto and all the Goichidō. You have saved us, who are but vessels of Akuma and Zainin beyond forgiveness, from our Kinan; furthermore, you have aided us, whose Shintai are infirm, through the Daiji and Daihi of the Ōkami and the Ōmikokoro. We know not how to express our gratitude, but henceforth we shall repent from the depths of our hearts. Pray, I beseech you, depart from this place with all haste. If you proceed deep into this Makutsugahara, you shall find the rocky cavern dwelling of Onikumohiko, and beyond it, his magnificent main castle. Should you venture there, many wicked ones lie in wait with arms prepared, and I fear that even you, noble and valiant deities, may suffer some hardship. I pray you, heed our words and flee from this place.'</p>
+          <p class="en-p">He offered this counsel with his sincerity manifest upon his countenance. Kamehiko, half in mockery, replied:</p>
+          <p class="en-p">'Ho, General Onihiko, your wit turns quite well, does it not? This is a cunning stratagem to feign kindness, repel our brave commanders, and snatch a moment of respite. Having attempted to torment our party here, you have met with immediate divine retribution, only to be thwarted by your own stones and arrows, suffering a miserable defeat and learning your lesson, it seems. However, we are by no means like the Brahmins, nor like Onikumohiko, who wear the mask of virtue to disturb the world. We shall now meet with Onikumohiko and compel him to repent from the depths of his heart, just as you have done. From this moment, bind our party hand and foot as before, and, though it be a burden, carry us in this Ajirokago.'</p>
+          <p class="en-p">Onihiko replied: 'Nay, that would be disastrous. Should we welcome deities such as you into the main castle, it would bring about a cataclysm that would shake heaven and earth; the interior of the castle at Ōeyama would be reduced to chaos and ruin, a tragic scene of scattered petals and dust, as clear as an object reflected in a bright mirror. I beseech you, I beseech you, pray withdraw from this place.'</p>
+          <p class="en-p">Kamehiko said: 'You are still favoring Onikumohiko, are you not? Ah, how admirable, how admirable. To show such devotion to one whom you once relied upon as your general is indeed the manifestation of human sincerity. Nevertheless, our hearts are set upon this course, and to turn back our horses midway is something a man cannot endure. If you will not listen, we shall continue our forced march from here and advance upon the main castle of Ōeyama.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">秋山彦が心籠めたる宣伝歌に鬼彦、鬼虎、石熊、熊鷹其他の面々は心の底より前非を悔い、一行の前に鰭伏して両手を合せ、覚束なき言霊の息を固めて秋山彦の後につき天津祝詞を奏上し、宣伝歌を唱へ帰順の意を表したりけり。</p>
+            <p class="ja-classical-line">鬼彦『素盞嗚尊様を始め御一同の方々に御礼申し上げます、吾々の如き悪魔の容器赦し難き罪人の危難をお救ひ下され、其上にも大慈大悲の大神の大御心を以て身体不自由の吾々をお助け下されし御志何と御礼を申し上げて宜しいやら、今後は心の底より悔い改めます、サアサ何卒一刻も早く此場を御立退き下さいませ、此魔窟ケ原をズツト奥へ進みますれば愈鬼雲彦の岩窟の棲家、又立派なる本城が御座いまする、其処へ参れば数多の邪人共手具脛引いて待ち構へ居れば、如何に勇猛なる貴神様も多少御苦みの事と存じますれば、吾々の言葉をお用ひ下さいまして、何卒此場より御逃れ下さいますよう』</p>
+            <p class="ja-classical-line">と真心を面に表はして忠告する。亀彦は揶揄半分に、</p>
+            <p class="ja-classical-line">『ホー鬼彦の大将、随分智慧が能く廻るぢやないか、親切ごかしに吾々の勇将を撃退し暫時の猶予を貪らむとする猾い計略、今此処に於て吾ら一行を苦めむとせし処、天罰立所に致り過つて味方の石弾、征矢に中り零敗の大見当違ひを演じ懲り懲りしたと見えるワイ。然し乍ら吾々は決して婆羅門教の如く、否鬼雲彦の如く善の仮面を被り天下を攪乱せむとするものに非ず、之より鬼雲彦に面会し彼をして汝等の如く心の底より悔い改めしめねばならぬ、今よりは吾々一行を旧の如くに高手小手に縛め、御苦労乍ら、此網代籠に乗せて担いで行つて呉れよ』</p>
+            <p class="ja-classical-line">鬼彦『イヤ滅相な、貴神等の如きお方を本城へ迎へ入れるが最後、天地転動の大騒動、大江山の城内は乱離骨灰、落花微塵の惨状を演出するは明鏡の物を照して余蘊なきが如しであります、何卒々々此場をお引き取り下さいませ』</p>
+            <p class="ja-classical-line">亀彦『貴様は矢つ張り鬼雲彦の贔屓を致して居るな、ヤア感心々々、一旦大将と恃みた者に対してそれ丈けの心遣ひを致すは人間の真心の発露である。併し乍ら此処迄思ひ立つたる吾々の心中、中途に駒の頭を立て直す事は男子として忍び難き処だ、如何しても聞かねば吾々は之より強行的行脚を続け大江山の本城に立向ふであらう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As they began to walk slowly, Onihiko uttered a cry of lamentation.</p>
+          <p class="en-p">"Alas, alas, it is a great calamity; however heroic you, noble deities, may be, I perceive the bitterness of your struggle, being but a few against a multitude," he said, restraining them from the sincerity of his heart.</p>
+          <p class="en-p">The subordinates, one and all, displayed countenances of astonishment and gazed upon the face of Onihiko.</p>
+          <p class="en-p">Kamehiko spoke: "What is this? Do not utter such effeminate words; are you not the man who was called the left-hand guardian of Onikumohiko? Furthermore, what is the meaning of this? To raise a ruinous cry of sorrow and fill your eyes with tears of despairing grief to stop us—I cannot fathom your intent. There must be some deep stratagem in this. We, the party, possess the right to walk through the mountains at our own free will. Come, everyone, let us advance. Even if Onikumohiko should possess a great army of a million to defend and fight, I, Kamehiko, alone am sufficient. As a strong wind stirs up clouds of dust, by the breath of my single word, I shall cause them to repent from their very foundations and transform the den of demons into a heavenly paradise. Ha, how amusing, how valiant!"</p>
+          <p class="en-p">So he muttered to himself, squaring his shoulders with a spirit of ten thousand fathoms that none could withstand, stamping his feet and roaring with martial vigor.</p>
+          <p class="en-p">Onihiko said: "Kamehiko-sama, you are raising your meter with a terrible intensity."</p>
+          <p class="en-p">Kamehiko replied: "Oh, indeed, it is the meter of the enemy's imminent destruction; do not think that I am unaware of your attempt to hinder my advance by means of this meter. What do you take me, the Jean-Pierre, to be?"</p>
+          <p class="en-p">Onihiko said: "Jean-Pierre? I know not if it be a Jean-Pierre horse, but you are truly a person who concocts such Jean-Pierre."</p>
+          <p class="en-p">Kamehiko said: "Agh, it smells of Jean-Pierre; if we dally, the meter that has risen with such effort will become Pierre. Come, let us go."</p>
+          <p class="en-p">And he attempted to set forth once more.</p>
+          <p class="en-p">Onihiko said: "Ah, though I kindly entreat you not to go, you show every sign of wishing to proceed regardless; now that it has come to this, though I would go, I cannot go."</p>
+          <p class="en-p">Kamehiko said: "Eh, is this a time for jests? Without spewing such drivel, why do you not bind me and carry me to the main castle?"</p>
+          <p class="en-p">Onihiko said: "Th-th-that is the very calamity. Had I been the man I was until now, no matter how much you wished to go, I would have taken you and claimed the merit; but now that I have awakened to the causality of heaven and earth and repented of evil, how could I remain silent? The nature of man is good; I shall never speak of evil things."</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">とそろそろ歩み初めたれば、鬼彦は泣声を出し、</p>
+            <p class="ja-classical-line">『モシモシ、タヽヽヽ大変で御座います、如何に貴神方が英雄なればとて多勢に対する無勢、御苦戦の程お察し申す』</p>
+            <p class="ja-classical-line">と真心より止める。部下の一同は驚異の面相を陳列して鬼彦の顔をうち衛り居る。</p>
+            <p class="ja-classical-line">亀彦『何だ、女々しい事を言ふな、貴様も鬼雲彦の左守と迄言はれた男じやないか、それに何ぞや、亡国的哀音を立て絶望的悲調の涙を湛へて吾々を止めむとするは其意を得ない、之には何か深き謀計のある事ならむ、吾等一行は自由自在に山中徒歩の権利を有す、サアサ御一同様、進みて参りませう。仮令鬼雲彦百万の大軍を擁し防ぎ戦うとも此亀彦が只一人あれば沢山なり。強風の砂塵を捲き上ぐる如く、吾一言の息吹によつて根底より悔い改めしめ、悪魔の巣窟をして天国楽園と化せしめむ。ヤア面白し、勇ましし』</p>
+            <p class="ja-classical-line">と独語ちつつ肩を怒らし気焔万丈当るべからず、足踏み鳴らし雄猛びする。</p>
+            <p class="ja-classical-line">鬼彦『亀彦様、大変な勢でメートルをお上げになつて居られますな』</p>
+            <p class="ja-classical-line">亀彦『オウさうだ、敵の敗亡目前にメートルだ、某の前進を妨げむとしてメートルの事致すと量見ならぬぞ、ジヤンジヤ、ヒエールの某を何と心得てるか』</p>
+            <p class="ja-classical-line">鬼彦『ジヤンジヤ、ヒエールか、ジヤンジヤ馬か存じませぬが能う貴下はジヤンジヤを捏ねるお方ですな』</p>
+            <p class="ja-classical-line">亀彦『エーエ、ジヤンジヤマ臭い、愚図々々して居ると折角上つたメートルがヒエールだ、サアサ行かう』</p>
+            <p class="ja-classical-line">と又もや行かむとする。</p>
+            <p class="ja-classical-line">鬼彦『アヽア、行つて下さるなと親切に申し上げても貴下は何処までも行かむとする御気色、モウ斯うなつてはゆかん乍らゆかんともする事が出来ませぬ哩』</p>
+            <p class="ja-classical-line">亀彦『エ、洒落どころかい、愚図々々吐さずと此方を縛り上げて本城へ担ぎ込まぬか』</p>
+            <p class="ja-classical-line">鬼彦『ソヽヽヽそれが大変で御座います、今迄の私なれば貴下等が何程行かむと仰しやつても連れて行つて手柄に致しまするが、最早天地の因果を悟り悪を悔い改めた上は、如何して之が黙つて居られませう、人の性は善で御座います、決して悪い事は申しませぬ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kamehiko exclaimed, 'Ah, what a pack of helpless cowards! Onikumohiko must find it no ordinary task to sustain such a company; when I consider it, I find the heart of Onikumohiko truly pitiable.'</p>
+          <p class="en-p">At this moment, five men wearing wigs with two horns protruding appeared, carrying spears and walking with a slow, heavy gait into the place.</p>
+          <p class="en-p">The men spoke, 'Hail, General Onihiko, what a feat, what a feat! Come, we shall now guide you; General Onikumohiko awaits with neck outstretched to learn of the situation, for it must have been a most arduous labor for you.'</p>
+          <p class="en-p">So saying, they peered one by one into the palanquin.</p>
+          <p class="en-p">The men cried, 'What is this? Is it not an empty palanquin? What has become of Susanōnomikoto and the others? Was it not reported that you had successfully captured them alive?'</p>
+          <p class="en-p">Onitora, Kumataka, Ishikuma, and Onihiko looked about them, and lo, how strange it was; the figure of Kamehiko, who had been boasting so loudly until now, and the shadows and forms of Susanōnomikoto, Kunitakehiko, and their party had all vanished.</p>
+          <p class="en-p">Onihiko said, 'Ah, this is a mystery. Where have the divine men—nay, the prisoners—whom we brought in this wicker palanquin hidden themselves? It is a matter beyond my comprehension.'</p>
+          <p class="en-p">Kumataka replied, 'Come, this is the notorious Makutsugahara; perhaps invisible demons have emerged and devoured them while we were unaware, or perhaps they have naturally vanished, fearing the might of General Onikumohiko. In any case, it is a matter beyond my comprehension. Ho, you five gentlemen, return to the main castle at once and report this matter with haste.'</p>
+          <p class="en-p">One of the five, widening his eyes, said,</p>
+          <p class="en-p">'What is this you say? I cannot comprehend your command to report with haste.'</p>
+          <p class="en-p">Kumataka declared, 'I am not the Kumataka of yesterday; today I am a noble believer of the Sangōkyō. From here, I shall launch a counterattack upon the main castle, wring off the bare neck of Onikumohiko, and bring the spirits of the Yamata-no-Orochi to submission through Kototama, one by one; the raising of our victory cry shall be but a fleeting moment. You must depart this place at once and fail not to prepare for defense against our approaching forces.'</p>
+          <p class="en-p">The five, all at once, looked suspicious and asked,</p>
+          <p class="en-p">'Is... is that truly the case?'</p>
+          <p class="en-p">Kumataka answered, 'The truth or falsehood shall soon be known; depart this place with haste.'</p>
+          <p class="en-p">Awestruck by this vehemence, the five exchanged glances and said,</p>
+          <p class="en-p">'What is this? Both General Onihiko and Brother Kumataka, and the faces of all the others, have completely lost their stern composure; their former demonic masks have suddenly transformed, falling into the countenances of radiant goddesses. How troublesome this is! Does one become such a spineless creature when one falls into the path of virtue?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">亀彦『ヤア仕方のない弱虫ばかりだナア、鬼雲彦もコンナ連中を養つて居れば並大抵の事でもあるまい、思へば思へば鬼雲彦の御心中お可憐相である哩』</p>
+            <p class="ja-classical-line">斯かる処へ二本の角をニユツと生した鬘を被つた五人の男、ノソリノソリと手槍を提げ、此場に現はれ来り、</p>
+            <p class="ja-classical-line">男『ヤア、鬼彦の大将、お手柄お手柄、サア之から吾々が御案内申さう、鬼雲彦の御大将様子如何にと首を長うしてお待ちかね、嘸お骨折で御座つたらう』</p>
+            <p class="ja-classical-line">と言ひ乍ら駕籠の中を一々覗きこみ、</p>
+            <p class="ja-classical-line">男『ヤア何だ、空籠じやないか、素盞嗚尊其他は如何なされた、首尾克う生擒つたとの御注進ではなかつたか』</p>
+            <p class="ja-classical-line">鬼虎、熊鷹、石熊、鬼彦は四辺を見れば此は如何に、今迄盛にメートルを上げて居た亀彦の姿も素盞嗚尊、国武彦其他一行の影も形もなくなつて居る。</p>
+            <p class="ja-classical-line">鬼彦『ヤア、此奴は不思議だ、今迄此網代籠に乗せて来た一同の神人、ではない囚人何処へ姿を隠しよつたか、合点の往かぬ事である哩』</p>
+            <p class="ja-classical-line">熊鷹『サア此処は名に負ふ魔窟ケ原、目に見えない悪魔が出て来よつて吾々が知らぬ間に喰つて仕舞つたのか、但は鬼雲彦の大将の威勢に恐れて自然消滅致したか、何に付けても合点の往かぬ事である哩。ヤア五人の方々、一時も早く本城へ立ち帰り此由早く注進致すな』</p>
+            <p class="ja-classical-line">五人の中の一人、目を円くし、</p>
+            <p class="ja-classical-line">男『ヤア何と仰せられます、一時も早く注進致すなとは合点が承知仕らぬ』</p>
+            <p class="ja-classical-line">熊鷹『俺は昨日迄の熊鷹ではない、今日は立派な三五教の信者であるぞ、之より本城へ逆襲なし鬼雲彦が素首捻切り引きちぎり八岐大蛇の身魂を片つ端より言向和し、勝鬨あげるは瞬く間だ、汝は一刻も早く此場を立ち去り吾々が寄せ手の軍勢に向つて防戦の用意オサオサ怠るな』</p>
+            <p class="ja-classical-line">五人は一度にいぶかり乍ら、</p>
+            <p class="ja-classical-line">『ソヽヽヽそれは真実で御座るか』</p>
+            <p class="ja-classical-line">熊鷹『真偽は今に分るであらう、汝は早く此場を立ち去れ』</p>
+            <p class="ja-classical-line">この権幕に五人は互に顔見合せて、</p>
+            <p class="ja-classical-line">『何だ、鬼彦の大将と言ひ、熊鷹の阿兄と言ひ、其他一同の顔の紐は薩張解けて仕舞ひ、今迄の鬼面は忽ち変じて光眩き女神の様な顔色に堕落して仕舞ひよつた、ハテ困つた事だワイ、善の道へ堕落するとコンナ腰抜けに成つて仕舞ふものかなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The Gonin turned upon their heels and fled in haste, pointing toward the distance. Onihiko stood up with a start, having finished chanting the Sendenka of the Ananai-kyō, and spoke: 'Come, all you people, how is it? Do you not feel as though the wind has been taken out of your sails?'</p>
+          <p class="en-p">The Ichidō replied: 'Indeed, it is so. The evil heart that we had strained to maintain until now has vanished like a fart in the water, bubbling away into nothingness. Everyone has become like Amazake from which the alcohol has evaporated. Kamehiko offered his Iken, but that too lacked any firm foundation; it was a speech neither sweet nor spicy, neither severe nor lenient, and altogether incomprehensible. It was just like drinking Amazake with the juice of Shiyōga added to it. It felt as though one were receiving money on the sly while listening to the Kowaiken of an Oyaji. Come now, as a Kinen of our Nifushin, we must hasten to the Honjiyō of Ōeyama and extract the soul of the Akushin—nay, the neck of Onikumohiko—to save him.'</p>
+          <p class="en-p">The Ichidō clapped their hands to express their agreement, and with Onihiko in the lead, chanting the Sendenka, they advanced, leaping over the desolate wilderness where the winter wind raged and crossing valleys to the right and left. At that moment, a man and a woman suddenly appeared from the thicket, and catching sight of Onihiko and his party, they laughed coldly and said:</p>
+          <p class="en-p">'Ha! Are you not the hero and man of valor of Ōeyama of whom we have heard? Yet, what is this appearance of yours today? Is it not utterly ruined? With that indistinct countenance, like a marble-less bottle of Ramune, have you been deceived by a fox? Or perhaps, have you been taken in by the glib tongue of the Akushin of Susanoo-no-Mikoto, and had your gall stolen and your loins weakened? In any case, it is a senile figure and a senile soul that defies understanding. To think that you, Onihiko and his company, would return so sluggishly, having been so easily toyed with by the enemy—it is truly pathetic. The great commander Onikumohiko will surely rejoice greatly. He will likely shed tears like acorns, saying that a man is fortunate to have such retainers, and rejoice. Ahahaha! Ohohoho!'</p>
+          <p class="en-p">They laughed until they rolled on the ground. Onihiko, with a sullen face, replied: 'Hey, I know not who you are, but we have merely exercised our own rights of freedom. This is no place for the likes of you to interfere. If you continue to babble, shall I unleash the power of Kototama upon you? Shall I strike your cheeks with an iron fist—nay, a rice cake—like a sea snail?'</p>
+          <p class="en-p">'Ahahaha! Ohohoho! Hey, everyone, come this way. Come, quickly!'</p>
+          <p class="en-p">As they tore open the rock, a staircase was revealed within.</p>
+          <p class="en-p">Onihiko said: 'Hey, this is a path we always take, yet I never knew until now that there was a hole in such a place. This is strange. Hey, Onitora, Kumataka, Ishikuma, and all the rest of you, shall we set out to explore this cavern for the sake of observation?'</p>
+          <p class="en-p">Onitora replied: 'That should be interesting,' and went down first.</p>
+          <p class="en-p">Driven by curiosity, the hundreds of rough men, without a single one remaining, tumbled into the cavern with a sound like a mountain of pond snail shells being poured out from above. Suddenly, Onitakehiko, who had appeared, shut the stone lid tight and placed a thousand-man-pulling rock upon it with a thud, saying: 'Ahahaha! Well, now we shall be at peace for a while.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">五人は踵を返し一目散に彼方を指して逃げ帰る。鬼彦は衝立ち上り三五教の宣伝歌を謡ひ終り、</p>
+            <p class="ja-classical-line">『サア一同の方々、如何で御座る、何だか拍子抜けがした様には御座らぬか』</p>
+            <p class="ja-classical-line">一同『左様で御座る、折角張り詰めた今迄の悪心は水の中で屁を放つた様にブルブルと泡となつて消え失せました、誰も彼もアルコールの脱けた甘酒の様になつて仕舞つた、亀彦が意見をして呉れたが之も余り拠り所が無い、甘い様な辛い様な、厳しい様な寛かな様な訳の分らぬ言葉であつた。丁度甘酒に、生姜の汁を入れて飲む様なものだ、親爺の強意見を聞き乍らソツとお金を貰ふ様な心持だつた、サアサ之から入信の記念として大江山の本城に駆け向ひ鬼雲彦の素首、オツト、ドツコイ悪神の魂を抜いて助けてやらねばなるまい』</p>
+            <p class="ja-classical-line">一同拍手して賛成の意を表し、鬼彦を先頭に宣伝歌を謡ひつつ、凩荒ぶ荒野原や谷川を右に左に跳び越え進む折しも、忽然として叢の中より現はれ出でたる男女の二人、鬼彦一行の姿を目蒐けて冷やかに笑ひ乍ら、</p>
+            <p class="ja-classical-line">『ヤア貴方は大江山の英雄豪傑と聞えたる御方、然るに今日のお姿は如何で御座る。薩張台なしでは御座らぬか、玉の落ちたラムネの様な判然致さぬ其顔付、狐にでも欺されなさつたか、イヤ、エ、素盞嗚尊の悪神の口車に乗せられて胆をとられ腰を抜かしたのではあるまいか、何れにしても合点の往かぬ耄碌姿、耄碌魂、脆くも敵に翻弄されてノソノソと帰り来るとは言ひ甲斐なき鬼彦一同の面々、鬼雲彦の大将に於かせられても嘸々お喜び遊ばす事であらう、持つべきものは家来なりけりと団栗の様な涙を流してお喜びになるであらう、アハヽヽヽ、オホヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ひ転ける。鬼彦はムツト顔にて、</p>
+            <p class="ja-classical-line">『エー、何処の何奴か知らぬが吾々は吾々としての自由の権利を実行したのだ、汝等の如きものの容喙すべき処でない、愚図々々吐すと言霊の発射を致してやらうか。蠑螺の如き鉄拳、否牡丹餅で貴様の頬辺を殴つてやらうか』</p>
+            <p class="ja-classical-line">『アハヽヽヽ、オホヽヽヽ、ヤア皆の方々、此方へ御座れ、サアサ早く』</p>
+            <p class="ja-classical-line">と岩をクレツと剥れば、中には階段がついて居る。</p>
+            <p class="ja-classical-line">鬼彦『ヤア何時も吾々のお通り路だがコンナ処に穴があるとは今迄知らなかつた。こいつは妙だ、ヤイ鬼虎、熊鷹、石熊其他の面々一同、見学の為めに岩窟の探険と出掛ようではないか』</p>
+            <p class="ja-classical-line">鬼虎は、</p>
+            <p class="ja-classical-line">『面白からう』</p>
+            <p class="ja-classical-line">と先に立つて下り行く。数百人の荒男は残らず好奇心に駆られて岩窟の中にガラガラツと田螺の殻を山の上から打ちあけた様な勢で一人も残らず転げ込むだ。忽然として現はれたる鬼武彦は岩石の蓋をピタリと閉め其上に千引の岩をドスンと載せ、</p>
+            <p class="ja-classical-line">『アハヽヽヽ、マア之で暫くは安心だワイ』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c06.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 6: Stone 槍の Rain [596]</span>
+      </a>
+      <a href="c08.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 8: 衣懸 Pine [598]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
