@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 20: Transformation of Speech [546] - Volume 13 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 13 Table of Contents</a>
+      <span>Part 4: Strange Caverns and Monstrous Rocks (第4篇 奇窟怪巌)</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 13 &bull; Chapter 20</span>
+      <h1 class="chapter-title-en">Chapter 20: Transformation of Speech [546]</h1>
+      <p class="chapter-title-ja">第20章　宣替〔546〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Leaving the mansion of Princess Garyō behind, Otohiko, Kamehiko, and Komahiko set forth once more upon the exploration of the cavern. Chanting missionary hymns, they marched boldly along the winding subterranean path, now broad, now narrow, with ceilings now lofty and now low.</p>
+          <p class="en-p">'The Deity hath appeared openly in the world / To sever good from evil asunder! / Kaminaho-bi who fashioned this cosmos, / And Ōnaho-bi whose heart is vast— / In all things throughout the mortal realm, / Restore by looking and listening aright through Naho-bi, / And amend every transgression through speech! / To subdue the crooked spirits of the Cavern of Demons / And establish the divine realm firm as rock, / We three missionaries advanced, / Yet ere we knew it, clouds of pride enveloped us, / Our hearts wandered down paths of gloom, / Straying from the way of true sincerity! / Dreaming dreams within a dream, / Puffed up in spirit, / We were taken aboard the Sacred Camphor Ship / And soared high unto the ninth heaven; / Yet scarce had we rejoiced,'</p>
+          <p class="en-p">'Our joy dissolved, and in a dream-like flash / We were lost upon the desolate moor! / Encountering mysterious Noro upon the lonely plain, / We knew not that within his harsh words / Lay concealed the jewel-voice of divine grace! / Squaring our elbows in haughty pride, / How ashamed are we of our folly! / Dream or waking or fleeting phantom? / We whose hearts were darkened / Plunged once more into the black cavern / Where none could tell black from white! / Breaking through the countless goblin spirits / Swarming before and behind, to right and left, / We reached at last the bright three-forked road, / And collided unawares with a heavy blow! / Bitter was the pain in the dark chest! / Encountering mysterious Yajihiko / And sober yet foolish Yotahiko,'</p>
+          <p class="en-p">'Before the stone portal that refused to open, / By the sacred Kototama of the Amatsu-Norito / It swung wide asunder! / Gazing within, an endless corridor stretched afar; / Dashed we headlong down the hall, / Marching endlessly without bound! / Even as our eager spirits hastened forward, / Brought to a sudden halt by a solid rock wall, / We looked up in astonishment—what marvel is this? / Unnumbered stars twinkled in the vault of heaven! / Even as we wondered in awe, / A figure surpassing jewels in beauty— / Whence came she, the maiden Izumo-hime? / Bidding us advance unto the capital of Fusa, / She walked ahead to guide our steps, / Leading us three missionaries / Unto the foot of the Koshi Pass!'</p>
+          <p class="en-p">'Arriving there, behold what wonder: / The apostle Hinode-wake, / With Takahiko, Iwahiko, and Umehiko, / Lay upon the colossal boulder / Wrapped in deep and blissful slumber! / Yet scarce had we rejoiced, / Awakened by the roar of a sudden tempest, / Looking round, behold what horror: / Seated within the inner chamber of Princess Garyō, / Urged by the noble goddess to partake of a feast / Of lizards, earthworms, serpents, frogs, / And hideous slugs! / Even as we hesitated in revulsion, / Our bodies were bound fast as with iron fetters, / Bereft of freedom of hand and foot! / In that hour of utter desperation, / When we resigned our souls unto death, / Lo, Princess Garyō in an instant'</p>
+          <p class="en-p">'Disclosed a radiant, gentle smile, / And proclaimed flawless virtuous words and beautiful speech! / In the boundless joy of her sacred counsel, / The dreams of pride dissolved away, / The pristine spirit of Naho-bi shone forth, / And emerging from the hall, / Transformed into the sacred soul of Izunome, / We missionaries of the Anai teachings / Cast off all slanderous speech! / Proclaiming the sacred, refined words of God, / How valiant our renewed march! / Whether the morning sun shine or be clouded, / Whether the moon wax or wane, / Yea, though the earth itself sink into the deep, / And though the cavern swarm with myriads of demons, / By the sacred Kototama bestowed by the Deity / We shall subdue them all with peace! / Weaving the horizontal and vertical threads / Of the Anai teachings like a brocade upon the loom, / We shall serve the divine mission!'</p>
+          <p class="en-p">'Ah, how wondrous, how joyful! / Our hearts leap along the rocky path! / Arousing the Yamato soul, / Keener and firmer than rock, / Uttering the fierce war-shout, stamping our feet, / Let us march forward along the Way of the Gods, / Yea, forward along the Way of the Gods!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">音彦、亀彦、駒彦の三人は、臥竜姫の館を後に見て、又もや巌窟内の探険に出かけた。九十九折の或は広く、或は狭く、或は天井高く、或は低き石径を宣伝歌を歌ひ乍ら、勇ましく進み行く。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立別ける
+この世を造りし神直日
+心も広き大直日
+唯何事も人の世は
+直日に見直せ聞直せ
+身の過ちは詔り直せ
+醜の窟の曲神を
+吾等三人の宣伝使
+言向和し神の世を
+堅磐常磐に立てむとて
+進み来りし其の間に
+何時か誇りの雲覆ひ
+心は暗き闇の道
+誠の道を踏み迷ひ
+夢に夢見る心地して
+心たかぶる其の儘に
+磐樟船に乗せられて
+九天高く昇りつめ
+やつと安心する間なく</p>
+            <p class="ja-classical-line">喜び消えて夢の間の
+荒野ケ原に踏み迷ひ
+得体の知れぬ野呂サンに
+寂しき野辺に廻り合ひ
+荒き言葉のその中に
+神の恵みの玉の声
+含みあるとは知らずして
+肩臂怒らし進み行く
+わが身の程も恥しき
+夢か現か幻か
+心の暗きわれわれは
+黒白もわかぬ闇黒の
+再び窟の人となり
+醜の身魂の数多く
+前後左右に飛び廻る
+中を切り抜けやうやうに
+光を三叉の道の角
+思ひがけなく衝当る
+痛さは痛し胸の闇
+得体の知れぬ弥次彦や</p>
+            <p class="ja-classical-line">酒も飲まぬに与太彦の
+二人の男に出会して
+開き兼たる石の門
+天津祝詞の言霊に
+さつと開いて眺むれば
+果しも知らぬ長廊下
+一目散に進み行く
+行けども行けど果しなく
+心の駒の逸る間に
+行き詰りたる岩壁に
+はつと気がつき眺むれば
+こは抑も如何に大空に
+きらめく星の数多く
+怪しみゐたる折柄に
+玉をあざむく優姿
+いづくの方か出雲姫
+フサの都に進まむと
+先に立ちてぞ出て行く
+吾等三人の宣伝使
+コシの峠の麓まで</p>
+            <p class="ja-classical-line">到りて見ればこは如何に
+日の出の別の宣伝使
+鷹彦岩彦梅彦の
+四人千引の岩の上に
+白河夜船の夢結ぶ
+あゝ嬉しやと思ふ間も
+あらしの音に目を醒し
+よくよく見ればこは如何に
+臥竜の姫の住ひたる
+奥の一間に端坐して
+蜥蜴蚯蚓や蛇蛙
+見るも穢きなめくぢり
+蚯蚓の馳走を与へむと
+貴の女神にすすめられ
+遠慮会釈の折柄に
+三人の身体は鉄縛り
+手足も自由にならぬ身の
+いよいよ生命を捨鉢の
+決心したる折柄に
+臥竜の姫は忽ちに</p>
+            <p class="ja-classical-line">優しき笑顔を現はしつ
+水も漏さぬ善言美詞
+宣り聞されし嬉しさに
+衿の夢も何処へやら
+直日の身魂輝きて
+ここに館をいづのめの
+神の身魂となりそめし
+三五教の宣伝使
+そしり言の葉吹き払ひ
+みやび言葉の神嘉言
+詔り直し行く勇ましさ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+たとへ大地は沈むとも
+窟の曲津多くとも
+神の賜ひし言霊に
+言向和し三五の
+神の教を縦横の
+錦の機の此の仕組
+仕へまつらむ宣伝使</p>
+            <p class="ja-classical-line">あゝ面白し面白し
+心は勇む岩の道
+岩より堅き鋭心の
+大和心を振り起し
+伊都の雄健び踏健び
+進みて行かむ神の道
+進みて行かむ神の道』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">音彦、亀彦、駒彦の三人は臥竜姫の館を後にして、又もや巌窟内の探検に出掛けた。九十九折の、あるいは広くあるいは狭く、あるいは天井高くあるいは低き石の小道を、宣伝歌を歌いながら勇ましく進み行く。</p>
+              <p class="ja-modern-p">『神が表に現れて／善と悪とを立て分ける／この世を造りし神直日／心も広き大直日／ただ何事も人の世は／直日に見直せ聞き直せ／身の過ちは宣り直せ／醜の巌窟の曲津神を／我等三人の宣伝使／言向け和し神の世を／堅磐常磐に立てんとて／進み来たりし其の間に／いつしか誇りの雲覆い／心は暗き闇の道／誠の道を踏み迷い／夢に夢見る心地して／心高ぶる其のままに／磐樟船に乗せられて／九天高く昇りつめ／やっと安心する間もなく』</p>
+              <p class="ja-modern-p">『喜び消えて夢の間の／荒野原に踏み迷い／得体の知れぬ野呂さんに／寂しき野辺に巡り会い／荒き言葉の其の中に／神の恵みの玉の声／含みあるとは知らずして／肩肘怒らし進み行く／我が身の程も恥ずかしき／夢か現か幻か／心の暗き我々は／黒白も分かぬ闇黒の／再び巌窟の人となり／醜の身魂の数多く／前後左右に飛び廻る／中を切り抜けようやくに／光る三叉の道の角／思いがけなく衝突する／痛さは痛し胸の闇／得体の知れぬ弥次彦や』</p>
+              <p class="ja-modern-p">『酒も飲まぬに与太彦の／二人の男に出会いて／開きかねたる石の門／天津祝詞の言霊に／さっと開いて眺むれば／果ても知らぬ長廊下／一目散に進み行く／行けども行けど果てしなく／心の駒の逸る間に／行き詰まりたる岩壁に／はっと気がつき眺むれば／これはそもそも如何に大空に／きらめく星の数多く／怪しみ居たる折柄に／玉を欺く優姿／何処の方か出雲姫／フサの都に進まんと／先に立ちてぞ出て行く／我等三人の宣伝使／コシの峠の麓まで』</p>
+              <p class="ja-modern-p">『至りて見ればこれは如何に／日の出別の宣伝使／鷹彦、岩彦、梅彦の／四人千引の岩の上に／白河夜船の夢結ぶ／ああ嬉しやと思う間も／嵐の音に目を覚まし／よくよく見ればこれは如何に／臥竜の姫の住みたる／奥の一間に端坐して／蜥蜴、蚯蚓や蛇、蛙／見るも穢き蛞蝓／蚯蚓の馳走を与えんと／貴の女神に勧められ／遠慮会釈の折柄に／三人の身体は金縛り／手足も自由にならぬ身の／いよいよ命を捨て鉢の／決心したる折柄に／臥竜の姫は忽ちに』</p>
+              <p class="ja-modern-p">『優しき笑顔を現しつ／水も漏らさぬ善言美詞／宣り聞かされし嬉しさに／傲りの夢も何処へやら／直日の身魂輝きて／ここに館を出づのめの／神の身魂となり初めし／三五教の宣伝使／誹り言の葉吹き払い／雅言葉の神嘉言／宣り直し行く勇ましさ／朝日は照るとも曇るとも／月は満つとも虧くるとも／例え大地は沈むとも／巌窟の曲津多くとも／神の賜いし言霊に／言向け和し三五の／神の教えを縦横の／錦の機の此の仕組／仕えまつらん宣伝使』</p>
+              <p class="ja-modern-p">『ああ面白し面白し／心は勇む岩の道／岩より堅き鋭心の／大和心を振り起こし／厳の雄叫び踏み轟かし／進みて行かん神の道／進みて行かん神の道』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Even as they sang, they reached a crossroad within the cavern. At that moment, three men emerged from ahead:</p>
+          <p class="en-p">Iwahiko: 'Ho! If it be not Oto, Kame, and Koma! Where have ye been idling, ye fools? We three have searched for your trace, circling these crossroads times without number! What in the world made ye linger so?'</p>
+          <p class="en-p">Otohiko: 'Ah, is it indeed Master Iwahiko? We are deeply, deeply grieved to have caused you such anxious concern! We were taken aboard the Sacred Rock-Ship of Lord Hinode-wake together with you all, soaring high into the clouds in boundless joy; yet unawares, upon the overgrown, desolate moor we three were shaken down! Until this very instant we were in dire anxiety concerning the fate of you three noble gentlemen; but beholding your safe and sound countenances, there could be no greater joy! For this divine reunion brought about by the Deity of the Anai teachings, we offer our heartfelt thanks!'</p>
+          <p class="en-p">Iwahiko: 'What is this? Adopting such exaggeratedly polite language, mock me not! Dost thou not know that excess of courtesy turneth into insolence? Thy sudden transformation—hast thou gone mad, or art thou a goblin? What an incomprehensible rogue! Say, Ume, this fellow is wondrously cracked!'</p>
+          <p class="en-p">Umehiko: 'Aye, look upon the faces of the three! Malnourished, pale as ghosts, emaciated like hungry fiends! Intoxicated by the cavern gases, they must have lost their wits!'</p>
+          <p class="en-p">Otohiko: 'Noble Master Iwa, Master Ume, pray give yourselves no concern! We suffer from no mental derangement whatsoever! We are missionaries of the Anai teachings; is it not so, friend Kame, friend Koma? We have not lost our senses in the slightest!'</p>
+          <p class="en-p">Kamehiko: 'Truly, truly so! Master Iwa and Master Ume show exceeding kindness in their concern, but there is no abnormality whatever; pray be at ease!'</p>
+          <p class="en-p">Iwahiko: 'Hey, Ume, Taka! 'Tis ever more unnatural! Like spoiled courtesans, they have suddenly turned sickeningly polite! Oto, Kame, Koma—are ye mocking us? Insolent knaves!'</p>
+          <p class="en-p">Kamehiko: 'Nay, heaven forbid! How could we ever mock august missionaries of the Anai teachings and face the Deity? We are humble servants of God sent to proclaim the Anai teachings throughout the world; how could we behave with disrespect before your noble presence?'</p>
+          <p class="en-p">Iwahiko: 'What comical fellows! Why hast thou turned so suddenly effeminate? Canst thou not display a vigorous, masculine spirit, using rough, hearty speech and shouting boldly? Bereft of martial courage, how canst thou ever subdue the demons?'</p>
+          <p class="en-p">Otohiko: 'Yea, for grave reasons, we three have undergone sincere repentance!'</p>
+          <p class="en-p">Iwahiko: 'Repentance doth not make a man so faint-hearted and weak! Under the divine protection of God, one must soar boldly across the world in vibrant vigor! Thou art intoxicated with kannagara: "kannagara" if it rain, "kannagara" if the wind blow, "kannagara" if a thief enter—can such a fellow ever serve as an Anai missionary?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と歌ひながら、岩窟内の十字路に着いた。この時前方より現はれたる三人の男、</p>
+            <p class="ja-classical-line">岩彦『オー貴様は音公に亀公、駒公、何処にまごついて居よつたのだい。馬鹿野郎だな。俺たち三人は貴様の行方を探して、幾度この八衢の隧道を廻つたことか知れやしない。一体何をぐづついとつたのだい』</p>
+            <p class="ja-classical-line">音彦『ハイ、コレハコレハ岩彦サンでございますか。誠に誠に御心配をかけまして済みませぬ。私は日の出別命様の磐船に、あなた方と一同に乗せられて雲の上に上げられ、ヤレ嬉しやと思つて居りましたが、豈図らむや何時の間にか草茫々と生え茂る荒野ケ原に、吾々三人は振り落されてゐました。あなた様三人は何うして居られますかと、今の今まで心配をして居りましたが、マアマア御無事な御一行の御顔を拝しまして、これ位嬉しいことはございませぬ。これも三五教の神様の全くの御引合せ有り難うございます』</p>
+            <p class="ja-classical-line">岩彦『ナアンダ。俄に御丁寧な言葉を使ひよつて馬鹿にするない。礼に過ぐれば却て無礼だといふことを知らぬか。打つて変つた貴様の態度、気が狂つたのか、但は化物か、合点の行かぬ奴だ。ナア梅公、此奴はチト変痴奇珍だぞ』</p>
+            <p class="ja-classical-line">梅彦『アーさうだ。三人の奴の面を見い。営養不良、色蒼白め、身体骨立餓鬼の如しだ。巌窟内の瓦斯に酔はされよつて精神に異状を来したのだらう』</p>
+            <p class="ja-classical-line">音彦『コレハコレハ岩サン、梅サン、決して御心配下さいますな。精神に異状を来したでも、何でもございませぬ。私は三五教の宣伝使でございますから、ナー亀サン、駒サン、些も気が狂つてはゐませぬなア』</p>
+            <p class="ja-classical-line">亀彦『左様々々、岩サン梅サンは大変心配をして下さるさうですが、決して異状はありませぬ、御安心して下さいませ』</p>
+            <p class="ja-classical-line">岩彦『オイ梅公、鷹公、ますます変だ。女郎の腐つたやうに俄に糞丁寧になりよつたぢやないか。オイ音公、亀公、駒公、貴様等は人を嘲弄するのか。あまり馬鹿にするない』</p>
+            <p class="ja-classical-line">亀彦『イエイエ滅相なこと仰有いませ。決して勿体ない三五教の宣伝使様を嘲弄ナンカしてどうして神様に申訳が立ちませう。私たちは三五教を天下に宣伝する神の僕でございます』</p>
+            <p class="ja-classical-line">岩彦『ますます可笑しい奴だ。なぜ貴様はさう俄に女性的になつたのだ。モ少し勇壮活溌な男性的の精神を発揮して、ベランメー口調でも使つて勇ましく噪がぬかい。勇気がなくては大事は遂行することは出来ないぞ。お正月言葉を使ひよつて、ナンダ。俄に気分が悪いやうな御丁寧な言霊を使ひよるのか』</p>
+            <p class="ja-classical-line">音彦『ハイ、吾々三人は仔細あつて改心を致しました』</p>
+            <p class="ja-classical-line">岩彦『改心をすれば、さう女々しくなるものぢやない。何事も神様の御保護の下に、活機臨々として天下に雄飛活躍せなくてはならないのだ。貴様は惟神中毒をしよつて、雨が降つたというては胸を躍らせ、風が吹くというては胆を潰し、灯心の幽霊のやうな細い細い精神になりよつて、ナンダ、その女々しい言霊は。ちつと確りせぬか。元気がつくやうに二つ三つ拳骨をお見舞ひしてやらうか。これも貴様等を鞭撻するための情の鞭だ』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">と歌いながら、岩窟内の十字路に着いた。この時前方より現れたる三人の男、</p>
+              <p class="ja-modern-p">岩彦『おお貴様等は音公に亀公、駒公、何処でまごついて居ったのだ。馬鹿野郎だな。俺達三人は貴様等の行方を探して、幾度この八衢のトンネルを回ったことか知れやしない。一体何をぐずついておったのだ』</p>
+              <p class="ja-modern-p">音彦『はい、これはこれは岩彦さんでございますか。誠に誠にご心配をお掛けしまして相済みません。私は日の出別命様の磐船に貴方がたと一同に乗せられて雲の上に上げられ、やれ嬉しやと思って居りましたが、思いもよらずいつの間にか草茫々と生い茂る荒野原に、我々三人は振り落とされて居りました。貴方様三人はどうして居られますかと、今の今まで心配をして居りましたが、まあまあご無事な御一行のお顔を拝しまして、これ位嬉しい事はございません。これも三五教の神様の全くのお引き合わせ、有難うございます』</p>
+              <p class="ja-modern-p">岩彦『何だ。俄かにご丁寧な言葉を使いおって馬鹿にするな。礼に過ぎれば却って無礼だという事を知らぬか。打って変わった貴様の態度、気が狂ったのか、あるいは化け物か、合点の行かぬ奴だ。なあ梅公、こいつはちと変痴奇珍だぞ』</p>
+              <p class="ja-modern-p">梅彦『ああそうだ。三人の奴の面を見い。栄養不良、色蒼白め、身体骨立して餓鬼の如しだ。巌窟内のガスに酔わされて精神に異常を来したのだろう』</p>
+              <p class="ja-modern-p">音彦『これはこれは岩さん、梅さん、決してご心配下さいますな。精神に異常を来したでも、何でもございません。私は三五教の宣伝使でございますから、なあ亀さん、駒さん、少しも気が狂っては居りませんなあ』</p>
+              <p class="ja-modern-p">亀彦『左様左様、岩さん梅さんは大変心配をして下さるそうですが、決して異常はありませぬ、ご安心をして下さいませ』</p>
+              <p class="ja-modern-p">岩彦『おい梅公、鷹公、益々変だ。女郎の腐ったように俄かに糞丁寧になりよったじゃないか。おい音公、亀公、駒公、貴様等は人を嘲弄するのか。あまり馬鹿にするな』</p>
+              <p class="ja-modern-p">亀彦『いえいえ滅相な事をおっしゃいませ。決して勿体ない三五教の宣伝使様を嘲弄なんかして、どうして神様に申し訳が立ちましょう。私たちは三五教を天下に宣伝する神の僕でございますから、貴方様方の前で失敬な振る舞いをするはずがございません』</p>
+              <p class="ja-modern-p">岩彦『益々可笑しい奴だ。何故貴様はそう俄かに女性的になったのだ。もう少し勇壮活発な男性的の精神を発揮して、べらんめえ口調でも使って勇ましく騒がないかい。勇気が無くてどうして魔神調伏が出来るか』</p>
+              <p class="ja-modern-p">音彦『はい、我々三人は仔細あって改心をいたしました』</p>
+              <p class="ja-modern-p">岩彦『改心をすれば、そう女々しくなるものじゃない。何事も神様の御保護の下に、活気凛々として天下に雄飛活躍しなくてはならないのだ。貴様は惟神中毒をしおって、雨が降っても惟神、風が吹いても惟神、泥棒に入られても惟神、そんな事では三五教の宣伝使が務まるかい』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">So saying, he clenched his fists knotty as turban-shells and rained rapid blows upon their heads.</p>
+          <p class="en-p">Otohiko: 'How gracious of thee to show such benevolent concern! We pray that thou wilt admonish us many times hereafter!'</p>
+          <p class="en-p">Iwahiko: 'Aha! This fellow hath truly lost his wits! Hey, Oto, compose thyself! Hast thou been possessed by a demon? What meaneth this demeanor?'</p>
+          <p class="en-p">Kamehiko: 'Master Iwa's words are wholly just; we do not call them unreasonable! Yet we three have attained tens of times greater strength and fortitude than before! We have cultivated a faith that flincheth not before any adversity whatsoever!'</p>
+          <p class="en-p">Iwahiko: 'Hey, Taka, Ume! 'Tis utterly beyond comprehension! His demeanor is like that of a maiden! Tedious and dreary, reeling off endless polite speeches like pulling dried gourd-strips—pah! The old abusive Otohiko was vastly preferable to this!'</p>
+          <p class="en-p">Takahiko: 'Aha! 'Tis admirable indeed! Master Oto, Master Kame, Master Koma, how wondrously have ye polished your souls and grown strong! Unlike your former selves, your courage is multiplied a hundredfold! Verily, only thus can any demon god be pacified through words! Befitting true apostles who have realized the divine virtue of Izunome no Kami!'</p>
+          <p class="en-p">Otohiko: 'How graciously hast thou spoken! Thou art indeed a true apostle of God! We pray that thou wilt never forsake us, but guide our steps hereafter!'</p>
+          <p class="en-p">Takahiko: 'Not at all! Felicitations unto you three gentlemen! Let us join hands and walk together along the Path of the Gods! Pray forsake us not either!'</p>
+          <p class="en-p">Iwahiko: 'What is this? Taka, cease this banter! While I strive with all my might to instill vigor into them, thou pushest an obstinate wheel to mock me! 'Tis ever more scandalous, in the very fashion of the Cavern of Demons! Say, Ume, what thinkest thou?'</p>
+          <p class="en-p">Umehiko: 'Master Iwa, that must surely be an error in your thinking!'</p>
+          <p class="en-p">Iwahiko: 'Hold, pause! Ume, hast thou too lost thy wits? Wherefore weak-minded fellows are useless! Exploring but half of the Cavern of Demons hath reduced ye thus; by the time we explore the whole, ye will soften into octopuses, bereft of bone and sinew! Up, comrades, stand firm! Ye spineless cowards! Leading five such spineless weaklings, that Master Iwa alone must fight in desperate struggle against mighty foes maketh me forlorn indeed! What a fine pack of cowards have gathered here!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と云ひながら、蠑螺の如き拳骨を固め三人の頭をボカボカと急速度をもつて擲りつけた。</p>
+            <p class="ja-classical-line">音彦『ご親切によう思つて下さいました。何卒これからは、幾度もご注意をして下さいませ』</p>
+            <p class="ja-classical-line">岩彦『アハーやつぱり此奴どうかして居よる。オイ音公、確りせぬかい。貴様は魔に犯されたのだらう。ナンダその態度は』</p>
+            <p class="ja-classical-line">亀彦『岩サンのご意見は御尤もでございます。決して無理とは申しませぬ。併し乍ら私等三人は以前に数十倍の力と強味が出来ました。如何なる難事に際会しても、少しも驚かぬやうになりました。如何なる敵に向つても怯めず臆せず、善戦善闘するだけの神力を与へられました』</p>
+            <p class="ja-classical-line">岩彦『オイ鷹公、梅公、一体合点が行かぬぢやないか。此奴の態度と云つたら丸で処女の如しだ。辛気臭くて、長い長い口上を列べ立てよつて、干瓢でもたぐるやうに、あた辛気臭い。骨無しの力も無い、女々しい言霊、エーゲン糞の悪い』</p>
+            <p class="ja-classical-line">鷹彦『ヤア感心です。音サン、亀サン、駒サン、よう其処まで魂を研き、強うなつて下さいました。今までの三人サンとは違つて勇気も百倍いたしました。嗚呼それでこそ如何なる敵にも打克つことが出来ませう。よい修業をなさいましたなア』</p>
+            <p class="ja-classical-line">音彦『ご親切に能く言つて下さいました。貴方こそ本当の宣伝使様でございます。以後は何卒お見捨なくお世話下さいますやう御願ひ致します』</p>
+            <p class="ja-classical-line">鷹彦『何う致しまして、お三人様お芽出度うございます。お互様に宜しく手を曳き合うて神の道に参りませう。貴方の方からもお見捨てなく』</p>
+            <p class="ja-classical-line">岩彦『ナンダ。鷹公洒落ない。人が一生懸命に力を付けてやらうと思つて居るのに、貴様は横車を押しよつて人を嘲弄するのか。愈もつて怪しからぬ醜の巌窟式だ。ナア梅公、一体合点が行かぬぢやないか』</p>
+            <p class="ja-classical-line">梅彦『岩サン、それは貴方のお考へ違ひでございませう』</p>
+            <p class="ja-classical-line">岩彦『オツト待つた待つた。梅の奴、貴様までが逆上して何うするのだ。これだから精神の弱い奴は間に合はぬのだ。醜の窟の半分くらゐ探険してこれだから、全部探検する迄にはすつかり軟化して章魚のやうに、骨も何も無くなつて了ふかも知れやせぬぞ。オイ皆の奴、しつかりせぬか。腰抜け野郎奴が。あゝコンナ腰抜け野郎を五疋も伴れて、この岩サン一人が奮戦苦闘強敵に当らねばならぬかと思へば、心細くなつて来るワイ。エー何奴も此奴も好い腰抜けの揃つたものだな』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">と言いながら、栄螺の如き拳骨を固め三人の頭をボカボカと急速度をもって擲りつけた。</p>
+              <p class="ja-modern-p">音彦『ご親切によく思って下さいました。何卒これからは、幾度もご注意をして下さいませ』</p>
+              <p class="ja-modern-p">岩彦『あはー、やっぱりこいつどうかしていおる。おい音公、しっかりしないかい。貴様は魔に犯されたのだろう。何だその態度は』</p>
+              <p class="ja-modern-p">亀彦『岩さんのご意見はごもっともでございます。決して無理とは申しません。しかしながら私達三人は以前に数十倍の力と強みが出来ました。如何なる難事に際会しても、少しも驚かぬだけの信念が養われました』</p>
+              <p class="ja-modern-p">岩彦『おい鷹公、梅公、一体合点が行かぬじゃないか。こいつの態度と言ったらまるで処女の如しだ。辛気臭くて、長い長い口上を並べ立ておって、干瓢でも手繰るように、ああ辛気臭い。これなら以前の悪態をつく音公の方が余程マシだったわい』</p>
+              <p class="ja-modern-p">鷹彦『やあ感心です。音さん、亀さん、駒さん、よくそこまで魂を研き、強くなって下さいました。今までの三人さんとは違って勇気も百倍いたしました。ああそれでこそ如何なる魔神をも言向け和す事が出来ます。流石は出づのめの神の御神徳を感得された真の宣伝使様でございます』</p>
+              <p class="ja-modern-p">音彦『ご親切によく言って下さいました。貴方こそ本当の宣伝使様でございます。以後は何卒お見捨てなくお世話下さいますようお願い致します』</p>
+              <p class="ja-modern-p">鷹彦『どういたしまして、お三人様お芽出度うございます。お互い様によろしく手を引き合って神の道に参りましょう。貴方の方からもお見捨てなく』</p>
+              <p class="ja-modern-p">岩彦『何だ。鷹公、冗談じゃない。人が一生懸命に力を付けてやろうと思って居るのに、貴様は横車を押しおって人を嘲弄するのか。いよいよ以て怪しからぬ醜の巌窟式だ。なあ梅公、一体どう思う』</p>
+              <p class="ja-modern-p">梅彦『岩さん、それは貴方のお考え違いでございましょう』</p>
+              <p class="ja-modern-p">岩彦『おっと待った待った。梅の奴、貴様までが逆上してどうするのだ。これだから精神の弱い奴は間に合わぬのだ。醜の窟の半分くらい探検してこれだから、全部探検するまでにはすっかり軟化して蛸のように、骨も何も無くなってしまうかも知れやせぬぞ。おい皆の奴、しっかりせぬか。腰抜け野郎奴が。ああこんな腰抜け野郎を五匹も連れて、この岩さん一人が奮戦苦闘、強敵に当たらねばならぬかと思えば、心細くなって来るわい。ええ何奴も此奴もいい腰抜けの揃ったものだな』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahiko: 'Master Iwa, wilt thou not also grow somewhat stronger? Though thou appearest outwardly fierce, unless thy inner soul be composed, thou wilt be of no service in the hour of trial!'</p>
+          <p class="en-p">Iwahiko: 'Insolent cowards! "Thou seest the speck in thy brother's eye, but beholdest not the beam in thine own"—'tis spoken of ye! Weaklings! What babblest thou? Heaven becometh earth, and earth heaven! The world changeth with swift change; if ye boast so proudly, ye shall pay for it!'</p>
+          <p class="en-p">Otohiko: 'Ah, that God in His mysterious will hath laid upon us the charge of an elder brother like Master Iwa—so skilled in hollow bravado yet faint of heart! Yet 'tis a blessing, for the Deity displayeth him unto us as a specimen of weakness that we may polish our souls!'</p>
+          <p class="en-p">Iwahiko: 'Spineless weakling! What nonsense babblest thou? To hear such whining, like a ruined courtesan, maketh my heart sink! Hey, Taka, Ume, shall I administer a resounding clout to waken you?'</p>
+          <p class="en-p">Takahiko and Umehiko: 'Aye, aye, we pray for thy favor! Strike us abundantly until we come to our senses!'</p>
+          <p class="en-p">Iwahiko: 'An utterly bewildering crew of five! They have surely been bewitched by foxes! Leading such faint-hearted weaklings, warfare against the demons can never be sustained! A grievous plight hath arisen! Let me too pray unto the Deity that I may be endowed with peerless martial might!'</p>
+          <p class="en-p">Otohiko: 'Ah, Master Iwa's gracious benevolence—in what world could we ever forget it? Befitting a noble apostle of the Anai teachings, how deeply dost thou care for us!'</p>
+          <p class="en-p">Kamehiko: 'We thank thee for thy loving kindness! It pierceth our very bones with joy!'</p>
+          <p class="en-p">Komahiko: ''Tis truly said that human nature is good, and that one should live with men as one rideth horses! Beholding Master Iwa's sincere heart, 'tis like unto the direct, loving words of the Great Deity; we are overjoyed and humbled!'</p>
+          <p class="en-p">Iwahiko: 'Alas, all is utterly hopeless! Pray as I will, 'tis an absolute zero! Woe, woe! What shall I do? I am reduced to tears, yet through excess of despair, tears themselves will not flow!'</p>
+          <p class="en-p">Takahiko: 'Our whole company is deeply contented with Master Iwa's loving solicitude!'</p>
+          <p class="en-p">Umehiko: 'Verily, his true heart hath shown its color; there could be no greater joy! Befitting an apostle chosen by God, to repay his kindness we must strive to make our weak Master Iwa somewhat stronger!'</p>
+          <p class="en-p">Iwahiko: 'Insolent Ume! What art thou saying? How could I be weaker than thee? In this hour, mine own senses are the clearest of all! This is the Cavern of Demons! Gird up your loins and take courage! None knoweth what fiends may assault us!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鷹彦『岩サン、貴方モー少し強くなつて下されや。外ばつかり強く見えても、肝腎の魂が落ついて居らねば、まさかの時の御間には合ひませぬからナア』</p>
+            <p class="ja-classical-line">岩彦『エー腰抜け奴が、自分の目にある柱は見えぬでも人の目の埃はよう分るとは、貴様等のことだ。弱味噌奴が。何を吐かしよるのだい。天が地となり地が天となる。変れば変つたものだ。弱い者を称して強者といひ、強い者を称して弱者といふ。如何に逆様の世の中だと云つても、見直し、聞き直し、詔り直しを宣伝する神の使が、さう道理を逆転させては何うして此のお道がひらけると思ふか。しつかりせぬかい。何を呆けてゐるのだ。アヽ情無いわ。エライ厄介ものを背負はされたものだワイ』</p>
+            <p class="ja-classical-line">音彦『アヽ私も岩サンのやうに空威張りの上手な心の弱い御方を、神様もナント思召してか知りませぬが、背負はして下さつたものだ。これも吾々の身魂研きの為に、弱い方の標本をお示し下さつたのだらうか』</p>
+            <p class="ja-classical-line">岩彦『骨無しの腰抜け、何を吐しよるのだ。女郎の腐つたやうな弱音を吹きよつて情なくなつて来たワイ。オイ鷹公、梅公、貴様も一つ、ポカンと目醒しをくれてやらうか』</p>
+            <p class="ja-classical-line">鷹、梅『ハイハイ何卒よろしうお願ひ申します。どつさりと気のつくまで叩いて下さいませ』</p>
+            <p class="ja-classical-line">岩彦『ハテ合点の行かぬ五人の男、此奴ア狐にいかれよつたな。コンナ弱虫を引率して悪魔との戦闘は、たうてい継続されるものぢやない。ヤーヤー困つた事になつて来た。俺も一つ思案をせなくちやなるまい。オーさうだ。解つた。今まで俺は強い強いと思つてゐたが、人を杖について助太刀を頼むと云ふ心が悪かつたのだ。その点が俺の欠点であつた。これは神様が貴様一人で活動せエ。大勢の奴を力にしても駄目だ。まさかの時になつたら此の通りだ。何奴も此奴も腰抜け野郎だ。力と頼むは自分の守護神ばつかりだ。イヤイヤ吾身を守護し給ふ元の大神様ばかりだ。人に頼るな、師匠を杖につくなといふ教があつたワイ。サア俺はモ一つ強うなつて神業に参加せなくてはなるまい。それにつけても今まで寝食を共にして来た五人連れ、俺でさへも神様から弱いと云つて戒められて居るのだから、コンナ弱味噌を吾々として見棄てて置く訳にも行かない。アヽどうかして強くしてやりたいものだ。コンナ腰抜人足を世の中へ出したならば、これほど悪魔の蔓る荒野ケ原であるから、自分一身を保護することも出来やしない。アヽ情無いことだ。大国治立の大神様、どうぞ此の五人のものを憐れみ下さいまして、貴方のお力を分配してやつて下さいませ。九分九厘といふ所で、十中の八九まで大抵の宣伝使は腰を抜かして、屁古垂れるものだが、今ここに陳列してある五人の蛸宣伝使は、目的の半途にも達せずして殆ど崩壊して了ひさうだ。せめて九分九厘といふ所までなりと、活動さしてやつて下さいませ。国治立の大神憐れみ玉へ、助け玉へ。臆病神を払はせ玉へ、清め玉へ、岩彦が真心を籠めての一生の願ひでございます。惟神霊幸倍坐世、惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">音彦『アヽ岩サンのご親切、何時の世にかは忘れませう。流石は三五教の宣伝使様、よくも吾々をそこまで思つて下さいます』</p>
+            <p class="ja-classical-line">亀彦『ご親切に有り難う。骨身に応へます、嬉しうございます』</p>
+            <p class="ja-classical-line">駒彦『性は善なり、人には添うて見よ、馬には乗つて見よとは、よく云つたことだ。岩サンの真心が現はれて大神様の直接の慈言のやうに、嬉しう辱なう存じます』</p>
+            <p class="ja-classical-line">岩彦『アヽさつぱり駄目だ。モウ何ほど祈つたつて零点だ。アヽ止みぬる哉止みぬる哉。アヽ何とせむ方泣く涙、余りのことで涙さへ出ぬワイヤイ』</p>
+            <p class="ja-classical-line">鷹彦『岩サンのお心遺ひ、われわれ一統満足を致しました』</p>
+            <p class="ja-classical-line">梅彦『本当に心の色が現はれて、コンナ嬉しいことは無い。やつぱり神様に選ばれた宣伝使様だけあつて、ご親切に報ゆるために吾々も、彼の弱い岩サンをモ一つ強くして上げねばなりませぬ』</p>
+            <p class="ja-classical-line">岩彦『コラ梅公、貴様そら何を云ふのだ。貴様より弱くなつて堪らうかい。今では俺が一番気が確だ。ここは醜の窟だ。気を張りつめて元気を出さぬか。何がやつて来るか知れやしないぞ。せめて自分だけの保護だけ位はやつて呉れぬと、俺も十分に奮闘が出来はしないワイ』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">鷹彦『岩さん、貴方ももう少し強くなって下されや。外ばかり強く見えても、肝心の魂が落ち着いて居らねば、まさかの時のご用には合いませぬからなあ』</p>
+              <p class="ja-modern-p">岩彦『ええ腰抜け奴が、自分の目にある梁は見えぬでも人の目の塵はよく分かるとは貴様達の事だ。弱味噌奴が。何を吐かしよるのだい。天が地となり地が天となる。変われば変わる世の中だ、いつまでも偉そうな口を利いて居ると承知せぬぞ』</p>
+              <p class="ja-modern-p">音彦『ああ私も岩さんのように空威張りの上手な心の弱いお方を、神様も何と思召してか知りませんが、背負わせて下さったものだ。これも我々の身魂磨きのために、弱い方の標本として見せて下さるのだから有難い事です』</p>
+              <p class="ja-modern-p">岩彦『骨無しの腰抜け、何を吐しよるのだ。女郎の腐ったような弱音を吹きよって情けなくなって来たわい。おい鷹公、梅公、貴様も一つ、ポカンと目覚ましをくれてやろうか』</p>
+              <p class="ja-modern-p">鷹、梅『はいはい何卒よろしくお願い申します。どっさりと気のつくまで叩いて下さいませ』</p>
+              <p class="ja-modern-p">岩彦『はて合点の行かぬ五人の男、こいつは狐にいかれよったな。こんな弱虫を引率して悪魔との戦闘は、とうてい継続されるものじゃない。やや困った事になって来た。俺も神様に祈って、剛勇無双の力を授かろうかい』</p>
+              <p class="ja-modern-p">音彦『ああ岩さんのご親切、いつの世にかは忘れましょう。流石は三五教の宣伝使様、よくも我等をそこまで思って下さいます』</p>
+              <p class="ja-modern-p">亀彦『ご親切に有難う。骨身に応えます、嬉しゅうございます』</p>
+              <p class="ja-modern-p">駒彦『性は善なり、人には添うて見よ、馬には乗ってみよとは、よく言った事だ。岩さんの真心が現れて大神様の直接の慈言のように、嬉しゅう辱のう存じます』</p>
+              <p class="ja-modern-p">岩彦『ああさっぱり駄目だ。もう幾ら祈ったって零点だ。ああ止めぬる哉止めぬる哉。ああ何とせん方泣く涙、余りの事で涙さえ出ぬわいやい』</p>
+              <p class="ja-modern-p">鷹彦『岩さんのお心遣い、我々一統満足をいたしました』</p>
+              <p class="ja-modern-p">梅彦『本当に心の色が現れて、こんな嬉しい事は無い。やっぱり神様に選ばれた宣伝使様だけあって、ご親切に報いるために我々も、彼の弱い岩さんをもう一つ強くして上げねばなりますまい』</p>
+              <p class="ja-modern-p">岩彦『これ梅公、貴様それ何を言うのだ。貴様より弱くなって堪るかい。今では俺が一番気が確かだ。ここは醜の窟だ。気を張り詰めて元気を出さないか。何がやって来るか知れやしないぞ』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Even as he spoke, accompanied by a colossal roar as though a hundred thunderbolts had fallen at once, a colossal orb of fiery light plunged before the company, and exploding violently, shot forth fiery arrows in all eight directions.</p>
+          <p class="en-p">Master Iwa cried 'Agh!' and fell prostrate in a dead faint upon the ground. The remaining five, with hands serenely clasped together, continued steadfastly chanting the sacred Kototama.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">斯る所へ何処ともなく百雷の一時に落下する如き大音響と共に、巨大なる大火光は一同の前に落下した途端、爆発して四方八方に火矢を飛ばした。</p>
+            <p class="ja-classical-line">岩公はアツと言うて、その場に昏倒した。五人は依然として両手を合せ、神言を奏上しつつありける。</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">斯かる所へ何処からともなく百雷の一時に落下する如き大音響と共に、巨大なる大火光が一同の前に落下した途端、爆発して四方八方に火矢を飛ばした。</p>
+              <p class="ja-modern-p">岩公はアッと言ってその場に昏倒した。五人は依然として両手を合わせ、神言を奏上しつつありける。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c19.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 19: The Feast in the Cavern [545]</span>
+      </a>
+      <a href="c21.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 21: The True Guardian Spirits [547]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

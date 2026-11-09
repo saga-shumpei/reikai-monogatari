@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 23: Reconciliation [549] - Volume 13 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 13 Table of Contents</a>
+      <span>Part 5: Travels on Foot (第5篇 膝栗毛)</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 13 &bull; Chapter 23</span>
+      <h1 class="chapter-title-en">Chapter 23: Reconciliation [549]</h1>
+      <p class="chapter-title-ja">第23章　和解〔549〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yajihiko and Yotahiko gulped down the vast pot of tea once more, draining it to the very last drop.</p>
+          <p class="en-p">'Ugh, how vile! I fancied I was scouring my belly by drinking such a flood of tea, yet methinks my mouth is sticky still! Even after scouring, the crone's snot and mucus are lodged together in my intestines, wherefore my spirits are far from clean. Thou art a cruel knave: hadst thou warned me beforehand about the snot, I had not eaten! Thy heart is truly perverse!'</p>
+          <p class="en-p">'My belly is sick from hunger, but thou, having stuffed thyself full, spuest forth such ungrateful grumbling—thy heart is black indeed! Alas, having swilled so monstrous an ocean of tea, I am bursting for a piss! Yet the ladder hath been removed, and we cannot descend; if I relieve myself here, it will leak through the floor below, and my bladder is ready to burst! What in heaven's name shall I do?'</p>
+          <p class="en-p">Yotahiko: 'Here is a capital vessel! Why not piss into this large teapot? There is no fear of it leaking down below!'</p>
+          <p class="en-p">So saying, they took turns discharging their frothing, amber urine into the vessel, until by dawn the teapot was half filled. Overcome with the fatigue of the road, the two fell fast asleep. Ere long, the crowing of cocks and chirping of birds began to be heard.</p>
+          <p class="en-p">Yajihiko: 'Ah, how fleeting are the spring nights! No sooner did I drop down here than the cocks begin to crow; and no sooner had the smoke dispersed than they begin to kindle the fire below, choking us with smoke again! Cough, cough! Ah, how smoky, how smoky!'</p>
+          <p class="en-p">The old crone called from below:</p>
+          <p class="en-p">'Halloo, guests in the loft! Wilt thou lower the teapot?'</p>
+          <p class="en-p">'Aye, aye!'</p>
+          <p class="en-p">And Yajihiko caught the teapot upon the iron hook and lowered it smoothly down. After a little while, the crone cried:</p>
+          <p class="en-p">'Here are your rice balls, guests! Lower the hook!'</p>
+          <p class="en-p">Yajihiko slid the hook smoothly down. The old woman once more loaded rice balls upon the cross-tied basket and hooked it on.</p>
+          <p class="en-p">'Hey, Yota, 'tis safe today; shall I eat my fill?'</p>
+          <p class="en-p">'Nay, I am utterly stuffed! The night was so brief, yet I devoured two men's rations and swilled a whole teapot of tea besides, so that my belly is swollen and taut as a woman in her tenth month! Stand not on ceremony; eat them all thyself!'</p>
+          <p class="en-p">'Somehow I have no appetite either; methinks I shall pass.'</p>
+          <p class="en-p">'They say that even when hungry, the belly liketh it not; yet hunger maketh all food savory, and famished men care not for filth! Why not exert thyself and dispatch five or six of them, Yajihiko?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">弥次彦、与太彦の二人は、また大土瓶の茶をガブガブと残らず飲んでしまつた。</p>
+            <p class="ja-classical-line">『エー気分の悪い、沢山の茶を飲んで洗濯をした積りだが、何だかまだ口が粘つくやうだ。洗濯をしても矢張腹の中に洟もあれば鼻汁も雑居して居るのだから、気持ちがあまり冴えぬワイ。お前も殺生な奴だ、洟が斯う斯うだと前に言うて呉れればよいものを、腹が悪いなア』</p>
+            <p class="ja-classical-line">『俺は腹がへつて悪いが、貴様は鱈腹喰つて、もつたいない理窟を言ふとは、よほど腹の悪い奴だ。アヽ余り沢山飲んだので小便が仕度くなつた。梯子も何も取つて仕舞つて降る事が出来やしない。此処でやれば下へ漏るし、張り切れる様になつて来たワ、どう為ようか知らぬて』</p>
+            <p class="ja-classical-line">与太彦『都合の好いものがある、この土瓶の中にやつたらどうだ、下に漏る気遣ひはないぞ』</p>
+            <p class="ja-classical-line">と云ひながら、かはるがはる泡立た茶色の小便を夜の明けるまでに半分ばかり溜めた。二人は旅の疲れでグツスリと寝込んでしまつた。ソロソロ聞ゆる鶏の声、小鳥の声、</p>
+            <p class="ja-classical-line">弥次彦『ヤー春の夜は短いものだ、此処へこけたと思へば早鶏の声だ、折角煙が無くなつたと思へば又そろそろ焚き出しよつて燻るワイ。アヽ煙たい煙たい』</p>
+            <p class="ja-classical-line">婆々は下より、</p>
+            <p class="ja-classical-line">『二階のお客さま、土瓶を降ろして下さらぬか』</p>
+            <p class="ja-classical-line">『ヨシヨシ』</p>
+            <p class="ja-classical-line">と弥次彦は土瓶を鈎に引つ掛けツルツルと釣り降ろした。暫くすると、婆々が、</p>
+            <p class="ja-classical-line">『お客さま握り飯だ、鈎を降したり』</p>
+            <p class="ja-classical-line">弥次彦はツルツルと鈎を降す。婆々はまたもや十文字に縛つた笊に握り飯を盛つて引かける。</p>
+            <p class="ja-classical-line">『オイ与太公、今日は大丈夫だ、どつさりと頂いて見ようかい』</p>
+            <p class="ja-classical-line">『イヤモウ閉口だ、夜の短いのに二人前も頂いて、おまけに土瓶の茶を沢山飲んだものだから、臨月の嬶アの腹のやうに筋張つてポンポンだ。お前、遠慮せずに頂いて終へ』</p>
+            <p class="ja-classical-line">『俺も何となく腹がすかぬ、マア止めて置かうかい』</p>
+            <p class="ja-classical-line">『お腹がすいても空腹うないと云ふが、空腹いときのまずいものなし、ひだるいときの汚いものなしぢや、一つ奮発して五つ六つ平げたらどうだい弥次彦』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">弥次彦、与太彦の二人は、また大土瓶の茶をガブガブと残らず飲んでしまった。</p>
+              <p class="ja-modern-p">『ええ気分の悪い、沢山の茶を飲んで胃袋を洗濯したつもりだが、何だかまだ口が粘つくようだ。洗濯をしてもやはり腹の中に鼻水もあれば鼻汁も同居しているのだから、気持ちがあまり冴えないわい。お前も無慈悲な奴だ、鼻水がどうのこうのと前に言ってくれればよいものを、意地が悪いなあ』</p>
+              <p class="ja-modern-p">『俺は腹が減って具合が悪いが、貴様はたらふく食っておいて、勿体ない文句を言うとは、よほど性根の悪い奴だ。ああ、あまり沢山飲んだので小便がしたくなった。梯子も何も片付けられてしまって降りることができやしない。ここでやれば下へ漏るし、膀胱が張り裂けるようになって来たぞ、どうしたものかなあ』</p>
+              <p class="ja-modern-p">与太彦『好都合なものがある、この土瓶の中に放尿したらどうだ、下に漏れる心配はないぞ』</p>
+              <p class="ja-modern-p">と言いながら、代わる代わる泡立つ茶色の小便を夜が明けるまでに土瓶の半分ほど溜めた。二人は旅の疲れでぐっすりと寝込んでしまった。そろそろ聞こえてくる鶏の声、小鳥のさえずり、</p>
+              <p class="ja-modern-p">弥次彦『いやあ春の夜は短いものだ、ここへ倒れ込んだと思えばもう一番鶏の声だ、せっかく煙が無くなったと思えば、またそろそろ下で火を焚き出して煙りおるわい。ああ煙たい煙たい』</p>
+              <p class="ja-modern-p">老婆は下より、</p>
+              <p class="ja-modern-p">『二階のお客さま、土瓶を降ろして下さらぬか』</p>
+              <p class="ja-modern-p">『よしよし』</p>
+              <p class="ja-modern-p">と弥次彦は土瓶を鈎に引っ掛けツルツルと吊り降ろした。しばらくすると、老婆が、</p>
+              <p class="ja-modern-p">『お客さま握り飯だよ、鈎を降ろしておくれ』</p>
+              <p class="ja-modern-p">弥次彦はツルツルと鈎を降ろす。老婆はまたもや十文字に縛ったザルに握り飯を盛って引っ掛ける。</p>
+              <p class="ja-modern-p">『おい与太公、今日は大丈夫だ、どっさりと頂いてみようかい』</p>
+              <p class="ja-modern-p">『いやもう降参だ、夜が短いのに二人前も平らげて、おまけに土瓶の茶を沢山飲んだものだから、臨月の女房の腹のように筋張ってパンパンだ。お前、遠慮せずに全部平らげてしまえ』</p>
+              <p class="ja-modern-p">『俺も何となく腹が空かない、まあやめておこうかい』</p>
+              <p class="ja-modern-p">『お腹が空いても空腹（す）かないと言うが、空腹のときの不味いもの無し、ひもじいときの汚いもの無しだ、一つ奮発して五つ六つ平らげたらどうだい弥次彦』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Nay, my gorge heaveth at the very thought; I have no stomach for food! Rather let us beg a fresh brew of tea and fill our bellies therewith! Grandmother, wilt thou not grant us a plentiful brew of tea?'</p>
+          <p class="en-p">The crone answered from below:</p>
+          <p class="en-p">'Master from Takatori, the tea is boiled just to a turn—neither too hot nor too lukewarm, but fit for savoring! Lower the hook!'</p>
+          <p class="en-p">'The hook hath been dangling down this long while!'</p>
+          <p class="en-p">'Aha, so it hath! When one groweth old, what with rheum in the eyes and snivel in the nose, one becometh so doddering and filthy!'</p>
+          <p class="en-p">So saying, she blew her nose with her fingers, seized the teapot handle with that selfsame hand, and hooked it on. Yajihiko hauled it briskly up:</p>
+          <p class="en-p">'Again she hath handled the pot with snivelly fingers, yet surely the snot hath not slipped into the tea! Come, let us fill our bellies with tea at our ease!'</p>
+          <p class="en-p">So speaking, they snatched the vessel between them and swilled it down greedily till seven or eight tenths were consumed; but suddenly a strange and pungent stench assailed their nostrils.</p>
+          <p class="en-p">'Hey, this tea giveth forth a most uncanny odor! Deeming it a brew of pleasantly savory, salty tang, I drank it down; yet this stench is exceedingly foul! Dost thou not smell it, Yotahiko?'</p>
+          <p class="en-p">Poking his head down through the hatch, he shouted:</p>
+          <p class="en-p">'Hearken, grandmother! Hath this tea not turned putrid? It reeketh of a most bizarre stench!'</p>
+          <p class="en-p">'How could it be putrid? 'Twas brewed fresh only yesternight! Yea, I simply added fresh leaves to what you left over from last night, and boiled it up anew! There is no cause to fear it hath spoiled!'</p>
+          <p class="en-p">'Merciful heavens, what a horror! What shall we do, Yota?'</p>
+          <p class="en-p">'No help for it! "What proceedeth from oneself returneth unto oneself!" 'Tis no stranger's piss, but our very own urine that we have drunk! Deem it a physic for the colic, and endure it with patience! Because thou art ever so proud, haughty, and rapacious, karma hath brought its retribution, and like a wolf thou hast been made to lap up thine own piss! Ptui! Ptui! Ptui!'</p>
+          <p class="en-p">Thrusting their fingers deep down their throats, they retched with violent coughing, and the vomited swill, leaking through the slatted floor of the brushwood loft, cascaded down straight upon the bald pate of the old grandfather below!</p>
+          <p class="en-p">'Curse it! That insolent rat hath pissed upon my crown—hold, 'tis not piss alone, but grains of rice mingled therein! Aha! This must surely be the guests in the loft—unruly rogues! Because he was the master who took our daughter into service, we gave them lodging in our loft, and now they shower vomit upon my head—the height of callous ingratitude! Very well, if they show such insolence, I have a rod in pickle for them! Hearken, Otake: thou shalt not set the ladder for them! Keep them enshrined in the rafters, smoking them until they turn into dried tinder! They have made an utter mockery of us! Halloo, ye scoundrels in the loft, what have ye to say for yourselves?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ヤアどう思つても胸膨れがして食ふ気にならぬワイ。それよりも茶なと貰つて腹を膨らさうぢやないか。モシモシ婆サン、どつさりお茶を下さらぬか』</p>
+            <p class="ja-classical-line">婆々は下から、</p>
+            <p class="ja-classical-line">『高取村の旦那さま、お茶が都合よく沸きました、あまり熱くもなし、ぬるくもなし、飲み頃ですぜ。サア鈎を降して下さい』</p>
+            <p class="ja-classical-line">『鈎は最前から降して待つて居るのだ』</p>
+            <p class="ja-classical-line">『アヽ、ホンニ降りてをつたなア、年が寄ると目脂、鼻汁、いやもうじじむさいものだ』</p>
+            <p class="ja-classical-line">と言ひながら、手鼻をかんでその手で土瓶の蔓を持ち鈎に引掛けた。弥次彦は手早く手繰上げて、</p>
+            <p class="ja-classical-line">『また婆々の手鼻をかんだ手で茶を汲んで呉れたが、茶の中にはまさか鼻汁は這入つてゐまい。マア緩くりと茶腹でも膨らかさうかい』</p>
+            <p class="ja-classical-line">と言ひながら互ひに引つたくり、争ひつつ七八分まで飲んで仕舞つたが、何となく妙な臭が鼻にプンプンとする。</p>
+            <p class="ja-classical-line">『オイこの茶は怪体な臭がするぢやないか、何だか塩辛い味の、よい塩加減の茶だと思うて飲んだが、この臭が何だか気に喰はぬぢやないか、のう与太彦』</p>
+            <p class="ja-classical-line">と云ひながら下を覗いて、</p>
+            <p class="ja-classical-line">『コレコレお婆さま、この茶は腐つとらせぬかいなア。妙な臭がするぞ』</p>
+            <p class="ja-classical-line">『なに腐つて居るものかい、昨夜沸した所だ、現にお前さまが昨夜飲んだ残りの上に茶を補して沸かして上げたのだ。腐つて居る気遣ひは無いわいなア』</p>
+            <p class="ja-classical-line">『ヤー此奴は堪らぬ、どうしようか、オイ与太公』</p>
+            <p class="ja-classical-line">『仕方がないなア。己に出づるものは己に帰るぢや。他人の小便ぢやあるまいし、自分の小便を自分が飲んだのだ、疝気の薬ぢやと思へば、マア辛抱するのだなア。あんまり常平生から、バリバリバリ付くものだから、因劫が報い来つて自業自得で、狼の様にバリを飲まされたのだ。ペツペツペツペツ』</p>
+            <p class="ja-classical-line">ガア、ガラガラガラと咽に指を突き込んで吐き出す、柴屋の簀子を洩れて反吐水は下を通り爺の禿頭にダラダラと流れ落ちた。</p>
+            <p class="ja-classical-line">『チエツ、鼠の奴、頭から小便をかけよつて、ヤー小便計りぢやないぞ、飯粒が交つて居る。ヤアこれは大方二階のお客だらう、怪しからぬ奴ぢや。娘の世話になつた旦那、主人だと思ふから二階に泊めてやれば頭から反吐を引かけるなんて不人情きはまる。ヨシ先方がさうなら此方も了見がある。コレお竹、梯子を差す事はならぬぞ、何時までも天井へ祭り込んで焚物になるとこまで燻べてやるのだ。本当に人を馬鹿にして居る。コラ二階の兵六玉、どうするのだ』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">『いやどう思っても胸焼けがして食べる気にならぬわい。それよりもお茶でも貰って腹を膨らまそうじゃないか。もしもし婆さん、どっさりお茶を下さらぬか』</p>
+              <p class="ja-modern-p">老婆は下から、</p>
+              <p class="ja-modern-p">『高取村の旦那さま、お茶がちょうど良く沸きました、熱くもなし温くもなし、飲み頃ですよ。さあ鈎を降ろして下さい』</p>
+              <p class="ja-modern-p">『鈎はずっと前から降ろして待っているのだ』</p>
+              <p class="ja-modern-p">『ああ、本当に降りておいでだったかね、年寄ると目脂や鼻汁で、いやもう年寄りじみて汚いものだ』</p>
+              <p class="ja-modern-p">と言いながら手鼻をかんでその手で土瓶の弦を持ち鈎に引っ掛けた。弥次彦は手早く手繰り上げて、</p>
+              <p class="ja-modern-p">『また婆さんの手鼻をかんだ手で茶を汲んでくれたが、茶の中にはまさか鼻汁は入っていまい。まあゆっくりと茶腹でも膨らませようかい』</p>
+              <p class="ja-modern-p">と言いながら互いに奪い合い、争いながら七八分目まで飲んでしまったが、何となく妙な臭いが鼻にプンプンとする。</p>
+              <p class="ja-modern-p">『おい、この茶は怪奇な臭いがするじゃないか、何だか塩辛い味のよい塩梅の茶だと思って飲んだが、この臭いがどうも気に食わぬじゃないか、のお与太彦』</p>
+              <p class="ja-modern-p">と言いながら下を覗いて、</p>
+              <p class="ja-modern-p">『これこれお婆さま、この茶は腐っていはしないかね。妙な臭いがするぞ』</p>
+              <p class="ja-modern-p">『なに腐っているものですか、昨夜沸かしたばかりだよ、現にお前さまが昨夜飲んだ残りの上にお茶を足して沸かしてあげたのだよ。腐っている心配はないわいな』</p>
+              <p class="ja-modern-p">『やあこいつは堪らぬ、どうしようか、おい与太公！』</p>
+              <p class="ja-modern-p">『仕方がないなあ。己より出づるものは己に帰るというやつだ。他人の小便ではあるまいし、自分の小便を自分が飲んだのだ、疝気の妙薬だと思えばまあ辛抱するのだなあ。あんまり常日頃から威張り散らして強欲を張るものだから、因果が巡り来て自業自得で、狼のように小便（バリ）を飲まされたのだ。ペッペッペッペッ』</p>
+              <p class="ja-modern-p">ガー、ガラガラガラと喉に指を突っ込んで吐き出すと、柴屋の簀子を漏れて吐瀉物が下を通り、老爺の禿頭にダラダラと流れ落ちた。</p>
+              <p class="ja-modern-p">『ちぇっ、鼠の奴、頭から小便をかけおって、やや小便ばかりじゃないぞ、飯粒が混ざっている。やあこれはおそらく二階の客だろう、怪しからぬ奴じゃ。娘がお世話になった旦那様、昔の主人だと思うから二階に泊めてやれば、頭から吐瀉物を浴びせかけるなんて不人情の極みだ。よし先方がそうならこちらにも考えがある。これお竹、梯子を掛けてやることはならんぞ、いつまでも天井へ祭り上げて、焚き付けになるまで燻し上げてやるのだ。本当に人を馬鹿にしている。こら二階ののらくら者、どう落とし前をつけるのだ』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Pardon, grandfather! 'Twas not I; 'twas a rat! Even Yajihiko cannot bear to have a rat's mischief laid at his door!'</p>
+          <p class="en-p">'Spout no foolish lies! Doth a rat spew forth human vomit? Despise me not because I am a rustic old man!'</p>
+          <p class="en-p">Yajihiko: 'Hey, Otake, set the ladder for us forthwith!'</p>
+          <p class="en-p">'Yea, I shall set it presently; wait a moment while I attend to my little business (relieve myself)!'</p>
+          <p class="en-p">Yotahiko: '"I will set it after I attend to my little business"—she hath turned a merry pun upon us!'</p>
+          <p class="en-p">The grandfather: 'Otake! How darest thou set the ladder without thy parents' leave?'</p>
+          <p class="en-p">'Yet he is the master who showed me such kindness; say what you will, father, I will set it for him! Come, mount upon it quickly and descend!'</p>
+          <p class="en-p">'Mount upon it, thou sayest? How can one tread upon so rickety, spindly a ladder? 'Tis perilous in the extreme!'</p>
+          <p class="en-p">'If you fear to tread, hug both side-rails tight and straddle your legs down! If both straddle together, the ladder will snap; wherefore let the master descend first!'</p>
+          <p class="en-p">'"The master first"—what an insolent mockery! Well, no help for it; they hold the handle of the sickle while we clutch the cutting blade! Until we make a safe landing from this brushwood loft, we had best play the quiet cat and keep our peace, Yota!'</p>
+          <p class="en-p">At long last the two clambered down. Yajihiko puffed his cheeks with rage:</p>
+          <p class="en-p">'Hark ye, crone! Make no fool of me by making us swill urine!'</p>
+          <p class="en-p">'What sayest thou, fellow? Who made thee swill urine? Didst thou not discharge it of thine own accord and drink it thyself? Because thou didst act so shamefully wasteful, I knew full well it was urine, yet left it untouched to teach thee a lesson! Even if thou journeyest on pilgrimage to the Caucasus with such a profligate spirit, the Kami will avert Their faces from thee! An utter good-for-nothing rogue! Because thou hadst servants in thy household, I deemed thee a man of some breeding, but such villainy hath exhausted my patience! Poor as I am, I know the clean from the unclean! Heavens above, our ancestral, precious teapot, handed down through generations, defiled with urine—how can it ever be used again? Restore it to its pristine purity, or this old crone will never let thee go!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『モシモシ爺さま、私ぢやない、あれは鼠ぢや。鼠の悪戯迄吾々に転嫁させられては弥次彦も困るよ』</p>
+            <p class="ja-classical-line">『馬鹿言ふない、鼠が反吐をつくかい、田舎者だと思つて余り馬鹿にするな』</p>
+            <p class="ja-classical-line">弥次彦『コラコラお竹、梯子を差さぬかい』</p>
+            <p class="ja-classical-line">『ハイいま差します、チヨット待つて下さい。小用して来るから』</p>
+            <p class="ja-classical-line">与太彦『用事を済ましてから差して上げますとは、洒落てけつかるワイ』</p>
+            <p class="ja-classical-line">爺『コラお竹、親の許しもなしに梯子をかけると云ふ事があるか』</p>
+            <p class="ja-classical-line">『それでも、可愛がつて下さつた旦那さまぢやもの、親が何と云つても私は差して上げます。サアサア早くこれに乗つて降りて来て下さい』</p>
+            <p class="ja-classical-line">『乗れと言つたつて、コンナヒヨロヒヨロの梯の子にどうして乗れるのだ。危なくつて仕方がない』</p>
+            <p class="ja-classical-line">『乗るのがいやなら、両方の親柱をグツと抱いて大股に跨げて降りて下さい。二人一緒に跨げると梯子が折れます。マア、旦那さまから先い』</p>
+            <p class="ja-classical-line">『旦那さまから先いなんて馬鹿にしてやがる。エー仕方がない。鎌の柄を向ふに握られて、切れる方を此方が持つて居るやうなものだから、この柴屋から無事に着陸する迄は、猫を被つて大人しうして居ろかい、この与太ヤンも』</p>
+            <p class="ja-classical-line">二人は漸う降りて来た。弥次彦は面を脹らして、</p>
+            <p class="ja-classical-line">『コラ婆々、人に小便を飲ましよつて馬鹿にするない』</p>
+            <p class="ja-classical-line">『この人は何を言ふのだい、誰が小便を飲ましました。お前さまが勝手にこいて飲んだのぢやないか。あんまり勿体無い事をなさるから、懲しめの為に小便だとは知つて居つたけれど、態とに其儘にして置いたのだよ。ソンナ道楽な心で、コーカス詣りをしたつて神様は、彼方向いて御座るわ。本当に自堕落な兵六玉だナア。奉公人の一人も使ふ人だから、チツトは行儀ぐらゐ知つた方だと思うて居たのに、あまりの仕打で愛想が尽きた。私は斯う貧乏して居つても、綺麗な物と汚い物ぐらゐは弁へて居る。アタ勿体ない、先祖譲りの履歴のついた、大事なお土瓶に小便をこかれて、どうしてこれが使へるものか。サア旧の通りにして下され、婆々が承知しませぬぞや』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">『もしもし爺さま、私じゃない、あれは鼠です。鼠の悪戯まで我々に擦り付けられては弥次彦も困りますよ』</p>
+              <p class="ja-modern-p">『馬鹿を言うな、鼠が反吐を吐くものか、田舎者だと思って余り馬鹿にするな』</p>
+              <p class="ja-modern-p">弥次彦『こらこらお竹、梯子を掛けてくれないか』</p>
+              <p class="ja-modern-p">『はい今掛けます、ちょっと待って下さい。小用を足して来ますから』</p>
+              <p class="ja-modern-p">与太彦『小用（用事）を済ませてから掛けて上げますとは、洒落ていやがるわい』</p>
+              <p class="ja-modern-p">爺『こらお竹、親の許しもなしに梯子を掛ける奴があるか』</p>
+              <p class="ja-modern-p">『それでも、可愛がって下さった旦那様ですもの、親が何と言っても私は掛けてあげます。さあさあ早くこれに乗って降りて来て下さい』</p>
+              <p class="ja-modern-p">『乗れと言ったって、こんなヒョロヒョロの梯子にどうして乗れるのだ。危なくて仕方がない』</p>
+              <p class="ja-modern-p">『乗るのが嫌なら、両方の柱をぐっと抱いて大股に跨いで降りて下さい。二人一緒に跨ぐと梯子が折れます。まあ旦那様からお先にどうぞ』</p>
+              <p class="ja-modern-p">『旦那様からお先に、なんて馬鹿にしやがる。ええ仕方がない。鎌の柄を向こうに握られて、切れる刃の方をこちらが持っているようなものだから、この柴屋から無事に着陸するまでは、猫をかぶっておとなしくしていようかい、この与太ヤンも』</p>
+              <p class="ja-modern-p">二人はようやく降りて来た。弥次彦は顔を膨らませて、</p>
+              <p class="ja-modern-p">『こら婆さん、人に小便を飲ませおって馬鹿にするな！』</p>
+              <p class="ja-modern-p">『この人は何を言うのだい、誰が小便を飲ませました。お前さまが勝手に垂れて飲んだのではないか。あまりに勿体ない事をするから、懲らしめのために小便だと知ってはいたけれど、わざとそのままにしておいたのだよ。そんな放蕩な心でコーカス詣りをしたって神様はそっぽを向いておいでだよ。本当に自堕落なのらくら者だねえ。奉公人の一人も使う人だから少しは行儀くらい知った方だと思っていたのに、あんまりな仕打ちで愛想が尽きたよ。私はこうして貧乏していても、綺麗な物と汚い物くらいは弁えている。ああ勿体ない、先祖代々伝わった大事な土瓶に小便を垂れられて、どうしてこれが使えようか。さあ元通りにしておくれ、婆は承知しないよ！』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'What is a single earthenware pot? If it be so dear to thee, I will purchase another and give it back! What a monstrous fuss over a pot worth three or five copper sen!'</p>
+          <p class="en-p">'This teapot cannot be bought for three or five sen—it is worth a full hundred ryō!'</p>
+          <p class="en-p">'Even a teapot of solid gold could be had for a hundred ryō! Why dost thou demand so preposterous a sum for this soot-black octopus-pot? Taking advantage of our plight—what a grasping, covetous old crone thou art! With one foot in the grave, what good will thy greed do thee, thou withered vixen?'</p>
+          <p class="en-p">'True, 'twas bought for three sen when first acquired, yet it hath been our sacred heirloom handed down since the days of my great-grandfather! Cast up the compound interest upon three sen over a hundred and fifty years, and thou wilt find a hundred ryō is cheap indeed!'</p>
+          <p class="en-p">'What an exorbitant reckoning! This crone belongeth to the Ural Faith—the "Wont-Sell (Uran)" cult, Yotahiko!'</p>
+          <p class="en-p">'Ural or Won't-Sell, what care I? For a hundred ryō or a thousand, who would ever part with a family heirloom?'</p>
+          <p class="en-p">Yajihiko: 'Were it an octopus, it might have legs (interest); but this is a legless belly-pot (teapot), so how could it ever yield interest?'</p>
+          <p class="en-p">Yotahiko: 'All compounded things are subject to decay, and those who meet must part—such is the way of the world! Thou hadst best resign thyself to the loss, for the salvation of thy soul in the world to come!'</p>
+          <p class="en-p">The grandfather: 'What! Hearing your speech, did ye dare discharge vile urine into our ancestral heirloom? This passeth all endurance—ye have ruined our house's greatest treasure!'</p>
+          <p class="en-p">Yajihiko: 'Cease thy petty squawking! If putting urine into thy teapot angereth thee so, thou who didst make us swill urine into our very bellies art the truly unpardonable scoundrel! Thou kettle-headed grandfather clutching thy belly-pot—shall I smite both thy pot and thy kettle together?'</p>
+          <p class="en-p">The grandfather: 'After enjoying our hospitality, dost thou utter such brazen insolence? Though I be advanced in years, know that in my youth I was famed as "Wildcat Tora"!'</p>
+          <p class="en-p">So shouting, he clenched his fist and struck a resounding blow.</p>
+          <p class="en-p">Yotahiko cried:</p>
+          <p class="en-p">'Thou doddering graybeard, what darest thou do?'</p>
+          <p class="en-p">And clenching his iron fist, struck the grandfather's kettle-head with a resounding thwack! The old man screeched in fury, Otake wept, the old woman shrieked, and Yajihiko raged in a frenzy. The multitude of pilgrims passing before the house cried 'A brawl! A brawl!' and gathered in amusement like swarming black ants.</p>
+          <p class="en-p">Bystander A: 'What in the world is this brawl about?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『土瓶の一つくらゐ何だ、それほど惜しけりや買うて返してやるわ。何だ大層らしい。三銭や五銭の土瓶を』</p>
+            <p class="ja-classical-line">『この土瓶は三銭や五銭ぢや買へませぬ、百両から致しますよ』</p>
+            <p class="ja-classical-line">『金の土瓶でも百両出せばあるのに、何ぢやコンナ真つ黒気な蛸土瓶をあまり懸け値を言ふな。足許を付け込みよつて年寄の癖に欲の皮の深い奴だ。棺桶に片足突込んで居つて欲張つて何になる、お熊婆奴が』</p>
+            <p class="ja-classical-line">『この土瓶は成るほど買うた時は三銭だつたさうだが、曽祖父の代から家宝となつて今まで持つて来た物だ。三銭の金に利に利を盛つて百五十年の間勘定して見なさい、百両なら安いものだよ』</p>
+            <p class="ja-classical-line">『何と勘定の高い婆アだなア、こいつア、ウラル教だよ与太公』</p>
+            <p class="ja-classical-line">『ウラルもウランもあるものか、百両だつて千両だつて、家の宝を売つて堪るものか』</p>
+            <p class="ja-classical-line">弥次彦『蛸なら足もつくだらうが、此奴は足の無い胴瓶ばかりだから、素より利足の付く筈がないわ』</p>
+            <p class="ja-classical-line">与太彦『形あるものは必ず滅び、逢ふものは離れると云ふのは世の中の習ひだ。諦めて置くが好からう、後生の為だよ』</p>
+            <p class="ja-classical-line">爺『何んだ、聞いて居れば親重代の土瓶を穢はしい小便を垂れよつたのか、モウ了見ならぬ、俺のとこの宝を台なしにしよつたナ』</p>
+            <p class="ja-classical-line">弥次彦『エー小さい事を吐かすない、土瓶に小便を入れたのがそれほど腹が立つのなら、吾々の胴腹に小便を入れよつた貴様こそ了見ならぬ奴だ。胴瓶の土瓶いぢりの薬鑵老爺、土瓶も薬鑵も一緒にポカンと遺つてやらうか』</p>
+            <p class="ja-classical-line">爺『人の家に厄介になつて置きながら、何と云ふ劫託をこきよるのだ。コラ、年は寄つてもこれでもヤンチヤの虎サンと綽名を取つた此方だぞ』</p>
+            <p class="ja-classical-line">と云ひながら握り拳を固めてポカンとやつた。</p>
+            <p class="ja-classical-line">与太彦は、</p>
+            <p class="ja-classical-line">『この耄碌老爺、何をしやがる』</p>
+            <p class="ja-classical-line">と又もや鉄拳を固めて薬鑵頭をポカンとやる。老爺は甲声を出して怒る、お竹は泣く、婆はわめく、弥次はカンカンになつて暴れ廻る。表を通る数多の参詣者は『ヤア喧嘩だ喧嘩だ』と面白がり黒山の如く集まつて来る。</p>
+            <p class="ja-classical-line">甲『コラ一体何の喧嘩だ』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">『土瓶の一つくらい何だ、それほど惜しければ買って返してやるわ。何だ大層らしい。三銭や五銭の土瓶を』</p>
+              <p class="ja-modern-p">『この土瓶は三銭や五銭では買えません、百両は致しますよ』</p>
+              <p class="ja-modern-p">『金の土瓶でも百両出せばあるのに、何がこんな真っ黒な蛸土瓶に法外な掛け値を言うのだ。足元を見やがって年寄りの癖に欲の皮が突っ張った奴だ。棺桶に片足を突っ込んでいて欲張って何になる、お熊婆めが』</p>
+              <p class="ja-modern-p">『この土瓶はなるほど買った時は三銭だったそうだが、曾祖父の代から家宝となって今まで伝えて来た物だ。三銭の金に利息に利息を重ねて百五十年の間勘定して御覧なさい、百両なら安いものだよ』</p>
+              <p class="ja-modern-p">『なんと勘定の高い婆さんだなあ、こいつはウラル教（売らん教）だよ与太公』</p>
+              <p class="ja-modern-p">『ウラルも売らんもあるものか、百両だって千両だって、家の宝を売って堪るものですか』</p>
+              <p class="ja-modern-p">弥次彦『蛸なら足（利足）も付くだろうが、こいつは足の無い胴瓶ばかりだから、もとより利足の付くはずがないわ』</p>
+              <p class="ja-modern-p">与太彦『形あるものは必ず滅び、会う者は離れるというのが世の習いだ。諦めておくのが良かろう、来世のためだよ』</p>
+              <p class="ja-modern-p">爺『何だ、聞いていれば先祖代々の土瓶に穢らわしい小便を垂れおったのか、もう勘弁ならん、うちの宝を台無しにしおったな！』</p>
+              <p class="ja-modern-p">弥次彦『ええ小さい事を言うな、土瓶に小便を入れたのがそれほど腹が立つのなら、我々の胴腹に小便を入れさせた貴様こそ許せぬ奴だ。胴瓶の土瓶いじりの薬罐親父、土瓶も薬罐も一緒にポカンと殴ってやろうか』</p>
+              <p class="ja-modern-p">爺『人の家に厄介になっておきながら、何という大言壮語を吐くのだ。こら、年は寄ってもこれでも「やんちゃの虎さん」と綽名を取った俺だぞ』</p>
+              <p class="ja-modern-p">と言いながら握り拳を固めてポカンと殴った。</p>
+              <p class="ja-modern-p">与太彦は、</p>
+              <p class="ja-modern-p">『この耄碌親父、何をしやがる』</p>
+              <p class="ja-modern-p">とまたもや鉄拳を固めて薬罐頭をポカンと殴る。老爺は甲高い声を出して怒り、お竹は泣き、婆は喚き、弥次はカンカンになって暴れ回る。表を通る数多くの参詣者は『やあ喧嘩だ喧嘩だ』と面白がって黒山のように集まって来る。</p>
+              <p class="ja-modern-p">甲『これ一体何の喧嘩だ』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Bystander B: 'They say 'tis a battle between a teapot and a teakettle!'</p>
+          <p class="en-p">While the crowd of onlookers clamored in excitement, there arrived a procession of missionaries proudly advancing on horseback, adorned in imposing eboshi caps and kariginu robes. Halting their steeds, the missionaries strode vigorously through the parted throng into the house:</p>
+          <p class="en-p">'Ah, are ye not Yajihiko and Yotahiko?'</p>
+          <p class="en-p">'Aha! Ye are the venerable missionaries whom we met in the Monstrous Cavern! What an extraordinary place to meet you again!'</p>
+          <p class="en-p">The six missionaries clapped their hands in unison and chanted:</p>
+          <p class="en-p">'God manifesteth upon the surface of the world / Severing the good from the evil! / Kaminaobi, Creator of this realm, / And Ōnaobi of boundless compassion! / In all matters of mortal life, / Re-view and re-hear through the spirit of rectitude; / Confess and rectify every transgression!'</p>
+          <p class="en-p">Drawn by this sacred song, Yajihiko and Yotahiko, together with the old grandfather, the crone, and Otake, completely forgot their bitter strife, and clapping their hands together, danced in rapturous joy.</p>
+          <p class="en-p">Otohiko: 'Ah, the renewal of the world! The Great Renewal! Come, let us all make our way to Mount Caucasus!'</p>
+          <p class="en-p">All in unison: 'Thanks be to God!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">乙『土瓶と薬鑵の喧嘩ださうな』</p>
+            <p class="ja-classical-line">ワイワイと野次馬連が騒いで居る、斯かる所へ烏帽子、狩衣、厳めしく馬上ゆたかに進み来る宣伝使の一行ありき。宣伝使は馬を止め、ツカツカと群集を別けてこの家に飛び込み、</p>
+            <p class="ja-classical-line">『アヽ、お前サンは弥次彦サン与太彦サンぢやないか』</p>
+            <p class="ja-classical-line">『ホー、貴様は醜の巌窟でお目に懸つた宣伝使様、エライ所でお目にかかりました』</p>
+            <p class="ja-classical-line">宣伝使六人は声を揃へて手を拍ちながら、</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立別ける
+この世を造りし神直日
+心も広き大直日
+唯何事も人の世は
+直日に見直せ聞直せ
+身の過ちは詔直せ』</p>
+            <p class="ja-classical-line">と歌ひ初めたる。この声に連れて弥次彦、与太彦を初め、老爺も婆々もお竹も、今までの争ひをケロリと忘れ、共に手を拍ち踊り狂ふ。</p>
+            <p class="ja-classical-line">音彦『アヽ世直し世直し、サーサ皆さまコーカス山へ参りませう』</p>
+            <p class="ja-classical-line">一同『有難う』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">乙『土瓶と薬罐の喧嘩だそうな』</p>
+              <p class="ja-modern-p">わいわいと野次馬連が騒いでいる、そんな所へ烏帽子、狩衣を厳めしく着けて馬上ゆたかに進み来る宣伝使の一行があった。宣伝使は馬を止め、つかつかと群衆を押し分けてこの家に飛び込み、</p>
+              <p class="ja-modern-p">『ああ、お前さんは弥次彦さん与太彦さんじゃないか』</p>
+              <p class="ja-modern-p">『ほう、貴方はあの鬼の巌窟でお目にかかった宣伝使様、大変なところでお目にかかりました』</p>
+              <p class="ja-modern-p">宣伝使六人は声を揃えて手を拍ちながら、</p>
+              <p class="ja-modern-p">『神が表にお現れになり／善と悪とを立て分ける／この世を造り給うた神直日／心も広き大直日／ただ何事も人の世は／直日に見直せ聞き直せ／身の過ちは告げ直せ』</p>
+              <p class="ja-modern-p">と歌い始めた。この声につられて弥次彦、与太彦をはじめ、老爺も老婆もお竹も、今までの争いをけろりと忘れ、共に手を拍ち狂喜乱舞した。</p>
+              <p class="ja-modern-p">音彦『ああ世直し世直し、さあさあ皆様コーカス山へ参りましょう』</p>
+              <p class="ja-modern-p">一同『有難う』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c22.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 22: High 加索詣 [548]</span>
+      </a>
+      <a href="c24.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 24: Great 活躍 [550]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

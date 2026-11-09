@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 17: Opening the Cloud Portal [513] - Volume 12 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 12 Table of Contents</a>
+      <span>Part 3: The Episode of Opening the Heavenly Rock Door (Part III) (第3篇 天岩戸開（三）)</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 12 &bull; Chapter 17</span>
+      <h1 class="chapter-title-en">Chapter 17: Opening the Cloud Portal [513]</h1>
+      <p class="chapter-title-ja">雲の戸開〔513〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Soon across the Ocean of Kure, violent tempests arrived in relentless fury, waves raged high like towering mountains, and that stalwart vessel Kunitakemaru was on the very verge of sinking beneath the waters—in that singular instant, from a corner of the ship, piercing cleanly through the darkness with a refreshing voice, the sacred missionary chant came resounding forth.</p>
+          <p class="en-p">'God manifests visibly upon the surface to separate good from evil; ethics and morals have fallen to the ground, and foul demonic gales rage fiercely! The hundred roaring shouts of demons, giant serpents, and crooked spirits surge across mountain ridges, river shallows, vast wildernesses, and ocean expanses in dreadful tumult, and the world has plunged into eternal darkness! Amidst this desolate world, the upright Deities of pure Heaven and Earth have all ascended back unto the high heavens; the dragon deities protecting the terrestrial realm have concealed themselves deep in the seabed; and across the hundred and eighty lands and eighty islands adrift upon the vast sea, it has now become the reign of devils, with myriad calamities swarming thick!</p>
+          <p class="en-p">The mountain gales of Mount Ural and the divine winds of Mount Caucasus unite upon the Ocean of Kure; where the war between good and evil converges, a whirlwind arises! This ship carrying countless sins, buffeted by the foul demonic wind, is on the brink of capsizing in an instant to become driftwood at the ocean floor! O Kaminaho-no-Kami who created this world, O Ōnaho-no-Kami of boundless heart, revise and relisten in sacred rectitude, quell the foul whispers peacefully, and reproclaim Your divine decree upon the Ocean of Kure! O Ara-mitama of Lady Tachibanahime no Mikoto, who dwells in eternal peace, grant swift salvation! O missionary of Lady Ishikoridome no Mikoto with heart resolute as stone: the seasonal wind raging now,</p>
+          <p class="en-p">Is the divine priest Tokiokishi no Mikoto who untangles the entanglements of the soul! Traversing the four directions, he is now here aboard the Kunitakemaru! O Lady Tachibanahime, born as the noble offspring of the Great Deity Kamu-Susanō-no-Ōkami, save the sincere heart that treasures the Divine Realm, and save likewise the hundred souls tossing upon the cresting waves! Graciously, serenely, and peacefully hear my extraordinary prayer, this Heavenly Norito! By the supreme proclamation of the two Deities Kamurogi and Kamuromi assembled in Takamanohara, when the Imperial Ancestor Kamu-Izanagi-no-Ōkami cleansed Himself in purificatory ablution at Awagihara of Tachibana in Himuka of Tsukushi,</p>
+          <p class="en-p">The divine spirits of the four Deities of the Purification Portals who manifested forth—grant fortune and dispel our myriad sins and defilements, as swift rapids wash away debris or as winds of Shinatobe blow them utterly away! Together with all Heavenly Deities, Earthly Deities, and the eight million gods, prick up your ears like stags and listen to this solemn proclamation! O Supreme Imperial Deity, Great Originator who created this world: we beseech You, look anew upon the people aboard the Kunitakemaru within Your great divine heart and grant them salvation! According to the divine will, let the soul be blessed! By the grace of the one, two, three, four, five, six, seven, eight, nine, ten, hundred, thousand, ten thousand deities, purge and cleanse all myriad sins!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">日も早や呉の海原は、颶風頻りに至り、浪は山岳の如くに立ち狂ひ、さしも堅固なる国武丸も、今や水中に沈まむとする一刹那、船の一隅より声も涼しく闇を透して宣伝歌は聞え来たりぬ。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立別ける
+倫理道徳地を払ひ
+醜の魔風は吹き荒び
+鬼や大蛇や曲津霊の
+伊猛り叫ぶ百声は
+山の尾の上や川の瀬や
+大野が原や海原に
+皆湧き充ちて物凄く
+世は常暗となりにけり
+荒び果てたる世の中に
+澄きりませる天地の
+正しき神は悉く
+御空も高く帰り坐し
+地上を護る竜神は
+海底深く隠ろひて
+大海原に漂へる
+百八十国や八十の島
+今や悪魔の世となりて
+万の禍むらがりつ</p>
+            <p class="ja-classical-line">ウラルの山の山颪
+コーカス山の神風も
+一つになりて呉の海
+善と悪との戦ひの
+巡り合ふたる旋風
+罪を乗せたる此船は
+醜の魔風に煽られて
+瞬く間に覆へり
+底の藻屑とならむとす
+此世を造りし神直日
+心も広き大直日
+直日に見直し聞直し
+醜の囁き平けく
+詔り直しませ呉の海
+永久に鎮まる橘姫の
+神の命の荒魂
+救はせ給へ速やけく
+心は堅き石凝姥の
+神の命の宣伝使
+今吹き荒ぶ時津風は</p>
+            <p class="ja-classical-line">心のもつれを時置師
+神の命の神司
+四方を廻りて今此処に
+国武丸の上に在り
+神須佐之男の大神の
+貴の御子と生れませる
+橘姫よ神国を
+思ふ誠の真心を
+救へや救へ百人も
+共に救へや浪の上
+並々ならぬ吾願ひ
+心平に安らかに
+天津祝詞を聞し召せ
+高天原に神集ふ
+神漏岐神漏美二柱の
+大御言もて皇御祖
+神伊邪那岐の大御神
+筑紫の日向の橘の
+おどの阿波岐が原に坐し
+禊ぎ払ひし其時に</p>
+            <p class="ja-classical-line">鳴り出でませる四柱の
+祓戸神の神御霊
+幸ひまして許々多久の
+罪や穢れを速川の
+瀬に流すごと科戸辺の
+風にて伊吹き払ふごと
+天津神等国津神
+八百万神諸共に
+小男鹿の耳振り立てて
+聞し召さへと詔り白す
+此世を造りし大本の
+皇大神よ願はくは
+国武丸の人々を
+大御心に見直して
+救はせ賜へ惟神
+御霊幸はひ坐し坐せよ
+一二三四五つ六つ
+七八九つ十百千
+万の神の御恵みに
+万の罪を払ひ坐せ</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">やがて呉の海原には激しい暴風がしきりに吹き荒れ、波は山のように立ち狂い、あれほど堅固であった国武丸も、今まさに水中に沈もうとする刹那、船の一隅から涼やかな声で、闇を透徹して宣伝歌が聞こえてきた。</p>
+            <p class="ja-modern-p">『神が表にお現れになり、善と悪とを峻別される。倫理や道徳は地に堕ち、醜い魔風が吹き荒び、鬼や大蛇や曲津霊の激しく猛り叫ぶ百の声は、尾根の上や川の浅瀬、広大な野原や大海原に満ちあふれてもの凄く、世界は常闇となってしまった。荒れ果てた世の中で、澄みきっていた天地の正しき神々は悉く高天原の御空へとお帰りになり、地上を護る竜神は海底深く隠れ、大海原に漂う無数の国々や島々は、今や悪魔の世となって無数の災禍が群がってきた。</p>
+            <p class="ja-modern-p">ウラル山の山颪と、コーカサス山の神風が一つになり、呉の海で善と悪との戦いが巡り合って生じた旋風よ。数々の罪を乗せたこの船は醜い魔風に煽られて、瞬く間に転覆し、海底の藻屑となろうとしている。この世をお造りになった神直日神、心の広大なる大直日神よ、直日に見直し聞き直され、醜き囁きを平らかに治め、呉の海に神勅を宣り直してください。永遠に鎮まります橘姫の神の命の荒魂よ、速やかに救い給え。心堅固なる石凝姥の神の命の宣伝使よ、今吹き荒ぶ時津風は、</p>
+            <p class="ja-modern-p">心の縺れを解きほぐす時置師の神の命の神司である。四方を巡って今ここに国武丸の上にある。神須佐之男の大神の貴き御子としてお生まれになった橘姫よ、神国を思う誠の真心を救い給え、百人の人々も共に荒波の上より救い給え。並々ならぬわが願い、心平らかに安らかに、天津祝詞をお聞き届けください。高天原に神集い給う神漏岐・神漏美の二柱の大御言をもって、皇御祖の神伊邪那岐の大御神が筑紫の日向の橘の小門の阿波岐原においでになり、禊ぎ祓い給うたその時に、</p>
+            <p class="ja-modern-p">現れ出でられた四柱の祓戸神の御霊よ、幸い給いて、あまたの罪や穢れを速川の瀬に流すがごとく、科戸の風が吹き払うがごとく、天津神・国津神・八百万の神々とともに、小男鹿の耳を振り立ててお聞き届けくださいと宣り申す。この世をお造りになった大本の大神よ、願わくは国武丸の人々を大御心において見直して救い給え。かんながら霊幸わい給え。一二三四五六七八九十百千万の神々の御恵みによって、万の罪を祓い清め給え。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'As missionary of the Anai teachings and divine priest of Ishikoridome, reverently and awe-inspiringly do I beseech You!'</p>
+          <p class="en-p">No sooner had the chant ended than the fierce tempest instantly subsided, and the surface of the Ocean of Kure became so calm that the ship seemed to glide across tatami mats. In the heavens, the radiant light of the full moon began to shine in the eastern sky; everyone aboard felt as though they had returned from the dead, spontaneously raising shouts of joy toward the moon, clasping their hands in prayer, and weeping with profound emotion.</p>
+          <p class="en-p">An indescribably fragrant perfume permeated all quarters, clear, melodious music was heard, and a rain of flower petals showered down continuously. Looking up into the mid-heavens, fluttering her celestial feather robe, a heavenly maiden danced:</p>
+          <p class="en-p">'Ah, how delightful! Ah, how delightful! Ah, how clear and pure the heavenly sky! The lands of the four quarters have been restored to peace, and the foul winds and waves have grown serene! Reverencing God and honoring the ruler, husbands cherishing wives, wives yielding unto husbands, marital bonds harmoniously joined, children respecting parents, brothers loving and helping one another, and dear friends assembling together in supreme sincerity—such a Divine Age is the divine land of Takamanohara governed by the Heavenly Deities! Born at the foot of Mount Kogane, Haniyashiko and the maiden deity taught the sublime sincerity of the Anai teachings upon Mount Tenkyō, where the fragrance of Konohana-hime wafts high, like flowers blooming for myriad ages!</p>
+          <p class="en-p">Upon auspiciously flourishing Mount Chikyō, Kamu-Susanō-no-Ōkami manifests as light, appearing as the Mizu-no-Mitama; enshrining in the divine shrine of Mount Caucasus the sacred spirits of Kunitokotachi-no-Ōkami and Kin-katsu-kane-no-Ōkami, He severs with the divine double-edged sword of Tsumugari the layered canopy of clouds that barricade Heaven and Earth; and having severed them, Takamanohara and the vast oceans shine forth in radiant clarity, living in the morning era of the rising sun! Ah, missionary of Ishikoridome: Mitsuhiko towering high in the heavens with the divine virtue of Mount Caucasus, Tamamitsuhiko of the sacred Izunomitama,</p>
+          <p class="en-p">Kunimitsuhiko the divine priest, Yukihirawake, and Tokiokishi—you six comrades banded in loving harmony, listen serenely and well! I am the spirit of Konohana-hime, a branch soul of the Izunomitama! Born as the precious daughter of the noble Haruyamahiko and Natsuhime of the Land of Hazama, I am Lady Tachibanahime, one of the three noble figures illuminating this world for the sake of the Great Imperial Deity! Appointed as the presiding deity over this fathomless Ocean of Kure, I am she who eternally protects it! Purify your hearts and cleanse your bodies; to purge all sins and impurities, bring your ship once ashore upon this Tachibana Island and hear my Kotodama! O divine ministers who proclaim,</p>
+          <p class="en-p">The teachings of the awesome God in all directions: do not be bound by petty matters! Place your souls beyond the void, fathom and illuminate the wondrous workings of the Divine Age, the Hidden Realm, and the Manifest Realm, and become stalwart pillars of the Imperial Deities who save the people of the world!'</p>
+          <p class="en-p">As this exquisite song ceased echoing across the heavens, the celestial maiden who had been dancing disappeared like smoke, and in the deep azure night sky, the bright fifteenth-night moon shone resplendently upon the surface of the sea.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三五教の宣伝使
+石凝姥の神司
+畏み畏み願ぎ奉る』</p>
+            <p class="ja-classical-line">と歌ひ終るや、さしも激しき暴風も、忽ち凪いで、呉の海面は、殆ど畳の上を滑つて行くやうになつて来た。天津御空には皎々たる満月の光、東天に輝き初め、船中の一同は甦りたる如き心地して、思はず月に向つて喜びの声を放ち合掌して感泣せり。</p>
+            <p class="ja-classical-line">得も言はれぬ馥郁たる香気四方に充ち、嚠喨たる音楽聞え、頻りに降り来る花の雨、仰ぎ見れば中空に、天の羽衣翻へしつつ、</p>
+            <p class="ja-classical-line">『アナ面白や面白や
+アナ、さやけしや天津空
+四方の国土も治まりて
+醜の波風静まりぬ
+神を敬ひ君を尊び
+夫は妻を慈しみ
+妻は夫に服従ひて
+夫婦の仲も睦まじく
+子はまた親を敬ひて
+兄弟親しみ相助け
+親しき友の寄り合ひて
+誠を尽す神の代は
+天津御神の治すなる
+高天原の神の国
+黄金山下に生れませる
+埴安彦や姫神の
+教へ給へる三五の
+誠も高き天教山の
+空に匂へる木の花姫
+千代に八千代に咲く花の</p>
+            <p class="ja-classical-line">栄え目出度き地教山
+光となりて現れませる
+神須佐之男の大御神
+瑞の御魂と現はれて
+コーカス山の神の宮に
+国治立の大神や
+金勝要の大神の
+御魂を祝ぎ祭らせて
+曲切り払ふ都牟刈の
+両刃の太刀の神実に
+天と地とに塞がれる
+八重棚雲を切り払ひ
+払ひ給へば天の原
+大海原も明らけく
+光り輝く朝日子の
+日の出の御代と生くるなり
+嗚呼石凝姥の宣伝使
+コーカス山の神徳も
+雲井に高く光彦や
+厳の御魂の玉光彦</p>
+            <p class="ja-classical-line">国光彦の神司
+行平別や時置師
+睦び合ふたる六人連
+よく聞し召せ平らけく
+吾は木の花姫の神
+厳の御魂の分け霊
+ハザマの国の春山彦の
+貴の命や夏姫の
+珍の娘と生れ逢ひ
+皇大神の御為めに
+此世を照らす三柱の
+中の一人の橘姫よ
+底ひも知れぬ呉の海の
+司の神と任けられて
+常磐に護る吾なるぞ
+心を浄め身を清め
+罪や穢れを橘の
+島に一度は船寄せて
+吾言霊を聞けよかし
+畏き神の御教を</p>
+            <p class="ja-classical-line">四方に伝ふる神司
+小さき事に囚はれず
+虚空の外に身を置きて
+神代幽世現世の
+奇しき有様明らめて
+世人を救ふ皇神の
+太き柱となれよかし』</p>
+            <p class="ja-classical-line">と優美なる歌天空に聞え終ると共に、今迄舞ひ狂ひたる、天津乙女の姿は煙の如く消え失せ、紺碧の空には三五の明月皎々として海面を照し給ふ。</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">三五教の宣伝使、石凝姥の神司として、慎み畏み祈り奉る』</p>
+            <p class="ja-modern-p">と歌い終わるや否や、あれほど激しかった暴風もたちまち凪ぎ、呉の海面はまるで畳の上を滑って進むかのようになった。天空には皎々たる満月の光が東の空に輝き始め、船中の一同は生き返ったような心地となり、思わず月に向かって喜びの声を上げ、合掌して感泣した。</p>
+            <p class="ja-modern-p">言いつくせぬ馥郁たる香気が四方に満ち、高らかな音楽が聞こえ、しきりに花の雨が降り注いできた。仰ぎ見ると中空に、天の羽衣を翻しながら天女が舞っていた。</p>
+            <p class="ja-modern-p">『ああ面白や、ああ面白や。ああ清々しきかな天津空。四方の国土も治まり、醜い波風は静まった。神を敬い君を尊び、夫は妻を慈しみ、妻は夫に従って、夫婦の仲も睦まじく、子は親を敬い、兄弟は親しみ助け合い、親しき友が寄り集まって誠を尽くす神の代は、天津御神がお治めになる高天原の神の国である。黄金山の麓にお生まれになった埴安彦や姫神がお教えになった三五の誠も高き天教山の空に香り漂う木の花姫、幾千代にも咲き誇る花の、</p>
+            <p class="ja-modern-p">栄えめでたき地教山において光となって現れ給う神須佐之男の大御神が、瑞の御魂として現れ、コーカサス山の神の宮に国治立の大神や金勝要の大神の御魂を奉斎し、邪曲を切り払う都牟刈の両刃の太刀の神実をもって、天と地を塞ぐ八重棚雲を切り払い給えば、高天原も大海原も清らかに明け渡り、輝く朝日の出ずる御代として生きるのである。ああ、石凝姥の宣伝使よ。コーカサス山の神徳も雲居高く聳える光彦、厳の御魂なる玉光彦、</p>
+            <p class="ja-modern-p">国光彦の神司、行平別、時置師という、親睦せる六人の同行者たちよ、よく平らかにお聞きなさい。私は木の花姫の神、厳の御魂の分霊である。ハザマの国の春山彦の貴き命と夏姫の尊き娘として生まれ出で、皇大神のためにこの世を照らす三柱の中の一人である橘姫である。底知れぬ呉の海の主宰神に任ぜられ、常久に守護する私である。心を浄め身を清め、罪や穢れを清めるために、一度はこの橘の島へ船を寄せ、私の言霊を聞きなさい。尊き神の教えを、</p>
+            <p class="ja-modern-p">四方に伝える神司たちよ、小さな事柄に囚われることなく、虚空の外に身を置いて、神代・幽界・現界の玄妙なる有様を究め明らかにし、世の人々を救う皇神の太き柱となりなさい』</p>
+            <p class="ja-modern-p">という優美なる歌が天空に聞こえ終わるとともに、今まで舞い狂っていた天津乙女の姿は煙のように消え失せ、紺碧の夜空には十五夜の明月が皎々と海面を照らしていた。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c16.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 16: Kunitakemaru [512]</span>
+      </a>
+      <a href="c18.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 18: 水 Ox [514]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

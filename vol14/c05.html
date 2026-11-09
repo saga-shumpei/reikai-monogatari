@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: Utter Indifference [555] - Volume 14 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 14 Table of Contents</a>
+      <span>Part 1: Lost in Dreams and Mists (第1篇 五里夢中)</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 14 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: Utter Indifference [555]</h1>
+      <p class="chapter-title-ja">第5章　風馬牛〔555〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The three mounted the fiery wild steeds, and bombarded by barrages of flatulence, galloped headlong up the precipitous slope of Ojika Pass.</p>
+          <p class="en-p">Yajihiko: '"Even a long whip reacheth not the horse's belly!" Bah, 'tis a nuisance; a whip is utterly useless!'</p>
+          <p class="en-p">So saying, he tossed his whip away from horseback without the slightest regret.</p>
+          <p class="en-p">The Horse: 'Ignorant fool! What need hath a fellow who is three parts human and seven parts monster of a whip? Thou gluttonous captain of swilling and gorging, shall I rear upright here and now?'</p>
+          <p class="en-p">Yajihiko: 'Thou knavish nag, cease thy insolent chatter! Dost thou not know Master Yajihiko, the peerless equestrian master of all ages? If thou babblest further, I shall squeeze thy ribs and choke thy breath!'</p>
+          <p class="en-p">The Horse: 'Neigh-hee-hee-hee! How laughable! I feel not even the touch of a mosquito upon my back, thou vessel of foxes!'</p>
+          <p class="en-p">Yajihiko: 'Ho, brute beast, thy tongue is far too insolent! Dost thou not know it is treasonous insolence against thy master?'</p>
+          <p class="en-p">The Horse: 'Neigh-hee-hee-hee! Fine words indeed! Who ever heard of a man riding a horse without even putting on a bridle? Thou art truly an exquisite simpleton (tonma)!'</p>
+          <p class="en-p">Yajihiko: 'The simpleton is thine own self!'</p>
+          <p class="en-p">The Horse: 'Yajihiko, thou doltish knave! When Otake forced thee to drink urine at her inn, how comical thou wast, tilting thy horse-head in perplexity wondering if it were not horse piss! Thou art a knave who committeth blunder (he-ma) upon blunder! Small wonder they call thee a foolish horse-wit!'</p>
+          <p class="en-p">Yajihiko: 'Ugh, what a prating fool! Having no bit or bridle, I am in somewhat of a fix!'</p>
+          <p class="en-p">The Horse: 'If thou hast no bit, mount not! A wooden rocking-horse is good enough for thee! Nowadays men become meek enough if only one fitteth them with a golden bit (a bribe)! How sayest thou? Hast thou any gold?'</p>
+          <p class="en-p">Yajihiko: 'Being a dunce like thee, of late my purse is utterly empty and pinched with poverty (hin-hin)! Ho, Yotahiko, how fareth thy mount?'</p>
+          <p class="en-p">Yotahiko: 'My ride is smooth and delightful! I feel as though I were astride a gentle maiden-steed!'</p>
+          <p class="en-p">Yajihiko: 'Alas, there is no help for it; 'tis my misfortune to have boarded such a frantic jade! Ho, Roku-san, how is it with thee?'</p>
+          <p class="en-p">Roku: 'Mine is tolerably pleasant too; the ride is exceedingly fine! 'Tis an indescribably agreeable sensation, as though I were straddling the golden or silver dragon!'</p>
+          <p class="en-p">Yajihiko: 'Ugh, vexatious (horse-vexing) indeed! I have drawn the short straw!'</p>
+          <p class="en-p">The Horse: 'Hark, Yaji, seeing thou art a busybody (yaji-uma), thou hast only thyself to blame! Come, take an aerial glide from my back, crash upon the rocks, crack thy skull, and pay another visit to the myriad Buddha realms! After that, thou mayest well be fit to ride a decent horse!'</p>
+          <p class="en-p">Yajihiko: 'Ugh, what a brazen-tongued rascal!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三人は駻馬に跨り放屁の砲撃を受けながら小鹿峠の急阪を一目散に登り行く。</p>
+            <p class="ja-classical-line">弥『長鞭馬腹に及ばずだ、エー邪魔臭い、鞭は無用だ』</p>
+            <p class="ja-classical-line">と馬上より惜し気もなく鞭を投げ捨てた。</p>
+            <p class="ja-classical-line">馬『無智な奴の、人三化七に鞭の必要があるものかい、牛飲馬食の大将奴、もう此処らで一つ直立してやらうかい』</p>
+            <p class="ja-classical-line">弥『馬公の奴、減らず口をたたくな。古今無双の乗馬の達人、弥次彦サンを知らないか、愚図々々吐すと胴腹を締めて息を止めてやらうか』</p>
+            <p class="ja-classical-line">馬『ヒヽヽヽヽヒンヒン、可笑しい哩、蚊の一匹も留つたやうな感覚も起らぬワ、狐の容器奴が』</p>
+            <p class="ja-classical-line">弥『オイ、畜生、口が過ぎるぞ。主人に向つて無礼であらうぞ』</p>
+            <p class="ja-classical-line">馬『ヒヽヽヽヽヒン、美ん事仰有る哩、轡も嵌めずに馬に乗る奴があるかい、余程いい頓馬だな』</p>
+            <p class="ja-classical-line">弥『頓馬とは貴様の事だよ』</p>
+            <p class="ja-classical-line">馬『弥次彦の馬鹿者奴、お竹の宿で小便を飲まされよつて、此奴は馬の小便ぢや無からうかと馬首を傾けて思案した時の可笑しさ、屁馬ばつかりやる奴だな。それだから馬抜野郎と言ふのだ』</p>
+            <p class="ja-classical-line">弥『エー、能く囀る頓馬野郎だ、轡は無し一寸困つたな』</p>
+            <p class="ja-classical-line">馬『轡が無けりや乗るない、貴様は木馬で結構だ。何でも今の奴は金の轡さへ嵌めさへすれば温柔しくなるのだよ、如何だ、金を持つとるかい』</p>
+            <p class="ja-classical-line">弥『俺も貴様のやうな頓馬だから此頃は手許不如意でヒンヒン（貧々）だ。オイ与太彦、貴様の馬は如何だ』</p>
+            <p class="ja-classical-line">与『乗心地が良いワ。女偏に馬の字に跨つた様な気分だよ』</p>
+            <p class="ja-classical-line">弥『エー仕方が無いワ、コンナジヤジヤ馬に乗り合したのが災難だ。オイ六サン、お前は如何だい』</p>
+            <p class="ja-classical-line">六『俺もチヨボチヨボだ、乗心地が良いよ、何とも言へぬ良い気持だ。丁度金竜、銀竜に乗つとる様な股倉加減だよ』</p>
+            <p class="ja-classical-line">弥『エー、異馬々々しい、貧乏籤を抽いたものだワイ』</p>
+            <p class="ja-classical-line">馬『オイ弥次サン、お前は弥次馬だから仕方が無いよ。マア馬の俺の背中から空中滑走をやつて着陸して頭をポカンと割つて、ま一遍十万億土へ行つて来い、さうすれば立派な馬に乗れまいものでも無いワ』</p>
+            <p class="ja-classical-line">弥『エー、能う口答をする馬鹿野郎だナア』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">三人は暴れ馬に跨がり、放屁の砲撃を喰らいながら小鹿峠の急坂を一目散に登っていった。</p>
+              <p class="ja-modern-p">弥次彦『長鞭馬腹に及ばず（長い鞭も馬の腹には届かぬ）だ、ええい邪魔くさい、鞭など無用だ！』</p>
+              <p class="ja-modern-p">と馬上から惜しげもなく鞭を投げ捨てた。</p>
+              <p class="ja-modern-p">馬『無知な奴め、三分が人間で七分が化け物（人三化七）の癖に鞭の必要があるものか！ 牛飲馬食の大将め、もうここらで一つ直立してやろうか！』</p>
+              <p class="ja-modern-p">弥次彦『馬の野郎、減らず口を叩くな！ 古今無双の乗馬の達人・弥次彦さんを知らないのか。愚図愚図ほざくと腹を締め上げて息の根を止めてやろうか！』</p>
+              <p class="ja-modern-p">馬『ヒヒヒヒヒンヒン、おかしいわい！ 蚊が一匹止まったような感覚すら起きぬわ、狐の入れ物めが！』</p>
+              <p class="ja-modern-p">弥次彦『おい畜生、口が過ぎるぞ！ 主人に向かって無礼であろう！』</p>
+              <p class="ja-modern-p">馬『ヒヒヒヒヒン、見事なことを仰るわい！ 轡（くつわ）も嵌めずに馬に乗る奴があるか、よっぽどいい頓馬（とんま）だなあ！』</p>
+              <p class="ja-modern-p">弥次彦『頓馬とは貴様のことだ！』</p>
+              <p class="ja-modern-p">馬『弥次彦の馬鹿者め、お竹の宿で小便を飲まされおって、「こいつは馬の小便ではなかろうか」と首を傾げて思案した時のおかしさよ！ ヘマ（屁馬）ばかりやる奴だな、それだから間抜け（馬抜）野郎と言うのだ！』</p>
+              <p class="ja-modern-p">弥次彦『ええい、よく囀る頓馬野郎だ。轡は無し、ちょっと困ったな』</p>
+              <p class="ja-modern-p">馬『轡が無けりゃ乗るな！ 貴様は木馬で十分だ。何でも今の奴は金の轡（賄賂）さえ嵌めれば大人しくなるのだよ。どうだ、金を持っとるかい？』</p>
+              <p class="ja-modern-p">弥次彦『俺も貴様のような頓馬だから、この頃は手元不如意でヒンヒン（貧々・鳴き声）だ。おい与太彦、貴様の馬はどうだ』</p>
+              <p class="ja-modern-p">与太彦『乗り心地が良いわい。女偏に馬の字（しとやか）に跨がったような気分だよ』</p>
+              <p class="ja-modern-p">弥次彦『ええい仕方がない、こんなじゃじゃ馬に乗り合わせたのが災難だ。おい六さん、お前はどうだい』</p>
+              <p class="ja-modern-p">六『俺もチョボチョボだ、乗り心地が良いよ。何とも言えぬ良い気持ちだ。丁度、金竜や銀竜に乗っとるような股倉加減だよ』</p>
+              <p class="ja-modern-p">弥次彦『ええい、忌々しい（異馬々々しい）！ 貧乏籤を引いたものだわい』</p>
+              <p class="ja-modern-p">馬『おい弥次さん、お前は野次馬だから仕方がないよ。まあ馬の俺の背中から空中滑走をやって着陸し、頭をポカンと割って、もういっぺん十万億土へ行って来い！ そうすれば立派な馬に乗れまいものでもないわい』</p>
+              <p class="ja-modern-p">弥次彦『ええい、よく口答えをする馬鹿野郎だなあ！』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The horse shook its mane, glared with furious eyes, and opening its cavernous jaws, snapped fiercely to bite Yajihiko's arm.</p>
+          <p class="en-p">Yajihiko: 'Hold, what art thou about, thou unruly jade? Thinkest thou I would let myself be bitten by the likes of thee?'</p>
+          <p class="en-p">The Horse: 'Shall I stand upright on two legs? Since thou art a vessel of four-legged beasts, 'tis well that thou shouldst try riding a horse standing upright like a human for once!'</p>
+          <p class="en-p">Yajihiko: 'Hark, behave as a horse ought! For a four-legged creature to walk upright is a violation of heaven's natural law!'</p>
+          <p class="en-p">The Horse: 'Neigh, neigh, neigh! That applieth unto thine own self! While thou hast the soul of a four-legged beast, thou struttest haughtily on two legs—why shouldst thou marvel at a horse standing upright? Neigh, neigh, neigh!'</p>
+          <p class="en-p">Yajihiko: 'Ugh, what a hopeless brute! I dismiss thee from my service! Henceforth I shall travel upon my hereditary shanks' mare! Huge in frame yet skilled only in breaking wind, thou simpleton nag! Halt, halt, I shall dismount!'</p>
+          <p class="en-p">The Horse: 'I will not let thee dismount, nay, not here! 'Tis the wrong spot for dismounting! Tarry yet a little; ahead lieth a tremendous precipice whose bottom is covered thick with prickly smilax brambles! Unless I carry thee thither and cast thee down, the sport hath no flavor whatever!'</p>
+          <p class="en-p">Yajihiko: 'This is a horse-plague of boundless annoyance; I bow my head in speechlessness (heikō-tonshu)!'</p>
+          <p class="en-p">The Horse: 'Presently thou shalt drop dead in speechlessness (heikō-tonshi)!'</p>
+          <p class="en-p">Yajihiko: 'What babblest thou? Cast me down if thou darest! Clinging fast unto thy mane, thou too shalt be buried together in the briars! When we reach the point where thou canst move no more like a dead nag, I will generously bestow upon thee a lavish tip!'</p>
+          <p class="en-p">The Horse: 'Now the dance beginneth: One, two, three!'</p>
+          <p class="en-p">Yajihiko: 'Hold, ramp not so wildly! Be quiet! If thou ragest, I will bite into thee and suck thy blood—how wilt thou like that?'</p>
+          <p class="en-p">The Horse: 'I thought thou wast but a puny human, but thou art verily like a flea! The horse-radical joined with a flea maketh the character "commotion" (騒)! Well then, here beginneth a mighty commotion! Prepare thyself!'</p>
+          <p class="en-p">Yajihiko: 'Alas, there is no help for it! Astride this horse, shall I partake of food and drink in farewell to this earthly life? Ramp, horse, ramp! One step ahead is total darkness! A flea biting for food and drink—this is true gorging and swilling (gyūin-bashoku)! Shall I gnaw thy neck a little?'</p>
+          <p class="en-p">The Horse: 'Neigh, neigh, neigh! What a miserable wretch, destitute of all dignity!'</p>
+          <p class="en-p">Yajihiko: 'What? Doth a mere beast dare grade the dignity of a Preaching Emissary?'</p>
+          <p class="en-p">The Horse: 'Now matters have reached desperation—I am a wild jade!'</p>
+          <p class="en-p">Quicker than words could tell, it shook its mane and reared upright, leaping two or three fathoms into the air to the left, right, fore, and aft, bucking in frantic fury.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">馬、鬘を振り立て目を瞋らし口を開けてガブツと腕を噛みかけやうとする。</p>
+            <p class="ja-classical-line">弥『コラ、何をしやがるのだい、ジヤジヤ馬奴が、貴様等に噛まれて堪るかい』</p>
+            <p class="ja-classical-line">馬『直立しやうか、貴様は四足の容器だから一遍ぐらゐ人間らしう直立した馬に乗つて見るも良からう』</p>
+            <p class="ja-classical-line">弥『コラ、馬は馬らしうせぬかい、四足が立つて歩くといふことは天則違反だぞ』</p>
+            <p class="ja-classical-line">馬『ヒンヒンヒン、それは貴様の事だ。四足身魂が偉相に、立つて歩くのが何が不思議だい、ヒンヒンヒン』</p>
+            <p class="ja-classical-line">弥『エー仕様の無い奴だ、もう暇を遣はす、これから親ゆづりの膝栗毛に乗つて歩かうかい、胴柄ばかり大きくて、屁ばつかり達者な頓馬野郎奴、止まれ止まれ、下りてやらう』</p>
+            <p class="ja-classical-line">馬『下さぬぞ下さぬぞ、下す所が違ふワ。も少し待つて居れ、この先に大変な断巌絶壁があつて、谷底には猿捉茨が一面生えてゐる、そこまで行つて下してやらぬと根つから興味が薄い哩』</p>
+            <p class="ja-classical-line">弥『此奴は聊か迷惑千万馬の、閉口頓首ぢや』</p>
+            <p class="ja-classical-line">馬『今に閉口頓死だよ』</p>
+            <p class="ja-classical-line">弥『何を吐しやがるのだ、落すなら落して見よ。貴様の鬘に喰ひついて居るから貴様も一所に猿捉茨の中に埋没だ。死んだ馬につけたら能う動かぬほど、其処になつたらドツサリと賃銀をはりこんで与る哩』</p>
+            <p class="ja-classical-line">馬『サア之からだ、一ン二ン三ンツ』</p>
+            <p class="ja-classical-line">弥『コラ、暴れるな、静にせないかい、俺は貴様が暴れると喰ひついて血を吸ふてやるぞ、それでも可いかエーン』</p>
+            <p class="ja-classical-line">馬『何だか、チツポイ人間だと思つたら貴様は蚤の如うな奴だ。馬偏に蚤といふ奴は騒ぐに定つてる。ヨシ之から一騒ぎだ、覚悟せい』</p>
+            <p class="ja-classical-line">弥『もう仕方が無い、馬上悠かに此世の名残りに飲食でもやらうかい。馬よ騒げよ、一寸先や闇だ、蚤が食ひついて飲食だ、これが牛飲馬食だ、チツト噛つて遣らうかい』</p>
+            <p class="ja-classical-line">馬『ヒンヒンヒン、貧相な奴だな、品格の悪い』</p>
+            <p class="ja-classical-line">弥『何だ、宣伝使の人格を品等すると言ふ事が畜生の分際としてあるものかい』</p>
+            <p class="ja-classical-line">馬『ヤア、もう斯うなつたら破れかぶれだ、ジヤジヤ馬だ』</p>
+            <p class="ja-classical-line">と言ふより早く鬘を震つて直立し、前後左右に二三間ばかり空中に跳び上り狂ひ廻るにぞ、</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">馬はたてがみを振り立て、目を瞋らし、大口を開けてガブッと弥次彦の腕に噛みつこうとした。</p>
+              <p class="ja-modern-p">弥次彦『こら、何をしやがるのだ！ じゃじゃ馬めが、貴様なんかに噛まれてたまるか！』</p>
+              <p class="ja-modern-p">馬『直立しようか！ 貴様は四つ足の入れ物だから、一遍くらい人間らしく直立した馬に乗ってみるのも良かろう！』</p>
+              <p class="ja-modern-p">弥次彦『こら、馬は馬らしくせぬか！ 四つ足が立って歩くということは天則違反だぞ！』</p>
+              <p class="ja-modern-p">馬『ヒンヒンヒン、それは貴様のことだ！ 四つ足の身魂の癖に偉そうに、二本足で立って歩くのが何が不思議だ、ヒンヒンヒン！』</p>
+              <p class="ja-modern-p">弥次彦『ええい仕様のない奴だ、もう暇をやる！ これから親譲りの膝栗毛に乗って歩こうか。胴体ばかり大きくて屁ばかり達者な頓馬野郎め、止まれ止まれ、下りてやるわ！』</p>
+              <p class="ja-modern-p">馬『下ろさぬぞ、下ろさぬぞ！ 下ろす場所が違うわい。もう少し待っておれ、この先にとんでもない断崖絶壁があって、谷底には猿捕茨（さるとりいばら）が一面に生えている。そこまで行って下ろしてやらねば、根っから興味が薄いからな！』</p>
+              <p class="ja-modern-p">弥次彦『こいつは聊か迷惑千万馬の、閉口頓首（へいこうとんしゅ）じゃ！』</p>
+              <p class="ja-modern-p">馬『今に閉口頓死（へいこうとんし）だよ！』</p>
+              <p class="ja-modern-p">弥次彦『何をほざくか！ 落とすなら落としてみろ！ 貴様のたてがみに食いついているから、貴様も一緒に猿捕茨の中へ埋没だ！ 死んだ馬に鍼を打つようにピクリとも動かぬ所まで行ったら、どっさりと賃金を奮発してやるわい！』</p>
+              <p class="ja-modern-p">馬『さあこれからだ、一、二の、三ッ！』</p>
+              <p class="ja-modern-p">弥次彦『こら、暴れるな！ 静かにしないか！ 貴様が暴れたら噛みついて血を吸ってやるぞ、それでもいいか、ええん！』</p>
+              <p class="ja-modern-p">馬『何だか小っぽけな人間だと思ったら、貴様は蚤のような奴だな。馬偏に蚤という文字は「騒ぐ」に決まっている。よし、これから一騒ぎだ、覚悟しろ！』</p>
+              <p class="ja-modern-p">弥次彦『もう仕方がない、馬上で遥かにこの世の名残に飲食でもやろうか。馬よ騒げよ、一寸先は闇だ、蚤が食いついて飲食だ、これが牛飲馬食だ、ちょっと齧ってやろうか！』</p>
+              <p class="ja-modern-p">馬『ヒンヒンヒン、貧相な奴だな、品格が悪い！』</p>
+              <p class="ja-modern-p">弥次彦『何だ、宣伝使の人格を品定めするなんてことが畜生の分際であっていいものか！』</p>
+              <p class="ja-modern-p">馬『やあ、もうこうなったら破れかぶれだ、じゃじゃ馬だ！』</p>
+              <p class="ja-modern-p">と言うより早くたてがみを震わせて直立し、前後左右に二、三間ほど空中に跳び上がって狂い回った。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yajihiko: 'Hold, hold! Quiet down! My eyes are spinning! Not only mine eyes, but the mountains and roads are all spinning round! Everything hath begun revolving like a gyrocompass! Cease in good measure!'</p>
+          <p class="en-p">The Horse: 'Nay, I shall rage until thou tumbling fallest! Presently I shall dispatch thee unto the Netherworld!'</p>
+          <p class="en-p">Yajihiko: 'Earthquakes and volcanic eruptions be damned! I have grown weary of this earth that spinneth so dizzyingly! It seemeth the divine reconstruction of the world is unfolding at desperate speed! Ah, what a whirling world it is!'</p>
+          <p class="en-p">The Horse: 'How wretched is thy wandering in karmic transmigration! Thou art ever boasting that thou art participating in the heaven-turning and earth-shaking divine work—how sayest thou? Can any heaven-turning, earth-shaking enterprise surpass the activity of this horse? Art thou not filled with awe at my miraculous feat, spinning swifter than a gyrocompass at eight thousand revolutions a minute?'</p>
+          <p class="en-p">Yajihiko: 'I submit! Forgive me, I pray thee!'</p>
+          <p class="en-p">The Horse: 'Look at thy disgraceful posture! Whom in the world dost thou take me for?'</p>
+          <p class="en-p">Yajihiko: 'Art thou not a brute beast of a nag?'</p>
+          <p class="en-p">The Horse: 'Ignorant fool! I am an avatar of Princess Konohana—the Vitup-horse-ive Avalokiteshvara, the Horse-Headed Goddess of Mercy (Batō Kannon)!'</p>
+          <p class="en-p">Yajihiko: 'Merciful heavens! Forgive my insolence, I pray thee have mercy upon me!'</p>
+          <p class="en-p">With a whistling sputter like a fart, the horse vanished into thin air like smoke.</p>
+          <p class="en-p">Yajihiko: 'Ah, what an ordeal! What a dreadful trial I was put through! Ho, Yota, Roku, what hath become of your horses?'</p>
+          <p class="en-p">Yotahiko and Roku: 'What meanest thou by horses? Who ever rode a horse?'</p>
+          <p class="en-p">Yajihiko: 'Did not ye ride comfortably upon mares all the way hither but a moment ago?'</p>
+          <p class="en-p">Both: 'Talk no nonsense! We walked all the way on our hereditary locomotion (our own feet)! And thou too wast trudging along with a strange grimace, thine eyes shut tight! Thou wast dreaming while walking! What an easygoing fellow! Ah, how unreliable to have such a companion on the road!'</p>
+          <p class="en-p">Yajihiko: 'How uncanny! I cannot fathom this scene—whose doing can this be?'</p>
+          <p class="en-p">Yotahiko: 'Ha-ha-ha! Rolling thy huge eyes, even if thou enactest a play in such a spot, no audience will ever appear! Belching out a discordant croak and revolving thy acorn-eyes, thou ham actor, what farce art thou mimicking? The spring air hath made thee dizzy with fever! Ha-ha-ha!'</p>
+          <p class="en-p">Yajihiko: 'Can it be that it was indeed a dream?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">弥『コラコラ静にせないか、目が廻るわい、目どころか、山も道もみんな廻り出したワイ、ジヤイロコンパスの様に、そこらが廻転し出した哩、いい加減に静まらないか』</p>
+            <p class="ja-classical-line">馬『何、貴様が落ちる所まで暴れるのだ。今に冥土に送つてやるのだ』</p>
+            <p class="ja-classical-line">弥『鳴動も爆発もあつたものかい、これだけクルクル廻る地球上は俺も嫌になつた哩、何でも世の立替が急速度を以て開展して行くと見えるわい。アーア、能く廻る世の中だ』</p>
+            <p class="ja-classical-line">馬『輪廻に迷ふ浅間しさ、回天動地の神業に参加すると貴様は毎時も吐いてゐるが如何だい、回天動地の大事業は馬サンの活動に勝るものはあるまい、一分間に八千回、回転するジヤイロコンパスよりも早い俺の放れ業には感心したか』</p>
+            <p class="ja-classical-line">弥『恐れ入つた、もう耐へて呉れえ』</p>
+            <p class="ja-classical-line">馬『醜態見やがれ、一体俺を誰だと思つてるのだ』</p>
+            <p class="ja-classical-line">弥『畜生の馬公ぢやないか』</p>
+            <p class="ja-classical-line">馬『馬鹿だな、俺は木花姫の分霊だ、罵倒観音だ。すなはち馬頭観音様だよ』</p>
+            <p class="ja-classical-line">弥『これはこれは、失礼いたしました、何卒許して下さいませ』</p>
+            <p class="ja-classical-line">馬ブウブウブスと音を立てて屁のやうに消えて仕舞つた。</p>
+            <p class="ja-classical-line">弥『アヽア、大変だつた、恐い目に遭はされた。オー与太公、六公、貴様、馬は如何したのだ』</p>
+            <p class="ja-classical-line">与、六『馬を如何したつて、誰が馬に乗つたのだい』</p>
+            <p class="ja-classical-line">弥『貴様、今いい気でヒン馬に跨つて此処まで来たのぢやないか』</p>
+            <p class="ja-classical-line">二人『馬鹿言ふない、俺たちは親譲りの交通機関でてくつて来たのだ、貴様も矢張り何だか妙な面をしよつて目を塞いだまま歩いて居つたぢやないか、歩きもつて夢を見よつたのだな、気楽な奴だ、アヽコンナ奴と道連れになるのも頼りない事だナア』</p>
+            <p class="ja-classical-line">弥『ハテ、面妖な、合点の往かぬこの場の光景、何物の仕業なるぞ』</p>
+            <p class="ja-classical-line">与『アハヽヽヽ、何だ、大きな目を剥きよつてコンナ処で芝居をやつたとて誰も観客は出て来はせないぞ。ど拍子の抜けた銅羅声を出しよつて、団栗眼を廻転させて大根役者奴が、何の真似だい、チツト春さきで逆上せよつたな、アハヽヽヽヽ』</p>
+            <p class="ja-classical-line">弥『そうすると矢張り夢だつたかいな』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">弥次彦『こらこら静かにしないか、目が回るわい！ 目どころか、山も道もみんな回り出したぞ！ ジャイロコンパスのように辺りが回転し出したわい、いい加減に静まらないか！』</p>
+              <p class="ja-modern-p">馬『何、貴様が振り落とされるまで暴れるのだ！ 今に冥土へ送ってやるのだ！』</p>
+              <p class="ja-modern-p">弥次彦『鳴動も爆発もあったものか！ これだけグルグル回る地球の上は俺も嫌になったわい。何でも世の建て替えが猛スピードで展開していくと見える。ああ、実によく回る世の中だ！』</p>
+              <p class="ja-modern-p">馬『輪廻に迷う浅ましさよ！ 天地を覆す神業に参加すると貴様は常々ほざいているが、どうだ、回天動地の大事業もこの馬さんの活動に勝るものはあるまい！ 一分間に八千回転するジャイロコンパスよりも速い俺の離れ業に感心したか！』</p>
+              <p class="ja-modern-p">弥次彦『恐れ入った、もう勘弁してくれえ！』</p>
+              <p class="ja-modern-p">馬『無様な格好を見やがれ！ 一体、俺を誰だと思っているのだ』</p>
+              <p class="ja-modern-p">弥次彦『畜生の馬公じゃないか』</p>
+              <p class="ja-modern-p">馬『馬鹿だなあ、俺は木花姫の分霊だ、罵倒観音、すなわち馬頭観音様だよ！』</p>
+              <p class="ja-modern-p">弥次彦『これはこれは失礼いたしました、何卒お許しくださいませ！』</p>
+              <p class="ja-modern-p">馬はブウブウブスッと音を立てて屁のように煙となって消えてしまった。</p>
+              <p class="ja-modern-p">弥次彦『ああ、大変だった。恐ろしい目に遭わされた。おお与太公、六公、貴様ら、馬はどうしたのだ』</p>
+              <p class="ja-modern-p">与太彦・六『馬をどうしたって、一体誰が馬に乗ったのだい』</p>
+              <p class="ja-modern-p">弥次彦『貴様ら、今いい気になって牝馬に跨がってここまで来たのではないか』</p>
+              <p class="ja-modern-p">二人『馬鹿言え！ 俺たちは親譲りの交通機関（自分の足）で歩いて（テクって）来たのだぞ。貴様も何だか妙な顔をして、目を閉じたまま歩いていたじゃないか。歩きながら夢を見ていたのだな、気楽な奴だ。ああ、こんな奴と道連れになるのも心細いことだなあ』</p>
+              <p class="ja-modern-p">弥次彦『はて、面妖な。納得のいかぬこの場の光景、一体何者の仕業なのだ』</p>
+              <p class="ja-modern-p">与太彦『アハハハ、何だ、大きな目を剥きやがって、こんな所で芝居を打ったとて観客など誰も出て来はしないぞ。調子っぱずれの胴間声を出して、どんぐり眼を回して大根役者めが、何の真似だ。ちょっと春先で上気したのだな、アハハハ！』</p>
+              <p class="ja-modern-p">弥次彦『そうすると、やはり夢だったのかなあ』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yotahiko: 'Go wash thy face for once, thou dazed porter! Thy frame is vast as a rough-hewn Guardian King, yet as the proverb saith, "A huge man hath wit too sluggish to circulate through his whole carcass"—thou art a great blundering block of udo wood! As for Master Yota, small though my body be, I am an elder brother like the Japanese pepper: "Small though the pepper-pod be, it biteth sharp and hot!"'</p>
+          <p class="en-p">Yajihiko: 'Chirp not so flippantly! A cock goeth barefoot!'</p>
+          <p class="en-p">Yotahiko: 'Huge though a horse be, he weareth no breeches! Gird thy loincloth and pull thyself together! Ha-ha-ha!'</p>
+          <p class="en-p">Yajihiko: 'This Ojika Pass is truly a haunted pass, even as rumor hath it! Unless we keep our wits about us, we shall be bewitched by foxes!'</p>
+          <p class="en-p">Yotahiko: 'Ha-ha-ha! Fine words indeed! Having been bewitched thyself, thou utterest warnings! This Master Yota was crafted through a vastly superior process of soul-manufacture! I am of quite another caliber from a mass-produced, shoddy article like thee! Is it not so, Roku?'</p>
+          <p class="en-p">Roku: 'Truly, Master Yaji is just like a lost ghost wandering at the Crossroads of the Six Realms!'</p>
+          <p class="en-p">Yotahiko: 'Hark, speaking of ghosts (mōja), look yonder! A multitude of ghosts (mōja) are coming!'</p>
+          <p class="en-p">Yajihiko: 'Thou art playing the fool; are not those cattle?'</p>
+          <p class="en-p">Yotahiko: 'Because they are cattle (moo), they are "moo-ja" (ghosts)!'</p>
+          <p class="en-p">Yajihiko: 'What babblest thou, cracking puns in such a place?'</p>
+          <p class="en-p">Roku: 'Do flies gather upon decayed puns? Ha-ha-ha!'</p>
+          <p class="en-p">Yajihiko: 'Truly they are a vast herd of cattle! What sayest thou, Yota, shall we swap our horses for oxen?'</p>
+          <p class="en-p">Yotahiko: 'What talk is this of swapping? I have no memory of ever riding a horse!'</p>
+          <p class="en-p">The herd of oxen came lumbering heavily toward the three.</p>
+          <p class="en-p">Yotahiko: 'Friend Ox, though this be not thy quarrel, in this world we must help one another! How sayest thou, for sociability's sake wilt thou not carry me? Yet though it be for sociability, gore me not with thy horns!'</p>
+          <p class="en-p">The Ox: 'I think I shall cease (moo)! For carrying an ignorant (mōmai), obstinate dotard (mōroku) bringeth no profit (mōke) whatever!'</p>
+          <p class="en-p">Yotahiko: 'Behold, this fellow punneth wittily! He is quite conversational; shall I mount him?'</p>
+          <p class="en-p">The Ox: 'Mount if thou wilt! In return, thou shalt suffer an ox-like, crushing (gyū-gyū) ordeal!'</p>
+          <p class="en-p">Yotahiko: 'What sayest thou? If thou playest such treachery, I shall strike thy pate with my fist, feast upon thy beef, and stretch thy hide over a drum!'</p>
+          <p class="en-p">The Ox: 'Well, at any rate, mount!'</p>
+          <p class="en-p">Yotahiko: 'O gratitude! I have heard of "being drawn by an ox to visit Zenkō-ji Temple," but riding an ox to visit Mount Caucasus? How perfectly matched—like a sweet rice ball falling into an open mouth, or sweet bean paste on dumplings! Inseparably bound, let us make our pilgrimage to Caucasus!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">与『一遍手洗を使はむかい、恍け人足奴、貴様は図体ばかり仁王の荒削り見たいな奴だが、大男総身に智慧が廻りかねか、独活の大木、胴柄倒し、困つた奴だナア。この与太サンは身体は小さくても山椒小粒でもヒリリツと辛いと言ふ哥兄サンだぞ』</p>
+            <p class="ja-classical-line">弥『チヤチヤ吐すない、鶏は跣足だ』</p>
+            <p class="ja-classical-line">与『馬は大きうてもふりまらだ、チツト褌でも締めて、しつかりせむかい、アハヽヽヽ』</p>
+            <p class="ja-classical-line">弥『この小鹿峠はやつぱり噂の通り化物峠だ、しつかりせむとお三狐にちよろまかされるぞ』</p>
+            <p class="ja-classical-line">与『アハヽヽヽ、吐したりな吐したりな、自分がちよろまかされよつて憚りさまだ、この与太サンはチツト身魂の製造法が違ふのだ。貴様のやうな粗製濫造とは聊か選を異にしてゐるのだぞ、喃う六公』</p>
+            <p class="ja-classical-line">六『恰で弥次サンは六道の辻に亡者が迷ふた様な人ですな』</p>
+            <p class="ja-classical-line">与『オイオイ、亡者の序に向ふを見よ、沢山の亡者が来るぢやないか』</p>
+            <p class="ja-classical-line">弥『貴様こそ恍けて居よる、彼奴は牛じやないか』</p>
+            <p class="ja-classical-line">与『牛だからもうじや』</p>
+            <p class="ja-classical-line">弥『何を吐しやがる、コンナ処で口合ひを出しやがつて』</p>
+            <p class="ja-classical-line">六『くちあいものには蝿が集るか、アハヽヽヽヽ』</p>
+            <p class="ja-classical-line">弥『真実に沢山なもう公ぢや、オイ如何だ与太公、馬を牛に乗り換へたら』</p>
+            <p class="ja-classical-line">与『乗り換へるも乗り換へぬもあつたものかい、馬に乗つた覚えがないぢやないか』</p>
+            <p class="ja-classical-line">牛の群ドシドシと三人の前に突進し来たる。</p>
+            <p class="ja-classical-line">与『牛公の奴、貴様の喧嘩ぢやないが天地間は、もちつ、もたれつぢや。如何だ、附合に俺を一つ乗せて行かないか、附合ぢやと言つても俺を突いては困るよ』</p>
+            <p class="ja-classical-line">牛『もう止めておこかい、もう昧頑固なもう碌を乗せたつてもうからぬからな』</p>
+            <p class="ja-classical-line">与『此奴、洒落た事を言ひよる、一寸談せる哩、乗つてやらうか』</p>
+            <p class="ja-classical-line">牛『乗るなら乗れ、その代りに牛々言ふ目に遇はされるぞ』</p>
+            <p class="ja-classical-line">与『何を吐しよるのだ、ソンナ不心得の事をしよつたが最後、貴様のどたまをトン骨とやつて肉は喰ひ皮は太鼓に張つてやるのだ』</p>
+            <p class="ja-classical-line">牛『マア兎も角、乗つたが良からう』</p>
+            <p class="ja-classical-line">与『ヨー有難い、牛に引かれて善光寺詣りと言ふ事は聞いて居るが、牛に乗つてコーカス詣りか。合ふたり、適ふたり、開いた口に牡丹餅、三口にしんこ、四つ口に羊羹、○○に踵、ピツタリコだ。水も漏らさぬ仲となつてコーカス詣でだ』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">与太彦『一度顔でも洗って来い、ぼんくら人足め！ 貴様は図体ばかり仁王の荒削りみたいだが、「大男総身に知恵が回りかね」で、ウドの大木、胴柄倒し、困った奴だなあ。この与太さんは身体は小さくとも、「山椒は小粒でもヒリリと辛い」という兄貴分だぞ』</p>
+              <p class="ja-modern-p">弥次彦『茶々を入れるな、鶏は素足だ！』</p>
+              <p class="ja-modern-p">与太彦『馬は大きくてもフリチン（裸）だ。ちょっと褌でも締めてしっかりしないか、アハハハ！』</p>
+              <p class="ja-modern-p">弥次彦『この小鹿峠はやっぱり噂通りの化け物峠だ。しっかりしないと狐に化かされるぞ』</p>
+              <p class="ja-modern-p">与太彦『アハハハ、よく言うよ！ 自分が化かされておいてご苦労なことだ。この与太さんはちょっと魂の製造法が違うのだ。貴様のような粗製濫造とは一線を画しているのだぞ、なあ六公』</p>
+              <p class="ja-modern-p">六『まるで弥次さんは六道の辻で亡者が迷っているような人ですな』</p>
+              <p class="ja-modern-p">与太彦『おいおい、亡者のついでに向こうを見ろ。たくさんの亡者が来るじゃないか』</p>
+              <p class="ja-modern-p">弥次彦『貴様こそとぼけているぞ、あれは牛じゃないか』</p>
+              <p class="ja-modern-p">与太彦『牛だから「もう（亡者）」じゃ！』</p>
+              <p class="ja-modern-p">弥次彦『何をほざくか、こんなところで地口を言いやがって』</p>
+              <p class="ja-modern-p">六『腐れ合い（口合い）ものには蝿が集まるか、アハハハ！』</p>
+              <p class="ja-modern-p">弥次彦『本当にたくさんのモー公（牛）じゃ。おいどうだ与太公、馬を牛に乗り換えたら』</p>
+              <p class="ja-modern-p">与太彦『乗り換えるも乗り換えないもあったものか、馬に乗った覚えがないじゃないか！』</p>
+              <p class="ja-modern-p">牛の群れがドシドシと三人の前に突進して来た。</p>
+              <p class="ja-modern-p">与太彦『牛公の奴、貴様の喧嘩ではないが、天地の間は持ちつ持たれつじゃ。どうだ、付き合いに俺を一つ乗せて行かないか。付き合いじゃと言っても、俺を角で突いては困るよ』</p>
+              <p class="ja-modern-p">牛『もう（モー）やめておこうかい。蒙昧で頑固な耄碌（もうろく）を乗せたところで、儲からぬからな』</p>
+              <p class="ja-modern-p">与太彦『こいつ、洒落たことを言いやがる。ちょっと話せるわい、乗ってやろうか』</p>
+              <p class="ja-modern-p">牛『乗るなら乗れ。その代わりにギュウギュウ（牛々）言わされる目に遭うぞ』</p>
+              <p class="ja-modern-p">与太彦『何をほざくか！ そんな不心得なことをしでかしたら、貴様のド頭をゲンコツで殴って、肉は食い、皮は太鼓に張ってやるぞ！』</p>
+              <p class="ja-modern-p">牛『まあ兎も角、乗るがよかろう』</p>
+              <p class="ja-modern-p">与太彦『よう有難い！「牛に引かれて善光寺参り」とは聞いているが、牛に乗ってコーカス参りか！ 誂え向き、開いた口に牡丹餅、三口に新粉餅、四つ口に羊羹、ぴったりだ！ 水も漏らさぬ仲となってコーカス詣でだ！』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The Ox: 'Hark, Yota, my comrades number a hundred, and thy companions are three beasts! Hold an election among us and mount whichever thou pleasest!'</p>
+          <p class="en-p">Yajihiko: 'Come, come, the holders of the franchise are three, and the candidates are three head of cattle! Shall we conduct a universal suffrage election?'</p>
+          <p class="en-p">The Ox: 'Do as thou wilt, only hasten!'</p>
+          <p class="en-p">Yotahiko: 'One vote per man! I choose the red cow!'</p>
+          <p class="en-p">The Ox: 'As expected, thou art fond of females! Thou art truly red and foul with grime!'</p>
+          <p class="en-p">Roku: 'I choose the white cow!'</p>
+          <p class="en-p">The Ox: 'For a fellow black as a crow to ride a white cow looketh absurd! Mount a black ox instead!'</p>
+          <p class="en-p">Roku: 'I am an amateur (white-man) at riding oxen, so I choose the white! To ride the black and suffer hardship (kurō) would never do!'</p>
+          <p class="en-p">Yajihiko: 'I abstain from my voting right!'</p>
+          <p class="en-p">The Ox: 'What? Renouncing thy sacred franchise? What dost thou take constitutional government for?'</p>
+          <p class="en-p">Yajihiko: 'Having had such a nightmare riding a horse, I am thoroughly sick of it! No more beasts of burden for me! Henceforth I shall trudge along step by step! In any case, an ox is sluggish of foot, so walking on foot is far speedier!'</p>
+          <p class="en-p">Yotahiko: 'Then I shall gladly ride! Ho, Roku, mount thou too!'</p>
+          <p class="en-p">Roku: 'Why should I refuse? When they offer a ride gratis (roha), where could one find a cheaper vehicle? Come, Sir White, Sir Red, march forward!'</p>
+          <p class="en-p">The Red and White Cattle: 'We thank you for the honor of being elected!'</p>
+          <p class="en-p">Yotahiko: ''Tis but natural! Since heroes match for a thousand warriors are mounted upon you, your election was certain! Advance, advance!'</p>
+          <p class="en-p">The Red Cow: 'Hark, Yota, ahead of us lieth a perilous slope. When we reach that slope, I shall stand upright, so be prepared!'</p>
+          <p class="en-p">Yotahiko: 'Very well, stand upright if thou wilt! I shall cling fast unto thy horns!'</p>
+          <p class="en-p">The White Cow: 'Hearken, Roku-san, mine is the same! Ahead lieth a tortuous, narrow path; when we traverse it, I must needs walk upright, so hold on tight! For 'tis a precipice where nine hundred and ninety-nine out of a thousand mortals tumble to their deaths...'</p>
+          <p class="en-p">Roku: 'Heavens! Doth such a terrifying spot await us? In that case, the contract is broken; I cancel (void) the bargain! Let me down!'</p>
+          <p class="en-p">The White Cow: 'Thinkest thou we would let thee down? What sayest thou, Red?'</p>
+          <p class="en-p">The Red Cow: ''Tis far too early to dismount! Shall we fling them down at the sheer precipice?'</p>
+          <p class="en-p">Yotahiko: 'Aha, these rogues pun so audaciously! Alas, there is no help for it—I must take an aerial glide! One, two, three—thud! Ouch, ouch, ow!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">牛『オイ与太公、俺の朋輩は百人、貴様の連れは三匹だ、この中から選挙して何れなつと乗るが宜からう』</p>
+            <p class="ja-classical-line">弥『サアサア選挙権の所有者は三人だ、被選挙権者も三匹だ、如何だ、普通選挙でやらうかな』</p>
+            <p class="ja-classical-line">牛『如何でも宜いワ、早くやらないか』</p>
+            <p class="ja-classical-line">与『一人一票だ、俺は赤の牝だ』</p>
+            <p class="ja-classical-line">牛『貴様、矢張り牝が好きだな、余程あかだと見える哩』</p>
+            <p class="ja-classical-line">六『俺は白の牝だ』</p>
+            <p class="ja-classical-line">牛『白い牛に烏のやうな男が乗ると似合はないぞ、一層黒にして乗つてやれ』</p>
+            <p class="ja-classical-line">六『俺は牛に乗るのはしろ人だから白にするのだ。黒に乗つて、苦労するのは困るからのう』</p>
+            <p class="ja-classical-line">弥『俺は選挙権の棄却だ』</p>
+            <p class="ja-classical-line">牛『神聖な一票の選挙権を放棄すると言ふ事があるものか、立憲政治を何と心得てゐる』</p>
+            <p class="ja-classical-line">弥『俺は馬に乗つた夢を見て、懲り懲りした、もうもう乗り物は廃止だ。これからボツボツとてくる事にしやう、乗つた所で牛の奴、足が遅いから却てテクが良い訳だ』</p>
+            <p class="ja-classical-line">与『ソンナラ俺は乗せて貰はう。オイ六公、貴様も乗つたり』</p>
+            <p class="ja-classical-line">六『乗らいでか、ロハで乗せてやらうと言ふのだもの、コンナ安価い乗り物があるかい、サア白サン、赤サン、歩いたり歩いたり』</p>
+            <p class="ja-classical-line">赤、白『ヤア当選の光栄を得まして有難うございます』</p>
+            <p class="ja-classical-line">与『極つた事だ、一騎当千の英雄豪傑が乗つて居るのだもの、当選するのは当然だ、サア進んだり進んだり』</p>
+            <p class="ja-classical-line">赤『オイ、与太サン、この先へ行くと峻い阪がある、その阪まで行つたら直立するから覚悟してお呉れや』</p>
+            <p class="ja-classical-line">与『よしよし直立せい、俺は貴様の角に喰ひ付いて居るから大丈夫だよ』</p>
+            <p class="ja-classical-line">白『これこれ六サン、俺もチヨボチヨボだ、この先へ行くと羊腸の小径がある、そこを通る時は如何しても直立せねばならぬから、しつかりなさいよ、千人の者が九百九十九人まで落ちて死ぬ処だから……』</p>
+            <p class="ja-classical-line">六『ヤアソンナ処があるのかい、ソンナラもう此処で破約だ、小便だ、下して呉れ』</p>
+            <p class="ja-classical-line">白『下して堪るか、喃、赤公』</p>
+            <p class="ja-classical-line">赤『極つた事だ、下すのはまだ早い、断巌絶壁で振り落してやらうかい』</p>
+            <p class="ja-classical-line">与『ヤア此奴洒落た事を吐いてゐよる、エー、仕方が無い、思ひ切つて空中滑走だ。一、二、三つ、ドスン、アイタヽヽヽ』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">牛『おい与太公、俺の仲間は百頭、貴様の連れは三匹だ。この中から選挙して好きな牛に乗るがよい』</p>
+              <p class="ja-modern-p">弥次彦『さあさあ、選挙権の所有者は三人、被選挙権者は三頭だ。どうだ、普通選挙でやろうかな』</p>
+              <p class="ja-modern-p">牛『どうでもよいわ、早くやらないか』</p>
+              <p class="ja-modern-p">与太彦『一人一票だ、俺は赤い雌牛だ！』</p>
+              <p class="ja-modern-p">牛『貴様、やはり雌が好きだな。よっぽどアカ（垢・赤）と見えるわい』</p>
+              <p class="ja-modern-p">六『俺は白い雌牛だ』</p>
+              <p class="ja-modern-p">牛『白い牛に烏のような男が乗ると似合わないぞ、いっそ黒牛に乗れ』</p>
+              <p class="ja-modern-p">六『俺は牛に乗るのは素人（白人）だから白にするのだ。黒に乗って苦労するのは困るからな』</p>
+              <p class="ja-modern-p">弥次彦『俺は選挙権を棄権（棄却）する！』</p>
+              <p class="ja-modern-p">牛『神聖な一票の選挙権を放棄するなんてことがあるか！ 立憲政治を何と心得ているのだ！』</p>
+              <p class="ja-modern-p">弥次彦『俺は馬に乗った夢を見て懲り懲りした。もう乗り物は御免だ。これからボツボツ歩くことにしよう。乗ったところで牛の奴は足が遅いから、歩いた方がましだ』</p>
+              <p class="ja-modern-p">与太彦『それなら俺は乗せてもらおう。おい六公、貴様も乗れ！』</p>
+              <p class="ja-modern-p">六『乗らない手があるか！ タダ（ロハ）で乗せてやるというのだから、こんな安い乗り物があるか。さあ白さん、赤さん、歩いておくれ！』</p>
+              <p class="ja-modern-p">赤牛・白牛『やあ、当選の栄誉を得まして有難うございます！』</p>
+              <p class="ja-modern-p">与太彦『決まりきったことだ。一騎当千の英雄豪傑が乗っているのだから当選するのは当然だ。さあ進め、進め！』</p>
+              <p class="ja-modern-p">赤牛『おい与太さん、この先へ行くと険しい坂がある。その坂まで行ったら直立するから覚悟しておくれよ』</p>
+              <p class="ja-modern-p">与太彦『よしよし直立しろ！ 俺は貴様の角にしがみついているから大丈夫だ』</p>
+              <p class="ja-modern-p">白牛『これこれ六さん、俺も同じだ。この先へ行くと曲がりくねった小道がある。そこを通る時はどうしても直立せねばならんから、しっかり掴まれよ。千人のうち九百九十九人まで落ちて死ぬ場所だからな……』</p>
+              <p class="ja-modern-p">六『やあ、そんな恐ろしい所があるのか！ それならもうここで契約破棄だ、キャンセル（小便）だ、下ろしてくれ！』</p>
+              <p class="ja-modern-p">白牛『下ろしてたまるか！ なあ赤公！』</p>
+              <p class="ja-modern-p">赤牛『決まっているじゃないか。下ろすのはまだ早い、断崖絶壁で振り落としてやろうか！』</p>
+              <p class="ja-modern-p">与太彦『やあ、こいつ洒落たことをほざきおる。ええい仕方がない、思い切って空中滑走だ！ 一、二、三ッ、ドスン！ アイタタタタ！』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yajihiko: 'Ho there, what ails you two? Leaping into the air while trudging along the road and sprawling flat upon the ground, crying "ouch, ouch"—gather your wits!'</p>
+          <p class="en-p">Yotahiko: 'Alas, I have been put through a cattle-like, crushing (gyū-gyū) ordeal!'</p>
+          <p class="en-p">Yajihiko: 'What sayest thou? Hast thou been dreaming? Who ever heard of a man dreaming while walking?'</p>
+          <p class="en-p">Yotahiko: 'What babblest thou? Art not thou the very founder of dreaming while walking? I merely competed with thee and dreamed too! Didst not thou also have a worthless dream, Roku?'</p>
+          <p class="en-p">Yajihiko: 'Ha-ha-ha-ha! How great are the deities! Because ye mocked me mercilessly for dreaming, divine retribution struck swiftly, and ye too were made to dream while walking! This is why traveling with dullards like alcohol-free sweet saké is such a vexation!'</p>
+          <p class="en-p">At that very moment, a prodigious roar resounded as if the mountains were crumbling away. Startled, the three awoke with a start—and lo and behold, they had been dozing by the roadside at Ojika Pass, nodding their heads in slumber!</p>
+          <p class="en-p">The Three: 'Ah, what a wondrous dream we have had! Dreaming a dream within a dream, everything is nominal and empty, vague and obscure—utterly lost in dreams and mists! Ah, this is Ojika Pass; let us gird our loins firmly and press on!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">弥『オイオイ貴様、何だ、二人とも道を歩きもつて跳び上りよつて地べたにへたつて、アイタタもあつたものかい、しつかりせぬか』</p>
+            <p class="ja-classical-line">与『オレは、もうもう、牛々云ふ目に遭はされちやつた』</p>
+            <p class="ja-classical-line">弥『如何したと言ふのだ、夢を見たのぢや無いか、歩きもつて夢を見る奴が何処にあるかい』</p>
+            <p class="ja-classical-line">与『何を吐しよるのだ、歩きもつて夢見るのは貴様が教祖ぢやないか、俺も競争して夢を見てやつたのだ、ナア六公、貴様も碌でもない夢を見たのだらう』</p>
+            <p class="ja-classical-line">弥『アハヽヽヽヽ、神様は偉いものだ、俺が夢を見たと言つて襤褸糞に笑ひよるものだから罰は覿面、貴様も同じ様に歩きもつて夢を見せられよつたな。これだからアルコールの脱けた甘酒のやうな低脳児と同行するのは困ると言ふのだ』</p>
+            <p class="ja-classical-line">この時山岳も崩るる許りの怪音が聞えて来た。三人は驚いて目を醒せば豈図らむや小鹿峠の道端にコクリコクリと居睡つて居た。</p>
+            <p class="ja-classical-line">三人『アーア偉い夢を見た喃、夢の中に夢を見たり、何が何だか有名無実、曖昧朦朧、アア小鹿峠だ、こしつかりと腹帯でも締めて行かうかい』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">弥次彦『おいおい貴様ら、何だ、二人とも道を歩きながら飛び上がって地面にへたり込んで、「アイタタ」もあったものか、しっかりせぬか！』</p>
+              <p class="ja-modern-p">与太彦『俺は、もうもう（モーモー）、牛々（ぎゅうぎゅう）言わされる目に遭わされちゃったよ』</p>
+              <p class="ja-modern-p">弥次彦『どうしたと言うのだ。夢を見たのではないか。歩きながら夢を見る奴がどこにあるか！』</p>
+              <p class="ja-modern-p">与太彦『何をほざくか！ 歩きながら夢を見るのは貴様が元祖（教祖）じゃないか。俺も張り合って夢を見てやったのだ。なあ六公、貴様もろくでもない夢を見たのだろう』</p>
+              <p class="ja-modern-p">弥次彦『アハハハハ、神様は偉いものだ！ 俺が夢を見たと言ってボロクソに笑いおったから罰は覿面、貴様らも同じように歩きながら夢を見せられおったな。これだからアルコールの抜けた甘酒のような低脳児と同行するのは困ると言うのだ』</p>
+              <p class="ja-modern-p">この時、山岳も崩れんばかりの怪音が轟いてきた。三人は驚いて目を覚ませば、あにはからんや、小鹿峠の道端でコクリコクリと居眠りをしていたのであった。</p>
+              <p class="ja-modern-p">三人『ああ、大層な夢を見たものだなあ。夢の中に夢を見たり、何が何だか有名無実、曖昧模糊、五里夢中だ。ああ小鹿峠だ、しっかりと腹帯でも締めて行こうか！』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: Horse 詈 [554]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: 楽隠居 [556]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

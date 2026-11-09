@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 23: A Swift and Fierce Assault [519] - Volume 12 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 12 Table of Contents</a>
+      <span>Part 3: The Episode of Opening the Heavenly Rock Door (Part III) (第3篇 天岩戸開（三）)</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 12 &bull; Chapter 23</span>
+      <h1 class="chapter-title-en">Chapter 23: A Swift and Fierce Assault [519]</h1>
+      <p class="chapter-title-ja">短兵急〔519〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Gazing across the ocean below from the high tower of Lady Miyukihime's palace upon the singular island, an endless host of warships, numbered by hundreds and thousands, advanced in majestic fish-scale formation pressing relentlessly toward the island with formidable menace. Deeming this no ordinary matter, Lady Miyukihime summoned her veteran retainer Takasugiwake:</p>
+          <p class="en-p">'Lord Takasugiwake, gazing upon the ocean from this high tower, I see countless warships advancing upon us—go and ascertain with certainty whether they be the demonic army of Uralhiko, or the divine army of the Great Imperial Deity revealed upon Mount Tenkyō!'</p>
+          <p class="en-p">Receiving this command, Takasugiwake replied:</p>
+          <p class="en-p">'I have fully understood! I shall descend the mountain at once, investigate the truth of the matter, and report immediately back!'</p>
+          <p class="en-p">No sooner had he spoken than he leaped upon his steed and galloped clattering down Miyukigaoka toward the shore. Lady Miyukihime then summoned Ōkuniwake near:</p>
+          <p class="en-p">'Lord Ōkuniwake, the vast army assaulting this mountain is no ordinary occurrence. Even if it be the demonic army of Uralhiko, you must never oppose them with weapons! To pacify and reconcile crookedness through the Kotodama of good and beautiful words is the supreme divine will of Kamu-Susanō-no-Mikoto! Although this mansion abounds with countless weapons and warriors, their purpose is by no means the slaughter of enemies! These sacred treasures exist solely to awe and bring into righteous submission the armies of crooked spirits lurking in the hearts of gods and men through the virtue of the sword; therefore, keep bows sheathed in their bags and swords housed in their scabbards—confront all enemies with weapons at rest, and transmit this strict order unto every officer and soldier!'</p>
+          <p class="en-p">Thus did she solemnly proclaim.</p>
+          <p class="en-p">Ōkuniwake: 'The enemy swarms like clouds and mists toward this mountain, slaughtering islanders and torching houses and forests; the raging flames are already burning close unto this very mansion! Was not our daily martial discipline intended precisely for such a crisis as this?! Now is the hour for our trained bowmen and stalwart soldiers of tempered spirit to display their valor—if not now, when shall we ever fight?! To watch passively as we are burned and destroyed by the enemy is unbearable! Though God is supreme benevolence and love, suiting the times He wields the sharp sword of subjugation! How much more so for Your Divinity, born of the virtue of the ten-span sacred sword enshrined upon Mount Caucasus! Have You lost Your senses?! I implore You to reconsider once more!'</p>
+          <p class="en-p">Lady Miyukihime: 'Swords must not be wielded lightly! The sword is a deadly weapon! To meet evil with evil and repay violence with violence is the method of ordinary mortals! As an angel proclaiming the Anai teachings across the realm, and as a missionary, to cast aside the Kotodama of good and beautiful words and meet arms with arms is what my heart can never permit! Entrust all things unto the God of supreme benevolence and love! To honor martial virtue and revere bravery means the "stance of no stance"—having weapons yet using none, possessing no weapons yet using weapons, enduring with fortitude, overcoming ferocious madness with gentleness, confronting evil with good, and facing demons with God! Softness overcoming hardness is the military strategy of the divine host, the heavenly stratagem of the Six Secret Teachings! Never forget this principle! I shall now retire into the inner sanctuary, offer divine prayers before the Great Deity, and reconcile the advancing foe through Kotodama! Unto the lowest private soldier, on this day alone, under no circumstances must anyone bear weapons!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">一つ島なる深雪姫ケ館の高楼より、眼下の海面を見渡せば、幾百千とも限りなき軍船、魚鱗の備へ堂々として島を目蒐けて押寄せ来る物々しさ。唯事ならじと深雪姫は近侍の老臣高杉別を近く招き宣り玉ふ。</p>
+            <p class="ja-classical-line">『高杉別殿、妾は今此の高楼より海面を眺むれば、此方に向つて攻め来る数多の兵船ウラル彦の魔軍か、天教山に現れませる皇大神の神軍か、慥に見届け来られよ』</p>
+            <p class="ja-classical-line">と下知すれば、高杉別は、</p>
+            <p class="ja-classical-line">『委細承知仕りました。われは是より当山を下り、事の実否を糺した上直に報告仕るべし』</p>
+            <p class="ja-classical-line">と云ふより早く馬に跨り、深雪ケ丘を浜辺に向つて戞々と下り行く。深雪姫は又もや大国別を近く招き、</p>
+            <p class="ja-classical-line">『アイヤ大国別殿、当山に攻め寄せ来る数多の軍勢唯事ならず。仮令ウラル彦の魔軍にもせよ、必ず武器を以て之に敵対すべからず、善言美詞の言霊を以て曲を言向け和すは神須佐之男の命の大御心、この館には数多の武器、兵士、充ち備へありと雖も、決して敵を殺戮する目的に非ず。天下の神人が心に潜む曲津軍を、剣の威徳に依つて怯ぢ怖れしめ帰順せしむるの神器なれば、弓は袋に、剣は鞘に納まり返つて、総ての敵に臨むべく部下の将卒にも此旨厳しく伝へられよ』</p>
+            <p class="ja-classical-line">と言厳かに宣示された。</p>
+            <p class="ja-classical-line">大国別『敵は雲霞の如く、当山に向つて攻め来り、島人を殺戮し、民家山林を焼き払ひ、火は炎々として最早館の間近く燃え寄せたり。日頃武術を鍛へたるは斯る時の用意ならめ。研き置いたる弓矢の手前、胆を練りたる将卒の今や武勇の現はれ時、この時を措いて何れの時か戦はむや。みすみす敵に焼き滅されむは心もとなし。神は至仁至愛に坐ませども時あつて折伏の利剣を用ひ給ふ。况んや、コーカス山に鎮まり給ふ、十握の宝剣の御魂の威徳に成り在せる貴神に於てをや。血迷ひ給ひしか、今一度反省されむ事を希ひ奉る』</p>
+            <p class="ja-classical-line">深雪姫『剣は容易に用ふ可らず。剣は凶器なり。凶を以て凶に当り、暴を以て暴に報ゆるは普通人の行ふ手段、苟くも三五教を天下に宣伝する天使の身として、また宣伝使の職として、善言美詞の言霊を閑却し、武を以て武に当るは我が心の許さざる所、ただ何事も至仁至愛の神に任せよ。武を尚び雄健を尊重すると云ふは、構へなきの構へ、武器あつて武器を用ゐず、武器無くして武器を用ゐ、能く堪忍び、柔和を以て狂暴に勝ち、善を以て悪に対し、神を以て魔に対す、柔能く剛を制するは神軍の兵法、六韜三略の神策なり。汝此主旨を忘却する勿れ。吾はこれより奥殿に入り、大神の御前に神言を奏上し、寄せ来る敵を言向け和さむ。一兵一卒の端に至る迄、今日に限り武器を持たしむるべからず』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">一つ島にある深雪姫の館の高楼から眼下の海面を見渡すと、数百千とも数え切れぬ無数の軍船が魚鱗の陣形を堂々と敷いて島を目指して押し寄せてくる物々しさであった。ただ事ではないと深雪姫は近侍の老臣・高杉別を呼び寄せて命じられた。</p>
+            <p class="ja-modern-p">『高杉別殿、妾が今この高楼より海を眺めるに、こちらへ攻め寄せて来る無数の兵船はウラル彦の魔軍であるか、それとも天教山にお現れになった皇大神の神軍であるか、しかと見届けてまいられよ』</p>
+            <p class="ja-modern-p">と下知されると、高杉別は、</p>
+            <p class="ja-modern-p">『委細承知いたしました。私は直ちに山を下り、事の真偽を確かめた上で直ちにご報告申し上げます』</p>
+            <p class="ja-modern-p">と言うが早いか馬に跨り、深雪ヶ丘を浜辺に向かって蹄の音を響かせ駆け下りていった。深雪姫はまた大国別を呼び寄せられ、</p>
+            <p class="ja-modern-p">『大国別殿、当山へ攻め寄せて来る大軍はただ事ではありません。たとえウラル彦の魔軍であろうとも、決して武器をもってこれと敵対してはなりません。善言美詞の言霊をもって邪曲を言向け和すことこそ神須佐之男命の大御心です。この館には数多くの武器や兵士が備えられていますが、決して敵を殺戮することが目的ではありません。天下の神人たちの心に潜む曲津軍を、剣の威徳によって畏怖させ帰順させるための神器なのですから、弓は袋に、剣は鞘に納め、すべての敵に対して武力を交えぬよう、部下の将卒にも厳重に伝えなさい』</p>
+            <p class="ja-modern-p">と厳かに宣示された。</p>
+            <p class="ja-modern-p">大国別『敵は雲霞の如く当山に向かって攻め寄せ、島人を殺戮し民家や山林を焼き払い、火の手は赤々と燃え盛り早くも館の間近に迫っております！ 日頃武術を鍛錬したのはまさにこのような時の備えではありませんか！ 研ぎ澄ました弓矢の技、胆力を練った将卒たちの武勇を示す時は今をおいていつ戦うというのですか！ みすみす敵に焼き滅ぼされるのを座視するなど到底できません！ 神は至仁至愛であられますが、時に応じて邪悪を討ち滅ぼす利剣を用いられます。ましてコーカサス山に鎮まる十握の宝剣の威徳によってお生まれになった貴女様が、なぜそのようにお迷いになるのですか！ もう一度お考え直しくださいますようお願い申し上げます！』</p>
+            <p class="ja-modern-p">深雪姫『剣は安易に用いてはなりません。剣は凶器です。凶をもって凶に当たり、暴をもって暴に報いるのは普通の人間の行う手段です。かりそめにも三五教を天下に宣伝する天使の身として、また宣伝使の職として、善言美詞の言霊を蔑ろにし武力をもって武力に応じることは我が心の許さぬところです。ただ何事も至仁至愛の神にお任せしなさい。武を尚び雄健を重んじるというのは「構えなき構え」であり、武器があっても武器を用いず、武器なくして武器を用い、よく忍耐し、柔和をもって狂暴に勝ち、善をもって悪に対峙し、神をもって魔に対することです。柔よく剛を制するのが神軍の兵法であり、六韜三略の神策なのです。そなたはこの主旨を忘れてはなりません。私はこれより奥殿に入り、大神の御前に神言を奏上して寄せ来る敵を言向け和しましょう。一兵一卒の端に至るまで、今日に限っては決して武器を持たせてはなりません』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Thus proclaiming, she leisurely prepared to retire into the inner sanctuary. Clinging unto Lady Miyukihime's sleeve, Ōkuniwake pleaded:</p>
+          <p class="en-p">'Pray wait, wait but a moment! The shouts and arrow-cries draw nearer and nearer—no matter how one seeks to reconcile them through good and beautiful words, it cannot avail against raw violence! I shall now lead my officers and soldiers to cut down and sweep away the advancing foe in every direction, demonstrating our long-trained valor! Grant permission for this alone, I beseech You!'</p>
+          <p class="en-p">Clenching his fists and trembling in heroic agitation, he implored her. Lady Miyukihime, calm and unhurried, sang in measured, tranquil tones:</p>
+          <p class="en-p">'God manifests visibly upon the surface to separate good from evil! O Kaminaho-no-Kami who created this world, O Ōnaho-no-Kami of boundless heart! In all mortal affairs, revise and relisten in rectitude, and reproclaim the crooked words of the world! There is no sword that can ever prevail against righteousness! The power of Sincerity alone saves the world! Taking God as your strength and leaning upon the Anai teachings as your staff, no matter what enemies approach, reconcile them through God's auspicious words, and harm not the foe! God is with you! God carries through His sincerity! Save humanity through Sincerity! Now is the trial of body and soul! By the single disposition of the heart, good instantly turns into evil,</p>
+          <p class="en-p">And evil instantly turns into good—the very watershed of good and evil, righteousness and perversity! Under heaven, there are in truth neither friends nor foes! Friends at times become foes, and foes turn into friends! Entrust all human affairs unto God, entirely! Do not err through anxious haste! God dwells together with you! Whether the sun shines or clouds gather, whether the moon waxes or wanes, even if the earth sinks or this sacred island burns to ashes, God will surely behold our sincere red hearts and deliver us unto safety! With the sacred spear of singular sincerity, reconcile the approaching enemy, manifest the power of God, and let the divine majesty blaze forth!'</p>
+          <p class="en-p">Singing thus, she disappeared into the inner sanctuary.</p>
+          <p class="en-p">The army of tens of thousands torched the entire island; fanned by the wind, billowing black smoke enveloped all quarters, and the soldiers stood in tense excitement, holding their breath awaiting the order for battle.</p>
+          <p class="en-p">Ōkuniwake folded his arms, sighing in deep anguish and utterly at a loss as to what to do—when at that very moment, his horse's hooves clattering loudly, Takasugiwake came galloping back, vaulted lightly from the saddle, and shouted before Ōkuniwake:</p>
+          <p class="en-p">'Lord Ōkuniwake! Why have you made no preparations for defense?! The enemy surrounds this mountain with tens of thousands of horsemen from all four sides, torching the forests and threatening to reduce this mansion to ashes—why do you hesitate?!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と宣示し、悠々として奥殿に入らむとなしたまふ。大国別は、深雪姫の袖を控へて、</p>
+            <p class="ja-classical-line">『まづまづ暫くお待ち下さいませ。追ひ追ひ近づく矢叫びの声、如何に善言美詞の神嘉言を以て言向け和さむとすればとて、暴力には及び難からむ。吾はこれより部下の将卒を励まし、寄せ来る敵を縦横無尽に斬り立て、薙払ひ、日頃鍛へし武勇を示さむ。此事計りは強つて御許し下さいませ』</p>
+            <p class="ja-classical-line">と拳を握り身を震はし、雄健びしつつ願ひ居る。深雪姫は悠々迫らず、悠長なる音調にて、</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立別ける
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直せ聞き直せ
+世の曲言は宣り直せ
+正義に刃向ふ剣なし
+誠の力は世を救ふ
+神を力に三五の
+神の教を杖として
+如何なる敵の来るとも
+神の嘉言に言向けて
+敵を傷つく事勿れ
+神は汝と倶にあり
+神は誠を立て徹す
+誠で人を救ふべし
+今は身魂の試し時
+心の持方一つにて
+善も忽ち悪となり</p>
+            <p class="ja-classical-line">悪も忽ち善となる
+善悪正邪の分水嶺
+天が下にはおしなべて
+敵も味方も無きものぞ
+味方も時に敵となり
+敵も味方となり変る
+只何事も人の世は
+神に任せよ悉く
+心を焦ちて過失つな
+神は汝と倶に住む
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+此神島は焼けるとも
+神は必ず吾々が
+赤き心を御覧し
+安きに救ひ給ふべし
+誠一つの玉鉾に
+寄せ来る敵を言向けて
+神の力を現はせよ</p>
+            <p class="ja-classical-line">神の稜威を輝かせ』</p>
+            <p class="ja-classical-line">と歌ひながら、奥殿に姿を隠させ玉ふ。</p>
+            <p class="ja-classical-line">数万の軍勢は全島に火を放ち、折からの風に煽られて黒煙濛々として四辺を包み、数多の将卒は何れも雄猛びして、防戦の命の下るを今や遅しと固唾を呑むで控へゐる。</p>
+            <p class="ja-classical-line">大国別は双手を組むで、青息吐息、如何はせむと思案に暮るる時しもあれ、駒の足音戞々と走せ帰りたる高杉別はヒラリと駒を飛び下りて、大国別の前に現はれ、</p>
+            <p class="ja-classical-line">『ヤア大国別殿、貴神は何故防戦の用意をなさらぬか、敵は四方より数万騎を以て当山を囲み、山林に火を放ち既に当館も烏有に帰せむとする場合、何を躊躇さるるや』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">と宣示し、悠然として奥殿へと入ろうとされた。大国別は深雪姫の袖を引き留めて、</p>
+            <p class="ja-modern-p">『まずまず、暫くお待ちくださいませ！ 次第に近づく矢叫びの声、いかに善言美詞の神嘉言をもって言向け和そうとしても、暴力を前にしてはとても及びますまい！ 私はこれより部下の将卒を率いて寄せ来る敵を縦横無尽に斬り立て薙ぎ払い、日頃鍛えた武勇を示してご覧に入れます！ このことばかりはどうしてもお許しください！』</p>
+            <p class="ja-modern-p">と拳を握りしめ体を震わせ、勇み立ちながら懇願した。深雪姫は少しも慌てず、ゆったりとした調べで歌われた。</p>
+            <p class="ja-modern-p">『神が表にお現れになって、善と悪とを峻別される。この世をお造りになった神直日神、心の広大な大直日神よ。ただ人の世の何事も直日に見直し聞き直し、世の曲言は宣り直せ。正義に刃向かう剣などありはしない。誠の力こそが世を救うのだ。神を力とし、三五の神の教えを杖として、いかなる敵が来ようとも神の嘉言によって言向け和し、敵を傷つけることなかれ。神は汝と共にある。神は誠を立て通される。誠をもって人を救うべきである。今は身魂の試しの時。心の持ち方一つによって、善もたちまち悪となり、</p>
+            <p class="ja-modern-p">悪もたちまち善となる。善悪正邪の分水嶺である。天の下においては、すべて敵も味方もないものだ。味方も時に敵となり、敵も味方と変わりゆく。ただ人の世のすべてのことは神に任せよ、ことごとく。心を焦って過つことなかれ。神は汝と共に住まわれる。朝日は照ろうとも曇ろうとも、月は満ちようとも欠けようとも、たとえ大地が沈もうとも、この神島が焼け落ちようとも、神は必ず我らの赤き真心をご覧になり、安らかに救い給うはずである。誠一つの玉鉾をもって寄せ来る敵を言向け和し、神の力を現わせよ、神の威光を輝かせよ』</p>
+            <p class="ja-modern-p">と歌いながら、奥殿へと姿を消された。</p>
+            <p class="ja-modern-p">数万の軍勢は全島に火を放ち、折からの風に煽られて黒煙がもうもうと四方を包み、大勢の将卒たちはいずれも勇み立ち、防戦の命令が下るのを今か今かと固唾を呑んで待機していた。</p>
+            <p class="ja-modern-p">大国別は両腕を組み、青息吐息でどうすべきかと思案に暮れていたまさにその時、駒の足音高く駆け戻ってきた高杉別はひらりと馬から飛び降り、大国別の前に現れて言った。</p>
+            <p class="ja-modern-p">『大国別殿！ 貴神はなぜ防戦の用意をなさらぬのか！ 敵は四方より数万の軍勢をもって当山を包囲し、山林に火を放ち、すでにこの館をも灰燼に帰せしめんとしているのに、何を躊躇しておられるのか！』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He slapped his knee and roared; but seeing Ōkuniwake fold his arms in utter silence with tears trickling down his cheeks, Takasugiwake spat in bitter contempt:</p>
+          <p class="en-p">'Bah! Unbefitting your renowned valor, in this desperate crisis of life and death, to cower before the enemy's might and sink into craven sorrow—what cowardly behavior! Since it has come to this, consulting with you is utterly useless! I shall now lead the mansion's soldiers to fight our final battle and decide victory or defeat in a single stroke!'</p>
+          <p class="en-p">Striding fiercely toward the front, Ōkuniwake called out to him:</p>
+          <p class="en-p">'Lord Takasugiwake! Your words are entirely reasonable! As the presiding officer of this mansion, I too cannot bear to stand by idly and let the enemy trample us! Nevertheless, the divine purpose of the supreme God of benevolence to save humanity must be weighed with utmost gravity! Pray reflect deeply for a moment!'</p>
+          <p class="en-p">'Those words hardly sound like Lord Ōkuniwake! Cowardly excuses! Are you not the chief minister of Lady Miyukihime who guards this island?! If it is occupied by the enemy through such spineless hesitation, how could you ever face Lady Miyukihime?! Hear that—the enemy's battle-cries shaking the very mountains! Since your consent is hopeless, I shall act independently on my own initiative, slaughtering the cloud-like host with our long-trained martial might!'</p>
+          <p class="en-p">He rushed impetuously toward the gate.</p>
+          <p class="en-p">'Wait, Lord Takasugiwake! Wait but a moment!'</p>
+          <p class="en-p">'What?! In such a crisis, can there be a moment's delay?! "The victor is the government army, the defeated are rebels!" Lord Ōkuniwake, I shall show you my valor!'</p>
+          <p class="en-p">Hurling these words, he dashed toward the front gate; and just as he was about to order the troops into battle, the deity Tajikarao returning from Miyukigaoka witnessed this scene and spoke:</p>
+          <p class="en-p">'Well, well! Things have become extraordinarily amusing! Shall we sit back leisurely, sip some sake, and enjoy the spectacle of the enemy's procession?!'</p>
+          <p class="en-p">Takasugiwake: 'Are you not Tajikarao of Mitoshi Village, the self-proclaimed Ushitora-no-Konjin?! In such an hour of mortal peril, why do you act so leisurely and carefree?! In this desperate crisis, prepare for battle!'</p>
+          <p class="en-p">'Aha ha ha! Delightful, delightful! Takasugiwake's panic is enough to make a belly laugh! Calm down, calm down, let's watch the enemy's attack as a side-dish while having a drink! Hey, someone bring sake, bring sake! Deadly things like swords, spears, and bows are not to be used in a sacred precinct where God abides! Weapons are instruments of death!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と膝を叩いて呶鳴り付けたるにぞ、大国別は何の答もなく双手を組むだ儘俯むき涙さへ腮辺に伝ふるを見て取つた高杉別は悖かしげに、</p>
+            <p class="ja-classical-line">『エイ、日頃の武勇にも似ず、千騎一騎の此の場合、敵の勢力に萎縮して、周章狼狽の余り、憂苦に沈む卑怯未練な貴神の振舞、最早斯くなる上は、貴神に相談するも何の益あらむや。吾れはこれより館の将卒を率ゐ、此処を先途と一戦を試み、勝敗を一時に決せむ』</p>
+            <p class="ja-classical-line">と雄健びし乍ら、スタスタと此場を立つて表に出むとするを、大国別は言葉をかけ、</p>
+            <p class="ja-classical-line">『ヤア高杉別殿、貴下の御意見御尤も千万、吾れとても当館の主宰神、闇々敵の蹂躪に任せ袖手傍観するに忍びむや。さは然り乍ら、至仁至愛の大神が天下救済の御神慮は慎重に考慮せざる可からず。貴神暫く熟考せられよ』</p>
+            <p class="ja-classical-line">『大国別殿の言葉とも覚えぬ。卑怯未練な陳弁、貴神は本島を守り給ふ深雪姫の神の宰神ならずや。斯かる卑怯未練の御心掛にて闇々敵に占領されなば、何を以て深雪姫の神に言解けあるか。アレアレ聞かれよ、山岳も轟く許りの敵の叫び声、到底貴神の賛成は覚束なければ、吾れは是より単独にて自由行動に出で、本島に攻め寄せ来たる雲霞の如き大軍を、日頃鍛へし武力を以て鏖殺せむ』</p>
+            <p class="ja-classical-line">と勢込んで表をさして駆出す。</p>
+            <p class="ja-classical-line">『ヤアヤア高杉別殿、暫く暫くお待ちあれ』</p>
+            <p class="ja-classical-line">『何ツ、此期に及むで暫時の猶予がならうか、勝てば官軍負くれば賊、大国別殿、拙者が武勇を御目に掛けむ』</p>
+            <p class="ja-classical-line">と云ひ捨てて表門へと駈出だし、部下の将卒に向つて、戦闘準備を命令せむとする折しも、深雪ケ丘より帰り来れる手力男の神は此体を見て、</p>
+            <p class="ja-classical-line">『ヤア、大変に面白くなつて来ましたね。一つ敵軍の行列を緩りと、酒でも飲むで見物致しませうか』</p>
+            <p class="ja-classical-line">高杉別『汝は、御年村の自称丑寅の金神手力男ではないか。かかる危急存亡の場合、何を悠々として気楽さうに構へて居らるるや。千騎一騎の此場合、防戦の用意をなされ』</p>
+            <p class="ja-classical-line">『アハヽヽヽ、ヤア面白い面白い、高杉別のその狼狽かた、イヤもう臍が宿換いたすワイ。アハヽヽヽ、マアマア緩り落着いて敵軍の襲撃を見てそれを肴に一杯やらうかい。ヤア誰も彼も酒だ酒だ、殺伐な剣や槍や弓の様な物は神様の鎮まり給ふ聖地に於て用ふる物ではない。武器は兇器だ』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">と膝を叩いて怒鳴りつけたが、大国別は何の返答もなく腕を組んだままうつむき、涙さえ頬を伝うのを見て取った高杉別は、忌々しそうに吐き捨てた。</p>
+            <p class="ja-modern-p">『ええい！ 日頃の武勇にも似合わず、一騎当千のこの時に敵の勢力に萎縮し、狼狽のあまり悲嘆に沈むとは、卑怯未練な振る舞いである！ もはやこうなった以上、貴神に相談しても何の益もない！ 私はこれより館の将卒を率い、ここを最後と一戦を交え、勝敗を決してくれよう！』</p>
+            <p class="ja-modern-p">と勇み立ちながらスタスタと立ち去ろうとするのを、大国別は呼び止めた。</p>
+            <p class="ja-modern-p">『高杉別殿、貴殿の意見はごもっともである。私とて当館の主宰神として、敵の蹂躪を座視するに忍びない。しかしながら、至仁至愛の大神の天下救済の御神慮は慎重に考慮せねばならぬ。貴神もしばし熟考されよ』</p>
+            <p class="ja-modern-p">『大国別殿の言葉とは思えぬ！ 卑怯未練な言い訳である！ 貴神はこの島を守る深雪姫様の宰相ではないか！ そのような卑怯な心構えで敵に占領されたなら、何を以て深雪姫様に申し開きをするのか！ あれを聞かれよ、山をも揺るがす敵の鬨の声！ 到底貴神の賛成が得られぬなら、私はこれより単独で自由行動を取り、押し寄せる雲霞の大軍を日頃鍛えた武力で皆殺しにしてくれるわ！』</p>
+            <p class="ja-modern-p">と勢い込んで表へ駆け出そうとした。</p>
+            <p class="ja-modern-p">『これ高杉別殿、待たれよ、しばし待たれよ！』</p>
+            <p class="ja-modern-p">『何を！ この期に及んで一時の猶予がなろうか！「勝てば官軍、負くれば賊」だ、大国別殿、私の武勇をお目にかけよう！』</p>
+            <p class="ja-modern-p">と言い捨てて表門へと駆け出し、部下の将卒に向かって戦闘準備を命じようとしたその時、深雪ヶ丘から戻ってきた手力男神がこの様子を見て言った。</p>
+            <p class="ja-modern-p">『やあやあ、大変面白くなってきましたね。一つ敵軍の行列をゆっくりと酒でも飲みながら見物いたしましょうか』</p>
+            <p class="ja-modern-p">高杉別『貴様は御年村の自称・丑寅の金神手力男ではないか！ このような危急存亡の時に、何を悠長に気楽に構えているのか！ 一騎当千のこの時、防戦の用意をなされ！』</p>
+            <p class="ja-modern-p">『アハハハ、やあ面白い、面白い！ 高杉別のその狼狽ぶりは、へそが茶を沸かすわい！ アハハハ、まあまあ落ち着いて敵軍の襲撃を肴に一杯やろうじゃないか。おい誰か酒だ、酒だ！ 殺伐たる剣や槍や弓などは、神のお鎮まりになる聖地で用いるものではない。武器は凶器だぞ』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takasugiwake flared into towering fury:</p>
+          <p class="en-p">'Your wanton, irresponsible words shall serve as a blood sacrifice for our departure into battle!'</p>
+          <p class="en-p">Drawing his blade, he slashed straight at his head. Tajikarao seized a massive gatepost, yanked it out from the ground, hoisted it high overhead, and pinned Takasugiwake down.</p>
+          <p class="en-p">Takasugiwake: 'Villain! Pretending to be a loyal ally while conspiring with the enemy to seize this sacred precinct! Even if I am slain and descend unto the Hidden Realm, my loyal spirit shall remain upon the earth to punish your wicked schemes!'</p>
+          <p class="en-p">Tajikarao: 'Aha ha ha! Pray don't misunderstand, Lord Takasugiwake!'</p>
+          <p class="en-p">So saying, he tossed the gatepost aside. At that instant, leaping like a bird of prey, Takasugiwake lunged:</p>
+          <p class="en-p">'Traitorous villain, taste my blade!'</p>
+          <p class="en-p">He thrust fiercely at Tajikarao's flank. The moment Tajikarao nimbly dodged aside, Takasugiwake missed his mark, stumbled forward seven or eight paces propelled by his own momentum, and fell flat upon the ground with his drawn sword.</p>
+          <p class="en-p">Dense black smoke enveloped the mansion ever more thickly; fanned by the wind, the crackling roar of the mountain forests burning and the tumultuous clamor of the advancing army drew nearer and louder by the second.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高杉別はクワツと怒り、</p>
+            <p class="ja-classical-line">『放縦無責任の汝の言葉、門出の血祭りにせむ』</p>
+            <p class="ja-classical-line">と一刀を抜いて真向より斬りかかる。手力男神は、門柱をグツと引き抜き頭上高く振り翳し、高杉別を押へ付けた。</p>
+            <p class="ja-classical-line">高杉別『ヤア、貴様は今まで忠実なる味方と見せかけて、内外相呼応して、此聖地を占領せむと計画しつつありし曲者ならむ。たとへ吾身は殺されて帰幽する共、我誠忠正義の霊魂は地上に留まり、汝が悪念を懲さで置くべきか』</p>
+            <p class="ja-classical-line">手力男神『アハヽヽヽヽ、モシモシ高杉別殿、誤解されては困りますよ』</p>
+            <p class="ja-classical-line">と云ひながら門柱をサツと取り除けた。高杉別はその刹那、飛鳥の如く飛びかかつて、</p>
+            <p class="ja-classical-line">『反逆無道の曲者思ひ知れや』</p>
+            <p class="ja-classical-line">と云つて、手力男の脇腹目蒐けて突きかかる。手力男はヒラリと体を躱したる途端に、高杉別は狙ひ外れて勢余り、七八間も前方にトントントントンと走つて抜刀の儘ピタリと倒れた。</p>
+            <p class="ja-classical-line">黒煙は益々館を包み、風に煽られて全山樹木の焼ける音、攻め寄せ来る人馬の物音、刻々に近付高まり来たりぬ。</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">高杉別はカッと激怒し、</p>
+            <p class="ja-modern-p">『放縦無責任な貴様の言葉、門出の血祭りにしてくれるわ！』</p>
+            <p class="ja-modern-p">と一刀を抜いて真っ向から斬りかかった。手力男神は門柱をぐっと引き抜き、頭上高く振りかざして高杉別を押さえつけた。</p>
+            <p class="ja-modern-p">高杉別『おのれ！ 貴様は今まで忠実な味方と見せかけて、内外呼応してこの聖地を占領しようと企んでいた曲者だな！ たとえ我が身は殺されて冥土へ行こうとも、我が忠義の魂は地上に留まり、貴様の悪念を懲らしめずにおくものか！』</p>
+            <p class="ja-modern-p">手力男神『アハハハ、もしもし高杉別殿、誤解されては困りますよ』</p>
+            <p class="ja-modern-p">と言いながら門柱をさっと取り除けた。高杉別はその刹那、飛ぶ鳥のように飛びかかり、</p>
+            <p class="ja-modern-p">『反逆無道の曲者、思い知れ！』</p>
+            <p class="ja-modern-p">と叫んで手力男の脇腹を目がけて突きかかった。手力男がひらりと体を躱した途端、高杉別は狙いが外れて勢い余り、七、八間も前方へとトントントンと走り抜け、刀を抜いたままバッタリと倒れた。</p>
+            <p class="ja-modern-p">黒煙はいよいよ館を包み、風に煽られて山全体の樹木が激しく燃える音と、攻め寄せる人馬の鬨の声が刻一刻と間近に迫ってきた。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c22.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 22: 一 Island 攻撃 [518]</span>
+      </a>
+      <a href="c24.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 24: Kotodama の Virtue [520]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

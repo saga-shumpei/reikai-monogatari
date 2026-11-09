@@ -133,33 +133,35 @@
       text-transform: uppercase;
       margin-bottom: 0.5rem;
     }
-    .ja-modern {
-      margin-bottom: 1.25rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px dashed var(--border);
-    }
-    .ja-modern-p {
-      font-size: 0.95rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin-bottom: 0.75rem;
-      text-align: justify;
-    }
-    .ja-modern-p:last-child {
-      margin-bottom: 0;
-    }
-    .ja-label-classical {
-      color: #94a3b8;
-    }
+    .ja-classical { margin-bottom: 0.5rem; }
     .ja-classical-line {
-      font-size: 0.9rem;
-      color: #94a3b8;
-      line-height: 1.8;
-      margin-bottom: 0.5rem;
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
     }
-    .ja-classical-line:last-child {
-      margin-bottom: 0;
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
     }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
 
     .footer-nav {
       display: flex;
@@ -228,14 +230,6 @@
           <p class="en-p">"Archangel, a great emergency has broken out regarding the conference in Tokoyo. The ringleaders behind the destruction of the Heavenly Law are Yukinarihiko and his party, who were dispatched as your representatives. Tokoyohime has just arrived at the castle from afar, and is preparing to report the details to the Great Deity, Ancestor of the Land, through you. How shall this be handled?"</p>
         </div>
         <div class="lang-ja">
-          <div class="ja-label">現代日本語訳</div>
-          <div class="ja-modern">
-            <p class="ja-modern-p">聖地の天使長広宗彦命が、常世城における会議の結果と、行成彦一行の消息はどうであるかと心を悩ませていた折しも、桃上彦の従臣である八十猛彦と百猛彦が慌ただしく広宗彦命の前に現れ、その顔の上に一種異様な色を浮かべて、</p>
-            <p class="ja-modern-p">「急変があります、周囲の者を遠ざけてください」</p>
-            <p class="ja-modern-p">と申し上げた。</p>
-            <p class="ja-modern-p">広宗彦命は二人のただならぬ顔色に不審の眉をひそめながらも、その言葉を聞き入れて従臣らを残らず別室に立ち去らせた。二人は肩を怒らせ、肘を張り、目を丸く光らせ、口をとがらせ、何かに襲われたかのような様子で、</p>
-            <p class="ja-modern-p">「天使長よ、常世の会議について一大事変が突発しました。天則破壊の張本人は貴下の代理として出張された行成彦一行です。ただ今、常世姫がはるばる来城され、その詳細を貴下を通じて、国祖の大神に奏上すべく準備中です。どのように取り計らいますか」</p>
-          </div>
           <div class="ja-label ja-label-classical">原文（近代文語）</div>
           <div class="ja-classical">
             <p class="ja-classical-line">聖地の天使長広宗彦命は、常世城における会議の結果と、行成彦一行の消息如何にと心を悩ませゐたる折しも、桃上彦の従臣なる八十猛彦、百猛彦は慌ただしく広宗彦命の前にあらはれ、その面上に一種異様の色をうかべて、</p>
@@ -244,6 +238,20 @@
             <p class="ja-classical-line">広宗彦命は二人の啻ならざる顔色に不審の眉をひそめながら、その言を採納して従臣らを残らず別室に立去らしめたり。二人は肩を怒らせ肱を張り、眼を丸く光らせ、口を尖らせ、何物にか襲はれたるごとき形容にて、</p>
             <p class="ja-classical-line">『天使長よ、常世の会議について一大事変突発せり。天則破壊の張本人は貴下の代理として出張されし行成彦一行なり。ただ今常世姫遥々来城ありて、その詳細を貴下を通じ、国祖の大神に奏上すべく準備中なり。いかが取計らはむや』</p>
           </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">聖地の天使長広宗彦命が、常世城における会議の結果と、行成彦一行の消息はどうであるかと心を悩ませていた折しも、桃上彦の従臣である八十猛彦と百猛彦が慌ただしく広宗彦命の前に現れ、その顔の上に一種異様な色を浮かべて、</p>
+            <p class="ja-modern-p">「急変があります、周囲の者を遠ざけてください」</p>
+            <p class="ja-modern-p">と申し上げた。</p>
+            <p class="ja-modern-p">広宗彦命は二人のただならぬ顔色に不審の眉をひそめながらも、その言葉を聞き入れて従臣らを残らず別室に立ち去らせた。二人は肩を怒らせ、肘を張り、目を丸く光らせ、口をとがらせ、何かに襲われたかのような様子で、</p>
+            <p class="ja-modern-p">「天使長よ、常世の会議について一大事変が突発しました。天則破壊の張本人は貴下の代理として出張された行成彦一行です。ただ今、常世姫がはるばる来城され、その詳細を貴下を通じて、国祖の大神に奏上すべく準備中です。どのように取り計らいますか」</p>
+            </div>
+          </details>
         </div>
       </section>
 
@@ -259,14 +267,6 @@
           <p class="en-p">"Tokoyohime, I can well imagine your fatigue from your journey from afar. First, please take your rest here."</p>
         </div>
         <div class="lang-ja">
-          <div class="ja-label">現代日本語訳</div>
-          <div class="ja-modern">
-            <p class="ja-modern-p">と、二人は異口同音に符節を合わせたかのように奏上した。二人が同時に同じ言葉を揃えて発したのも道理であり、二人は野心の強い桃上彦の命により、持っている笏板の裏にこの奏言を書き記して読み上げたからであった。</p>
-            <p class="ja-modern-p">広宗彦命は二神の思いがけない報告に茫然として返す言葉も出なかった。ちょうどその時、桃上彦は常世姫の後に従い、悠然と入って来て、勝ち誇った顔色で、その美しい白い顔を空に向けて少ししゃくりながら、</p>
-            <p class="ja-modern-p">「ただ今、ここにいる常世姫が、常世城の常世会議の報告のため、はるばる来城された。速やかに国祖の大神に、この旨を伝奏していただきたい」</p>
-            <p class="ja-modern-p">と叩きつけるように言ったので、広宗彦命は弟の高慢不遜な態度に憤慨せざるを得なかった。しかし天地の律法に省み、湧き立つ胸をじっとこらえ、何でもない風を装って、</p>
-            <p class="ja-modern-p">「常世姫、遠路のご旅行、お疲れのほどお察し申し上げる。まずはここでお休みあれ」</p>
-          </div>
           <div class="ja-label ja-label-classical">原文（近代文語）</div>
           <div class="ja-classical">
             <p class="ja-classical-line">と二人は異口同音に符節を合したるごとく奏上したり。二人の一時に同じ語を揃へて発したるも道理、二人は野心つよき桃上彦の命により、持てる笏板の裏にこの奏言を書き記して読みあげたればなり。</p>
@@ -275,6 +275,20 @@
             <p class="ja-classical-line">と叩きつけるやうに云ひければ、広宗彦命は弟の高慢不遜なる態度に憤懣せざるを得ざりけり。されど天地の律法に省み、わき立つ胸をジツとこらへ、さあらぬ体にて、</p>
             <p class="ja-classical-line">『常世姫遠路の御旅行、御疲労のほど察し入る。先づこれにて御休息あれ』</p>
           </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">と、二人は異口同音に符節を合わせたかのように奏上した。二人が同時に同じ言葉を揃えて発したのも道理であり、二人は野心の強い桃上彦の命により、持っている笏板の裏にこの奏言を書き記して読み上げたからであった。</p>
+            <p class="ja-modern-p">広宗彦命は二神の思いがけない報告に茫然として返す言葉も出なかった。ちょうどその時、桃上彦は常世姫の後に従い、悠然と入って来て、勝ち誇った顔色で、その美しい白い顔を空に向けて少ししゃくりながら、</p>
+            <p class="ja-modern-p">「ただ今、ここにいる常世姫が、常世城の常世会議の報告のため、はるばる来城された。速やかに国祖の大神に、この旨を伝奏していただきたい」</p>
+            <p class="ja-modern-p">と叩きつけるように言ったので、広宗彦命は弟の高慢不遜な態度に憤慨せざるを得なかった。しかし天地の律法に省み、湧き立つ胸をじっとこらえ、何でもない風を装って、</p>
+            <p class="ja-modern-p">「常世姫、遠路のご旅行、お疲れのほどお察し申し上げる。まずはここでお休みあれ」</p>
+            </div>
+          </details>
         </div>
       </section>
 
@@ -290,14 +304,6 @@
           <p class="en-p">Hiromunehiko no Mikoto felt as if cold water had suddenly been poured over his head, and knew not what to answer. The princess further continued her words:</p>
         </div>
         <div class="lang-ja">
-          <div class="ja-label">現代日本語訳</div>
-          <div class="ja-modern">
-            <p class="ja-modern-p">と言って席を譲り、かたわらに端坐した。常世姫は、何の憚ることもなく、</p>
-            <p class="ja-modern-p">「それでは高座を許されよ」</p>
-            <p class="ja-modern-p">と悠然として座に着いた。この時の姫の態度は、群がる雀の中に丹頂の鶴がただ一羽、天空より舞い下りたかのごとく、一種不可思議の威厳をもって、諸神司を圧倒してひれ伏せさせるように見えた。</p>
-            <p class="ja-modern-p">常世姫は、慇懃に別れて以来の挨拶を述べ、かつ行成彦を聖地の代理として、はるばる常世城に派遣されたその好意に感謝し、かつ八王大神をはじめ我が身の不覚から、千載一遇の大会議を紛糾混乱の極みに達せしめ、かつ聖地の使臣らに一片の誠意もなく、権謀術数のみを事として、神格を傷つけたことを遺憾とする旨を、言葉爽やかに懇々と述べ立てた。</p>
-            <p class="ja-modern-p">広宗彦命は頭上から突然冷水を浴びせかけられたような心地がして、答える言葉も知らなかった。姫はさらに言葉を継いで、</p>
-          </div>
           <div class="ja-label ja-label-classical">原文（近代文語）</div>
           <div class="ja-classical">
             <p class="ja-classical-line">と席をゆづつて側に端坐したり。常世姫は、何の憚るところもなく、</p>
@@ -306,6 +312,20 @@
             <p class="ja-classical-line">常世姫は、慇懃に一別以来の挨拶を述べ、かつ行成彦を聖地の代理として、はるばる常世城に派遣されしその好意を感謝し、かつ八王大神はじめ我身の不覚より、千載一遇の大会議をして紛糾混乱の極に達せしめ、かつ聖地の使臣らの一片の誠意なく、権謀術数のみをこれ事とし、神格を傷つけたることを遺憾とするの旨を言葉さはやかに諄々として述べ立てたり。</p>
             <p class="ja-classical-line">広宗彦命は頭上より突然冷水を浴せかけられたるごとき心地して、答ふる言葉も知らざりき。姫はなほ語をついで、</p>
           </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">と言って席を譲り、かたわらに端坐した。常世姫は、何の憚ることもなく、</p>
+            <p class="ja-modern-p">「それでは高座を許されよ」</p>
+            <p class="ja-modern-p">と悠然として座に着いた。この時の姫の態度は、群がる雀の中に丹頂の鶴がただ一羽、天空より舞い下りたかのごとく、一種不可思議の威厳をもって、諸神司を圧倒してひれ伏せさせるように見えた。</p>
+            <p class="ja-modern-p">常世姫は、慇懃に別れて以来の挨拶を述べ、かつ行成彦を聖地の代理として、はるばる常世城に派遣されたその好意に感謝し、かつ八王大神をはじめ我が身の不覚から、千載一遇の大会議を紛糾混乱の極みに達せしめ、かつ聖地の使臣らに一片の誠意もなく、権謀術数のみを事として、神格を傷つけたことを遺憾とする旨を、言葉爽やかに懇々と述べ立てた。</p>
+            <p class="ja-modern-p">広宗彦命は頭上から突然冷水を浴びせかけられたような心地がして、答える言葉も知らなかった。姫はさらに言葉を継いで、</p>
+            </div>
+          </details>
         </div>
       </section>
 
@@ -323,16 +343,6 @@
           <p class="en-p">they reported, whereupon the complexions of Tokoyohime and Momogamihiko instantly changed color like a turkey. Ah, what will the outcome be? An earthquake, or the onslaught of a violent storm? It shall become clear in the next chapter.</p>
         </div>
         <div class="lang-ja">
-          <div class="ja-label">現代日本語訳</div>
-          <div class="ja-modern">
-            <p class="ja-modern-p">「私はあなたがご存じの通り、国祖国治立命の娘である稚桜姫命の第三女であり、この聖地で長く神務を執り神政をお補佐申し上げたことは、あなたの熟知されるところでしょう。私の身はたとえ海洋万里を隔てた常世の国にあるとしても、聖地を忘れたことは瞬く間もありません。今回の常世会議を、神定の聖地で開かなかったことは、第十八王大神をはじめ私の手落ちであることに相違ありませんが、今日の聖地の実況に照らし、深く思い、遠く配慮して聖地を避け、常世城で開催したのも、その真意は、聖地の混乱と紛糾の内情が天下に暴露されることを恐れたからです。それなのに、ただ単に私たち夫婦の野心を遂行するために、常世城に諸々の神司を集めてこれらを籠絡しようとしたという聖地の使臣らの言動は、実に乱暴の極みであり、天地の大神も、諸々の神人もともに相手にもしない大きな非行であると信じます。賢明なあなたは天使長としての資格をもって、私の陳述の詳細を国祖の神に進言してください。あなたが直接進言することをご承諾なさらないならば、私を大神の御前に導いてください」</p>
-            <p class="ja-modern-p">と進退きわまらせる言霊の猛烈な釘や鎹を打ち込まれた広宗彦は、思わず額を撫で、頭を掻き、太い息を漏らすばかりである。</p>
-            <p class="ja-modern-p">このとき桃上彦は猛然と立ち上がり、</p>
-            <p class="ja-modern-p">「兄上に一言申し上げよう」</p>
-            <p class="ja-modern-p">と威丈高に呼ばわるまさにその時、門の外が俄かに騒がしくなり、広若を先頭に二、三人の従臣が慌ただしく入って来て、広宗彦命に向かって、</p>
-            <p class="ja-modern-p">「行成彦の御一行が帰城されました」</p>
-            <p class="ja-modern-p">と報告したところ、常世姫と桃上彦の顔色は、七面鳥のようにさっと色を変えた。ああ、この結果はどうなるのか。地震か、暴風雨の襲来か、次の章で明白になるであろう。</p>
-          </div>
           <div class="ja-label ja-label-classical">原文（近代文語）</div>
           <div class="ja-classical">
             <p class="ja-classical-line">『妾は貴下の知らるるごとく、国祖国治立命の娘稚桜姫命の第三女にしてこの聖地に永く神務を執り神政を輔佐したてまつりたるは、貴下の熟知さるるところならむ。妾は身はたとへ海洋万里を隔てたる常世の国にありといへども、聖地を忘れたることは瞬く間もなし。今回の常世会議は、神定の聖地にて開かざりしは、第一八王大神はじめ妾の失態には相違なけれども、今日の聖地の実況に照し、深く思ひ、遠く慮りて聖地を避け、常世城に開催したるもその真意は、聖地の混乱紛糾の内情の天下に暴露せむことを恐れたればなり。しかるにただ単に吾々夫婦の野心遂行のために、常世城に諸神司を集めこれを籠絡せむとしたりとの聖地の使臣らの言は、実に乱暴の極にして天地の大神も、各神人も共に歯ひせざるの大非行なりと信ず。賢明なる貴下は天使長たるの資格をもつて、妾が陳述の詳細を国祖の神に進言されたし。貴下にして直接進言を肯ンじたまはざれば妾を大神の御前に導きたまへ』</p>
@@ -343,6 +353,22 @@
             <p class="ja-classical-line">『行成彦の御一行御帰城あり』</p>
             <p class="ja-classical-line">と報告したりけるに、常世姫、桃上彦の顔色は、七面鳥のごとくさつと色を変じたりける。アヽこの結果は如何。地震か暴風雨の襲来か、次章に明白とならむ。</p>
           </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">「私はあなたがご存じの通り、国祖国治立命の娘である稚桜姫命の第三女であり、この聖地で長く神務を執り神政をお補佐申し上げたことは、あなたの熟知されるところでしょう。私の身はたとえ海洋万里を隔てた常世の国にあるとしても、聖地を忘れたことは瞬く間もありません。今回の常世会議を、神定の聖地で開かなかったことは、第十八王大神をはじめ私の手落ちであることに相違ありませんが、今日の聖地の実況に照らし、深く思い、遠く配慮して聖地を避け、常世城で開催したのも、その真意は、聖地の混乱と紛糾の内情が天下に暴露されることを恐れたからです。それなのに、ただ単に私たち夫婦の野心を遂行するために、常世城に諸々の神司を集めてこれらを籠絡しようとしたという聖地の使臣らの言動は、実に乱暴の極みであり、天地の大神も、諸々の神人もともに相手にもしない大きな非行であると信じます。賢明なあなたは天使長としての資格をもって、私の陳述の詳細を国祖の神に進言してください。あなたが直接進言することをご承諾なさらないならば、私を大神の御前に導いてください」</p>
+            <p class="ja-modern-p">と進退きわまらせる言霊の猛烈な釘や鎹を打ち込まれた広宗彦は、思わず額を撫で、頭を掻き、太い息を漏らすばかりである。</p>
+            <p class="ja-modern-p">このとき桃上彦は猛然と立ち上がり、</p>
+            <p class="ja-modern-p">「兄上に一言申し上げよう」</p>
+            <p class="ja-modern-p">と威丈高に呼ばわるまさにその時、門の外が俄かに騒がしくなり、広若を先頭に二、三人の従臣が慌ただしく入って来て、広宗彦命に向かって、</p>
+            <p class="ja-modern-p">「行成彦の御一行が帰城されました」</p>
+            <p class="ja-modern-p">と報告したところ、常世姫と桃上彦の顔色は、七面鳥のようにさっと色を変えた。ああ、この結果はどうなるのか。地震か、暴風雨の襲来か、次の章で明白になるであろう。</p>
+            </div>
+          </details>
         </div>
       </section>
 

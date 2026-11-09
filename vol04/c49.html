@@ -133,33 +133,35 @@
       text-transform: uppercase;
       margin-bottom: 0.5rem;
     }
-    .ja-modern {
-      margin-bottom: 1.25rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px dashed var(--border);
-    }
-    .ja-modern-p {
-      font-size: 0.95rem;
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin-bottom: 0.75rem;
-      text-align: justify;
-    }
-    .ja-modern-p:last-child {
-      margin-bottom: 0;
-    }
-    .ja-label-classical {
-      color: #94a3b8;
-    }
+    .ja-classical { margin-bottom: 0.5rem; }
     .ja-classical-line {
-      font-size: 0.9rem;
-      color: #94a3b8;
-      line-height: 1.8;
-      margin-bottom: 0.5rem;
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
     }
-    .ja-classical-line:last-child {
-      margin-bottom: 0;
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
     }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
 
     .footer-nav {
       display: flex;
@@ -228,14 +230,6 @@
           <p class="en-p">Furthermore, unlike the sun, stars do not perform automatic tilting motions, and because the stars themselves shine stably like the moon, their five rays and six rays can be seen clearly from the Earth.</p>
         </div>
         <div class="lang-ja">
-          <div class="ja-label">現代日本語訳</div>
-          <div class="ja-modern">
-            <p class="ja-modern-p">「瑞月は虚空にかかり、万界の闇を照破す」</p>
-            <p class="ja-modern-p">というのは、神示の一端である。</p>
-            <p class="ja-modern-p">私（瑞月王仁）は前述のように、現代の盛んな学説に少しも拘泥せず、霊界にあって見聞きしたそのままを、出放題にしゃべるばかりである。これについては、満天下の智者や学者が邪説怪論として、攻撃の矢を向けてくるであろう。</p>
-            <p class="ja-modern-p">大空にかかる無数の星辰の中には、その光度に強弱があり、厚薄があって、その色光が一定していないのは、決して星の老若や大小によるのではない。その水火調節の分量、および金、銀、銅、鉄などの含有の多少の如何によって、さまざまに光の色が変わって見えるだけである。水の分量が多いときは白光を現し、火の分量が多い星は赤色を表す。ゆえに星の高低や位置によって、さまざまな光色を各自に発射している。星の光が五角星のように五光射形に地球から見えるのは火の分量が多い星であり、六角星のように六光射形に見えるのは水の分量が多い星である。火の字の各端に丸点を付してみると五つの丸点となる。五は天を象り、火を象る。また水の字の各端に丸点を付してみると、六つの丸点となる。六は水を象り、地を象る。ゆえに五光射星と六光射星は天上にあって、水火の含有量の多少を現しているのであります。</p>
-            <p class="ja-modern-p">また星は太陽のように自動傾斜運動をなさず、月球のように星自体が安定して光っているから、五光射や六光射がよく地球上から見ることができるのである。</p>
-          </div>
           <div class="ja-label ja-label-classical">原文（近代文語）</div>
           <div class="ja-classical">
             <p class="ja-classical-line">『瑞月憑虚空、照破万界暗』</p>
@@ -244,6 +238,20 @@
             <p class="ja-classical-line">大空に懸る無数の星辰の中には、其の光度に強弱あり、厚薄ありて、その色光一定して居ないのは、決して星の老若大小に依るのではない。その水火調節の分量及び金、銀、銅、鉄等の包含の多少の如何に由つて種々に光色が変つて見えるまでである。水の分量の多い時は白光を顕はし、火の分量の多い星は赤色を表はす。故に星の高低や位置に由つて種々の光色を各自に発射して居る。星の光の☆の如く五光射形に地球より見えるのは火の量分の多い星であり、〓__SP_015__の如く六光射形に見ゆるのは水の量分の多い星である。火の字の各端に○点を附して見ると〓__SP_016__のごとく五つの○点となる。五は天を象り、火を象る。また水の字の各端に○点を附して見ると、〓__SP_017__の如く六つの○点となる。六は水を象り、地を象る。故に五光射星と六光射星は天上にあつて水火の包含量の多少を顕はして居るのであります。</p>
             <p class="ja-classical-line">又星は太陽の如く、自動傾斜運動を為さず、月球のやうに星自体が安定して光つて居るから、五光射、六光射が良く地球上から見得らるるのである。</p>
           </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">「瑞月は虚空にかかり、万界の闇を照破す」</p>
+            <p class="ja-modern-p">というのは、神示の一端である。</p>
+            <p class="ja-modern-p">私（瑞月王仁）は前述のように、現代の盛んな学説に少しも拘泥せず、霊界にあって見聞きしたそのままを、出放題にしゃべるばかりである。これについては、満天下の智者や学者が邪説怪論として、攻撃の矢を向けてくるであろう。</p>
+            <p class="ja-modern-p">大空にかかる無数の星辰の中には、その光度に強弱があり、厚薄があって、その色光が一定していないのは、決して星の老若や大小によるのではない。その水火調節の分量、および金、銀、銅、鉄などの含有の多少の如何によって、さまざまに光の色が変わって見えるだけである。水の分量が多いときは白光を現し、火の分量が多い星は赤色を表す。ゆえに星の高低や位置によって、さまざまな光色を各自に発射している。星の光が五角星のように五光射形に地球から見えるのは火の分量が多い星であり、六角星のように六光射形に見えるのは水の分量が多い星である。火の字の各端に丸点を付してみると五つの丸点となる。五は天を象り、火を象る。また水の字の各端に丸点を付してみると、六つの丸点となる。六は水を象り、地を象る。ゆえに五光射星と六光射星は天上にあって、水火の含有量の多少を現しているのであります。</p>
+            <p class="ja-modern-p">また星は太陽のように自動傾斜運動をなさず、月球のように星自体が安定して光っているから、五光射や六光射がよく地球上から見ることができるのである。</p>
+            </div>
+          </details>
         </div>
       </section>
 
@@ -259,14 +267,6 @@
           <p class="en-p">Furthermore, the farther one departs south of the equator, the lower the Hokuto star and the Polar Star appear to be, eventually disappearing from sight; this is because it is related to the degree of tilt of the heavens and the earth, and to the position where one is located. This, too, will become clearly understood if one considers it while joining two umbrellas, upper and lower, and making them tilt and rotate.</p>
         </div>
         <div class="lang-ja">
-          <div class="ja-label">現代日本語訳</div>
-          <div class="ja-modern">
-            <p class="ja-modern-p">太陽もまた星のように、安定して自体の傾斜運動をしなかったなら、五光射体と見え、または六光射体と見えるのであるが、その自動的傾斜運動の激しさのために、その光射体が円く見えるのである。たとえば蓄音機の円盤に、いろいろな絵や文字を書き記しておいて、これを回してみると、そのいろいろな形の書画が盤と同様に、丸くなって見えるようなものである。</p>
-            <p class="ja-modern-p">また北斗星というのは、北極星に近い星であって、俗にこれを七剣星、または破軍星と称えられている。この七剣星はまた天の瓊矛とも言い、伊邪那岐の神、伊邪那美の神が天の浮橋に立って漂える泥海の地の世界を、塩古淤呂古淤呂にかき鳴らし給うた宇宙修理固成の神器である。今日もなお我が国より見る大空の中北部に位置を占めて、太古のまま日、地、月の安定を保維している。</p>
-            <p class="ja-modern-p">また北斗星は、円を描いて運行しつつあるように地上より見えているが、これは大空の傾斜運動と、大地の傾斜運動の作用によって、北斗星が運行するように見えるばかりである。万一北斗星が運行するようなことがあっては、天地の大変を来すのである。しかし他の星は、地上より見て、東天より西天に没するように見えるにもかかわらず、北斗星の運行軌道の、東西南北に頭を向けて、天界を循環するように見えるのは、その大空の中心と、大地の北中心に位置しているため、他の諸星と同じように見えないだけである。たとえば、雨傘を広げて、その最高中心部に北極星、やや下がって北斗星の絵を描き、その他の傘の各所一面に、星を描いて直立しその傘の柄を握り、東南西北と傾斜運動をさせてみると、北斗星は円を描いて、軌道を巡るように見え、広い端になるほどその描いた星が、東から西へ運行するように見える。これを見ても、北斗星が北極星を中心として円い軌道を運行するのでないことが分かるであろう。</p>
-            <p class="ja-modern-p">また太陽の光線の直射の中心は赤道であるが、大地の中心は北極すなわち地球である。大地の中心に向かって、大空の中心たる太陽が合わせ鏡のように位置を占めているとすれば、地球の中心たる北部の中津国すなわち我が日本が赤道でなければならぬと言う人があるが、それは太陽の傾斜運動と、地球の傾斜運動のある関係より、光線の中心が地球の中心すなわち北部なる我が日本に直射しないためである。</p>
-            <p class="ja-modern-p">また赤道を南に隔たるほど、北斗星や北極星がだんだんと低く見え、ついには見えなくなってしまうのは、大空と大地との傾斜の程度と、自分のいる地位とに関係するからである。これも雨傘を上と下と二本合わせて傾斜回転をさせながら考えてみると、その原因が判然と分かってくる。</p>
-          </div>
           <div class="ja-label ja-label-classical">原文（近代文語）</div>
           <div class="ja-classical">
             <p class="ja-classical-line">太陽もまた星の様に、安定し自体の傾斜運動をせなかつたら、五光射体と見え、又は六光射体と見えるのであるが、その自動的傾斜運動の激しきために、その光射体が円く見えるのである。譬へば蓄音機の円盤に、色々の画や文字を書き記しておいて、これを廻して見ると、その色々の形の書画が盤と同様に、丸くなつて見えるやうなものである。</p>
@@ -275,6 +275,20 @@
             <p class="ja-classical-line">また太陽の光線の直射の中心は赤道であるが、大地の中心は北極即ち地球である。大地の中心に向つて、大空の中心たる太陽が合せ鏡の如くに位置を占めて居るとすれば、地球の中心たる北部の中津国即ち我が日本が赤道でならねばならぬと云ふ人があるが、それは太陽の傾斜運動と、地球の傾斜運動の或る関係より、光線の中心が地球の中心即ち北部なる我日本に直射せないためである。</p>
             <p class="ja-classical-line">また赤道を南に距るほど、北斗星や北極星が段々と低く見え、終には見えなく成つて了ふのは、大空と大地の傾斜の程度と、自分の居る地位とに関係するからである。是も雨傘を上と下と二本合して傾斜廻転をなし乍ら考へて見ると、その原因が判然と分つて来る。</p>
           </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">太陽もまた星のように、安定して自体の傾斜運動をしなかったなら、五光射体と見え、または六光射体と見えるのであるが、その自動的傾斜運動の激しさのために、その光射体が円く見えるのである。たとえば蓄音機の円盤に、いろいろな絵や文字を書き記しておいて、これを回してみると、そのいろいろな形の書画が盤と同様に、丸くなって見えるようなものである。</p>
+            <p class="ja-modern-p">また北斗星というのは、北極星に近い星であって、俗にこれを七剣星、または破軍星と称えられている。この七剣星はまた天の瓊矛とも言い、伊邪那岐の神、伊邪那美の神が天の浮橋に立って漂える泥海の地の世界を、塩古淤呂古淤呂にかき鳴らし給うた宇宙修理固成の神器である。今日もなお我が国より見る大空の中北部に位置を占めて、太古のまま日、地、月の安定を保維している。</p>
+            <p class="ja-modern-p">また北斗星は、円を描いて運行しつつあるように地上より見えているが、これは大空の傾斜運動と、大地の傾斜運動の作用によって、北斗星が運行するように見えるばかりである。万一北斗星が運行するようなことがあっては、天地の大変を来すのである。しかし他の星は、地上より見て、東天より西天に没するように見えるにもかかわらず、北斗星の運行軌道の、東西南北に頭を向けて、天界を循環するように見えるのは、その大空の中心と、大地の北中心に位置しているため、他の諸星と同じように見えないだけである。たとえば、雨傘を広げて、その最高中心部に北極星、やや下がって北斗星の絵を描き、その他の傘の各所一面に、星を描いて直立しその傘の柄を握り、東南西北と傾斜運動をさせてみると、北斗星は円を描いて、軌道を巡るように見え、広い端になるほどその描いた星が、東から西へ運行するように見える。これを見ても、北斗星が北極星を中心として円い軌道を運行するのでないことが分かるであろう。</p>
+            <p class="ja-modern-p">また太陽の光線の直射の中心は赤道であるが、大地の中心は北極すなわち地球である。大地の中心に向かって、大空の中心たる太陽が合わせ鏡のように位置を占めているとすれば、地球の中心たる北部の中津国すなわち我が日本が赤道でなければならぬと言う人があるが、それは太陽の傾斜運動と、地球の傾斜運動のある関係より、光線の中心が地球の中心すなわち北部なる我が日本に直射しないためである。</p>
+            <p class="ja-modern-p">また赤道を南に隔たるほど、北斗星や北極星がだんだんと低く見え、ついには見えなくなってしまうのは、大空と大地との傾斜の程度と、自分のいる地位とに関係するからである。これも雨傘を上と下と二本合わせて傾斜回転をさせながら考えてみると、その原因が判然と分かってくる。</p>
+            </div>
+          </details>
         </div>
       </section>
 

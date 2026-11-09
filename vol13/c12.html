@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: The Pitfall [538] - Volume 13 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 13 Table of Contents</a>
+      <span>Part 3: Strange Tales of Exploration (第3篇 探険奇聞)</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 13 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: The Pitfall [538]</h1>
+      <p class="chapter-title-ja">第12章　陥穽〔538〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At the manifestation of the divine Lord Hinode-wake, Master Iwa, whose predicament had been exceeding perilous, was suddenly inspired with renewed vigor, and cried:</p>
+          <p class="en-p">Iwahiko: 'Behold, thou demonic sorceress of shape-shifting deceit, plead as thou wilt, all is vain! Now that the supreme general of the Anai apostles hath appeared, thy fortune is utterly run out! How sayest thou: is not the divine providence of the Great Deity meticulously prepared in every detail?'</p>
+          <p class="en-p">The maiden: 'Before so mighty a champion as thou, I must needs curl my tail and beat retreat! Wherefore I beg your leave to depart!'</p>
+          <p class="en-p">Iwahiko: 'Serves thee right, thou goblin serpent! Didst thou not confess with thine own mouth that thou wouldst curl thy tail?'</p>
+          <p class="en-p">The maiden: 'Ah, divine Lord Hinode-wake no Mikoto, how graciously hast thou come to receive me! Prithee, have no further dealings with an obstinate fool such as Master Iwa! For these are missionaries of false pretense—swayed by survival of the fittest, devouring the weak, utterly selfish, and inhumane...!'</p>
+          <p class="en-p">Iwahiko: 'Villain, mock me not! Swelling with conceit... what outrageous arrogance for a woman to utter!'</p>
+          <p class="en-p">The maiden: 'Fare ye well; rest at your leisure!'</p>
+          <p class="en-p">So saying, she slipped through a tiny aperture in the stone wall as effortlessly as wisp of smoke.</p>
+          <p class="en-p">Iwahiko: 'Lo, even as I foretold, she hath revealed the true nature of a shape-shifting goblin, escaping through a hole where even a man's neck could scarce enter! Hey, Taka, Oto, Ume, Kame, Koma! How say ye? Is not my clairvoyance wondrously grand? Master Taka was utterly duped, using polite phrases to her; but now the shallow bottom of thy discernment is laid bare!'</p>
+          <p class="en-p">Takahiko: 'Ha-ha-ha! Cease thy hollow swaggering, like a wind-up puppet!'</p>
+          <p class="en-p">Even as he spoke, a heavy, ominous clunk resounded.</p>
+          <p class="en-p">Iwahiko: 'Lo, a strange sound! What can this mean?'</p>
+          <p class="en-p">From without, the maiden suddenly thrust her pale face through the aperture in the rock-wall, saying:</p>
+          <p class="en-p">The maiden: 'Master Iwa, prithee tarry in this cavern at your ease for ten days, twenty days, yea, a hundred days! I have snapped the portal shut, so there is no fear of wicked intruders entering from without, nor is there any danger of ye escaping from within! Having naught else to offer, lick the oil from the rocks... and quietly perform your spiritual austerities! As for me, holding hands with Lord Hinode-wake... O-ho-ho-ho, how joyous! Rest at your ease! Farewell!'</p>
+          <p class="en-p">Iwahiko: 'A great disaster! That sound a moment ago was the shutting of the entrance portal! We cannot abide passively in such a plight!'</p>
+          <p class="en-p">The maiden: 'Though ye cannot abide, ye must needs abide, for there is no help for it! Nay, there is no way of exit! Yet according as ye conduct yourselves, perchance I may contrive some measure for your relief!'</p>
+          <p class="en-p">Iwahiko: 'Alas, what tyrannical coercion! Verily, men are never to be judged by appearances: wearing a gentle visage as though she would not harm a flea, yet her heart within is like that of a Yaksha! Hearken, companions, where there is an entrance, there must assuredly be an exit! Shall we not put our hands to this crevice and push and pull with all our might? That six-foot stalwart warriors should be locked away by a single frail damsel, pleading for pardon—'tis an unbearable disgrace! ...I pray thee, Lord Hinode-wake, wilt not thy divine self deliver us?'</p>
+          <p class="en-p">'Well met, Master Iwa, rest at your leisure! ...Fair maiden, shall we now take our journey together unto heaven?'</p>
+          <p class="en-p">The maiden: 'I thank thee with all my heart! If I may walk by thy side even for half an hour, I shall harbor not the slightest regret though I die! Ho-ho-ho!'</p>
+          <p class="en-p">Iwahiko: 'Lo, hark at her shameless blather: "If I can walk by thy side even for half an hour, I shall be content to die"—flaunting such wanton romance before our very faces, making mock of us! Ah, they have already departed whither! What an uncanny, eerie business!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">日の出別神の出現に、形勢もつとも危かりし岩公は、俄に元気づき、</p>
+            <p class="ja-classical-line">岩彦『サア妖怪変化の魔性の女、何と言つても、モウ駄目だ。三五教の宣伝使の大将が現はれた以上は、最早運の尽きだ。どうだ、神様の経綸と云ふものは、用意周到なものだぞ』</p>
+            <p class="ja-classical-line">女『妾は、あなたの様な強いお方には尾を巻きます。モウ是で御免を蒙ります』</p>
+            <p class="ja-classical-line">岩彦『態ア見やがれ、大蛇の化者奴が。尾を巻くと自白したぢやないか』</p>
+            <p class="ja-classical-line">女『ヤア日の出別命様、能う迎へに来て下さいました。岩サンのやうな分らずやは、今後は決して、係り合はない様にして下さい。此方は優勝劣敗、弱肉強食、身勝手千万な、非人道的、デモ宣伝使ですから………』</p>
+            <p class="ja-classical-line">岩彦『ヤイヤイ、馬鹿にするない、能いかと思つて…………、女に似合はぬ暴言を吐く奴だ』</p>
+            <p class="ja-classical-line">女『さようなら、ゆつくりと御休息なさいませ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、岩壁の細い穴から、スツと烟の様に脱けて了つた。</p>
+            <p class="ja-classical-line">岩彦『ヤア案に違はぬ妖怪変化の正体を顕はしよつて、アンナ首も這入らぬやうな穴から出て仕舞よつた。オイ鷹公、音公、梅公、亀、駒どうだ、俺の天眼通は偉いものだらう。鷹公の奴め、瞞されよつて、丁寧な言葉を使つて居たが斯うなる以上は貴様の眼力も底が見えた』</p>
+            <p class="ja-classical-line">鷹彦『アハヽヽヽ、弥之助人形の空威張りはやめてくれ』</p>
+            <p class="ja-classical-line">斯く云ふ中、ガクリと異様な音がした。</p>
+            <p class="ja-classical-line">岩彦『ヤア変な音がしたぞ、一体コラどうだ』</p>
+            <p class="ja-classical-line">女は外より白い顔を、岩壁の穴から、ニヨツと突出し、</p>
+            <p class="ja-classical-line">女『岩サン、マアマア十日も二十日も百日も、緩りこの岩窟に御逗留遊ばして下さいませ入口はポンと戸を閉めてありますから、外から悪者の這入る気づかひもなければあなた方が脱けて出る気遣ひも有りませぬよ。ナンにも献げるものはありませぬから岩の油なつと舐つて、…………ネー……温順しく御修行をなさいませ。妾は日の出別命サンと、手に手を把つて…………オホヽヽヽヽ、ア嬉し、マアゆつくりお寛ぎ遊ばせ。アバヨ』</p>
+            <p class="ja-classical-line">岩彦『ヤア大変だ、最前の音は、入口の戸を閉めよつたのだな。こりや斯うしては居られぬワイ』</p>
+            <p class="ja-classical-line">女『居られなくつても、斯うして居らねば仕方がありませぬよ。イヤ出方がありませぬワ。お前サン等の出方に依りては、此方にも亦、何とか仕方が有りませう』</p>
+            <p class="ja-classical-line">岩彦『イヤア、強圧的強談だ、人は見かけに依らぬ者、優しい顔をして、蚤一匹殺さぬやうな容子で、心の中は夜叉の様だ。オイ一統の者、入口があつたら、キツト出口が有るに違ひないぞ。この穴から一つ、手を掛て、引くなと、押すなとやつて見ようかい。六尺の男子が、繊弱き女の一人に監禁されて、どうぞ許して下さいなぞと、言はれた義理ぢやない。…………モシモシ日の出別命さま、貴神どうかして下さらないか』</p>
+            <p class="ja-classical-line">『ヤア、岩サンマアゆつくり御休息なさいませ、……ヤア女のお方、是から天国へでも旅行致しませうか』</p>
+            <p class="ja-classical-line">女『有難うございます、妾貴方と、たとへ半時でも、一緒に連つて歩かして貰へば、死んでも遺る事は有りませぬワ、ホヽヽヽ』</p>
+            <p class="ja-classical-line">岩彦『ヤアまた吐かしたりな吐かしたりな、「妾アンタと半時でも一緒に歩く事が出来れば、死んでも得心だ」とかナンとか吐かしよつて、仕様もないローマンスを人の前に展開させよつて、馬鹿にしてけつかる。オヽもう何処やら往つて仕舞よつた。エー怪体の悪い』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">日の出別神の出現に、形勢が最も危うかった岩公はにわかに元気づき、</p>
+              <p class="ja-modern-p">岩彦『さあ妖怪変化の魔性の女、何と言ってももう駄目だ。三五教の宣伝使の大将が現れた以上は、最早運の尽きだ。どうだ、神様の経綸というものは用意周到なものだぞ』</p>
+              <p class="ja-modern-p">女『妾は、貴方のような強いお方には尾を巻きます。もうこれで御免を被ります』</p>
+              <p class="ja-modern-p">岩彦『ざまあ見やがれ、大蛇の化け物奴が。尾を巻くと自白したじゃないか』</p>
+              <p class="ja-modern-p">女『やあ日の出別命様、よく迎えに来て下さいました。岩さんのような分からず屋は、今後は決して関わり合わない様にして下さい。こちらは優勝劣敗、弱肉強食、身勝手千万な、非人道的なインチキ宣伝使ですから………』</p>
+              <p class="ja-modern-p">岩彦『やいやい、馬鹿にするな、良い気になりおって…………、女に似合わぬ暴言を吐く奴だ』</p>
+              <p class="ja-modern-p">女『さようなら、ゆっくりとご休息なさいませ』</p>
+              <p class="ja-modern-p">と言いながら、岩壁の細い穴からスッと煙のように抜け出してしまった。</p>
+              <p class="ja-modern-p">岩彦『やあ案に相違なく妖怪変化の正体を現しおって、あんな首も入らぬような穴から出て行ってしまいおった。おい鷹公、音公、梅公、亀、駒、どうだ。俺の天眼通は偉いものだろう。鷹公の奴め、騙されおって丁寧な言葉を使って居たが、こうなる以上は貴様の眼力も底が見えたな』</p>
+              <p class="ja-modern-p">鷹彦『あははは、弥之助人形の空威張りはやめてくれ』</p>
+              <p class="ja-modern-p">こう言う中、ガクリと異様な音がした。</p>
+              <p class="ja-modern-p">岩彦『やあ変な音がしたぞ、一体これはどうだ』</p>
+              <p class="ja-modern-p">女は外から白い顔を岩壁の穴からニョキッと突き出し、</p>
+              <p class="ja-modern-p">女『岩さん、まあまあ十日も二十日も百日も、ごゆっくりこの岩窟にご逗留あそばして下さいませ。入口はポンと扉を閉めてありますから、外から悪者の入る心配も無ければ貴方方が抜け出る心配もありませんよ。何にも差し上げるものは無いから、岩の油でも舐めて、…………ねえ……大人しくご修行をなさいませ。妾は日の出別命さんと手に手を取り合って…………おほほほ、ああ嬉しい、まあごゆっくりお寛ぎあそばせ。あばよ』</p>
+              <p class="ja-modern-p">岩彦『やあ大変だ、先刻の音は入口の扉を閉めおったのだな。これはいこうしてはおられぬわい』</p>
+              <p class="ja-modern-p">女『居られなくっても、こうして居らねば仕方がありませんよ。いや出る方法がありませんわ。お前さん方の出方によっては、こちらにもまた何とか仕方がありましょう』</p>
+              <p class="ja-modern-p">岩彦『いやあ、強圧的な強談だ。人は見かけによらぬもの、優しい顔をして蚤一匹殺さぬような様子で、心の中は夜叉の様だ。おい一同の者、入口があったらきっと出口があるに違いないぞ。この穴から一つ、手を掛けて引くなり押すなりやってみようかい。六尺の男子が繊弱な女の一人に監禁されて、どうぞ許して下さいなどと言えた義理じゃない。…………もしもし日の出別命様、貴神どうにかして下さらないか』</p>
+              <p class="ja-modern-p">『やあ、岩さんまあゆっくりご休息なさいませ、……やあ女のお方、これから天国へでも旅行いたしましょうか』</p>
+              <p class="ja-modern-p">女『有難うございます。妾、貴方と例え半時でも一緒に連れて歩かせて貰えれば、死んでも心残りは有りませんわ、ほほほ』</p>
+              <p class="ja-modern-p">岩彦『やあまた吐かしおったな吐かしおったな、「妾アンタと半時でも一緒に歩く事が出来れば死んでも得心だ」とか何とか吐かしおって、仕様もないロマンスを人の前で展開させおって、馬鹿にしおる。おお、もう何処かへ行ってしまいおった。ええ気味の悪い』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahiko: 'Lo, while I sought to take her for mine own, the apostle Hinode-wake came from without and utterly carried her off! Ah, 'tis reckless abandonment...! Yet it cannot be helped; let me too slip forth through this hole, even as the woman did!'</p>
+          <p class="en-p">So saying, Takahiko, by wondrous divine arts, diminished his bodily stature, transformed himself into a small hawk, and swiftly glided through the aperture.</p>
+          <p class="en-p">Iwahiko: 'Behold, he hath escaped as well! Hey, friend Taka, ah, thou art a wondrous fellow! Lift up the stone lid of a moment ago and welcome us back to freedom!'</p>
+          <p class="en-p">Takahiko: 'Hark ye, Master Iwa and all your company! I shall henceforth journey unto heaven holding hands with the apostle Hinode-wake! Forgive me for displaying such romance before your eyes, but resignedly accept it as your karma! O-ho-ho-ho-ho, farewell!'</p>
+          <p class="en-p">Iwahiko: 'Villain Taka! What meanest thou by mimicking that goblin woman and acting so outrageously puffed up? Put thyself in our shoes!'</p>
+          <p class="en-p">Takahiko: '(In Gidayū puppet-theater cadence) "Thou art thou, and I am I! Take thy ease, take thy quiet rest for ten days, twenty days, a hundred days—yea, for a thousand, ten thousand years until ye turn to stone! Even as in the tale of Senmatsu: waiting a year, yet he appeareth not; waiting two years, yet he appeareth not; though they wait a thousand, ten thousand years, what tidings shall ever arrive? Doubtless the wives ye left behind in your homelands will weep and lament: 'When I think thereon, oh how pitiful! Are there neither gods nor buddhas in this world? Where and how fareth Master Iwa, upon whom I relied? Yearning and longing to behold him dawn and dusk, yet no tidings come save stony silence! Shedding tears like hail: in all the three thousand worlds, can there be any wretch so ill-fated as I? Ah, what shall I do, what shall I do...!'" Thus falleth the curtain on the tragedy—and ye are now sowing the seeds thereof! Prithee exert yourselves to sow your seeds well! A thousand years hence, someone may perchance come to worship with a votive bib, saying: 'In this cavern, Master Iwa, the stone-stubborn champion, turned to fossilized stone!' A man hath but one life, yet his name endureth forever—'tis a fine theme for future lore! Even as the Anai teachings declare: "When the seeds are sown and the seedlings sprout, then go ye forth; when harvest-time cometh, confer renown and restore them to their source!" Since even the Great Deity Kunitokotachi was imprisoned for long ages, 'twill be the glory of all ye missionaries to emulate the Deity and perform three thousand years of spiritual austerities! Ha-ha-ha, o-ho-ho-ho!'</p>
+          <p class="en-p">Iwahiko: 'What meaneth this? A single fellow laughing both like a man and like a woman, as though he were a demon!'</p>
+          <p class="en-p">Takahiko: ''Tis a matter of course! In the flesh a man, in the spirit a woman—the guardian deity of the henjō-nyoshi (transformed woman)!'</p>
+          <p class="en-p">Iwahiko: 'Confound thy transformed women and men! Cease babbling sacred incantations and open the rock forthwith! ...Hearken, gatekeeper, if thou lingerest, I shall strip thee of thine office!'</p>
+          <p class="en-p">Takahiko: 'Ho-ho-ho-ho! Master Iwa, whom wouldst thou dismiss? Imprisoned behind the rock-portal, thy face hath lost all authority! Thou art appointed an officer for life; prithee rest content in thy lifelong subterranean post!'</p>
+          <p class="en-p">Iwahiko: 'Setting aside all intricate disputes, open this cavern portal without more ado!'</p>
+          <p class="en-p">Takahiko: 'Nay, I am pressed for time; 'twas sport enough to tease ye thus far! It cannot be helped; I shall open it for you!'</p>
+          <p class="en-p">Iwahiko: 'If thou keepest us enclosed in this stone cave forever, darkness will reign day and night! Bring forth the goblin woman and bid her perform the sacred dance of Ame-no-Uzume no Mikoto! Else shall we not easily emerge!'</p>
+          <p class="en-p">Takahiko: 'Cease thine endless banter! Come forth swiftly, for the god Tajikarao shall now wrench open the rock-portal! Were it a radiant goddess of love like Amaterasu-Ōmikami, singing "Ah, how delightful, how clear and pure!", 'twould be worth opening; but to open upon a gallery of sour, wrinkled faces like a gathering of five hundred Arhats is wholly devoid of joy! Yet companions on the road must share mutual compassion; wherefore out of mercy shall I unbar the gate!'</p>
+          <p class="en-p">Iwahiko: 'Hold, pause! Forget not to spread forth myriad delicacies of sea, river, mountain, and field upon the eight-legged offering tables! Dost thou imagine we shall come forth so lightly without mirror, without sword, and without the five-hundred jewel strings? Pile high the fragrant fruits upon wooden altars like towering pyramids, master the architecture of divine offerings, chant the Amatsu-Norito without blemish, and present the great sacred staff!'</p>
+          <p class="en-p">Takahiko: 'What nonsense babblest thou? Can I alone perform the eightfold feats of the Thousand-Armed Kannon? If thou babblest further, remain imprisoned in the rock-chamber for thousands of ages forever!'</p>
+          <p class="en-p">Iwahiko: 'Nay, we remit the offerings! Only open the portal! Left alone in this demon cavern, thou wouldst suffer bitter loneliness!'</p>
+          <p class="en-p">Takahiko: 'It cannot be helped!'</p>
+          <p class="en-p">Exerting all his might, he pushed violently against the stone wall. The stone portal proved lighter than anticipated; carried forward by his momentum, Takahiko tumbled headlong into the cavern, striking his knees and crying 'Ouch!' as he rubbed them. In that swift instant, the five men dashed out into the corridor and slammed the stone gate shut from without.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鷹彦『ヤア折角俺の所有にしようと思つて居つたのに、外部から日の出別の宣伝使がやつて来て、サツパリ横領して了つた。エー自棄だ………と云つて、どうも仕方がないワ、俺も一つ、あの女ぢやないが、この穴から脱けてやらうかい』</p>
+            <p class="ja-classical-line">と言ひ乍ら、鷹彦は、神変不思議の術を以て、身体を縮小し、小さい鷹となつてスツと脱け出した。</p>
+            <p class="ja-classical-line">岩彦『ヤアまた出よつた、オイ鷹公、アヽ貴様は偉い奴だ。最前の石蓋を揚げて、吾々を旧の所へ歓迎するのだぞ』</p>
+            <p class="ja-classical-line">鷹彦『コレコレ岩サン御一統様へ、妾は是より日の出別の宣伝使様と、手に手を執つて天国の旅行を致します。コンナローマンスをお目にかけて済まないが、是も因縁づくぢやと諦めて下しやンせ、オホヽヽヽヽ、アバヨ』</p>
+            <p class="ja-classical-line">岩彦『ヤイヤイ鷹の奴、ナンだ、化女の真似をしよつて、ソンナ能い気な事かい。俺達の身にもなつて見よ』</p>
+            <p class="ja-classical-line">鷹彦『（義太夫口調）「お前はお前、妾は妾、マアマアゆつくりと、十日も二十日も百日も、千年も万年も化石になる迄ゆつくり御逗留遊ばせや。千松ぢやないが、一年待つてもまだ見えぬ、二年待つてもまだ見えぬ、千年万年待つたとて、何の便りがあろかいな、と郷里に残つた、貴様たちの女房が嘸や嘆くであらう。思へば思へば気の毒やな、神や仏もなきものか、力に思ふ岩サンは、何処にどうして御座るやら、会ひたい見たいと明け暮に、こがれ慕ふて居るものを、何の便りも梨の礫、礫の様な涙こぼして、三千世界の世の中に妾ほど因果は世にあらうか、アーどうしようぞいなどうしようぞいなア……」と悲劇の幕が下りる、その種蒔だ。マア精出して、種でも蒔いて置くが能からう、千年ほど先へ行つた時に、この岩窟の中に岩公といふ岩固男が化石して…………と云つて、涎掛でも持つて参拝する奴があるかも知れやしないぞ。人は一代名は末代だ、是も良い話の種だ。種蒔いて苗が立ちたら出て行くぞよ、刈込みになりたら手柄をさして、元へ戻らすぞよ………と三五教の教にある通りだ。国治立の大神さまでさへ、永らく押込められて御座つた位だから、先づ神様にあやかつて、三千年の修行をなさるが、宣伝使各位の光栄だらう。アハヽヽヽ、オホヽヽヽ』</p>
+            <p class="ja-classical-line">岩彦『ナアンダ、一人居つて男と女の笑ひ様をしよつて、化物みたよな奴だナ』</p>
+            <p class="ja-classical-line">鷹彦『定つた事だ、肉体は男で霊は女だ、変性女子の守護神だ』</p>
+            <p class="ja-classical-line">岩彦『エー、変性女子も男子もあつたものかい。遍照金剛吐さずに、早く開岩せぬか…………オイ門番奴が、愚図々々いたして居ると、免職をさそか』</p>
+            <p class="ja-classical-line">鷹彦『ホヽヽヽヽ、岩さま、免職さすとはソラ誰に、………あなたは岩戸に押込められて既に既に面色なしだ、終身官だな、終身此処に、晏如として、就職なさるが宜しからう』</p>
+            <p class="ja-classical-line">岩彦『複雑なる問題は、一切総括して、兎も角この岩窟を開いて呉れたがよからうぞ』</p>
+            <p class="ja-classical-line">鷹彦『イヤー、先が急く、モウ是丈イチヤつかして遺れば充分だ、エー仕方がない、開けてやらうかい』</p>
+            <p class="ja-classical-line">岩彦『何時までもこの方を岩戸に押込めておくと、咫尺暗澹昼夜を弁ぜずだ。化の女を呼んで来て鈿女命の俳優技を見せて呉れぬか。さうでないと、容易にお出ましにならぬぞ』</p>
+            <p class="ja-classical-line">鷹彦『減らず口を叩くない。サア手力男の神さまが、岩戸を開くから、サツサと出て来い。天照大神様のやうな奇麗な「あな面白や、あなさやけおけ」と言つた様な、愛の女神なれば、開きごたへがあるが、この岩戸開きは、五百羅漢の陳列会を見るよなシヤツ面の渋紙さま計りだから、開きごたへがないワ。併し乍ら、旅は道づれ世は情だ。情を以て開扉してやらう』</p>
+            <p class="ja-classical-line">岩彦『オツト待つた、海河山野、種々の美味物を八足の机代に置足らはして、献つる事を忘れなよ…………出いと云つたつて、鏡もなければ劔もなし、五百津美須麻琉の珠も無くして、さう易々とお出ましになると思ふか。香具の果物でも、木机にピラミツドの様に横山の如く置足らはし、御供物の建築法を能く心得て、粗相のない様に、天津祝詞を奏上し、太玉串を奉れ』</p>
+            <p class="ja-classical-line">鷹彦『何を吐しよるのだ。千手観音の様に、俺一人でソンナ八人芸が出来るかい。愚図々々いふと、千代に八千代に永久に、岩戸の中の閉門だぞ』</p>
+            <p class="ja-classical-line">岩彦『ヤア、もうお供物は免除してやらう。兎も角、開けば良いのだ。貴様もコンナ魔窟に単身置かれては、大に寂寥を感ずるだらう』</p>
+            <p class="ja-classical-line">鷹彦『エー仕方がない』</p>
+            <p class="ja-classical-line">と言ひ乍ら、力を籠めて、岩壁をウンと押した。思つたよりも岩の戸は軽く、勢余つて鷹彦は、岩戸の中へ又もや飛込み、膝頭を打つて『アイタヽ』と撫で擦つて居る。その間に五人は、逸早く表に脱け出し、外より石門をピシヤツと閉ぢた。</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">鷹彦『やあ、折角俺の所有にしようと思って居ったのに、外部から日の出別の宣伝使がやって来て、さっぱり横領してしまった。ええ自暴自棄だ………と言って、どうも仕方がないわい。俺も一つ、あの女じゃないが、この穴から抜け出ようかい』</p>
+              <p class="ja-modern-p">と言いながら、鷹彦は神変不思議の術をもって身体を縮小し、小さい鷹となってスッと抜け出した。</p>
+              <p class="ja-modern-p">岩彦『やあ、また出おった。おい鷹公、ああ貴様は偉い奴だ。先刻の石の蓋を持ち上げて、我々を元の所へ歓迎するのだぞ』</p>
+              <p class="ja-modern-p">鷹彦『これこれ岩さんご一統様へ、妾はこれより日の出別の宣伝使様と手に手を取って天国の旅行をいたします。こんなロマンスをお目に掛けて相済みませんが、これも因縁づくじゃと諦めて下しゃんせ、おほほほほ、あばよ』</p>
+              <p class="ja-modern-p">岩彦『やいやい鷹の奴、何だ、化け女の真似をしおって、そんな良い気な事があるかい。俺達の身にもなってみよ』</p>
+              <p class="ja-modern-p">鷹彦『（義太夫口調）「お前はお前、妾は妾、まあまあゆっくりと、十日も二十日も百日も、千年も万年も化石になるまでゆっくりご逗留遊ばせや。千松じゃないが、一年待ってもまだ見えぬ、二年待ってもまだ見えぬ、千年万年待ったとて何の便りがあろうかいな、と郷里に残った貴様達の女房がさぞや嘆くであろう。思えば思えば気の毒やな、神や仏も無きものか、力に思う岩さんは何処にどうしてござるやら、会いたい見たいと明け暮れに焦がれ慕うて居るものを、何の便りも梨の礫、礫のような涙こぼして、三千世界の世の中に妾ほど因果は世にあろうか、ああどうしようぞいなどうしようぞいなあ……」と悲劇の幕が下りる、その種蒔きだ。まあ精を出して種でも蒔いて置くが良かろう、千年ほど先へ行った時に、この岩窟の中に岩公という岩固男が化石して…………と言って、涎掛けでも持って参拝する奴があるかも知れやしないぞ。人は一代名は末代だ、これも良い話の種だ。種蒔いて苗が立ちたら出て行くぞよ、刈り込みになりたら手柄をさして、元へ戻らすぞよ………と三五教の教えにある通りだ。国治立の大神様でさえ永らく押し込められてござった位だから、先ず神様にあやかって、三千年の修行をなさるが宣伝使各位の光栄だろう。あははは、おほほほ』</p>
+              <p class="ja-modern-p">岩彦『何だ、一人で男と女の笑い方をしおって、化物みたいな奴だな』</p>
+              <p class="ja-modern-p">鷹彦『決まった事だ、肉体は男で霊は女だ、変性女子の守護神だ』</p>
+              <p class="ja-modern-p">岩彦『ええい、変性女子も男子もあったものかい。遍照金剛を吐かずに早く開岩せぬか…………おい門番奴、愚図愚図いたして居ると免職さすぞ』</p>
+              <p class="ja-modern-p">鷹彦『ほほほほ、岩さま、免職さすとはそら誰に、………貴方は岩戸に押し込められて既に既に面目なしだ、終身官だな、終身ここに晏如として就職なさるが宜しかろう』</p>
+              <p class="ja-modern-p">岩彦『複雑なる問題は一切総括して、ともかくこの岩窟を開いてくれた方が良かろうぞ』</p>
+              <p class="ja-modern-p">鷹彦『いや、先を急ぐ。もうこれだけイチャつかしてやれば充分だ。ええい仕方がない、開けてやろうかい』</p>
+              <p class="ja-modern-p">岩彦『いつまでもこの方を岩戸に押し込めておくと、咫尺暗澹として昼夜を弁ぜずだ。化けの女を呼んで来て鈿女命の神楽舞を見せてくれないか。そうでなければ容易にお出ましにならぬぞ』</p>
+              <p class="ja-modern-p">鷹彦『減らず口を叩くな。さあ手力男の神様が岩戸を開くから、さっさと出て来い。天照大神様のような綺麗な「あな面白や、あなさやけおけ」と言ったような愛の女神ならば開き甲斐があるが、この岩戸開きは五百羅漢の陳列会を見るような面構えの渋紙面ばかりだから、開き甲斐が無いわ。しかしながら旅は道連れ世は情けだ。情けをもって開扉してやろう』</p>
+              <p class="ja-modern-p">岩彦『おっと待った、海河山野の種々の美味物を八足の机代に置き足らはして献る事を忘れるなよ…………出よと言ったって、鏡も無ければ剣も無し、五百箇美須麻流の珠も無くして、そう易々とお出ましになると思うか。非時香菓でも木机にピラミッドの様に横山の如く置き足らはし、御供物の建築法をよく心得て、粗相の無い様に天津祝詞を奏上し、大玉串を奉れ』</p>
+              <p class="ja-modern-p">鷹彦『何を吐しおるのだ。千手観音の様に俺一人でそんな八人芸が出来るかい。愚図愚図言うと千代に八千代に永久に岩戸の中の閉門だぞ』</p>
+              <p class="ja-modern-p">岩彦『やあ、もうお供物は免除してやろう。ともかく開けば良いのだ。貴様もこんな魔窟に単身置かれては大いに寂寥を感ずるだろう』</p>
+              <p class="ja-modern-p">鷹彦『ええ仕方がない』</p>
+              <p class="ja-modern-p">と言いながら、力を籠めて岩壁をうんと押した。思ったよりも岩の扉は軽く、勢い余って鷹彦は岩戸の中へまたもや飛び込み、膝頭を打って『痛たた』と撫で擦っている。その間に五人は逸早く表へ抜け出し、外から石門をピシャリと閉じた。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Iwahiko: 'Behold, the tables are turned! Now Futodama no Mikoto, Koyane no Mikoto, and all the five accompanying deities are gathered without! How fareth it, Lord Takahiko?'</p>
+          <p class="en-p">Takahiko: 'Change changeth all in this fleeting world! Now art thou bound to chant the Amatsu-Norito with deep reverence before the rock-portal! Ha-ha-ha!'</p>
+          <p class="en-p">Otohiko: 'Hey, Iwahiko, 'tis an idle waste of precious time to squander our hours in such banter! Advance without a moment's delay!'</p>
+          <p class="en-p">Kamehiko: 'Hold, friend Oto! What of Takahiko enclosed within the rock?'</p>
+          <p class="en-p">Otohiko: 'What mattereth a single soul? Let him be!'</p>
+          <p class="en-p">Iwahiko: 'Ha-ha, capital, capital!'</p>
+          <p class="en-p">Thrusting his blackened face through the rock-aperture as before, he mocked:</p>
+          <p class="en-p">Iwahiko: 'Ho-ho-ho-ho! Hark ye, Master Taka, we five shall now explore this cavern, subdue every gourd-faced demon of crooked mischief through Kototama, and return crowned as gods of victory and glory! Tarry quietly within, craning thy neck in expectation! Farewell!'</p>
+          <p class="en-p">Takahiko: 'Ha-ha! What babblest thou? Master Taka, as thou didst behold a moment ago, is a wondrous deity who can emerge even through the eye of a needle!'</p>
+          <p class="en-p">So saying, he once again transformed himself into a hawk, flew forth through the aperture, and before their eyes his frame expanded mightily, spreading wings exceeding ten feet across, beating them with a thunderous clatter.</p>
+          <p class="en-p">Iwahiko: 'Lo, what magnificent vigor! If that be so, Master Taka can do good service! Wilt thou not glide through the air after that maiden and capture her for us? The right of ownership belongeth to Master Iwa; prithee arrange it to my satisfaction!'</p>
+          <p class="en-p">Takahiko: 'Because thou babblest endless nonsense and lingerest over idle jests, we were abandoned by the divine Lord Hinode-wake! Up, up! Advance at full speed through the subterranean corridors; fall not behind!'</p>
+          <p class="en-p">And Takahiko sprinted ahead, while the five had no choice but to follow in pursuit. Suddenly, they ran up against a second impenetrable wall of rock.</p>
+          <p class="en-p">Takahiko: 'Alack, a great impasse! Though the worldly realm be at a standstill, to be brought up against so solid a rock is past enduring! We must devise some remedy!'</p>
+          <p class="en-p">Iwahiko: 'Come, open an extraordinary assembly!'</p>
+          <p class="en-p">Kamehiko: 'Now that the doctrine of the uselessness of parliaments hath arisen, 'tis somewhat behind the times! Who ever heard of submitting so absurd a motion? Utter not things that belong to men of the twentieth century, five hundred thousand years in the future!'</p>
+          <p class="en-p">Komahiko: 'Lo, is it not said that extremity findeth a way? Look to the side! A broad, smooth avenue hath been carved out through the rock!'</p>
+          <p class="en-p">All together: 'Verily, 'tis there, 'tis there! Come, let us ascend these steps!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">岩彦『サア入れ替はりだ、今度は、太玉命も、児屋根命も、何もかも、五伴男揃うたのだ。オイ鷹津神さま、どうだ』</p>
+            <p class="ja-classical-line">鷹彦『代れば変る世の中だ。サア貴様、岩戸の前に天津祝詞を畏み畏み奏上するのだぞ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">音彦『オイ岩公、コンナ洒落ばつかりに、貴重な光陰を濫費しては詰まらぬぢやないか。一時も早く前進だ』</p>
+            <p class="ja-classical-line">亀彦『オイオイ音公待つた、この岩窟の中の鷹彦は、どうするのだ』</p>
+            <p class="ja-classical-line">音彦『ナニ構ふものか、人間一人位、どうなつたつて放つとけ』</p>
+            <p class="ja-classical-line">岩彦『アハ、面白い面白い』</p>
+            <p class="ja-classical-line">と言ひ乍ら、以前の岩穴から、黒い顔をちよつと出し、</p>
+            <p class="ja-classical-line">岩彦『ホヽヽヽヽ、モシモシ鷹サンとやら、妾は是より五人連この岩窟を探険し、お前さまの様な瓢箪面の曲津神を、片つ端から言向和し、勝利光栄の神となつて帰つて来る迄、千年でも万年でも此処に晏如として、堅磐常磐に鎮座ましませや、ホヽヽヽ』</p>
+            <p class="ja-classical-line">鷹彦『アハヽヽ、何を吐しよるのだ。鷹さまは、貴様も最前見て居ただらう、針の穴からでもお出ましになる、不思議な神様だよ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、再び鷹となつて穴より飛出し、見る見る身体膨張し、一丈余りの羽を拡げて、バタバタと羽ばたきした。</p>
+            <p class="ja-classical-line">岩彦『ヤア偉い元気だナア。オイオイ斯うなれば、鷹さまも話せるワイ。今の美人の後を一つ、空中滑走を行つて、捕獲して来て呉れないか。所有権は岩さまにあるのだから、都合によれば、賃貸借ぐらゐは許可してやるワ』</p>
+            <p class="ja-classical-line">鷹彦『貴様は仕様もない事を云ひ、永らく洒落るものだから、肝腎の日の出別命さまに放つとけぼりを喰つたのだ。サーサ是から全速力を出して、岩窟内の駆歩だ、落伍せない様に…………気を付けツ、右へ廻れオイ、一二三……』</p>
+            <p class="ja-classical-line">と鷹公は駆出した。五人は是非なく追跡する、ピタツと行当つた第二の岩壁、</p>
+            <p class="ja-classical-line">鷹彦『ヨー、コラ大変だ。如何に行詰りの世の中だと云つても、斯う岩と行詰つては仕方がない。ナンとか一つ善後策を講究せなくてはなるまい』</p>
+            <p class="ja-classical-line">岩彦『サア臨時議会の開会だツ』</p>
+            <p class="ja-classical-line">亀彦『議会無用論の持上つた今日は、チツト遅臭いぞ。ソンナ珍聞漢な発議をする奴が、何処にあるかい。五十万年の将来の二十世紀とやらの人間の吐く様な事を云ふものぢやないワ』</p>
+            <p class="ja-classical-line">駒彦『ヤア窮すれば達すと云ふ事がある。オイオイ貴様、一寸横の方を見い。坦々たる大道が開鑿されて有るぢやないか』</p>
+            <p class="ja-classical-line">一同『ヨー有る有る、サア是からこの階段を上らうかい』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">岩彦『さあ入れ替わりだ。今度は太玉命も児屋根命も何もかも、五伴男が揃ったのだ。おい鷹津神さま、どうだ』</p>
+              <p class="ja-modern-p">鷹彦『代われば変わる世の中だ。さあ貴様、岩戸の前に天津祝詞を畏み畏み奏上するのだぞ、あははは』</p>
+              <p class="ja-modern-p">音彦『おい岩公、こんな冗談ばかりに貴重な光陰を浪費しては詰まらないじゃないか。一時も早く前進だ』</p>
+              <p class="ja-modern-p">亀彦『おいおい音公待った、この岩窟の中の鷹彦はどうするのだ』</p>
+              <p class="ja-modern-p">音彦『何構うものか、人間一人位どうなったって放っておけ』</p>
+              <p class="ja-modern-p">岩彦『あは、面白い面白い』</p>
+              <p class="ja-modern-p">と言いながら、以前の岩穴から黒い顔をちょっと出し、</p>
+              <p class="ja-modern-p">岩彦『ほほほほ、もしもし鷹さんとやら、妾はこれより五人連れでこの岩窟を探検し、お前様のような瓢箪面の曲津神を片っ端から言向け和し、勝利光栄の神となって帰って来るまで、おとなしくそこで首を長くして待ってお出でなさいましね。あばよ』</p>
+              <p class="ja-modern-p">鷹彦『あはは、何を吐しよるのだ。鷹さまは貴様も先刻見て居ただろう、針の穴からでもお出ましになる不思議な神様だよ』</p>
+              <p class="ja-modern-p">と言いながら、再び鷹となって穴より飛び出し、見る見る身体が膨張し、一丈余りの羽を拡げてバタバタと羽ばたきした。</p>
+              <p class="ja-modern-p">岩彦『やあ偉い元気だなあ。おいおいこうなれば鷹さまも話せるわい。今の美人の後を一つ空中滑走を行って、捕獲して来てくれないか。所有権は岩さまにあるのだから、都合の良いように取り計らって貰いたい』</p>
+              <p class="ja-modern-p">鷹彦『貴様は仕様もない事を言い、永らく冗談を言うものだから、肝心の日の出別命さまに放っておかれたのだ。さあさあこれより全速力を出して岩窟内の駆け足だ、落伍しないようにしっかり追いついて来いよ』</p>
+              <p class="ja-modern-p">と鷹公は駆け出した。五人は是非なく追跡する。ピタッと行き当たった第二の岩壁、</p>
+              <p class="ja-modern-p">鷹彦『よう、こりゃ大変だ。如何に行き詰まりの世の中だと言っても、こう岩と行き詰まっては仕方がない。何とか一つ善後策を講究しなくてはなるまい』</p>
+              <p class="ja-modern-p">岩彦『さあ臨時議会の開会だっ』</p>
+              <p class="ja-modern-p">亀彦『議会無用論の持ち上がった今日はちょっと遅いぞ。そんな珍紛漢紛な発議をする奴が何処にあるかい。五十万年の将来の二十世紀とやらの人間の吐く様な事を言うものじゃない』</p>
+              <p class="ja-modern-p">駒彦『やあ窮すれば通ずという事がある。おいおい貴様、ちょっと横の方を見い。坦々たる大道が開鑿されて有るじゃないか』</p>
+              <p class="ja-modern-p">一同『おお有る有る、さあこれからこの階段を上ろうかい』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kamehiko: 'Hold, tarry! If ye climb too high, ye will fall again!'</p>
+          <p class="en-p">Takahiko: 'What if we fall? There is scarce danger of falling into heaven! 'Tis leagues apart from splashing into a well, as thou didst! Lo, here too is a path; which way ought we to take?'</p>
+          <p class="en-p">Iwahiko: 'It needeth no saying! Plain to the eye, we ought to take the broad and bright path!'</p>
+          <p class="en-p">Kamehiko: 'A new way and an old way are prepared! If ye take the new way, 'twill seem easy at first, but at the end the road will vanish and ye will be forced to turn back to the start!'</p>
+          <p class="en-p">Otohiko: 'What babblest thou? 'Tis not of such roads that the god speaketh! The Deity speaketh of the way of divine doctrine! What a thick-skulled fellow thou art!'</p>
+          <p class="en-p">Kamehiko: 'Though it be somewhat dark, I shall take the narrow lower way!'</p>
+          <p class="en-p">Iwahiko: 'Do as thou pleasest! Those of dark heart ever desire dark places! ...Brethren, which way choose ye?'</p>
+          <p class="en-p">Otohiko, Komahiko, Takahiko, and Umehiko cried with one voice:</p>
+          <p class="en-p">'The broad way, the broad way!'</p>
+          <p class="en-p">And the five ascended the rock stairs. Kamehiko alone, taking the lower, darker path, sang missionary hymns as he advanced some four or five chō, when suddenly from overhead four or five black shapes plunged downward and fell splash into a dark pit.</p>
+          <p class="en-p">Kamehiko: 'Lo, what is this? Have lions fallen from above? Preparing pit after pit in such a tunnel of rock... If Taka and Iwa were here, they would raise a clamor to open an extraordinary assembly...!'</p>
+          <p class="en-p">Craning his neck and minding his footing, he peered timidly into the well. From within the depths came a voice:</p>
+          <p class="en-p">Iwahiko: 'Lo, art thou not friend Kame? Wilt thou not save me?'</p>
+          <p class="en-p">Kamehiko: 'That voice belongeth to Master Iwa!'</p>
+          <p class="en-p">Iwahiko: 'Yea, verily! 'Tis Master Iwa, Master Taka, Master Oto, Master Ume, and Master Koma!'</p>
+          <p class="en-p">Kamehiko: 'Though ye plead for rescue, there is no way to lay a hand to it! Cry not so loudly, but wait! I shall now convene an extraordinary assembly, and upon its deliberation decree whether to save ye or not!'</p>
+          <p class="en-p">Iwahiko: 'Mock us not! Thou seekest revenge for a moment ago!'</p>
+          <p class="en-p">Kamehiko: 'Even so! If ye climb too high, ye are cast headlong into the bottom of hell! How say ye: will ye banish all pride and perform sincere repentance?'</p>
+          <p class="en-p">Iwahiko: 'Repentance? How could there be repentance in those who have already repented to the uttermost? Repentance is a term necessary for imperfect creatures like thee; from our dictionary it hath been utterly expunged! Pull us up forthwith!'</p>
+          <p class="en-p">So saying, the five climbed up laughing uproariously.</p>
+          <p class="en-p">Kamehiko: 'What! Ye are not wet in the least!'</p>
+          <p class="en-p">Takahiko: ''Twas a simple matter! When we tumbled into the pit, Master Taka spread both wings wide and covered the whole mouth of the well! Then the four little sparrows descended and alighted upon me, wherefore none was wet!'</p>
+          <p class="en-p">Iwahiko: 'To call us sparrows is somewhat cruel, is it not, brethren Ume, Oto, and Koma...?'</p>
+          <p class="en-p">Takahiko: 'Yet I am the savior of your lives! Whatsoever I call ye, bear it with patience, for endurance is the mother of success! Ha-ha!'</p>
+          <p class="en-p">Iwahiko: 'This is the second pitfall! What evil deeds the demon gods may plot ahead, none can tell! We cannot walk heedlessly! Fortunately, can we not use Master Taka as an airship and travel through the air?'</p>
+          <p class="en-p">Takahiko: 'This airship is reserved solely for the service of Lord Hinode-wake and the divine goddess! I am sorry for ye, but alas, it cannot be! Ha-ha-ha!'</p>
+          <p class="en-p">At that moment, from within the dim tunnel ahead, the strange voice of a missionary hymn resounded.</p>
+          <p class="en-p">All together: 'Hark, 'tis a familiar hymn! What can it be?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">亀彦『マア待て待て、あまり高い所へ上ると、又落ちるぞ』</p>
+            <p class="ja-classical-line">鷹彦『落ちたつて良いぢやないか、滅多に天に墜落する虞はないワ、貴様の様に、井戸に着水するのとは天地の相違だ。ヨー此処にも道がある、何方の道を行つたら宜からうかナア』</p>
+            <p class="ja-classical-line">岩彦『いはいでも定つて居る。一目瞭然、広い道の明るい道へ行けば良いぢやないか』</p>
+            <p class="ja-classical-line">亀彦『新道と旧道と二路拵へてあるぞよ。新道へ行けば、初めは楽な様なが、往き行つた所で道が無くなりて又元の所へ後戻りを致さねばならぬぞよ』</p>
+            <p class="ja-classical-line">音彦『何を吐しよるのだ。ソンナ道の事ぢやないワ。神様は教の道の事を仰有るのだぞ。頭脳の悪い奴だナ』</p>
+            <p class="ja-classical-line">亀彦『俺は少し暗くつても、細路の下道を進んで行かうと思ふ』</p>
+            <p class="ja-classical-line">岩彦『勝手にせい。心の暗い奴は、暗い所に行きたがるものだ………オイ皆の連中、どちらにするか』</p>
+            <p class="ja-classical-line">音、駒、鷹、梅一度に、</p>
+            <p class="ja-classical-line">『広い道広い道』</p>
+            <p class="ja-classical-line">と五人は、岩路の階段を上つて行く、亀公は唯一人、やや暗き、低き路を宣伝歌を歌ひ乍ら、四五丁許り進み行くと、忽ち頭上より、黒い影四つ五つ落下し来り、暗黒なる陥穽にゾボゾボゾボと音を立てて落込んだ。</p>
+            <p class="ja-classical-line">亀彦『ヤア何だ、上から獅子でも落ちて来よつたのかナ、コンナ岩窟のトンネルの中に又しても又しても、陥穽を拵へよつて………鷹公、岩公が此処に居つたら、また「議会の開会だ」などと洒落よるのだけれど、俺一人では、議会を開く訳にも行かず、困つた事だ。彼奴、何処へ行きよつたのか知らぬ。何は兎も有れ、何者だか一つトツクリと正体を見届けてやらう』</p>
+            <p class="ja-classical-line">と首を伸ばして、足許に気を付け乍ら、怖さうに覗き込んだ。井戸の中より、</p>
+            <p class="ja-classical-line">岩彦『ヤア貴様は亀公ぢやないか、俺を助けて呉れぬかい』</p>
+            <p class="ja-classical-line">亀彦『さういふ声は岩公だナ』</p>
+            <p class="ja-classical-line">岩彦『オーさうだ、岩サンに鷹サン、音サン梅サン、駒サンだ』</p>
+            <p class="ja-classical-line">亀彦『助けて呉と言つたつて、どうにも斯うにも、手の着け様が無いぢやないか。マアさう喧し云はずに待つて居れ。今臨時議会を開いて見るから、開会の上で助けるか助けぬかが決定るのだ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">岩彦『馬鹿にしよるナ、最前の敵討ちをしようと思つてけつかるナ』</p>
+            <p class="ja-classical-line">亀彦『さうだから、あまり高上りすると、逆様に地獄の底へ落されるのだよ。どうだ、是で慢神心をスツパリと取り去つて改心を致すか』</p>
+            <p class="ja-classical-line">岩彦『改心致すも致さぬも有つたものかい。改心のし切つた者に改心が有つてたまるかい。改心と云ふ事は、貴様のやうな不完全な人間に必要な言葉だ。吾等に対しては、辞典から改心の二字を除去すべきものだ………大きに憚りさま、エライご心配を掛けました。此処にもどうやら、立派な段梯子が懸つて居ります。アハ……』</p>
+            <p class="ja-classical-line">と言ひ乍ら、五人はゲラゲラ笑ひ笑ひ上つて来た。</p>
+            <p class="ja-classical-line">亀彦『ナンダ、一寸も濡れて居らぬぢやないか』</p>
+            <p class="ja-classical-line">鷹彦『きまつた事だい、井戸の底へ転落した時に、この鷹サンが、両翼をパツと開いて、井戸一面を閉塞したのだ。そこへ四匹の小雀が下りて来て、ポンと止まつたものだから濡れさうな筈があるかい』</p>
+            <p class="ja-classical-line">岩彦『小雀とは、チト残酷ぢやないか。ナア梅、音、駒の御連中………』</p>
+            <p class="ja-classical-line">鷹彦『それでも生命の親だ。ナント云はれたつて、チツト位は隠忍するのだ。忍耐は成功の基礎だから、アハヽヽ』</p>
+            <p class="ja-classical-line">岩彦『第二の………これは陥穽だ。是から前途に、ドンナ事を悪神の奴、企んで居るか分つたものぢやない。うつかりと歩けたものぢやないワ。幸ひ此処に、鷹サンを飛行船にして、吾々五人が操縦する事にしたら、都合が良いぢやないか』</p>
+            <p class="ja-classical-line">鷹彦『この飛行船は、日の出別様とあの女神様との御用だ。お気の毒さま、お生憎さまだ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">この時前方の薄暗き隧道の中より、怪しき宣伝歌の声聞え来たる。</p>
+            <p class="ja-classical-line">一同『ヤア、聞き覚えのある宣伝歌だ、ハテナ』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">亀彦『まあ待て待て、あまり高い所へ上るとまた落ちるぞ』</p>
+              <p class="ja-modern-p">鷹彦『落ちたって良いじゃないか、滅多に天に墜落する虞は無いわ。貴様のように井戸に着水するのとは天地の相違だ。おおここにも道がある、どちらの道を行ったら良かろうかな』</p>
+              <p class="ja-modern-p">岩彦『言わでも定まっている。一目瞭然、広い道の明るい道へ行けば良いじゃないか』</p>
+              <p class="ja-modern-p">亀彦『新道と旧道と二路拵えてあるぞよ。新道へ行けば初めは楽なようだが、行き着いた所で道が無くなりてまた元の所へ後戻りを致さねばならぬぞよ』</p>
+              <p class="ja-modern-p">音彦『何を吐しよるのだ。そんな道の事じゃないわ。神様は教えの道の事を仰るのだぞ。頭脳の悪い奴だな』</p>
+              <p class="ja-modern-p">亀彦『俺は少し暗くても、細路の下道を進んで行こうと思う』</p>
+              <p class="ja-modern-p">岩彦『勝手にせい。心の暗い奴は暗い所に行きたがるものだ………おい皆の連中、どちらにするか』</p>
+              <p class="ja-modern-p">音、駒、鷹、梅一度に、</p>
+              <p class="ja-modern-p">『広い道、広い道』</p>
+              <p class="ja-modern-p">と五人は岩路の階段を上って行く。亀公は唯一人、やや暗い低い路を宣伝歌を歌いながら四五町ばかり進み行くと、忽ち頭上より黒い影が四つ五つ落下して来て、暗黒なる落とし穴にドブンと落ちた。</p>
+              <p class="ja-modern-p">亀彦『やあ何だ、上から獅子でも落ちて来おったのかな、こんな岩窟のトンネルの中に又しても又しても落とし穴を拵えおって………鷹公、岩公がここに居ったら、また「議会の開会」と騒ぎ立てるだろうに………』</p>
+              <p class="ja-modern-p">と首を伸ばして足元に気を付けながら、怖そうに覗き込んだ。井戸の中より、</p>
+              <p class="ja-modern-p">岩彦『やあ貴様は亀公じゃないか、俺を助けてくれないかい』</p>
+              <p class="ja-modern-p">亀彦『そういう声は岩公だな』</p>
+              <p class="ja-modern-p">岩彦『おおそうだ、岩さんに鷹さん、音さん梅さん、駒さんだ』</p>
+              <p class="ja-modern-p">亀彦『助けてくれと言ったって、どうにもこうにも手の着けようが無いじゃないか。まあそう喧しく言わずに待って居れ。今、臨時議会を開いてみるから、開会の上で助けるか助けぬか決議してやるよ』</p>
+              <p class="ja-modern-p">岩彦『馬鹿にしおるな、先刻の敵討ちをしようと思ってけつかるな』</p>
+              <p class="ja-modern-p">亀彦『そうだから、あまり高上りすると逆さまに地獄の底へ落とされるのだよ。どうだ、これで慢心をすっぱりと取り去って改心を致すか』</p>
+              <p class="ja-modern-p">岩彦『改心致すも致さぬもあったものかい。改心のし切った者に改心が有ってたまるかい。改心ということは貴様のような不完全な人間に必要な言葉だ。我等に対しては辞典から抹殺されているのだ。早く引き上げぬか』</p>
+              <p class="ja-modern-p">と言いながら、五人はゲラゲラ笑いながら上がって来た。</p>
+              <p class="ja-modern-p">亀彦『何だ、一寸も濡れて居らぬじゃないか』</p>
+              <p class="ja-modern-p">鷹彦『決まった事だい、井戸の底へ転落した時にこの鷹さんが両翼をパッと開いて井戸一面を閉塞したのだ。そこへ四匹の小雀が下りて来てポンと止まったものだから濡れる気づかいは無いのだ』</p>
+              <p class="ja-modern-p">岩彦『小雀とはちょっと残酷じゃないか。なあ梅、音、駒のご連中………』</p>
+              <p class="ja-modern-p">鷹彦『それでも生命の親だ。何と言われたって少しくらいは隠忍するのだ。忍耐は成功の基礎だから、あはは』</p>
+              <p class="ja-modern-p">岩彦『第二の………これは落とし穴だ。これから前途にどんな事を悪神の奴、企んでいるか分かったものじゃない。うっかりと歩けたものじゃないわ。幸いここに鷹さんを飛行船にして、空中旅行をやって行こうじゃないか』</p>
+              <p class="ja-modern-p">鷹彦『この飛行船は日の出別様とあの女神様との御用だ。お気の毒さま、お生憎さまだ、あははは』</p>
+              <p class="ja-modern-p">この時、前方の薄暗い隧道の中から怪しい宣伝歌の声が聞こえて来た。</p>
+              <p class="ja-modern-p">一同『やあ、聞き覚えのある宣伝歌だ、はてな』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: The Mysterious Maiden [537]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: The Celestial Vessel Jōten-maru [539]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

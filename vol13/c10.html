@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 10: The Cavern [536] - Volume 13 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 13 Table of Contents</a>
+      <span>Part 3: Strange Tales of Exploration (第3篇 探険奇聞)</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 13 &bull; Chapter 10</span>
+      <h1 class="chapter-title-en">Chapter 10: The Cavern [536]</h1>
+      <p class="chapter-title-ja">第10章　巌窟〔536〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Intent upon retrieving the arrow loosed by Hinode-wake no Mikoto, Takahiko, Iwahiko, and their companions parted the reed-plains, vying with one another to be foremost in renown.</p>
+          <p class="en-p">Iwahiko: 'He loosed but a single reed-arrow into this boundless wilderness of reeds and bade us fetch it; but search as we may, if it cannot be found beneath heaven's stars, 'tis an utter impossibility! Sinking into the abyss of utter despair—surely 'tis such an affliction as this!'</p>
+          <p class="en-p">Kamehiko: 'To search for a solitary reed-arrow across this limitless moor is a labor wholly impossible! 'Tis far more hopeless than striving to strike down the stars of the firmament with a bamboo pole!'</p>
+          <p class="en-p">Takahiko: 'Ye blow faint-hearted whines again! Behold, this is the very testing of our spirits! No matter what betides, we must yield meek and unquestioning obedience to the word of the apostle Hinode-wake!'</p>
+          <p class="en-p">Komahiko: 'Is not his bidding beyond all reason?'</p>
+          <p class="en-p">Takahiko: 'We ought ever to consider that parents, masters, and teachers will enjoin things hard to bear. Yet never would parents or teachers cast us into the abyss merely to shout in cruel triumph. To the uttermost end, in perfect faith unto death, we must seek the arrow!'</p>
+          <p class="en-p">Komahiko: 'What a vexing arrow-hunt! A plight wherein one falls into utter bewilderment! Hey, look! A great terror approacheth—fire is blazing toward us! With fire set to so dense a wilderness, we cannot endure! Verily, was not the apostle Hinode-wake utterly reckless? I suspected all along that he was deceitful!'</p>
+          <p class="en-p">Takahiko: 'We have fallen into the snare of the evil deities who seek to cast us into the lowest hell! Nay, let us abandon despair; let us rage and storm and battle fiercely even until we be consumed by the flames!'</p>
+          <p class="en-p">Even as he spoke, fire roared fiercely from all four quarters and all eight winds, and billows of dense black smoke enveloped them all. Umehiko and Otohiko cried aloud:</p>
+          <p class="en-p">'Oh, the heat! Oh, the choking smoke! What anguish! What shall we do?'</p>
+          <p class="en-p">Takahiko: 'Do not utter faint-hearted cries! Is it not said that if the mind be extinguished, even fire itself is cool? In such an hour, water must confront fire! We shall extinguish the raging inferno with the precious, inexhaustible water of God that never drieth! This is the crucible of our spiritual trial!'</p>
+          <p class="en-p">Even as he uttered these words, the flames swept close beneath their very feet. Brought to bay and bereft of escape, they clustered together, embracing one another and stamping their feet in despair. Suddenly, with a thunderous crumble, the earth collapsed, and the whole company plunged deep into the soil. Above them, the voracious fire swept roaring past without mercy.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">日の出別の射放ちたる矢を拾ふべく、鷹彦、岩彦一行は、先を争うて我一に功名せむと、萱野を分けて進み行く。</p>
+            <p class="ja-classical-line">岩彦『この萱野原へ萱製の矢をたつた一本位射放つて、それを拾つて来いと云うたつて、天然坊の星あたり、何だけ探しても無ければもう駄目だ。失望落胆の淵に沈むとは、コンナことを云ふのだらうかい』</p>
+            <p class="ja-classical-line">亀彦『際限もなきこの萱野原を、僅に一本の萱製の矢を探すと云つたつて、到底不可能的大事業だ、竿竹をもつて空の星をがらつよりも頼りない話ぢやないか』</p>
+            <p class="ja-classical-line">鷹彦『また弱音を吹きよる。これが身魂の審めだ。何でも構はない、日の出別の宣伝使のおつしやる通り、唯々諾々として遵奉するのだよ』</p>
+            <p class="ja-classical-line">駒彦『あまり無理ぢやないか』</p>
+            <p class="ja-classical-line">鷹彦『親と主人と師匠は無理を云ふものだと思うて居れば好いのだ。滅多に吾々を親や師匠が窮地に陥没さして、痛快を叫ぶと云ふやうな事はなさる気遣ひがない。何処までも徹頭徹尾命のまにまに矢探しをするのだよ』</p>
+            <p class="ja-classical-line">駒彦『ヤヤコシイ、矢探しだナ。矢矢暫く思案に暮れにけりの為体だ。オイオイ大変だ、火が燃えて来るぞ。これだけ生へ茂つた野原に火をつけられ、吾々は耐つたものぢやないワ、本当に日の出別の宣伝使は無茶ぢやないか、矢張り彼奴は怪しいと思つて居たよ』</p>
+            <p class="ja-classical-line">鷹彦『吾々を奈落の底に陥穽すると云ふ悪神の企みに乗つたのだ。エヽもう自棄糞だ、焼け死する処まで荒れて、荒れて、暴れ廻してやらうかい』</p>
+            <p class="ja-classical-line">斯くいふ折しも、火は四方八方より燃え猛り、黒煙濛々として一同を包んで了つた。梅公、音公両人は、</p>
+            <p class="ja-classical-line">『暑いワイ、煙たいワイ、苦しい。如何しよう』</p>
+            <p class="ja-classical-line">鷹彦『また弱音を吹くな、心頭を滅すれば火もまた涼しと云ふ事があるわ。斯ういふ時に、火に対する水だ。乾く事なく尽る事なき神の尊き水をもつて、猛火を消すのだ。これが吾々の身魂の試錬だよ』</p>
+            <p class="ja-classical-line">かく言ふ折しも火は足許へ燃えて来た。進退谷まつた一同は一処に集まり互に抱きついて地団駄踏んで居る。忽ち地はバサリと陥落し、土中に一行は陥つた。火はその上を何の容赦もなく咆哮しながら燃え過ぎにけり。</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">日の出別命が射放たれた矢を拾おうと、鷹彦、岩彦の一行は先を争って我先に手柄を立てようと、茅野を掻き分けて進んで行く。</p>
+              <p class="ja-modern-p">岩彦『この茅野原へ茅製の矢をたった一本射放って、それを拾って来いと言われたって、天然坊の星あたり、いくら探しても無ければもう駄目だ。失望落胆の淵に沈むとは、こんな事を言うのだろうかい』</p>
+              <p class="ja-modern-p">亀彦『際限もないこの茅野原で、僅か一本の茅製の矢を探すと言ったって、到底不可能な大事業だ。竿竹で空の星を突き落とすよりも頼りない話じゃないか』</p>
+              <p class="ja-modern-p">鷹彦『また弱音を吐きおる。これが身魂の試練だ。何でも構わない、日の出別の宣伝使のおっしゃる通り、唯々諾々として従うのだよ』</p>
+              <p class="ja-modern-p">駒彦『あまり無理じゃないか』</p>
+              <p class="ja-modern-p">鷹彦『親と主人と師匠は無理を言うものだと思って居ればよいのだ。滅多に我々を親や師匠が窮地に陥れて、痛快だと叫ぶような事はなさる心配がない。どこまでも徹頭徹尾、言いつけのままに矢探しをするのだよ』</p>
+              <p class="ja-modern-p">駒彦『ややこしい矢探しだな。ややしばらく思案に暮れ果てた様相だ。おいおい大変だ、火が燃えて来るぞ。これだけ生い茂った野原に火をつけられ、我々は堪ったものじゃないわ。本当に日の出別の宣伝使は無茶じゃないか、やはりあいつは怪しいと思って居たよ』</p>
+              <p class="ja-modern-p">鷹彦『我々を奈落の底に陥れようという悪神の企みに乗ってしまったのだ。ええい、もう自暴自棄だ、焼け死ぬところまで荒れて、荒れて、暴れ回ってやろうかい』</p>
+              <p class="ja-modern-p">こう言う折しも、火は四方八方から燃え猛り、黒煙が濛々として一同を包んでしまった。梅公、音公の二人は、</p>
+              <p class="ja-modern-p">『暑いよ、煙たいよ、苦しい。どうしよう』</p>
+              <p class="ja-modern-p">鷹彦『また弱音を吐くな、心頭を滅却すれば火もまた涼しという事があるわ。こういう時に、火に対する水だ。乾く事なく尽きる事なき神の尊き水をもって、猛火を消すのだ。これが我々の身魂の試練だよ』</p>
+              <p class="ja-modern-p">こう言う折しも、火は足元へ燃え寄せて来た。進退窮まった一同は一箇所に集まり、互いに抱きついて地団駄を踏んでいる。たちまち大地はバサリと崩れ落ち、土中に一行は落ち込んだ。火はその上を何の容赦もなく咆哮しながら燃え過ぎて行った。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Iwahiko: 'Ah, now I understand! That the Deity will save us at the ninety-nine-percent mark of utter despair—this was the meaning thereof! When he spoke of manifesting the Fire-Rat to guide us, I thought a real scarlet rodent would appear, but behold, it was a colossal, wondrous fire-rat! Wherever the flame passeth, the burnt embers turn black as charcoal; hence did he call it the Fire-Rat!'</p>
+          <p class="en-p">Takahiko: 'Ho, your spiritual perception is remarkably swift! Yet hark, does not the ground still sink beneath us? To plunge to the very bottom of hell would be a grievous plight; unless it ceaseth soon, excess will be as grievous as insufficiency!'</p>
+          <p class="en-p">From an unseen quarter came the sound: 'Ku-ku-ku-ku-ku!'</p>
+          <p class="en-p">All together: 'Behold, is not that the squeaking of a rat? Let us go toward that sound!'</p>
+          <p class="en-p">Following the sound, the company advanced. Verily, an ancient rat whose fur bore a scarlet tinge appeared before them, bearing the reed-arrow in its mouth, and uttered:</p>
+          <p class="en-p">'Within 'tis hollow, without 'tis narrow and choked!'</p>
+          <p class="en-p">Having so cried, it vanished from sight. The moment the company stamped their feet, a resonant thud echoed, and they plunged into a deep pit. Looking round, they beheld six cavernous portals opening before them.</p>
+          <p class="en-p">Takahiko: 'Behold, 'tis here, 'tis here! Hinode-wake no Mikoto is wondrously great! The spot where the arrow fell was indeed the entrance to this cavern! How exceedingly meticulous are the demons; having fashioned an entrance in such an obscure depth, none would ever divine it! Come, as promised, let each of us take a separate passage and set forth to explore!'</p>
+          <p class="en-p">The six men each vanished into one of the passages. They were stone tunnels of lofty ceiling and ample breadth. Wondrous to behold, despite being subterranean, the interior of the cavern was exceedingly bright. Each of the six men hastened down his chosen portal.</p>
+          <p class="en-p">Hinode-wake's Fire-Rat hath appeared upon the desolate moor, / Casting celestial light upon the hearts of men who wander astray.</p>
+          <p class="en-p">Here and there, air vents were pierced through the stone walls connecting passage to passage. Having advanced some two or three chō along the six tunnels, they arrived at a spacious hall. Beyond this place, a massive stone portal was firmly shut, forbidding further progress. The six men, without prior accord, gathered together in one spot;</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">岩彦『アヽこれで分つた。九分九厘叶はぬと云ふ処で神様が助けてやると仰有るのは茲の事だ。火鼠を現はして教へてやるなぞと、本当の赤い鼠が出るのかと思つて居たれば途方途徹もない大きな火鼠だつた。火の通つた跡は焼け殻が皆黒くなつて、炭になりよる。それで火鼠と仰有つたのだな』</p>
+            <p class="ja-classical-line">鷹彦『ホー中々貴様は悟りがよいワイ。何だ未だブクブクするぢやないか。地獄の底まで陥没しても困る、好加減に止めて貰はぬと、過ぎたるは猶及ばざるが如しだ』</p>
+            <p class="ja-classical-line">何処ともなく、『ククヽヽヽ』</p>
+            <p class="ja-classical-line">一同『ヤア、あれは鼠の鳴き声ぢやないか。彼方の方に往つて見ようぢやないか』</p>
+            <p class="ja-classical-line">と声を尋ねて一同は進んで行く。果して毛の緋色を帯びた古鼠が萱の矢を喰はへてこの処に現はれ、</p>
+            <p class="ja-classical-line">『内はホラホラ、外はスブスブ』</p>
+            <p class="ja-classical-line">と鳴いたきり姿を消して了つた。一同はドンと足踏する途端、ズドンと音がして深い穴に落ち込んだ。見れば其処には六個の巌窟が開いて居る。</p>
+            <p class="ja-classical-line">鷹彦『ヤア此処だ此処だ、日の出別命もなかなか偉いワイ、矢の落ちた処が矢張この巌窟の入り口だつた。悪魔と云ふものは、本当に注意周到なものだ、コンナ処に入口を拵へておけば誰も気の付く筈はない、至れり尽せりだ。サアこれから約束の通り各自分担して探険に出かけるのだ』</p>
+            <p class="ja-classical-line">六人は各一個の穴に姿を隠した。比較的高く横巾の広い巌穴である。どうしたものかこの巌窟の中は地中にも拘はらず非常に明い。六人は各一つの穴を目蒐けて進み行く。</p>
+            <p class="ja-classical-line">日の出別の火鼠荒野に現はれて　　迷へる人の心を照せり</p>
+            <p class="ja-classical-line">時々穴と穴との巌壁に風通しが開けてある。六人は六個の穴を二三町進むと其処に非常に広い場所がある。之より先は堅固なる巌の戸が鎖されて進む事が出来ない。六人は期せずして一処に集まり、</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">岩彦『ああ、これで分かった。九分九厘駄目だという土壇場で神様が助けてやると仰るのは、この事だ。火鼠を現して教えてやるなどと言われたので、本当の赤い鼠が出るのかと思って居たら、とてつもなく大きな火鼠だった。火の通った後は焼け殻が皆黒くなって、炭になりおる。それで火鼠と仰ったのだな』</p>
+              <p class="ja-modern-p">鷹彦『ほう、中々貴様は悟りがよいわい。何だ、まだ地面がブクブクと沈むじゃないか。地獄の底まで落ち込んでも困る、いい加減に止めてもらわぬと、過ぎたるは猶及ばざるが如しだ』</p>
+              <p class="ja-modern-p">どこからともなく、『ククククク』</p>
+              <p class="ja-modern-p">一同『やあ、あれは鼠の鳴き声じゃないか。あちらの方へ行ってみようじゃないか』</p>
+              <p class="ja-modern-p">と声を尋ねて一同は進んで行く。果たして毛に緋色を帯びた古鼠が茅の矢をくわえてこの場所に現れ、</p>
+              <p class="ja-modern-p">『内はホラホラ、外はスブスブ』</p>
+              <p class="ja-modern-p">と鳴いたきり姿を消してしまった。一同がドンと足踏みした途端、ズドンと音がして深い穴に落ち込んだ。見ればそこには六個の巌窟が開いている。</p>
+              <p class="ja-modern-p">鷹彦『やあ、ここだここだ。日の出別命もなかなか偉いわい。矢の落ちた所がやはりこの巌窟の入り口だった。悪魔というものは本当に注意周到なものだ、こんな所に入り口を拵えておけば誰も気が付くはずはない、至れり尽くせりだ。さあ、これから約束の通り各自手分けして探検に出掛けるのだ』</p>
+              <p class="ja-modern-p">六人はそれぞれ一個の穴に姿を隠した。比較的高く横幅の広い岩穴である。どうしたものか、この巌窟の中は地中にも拘わらず非常に明るい。六人は各々一つの穴を目がけて進んで行く。</p>
+              <p class="ja-modern-p">日の出別の火鼠荒野に現はれて　　迷へる人の心を照せり</p>
+              <p class="ja-modern-p">時々、穴と穴との岩壁に風通しの隙間が開けてある。六人は六個の穴を二三町進むと、そこに非常に広い場所がある。これより先は堅固なる巌の扉が閉ざされて進むことが出来ない。六人は示し合わせたわけでもなく一箇所に集まり、</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahiko: 'Well met, brethren! How did it fare with ye? Did anything strange occur?'</p>
+          <p class="en-p">Kamehiko: 'It did, it did! Great marvels occurred!'</p>
+          <p class="en-p">Takahiko: 'What was it that occurred?'</p>
+          <p class="en-p">Kamehiko: 'There were myriad peepholes on both sides of the stone wall!'</p>
+          <p class="en-p">Takahiko: 'What nonsense art thou babbling with such pompous gravity? Those are merely airholes common to all the caverns!'</p>
+          <p class="en-p">Iwahiko: 'This is wholly devoid of satisfaction! A battle without an adversary is impossible! What, demons dwelling in the Cavern of Demons? 'Tis an utter mockery! Wherefore is it said that worldly rumors are never to be trusted!'</p>
+          <p class="en-p">Takahiko: 'Nay, the decisive battle beginneth now! This is merely the prologue. Is it not reported to extend tens of leagues in depth? Let us push against this stone wall with all our might! Since 'tis said there are many doors, ah, indeed, let us push against them! Up, all of ye, charge in general assault!'</p>
+          <p class="en-p">And they pushed with all their strength. The stone upon which Kamehiko thrust opened as effortlessly as a curtain; carried forward by his momentum, he plunged headlong into the cavernous opening and fell splash into a bottomless pit of unknown fathoms.</p>
+          <p class="en-p">Kamehiko: 'Alack, a great disaster! Will ye not save me, fellows?'</p>
+          <p class="en-p">The five men gingerly crossed the edge of the pit step by step, clutching firmly with their fingers, and said:</p>
+          <p class="en-p">'Ah, an unforeseen disgrace! Verily, one can never let down one's guard for a single instant!'</p>
+          <p class="en-p">Takahiko: 'We must somehow contrive to rescue friend Kame!'</p>
+          <p class="en-p">Kamehiko, from the bottom of the well:</p>
+          <p class="en-p">'Hey, hey, can ye not do something for me?'</p>
+          <p class="en-p">Otohiko: 'Thy very name is Tortoise; thou oughtest to be master of the water! Rest at ease and drink thy fill of water! In sudden extremity, good wisdom doth not readily flow; wherefore by the side of this well let us convene an informal assembly and hold a ballot to decide whether to save thee or not to save thee! Prithee, be patient until the session is adjourned!'</p>
+          <p class="en-p">Kamehiko: 'How canst thou utter such callous nonsense? Pull me up without a moment's delay!'</p>
+          <p class="en-p">Iwahiko: 'Hold thy noisy tongue! How can we lay a hand to this situation?'</p>
+          <p class="en-p">Kamehiko: 'Lay a hand? Far from laying a hand, my feet, my head, my whole body are submerged!'</p>
+          <p class="en-p">Takahiko: 'Come, come, the extraordinary assembly is opened! Now for the election of the speaker! Whom shall we appoint as floor leader?'</p>
+          <p class="en-p">Kamehiko: 'Ah, what exasperation! This is no jesting matter! I am shivering with bitter cold; my whole body and all else will freeze solid!'</p>
+          <p class="en-p">Iwahiko: 'Though thou freezest, it cannot be helped; we must proceed by majority rule! Dividing the five into two factions, three against two! Takahiko shall serve as Speaker!'</p>
+          <p class="en-p">Takahiko: 'Honored gentlemen, I thank ye for attending despite the long journey! In convening this extraordinary session, we face an issue of the utmost urgency; at this hour of national peril, I pray for your deliberate and prudent counsel. The necessity of submitting this bill is, as ye know, that a certain bungling emissary, formerly of the Ural teachings, named Kame, set forth to explore the Cavern of Demons, yet through utter short-sightedness and folly fell into an unforeseen pit and plunged deep into a well, where his life hangeth by a thread! I earnestly pray that ye squeeze forth the cherished treasures of your knowledge to devise a measure for his deliverance and exert your uttermost efforts!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鷹彦『ヤア皆の連中、如何だつた。別に変つた事は無かつたか』</p>
+            <p class="ja-classical-line">亀彦『あつた、あつた、大にあつた』</p>
+            <p class="ja-classical-line">鷹彦『何があつたのだ』</p>
+            <p class="ja-classical-line">亀彦『巌壁の両方に覗き穴が沢山あつたのだ』</p>
+            <p class="ja-classical-line">鷹彦『何を云ふのだ、大層らしい。どの窟にも共通的に空気穴が開いて居るのだよ』</p>
+            <p class="ja-classical-line">岩彦『之では約らぬぢやないか、相手なしの戦ひは出来やしない。何だ、醜の厳窟に化物が居るナンテ人を馬鹿にして居る。それだから世間の噂は当にならぬといふのだ』</p>
+            <p class="ja-classical-line">鷹彦『イヤ、これからが正念場だよ。ここはホンの序幕だ。何十里とも知れぬ程あると云ふぢやないか、どこぞこの岩壁を力一杯押して見ようか。何でも沢山の戸があると云ふ事だから、アヽさうだ、一つ押してやらう。オイ皆一度に総攻撃だ』</p>
+            <p class="ja-classical-line">と。力一杯ウンと押した。亀公の押した岩は、暖簾を押すやうに手もなく開いて、亀の勢あまつて巌穴の中へ飛び込んだ途端に幾丈とも知れぬ陥穽にザブンと音を立てて落ち込んだ。</p>
+            <p class="ja-classical-line">亀彦『ヤヤ大変だ。皆の奴俺を助けて呉れぬかい』</p>
+            <p class="ja-classical-line">五人は穴の傍を一足、一足、指に力を入れながらソツと向ふに渡り、</p>
+            <p class="ja-classical-line">『アヽ、思はぬ不覚を取つた。これだから気許しは一寸も出来ないと云ふのだ』</p>
+            <p class="ja-classical-line">鷹彦『何とかして亀サンを救うて上げて遣らねばなるまい』</p>
+            <p class="ja-classical-line">亀、井戸の底より、</p>
+            <p class="ja-classical-line">『オイ、オイ、何とかして呉れないか』</p>
+            <p class="ja-classical-line">音彦『お前は名から亀サン、水の中は得意だらう、マア悠乎と水でも呑んで寛ぎたまへ。突差の場合よい智慧も出ないから此井戸の傍で山の神ぢやないが、井戸端会議を開会してお前を助けるか、助けないかといふ決議をやるのだ。マアマア、閉会になる迄辛抱して呉れ』</p>
+            <p class="ja-classical-line">亀彦『ソンナ気楽な事を云うて居れるかい、一時も早く救ひ上げて呉れ』</p>
+            <p class="ja-classical-line">岩彦『エヽ、矢釜敷い云うな、手の付けやうが無いちやないか』</p>
+            <p class="ja-classical-line">亀彦『手のつけやうどころか、足も頭も体中、浸けて居るぢやないか』</p>
+            <p class="ja-classical-line">鷹彦『サアサア、臨時議会の開会だ、これから議長の選挙だ。院内総務は誰にしようかな』</p>
+            <p class="ja-classical-line">亀彦『アヽ辛気臭い、洒落どころぢやないわ、冷たくなつて仕方がない、体も何も氷結して了ふわ』</p>
+            <p class="ja-classical-line">岩彦『氷結したつて仕方がない、此方は多数決だ。五人を両派に分けて、三人と二人だ。鷹サンは議長といふ格だ』</p>
+            <p class="ja-classical-line">鷹彦『エヽ諸君、遠路の処よく出席下さいました。今回臨時議会を開会いたしましたに就ては、最も急を要する事件で御座いまして、国家危急存亡の場合、何卒諸君の慎重なる御審議を願ひ度いのです。抑々今回の議案提出の要件は、御存じの通り、元ウラル教のヘボ宣伝使、亀公と云ふ男、醜の巌窟の探険に出かけ、実に短見浅慮にも思はぬ不覚を取り、深く井中に陥没致し、生命旦夕に迫る、と云ふ場合でございます。何卒諸君の箱入の知識を絞り出されて、彼が救済の策を講じ最善の努力を尽されむ事を希望いたします』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">鷹彦『やあ皆の衆、どうだった。別に変わった事は無かったか』</p>
+              <p class="ja-modern-p">亀彦『あった、あった、大いにあった』</p>
+              <p class="ja-modern-p">鷹彦『何があったのだ』</p>
+              <p class="ja-modern-p">亀彦『岩壁の両方に覗き穴がたくさんあったのだ』</p>
+              <p class="ja-modern-p">鷹彦『何を言うのだ、大層らしい。どの窟にも共通して空気穴が開いているのだよ』</p>
+              <p class="ja-modern-p">岩彦『これでは張り合いがないじゃないか。相手無しの戦いは出来やしない。何だ、醜の巌窟に化け物が居るなんて人を馬鹿にしている。それだから世間の噂は当てにならぬと言うのだ』</p>
+              <p class="ja-modern-p">鷹彦『いや、これからが正念場だよ。ここはほんの序幕だ。何十里とも知れぬほど奥行きがあると言うじゃないか。どこかこの岩壁を力一杯押してみようか。何でもたくさんの扉があると言う事だから、ああそうだ、一つ押してやろう。おい皆、一度に総攻撃だ』</p>
+              <p class="ja-modern-p">と、力一杯うんと押した。亀公の押した岩は暖簾を押すように手もなく開き、亀の勢い余って岩穴の中へ飛び込んだ途端、幾丈とも知れぬ落とし穴にザブンと音を立てて落ち込んだ。</p>
+              <p class="ja-modern-p">亀彦『やや大変だ。皆の奴、俺を助けてくれないかい』</p>
+              <p class="ja-modern-p">五人は穴の傍を一足、一足、指に力を入れながらそっと向こうに渡り、</p>
+              <p class="ja-modern-p">『ああ、思わぬ不覚を取った。これだから油断は少しも出来ないと言うのだ』</p>
+              <p class="ja-modern-p">鷹彦『何とかして亀さんを救い上げてやらねばなるまい』</p>
+              <p class="ja-modern-p">亀、井戸の底より、</p>
+              <p class="ja-modern-p">『おい、おい、何とかしてくれないか』</p>
+              <p class="ja-modern-p">音彦『お前は名前からして亀さん、水の中は得意だろう。まあ悠々と水でも飲んで寛いでいたまえ。とっさの場合には良い知恵も出ないから、この井戸の傍で山の神じゃないが、井戸端会議を開会してお前を助けるか助けないかという決議をやるのだ。まあまあ、閉会になるまで辛抱してくれ』</p>
+              <p class="ja-modern-p">亀彦『そんな気楽な事を言っていられるかい。一時も早く救い上げてくれ』</p>
+              <p class="ja-modern-p">岩彦『ええい、やかましく言うな、手のつけようが無いじゃないか』</p>
+              <p class="ja-modern-p">亀彦『手のつけようどころか、足も頭も体中、浸けているじゃないか』</p>
+              <p class="ja-modern-p">鷹彦『さあさあ、臨時議会の開会だ。これから議長の選挙だ。院内総務は誰にしようかな』</p>
+              <p class="ja-modern-p">亀彦『ああ辛気臭い、冗談どころじゃないわ、冷たくなって仕方がない、体も何もかも氷結してしまうわ』</p>
+              <p class="ja-modern-p">岩彦『氷結したって仕方がない、こちらは多数決だ。五人を両派に分けて、三人と二人だ。鷹さんは議長という格だ』</p>
+              <p class="ja-modern-p">鷹彦『ええ諸君、遠路のところよく出席下さいました。今回臨時議会を開会いたしましたにつきまては、最も急を要する事件でございまして、国家危急存亡の場合、何卒諸君の慎重なる御審議を願いたいのです。そもそも今回の議案提出の要件は、ご存知の通り、元ウラル教のへぼ宣伝使・亀公という男、醜の巌窟の探検に出掛け、実に短見浅慮にも思わぬ不覚を取り、深く井中に陥没致し、生命旦夕に迫る、という場合でございます。何卒諸君の秘蔵の知識を絞り出されて、彼の救済の策を講じ最善の努力を尽くされん事を希望いたします』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Aye, aye! Agreed, agreed!'</p>
+          <p class="en-p">With this, the four greeted his words with simultaneous applause. From the bottom of the well, Kamehiko cried:</p>
+          <p class="en-p">Kamehiko: 'Hey, won't ye rescue me quickly? Deliverance after I am dead will profit nothing!'</p>
+          <p class="en-p">Takahiko: 'Silence! Cease thy clamor from the bottom of the well; dost thou dare desecrate the sanctity of the assembly? How say ye, gentlemen: as the prior motion, ought we to rescue friend Kame, or ought we to leave him to his doom? Indicate your will by rising!'</p>
+          <p class="en-p">Otohiko: 'Are we not all standing already?'</p>
+          <p class="en-p">Takahiko: 'Ah, my error! Honorable members, prithee be seated. Let those in favor rise: those who resolve to save Kamehiko, stand forth; those who judge he should not be rescued, remain seated. One, two, three!'</p>
+          <p class="en-p">Takahiko: 'Lo, is Komahiko the solitary soul who hath risen? This is scandalous! Then the Speaker himself shall cast his vote and rise!'</p>
+          <p class="en-p">Iwahiko: 'Tyranny of the chair! Majority rule, majority rule! Those in favor are two; those opposed are three!'</p>
+          <p class="en-p">Takahiko: 'The tyranny of the majority hath reached its zenith! Shall I command the dissolution of the assembly?'</p>
+          <p class="en-p">Kamehiko, weeping from the bottom of the well:</p>
+          <p class="en-p">'Villains, mock me not! This is no time for banter! Pull me up quickly!'</p>
+          <p class="en-p">Iwahiko: 'The perimeter of this well is lined with these very stones! Thou hast only to set hands and feet upon the rocks and clamber up!'</p>
+          <p class="en-p">Kamehiko: 'Clamber up, sayest thou? There is neither handhold nor foothold for hands or feet!'</p>
+          <p class="en-p">Iwahiko: 'Doubtless so! Thy limbs are stubby and the shell upon thy back blocketh thy way! Hullo tortoise, Master Tortoise, in all the world there is no creature so clumsy as thou, ha-ha-ha!'</p>
+          <p class="en-p">Kamehiko: 'And what sayest thou, Master Hare?'</p>
+          <p class="en-p">Takahiko: 'In an hour of peril, at the very brink of doom, if thou hast leisure enough to trade playful rhymes, haul thyself up forthwith!'</p>
+          <p class="en-p">Kamehiko: 'I thank ye all for your great pains! Ye could not see from above in the dark, but a splendid flight of stairs hath been carved into the stone, ha-ha-ha!'</p>
+          <p class="en-p">And chuckling merrily, he leisurely climbed up from the well.</p>
+          <p class="en-p">Iwahiko: 'He hath made fools of us! Nay, that we convened an extraordinary assembly, raised a great uproar, and expended vast secret funds—'tis rather we who were cast into a pitfall! To squeeze secret funds from nonexistent brains is folly itself! For this assembly, the parliamentary stipends must be increased by fifty percent! Ha-ha-ha!'</p>
+          <p class="en-p">Even as they laughed together, from the darkness ahead came strange, indescribable groans and monstrous cries, unceasingly striking upon their ears.</p>
+          <p class="en-p">Wondrous to relate, as the sound reverberated, the bodies of the whole company trembled in every limb as though struck by an electric charge, and a creeping numbness began to overtake them.</p>
+          <p class="en-p">Takahiko: 'Lo, this is a terrible peril! Up, brethren, gird up your loins! The moment to act with all our might is upon us! Above all else, the sacred words—the Kototama!'</p>
+          <p class="en-p">With one voice, the whole company solemnly chanted the Amatsu-Norito.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ヤア賛成々々』</p>
+            <p class="ja-classical-line">と、四人は一度に拍手をもつて迎へる。亀公は井戸の底より、</p>
+            <p class="ja-classical-line">亀彦『ヤーイ、早く助けぬかい。死んでからなら助けても役に立たぬぞ』</p>
+            <p class="ja-classical-line">鷹彦『何だ。井戸の底から矢釜敷云ふな、議会の神聖を汚すでないか。如何でせう、諸君、先決問題として亀公を救済すべきものなりや、将又このままに見殺にすべきものなりや、起立をもつてお示し下さい』</p>
+            <p class="ja-classical-line">音彦『皆すでに起立して居るぢやありませぬか』</p>
+            <p class="ja-classical-line">鷹彦『ヤア、これは間違つた。議員一同そこにお坐り下さい。賛成者は起立を願ひます。亀彦を助けると云ふお心の方は起立して下さい、救はないと云ふ御意見の方はそのまま坐つて居てもらひませう。一二三』</p>
+            <p class="ja-classical-line">鷹彦『ヤア起立される方は駒サン一人ですか、これは怪しからぬ。然らば議長が起立いたしませう』</p>
+            <p class="ja-classical-line">岩彦『議長横暴だ。多数決多数決。可とする者二人、否とする者三人』</p>
+            <p class="ja-classical-line">鷹彦『多数党横暴極まる。議会の解散を命じませうか』</p>
+            <p class="ja-classical-line">亀、井戸の底より泣き声を出して、</p>
+            <p class="ja-classical-line">『ヤイ、馬鹿にするない、洒落どころかい。早く助けて呉れないか』</p>
+            <p class="ja-classical-line">岩彦『この井戸の周囲は皆この岩サンで固めてあるのだ。岩に手をかけ足をかけ登つて来ればよいのだよ』</p>
+            <p class="ja-classical-line">亀彦『登れと云つたつて、手も足も引つかかる処がないのだよ』</p>
+            <p class="ja-classical-line">岩彦『さうだらう、手足が短くて背の甲羅がつかへて登れぬのだらう。モシモシ亀よ亀サンよ、世界の中にお前ほど、体の不自由なものは無い、アハヽヽ』</p>
+            <p class="ja-classical-line">亀彦『何とおつしやる兎サン』</p>
+            <p class="ja-classical-line">鷹彦『危急存亡の場合、命の瀬戸際になつて、洒落るだけの余裕があるものなら、サツサと登つて来い』</p>
+            <p class="ja-classical-line">亀彦『皆サン大きに憚りさま。上から暗くて見よまいが、立派な段梯子が刻んであるわ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ひながら悠々として井戸から登つて来た。</p>
+            <p class="ja-classical-line">岩彦『こいつ一杯喰された。イヤ此方が臨時議会まで開いて大騒動をやつて、沢山の機密費を使つたのは、吾々の方が陥穽に放り込まれたやうなものだ。有もせぬ脳味噌から機密費を絞り出して馬鹿らしい。この度の議会は歳費五割増だ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">斯く笑ひさざめく折しも、前方に当つて何とも形容の出来ないやうな異声怪音頻りに一同の耳朶を打つ。</p>
+            <p class="ja-classical-line">不思議や一行の身体はその響と共に、電気にでも感じたやうに、身体の各部に震動を感じ、やや痳痺気味になつて来た。</p>
+            <p class="ja-classical-line">鷹彦『ヤア、此奴は大変だぞ、オイオイ皆の者、緊褌一番、大に活動すべき時期が切迫した。何はともあれ、神言だ神言だ』</p>
+            <p class="ja-classical-line">一同は声をそろへて、天津祝詞を奏上する。</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">『賛成、賛成』</p>
+              <p class="ja-modern-p">と、四人は一度に拍手をもって迎える。亀公は井戸の底より、</p>
+              <p class="ja-modern-p">亀彦『やあい、早く助けないか。死んでからでは助けても役に立たぬぞ』</p>
+              <p class="ja-modern-p">鷹彦『何だ。井戸の底からやかましく言うな、議会の神聖を汚すではないか。どうでしょうか諸君、先決問題として亀公を救済すべきものであるか、それともこのまま見殺しにすべきものであるか、起立をもって示して下さい』</p>
+              <p class="ja-modern-p">音彦『皆すでに起立しているではありませんか』</p>
+              <p class="ja-modern-p">鷹彦『やあ、これは間違えた。議員一同そこにお座り下さい。賛成者は起立を願います。亀彦を助けるというお考えの方は起立して下さい、救わないというご意見の方はそのまま座っていてもらいましょう。一、二、三』</p>
+              <p class="ja-modern-p">鷹彦『やあ、起立される方は駒さん一人ですか、これは怪しからん。それなら議長が起立いたしましょう』</p>
+              <p class="ja-modern-p">岩彦『議長の横暴だ。多数決、多数決！ 可とする者二人、否とする者三人』</p>
+              <p class="ja-modern-p">鷹彦『多数党の横暴極まる。議会の解散を命じましょうか』</p>
+              <p class="ja-modern-p">亀、井戸の底より泣き声を出して、</p>
+              <p class="ja-modern-p">『やい、馬鹿にするな、冗談どころかい。早く助けてくれないか』</p>
+              <p class="ja-modern-p">岩彦『この井戸の周囲は皆この岩石で固めてあるのだ。岩に手をかけ足をかけ登って来ればよいのだよ』</p>
+              <p class="ja-modern-p">亀彦『登れと言ったって、手も足も引っかかる所が無いのだよ』</p>
+              <p class="ja-modern-p">岩彦『そうだろう、手足が短くて背の甲羅がつかえて登れぬのだろう。もしもし亀よ亀さんよ、世界の中でお前ほど体の不自由なものは無い、あははは』</p>
+              <p class="ja-modern-p">亀彦『何とおっしゃる兎さん』</p>
+              <p class="ja-modern-p">鷹彦『危急存亡の場合、命の瀬戸際になって、冗談を言うだけの余裕があるものなら、さっさと登って来い』</p>
+              <p class="ja-modern-p">亀彦『皆さん大儀であった。上からでは暗くて見えまいが、立派な階段が刻んであるわ、あはははは』</p>
+              <p class="ja-modern-p">と笑いながら悠々として井戸から登って来た。</p>
+              <p class="ja-modern-p">岩彦『こいつ一杯食わされた。いやこちらが臨時議会まで開いて大騒動をやって、たくさんの機密費を使ったのは、我々の方が落とし穴に放り込まれたようなものだ。ありもしない脳味噌から機密費を絞り出して馬鹿らしい。この度の議会は歳費五割増しだ。あはははは』</p>
+              <p class="ja-modern-p">こう笑い興じる折しも、前方に向かって何とも形容の出来ないような異様な声や怪しい音がしきりに一同の耳を打つ。</p>
+              <p class="ja-modern-p">不思議なことに、一行の身体はその響きと共に電気にでも感ぜられたように、身体の各部に振動を感じ、やや麻痺気味になって来た。</p>
+              <p class="ja-modern-p">鷹彦『やあ、こいつは大変だぞ。おいおい皆の者、緊褌一番、大いに活動すべき時期が切迫した。何はともあれ、神言だ、神言だ』</p>
+              <p class="ja-modern-p">一同は声をそろえて、天津祝詞を奏上する。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c09.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 9: The Fire-Rat [535]</span>
+      </a>
+      <a href="c11.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 11: The Mysterious Maiden [537]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

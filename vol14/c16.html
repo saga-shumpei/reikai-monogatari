@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 16: Second Blooming [566] - Volume 14 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 14 Table of Contents</a>
+      <span>Part 3: Pilgrimage to Mount Caucasus (第3篇 高加索詣)</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 14 &bull; Chapter 16</span>
+      <h1 class="chapter-title-en">Chapter 16: Second Blooming [566]</h1>
+      <p class="chapter-title-ja">第16章　返り咲〔566〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As an envoy of the Sango Faith overcoming all crooked obstacles, Katsuhiko, clad in three haori cloaks, trudged along in bizarre attire, surmounting the Eighteen Slopes and ascending the mountain passes of Nineteen and Twenty with youthful vigor. Yajihiko and Yotahiko spewed elusive sophistries, trembling like lean nags—buzz, buzz, buzz!—with unsteady wobbly hips, blowing trumpets from their mouths and loud horns of flatulence from their rumps, until Thunder himself fled barefoot in terror! Reaching the Twentieth Mountain Pass, they rested awhile, and set forth once more on Shanks' Mare. Just then, Karasu Kanzaburō of cawing voice appeared, leading a band of many minions.</p>
+          <p class="en-p">Before the path of Katsuhiko and his four companions, the masked band shouted in eerie guise, spreading their arms crying, 'Hold! Ye shall not pass!' Brandishing weapons, they barred the way. Though our heroes seemed reckless like frogs facing snakes, through the grace of the Mizu-no-Mitama, when Katsuhiko chanted the majestic Kototama toward Heaven and Earth, even those ferocious ruffians lost their wits and surrendered, prostrating upon the highway like crawling dogs! True to his name of Katsuhiko—victorious over all defeats—he marched triumphantly at their head. Crossing five more passes, they rested upon the veranda of a modest thatched cottage, meeting a blind grandmother.</p>
+          <p class="en-p">Hearing the tragic tale of the aged couple, Rokukō realized his past sins; with his former misdeeds exposed, he could scarce reply for weeping. A rekindling of old love like fire catching upon charred embers—putting aside the aged couple, Rokukō's rejoicing was even as the opening of the Heavenly Rock Cave! Uplifted in spirit, resolving that after worshiping at Mount Caucasus the sword should return unto its former scabbard, they bade farewell and climbed unto the Twenty-Third Pass of famed magnificent prospect. Buffeted by gales, gasping for breath, they stood atop the Twenty-Fifth Pass.</p>
+          <p class="en-p">Tarrying there, clumsy rites of Chinkon suddenly opened a scene of wild bedlam! Tumbling into the ravine, the four swooned away, and hastening unto the crossing of the Itto River in the Nether Realm, what met their eyes? Peering through the lattice-window of a cottage nestled beneath a pine grove, born jester Yotahiko engaged in fierce dispute with a crone. Forcing the door and entering, amidst tumultuous strife the hags brandished carving knives, striving to wrench away the souls of the Sango Faith! Two grotesque crones—one crying, 'I am Kotsune-hime, younger sister of the Demon Crone of the Sanzu River!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三五教の宣伝使
+凡ての枉に勝彦は
+三枚羽織に身をかため
+異様の姿トボトボと
+十八坂を乗り越えて
+十九や二十の山坂を
+気も若々と登り行く
+弥次彦、与太彦両人は
+掴まへ所の無い様な
+屁理屈放りつつ痩馬の
+足もワナワナ　ブウブウブウ
+屁放り腰の怪しくも
+口に法螺吹き尻からは
+太き喇叭の吹きつづけ
+雷サンも驚いて
+跣足で逃げる二十山
+峠に登つて一休息
+又も、のり出す膝栗毛
+声も烏の勘三郎
+数多の手下引き連れて</p>
+            <p class="ja-classical-line">三五教の勝公が
+四人連れの行く先に
+怪しき姿の大声に
+ドツコイやらじと手を拡げ
+得物を執つて立ち対ふ
+こちらは蛙の向ふ見ず
+瑞の御霊の幸はひに
+稜威の言霊さやさやと
+天地に向つて詔りつれば
+流石に猛き荒び男も
+胆を潰して降参し
+これや堪らぬと大道に
+犬つく這ひの可笑しさよ
+負けても名だけは勝彦の
+負けて堪ろか勝つづけ
+一同続けと先に立ち
+峠の数も五つ越え
+しこけき小家に立寄つて
+盲目の婆アサンに邂逅ひ
+椽に腰かけ一休息</p>
+            <p class="ja-classical-line">爺サン婆サンの悲劇の幕を
+聞いて悟りし六公の
+昔に負ふた古傷を
+曝け出されて六サンは
+碌々答辞も泣く涙
+焼け木杭に又しても
+火が付く様な縁談に
+爺サン婆サンは扨措いて
+六公サンの喜びは
+天の岩戸の開けたる
+思ひに一同勇み立ち
+コーカス山の参拝を
+終つて再び元の鞘
+をさまる縁の目出度やと
+ここに暇を告げ乍ら
+登つて来たのが名にし負ふ
+眺望絶佳の二十三番峠の上
+吹き来る風に煽られて
+息もせきせき進みゆく
+二五番峠の頂に</p>
+            <p class="ja-classical-line">佇む折しも忽ちに
+ヘボ鎮魂の神憑り
+乱痴気騒ぎの幕を開け
+谷間に陥り四人は
+暫時気絶し幽界の
+一途の川の渡まで
+急いで来て見れやこは如何に
+松の並樹の蒼々と
+茂る根下の一軒家の
+怪しき窓を覗き込み
+生れついたる与太助の
+与太公と婆の押問答
+ブリンと押して中に入り
+すつたモンダの諍に
+大口あけて出刄（出歯）を見せ
+三五教の身魂をば
+抜いてやらうと力み立つ
+可笑しい面の二人婆
+三途川原の鬼婆の
+俺は妹の木常姫</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">三五教の宣伝使として、あらゆる邪曲に打ち勝つ勝彦は、三枚の羽織を身にまとい、異様な姿でトボトボと十八坂を乗り越え、十九や二十の山坂を気も若々しく登って行く。弥次彦と与太彦の二人は、掴み所のないような屁理屈を並べ立てつつ、痩せ馬のように足もワナワナと震わせ、ブウブウと屁っ放り腰の怪しげな足取りで、口には法螺を吹き、尻からは太いラッパ（屁）を吹き続け、雷様も驚いて裸足で逃げ出すほどの勢いで二十山峠に登って一服休憩し、またもや乗り出す膝栗毛。そこへ声も烏の勘三郎が、数多くの手下を引き連れて現れた。</p>
+              <p class="ja-modern-p">三五教の勝彦が率いる四人連れの行く手に、怪しげな姿で大声を張り上げ、「どっこい通さじ」と両手を広げ、武器を手にして立ちはだかった。こちらは向こう見ずな蛙のようではあるが、瑞の御霊の恩頼により、威光ある言霊を清らかに天地に向かって宣り唱えれば、流石に猛々しい荒くれ男も肝を潰して降参し、「これやたまらぬ」と街道に平伏して犬のように這いつくばる可笑しさよ。「負けても名だけは勝彦」の名の通り、負けてたまるかと連戦連勝。一同続けと先頭に立ち、峠の数も五つ越え、古びた粗末な小家に立ち寄って盲目の老婆に出逢い、縁側に腰掛けて一休みした。</p>
+              <p class="ja-modern-p">爺さん婆さんの悲劇の物語を聞いて自らの罪を悟った六公は、昔負わせた古傷を白日の下に曝け出され、ろくに挨拶も出来ずただ涙を流すばかり。「焼け木杭（ぼっくい）に火がつく」ような復縁の縁談に、爺さん婆さんはさて置いて、六公の喜びはまるで天の岩戸が開けたかのような心地となり、一同は大いに勇み立ち、「コーカス山の参拝を終えた後に、再び元の鞘に収まる復縁のめでたさよ」と暇乞いを告げながら登って来たのが、名うての眺望絶佳なる二十三番峠の上であった。吹き来る風に煽られ、息を切らしながら進んで行き、二十五番峠の頂に立った。</p>
+              <p class="ja-modern-p">佇む折しもたちまちに、ヘボな鎮魂の神懸かりから乱痴気騒ぎの幕が開き、谷間に落ち込んだ四人は一時気絶した。幽界の「一途川」の渡し場まで急いで来て見れば、これはどうしたことか。松の並木が青々と生い茂る根元の一軒家の怪しげな窓を覗き込み、生まれついての与太者である与太公と老婆との間で激しい押し問答が始まった。戸をガラリと押して中に入り、すったもんだの諍いの末に大口を開けて出刃包丁を見せつけ、「三五教の身魂を抜き取ってやろう」と力み立つ。可笑しな顔つきの二人の老婆、「三途の川原の鬼婆の妹の木常姫じゃ」と名乗った。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Come on, let us fight!' cried Tokoyo-hime, brandishing her carver to strike at the four! The four envoys darted like birds, clashing blades and dodging like butterflies fluttering in spring fields; and hard-pressed by their valiant combat, the hags fell back struck dumb! Yet scarce had they rejoiced, when lo—whether dream, reality, or illusion—at the sound of rushing waters they awoke upon the river bottom! An incomprehensible marvel! Skilled swimmer Rokukō unaccountably drowned and turned into a floating corpse! The three left behind were plunged in despair, having not even incense to burn in his memory!</p>
+          <p class="en-p">Night's curtain fell in pitch-black gloom where white and black were indistinguishable; through the night they wept, and at dawn marched dejectedly across the vast plain. Reaching a rushing stream, Yotahiko shuddered with panting breath, crying: 'Ro... ku... I am Roku!' Declaring that Rokukō's living spirit had arrived, striking awe into their hearts—even as he spoke, an enormous man strode forth! Looking closely, 'twas Karasu Kanzaburō, carrying Rokukō's body upon his back! A proof that the threads of divine affinity never sever; through the virtue of Kototama, Rokukō instantly revived!</p>
+          <p class="en-p">Peering around in bewilderment, Rokukō cried: 'Katsuhiko-san? Yota-san? And thou art Yajihiko the farting bug! Is this the Netherworld or the mortal sphere?' Shaking his head in doubt, he realized at last: 'Am I truly alive?!' Rejoicing, the four followed Katsuhiko down steep slopes, passed safely through the capital of Fusa, and worshiped at the glorious shrine of Mount Caucasus! Joyfully returning unto Koyama Village to Otake's home, with Katsuhiko as matchmaker, their broken bond was rekindled; and the old man, grandmother, Roku, brother Matsu, his wife, and Otake rejoiced in boundless gladness!</p>
+          <p class="en-p">The wondrous tale of their wedding ceremony—auspicious beyond compare!</p>
+          <p class="en-p">Otake's parental home in Koyama Village was named Harunoya (Spring House). The grandfather was Tsurusuke (Crane), the grandmother Okame (Tortoise), the son Matsukō (Pine), and his wife Oume (Plum). With the bridegroom added unto the family of Crane, Tortoise, Pine, Bamboo, and Plum, six souls dwelt together; and Roku's wedding was solemnized with Katsuhiko the divine envoy as matchmaker! Yajihiko and Yotahiko joined as Roku's companions in the feast! Together with the one true teaching of Sango, ten precious spirits celebrated the joyous banquet! Fragrant as white plum blossoms was Otake; noble as evergreen pine was Matsu and his bride; praying that like the crane's thousand years and tortoise's ten thousand ages their love might endure into the Miroku Age, before the Deity of Union they chanted the Amatsu-Norito, exchanging the sacred three-times-three cups! Amidst the festive rejoicing of the nine gathered souls, Katsuhiko sang a solemn nuptial hymn:</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">サア来い勝負と常世姫
+此奴も出刄を振り上げて
+四人に対つて切りかかる
+茲に四人の宣伝使
+飛鳥の如く翔け廻り
+丁々発止、丁発止
+蝶の春野に狂ふ如
+汗を流して戦へば
+流石の婆も立ち遅れ
+アフンとしたと思ひきや
+夢か、現か、幻か
+サツと聞ゆる水音に
+眼を覚せば川の底
+底の分らぬ此不思議
+泳ぎ自慢の六公が
+如何はしけむブルブルと
+溺れて忽ち土左衛門
+後に残つた三人は
+兎やせむ斯くや線香の
+煙手向ける術もなく</p>
+            <p class="ja-classical-line">夜の帳は下ろされて
+黒白も分かぬ真の闇
+是非なく此処に夜を明かし
+涙を押へシホシホと
+大野ケ原を打渡り
+水音高き川の辺に
+辿り着くなり与太彦が
+鼻息荒く身慄ひし
+ロヽヽクヽヽと口をきり
+六の生霊が出て来たと
+吐いて一同の胆をとり
+寝言を吐く折柄に
+現はれ出でたる大男
+能く能く見ればこは如何に
+声も烏の勘三郎
+六の死骸を背に負うて
+送つて来たのは不思議なる
+縁の糸の次々に
+切れぬ証か言霊の
+力に忽ち息を吹き</p>
+            <p class="ja-classical-line">四辺キヨロキヨロ見渡して
+勝彦サンか与太サンか
+お前は弥次彦屁放き虫
+此処は冥土か現界か
+合点が往かぬと思案顔
+初めて気がつきまだ俺は
+生きて居たかと勇み立ち
+勝彦サンに従うて
+茲に四人は急坂を
+辿り辿りてフサの国
+都を無事に打ち過ぎて
+名さへ目出度きコーカスの
+神のお宮に参拝し
+喜び勇み小山村
+お竹の家に引き返し
+勝彦サンの媒酌で
+比翼連理の蒸し返し
+老爺も婆も六サンも
+兄の松公夫婦の者も
+お竹と共に勇み立ち</p>
+            <p class="ja-classical-line">ここに愈合衾の
+式を行ふ物語
+聞くも目出度き次第なり。</p>
+            <p class="ja-classical-line">小山村のお竹の生家は春の屋と謂ふ。爺サンの名は鶴助、婆サンはお亀、息子の名は松公、女房はお梅と謂ふ。鶴亀松竹梅の一家族に婿を加へて六人暮し、名も六サンの婿入り祝ひ、媒酌の役は勝彦の宣伝使。弥次彦、与太彦二人は六サンの友人としてこの目出度き結婚の席に加はつた。三五教の誠一つの教を加へて此処に十曜の珍の身魂、目出度き酒宴一度に開く白梅の、薫り床しきお竹の姿、常磐の松の何処やらに、気品も高き松サン夫婦、鶴の千歳の末永く、亀の齢の万代も、五六七の世までも変らじと、結びの神の御前に、天津祝詞の太祝詞、言挙げ終つて酒杯の、数も芽出度き三々九度、此処に九人は勇み立ち、千代を寿ぐ酒宴の、真最中に勝彦は、千代を祝する結婚の、歌を涼しく歌ひける。</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">『さあ来い、勝負だ！』と常世姫も出刃包丁を振り上げて四人に向かって斬りかかって来た。ここに四人の宣伝使は鳥のように駆け巡り、丁々発止、春の野に蝶が狂い飛ぶように汗を流して戦えば、流石の鬼婆も太刀打ち出来ずたじろいだ。これに安心したかと思いきや、夢か現か幻か、ザッと聞こえる水音に目を覚ませば冷たい川の底。底の知れないこの不思議よ。泳ぎ自慢の六公がどうしたことかブルブルと溺れて、たちまち土左衛門（水死体）となってしまった。後に残された三人は途方に暮れ、線香の煙を手向ける術もなかった。</p>
+              <p class="ja-modern-p">夜の帳は下ろされて白黒の区別もつかぬ漆黒の闇となり、やむなくここで夜を明かして涙を抑え、しょんぼりと広野原を渡り、水音の高らかな川のほとりに辿り着くや否や、与太彦が鼻息荒く身震いし、『ロ……ク……六じゃ！』と口を開き、六公の生霊が現れ出たと告げて一同の肝を冷やした。寝言のように告げる折しも、一人の大男が現れ出た。よくよく見ればこれは如何に！ 声も烏の勘三郎が六公の身体を背中に背負って届けてくれたのであった。これは不思議な因縁の糸が次々に途切れぬ証拠か、言霊の力によって六公はたちまち息を吹き返した。</p>
+              <p class="ja-modern-p">四辺をキョロキョロと見渡して、『勝彦さんか、与太さんか。お前は弥次彦、屁放き虫。ここは冥土か現界か』と合点がいかぬ思案顔。ようやく気がつき、『まだ俺は生きていたのか！』と勇み立ち、勝彦に従ってここに四人は急坂を辿り辿りてフサの国の都を無事に通り過ぎ、名さえめでたきコーカスの神のお宮に参拝した。喜び勇んで小山村のお竹の生家へと引き返し、勝彦の媒酌により比翼連理の夫婦の復縁相成り、爺さんも婆さんも六さんも兄の松公夫婦もお竹と共に大いに勇み立った。</p>
+              <p class="ja-modern-p">ここに晴れて共寝の式（合衾の儀）を執り行う物語、聞くもめでたき次第である。</p>
+              <p class="ja-modern-p">小山村のお竹の生家は「春の屋」という。爺さんの名は鶴助、婆さんはお亀、息子の名は松公、女房はお梅という。鶴・亀・松・竹・梅の一家族に婿を迎えて六人暮らし、名も六さんの婿入り祝い、仲人の役は勝彦宣伝使。弥次彦と与太彦の二人は六さんの友人として、このめでたき結婚の席に加わった。三五教の誠一つの教えを加えてここに十曜の珍の身魂、めでたき酒宴が一斉に開かれた。白梅の香りゆかしいお竹の姿、常磐の松の気品高き松さん夫婦、鶴の千年の末長く、亀の万代の齢までも、五六七の世までも変わらじと、結びの神の御前に天津祝詞の太祝詞を言挙げし、めでたき三々九度の盃を交わし、ここに九人は勇み立ち、千代を寿ぐ酒宴の真っ最中に、勝彦は千代を祝する結婚の歌を涼やかに歌った。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Katsuhiko's Nuptial Hymn:
+'May this reign endure long as the distant heavens,
+Through a thousand and eight thousand ages like evergreen pines!
+A peaceful realm awaited with crane-stretched neck,
+The divine age of waiting cometh round;
+Even the name is auspicious of Dame Okame!
+Surmounting ninety-nine slopes again and again,
+Ascending and descending in perfect peace,
+Now shall they cross the slopes of old age!
+Youthful as spring meadows,
+Two pairs of young couples united;
+Deep is the color of the evergreen pine,
+Ever steadfast is Master Matsu,
+And fragrant in full bloom is Dame Oume;
+Tender bamboo of the garden, long endure,
+Living in sweet harmony with Roku of sixfold name;
+Through one, two, three, four, even five,
+Sixfold beloved, like the seven herbs of spring,
+Through a thousand and eight thousand ages,
+Even as the ninefold celestial sky shines blue,</p>
+          <p class="en-p">Pure, cool, and azure,
+May the path of divine continuity ever endure!
+Unto a hundred years, a thousand, ten thousand,
+Unto hundreds of millions of years,
+Change not, never waver!
+Dwell in harmonious love upon the Divine Way,
+Treading upright and true!
+Numerous as stars in the heavenly vault,
+Countless as sands upon the seashore,
+Bear children, bear offspring, pound mochi-cakes!
+Pound bountiful mochi-cakes in grand array,
+Living in loving harmony as husband and wife,
+Pure and grand like Ōnamuchi-no-Kami!
+Cast away all ill temper;
+Blessed with sons-in-law, daughters-in-law, and wealth,
+Holding treasures like the full moon of the fifteenth night,
+Shining radiant as a polished mirror,
+Shine bright, ye young couples!
+Though a thousand and ten thousand years pass by,
+Ever youthful as in your present prime,</p>
+          <p class="en-p">Taste the grace of the Gods,
+Be nourished by the dew of divine blessing!
+Ah, Kamunagara, Kamunagara,
+Tamachihaemase!
+Ah, Kamunagara, Kamunagara,
+Tamachihaemase!'</p>
+          <p class="en-p">Having sung thus, he offered the cup unto Rokukō. Rokukō raised it reverently unto his brow and passed it unto Otake; and the cups of parent, child, and spouses were accomplished in peace.</p>
+          <p class="en-p">Yaji: 'Auspicious, auspicious indeed! Now 'tis Roku-san's turn; pray sing a song!'</p>
+          <p class="en-p">Rokukō's Song of Repentance and Love:
+'Reflecting upon three years ago,
+Longing with burning love for Otake;
+In all the span between heaven and earth,
+Never could so fair a maiden be found!
+Yearning, I climbed the mountain paths,
+Slope upon slope, until at last
+My prayers were answered through divine providence;
+Pledged as birds with wings intertwined,
+Joyous in bedtime pillow-talk;
+Yet brief were those days, for wild winds blew,
+The wild steed of my heart ran amok,
+My soul turned fierce, entering the Ural Faith!
+"Drink, make merry! One step ahead
+Is a world of blackness; brood not!
+Live bold and short!"—
+Hardening my wicked heart, day and night
+I knew no difference, drowning in deep wine,</p>
+          <p class="en-p">Drunken, my beloved wife
+I beat, kicked, and struck!
+Night and day strife never ceased;
+Bruises upon Otake's face
+Never had time to heal;
+Treating her piteous plight as worthless dust,
+I lived in wicked cruelty;
+Until in wrath, unawares,
+Otake fled our home unto her parents,
+Turning an unyielding face!
+Thereupon I came unto my senses,
+Yearning to be reunited with Otake;
+My heart burned, yet hand and voice availed naught;
+Repulsed by cold refusal again and again;
+Born as a man, yet cast aside by his wife—
+What face had I as a man?
+In despair, I joined the constables of the Ural Faith,
+Hunting envoys of the Sango Faith!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『世は久方の末長く
+常磐の松の千代八千代
+治まる御代を鶴の首
+まつの神代の廻り来て
+名さへ目出度きお亀サン
+九十九の坂を幾度も
+上りつ下りつ安々と
+今より越えむ老の坂
+春の野の如若やいで
+二組揃ふた若夫婦
+常磐の松の色深く
+いつも変らぬ松サンや
+花咲き匂ふお梅サン
+園のなよ竹末長く
+睦みて暮せ六の名の
+ついた男の六サンを
+一、二、三四の五迄も
+六び親しみ七草の
+千代に八千代に九重の
+御空の色に擬ふ如</p>
+            <p class="ja-classical-line">清く涼しく青々と
+十つぎの道を何時迄も
+百歳、千歳、万歳
+幾億万年の末までも
+互に変るな変らじと
+親しみ暮せ神の道
+直く正しくふみしめて
+天津御空の星の如
+浜の真砂の数の如
+御子を生め生め餅を搗け
+子餅をタント搗き並べ
+夫婦仲良く世帯もち
+清きその名も大名持
+疳癪持ちは止めにして
+婿持ち嫁持ち金を持ち
+宝を持ちて望の夜の
+月の鏡の照ら照らと
+輝き渡れ若夫婦
+千年万年暮れるとも
+今の姿で若々と</p>
+            <p class="ja-classical-line">神の恵を味へよ
+恵の露に潤へよ
+アヽ惟神々々
+霊幸倍坐しませよ
+アヽ惟神々々
+霊幸倍坐しませよ』</p>
+            <p class="ja-classical-line">と歌つて酒杯を六公にさした。六公は恭しく押し頂いてお竹に渡した。茲に親子夫婦の杯は無事に済みける。</p>
+            <p class="ja-classical-line">弥『ヤアお目出度いお目出度い、サア之から六サンの番だ、一つ歌つて下さい』</p>
+            <p class="ja-classical-line">六公『思ひ廻せば三年の昔
+恋に焦れたお竹サン
+天と地とのその中に
+コンナ綺麗な娘子は
+又とあるまいあるまいと
+慕うて通ふ坂道の
+数重なりて漸うに
+ヤツと願を掛巻くも
+畏き神の引合せ
+比翼連理の楽みを
+寝物語に喜びし
+日数もあらしの風強く
+心の駒の狂ひ出し
+魂は荒びてウラル彦
+神の教の道に入り
+飲めよ騒げよ一寸先は
+闇の世界ぢやクヨクヨするな
+太う短う暮してやろと
+悪胴据ゑて夜昼の
+区別も知らず深酒に</p>
+            <p class="ja-classical-line">酔うて可愛いい女房を
+打つやら蹴るやら殴るやら
+夜昼喧嘩の絶え間なく
+お竹の顔は生疵の
+絶えた間もなき憐れさを
+屁とも思はず暮して来たが
+お竹は怒つて知らぬ間に
+吾家を出でて親里に
+逃げて帰つて知らぬ顔
+ここに私も目が醒めて
+ま一度お竹に添ひ度いと
+心焦れど手も口も
+かかる由なく冷やかな
+肱鉄砲の続け打ち
+男と生れた六公も
+女房の方から見捨てられ
+何の顔あら男
+仕様事なさにウラル教
+捕手の群に加はつて
+三五教の宣伝使</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">勝彦宣伝使の結婚祝歌：
+『世は久方の末長く
+常磐の松の千代八千代
+治まる御代を鶴の首
+まつの神代の廻り来て
+名さへ目出度きお亀サン
+九十九の坂を幾度も
+上りつ下りつ安々と
+今より越えむ老の坂
+春の野の如若やいで
+二組揃ふた若夫婦
+常磐の松の色深く
+いつも変らぬ松サンや
+花咲き匂ふお梅サン
+園のなよ竹末長く
+睦みて暮せ六の名の
+ついた男の六サンを
+一、二、三四の五迄も
+六び親しみ七草の
+千代に八千代に九重の
+御空の色に擬ふ如</p>
+              <p class="ja-modern-p">清く涼しく青々と
+十つぎの道を何時迄も
+百歳、千歳、万歳
+幾億万年の末までも
+互に変るな変らじと
+親しみ暮せ神の道
+直く正しくふみしめて
+天津御空の星の如
+浜の真砂の数の如
+御子を生め生め餅を搗け
+子餅をタント搗き並べ
+夫婦仲良く世帯もち
+清きその名も大名持
+疳癪持ちは止めにして
+婿持ち嫁持ち金を持ち
+宝を持ちて望の夜の
+月の鏡の照ら照らと
+輝き渡れ若夫婦
+千年万年暮れるとも
+今の姿で若々と</p>
+              <p class="ja-modern-p">神の恵を味へよ
+恵の露に潤へよ
+アヽ惟神々々
+霊幸倍坐しませよ
+アヽ惟神々々
+霊幸倍坐しませよ』</p>
+              <p class="ja-modern-p">と歌って酒杯を六公に差した。六公は恭しく押し頂いてお竹に渡した。ここに親子の盃、夫婦の固めの盃は無事に相済んだ。</p>
+              <p class="ja-modern-p">弥次彦『やあおめでたい、おめでたい！ さあ、これからは六さんの番だ、ひとつ歌って下さいよ』</p>
+              <p class="ja-modern-p">六公の誓いの歌：
+『思ひ廻せば三年の昔
+恋に焦れたお竹サン
+天と地とのその中に
+コンナ綺麗な娘子は
+又とあるまいあるまいと
+慕うて通ふ坂道の
+数重なりて漸うに
+ヤツと願を掛巻くも
+畏き神の引合せ
+比翼連理の楽みを
+寝物語に喜びし
+日数もあらしの風強く
+心の駒の狂ひ出し
+魂は荒びてウラル彦
+神の教の道に入り
+飲めよ騒げよ一寸先は
+闇の世界ぢやクヨクヨするな
+太う短う暮してやろと
+悪胴据ゑて夜昼の
+区別も知らず深酒に</p>
+              <p class="ja-modern-p">酔うて可愛いい女房を
+打つやら蹴るやら殴るやら
+夜昼喧嘩の絶え間なく
+お竹の顔は生疵の
+絶えた間もなき憐れさを
+屁とも思はず暮して来たが
+お竹は怒つて知らぬ間に
+吾家を出でて親里に
+逃げて帰つて知らぬ顔
+ここに私も目が醒めて
+ま一度お竹に添ひ度いと
+心焦れど手も口も
+かかる由なく冷やかな
+肱鉄砲の続け打ち
+男と生れた六公も
+女房の方から見捨てられ
+何の顔あら男
+仕様事なさにウラル教
+捕手の群に加はつて
+三五教の宣伝使</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Believers we arrested without mercy,
+Hauling them unto the Ural Mountains where the Ural Deity dwelleth;
+Drinking wine on reward money till my bowels rotted;
+Riding high, inspecting every path;
+Arriving at Ojika Pass, I encountered the envoys of the Sango Faith;
+Rejoicing like eating dumplings in a dream;
+Yet when I struck, lo, what befell!
+Before the majestic Kototama of the Sango envoys,
+My heart completely turned around!
+Repenting my past sins, entering the Divine Way,
+Guided by the envoys of the faith,
+Learning the true doctrine, surmounting twenty passes,</p>
+          <p class="en-p">When I stopped at Matsuya in Yamada Village to eat sweet dumplings,
+Unawares I met Otake face to face!
+No sooner did she hear me cry, "Art thou Otake?"
+Than terrified, she fled like clouds toward the rear gate!
+Alas, the bitter shame! Hated by Otake once again,
+How could I hold up my head as a man?
+Mortified before Katsuhiko, Yaji, and Yota,
+I bolted headlong toward the pass,
+Hiding in the forest, holding my breath;
+United through a smelly dialogue of wind,
+Rejoined with the three companions;
+Through the sacred art of Chinkon Kishin,</p>
+          <p class="en-p">Laundering the soul clean, venturing unto the river of Hell,
+Surviving through nine deaths and one life, saved by human compassion;
+Passing beyond the capital of Fusa unto Mount Caucasus,
+Clasping hands before the divine altar, chanting the Norito,
+Praying that Otake and I might live in love and peace as parent, child, and spouse;
+Returning auspiciously hither to exchange the nuptial kelp,
+Plying cups of wine in joy,
+Pledging love as old man and old woman of Takasago—
+How joyous is this blessed night!
+Ah, Kamunagara, Kamunagara, Tamachihaemase!
+Whether the morning sun shines or clouds over,</p>
+          <p class="en-p">Whether the moon waxes or wanes,
+Even wert the earth to sink into the deep,
+May this pledge of parent, child, and spouse endure changeless for myriad ages!
+Revering the teachings of the Sango Faith that saveth the world,
+May our house endure, offspring flourish, and soul's life be everlasting!
+Courageous as crane and tortoise, flourishing as pine, bamboo, and plum,
+May the Divine Realm flourish forever and ever!
+A thousand autumns and ten thousand years of bliss!
+A thousand autumns and ten thousand years of bliss!</p>
+          <p class="en-p">Having sung thus, he took the cup and presented it reverently unto Katsuhiko. Thereupon Otake arose and began her song:</p>
+          <p class="en-p">Otake's Hymn of Gratitude and Faith:
+Envoys of the Sango Faith,
+Pacifying the foul demonic spirits;
+Walking the true path, Katsuhiko's
+Divine grace as our matchmaker hath redeemed us;
+Today, bright like the auspicious full moon,
+My heart that waned hath waxed full again!
+A marriage that seemed severed forever
+Hath burst into bloom like a withered tree flowering!
+Sharing the dream pillow once more,
+"Is it not a dream? Can this truly be reality?"—
+Such wonder and joy overwhelm my breast!
+The eternal darkness of Tokoyo hath rolled away;
+As though the Heavenly Rock Cave opened in an instant—
+Such is today's auspicious consummation!
+Ah, what joy, what boundless joy!
+Blessed with parents whose names are Crane and Tortoise,
+Brother Matsu and sister-in-law Plum,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">信者と見れば容赦なく
+片つ端から引捉へ
+ウラルの神の立て籠る
+ウラルの山へ連れ行きて
+褒美の金に腸も
+腐る許りに酒を飲み
+調子にのつて此処彼処
+尋ねて廻る目付役
+小鹿峠に来て見れば
+三五教の宣伝使
+夢に牡丹餅食た様に
+心の裡に雀躍し
+当つて見ればこは如何に
+神徳強き三五の
+神の司の言霊に
+ガラリと心を立直し
+前非を悔いて神の道
+教司に伴はれ
+此処に誠の教を知り
+二十峠を乗り越えて</p>
+            <p class="ja-classical-line">山田の村の松の屋に
+牡丹餅食はうと立寄れば
+思ひ掛けなきお竹奴に
+パツと出会はす顔と顔
+お前はお竹と一言葉
+聞くより早く驚いて
+お竹は忽ち雲霞
+裏口さして逃げて行く
+アヽ残念や残念や
+又もお竹に嫌はれて
+如何して男の顔が立つ
+勝彦サンや弥次与太の
+二人の手前も恥しく
+一目散にトントンと
+峠を指して立ち向ひ
+林の中に身を潜め
+息をこらして待つ程に
+放つ屁問答の臭い仲
+また三人に廻り会ひ
+鎮魂帰神の神術に</p>
+            <p class="ja-classical-line">魂の洗濯サラサラと
+地獄の川まで進み出で
+九死一生の目に会うて
+人の情に助けられ
+フサの都を乗り越えて
+コーカス山の参詣で
+両手を合せて神前に
+額き祝詞の奏上し
+何卒お竹と末永う
+親子夫婦は睦じう
+暮させ給へと願をかけ
+目出度此処に立帰り
+千代の契を結び昆布
+苦労するめや酒杯の
+数を重ねて勇み立ち
+尉と姥との契をば
+結ぶ今宵ぞ楽しけれ
+アヽ惟神々々
+霊幸倍ましませよ
+朝日は照るとも曇るとも</p>
+            <p class="ja-classical-line">月は盈つとも虧くるとも
+仮令大地は沈むとも
+親子夫婦のこの契
+千代も八千代も変らざれ
+この世を救ふ三五の
+神の教を畏みて
+家門長久子孫の繁栄
+魂の生命の末永く
+鶴と亀との勇ましく
+松、竹、梅の何処迄も
+栄えに栄えよ神の国
+千秋万歳万々歳
+千秋万歳万々歳』</p>
+            <p class="ja-classical-line">と歌ひ終つて酒杯をとり勝彦に恭しく献した。お竹は起つて歌ひ始めた。</p>
+            <p class="ja-classical-line">『三五教の宣伝使
+醜の魔神を言向けて
+誠の道も勝彦の
+神の恵も三つ栗の
+仲とり役に救はれて
+今日は芽出度き望月の
+虧けては盈つる吾思ひ
+思ひきつたる夫婦仲
+枯木に花の咲き出でて
+又もや交す夢枕
+夢ではないか現では
+あるまいかなと思ふ程
+喜び胸に迫り来て
+常世の闇も晴れ渡り
+天の岩戸の忽ちに
+開けし如き今日の首尾
+アヽ嬉しやな嬉しやな
+世は垂乳根の父母の
+名さへ目出度き鶴と亀
+松と梅との兄夫婦</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">『信者と見れば容赦なく片っ端から召し捕らえ、ウラルの神の立て籠もるウラルの山へ連行し、褒美の金で腸も腐るばかりに酒を飲み、調子に乗ってあちこち探し回る目付役。小鹿峠に来て見れば、三五教の宣伝使一行に出逢い、「棚から牡丹餅」を食ったように心の中で躍り上がり、襲いかかってみればこれは如何に！ 神徳の強き三五の神の使いの言霊に、ガラリと心を入れ替え、前非を悔いて神の道。教えの使殿に伴われて、ここに誠の教えを知り、二十の峠を乗り越えて、</p>
+              <p class="ja-modern-p">山田の村の松の屋に牡丹餅を食おうと立ち寄れば、思いがけなくもお竹のやつとバッタリ出くわす顔と顔。『お前はお竹か』との一言を聞くより早く驚いて、お竹はたちまち雲霞の如く裏口を指して逃げて行く。ああ無念や、無念や！ またしてもお竹に嫌われて、どうして男の顔が立つ。勝彦さんや弥次・与太の二人の手前も恥ずかしく、一目散にトントンと峠を指して駆け登り、林の中に身を潜め、息を殺して待つほどに、放ち合う屁問答の臭い仲、またしても三人に巡り逢い、鎮魂帰神の神術に、</p>
+              <p class="ja-modern-p">魂の洗濯サラサラと、地獄の川まで進み出て、九死に一生の目に遭うて、人の情けに助けられ、フサの都を乗り越えてコーカス山の参詣に、両手を合わせて神前に額づき祝詞を奏上し、何とぞお竹と末長く、親子夫婦は睦まじく暮らさせ給えと願を掛け、めでたくここに立ち帰り、千代の契りを結ぶ昆布、苦労するめや酒杯の数を重ねて勇み立ち、尉と姥との契りをば結ぶ今宵ぞ楽しけれ。ああ惟神、惟神、霊幸倍坐しませ。朝日は照るとも曇るとも、</p>
+              <p class="ja-modern-p">月は満つるとも欠くるとも、たとえ大地は沈むとも、親子夫婦のこの契り、千代も八千代も変わらざれ！ この世を救う三五の神の教えを畏みて、家門長久、子孫の繁栄、魂の命の末長く、鶴と亀との勇ましく、松、竹、梅のどこまでも、栄えに栄えよ神の国！ 千秋万歳、万々歳！ 千秋万歳、万々歳！』</p>
+              <p class="ja-modern-p">と歌い終えて酒杯を取り、勝彦に恭しく献じた。お竹は立ち上がって歌い始めた。</p>
+              <p class="ja-modern-p">お竹の感謝と愛の誓いの歌：
+『三五教の宣伝使
+醜の魔神を言向けて
+誠の道も勝彦の
+神の恵も三つ栗の
+仲とり役に救はれて
+今日は芽出度き望月の
+虧けては盈つる吾思ひ
+思ひきつたる夫婦仲
+枯木に花の咲き出でて
+又もや交す夢枕
+夢ではないか現では
+あるまいかなと思ふ程
+喜び胸に迫り来て
+常世の闇も晴れ渡り
+天の岩戸の忽ちに
+開けし如き今日の首尾
+アヽ嬉しやな嬉しやな
+世は垂乳根の父母の
+名さへ目出度き鶴と亀
+松と梅との兄夫婦</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Living in eternal harmony with Roku-san, sharing our hearts' deepest thoughts; delivered from fierce demons through Katsuhiko's divine grace; joyful like the twin pines of Takasago, growing old together as faithful husband and wife! Like the camellia evergreen in eight thousand springs, may our love bloom fragrant and unfading forever! Lips fresh as vermilion dew, eyebrows shaped like the crescent moon, eyes bright like the sun and moon! Sound in limb and robust in health, laboring diligently in daily life, may our house prosper and spread the divine teachings unto all four quarters of the earth,</p>
+          <p class="en-p">Shining across the seas far and near, we two shall serve the sacred work of opening the Heavenly Rock Cave! "The Gods manifest upon the surface of the world, sundering the good from the evil! Kamunaobi who created this universe, Ōnaobi of vast and boundless heart!" Confessing and rectifying past misdeeds, re-seeing and re-hearing in righteousness, obeying the divine word, we dedicate our sincere hearts unto the Gods for thousands of ages! Whether the morning sun shines or clouds over, whether the moon waxes or wanes, even wert the earth to sink, our wedlock shall stand unshaken for myriad ages, green as the changeless pine, until the dawn of the Miroku Age!</p>
+          <p class="en-p">Preserve the lives of our father and mother, preserve the loving harmony of man and woman, O Great God who established the Sango Faith! Before the myriads of millions of deities, with bowed necks we worship and serve! Ah, Kamunagara, Kamunagara, Tamachihaemase! Ah, Kamunagara, Kamunagara, Tamachihaemase!</p>
+          <p class="en-p">Having sung thus, the parents Tsurusuke and Okame, brother Matsu and his wife Oume, as well as Yajihiko and Yotahiko, sang joyous celebratory songs; and the nuptial ceremony was accomplished in boundless joy, blessed before the Gods to endure through a thousand and eight thousand ages.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">千代の睦びの六サンと
+心の丈けを語りつつ
+強き悪魔に勝彦の
+神の恵に助けられ
+会うて嬉しき相生の
+松の木蔭の尉と姥
+幾久しくも末長く
+愛しき妻よ夫よと
+勇む心の玉椿
+八千代の春に会ふ心地
+花と匂へよ永久に
+色は褪せざれ何時迄も
+心の色も紅の
+露の唇、月の眉
+花咲き匂ふ花の山
+月日に擬ふ二つの目
+手足もまめに健かに
+日々の生業励しみて
+家富み栄え三五の
+神の教を四方の国</p>
+            <p class="ja-classical-line">海の内外に輝かし
+天の岩戸の神業に
+仕へまつらむ夫婦連れ
+神が表に現れまして
+善と悪とを立別ける
+この世を造りし神直日
+心も広き大直日
+只何事も今迄の
+悪戯事は宣り直し
+善きに見直し聞直し
+神の教に服従ひて
+幾千代までも真心を
+神の御前に捧ぐべし
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+千代に動かぬ夫婦仲
+何時も変らぬ常磐木の
+松の操の青々と
+五六七の御代の来る迄</p>
+            <p class="ja-classical-line">父と母との御生命
+男子女子の睦み合ひ
+守らせ給へ三五の
+教を立つる大御神
+百千万の神々の
+御前に頸根突抜きて
+拝み仕へ奉る
+アヽ惟神々々
+霊幸倍坐しませよ
+アヽ惟神々々
+霊幸倍坐しませよ』</p>
+            <p class="ja-classical-line">と歌ひ終つた。ここに鶴亀の両親を始め、松、梅の兄夫婦および弥次彦、与太彦の祝の歌節面白く歌ひ終つて目出度く合衾の式も相済み、千代も八千代も変らじと神の御前にことほぎまつりぬ。</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">『千代の睦びの六さんと、心の丈を語りつつ、強き悪魔に勝つ（勝彦）の神の恵みに助けられ、逢うて嬉しき相生の松の木陰の爺（尉）と婆（姥）、幾久しくも末長く、愛しき妻よ夫よと、勇む心の玉椿、八千代の春に逢う心地。花と匂えよ永久に、色は褪せざれ何時までも。心の色も紅の露の唇、月の眉、花咲き匂う花の山、月日に擬う二つの目、手足もまめに健やかに、日々の生業に励みて、家富み栄え、三五の神の教えを四方の国、</p>
+              <p class="ja-modern-p">海の内外に輝かし、天の岩戸の神業に仕えまつらん夫婦連れ。神が表に現れまして、善と悪とを立別ける、この世を造りし神直日、心も広き大直日、ただ何事も今までの悪戯事は宣り直し、良きに見直し聞き直し、神の教えに服従いて、幾千代までも真心を神の御前に捧ぐべし。朝日は照るとも曇るとも、月は満つるとも欠くるとも、たとえ大地は沈むとも、千代に動かぬ夫婦仲、いつも変わらぬ常磐木の松の操の青々と、五六七（みろく）の御代の来るまでも、</p>
+              <p class="ja-modern-p">父と母との御生命、男子女子の睦み合い、守らせ給え、三五の教えを立つる大御神、百千万の神々の御前に首根突き抜きて拝み仕え奉る。ああ惟神、惟神、霊幸倍坐しませ。ああ惟神、惟神、霊幸倍坐しませ』</p>
+              <p class="ja-modern-p">と歌い終えた。ここに鶴・亀の両親をはじめ、松・梅の兄夫婦、および弥次彦、与太彦の祝いの歌も面白く歌い終えて、めでたく合衾の式も相済み、千代も八千代も変わらじと神の御前に言祝ぎ奉ったのであった。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c15.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 15: 丸 Tree Bridge [565]</span>
+      </a>
+      <a href="c17.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 17: 一寸一服 [567]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

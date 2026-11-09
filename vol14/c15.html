@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: The Log Bridge [565] - Volume 14 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 14 Table of Contents</a>
+      <span>Part 3: Pilgrimage to Mount Caucasus (第3篇 高加索詣)</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 14 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: The Log Bridge [565]</h1>
+      <p class="chapter-title-ja">第15章　丸木橋〔565〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Swept from the crest of the Twenty-Fifth Pass by a furious hurricane and plunged into the glen, Katsuhiko's company revived, arose, and gazed into one another's visages.</p>
+          <p class="en-p">Katsu: 'Aha! Here is the bottom of Ojika Glen! Fancying I had been battling the evil spirits of Tokoyo-hime and Kotsune-hime in a solitary thatched cottage by the pine grove of the Itto River—was it but a dream after all?'</p>
+          <p class="en-p">Yaji: 'Master Envoy, didst thou behold that dream as well? I saw it too! What a hideous hag! Face purple and swollen from brows to nose—a repulsive spectacle of Tokoyo-hime reclining, which chilled me to the marrow! And that middle-aged hag in her light-blue robe marked with the star-crest—the memory maketh my flesh creep! And Yotakō peeping through the lattice, cutting capers like a strolling actor—'twas comical, terrifying, sickening, and infuriating all at once, until the spirit of the Sango Faith fled, leaving no room to re-see, re-hear, or re-rectify! Hark, Yotakō and Rokukō, how was it with you? Ye were actors in that dream!'</p>
+          <p class="en-p">Yota: 'Mine was much the same! The hag was babbling of the Itto River and being resolute in desires! A thoroughly demented old crone indeed!'</p>
+          <p class="en-p">Roku: 'When the demon hag charged with her carving knife, seeing we were empty-handed while she held a blade, my heart leapt into my mouth—and at that instant I awoke! What a foul dream! Since men speak of this fleeting world as a dream, somewhere such reality may well exist!'</p>
+          <p class="en-p">Yaji: 'A dream is a sacred thing! It occurs when we cast off all worldly bonds and abandon ourselves innocently unto the workings of our Guardian Deities; wherefore what is shown in dreams surely cometh to pass whether in the past, the present, or the future!'</p>
+          <p class="en-p">Roku: 'Could it be so? Is it of the past, or of the future?'</p>
+          <p class="en-p">Katsu: 'The fulfillment of this dream belongeth unto tens of myriads of years in the future! When that era of rampant demons known as the Twentieth Century arriveth, the dark spirits of the Eight-Headed Serpent and Nine-Tailed Golden Fox will stir anew, seizing bodies prone to possession by Tokoyo-hime and Kotsune-hime! Inquiring through divine clairvoyance, toward the northeast from here, upon the parkland of the Gods, the Male and Female of our dream shall manifest to commence the works of the Miroku Age; wherefore evil spirits will possess vessels of the henjō nanshi lineage, masking themselves in virtue to devour the children of the faith and snatch away their jewels of life! Alas, how piteous are mortals of the Twentieth Century! One cannot but contemplate the heart-rending agony of the Izunome, Mizu-no-Mitama, Kin-katsu-kane, and Konohana-hime! Kamunagara Tamachihaemase, Kamunagara Tamachihaemase!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">二十五番峠の頂上より強烈なる烈風に吹き払はれ、谷間に陥りし勝公一行は、息吹き返し起き上り、互に顔を見合せて、</p>
+            <p class="ja-classical-line">勝『ヤア、此処はコシカ峠の谷底だ。一途の川とやら云ふ並木の松の茂つた一つ家に於て、常世姫や木常姫の悪霊と格闘をやつて居た積りだに、これは矢張り夢だつたかいなア』</p>
+            <p class="ja-classical-line">弥『アヽ宣伝使様、貴方もソンナ夢を見たのですか、私も見ましたよ、エグイ顔をした婆アだつたねー。目の周囲から鼻の辺りと云ふものは紫色に腫上つて、随分見つともよくない常世姫の寝姿、一目見るよりゾツとした。それに又、星の紋のついた水色の羽織を着た中婆の嫌らしい顔つたら、今思つても身体中がゾクゾクするやうですワ。それに与太公の奴、一つ家の窓を覗いて、芝居がかりに手踊をやるをかしさ、可笑しいやら、恐ろしいやら、気分が悪いやら、腹が立つやら、疳が立つやら、イヤもう三五教の精神も何処かへ行つて仕舞うて、見直し聞き直し、宣り直しと云ふ余裕がなかつた。オイ与太公、六公、貴様は如何だつた。夢の中の一人だつたぞ』</p>
+            <p class="ja-classical-line">与『俺もチヨボチヨボだ、一途の川だとか、欲しい一図だとか、婆が吐いて居たよ。余程よい血迷ひ婆アだワイ』</p>
+            <p class="ja-classical-line">六『鬼婆が出刄をもつて、突つかかつて来よつた時にや、この方は無手だ、先方は獲物を持つて居るのだから一寸ハラハラした途端、目が醒めたのだ。アヽ嫌らしい夢を見たものだ。夢の浮世と云ふからには、何処かにかう云ふ事実があるかも知れないよ』</p>
+            <p class="ja-classical-line">弥『夢と云ふものは神聖なものだ。吾々が社会的の総ての羈絆を脱して、他愛もなく本守護神の発動に一任した時だから、夢の中の事実はきつと過去か、現在か、未来のうちには実現するものだよ』</p>
+            <p class="ja-classical-line">六『さうだらうかなア、過去の事だらうか、未来の事だらうかな』</p>
+            <p class="ja-classical-line">勝『それは、この夢の実現は数十万年未来の事だ。二十世紀と云ふ悪魔横行の時代が来た時、八尾八頭や金毛九尾の悪霊が再び発動しよつて、常世姫や木常姫の霊魂の憑り易い肉体を使つて、行りよる事だよ。天眼通力によつて調べて見ると、何でもこれから艮の方に当つて、神さまの公園地に、夢の中の男子とか女子とかが現はれて、ミロクの世の活動を開始されるのを、何でも変性男子の系統の肉体に懸り、善の仮面を被つて教への子を食ひ殺し、玉取りをやる事の知らせであらう。アヽ二十世紀と云ふ世の中の人間は実に可憐さうだ。それにつけても、厳霊、瑞霊や金勝要の神、木花姫の呑剣断腸の御苦しみが思ひやられる哩。嗚呼惟神霊幸倍坐世惟神霊幸倍坐世』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">二十五番峠の頂上より強烈な烈風に吹き払われ、谷間に落ち込んだ勝彦一行は、息を吹き返して起き上がり、互いに顔を見合わせて、</p>
+              <p class="ja-modern-p">勝彦『やあ、ここは小鹿峠の谷底だ。「一途川」とかいう並木の松が生い茂った一軒家において、常世姫や木常姫の悪霊と格闘していたつもりだったが、これはやはり夢だったのかなあ』</p>
+              <p class="ja-modern-p">弥次彦『ああ宣伝使様、貴方もそんな夢を見たのですか。私も見ましたよ。エグい顔をした婆さんでしたねえ。目の周囲から鼻の辺りまで紫色に腫れ上がって、ずいぶん見っともない常世姫の寝姿、一目見るなりゾッとしました。それにまた、星の紋のついた水色の羽織を着た中年の婆さんの嫌らしい顔ったら、今思い出しても身体中がゾクゾクするようですわい。それに与太公のやつ、一軒家の窓を覗いて芝居がかりに手踊りをやる可笑しさと言ったら、可笑しいやら恐ろしいやら、気分が悪いやら腹が立つやら疳が立つやら、いやもう三五教の精神もどこかへ行ってしまって、「見直し聞き直し宣り直し」という余裕がありませんでした。おい与太公、六公、貴様達はどうだった。夢の中の登場人物だったぞ』</p>
+              <p class="ja-modern-p">与太彦『俺も似たようなものだ。「一途の川」だとか「欲しい一途」だとか、婆がぬかしていたよ。よっぽど血迷った婆さんだわい』</p>
+              <p class="ja-modern-p">六公『鬼婆が出刃包丁を持って突っかかって来た時には、こちらは素手、向こうは凶器を持っているのだから、ちょっとハラハラした途端に目が覚めたのだ。ああ嫌らしい夢を見たものだ。「夢の浮世」と言うからには、どこかにこういう事実があるかも知れないよ』</p>
+              <p class="ja-modern-p">弥次彦『夢というものは神聖なものだ。我々が社会的な一切の束縛を脱して、無心に本守護神の発動に一任した時なのだから、夢の中の事実はきっと過去か現在か未来のうちには実現するものだよ』</p>
+              <p class="ja-modern-p">六公『そうだろうかなあ。過去のことだろうか、未来のことだろうかなあ』</p>
+              <p class="ja-modern-p">勝彦『それは、この夢の実現は数十万年未来の事だ。二十世紀という悪魔横行の時代が来た時、八頭八尾の大蛇や金毛九尾の悪霊が再び発動し、常世姫や木常姫の霊魂が憑依しやすい肉体を使って悪業を働く知らせなのだ。天眼通の力によって調べてみると、ここから東北（艮・うしとら）の方角に当たって神様の公園地に、夢の中の男子や女子が現れてミロクの世の神業を開始されるのを、変性男子の系統の肉体に取り憑き、善の仮面を被って教えの子らを食い殺し、霊魂（玉）を奪い取ろうとする悪魔の陰謀の予告であろう。ああ、二十世紀という世の中の人間は実に憐れそうだ。それにつけても厳霊・瑞霊や金勝要の神、木花姫の呑剣断腸のご苦しみが思いやられるわい。ああ、惟神霊幸倍坐世、惟神霊幸倍坐世』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yota: 'For the salvation of all living beings across past, present, and future, seeing we have fallen beside this pristine stream, let us perform misogi, chant the sacred words, and pray for the fleshly shrines where abide Kin-katsu-kane, Konohana-hime, and the Male and Female who are the grand pillars of the Miroku Divine Reign! That this world may endure for myriad kalpas, blooming with flowers of unalloyed good!'</p>
+          <p class="en-p">Katsu: 'I heartily approve! Brethren, let us immediately act upon Yotahiko's proposal!'</p>
+          <p class="en-p">Yaji and Roku: 'We agree as well!'</p>
+          <p class="en-p">Casting off their garments by the riverbank, they plunged headlong into the stream with a resounding splash. While the four were immersed, purifying their flesh, Rokukō sank beneath the surface with a bubbling murmur and vanished into the depths. Clasping their hands with wholehearted devotion, Katsuhiko and the other two completed the Amatsu-Norito facing upstream; yet when they glanced aside, Rokukō was nowhere to be seen!</p>
+          <p class="en-p">Katsu: 'Heavens! Whither hath Roku-san gone? O-ho! Roku-san, where art thou?!'</p>
+          <p class="en-p">Though they shouted and called, no reply returned, save the roaring turbulence of dashing waves. Yajihiko cried:</p>
+          <p class="en-p">Yaji: 'Disaster! Rokukō hath sunk out of sight! We cannot stand idle; we must search for him! If he swalloweth water and drowneth, 'twill be past all remedy! Hark, Yotakō, what shall we do?'</p>
+          <p class="en-p">Yota: 'What can we do? He must be playing at being a submarine, lying submerged on the river bottom! He is a master of swimming; there is no fear of his drowning! When thou wast caught in the pine tree, he swam across this very torrent in full clothing without turning a hair! He is merely trying to startle us in jest!'</p>
+          <p class="en-p">Yaji: 'No matter how skilled a swimmer, one cannot be careless! Men say, "He who swimmeth well drowneth well!" In my judgment, he hath surely changed his name!'</p>
+          <p class="en-p">Yota: 'Changed his name? What meanest thou?'</p>
+          <p class="en-p">Yaji: 'He hath surely renamed himself Kawasoko Dozaemon—a drowned corpse at the river bottom!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">与『吾々は過去現在未来の衆生済度のため、この清らかな川辺に落ち込んだのを幸ひに、御禊を修し、神言を奏上してミロク神政の建設の太柱、男子女子をはじめ、金勝要の神、木花姫の霊の鎮まりたまふ肉の宮の為に、祈りませうか。この世の中が万劫末代維持していけるやうに、善ばかりの花の咲くやうに』</p>
+            <p class="ja-classical-line">勝『大賛成です、皆サン与太彦サンの提案に従つて即時決行致しませう』</p>
+            <p class="ja-classical-line">弥、六『吾々も賛成です』</p>
+            <p class="ja-classical-line">と云ひ乍ら、着衣を川辺に脱ぎ捨て、谷川にザンブとばかり飛込んだ。四人は一度に水に浸り身体を清めて居る際、ブルブルブルと音を立てて、六公は水底に姿を隠して仕舞つた。勝公を初め三人は一生懸命に両手を合せ川上に向つて天津祝詞を奏上し終つてフト傍を見れば六公の姿が見えぬ。</p>
+            <p class="ja-classical-line">勝『ヤア六サンは何処へ行つた。オーイ六サン何処だ』</p>
+            <p class="ja-classical-line">と呼べど叫べど何の応へもなく、激潭飛沫の音轟々と聞ゆるのみ。弥次彦は、『ヤア大変だ、六公が何処かへ沈没しよつたな、これや斯うしては居られぬ哩、何とかして捜索をせなくてはならぬ、愚図々々して居ると沢山の水を呑んで縡れては取返しがつかぬ。オイ与太公どうせうかなア』</p>
+            <p class="ja-classical-line">与『どうせうたつて仕方がないサ、大方六公の奴、潜水艇気取りで何処かの水底に暫時伏艇して居るのだらう。彼奴は水練に妙を得た奴だから、決して溺れるやうな気遣ひはないよ。貴様が松の枝に引つ懸つて居た時も、あの着物のまま谷川を泳ぎ渡つて平気で居る奴だから大丈夫だ。吾々を一寸驚かしてやらうと思うて洒落て居るのだよ』</p>
+            <p class="ja-classical-line">弥『なにほど水泳の達人だと云つても油断は出来ない、さう楽観する訳にもいかない、諺にも、好く泳ぐものは好く溺る、と云ふ事がある。此奴はどうしても俺の考へでは名替をしよつたに相違ない』</p>
+            <p class="ja-classical-line">与『名替つて何だい、流れの間違ひだらう』</p>
+            <p class="ja-classical-line">弥『馬鹿云ふな、川底土左衛門と改名したらうと云ふのだ』</p>
+            <p class="ja-classical-line">与『土左衛門とは怪しからぬ、真に大変だ。それだから道中に四人連はいかないと云ふのだ。オイ六公、生きて居るのか死んで居るか、ハツキリ返事をせぬかい』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">与太彦『我々は過去・現在・未来の衆生済度のため、この清らかな川辺に落ち込んだのを幸いに、禊を修めて神言を奏上し、ミロク神政の建設の大黒柱である男子・女子をはじめ、金勝要の神、木花姫の霊の鎮まり給う肉の宮のために祈りましょうか。この世の中が万劫末代まで維持していけるように、善ばかりの花が咲き薫るように』</p>
+              <p class="ja-modern-p">勝彦『大賛成です。皆さん、与太彦さんの提案に従って即時に決行いたしましょう』</p>
+              <p class="ja-modern-p">弥次彦・六公『我々も賛成です』</p>
+              <p class="ja-modern-p">と言いながら衣服を川辺に脱ぎ捨て、谷川にザンブとばかり飛び込んだ。四人は一度に水に浸かって身体を清めている最中、ブルブルブルと音を立てて六公は水底に姿を消してしまった。勝彦をはじめ三人は一生懸命に両手を合わせ、川上に向かって天津祝詞を奏上し終えて、ふと傍らを見れば六公の姿が見当たらない。</p>
+              <p class="ja-modern-p">勝彦『やあ、六さんはどこへ行った！ おーい六さん、どこだ！』</p>
+              <p class="ja-modern-p">と呼べど叫べど何の返事もなく、激流の水しぶきの音が轟々と聞こえるばかりであった。弥次彦は、</p>
+              <p class="ja-modern-p">弥次彦『やあ大変だ、六公がどこかへ沈没してしまったぞ。これはこうしてはおられぬわい、何とかして捜索しなければならん。グズグズしているとたくさんの水を飲んで溺れてしまっては取り返しがつかない。おい与太公、どうしようかなあ』</p>
+              <p class="ja-modern-p">与太彦『どうしようと言ったって仕方がないさ。大方六公のやつ、潜水艇気取りでどこかの水底にしばらく潜航しているのだろう。あいつは水練に長けたやつだから、決して溺れるような心配はないよ。貴様が松の枝に引っ掛かっていた時も、あの着物のまま谷川を泳ぎ渡って平気でいたやつだから大丈夫だ。我々をちょっと驚かしてやろうと思ってふざけているのだよ』</p>
+              <p class="ja-modern-p">弥次彦『いくら水泳の達人だと言っても油断は出来ないぞ。そう楽観するわけにもいかない。「よく泳ぐ者はよく溺る」という諺もある。こいつはどうしても俺の考えでは名前を変えてしまったに相違ない』</p>
+              <p class="ja-modern-p">与太彦『名前を変えるって何だい、流れの方向の間違いだろう』</p>
+              <p class="ja-modern-p">弥次彦『馬鹿を言うな。「川底土左衛門（水死体）」と改名したのだろうと言うのだ』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yota: 'A drowned corpse? How abominable! Truly a catastrophe! That is why folk say four companions bring ill luck! Hark, Rokukō! Art thou alive or dead? Answer clearly!'</p>
+          <p class="en-p">Yaji: 'Would a dead man answer? Calm thyself!'</p>
+          <p class="en-p">Yota: ''Tis a matter of seconds beneath the waves! If his breath runs out while we dally, what shall we do? To remain cool at such a crisis is the height of inhumanity! How could I help being beside myself? O-ho! O-ho! Rokukō! 'Tis too early to tread the Crossroads of the Six Realms! We are upon our pilgrimage unto Mount Caucasus! Surface, surface at once! Whither hast thou strayed? O-ho! O-ho!'</p>
+          <p class="en-p">Katsu: 'There is no help for it; he could scarce swim against this furious torrent! He must have been caught in a whirlpool and carried downstream! Shall we trace the riverbank downward to search for him?'</p>
+          <p class="en-p">Yaji: 'Even wert we to search, look upon that boiling blue chasm—what can we do? Had we Takahiko here, he would make an ideal search party! Dusk is gathering; if we dally, what disaster may befall us? Leaving Rokukō unto his karma, we three are precious instruments of the Gods! Let us hasten to the summit before dark!'</p>
+          <p class="en-p">Taking the lead, he hurried up the ravine slope. The other two followed, barely reaching the mountain trail atop the Twenty-Fifth Pass as twilight fell.</p>
+          <p class="en-p">Yaji: 'Well, Master Envoy! We three have returned safely unto our starting point, yet Rokukō's fate is tragic indeed! When the blind grandmother of Koyama Village heareth of it, how she will weep! Her paralyzed husband and she rejoiced so dearly! Alas, how cruel is this world! A mortal sphere of endless sorrow! Would we might establish a perfect cosmos where all beings enjoy eternal youth and immortality, free from demons and sudden misfortune!'</p>
+          <p class="en-p">Yota: '"Young and old alike are uncertain in life"—truly spoken! The transience of mortal existence pierceth me ever deeper!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">弥『死んで居るものが返事をするかい、気を落着けないか』</p>
+            <p class="ja-classical-line">与『一息を爭ふ水の中だ、愚図々々して居る間に息が切れたらどうするのだ。コンナ時に落着き払つて居る奴は非人道的の骨頂だ。これがどうして周章狼狼せずに居られうかい。オーイ　オーイ、六公、六道の辻を通るのは未だ早いぞ、コーカス参りの途中ぢやないか、早く浮かばぬか浮かばぬか、何処に踏み迷ふとるのだ。オーイ　オーイ』</p>
+            <p class="ja-classical-line">勝『エヽ仕方がない、滅多にこの激流を潜つて上る筈もなし、大方渦に巻込まれて流れたのかも知れませぬよ、谷川伝ひに此処を下つて探して見ませうか』</p>
+            <p class="ja-classical-line">弥『探さうと云つたつて、アレあの通り碧潭激流、何うする事も出来ぬぢやありませぬか。コンナ時に鷹彦サンが居て呉れば捜索隊になつて貰ふのに大変都合が好いけれどなア、追々日も暮れて来る、困つた事だ。愚図々々して居ると吾々迄がドンナ災難に遇ふかも知れぬ、マア六公は六公で仕方がないとして、吾々三人は神様の大事なお使ひ道具だ。あまり足許の暗くならない間に頂上まで、駆けつけませう』</p>
+            <p class="ja-classical-line">と先に立つて谷辺を駆け登る。二人も後に従ひ辛うじて黄昏頃、二十五番峠の頂上の山道に辿り着いた。</p>
+            <p class="ja-classical-line">弥『サア宣伝使様、漸く吾々三人は無事に元の地点に凱旋しましたが、六公の奴困つたものですなア。小山村のお婆アサンが聞いたら、嘸歎く事でせう、老爺サンも中風なり、あれ程喜んで居たものを、アヽ世の中と云ふものは残酷なものだ。本当に煩悶苦悩の娑婆世界だ。何とかして万有一切どこ迄も不老不死で悪魔の襲来や不時の過ちの無い完全なる世界を作りたいものですなア』</p>
+            <p class="ja-classical-line">与『アヽ人間を老少不定とはよく云つたものだ。無常迅速の感益々深しだワイ』</p>
+            <p class="ja-classical-line">勝『泣いても悔んでもモウ仕方がない、暮れる時が来れば日は暮れる、人間も死ぬ時節が来たら死なねばならない、桜の花は永久に梢に止まらず、頭の髪は何時迄も黒い艶を保つ事が出来ないのは世の中の習はせだ。アーアもう過ぎ越し苦労はサラリと谷川へ流して刹那心を楽しまうかい』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">与太彦『土左衛門とは不吉な、実に大変だ。だから道中に四人連れは良くないと言うのだ。おい六公、生きているのか死んでいるのか、ハッキリ返事をしないかい！』</p>
+              <p class="ja-modern-p">弥次彦『死んでいる者が返事をするものか、気を落ち着かせないか』</p>
+              <p class="ja-modern-p">与太彦『一息を争う水の中だぞ。グズグズしている間に息が切れたらどうするのだ。こんな時に落ち着き払っているやつは非人道の極致だ。これがどうして慌てふためかずにいられようか。おーい、おーい六公！ 六道の辻を通るのはまだ早いぞ！ コーカス山参りの途中じゃないか。早く浮き上がって来ないか、どこに迷い込んでいるのだ！ おーい、おーい！』</p>
+              <p class="ja-modern-p">勝彦『ええい仕方がない、めったにこの激流を潜って遡れるはずもない、大方渦に巻き込まれて流されたのかも知れませんよ。谷川沿いに下流を下って探してみましょうか』</p>
+              <p class="ja-modern-p">弥次彦『探そうと言ったって、あれ、あの通りの青淵の激流、どうすることも出来ないじゃありませんか。こんな時に鷹彦さんが居てくれたなら捜索隊になってもらうのに大変都合が良いのだけれどなあ。だんだん日も暮れて来る、困ったことだ。グズグズしていると我々までがどんな災難に遭うかも知れぬ。まあ六公は六公で仕方がないとして、我々三人は神様の大事なお使い道具だ。あまり足元の暗くならないうちに頂上まで駆けつけましょう』</p>
+              <p class="ja-modern-p">と先頭に立って谷沿いを駆け登った。二人も後に従い、辛うじて黄昏時に二十五番峠の頂上の山道に辿り着いた。</p>
+              <p class="ja-modern-p">弥次彦『さあ宣伝使様、ようやく我々三人は無事に元の地点に凱旋しましたが、六公のやつ、困ったものですねえ。小山村のお婆さんが聞いたらさぞ嘆くことでしょう。爺さんも中風を患い、あれほど喜んでいたものを。ああ、世の中というものは残酷なものだ。本当に煩悶苦悩の娑婆世界だ。何とかして万有一切、どこまでも不老不死で悪魔の襲来や不慮の過ちの無い完全なる世界を作りたいものですねえ』</p>
+              <p class="ja-modern-p">与太彦『ああ、「人間は老少不定」とはよく言ったものだ。無常迅速の思いがますます深まるわい』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Katsu: 'Weeping and regretting avail naught! When the hour cometh, the sun must set; when the time arriveth, mortal man must die! Cherry blossoms abide not forever upon the bough, nor can raven hair keep its luster eternally—such is the way of the world! Let us wash away past regrets into the stream and embrace the joy of the present instant!'</p>
+          <p class="en-p">Yota: 'What an agonizing joy of the instant! Though I resolve not to brood, how can I forget Rokukō who was laughing hale and hearty till a moment ago? When he and I searched for you twain the other day, his noble heart shone forth! Behind his rough exterior lay deep kindness! When ye vanished, how desperately he grieved! He even declared that if his two friends were dead, he would drown himself to accompany you! What a tragic end! Though companions but for a single day, he treated us like friends of ten years' standing! Thinking upon it, I would fain have died with him! Alas, shall we never gaze upon his face in this world again? Piteous, heartbreaking sorrow!'</p>
+          <p class="en-p">Weeping bitterly, he cast himself prostrate upon the earth in helpless grief.</p>
+          <p class="en-p">Yaji: 'Hark, Yotakō, pull thyself together! Thou art not the only one plunged in sorrow; I grieve as deeply as thou!'</p>
+          <p class="en-p">And weeping bitter tears, burying his face in his sleeves, he threw himself upon the ground; and rocking their bodies, both wailed aloud in lamentation. Blinking through tear-filled eyes, Katsuhiko admonished them:</p>
+          <p class="en-p">Katsu: 'Hold, Yajihiko, Yotahiko! Yield not to such despair! Be men! A man must not shed tears so freely; 'tis too effeminate!'</p>
+          <p class="en-p">Yet he too wiped falling tears with his sleeve.</p>
+          <p class="en-p">At last, through the rectifying grace of Kamunaobi and Ōnaobi, the curtain of tragedy was softly rolled up. The brief night gave way to dawn, and faint morning light illuminated their path. With hearts still aching for Rokukō, they turned unto the eastern sky with clasped hands, chanting the Amatsu-Norito to pray for his preservation; and completing their prayer, they descended the steep slope toward the northwest.</p>
+          <p class="en-p">Their swift descent ended, and running several miles across a boundless plain, they arrived beside a stream spanned by a single log bridge.</p>
+          <p class="en-p">Yaji: 'Master Envoy, our legs have grown weary. Shall we sit here and rest awhile?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">与『実に切ない刹那心だナア。過越し苦労をせまいと思つても、今の今迄ピンピンと噪いで居つた六公の事がどうして忘れる事が出来やうぞ。一昨日も六公と、お前サン等二人の行方を捜した時には六公の美しい心が現はれて居た。見かけによらぬ親切な男だつた。それはそれは宣伝使様、貴方達のお姿が見えなかつた時には、あの男はどれだけ心配をしよつたか知れませぬぜ。二人の友達がもし国替をして居るのなら、私も一緒に川へ身を投げてお伴をしたいと迄云つた位だ。アヽ可憐さうな事をした。僅一日道連になつても十年の知己のやうに親切を尽す六公の心の麗しさ、これを思へば吾々も六公の道連になつてやりたいやうだ。アヽもう此世では彼奴の顔を見る事が出来ぬのか、情ない可憐さうだ』</p>
+            <p class="ja-classical-line">と涙含み、身の置処なきさまに大地に身を投げた。</p>
+            <p class="ja-classical-line">弥『コラコラ与太公、しつかりせぬか、失望落胆するのは貴様ばかりぢやない、俺だつて同じ事だよ』</p>
+            <p class="ja-classical-line">と、又もや涙をハラハラと澪し顔に袖をあて、道の上にべたりと倒れ、身を揺つて遂には両人声をあげて泣き叫ぶ。勝公も涙の目を瞬たたきながら、</p>
+            <p class="ja-classical-line">勝『コレコレ弥次彦サン、与太彦サン、さう気投げをするものぢやない、チト確りせぬか。男と云ふものは仮りにも涙を澪すものぢやない、あまり女々しいぢやないか』</p>
+            <p class="ja-classical-line">と自分も亦落つる涙を袖にて拭ふ。</p>
+            <p class="ja-classical-line">愁歎の幕は漸く神直日大直日に見直し聞き直し幽かに巻上げられた。短き夜は既に明け離れ足許は仄と明かくなつて来た。一同は六公の身の上が矢張り気に懸ると見え東天に向つて合掌し、天津祝詞を奏上し、次で六公の無事生存せむ事を祈り、終つて又もや急坂を西北さして下り往く。</p>
+            <p class="ja-classical-line">足並早き下り坂にもいつしか暇を告げて、又もや茫々たる原野を走り行くこと数百丁、丸木橋のかけられた辺に辿りついた。</p>
+            <p class="ja-classical-line">弥『宣伝使様。大分足も草臥れました。此処に腰をおろして一休み致しませうか』</p>
+            <p class="ja-classical-line">勝『オヽこの川だつた、六公はこの水上で見失ひ、残念な事をしたが、今頃はどうなつて居るだらう』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">勝彦『泣いても悔やんでももう仕方がない。暮れる時が来れば日は暮れる、人間も死ぬ時節が来たら死なねばならない。桜の花は永久に梢にとどまらず、頭の髪はいつまでも黒い艶を保つことが出来ないのは世の習いだ。ああ、もう過ぎ越し苦労はサラリと谷川へ流して、刹那の心を楽しみましょうかい』</p>
+              <p class="ja-modern-p">与太彦『実に切ない刹那の心だなあ。過ぎ越し苦労をすまいと思っても、今の今までピンピンと騒いでいた六公の事がどうして忘れられようか。一昨日も六公とお前さん達二人の行方を捜した時には、六公の美しい心が現れていた。見かけによらない親切な男だった。それはそれは宣伝使様、貴方達のお姿が見えなかった時には、あの男がどれほど心配したか知れませんぜ。「二人の友達がもし他界しているのなら、私も一緒に川へ身を投げてお供をしたい」とまで言ったくらいだ。ああ可哀想な事をした。わずか一日道連れになっても十年の知己のように親切を尽くす六公の心の麗しさ、これを思えば我々も六公の道連れになってやりたいようだ。ああ、もうこの世ではあいつの顔を見る事が出来ないのか、情けない、可哀想だ』</p>
+              <p class="ja-modern-p">と涙を含み、身の置き所もないように地面に身を投げ出した。</p>
+              <p class="ja-modern-p">弥次彦『これこれ与太公、しっかりしないか。失望落胆するのは貴様ばかりじゃない、俺だって同じ事だよ』</p>
+              <p class="ja-modern-p">とまたしても涙をハラハラと零し、顔に袖を当てて道の上にペタリと倒れ込み、身体を揺すってついには二人して声を上げて泣き叫んだ。勝彦も涙目をしばたたきながら、</p>
+              <p class="ja-modern-p">勝彦『これこれ弥次彦さん、与太彦さん、そう弱気になるものではない、少しはしっかりしなさい。男というものは仮にも涙を零すものではない、あまり女々しいじゃないか』</p>
+              <p class="ja-modern-p">と自分もまたこぼれ落ちる涙を袖で拭った。</p>
+              <p class="ja-modern-p">愁嘆の幕は、ようやく神直日・大直日の神のお心で見直し聞き直され、かすかに巻き上げられた。短い夜はすでに明け放たれ、足元はほのぼのと明るくなって来た。一同は六公の身の上がやはり気にかかると見え、東の空に向かって合掌し、天津祝詞を奏上して六公の無事生存を祈り、祈り終えてまたしても急坂を北西を目指して下り始めた。</p>
+              <p class="ja-modern-p">足早な下り坂もいつしか終わりを告げ、またしても草茫々たる原野を走ること数百町（数キロメートル）、丸木橋が架けられた辺りに辿り着いた。</p>
+              <p class="ja-modern-p">弥次彦『宣伝使様、大分足も疲れました。ここに腰を下ろして一休みいたしましょうか』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Katsu: 'Ah, 'tis this very river! We lost Rokukō upstream, unto our bitter grief; how fareth he now?'</p>
+          <p class="en-p">Suddenly Yotahiko began groaning 'Ugh, ugh!', clasping his hands and swaying violently.</p>
+          <p class="en-p">Yaji: 'Heavens! Possessed again! We have had quite enough of demon assaults! Ho, evil spirits inhabiting Yotahiko, retreat at once!'</p>
+          <p class="en-p">Yota: 'Ro... ku... I am Roku, Roku!'</p>
+          <p class="en-p">Yaji: 'Bah! Good-for-nothing Roku! Having drowned as a corpse and departed unto the Otherworld, dost thou still hanker after the mortal sphere and wander hither? Cast off thine attachments and become a divine spirit! Leaving Otake behind, thy regret is natural; yet there is no help for it! Go unto the Divine Realm and prepare a dwelling for Otake! I too shall follow three hundred or a thousand years hence, so reserve a scenic spot for me! Confer with King Enma and post a "Reserved" sign for my lot! In return, I shall pray for thy repose morning and evening! If thou meetest the demon crone of the Sanzu River, she heedeth whatever I say; shall I write thee a letter of introduction?'</p>
+          <p class="en-p">Yota: 'I... am... not... dead!'</p>
+          <p class="en-p">Yaji: 'Naturally so; the dead abide not in the mortal world! Yet why dost thou wander hither where thou art not?'</p>
+          <p class="en-p">Yota: 'I... am... still... alive! I am by no means dead! Presently I shall bring my fleshly body to show you!'</p>
+          <p class="en-p">Yaji: 'What? Thou art not dead? Aha! Then thou art Roku's living phantom! Where art thou lingering now?'</p>
+          <p class="en-p">Yota: 'Ye shall know presently! Wait here for half an hour, all three of you! Rescued by Karasu Kanzaburō, my life is completely saved! Rest your hearts!'</p>
+          <p class="en-p">Yaji: 'Heavens! Can it be true? If true, how overjoyed I am! Master Envoy, this soundeth too sweet; could an evil deity be deceiving us? Pray perform saniwa upon him!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">与太彦は忽ちウンウンと唸り出し、両手を組んで身体を動揺し始めた。</p>
+            <p class="ja-classical-line">弥『ヤア又しても神憑りになりよつた。モウ悪魔の襲来は懲り懲りだ。オイ与太公の体に憑依つて居る悪霊共、速に退散致さぬか』</p>
+            <p class="ja-classical-line">与『ロヽヽヽヽクヽヽヽヽ六ぢや六ぢや』</p>
+            <p class="ja-classical-line">弥『エヽ碌でもない六の奴、貴様土左衛門になりよつて幽世の人間となりながら未だ娑婆が恋しうて迷うて来たか。好い加減に執着心を去つて、一時も早く霊神になれ。貴様はお竹を残して死んだのだから残り惜からう。残念なのは尤もだが、モウ斯うなつては仕方がない、早く神界へとつとと往つてお竹の場所を拵へて待つて居るがよからう。俺だとて三百年か千年の後かは知らぬが、何れ一度は行くのだから、景色のよい場所を取つて置いて呉れ。閻魔さまと相談して俺の場所だけには、契約済の札を立てて置くのだぞ。その代り俺は娑婆に居て、朝晩貴様のため冥福を祈つてやる。三途の川の鬼婆に出遇つたら、俺の云ふ事は何でも聞くのだから、何なら紹介状を書いてやらうか』</p>
+            <p class="ja-classical-line">与『オヽヽヽレヽヽヽワヽヽシヽヽ、死んで居らぬ』</p>
+            <p class="ja-classical-line">弥『定つた事よ、死んだものは娑婆に居らぬのは当然だ。居らぬ筈の貴様が何故コンナ処へ踏み迷ふて来るのだ』</p>
+            <p class="ja-classical-line">与『オヽレヽヽワヽヽマヽダヽイヽ生て居る、決して決して死んで居らぬぞ、今に肉体を引つ張つて来て見せてやらう』</p>
+            <p class="ja-classical-line">弥『ハア死んで居らぬと云つたのか、よく分つた、さうすると六の生霊だな、今何処に魔胡ついとるのか』</p>
+            <p class="ja-classical-line">与『イヽ今に判る、此処で半時ばかり三人とも待つて居て呉れ。烏勘三郎に助けられて命は完全に助かつた。安心してくれ』</p>
+            <p class="ja-classical-line">弥『ヤアそれや本当か、本当なら俺も嬉しい哩。これこれ宣伝使さま、余り甘い話だが、此奴は邪神が誑かして居るのではあるまいか、貴方一つ審神をして見て下さいな』</p>
+            <p class="ja-classical-line">勝『神に間違ひはありますまい、軈て六サンの肉体に遇はれませう。暫く此処に坐つて神言を奏上し、神様にお礼を申しませう。モシモシ、六サンとやら、モウ判りました、お引き取りを願ひます。一二三四五六七八九十百千万、惟神霊幸倍坐世、惟神霊幸倍坐世』</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">勝彦『おお、この川だったな。六公はこの上流で見失い、誠に残念な事をした。今頃はどうなっているだろう』</p>
+              <p class="ja-modern-p">与太彦はたちまちウンウンと唸り出し、両手を組んで身体を激しく揺り動かし始めた。</p>
+              <p class="ja-modern-p">弥次彦『やあ、またしても神懸かりになりおった！ もう悪魔の襲来は懲り懲りだぞ。おい、与太公の身体に憑依している悪霊ども、速やかに退散いたさぬか！』</p>
+              <p class="ja-modern-p">与太彦『ロ……ク……六じゃ、六じゃ！』</p>
+              <p class="ja-modern-p">弥次彦『ええい、ろくでもない六のやつめ！ 貴様、土左衛門になって幽世の人間となりながら、まだ娑婆が恋しくて迷い出て来たのか。いい加減に執着心を捨てて、一刻も早く神霊になれよ。貴様はお竹を残して死んだのだから名残惜しかろう。無念なのはもっともだが、もうこうなっては仕方がない。早く神界へ行って、お竹の居場所をこしらえて待っているが良いぞ。俺だって三百年か千年の後かは知らぬが、いずれ一度は行くのだから、景色の良い場所を取っておいてくれ。閻魔様と相談して、俺の場所だけには「契約済み」の札を立てておくのだぞ。その代わり、俺は娑婆にいて朝晩貴様のために冥福を祈ってやる。三途の川の鬼婆に出逢ったら、俺の言う事は何でも聞くのだから、何なら紹介状を書いてやろうかい』</p>
+              <p class="ja-modern-p">与太彦『お……れ……は……し……死んでおらぬ！』</p>
+              <p class="ja-modern-p">弥次彦『当たり前よ、死んだ者が娑婆に居らぬのは当然だ。居らぬはずの貴様が何故こんな所へ迷い出て来るのだ』</p>
+              <p class="ja-modern-p">与太彦『お……れ……は……ま……だ……い……生きている！ 決して決して死んでおらぬぞ！ 今に肉体を引っ張って来て見せてやろう！』</p>
+              <p class="ja-modern-p">弥次彦『はあ？ 死んでおらぬと言ったのか？ よく分かった、そうすると六の生霊だな。今どこでモタモタしているのだ』</p>
+              <p class="ja-modern-p">与太彦『い……今に分かる！ ここで半時（一時間）ばかり三人とも待っていてくれ！ 烏勘三郎に助けられて命は完全に助かった！ 安心してくれ！』</p>
+              <p class="ja-modern-p">弥次彦『やあ、それや本当か！ 本当なら俺も嬉しいわい。これこれ宣伝使様、あまりに美味い話だが、こいつは邪神が誑かしているのではありますまいか。貴方、ひとつ審神者をして見て下さいな』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Katsu: 'The oracle cannot be mistaken; presently we shall meet Roku-san's physical body! Let us sit awhile, chant the sacred words, and offer gratitude unto the Gods! Hearken, Roku-san! We have understood; pray depart in peace! "Hito, Futa, Mi, Yo, Itsu, Muyu, Nana, Ya, Kokono, Tari, Momo, Chi, Yorozu!" Kamunagara Tamachihaemase, Kamunagara Tamachihaemase!'</p>
+          <p class="en-p">Rokukō's living spirit departed instantly. Returning unto his senses, Yotahiko murmured:</p>
+          <p class="en-p">Yota: 'Ah, so Rokukō is indeed alive! He possessed me and declared such words! Because I grieved for him so deeply, my earnest heart reached his living spirit! If what he spoke through my lips be true, how joyful I am!'</p>
+          <p class="en-p">While the three sat in silence beside the bridge, an enormous man emerged from the river carrying a man upon his back, trudging slowly upward. Behind him followed a band of a dozen rough-hewn men, murmuring among themselves. The three stared at them in amazement.</p>
+          <p class="en-p">Man: 'Lo! Ye are the divine envoys of the Sango Faith!'</p>
+          <p class="en-p">Three: 'Art thou not Karasu Kanzaburō?!'</p>
+          <p class="en-p">Kanzaburō: 'Aye, indeed! I have brought Roku-san unto you!'</p>
+          <p class="en-p">Yaji: 'Hearty thanks unto thee! Doth Roku-san speak? Doth he live?'</p>
+          <p class="en-p">Kanzaburō: 'He neither speaketh nor moveth, yet faint warmth lingereth in his body; wherefore thinking he might revive if warmed by fire, seeing him bobbing downstream, we risked our lives and plunged into the torrent to retrieve him!'</p>
+          <p class="en-p">Katsu: 'Wondrous indeed! But a moment ago, Rokukō came hither and promised he would meet us presently!'</p>
+          <p class="en-p">Kanzaburō: 'Passing strange! How could he have visited you ere now? Could this not be Roku-san, but an impostor? Some shape-shifting badger? For putting us to such toil, shall I dash him unto the earth and trample him?!'</p>
+          <p class="en-p">Yaji: 'Hold, hold! Desist from such rough handling; thou wilt slay him outright! Lay him gently upon the turf; now we shall perform the sacred rite of Soul-Recalling!'</p>
+          <p class="en-p">Kanzaburō: 'I cannot comprehend a word of this mystery! Well, I shall set him down!'</p>
+          <p class="en-p">And he laid him gently upon the green turf.</p>
+          <p class="en-p">Yaji: 'O Rokukō, what a favored mortal thou art! We shall restore thy soul! Master Envoy, let us chant the Heavenly Counting Song!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">六公の生霊は忽ち肉体を離れた。与太彦は元の如くケロリとしながら、</p>
+            <p class="ja-classical-line">与『アヽ、矢張り六公は生て居ますなア、とうとう憑依つて来よつて、アンナ事を云ひよつた。余り六公々々と思ひ詰めて居たものだから、此方の一心が届いて六の生霊に感応したと見える、私の口を借つて云つた事が本当なら嬉しいがなア』</p>
+            <p class="ja-classical-line">三人が橋の袂に端坐して稍沈黙に耽る折しも一人の男を背負うて川から上り、ノソリノソリと上つて来る大男がある。後よりガヤガヤと囁きながら十数人の荒くれ男がついて来る。三人は怪訝な顔をして此男を凝視て居る。</p>
+            <p class="ja-classical-line">男『ヤア貴方は三五教の宣伝使様』</p>
+            <p class="ja-classical-line">三人『ヤアお前は烏勘三郎だないか』</p>
+            <p class="ja-classical-line">『ハイ左様で御座います、六サンを連れて参りました』</p>
+            <p class="ja-classical-line">弥『夫は夫は有難い、御苦労だつた。六サンは物言ひますかな、イヤ未だ生て居りますか』</p>
+            <p class="ja-classical-line">烏『物も言はず動きもしませぬが、身体の一部に温味がありますので、火でも焚いてあたらしたら、此方のものにならうも知れぬと考へて、ブカブカと流れて来るのを吾々一同が命を的に川へ飛び込み拾つて来ました』</p>
+            <p class="ja-classical-line">勝『それは有難い、唯今の先、六公が此処にやつて来てタツタ今、お目に懸ると云つて居ました』</p>
+            <p class="ja-classical-line">烏『妙ですなア、先程此処へ来たとは合点が往かぬ。さうすると此奴は六サンぢやないのかなア、大方化物だらう。エヽ偉い苦労をさせよつて、呶狸奴が、打ちつけて蹂躙つてやらうか』</p>
+            <p class="ja-classical-line">弥『マアマア待つた待つた、ソンナ手荒い事をしてどうなるものか、夫こそ本当に死んで仕舞はア。そつと其辺におろして呉れ、これから霊よびの神業だ』</p>
+            <p class="ja-classical-line">烏『アヽ何だかテント、訳が分らぬやうになつて来たワイ。マア仕方がない、下さうかい』</p>
+            <p class="ja-classical-line">と芝生の上にそつと下した。</p>
+            <p class="ja-classical-line">弥『オヽ六公、貴様は仕合せものだ、待て待て今に魂返しをやつてやらう。サア宣伝使様、天の数歌を始めませうか』</p>
+            <p class="ja-classical-line">勝彦は無言つて、首肯きながら拍手を打ち声も細く静に落着き払つて、一二三四五六七八九十百千万と二回繰かへした。六公の体はムクムクと動き出し、直に起上り三人の顔をキヨロキヨロと眺め、</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">勝彦『神託に間違いはありますまい。やがて六さんの肉体に巡り逢えるでしょう。しばらくここに座って神言を奏上し、神様にお礼を申し上げましょう。もしもし六さんとやら、もう分かりました、お引き取りを願います。「ひ、ふ、み、よ、い、む、な、や、こ、と、ももちよろず」、惟神霊幸倍坐世、惟神霊幸倍坐世』</p>
+              <p class="ja-modern-p">六公の生霊はたちまち肉体を離れた。与太彦は元の如くケロリとしながら、</p>
+              <p class="ja-modern-p">与太彦『ああ、やはり六公は生きていますなあ。とうとう憑依して来てあんな事を言いおった。あまりに六公、六公と思い詰めていたものだから、こちらの一心が届いて六の生霊に感応したと見える。私の口を借りて言った事が本当なら嬉しいがなあ』</p>
+              <p class="ja-modern-p">三人が橋の袂に端座して静かに沈黙していた折しも、一人の男を背負って川から上がり、ノソリノソリと登って来る大男があった。後ろからガヤガヤと囁き合いながら十数人の荒くれ男たちがついて来る。三人は怪訝な顔をしてこの男を注視していた。</p>
+              <p class="ja-modern-p">大男『やあ、貴方は三五教の宣伝使様！』</p>
+              <p class="ja-modern-p">三人『やあ、お前は烏勘三郎ではないか！』</p>
+              <p class="ja-modern-p">烏勘三郎『はい、左様でございます。六さんを連れて参りました！』</p>
+              <p class="ja-modern-p">弥次彦『それはそれは有難い、ご苦労だった！ 六さんは物を言いますかな、いや、まだ生きておりますか』</p>
+              <p class="ja-modern-p">烏勘三郎『物も言わず動きもしませんが、身体の一部に温もりがありますので、火でも焚いて温めたなら息を吹き返すかも知れぬと考え、プカプカと流れて来るのを我々一同が命がけで川へ飛び込み、拾い上げて参りました』</p>
+              <p class="ja-modern-p">勝彦『それは有難い。たった今、六公がここへやって来て、「今にお目にかかる」と言っておりましたよ』</p>
+              <p class="ja-modern-p">烏勘三郎『妙ですなあ。先ほどここへ来ただなんて合点がいきません。そうするとこいつは六さんじゃないのかなあ、大方化け物でしょう。ええい、大変な苦労をさせおって、この古狸めが、叩きつけて踏み躙ってやろうか！』</p>
+              <p class="ja-modern-p">弥次彦『まあまあ待った、待った！ そんな手荒な事をしてどうなるものか、それこそ本当に死んでしまうわい。そっとその辺りに下ろしてくれ、これから魂呼びの神業だ』</p>
+              <p class="ja-modern-p">烏勘三郎『ああ何だかさっぱり訳が分からなくなって来たわい。まあ仕方がない、下ろそうかい』</p>
+              <p class="ja-modern-p">と芝生の上にそっと下ろした。</p>
+              <p class="ja-modern-p">弥次彦『おお六公、貴様は幸せ者だ。待て待て、今に魂返しをやってやろう。さあ宣伝使様、天の数歌を始めましょうか』</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Clapping his hands in silence, Katsuhiko chanted the Heavenly Counting Song with serene calm twice: 'Hito, Futa, Mi, Yo, Itsu, Muyu, Nana, Ya, Kokono, Tari, Momo, Chi, Yorozu.' Thereupon Rokukō's body began to stir, and sitting upright, he rubbed his eyes and peered into their visages:</p>
+          <p class="en-p">Roku: 'Aha! Yajikō, Yotakō! Master Envoy, what a strange spot to meet! Having failed to cross the Sanzu River, I was on the brink of my second journey to the dead; yet Karasu Kanzaburō and his disciples plunged into the flood, fished me out, and carried me on his back unto this log bridge! Are ye still journeying through the Nether Realm? I fancied I was alone, yet what faithful companions ye are to follow me even in death! True friends are treasures indeed! Kamunagara Tamachihaemase, Kamunagara Tamachihaemase!'</p>
+          <p class="en-p">Yajihiko gave Rokukō's back three or four resounding smacks with his open palm.</p>
+          <p class="en-p">Roku: 'Ouch, ouch! What art thou doing? I knew thou wast a ruffian in the mortal world, but hast thou not reformed even in the Netherworld?!'</p>
+          <p class="en-p">Yaji: 'This is not the Netherworld! 'Tis the plain beneath the Twenty-Fifth Pass! Thou wast drowned in the torrent and on the brink of death; yet through divine providence, Kanzaburō's men rescued thee and brought thee hither! Pull thyself together!'</p>
+          <p class="en-p">Rubbing his eyes, Rokukō surveyed the surroundings with fresh wonder:</p>
+          <p class="en-p">Roku: 'Aha! It seemeth indeed the mortal sphere! Good friends, forgive the sorrow I caused you, and accept my heartfelt gratitude! And Karasu Kanzaburō and all thy brethren—ye are the saviors of my life; never shall I forget this debt so long as I live!'</p>
+          <p class="en-p">Kanzaburō: 'We rejoice that thou hast revived! Let us give thanks unto the Gods!'</p>
+          <p class="en-p">Chanting the sacred words and singing propagation songs, the four envoys expressed their profound gratitude unto Kanzaburō and his troop; and crossing the log bridge, they pressed forward toward the Twenty-Sixth Pass.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">六『アヽお前は弥次公、与太公か、ヤア宣伝使様妙な処で遇ひました。三途の川を渡り損ねてスツテの事で二度目の国替をするところだつたが、烏勘三郎と云ふ男、十数人の弟子と共に身を躍らして川に飛び込み私を救ひ上げ、背に負ふて何処ともなしにトントン走り出したと思つたら丸木橋の袂、お前サンはやはり幽界の旅をして居なさるのか、今度は自分一人だと思つて居たのに何処までも交際のよい御親切なお方だ。持つべきものは朋友なりけりだ。アヽ、惟神霊幸倍坐世、惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">弥次彦は六公の背を平手で三つ四つ、力を籠めて擲りつけた。</p>
+            <p class="ja-classical-line">六『アイタヽヽヽ貴様は何をするのだい。驚いたな、娑婆に居る時から乱暴な奴だと思うて居たが、貴様未だ冥途に来ても改心出来ぬか』</p>
+            <p class="ja-classical-line">弥『此処は冥途ぢやないぞ、二十五番峠を下つて数百丁来たところだ。お前は谷川に溺れて一旦縡れて居つたのだ。それを神様のお引き合せで勘三郎サンの親内の者に助けられ、此処に来たのだ。確りして呉れ』</p>
+            <p class="ja-classical-line">六公は目を擦りながら今更のやうな顔をして四辺を念入りに見廻し、</p>
+            <p class="ja-classical-line">『ヤア、矢張どうやら娑婆らしい、ヤ、皆サン、偉い御心配をかけました、有難う。これはこれは烏勘三郎サン、その他親内の御一同、よう助けて下さいました。命の親だと思ふてこの御恩は生涯忘れませぬ』</p>
+            <p class="ja-classical-line">烏『ヤア気がついて何より結構でした。神様にお礼を申しませう』</p>
+            <p class="ja-classical-line">茲に一同は神言を奏上し、宣伝歌を歌ひ、又もや四人の一行は勘三郎その他に厚く礼を述べ、丸木橋を渡つて二十六番峠を指して進み行く。</p>
+          </div>
+          <details class="ja-modern-details">
+            <summary class="ja-modern-summary">
+              <span class="summary-icon">📖</span>
+              <span class="summary-text">現代日本語訳</span>
+              <span class="summary-arrow"></span>
+            </summary>
+            <div class="ja-modern">
+              <p class="ja-modern-p">勝彦は無言のまま頷きながら柏手を打ち、声も静かに落ち着き払って、「ひ、ふ、み、よ、い、む、な、や、こ、と、ももちよろず」と二回繰り返した。すると六公の身体はムクムクと動き出し、すぐに起き上がって三人の顔をキョロキョロと眺め、</p>
+              <p class="ja-modern-p">六公『ああ、お前は弥次公、与太公か！ やあ宣伝使様、妙な所で出逢いましたなあ。三途の川を渡り損ねて危うく二度目の他界（国替え）をするところだったが、烏勘三郎という男が十数人の弟子と共に身を躍らせて川に飛び込み私を救い上げ、背中に背負ってどこへともなくトントン走って行ったと思ったら丸木橋の袂、お前さん達はやはり幽界の旅をしておられるのかい。今度は自分一人だけだと思っていたのに、どこまでも付き合いの良いご親切なお方たちだ。持つべきものは朋友（友）だなあ。ああ、惟神霊幸倍坐世、惟神霊幸倍坐世』</p>
+              <p class="ja-modern-p">弥次彦は六公の背中を平手で三つ四つ、力を込めて引っぱたいた。</p>
+              <p class="ja-modern-p">六公『痛たたたた！ 貴様は何をするのだい！ 驚いたなあ、娑婆に居る時から乱暴なやつだと思っていたが、貴様はまだ冥土に来ても改心出来ぬのか』</p>
+              <p class="ja-modern-p">弥次彦『ここは冥土じゃないぞ！ 二十五番峠を下って数百町（数キロメートル）来た所だ。お前は谷川に溺れて一時息が絶えていたのだ。それを神様のお引き合わせで勘三郎さんの身内の者たちに助けられ、ここへ連れて来られたのだ。しっかりしろ！』</p>
+              <p class="ja-modern-p">六公は目を擦りながら今更のように四辺を念入りに見回し、</p>
+              <p class="ja-modern-p">六公『やあ、やはりどうやら娑婆らしいぞ！ やあ皆さん、大変なご心配をおかけしました、有難う！ これはこれは烏勘三郎さん、その他身内のご一同、よくぞ助けて下さいました。命の恩人と思って、このご恩は生涯忘れません！』</p>
+              <p class="ja-modern-p">烏勘三郎『やあ、気がついて何より結構でした。神様にお礼を申し上げましょう』</p>
+              <p class="ja-modern-p">ここに一同は神言を奏上し、宣伝歌を歌い、またしても四人の一行は勘三郎らに厚く礼を述べ、丸木橋を渡って二十六番峠を目指して進んで行った。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: 一途 River [564]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: 返り咲 [566]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
