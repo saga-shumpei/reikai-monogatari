@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 敵味方 [626] - Volume 17 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 17 Table of Contents</a>
+      <span>Volume 17</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 17 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 敵味方 [626]</h1>
+      <p class="chapter-title-ja">敵味方〔626〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Bathed in the moonlight of the fifteenth day of Niguwatsu, upon the level ground at the summit of Mitakeyama, they entered the land of Kuwashiyo, sharing a common fate, spreading their straw rain-capes, and using their elbows as pillows. Umakō and Shikakō, their dreams shattered by the sound of the storm blowing over the peaks, rose up at once with a start.</p>
+          <p class="en-p">Shikakō: 'Ah, what a terrifying thing it was. Just as I thought we had escaped the peril of the rocky cavern through the compassion of Lady Murasakihime, the two, Arataka and Onitaka, returned from Onigajō, bound us two, and thrust us back into the cavern; but it was a dream. Ah, how terrifying, how terrifying; even in a dream, such Akunin make one shudder.'</p>
+          <p class="en-p">Umakō: 'Ha, did you also have a dream? I had a dream of the same kind. Somehow, the heart is ill at ease in this place. Since it is a moonlit night, shall we wander about here?'</p>
+          <p class="en-p">Shikakō: 'That is so. If we have this many of our company, we should be safe in the event of an emergency. Even if we wander a chō or two away, there should be no cause for concern. Should Arataka or Onitaka appear by any chance, if we but say a single word, "O, help us," Kamehiko-sama will surely assist us by the firing of the Kototama, that is a certainty. Come, let us go, let us go. Everyone is sleeping so soundly. Those of us with deep sins are driven by fear and cannot even enjoy a proper sleep. If we are awake, we are subjected to terrifying sights; if we sleep, we have terrifying dreams; whether sleeping or waking, we are constantly tormented... Relying on the light of the magnificent moon, shall we not wander about here a little for the sake of our health?'</p>
+          <p class="en-p">Umakō: 'That would be well.'</p>
+          <p class="en-p">So saying, they rose abruptly, and the two, holding hands, wandered aimlessly about the summit of the mountain.</p>
+          <p class="en-p">'Ah, what a beautiful scene. Although the wind is cold enough upon the mountain, dew has gathered on the leaves, and the moon dwells in each one; this spectacle is as if we were in a world of crystal. Ah, even unfortunate beings like us can behold such a delightful scene. How one wishes for a long life as a human being.'</p>
+          <p class="en-p">So they sang in a humming voice, wandering here and there.</p>
+          <p class="en-p">Kamehiko awoke in the midst of the night and said, 'Ah, everyone is gathered together, sleeping so soundly. The white face of Princess Etsuko, her peach-colored cheeks, the flower-like, beautiful figure of Lady Murasakihime; on one side a flower-like countenance, on the other skin like snow, and in the sky the bright moon of the fifteenth night. It seems the moon itself is quite pleased, for it illuminates the two fair faces with special favor; how much more beautiful they appear. ...Ah, the face of Otohiko, what a posture, lacking in vigor. He sleeps with one arm bent in the shape of a kana character, his mouth open in an unrefined manner. At this hour, he is likely dreaming of Princess Isago. His beloved wife was snatched away by those of the Brahman religion and remains missing; when I think of it, I can well perceive his inner heart. Even so, he has been walking with us all this time, and seeing that he does not even utter the name of Princess Isago, he must be quite resolute... By looking at the sleeping face of a human, one can generally discern their spirit. Let me set out to inspect the head of Aohyōtanyahiko... Ha, this fellow is smiling happily. He must be dreaming of Osechi of Tanbamura or some such thing. Ha, he is smiling even more. As he is a fellow who might be called a phantom, there is something about his smile that is full of malice. I would like to show this to Osechi, ha ha ha. Ha, this fellow is from Tanshu, he has a rather fine face. He said it was by the command of the deity Princess Toyokuni, and indeed, there is a sense of dignity about him. Ha, a strange light is appearing in the center of his face. Is he an incarnation of Princess Konohana, or the return of the Myōon Bosatsu? This fellow is not one to be lightly despised. He appears to be a person of great character among our party. ...Ha, I have performed a good Saniwa. Tomorrow, I shall give Otohiko the leader a surprise. ...Hm, this fellow is the hunchbacked Natsuhiko, trained by Kurohime. What a pathetic, scowling face. Ha, this fellow is not worth criticizing. Here is one with a rather cunning face. This fellow is what they call a fox or a raccoon. Hm, yes, yes, Tomohiko, Tomohiko; while he is sleeping now, shall I tie his hair together?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">二月十五日の月光を浴びて、三嶽山の頂上の平地に、一蓮托生、蓑を敷き、肱を枕に華胥の国に入る。馬公鹿公は峰吹く嵐の音に夢を破られ、一度にムツクと起上り、</p>
+            <p class="ja-classical-line">鹿公『アー恐ろしい事だつた。折角紫姫様のお情に依りて、岩窟の難を免れたと思へば荒鷹、鬼鷹の両人、鬼ケ城より帰り来り、俺達二人をフン縛つて、又もや岩窟に捻込みやがつたと思へば、夢だつた。アー恐ろしい恐ろしい、夢に見ても、アンナ悪人はゾツとする』</p>
+            <p class="ja-classical-line">馬公『ヤアお前も夢を見たか。俺も同様の夢を見た。何だか此処は寝心が悪い。チツト月夜でもあり、そこらをブラついて見ようかい』</p>
+            <p class="ja-classical-line">鹿公『さうだなア、是れ丈の同勢があれば、まさかの時には大丈夫だ。一丁や二丁離れたつて、気遣ひはあるまい。万一荒鷹や、鬼鷹が出て来やがつた所で「オイ助けて呉れい」と一言云へば、すぐ加米彦さまが、言霊の発射とやらで助けて下さるは請合ぢや。サア行かう行かう。皆さまはマア、よう寝ンで居らつしやること。吾々の様に罪が深い者は、恐怖心に駆られて、安眠も碌に出来ないワ。起きて居れば怖い目に遭はされる、寝れば眠るで怖い夢を見る、寝ても醒めても、責られ通しだ………結構なお月様の光をたよりに、チツと其処辺を、保養がてら、ウロつかうぢやないか』</p>
+            <p class="ja-classical-line">馬公『宜からう』</p>
+            <p class="ja-classical-line">と、フツと立ち、二人は手をつなぎ、ブラブラと山の頂きを逍遥して居る。</p>
+            <p class="ja-classical-line">『アヽ何と、佳い景色だ。山の上で風は良い加減に冷たいが、木の葉に露が溜り一々月が宿つて居る、此光景はまるで、水晶の世界に居る様だ。アーア俺達の様な不仕合せ者でも、亦コンナ愉快な光景を見る事が出来る。人間は長生したいものだなア』</p>
+            <p class="ja-classical-line">と鼻唄を唄ひ、あちらこちらとウロついて居る。</p>
+            <p class="ja-classical-line">加米彦は中途に目を醒まし、</p>
+            <p class="ja-classical-line">『アーア皆さま打揃うて、よく寝て居らつしやるワイ。悦子姫さまの白い顔、桃色の頬べた、紫姫さまの花のやうな麗しきお姿、一方は花の顔容、一方は雪の肌、空には三五の明月、お月さまも余程気に入つたと見えて、二人のナイスの顔を、特別待遇でお照しなさると見える、いやが上にも綺麗なお顔だ事。………アヽ音彦の顔か、随分力をオト彦テなスタイルだ。片腕をくの字に曲げ、無作法に口を開けて寝て御座るワイ。今頃は五十子姫の夢でも見て居るのだらう。可愛い女房をバラモン教の奴に攫はれ、今に行衛不明、思へば思へば心中を察してやる。それでも此永の間一緒に歩いて居るが、五十子姫のイの字も口に出しよらぬ所を見ると、余程確りして居るワイ……人間の寝顔を見れば、大抵其人の精神が分るものだ。どれどれ青瓢箪彦の首実検と出かけよう………ヤア此奴は嬉しさうにホヤホヤと笑うて居る。何でも丹波村とかのお節の夢でも見て居るのだらう。ヤア益々笑ひよるぞ。幽霊と仮称せられる様な奴だから、どうで笑ひにも何処ともなしに厭味たつぷりの所がある。コンナ所を一つお節に見せてやりたいものだなア、アハヽヽヽ。ヤア此奴は丹州かな、一寸好い顔をして居やがるぞ。何でも豊国姫の神様の御命令だと云つて居たが、何処ともなしに威厳が備はつて居る。ハヽア顔の真中に妙な光が現はれて居るぞ。木の花姫の化身か、妙音菩薩の再来か、此奴ア、ウツカリ軽蔑する訳には行かぬワイ。我々一行中での大人格者と見える。……ヤア良い審神をした。明日になつたら音彦の大将に一泡吹かしてやらう。……ウン此奴は黒姫仕込みの、腰曲りの夏彦と云ふ奴だ。なんと情ない鯱つ面だなア。ヤア此奴ア批評の価値がないワイ。此処に一寸こましい面の持主がある。此奴が、何でも狐とか狸とか云ふ奴だ。ウンさうさう常彦々々、今寝て居る間に、髪と髪とを括つといてやらうかなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kamehiko seized the long hair of the two, and with the ends, bound them fast in a Jigokumusubi knot.</p>
+          <p class="en-p">"Come, when this fellow awakens, it shall be truly Kotsukei. From here on, it is the turn of Otohiko-sama and Aohiko. Yet, the Kiyori is too great... it seems the hair will not reach. Wait, wait... ah, here is a rope. I shall bind them with this."</p>
+          <p class="en-p">He bound them together with Tebaya, and said,</p>
+          <p class="en-p">"Ha, ha, ha, ha, with this there is no fear of Funshitsu. Next shall be Yoshikohime-sama and Murasakihime-sama... Ah, this is a pity. To join Murasakihime and Tanshiu, and finally to join Yoshikohime and the Ōkami-sama, Kamehiko. With this, two times four is eight people, and two times eight is sixteen arms and legs. Ah, Omoshiro, Omoshiro."</p>
+          <p class="en-p">He then reached out in the Tesagu and seized the hair of Murasakihime.</p>
+          <p class="en-p">Murasakihime rose abruptly, seized the Udekubi of Kamehiko, and threw him with such force that Kamehiko fell with a thud toward the valley at his side.</p>
+          <p class="en-p">"Aita, aita, aita, aita!" he cried out.</p>
+          <p class="en-p">Murasakihime said, "Ah, everyone, please wake up. Once again, the Teshita Monodomo of Onikumawake have appeared. Come, Goyōi, Goyōi."</p>
+          <p class="en-p">Startled by this voice, the Ichidō sprang up, and Tsunehiko cried,</p>
+          <p class="en-p">"Aita, aita, aita, aita!"</p>
+          <p class="en-p">Natsuhiko said, "Eh, eh, etaiwai, etaiwai, who is it, who is it, pulling at a person's hair... will you not let go?"</p>
+          <p class="en-p">Tsunehiko said, "Oi, Natsu, it must be you."</p>
+          <p class="en-p">Natsuhiko said, "Do not speak like a fool. It is you who are pulling my hair."</p>
+          <p class="en-p">Aohiko said, "Ah, there is someone pulling my head... Ah, what is this? While we were sleeping, they have joined our hair together. The one who would play such a prank is likely Kame-kō. Oi, Kamehiko, where have you gone? Come out quickly and untie us."</p>
+          <p class="en-p">Kamehiko said, "Oi, oi, I am in a terrible place, bound with my hands behind my back, and I am in distress. Someone come out and untie me."</p>
+          <p class="en-p">Aohiko said, "Ah, so Kamehiko has been bound as well? This is why it is said that negligence is a great enemy. To let one's guard down while facing enemy territory and to fall asleep is our own lack of vigilance, yet it is fortunate that no one has been lost."</p>
+          <p class="en-p">Kamehiko said, "Oi, Aohiko, everyone, do not worry yourselves. Mine is a case of self-binding and self-unbinding; I remain as I was before."</p>
+          <p class="en-p">Aohiko said, "What is this, trying to frighten people... where were you bound?"</p>
+          <p class="en-p">Kamehiko said, "Well, it matters not. What on earth are you all? You have attached long tails to your heads..."</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">加米彦は二人の長髪をソツと掴み、端と端とで地獄結に括つて了ひ、</p>
+            <p class="ja-classical-line">『サア此奴が目が覚めたら、随分滑稽だらう。これからが、音彦さまと青彦の番だ。併しあまり距離が遠いので……髪と髪とが届かぬらしい。待て待て……エー此処に綱がある。此奴で括つて置かう』</p>
+            <p class="ja-classical-line">と手早く括り合し、</p>
+            <p class="ja-classical-line">『ハヽヽヽ、これで紛失の憂ひなしだ。此次が悦子姫さま、紫姫さまか………ヤア此奴ア、惜いぞ。紫姫と丹州とを継ぎ合せ、最後に悦子姫と加米彦の大神さまとの継ぎ合せだ。これで二四ケ八人、二八十六本の手と足。ヤア面白い、面白い』</p>
+            <p class="ja-classical-line">と手探りに、紫姫の髪をソツと掴みかかつた。紫姫はムツクと起き上りさま、加米彦の腕首掴ンで、ドツカと投げたるその勢あまつて加米彦は、傍の谷を目がけてドスーン。</p>
+            <p class="ja-classical-line">『アイタヽヽヽ』</p>
+            <p class="ja-classical-line">と叫び居る。</p>
+            <p class="ja-classical-line">紫姫『ヤア皆さま、起きて下さいませ。又もや鬼熊別の部下の者共が現はれました。サア御用意々々』</p>
+            <p class="ja-classical-line">此声に驚いて一同は撥ね起き、常彦は、</p>
+            <p class="ja-classical-line">『アイタヽヽヽ』</p>
+            <p class="ja-classical-line">夏彦『エヽヽエタイワイエタイワイ、誰だ誰だ、人の髪の毛を引つぱりよつて……放さぬかい』</p>
+            <p class="ja-classical-line">常彦『オイ夏、貴様だらう』</p>
+            <p class="ja-classical-line">夏彦『馬鹿云ふな、貴様が俺の髪を引つぱつとるのだ』</p>
+            <p class="ja-classical-line">青彦『ヤア俺の頭を曳く奴がある。………ヤア何だ、寝て居る間に、髪と髪とを継ぎ合しよつたな、コンナ悪戯をする奴は、大方加米公だらう。……オイ加米彦、何処へ行つた。早く出て来て、ほどかないか』</p>
+            <p class="ja-classical-line">加米彦『オーイ、オイ、俺はエライ所に、後手に括られて、困つて居るワイ。誰か出て来てほどいて呉れ』</p>
+            <p class="ja-classical-line">青彦『ヤア加米彦も括られよつたのかな、是れだから、油断は大敵と云ふのだ。敵地に臨みて気を許し、寝てるのが此方の不覚だ、併し人間が紛失せなくてまだしもだ』</p>
+            <p class="ja-classical-line">加米彦『オーイ、青彦、皆さま、御心配下さいますな、私のは自縄自縛、自縄自解、依然として元の通り』</p>
+            <p class="ja-classical-line">青彦『ナアーンだ、人を脅嚇かしよつて……どこを括られて居つたのだ』</p>
+            <p class="ja-classical-line">加米彦『マアどうでも良い、一体お前達はナアンだ。頭に長い尾を附けよつて……』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tanshiu: 'Kamehiko-sama, you have played a most mischievous prank. I have been watching you, feigning ignorance all the while. The sight of you being cast aside by Murasakihime-sama was truly amusing, ha ha ha ha!'</p>
+          <p class="en-p">Kamehiko: 'Ah, a blunder. Everyone, I have performed a most rude act... I pray that Kamunahohi and Ōnahohi will look upon this and hear this with rectification.'</p>
+          <p class="en-p">Otohiko: 'There is a limit even to jests. This is an act that harms the sanctity of a Sendenshi. As of this day, acting in the stead of Susanōnōokami, I hereby strip you of your office as Sendenshi. Be grateful for this.'</p>
+          <p class="en-p">Kamehiko: 'This is a bit of a nuisance. I say, Otohiko-sama, pray grant me a stay of execution until the subjugation of Onigajo is complete.'</p>
+          <p class="en-p">Otohiko: 'No, that shall not be.'</p>
+          <p class="en-p">Kamehiko: 'I say, Yoshikohime-sama, pray intercede on my behalf.'</p>
+          <p class="en-p">Yoshikohime: 'Now, Otohiko-sama, please admonish him well so that he shall not commit such mischief henceforth, and for this time, I pray you forgive him.'</p>
+          <p class="en-p">Otohiko: 'Though you are one difficult to forgive, I shall follow the words of Yoshikohime-sama and overlook this matter for now.'</p>
+          <p class="en-p">Kamehiko: 'Ha ha ha ha, what is it you are spouting? "Overlook"... the very word is laughable, ah ha ha ha, it is so funny that my stomach aches. What is with that solemn face you wear? ...Will you not clear the way? No matter how much you worry and fret over Isokohime, you will not meet your wife who is drifting on the solitary island of Ryūgū; will you not cast aside your fleeting heart and be a little more relaxed? It is no fun to travel when a fellow with such a difficult face is among us.'</p>
+          <p class="en-p">Otohiko: 'What? Is Isokohime drifting on the solitary island of Ryūgū? When, and from whom, did you hear that?'</p>
+          <p class="en-p">Kamehiko: 'How can one serve as a Sendenshi if one does not know such things? With the divine clairvoyance of Kamehiko-sama, it has been thoroughly investigated. She is there now on Ryūgū Island with Umekohime-sama, the lady-in-waiting Imakohime, and Uzuhime, the four of them together, in the midst of a fierce battle with the Brahman religion. However, do not worry, for the Gods are protecting them.'</p>
+          <p class="en-p">Otohiko: 'Ah, is that so? I had been pondering in various ways, fearing that Isokohime might have been taken captive by the Uranai religion, and I had become a porter for Kurohime to observe the situation; but as it seemed she was not with the Uranai religion, I had thought perhaps she had been taken prisoner by Onigumohiko of Mt. Ōe. I had come this far with courage, thinking that if I went to Onigajo, I must rescue Isokohime if she were there. If that is the case, then Isokohime is not at Onigajo, is she?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">丹州『加米彦さま、あなた随分悪戯をしましたネー。私が知らぬ顔をして見て居りましたよ。紫姫さまに取つて放られなさつたときの面白さ、アツハヽヽヽ』</p>
+            <p class="ja-classical-line">加米彦『ヤア失敗つた。皆さま、飛ンだ失礼を演じまして、……どうぞ神直日、大直日に見直し聞直して下さいませ』</p>
+            <p class="ja-classical-line">音彦『戯談にも程がある。宣伝使の神聖を害する行動だ。今日限り、素盞嗚大神の代りとなつて、汝に対し、宣伝使の職を解く。有難う思へ』</p>
+            <p class="ja-classical-line">加米彦『此奴ア一寸迷惑だ。モシモシ音彦さま、鬼ケ城の征伐が済む迄、執行猶予をして下さいな』</p>
+            <p class="ja-classical-line">音彦『イヤなりませぬ』</p>
+            <p class="ja-classical-line">加米彦『モシモシ悦子姫さま、どうぞ仲裁して下さいませ』</p>
+            <p class="ja-classical-line">悦子姫『コレ音彦さま、今後、コンナ悪戯をなさらぬ様に、能く戒めて、今度は赦して上げて下さいナ』</p>
+            <p class="ja-classical-line">音彦『赦し難き其方なれど、悦子姫様のお言葉に従ひ、今度は忘れて遣はす』</p>
+            <p class="ja-classical-line">加米彦『アツハヽヽヽ、何に吐しよるのだい。遣はす………が聞いて呆れるワイ、アハヽヽヽ、あまり可笑しくて、腹が痛くなつた。真面目くさつた面構へをしよつて何だい。………チツと捌けぬかい。何程五十子姫の事を思つて心配したつて、竜宮の一つ島に漂着して居る女房に遇へるでもなし、刹那心を出して、モウちつと砕けぬかい。何だか、ソンナむつかしい顔した奴が混つて居ると、道中が面白くないワ』</p>
+            <p class="ja-classical-line">音彦『ナニツ、五十子姫は竜宮の一つ島に漂着して居るのか、それやお前、何時、誰に聞いたのぢや』</p>
+            <p class="ja-classical-line">加米彦『ソンナ事が分らぬ様な事で、宣伝使が勤まるかい。加米彦さまの天眼通で、チヤーンと調べてあるのだ。梅子姫さまと侍女の今子姫、宇豆姫の四人連れで、今竜宮島でバラモン教と激戦の最中だ。併し心配は致すな、神様が護いて御座る』</p>
+            <p class="ja-classical-line">音彦『ヤアさうだつたか、五十子姫は、ウラナイ教に、若しや擒になつて居るのではなからうかと種々と工夫をして、黒姫の荷持となり、様子を考へて居たが、どうもウラナイ教には居りさうもないので、若しや大江山の鬼雲彦が為に捕はれの身となつて居るのではなからうかと思つて居たのだ。鬼ケ城へ是から行つて、モシや五十子姫が居つたら助けてやらねばなるまい、と、此処まで勇みて来たのだ。さうすれば鬼ケ城には、五十子姫は居ないかなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kamehiko said, 'Ha, ha, ha, ha, I pity you; you were of a mind to conquer Onigajo tomorrow and have a joyous Taimen with your beloved Niyōbau, Princess Isokohime, but I have said a terrible thing. ...My condolences to you.'</p>
+          <p class="en-p">'Ho, ho, ho, ho.'</p>
+          <p class="en-p">Otohiko said, 'Nanigoto is a matter of Unmei. No matter how much a Ningen may suffer in Hanmon, things will only turn out as they must. Let us rest here comfortably for one Hitonei tonight, and tomorrow we shall commence the Kototamasen in a grand manner. Come, everyone, let us rest. Kamehiko, it is a burden, but you shall stand Nezunoban tonight.'</p>
+          <p class="en-p">Kamehiko, deliberately and with Teinei, rubbed his head against the Daichi and, thrusting out his Riyōte, said,</p>
+          <p class="en-p">Kamehiko said, 'This, indeed, is the Onafu of Otohiko-no-Kimi; I have Shiyōchi and remain at your Goza.'</p>
+          <p class="en-p">All said, 'Aha, ha, ha, ha, Oho, ho, ho, ho.'</p>
+          <p class="en-p">Once again, they lay down to sleep as they pleased. Enchanted by the scenery of the moon, the two, Shika-kō and Uma-kō, unwittingly wandered seven or eight chō away to the south from the resting place of the party. At this moment, four or five rough men suddenly appeared from the shade of the trees, scattered and surrounded the two, and carrying clubs, said,</p>
+          <p class="en-p">'Hey, are you not the servants of Princess Murasaki, the two, Shika and Uma? How did you come to slip away to this place?'</p>
+          <p class="en-p">Shika-kō said, 'Oh, oh, Arataka and Onitaka, the bosses, I truly pity you, but we have finally managed to come out here by breaking through the rocky cavern.'</p>
+          <p class="en-p">Arataka said, 'How did you break that solid rocky cavern?'</p>
+          <p class="en-p">Shika-kō said, 'As you know, I carry not even an inch of steel on my person, and there is nothing I can do, but by the Kototama of divine transformation and mystery, the Iwato opened wide to the left and right of its own accord, and being led by the Goddess of Peace, I have come as far as this.'</p>
+          <p class="en-p">Onitaka said, 'What, who is this Goddess of Peace? Is it not Princess Murasaki?'</p>
+          <p class="en-p">Uma-kō said, 'Princess Murasaki is fine, but a peerless beauty named Princess Etsuko suddenly appeared, took the hands of Uma-sama and Shika-sama, and saved us. Now that it has come to this, I have the strength of a thousand men; Arataka, Onitaka, and other small-fry warriors, even if a thousand or ten thousand of you attack at once, I shall not flinch, aha, ha, ha, ha.'</p>
+          <p class="en-p">Arataka said, 'Hey, General Onitaka, is this fellow not a bit strange? These two, who were crying and trembling every single day, are today speaking such grand words as if they were truly carefree from the bottom of their hearts; what could have happened?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">加米彦『ハヽヽヽ、お気の毒様、明日は鬼ケ城を征服し、可愛い女房の五十子姫さまに芽出度く対面遊ばす御心中であつたのに、エライ悪い事を申しました。……お力落しさま』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">音彦『何事も運命だ。人間がどれ程煩悶したつて、成る様にほか成りはせぬ。今晩はゆつくりと此処でモウ一寝入りして、明日は花々しく言霊戦を開始する事にしやう。サア皆さま休みませう。加米彦、お前は御苦労だが、今夜は不寝番だ』</p>
+            <p class="ja-classical-line">加米彦、ワザと叮嚀に、大地に頭を摺つけ、両手を突き乍ら、</p>
+            <p class="ja-classical-line">加米彦『これはこれは音彦の君の御仰せ、確に承知仕つて御座いまする』</p>
+            <p class="ja-classical-line">一同『アハヽヽヽ、オホヽヽヽ』</p>
+            <p class="ja-classical-line">又もや思ひ思ひに寝に就く。月の景色に浮かされて、鹿公、馬公の二人は思はず知らず、七八丁ばかり、一行の休息場より南に離れて了つた。此時四五人の荒男、突然木蔭より現はれ来り、バラバラと二人の周囲を取り巻き、棍棒を携へ、</p>
+            <p class="ja-classical-line">『ヤア其方は、紫姫の僕、鹿、馬の両人ではないか、どうして此処へ脱け出して来た』</p>
+            <p class="ja-classical-line">鹿公『コレハコレハ荒鷹、鬼鷹の親分様、誠にお気の毒で御座いますが、岩窟を叩き破つてやうやう此処まで出て参りました』</p>
+            <p class="ja-classical-line">荒鷹『貴様はどうして、あの堅固な岩窟を破つたのか』</p>
+            <p class="ja-classical-line">鹿公『私は御存じの通り、身に寸鉄も持たない、どうする事も出来ませぬが、神変不思議の言霊に依りて、自然に岩戸は左右にパツと開き、平和の女神に誘はれて、此処までやつて来ましたよ』</p>
+            <p class="ja-classical-line">鬼鷹『ナニ、平和の女神とは誰の事だ。紫姫の事ではないか』</p>
+            <p class="ja-classical-line">馬公『紫姫も結構だが、見目も貌も悦子姫と云ふ絶世のナイスが、突然現はれ給ひ、馬さま、鹿さまの御手をとり、救ひ出させ給うたのだ。モウ斯うなる上は千人力だ、荒鷹、鬼鷹、其他の小童武者共、千疋、万疋一度に掛らうと、ビクとも致さぬ某だ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">荒鷹『オイ鬼鷹の大将、此奴アちつと変ぢやないか。毎日日日ベソベソと吠面かわいて慄うて居つた両人が、今日は心底から気楽さうに、大言を吐いて居る、どうしたものだらう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Onitaka said, 'This fellow must have gone into a state of Hatsukiyō. Otherwise, he could not have spoken such things.'</p>
+          <p class="en-p">Arataka said, 'Even so, what has become of Murasakihime, the Kanjin Mokutekibutsu? I have made an Oyakusoku to the Ontaishiyō, Onikumawake. It would be a Taihen matter if she were to be lost.'</p>
+          <p class="en-p">Shikakō said, 'Ha, ha, ha, ha! It is a Taihen, a Taihen indeed. It has passed beyond a Taihen; it is a Tenpen and a Chihen. The Jishin, the thunder, the chariot of fire, and the Gankutsu of the demons shall, without waiting for the Asu, be reduced to Kotsupamijin. Alas, it is a Haka fate, ha, ha, ha, ha!'</p>
+          <p class="en-p">Onitaka said, 'Nay, he grows more suspicious. Hey, Shika, you horse-fellow, tell us the Arika of Murasakihime in Aritei.'</p>
+          <p class="en-p">Shikakō said, 'Ha, ha, ha, ha! With that look of Shinpai upon your Kahotsuki—whether you be ants, Mimizu, or weasels, I know not—Murasakihime is not an Omochiya for the likes of you. You may have the purpose of offering her to the general Onikumawake to receive a reward, but like a loincloth with a broken string, slipping here and slipping there, I regret to say your purpose shall not be achieved. Pray, take care that your jaws do not become dislocated from sheer astonishment.'</p>
+          <p class="en-p">Onitaka said, 'Nay, you speak things that are increasingly incomprehensible. Hey, horse, deer, do you not fear the power of us both, Arataka and Onitaka?'</p>
+          <p class="en-p">Shikakō said, 'Hearken, Arataka and Onitaka, what do you think of the power of us both, Shikakō and Umakō? Are you not filled with awe? Ha, ha, ha, ha!'</p>
+          <p class="en-p">Arataka said, 'He is a fellow who grows more and more strange. Surely, this fellow must have gained some powerful backing. Hey, Shika, someone must be pushing you from behind. Confess everything in detail.'</p>
+          <p class="en-p">Shikakō said, 'It is a settled matter. On our side, beginning with Onikumahiko of Ōeyama, and countless other heroes of the world, they are coming to our aid like clouds and mist. They shall smash the Gankutsu of Mount Mitake into pieces, blow the five or six guards into the bottom of the valley, and are now preparing to advance and attack the enemy at Onigajō. From the East, yet more numerous armies, led by the heroes Kamehiko and Eikohime, numbering in the hundreds of thousands without limit, are planned to descend upon you before many days pass. Since it has come to this, Onigajō shall also crumble into ruin; it would be best for you to return at once and report this to the spineless general Onikumawake.'</p>
+          <p class="en-p">Arataka said, 'What! If I let you speak, your insolent and boundless insults shall be washed away in the blood of your departure. I shall shatter your two bodies upon the tip of this club... Hey, men, fall upon these two!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼鷹『此奴ア、発狂したのだらう。さうでなくては、アンナ事が言へたものぢやない』</p>
+            <p class="ja-classical-line">荒鷹『それにしても、肝腎の目的物たる紫姫は、どうなつただらう。鬼熊別の御大将に御約束をして来たのだ。若し紛失でもして居たら大変だがなア』</p>
+            <p class="ja-classical-line">鹿公『アツハヽヽヽ、タヽヽ大変だ大変だ。大変が通り越して、天変地変だ、地震雷火の車、鬼の岩窟は忽ち明日をも待たず、木端微塵、憐れ果敢なき次第なり、ワツハヽヽヽ』</p>
+            <p class="ja-classical-line">鬼鷹『ヤア益々怪しいぞ、………オイ鹿、馬の奴、紫姫の所在を有態に申せ』</p>
+            <p class="ja-classical-line">鹿公『アハヽヽヽ、あの心配さうな面付、蟻か、蚯蚓か、鼬か知らぬが、貴様等の翫弄物にはお成り遊ばす紫姫ぢや御座らぬワイ。鬼熊別の大将に奉つて、御褒美に与らうと云ふ目的であらうが、細引きの褌、あちらへ外れ、こちらへ外れ、お気の毒乍ら目的は成就致さぬワイ。あまり呆れて腮が外れぬ様に御注意なされませや』</p>
+            <p class="ja-classical-line">鬼鷹『ヤア益々合点のゆかぬ事を申す奴だ。コラ馬、鹿、貴様は荒鷹、鬼鷹御両人様の御威勢を恐れぬか』</p>
+            <p class="ja-classical-line">鹿公『コレヤ荒鷹、鬼鷹、貴様は鹿公さま馬公さま御両人の御威勢を何と思ふか、恐れ入らぬか、アツハヽヽヽ』</p>
+            <p class="ja-classical-line">荒鷹『益々可怪しい奴だ。何でも此奴ア、強力な尻押しが出来たに違ない。オイ鹿、貴様の後に誰か尻を押す奴が出来たのだらう。逐一白状致せ』</p>
+            <p class="ja-classical-line">鹿公『きまつた事だよ、此方には大江山の鬼雲彦を始めとし、其他数万の天下の豪傑、雲霞の如く吾々両人を救援に向ひ、三嶽の山の岩窟を滅茶苦茶に叩き潰し、五六人の留守番の奴等は谷底へ吹き散らし、是れより進みて鬼ケ城の敵に向つて攻撃の準備中だ。東方よりは又もや数多の軍勢、亀彦、英子姫のヒーロー豪傑を先頭に、数十万とも限りなく、日ならず攻め寄せる計画整うたり。モウ斯うなる上は、鬼ケ城もガタガタの滅茶々々、一時も早く引返し、此由を鬼熊別の腰抜大将に注進致すが宜からうぞ』</p>
+            <p class="ja-classical-line">荒鷹『ナニツ、言はしておけば際限なき雑言無礼、首途の血祭、汝等二人の身体は、此棍棒の先に粉砕し呉れむ……ヤアヤア者共、二人に向つて打つて掛れ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The Ichidō, setting their sights upon the Futari, brandished their Konbō and rushed at them; meanwhile, Shikakō and Umakō, with Itsushiyōkenmei, fled in an Idaten-run toward the Kiusokuba of Yoshikohime.</p>
+          <p class="en-p">Arataka cried out, 'Ho, you cowardly and Miren pair of Umakō and Shikakō, you are items of no account... Ho, ho, Monodomo, you four or five shall suffice. Make haste, pursue them, and bring back the Riyōnin as Ikedori.'</p>
+          <p class="en-p">'We obey,' they replied.</p>
+          <p class="en-p">And five or six men ran in pursuit of the two, racing ever toward the north.</p>
+          <p class="en-p">Kamehiko said, 'Ho, the Sauzau Ashioto have become audible. Aohiko, Tsunehiko, Natsuhiko, arise, arise!'</p>
+          <p class="en-p">Even as he spoke, Shikakō and Umakō came running to this place.</p>
+          <p class="en-p">'I report to the Sendenshi,' they said. 'Even now, Arataka and Onitaka, leading four or five Kobun and brandishing their Konbō, are advancing upon this place. Pray, make preparations for defense.'</p>
+          <p class="en-p">Kamehiko replied, 'Ho, have they arrived already? If they would but bring the entire army of Onikumawake from Onigajō, it would settle the matter once and for all. Five or ten of them are but a nuisance.'</p>
+          <p class="en-p">Shikakō said, 'Pray, Kamehiko-sama, with all our might, Umakō and I have blown and blown and blown them away. With this, surely your second generation shall be fulfilled.'</p>
+          <p class="en-p">Kamehiko said, 'Ho, if the enemy comes to this place, it shall disturb the peaceful slumber of Yoshikohime-sama and the others. Rather than that, let us advance from this side and engage in a fierce battle. Shikakō, Umakō, come, follow me...'</p>
+          <p class="en-p">No sooner had he spoken than Kamehiko ran toward the south. Suddenly, four or five shadows came running from the south, breathless; the three hid themselves in the nearby thicket and watched the situation.</p>
+          <p class="en-p">The first said, 'Hey, will you not go ahead?'</p>
+          <p class="en-p">The second replied, 'What matters it who is first or last? Whether those who go ahead find it perilous or safe, who can tell? It is best to proceed as fate dictates. If you blow such winds of cowardice, can you fulfill the service of evil?'</p>
+          <p class="en-p">The first said, 'What, who says it is the service of evil? We are acting with Itsushiyōkenmei, believing there is no path better than this. Does the commander Onikumawake not always say? The world is the world of demons. It is the survival of the fittest. Because it is so, the people of the world are to be pitied; it is the duty of man to torment the strong and aid the weak... does he not always say so? If I thought that the commander Onikumawake was evil even by a hair's breadth, I would not be running through mountains and slopes in the dead of night, performing such bitter labor. It is said that some strong-willed evil gods of the San-Ikkyō have emerged to oppress the weak people of the world, so my sole purpose is to destroy the wicked for the sake of the world.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">一同は二人を目あてに、棍棒打振り打つてかかるを、鹿、馬の両人は一生懸命、韋駄天走りに、悦子姫が休息場に向つて逃げ帰る。</p>
+            <p class="ja-classical-line">荒鷹『ヤア卑怯未練な馬、鹿の両人、口程にもない代物、……ヤアヤア者共、汝ら四五人にて結構だ。早く追つかけ両人を生捕に致して来い』</p>
+            <p class="ja-classical-line">『畏まりました』</p>
+            <p class="ja-classical-line">と五六人の男は、二人の後を追つて北へ北へと走り行く。</p>
+            <p class="ja-classical-line">加米彦『ヤア騒々しき足音が聞えて来た。青彦、常彦、夏彦、起きたり起きたり』</p>
+            <p class="ja-classical-line">斯く云ふ内、鹿公、馬公は此場に走り来り、</p>
+            <p class="ja-classical-line">『宣伝使に申し上げます。只今荒鷹、鬼鷹の両人、四五人の乾児を引きつれ、棍棒を打振り、此場に進みて参ります。防戦の御用意なされませ』</p>
+            <p class="ja-classical-line">加米彦『ヤア最早やつて来よつたか。序に鬼ケ城の鬼熊別全軍を率ゐて来て呉れれば、埒が明いて良いがなア。五人や十人邪魔臭い』</p>
+            <p class="ja-classical-line">鹿公『もうし加米彦さま、随分力一杯、馬公と二人で吹いて吹いて吹き捲つてやりました。是であなたの二代目が勤まりませうなア』</p>
+            <p class="ja-classical-line">加米彦『ヤア此場へ敵がやつて来ては、悦子姫さま其他の安眠妨害だ。それよりも此方から向つて、一つ奮戦だ。鹿公、馬公、サア来い来れ……』</p>
+            <p class="ja-classical-line">と云ふより早く加米彦は、南を指して走り行く。忽ち南方より息せき切つて走り来る四五の物影、三人は傍の木の茂みに身を忍ばせ、様子を窺つて居る。</p>
+            <p class="ja-classical-line">甲『オイ貴様さつきへ往かぬかい』</p>
+            <p class="ja-classical-line">乙『先も後もあつたものかい。先へ行た者が険呑だとも、安全だとも分るものぢやない。何事も運命の儘に進めば良いのだ。ソンナ臆病風を出して、悪の御用が勤まるかい』</p>
+            <p class="ja-classical-line">甲『ナニ誰が悪の御用だ。吾々は是位最善の道はないと思つて、一生懸命に活動して居るのだ。鬼熊別の大将は何時も仰有るぢやないか。世界は悪魔の世の中だ。優勝劣敗だ。さうだから世界の人間が可哀相だ、強い者を苛め、弱い者を助けてやるのが人間だ……と、何時も仰有るぢやないか。俺は鬼熊別の大将が毛筋程でも悪だと思つたら、コンナ夜夜中に山坂を駆巡り、辛い働きはせないよ。何でも、三五教とやらの、強い者勝の悪神が出て来よつて、世界の弱い人民を虐げると云ふ事だから、俺も天下の為悪人を滅亡すのが唯一の目的だ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otsu: 'Ah, ha, ha, ha! Kisama, thou art a rather Bakashiyōjiki fellow. Though Onikumawake may appear thus, he is seven parts evil and three parts good; dost thou not understand this? Ah, I can no longer advance even Hitoashi further.'</p>
+          <p class="en-p">Hei: 'Indeed, having come this far, our feet have come to a sudden Ashido. It may be that those two fellows who fled just Saizen have used Mahafu to hinder our progress.'</p>
+          <p class="en-p">From within the thicket of trees,</p>
+          <p class="en-p">'Kamehiko-sama, there is no such thing as an absolute Akunin in this Sekai, is there? Hearing their conversation just now, does it not show that even among the Kobun of the demons, there are Zennin mixed in?'</p>
+          <p class="en-p">Kamehiko: 'That is so. No matter how much one may be called an Akunin, originally, the magnificent spirit of Kamisama flows through the Ketsukuwan of all; thus, it is from Gokai that they become evil. Yet, there are few who commit evil while knowing it to be evil. Even we, while intending to exhaust all goodness, may be piling up sins unknowingly when viewed from the heart of Kamisama, who is Chitoku, Enman, and abundant in beauty. Therefore, humans must entrust all things to Kannagara, blame themselves, and be humble and reflective.'</p>
+          <p class="en-p">Shikakō: 'Hmph... thou speakest as if thou art virtuous. Art thou not a person of strong arrogance rather than humility? Art thou not one who blows nothing but horns, blowing them until they collapse, wrapping people in smoke, and taking pride in thyself with thy nose held high? Thou hast also become quite senile, hast thou not?'</p>
+          <p class="en-p">Kamehiko: 'Ah, ha, ha, ha! That is why I say it is troublesome. It is troublesome because you look only at the surface and do not look at our souls.'</p>
+          <p class="en-p">Kō: 'Hey, what is this? Canst thou not hear a voice from within the woods?'</p>
+          <p class="en-p">Otsu: 'Indeed, I have thought from Saizen that there was a strange voice. Hey, hey, where is the master of that voice? Whether friend or foe, it matters not; from the eyes of Kamisama, all are brothers in this Sekai. Rather than hiding in such a place looking fearful and whispering, why not appear openly in this place and hold a friendly discussion?'</p>
+          <p class="en-p">Kamehiko: 'This is interesting. You must be the subordinates of Onikumawake who occupy Onigajō. I am a fine missionary of the Sangokyō called Kamehiko. Shall I let you hear a song of propagation?'</p>
+          <p class="en-p">Kō: 'Yes, yes, at such a fine place... we have met in a truly mysterious place. Please, we beseech you, spare only our lives.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">乙『アハヽヽヽ、貴様は割りとは馬鹿正直な奴だなア、鬼熊別はアヽ見えても、悪が七分に善が三分だ、それが貴様分らぬのか。……アーアもう一歩も前進する事が出来なくなつて了つた』</p>
+            <p class="ja-classical-line">丙『さうだなア、此処まで来ると、足がピタリと止まつた。何でも最前逃げて行きよつた二人の奴、魔法を使つて俺達の足止めをしよつたのかも知れぬぞ』</p>
+            <p class="ja-classical-line">木の茂みの中より、</p>
+            <p class="ja-classical-line">『加米彦さま、世界に絶対の悪人はありませぬなア、今彼等の話を聞けば、鬼の乾児にもヤツパリ善人が混つて居るぢやありませぬか』</p>
+            <p class="ja-classical-line">加米彦『そうだ、如何に悪人と云つても、元はみな神様の結構な霊が血管の中を流れて居るのだから、悪になるのは皆誤解からだ。併し悪と知りつつ悪を行る奴は滅多にないものだ。吾々も斯うして善を尽した積りでも、智徳円満豊美なる神様の御心から御覧になれば、知らず識らずの間に罪を重ねて居るか知れないよ。そうだから人間は何事も惟神に任し、己を責め、謙遜り省みなくてはならないのだ』</p>
+            <p class="ja-classical-line">鹿公『ヘン……殊勝らしい事を仰有います事、あなたは随分謙遜る所か、高慢心の強いお方ぢや、法螺ばつかり吹いて吹いて吹き倒し、人を煙に巻いて、鼻を高うして得意がつてるお方ぢや有りませぬか。あなたも、よつぽど耄碌しましたなア』</p>
+            <p class="ja-classical-line">加米彦『アハヽヽヽ、それだから困ると云ふのだ。お前達は表面ばつかり見て、吾々の魂を見て呉れないから困るナア』</p>
+            <p class="ja-classical-line">甲『ヤア何だ、林の中から声が聞えるぢやないか』</p>
+            <p class="ja-classical-line">乙『そうだ、最前から怪体な声がすると思うて居た。……オイオイ今の声の主人公は何処に居るのだ。敵でも味方でも良いワ、みな神様の目から見れば世界兄弟だ。ソンナ所に怖相に引込みて、ヒソビソ話をするよりも、公然と此場に現れて、一つ懇談会でもやつたらどうだい』</p>
+            <p class="ja-classical-line">加米彦『此奴ア面白い、お前達は鬼ケ城に割拠する鬼熊別の部下の者だらう。俺は三五教の加米彦と云ふ立派な宣伝使だ。一つ宣伝歌を聞かしてやらうか』</p>
+            <p class="ja-classical-line">甲『ハイハイ良い所で……ドツコイ不思議な所でお目にかかりました。どうぞ生命許りはお助け下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec08">
+        <div class="sec-header">
+          <span class="para-num">&sect; 8</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otsu: 'Oi, oi, why do you Ayama? He says he will let us hear a Ketsukō song.'</p>
+          <p class="en-p">Kō: 'Ah, is that so? I heard it as if he would decoct and eat us, so I was startled.'</p>
+          <p class="en-p">Otsu: 'Ahaha, excuse me, you who are called a Sendenshi, your Kototama is indeed Hatsukiri. You do not harbor even a Chiyotsuto of Tekii toward Wareware. Ah, I am now Anshin; please, do let us hear it.'</p>
+          <p class="en-p">Shikakō: 'Oi, you Teshita of the Oni, we are Shikakō. If you feel Anshin too quickly, you will have to Kōkuwai later.'</p>
+          <p class="en-p">Otsu: 'What? You are the Shikakō who just fled, are you not? Will you not come out here? Let us have a trial of strength; if I lose, I shall submit to you, and if I win, I shall make you submit to me.'</p>
+          <p class="en-p">Shikakō: 'Ahaha, you are saying things like the Fudesaki of Ananai-kyō. To win or to lose is a matter of the fortune of the hour. However, is the Shiyōbu not Mohaya decided? We have suffered Reihai to the Kototama of the Sendenshi, Kamehiko. Ahaha.'</p>
+          <p class="en-p">At such a place, Arataka and Onitaka, the Riyōnin, appeared with a slow, heavy gait.</p>
+          <p class="en-p">'Oi, Kisama-tachi, what are you doing in such a place? Will you not show fukujiyū to our Meirei?'</p>
+          <p class="en-p">Kō: 'Yes, suddenly I have become strong, and from the bottom of my belly, something is stirring, and it has become Aho-like, so I have become unable to show fukujiyū to your Meirei.'</p>
+          <p class="en-p">Arataka: 'Sora, what are you saying? Kisama, you have been lured by Okubiyōkaze, lost your strength, and have become delirious.'</p>
+          <p class="en-p">Otsu: 'Moshi-moshi, Arataka and Onitaka, the Riyōnin-sama, it is already useless. Your arrogance ends this very day and hour. I, too, somehow feel from the bottom of my belly that what is called my true guardian deity is stirring and raising its head, whispering: "Nani, you insignificant warriors Onitaka and Arataka, if you repent here and now, it is well; if you do not, twist off their arms, tear them apart from the crotch, and devour them." Ahaha.'</p>
+          <p class="en-p">Hei: 'Ya, Onitaka, Arataka, how is it? Have you surrendered?'</p>
+          <p class="en-p">Tei: 'Will you repent?'</p>
+          <p class="en-p">Bo: 'Will you yield, will you follow Ananai-kyō, will you reform evil and return to good? What is your reply? Shall we let you hear a Senden-ka?'</p>
+          <p class="en-p">Arataka: 'Aita, this is strange. My head has begun to ache as if it were being split open with a chisel. Onitaka, how about you?'</p>
+          <p class="en-p">Onitaka: 'Aita, I also feel as if I have begun to ache. What a thing that I cannot comprehend.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">乙『オイオイ何を謝罪るのだ。結構な歌を聴かしてやると仰有るのだよ』</p>
+            <p class="ja-classical-line">甲『アヽさうか、おれや又、煎じて食てやらうと聞えたので、ビツクリしたのだよ』</p>
+            <p class="ja-classical-line">乙『アハヽヽヽ、モシモシ宣伝使とやら云ふお方、あなたの言霊は、どうも明瞭して居ります。吾々に対し一寸も敵意を含みて居ない。ヤアもう安心致しました、どうぞ聞かして下さいませ』</p>
+            <p class="ja-classical-line">鹿公『オイ鬼の部下共、俺達は鹿公ぢやぞ。あまり安心を早うすると、後で後悔をせにやならぬぞ』</p>
+            <p class="ja-classical-line">乙『ナニ、お前は今逃げた鹿公ぢやなア、此処へ出て来ぬかい、一つ力比べをして、負たら従うてやる、勝つたら従はすぞよ』</p>
+            <p class="ja-classical-line">鹿公『アハヽヽヽ、三五教のお筆先の様な事を云つて居やがる。勝つも負けるも時の運だ。併し乍ら勝負は最早ついて居るぢやないか。サツパリ加米彦の宣伝使の言霊に零敗して了つた。アツハヽヽヽ』</p>
+            <p class="ja-classical-line">斯かる所へ荒鷹、鬼鷹の両人、ノソリノソリと現れ来り、</p>
+            <p class="ja-classical-line">『オイ貴様達、コンナ所で何をして居るのだ、吾々の命令に服従せないのか』</p>
+            <p class="ja-classical-line">甲『ハイ俄に強くなつて、腹の底から、何だかムクムクと動き出し、阿呆らしくなつて、あなた方の命令に服従する事が出来なくなつて来ました』</p>
+            <p class="ja-classical-line">荒鷹『ソラ何を言ふのだ、貴様、臆病風に誘はれて腰を抜かし、逆上せやがつたな』</p>
+            <p class="ja-classical-line">乙『モシモシ荒鷹、鬼鷹の両人さま、モウ駄目ですよ、あなたの威張るのも今日唯今限り、私もどうやら腹の底から、本守護神とやらがムクムクと頭を抬げ「ナーニ鬼鷹荒鷹の木端武者、今此場で改心致せば良し、致さぬに於ては、腕を捩折り、股から引裂いて喰つて了へ」と囁いて御座る、アツハヽヽヽ』</p>
+            <p class="ja-classical-line">丙『ヤア鬼鷹、荒鷹、どうぢや、降参致したか』</p>
+            <p class="ja-classical-line">丁『改心するか』</p>
+            <p class="ja-classical-line">戊『往生致すか、三五教に従ふか、悪を改め善に立帰るか、返答はどうぢや。宣伝歌を聴かしてやらうか』</p>
+            <p class="ja-classical-line">荒鷹『アイタヽヽヽ、此奴ア変だ、頭が鑿でカチ割られる様に痛くなつて来よつた、鬼鷹、お前はどうだ』</p>
+            <p class="ja-classical-line">鬼鷹『アイタヽヽヽ、俺も何だか、痛くなつて来たやうだ。ハテ合点の行かぬ事だワイ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec09">
+        <div class="sec-header">
+          <span class="para-num">&sect; 9</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">From within the forest, the voice of Kamehiko spoke:</p>
+          <p class="en-p">Though the morning sun may shine or be obscured, / Though the moon may wax or wane, / Even if the great earth should sink, / And though the Magatsu-no-Kami be many, / The divine path of Ananai-kyō / Shall distinguish between good and evil, / And save all—the demons, the Orochi, and the Magatsumi— / Upon the path of truth. / Tossed by the wild winds of the world, / The Morobito, who are the Miko of Kami, / Wander and stray to the right, to the left, / To the front, and to the back. / In that interval, they advance toward good, / Yet unknowingly fall into evil. / The Ikumitama received from Kami / They either defile or destroy; / And in the end, broken and desperate, / Tormented by the demons of their own hearts, / They incline toward forbidden ways / And lose their footing on the path of truth.</p>
+          <p class="en-p">Bravely they proceed, unknowingly, / Upon the path of wickedness. / Originally, they were the Wakemitama of Tentei, / Where there is neither good nor evil. / Good and evil are but the Sutekotoba / Of the human world, / Uttered from time to time; / They are things not to be relied upon. / Ah, Arataka, Onitaka, / You too are children of Kami, children of men. / Born as noble children of Kami, / Why, in your suffering, have you become / The subordinates of Onikumawake in Onigajō, / Tormenting and oppressing the Yobito? / Rectify your Mitama, rectify them now. / That you met me at the summit of Mount Mitake / Is the arrangement of the profound grace / Of the Kamigami. / By the way one holds one's heart, / It becomes evil, or it becomes good; / It is the watershed of good and evil, right and wrong.</p>
+          <p class="en-p">How is your resolve? Come, how is it? / The Kami Naohi who created this world, / And the Ōnaohi of vast heart, / Simply look upon the human world / And rectify all things, re-seeing and re-proclaiming them. / The Ananai-kyō established by Kami— / Return, return to the true heart. / Polish, polish the Ikumitama / Received from the Kami of heaven and earth. / Ah, Kannagara Kamigami, / May your spirits be blessed, / And purify the Mitama of the Majin, / Including Arataka, Onitaka, and the others. / I humbly beseech you, / I earnestly offer this prayer.'</p>
+          <p class="en-p">As he finished singing with a voice clear and cool, Arataka, Onitaka, and all the others prostrated themselves upon the earth, shedding tears in abundance, and merely expressed their gratitude, saying, 'Thank you, thank you.'</p>
+          <p class="en-p">At this moment, the party of Princess Etsuko appeared.</p>
+          <p class="en-p">Otohiko said, 'Well, Kamehiko, what a great achievement! It seems that even the commanders Arataka and Onitaka have been saved.'</p>
+          <p class="en-p">Arataka and Onitaka spoke in unison, 'This is, indeed, the messenger of Ananai-kyō. Today, this very moment, illuminated by the spirit of Kami, our roots have been awakened and the Iwato of our hearts has been opened. We have already been saved from evil. We pray that from this day forth, you will allow us to enter your path and use us as your attendants.'</p>
+          <p class="en-p">Otohiko replied, 'Ho, that is most excellent. Tell me, Princess Etsuko, what shall we do? With them having repented so quickly, the Kototama battle of Onigajō seems to have lost its tension. I pray for your command.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">林の中より、加米彦の声、</p>
+            <p class="ja-classical-line">『朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+曲津の神は多くとも
+三五教の神の道
+善と悪とを立別けて
+鬼も大蛇も曲津見も
+誠の道に皆救ふ
+世の荒風に揉まれつつ
+神の御子なる諸人は
+右や左や前後ろ
+彷徨ひ惑ふ其間に
+善にも進み又悪に
+知らず識らずに陥りて
+神より受けし生御魂
+或は汚し又破り
+破れかぶれの其果は
+心の鬼に責められて
+あらぬ方へと傾きつ
+誠の道を踏み外し</p>
+            <p class="ja-classical-line">邪の道に勇ましく
+知らず識らずに進み行く
+元は天帝の分霊
+善も無ければ悪も無い
+善と悪とは人の世の
+其折々の捨言葉
+アテにはならぬ物ぞかし
+あゝ荒鷹よ鬼鷹よ
+汝も神の子人の子よ
+尊き神の子と生れ
+何苦しさに鬼ケ城
+鬼熊別の部下となり
+世人を苦しめ虐ぐる
+身魂を直せ今直せ
+三嶽の山の頂きで
+吾に逢うたは神々の
+篤き恵の引合せ
+心一つの持方で
+悪ともなれば善となる
+善悪正邪の分水嶺</p>
+            <p class="ja-classical-line">覚悟は如何にサア如何に
+此世を造りし神直日
+心も広き大直日
+唯何事も人の世を
+直日に見直し宣り直す
+神の樹てたる三五教
+復れよ帰れ真心に
+磨けよみがけ天地の
+神より受けし生魂
+あゝ惟神々々
+御霊幸はひましまして
+荒鷹鬼鷹其外の
+魔神の身魂を清めませ
+偏に願ひ奉る
+偏に祈願申します』</p>
+            <p class="ja-classical-line">と声も涼しく歌ひ終るや、荒鷹、鬼鷹其他一同は大地に平伏し、涙をハラハラと流し唯、</p>
+            <p class="ja-classical-line">『有難う有難う』</p>
+            <p class="ja-classical-line">と僅に感謝の意を表して居る。</p>
+            <p class="ja-classical-line">斯かる所へ、悦子姫の一行は現はれ来り、</p>
+            <p class="ja-classical-line">音彦『ヤア加米彦、御手柄々々、荒鷹、鬼鷹の大将も、どうやら救はれた様な塩梅ですなア』</p>
+            <p class="ja-classical-line">荒鷹、鬼鷹一度に、</p>
+            <p class="ja-classical-line">『これはこれは三五教の宣伝使様、私は今日、只今、神の御霊に照されて、発根と心の岩戸が開けました。最早吾々は悪より救はれました。どうぞ今日限り、あなたのお道に入れて下さいまして、お伴に御使ひ下されば有難う御座います』</p>
+            <p class="ja-classical-line">音彦『ホーそれは何より重畳だ。もうし悦子姫様、如何致しませう。斯う早く改心せられては鬼ケ城の言霊戦も、何だか張合が抜けた様です、何卒あなたの指揮を願ひます』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec10">
+        <div class="sec-header">
+          <span class="para-num">&sect; 10</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yoshikohime stood up with a solemn air.</p>
+          <p class="en-p">"Nay, Arataka and Onitaka, both of you, return for the time being to Onigajo, and let us commence a glorious battle of Kototama with my party, and upon that, we shall decide to make peace between both sides."</p>
+          <p class="en-p">Arataka replied, "What is it that you say? We no longer have the courage to fight against you. Is that not so, Onitaka?"</p>
+          <p class="en-p">Onitaka said, "We have absolutely submitted to Ananai-kyō. It would be sacrilegious; how could we possibly bear arms against you?"</p>
+          <p class="en-p">Yoshikohime said, "I understand. However, until Onikumawake submits, I shall hold in reserve the permission for your entry into Ananai-kyō. It would not be kind to Onikumawake, whom you have hitherto revered as your leader. If possible, I would have you cause Onikumawake to repent. Yet, as I cannot, as a commander, suddenly listen to what you say, I have devised a divine strategy here: to part ways with you for a time, commence a glorious battle of Kototama, and have the result be the procedure of reconciliation and the opening of the castle; that would be the moderate course. Therefore, Murasakihime-sama, Shika-sama, Uma-sama, who have been held captive in the rock cave of Mitake until now, and Tanshu-sama, pray return to Onigajo for the time being together with Arataka-sama and Onitaka-sama. Then, commence a battle of Kototama against my divine army. You shall be the defensive army, and I shall be the attacking army. For the attacking army, I shall assign Yoshikohime, Oto-hiko, Kame-hiko, Ao-hiko, Natsu-hiko, and Tsune-hiko... Come, come, return to Onigajo as quickly as possible. Without delay, I shall lead the divine army and commence a great attack."</p>
+          <p class="en-p">Tanshu said, "Ah, I have understood the divine strategy of the princess of the Six Secret Teachings and Three Strategies. Come, Murasakihime-sama, Lord Shika, Lord Uma, let us now ride to Onigajo and defend with all our might against the attack of Yoshikohime-sama... Yoshikohime-sama, we shall meet again on the battlefield. I, this Tanshu, shall show you the power of Kototama; pray do not be defeated and flee in disgrace. Ah, how interesting, how interesting; we shall now return to the main castle of Onigajo, revere Onikumawake as the commander-in-chief, and against the approaching divine army of Ananai-kyō, we shall exhaust every secret art of the Kototama of divine transformation and mystery, harass you with a thousand changes and ten thousand variations, and crush you into splinters. Farewell, Lady Yoshikohime."</p>
+          <p class="en-p">Yoshikohime said, "Farewell, Lord Tanshu, we shall meet again on the battlefield."</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">悦子姫、儼然として立上り、</p>
+            <p class="ja-classical-line">『イヤ荒鷹、鬼鷹の両人、そなたは一先づ鬼ケ城に立帰り、妾の一行と花々しく言霊の戦を開始し、其上にて双方より和睦をする事に致しませう』</p>
+            <p class="ja-classical-line">荒鷹『ナント仰せられます、最早私共はあなた方に向つて戦ふ勇気はありませぬ。ナア鬼鷹、お前もさうだらう』</p>
+            <p class="ja-classical-line">鬼鷹『吾々は絶対に三五教に帰順致しました。勿体ない、どうしてあなた方に刃向ふ事ができませうか』</p>
+            <p class="ja-classical-line">悦子姫『分りました。併し乍ら鬼熊別の帰順する迄は、あなたは、三五教に入信の許可を保留して置きます。今迄首領と仰いだ鬼熊別に対し親切が通りませぬ。成る事ならばあなた方より鬼熊別を、改心さして頂きたい。併し乍ら俄にあなた方の仰有る事を、大将として聞けますまいから、茲に一つの神策を案じ、一旦あなた方と立別れて、花々しく言霊戦を開始し、其結果和睦開城と云ふ段取となるのが、穏健な行方でせう。就ては今迄三岳の岩窟に捕はれて居た紫姫さま、鹿さま、馬さまを始め、丹州さまは荒鷹さま、鬼鷹さまと共に、一先ず鬼ケ城へ御帰り下さい。さうして妾の神軍に向つて言霊戦を開始なされませ。あなたの方は防禦軍、妾の方は攻撃軍で御座います。攻撃軍には、悦子姫、音彦、加米彦、青彦、夏彦、常彦を以て之に当てます、………サアサア一時も早く鬼ケ城へ御帰り遊ばせ。時を移さず妾は神軍を引率し、大攻撃に着手致します』</p>
+            <p class="ja-classical-line">丹州『ヤア六韜三略の姫様の御神策、心得ました。サアサア紫姫様、鹿公、馬公、是から鬼ケ城へ乗り込み、悦子姫さまの攻撃に向つて、極力防戦を致しませう。………悦子姫様、戦場にて、改めてお目に掛りませう。此丹州が言霊の威力をお目にかける、必ずオメオメと敗走なされますな。あゝ面白し面白し、吾等は是より鬼ケ城の本城に立帰り、鬼熊別を総大将と仰ぎ、寄せ来る三五教の神軍に向つて、あらゆる神変不思議の言霊の秘術を尽し、千変万化にかけ悩まし、木端微塵に平げ呉れむ、さらば悦子姫殿』</p>
+            <p class="ja-classical-line">悦子姫『さらば丹州殿、改めて戦場にてお目に掛りませう』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: 空 Valley の足 Sound [625]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: Castle 攻 [627]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 16: Castle 攻 [627] - Volume 17 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 17 Table of Contents</a>
+      <span>Volume 17</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 17 &bull; Chapter 16</span>
+      <h1 class="chapter-title-en">Chapter 16: Castle 攻 [627]</h1>
+      <p class="chapter-title-ja">城攻〔627〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The cold wind blows upon Fukuchiyama, where the Onigajō castle towers into the Ōzora of the Ushitora; fortified with the Chibiki rock, it is the eternal Sumika of Onikumawake, a Kinjiyōtetsupeki which, if guarded by a single Itsusotsu, cannot be assailed by Bansotsu, serving as a zone of Zetsutaiteki Anzen against the Kōgeki of the enemy. Within the Yahirodono built inside the Gankutsu, the Tōriyō of the fortress, Onikumawake, together with his Inochi-no-niyōbau, the dark-complexioned Mukadehime, and a multitude of Ninsoku, stands guard day and night in Kengo.</p>
+          <p class="en-p">Onikumawake summons his allies, including Arataka and Onitaka, whom he relies upon as his Futokorogatana, as well as Murasakihime and the soldiers of Tanshiu of beautiful Mimekatachi, to hold a grand council to deliberate on the defense against the advance of the Kototama-tai led by Princess Etsuko, the propagandist of the Sangōkyō; the multitude of subordinates surround the Gankutsu-do in ten and twenty layers, their martial appearance in preparation for the enemy's assault being a sight to behold.</p>
+          <p class="en-p">Onikumawake addressed them all, saying: 'The wretches of the Sangōkyō have trampled upon the mansion of the Great General Onikumahiko residing at Ōeyama, and advancing further, have destroyed the Gankutsu of Mitake; now, reports reach us that they are pressing upon this main castle with but a small divine army. I possess a renowned great army and have constructed such a Kengo Kinjiyōtetsupeki that I need not yield to the assault of any hero, champion, or demon. Nevertheless, negligence is a great enemy; you shall henceforth lead your many subordinates, confront the enemy with all available weapons, and annihilate them in a single battle. If you have any opinions regarding the operational plan for this, present them before me.'</p>
+          <p class="en-p">Upon this strict command, Arataka stepped forward and said: 'Great General, your command is reasonable, yet as you know, Onikumahiko of Ōeyama, despite possessing a multitude of allies, was defeated by a mere four propagandists and fled like mist into the clouds. It is truly unreliable to face the heaven-sent divine army with weapons alone. If there be any good method, pray, show it to us.'</p>
+          <p class="en-p">Mukadehime replied: 'Even if you say so, in this Onigajō, we have no weapons against the enemy other than spears, halberds, and swords. What is your intention in this matter? If you have a good strategy, present it without reserve.'</p>
+          <p class="en-p">Onitaka said: 'With reverence, I speak to Onikumawake and Mukadehime-sama. The enemy approaches with Kototama and possesses divine power that radiates the five-colored spiritual light, driving and tormenting their foes in every direction; thus, it is difficult to prevail as things stand. Fortunately, I have been transmitted by a strange white-haired divine being upon the summit of Mount Mitake a divine power that can shake heaven and earth with a single cry, and command wind, rain, thunder, and lightning with a single word. Now, all shall be well; even if there were tens of thousands of weapons, if the bodies of our subordinates are bound by spirit, there is nothing that can be done. I believe that the supreme strategy is to annihilate the enemy who approaches with Kototama by using Kototama ourselves.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">冷たき風も福知山、世を艮の大空に聳り立ちたる鬼ケ城、千引の岩にて固めたる、鬼熊別が千代の住家、金城鉄壁一卒これを守れば万卒攻むべからざる、敵の攻撃に対しては絶対的の安全地帯、岩窟の中に築きたる八尋殿に砦の棟梁鬼熊別は、角の生えたる命の女房、顔色黒い蜈蚣姫数多の人足従へて夜昼堅固に守り居る。鬼熊別が懐中刀と頼みたる、荒鷹、鬼鷹始めとし、紫姫や容貌美き丹州の、味方の兵士を呼び集め、三五教の宣伝使、悦子姫が率ゐ来る言霊隊の進軍に対して、防戦の協議を凝らす大会議、数多の従卒岩窟戸の周囲を十重二十重に取り囲み、敵の襲来に備へ居るその物々しさ、よその見る目も勇ましき。鬼熊別は一同に向ひ、</p>
+            <p class="ja-classical-line">『三五教の奴原、大江山に在す鬼雲彦の御大将の館を蹂躙し、尚ほ進みて三嶽の岩窟を破壊し去り、今や少数の神軍をもつて本城に押し寄せ来るとの注進、吾は名に負ふ大軍を擁し、斯る堅城鉄壁を構へ居れば、如何なる英雄豪傑鬼神の襲来と雖も屈するに及ばず、然はさりながら油断は大敵、汝等は是より、味方の数多の部下を引率し、所在武器をもつて敵に向ひ、只一戦に殲滅せよ、夫についての作戦計画、意見あらば各吾前へ開陳せよ』</p>
+            <p class="ja-classical-line">と厳命したりければ、荒鷹は進み出で、</p>
+            <p class="ja-classical-line">荒鷹『御大将の御仰せ、一応御尤もでは御座いますが、御存じの通り大江山の鬼雲彦は数多の味方を擁しながら、僅四人の宣伝使のために一敗地に塗れて雲を霞と遁走せられたる如く、到底天来の神軍に対し武器をもつて向ふは心許なし、何か良き方法あらばお示し下さいませ』</p>
+            <p class="ja-classical-line">蜈蚣姫『さうだと申して此鬼ケ城に於ては、槍、長刀、剣の外に敵に対する武器はあらず。汝等如何に致す所存にや、良策あらば遠慮なく開陳せよ』</p>
+            <p class="ja-classical-line">鬼鷹『畏れながら、鬼熊別、蜈蚣姫様に申上ます、敵は言霊を以て迫り来り、五色の霊光を放射し敵を縦横無尽に駆悩ます神力を具備し居れば、到底此儘にては叶ひ難し。吾は幸ひ一声天地を震撼し、一言風雨雷霆を叱咤する神力を図らずも三嶽山の山上に於て白髪異様の神人より伝授されました、もう此上は大丈夫、仮令幾万の武器ありとも、部下の身体を霊縛されなば如何ともする事は出来ますまい、吾々は言霊を以て寄せ来る敵を殲滅するを最上の策と存じます』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Onikumawake asked, 'Even if you alone know how to apply the Kototama, what do you intend to do regarding the other Bushiyō?'</p>
+          <p class="en-p">Onitaka replied, 'With all due respect, Arataka, Tanshiu, and Murasakihime have all, at the same time as myself, received the transmission of the miraculous arts of the Kototama of divine transformation and mystery from the Shinjin; therefore, I pray you, have no Goshinpai. Even if the Sendenshi of the Ananai-kyō should approach with their own miraculous spiritual arts, we shall use the power of our Kototama to harass and confound them in every possible way. You must not trouble your many Buka or send them forth with Kiyōki; we certainly have the Shiyōsan.'</p>
+          <p class="en-p">As he spoke these words with an air of nonchalance, Onikumawake and Mukadehime filled their faces with smiles.</p>
+          <p class="en-p">'If that be so, Onitaka, I command you to take command of the entire army; do not be negligent. I shall now ascend to the high tower to observe the state of your fierce battle. Mukadehime, come with me.'</p>
+          <p class="en-p">So saying, they departed from that place and leisurely slipped into an inner chamber.</p>
+          <p class="en-p">Suddenly, pricking up their ears at the sound of the Sendenka being chanted, Onitaka cried out, 'Hear me, all of you! The enemy has approached close at hand; prepare yourselves for defense.'</p>
+          <p class="en-p">Arataka exclaimed, 'Even if the Sendenshi of the Ananai-kyō—Etsukohime, Otohiko, Kamehiko, Aohyōtanhiko, the bent-waisted Natsuhiko, and Tsunehiko with eyes slanted like a fox—should come to attack, I shall wield the secret arts of Sun and Wu, nay, I shall manifest the miraculous arts of the Kototama of divine transformation and mystery, drive the enemy into a thousand changes and ten thousand transformations, and in an instant, we shall raise the shout of victory.'</p>
+          <p class="en-p">His face was filled with courage and spirit, and his majestic air swept across the surroundings with such bravery.</p>
+          <p class="en-p">All of them clapped their hands and raised a simultaneous shout of 'Uro-uro,' a scene as if the very mountains were crumbling.</p>
+          <p class="en-p">Stirred by the sound of the Sendenka, Onitaka, Arataka, and the rest of the Kototama-tai appeared in the corridor and began to prepare their defense against the barrage of Kototama from the approaching divine army.</p>
+          <p class="en-p">Kamehiko, a Bushiyō of the attacking force, began to chant the Sendenka with a clear voice:</p>
+          <p class="en-p">Kami appears upon the surface, / To distinguish between the good and the evil. / The fortune of Onikumawake is exhausted, / The world that is perishing is like the second month. / The moon of Ananai shines in the vast sky, / Bright and clear, illuminating the heads of the demons. / I, Kamehiko, who celebrate the ten thousand generations, / Advance to attack the fortress of the demons. / The Kototama I chant are the hundred deities of heaven and earth, / And the eight million gods. / Yield, O Onigajo! / Subdue the gathering crooked ones, / And scatter them toward the western sea. / The Toyoashihara no Mizuho no Kuni, / Is illuminated everywhere by the Kototama. / Behold the water and fire of truth! / Even if you come to attack with spears, halberds, and swords, / With their points aligned, / The Sumeru-Ōkami shall protect us.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼熊別『汝一人如何に言霊を応用すればとて、其他の部将は如何致す積りだ』</p>
+            <p class="ja-classical-line">鬼鷹『畏れながら、荒鷹、丹州、紫姫のお歴々は、私と一度に神変不思議の言霊の妙術を神人より伝授され居りますれば、必ず必ず御心配あらせられな、仮令三五教の宣伝使、神変不思議の霊術をもつて迫り来るとも、吾が言霊の威力を以て、縦横無尽にかけ悩まさむ、必ず必ず数多の部下を労し、兇器をもつて向はせ給ふべからず、確に吾々勝算が御座る』</p>
+            <p class="ja-classical-line">と事もなげに述べ立てたるに、鬼熊別、蜈蚣姫は満面に笑を湛へ、</p>
+            <p class="ja-classical-line">『然らば鬼鷹汝に全軍の指揮を命ず、必ず共に油断致すな、吾は是より高楼に登り、汝等が奮戦の状況を見む、蜈蚣姫来れ』</p>
+            <p class="ja-classical-line">と此場を立つて奥の一間に悠々と忍び入る。忽ち聞ゆる宣伝歌の声に耳を聳立て、</p>
+            <p class="ja-classical-line">鬼鷹『ヤアヤアかたがた、敵は間近く攻め寄せました、何れも防戦の用意あれ』</p>
+            <p class="ja-classical-line">荒鷹『仮令三五教の宣伝使、悦子姫、音彦、加米彦、青瓢箪彦、腰の曲つた夏彦、狐のやうに目の釣り上つた常彦押寄せ来るとも、吾は孫呉の秘術を揮ひ、否々神変不思議の言霊の妙術を発揮し、敵を千変万化に駆悩まし、勝鬨上げるは瞬く間』</p>
+            <p class="ja-classical-line">と勇める顔色英気に満ち、威風凛々として四辺を払ふ勇ましさ。一同は双手を打ち一斉にウローウローと鬨の声、山岳も崩るる許りの光景なり。</p>
+            <p class="ja-classical-line">宣伝歌の声に一同は勇み立ち、鬼鷹、荒鷹其他の言霊隊は廊下に立ち現はれ、寄せ来る神軍の言霊の散弾に向つて防戦の用意に取りかかりぬ。寄手の部将加米彦は声も涼しく宣伝歌を宣り始めたり。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立て別ける
+鬼熊別の運の尽き
+亡び行く世は如月の
+三五の月は大空に
+明皎々と輝きて
+鬼の頭を照すなり
+万代祝ふ加米彦が
+悪魔の砦に攻め寄せて
+宣る言霊は天地の
+百の神達八百万
+諾ひ給へ鬼ケ城
+群がる曲を言向けて
+西の海へと逐散らし
+豊葦原の瑞穂国
+隈なく照す言霊の
+誠の水火を受けて見よ
+槍雉刀や剣太刀
+穂先を揃へて攻め来とも
+皇大神の守ります</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The Magokoro of I, Kamehiko, is a Niyoihotsushiyu that fire cannot burn nor water drown; an Ikumitama that shall not decay for Yorozuyo. To restore the Mihashira of the jewel and to Kotomu and harmonize, I, Kamehiko, now advance. Ye Yatsubara who deem yourselves my peers, one or two are of no Mendau; though Senmannin come to attack at a Hitotoki, bound as a Kotaba. As a Sendenshi of Ananai-kyō, receiving the Mitama of Kami, I shall blow away the Sagiri of Ibuki, and as leaves scatter in the wind, I shall blow you away before mine eyes. Repent your hearts and Kijiyun before me, or else meet Uchijini with the castle as your pillow; if that too ye loathe, then Ichihaya, surrender the castle and flee. Though the moon may wax or wane, and though the Daichi may sink, I, Kamehiko, shall Kotomu to the soul of the Ananahi heart, blow away the Kumokiri that block the sky of Tanba to the Yomo, and purify and clear the path of Kami. Aa, how interesting, how interesting! Sendenshi under the protection of Kami, Aa Kannagara Kannagara, may your Mitama be blessed.</p>
+          <p class="en-p">Thus having finished chanting, the many soldiers guarding the perimeter against the Senden-ka of Kamehiko shook their heads and for a while manifested a state of agony.</p>
+          <p class="en-p">The young and fair-faced Tanshu, in order to respond to the Kototama of Kamehiko, unfurled his white fan and, waving it left and right, chanted:</p>
+          <p class="en-p">The Fukuchiyama of the wind of truth, the Onigajo of the human heart. Kotomu even the demons and the great serpents, for such is the heart of Kami that saves the people of the world. Onikumawake is a Sendenshi of the teachings of the Kami of Brahman; he is not from the beginning an evil person. The dark-complexioned Mukade-hime, her spirit drawn away by the darkness of her hue, has unknowingly allowed her pure crystal spirit to become utterly clouded, and it has ended in the darkness of Tokoyo. Nevertheless, Kamehiko, man is the child of Kami and the palace of Kami; there is good within evil, and there is evil even in what appears as good. The great general Onikumawake has clouded his heart with greed and proclaimed the Kototama of Magari, yet when the season comes, he shall return to his original spirit of Kami. For the sake of Kami, for the sake of the nation, and for the sake of the people of the world, he may yet perform meritorious deeds. Forgive him, O Sendenshi of the teachings of Kami of the Ananahi. Kamunao-bi who created this world, and Oonao-bi of vast heart; in all things in the world of man, look straight, listen straight, and repent your own transgressions straight. This is the heart that is equal to the will of the Great Kami of heaven and earth. Aa Kamehiko, Kamehiko, you stand against this fortress and commence the battle of Kototama, and your heart raises a shout of victory; yet, nevertheless, nevertheless, it is the custom of the world that what waxes must wane. To help the weak and to restrain the strong is the path of Kami. Do not, taking advantage of your victory, torment our allies in vain. If viewed through the eyes of Kami, all people of the world are my children; Kami is the parent and man is the child. Man and man are brothers, and a quarrel between brothers is an act of unfilial piety toward their parents. If even one of my Kototama enters your ears, depart from this place quickly, O Sendenshi who saves the people of the world. Aa Kannagara Kannagara, may your Mitama be blessed.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">吾加米彦の誠心は
+火にも焼けない又水に
+溺れもせない如意宝珠
+万代朽ちぬ生身魂
+玉の御柱立て直し
+言向け和す其ために
+今や加米彦向うたり
+吾と思はむ奴原は
+一人二人は面倒だ
+千万人も一時に
+小束となつて攻め来れ
+三五教の宣伝使
+神の御魂を蒙りて
+息吹の狭霧に吹き払ひ
+風に木の葉の散る如く
+吹き散らさむは目のあたり
+心改め吾前に
+帰順致すかさもなくば
+城を枕に討死か
+それも厭なら逸早く</p>
+            <p class="ja-classical-line">城明け渡し逃げ出せ
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+此加米彦が麻柱の
+心の魂に言向けて
+丹波の空に塞がれる
+雲霧四方に吹き払ひ
+清めて晴らす神の道
+嗚呼面白い面白い
+神の守りの宣伝使
+嗚呼惟神々々
+御魂幸はひ坐ませよ』</p>
+            <p class="ja-classical-line">と謡ひ終りし加米彦が宣伝歌に四辺を守る数多の部卒は頭を振り暫く苦悶の体を現はしける。</p>
+            <p class="ja-classical-line">少壮白面の丹州は、加米彦の言霊に応戦すべく白扇を披き左右左に打ちふりながら、</p>
+            <p class="ja-classical-line">『誠の風の福知山
+人の心の鬼ケ城
+鬼も大蛇も言向けて
+世人を救ふ神心
+鬼熊別はバラモンの
+神の教の宣伝使
+素より悪き者ならず
+顔色黒き蜈蚣姫
+色の黒いに霊ぬかれ
+知らず識らずに水晶の
+清き霊は曇り果て
+常夜の暗となり果てぬ
+さはさりながら加米彦よ
+人は神の子神の宮
+悪の中にも善がある
+善に見えても悪がある
+鬼熊別の大将は
+欲に心を曇らせて
+曲の言霊宣りつれど
+時節来れば又元の</p>
+            <p class="ja-classical-line">神の霊と立ち復り
+神の御為め国のため
+世人のために勲功を
+ひよつと立てまいものでない
+許せよ許せ麻柱の
+神の教の宣伝使
+此世を造りし神直日
+心も広き大直日
+唯何事も人の世は
+直日に見直せ聞き直せ
+身の過ちは宣り直せ
+これぞ天地の大神の
+御旨に等しき心なり
+嗚呼加米彦よ加米彦よ
+これの砦に立ち向ひ
+言霊戦を開始して
+勝鬨あぐる汝が心
+さはさりながらさりながら
+満つれば欠くる世の習ひ
+弱きを助け強きをば</p>
+            <p class="ja-classical-line">抑へて行くが神の道
+勝に乗じて徒に
+吾等が味方を悩ますな
+神の御眼より見給へば
+世界の者は皆我が子
+神は親なり人は子よ
+人と人とは兄弟よ
+兄弟喧嘩は両親に
+対して不幸となるものぞ
+吾が言霊の一つだに
+汝が耳に入るならば
+早く此場を立ち去れよ
+世人を救ふ宣伝使
+嗚呼惟神々々
+御魂幸はへましませよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Having finished this chant, he suddenly concealed his form.</p>
+          <p class="en-p">Kamehiko said, 'What is this? That fellow from Tanshiu has uttered things of which one cannot tell whether he be friend or foe; ha, what a faint-hearted fellow he is. It appears he is quite intimidated by Onikumawake, ha ha ha ha.'</p>
+          <p class="en-p">Natsuhiko, a small man with a waist bent like the character ku, turned toward the enemy's Gankutsu and began to sing a Sendenka to commence the Kototamasen.</p>
+          <p class="en-p">'The Onigajo, heard of as the dwelling of demons, where the Magatsu lurk. Onikumawake and Mukadehime, growing horns like those of an ox, tightening their Kohi loincloths, they trample upon the wide Sekai with a Wagamonogaho air. Seeing the women of Achira and Kochira as weak, they suddenly tuck them under their arms and carry them away. They gather together to make them Naburimono, sipping their Ikichi and eating their flesh. Not yet satisfied, they watch for gaps to sneak into the houses of men, snatching away the gold and treasures that were guarded as more precious than their own eyes. They indulge in every manner of Eiyōeiguwa. In the Onigajo that towers into the clouds, especially in the high Takadono, they ascend to drink sake at their leisure.'</p>
+          <p class="en-p">'Looking down upon the Yobito from below, they feign ignorance of heat and cold. With eyes peeled wide and noses flared, opening their great mouths wide, they are like the demon tiles that look down upon men. Upon receiving the hail of Natsuhiko-tsukasa's Kototama, the end of Onikumawake's body shall suddenly come crashing down. One can already imagine it from now. Though it is called spring, try receiving but one arrow-bullet of Natsuhiko's truly hot Kototama. Onitaka, Arataka, deer and horse, Murasakihime and Tanshiu, like leaves scattered by the wind, taken by surprise, they shall scatter, scatter, scatter. Like a sudden evening shower, the rain of tears, the sleeves never dry from the autumn shower. Though the moon shines in the heavens,'</p>
+          <p class="en-p">'For you, your luck has run out. You are a fox-possessed creature, wandering, confused, and glancing about. It is said that demons and great serpents go together. Since the age of the gods of old, there is the proverb of a demon husband and a serpent wife. What has happened here? The demon's wife is Mukadehime. A blue old man and a black old woman. Now, from here on, I shall aim the spiritual bullets of the Kototama that Natsuhiko has trained in daily at the Onigajo, and lick it with a tongue of crimson lotus. Ah, how amusing, how red the faces are. Ah, Kannagara Kannagara. Seeing with my own eyes the demons fleeing, crying that they cannot endure it, that they cannot prevail, is a joy to me.'</p>
+          <p class="en-p">'To see it is a delight to me. Ha ha ha.'</p>
+          <p class="en-p">Kamehiko said, 'Hey Natsuhiko, what a clumsy Kototama that is. Do you think the enemy will surrender with such things? Recite it again, recite it again.'</p>
+          <p class="en-p">Natsuhiko replied, 'I have performed the Kototama corresponding to the spirit and soul; no matter how much you tell me to recite it again, it has already become out of stock.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と謡ひ終り忽ち姿を隠したり。</p>
+            <p class="ja-classical-line">加米彦『何だ丹州の奴、敵だか味方だか訳の分らぬ事を云ひよつたな、エヽ気の弱い奴だ。鬼熊別に余程気兼をして居ると見える哩、アハヽヽヽヽ』</p>
+            <p class="ja-classical-line">腰のくの字に曲つた小男の夏彦は敵の岩窟に向ひ、言霊戦を開始すべく宣伝歌を歌ひ始めたり。</p>
+            <p class="ja-classical-line">『鬼の棲家と聞えたる
+曲津の潜む鬼ケ城
+鬼熊別や蜈蚣姫
+牛のやうなる角生やし
+虎皮の褌きうと締め
+広い世界をのそのそと
+吾物顔に蹂躙り
+彼方此方の女達
+弱いと見たら忽ちに
+小脇に掻い込み連れ帰り
+寄つてかかつて嬲者
+生血を啜り肉を喰ひ
+未だ飽き足らで人の家に
+隙を窺ひ忍び込み
+目より大事と蓄へた
+金や宝をぼつたくり
+栄耀栄華の仕放題
+雲に聳ゆる鬼ケ城
+殊更高い高楼に
+登つて悠くり酒喰ひ</p>
+            <p class="ja-classical-line">世人を眼下に見下して
+暑さ寒さも知らず顔
+いかい眼を剥き鼻を剥き
+大い口をかつと開け
+人を見下ろす鬼瓦
+夏彦司の言霊の
+霰を喰つて忽ちに
+がらりがらりとめげ落ちる
+鬼熊別の身の果てぞ
+今から思ひやられける
+春とは云へど夏彦が
+誠にアツき言霊の
+矢玉を一つ喰つて見よ
+鬼鷹、荒鷹、鹿に馬
+紫姫も丹州も
+風に木葉の散る如く
+不意を喰つてばらばらばら
+夕立のやうな涙雨
+乾く間もなき袖時雨
+月は御空に輝けど</p>
+            <p class="ja-classical-line">汝がためには運の尽き
+ウロつき間誤つきキヨロつきの
+ウロつき廻る狐憑き
+鬼に大蛇はつきものぢや
+昔々の神代より
+鬼の夫に蛇の女房
+世の諺はあるものに
+これや又何とした事か
+鬼の女房に蜈蚣姫
+青い爺に黒い嬶
+サア是からは夏彦が
+日頃鍛へし言霊の
+霊弾を向けて鬼ケ城
+紅蓮の舌で舐めてやろ
+嗚呼面黒い面赤い
+嗚呼惟神々々
+とても叶はぬ叶はぬから
+耐りませぬと鬼共が
+逃げ行く姿を目の当り
+見る吾こそは楽しけれ</p>
+            <p class="ja-classical-line">見る吾こそは面白き。</p>
+            <p class="ja-classical-line">アハヽヽヽ』</p>
+            <p class="ja-classical-line">加米彦『オイ夏彦、何と云ふまづい言霊だ、ソンナ事で敵が降服するものか、宣り直せ宣り直せ』</p>
+            <p class="ja-classical-line">夏彦『身魂相応の言霊をやつたのだ、何程宣り直せと云うても、はや品切に相成申候だよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kamehiko: 'Ha, ha, ha, ha! What a strange Kototama this is; yet, if I consider it a spectacle of this current Sentō, I can endure it.'</p>
+          <p class="en-p">Natsuhiko: 'Since your waist is bent, the Kototama emerging from your Saikatanden is but a Koshio song anyway, ha, ha, ha, ha!'</p>
+          <p class="en-p">Rising from the Ihayado, Shikakō once again brandished his fan, and facing the attacking force, commenced the Kototamasen with a Daionzeu. The song was as follows:</p>
+          <p class="en-p">'To the Ōkami of Toyokunihime, who appeared upon the plains of Manai, the minister of the Kami, Murasakihime, departed from the capital. Accompanied by two attendants, a horse and a deer, she crossed mountains, valleys, and rivers, traversing the plains of Ōno and the villages. As they arrived before the plains of Manai, Arataka and Onitaka, who were entrenched in the Ihayado of Mitake, were deceived by their Teshita Magami. Believing the words that the plains of Manai were in this direction, they were lured into the dark Ihayado and cast into a deep pit; the horse and the deer thus saw a fool’s errand. Murasakihime, fortunately, by virtue of having shed her rough skin, was noticed by Onitaka and Arataka and saved. Revered as a queen, she took possession of the Ihayado and wielded authority with terrifying power. Soon there came the missionary of the teachings of the Kami of Asahashira, whose appearance and form were those of Etsukohime. Oto-hiko, the sound of the wind blowing through the pines, and the stiff-backed Kamehiko came lumbering to the mouth of the valley. Murasakihime, the minister of the Kami, was no old crone washing clothes with a splashing sound, but a figure of elegant grace. Kamehiko, struck with terror, came to the front of the Ihayado, stumbling and sliding down the slope overgrown with thorns, and fell with a thud into an unexpected pit, landing upon his backside.</p>
+          <p class="en-p">Whether he landed or not, I know not. Thereafter, the three came creeping, lured by Murasakihime, and entered the Ihayado. Because she saved me, the two then entered into the faith of the teachings of the Kami of Asahashira. At the summit of Mount Mitake, they encountered a wind that broke all records, and unable to endure it, they crawled on all fours until they reached the thicket of trees. As they all rested there and slept as soundly as if they were on a voyage to Shirakawa, Onitaka and Arataka arrived. They dreamt that the deer and the horse were bound with their hands behind their backs and thrust once more into the Ihayado. Awakening in great astonishment, they wandered about the area while admiring the moonlight.</p>
+          <p class="en-p">A black shadow appeared, and after much rubbing, kneading, and quarreling, they finally persuaded the two fellows, Onitaka and Arataka, and guided them to the Sangokyō. By the command of Princess Etsuko, they returned, or so it seemed on the surface. But wait, this is wrong. It was not I who said it; I was so happy that I made a mistake. Hey, Natsuhiko and Tsunehiko! Oops, I slipped in the ash shed, covered in ash and pitch black. Now that it has come to this, there is no help for it. Others are one thing, but I, from this moment on, shall let the general of Onikumawake bite my backside. Do not be angry, Mukade-hime. The skin of the lie has been carelessly peeled away; my Mitama is still dark.</p>
+          <p class="en-p">The Kototamasen is all in vain. Ah, Kannagara-tamachi-hae-mase. The frog, before it knew it, exposed its own belly from its mouth. Since it is no longer possible, it flees; the missionary of the Sangokyō. Truly, I submit; I pray you, forgive me.'</p>
+          <p class="en-p">With these words, he tucked up his skirts and fled at full speed, running toward the battle lines of Oto-hiko in a comical fashion. Princess Etsuko, Oto-hiko, and Kamehiko burst into laughter at the absurdity, rolling on the ground in mirth.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">加米彦『アハヽヽヽ、怪体の言霊もあるものだなア、併しこれも今度の戦闘の景物と思へば辛抱が出来るよ』</p>
+            <p class="ja-classical-line">夏彦『何れ腰が曲つて居るものだから、臍下丹田から出る言霊も何うせ腰折れ歌だよ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">岩窟の方より鹿公は立ち上り、又もや扇を打振り打振り、寄せ手に向つて大音声に言霊戦を開始したり。その歌、</p>
+            <p class="ja-classical-line">『真名井ケ原に現れませる
+豊国姫の大神に
+詣でむものと紫姫の
+神の司は都をば
+立ち出で給ひ馬と鹿
+二人の伴を従へて
+山越え谷越え川を越え
+大野ケ原や里を越え
+真名井ケ原の手前迄
+進み来れる折柄に
+三嶽の岩窟に立て籠る
+荒鷹、鬼鷹両人が
+部下の魔神に欺かれ
+真名井ケ原は此方ぢやと
+云うた言葉を真に受けて
+暗き岩窟に誘はれ
+深い穴へと放り込まれ
+馬と鹿とは馬鹿を見た
+紫姫は幸に
+渋皮剥けたるお蔭にて</p>
+            <p class="ja-classical-line">鬼鷹荒鷹両人が
+お目に留まつて助けられ
+チンコ、はいこと敬はれ
+岩窟の女王となり済まし
+権威を揮ふ凄じさ
+間もなく出て来た麻柱の
+神の教の宣伝使
+容貌も形も悦子姫
+松吹く風の音彦や
+背の堅い加米彦が
+のそのそ来る谷の口
+バサンバサンと衣洗ふ
+婆々にはあらぬ紫姫の
+神の司の優姿
+肝を潰して加米彦が
+荊棘の茂る坂道を
+転けつ辷りつ漸うに
+岩窟の前にやつて来て
+思ひがけなき陥穽
+ドスンと落ちて尻餅を</p>
+            <p class="ja-classical-line">ついたかつかぬか俺や知らぬ
+それから三人のこのこと
+紫姫に誘はれ
+岩窟の中にやつて来て
+俺を助けて呉れた故
+そこで二人は麻柱の
+神の教に入信し
+三嶽の山の絶頂で
+レコード破りの風に遇ひ
+これや耐らぬと四つ這ひに
+なつて漸う木の茂み
+一同此処に息やすめ
+白河夜船と寝て居れば
+鬼鷹荒鷹やつて来て
+鹿と馬とを後手に
+縛つて又もや岩窟に
+押し込められた夢を見て
+ビツクリ仰天起き上り
+月の光を賞めながら
+其辺をぶらつく時もあれ</p>
+            <p class="ja-classical-line">現はれ来る黒い影
+摺つた揉みたといさかいつ
+とうとう鬼鷹荒鷹の
+二人の奴を言向けて
+三五教に導きつ
+悦子の姫の命令で
+帰つて来たは表向
+おつとどつこいこれや違ふ
+俺が言ふのぢやなかつたに
+余り嬉して間違つた
+ヤイヤイ夏彦常彦よ
+ドツコイすべつた灰小屋で
+灰にまみれて真黒気
+もう斯うなれば是非もない
+他人は兎も角俺だけは
+今を限りに鬼熊別の
+大将に尻を喰ますぞよ
+むかづくまいぞよ蜈蚣姫
+うつかり剥げた嘘の皮
+俺の身魂はまだ暗い</p>
+            <p class="ja-classical-line">言霊戦は皆駄目だ
+嗚呼惟神々々
+御霊幸はひましませよ
+蛙は口から知らぬ間に
+腹の中をば曝け出し
+もう叶はぬから逃げて出る
+三五教の宣伝使
+本当に吾は帰順する
+何うぞ赦して下されや』</p>
+            <p class="ja-classical-line">と尻を捲つて一散走り、音彦が戦陣に向つて、一目散に逃げ来る可笑しさ、悦子姫、音彦、加米彦は可笑しさに吹き出し、笑ひ転けたり。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c15.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 15: 敵味方 [626]</span>
+      </a>
+      <a href="c17.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 17: 有終の Beauty [628]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
