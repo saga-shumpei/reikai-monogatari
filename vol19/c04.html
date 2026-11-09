@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4: Goodness か悪か [649] - Volume 19 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 19 Table of Contents</a>
+      <span>Volume 19</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 19 &bull; Chapter 4</span>
+      <h1 class="chapter-title-en">Chapter 4: Goodness か悪か [649]</h1>
+      <p class="chapter-title-ja">善か悪か〔649〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In the Mahoraba of the land of Mizuho, surrounded by the Aogakiyama, lies the Shinsakuchi, a fortress of Kengo known as the Shitatsuihane. There, the Yotsuō, who knows naught even in dreams of the Kibiyōsen of the Shōsansai nor the Fūsuikuwa of the Daisansai, appeared at the foot of the mountain. By the Onmiizu of Tamateruhime, whose light shines in Yomo, she appeared as Tanabatahime, clad in Terutahe robes, weaving the loom of Tateyoko, brocade and damask. Attended by Murasakihime, as days and months passed and years were crossed, her name resounded in Yomo.</p>
+          <p class="en-p">Yoshikohime, accompanied by Natsuhiko, Tsunehiko, Kamehiko, Taki, and Ita, departed from the dwelling at the foot of the mountain of Yotsuō without revealing her Shimei, setting forth for the sake of Shingefu to parts unknown. Otohiko and Ikohime, having received a different Shimei, likewise departed from the dwelling of Yotsuō, leaving for parts unknown without revealing their destination, in accordance with Kannagara.</p>
+          <p class="en-p">Remaining behind, Murasakihime, Wakahiko, Osetsu, Otama, Bakō, and Kakō devoted their full strength day and night to the upbringing of Tamateruhime.</p>
+          <p class="en-p">Summer drew to its close ere one knew it; the heavens were high, the winds were clear, the ears of rice in the fields beat like golden waves, and the autumn foliage, woven into brocade by Sahohime, reached the height of the season.</p>
+          <p class="en-p">At that very time, in the dead of night, there was a man knocking at the door. Bakō and Kakō were startled by this sound and awoke.</p>
+          <p class="en-p">Bakō said, 'Hey, Kakō, is there not a sound of someone knocking at the front door? I hate to trouble you, but would you mind going to investigate?'</p>
+          <p class="en-p">'What, that is but the sound of the cold wind of the autumn night knocking at the door as it scatters the maple leaves. You have become quite hypersensitive, have you not? It is no wonder, for we are charged with the duty of protecting the living spirit of the Miroku Shinsei, Tamateruhime-sama; it is natural to pay heed to the sound of rain and the echo of the wind. However, it would be a pity if you were to fall ill from overthinking; we must leave all things to the Kami, and as for us, it is sufficient that we do our best and serve with loyalty.'</p>
+          <p class="en-p">'That may be as you say, but the sound just now was by no means the sound of rain or wind; it seems as though there is someone visiting at the gate.'</p>
+          <p class="en-p">Kakō replied, 'Is it the storm on the peak or the wind in the pines? Or perhaps, if I am mistaken, the mischief of foxes and badgers, trying to threaten us by knocking on the rain shutters with their tails. It seems that spies from the Uranai-kyō have come time and again of late, attempting to snatch back Tamateruhime-sama; it would be a disaster if we were careless and opened the door in the middle of the night. We would have no excuse to offer Eikohime-sama or Yoshikohime-sama. For now, the safest course is to adopt the principle of the three monkeys: see no evil, hear no evil, speak no evil. With my deer and your horse, we shall guard this place firmly and well.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">瑞穂の国の真秀良場や
+青垣山を繞らせる
+下津岩根と聞えたる
+要害堅固の神策地
+小三災の饑病戦
+大三災の風水火
+夢にも知らぬ世継王の
+山の麓に現れませる
+玉照姫の御稜威
+光は四方に照妙の
+衣を纏ひて経緯の
+綾と錦の機を織る
+棚機姫と現はれし
+紫姫に侍かれ
+月日を重ね年を越え
+其名は四方に轟きぬ。</p>
+            <p class="ja-classical-line">悦子姫は、夏彦、常彦、加米彦、滝、板を伴ひ、我使命を明かさず、世継王山麓の住家を後にして、何処ともなく神業の為めに出発したり。音彦、五十子姫は別の使命を受け、是亦何処ともなく、行先を明かさず、惟神的に、世継王の住家を後にして出発せり。</p>
+            <p class="ja-classical-line">後には、紫姫、若彦、お節、お玉、馬公、鹿公の面々朝な夕なに、玉照姫の保育に全力を尽し居たりける。</p>
+            <p class="ja-classical-line">夏も何時しか暮れ果て、天高く、風清く、野には稲穂が黄金の波を打ち、佐保姫の錦織なす紅葉の、愈秋の半となりぬ。</p>
+            <p class="ja-classical-line">時しもあれ、真夜中に戸を叩く一人の男あり。馬公、鹿公は此音に驚き目を醒まし、</p>
+            <p class="ja-classical-line">馬公『オイ鹿公、何だか表の戸を叩く音がするではないか、お前御苦労だが一つ調べて見て呉れないか』</p>
+            <p class="ja-classical-line">『何、あれは秋の夜の紅葉を散らす凩の戸を叩く音だ。余程お前も神経過敏になつたものだな、そりや無理もない、五六七神政の生御霊玉照姫様の御保護の任に当つて居るのだから、雨の音、風の響にも注意を払ふのは当然だ。併し乍ら余り思ひ過ぎると神経病を起す様になつては詰らないから、何事も神様にお任せして、吾々は能ふ限りのベストを尽し、忠実に務めさへすれば宜いのだよ』</p>
+            <p class="ja-classical-line">『そりやお前の云ふ通りだが、併し今の音は決して雨や風の音ではない、何か訪るる人が門にありさうだよ』</p>
+            <p class="ja-classical-line">鹿公『峰の嵐か松風か、一つ違へば狐狸の悪戯か、尻尾を以て雨戸を叩き、吾々を脅威さうとするのだ。此間から幾度となく、ウラナイ教の間者がやつて来て、玉照姫様を奪ひ返さうとかかつて居るらしい、迂濶り夜中に戸でも開け様ものなら大変だ、英子姫様、悦子姫様に申訳がない、先づ此処は、見ざる、聞かざる、言はざるの三猿主義を取る方が安全第一だ。俺の鹿とお前の馬とでシカりとウマウマ守るのだナア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The sound of knocking upon the door grew ever more violent.</p>
+          <p class="en-p">"Is it not knocking with ever greater violence? How would it be to inquire of Murasakihime?"</p>
+          <p class="en-p">"That is indeed so; yet, as she is sleeping so soundly, it would be a pity to awaken her in the middle of the night."</p>
+          <p class="en-p">The sound of knocking upon the front grew ever more violent. Shikakō, in a voice that seemed sullen, spoke:</p>
+          <p class="en-p">"Who is it that knocks so recklessly upon a house where people have fallen asleep?"</p>
+          <p class="en-p">"I am one who has come all the way by solitary travel from Chikubushima in Gōshiu, by the Gomeirei of Hidekohime. Is Murasakihime at home? Is Wakahiko present?"</p>
+          <p class="en-p">Shikakō replied: "Since you know the names of Murasakihime and Wakahiko, you must be something or other; thinking thus, I cannot open the door easily. We sleep by day and serve as Fushinban by night. During the night, the authority is ours, and no matter who tells us to open, it cannot be opened until the Honshiyugojin of this Shikakō issues the command to open. Well now, it is a trouble for you, but as your Shiyōtai is unknown, it would be best to wait until it is Shizen to open. You will likely reveal your thick fur over your whole body when illuminated by Nitsukuō. As we are Ningen who cannot see during the Yabun, I must humbly decline."</p>
+          <p class="en-p">From outside:</p>
+          <p class="en-p">"Is that voice not Shikakō? I have not come today for any other matter. By the heart of Kami-Susanoo-no-Ōkami, I have come as a direct messenger, bearing the great command of Hidekohime; I am Kamehiko, a missionary of the Sangyō."</p>
+          <p class="en-p">"What, is it Kamehiko-sama? If so, there is no reason not to open, but might this be a feigned voice?"</p>
+          <p class="en-p">"What, is there any need to feign a voice? I have details to convey to Murasakihime and all others. It would be best to open without a moment's delay."</p>
+          <p class="en-p">"Somehow, Kamehiko-sama, only on this Kefu, is even your tone of speech solemn; regarding this, whether it be good or evil, auspicious or ominous, this is no ordinary messenger, is it, Bakakō? What should we do?"</p>
+          <p class="en-p">"It is a grave tone of voice. It appears he has come bearing the proxy authority of the Ōkami, and the resonance of his Kototama is somehow more solemn than usual."</p>
+          <p class="en-p">"What, he is merely saying such things to jest. He intends to intimidate us with a tone of voice as if there were some grave business. What, there is no need to worry; it is like the mountain groaning and bringing forth a single mouse. Hahaha."</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">戸を叩く音益々烈しくなり来る。</p>
+            <p class="ja-classical-line">『それでも益々烈しく叩くぢやないか、どうだ一つ紫姫様に伺つて見たら』</p>
+            <p class="ja-classical-line">『それもさうだな、併し乍ら折角よくお寝みになつて居られるのだから、夜中にお目を醒まさせるのもお気の毒だ』</p>
+            <p class="ja-classical-line">表を叩く音益々烈しい。鹿公はムツとした様な声で、</p>
+            <p class="ja-classical-line">『誰だい、人の寝しづまつた家を無闇に叩くものは』</p>
+            <p class="ja-classical-line">『吾れは英子姫様の御命令によつて、江州竹生島よりはるばる単騎旅行でやつて来た者だ。紫姫は在宅か、若彦は居るか』</p>
+            <p class="ja-classical-line">鹿公『紫姫様や若彦様の名を知つて居るからには、何でも何だらう、さう考へると容易に開ける事は出来ない。吾々は昼は寝ね夜は不寝番をつとめて居るのだ。夜の間は俺達の権限があるのだから誰が開けいと云つても、此鹿公の本守護神が開けと命令を下す迄は開けられぬのだ。マアマア暫く御苦労だが正体が分らぬから、自然に開ける迄待つて居たが宜からう。日光に照されて、モウモウした毛を体一面に現はすのだらう。吾々は夜分は目の見えぬ人間だから、平にお断り申す』</p>
+            <p class="ja-classical-line">外より、</p>
+            <p class="ja-classical-line">『さう云ふ声は鹿公ぢやないか、今日参つたのは余の儀ではない。神素盞嗚大神様の御心により、英子姫様の大命を奉じて御直使として出張致した、三五教の宣伝使亀彦であるぞよ』</p>
+            <p class="ja-classical-line">『何、亀彦さまか、ソンナラ開けぬ事は無いが若しや作り声ではあるまいかなア』</p>
+            <p class="ja-classical-line">『何、作り声する必要があるか、紫姫以下一同に申し渡す仔細がある。一時も早く開けたが宜からうぞ』</p>
+            <p class="ja-classical-line">『何だか亀彦さま、今日に限つて言葉つき迄厳粛に構へて御座る、何かこれに就ては善か悪か、吉か凶か、普通のお使ではあるまい、なア馬公、どうしたら宜からうなア』</p>
+            <p class="ja-classical-line">『荘重な語気だな、今日は大神様の代理権を以て来て居るのだと見えて、いつもとは言霊の響きが何処とは無しに森厳だぞ』</p>
+            <p class="ja-classical-line">『何、アンナ事を云つて洒落てるのだよ。大変な用向きがある様な語調で吾々を威喝しようと思つて居るのだ。何、心配する事はないさ、大山鳴動して鼠一匹位なものだ。アハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kamehiko said, 'Open the door quickly; why do you linger?'</p>
+          <p class="en-p">Shikakō replied, 'You have arrived with such a haughty and exaggerated manner; this is a matter that we two cannot easily resolve, so perhaps we should consult with the commander Wakahiko.'</p>
+          <p class="en-p">Umakō said, 'That would be well.'</p>
+          <p class="en-p">Saying this, he entered the living quarters of Wakahiko and shook his shoulders, saying, 'Pardon me, is it Wakahiko-sama or Aohiko-sama? I know not which I should address, but pray, arise for a moment. A formidable personage has appeared at the entrance. Come, come, arise and wake at once.'</p>
+          <p class="en-p">'If it be not Umakō,' said Wakahiko. 'Why do you make such a clamor in the middle of the night?'</p>
+          <p class="en-p">'Nay, a sudden incident has occurred. By the Mikokoro of Susanōnōokami, a messenger of the Sendenshi of Kamehiko has arrived as an Ojikishi from Hidekohime-sama.'</p>
+          <p class="en-p">Wakahiko replied, 'What, a messenger of the Sendenshi of Kamehiko has arrived? How late you have come! We, including Murasakihime and all of us, have been counting the days, stretching our necks in anticipation, wondering when the words of praise from Hidekohime-sama would descend. Rejoice, Umakō, for surely we shall receive a Gohōbi.'</p>
+          <p class="en-p">'That is indeed grateful; shall we then open the door?'</p>
+          <p class="en-p">'Wait a moment; we must tidy the sleeping quarters and cleanse the surroundings before we invite them to enter, for it would be disrespectful to the Ojikishi to receive them in such disarray. Pray, Murasakihime-sama, Otama-sama, arise quickly; a messenger of the Sendenshi of Kamehiko has just arrived as an envoy of Hidekohime-sama.'</p>
+          <p class="en-p">Murasakihime said, 'Ah, is that so? That is a serious matter; we are in a predicament, are we not?'</p>
+          <p class="en-p">'We have endured such bitter toil and hardship to welcome Tamateruhime-sama into the Sangōkyō, so there is no reason why we should be rebuked, rather than praised. Do not be anxious; no matter how magnificent a divine personage they may be, a woman is still a woman. You should not worry so needlessly.'</p>
+          <p class="en-p">'Even so, I cannot help but feel uneasy. Whatever the case may be, let us quickly tidy the room and have them enter.'</p>
+          <p class="en-p">The group cleared away their bedding and finished cleaning the room neatly.</p>
+          <p class="en-p">Wakahiko said, 'Now, the preparations are complete. Umakō, Shikakō, it would be well to open the front door and guide Kamehiko-sama inside.'</p>
+          <p class="en-p">The two, Umakō and Shikakō, replied that they understood, and they slid open the front door. The two were astonished, for the messenger of the Sendenshi of Kamehiko stood with solemn dignity, wearing a golden crown, with a luminous jewel illuminating the surroundings, clad in a white robe with long, thin silk sleeves. The messenger advanced with composure as if the entrance were too narrow, bowed once to the two, walked straight into the inner room, sat formally before Tamateruhime, performed clapping and two bows, finished reciting the divine words, and sat in a formal posture.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">亀彦『早く開けぬか、何をぐづぐづ致して居るぞ』</p>
+            <p class="ja-classical-line">鹿公『ヨオ高圧的に大袈裟に出やがつたな、これでは吾々両人にては一寸解決がつき難い、若彦の大将に一寸相談して見ようか』</p>
+            <p class="ja-classical-line">馬公『それが宜からう』</p>
+            <p class="ja-classical-line">と云ひ乍ら若彦の居間に立ち入り肩を揺つて、</p>
+            <p class="ja-classical-line">『モシモシ若彦さまか、青彦さまか、どちらを云つて宜いのか知らぬが一寸起きて下さい。門口に大変な者が現はれました。サアサア早く起きたり起きたり』</p>
+            <p class="ja-classical-line">『誰かと思へば馬公ぢやないか。夜の夜中に何を喧しう云ふのだい』</p>
+            <p class="ja-classical-line">『イエイエ急な事件が突発しました。素盞嗚大神様の御心により英子姫様より御直使として、亀彦の宣伝使が見えました』</p>
+            <p class="ja-classical-line">若彦『何、亀彦の宣伝使が見えたと、何と遅かつたな、もう英子姫様よりお褒めの言葉が下るか下るかと指折り数へて、紫姫を始め吾々一同は首を伸ばして待つて居たのだ。馬公喜べ屹度御褒美を頂戴するのだらう』</p>
+            <p class="ja-classical-line">『それは有難い、ソンナラ開けませうか』</p>
+            <p class="ja-classical-line">『一寸待つて呉れ、寝間を片付け、其処いらを掃除してそれから御這入りを願はないと、こう散けては御直使に対して御無礼だ。モシモシ紫姫さま、お玉さま、早く起きて下さい、英子姫様のお使として亀彦の宣伝使が只今見えました』</p>
+            <p class="ja-classical-line">紫姫『ア、さうですか、そりや大変です、困つた事になりましたねエ』</p>
+            <p class="ja-classical-line">『あれだけの吾々は苦心惨憺を重ね玉照姫様を三五教へお迎へ申したのだから、褒めて貰ふ事はあつてもお咎めを蒙る様な道理がない。御心配なさいますな、何程立派な神人ぢやと云つても、女は矢張り女だナア、そンな取越苦労はするものぢやありませぬよ』</p>
+            <p class="ja-classical-line">『それでも何だか気掛りでなりませぬワ。何は兎もあれ、早く室内を片づけて這入つて貰ひませう』</p>
+            <p class="ja-classical-line">と一同は夜着を片付け、綺麗に掃除をなし終り、</p>
+            <p class="ja-classical-line">若彦『サア準備は出来た、馬公、鹿公、表を開けて亀彦さまを御案内申したがよからう』</p>
+            <p class="ja-classical-line">馬、鹿の両人は畏まりましたと表戸をサラリと開け、驚いたのは両人、亀彦の宣伝使は威儀儼然として金色の冠を頂き、夜光の宝玉四辺を照らし、薄き絹の袖長き白衣を着し、入口狭しと悠々と進み入り、二人に一揖し、つかつかと奥の間に進み、玉照姫の御前に端坐し、拍手再拝、神言を奏し終り正座に着きける。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Murasakihime placed her hands upon the floor and spoke: 'Oh, this is indeed the Sendenshi Kamehiko, nay, the Jikishi of Hidekohime. Despite the darkness of night and the great distance, you have come to visit us. I pray you, let us hear the nature of your mission.'</p>
+          <p class="en-p">Kamehiko composed his demeanor and replied: 'My arrival at this mansion this very day is for no trivial matter. Regarding the conduct of you, Murasakihime, and Wakahiko, Kamususanōnōokami has expressed extreme displeasure, and having received a Goshinji from Hidekohime, I have come here purposely as the Jikishi of the Mikoto of Hidekohime.'</p>
+          <p class="en-p">Murasakihime and Wakahiko started in surprise, placed their hands upon the floor, and said: 'We are deeply grateful for your trouble, Jikishi-sama. We pray you, let us hear the nature of your mission with haste.'</p>
+          <p class="en-p">'It is the strict command that, as you have forgotten the laws of Tenchi regarding Tamateruhime of the Shinkaikeirin, and have employed the secret schemes of Kenbōjiyutsusū, and have attained your objective through the strategy of Hankankuniku, such acts do not accord with the divine will. The deity of Tamateruhime must be surrendered for the time being to Kurohime of the Uranai faith. You are to send Tamateruhime-sama and Otama to the hands of Kurohime without a moment's delay, and you are to bear this responsibility and depart from your office of Sendenshi.'</p>
+          <p class="en-p">Thus he declared with solemnity.</p>
+          <p class="en-p">Murasakihime flushed with shame and said: 'Truly, your words as Jikishi are clear in their reason. It is the result of my own lack of virtue, and now there are no words of excuse left to offer. I accept this with reverence.'</p>
+          <p class="en-p">'Wait, wait, Murasakihime-sama. To speak so bluntly, setting aside this Wakahiko, will leave us with no resolution for the future. Even if it were a strategy of Kenbōjiyutsusū, the welcoming of the living spirit of Tamateruhime, the precious treasure of the Miroku Shinsei, into the Sangyō is an outstanding achievement of merit. We should be receiving words of commendation; that we should instead be dismissed from our posts and, furthermore, told to hand over Tamateruhime-sama to Kurohime, does not seem to be the words of Ōkami or Hidekohime. Hey, you, Kamehiko, you must be jealous of our success and are saying such things. Nay, this must be the rambling of your own primary guardian deity; it is surely the mischief of your secondary guardian deity. I, Wakahiko, shall now perform a spiritual injection and reveal the demon possessing you.'</p>
+          <p class="en-p">As he quickly clasped his hands and let out a cry to apply a spiritual binding, a goddess appeared suddenly from behind Kamehiko like smoke, her brilliance illuminating the universe, and she cast her gaze upon the face of Wakahiko. Murasakihime and Wakahiko felt their bodies wither, prostrated themselves on the spot, trembled in fear, and their tears came to moisten the tatami mats. Kamehiko softened his expression.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">紫姫は手を突ひて、</p>
+            <p class="ja-classical-line">『これはこれは亀彦の宣伝使様、否、英子姫様の御直使様、夜陰といひ遠方の処、ようこそ御入来下さいました。御用の趣仰せ聞けられ下さいませ』</p>
+            <p class="ja-classical-line">亀彦は威儀を正し、</p>
+            <p class="ja-classical-line">『今日只今此館に参りしは余の儀では厶らぬ。此度其方紫姫を始め若彦の行為に就いて神素盞嗚大神様、以ての外の御不興、英子姫様に御神示あらせられたれば、亀彦ここに英子姫の命の直使としてわざわざ参りたり』</p>
+            <p class="ja-classical-line">紫姫、若彦はハツと両手をつき、</p>
+            <p class="ja-classical-line">『これはこれは御直使様御苦労に存じます。御用の趣、速にお聞かせ下さいませ』</p>
+            <p class="ja-classical-line">『其方事は神界経綸の玉照姫を天地の律法を忘却し、権謀術数の秘策を用ゐ、反間苦肉の策を以て目的を達したる事神意に叶はず、彼れ玉照姫の神は、一旦、ウラナイ教の黒姫に与ふべきものなり。一時も早く玉照姫様及びお玉を黒姫の手許に送り、汝等は此責任を負ひて宣伝使の職を去るべし、との厳命で御座る』</p>
+            <p class="ja-classical-line">と厳かに云ひ渡したり。</p>
+            <p class="ja-classical-line">紫姫は顔を赤らめ、</p>
+            <p class="ja-classical-line">『実に理義明白なる御直使のお言葉、妾不徳の致す処、今となつては最早弁解の辞も御座いませぬ。謹みてお受け致します』</p>
+            <p class="ja-classical-line">『モシモシ紫姫さま、此若彦を差し置き、さうづけづけとものを仰有つては後の結びがつきませぬ。仮令権謀術数の策にもしろ五六七神政の貴の御宝、玉照姫の生御霊を三五教に迎へ奉りたる抜群の功名手柄、御賞詞こそ頂くべきに、却つて吾々の職を免じ、剰つさへ玉照姫様を黒姫に渡せとは大神様始め英子姫様の御言葉とも覚えませぬ。オイ、コラ亀彦、貴様は吾々の成功を嫉み、左様な事を申すのであらう。否、汝の本守護神より出でたる世迷ひ言ではあるまい、屹度副守護神の悪戯ならむ。只今若彦が神霊注射を行ひ、汝に憑依せる悪魔を現はし呉れむ』</p>
+            <p class="ja-classical-line">と早くも両手を組みウンと一声霊縛を加へむとするや、亀彦の背後より煙の如く忽然として顕はれ給うた光華明彩六合を照徹する許りの女神顕はれ給ひ、若彦が面を射させ給ひぬ。紫姫、若彦は身体萎縮し其場に畏伏しワナワナと震ひ戦き、涙に畳を潤すに至りぬ。亀彦は顔色を和らげ、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">"To slay Bashiyoku while shaking off tears as a hero is the Goshinji of Kamususanōnōokami and Hidekohime; yet, if thou shalt well Nahohi, Minaho, and Kikinaoshi, and by the realization of the Kushimitama, perfectly accomplish this Taimō, thou shalt be able to participate in the Shingefu once again."</p>
+          <p class="en-p">With these words, bowing his head slightly and shedding tears of Dōjiyō, the figure of Kamehiko, together with the Megami, vanished suddenly from this place. From this moment, the voice of Tamateruhime weeping grew more intense with every Jijikokukoku.</p>
+          <p class="en-p">Otama said, "Tamateruhime, I pray you, restore your Gokigen. Is there something that causes you Kizaha? I offer my Owabi in Ikuhe."</p>
+          <p class="en-p">So saying, she pressed her forehead to the tatami and Wabii.</p>
+          <p class="en-p">"Murasakihime, a Taihen matter has come to pass. What shall we do about Wakahiko?"</p>
+          <p class="en-p">"There is no Shikata; because we acted unreasonably in our haste for Seikō, even if it be said that the end justifies the means, that is a deed for common men, and it cannot be said that we, in our station as messengers of propagation, have performed a noble action. If we two were to be praised by the Ōkami as men of merit, the very life of the Sangyō would here announce its total destruction, and it would end as the Ural religion. Ah, in the words of the Ōkami, there is not even one in a thousand that is vain. From this time forth, we must repent our past errors, polish our spirit and soul, and become true messengers of propagation. That weeping voice of Tamateruhime, it is natural that it does not accord with the divine will."</p>
+          <p class="en-p">"Aye, there is no Shikata."</p>
+          <p class="en-p">Bakō said, (in a low voice),</p>
+          <p class="en-p">"Hey, Shikakō, the night plot of the owl, thou art making a difficult face because thou hast missed thy supper. Dost thou know the divine oracle of the Sangyō which says, 'Even if it be a good deed, if it be not done with sincerity, and if evil be mixed in even to the width of a hair, the matter shall not be accomplished'?"</p>
+          <p class="en-p">"Hmm, I think I heard that sometime. What a difficult thing the Kami say. If the Ōkami, who governs the three thousand worlds at will, speaks of such small things in such a fussy manner, the accomplishment of the divine government is uncertain. However, since even Wakahiko-sama and Murasakihime, whom we revere as our master and teacher, are retiring, it is the same for us. If we do not think of something, we shall meet with a foolish fate."</p>
+          <p class="en-p">"Excuse me, Wakahiko-sama, Murasakihime-sama, congratulations, I offer my felicitations."</p>
+          <p class="en-p">Shikakō hurriedly placed his hand over Bakō's mouth and said,</p>
+          <p class="en-p">"Hey, hey, Bakō, what art thou saying? Is that not somewhat rude?"</p>
+          <p class="en-p">"Bakō, well hast thou spoken. Truly, there is no greater cause for celebration than this. This very day and hour, the Heavenly Rock Cave of the lower abdomen has opened. From now on, the true sun and moon of suchness shall appear. I wish you congratulations, one and all."</p>
+          <p class="en-p">Wakahiko clapped his hands and said,</p>
+          <p class="en-p">"Ōkami, I thank Thee. At last, the dark clouds of the heart and heaven have cleared for me as well."</p>
+          <p class="en-p">Thus he expressed words of gratitude together with his tears.</p>
+          <p class="en-p">Tamateruhime, with a countenance of beauty that defies description, began to smile, her Gokigen no longer askew, and Otama wept with joy.</p>
+          <p class="en-p">Bakō and Shikakō looked at each other's faces and said,</p>
+          <p class="en-p">"Well, I do not understand. How will this turn out, I wonder?"</p>
+          <p class="en-p">What manner of actions will Murasakihime and Wakahiko henceforth truly undertake?</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『英雄涙を振つて馬稷を斬るとは神素盞嗚大神、英子姫様の御心事、さり乍ら汝よく直日に見直し聞き直し、奇魂の覚りによりて此大望を完全に遂行せば、再び神業に参加する事を得む』</p>
+            <p class="ja-classical-line">と稍俯むき、同情の涙を流しつつ女神と共に、亀彦の姿は忽然として此場より消えにける。玉照姫の泣き給ふ声は此時より時々刻々に烈しくなり来たれり。</p>
+            <p class="ja-classical-line">お玉『玉照姫様、どうぞ御機嫌を直して下さいませ。何かお気障りが御座いますか。幾重にも御詫致します』</p>
+            <p class="ja-classical-line">と頭を畳にすり付け詫入る。</p>
+            <p class="ja-classical-line">『紫姫さま、大変な事になりましたねエ。若彦はどう致したら宜しいのでせう』</p>
+            <p class="ja-classical-line">『仕方がありませぬ、成功を急ぐの余り無理をやつたものですから、何程目的は手段を選ばずといつても、それは俗人の為すべき事、吾々宣伝使の分際として余り立派な行動をやつたとは云はれますまい。吾々両人を殊勲者として大神様より賞詞さるる様な事あらば、それこそ三五教の生命は茲に全く滅亡を告げ、ウラル教となつて了ひませう。アヽ大神様の御言葉には千に一つもあだは御座いませぬ。是よりは前非を悔い身魂を研いて本当の宣伝使にならなくちやなりませぬ。玉照姫様のあの御泣き声、御神慮に叶つて居ないのは当然です』</p>
+            <p class="ja-classical-line">『エヽ仕方がありませぬなア』</p>
+            <p class="ja-classical-line">馬公は、（小声で）</p>
+            <p class="ja-classical-line">『オイ鹿公、梟鳥の宵企み、夜食に外れて難かしい顔を致すぞよ。ドンナ良い事でも誠で致した事でなければ、毛筋の横巾程でも悪が混りたら、物事成就致さぬぞよ、と云ふ三五教の御神諭を知つて居るか』</p>
+            <p class="ja-classical-line">『ウン、いつか聞いた様に思ふ。ナント神様といふものは七難かしい事を仰有るものだな。三千世界を自由になさる大神様が、ソンナ小さい事をゴテゴテ仰有る様では神政成就も覚束ないワイ。然し乍ら若彦さまや、吾々の師匠と仰ぎ主人と崇むる紫姫様迄が、御退職なさる以上は吾々とても同じ事だ。何とか考へないと馬鹿な目に遭はねばならぬぞ』</p>
+            <p class="ja-classical-line">『モシモシ若彦さま、紫姫さま、御目出度う、お祝ひ致します』</p>
+            <p class="ja-classical-line">鹿公は慌てて馬公の口に手を当て、</p>
+            <p class="ja-classical-line">『コラコラ馬公何を云ふのだ、些と失礼ぢやないか』</p>
+            <p class="ja-classical-line">『馬公、よう云ふて下さつた。本当にコンナ目出度い事はありませぬワ。今日只今始めて臍下丹田の天の岩戸が開けました。これから本当の真如の日月が現はれませう。お互様にお目出度う存じます』</p>
+            <p class="ja-classical-line">若彦は拍手を打つて、</p>
+            <p class="ja-classical-line">『大神様有難う御座います。愈私も心天の妖雲が晴れました』</p>
+            <p class="ja-classical-line">と感謝の辞を涙と共に述べたて居る。</p>
+            <p class="ja-classical-line">玉照姫は何とも形容の出来ない美はしき顔色にて、御機嫌斜ならずニコニコと笑ひ始め給ひ、お玉は嬉し泣きに泣き入る。</p>
+            <p class="ja-classical-line">馬公、鹿公二人は互に顔を見合せ、</p>
+            <p class="ja-classical-line">『ハテ合点がゆかぬ。こりやマアどうなり往くのであらうかな』</p>
+            <p class="ja-classical-line">紫姫、若彦は今後果して如何なる行動に出づるならむか。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c03.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 3: 千騎一騎 [648]</span>
+      </a>
+      <a href="c05.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 5: 零敗の苦 [650]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

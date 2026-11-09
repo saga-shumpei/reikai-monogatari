@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: 混線 [658] - Volume 19 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 19 Table of Contents</a>
+      <span>Volume 19</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 19 &bull; Chapter 13</span>
+      <h1 class="chapter-title-en">Chapter 13: 混線 [658]</h1>
+      <p class="chapter-title-ja">混線〔658〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">From the Misora where the moon shines across, scattered snow falls fluttering, as if in shame. In the Kojitayami where Jiyumoku grow thick, the Sendenshi of the Ural Kyō, the Riyōnin named Terujī and Koronbo, having left the land of Tokoyo behind, and wishing to open the path of the Ural, crossed over Umikahayamanu and came to Onokorojima. Seeing the purple clouds rising in the distant sky, they wondered at the mystery, thinking that this must surely be the Shiyutsugen of a Shinjin; at any rate, they decided to go toward the clouds as their Mea, and while bathed in the moonlight, the Futari proceeded, walking step by step along the ridge of Takakumayama and to the Sanroku of Ōharayama.</p>
+          <p class="en-p">In the forest on one Katahe, there was the voice of a strange person; wondering what Nanigoto it might be, the Riyōnin, with stealthy steps, Suriyo and watched the Dedokoro of the voice.</p>
+          <p class="en-p">Tanimaru said, 'Oi, Onimaru, your efforts were great. The Ontaishiyō Onikumohiko was Gekitai by the Sendenshi of the Ananai-kyō, and subsequently, the vice-general Onikumawake, who had constructed a Kenjiyōtetsupeki at Onigajō and intended to sweep across the world, also fell into such a miserable state and fled back to the land of Fusa. We, who were left behind, have sunk into a tragic plight as if our bird wings were taken away. We thought that if we could somehow recover Ōeyama and Onigajō once more, and if we two could barricade ourselves in both mountains, take up our positions grandly again, and restore our former prosperity, we would achieve our purpose after a thousand hardships. Now that we have welcomed the deity Tamateruhiko, who is said to have been born of Kototeruhime of Takakumayama, no matter how great the Ananai-kyō may be, they will be able to do nothing. The wretches Takahime and Kurohime of the Uranai Kyō worked with all their might, and as a result, the essential Tamateruhime was snatched away by the Ananai-kyō; at present, is it not the case that the winds of decline are blowing gradually upon the Uranai Kyō as well? In contrast, the Ananai-kyō is prosperous as you see, by the divine power of Tamateruhime. As for the Brahmanism we serve, if only we could get our hands on Tamateruhiko, we would destroy both the Ananai-kyō and the Uranai Kyō with a single kick, but since our general has met such a fate, there is nothing we can do. However, even if our generals Onikumohiko and Onikumawake have lost heart, the true God never loses heart, so I thought that even if I were left alone, I must uphold this path. They say that if you wait, the sea route will bring a favorable wind, and truly, today has been a splendid day. Regarding that, I have caused you a great deal of trouble.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">月照りわたる御空より
+まばらの雪はちらちらと
+恥かしさうに降つて来る
+樹木茂れる木下闇
+ウラル教の宣伝使
+テルヂー、コロンボの両人は
+常世の国を後に見て
+ウラルの道を開かむと
+海河山野を打渡り
+自転倒島に来て見れば
+遥の空に紫の
+雲立ち昇る怪しさに
+是れぞ正しく真人の
+出現ならむ兎も角も
+雲を目当てに行き見むと
+高熊山の峰伝ひ
+大原山の山麓に
+月の光を浴び乍ら
+二人テクテク進み来る。</p>
+            <p class="ja-classical-line">片方の森に怪しき人の声、何事ならむと両人は、差し足、抜き足、摺寄つて、声の出処を窺ひ居る。</p>
+            <p class="ja-classical-line">谷丸『オイ、鬼丸、御苦労だつたなア。鬼雲彦の御大将は、三五教の宣伝使に撃退され、続いて鬼ケ城に堅城鉄壁を構へ、天下を席巻せむとして居た鬼熊別の副将も亦、アヽ云ふ悲惨な態になつて、フサの国に逃げ帰り、振り残された吾々は、鳥の翼を取られたやうな悲境に沈淪し、何とかしてモウ一度、大江山、鬼ケ城を回復し、吾々両人は両山に立て籠り、再び堂々と陣取り、以前の隆盛に復活せむと、千辛万苦の結果漸く目的を達し、斯うして高熊山の言照姫が産んだとか云ふ玉照彦の神様をお迎へした以上は、何程三五教だつて、どうする事も出来まい。ウラナイ教の高姫や黒姫の奴が一生懸命に骨を居つて、その結果三五教に肝腎の玉照姫を横奪され、今の所ではウラナイ教も追々と凋落の風が吹いて来よつたぢやないか。それに引替へ三五教は、玉照姫の神力で、あの通りの隆盛だ。吾々の奉ずるバラモン教も、玉照彦さへ手に入らば、三五教もウラナイ教も、唯一蹴の下に滅ぼして了ふのだが、到底大将があんな事になつたのだから、どうする事も出来やしない。併し乍ら吾々は仮令鬼雲彦、鬼熊別の大将が屁古垂れても誠の神さまは決して屁古垂れないのだから、一人になつても此道を立てねば置かぬと思つて居たが、待てば海路の風が吹くとやら、今日は本当に結構な日だつたネー。それに就てもお前に随分骨を折らしたものだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Onimaru said, 'Brother Tanimaru, there is no need for you to offer me such thanks. Your deeds were truly magnificent. When we reached Kunadome of Yamaguchi, Kunadomenokami was guarding it firmly, leading a multitude of Teshita. I was filled with anxiety, wondering how I might break through this Nankuwan, but thanks to the Kiyōkau Danpan you conducted with Kunadomenokami, we managed to pass that place and reach the foot of Takakumayama as if swimming. Just as I was feeling Anshin, thinking that the situation was now in our hands, the Kami Mikunimori appeared on the scene, bringing with him his Niyōbau, known as Kuniyorihime. The ferocity of their Giyōsau when they glared at Oretachi makes me shudder even now.'</p>
+          <p class="en-p">Tanimaru replied, 'However, by employing your customary Benzetsu, we skillfully slipped through this Sekishiyo, and when the Riyōnin arrived before the Gankutsu, neither the object of our quest, Kototeruhime, nor Tamateruhiko-sama were to be seen. While we were exploring the interior of the Gankutsu, the joy I felt when the cry of an infant reached my ears—never since the cutting of the umbilical cord have I known a moment so delightful.'</p>
+          <p class="en-p">Onimaru said, 'Thanks to that, we were able to welcome Tamateruhiko-sama and return, but Kototeruhime, whom we had heard was a mother with a figure as magnificent as a goddess, did not show her shadow at all, did she?'</p>
+          <p class="en-p">Tanimaru replied, 'She must have been terrified by our might and fled. Yet, the womb is but a borrowed vessel, and Tamateruhiko-sama is no different from the cast-off shell of a cicada. Since we have returned having obtained the essential Honzon, does it not matter little what becomes of Kototeruhime?'</p>
+          <p class="en-p">Thus, while carefully resting Tamateruhiko by their side, unaware that there was one watching from the other side, they whispered in high voices, overflowing with joy. Two figures lay hidden in the shade of the trees nearby.</p>
+          <p class="en-p">Colombo said, 'Look here, Terujī, we have come all the way from the land of Tokoyo to manifest our merit and restore the Ural religion to its former power, yet we have been outstripped by the fellows of the Brahman religion; is this not vexing? Is there no means to snatch him away to our side?'</p>
+          <p class="en-p">Terujī replied, 'Indeed, it seems there are two of them over there. We, too, are two. We must devise some scheme to threaten them and skillfully obtain Tamateruhiko-sama. Since the essential jewel is shining right before our eyes, five or six ken away, we cannot return as we are, regardless of whether we succeed or fail.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼丸『谷丸の哥兄、別に俺にそう礼を言ふには及ばぬぢやないか。お前の働きつたら、実に華々しいものだつた。山口の来勿止まで行つた時は、来勿止神が沢山の手下を引連れ、固く守つて居る。俺はモウ此難関をどうして突破しようと心配でならなかつた、その時お前は来勿止神に向つて、強硬な談判をやつたお蔭で、ヤツと其場を通過し高熊山の麓まで泳ぎつく様にして駆けつけて、ヤアこれでこつちのものだと安心して居る最中へ、神国守の神が国依姫とか云ふ女房を連れて其場に現はれ、俺達を睨んだ時の其形相の凄じさ、今思つてもゾツとするよ』</p>
+            <p class="ja-classical-line">谷丸『併し乍らイロイロと得意の弁舌を以て、此関所をウマく切り抜け、両人が岩窟の前に行つた所、目的物の言照姫も玉照彦さまも、お姿は見えず、イロイロと岩窟内を探険する最中、赤児の泣き声が耳に這入つた時の嬉しさ、臍の緒切つてから、あの時位愉快な事はなかつたなア』</p>
+            <p class="ja-classical-line">鬼丸『お蔭で玉照彦様は奉迎して帰つたが、女神の様な立派なお姿の母親と聞いて居た言照姫は、皆目影を見せなかつたぢやないか』</p>
+            <p class="ja-classical-line">谷丸『吾々の威勢に恐れて遁走して了つたのだ。併し腹は借り物、玉照彦様の蝉の脱殻も同然だ。肝腎の本尊を手に入れて帰つたのだから、言照姫なんかどうでも良いぢやないか』</p>
+            <p class="ja-classical-line">と玉照彦を大切に傍に休ませ乍ら、一方に窺ふ人有りとも知らず、嬉しさの余り声高々と囁いて居る。此方の木蔭に身を潜めた二人、</p>
+            <p class="ja-classical-line">コロンボ『コレ、テルヂーよ、遥々と常世の国からやつて来て功名を現はし、ウラル教を昔の勢に回復しようと思つたのに、バラモン教の奴に先を越されて詰らぬぢやないか。何とかして此方の方へボツたくる手段はあるまいかなア』</p>
+            <p class="ja-classical-line">テルヂー『さうじやなア、向ふはどうやら二人らしい。此方もヤツパリ二人だ。何とかして、一つ脅かし、玉照彦様をウマく手に入れる工夫を廻らさねばなるまい。現在五六間眼の前に、肝腎の玉が輝いて居るのだから、成功不成功は後の問題として、吾々としては此儘帰る事は出来ないなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Colombo said, 'Yet, hearing the words of Aitsu just now, since he is a fellow who has skillfully broken through the Yamaguchi Sekishiyo, which Kunadomenokami was guarding with a Takusan number of Buka, as well as the Mikunimori Sekishiyo further within, he must surely be a man of great strength. It is Tautei Dame for us to confront him with our Nikudan, exhausted as we are from a Chiyōto journey. There is no Shikata but to devise some Kikei. O, Anii Teruji, does no good thought arise in you?'</p>
+          <p class="en-p">Teruji replied, 'Since they must return by this path, shall we not lie in wait along the Chiuto and do something? It would be an Ichidaiji if we spoke too softly and were perceived by the enemy. Come, follow me.'</p>
+          <p class="en-p">With that, they muffled their Ashioto, bent their waists, and crawling, left the place, Hikikahe along the path they had come, and arrived back at the Sanroku of Sakahitauge.</p>
+          <p class="en-p">Teruji said, 'As I know not Nandoki the fellows of the Brahman Kyō shall return, I must quickly devise a Keiriyaku; I shall climb this Rauboku and shake the pine branches with a rustling sound, mimicking the voice of a Tengu, while you hide your body in the thicket of shrubs, and watching for the moment the two fellows are startled and lose their composure, you shall softly lift up Tamateruhiko-sama and flee to the side of the Tengu Rock at Sakahitauge; if you do so, success is surely without doubt.'</p>
+          <p class="en-p">Colombo said, 'Anii's plan sounds interesting at first hearing, but it is a dangerous performance, as they say the ox's halter slips off from the beginning; if things go wrong, the end may be that I slip from the high tree and lose my composure or break the bones of my legs.'</p>
+          <p class="en-p">Teruji said, 'Hey, before I have even climbed the pine tree, do not speak such useless things about falling or not falling. Has there ever been a flaw in any of my Keiriyaku until now?'</p>
+          <p class="en-p">Colombo said, 'It is a funeral for the Heavenly Way, an empty burial.'</p>
+          <p class="en-p">Teruji said, 'Eh, you are a fellow who speaks of ominous things again. I am about to climb a high tree, and you speak of an empty burial; you are a fellow who speaks of ill-omened things once more. Nevertheless, I know not when they shall return. Let us quickly begin the plan. I shall refrain today, for you have used a strange Kototama upon me. As a penalty, you shall take the role of the tree-climber. Use the Kototama of the Tengu well.'</p>
+          <p class="en-p">Colombo said, 'Anii, you know well from always that my tree-climbing is clumsy. Without saying such things, as you are the superior, please perform the superior role as expected. I shall serve as the subordinate. If I, with a body as heavy as a millstone, were to climb the tree and slip, and go tumbling to the ground, that would indeed be a disaster. Come, come, one, two, three.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">コロンボ『併し今の彼奴の話で聞けば、来勿止神が沢山な部下を連れて、厳守して居た山口の関所も、モ一つ奥の神国守の関所も、巧く突破した位な奴だから、中々力の強い奴に違ひないぞ。吾々の様に長途の旅で疲労れきつた肉弾を以て打向ふた所で到底駄目だ。何とか奇計を廻らすより仕方がない。……オイ、テルヂーの哥兄お前何か良い考へは湧いて来ぬかなア』</p>
+            <p class="ja-classical-line">テルヂー『何れ此路を通つて帰るのだから、中途に待ち受けて、何とかやらうぢやないか。あまりヒソビソ話をやつて居て、敵に悟られては一大事だ。サア俺に随いて来い』</p>
+            <p class="ja-classical-line">と足音を忍ばせ、腰を屈め、這ふ様にして此場を後に、元来し道へ引返し、堺峠の山麓に帰り着いた。</p>
+            <p class="ja-classical-line">テルヂー『何時バラモン教の奴が帰つて来るか知れないから、早く計略をめぐらさねばならぬ、俺は此老木に攀登り、松の枝をザアザアと揺つて、天狗の声色を使ふから、貴様は灌木の茂みに身を隠し、二人連れの奴がビツクリして腰を抜かした隙を考へ、玉照彦さまをソツと抱きあげ、堺峠の天狗岩の側まで逃げて呉れ、そうすれば成功屹度疑無しだ』</p>
+            <p class="ja-classical-line">コロンボ『兄貴の計画も一寸聞くと面白いが、しかし当事と牛のオモガイは先から外れるとか云つて、危ない芸当だなア、罷り違へば高い木の上から滑走して、腰を抜くか、脚の骨を折る位が結末かも知れないよ』</p>
+            <p class="ja-classical-line">テルヂー『エヽまだ松の木に登らぬ間から、落ちるの、落ちぬのつて、せうもない事言ふな。俺の計略に一つとして今迄欠点があつたかい』</p>
+            <p class="ja-classical-line">コロンボ『天道様の弔ひだ、空葬だ』</p>
+            <p class="ja-classical-line">テルヂー『エー又怪体の悪い事を云ふ奴だ。これから高い木へ登らうと思つて居るのに、空葬だなんて、又しても縁起の悪いことを言ふ奴だなア。併しながら、何時帰つて来るか知れない。早く計画に取りかからう。…………俺は貴様に妙な言霊を使はれたから、今日は遠慮して置く。罰金として貴様が木登り役だ。うまく天狗の言霊を使ふのだよ』</p>
+            <p class="ja-classical-line">コロンボ『兄貴、俺の木登りの拙劣なのは、常から能く知つて居るぢやないか。そんな事言はずに、お前上役だから、ヤツパリ上の役をして呉れ。俺は下役を務める。こんな挽臼の様な重たい体で木登りをして踏み外し、地上へスツテンコロンボーとやつては、それこそ大変だ。サアサア一イ二ウ三ツだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Terujī said, 'Alas, it cannot be helped. Under a brave general, there are weak soldiers. This, too, is because my own form is poor.'</p>
+          <p class="en-p">So saying, like a monkey, he embraced the trunk of the great tree and climbed high into the branches.</p>
+          <p class="en-p">Koronbo cried, 'Hey, Aniki, where are you?'</p>
+          <p class="en-p">Terujī replied, 'You fool! If you speak in such a loud voice, it will be a grave matter if those two fellows approaching nearby hear you. Will you not be quiet for a moment?'</p>
+          <p class="en-p">Koronbo said, 'But because you did not teach me the Sakusen Keikuwaku sufficiently, I am in a total state of Yamikumo as to what Haushin I should take.'</p>
+          <p class="en-p">Terujī said, 'It is Ketsukō precisely because it is Yamikumo. Fortunately, under a sky of Yukigumo, the round moon is not visible, and as the surroundings are dimly dark, this Geitau can be performed. If you dally, we shall be Hatsukaku. Be silent now, in good Kagen.'</p>
+          <p class="en-p">Koronbo said, 'Ah, how lonely it is. Look, a white hand is being extended and beckoning. How detestable it is... Hey, some loathsome fellow is extending a thin white hand and beckoning to me. Shall I try to climb up to Aniki's side somehow?'</p>
+          <p class="en-p">Terujī said, 'Alas, there is no Shikata for such an Okubiyōmono, a fellow who lacks wit. Though you speak as if you were Zuibun strong and offer Ritsupa Chie when you are by my side, the moment you are Hitori, you immediately become terrified... If you keep dallying, they will return. That which appeared to be a white hand beckoning is but Kareobana. From ancient times, it is said: "Seeing the true form of a ghost, it is but Kareobana." Settle your soul in your Seika Tanden... It is a case of one against a thousand. It will be troublesome if you do not struggle valiantly.'</p>
+          <p class="en-p">Koronbo said, 'Alas, it cannot be helped. Shall I hide myself in the thicket of trees?'</p>
+          <p class="en-p">So saying, he hid his body within the Kareobana, trembling in fear. To this place, Onimaru and Tanimaru both advanced, respectfully carrying Tamateruhiko.</p>
+          <p class="en-p">Onimaru said, 'Hey Tanimaru, was there not some strange voice just now? Could it be that the fellows of the Sangyō-kyō have detected our movements and come to usurp Lord Tamateruhiko?'</p>
+          <p class="en-p">Tanimaru replied, 'It is so; it sounded like a human voice. I would not mind if one or Futari came, but if there are many, it is a bit troublesome. We must protect Lord Tamateruhiko, and if we do so, there is only Hitori to struggle against the enemy. Quietly... forgive me... shall we ask Lord Tamateruhiko to rest in this thicket, and consider the situation between the two of us?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">テルヂー『エー仕方がない。勇将の下に弱卒有り。これも俺の型が悪いのだ』</p>
+            <p class="ja-classical-line">と猿の如く、大木の幹をかかへて、樹上高く駆登つた。</p>
+            <p class="ja-classical-line">コロンボ『オーイ、兄貴、どこに居るのだ』</p>
+            <p class="ja-classical-line">テルヂー『馬鹿ツ、大きな声で物を言うと、そこいらへ近寄つて来る二人の奴に聞えると大変だぞ。チツと静かにせぬかい』</p>
+            <p class="ja-classical-line">コロンボ『併し作戦計画を、俺に充分教へて置かないものだから、どう方針を採つたら良いかサツパリ暗雲だ』</p>
+            <p class="ja-classical-line">テルヂー『暗雲だから結構だ。幸ひ雪雲の空、円いお月さまも見えず、ボンヤリと其処らが暗いので、此芸当がうてるのだ。グヅグヅして居ると発覚するぞ。モウ良い加減沈黙せい』</p>
+            <p class="ja-classical-line">コロンボ『アヽさぶしい事だ。なんだ白い手を出して招いて居やがるぞ。いやらしい事だなア……………オイ何だか厭らしい奴が、細い白い手を出して、俺を招いて居るワイ。俺も何とかして兄貴の側へ登つて行かうかなア』</p>
+            <p class="ja-classical-line">テルヂー『エー臆病者の、気の利かぬ奴つたら仕方がない。俺の側に居れば随分強さうな事を言ひ、立派な智慧も出しやがる癖に、一人になると直ぐ怖けやがつて……グヅグヅ言うてると帰つて来るぞ。白い手を出して招く様に見えたのは、それは枯尾花だ。昔から……幽霊の正体見たり枯尾花……と云ふ事がある。チツと臍下丹田に魂を据ゑて……千騎一騎の場合だ。奮闘して呉れないと困るぢやないか』</p>
+            <p class="ja-classical-line">コロンボ『エー仕方がない。木の茂みへ隠れて居らうかなア』</p>
+            <p class="ja-classical-line">とコワゴワ枯尾花の中に身を隠し慄うて居る。斯かる所へ鬼丸、谷丸の両人は、玉照彦を恭しく抱き乍ら進み来り、</p>
+            <p class="ja-classical-line">鬼丸『オイ谷丸、何だか妙な声がして居たぢやないか。三五教の奴が吾々の行動を探知し、玉照彦様を横領に来たのぢやありますまいか』</p>
+            <p class="ja-classical-line">谷丸『そうだ、人間の声らしかつた。一人や二人来たつて構はぬが、大勢だと一寸面倒だ、此方は玉照彦様をお守りせにやならず、さうすれば、敵に向つて奮闘する者は唯の一人だ。そつと……失礼だが……玉照彦様に此叢に御休息を願つて、二人で様子を考へる事にしようではないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Onimaru said, 'Even so, it would be a dire matter should Tamateruhiko-sama cry out, "Hogyar, hogyar."'</p>
+          <p class="en-p">Tanimaru replied, 'Tamateruhiko-sama, I offer my sincerest apologies, but I pray you rest here for a short while. I beseech you, by all means, do not raise your voice.'</p>
+          <p class="en-p">With that, he respectfully spread a straw raincoat, covered it with a sedge hat, and placed broken tree branches upon it.</p>
+          <p class="en-p">Tanimaru said, 'There, now it is secure. As the situation is urgent, we must flee for a time, but it would be troublesome if the two of us were to become scattered in this mountain; let us therefore determine a place to settle. ...It shall be before the Tenguiha at Sakahitauge. Do you understand?'</p>
+          <p class="en-p">Onimaru replied, 'Yes, yes, I understand perfectly.'</p>
+          <p class="en-p">The two men, while peering about their surroundings, advanced slowly with clenched fists toward the base of a great tree. Colombo, from within the grass, gazed up into the tree and emitted a strange sound:</p>
+          <p class="en-p">Colombo cried, 'I... ma... jiya...'</p>
+          <p class="en-p">Tanimaru said, 'Hah, what a strange sound that is. It is not a deer, nor an insect, nor the cry of a bird; it is a bizarre, uncanny sound, bearing a mournful tone of national ruin.'</p>
+          <p class="en-p">Onimaru muttered, 'I... ya... ra... shii...'</p>
+          <p class="en-p">Tanimaru said, 'Hey, Onimaru, even you are saying "I..."—what are you talking about? Pull yourself together. As long as I am with you, I possess the strength of a million men. Steady your resolve.'</p>
+          <p class="en-p">Suddenly, from above the tree:</p>
+          <p class="en-p">'Zaa, zaa, zaa, ootsu, you are surely the remnants of the Akugami of Ōeyama. You wicked scoundrels, who have trespassed upon the sacred mountain of Takakumayama and stolen Tamateruhiko-sama away, the Great Tengu of Takakumayama shall now pluck your heads from your shoulders, rend you from your crotches, and hang you upon the branches of a pine tree. If that cannot be accomplished, then set down the Tamateruhiko-sama you hold in your bosom beneath this tree, and depart from this place with all haste!'</p>
+          <p class="en-p">Tanimaru said, 'What is this? To think there exists such a bizarre Tengu. A Tengu should know even of things a thousand leagues away. He dares to command me to take Tamateruhiko-sama from my bosom. This fellow must be a leaf-Tengu or a wild Tengu. ...Hey, you wild Tengu or leaf-Tengu in the tree, if you continue such foolish behavior, shall I, in turn, rend you asunder from your crotch?'</p>
+          <p class="en-p">Onimaru said, 'Excuse me, Tanimaru-sama, you must not say such preposterous things. How could we possibly contend with a Tengu dwelling in such a great tree? ...Excuse me, Tengu-sama in the tree, my commander is a little intoxicated with sake, so I pray you, overlook this. It was the sake that spoke.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼丸『それでも、玉照彦様がホギヤア　ホギヤアとでも仰有らうものなら大変だぞ』</p>
+            <p class="ja-classical-line">谷丸『玉照彦様、誠に申訳が御座いませぬが、一寸暫くの間此処にお休み下さいませ。必ず必ず御声をお発てにならない様にお願ひ致します』</p>
+            <p class="ja-classical-line">と恭しく蓑を敷き、其上に笠を蔽ひ、木の枝を折つて載せ、</p>
+            <p class="ja-classical-line">谷丸『サアもう是れで大丈夫だ。事急なれば、一時逃げる事にせなくてはならぬが、両人が此山中で散り散りバラバラになつて了つては困るから、落ち着く所を定めて置かう。………堺峠の天狗岩の前だぞ。良いか………』</p>
+            <p class="ja-classical-line">鬼丸『ハイハイ承知致しました』</p>
+            <p class="ja-classical-line">両人は四辺を窺ひ乍ら、ノソ……ノソと握り拳を固めて、大木の下に進んで来た。コロンボは草の中から樹上を眺め、妙な声を出し、</p>
+            <p class="ja-classical-line">コロンボ『イ………マ………ジヤ………』</p>
+            <p class="ja-classical-line">谷丸『ヤア何だか妙な声がするぞ。鹿でもなし、虫でもなし、鳥の声でもなし、怪体な亡国的悲調を帯びた、奇声怪音だないか』</p>
+            <p class="ja-classical-line">鬼丸『イ……ヤ……ラ……シイ………』</p>
+            <p class="ja-classical-line">谷丸『オイ鬼丸、貴様までが、イ……なんて、何を言ふのだ。シツカリせんかい。俺が附いて居る以上は、百万人力ぢや。シツカリ胴を据ゑるのだぞ』</p>
+            <p class="ja-classical-line">忽ち樹上より、</p>
+            <p class="ja-classical-line">『ザア　ザア　ザア、ウーツ、其方は大江山の悪神の残党であらうがな。不都合千万な、高熊山の神山に立ち入り玉照彦様を奪つて帰る横道者、今高熊山の大天狗が汝の素ツ首引抜き、股から裂いて松の木の枝に懸けてやらう。それが叶はぬとあれば今其方が懐に抱いて居る玉照彦様を、此木の下にソツとおろし一時も早く此場を立去れツ』</p>
+            <p class="ja-classical-line">谷丸『何だ、怪体な天狗も有れば有るものぢやないか。天狗と云ふ奴は、千里向うの事でも知つとる筈だ。玉照彦様を懐からソツと出せと吐しやがる。此奴ア木葉天狗か野天狗だらう。………ヤイ樹上の野天狗、木葉天狗、馬鹿な真似を致すと、此方が反対に股から引裂いてやらうか』</p>
+            <p class="ja-classical-line">鬼丸『モシモシ谷丸さま、そんな途方もない事を言ふものぢや有りませぬ。こんな大木に棲まつて御座る天狗に、相手になつて堪りますか………モシモシ樹上の天狗様、私の大将は一寸酒に酔うて居りますから、どうぞ御見のがし下さいませ。これは酒が言つたので御座います』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tanimaru exclaimed, 'Eh, what is all this prattling? Listen well, Jiyujiyō Tengu, for I am Tanimaru, known as the trusted blade of Onikumohiko, the Great Daitōriyō of the Brahman Kyō. To me, a thousand or ten thousand Notengu are of no more consequence than the passing wind of a Katsupa. Come, descend from the tree at once and offer your Owabi before me.'</p>
+          <p class="en-p">From the tree, there came again the sound, 'Zawa zawa zawa, u... tsu.'</p>
+          <p class="en-p">Onimaru pleaded, 'I pray you, Tengusama, have mercy upon us.'</p>
+          <p class="en-p">From within the grass, Colombo cried out, 'I beg you, Tanimaru-sama, spare at least our Inochi. And while you are at it, please spare the Tengu as well, an-an-an.'</p>
+          <p class="en-p">Tanimaru replied, 'Ha, what is this? Onimaru, you seem to be in great terror. It appears your Fukushiyu has leapt from your body and is hiding in the reeds, weeping in such a shameful manner.'</p>
+          <p class="en-p">Onimaru lamented, 'Having encountered such a terrifying ordeal, where the soul flies and the spirit vanishes, is it any wonder that my Fukushiyugojin should flee? Please, I beseech you, calm yourself so that you do not manifest your wrath. Your Fukushiyugojin is also Zuibun Ranbau. I pray you, Fukushiyugojin-sama, be at peace... See, I press my hands together in prayer like this. An-an-an.'</p>
+          <p class="en-p">Colombo wailed, 'On-on-on.'</p>
+          <p class="en-p">As if gaining momentum, they began to howl like wolves.</p>
+          <p class="en-p">Onimaru cried, 'Ah, with a Tengu above and wolves below, what is to become of me?'</p>
+          <p class="en-p">At this moment, whether by some mischance, Terujī lost his footing and, cutting through the wind, fell headlong with a 'Zūzūdon.' Onimaru shrieked, 'Kya!' and collapsed in terror. Tanimaru, perhaps bewildered by this Kuōkei, retreated along the path he had come, lifted Tamateruhiko, and began to force his way through the dense, thorny forest toward Tenguiha.</p>
+          <p class="en-p">Colombo, leaving behind the words, 'Life is the root of all things, and our promise was Tenguiha; brother, follow after me!' began to run with Itsushiyōkenmei.</p>
+          <p class="en-p">Onimaru shouted, 'Ah, what is this? The Tengu has fallen from the tree and is dazed. Ha, now I can be at ease... Oh, I thought my legs had given way, but I am still but an unfinished coward. I shall run with all my might toward Tenguiha.' And so he too began to run.</p>
+          <p class="en-p">Terujī muttered, 'Ah, the spectacle below was so amusing that I went to the edge of the branch and, while peering down with Itsushiyōkenmei, I fell to such a place before I knew it. For a moment... I seem to have been dazed. Hey, Colombo, it is I, it is I... Ah, it seems Colombo has gone to Tenguiha. Shall I go to search for him? Even so, it appears those of the Brahman Kyō have managed to pass through the barrier while we were distracted... Ah, it is regrettable, but it cannot be helped.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">谷丸『エー何をゴテゴテ言ふのだ。……オイ樹上の天狗、シツカリ聞け、吾れこそはバラモン教の大棟梁鬼雲彦が懐刀と綽名を取つた谷丸ぢやぞツ。野天狗の千疋万疋は此方に取つては河童のこいた屁程にも感じないのだ。サア早く木から下りて来て此方の前に謝罪を致さぬか』</p>
+            <p class="ja-classical-line">樹上又もや、</p>
+            <p class="ja-classical-line">『ザワザワザワ、ウ………ツ』</p>
+            <p class="ja-classical-line">鬼丸『モシモシ天狗様、どうぞ赦して下さいませ』</p>
+            <p class="ja-classical-line">草の中よりコロンボは、</p>
+            <p class="ja-classical-line">コロンボ『モシモシ谷丸さま、どうぞ生命ばかりはお助け下さいませ。序に天狗も助けてやつて下さい、アンアンアン』</p>
+            <p class="ja-classical-line">谷丸『ヤア何だ。鬼丸、貴様余程怖いと見えるな。副守の奴、貴様の体から飛び出しやがつたと見えて、萱の中に隠れて、見つともない、泣いて居るぢやないか』</p>
+            <p class="ja-classical-line">鬼丸『こんな恐ろしい、魂飛び魄消えると云ふ様な目に会うたのだもの、副守護神も飛び出しませうかい。モウモウどうぞ我を出さぬ様にお鎮まり下さいませ。あなたの副守護神も随分乱暴です。どうぞ副守護神さま、お静まりを願ひます。………コレ此通り手を合して拝みます。アンアンアン』</p>
+            <p class="ja-classical-line">コロンボ『オンオンオン』</p>
+            <p class="ja-classical-line">とソロソロ勢が付いたと見えて、狼泣きを始めたり。</p>
+            <p class="ja-classical-line">鬼丸『アーア上には天狗、下には狼、コラまア、どうしたら宜からうかなア』</p>
+            <p class="ja-classical-line">この時テルヂーは、どうした機みか、足踏み外し、風を切つて『ズーズドン』と真逆様に落ち来りぬ。鬼丸は『キヤツ』と云つて腰を抜かす。谷丸は一生懸命、此光景に面喰つたか、もと来し道に引返し、玉照彦を引抱へ、天狗岩指して茨茂れる密林を、遮二無二掻き分けて行く。コロンボは、</p>
+            <p class="ja-classical-line">『生命あつての物種、予ての約束天狗岩だ。兄貴、後から続けツ』</p>
+            <p class="ja-classical-line">と言葉を残し、一生懸命に駆出す。</p>
+            <p class="ja-classical-line">鬼丸『アーア何だ、天狗の奴、木から落ちて目を暈して居やがるな。ヤアこれでヤツと安心した。………ヨウ腰が抜けたと思へば、まだ腰抜けの未成品だ。天狗岩さして一散走りだ』</p>
+            <p class="ja-classical-line">と又も駆出す。</p>
+            <p class="ja-classical-line">テルヂー『アーア、あまり下の活劇が面白いので、枝の端へ行つて、一生懸命に覗いて居つたら、何時の間にか、斯んな所へ墜落して居る。一寸……コラ目を暈して居たと見えるワイ。…………オイ、コロンボ、俺だ俺だ……ヤア、コロンボの奴天狗岩へ行きよつたと見える。……ドーレ彼奴を捜索旁行つてやらうかなア。それにしてもバラモン教の奴等、俺達の目をまはしとる間に、巧く関所を通過しよつたと見える……エー残念だが仕方がない』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Stamping his feet in Jidanda, he ascended once more through the thicket, making for the Tenguiha atop the mountain pass. Colombo, at long last, guided by the light of the Oborozukiyo, climbed up to the side of the Tenguiha, his Mokuteki. The Jiyumoku grew in Hanmo, casting deep shadows, while the rock alone stood out white against the darkness.</p>
+          <p class="en-p">Colombo muttered to himself, 'Ah, this is the Tenguiha of my Mokuteki; for all its fame, it is a Kiyogan of little Miba. Yet, I wonder what has become of Teruji, that Nihakatengu. Truly, a formidable fellow arrived, and in turn, he took my Aragimo. It was nearly a case of my Kintama going on a Yōkau. Ah, if only he would come quickly... how lonely it is. And I wonder if Tamateruhiko-sama was secured successfully.'</p>
+          <p class="en-p">As he muttered this to himself, a man came creeping toward him, carrying something white.</p>
+          <p class="en-p">Colombo said, 'Oh, it is Ketsukō that Tamateruhiko-sama has been secured. I was in Taihen Shinpai.'</p>
+          <p class="en-p">Tanimaru replied, 'What is this? Your voice is even hoarse, is it not? You are a fellow without a settled spirit. How could I ever let Tamateruhiko-sama be taken? I have him Hōan here in my bosom, just as you see.'</p>
+          <p class="en-p">Colombo said, 'That is indeed Ketsukō. Sasuga, you are truly a Taishiyō.'</p>
+          <p class="en-p">Tanimaru said, 'That is a matter of course. It is quite different from a fellow like Kisama, who lets out a Nakigoe and trembles.'</p>
+          <p class="en-p">Colombo asked, 'But what of the Tengu’s Shitsupai? Is there any Betsujiyō?'</p>
+          <p class="en-p">Tanimaru replied, 'Hmm, the Tengu’s Shitsupai? That fellow was a bit peculiar. However, since there is no Betsujiyō to the essential Tamateruhiko-sama, you may rest assured.'</p>
+          <p class="en-p">Colombo said, 'Yes, thank you very much. You, too, seem to have something amiss with your voice.'</p>
+          <p class="en-p">Tanimaru said, 'Yes, it was such a sudden affair that I was momentarily bewildered; how could my voice not change? The fellows of the Sangokyō are watching with the eyes of cormorants and hawks, so we cannot afford even a moment of negligence.'</p>
+          <p class="en-p">Colombo said, 'That is most reasonable. As expected, my elder brother is my elder brother. You are flawless in all things.'</p>
+          <p class="en-p">Tanimaru said, 'That is a matter of course.'</p>
+          <p class="en-p">The scene shifts, and Teruji, having climbed to the seven-eighths mark of the pass, sat upon a rock by the roadside to rest his breath. A man came climbing up toward him, breathing heavily.</p>
+          <p class="en-p">The man said, 'Oh, elder brother, nay, Chief of Staff, how did it go with Tamateruhiko? Did it go well?'</p>
+          <p class="en-p">Teruji replied, 'Because you were cowardly and let out a Nakigoe from down below, we ended up having our Mokuteki stolen from us. Ah, what a spineless fellow you are.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と地団駄を踏みつつ、叢の中を峠の上の天狗岩さして、又もや登り行く。コロンボは漸くにして、朧月夜を便りに、目的の天狗岩の傍に登り着いた。樹木繁茂して暗く、岩のみ白く闇に浮き出て居る。</p>
+            <p class="ja-classical-line">コロンボ『アヽこれが目的の天狗岩だ、名高い割には見映えのせぬ巨岩だなア。併し乍ら俄天狗のテルヂーは、どうしとるだらうか。本当に、偉い奴が来やがつて、反対に荒胆を取つて了ひよつた。スツテの事で睾丸の洋行する所だつた。……アーア早く来て呉れれば好いのに……寂しい事だ。……そうして玉照彦様はウマく手に入つたか知らぬテ』</p>
+            <p class="ja-classical-line">と一人呟いて居る。其処へノソノソと白い物を抱へてやつて来た一人の男、</p>
+            <p class="ja-classical-line">コロンボ『ヤアうまく玉照彦様が手に入つて結構でした。私は大変に心配致しました』</p>
+            <p class="ja-classical-line">谷丸『なんだ、お前は声まで嗄らして居るぢやないか。胴の据わらぬ奴ぢやなア。……玉照彦様を渡して堪るものかい。此通りチヤンと懐に奉按して居るのだ』</p>
+            <p class="ja-classical-line">コロンボ『それはそれは結構でした。流石大将だけありますワイ』</p>
+            <p class="ja-classical-line">谷丸『定つた事だよ。貴様の様に泣声を出して慄うとるのはチツと違ふのだから』</p>
+            <p class="ja-classical-line">コロンボ『併し天狗の失敗はどうでした。別状は有りませぬかい』</p>
+            <p class="ja-classical-line">谷丸『ウン天狗の失敗か。彼奴ア一寸乙だつた。併し乍ら肝腎の玉照彦さまに別状は無いのだから、マア安心せい』</p>
+            <p class="ja-classical-line">コロンボ『ハイ有難う御座います。………あなたもチツトお声がどうかなさいましたなア』</p>
+            <p class="ja-classical-line">谷丸『ウンあまり俄の出来事で、一寸面喰つたものだから、どうで声も変らうかい。三五教の奴が鵜の目鷹の目で考へて居るのだから、チツとも油断は出来ないぞ』</p>
+            <p class="ja-classical-line">コロンボ『御尤もです。ヤツパリ哥兄は哥兄だ。何から何まで抜目が有りませぬなア』</p>
+            <p class="ja-classical-line">谷丸『定つた事だよ』</p>
+            <p class="ja-classical-line">話かはつてテルヂーは、峠の七八合目まで登り着き、路傍の岩に腰打掛け息を休めて居る。そこへ鼻息荒く上つて来た一人の男、</p>
+            <p class="ja-classical-line">男『ヤア哥兄、イヤ参謀長、玉照彦はどうだつた。うまくいきましたかな』</p>
+            <p class="ja-classical-line">テルヂー『貴様が卑怯な、下の方から泣き声を出しよるものだから、到頭目的物をシテやられて了つたのだ。エー仕方のない腰抜だナア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec08">
+        <div class="sec-header">
+          <span class="para-num">&sect; 8</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Onimaru said, 'I merely thought my loins had given way for an instant, but they are as sound as before. On that point, pray do not worry yourself. Yet, it is a matter of regret that we let Tamateruhiko-sama, whom we had schemed to capture thus far, escape. That is why I always say that one should not put on the airs of a superior and act haughty.'</p>
+          <p class="en-p">Terujī replied, 'Even if you say such things, you would not be able to perform the duties of a superior, would you? Well, well, consider it fortunate that you have saved your life, and resign yourself to it.'</p>
+          <p class="en-p">At this moment, the sixteen-night full moon parted the snow clouds and shone brightly upon the faces of the two.</p>
+          <p class="en-p">Terujī said, 'Ha! Are you not Colombo?'</p>
+          <p class="en-p">Onimaru said, 'Ha! Are you not Tanimaru?'</p>
+          <p class="en-p">Terujī said, 'Indeed, I am Tanimaru, who is at a loss for how to advance or retreat. No matter how much the moon may shine for Terujī, our hearts are in total darkness. It seems that, under the cover of darkness, we have exchanged our heads and tails before we knew it.'</p>
+          <p class="en-p">Onimaru said, 'Even if you say such things, I do not know from the head, ha ha ha ha!'</p>
+          <p class="en-p">Terujī said, 'Ha! You are a fellow of the Brahman religion, are you not? What has become of your commander?'</p>
+          <p class="en-p">Onimaru said, 'I am completely a Brahman. If a hat becomes old, it is well to exchange it for a new one. Will you not become my commander? To be alone on such a mountain path is unbearably lonely.'</p>
+          <p class="en-p">Terujī said, 'Well, it is not that I will not become so. I cannot walk with only my head. ...I am also troubled because I have 'Colombo-ed' my precious legs into some valley bottom. We are well-matched. Come, from now on we shall go together in harmony. Follow this sudden Tengu. I shall make you a small Tengu.'</p>
+          <p class="en-p">Onimaru said, 'If that is so, you are a Tengu who has fallen from a pine tree. ...Ha! Let us cancel this agreement. Ah, how terrifying! To form a bond of master and servant with a Tengu—there is no telling what curses might come of it.'</p>
+          <p class="en-p">Terujī said, 'Ha ha ha ha! In truth, you two were doing well, boasting in the shade of the trees at the foot of Mount Ōhara about having captured Tamateruhiko-sama. We two listened to you secretly, and... thinking to seize him by a stratagem, I had my servant, a fellow called Colombo, hide in the pampas grass beneath the trees, while I climbed a pine tree and used the voice of a Tengu to frighten you both, attempting to achieve my purpose by performing a scene of theater. However, your commander Tanimaru was a man of such great fortitude that there was no place for this Tengu to apply his schemes. In reality, I am also a human with a nose that stands out; if you doubt it, look at my nose. It is a nose one part lower, is it not?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼丸『腰が一時抜けたと思つた丈で、ヤツパリ腰はもとの通り大丈夫ですよ。其点は必ず必ず心配して下さるな。併し折角此処まで仕組んだ玉照彦さまを取逃すとは残念な事だ。そうだから上役面をして高上りをするものぢやないと、何時も言うのですがなア』</p>
+            <p class="ja-classical-line">テルヂー『貴様さう言つたつて、ヤツパリ上役の務めが出来やせうまいがな。マアマア生命丈拾つたら結構だと思つて諦めるのだなア』</p>
+            <p class="ja-classical-line">此時雪雲を分けて十六夜の満月は、明皎々と二人の顔を照したまふ。</p>
+            <p class="ja-classical-line">テルヂー『ヤア貴様はコロンボぢやないのか』</p>
+            <p class="ja-classical-line">鬼丸『ヤア貴様は谷丸ぢやないのか』</p>
+            <p class="ja-classical-line">テルヂー『ウン進退維れ谷丸ぢや。何程月はテルヂーでも、吾々の心は真暗闇だ。暗闇紛れに頭と尻を、何時の間にか取つ換へて了つたらしい』</p>
+            <p class="ja-classical-line">鬼丸『そんな事仰有つても、私は頭からシリませぬワイ、アハヽヽハア』</p>
+            <p class="ja-classical-line">テルヂー『ヤア貴様はバラモン教の奴だなア。貴様の大将はどうしたのだい』</p>
+            <p class="ja-classical-line">鬼丸『サツパリ婆羅門だ。笠が古くなれば新しいのと換へたら好いのだ。お前、俺の大将になつて呉れないか。こんな山路で一人になつちや心寂しくつて仕方がない』</p>
+            <p class="ja-classical-line">テルヂー『ウン、なつてやらぬ事もない。頭許りで歩く訳にも行かず。………俺も大切な足をどつかの谷底へコロンボーして了つたので困つて居るのだ。合うたり叶うたり。サアこれから仲善うして行くのだぞ。此俄天狗に従いて来い。貴様は小天狗にしてやらう』</p>
+            <p class="ja-classical-line">鬼丸『さうすると、お前は松の木から墜落した天狗だな。………ヤアもう解約致しませう。アタ恐ろしい、天狗と主従の縁を結ぶなんて、どんな祟りが来るか知れたものぢやない』</p>
+            <p class="ja-classical-line">テルヂー『アハヽヽヽ、実の処、貴様達両人、うまい事をやりよつて、大原山麓の木蔭で、玉照彦さまを手に入れた自慢話をやつて居つたのを、俺達両人がソツと拝聴して、……此奴一つ計略を以て横奪せむものと、俺の家来のコロンボと云ふ奴を、樹下の薄原に忍ばせ、俺は松の木の上に登つて、天狗の声色を使ひ、貴様等両人を嚇かして目的を達しようと、一幕の芝居を行つて見た処、貴様の大将谷丸が、非常に剛腹な奴で、此天狗も策の施す所が無かつたのだ。実際は俺も横目立つ鼻の人間だ、疑ふなら俺の鼻を見い。一割低い鼻だらう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec09">
+        <div class="sec-header">
+          <span class="para-num">&sect; 9</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Onimaru said, 'Aha, with that I am relieved. Now that it has come to this, the way of Kami is originally of one root; shall we form an alliance between the Ural Kyō and the Brahman Kyō, seek the whereabouts of Tamateruhiko-sama, and blow a bubble of defeat upon the Ananai-kyō?'</p>
+          <p class="en-p">Terujī replied, 'That may be well. However, when the critical moment arrives, see to it that you do not expose us to betrayal.'</p>
+          <p class="en-p">Onimaru answered, 'That is not the Ananai-kyō, but the Setsunashin. As for the circumstances of the Shinkai, one cannot predict what shall come to pass; such is the plight of us Sendenshi who serve Kami. At that time, we shall deal with it then. In any case, let us join our hearts and exert our strength to search for the whereabouts of Tamateruhiko-sama. I must go to Tenguiha for a moment, for I have a promise to keep... but I would be troubled if a true Tengu were to appear at Tenguiha... pray, Terujī-sama, allow me to accompany you.'</p>
+          <p class="en-p">Terujī laughed, 'Ha ha ha, you speak with such cunning. It is likely that the Taishiyō of Tanimaru is waiting at Tenguiha, holding Tamateruhiko-sama in his charge, is it not?'</p>
+          <p class="en-p">Onimaru said, 'Well, I cannot guarantee that, but as Tanimaru-sensei is a man of no oversight, he is surely protecting him with great care and awaiting my arrival.'</p>
+          <p class="en-p">Terujī said, 'Once you meet Tanimaru, you will suddenly become restless again, and this is your plan to hand me a letter of divorce, is it not?'</p>
+          <p class="en-p">Onimaru replied, 'No, no, that I have met you here is surely the divine arrangement of Kami. The Taishiyō of Tanimaru is also quite enlightened. There is no doubt that he will surely be pleased to form an alliance with you.'</p>
+          <p class="en-p">Terujī said, 'In truth, I too must go to Tenguiha. Colombo should have gone ahead and be waiting for me there.'</p>
+          <p class="en-p">Onimaru said, 'So you also have business at Tenguiha? ...Ah, if that is the case, I did not need to bow my head and beg... what a wasteful expenditure of Kototama.'</p>
+          <p class="en-p">Terujī laughed, 'Ha ha ha, what a mercenary fellow you are. Does not the mouth require no capital? Even in these days of rising prices, Kototama alone is free. Do not fret over the past as if you had failed to avenge your parents' enemy... come, let us go.'</p>
+          <p class="en-p">With these words, Terujī took the lead. Onimaru followed, trembling. At last, they drew near to Tenguiha, which stood out white in the darkness beneath the trees.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼丸『アハー、それでヤツと安心しました。モウ斯うなれば、神さまの道は元は一株、ウラル教とバラモン教の同盟軍を作り、玉照彦様の行衛を尋ね、三五教に一泡吹かせてやりませうかい』</p>
+            <p class="ja-classical-line">テルヂー『それも宜からう。併し肝腎の時になつて、俺達に素ツ破抜きを喰はさぬやうにして呉れよ』</p>
+            <p class="ja-classical-line">鬼丸『それは三五教ぢやないが、刹那心ですよ。何時神界の御都合で、どうなるやら予測す可からざるが、吾々神に仕ふる宣伝使の境遇、其時はマア其時、兎も角玉照彦様の行衛を協心戮力捜査する事に致しませう。私は是れから一寸、天狗岩まで往つて来ねばなりませぬ。約束があるのですから……併し天狗岩は本当の天狗が出よつたら困るから……どうぞテルヂーさま、あなたのお伴をさして下さいな』</p>
+            <p class="ja-classical-line">テルヂー『ハヽヽハア、巧い事言やがるなア。天狗岩には大方谷丸の大将が玉照彦様を奉按して待つて居るのだなア』</p>
+            <p class="ja-classical-line">鬼丸『サア其辺は保証出来ませぬが、抜目の無い谷丸先生の事だから、屹度大切に保護して、私の行くのを待つて居られるでせう』</p>
+            <p class="ja-classical-line">テルヂー『谷丸に会うたが最後、俄に又噪やぎ出して、俺に三行半を渡すと云ふ計画だなア』</p>
+            <p class="ja-classical-line">鬼丸『イエイエ斯うして、あなたと此処で会うたのも神様の御引合せでせう。谷丸の大将も中々ひらけて居ますよ。屹度喜んであなたと提携するに間違ひ有りませぬワ』</p>
+            <p class="ja-classical-line">テルヂー『俺も実は天狗岩へ行かねばならぬのだ。コロンボが先へ往つて待つてる筈だから』</p>
+            <p class="ja-classical-line">鬼丸『あなたもヤツパリ天狗岩に御用が有るのですか。……ア、そんなら別にあたま下げて頼むぢやなかつたに……エライ言霊の濫費をしたものだ』</p>
+            <p class="ja-classical-line">テルヂー『アハヽヽヽ、現金な奴だなア。口に資本は要らぬぢやないか。何程物価騰貴の今日此頃でも、言霊丈は無料だ。親の讎敵でも討損なうた様に、そう過ぎこし苦労をするものぢやない……サアサア行かう』</p>
+            <p class="ja-classical-line">とテルヂーは先に立つ。鬼丸はブルブル慄ひ乍ら従いて行く。漸く木下闇に白く浮き出た天狗岩の間近になつた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec10">
+        <div class="sec-header">
+          <span class="para-num">&sect; 10</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Onimaru: 'Hello, is Tanimaru there? I have brought one Tengu with me.'</p>
+          <p class="en-p">Terujī: 'See there? He is making a clamor.'</p>
+          <p class="en-p">Tanimaru: 'Who is it? Mimicking the voice of Onimaru—are you a fox, a badger, or perhaps a fellow of the Ural Kyō? Tanimaru is not one to be deceived by such tricks. My subordinate Onimaru has been here since before. How could there be two Onimarus?'</p>
+          <p class="en-p">Terujī: 'Hey, you called Tanimaru of the Brahman Kyō, I am a Sendenshi named Terujī of the Ural Kyō. Have you safely escorted Tamateruhiko-sama?'</p>
+          <p class="en-p">Tanimaru: 'What? You, what is your intent in asking after Tamateruhiko-sama? Even if heaven and earth were to be overturned, I would not hand him over to the likes of you. You wretched, failed transformation of a Tengu...'</p>
+          <p class="en-p">Koronbo: 'Ah, Terujī, have you just arrived? I have been speaking with all my might, thinking you were you until now. How ridiculous.'</p>
+          <p class="en-p">Terujī: 'Hahaha, what a terrible case of crossed lines. When the number of Jiyueushiya increases this much, the Denwakaukuwankiyoku is no easy task indeed.'</p>
+          <p class="en-p">Once again, the moon began to shine with brilliance. The faces of the four men became visible, even to the Abata upon their skin.</p>
+          <p class="en-p">Tanimaru: 'Great General of the Ural Kyō, this must be some divine arrangement by the Kamisama. Please, let us open our hearts and be on good terms. However, I pray you cease falling from pine trees. If one thing goes awry, one must cast away the only life one possesses.'</p>
+          <p class="en-p">Terujī: 'I am grateful for that. Then let us conclude a peace treaty here. Yet, into whose hands should Tamateruhiko-sama be entrusted? As a preliminary matter, I wish to determine that.'</p>
+          <p class="en-p">Tanimaru: 'As for this, I must beg to be excused. I have gone to such great lengths to welcome him... Oh, Tamateruhiko-sama has grown cold. This is a disaster... Ah, I was in such a hurry that I must have mistaken a stone for him. No wonder I thought he had become terribly heavy. Oh, what is this?'</p>
+          <p class="en-p">Terujī: 'Hahaha, look at your own behavior. That is why one should not be so greedy.'</p>
+          <p class="en-p">Tanimaru: 'Oh, this is a disaster. Shall I return to the original place once more and search for him?'</p>
+          <p class="en-p">Terujī: 'This time, let us agree that whoever reaches him first shall take him. Since you were the one who left him behind, it is the advantage of the finder to pick up what has been abandoned. Come, run, run!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼丸『モシモシ谷丸は来て居ますかなア。天狗を一疋連れて来ました』</p>
+            <p class="ja-classical-line">テルヂー『それ見たか。直噪やぎやがる』</p>
+            <p class="ja-classical-line">谷丸『誰だ。鬼丸の作り声を仕やがつて、狐か狸か、但はウラル教の奴だらう。そんな手に乗る谷丸ぢやないぞ。俺の部下の鬼丸は最前から此処に来て居るのだ。二人も鬼丸が有つて堪るか』</p>
+            <p class="ja-classical-line">テルヂー『オイ、バラモン教の谷丸とやら、俺はウラル教のテルヂーと云ふ宣伝使だ。玉照彦様を、御無事に奉按して来たか』</p>
+            <p class="ja-classical-line">谷丸『ナニツ、貴様、玉照彦様の事を尋ねてどうする積りだ。仮令天地が覆つても、貴様等に渡すものかい。天狗の化損ひ奴が……』</p>
+            <p class="ja-classical-line">コロンボ『アヽ、テルヂー、今来たのかい。私は今迄お前だと思つて、一生懸命に話して居つた。ア馬鹿らしい』</p>
+            <p class="ja-classical-line">テルヂー『アハヽヽヽ、エライ混線したものだなア。是れだけ需要者が殖えて来ると、電話交換局も大抵ぢやないワイ』</p>
+            <p class="ja-classical-line">再び月は皎々と輝き始めた。四人の顔は、菊石まで見える様になつて来た。</p>
+            <p class="ja-classical-line">谷丸『ウラル教の御大将、是れも何かの神様の御引合せだらう。どうぞ打解けて仲ようして下さいや。併し乍ら松の木から墜落する事は廃めて下さい。一つ違へば、一つより無い生命を棒に振らねばなりませぬぞ』</p>
+            <p class="ja-classical-line">テルヂー『それは有難う。そんなら此処で平和条約を締結しませう。併し玉照彦さまは何方の手に預つたら良いのだ、先決問題として、それが定めたいのだ』</p>
+            <p class="ja-classical-line">谷丸『是ればつかりは、御免蒙りたい。折角骨折つて奉迎して来たのだから………ヤア玉照彦さまは冷たくなつて居らつしやる。コリヤ大変だ……ハヽア、あまり慌て石と間違へてきたなア。道理でエロウ重たくならつしやつたと思うて居た。エーエ何の事だい』</p>
+            <p class="ja-classical-line">テルヂー『アハヽヽヽ、態を見なさい。それだからあまり欲張るものぢやありませぬぞ』</p>
+            <p class="ja-classical-line">谷丸『ヤアこりや大変だ。マ一遍元の所へ引返して探して来うかな』</p>
+            <p class="ja-classical-line">テルヂー『今度は一イ二ウ三ツで、先へ往つた者が頂く事にしようかい。お前が放かして置いたものだから、棄かしたものを拾ふのは拾ひ勝だ。サア走つた走つた』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec11">
+        <div class="sec-header">
+          <span class="para-num">&sect; 11</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tanimaru said, 'Teruji, you go ahead first. I shall follow slowly and search thereafter.'</p>
+          <p class="en-p">Teruji replied, 'If you say that, and go ahead of me, do you not see that I shall not know the direction in which it has been dropped? Tanimaru, have no reserve. Come, go you ahead first; the final ichibeukan is the shiyōbu.'</p>
+          <p class="en-p">Tanimaru laughed, 'Ah, ha, ha, ha, how cleverly you speak. If you do not move, I cannot move even for futsuka or mitsuka. You think to place me at the sentō to search for the arika... truly, the sendenshi of the Ural-kyō are zuru.'</p>
+          <p class="en-p">Onimaru said, 'Oi, oi, Tanimaru, if you dally, the fellows of the Ananai-kyō will pass by, pick it up, and take it away. Come, let us go quickly.'</p>
+          <p class="en-p">Tanimaru retorted, 'Eh, what a dull-witted fellow you are. While I am saying this and wasting time, you already know the bashiyo; why do you not naninani it secretly? You are a tonma yarau.'</p>
+          <p class="en-p">Teruji said, 'Oi, Colombo, you must not leave the side of Onimaru-kun for even a moment. Grasp his sleeve firmly and follow him wherever he goes, it matters not. And then, you shall naninani the naninani. Is that understood?'</p>
+          <p class="en-p">Colombo replied, 'I shiyōchi. But if Onimaru’s pace is swift, what shall I do?'</p>
+          <p class="en-p">Teruji said, 'Whether by his obi or by his feet, you must cling to him. What a dull-witted fellow you are.'</p>
+          <p class="en-p">Tanimaru said, 'Ah, now that it has come to this, it has become tautei impossible to dokusen it. If so, there is no shikata; let us proceed slowly, treating it as kiyōiubutsu.'</p>
+          <p class="en-p">So saying, they began to walk slowly. Teruji, while gripping the sleeve of Tanimaru firmly, said,</p>
+          <p class="en-p">Teruji said, 'Oi, Colombo, you must not let go of Onimaru.'</p>
+          <p class="en-p">Tanimaru said, 'Eh, it is as if I have thrust my feet into a torimochioke. A tick has fastened itself upon me in such a terrible place... Ah, this too must be some form of meguri.'</p>
+          <p class="en-p">With these words and a sullen face, the two pairs of four legs hastened down, pointing toward the foot of the Sakai Pass.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">谷丸『テルヂー、お前から先へ走りなさい。わしや、ゆつくりと後から探しに行きます』</p>
+            <p class="ja-classical-line">テルヂー『それだと言つて、お前から先へ往つて呉れな、何処に落してあるか方角が分らぬぢやないか。谷丸、御遠慮は要らぬ。サアお前からお先へお出でなさいませ、最後の一秒間が勝負ぢや』</p>
+            <p class="ja-classical-line">谷丸『アハヽヽヽ、うまい事仰有るワイ。お前が動かねば、私は二日でも三日でも動かせぬのだい。人を先頭に立てて所在を探さうと思つて……本当にウラル教の宣伝使は、狡猾いなア』</p>
+            <p class="ja-classical-line">鬼丸『オイオイ谷丸、グヅグヅして居ると、三五教の奴が通つて、拾つて帰んで了ひますで。サア早う往きませう』</p>
+            <p class="ja-classical-line">谷丸『エヽ気の利かぬ奴ぢやなア。俺が斯う言うて暇費れてる間に、貴様は場所を知つてるのだから、何んでソツと何々せぬのぢやい。頓馬な野郎だ』</p>
+            <p class="ja-classical-line">テルヂー『オイ、コロンボ、鬼丸君の側をチツトも離れちやならぬぞ。キユツと袖を掴まへて何処へ行つても構はぬ、往く所へ従いて往くのだ。そして何々を何々して来るのだ。良いか』</p>
+            <p class="ja-classical-line">コロンボ『承知致しました。併し鬼丸の足が速かつたら、どう致しませう』</p>
+            <p class="ja-classical-line">テルジー『帯なつと、足なつと、喰らひついて行くのだ。気の利かぬ奴だなア』</p>
+            <p class="ja-classical-line">谷丸『アヽもうこうなつちや、到底独占する訳にはゆかなくなつて来た。そんならモウ仕方がない、共有物として、ユツクリと行きませう』</p>
+            <p class="ja-classical-line">とソロソロ歩き始めた。テルヂーは谷丸の袖をグツト握り乍ら、</p>
+            <p class="ja-classical-line">テルジー『オイ、コロンボ、鬼丸を放しちや可けないよ』</p>
+            <p class="ja-classical-line">谷丸『エーエ鳥黐桶に足を突つこんだ様なものだ。エライ所でダニが喰ひ付きやがつて……アヽ是れも何かの罪業だらう』</p>
+            <p class="ja-classical-line">と面膨らし乍ら、四本足の二組は、堺峠の麓を指して急ぎ下り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c12.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 12: 言照姫 [657]</span>
+      </a>
+      <a href="c14.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 14: Voice の在所 [659]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9: Body and Soul の Clean 化 [654] - Volume 19 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 19 Table of Contents</a>
+      <span>Volume 19</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 19 &bull; Chapter 9</span>
+      <h1 class="chapter-title-en">Chapter 9: Body and Soul の Clean 化 [654]</h1>
+      <p class="chapter-title-ja">身魂の浄化〔654〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The darkness of the heart clears, and in the world, the demons are like the pear tree; upon the crag of the mountain pass, two men sat with their Uchika, gazing at the sky of Yukigumo, and indulging in Zatsudan.</p>
+          <p class="en-p">Arataka spoke: 'Ah, when I reflect upon the beginning of spring this Kotoshi, I became a Buka of Onikumawake, leading Amata Teshita into the Gankutsu of Mitakeyama, taking pride only in evil deeds, convinced that self-preservation was the Honriyō of Jinsei, and holding the Kaudō of Rikoshiyugi as my Kinkuwagiyokudeu. Yet, it seems Tendausama had not yet forsaken Wareware; we were saved by the Itsukau of Otohiko, Kamehiko, and Yoshikohime, and having Honzen attained enlightenment, we were permitted to enter the Ananai-kyō. We exerted our mental strength to launch a counter-attack upon the main castle of Onikumawake and to Kotomuke-yawasu him, but it appeared that the great commander Onikumawake had not yet been reached by the divine rope of salvation. He let our sincere Kototama warnings pass by like wind to a horse's ear, and in the end, he followed in the footsteps of Onikumahiko and fled to parts unknown. Even though we shared the rice from the same pot for but three days, as for us, we must save him to the path of truth wherever he may be; yet, his whereabouts are unknown, and since entering the Ananai-kyō, we have been unable to serve the Kami in any notable way, which is a source of distress. When we went to Chikubushima, Eikohime had already completed the divine work and, together with Susanoo-no-Ōkami, had returned to the residence in the Saien of Fusa-no-kuni. The members of the Ananai-kyō have scattered and parted, and in our present state, we are almost lost in our direction; at the very least, we must Kotomuke-yawasu Matsuhime of Takashiro-yama and achieve some merit... is that not so, Onitaka?'</p>
+          <p class="en-p">Onitaka replied: 'Oh, that is so. Though the place is different, this is indeed Ōe-yama. That which is visible over there is certainly Takashiro-yama. Always, due to the evil spirits of the wicked Kami, black clouds had enshrouded the summit of the mountain, but today, what has come to pass? Are there not magnificent clouds trailing in a way unlike any other time? It may be that someone of the Ananai-kyō has conquered it, enshrined a splendid Kami, and the divine virtue is manifesting. If that should be the case, while it is indeed splendid, it is as if there is no longer any place for Wareware to act upon this Jitentō-tō. In any event, let us once survey Takashiro-yama to ascertain the truth, and if by any chance they have submitted to the Ananai-kyō, then there is no help for it. Shall we not press on, cross this sea, go to even the single island of Ryūgū, and perform one great deed?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">心の暗の空晴れて、世界に鬼は梨の木の、峠の巌に腰打掛け、雪雲の空を眺めて、雑談に耽る二人の男あり。</p>
+            <p class="ja-classical-line">荒鷹『アヽ思ひまはせば今年の春の初、鬼熊別の部下となつて、三岳山の岩窟に数多の手下を引連れ、善からぬ事計りを得意になつて、自己保存は人生の本領だと思ひ詰め、利己主義の行動を以て金科玉条として居たが、まだ天道様は吾々を捨て給はざりしか、音彦、加米彦、悦子姫様の一行に救はれ、飜然と悟り、三五教に入信さして頂き、鬼熊別の本城に逆襲し、言向和さむと心力を尽して見たが、まだ鬼熊別の大将は、神の救ひのお綱が掛つて居なかつたと見え、吾々の熱誠なる言霊の忠告を馬耳東風と聞き流し、終には鬼雲彦の後を追うて何処ともなく遁走して了つた。仮令三日でも同じ鍋はだの飯を食つた間柄だから、我々としては何処までも、誠の道に救はねばならないのだが、何処へお出でになつたか行衛は知れず、三五教へ這入つてから、此れと云ふ様な神様に御奉仕も出来ず、困つたものだ。竹生島へ行つて見れば、英子姫様は神業を完成遊ばして、素盞嗚大神様と共に、フサの国斎苑の御住居へお帰り遊ばした後なり、三五教の方々には、散り散りバラになつて別れて了ひ、殆ど方向に迷ふ今日の有様、せめては高城山の松姫でも言向和して、一つ功を立てねばなるまい………ナア鬼鷹』</p>
+            <p class="ja-classical-line">鬼鷹『オーそうだ。此処も所は違ふが、ヤツパリ大枝山だ。あの向うに見えるは確かに高城山だ。何時も悪神の邪気に依つて黒雲が山の頂を包んで居たが、今日は又どうしたものだ。何時にない立派な雲が棚引いて居るではないか。何でも三五教の誰かが征服して、結構な神様を祀り、神徳が現はれて居るのではなからうかな。万一さうであるとすれば、結構は結構だが、吾々はモウ此自転倒島に於いて活動する所が無くなつた様なものだ。兎も角高城山を一度踏査して実否を探り、万々一三五教に帰順して居たとすれば、モウ仕方がない。どつと張り込んで此海を渡り、竜宮の一つ島へでも往つて、一働きしようぢやないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Arataka said, 'Oh, that is Jiyōfunbetsu. However, as our first undertaking, shall we not set out to explore Takashiroyama?'</p>
+          <p class="en-p">Onitaka replied, 'Splendid clouds are trailing over Takashiroyama, but look there, toward the true west, are not purple clouds again hanging in layers as they do at the foot of Misenzan? Might it be that a male deity, who rivals Tamateruhime, has made his appearance? Nevertheless, in any case, let us head toward Takashiroyama, and next, let us investigate the source of those purple clouds. Come, let us go.'</p>
+          <p class="en-p">So saying, they descended the steep, board-like slope and ran toward the west, and further west. The view was desolate, and the earth was covered in a single sheet of white cloth of thin snow. Leaving footprints like those of a Niō, they arrived at the foot of Takashiroyama, the village of Chiyokaha, and the side of Nakiishi.</p>
+          <p class="en-p">Arataka said, 'On one side, upon a small, miniature-garden-like hill where the trees are dense, white snow rests upon the treetops as if the Unohana had bloomed, causing flowers to blossom out of season; and before us flows the Ōigawa, a stream of indescribable beauty. Since crossing the slope of Ōeda, I have never seen such a fine landscape. Let us rest here for a while, and then proceed slowly toward Takashiroyama.'</p>
+          <p class="en-p">Onitaka said, 'Has not a strange voice begun to sound? There is no one who appears to be human, nor does there seem to be any beast. Footprints of foxes and tanuki remain upon the thin snow, yet it is neither the voice of a fox nor the voice of a human; it is a sound that I cannot comprehend. In any case, there is a large rock here. Everywhere else is covered in thin snow, but this rock alone has not a single flake of snow accumulated upon it, and furthermore, it is bone-dry. Fortunately, upon this rock—though I am no Yōryū Kannon—why do we not close our eyes, sit in meditation, and temper our hearts and spirits?'</p>
+          <p class="en-p">Arataka nodded in agreement and sat down heavily upon the flat crag.</p>
+          <p class="en-p">Arataka said, 'Hey brother, this rock is very warm. You too, sit here for a moment and see.'</p>
+          <p class="en-p">Onitaka said, 'Indeed, it is a truly warm rock. While the entire surface of the earth is covered in falling cold snow, and the heavens and earth are holding up a mirror to show us that the human sentiments of this cold-hearted world are just like this, what can this mean? Only upon this rock, a mere tsubo in size, the cold-hearted snow does not accumulate, and it retains a warmth like that of spring. Even seeing this, it must be a divine hint that somewhere, a few warm-hearted humans still remain.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">荒鷹『オウそれが上分別だ。併し第一着手として、高城山の探険と出かけやうぢやないか』</p>
+            <p class="ja-classical-line">鬼鷹『高城山に立派な雲が棚引いて居るが、あれ見よ、真西に当つて又もや弥仙山の麓の様に紫の雲が靉靆いて居るぢやないか。玉照姫様に匹敵した男神様が御出現遊ばしたのではあるまいかなア。併し何は兎も角高城山へ打向ひ、其次に紫の雲の出処を調べる事としようかい。サアサア行かう』</p>
+            <p class="ja-classical-line">と板を立てた様な坂道を下り、西へ西へと駆出した。満目蕭然として地は一面の薄雪の白布を被つて居る。仁王の様な足型を印し乍ら、高城山の山麓、千代川の郷、鳴石の傍までやつて来た。</p>
+            <p class="ja-classical-line">荒鷹『一方は樹木鬱蒼とした箱庭式の小山に、卯の花の咲いた様に、白雪が梢に止まり、時ならぬ花を咲かせ、前は何とも知れぬ綺麓な水の流れた大堰川、こんな佳い景色は大枝の坂を越えてこのかた、見た事も無い。一つ此辺で休息した上、ボツボツと高城山に向ふ事にしようかい』</p>
+            <p class="ja-classical-line">鬼鷹『何だか妙な声がし出したぢやないか。別に人間らしい者も居らず、獣とても居ないやうだ。狐や狸の足型は薄雪の上に残つて居るが、併し狐の声でもなし、人間の声でもなし、合点のいかぬ響きがするぢやないか。兎も角此処に大きな岩がある。どこもかも薄雪だらけだが、此岩に限つて一片の雪もたまつて居ない、さうして又カラカラに乾いて居る。幸ひ此岩の上で、楊柳観音ぢやないが、一つ瞑目静坐し心胆を錬つて見たらどうだ』</p>
+            <p class="ja-classical-line">荒鷹は打首肯き乍ら、平坦な巌の上にドツカと坐つた。</p>
+            <p class="ja-classical-line">荒鷹『オイ兄弟、大変此岩は温かいぞ。お前も一寸此処に坐つて見よ』</p>
+            <p class="ja-classical-line">鬼鷹『ヤア本当に温かい岩だなア。地上一面冷たい雪が降り、冷酷な世界の人情は此通りと、天地から鑑を出して、俺達に示して御座るのに、こりや又どうしたものだ。僅か一坪ばかりの此岩の上許りは、冷酷な雪もたまらず、春の様な暖かみを帯びて居る。是れを見ても、どつかに暖かい人間も、チツとは残つて居ると云ふ神様の暗示だらうよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Suddenly, the flat rock at their Shitsuka began to Meidō, and Kokukoku, the Onkiyō increased in Kiyōdai and Mauretsu degrees. The Futari, startled, leaped down with Ashibaya, retreated Shichihachiken to Konata, and remained gazing at the Ganseki. Instantly, the Ganseki exhaled Hakuen. Following this, a purple cloud, thin and long, rose toward Ten as if a pole were set within the Hakuen, taking the form of a fern frond with a clenched fist, vanishing in the Chiukū at a distance of Nisanjitsuken, then appearing and vanishing again in the same manner; Ikukuwai, the purple Enchiyū continued Tachinobo, in a state of Seiseimetsumetsu. The Futari could only raise their voices in astonishment, crying, 'Ya, ya!' The fierce Daibakuon gradually became Teisei, and at last, ceased entirely. The Hakuen, however, remained Izen, rising vigorously.</p>
+          <p class="en-p">At this moment, a goddess with a fair face and full cheeks appeared, wearing a golden crown, adorned all over her body with Yōraku made of Shiyujiyu Hōgiyoku, and clad in white, thin garments; the placement of her brows and eyes, the set of her nose, the crimson hue of her lips, and her teeth like snow, which she revealed slightly as she smiled, were all manifest as she appeared. Arataka said, 'Ya, was this the famed Nariishi of Kawase? Not knowing this, we have committed a thousandfold rudeness, trampling upon it with our defiled bodies; truly, there is no excuse for what we have done. Surely, the spirit of the Nariishi has appeared to deliver some stern oracle unto us. In any case, there is nothing to do but to offer our apologies.'</p>
+          <p class="en-p">So saying, Arataka prostrated himself flat upon the earth where thin snow lay, expressing his contrition. Onitaka likewise lay prostrate upon the earth, trembling. Suddenly, music was heard in the void, and large petals, like those of a lotus, fell in showers. The surroundings were enveloped in an indescribable fragrance. Arataka, while keeping his head to the ground, tilted his neck slightly and, with one eye, peered fearfully at the goddess upon the rock. The goddess, attended by two beautiful children on her left and right, stood manifest within the aforementioned Hakuen, smiling, and extending her delicate hands, which were white with a slight tinge of peach, she beckoned toward the two persons at Konata.</p>
+          <p class="en-p">Arataka said, 'Oi Onitaka, lift your head and behold that goddess. It seems she has some business with the two of us.' At this voice, Onitaka, though fearful, cast his eyes toward the goddess; the instant he did so, Onitaka cried, 'Ah!' and again pressed his head to the earth. Before they knew it, the two felt as if they were being dragged by some power, and they were safely arrived before the flat rock as before. The goddess, with grace, said:</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">忽ち膝下の平面岩は鳴動を始め、刻々に音響強大猛烈の度を加へて来た。二人は驚いて足早に飛び下り、七八間此方に引き返し、岩石を見詰めて居た。忽ち岩石は白煙を吐き出した。続いて紫の雲細く長く、白煙の中に棹を立てた様に天に冲し、蕨が握り拳を固めたやうな恰好になつては、二三十間中空に消え、又同じく現はれては消え、幾回となく紫の円柱が立昇り、生々滅々して居る。二人は『ヤアヤア』と声を張り上げ驚くばかりであつた。猛烈なる大爆音は次第々々に低声となり、遂にピタリと止まつた。白煙は依然として盛に立昇つて居る。此時金の冠を戴き、種々の宝玉を以て造られたる瓔珞を身体一面に着飾り、白き薄衣を着したる、白面豊頬の女神、眉目の位置と謂ひ、鼻の附具合と云ひ、唇の色紅を呈し、雪の如き歯を少しく見せ、ニヤリと笑ひ乍ら現はれ給うた。</p>
+            <p class="ja-classical-line">荒鷹『ヤア音に名高い川堰の鳴石であつたか。それとは知らずに御無礼千万にも、吾々の汚れた体で踏みにじり、誠に申訳のない事を致したワイ。キツと鳴石の霊が現はれて、何か吾々に対して厳しい御託宣を下されるのであらう。何はともあれお詫をするより仕方がない』</p>
+            <p class="ja-classical-line">と荒鷹は薄雪の積もる大地にペタリと平太張つて、謝罪の意を表した。鬼鷹も同じく大地に鰭伏し慄うて居る。忽ち虚空に音楽聞え、蓮の葉の様な大花弁がパラパラと降つて来た。四辺はえも云はれぬ芳香に包まれた。荒鷹は頭を地に附け乍ら、少しく首を曲げ、一方の目にて恐る恐る岩上の女神を眺めた。女神は二人の美しき稚児を左右に侍らせ、例の白烟の中に莞爾として立現はれ、白に稍桃色を帯びたる繊手を差し延べて、此方の両人に向ひ手招きして居る。</p>
+            <p class="ja-classical-line">荒鷹『オイ鬼鷹、ソウツと頭を上げてあの女神を拝んで見よ。何だか吾々両人に対して御用が有りそうだぞ』</p>
+            <p class="ja-classical-line">此声に鬼鷹はコワゴワ乍ら、女神の方に眼を注いだ刹那、鬼鷹は『アツ』と叫んで、又もや大地に頭を摺付けた。何時の間にやら両人の体は何者にか引きずらるる様な心地し、以前の平岩の前に安着して居た。女神は淑やかに、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Arataka-dono, Onitaka-dono, it has been a while.</p>
+          <p class="en-p">At this voice, both men raised their heads at once, gazed intently upon the figure of the Megami, and scratched their heads with countenances of bewilderment.</p>
+          <p class="en-p">The Megami caused the two Chigo to hold beautiful jewels from her bosom and signaled them with a glance.</p>
+          <p class="en-p">The two Chigo advanced before the two men, pressed the small purple jewels against their foreheads, and struck them in with a tapping sound.</p>
+          <p class="en-p">Before the two could even utter a cry of pain, the agony ceased.</p>
+          <p class="en-p">The two Chigo instantly returned to the sides of the Megami and laughed as if in great delight.</p>
+          <p class="en-p">From this moment, a sense of calm and a spring-like atmosphere drifted into the hearts of Arataka and Onitaka.</p>
+          <p class="en-p">The Megami spoke quietly: From this moment forth, you shall no longer be Arataka and Onitaka; I bestow upon you the names Takayasuhiko and Takateruhiko.</p>
+          <p class="en-p">I pray that henceforth you shall become true Shinjin and participate in the Shingefu.</p>
+          <p class="en-p">Do you remember my face?</p>
+          <p class="en-p">Arataka, at last in a state of relief, replied: To be bestowed the name Takayasuhiko is a grace for which I am deeply grateful, and an honor for my person.</p>
+          <p class="en-p">Takateruhiko said: For a Mitama as clouded as mine, to be given the Onna of Takateruhiko leaves me with no words to express my gratitude.</p>
+          <p class="en-p">If I may be so bold, are you not the deity of Tan-shu who resided with us in the rocky cavern of Mount Mitake?</p>
+          <p class="en-p">The Megami smiled and nodded.</p>
+          <p class="en-p">Takayasuhiko said: Ah, now the world has cleared for me.</p>
+          <p class="en-p">I feel as though I have been fully granted the divine power to bring the Matsuhime of Mount Takagi to submission and harmony, to serve the Shingefu of the Great Deity of Mizu-no-Mitama, and to bring the Yamata-no-Orochi that coils about heaven and earth to submission and harmony.</p>
+          <p class="en-p">I thank you.</p>
+          <p class="en-p">Takateruhiko also remained silent, bowing his head to express his gratitude.</p>
+          <p class="en-p">Takayasuhiko said: You have hitherto transformed your body into that of Tan-shu and endured various hardships to polish our Mitama; I pray you, reveal your name.</p>
+          <p class="en-p">The Megami replied: Now is not the time to reveal my name.</p>
+          <p class="en-p">Please polish your Mitama until you can perceive it naturally.</p>
+          <p class="en-p">When my identity becomes clearly known to you, that shall be the time when your Mitama have become true Shinjin.</p>
+          <p class="en-p">Until then, I shall reserve it as a pending matter for your sake.</p>
+          <p class="en-p">No sooner had she spoken than the figures of the three pillars vanished like smoke.</p>
+          <p class="en-p">The Naru-ishi continued to emit its small, low rumble as before.</p>
+          <p class="en-p">Takayasuhiko said: What a mysterious event has occurred.</p>
+          <p class="en-p">A mysterious Megami appeared before us and bestowed upon us divine names beyond our station, such as Takayasuhiko and Takateruhiko, yet I feel a new anxiety growing as to whether we shall truly be able to fulfill the responsibilities thereof.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『荒鷹どの、鬼鷹どの、しばらくで御座つたなア』</p>
+            <p class="ja-classical-line">此声に両人は一度に頭を擡げ、熟々と女神の姿を打眺め、腑に落ちぬ面色にて頭を掻いて居る。女神は二人の稚児に、懐より麗しき玉を持たせ、何事か目配せした。二人の稚児は両人の前に進みより、小さき紫の玉を両人の額に当て、コンコンと打ち込んだ。二人は『アイタタ』と云ふ間もなく、痛みは止まつた。二人の稚児は忽ち女神の両脇に復帰し、さも愉快げに笑つて居る。此時より荒鷹、鬼鷹の二人は何となく心穏かに春の様な気分が漂うた。</p>
+            <p class="ja-classical-line">女神は静に、</p>
+            <p class="ja-classical-line">『唯今より荒鷹、鬼鷹では有りませぬ。隆靖彦、隆光彦と名を与へます。どうぞ今後は誠の神人となつて、神業に参加して下さい。妾の顔を覚えて居ますか』</p>
+            <p class="ja-classical-line">荒鷹はやつと安堵の態、</p>
+            <p class="ja-classical-line">『隆靖彦の名を賜はり、有難き、身に取つての光栄で御座います』</p>
+            <p class="ja-classical-line">隆光彦『私の如き曇り切つた身魂に対し、隆光彦と御名を下さいましたのは、何ともお礼の申様が御座いませぬ。失礼乍ら貴神様は吾々と共に三岳山の岩窟にお住居遊ばした丹州様では御座いませぬか』</p>
+            <p class="ja-classical-line">女神は莞爾として首肯く。</p>
+            <p class="ja-classical-line">隆靖彦『アヽ是れで世界晴れが致しました。モウ此上は高城山の松姫を言向け和し、瑞の御霊の大神様の御神業に奉仕し、天地に蟠まる八岐の大蛇を言向け和す御神力は、十分に与へられた様な心持になりました。有難う御座います』</p>
+            <p class="ja-classical-line">隆光彦も無言の儘、頭を下げ感謝の意を表示する。</p>
+            <p class="ja-classical-line">隆靖彦『あなた様は今まで丹州と身を変じ、吾々の身魂を研く為に、種々雑多と御苦労を遊ばした神様、どうぞ御名を現はし下さいませ』</p>
+            <p class="ja-classical-line">女神『今は我名を現はすべき時にあらず。自然に貴方等の身魂に感得し得る所まで磨いて下さい。妾の素性が明瞭お分りになつた其時は、貴方等の身魂は天晴れの神人となられた時です。それまでは、あなた方の為に懸案として暫く留保して置きませう』</p>
+            <p class="ja-classical-line">と云ふかと見れば、三柱の姿は煙となつて消えて了つた。鳴石は依然として小さき唸りを立てて居る。</p>
+            <p class="ja-classical-line">隆靖彦『なんと不思議な事が有つたもんですなア。吾々に不思議な女神さまが現はれて、隆靖彦だとか、隆光彦だとか、身分不相応の神名を下さつたが、実際に於て責任を尽す事が出来るであらうかと、又一つ心配が殖えて来たやうだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takateruhiko said, 'Indeed, I share that sentiment. Yet, that Megamisama resembled Tanshiu-sama in some indefinable way. You must have thought so as well, did you not?'</p>
+          <p class="en-p">Takayasuhiko replied, 'Ah, I felt such profound awe that I could not gaze upon her countenance in reverence. My eyes were dazzled, and I could not face her. I felt a shame rising from the depths of my heart, as if my sins committed until now were being laid bare, and it was truly agonizing. Could this perhaps be but a dream?'</p>
+          <p class="en-p">Takateruhiko said, 'Nay, it is no dream, but a true manifestation. Now that this has come to pass, we must be all the more circumspect in our words and deeds, and become noble Sendenshi, lest we have no excuse before the Megamisama we have just beheld. Yet, does this Nakiishi not continue to moan as before? We know not what manner of Kamisama may appear again. Would it not be well to remain here a while longer, offering Norito and waiting?'</p>
+          <p class="en-p">Takayasuhiko replied, 'Ah, how could I endure the appearance of any more noble Kamisama? This is sufficient. I am so overcome with shame that I know not what to do. Come, let us hasten to Takashiroyama.'</p>
+          <p class="en-p">The two bowed reverently to the Nakiishi and proceeded with quickened steps along the embankment of the great river. Suddenly, they collided with two men, and in their astonishment, the two cried out,</p>
+          <p class="en-p">The two said, 'Ah, this is truly a grave discourtesy. We were walking with our heads bowed, hastening on our way, and not knowing that a Megamisama was passing, we have collided with you. We have no excuse. We pray you, forgive us.'</p>
+          <p class="en-p">Takayasuhiko said, 'Ah, are you not Umakō and Shikakō? With such great haste, where do you intend to go?'</p>
+          <p class="en-p">Umakō replied, 'Yes, our commanders, Murasakihime and Aohiko-sama, have committed a great failure and are suffering, finding themselves in a position where they can no longer remain in the sacred land. We two, finding it unbearable to watch their plight, stole away from the mansion and have come to Chikubushima in Gōshiu, hoping to meet Eikohime-sama and, through her compassion, have her intercede with Susanoo-Ōkami on behalf of the two. We have come in such haste that we have brought nothing with us. We beseech you, Tanshiu-sama, will you not lend us your aid? We implore you.'</p>
+          <p class="en-p">Takayasuhiko replied, 'I am not Tanshiu-sama. I am Arataka, who was a great evildoer that went with you to the Kototama battle at Onigajō.'</p>
+          <p class="en-p">Umakō replied, 'Pray, Tanshiu-sama, what are you saying? With your features clear and noble, and your countenance solemn and inviolable, though you are disguised in the form of a Megami, you are surely none other than the incomparable Tanshiu-sama. Do not speak such unkind words, but open your heart and be at ease with us.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">隆光彦『そうだ、私も同感だ。併しあの女神様は何処となく丹州さまにソツくりだつた。お前もさう思つただらう』</p>
+            <p class="ja-classical-line">隆靖彦『ヤア私はあまり勿体なくて、とつくりと顔を、ヨウ拝まなんだよ。何とはなしに目がマクマクして、面を向ける事が出来なかつた。そうして何だか心の底から恥しくつて、自分の今迄の罪悪を照される様な気がして、随分苦しかつた。是れはヒヨツとしたら夢ぢや有るまいかなア』</p>
+            <p class="ja-classical-line">隆光彦『ナニ、夢所か本当に顕はれ給うたのだ。斯うなつた以上は、層一層言行を慎んで立派な宣伝使にならなくちや、今の女神様に対して申訳が無からう。併し乍ら此の鳴石は依然として唸つて居るぢやないか。又々どんな神様が出現遊ばすか分らないよ。モウ暫く此処に祝詞を奏上して待つて居たらどうだらう』</p>
+            <p class="ja-classical-line">隆靖彦『ヤア此上立派な神様に出られてたまるものかい。モウ此れで結構だ。恥かしくつて仕方がない。サアサア早く高城山へ行かう』</p>
+            <p class="ja-classical-line">二人は鳴石に恭しく礼拝し、足早に大川の堤を伝つて上り行く。忽ちドンと突き当つた二人の男、驚いて、</p>
+            <p class="ja-classical-line">二人『ヤアこれはこれは誠に無調法致しました。あまり俯むいて道を急いで居ましたので、女神様の御通りとも知らず、衝突を致しまして、申訳が御座いませぬ。どうぞお許し下さいませ』</p>
+            <p class="ja-classical-line">隆靖彦『ヤアお前は、馬公に鹿公ぢやないか。エライ勢ひで何処へ行く積りぢや』</p>
+            <p class="ja-classical-line">馬公『ハイ吾々の大将、紫姫、青彦の両人さま、大失敗を演じ、聖地にも居れないと云ふ立場になつて苦んで居られます。私等両人はあまりお気の毒で、見て居る訳にも行かず、そつと館を飛び出し、江州の竹生島へ参つて、英子姫様にお目にかかり、お情を以て、素盞嗚大神様に両人のお詫をして頂かうと思ひ、取る物も取敢ず参りました。どうぞ丹州さま、何とか、あなたもお力添をして下さいませぬか、お頼み申します』</p>
+            <p class="ja-classical-line">隆靖彦『私は丹州さまぢやない。お前さんと一緒に、鬼ケ城の言霊戦に向つた大悪人たりし、荒鷹で御座いますよ』</p>
+            <p class="ja-classical-line">馬公『モシモシ丹州さま、ソラ何を仰有います。眉目清秀、厳として冒す可らざるあなたの御容貌、女神の姿に化けて居らつしやるが、適切りあなたは擬ふ方なき丹州様、そんな意地の悪い事を仰有らずに、気を許して、打解けて下さいな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Shikakō exclaimed, 'Ah, how wondrous! Another person who resembles Tanshiu-sama has appeared here. From the moment I first beheld you, I thought you were a strange personage; were you, then, a Keshin of the Kamisama? I beseech you, as the Shimatsu is exactly as I have just stated, pray assist us with your Goshinriki.'</p>
+          <p class="en-p">Takateruhiko replied, 'Nay, nay, I am by no means Tanshiu-sama. I am a man called Onitaka, a Kiyōdaibun of Arataka, who has dwelt in the Gankutsu of Mitakeyama and committed naught but evil.'</p>
+          <p class="en-p">Uma and Shikakō retorted, 'No matter what you say, you do not possess the Sozatsu Yōbau of Onitaka or Arataka. That Aitsu, though he once underwent Kaishin, has revealed his true Jigane again, wandered off on a Uro, and we hear in the councils of our fellows that he is likely now following in the footsteps of Onikumohiko and Onikumawake, traveling the path of evil in a Giyakuten. Do not deceive us by using the name of such a man of Tsutsui-style, whose good and evil are unfathomable; pray, tell us the truth. We are in a situation where one in a thousand is rare.'</p>
+          <p class="en-p">Takayasuhiko mused, 'The discernment of the world is indeed unerring. It seems that no matter how much one undergoes Kaishin, a Fukushu must have remained entrenched somewhere, for I have been viewed by the members of Sangyō-kyō just as Uma-kō and Shikakō have now described. Ah, it is unavoidable. I wish I could return to that form of the time to clear the doubts of these two. In this state, having acquired a beautiful Yōbau is, on the contrary, a troublesome blessing. Now, Onitaka—nay, Takateruhiko-sama...'</p>
+          <p class="en-p">Takateruhiko said, 'Ah, that is so. Yet, the fact that my Reikon has ascended and the physiognomy of my body has changed to such a degree that even Uma-kō-sama and Shikakō-sama are suspicious is truly noble. After all, for a human, the Reikon is paramount. ...Pray, Uma-sama, Shikaka-sama, I speak no lie. The moment I received a jewel from a magnificent Megamisama whom I knew not, I underwent this transformation. I was given the names Takayasuhiko and Takateruhiko, but until just a moment ago, I remained in the form of Arataka and Onitaka. I beseech you to clear your doubts.'</p>
+          <p class="en-p">The two, Uma and Shikakō, were enveloped in a cloud of doubt, and they scrutinized the figures of the two men from the tops of their heads to the tips of their toes with great care.</p>
+          <p class="en-p">Becoming a subordinate of Onikumohiko,
+The supreme commander of the Brahman religion,
+In the Gankutsu of the mountain of Mitake,
+As Arataka with a heart of wildness,
+And Onitaka who wrings out the living blood,
+We appeared and in all directions,
+Abducted the old and young, men and women,
+And together with Onikumawake,
+Who exhausted the limits of mercilessness,
+While we dwelt in mountain fortresses,
+Built at the mountain of Ōe, Onigajō,
+And the mountain of Mitake,
+Whether you descended by parting the clouds
+Of the Amatsu-mikado,
+Or appeared by digging through the earth,
+I know not, but Tanshiu-sama,
+Possessing an indescribable dignity,
+Came and bowed his head, requesting,
+'Make me your foster child,'
+The two, from the beginning, were not Kamisama.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鹿公『ヤア不思議だ。此処にも丹州さまそつくりの方が又現はれた。一目見た時から変つたお方ぢやと思つて居たが、ヤツパリ神様の化身で御座いましたか。どうぞ唯今申した通りの始末ですから、宜しく御神力を以てお助け下さいませ』</p>
+            <p class="ja-classical-line">隆光彦『イエイエ決して決して、私は丹州さまでは御座いませぬ。荒鷹の兄弟分鬼鷹と云ふ、三岳山の岩窟に於て、悪ばかり働いて居つた男で御座いますよ』</p>
+            <p class="ja-classical-line">馬、鹿『なんと仰有つても、鬼鷹、荒鷹の様な粗雑な容貌ぢや有りませぬワ。彼奴ア、一旦改心はしよつたが、又地金を出して、どつかへ迂路つき、此頃は鬼雲彦や鬼熊別の後を追うて、悪の道へ逆転旅行をやつて居るだらうと、吾々仲間の評定に上つて居る位な男です。そんな善悪不可解の筒井式の男の名を騙つたりなさらずに、本当の事を言つて下さい。私達は千騎一騎の場合で御座います』</p>
+            <p class="ja-classical-line">隆靖彦『世間の眼識は違はぬものだなア。何程改心してもヤツパリどつかに、副守が割拠して居つたと見えて、三五教の御連中からは、今、馬公、鹿公の言つた様に見られて居つたのだなア。アーア仕方のないものだ。どうぞしてあの時の姿になつて、此両人の疑を晴らしたいものだ。斯うなると、麗しき容貌になつたのが、却て有難迷惑だ。ナア鬼鷹否々、隆光彦さま…』</p>
+            <p class="ja-classical-line">隆光彦『アヽさうですなア。併し、馬公さま、鹿公さまにまで疑はれる程、霊魂が向上し、体の相貌までが変つて来たと云ふ事は、実に尊いものだ。ヤツパリ人間は霊魂が第一だ。……モシモシ馬さま鹿さま、決して嘘は申しませぬ。たつた今、何とも知れぬ立派な女神様から、玉を頂いたが最後、斯んなに変化して了つたのだ。名も隆靖彦、隆光彦と頂いたのだが、つい今の先まで依然として、荒鷹、鬼鷹の姿で居つたのだ。どうぞ疑を晴らして下さい』</p>
+            <p class="ja-classical-line">馬、鹿の二人は疑団の雲に包まれ、両人の姿を頭の上から足の爪先まで、念入りに見詰めて居る。</p>
+            <p class="ja-classical-line">『バラモン教の総大将
+鬼雲彦の部下となり
+三岳の山の岩窟に
+心も荒き荒鷹や
+生血を絞る鬼鷹と
+現はれ出でて四方八方の
+老若男女を拐はかし
+無慈悲の限りを尽したる
+鬼熊別と諸共に
+大江の山や鬼ケ城
+三岳の山に山砦を
+構へて住まへる折もあれ
+天津御空の雲別けて
+降りましたか地を掘りて
+現はれましたか知らねども
+何とはなしに威厳ある
+丹州さまがやつて来て
+俺の乾児にして呉れと
+頭を下げて頼まれる
+二人は素より神ならぬ</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In the sorrow of the body, they treated the followers of Murasakihime like slaves in Tanshiu, deceiving them into the Ihaya of Umakō and Shikakō, and casting those two into a rock cave equal to Jigoku, binding them with cruel ropes without mercy. Yet, the messengers of the Ananai-kyō, Otohiko and Kamehiko, appeared, ignoring the sins of that great evil which heaven and earth cannot contain, and while protecting Yoshiko-hime, they forgave their deep sins and guided them to the teachings of Kami. Thus, their Kamigokoro changed instantly, and they stood against the Onigajō, the fortress of Akuma that tormented men, participating in the pure battle of the Kototama, which is joyous even to hear.</p>
+          <p class="en-p">Knowing the nobility of Kami, and while they were setting their hearts to spread the way of the Ananai-kyō Kami to the countries in all four directions, they beheld the beauty of purple clouds rising at the foot of Mount Misen, as if by a divine sign. We two felt ourselves drawn by the clouds, and when we came to the foot of the sacred mountain where Konohana-hime is enshrined, we were astonished and awestruck to behold again the majestic figure of Tanshiu, which we had not expected. Turning on our heels and coming upon the mountain pass of Suchiyama, we were surprised to see the figures of Tsunehiko-sama, Taki, and Ita, and after exchanging a few words, we bowed in reverence to the command of Tanshiu-sama.</p>
+          <p class="en-p">Reverently serving, we pointed our way toward the eastern road, crossing over mountains and slopes, and when we went to Chikubushima, where Eiko-hime hides, across the raging waves of Lake Biwa, we found it but an empty shell, and in our frailty, we turned the heads of our horses and wandered hither and thither. Our faith also reached Katakigahara, and keeping pace, we stepped over the village of Kutsukake and climbed the Zangezaka, and when we stood upon the pass of Nashinoki and looked out, we gazed with longing at the scene of five-colored clouds trailing over the summit of Mount Takagi in the distant western sky. As we came treading upon the thin snow, we saw white smoke rising from above the Naruishi, where the sound of the wind blows high.</p>
+          <p class="en-p">Our hearts were stolen by the purple clouds rising again, and while we pressed our hands together in prayer, a goddess of incomparable solemnity appeared from within the smoke, accompanied by two children. While we watched her bestow upon us a beautiful jewel, the two, whose ugly forms would deceive even demons, were instantly wrapped in the sleeves of white robes, and their appearances changed in a moment. They were named the masters of the teachings, Takayasuhiko and Takamitsuhiko, and as we finally came to this place, we encountered the two, Umakō and Shikakō, whose faces we recognized, and our own forms changed suddenly; it is only natural that no matter how many words we exhaust, you will not believe us.</p>
+          <p class="en-p">Ah, indeed, indeed, we are still the two, Arataka and Onitaka, who have attained a higher state; please, clear your doubts. In man, the heart is paramount; if one polishes the soul, even a demon may instantly change into a Kami, and by the way one holds the heart, even a Kami may instantly become a demon. Yet, even so, no matter how much a human being polishes the soul, if it does not rely upon the power of Kami, the soul cannot be thoroughly purified. Though self-reliant faith is well, in all things in the world of men, there is no path other than to entrust one's body and heart to the power of the Sumerakami and receive salvation, rather than relying upon the cleverness and wisdom of man.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">身の悲しさに丹州を
+奴隷の如く酷き使ひ
+紫姫の主従を
+ウマウマ岩窟に騙し込み
+馬公、鹿公二人をば
+地獄に等しき岩穴へ
+情容赦も荒縄に
+縛つてヤツと放り込みし
+天地容れざる大悪の
+罪をも憎まず三五の
+神の教の宣伝使
+音彦、加米彦現はれて
+悦子の姫を守りつつ
+深き罪をば差し赦し
+神の教に導きて
+忽ち変る神心
+人を悩める鬼ケ城
+悪魔の砦に立向ひ
+聞くも芽出たき言霊の
+清き戦に参加して</p>
+            <p class="ja-classical-line">神の尊き事を知り
+三五教の神の道
+四方の国々弘めむと
+心を配る折柄に
+弥仙の山の山麓に
+神の知らせか紫の
+雲立昇る麗しさ
+吾々二人は何となく
+雲に引かるる心地して
+木の花姫の斎りたる
+御山の麓に来て見れば
+豈計らむや丹州の
+威厳備はる御姿に
+再び驚き畏みて
+踵を返し須知山の
+峠の上に来て見れば
+常彦さまや滝、板の
+二人の姿に驚きつ
+一言二言云ひかはし
+丹州さまの仰せをば</p>
+            <p class="ja-classical-line">畏み仕へ東路を
+指して山坂打渉り
+荒波猛る琵琶の湖
+英子の姫の隠れます
+竹生の島に往て見れば
+藻抜けの殻の果敢なさに
+駒の首を立て直し
+彼方此方と彷徨ひつ
+吾信仰も堅木原
+足並揃へて沓掛の
+郷を踏み越え懺悔坂
+漸く登り梨の木の
+峠に立ちて眺むれば
+遥に見ゆる西の空
+高城山の頂きに
+五色の雲の棚引きし
+其光景に憧憬れつ
+薄雪踏み締め来て見れば
+風の音高く鳴石の
+上より昇る白煙</p>
+            <p class="ja-classical-line">また立昇る紫の
+雲に心を奪はれつ
+両手を合せ拝む内
+煙の中より現はれし
+荘厳無比の女神さま
+二人の稚児を伴ひて
+吾れにうつしき宝玉を
+授け給うと見る間に
+鬼をも欺く醜体の
+二人は忽ち此通り
+白衣の袖に包まれて
+容貌忽ち一変し
+隆靖彦や隆光彦の
+教の司と名付けられ
+やうやう此処に来て見れば
+顔見覚えた馬公や
+鹿公二人に巡り会ひ
+俄に変る吾姿
+如何程言葉を尽すとも
+諾なひまさぬは道理なれ</p>
+            <p class="ja-classical-line">アヽ然り乍ら然り乍ら
+吾れはヤツパリ荒鷹に
+鬼鷹二人の向上身
+どうぞ疑晴らしませ
+人は心が第一よ
+霊魂研けば忽ちに
+鬼も変じて神となり
+心一つの持方で
+神も忽ち鬼となる
+さは然り乍ら人の身の
+如何に霊魂を研くとも
+神の力に依らざれば
+徹底的に魂は
+清まるものに有らざらむ
+自力信仰もよけれども
+唯何事も人の世は
+他力の神に身を任せ
+心を任せ皇神の
+救ひを得るより途はない
+人の賢しき利巧もて</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec08">
+        <div class="sec-header">
+          <span class="para-num">&sect; 8</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">I have now at last realized the error of what I thought was the path of sincerity. Alas, Umakō and Shikakō, cast away your Ningengokoro, and in all things, simply entrust yourselves to Kamunagara and the Tariki of Kami, and accumulate sincere Shinkau. I am the Sendenshi of the Uranai Kyō, who has appeared at the foot of Mount Takashiro, and I am advancing with the firm resolve to save others by Kotomu to Matsuhime the path of sincerity. Though I perceive the hearts of the two, Murasakihime and Wakahiko, what means is there to save them from the Ika of Ningengokoro? One should simply polish the Mitama and await the blooming spring.</p>
+          <p class="en-p">How could the Muriyō and Mugen Jihishin of Kamususanōnōokami ever Misu them? Ah, Kamunagara, Kamunagara! May the Mitama be blessed, and whatever sins Murasakihime and Wakahiko may possess, may they be calm and peaceful in heart, and may I pray to the great Kami, Kamususanōnōokami, to Nahohi, Minaho, Kikinaho, and Norinaoshi. Whether the morning sun shines or is clouded, whether the moon waxes or wanes, even if the earth should sink, we who traverse the path of the single pillar of sincerity have the salvation of Kami before our eyes. Surely, the two of you shall not be made to suffer in heart together, for the figure of the Goddess has appeared.</p>
+          <p class="en-p">We two are heading to Mount Takashiro in the lead. Umakō and Shikakō, both of you, cast away your attachments and join us in the pure battle of Kototama, and establish great merit. Come, come then, come then; let us go quickly, even for a moment, even for an instant. Kami is with you. Hearing that the grace of Kami is deeper than the sea, no matter how steep Mount Takashiro may be, and no matter how strong the power of the Akuma may be, we of the San-Go-Kyō, who receive the light of Kami in our bodies and illuminate the darkness of the Tokoyo, are truly joyful in our station. Ah, Kamunagara, Kamunagara! May the Mitama be blessed.</p>
+          <p class="en-p">So singing the song of propagation, the four in the party approached, step by step, pointing toward the mansion of Matsuhime of the Uranai Kyō.</p>
+          <p class="en-p">Umakō said, 'Excuse me, but through your song just now, we have fully understood the wonder and effect of faith from the bottom of our hearts. However, we two were in the midst of accompanying Murasakihime to worship at the precious throne of Hinai no Manai when we were abducted by you; thanks to that, we became believers of the noble San-Go-Kyō, and our master, Murasakihime, became a most noble Sendenshi, and we two were choked with tears of gratitude day and night... Ah, what fortunate people we master and servants were... we were rejoicing. But unexpectedly, Murasakihime and Wakahiko incurred the displeasure of the great Kami, and due to a slight misunderstanding, they were expelled from the San-Go-Kyō. Feeling apologetic toward Kami, saying that their sin was worth ten thousand deaths, Murasakihime lamented day and night, and we two servants could not bear to watch this. Therefore, we asked Murasakihime for leave, thinking we would establish some merit, manifest sincerity to the great Kami, and by that merit, have our master's sins forgiven. We asked her indirectly, but Murasakihime would not grant us leave. So, feeling as if we were vomiting blood, we acted against our hearts and heaped abuse upon our master, and being disowned by her, we came this far. Now that it has come to this, even if we fail, it will have no relation to the person of our master. If by any chance we manifest merit and achievement, we wish to ask for our master's return, and by that, we only wish to restore the honor of Murasakihime. We two consulted together, wishing to perform some good service, and came this far. However, since you have already resolved to Kotomu and harmonize Mount Takashiro, we are in the position of attendants; even if we succeed, it will not serve as material for our master's apology. Since you have already received that much divine virtue, would you please yield this battle of Kototama to me?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">誠の道を究めむと
+思うた事の誤りを
+今漸くに悟りけり
+吁馬公よ鹿公よ
+人間心を振棄てて
+唯何事も惟神
+神の他力に打任せ
+誠の信仰積むがよい
+吾れは是れより高城の
+山の麓に現はれし
+ウラナイ教の宣伝使
+松姫さまを言向けて
+誠の道に救はむと
+思ひ定めて進み行く
+紫姫や若彦の
+二人の心は察すれど
+人間心の如何にして
+救ふ手段がありませうか
+魂を研いて今は唯
+花咲く春を待てばよい</p>
+            <p class="ja-classical-line">神素盞嗚大神の
+無量無限のお慈悲心
+如何でか見捨て給はむや
+アヽ惟神々々
+御霊幸はひましまして
+紫姫や若彦に
+如何なる罪の有りとても
+心平らに安らかに
+直日に見直し聞直し
+宣り直しませ素盞嗚の
+大神様に祈ぎ奉る
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+誠一つの麻柱の
+道を貫く吾々は
+神の救ひは目の前
+必ずともに二人共
+心を痛め給ふまじ
+女神の姿と現はれし</p>
+            <p class="ja-classical-line">吾々二人は先頭に
+高城山に向ひ行く
+馬公、鹿公両人よ
+執着心を振り棄てて
+吾等と共に言霊の
+清き戦に加はりて
+太しき功績を立て給へ
+いざいざさらば、いざさらば
+一時も早く片時も
+疾く速けく参りませう
+神は汝と倶にあり
+神の恵は海よりも
+深しと聞けば高城の
+山は如何程嶮しとも
+悪魔の勢強くとも
+神の光を身に受けて
+常世の暗を照し行く
+三五教の吾々が
+身の上こそは楽しけれ
+アヽ惟神々々</p>
+            <p class="ja-classical-line">御霊幸はひ坐しませよ』</p>
+            <p class="ja-classical-line">と宣伝歌を歌ひつつ、一行四人は一歩々々、ウラナイ教の松姫が館を指して近付きぬ。</p>
+            <p class="ja-classical-line">馬公『モシモシ最前のお歌に依つて、私達もスツカリと信仰の妙味と効果が、心底から諒解出来ました。併し乍ら吾々両人は、紫姫様のお供を致し、比沼の真奈井の貴の宝座へ参拝の途中、あなた方に拐はかされ、其お蔭にて尊き三五教の信者となり、御主人の紫姫様は、世にも尊き宣伝使とまでお成り遊ばし、吾々両人は昼夜感涙に咽び……アーア吾々主従は何とした果報者だ……と喜んで居りましたが、計らずも紫姫様は若彦さまと共に、大神様の御不興を蒙り、少しの取違より、今は三五教を除名され、神様に対しては申訳なく、其罪万死に値すると言つて、日夜紫姫様のお歎き、家来の吾々両人、これがどうして見て居られませう。そこで吾々は紫姫様にお暇を願ひ、一つの功名を立て、大神様に誠を現はし、其功に依りて御主人の罪を赦して戴かうと思ひ、それとはなしにお願致しましたが、どうしても紫姫様は吾々に暇を下さらないので、血を吐くやうな思ひをして、心にも有らぬ主人に対し罵詈雑言を逞しうし、ヤツと勘当されて此処までやつて来ました。モウ斯うなる上は、仮令失敗を致さうとも、御主人の御身には何の関係も及ぼさないなり、万々一吾々が功名手柄を現はした時には御主人様に帰参をお願致し、さうして紫姫様の名誉を回復したいばつかりで、両人申合せ、何とか良い御用をして見たいと思つて、此処まで参りました。併し乍らあなたは既に高城山を言向け和さむと御決心なされた以上は、吾々はお供の身の上、仮令成功を致しましても、それが御主人様のお詫の材料にはなりませぬ。あなたは既に其れだけの御神徳をお頂きになつたのだから、此言霊戦はどうぞ、私に譲つて下さいますまいか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec09">
+        <div class="sec-header">
+          <span class="para-num">&sect; 9</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Shikakō said, 'It is as Umakō has just stated. I beseech you to discern our earnest kiyōchiu, and for this konkuwai, leave the matter unto us. Should we, manmanichi, meet with shitsupai, would you two, as the dainigun, undertake the tomurahiikusa?'</p>
+          <p class="en-p">So saying, he let tears fall in torrents, revealing his magokoro upon his countenance as he made his entreaty.</p>
+          <p class="en-p">Takayasuhiko replied, 'Since our nifushin, we have achieved no kōrau; we have striven to kotomu and reconcile the guwankiyō Matsuhime, that we might present her before the Kamisama, yet among bushi, it is ahimitagahi. Having heard such jijiyō, I cannot find cause to refuse you firmly. Now, Takateruhiko-sama, shall we yield the glory of this kototamasen to Umakō and Shikakō? Recalling the goshinchiyoku that one should bestow upon others what one desires for oneself, I cannot find it in my heart to reject you with muge.'</p>
+          <p class="en-p">Takateruhiko said, 'It is as you have otsushiya. Umakō, Shikakō, though it be a labor, I pray you perform this with splendor. I shall observe your mushaburi from that place by the riverbank where the scenery is fair.'</p>
+          <p class="en-p">Umakō and Shikakō replied, 'We thank you for your prompt consent. As our kototamasen is that of those whose mitama have yet to be polished, we humbly beseech your protection from the shadows.'</p>
+          <p class="en-p">Takayasuhiko said, 'Pray, manifest a glorious tegara of merit.'</p>
+          <p class="en-p">Takateruhiko said, 'I pray for your great victory.'</p>
+          <p class="en-p">The two, Umakō and Shikakō, expressed their gratitude, parted from the two, and proceeded with haste, pointing their way toward the mansion of Matsuhime.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鹿公『いま馬公の申した通りの事情で御座います。どうぞ、吾々の切なる胸中をお察し下さいまして、今回は吾々にお任せ下さいませ。万々一失敗を致しました時は、第二軍として、あなた方御両人が、弔戦をやつて下さいませぬか』</p>
+            <p class="ja-classical-line">と涙をハラハラと流し、真心を面に現はして頼みゐる。</p>
+            <p class="ja-classical-line">隆靖彦『吾々も入信以来、一つの功労もなく、せめては頑強なる松姫を言向け和し、神様にお目にかけたいと思つてやつて来たが、武士は相身互だ。それだけの事情を聞いた以上は、強つて断る訳にも行かぬ。ナア隆光彦さま、此言霊戦は馬公、鹿公に手柄を譲りませうか。己の欲する所は人に施せとの御神勅を思ひ出せば、無情に撥ねつける訳にもゆきますまい』</p>
+            <p class="ja-classical-line">隆光彦『あなたの仰有る通りです。馬公、鹿公、御苦労乍ら華々しくやつて見て下さい。私は彼の川縁の景色の佳い所で、あなたの武者振を拝見致します』</p>
+            <p class="ja-classical-line">馬、鹿『それは早速の御承諾、有難う御座います。何分身魂の磨けぬ吾々の言霊戦、蔭乍ら御保護を御願ひ致します』</p>
+            <p class="ja-classical-line">隆靖彦『天晴れ功名手柄を現はして下さい』</p>
+            <p class="ja-classical-line">隆光彦『大勝利を祈ります』</p>
+            <p class="ja-classical-line">馬、鹿の両人は『有難う』と感謝の意を表し、二人に別れ、松姫の館を指してイソイソ進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c08.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 8: Great 悟徹底 [653]</span>
+      </a>
+      <a href="c10.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 10: Horse Deer 正直 [655]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
