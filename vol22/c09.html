@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9: Pure Spring [701] - Volume 22 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 22 Table of Contents</a>
+      <span>Volume 22</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 22 &bull; Chapter 9</span>
+      <h1 class="chapter-title-en">Chapter 9: Pure Spring [701]</h1>
+      <p class="chapter-title-ja">清泉〔701〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The Ikukototama of one, two, and three, bestowed by Amatsumikami, appeared at the foot of the Yotsuō peak as the stern Mitama. To build the Miroku Miyo, Kamususanō no Ōkami appeared as the living Onko. Among the Yatariotome, the exceptionally noble Hidekohime, together with Yoshikohime, sought to secure the ninety-fold brocade palace and the hundred-thousand-fold Shinsaku for the end of Ikuokunen, making them Kakihatokiha. By the Mikoto of Amatsumikami, the Kongaufue Niyoihotsushiyu, the Ōgon jewel, and the purple precious treasures were hidden forever within the Okebuse mountain Ihato, waiting for the time to open.</p>
+          <p class="en-p">Opening it, Kurohime and Takahime, with a pounding Dōki in her chest, suffered from the loss of the jewel. With no words of explanation to the gods of heaven and earth, Takahime, weeping, broke her heart into a thousand pieces. Under the cover of night, she departed from the foot of the Yotsuō mountain. She traveled along the ridges of the Rokkō mountains to Matanigadake, where the clan of Mukadehime had entrenched themselves. Though the whereabouts of the jewel were unknown, Takahime, in her hasty judgment, assumed it was the plan of the persistent Magami, the Yamata no Orochi. She built a small hermitage on Takatoriyama, and day and night, like a hawk or a cormorant, she watched for an opening.</p>
+          <p class="en-p">Making the teachings of the three-five into a sutra here, she kept in her heart the desire to force open the rock-root, which was a breach of her own body that could not be woven as a warp. Accompanied by two or three believers, she waited for the time, though it was an agonizing wait.</p>
+          <p class="en-p">The warmth of spring drifted about, and here and there among the mountain cherry trees—though they were not like Otafuku masks—the leaves appeared before the flowers. Two men came walking briskly along the valley path, sat down at the base of an old mountain cherry tree, threw their bamboo hats onto the ground, and indulged in whispering.</p>
+          <p class="en-p">Kō: 'In this way, the mountains in all directions have put on new attire, filled with the vitality of spring. The buds on the trees are sprouting endlessly, moment by moment, celebrating the spring of Tokoshihe; the flowers are laughing, and the birds are singing. It has truly become an indescribable feeling. However, the Brahmanism we serve, compared to its former prosperity when Onikumohiko-sama of Ōeyama and Onikumawake of Onigajōyama responded to each other from north and south, sweeping through far and near, is now just like the arrival of winter. Since our fortress at Mikunigadake was torn down for the sake of the three-five teachings, we returned to our home country once, intending to wait for the time and make a comeback. I do not know how many times I tried to remonstrate with Mukadehime-sama, but she would not listen at all. And now, having come to this Matanigadake with Takayorihime of the Alps religion to assert the divine virtue of Daijizaiten-sama, three months have already passed. However, having been influenced since the fall of Takaharuyama, the believers who had gathered with such effort are melting away day by day like ice in the sun. The commander, Mukadehime-sama, is in a bad mood and vents her anger day and night, as if it were none of our business—it is truly troublesome, is it not? If we do not bring back some kind of souvenir today, that difficult face of hers will not return to its sheath. I wonder if there is any good idea.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">天津御神の賜ひてし
+生言霊の一二三
+四尾の峰の山麓に
+厳の御霊と現はれて
+五六七の神世を造らむと
+神素盞嗚の大神が
+生の御子と現れませる
+八人乙女の其中に
+秀でて貴き英子姫
+悦子の姫と諸共に
+錦の宮の九十
+百千万の神策を
+幾億年の末までも
+堅磐常磐に固めむと
+天津御神の神言もて
+金剛不壊の如意宝珠
+黄金の玉や紫の
+貴の宝を永久に
+秘め隠したる桶伏の
+山の岩戸を何時しかに</p>
+            <p class="ja-classical-line">開きて茲に黒姫や
+胸の動悸も高姫が
+玉失ひし苦しさに
+天地の神に言解の
+言葉もなくなく高姫は
+千々に心を砕きつつ
+夜に紛れて四尾の
+山の麓を出立し
+六甲山の峰続き
+蜈蚣の姫の一族が
+立籠りたる魔谷ケ岳
+玉の行方は分らねど
+執念深き曲神の
+八岐大蛇の計画と
+早合点の高姫は
+鷹鳥山に小やけき
+庵を結び夜も昼も
+鷹鳥ならぬ隼や
+鵜の目に隙を窺ひつ
+水も洩らさぬ三五の</p>
+            <p class="ja-classical-line">教をここに経となし
+緯さしならぬ身の破目を
+押開かむと村肝の
+心に包み岩が根に
+二三の信徒伴ひて
+時を待つこそ忌々しけれ。</p>
+            <p class="ja-classical-line">春の陽気も漂うて、山桜の此処彼処、お多福面ではなけれども、花より葉が前に出る、谷路伝うてスタスタと登り来る二人の男、山桜の古木の根元に腰打ち掛け、竹の子笠を大地に投げ棄てヒソビソ話に耽る。</p>
+            <p class="ja-classical-line">甲『此通り四方の山々新装をこらし、春の英気を含んで、木々の木の芽は時々刻々に際限もなく新芽を吹き出し、常世の春を寿ぎ、花は笑ひ、鳥は歌ひ、実に何とも云へぬ気分になつて来た。併し乍ら吾々の奉ずるバラモン教も、一時は大江山の鬼雲彦さまが鬼ケ城山の鬼熊別と南北相呼応して、遠近を風靡さした隆盛に引き替へ、今日のバラモン教は恰度冬が来たやうなものだなア。吾々は三国ケ岳の砦を三五教の為に取り毀たれてより、一旦本国へ帰り、時を待つて捲土重来せむものと、蜈蚣姫様に幾度諫言を試みたか知れなかつたが、どうしてもお聞きなさらず、又もやアルプス教の鷹依姫と共に、大自在天様の御威徳を発揮せむと主張し、此魔谷ケ岳にお越しになつてから早三月も経つた。併し乍ら高春山の没落以来影響を受け、折角集まつて来た信者も、日向の氷の如く、日に日に消滅の運命を繰返し、吾々の知つた事か何ぞの様に蜈蚣姫の御大将の不機嫌、日夜の八当り、実に困つたものぢやないか。今日は何とか一つお土産を持つて帰らねば、あの難かしい顔が元の鞘に納まらない、何とか良い名案はあるまいかなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otsu: 'Since this is a matter that has squeezed the very bottom of our wisdom, there is no fear of even a single louse being produced—or rather, falling out—no matter how much more you shake it upside down. In short, there is no other way but to use extraordinary measures. Takatorihime of Takatoriyama is of a considerable age, much like Mukadehime, but despite having appeared here only recently, she has tremendous influence. The number of men and women of all ages who visit the hermitage of Takatorihime, where she preaches the Way at the root of the rocks on Takatoriyama from the hour of the hare, is extraordinary. It is said that Takatorihime has swallowed a purple jewel, a diamond-like indestructible treasure, into her belly, so if we take direct action and do such-and-such to her, the world will be under the Brahman religion. Furthermore, there is a very beautiful woman named Tamanohime whom she relies upon as her right-hand man. If we can skillfully persuade that woman first and make her our own, we will gain an opportunity to approach Takatorihime. He who would fell a great tree must first cut its branches...'</p>
+          <p class="en-p">'That is the strategy of shooting the horse first if you intend to shoot the general. But will things really go as smoothly as planned? As they say, even a halter on a cow can slip off from the other side; it is truly an uneasy business.'</p>
+          <p class="en-p">'It is said that Tamanohime always comes to the valley stream to draw water. If we go to the front entrance, there are many pilgrims, so we would never be able to achieve our goal, but I have discovered that Tamanohime always descends to the clear spring in Tsubakidani on the back slope to draw the sacred water. That water must contain some extraordinary medicine. They say that Takatorihime gives it to many people, calling it sacred water, and all illnesses are strangely cured. That wretch Takatorihime claims it is divine power, and has Tamanohime, her trusted retainer, draw it secretly and offer it before the altar. First, if we skillfully get Tamanohime into our hands, and then rush to the main castle, success is undoubted. Come, the clear spring is only two or three chō away. Let us go quickly.'</p>
+          <p class="en-p">With that, the two, Kananbōru and Sumātobōru, climbed up the rugged valley path, holding their hats in their hands.</p>
+          <p class="en-p">Kanan and Sumāto finally arrived at the clear spring of Takatoriyama. Three women, identical in height, figure, and appearance, carrying thick bamboo buckets in both hands, appeared before the two with smiles on their faces.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">乙『名案と云つて、吾々の智嚢の底を搾り切つた上の事だから、モウ此上逆様に振つても虱一匹産出……否落ちて来る気遣ひがない。要するに非常手段を用ゐるより方法はあるまいよ。鷹鳥山の鷹鳥姫は相当な年増で、蜈蚣姫と同じ様な年輩だが、まだ此方へ現はれてから幾らにもならぬのに大変な勢だ。何時も四つ時からかけて鷹鳥山の岩の根に道を説く鷹鳥姫の庵に通ふ老若男女は非常なものだ。何でも鷹鳥姫は紫の玉、金剛不壊の宝珠を腹に呑み込んで居ると云ふ事だから、一つ彼奴を直接行動で何々して了へば、後はバラモン教の天下だ。それに就て、彼が股肱と頼む玉能姫と云ふ頗る美人が居る。先づ其女から巧妙く説きつけて、此方のものにしさへすれば、鷹鳥姫に接近の機会を得ると云ふものだ。大樹を伐る者は先ず其枝を伐る……』</p>
+            <p class="ja-classical-line">『将を射むとする者は先づ其馬を射ると云ふ筆法だな。併しさうウマく計画通りに行くだらうか。当事と牛のおもがひは向ふから外れると云つて、実に不安心なものだ』</p>
+            <p class="ja-classical-line">『その玉能姫は何時も谷川に水を汲みにやつて来るさうだ。表口へ廻れば沢山の参詣者だから、到底目的は達し得なからうが、玉能姫は裏坂の椿谷の清泉に何時も下り立ち、霊泉を汲みに来ると云ふ事を探知して居るのだ。あの水は何でも非常な薬品を含んで居る。それを御神水だと云つて、鷹鳥姫が数多の者に与へるので、凡ての病気は奇妙に全快するさうだ。之を鷹鳥姫の奴、御神力だと称し、股肱の臣たる玉能姫にソツと汲ませ、神前に供へさせて置くさうだ。第一玉能姫を巧妙く此方の手に入れて、其上で本城へ駆け向へば、成功疑なしだよ。サア清泉まで僅か二三丁だ。早く行かう』</p>
+            <p class="ja-classical-line">とカナンボール、スマートボールの両人は、崎嶇たる谷道を笠を手にしながら、チクチクと登り行く。</p>
+            <p class="ja-classical-line">カナン、スマートの両人は鷹鳥山の清泉に漸く辿り着いた。急坂を太き竹製の手桶を両手に提げ、背恰好、容貌、寸分違はぬ三人の女、ニコニコしながら二人の前に現はれ来り、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kafujiyo: 'Are you Kanan-sama of the Brahman Kyō?'</p>
+          <p class="en-p">Kanan: 'As you have surmised, I am Kanan. This fellow here is called Sumāto, and he is my kobun. Please, do keep this face well in your sight, so that you may not forget it...'</p>
+          <p class="en-p">'Ho-ho-ho-ho, even if I were to say I would forget, how could I ever forget such a face?'</p>
+          <p class="en-p">Sumāto: 'Hey, Kanan, since she says she cannot forget such a bijin even after one look, she must be quite a person, right?'</p>
+          <p class="en-p">'Ho-ho-ho-ho.'</p>
+          <p class="en-p">The woman clutches her stomach and crouches down.</p>
+          <p class="en-p">Sumāto: 'Hey, hey, jiyochiu-sama, what are you laughing at? Is there some tokuchiyō to my face... is there some part of it that pleases you, I wonder?'</p>
+          <p class="en-p">Kanan: 'Hey, Sumāto, you are quite the baka. Just take a look at yourself in the Mizukagami. You have a very rittsu-pa face, you know.'</p>
+          <p class="en-p">The three women clutch their navels and collapse in laughter all at once.</p>
+          <p class="en-p">'Strange.'</p>
+          <p class="en-p">Looking suspicious, Sumāto tries to look into the Seisen to gaze at his reflection. As if to say that being seen would be taihen, Kanan picks up a tegoro stone and throws it into the spring before anyone can stop him. Instantly, the water begins to namita, and Sumāto's face is reflected as thin, long, flat, and wide, moving zuii, kuwatsudō, shinshiyuku, and jizai, appearing as a pitch-black figure.</p>
+          <p class="en-p">Sumāto: 'I cannot see a thing. Is there not a spirit of a black man floating in this spring?'</p>
+          <p class="en-p">Kanan: 'Aha-ha-ha, I find it funny too, Kanan-wai, eh, Sumāto?'</p>
+          <p class="en-p">He laughs again. The three women laugh even harder. Not understanding the situation, Sumāto waits for the waves to settle and tries to peek again. Kanan throws a stone in.</p>
+          <p class="en-p">Sumāto: 'Do not make a fool of me. Why do you interfere when I am trying to look into the Mizukagami?'</p>
+          <p class="en-p">'If you look at your own face, I have a bit of a Kanan-koto, too. Aha-ha-ha, you are a very black person, indeed.'</p>
+          <p class="en-p">'My face has felt gloomy since this morning and I cannot help it. I do not feel very smart. What has actually happened?'</p>
+          <p class="en-p">'You are a simple-minded fellow. Mukade-hime-sama had ink painted on you so that you would not know which way she is headed. Your face is covered in ink. I find it amusing, Kanan-ball.'</p>
+          <p class="en-p">'That is taihen. Perhaps I should use the chōzu here, Sumāto.'</p>
+          <p class="en-p">'No, no, if you were to do such a thing, it would be taihen. Because you lack caution, Mukade-hime-sama is glaring at you for being the one who revealed the whereabouts of the jewel to Otama-no-kata at Mikuni-ga-take. She has given you a terrible disgrace... because you painted ink on Mukade-hime's face, she said that until the jewel is taken back, she would keep your face painted with ink... and so, while you were drunk and asleep, she played the plasterer and smeared it all over you.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">甲女『あなたは、バラモン教のカナンさまでせう』</p>
+            <p class="ja-classical-line">カナン『御察しの通りカナンです。此奴ア、スマートと云つて、私の乾児です。どうぞ此面を能くお目に止められまして、お忘れなき様に……』</p>
+            <p class="ja-classical-line">『ホツホヽヽヽ、忘れようと云つたつて、其お顔が如何して忘れられませう』</p>
+            <p class="ja-classical-line">スマート『オイ、カナン、一目見てさへ、斯う云ふ美人が忘れられぬと云ふのだから、大した者だらう』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">と腹を抱へて女は蹲む。</p>
+            <p class="ja-classical-line">スマ『コレコレお女中さま、何をお笑ひなさる。どつか私の顔に特徴がありますか……どつかお気に入つた所が御座いますかなア』</p>
+            <p class="ja-classical-line">カナン『オイ、スマート、貴様は余程良い馬鹿だなア。一寸水鏡に照らして見よ。随分立派な顔だぞ』</p>
+            <p class="ja-classical-line">三人の女は、一度に臍を抱へて笑ひ倒ける。</p>
+            <p class="ja-classical-line">『ハテナ』</p>
+            <p class="ja-classical-line">と不審そうにスマートは清泉に顔を照らし眺めようとする。見られては大変と言はぬ許りに、カナンは手頃の石を拾ふより早く泉の中へ投げ込んだ。忽ち波立ち、スマートの顔は細く長く横に平たく、前後左右に随意活動、伸縮自在、真黒けの姿が映る。</p>
+            <p class="ja-classical-line">スマート『何だかチツとも見えないワ。此泉には黒ん坊の霊が浮いて居るぢやないか』</p>
+            <p class="ja-classical-line">カナン『アハヽヽヽ、俺も可笑しうてカナンワイ、のうスマート』</p>
+            <p class="ja-classical-line">と又笑ふ。三人の女は益々笑ひ倒ける。スマートは合点行かず、波の静まつたのを見定め、又もや覗きかける。カナンは石を投げ込む。スマートは、</p>
+            <p class="ja-classical-line">『馬鹿にするない。何故水鏡を見ようと思ふのに、邪魔をするのだ』</p>
+            <p class="ja-classical-line">『貴様の顔を貴様が見ると、俺も一寸カナン事があるのだよ。アハヽヽヽ、随分黒う人だなア』</p>
+            <p class="ja-classical-line">『何だか俺の顔は今朝から鬱陶敷て仕方がない。スマートな気がせないよ。実際は如何なつたのか』</p>
+            <p class="ja-classical-line">『お目出度い奴だ。蜈蚣姫さまが何方へ向いとるか分らぬ様にと、墨を塗つて置かしやつたのだ。貴様の顔一面墨だらけだよ。俺は面黒くてカナンボールだ』</p>
+            <p class="ja-classical-line">『そりや大変だ。スマートも一つ此処で手水を使はうかなア』</p>
+            <p class="ja-classical-line">『イヤイヤそんな事しようものなら大変だぞ。貴様は注意が足らぬので、三国ケ岳で玉の在処をお玉の方に知らした奴だと蜈蚣姫さまに睨まれて居るのだ。大変な恥辱を与へよつた……蜈蚣姫の顔に墨を塗りやがつたから、あの玉を奪り返す迄はスマートの顔に墨を塗つて置くのだから……と云つてな、貴様が酒に喰ひ酔うて寝てる間に、ペツタリコと左官屋を遊ばしたのだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Smart: 'Is that not too cruel? I cannot bear to have my face seen like this by such nice ladies. If the impression remains with the Sanninonna forever that Smart is such a black-faced fellow, I shall not be able to stand it. I must wash off this ink and have them acknowledge my handsome appearance, or else it will be of no use.'</p>
+          <p class="en-p">He scooped up water by force and washed the grime from his face. For some reason, the spring, which had been so Seiretsu, turned as Matsukuro as if ink had been poured into it. The three women hid their faces.</p>
+          <p class="en-p">Sanninonna: 'Oh my, what shall we do?'</p>
+          <p class="en-p">Smart had washed off all the ink. He was a handsome man by nature.</p>
+          <p class="en-p">Smart: 'Hey, Kanan, it was Mukadehime-sama who painted my face, was it not? You have such a Ketsutai Gomensau, so you must have played this prank thinking that I would stand out if I walked with you.'</p>
+          <p class="en-p">Kanan: 'Oh, it does not matter. Since a sacrificial spirit is essential for all who are on the path of Kami, it is fine to just let it be as if I had done it, no matter who actually did.'</p>
+          <p class="en-p">Smart: 'At any rate, you three ladies, are you not the ones called Tamanohime-sama? Would you not please take Smart to Takatoriyama?'</p>
+          <p class="en-p">Kafujiyo: 'Ho ho ho ho, if we were to take someone with a Urizanegaho like yours back with us, we would be mistaken for Aomonoya. Kanan-sama, please spare us from that pumpkin face at least.'</p>
+          <p class="en-p">Kanan: 'Hey woman, what is this about a pumpkin? What is this about a Urizanegaho? Do not make a fool of me. I am not a greengrocer, so now that it has come to this, like it or not, I will carry you off to Matanigadake. Prepare yourself.'</p>
+          <p class="en-p">Otsujo: 'Who is filthy? Is there anyone who would be carried off by a Hyottoko like you?'</p>
+          <p class="en-p">Smart: 'You continue to make a fool of a seven-foot man, do you not? Look here, who do you think I am? I am Smart-sama, known as the god of the left guard to Mukadehime of the Brahmanism. Even though I look like this, I am a char-char who knows everything from A to Z. Tamanohime, prepare yourself.'</p>
+          <p class="en-p">Kafujiyo: 'If you are the one who knows so well that the real Tamanohime is... then try to guess which one it is...'</p>
+          <p class="en-p">Smart: 'One is Tamanohime, and two are ghosts.'</p>
+          <p class="en-p">Kafujiyo: 'Which one is the ghost, and which one is the real one?'</p>
+          <p class="en-p">Smart: 'Hey, Kanan, let us bind all three of these wretches and take them back. They are disguised so well that I cannot tell which is which, can I?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『そりや余り殺生ぢやないか。斯う云ふナイスにそんな面を見られては堪らない。スマートはあんな黒い奴だと、三人女の印象に何時までも残つちや堪らない。一つ墨を洗ひ落して、好男子振りを認めて置いて貰はぬと詮らぬからなア』</p>
+            <p class="ja-classical-line">と無理矢理に水を掬ひ、顔の垢を落す。如何したものか、さしもに清冽なる泉は墨を流した如く真黒になつて了つた。三人の女は、</p>
+            <p class="ja-classical-line">『あれ、マア何うしませう』</p>
+            <p class="ja-classical-line">と顔をかくす。スマートはスツカリと墨を落した。生れ付きの好男子である。</p>
+            <p class="ja-classical-line">スマート『オイ、カナン、俺の顔を塗りよつたのは、蜈蚣姫さまぢやなからう。貴様は怪体な御面相だから、俺と一緒に歩くと目立つと思つて悪戯をしたのだらう』</p>
+            <p class="ja-classical-line">カナン『マア何うでも好いワ。すべて神の道に在る者は、犠牲的精神が肝腎だから、誰がしたにもせよ、俺がした事にして置けば良いのだよ』</p>
+            <p class="ja-classical-line">『兎も角、三人のお方、貴女は玉能姫さまとか云ふ方ぢやありませぬか。どうぞスマートを鷹鳥山へ連れて往つて下さいますまいかな』</p>
+            <p class="ja-classical-line">甲女『ホヽヽヽヽ、あなたの様な瓜実顔を連れて帰らうものなら、青物屋と間違へられますわ。カナンさまの南瓜顔、どうぞそれ計りは勘忍へて頂戴な』</p>
+            <p class="ja-classical-line">カナン『オイ女、南瓜とは何だ。瓜実顔とは何ぢや。馬鹿にするない。八百屋ぢやあるまいし、サアもう斯うなつた以上は、否でも応でも、魔谷ケ岳へ担げて帰る。覚悟をせい』</p>
+            <p class="ja-classical-line">乙女『誰が汚らはしい。お前の様なヒヨツトコに担がれて行く者がありますかい』</p>
+            <p class="ja-classical-line">スマート『ますます貴様は七尺の男子を、馬鹿にするのだな。こりや、俺を誰様と心得て居る。バラモン教の蜈蚣姫が左守の神と聞えたる、スマートさまぢやぞ。斯う見えても何から何まで、知らぬ事のないチヤアチヤアだ。玉能姫、覚悟をせい』</p>
+            <p class="ja-classical-line">甲女『本当の玉能姫が……それ丈能く分るお前さまなら……何れだか当てて御覧……』</p>
+            <p class="ja-classical-line">スマート『一人は玉能姫、二人はお化けだよ』</p>
+            <p class="ja-classical-line">甲女『どれがお化けで、どれが本物ですか』</p>
+            <p class="ja-classical-line">『オイ、カナン、此奴三人共引括つて伴れて帰らう。何れがどうだか余り能う化けて居よつて、見当が取れぬぢやないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yotahiko: 'Well, that is true. However, if we carry such a Bijin home, I am worried that we might be bewitched again on the Tochiu, or get swindled in the Chiuto. So, fortunately, shall we smear this spring water on her, turn her Matsukuro, and take her home? Once we return home and scrub her with Karuishi and Sōda, she will become as Kirei as she is in the Ima, you see... Hey woman, come Koko. I shall paint you black.'</p>
+          <p class="en-p">The Sannin women, all at Ichido, laughed, 'Ho-ho-ho-ho!'</p>
+          <p class="en-p">At that Totan, white Hakuen rose up with a hissing sound, and instantly enveloped the Atari. The Futari collapsed flat on the spot in agony, as if their breath were being choked. The Sannin women scooped the Matsukuro water into a Teoke and poured it over the faces and all over the Teashi of the Futari. The Riyōnin turned the color of a Yakebotsukuhi and lay there on the side, remaining in a state of Kizetsu.</p>
+          <p class="en-p">The Sannin women said, 'Asahi-sama... Tsukihi-sama... Ah, Takakura-sama... come, let us return.'</p>
+          <p class="en-p">They reverted to Biyakuko among themselves and proceeded, pointing toward the mansion of Mukadehime of Matanigadake.</p>
+          <p class="en-p">Four or five Buka of the Brahman Kyō who had climbed up to Koko said:</p>
+          <p class="en-p">Kō: 'Hey, the Taishiyō of Canaan was supposed to have climbed up to this hermitage on Mount Takatori to advance, following the command of the leader, but I wonder what has become of him. The Tsukihi is already beginning to set. One would think there would be some news by now.'</p>
+          <p class="en-p">Otsu: 'I have worked hard and was hoping to be allowed to rest from now on, but because the Taishiyō is late in returning, we have been dispatched to such a dangerous zone; this is unbearable. Since this mountain is a place where truly terrifying monsters appear, if we are careless, a Matsukuro-kurosuke monster like the one the other day might appear again, and who knows if our eyeballs will be gouged out. Tenkō ended up as a helpless blind man just like that, ever since his eyeballs were pulled out.'</p>
+          <p class="en-p">Kō: 'What are you saying, that was not a Kuro-n-bō monster. He was walking through this forest under the cover of darkness and poked his eyeballs on a withered pine branch, causing them to pop out. Since he could not see his surroundings once he poked his eyes, he is just saying that a Kuro-n-bō monster gouged them out. If you do not take caution, you never know what kind of fate you might meet.'</p>
+          <p class="en-p">Otsu: 'No, no, it was not a pine tree. I heard a Kuro-n-bō really did appear. Be careful. It is beginning to grow dark, you know.'</p>
+          <p class="en-p">As they were saying this, they climbed up. Canaan suddenly regained consciousness and, looking around, saw the Matsukuro man, who had been stripped naked, lying beside him.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『さうだなア。併し斯う云ふ美人を担いで帰ぬと、途中で又魔がさし、中途でボツたくられると困るから、幸ひ此泉の水を塗り付け、真黒けにして帰らうかい。宅へ帰つて軽石や曹達で擦れば、現在の様な綺麗な面になるのだからのう……オイ女、此処へ来い。一つお黒いを塗つてやらう』</p>
+            <p class="ja-classical-line">三人の女一度に、</p>
+            <p class="ja-classical-line">『ホツホヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ひこける途端に、シユウシユウと立ち昇る白煙、忽ち四辺を包んで了つた。二人は息も詰るやうな苦しさに其場にパタリと倒れた。三人の女は真黒の水を手桶に掬ひ、二人の顔から手足一面に注いだ。両人は焼木杭の様な色になつて、其側に倒れた儘気絶して居る。三人の女は、</p>
+            <p class="ja-classical-line">『旭さま……月日さま……ヤア高倉さま……さア帰りませう』</p>
+            <p class="ja-classical-line">と互に白狐と還元し、魔谷ケ岳の蜈蚣姫が館を指して進み行く。</p>
+            <p class="ja-classical-line">此処へ上つて来たバラモン教の部下四五人、</p>
+            <p class="ja-classical-line">甲『オイ、スマートにカナンの大将は、此鷹鳥山の庵へ進むべく、教主の命を奉じて登つた筈だが、どうなつただらう。最早日も暮れかかつて居る。何とか便りがありさうなものだなア』</p>
+            <p class="ja-classical-line">乙『折角働いて、是から休まして貰はうと思つて居るのに、大将が帰りが遅いものだから、こんな危険区域へ派遣されて、堪つたものぢやない。此山は随分恐ろしい化物の出る所ぢやから、迂濶して居ると、又此間の様に真黒黒助の怪物が出て、目玉を剔り抜かれるか知れやしないぞ。転公は目玉を抜かれたきり、たうとうあの通り不自由な盲目となつて了つた』</p>
+            <p class="ja-classical-line">甲『なアに、あれは黒ン坊の化もんぢやない。此森林を暗がり紛れに歩きやがつて、松の枯枝に目玉を突当て飛び出たのだ。目を突くが最後其辺が見えなくなつたものだから、黒ン坊の化物が目を剔つたなどと云つてるのだ。用心せないと、どんな目に遇ふかも知れないぞ』</p>
+            <p class="ja-classical-line">乙『イヤイヤ、松の木ぢやない。本当に黒ン坊が出たさうだ。用心せよ。そろそろ暮れかかつたからなア』</p>
+            <p class="ja-classical-line">と云ひながら登つて来る。カナンはフト気が付き見れば、赤裸にしられた真黒の男が傍に横たはつて居る。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kanan: 'Hey, Sumāto, where have you gone? Come here quickly. A black Bakemono, the one that plucked out Tenkō's eyes the other day, is lying here. Hey, will you come quickly?'</p>
+          <p class="en-p">Sumāto began to stir at this voice.</p>
+          <p class="en-p">Sumāto: 'Oh, is that your voice, Kanan?'</p>
+          <p class="en-p">Kanan: 'Oh, that is right. You are a Bakemono, aren't you? You have come out again thinking you will take my eyes, haven't you? I will not fall for that trick.'</p>
+          <p class="en-p">Sumāto: 'It is you who are the black Bakemono disguised as Kanan. I will not forgive you. Prepare yourself!'</p>
+          <p class="en-p">He picked up a rattling stone from under his feet and threw it. Kanan also picked up a stone and threw it back. In the midst of an Ishigatsusen between the two,</p>
+          <p class="en-p">Kanan: 'Ouch, ouch, ouch!'</p>
+          <p class="en-p">Sumāto: 'Ouch, ouch, ouch!'</p>
+          <p class="en-p">They began a Daikakutō while saying this, and locked in a struggle, they fell with a splash into the Kiyoizumi, which was muddied to a deep black. Five men came up in the Usugura,</p>
+          <p class="en-p">Kō: 'Hey, did you not hear a strange sound?'</p>
+          <p class="en-p">Otsu: 'That is true. Shall we go and investigate? It is said that a Bijin named Tamanohime, who serves at the hermitage of Takatorihime, appears here from time to time, so if we are lucky, perhaps she came to Mizuku and, in the Usugura, made a mistake and fell in with a splash. Since Mukadehime-sama has said that if she can only get hold of that woman, everything else will work out, and has ordered the Taishiyō of Kanan and Sumāto to do so, why don't we perform a Tegara and become the Uhayaku of those fellows? There is no one else who would come to this Kiyoizumi to Mizuku at this time but Tamanohime.'</p>
+          <p class="en-p">Hei: 'Hey, if we keep dawdling, she will drink the water and die, and then it will all be for nothing. Come, let us save her quickly.'</p>
+          <p class="en-p">The five men approached the side of the Kiyoizumi, feeling their way. In the spring, which was not very deep, the two black fellows were grappling in silence, locked in a struggle. Their blackness grew even blacker, soaking into their very entrails.</p>
+          <p class="en-p">Kō: 'Here, here, Tamanohime-sama, that was dangerous. Come, I shall help you. It is so dark that I cannot see a thing. Besides, since you are wearing black clothes, I have no idea where you are. Come toward the direction of my voice.'</p>
+          <p class="en-p">In the spring, which was three ken wide and five or six ken long, they were struggling with all their might, splashing about. The black water was absorbed into the ear holes of both, and without knowing it, they had become deaf. Even their eyeballs had turned pitch black, and they could no longer see even an inch ahead.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『オイ、スマート、何処へ往つた。早く来て呉れ。此間転公の目を抜きよつた黒ン坊の化物が、茲に一匹横たはつて居よるワイ。オーイ、早よ来ぬかい』</p>
+            <p class="ja-classical-line">スマートは此声にムクムクと動き出した。</p>
+            <p class="ja-classical-line">『ヤア、お前の声はカナンぢやないか』</p>
+            <p class="ja-classical-line">『オウさうだ。貴様は化物だらう。又目をとらうと思つて出よつたのだらう。其手は喰はぬぞ』</p>
+            <p class="ja-classical-line">『貴様こそカナンに化けた黒ン坊だ。俺が了簡せぬのだ。覚悟せい』</p>
+            <p class="ja-classical-line">と足許のガラガラした石を拾つて投げつける。カナンも亦石を拾つて投げつける。双方より石合戦の真最中、</p>
+            <p class="ja-classical-line">『アイタヽヽ』</p>
+            <p class="ja-classical-line">『アイタヽヽ』</p>
+            <p class="ja-classical-line">と云ひながら大格闘を始め、真黒けに濁つた清泉の中へ組んづ組まれつ、ドブンと落込んだ。薄暗がりに上つて来た五人の男、</p>
+            <p class="ja-classical-line">甲『オイ、何だか妙な音がしたぢやないか』</p>
+            <p class="ja-classical-line">乙『さうだなア。一つ調べて見ようか。何でも此辺には鷹鳥姫の庵に仕へて居る、玉能姫と云ふ美人が、チヨコチヨコ現はれるさうだから、ヒヨツとしたら、水汲みに来やがつて薄暗がりに過つて、ドンブリコとやつたのかも知れないぞ。蜈蚣姫さまが彼奴さへ手に入れば、後はどうでもなると仰有つて、カナン、スマートの大将に言ひつけて御座る位だから、俺達が手柄をして彼奴等の上役にならうぢやないか。此清泉へ今頃に水汲みに来る奴は、玉能姫より外にありやせぬぞ』</p>
+            <p class="ja-classical-line">丙『オイ、愚図々々云つて居ると、水を呑んで死んで了つたら何にもならぬぢやないか。サア早く助けてやらう』</p>
+            <p class="ja-classical-line">と清泉の傍に五人は探り探り立ち寄つた。余り深くない泉の中、二人の黒ン坊は組んづ組まれつ無言の儘掴み合うて居る。黒さは益々黒く、腸まで浸み込んで了つた。</p>
+            <p class="ja-classical-line">甲『コレコレ、玉能姫さま、お危ないこつて御座いました。サア私が助けてあげませう。余り暗くつて一寸も分らぬ。それにお前さま黒い着物を着て居るものだからサツパリ見当が付かぬ。私の声のする方へお出でなさい』</p>
+            <p class="ja-classical-line">横幅三間縦五六間の泉の中で、バサバサと一生懸命に格闘して居る。黒い水は両人の耳の穴に吸収され、知らぬ間に聾になつて居る。目玉まで真黒け、一寸先も見えなくなつて了つた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otsu: 'Hey, does she not look a bit different from Tamanohime?'</p>
+          <p class="en-p">Kō: 'What, it is said that three beauties of the same appearance always appear at this spring. Most likely, one has fallen in, and the two others have jumped in with the intention of saving her. Even when saving the same person, it feels good to save such beauties. ... "I do not know who you are, but thank you for saving my precious life; I shall never forget this debt of gratitude." ... They are sure to send us amorous glances saying things like that. Let us three join forces to save the three women. Since they are all beauties of the same quality, there will be no distinction between first and second, no subsequent disputes will arise, and it is very convenient. ... Hey, Kuma, Hachi, you stay there and keep watch. We three are the ones who will achieve the merit and honor...'</p>
+          <p class="en-p">They were whispering thus. The black shadow continued to struggle on the other side, as always, splashing and kicking up water spray. In the dim light, the five of them did not notice at all that the Kiyoizumi had turned pitch black. Kō stripped completely naked and jumped in to rescue them. Otsu and Hei also jumped in, not wanting to be outdone, and advanced, saying, 'Hey there, young ladies, Tamanohime-sama, let me save you.'</p>
+          <p class="en-p">These fellows also became pitch black, and all three were transformed into blind, deaf, pitch-black bodies, and the five began to fight among themselves. The curtain of night gradually descended, deepening the darkness. Kumakō called out, 'Hey Hachi, hey, what on earth is going on? Hey, Kinkō, Ginkō, Tetsu, what are you doing? What has become of Tamanohime? Why do you not come up already? You are acting as if you are having a relaxed time in the spring, as if you had entered a hot spring or something. ... Hey, will you not come up quickly?'</p>
+          <p class="en-p">Though he called and shouted, the blind, deaf, pitch-black creatures did not understand at all, and in the end, they mistook the distinction between Kō, Otsu, and Hei, and were fighting with all their might. At this time, the goddess from before appeared suddenly in this place once again. And then, a light like an arc light shone above their heads. For the first time, the eyes of the five began to see a faint light.</p>
+          <p class="en-p">Kanan: 'Oh, this is a blunder. Before I knew it, the beauty has come again. Hey, Smart, this is no time to be fighting in a place like this. What is this, your figure is pitch black, is it not? You are not Smart after all. You are a shapeshifter, are you not?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">乙『オイ、玉能姫にしてはチツと様子が違ふぢやないか』</p>
+            <p class="ja-classical-line">甲『何、何時も三人同じ様な別嬪が此泉へ現はれると云ふ事だ。大方一人陥つたので二人が助ける積りで飛び込んで居るのだらう。同じ人を助けるのにも、あゝ云ふ美人を助けるのは気分が良い。……「どこのお方か知りませぬが、大切な生命をお拾ひ下さいまして、此御恩は忘れませぬ」……とかなんとか言つて、俺達に秋波を送るのは請合だ。三人の女を三人寄つて助ける事にしよう。皆同じ別嬪だから、甲乙がなくて後の争論も起らず、大変都合が好い。……オイ、熊、蜂、貴様は其処に番ついて居れ。吾々三人が功名手柄をするのだから……』</p>
+            <p class="ja-classical-line">と囁いて居る。黒い影はビシヤン、バシヤンと相変らず向ふの方で水煙を立てながら格闘を続けて居る。清泉の真黒けになつた事は、薄暗がりで少しも五人には気が付かなかつた。甲は真裸となつて救い出さむと飛び込んだ。乙丙も吾劣らじと飛び込み、</p>
+            <p class="ja-classical-line">『コレコレお女中、玉能姫さま、私が助けてあげませう』</p>
+            <p class="ja-classical-line">と進み行く。此奴も真黒けになり、三人共盲聾の真黒けの体に変じ、五人は互に同志打を始めて居る。夜は追々と暗の帳が深く下りて来た。熊公は、</p>
+            <p class="ja-classical-line">『オイ蜂、コラ一体どうなるのだらうなア。オイ、金公、銀公、鉄、何してるのだ。玉能姫は如何なつたのだ。良い加減に上つて来ぬか。温泉か何ぞへ這入つたやうに気楽さうに泉の中で意茶付いとるのだな。……オイ早くあがらぬかい』</p>
+            <p class="ja-classical-line">と呼べど叫べど、盲聾の真黒黒助には少しも分らず、遂には甲乙丙の区別を取違へ、一生懸命に格闘して居る。此時以前の女神又もやパツと此場に現はれた。さうしてアークライトの様な光は頭上に輝いて来た。五人の目は、始めてボーツと明りが見えて来出した。</p>
+            <p class="ja-classical-line">カナン『ヤア此奴あ失策つた。何時の間にか美人が又やつて来よつた。オイ、スマート、斯んな所で喧嘩をして居る時ぢやない。何だ、貴様の姿は真黒けぢやないか。矢張りスマートぢやなからう。化衆ぢやなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec08">
+        <div class="sec-header">
+          <span class="para-num">&sect; 8</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sumāto: 'Do not mock me by using the voice of Kanan. ...Hey you women, is it right for you to drop us into a place like this and then watch from a high place?'</p>
+          <p class="en-p">The three, Kin, Gin, and Tetsu, were also surprised by the appearance of the goddesses and suddenly crawled up.</p>
+          <p class="en-p">Kafujiyo: 'Thank you for saving us from such a dangerous place; thanks to you, we were saved. I shall never forget this favor.'</p>
+          <p class="en-p">Kin: 'Yes, yes, that is quite unnecessary. But when did you come up? I was thinking of saving you, and I was performing a great activity by jumping in just like this. ...Well, that is fine. But it is a bit strange to be thanked, as I do not remember pulling you up.'</p>
+          <p class="en-p">Otsujiyo: 'You, who are called Gin-sama, you are the benefactor who saved me.'</p>
+          <p class="en-p">Heijiyo: 'Tetsu-sama, you saved me so well.'</p>
+          <p class="en-p">Tetsu: 'Heh, thank you... What, that is absurd, I have become unable to tell who I should be talking to, I feel as if I saved you, and yet I also feel as if I did not save you... What on earth has happened here?'</p>
+          <p class="en-p">Kafujiyo: 'Kin-sama, how did you come to have such a black appearance? I am truly sorry for you.'</p>
+          <p class="en-p">Kinsuke noticed for the first time and looked at his body, finding himself like a monster of ink, with not a single empty space left. When he looked at Gin and Tetsu, they too were completely black like Matsukurokurosuke.</p>
+          <p class="en-p">Kin: 'Ya, looking at this in the light, why have we all become so black?'</p>
+          <p class="en-p">Kafujiyo: 'My benefactors of life, Kin-sama, Gin-sama, Tetsu-sama, please come this way. I shall wipe it off for you.'</p>
+          <p class="en-p">She extended her snow-white hands, plucked the grass from all around, and began to scrub them with a rustling sound, as if giving a bath to cattle or horses. The three, Kin, Gin, and Tetsu, whose original black-skinned bodies had looked as if they were suffering from jaundice, instantly turned pure white.</p>
+          <p class="en-p">Otsujiyo: 'Ho-ho-ho-ho, how beautiful. Three-sama, please take a look. You have become as beautiful as eggs in your complexion.'</p>
+          <p class="en-p">The three suddenly looked at their own bodies, and seeing they had turned pure white, they were both surprised and delighted, feeling as if they were ascending to heaven, and they unintentionally clapped their hands and jumped up. The three women each took out beautiful garments and dressed Kin, Gin, and Tetsu in them. They had become indescribably magnificent and handsome men. Kanan and Sumāto, still dyed completely black, looked on with resentment.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">スマート『貴様はカナンの声を使つて、馬鹿にするな。……コリヤ女、俺達をこんな所へ落しよつて、高所で見物すると云ふ事があるかい』</p>
+            <p class="ja-classical-line">金、銀、鉄の三人も女神の姿に驚いて俄に這ひあがつた。</p>
+            <p class="ja-classical-line">甲女『危い所をお助け下さいまして、お蔭で助かりました。此御恩は決して忘れませぬ』</p>
+            <p class="ja-classical-line">金『ハイハイ、滅相もない。併し何時お上りになりました。私は貴女をお助けしたいと思うて、此通り飛び込み大活動を致して居りました。……それはまア結構でした。併し御礼を言はれるのはチツと不思議だ。救ひ上げた覚えがないのだから』</p>
+            <p class="ja-classical-line">乙女『銀さまとやら、あなたは妾を救うて下さつた御恩人ですよ』</p>
+            <p class="ja-classical-line">丙女『鉄さま、能う助けて下さつた』</p>
+            <p class="ja-classical-line">鉄『へー、有難う……ナニ、滅相な、何方を言つて良いか訳が分らぬやうになつて来たワイ、助けてあげたやうにも思ふし、助けてあげない様にも思ふし、……こりやマア、如何なつたのだらう』</p>
+            <p class="ja-classical-line">甲女『金さま、お前さまは、何とした黒い姿にならしやつたのだ。妾、残念で御座います』</p>
+            <p class="ja-classical-line">金助始めて気が付き体を見れば、空地なきまで墨の化物の様になつて居る。銀、鉄はと見れば、これも真黒黒助。</p>
+            <p class="ja-classical-line">金『ヤア、此光に照らし見れば、誰も彼も何故斯う黒くなつたのだらう』</p>
+            <p class="ja-classical-line">甲女『妾の生命の御恩人、金さま、銀さま、鉄さま、どうぞ此方へ来て下さい。妾が拭き取つてあげませう』</p>
+            <p class="ja-classical-line">と雪の様な手を延べ、四辺の草をむしつて牛馬の行水でもさせる様に、カサカサと擦り始めた。金、銀、鉄の三人は、元の黒ン坊が黄疸を病んだ様な肌、忽ち純白色となつて了つた。</p>
+            <p class="ja-classical-line">乙女『ホツホヽヽヽ、綺麗だこと。三人さま、一寸御覧なさいませ。玉子の様な綺麗な肌付におなりなさいました』</p>
+            <p class="ja-classical-line">三人はフト自分の体を見て、純白色に変じて居るのに且驚き且喜び、天にも昇る心地して、思はず手を拍ち飛び上つた。三人の女は美はしき衣を各々取り出し、金、銀、鉄の三人に着せた。何とも云へぬ立派な好男子になつて了つた。カナン、スマートは真黒けに染つた儘恨めしさうに眺めて居る。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec09">
+        <div class="sec-header">
+          <span class="para-num">&sect; 9</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kafujiyo: 'Sumāto-sama, Kanan-sama, you have become quite dark. I have thus obtained three beautiful gentlemen. Do you not feel envious?'</p>
+          <p class="en-p">Taking their hands happily, she continued,</p>
+          <p class="en-p">Kafujiyo: 'Come, Kin-sama, Gin-sama, Tetsu-sama, dance like this. Let us dance with me.'</p>
+          <p class="en-p">The three sons and three daughters held hands and spun around in a circle. The two crawled up and, sucking their fingers, watched.</p>
+          <p class="en-p">Kanan: 'Ah, is this a dream? If it were a dream, it would be fine, but having become this pitch-black, even if I return home, I will be driven away by my wife.'</p>
+          <p class="en-p">Kuma, Hachi: 'Hey Kin, Gin, Tetsu, are you three mocking us by helping these three beauties and acting so cheerful? Why don't you share a little with me?'</p>
+          <p class="en-p">Kin: 'Unfortunately, since they are three beauties, I cannot cut them up and give them to you like bread or something, so you had better wait for the right time. Even the great commanders Kanan and Sumāto have become blackamoors like that, so if you think about that, you are still being preserved in your original state, so it would be to your advantage not to grumble as a small consolation. I am now heading to Takatoriyama with this Naisu, to meet Takatorihime-sama and partake in a feast. Well, drink some black water slowly and prepare for our victory celebration. Kanan, Commander Sumāto, adios. Come now, three princesses, it is dreary to be staring at blackamoors in a place like this. Shall we go somewhere for a change of air?'</p>
+          <p class="en-p">Kafujiyo: 'Let us style it as a honeymoon and go on a tour of the natural cities, Takatoriyama, Futatabiyama, Matanigadake, and Rokkōsan.'</p>
+          <p class="en-p">Kanan: 'Hey, Kin-kō, wait for me!'</p>
+          <p class="en-p">He shouted. Suddenly, the light like an arc lamp went out with a puff. The six white figures faded away, heading toward the mountain top as if floating in the darkness.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">甲女『スマートさま、カナンさま、随分お黒うおなりやしたネー。妾は斯うして三人の美しき殿御を持ちました。羨りい事は御座いませぬか』</p>
+            <p class="ja-classical-line">と嬉しさうに手を取つて、</p>
+            <p class="ja-classical-line">『サア、金さま、銀さま、鉄さま、斯う舞ふのだよ。妾とダンスを致しませう』</p>
+            <p class="ja-classical-line">と三男三女は手を握つてキリキリと舞うて見せる。二人は這ひあがり、指を啣へて、</p>
+            <p class="ja-classical-line">カナン『アーア、夢かいな。夢なれば結構だが、斯んな真黒けになつて了つては、宅へ帰つて嬶アにだつて追払はれて了ふワ』</p>
+            <p class="ja-classical-line">熊、蜂『オイ金、銀、鉄、貴様等は三人の美人を助けて、そんな陽気な事をしやがつて俺達を馬鹿にするのか。チツと俺にも分配したらどうだ』</p>
+            <p class="ja-classical-line">金『生憎三人の美人だから、パンか何かの様に割つて与へる訳にも行かず、まあ時節を待つのだなア。カナンにスマートの御大将でさへも、あの通り黒ン坊になつて了つたのだから、其事を思へば貴様はまだ元の生地の儘保留されて居るのだから、せめてもの喜悦として、グヅグヅ言はぬが得だらう。俺はこれから此ナイスと共に鷹鳥山に立向ひ、鷹鳥姫様にお目にかかつて、御馳走に預かつて来る。まアゆつくり黒い水でも飲んで、俺達の凱旋祝の準備でもして居て呉れ。カナン、スマートの御大将、アリヨース。サアサア三人の御姫さま、こんな所で黒ン坊を眺めてゐても殺風景です。どつかへ転地療養と出かけませうか』</p>
+            <p class="ja-classical-line">甲女『新婚旅行と洒落て、これから鷹鳥山、再度山、魔谷ケ岳、六甲山と、天然都会を漫遊致しませう』</p>
+            <p class="ja-classical-line">カナン『オイ、金公、待たぬかい』</p>
+            <p class="ja-classical-line">と呶鳴つて居る。忽ちアーク灯の様な光はブスツと消えた。六つの白い姿は闇に浮いた様に山上目蒐けて薄れ行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c08.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 8: Ogre の解脱 [700]</span>
+      </a>
+      <a href="c10.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 10: Beauty と Ugly [702]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

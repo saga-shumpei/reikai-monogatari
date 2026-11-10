@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: 銀公着瀑 [704] - Volume 22 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 22 Table of Contents</a>
+      <span>Volume 22</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 22 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: 銀公着瀑 [704]</h1>
+      <p class="chapter-title-ja">銀公着瀑〔704〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takatorihime, Wakahiko, and Tamanohime, the three who had built a hut at the roots of the rocks on the side of Takatoriyama and shut themselves away with the intention of erecting the Mihashira of the Oshihe of Ananai-kyō, as if harboring something in their hearts, descended to the Tanigaha and were performing the Misogi, when at that very moment, a man who had skimmed through the Chiukū and descended like a dove plunged with a splash into the Takitsubo.</p>
+          <p class="en-p">Startled by the sudden Dekigoto, the three opened their eyes wide and Jiyukushi-ed the Takitsubo, where the figure of a man came floating up, swayed by the ripples of the Suimen.</p>
+          <p class="en-p">Wakahiko said, 'This is Taihen!'</p>
+          <p class="en-p">And leaping up, he jumped into the Takitsubo, caught him under his arm, and with much ado rescued him.</p>
+          <p class="en-p">This was the figure of a man in the prime of his Genki, twenty-four or five years of age.</p>
+          <p class="en-p">Bringing his mouth close to his ear in Iroiro ways,</p>
+          <p class="en-p">And performing the Kamuwaza of Tamayo by crying, 'Oi, oi,' and chanting the Kazūta of Ten with all his Chikarakagi, he at last breathed back to life, and while looking around the Atari with a kyorokyoro gaze, he looked at the three and said,</p>
+          <p class="en-p">'Where is this place? When did I come to such a place? People I do not know everywhere... What is your name, honored one?'</p>
+          <p class="en-p">Wakahiko: 'This is the Chiufuku of Takatoriyama, the shooting range (kyōjō) of the Oshihe of Ananai-kyō, the dwelling of Takatorihime.'</p>
+          <p class="en-p">'Please forgive me. I beg you to spare my life alone.'</p>
+          <p class="en-p">'Who would ever take the life of you, whose life has just been saved? Calm yourself a little. What is your name?'</p>
+          <p class="en-p">'Yes, as for my name, I am sure... I remember it was Gin.'</p>
+          <p class="en-p">'Ha, ha, ha, ha! To remember your own name as having been Gin is rather funny, isn't it? From the look of you just now, you seem to have fallen from Ten, but from what country on earth have you come?'</p>
+          <p class="en-p">'Yes, please wait a moment. Even if you ask me so abruptly, it seems my soul has moved to some other lodging, and I cannot give a clear answer.'</p>
+          <p class="en-p">'Ah, that must be so, it cannot be helped. You fell from the great sky. Well now, I will slowly have you change your clothes, so rest here, calm your spirit, and after that it would be best to talk. Takatorihime-sama, something rather strange has happened, hasn't it?'</p>
+          <p class="en-p">Takatorihime: 'As it is said that there are many children of the Hinodewake-kamisama everywhere, perhaps they have taken pity on our sincerity and come down from Ten to reinforce us. At any rate, we must treat him with care. Now, now, Tamanohime-sama, you must have him change his garments.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鷹鳥山の中腹の岩の根に庵を結び、三五教の教の御柱を築かむと立籠りたる鷹鳥姫、若彦、玉能姫の三人は、何か心に期する所あるものの如く、谷川に下り立ち、禊身を修して居る時しも、中空を掠めて鳩の如く降り来れる一人の男、滝壺にザンブとばかり落ち込んだ。三人は俄の出来事に驚いて目を瞠り、滝壺を熟視すれば、水面の蜒りに揺られて浮き上り来る男の姿、</p>
+            <p class="ja-classical-line">『こは大変』</p>
+            <p class="ja-classical-line">と若彦は身を躍らし滝壺に飛び入り、小脇に引抱へ漸くにして救ひ上げた。これは二十四五歳の元気盛りの男の姿。種々と耳近くに口を寄せ、</p>
+            <p class="ja-classical-line">『オーイ　オーイ』</p>
+            <p class="ja-classical-line">と魂呼びの神術をなし、天の数歌を力限りに唱ふれば、漸くにして息吹き返し、四辺をキヨロキヨロ見廻しながら、三人を見て、</p>
+            <p class="ja-classical-line">『此処は何処で御座います。私は何時の間に此様な所へ来たのでせうか、見知らぬお方ばかり………貴方様は何と言ふお方で御座います』</p>
+            <p class="ja-classical-line">若彦『此処は鷹鳥山の中腹、三五教の教の射場（教場）、鷹鳥姫の御住家だ』</p>
+            <p class="ja-classical-line">『何卒怺へて下さいませ。生命ばかりはお助けを願ひます』</p>
+            <p class="ja-classical-line">『生命を助けてやつたお前さまを、誰が又生命をとるものか。ちと気を落ち着けなさい。お前さまは何と言ふ名だ』</p>
+            <p class="ja-classical-line">『ハイ、私は名は確か……銀と言つた様に覚えて居ます』</p>
+            <p class="ja-classical-line">『アハヽヽヽ自分の名を、銀といつた様に覚えて居るとは、ちつと可笑しいぢやないか。今見て居れば天から降つて来た様だが、一体何処の国から来たのだ』</p>
+            <p class="ja-classical-line">『ハイ、一寸待つて下さい。さう短兵急にお尋ねになつても、魂が何処か宿替したと見えて、はつきりとお答へが出来ませぬ』</p>
+            <p class="ja-classical-line">『ア、さうだらう、無理もない。大空から降つて来たのだもの。まアゆつくり着物を着替へさして上げるから、此処で休んで気を落着け、其上で物語をしたが宜からう。鷹鳥姫さま、どうも妙な事があるものですなア』</p>
+            <p class="ja-classical-line">鷹鳥姫『何れ日の出神様の御子さまが沢山あると言ふ事だから、妾等が誠を憐み給うて天から応援に来て下さつたのかも知れませぬぜ。兎も角大切に扱はねばなりますまい。さアさア玉能姫さま、貴方は衣服を着替へさして上げなさい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamanohime replied, 'Ai,' took out Wakahiko's change of clothes, made the man change into them, led him by the hand into a room, laid him down quietly, and set about wringing out the man's wet garments and hanging them on tree branches to dry.</p>
+          <p class="en-p">Wakahiko: 'Hey, Tamanohime, is there any mark on the lining of those clothes? Look closely and find out for me.'</p>
+          <p class="en-p">Having said this, he once again went with Takatorihime to the side of the former waterfall basin, chanted the Amatsunorito, and earnestly began performing Mizugori.</p>
+          <p class="en-p">While drying the garments and carefully searching to see if there were any marks, Tamanohime's eyes caught sight of a mark reading 'Gin.'</p>
+          <p class="en-p">Tamanohime: 'Ha... when that gentleman said a while ago that he thought it was Gin, it seems it was indeed not an illusion. Even so, for someone to descend from Tenjiyō into that abyss must be for some reason. Once his mind has calmed down, I shall think about it and ask him in detail.'</p>
+          <p class="en-p">So she murmured to herself as she walked up to the bedside where the man was lying horizontally and looked, seeing that the former man had sat up on the Shiyōjiyō, and was looking around his surroundings in wonder.</p>
+          <p class="en-p">Tamanohime: 'Mosimosi, Anata, how is your health?'</p>
+          <p class="en-p">Silver Duke: 'Yes, I feel a great deal better. But what sort of place is this?'</p>
+          <p class="en-p">Tamanohime: 'This is the archery ground of the Izumo-shinshū on Mt. Takatori. You fell headlong from the sky into the waterfall basin; exactly where did you come from?'</p>
+          <p class="en-p">Hearing that it was the archery ground of the Izumo-shinshū, the Silver Duke was struck with astonishment in his heart,</p>
+          <p class="en-p">Silver Duke: 'Yaa, this is terrible. Unawares, was I knocked flying by the golden statue, fell right into the midst of the enemy, and was saved by the enemy? If I say something like this is careless Brahmanism, it will be terrible. Is there not some good idea?'</p>
+          <p class="en-p">and folding his arms, he was plunged in reflection.</p>
+          <p class="en-p">Tamanohime: 'Please do tell me. Just now, when I was wringing and drying your garments, a mark saying Gin was attached to them.'</p>
+          <p class="en-p">Hearing this, the Silver Duke was struck with even greater astonishment in his heart, but putting on an indifferent manner,</p>
+          <p class="en-p">Silver Duke: 'I am called the Homeless Nyorai, one who dwells in heaven, dwells on earth, and at times dwells even beneath the earth. The one with the mark of the character for Gin was given to me by Tanabatamahime-sama when I crossed the Milky Way because my clothes had become too old. Is this place still the earth? Viewed from the land of Tenjiyō, it is an indescribably filthy place.'</p>
+          <p class="en-p">Tamanohime: 'Is the land of Tenjiyō that beautiful?'</p>
+          <p class="en-p">Silver Duke: 'Hee-hee, it is, oh, it is incomparable.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玉能姫は、</p>
+            <p class="ja-classical-line">『アイ』</p>
+            <p class="ja-classical-line">と答へて若彦の着替を持ち出し、男に着替へさせ、手を引きながら一室に連れ込み静かに寝させ、男の濡れた衣を絞り木の枝に懸けて乾かさうとして居る。</p>
+            <p class="ja-classical-line">若彦『コレ、玉能姫、其着物の裏に何か標はついて居ないか。よく調べてお呉れ』</p>
+            <p class="ja-classical-line">と言ひすて再び鷹鳥姫と共に以前の滝壺の傍に至り、天津祝詞を奏上し頻りに水垢離にかかり始めた。</p>
+            <p class="ja-classical-line">玉能姫は衣を干しながら詳細に何か標は無きやと探す中、「銀」と言ふ印に目が付いた。</p>
+            <p class="ja-classical-line">『ハア……最前銀と言ふ様に思ひますがと彼の方が言つたのは、矢張り現でもなかつたらしい。それにしても天上から彼の淵へ天降つて来るのは何か理由がなくてはなるまい。一つお気の鎮まつた折を考へて詳しく尋ねて見よう』</p>
+            <p class="ja-classical-line">と独語ちつつ男の横臥せる枕許に進み寄り見れば、以前の男は床上に起上り、不思議さうに四辺をキヨロキヨロ見廻して居る。</p>
+            <p class="ja-classical-line">『モシモシ貴方、お気分は如何です』</p>
+            <p class="ja-classical-line">『ハイ、大変に気分が良くなりました。然し此処は何と云ふ所で御座いますか』</p>
+            <p class="ja-classical-line">『此処は鷹鳥山の三五教の射場です。貴方は天から真逆様に滝壺へ降つて御座つたが、一体何処から御出でになつたのです』</p>
+            <p class="ja-classical-line">銀公は三五教の射場と聞いて心に打驚き、</p>
+            <p class="ja-classical-line">『ヤア、大変だ。知らず識らずに黄金像に撥ね飛ばされて、敵の中へ落ち込み敵に救はれたのか。こりや迂濶バラモン教だなどと言はうものなら大変だ。何とかよい考へはあるまいか』</p>
+            <p class="ja-classical-line">と腕を組んで思案に暮れて居る。</p>
+            <p class="ja-classical-line">『何卒仰有つて下さいませ。今貴方のお召物を絞つて干します時に、銀と云ふ標が付いて居ました』</p>
+            <p class="ja-classical-line">と聞いて銀公は一層心に打驚きしが、さあらぬ態にて、</p>
+            <p class="ja-classical-line">『私は無住所如来と言つて、天にも住み、地にも住み、時としては地中にも住む者で御座います。銀の字の印のついたのは銀河を渡る時、棚機姫様に余り着物が古くなつたので替へて貰つたのです。此処は矢張り地上ですか。天上の国から見れば、お話にならない穢しい所ですな』</p>
+            <p class="ja-classical-line">『天上の国はそれ程綺麗ですか』</p>
+            <p class="ja-classical-line">『ヘエヘエ、それはそれは比較になりませぬ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Anata: 'Do you have any proof to say that you have descended from Ten?'</p>
+          <p class="en-p">Anata: 'Yes, I did have it, but while in Chiukū I encountered a host of Akuma and had it stolen, and because of that I lost my Tsūriki, met with Fukaku, and fell here. However, as for me, a Mujiushiyoniyorai—mu is precisely yu, and yu is precisely mu—everywhere is a place of carefree pleasure for us Wareware, yet the Chijiyō is so defiled that there is no place to dwell, and the true... now I have become a Mujiushiyoniyorai. Aha ha ha ha.'</p>
+          <p class="en-p">Thus he plays the innocent. Tamanohime with a Kegen expression intently mitsu the face of Ginkō,</p>
+          <p class="en-p">Tamanohime: 'Ya, you are…'</p>
+          <p class="en-p">She uttered a Tonkiyō voice and was astonished almost to the point of falling. Upon this voice, the man,</p>
+          <p class="en-p">Ginkō: 'Have I been hatsuken? This is an Ichidaiji.'</p>
+          <p class="en-p">He tries to run off Itsushiyōkenmei. Tamanohime firmly grabs his Erikubi from behind and forces him to sit right there,</p>
+          <p class="en-p">Tamanohime: 'You must be Ginkō, an evil Warumono who is a subordinate Teshita of Kananbōru of Brahmanism. When Washi went to draw spiritual water at the pure spring some time ago, you were the fellow who, along with four or five companions, made unreasonable demands upon Washi and tried to make Washi your captive, were you not?'</p>
+          <p class="en-p">Ginkō: 'So so so so so, whether such a thing happened I do not know, but since there are far too many incidents, it does not float up in my memory at all, wa.'</p>
+          <p class="en-p">Tamanohime: 'To say there are many incidents means that you have piled up countless evil deeds. Come now, since things have come to this, I will not let you return as you are. I must torment and afflict you to the utmost by means of the Kototama. Now, please calm your spirits and sit down.'</p>
+          <p class="en-p">Ginkō muttered to himself,</p>
+          <p class="en-p">Ginkō: 'If this wretch were alone... somehow or other I would manage to escape, but since there are still two other commanders outside, and a great many believers wandering in and out, I cannot even escape, well now, this is a troublesome matter.'</p>
+          <p class="en-p">He inadvertently shouted the concluding phrase loudly. Hearing this, Tamanohime,</p>
+          <p class="en-p">Tamanohime: 'To call it a troublesome matter, what are you talking about? I am saying that I will offer you the Kototama of beautiful words and good speech.'</p>
+          <p class="en-p">Ginkō: 'If that is so, please spare me from drawing blood alone. I am truly troubled by the Kototama.'</p>
+          <p class="en-p">Tamanohime: 'When you speak of the Kototama in Brahmanism, what sort of thing is it, naa.'</p>
+          <p class="en-p">Ginkō: 'Yes, the Kototama of Brahmanism is such that, for example, if a person who has broken the path appears here, all the people present there—whether there be fifty or a thousand—each and every one of them takes a suitable stone, taps the head, and draws blood. That is taken as proof of atonement. There are a great many people here as well, and even if I were struck just once each it would be terrible, so for this alone I humbly beg a special exemption.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『貴方は何か、天からお降りになつたと言ふお証を持つて居られますか』</p>
+            <p class="ja-classical-line">『ハイ持つて居ましたが、中空に於て悪魔の群に出会し盗られて了ひ、その為めに通力を失つて不覚をとり、此処に顛落したのです。然し無住所如来の私、無は即ち有、有即ち無、何処も彼処も吾々の自由自在の遊楽地ではありますが、余り地上は穢れて居るので住むべき所がなく、本当の……今は無住所如来になりました。アハヽヽヽ』</p>
+            <p class="ja-classical-line">と空惚ける。玉能姫は怪訝な顔してマジマジと銀公の顔を凝視め、</p>
+            <p class="ja-classical-line">『ヤア、お前は………』</p>
+            <p class="ja-classical-line">と頓狂な声を出し倒れむばかりに驚いた。男は此声に、</p>
+            <p class="ja-classical-line">『発見されたか、一大事』</p>
+            <p class="ja-classical-line">と一生懸命に駆け出さうとする。玉能姫はグツと襟首を後より掴んで其場に引き据ゑ、</p>
+            <p class="ja-classical-line">『汝はバラモン教のカナンボールが部下の者、銀公と言ふ悪者だらう。いつやら妾が清泉へ霊水を汲みに行つた時、四五の同類と共に妾に向つて無理難題を吹きかけ、手籠に致さうとした奴であらうがな』</p>
+            <p class="ja-classical-line">『ソヽヽヽヽ、そんな事があつたか存じませぬが、余り事件が多いので、ねつから記憶に浮びませぬワ』</p>
+            <p class="ja-classical-line">『事件が多いとは悪事の数々を重ねたと云ふ事だらう。サア、もう斯うなる上は此儘では帰さぬ。飽までも言霊を以て責悩めて上げねばなりませぬ。マア気を落着けてお坐り下さい』</p>
+            <p class="ja-classical-line">銀公は口の中で、</p>
+            <p class="ja-classical-line">『此奴一人なら……どうなつとして逃げてやるのだが、まだ外に大将が二人、信者の奴が沢山にウロウロと出入りをして居るから、逃げる事も出来ず、ハテ、困つた事だなア』</p>
+            <p class="ja-classical-line">と終ひの一句を思はず高く叫んだ。玉能姫は之を聞き、</p>
+            <p class="ja-classical-line">『困つた事だとは、そりや何をおつしやる。善言美詞の言霊を手向けてやらうと云ふのだよ』</p>
+            <p class="ja-classical-line">『そんなら血を出すのだけは堪へて下さいませ。言霊には誠に困ります』</p>
+            <p class="ja-classical-line">『バラモン教で言霊と云へば、如何なものだなア』</p>
+            <p class="ja-classical-line">『ハイ、バラモン教の言霊は、例へば此処に一人の道を破つた者が現はれたとすれば、其処に居る全部の人が、五十人あらうが千人あらうが、一人々々悉く手頃の石を以て頭を小突いて血を出します。それを贖罪の証とするのです。此処にも余程沢山のお人が居られますが、一つ宛やられても大変だから、之だけは特別を以て御免除を願ひます』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Ho, ho, ho, ho! The Kototama of Ananai-kyō is to chant the Norito of Zengenbishi and offer apologies to Shinkai.'</p>
+          <p class="en-p">'Thanks to you, my head is also saved.'</p>
+          <p class="en-p">With an expression of relief, he stroked his forehead and looked on.</p>
+          <p class="en-p">Takatorihime and Wakahiko, having finished their Misogi, entered this place leisurely together with Amata Shinto believers,</p>
+          <p class="en-p">Takatorihime: 'Ah, you sama, how is your Kibun?'</p>
+          <p class="en-p">Ginkō: 'Yes, for causing you unexpected Goyakukai, on top of which I even borrowed your Kimono, and furthermore you granted me the Kototama, there is nothing quite as Arigata as this.'</p>
+          <p class="en-p">Wakahiko: 'The Kototama of Ananai-kyō is a little different from Brahmanism. There is no need for such Goenriyo.'</p>
+          <p class="en-p"> 'Yes, thank you very much. However, when I hear the Kototama of Ananai-kyō, my head aches as if I were poked with a stone, and my chest grows distressed, just as before... Since it will not do to be a burden on top of being a burden, I must respectfully decline this alone.'</p>
+          <p class="en-p">Wakahiko looked at him for a moment and said,</p>
+          <p class="en-p"> 'Yay, are you not Ginkō of Brahmanism? You are one who has tormented Tamanohime to a great extent. Shall I offer you our gratitude with the Kototama of Zengenbishi as a reward for tormenting Tamanohime?'</p>
+          <p class="en-p"> 'Would it not be fine if you did not say such things so crudely? Kin... Kin... Ginkō is truly a grand fellow, you see.'</p>
+          <p class="en-p">Takatorihime: 'Are you saying that that Ginkō is plotting some evil deed again?'</p>
+          <p class="en-p"> 'No, if he were a fellow to plot evil deeds, he would have at least some wits about him, but lately he has become utterly dumbfounded and completely at his wits' end. In the end, he scooped me up into mid-air and subjected me to this kind of treatment.'</p>
+          <p class="en-p">Takatorihime: 'Look here, Wakahiko-san, this man says strange things.'</p>
+          <p class="en-p"> 'Well, since there is such a strange thing, you see.'</p>
+          <p class="en-p">Wakahiko: 'What kind of thing is there? Speak up quickly.'</p>
+          <p class="en-p"> 'That fellow Kin suddenly turned into a golden Buddha and started chanting a million Dharani of incomprehensible sutras. Light emerged from his body, and even the colors of the clouds in the sky changed, you know. Step outside for a moment and look at the sky.'</p>
+          <p class="en-p">Muttering that he was a fellow who said strange things, Wakahiko rushed outdoors and gazed out, seeing a brilliant light shining atop the peak of Mount Takatori, illuminating even the color of the sky in gold. Wakahiko hurried back inside and said,</p>
+          <p class="en-p"> 'Takatorihime-sama, this is a serious matter. It appears that a bizarre divine person has appeared, shining brilliantly in golden splendor and dazzling all around. Moreover, at the peak of Mount Takatori... This must surely be a great auspicious omen for Ananai-kyō. Hey, Ginkō-sama, will you not go as well?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ホヽヽヽ、三五教の言霊は善言美詞の祝詞を奏上して、神界へお詫する事です』</p>
+            <p class="ja-classical-line">『お蔭で私の頭も助かりました』</p>
+            <p class="ja-classical-line">とやつと安心の態にて額を撫でて見て居る。</p>
+            <p class="ja-classical-line">鷹鳥姫、若彦二人は禊身を終り、数多の信徒と共に悠々として此場に入り来り、</p>
+            <p class="ja-classical-line">鷹鳥姫『アヽお前さま、気分は如何だなア』</p>
+            <p class="ja-classical-line">銀公『ハイ、思ひも寄らぬ御厄介をかけまして、其上着物まで拝借致しまして、又言霊までお許し下さいまして、こんな有難い事は御座いませぬ』</p>
+            <p class="ja-classical-line">若彦『三五教の言霊はバラモン教とは些つと違ふのだよ。さう御遠慮には及びませぬ』</p>
+            <p class="ja-classical-line">『ハイ有難う御座います。然し三五教の言霊を聞きますと、矢張り石で小突かれた様に頭が痛くなり、胸が苦しくなりますから………御厄介になつた上に御厄介になるのも済みませぬから、之ばかりは御辞退申します』</p>
+            <p class="ja-classical-line">若彦は一寸見て、</p>
+            <p class="ja-classical-line">『ヤア、お前はバラモン教の銀公ぢやないか。随分玉能姫を苦しめた者だねえ。玉能姫を苦しめて呉れたお礼に、善言美詞の言霊で御礼を申し上げようか』</p>
+            <p class="ja-classical-line">『さう現銀に仰有らないでも宜いぢやありませぬか。金…金…金公がそれはそれは偉い事ですぜ』</p>
+            <p class="ja-classical-line">鷹鳥姫『あの金公が、何ぞ又悪い事を企らんで居ると云ふのかい』</p>
+            <p class="ja-classical-line">『いいえ、悪い事を企らむ様な奴なら、ちつとは気が利いて居るのだが、薩張り此頃は呆気て仕舞つてカンカンになりました。終には私を中天に捲き上げて斯んな目に遇はしたのですよ』</p>
+            <p class="ja-classical-line">『これ若彦さま、此男は妙な事を云ひますな』</p>
+            <p class="ja-classical-line">『そりや、あんな妙な事があるのだもの』</p>
+            <p class="ja-classical-line">若彦『どんな事があるのだ。さつさと云つて見なさい』</p>
+            <p class="ja-classical-line">『金の奴、俄に黄金仏になつて仕舞ひ、訳の分らぬお経を百万陀羅囀るのです。あいつの身体から光が現はれて、空の雲まで色が変つて居ませうがな。一寸外へ出て、空を見て御覧』</p>
+            <p class="ja-classical-line">若彦は妙な事を云ふ奴だと呟きながら戸外に飛び出し眺むれば、鷹鳥山の山頂に光煌々として輝き、空の色まで金色に照して居る。若彦は慌しく入り来り、</p>
+            <p class="ja-classical-line">『鷹鳥姫さま、大変です。金色燦然として四辺眩ゆきまで照り輝く、異様の神人が現はれたと見えます。而も鷹鳥山の山頂に………こりや屹度三五教の為めには大吉瑞でせう。オイ銀公さま、お前さまも行かないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ginkō: 'As I must perform aerial gliding once again, you must not approach. However, do you go. And stroke his shoulders and back. The moment the golden statue twitches its shoulders even a bit, it will soar all the way up into the mid-heaven sky... not like an airplane... and then plunge headlong into the waterfall basin—such a feat will be performed. I have already had more than enough. Even hearing the word "gold" in the golden statue makes my liver turn to water.'</p>
+          <p class="en-p">Wakahiko: 'Since you are a man who has continued your egoistic actions until now in order to gain gold and silver, it should not be too bad to see a golden face, which is said to make even King Enma instantly turn into a Jizō-like face. Come, come, let us go; if we leave a person like you behind to keep watch, there is no telling what you might do. It would be a terrible thing if a red weasel were allowed to crawl in while we are away.'</p>
+          <p class="en-p">Ginkō: 'Far be it from me! In the mansion of my benefactor who saved my life, could I ever let a red weasel crawl in? I shall obediently and faithfully keep house. Please, you people, hurry and go on your exploration.'</p>
+          <p class="en-p">Takatorihime: 'Since Ginkō-sama insists no matter what that he will not move, Wakahiko-sama, you please stay here to keep watch and supervise Ginkō-sama. The two of us, together with Tamanouehime-sama, will go out on the exploration.'</p>
+          <p class="en-p">Thus, joyfully taking the light of the peak as their objective, they climbed upward. When Takatorihime and Tamanouehime, the two of them, climbed up with the light of Mount Takatori as their objective, the golden statue of which Ginkō had spoken stretched forth and stood towering, to the extent that its height seemed to be about five jō six shaku seven sun; the moment it saw the figures of the two, it grabbed Takatorihime by the left hand,</p>
+          <p class="en-p">Takatorihime: 'Hey, it is still too early for you to come to my place, return to where you were.'</p>
+          <p class="en-p">And saying so, just as if grabbing a cat by the scruff of its neck, it tossed her away with a puff towards the middle slopes of Mount Takatori. Taking Tamanouehime similarly in its right hand, it strode heavily, taking five or six steps toward the east, and said,</p>
+          <p class="en-p">Statue: 'You go over yonder.'</p>
+          <p class="en-p">And it tossed her away again. Suddenly the golden statue turned into smoke and vanished with a tremendous roaring sound. Afterwards, Kinsuke's physical body,</p>
+          <p class="en-p">Kinsuke: 'Ah, just when I thought I had become a mighty deity, as expected I am still the original Kinsuke. Well now, I wonder what on earth is the reason for this. Be that as it may, since things have come to this, I am a believer of Izutsu, so I shall visit the hermitage of Takatorihime-sama, express my intent of submission, and ask her to employ me.'</p>
+          <p class="en-p">Muttering thus to himself, he descended the mountain peak.</p>
+          <p class="en-p">Here Kinsuke came to the hermitage of Takatorihime, expressed his intent of repentance together with Ginkō, and became the right-hand man of Wakahiko, participating in the divine work. Ah, whose divine incarnation could this golden standing statue that had enveloped Kinsuke have been?</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">銀公『又空中滑走をやらねばなりませぬから、近寄つてはいけませぬ。然し貴方等はお出でなさいませ。そして肩や背中を撫でておやりなさいませ。金像がプリツと肩を動かしたが最後、中天の空まで……飛行機ぢやないが……上りつめ、又滝壺へ真逆様に陥ち込むと云ふ芸当が演ぜられます。私はもう懲りこりしました。金像の金の字を聞いても胆が潰れます』</p>
+            <p class="ja-classical-line">若彦『お前は金銀を得むが為めに今迄利己主義の行動を続けて来た男だから、閻魔さまでも忽ち地蔵顔になると云ふ金の顔を見るのは余り悪くはあるまい。サアサア行かう、お前のやうな者を留守させて置けば、如何な事するか分つたものぢやない。留守の間に赤鼬でも這はされたら大変ですよ』</p>
+            <p class="ja-classical-line">『滅相な、生命を助けて貰つた恩人の館に、赤鼬を這はして済みますか。いたちて神妙にお留守をいたちます。何卒早く貴方等、探険にお出でなさいませ』</p>
+            <p class="ja-classical-line">鷹鳥姫『如何しても銀公さまが動かぬと云ふのだから、若彦さま、お前さまは此処に銀公さまの監督がてら留守して居て下さい。玉能姫さまと二人、探険に行つて参ります』</p>
+            <p class="ja-classical-line">と欣々として山頂の光を目標に登り行く。鷹鳥姫、玉能姫の二人は鷹鳥山の光目標に登り見れば、銀公の云うた金像は背の高さ五丈六尺七寸もあらうかと思はるる許りに伸長して突立ち、二人の姿を見るより、鷹鳥姫を左手に引掴み、</p>
+            <p class="ja-classical-line">『オイ、まだ俺の所へ来るのは早い、もとへ帰れ』</p>
+            <p class="ja-classical-line">と猫の首筋を掴んだ様に鷹鳥山の中腹目蒐けてポイと放つた。右の手に玉能姫を同じく提げノソリノソリと五歩六歩東に向つて歩み出し、</p>
+            <p class="ja-classical-line">『お前は彼辺へ行け』</p>
+            <p class="ja-classical-line">と又ポイと投げた。忽ち金像は煙となつて、巨大な爆音と共に消えて了つた。後に金助の肉体は、</p>
+            <p class="ja-classical-line">『アヽア、偉い神さまになつたと思へば、矢張り元の金助か。こりや、マア、如何した訳だらう。何は兎もあれ、もう斯うなる以上は三五教の信者だから、鷹鳥姫さまの庵を訪ねて帰順の意を表し、使つて貰はうか』</p>
+            <p class="ja-classical-line">と独語しつつ山頂を降り行く。</p>
+            <p class="ja-classical-line">茲に金助は鷹鳥姫の庵に来り、銀公と共に改心の意を表し、若彦の股肱となつて神業に参加する事となつた。あゝ此金助を包み居たる黄金の立像は何神の化身であらうか。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: Golden 像 [703]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: Stillness Light 土 [705]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 10: Beauty と Ugly [702] - Volume 22 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 22 Table of Contents</a>
+      <span>Volume 22</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 22 &bull; Chapter 10</span>
+      <h1 class="chapter-title-en">Chapter 10: Beauty と Ugly [702]</h1>
+      <p class="chapter-title-ja">美と醜〔702〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The three women who appeared with Tamanohime were named Hozuehime for the first, Nakaehime for the second, and Shizuehime for the third. Kin, Gin, and Tetsu had finally been led by the Bijin and had arrived at the summit of a mountain whose name they did not know.</p>
+          <p class="en-p">Kin: 'Hozuehime-sama, it must be some kind of Innen that I have come to be in such a relationship with you through a Fushigi connection. Thanks to you, I have finally managed to climb to this place along that Yamamichi where one could not even see an Itsusunsaki ahead, but does this area not have a different atmosphere from Takatoriyama?'</p>
+          <p class="en-p">Hozuehime: 'It is indeed different. It is nearly Sanbiyakuri away from Takatoriyama.'</p>
+          <p class="en-p">Kin: 'When did we come so far?'</p>
+          <p class="en-p">Hozuehime: 'Ho ho ho, you may not be aware, but I am a Tennin. Since I brought you here with your body inside my wings, not even Hantoki has passed.'</p>
+          <p class="en-p">Kin: 'Even so, is that not too fast? However, Gin, Tetsu, and the other two Hime-sama should have come here together until now, so where could they have gone?'</p>
+          <p class="en-p">Hozuehime: 'In the Shinkai, there is no time, nor is there Enkin. Do not be so Goshinpai, for you will be able to meet them soon. Though I say soon, in the Genkai, it is fifty thousand years in the future.'</p>
+          <p class="en-p">Kin: 'What an incomprehensible thing you say. Is this not the Genkai?'</p>
+          <p class="en-p">Hozuehime: 'If you call it the Genkai, it is the Genkai; if you call it the Shinkai, it is the Shinkai, for we are wandering through the great universe where the manifest and the hidden are one.'</p>
+          <p class="en-p">Kin: 'I feel as if I have been bewitched by a fox. I, who am a blackamoor by nature, have found my skin becoming glossy and even turning white before I knew it. And to be led by a splendid nurse like you to the summit of a beautiful mountain I have never seen—I simply cannot comprehend it. Could this be a dream?'</p>
+          <p class="en-p">Hozuehime: 'Dreams are what humans of the Genkai see. It is said that sages have no dreams; how could a pure and clean person have dreams? Ultimately, your sincere heart, which wished to save Tamanohime-sama when she was about to fall into the clear spring and drown, has condensed, and that is why you are able to live happily here with me. In short, from that heart, you have brought forth a concubine like Tamanohime-sama and opened a land of salvation. However, next, you saved Tamanohime, and you thought to make her your own by holding it over her as a favor, and you used your Kototama, did you not? Because of that, your heart and words have condensed, and another land of illusion has unfolded. You must travel there from here. There is one more land further within where the Shurado, in which you try to perform deeds to be praised by Mukadehime, has unfolded; you must tread that path once as well. Enjoying yourself with me here on this beautiful mountain summit, admiring the various flowers in full bloom, is but for a brief moment. The world created by your initial intention to save Tamanohime is only very short. Farewell.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玉能姫と現はれたる三人の女は、甲を上枝姫と云ひ、乙を中枝姫と云ひ、丙を下枝姫と云ふ。金、銀、鉄の三人は漸く美人に導かれ、名も知らぬ山の頂に辿り着いて居た。</p>
+            <p class="ja-classical-line">金『上枝さま、不思議の縁で貴女と斯う云ふ仲になつたのも何かの因縁でせうなア。一寸先も分らないやうなあの山道を、貴女のお蔭で漸く此処に登つて来ましたが、どうも此辺は鷹鳥山とは趣が違ふぢやありませぬか』</p>
+            <p class="ja-classical-line">上枝姫『違ひますとも。鷹鳥山を距る事、殆ど三百里ですよ』</p>
+            <p class="ja-classical-line">『何時の間に、そんなに遠く来たのでせう』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、貴方は御存じありますまいが、私は天人ですよ。貴方の体を翼の中に入れて来たのですから、殆ど半時許りの間より経つて居ませぬ』</p>
+            <p class="ja-classical-line">『それにしても余り早いぢやありませぬか。併し今迄銀、鉄、外二人の姫さまは此所へ一緒に来た筈だのに、何処へ往つて仕舞つたのでせう』</p>
+            <p class="ja-classical-line">『神界では、タイムもなければ遠近もありませぬ。さう御心配なさらずとも今に会ふ事が出来ます。今と云つても現界で云へば五十万年の未来です』</p>
+            <p class="ja-classical-line">『何と合点の行かぬ事を仰有いますなア。此処は現界ではありませぬか』</p>
+            <p class="ja-classical-line">『現界と云へば現界、神界と云へば神界で、顕神幽一致の大宇宙の世界を逍遥して居るのですからなア』</p>
+            <p class="ja-classical-line">『何だか私は狐に誑まれたやうな気が致します。性来の黒ン坊の私、何時の間にやら艶々した皮膚になり、色迄白くなつて来ました。さうして貴女の様な立派なネースに手を曳かれ、見も知らぬ麗しき山の頂に導かれたと云ふのは、どうしても合点が往きませぬ。夢ぢやありますまいか』</p>
+            <p class="ja-classical-line">『夢は現界の人間の見るものです。聖人に夢なしと云うて、清浄潔白の人間に夢があつて耐りますか。畢竟貴方が玉能姫さまが清泉に陥り溺死をしようとして居たのを助けて上げたいと云ふ其真心が凝つて、此処に私と斯う楽く暮す事が出来る様になつたのです。要するに其心より玉能姫さま同様の妾を生出し救ひの国を開かれたのです。併し其次に貴方は玉能姫を救ひ上げ、それを恩に着せて自分の物にしようと思ひ且其言霊を使つたでせう。それで其心と言葉が凝つて又一つの迷ひの国が展開して居ます。其処へ貴方は是から旅行せねばなりますまい。も一つ奥の国は蜈蚣姫に褒められて手柄をしようと云ふ修羅道が展開して居ます、これも一度踏まねばなりますまい。私と斯うして楽く、麗しき山の頂に、百花爛漫たる種々の花を褒めながら楽むのも束の間ですよ。唯貴方の初一念の玉能姫を救ふと云ふ好意が造つた世界は極短いものです。左様なら』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Just as he thought this, the figure turned into smoke and vanished. The surroundings became dark and gloomy, to the point where he could not distinguish even a foot in front of him. Kinsuke said, 'Excuse me, Hozuesama, where have you gone? Please show me your face once more. Ah, has your form disappeared already? Even if you were an Eukuwaihenge, I would be satisfied even if I died, having been able to feel such a Yukuwai Kibun for even a single Ichiji. Ah, what should I do?'</p>
+          <p class="en-p">Just as he was wandering around in the Anya, crazed and moving in all directions, he tumbled headlong into a Senjin valley and fell with a splash into the Aofuchi of the Tanigaha.</p>
+          <p class="en-p">An Onibaba appeared from nowhere, suddenly stripped herself naked, and, tucking Kinsuke under her arm, pulled him up to safety. Just as Kinsuke was struggling and suffering, on the verge of Dekishi, he was saved by someone, and in his overwhelming joy, he said, 'I do not know who you are, but thank you so much for saving me. I am truly grateful.'</p>
+          <p class="en-p">When he raised his face and looked closely, the night had already broken, and he saw that he had been saved by a terrifying Onibaba on the bank of a mountain valley river. Kinsuke was struck with astonishment, and as he tried to flee the scene, the Onibaba gripped his neck firmly and said, 'Now, now, Kinsuke-sama, it is this old woman who saved you. Come now, please become my husband from here on.'</p>
+          <p class="en-p">Kinsuke replied, 'Oh, this is a disaster. If you were a beauty like Hozuesama, I would not be afraid even if you were a transformed being, but I would like you to excuse me from becoming the husband of an Onibaba-sama like you, who is covered in wrinkles and has a mouth split to her ears.'</p>
+          <p class="en-p">The Onibaba said, 'I am an old woman called Imorihime, who has a bright red birthmark on my belly and naturally displays the sacred title of Namumyohorengekyo. I am an Onibaba born from your own heart, so if I do not rely on you, whose care should I seek? Did you not try to save Tamanohime and, by making her feel indebted to you, attempt to fulfill your desires of love? Because you harbored such a self-serving thought of trying to make a woman fall for you by sprinkling the charred remains of a newt, the demon of that very heart has finally given birth to me, so no matter what you say, I will not let you go.'</p>
+          <p class="en-p">Kinsuke replied, '"If you ask a newt if there is any other love potion, it seems they will show you their finger in a ring." The meaning of making a ring with one's finger refers to the strange fate of Kinsuke, who is welcomed as an enemy of the world. Kin-chan has the potential to be loved by beauties. However, Imorihime will not do. No matter how much of a handsome man Kin-sama may be, for an evil, foul-mouthed old woman like you, it is a great nuisance, a Nan-no-horengekyo indeed. Please, just this once, forgive me. There will surely be a time when we meet again.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と云ふかと見れば姿は煙となつて消えて仕舞つた。四面暗澹として咫尺を弁ぜざるに至つた。金は、</p>
+            <p class="ja-classical-line">『モシモシ上枝様、何処へお出になりました。も一度お顔を見せて下さいませ。アヽもう姿がなくなつたか、仮令妖怪変化でも、唯の一時でもこんな愉快な気分になる事を得ば死んでも満足だ。アヽどうしたら良からう』</p>
+            <p class="ja-classical-line">と暗夜の道を前後左右に狂ひ廻る途端に、千仭の谷に真逆様に顛落し、谷川の青淵にざんぶとばかり落ち込んで仕舞つた。</p>
+            <p class="ja-classical-line">何処ともなく現はれ来る一人の鬼婆、矢庭に真裸となり、金助を小脇に引き抱へ救ひ上げた。金助は今や溺死せむと苦み悶えたる矢先、何人かに救はれ、嬉しさの余り、</p>
+            <p class="ja-classical-line">『何れの方かは存じませぬが、よくマア助けて下さいました。有難う存じます』</p>
+            <p class="ja-classical-line">と面を上げよくよく見れば、いつしか夜は明け放れ、山奥の谷川の辺に見るも恐ろしい鬼婆に救はれて居た。金助は吃驚仰天、此場を逃げ去らむとする時、鬼婆はグツと素首を握り、</p>
+            <p class="ja-classical-line">『これこれ金助さま、お前さまを助けたのは此婆だよ。さアこれから私のハズバンドになつて下さい』</p>
+            <p class="ja-classical-line">『やア此奴は大変ぢや。上枝様のやうな美人なら、仮令化衆でも恐ろしくはないが、お前のやうな皺苦茶だらけの、口が耳まで裂けた鬼婆アさまの亭主になるのは許して貰ひたいなア』</p>
+            <p class="ja-classical-line">『私はいもり姫と云ふ腹に真赤な痣があり、南無妙法蓮華経と御題目を天然に表はした、いもりの様な婆だ。これもお前の心から造つて生んだ鬼婆だから、お前の世話にならいで誰人の世話にならう。お前は玉能姫を助け、それを恩に着せて、恋の欲望を遂げようとしたではないか。いもりの黒焼振りかけて、女を思ひつかさうとするやうな虫の好い考へを起すものだから、たうとう其心の鬼が私を生んだのだから、何と云つても離れやせぬぞえ』</p>
+            <p class="ja-classical-line">『「惚薬、他にないかと蠑螈に問へば、指を輪にして見せたげな」指を輪にすると云ふ意味は、世の中の仇敵として喜ばれて居る妙な運命を辿る金助の事だよ。金ちやんには美人が惚れる可能性が備はつて居る。併し乍ら蠑螈姫では駄目だよ。なんぼ金さまが色男でも、お前のやうな悪垂れ婆には聊か御迷惑千万、ナンノホウレンゲキヨウだ。今度ばかりは何うか許して呉れ。又逢ふ時もあらうからなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Onibaba Imorihime shed tears, falling drop by drop.</p>
+          <p class="en-p">Imorihime: 'That I cannot hear, Kinsuke-sama. As for the relationship between you and me, are you speaking of Kinsuke or Kiyōkatabira? From the very day we first met...'</p>
+          <p class="en-p">Kinsuke: 'Hey, hey, what are you spouting? You say it is not a matter of yesterday or today, but have we not just met now?'</p>
+          <p class="en-p">Imorihime: 'That is different, Kinsuke-sama. I do not think your words are unreasonable, but you are by nature a sly man. The soul that stalked and targeted the skirts of women has hardened and solidified over seven or eight years, becoming this Imorihime here. I, this concubine, was born by opening the black curtain of your heart; to think you would cast me aside now, that I cannot hear, it is greedy. Even if this body were to be subjected to whatever cruel punishment in the court of Enma, Kinsuke-sama, whom I rely upon as my husband and my parent, how could I ever give you up? When I think and think of the previous life, and the life before the previous life, in the days of old, long ago, the vengeful spirits of the wives you left behind and the souls of the women you made weep have hardened and solidified here now. The joy of meeting you, how could I ever forget it for a thousand, eight thousand, or ten thousand generations, I, Imorihime? I wanted to meet you, I wanted to see you; from dawn till dusk, I have thought only of you. Please, I beg you, try to fathom the heart of the wife who has not forgotten you even in her dreams.'</p>
+          <p class="en-p">Kinsuke: 'Now, now, you called Imorihime, I perceive your earnest heart, but I am in a position of great importance where I must face the rocky cave of Takatoriyama, commence a magnificent Kototamasen, capture the very enemy, Takatorihime, and obtain the jewel of the Nyoi-hōju. If it is to become husband and wife, depending on the circumstances, it is not impossible. In any case, after my triumphant return, I shall give you my answer, yes or no. Come, let go of me quickly. The more time is delayed, the more it becomes the foundation of failure. Ugh, you unreasonable Onibaba!'</p>
+          <p class="en-p">Imorihime: 'Seeing my beloved husband off to the threshold of death in battle, how could I, his wife, remain silent? Endure the pain of the fist I bring forth while weeping, and go.'</p>
+          <p class="en-p">Kinsuke: 'Hey, Onibaba, that is not funny. Do you think I would endure being struck by a fist from the likes of you? How ill-omened; what are you saying about the threshold of death in battle?'</p>
+          <p class="en-p">Imorihime: 'Listen, Kin-sama, do you know my true nature? You are quite a sly man when it comes to women, but when it comes to money, you are like a monkey-eating persimmon by the privy, a man like a persimmon called a "Mi-shirazu" (one who does not know himself). You have been told that you are astringent, filthy, petty, and an inedible man, have you not? And you are a villain whom people have flattered as "Onikin" (Demon Gold). It is a world where money is the enemy. The grudges of many people and your demon heart have mingled, and thus this Onibaba of Imorihime has appeared. So to speak, I am the incarnation of lust and gold. You walk about wearing a human face as if you were grand, but you certainly do not possess such qualifications.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼婆の蠑螈姫は、涙をハラハラと流し、</p>
+            <p class="ja-classical-line">『そりや聞えませぬ金助さま。お前と私の其仲は、金助や経惟子の事かいな。初めて逢うた其日から……』</p>
+            <p class="ja-classical-line">『コラコラ、何吐すのだ。昨日や今日の事ぢやない、と云ひやがるが、現に今逢うた許りぢやないか』</p>
+            <p class="ja-classical-line">『そりや違ひます金助さま。お言葉無理とは思はねど、お前は元来ずるい人、女の尻を付け狙ひ、狙ひ狙うた魂が、凝り固まつて七八年、ここにいもりの姫となり、お前の心の黒幕を、開けて生れた此妾、今更捨てようとはそりや聞えませぬ、胴欲ぢや。仮令此身は閻魔の庁で、如何なる酷い成敗に遭はされうとも、私の夫とも親とも頼む金助さま、どうしてこれが思ひ切られようか。思へば思へば前の世の、まだ前の世の前の世の、昔の昔のさる昔、去つた女房の怨霊や、泣かした女の魂が、凝り固まつて今此処に、お前に逢うた嬉しさは、千代も八千代も万代も、忘れてならうかいもり姫、逢ひたかつた、見たかつた、明けても暮れてもお前の事、夢寐にも忘れぬ女房が、心を推量して下さんせいなア』</p>
+            <p class="ja-classical-line">『こりやこりや、いもり姫とやら、切なる心は察すれど、某は鷹鳥山の岩窟に立ち向ひ華々しく言霊戦を開始して、当の敵たる鷹鳥姫を虜に致し、如意宝珠の宝玉を手に入れねばならぬ大切な身の上、夫婦になれなら、事と品によつてはならぬ事もない。何は兎もあれ凱旋の後、否やの返事を仕らむ。サア早う其処を放しや。時延びる程不覚の基、エヽ聞き分けのない鬼婆め』</p>
+            <p class="ja-classical-line">『愛憐き夫が討死の、門出を見かけて女房が、これが黙つて居られうか、泣く泣く取り出す拳骨の痛さ、耐へて往かしやんせ』</p>
+            <p class="ja-classical-line">『こりや鬼婆、洒落ない。貴様等に拳骨を喰はされて耐るか、あた縁起糞の悪い、討死の門出なんて何を云ふのだ』</p>
+            <p class="ja-classical-line">『これ金さま、妾の素性を知つて居るかい。お前は女にかけては随分ずるい人だが、金にかけては雪隠のはたの猿食柿、一名身不知と云ふ、柿のやうな男だ。渋うて、汚うて、細かうて、喰へぬ男だと云はれて来ただらう。そして鬼金だ鬼金だと人に持て囃された悪党者だ。金が敵の世の中だよ。大勢の恨とお前の鬼心が混淆になつて、こんないもり姫の鬼婆が出現したのだ。云はば色と金との権現様だ。お前は豪さうに人間面を提げて歩いて居るが、決してそんな資格はありませぬぞえ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Onibaba: 'Oh, what a troublesome, foul-mouthed old hag has appeared. If you are not a Ningen, are you a Sangen, a Shingen, or a Gengen-sama?'</p>
+          <p class="en-p">Onibaba: 'You should also reform yourself to a reasonable degree and grant me Gedatsu, why don't you? If you cannot do that, I must stick to you wherever you go. It is like a magnet attracting iron. A sickness of the sweetheart cannot be cured by any Ishiya or the Arima hot springs, not from the roots to the leaves, no matter how far you go. Ah, what a dreary Ukiyo of darkness. Who would choose to become such an Onibaba of their own free will? You, the man they call you, are a cruel man. Now, what will you do for me?'</p>
+          <p class="en-p">With her hard, cold, wrinkled hands, she grabbed both of Kinsuke's arms with her Yunde, while clutching a Sazae Tsuboyaki in her right hand.</p>
+          <p class="en-p">Onibaba: 'Now, Kinsuke-sama, you are truly a heartless person. No, no, you are an impossible person. Now, what will you do with the body of this old hag?'</p>
+          <p class="en-p">As she spoke, she kept opening and closing her mouth, which was split all the way to her ears, and the repulsiveness of her pestering made his hair stand on end; when he felt a chill creeping down his Kubisujimoto and came to his senses with a start, he realized that the moment he had jumped into the Kiyoizumi of Izen, he had struck his Mukafuzune and had been in a state of Kizetsu.</p>
+          <p class="en-p">Looking to the side, he heard the Umekigoe of people, one after another, from within the darkness where one could not distinguish Shiseki.</p>
+          <p class="en-p">Thus, the night finally broke with the cawing of crows, and when he looked around, the six, Silver, Iron, Bear, Bee, Cannonball, and Smartball, were exposing their blood-stained faces, scratched by thorns, in the grass here and there, suffering in agony.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『エヽ困つた口の悪い婆が現はれたものだなア、人間でなければ三げんか、四けんか、五んげんさまか』</p>
+            <p class="ja-classical-line">『良い加減にお前さまも改心して、解脱さして呉れたら何うだいな。それが出来ねば何処迄もお前さまにくつ着いて行かねばならぬ。磁石が鉄に吸着くやうなものだ。スヰートハートした病は、お医者さまでも有馬の湯でも、根つから葉つから何処迄も癒りやせぬワイなア。アヽ味気なき闇の浮世だ。誰がすき好んでこんな鬼婆になりたいものか、お前と云ふ男は殺生な男だ。サア何うして下さる』</p>
+            <p class="ja-classical-line">と堅い冷たい皺だらけの手で、金助の両腕を左手に一掴みとなし、右の腕に蠑螺の壺焼を固めて、</p>
+            <p class="ja-classical-line">『これ金さま、お前は本当に情ない人だ。イヤイヤ喰へない人だ。サア此婆の身を何うして下さる』</p>
+            <p class="ja-classical-line">と耳迄引き裂けた口をパクパクさせながら口説きたてるその嫌らしさ、身の毛もよだち首筋元のぞわぞわと寒さにハツと気が付けば、以前の清泉の中に飛び込んだ途端、向脛を打ち、気絶して居た事が分つた。傍を見れば人の呻声、咫尺を弁ぜぬ闇の中から次々に聞えて来る。</p>
+            <p class="ja-classical-line">斯くして漸く夜は烏の声にカアと明け放れ、四辺を見れば、銀、鉄、熊、蜂、カナンボール、スマートボールの六人は、彼方此方の草の中に、荊蕀掻きの血だらけの顔を曝して苦悶して居た。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c09.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 9: Pure Spring [701]</span>
+      </a>
+      <a href="c11.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 11: Golden 像 [703]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: Ogre の解脱 [700] - Volume 22 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 22 Table of Contents</a>
+      <span>Volume 22</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 22 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: Ogre の解脱 [700]</h1>
+      <p class="chapter-title-ja">鬼の解脱〔700〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">With frost upon her Kashira, having passed half of this life, an old woman with a wrinkled face is on a Hitoritabi. The sound of insects gathering in the Kareno is heard faintly like a Danmatsuma. Even the rustling of the wind feels somehow lonely in the Aranohara, as she proceeds, leaning on her staff.</p>
+          <p class="en-p">In the Susukihara by the roadside, seven or eight Sekitafu with missing heads are buried, covered in moss and so aged that the characters are barely legible. Beside them stands an Ishijizau with its head removed, holding a jewel in its Hidarite, while its Migite has the Oyayubi and Nakayubi joined in a circle, with the Hitosashiyubi pointing sharply toward the sky. It appears that even the Jizau, thinking that Shiyujiyō without Kane are difficult to save, is so Shifunenbuka that even after having its head severed, it cannot let go of the desire for money, thus exposing its Shifuchiyakushin here as well.</p>
+          <p class="en-p">The old woman gazes intently and repeatedly at the jewel of the Jizau.</p>
+          <p class="en-p">Takahime: 'Hey, who are you? Is that jewel not the Niyoihotsushiyu? How did you steal this Shinpō that I, Takahime, have kept in Hizau? It must be divine retribution that your head is in this state. Come, hand it over to me at once.'</p>
+          <p class="en-p">She struggles to forcibly snatch it from the hand of the Ishijizau. From behind the Sekitafu, making the ears of miscanthus rustle, two old women and three men appear, calling out in weak voices.</p>
+          <p class="en-p">Voices: 'Takahime, Takahime.'</p>
+          <p class="en-p">Takahime is startled by these voices and casts her eyes toward the reed field; to her surprise, it is a group of five: Kurohime, Takayorihime, Ryūkokuwake, Teristan, and Karlins.</p>
+          <p class="en-p">Takahime: 'Hey, Kurohime-sama, what has become of the golden jewel? I instructed you five to divide the work, search the whole world, receive that jewel, and perform the Kototama talk, so why are you dawdling in a place like this?'</p>
+          <p class="en-p">Kurohime: 'I was treated unreasonably by you, and it became so unbearable that we all five threw ourselves into the sea of Tango and died. To clear this grudge, we have possessed you to take your life. Now, the five of us will gather, pull out your head, pull out your hands, pull out your feet, and torture you to death; prepare yourself.'</p>
+          <p class="en-p">So saying, she reveals a pale face, hangs both hands down in front from the chest like a mantis, and drifts toward Takahime from the front, back, left, and right, swaying with the wind.</p>
+          <p class="en-p">Takahime: 'Where do you think this place is? Are you still wandering after having gone to the Meido? Well, there is no help for the dead, so I shall forgive you now; you had better attain Buddhahood quickly.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">頭髪に霜を戴きし
+此世を半過ぎ去つた
+皺くちや婆の一人旅
+枯野にすだく虫の音も
+細く聞ゆる断末魔
+風のそよぎも何となく
+淋しさ交る荒野原
+杖を力に進み行く。</p>
+            <p class="ja-classical-line">道の傍の薄原に埋つた頭の欠けた石塔七つ八つ、苔生して字も碌に見え兼ねるばかり古びて居る。側に頭のとれた石地蔵、左手に玉を載せ、右手に親指と中指を合して輪となし、食指をツンと空に立て、地蔵も銭なき衆生は度し難しと、首まで刎られても執念深く、未だ金銭の欲が放せないと見え、此処にも亦執着心を遺憾なく暴露して居る。</p>
+            <p class="ja-classical-line">一人の婆は地蔵の玉をツクヅクと打眺め打眺め、</p>
+            <p class="ja-classical-line">『オイ、お前は何者ぢや、其玉は勿体なくも如意宝珠の玉ではないか、此高姫が秘蔵せし神宝を何時の間にか盗みよつて其天罰で貴様の首は此通り、サア早く此方へ渡せ』</p>
+            <p class="ja-classical-line">と石地蔵の手から無理にむしり取らうと藻掻いて居る。石塔の裏から萱の穂をガサガサ言はせながら、ヌツと現はれた二人の婆に三人の男、力なき声で、</p>
+            <p class="ja-classical-line">『高姫　高姫』</p>
+            <p class="ja-classical-line">と呼び止める。高姫は此声に驚いて萱原に目を注げば、豈図らむや、黒姫、鷹依姫、竜国別、テーリスタン、カーリンスの五人連れである。</p>
+            <p class="ja-classical-line">高姫『これ、黒姫さま、黄金の玉は如何なつた。お前達は五人連れで手分けして、世界中を探ね廻り、あの玉を受取り無言霊話を掛けよと吩咐けて置いたのに、斯んな所で何愚図々々して居るのだい』</p>
+            <p class="ja-classical-line">黒姫『妾は貴方に無体な事を言はれ、それが残念で残念で堪らなくなつて、到頭丹後の海へ五人一度に身を投げて死んだワイ喃。この怨恨を晴らさむ為めにお前に憑依いて生命をとつたのだ。サア之から五人が寄つて集つて、首を抜き手を抜き足を抜き、嬲殺にしてやらう、覚悟をなされ』</p>
+            <p class="ja-classical-line">と蒼白な顔を曝け出し、両手を乳の辺から蟷螂の様に前に下げ、風のまにまにフワリフワリと高姫の前後左右に押し寄せて来る。</p>
+            <p class="ja-classical-line">高姫『此処は何処と心得て居る、お前達は冥途へ行つて、まだ迷うて居るのか。エー死んだ奴は仕方がないから、もう許してやらう、早く成仏したが宜からうぞ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takayorihime: 'Because of you, the two of us, mother and child, are in this distress. You must think you are in the Genkai, but this is the eighth street of Jigoku. You are suffering from Seishinsakuran and are already traveling through Jigoku.'</p>
+          <p class="en-p">Takahime: 'Well, how strange.'</p>
+          <p class="en-p">As she placed her hand on her head, she found that, before she knew it, she had been made to wear a triangular paper Baushi.</p>
+          <p class="en-p">Takahime: 'Oh, this is Taihen. When did I die, I wonder? Now that it has come to this, there is no point in talking about the Jiyōjiyu of Shinsei. There is surely no precedent for a dead Ningen dying a second time. Since it has come to this, I will throw caution to the wind, stake my Inochi, and drag you all down to the very bottom of the cauldron of Jigoku. Prepare yourselves!'</p>
+          <p class="en-p">She shouted with her eyes narrowed in rage. Tatsukuniwake became Itakedaka and said,</p>
+          <p class="en-p">Tatsukuniwake: 'Listen here, Takahime. That you have caused us, mother and child, to suffer like this is all your fault. No matter how much you may Guwanba, there are five of us and only one of you; you can never hope to overcome such odds. Now, prepare yourself!'</p>
+          <p class="en-p">He grabbed at Takahime with his thin arms. Teristan and Karlins raised their clubs and attacked, intending to crush her from both sides. Kurohime and Takayorihime shook their shoulders, thrust out their chins, and laughed with apparent delight,</p>
+          <p class="en-p">Kurohime and Takayorihime: 'Ho-ho-ho-ho, ho-ho-ho!'</p>
+          <p class="en-p">Even the formidable Takahime found herself at a dead end, and fleeing for her Inochi, she ran aimlessly through the withered field. The five pursued her, shouting,</p>
+          <p class="en-p">The five: 'Hey, hey! Wait, wait!'</p>
+          <p class="en-p">She came to a sudden halt at a large river; if she hesitated, she might be caught by the five. Determined to leap across the cauldron of Jigoku and go as far as she could, Takahime threw herself into the muddy torrent with a splash. She reached the opposite bank by swimming across, changed her clothes, and instantly transformed into an old woman doing laundry. The two followed, jumping in with a splash. The three men stripped naked, tied their clothes to their heads, and swam across to the other side. Takahime said,</p>
+          <p class="en-p">Takahime: 'This is Taihen.'</p>
+          <p class="en-p">Clutching her wet clothes, she ran off into the withered pampas grass, naked and covered in scratches, running as hard as she could for breath. The five pursued her with deep persistence.</p>
+          <p class="en-p">Takahime crouched down in the withered pampas grass that was tall enough to hide her. The five arrived, running with all their might, and said,</p>
+          <p class="en-p">The five: 'Hey, it smells, it smells! It smells like Takahime!'</p>
+          <p class="en-p">They sniffed around everywhere like dogs. Takahime looked out from the pampas grass in fear and saw the five figures. It was a mistake to think they were Kurohime, Takayorihime, Tatsukuniwake, Teristan, and Karlins; they were all blue, red, and black Oni, brandishing iron clubs, knocking down the pampas grass one by one, and beginning a rigorous search for where Takahime might be hiding. The five male and female Oni,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鷹依姫『お前の為めに母子二人が此難儀、お前は現界の積りだらうが、此処は地獄の八丁目だ、精神錯乱してお前は最早地獄の旅をして居るのだよ』</p>
+            <p class="ja-classical-line">高姫『はて、不思議』</p>
+            <p class="ja-classical-line">と頭に手を当てて見れば、何時の間にか三角形の紙の帽子を被せられて居る。</p>
+            <p class="ja-classical-line">『ヤア、こりや大変だ、いつの間に死んだのかなア。もう斯う成つては神政成就も糞もあつたものぢやない。死んだ人間が二度死ぬ例はあるまい。此上は破れかぶれ、生命を的にお前達を滅して地獄の釜のどん底へ連れて行つてやらう。覚悟をせよ』</p>
+            <p class="ja-classical-line">と目を釣つて呶鳴りつけた。竜国別は威丈高になり、</p>
+            <p class="ja-classical-line">『こりや高姫、俺等母子を斯んな目に遇はせよつたのも、元は貴様故ぢや。何程貴様が頑張つても此方は五人其方は一人、到底衆寡敵する事は出来まい。サア覚悟をせい』</p>
+            <p class="ja-classical-line">と細い腕でグツと高姫を掴みにかかる。テーリスタン、カーリンスは棍棒を持ち、両方から叩き潰して呉れむと打つてかかる。黒姫、鷹依姫は肩を揺り腮をしやくり、小気味よささうに、</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、ホウホウホウ』</p>
+            <p class="ja-classical-line">と笑つて居る。流石の高姫も進退維れ谷まり、生命からがら枯野ケ原を当途もなく逃げて行く。後より五人は、</p>
+            <p class="ja-classical-line">『オーイオーイ、待つた待つた』</p>
+            <p class="ja-classical-line">と追ひ駆け来る。ピタツと行き当つた大川、愚図々々して居れば五人に取捉まるかも知れぬ。地獄の釜の一足飛び、行く処まで行かむと決心の臍を固めた高姫は、身を躍らして濁流へバサンと飛び込み、流れ渡りに向岸に着いて、着衣を換へて忽ち洗濯婆となつて了つた。続いて二人はバサンバサンと飛び込んだ。三人の男は真裸となり、着衣を頭に括りつけ泳いで此方へ渡つて来る。高姫は、</p>
+            <p class="ja-classical-line">『こりや大変』</p>
+            <p class="ja-classical-line">と濡れた着物を引抱へ、真裸のまま枯れた薄ケ原を身体中擦傷を負ひながら、呼吸を限りに何処ともなく駆けだした。五人は執念深く追つ駆けて行く。</p>
+            <p class="ja-classical-line">高姫は身を没する許りの枯れた薄の中に蹲んで居る。五人は一生懸命駆けつけ来り、</p>
+            <p class="ja-classical-line">『ヤア、臭いぞ臭いぞ、高姫の臭がするぞ』</p>
+            <p class="ja-classical-line">と其処中を犬の様に嗅ぎつけ廻る。高姫は薄の中から怖々五人の姿を見れば黒姫、鷹依姫、竜国別、テーリスタン、カーリンスと見えしは謬まり、何れも青、赤、黒の鬼の姿で金棒を打ち振り、萱原を片端から将棋倒しに叩いて廻り、高姫の在処は何処ぞと厳重に捜索し始めた。五人の男女の鬼は、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Ah, I am tired. If we have not found him by now, he must have fled to the other side. He is a fellow with nimble legs, as one would expect. He is reputed to be a glib talker in the Genkai, but this is what they mean by being glib of tongue and swift of foot. If we dally, he might break through our barrier and escape to Tengoku. Come, let us go quickly.'</p>
+          <p class="en-p">He runs off. One of the ogres says:</p>
+          <p class="en-p">'Hey, you four, go on ahead. I will remain here for a while longer to conduct a re-investigation... Somehow, my nose detects the scent of Takahime, and I cannot help but follow it.'</p>
+          <p class="en-p">The four ogres say:</p>
+          <p class="en-p">'We leave the rest to you, make sure you do it well.'</p>
+          <p class="en-p">The sound of them panting and running off with a clatter echoes like thunder in the ears of Takahime. Takahime is hiding only two or three ken away behind some pampas grass, while the Akaoni stands there with his horns thrust upward, his giant eyes bulging, and smoking a pipe of Sunatabako; she is trembling, shrinking down, unable even to breathe properly, her heart not her own.</p>
+          <p class="en-p">Akaoni: 'Ah, while I was alive, I was called Kurohime, and people said I was black, so black. But now that I have come to this Meido, my whole body has turned into a bright red Akaoni. However, Takahime-sama is a pitiable soul, despite what they say. I must find a way to help her. She must be somewhere around here. Now that I have scattered the others like that, it is safe. I must sniff her out as soon as possible and rescue Takahime-sama. Ah, the four fellows have gone quite far ahead.'</p>
+          <p class="en-p">Muttering this in a low voice, he treads through the ears of miscanthus and appears at the place where Takahime is hiding.</p>
+          <p class="en-p">'Takahime-sama, it has been a long time.'</p>
+          <p class="en-p">Takahime: 'Yes, who might you be? Please, I beg you, have mercy on me.'</p>
+          <p class="en-p">'I am the Akaoni. As you know, I had my golden orb stolen, and the regret and bitterness of that remained, so I have appeared here as an Akaoni. You must also be bitter about having your orb stolen. If you dally, another group of ogres will come, and there is no telling what they might do to you. Come, please climb onto my back, and I shall accompany you to the mountain over there. That place is the safest zone in the Yūkai.'</p>
+          <p class="en-p">At these kind words, which did not match his terrifying face, Takahime feels a sudden sense of relief.</p>
+          <p class="en-p">Takahime: 'Ah, so you were Kurohime? Please, I beg you, save me.'</p>
+          <p class="en-p">'I understand.'</p>
+          <p class="en-p">With that, he carries Takahime lightly on his back, as if a Nio were carrying a triplet, and clutching his iron club, he sets off.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『アヽ疲れた。もう此処まで探して居らねば先方へ逃げたのだらう。思惑とは脚の達者な奴だ。現界では口達者だと評判な奴だが、口八丁足八丁とは此奴の事だ。グヅグヅして居ると俺等の関門を突破して、天国へ遁走するかも知れないぞ。サア早う行かう』</p>
+            <p class="ja-classical-line">と駆け出す。一人の鬼は、</p>
+            <p class="ja-classical-line">『オイ、貴様達四人、先へ行け。俺は未だ此処に暫時残つて再調査をやつて見るから……如何も俺の鼻には高姫の臭がして仕方がない』</p>
+            <p class="ja-classical-line">四人の鬼は、</p>
+            <p class="ja-classical-line">『あと確り頼んだぞ』</p>
+            <p class="ja-classical-line">と息せききつてバタバタ駆け出す音、高姫の耳に雷の如く響いて来る。高姫は二三間薄を隔てて赤鬼が角突き立て、巨眼を剥き出し砂煙草を吸うて居るのに、心も心ならず、呼吸さへようせず小さくなつて慄へて居る。</p>
+            <p class="ja-classical-line">鬼『あゝ俺も生存中は黒姫と言つて色が黒い黒いと言はれた者だが、斯う冥途へ来て見れば身体中が真赤けの赤鬼となつて了つた。然し高姫さまは、あゝ言ふものの気の毒な事だ。如何かして助けて上げたいものだなア。何でも此辺に居るに違ひない。皆の奴をあゝしてまいた以上は、もう大丈夫だ。一時も早く嗅ぎつけて高姫さまを救ひ出さねばなるまい。ヤア四人の奴は大分先方へ行つた』</p>
+            <p class="ja-classical-line">と小声に呟きながら、高姫の潜める場所へ萱の穂を踏み分け現はれ来り、</p>
+            <p class="ja-classical-line">『高姫さま、久振りでしたなア』</p>
+            <p class="ja-classical-line">高姫『ハイ、貴方は誰方で御座いますか。何卒お許し下さいませ』</p>
+            <p class="ja-classical-line">『私は赤鬼ぢや、お前さまの知つている通り黄金の玉を盗られた、その悔しさ残念さが残つて今此処に赤鬼となつて現はれたのだ。お前さまも玉を盗られて悔しからう。グヅグヅして居ると又鬼の群がやつて来て何んな目に遭はすか知れませぬぞえ。サア私の背中に負ぶさつて下さい、之から向ふの山へお伴致しませう。其処は幽界第一の安全地帯です』</p>
+            <p class="ja-classical-line">と恐ろしい顔に似ず親切な言葉に、高姫はヤツと安心し、</p>
+            <p class="ja-classical-line">『あゝお前は黒姫であつたか、何卒妾を助けて下さい』</p>
+            <p class="ja-classical-line">『承知しました』</p>
+            <p class="ja-classical-line">と高姫を仁王が三つ児を負うた様に軽々しく背に負ひ、金棒を引抱へ、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Yoisho, yoisho.'</p>
+          <p class="en-p">Keeping time with an Ashibiyōshi, she trod over the rugged, thorn-covered Noyama with the speed of an Idaten, without the slightest difficulty, climbing and descending nearly twenty or thirty mountains, and in the blink of an eye, descended to the edge of a pond where lush, green Tamagusa grew.</p>
+          <p class="en-p">At this moment, the waves of the pond suddenly began to churn, though there was no wind. Takahime, wrapped in a cloud of Fushin, kept her eyes fixed on the surface of the pond, Mitsume-ing it without looking away. The Akaoni suddenly leaped into the churning Chichiu with a splash.</p>
+          <p class="en-p">All that remained behind was the Kanabō.</p>
+          <p class="en-p">Takahime: 'Well, this is a terribly heavy thing to carry.'</p>
+          <p class="en-p">When she grasped it in her hand to look, it was a Kanabō made of Hariko, crafted from a paulownia tree.</p>
+          <p class="en-p">Takahime: 'Hmph, you are making a Baka of me. What is this? I thought it was a great Kanabō, but it is a Kanabō no better than an Ogara, as if patched together with Hanakuso. If it were a fellow like this, I could trample five or ten, or even a thousand or ten thousand, all at Itsupen. Even so, I wonder if Kurohime's Akaoni threw itself into this pond and died. It is truly a Fubin thing.'</p>
+          <p class="en-p">No sooner had she taken hold of the Kanabō than her own form suddenly transformed into a Matsukuro Kurōni. After a while, the form of Kurohime floated up to the surface of the water.</p>
+          <p class="en-p">Takahime: 'Ah, Kurohime-sama, what has become of your Ogre form?'</p>
+          <p class="en-p">Kurohime: 'I had an attachment remaining to that Kanabō, and so I had become an Ogre; but when I came here, cast aside the Kanabō, left my fate to Heaven, and threw myself into this pond, a magnificent Goddess, like the Otohime-sama of the Ryūgū, appeared within the pond, peeled off my Ogre skin, and restored me to my former body. You, too, must cast away that Kanabō. If you have an attachment to such a thing, you will immediately become an Ogre just like that. The Kanabō is foolish, but if you have an attachment to even something with form, such as a jewel, you must fall into an even more painful hell.'</p>
+          <p class="en-p">So saying, she alighted lightly upon a reed leaf floating on the waves and laughed with an air of ease.</p>
+          <p class="en-p">At this time, the four previous Ogres appeared on the scene at full speed, carrying their Kanabō, and said:</p>
+          <p class="en-p">Ogres: 'Ya, so Takahime was here. Prepare yourself. Before we knew it, you have become one of our companions. This is extremely presumptuous. Come, we shall strike you down. Prepare yourself.'</p>
+          <p class="en-p">They attacked from all four directions with their Kanabō.</p>
+          <p class="en-p">Takahime: 'What? Why should I fear a Kanabō like an Ogara? Come on then.'</p>
+          <p class="en-p">Just as she picked up the iron rod that Kurohime had discarded and braced herself to strike back, Kurohime, who had floated to the surface of the water, said:</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ヨイシヨ　ヨイシヨ』</p>
+            <p class="ja-classical-line">と足拍子をとりながら、茨だらけの嶮しき野山を何の苦もなく韋駄天走りに踏み越え踏み越え、殆ど二三十ばかりの山を登りつ下りつ、瞬く間に青々した玉草の生えて居る池辺へ下した。</p>
+            <p class="ja-classical-line">此時池の波、俄に風もなきに立ち騒ぎ始めた。高姫は不審の雲に包まれつつ池の面を目を放さず凝視て居る。赤鬼は忽ちザブンと波たつ池中に身を躍らして飛び込んだ。あとに残るは金棒ばかりである。</p>
+            <p class="ja-classical-line">高姫『こりや、大変な重いものを持つたものだナ』</p>
+            <p class="ja-classical-line">と手に握り見れば、桐の樹で作つた張子の金棒であつた。</p>
+            <p class="ja-classical-line">『へん、莫迦にして居る。何だ、大きな金棒だと思つて居たのに、斯んな鼻糞で的を貼つた様な苧殻同然の金棒だ、こんな奴なら五本や十本、仮令千本万本でも一遍に踏み躙つて了つてやる。それにしても黒姫の赤鬼、此池に身を投げて死んだのであらうか、真に不愍な事だ』</p>
+            <p class="ja-classical-line">と金棒を持つや否や、俄に自分の姿は真黒けの黒鬼と化して了つた。暫くすると黒姫の姿は水面に浮び上がつた。</p>
+            <p class="ja-classical-line">高姫『あゝ黒姫さま、鬼の姿は如何なつた』</p>
+            <p class="ja-classical-line">黒姫『妾は其金棒に執着が残つて居つて、鬼となつて了つたのだが、此処へ来て金棒を放擲し、運を天に任し此池の中へ身を投じた処、池中に竜宮の乙姫さまの様な立派な女神さまが現はれて、妾の鬼の皮を剥ぎとり、旧の肉体にして下さつたのです。お前さまも其金棒を放かしなさい。そんな物に執着があると、其通り忽ち鬼になつて了ひますよ。金棒は愚、形ある玉なんかに執着すると、ま一つ苦しい地獄へ陥ちねばなりませぬ』</p>
+            <p class="ja-classical-line">と波の上に浮ぶ葭の葉に軽く止まつて気楽さうに笑つて居る。</p>
+            <p class="ja-classical-line">此時以前の四人の鬼、金棒を提げ一目散に此場に現はれ、</p>
+            <p class="ja-classical-line">『ヤア、高姫は此処に居つたか、覚悟を致せ。何時の間にやら俺の仲間になりよつた。僣越至極、サア打ち倒めしてやらう。覚悟をせよ』</p>
+            <p class="ja-classical-line">と四方より金棒を以て打つてかかる。</p>
+            <p class="ja-classical-line">『何ツ、苧殻の様な金棒が何恐ろしいか。さア来い』</p>
+            <p class="ja-classical-line">と自分も黒姫の捨てた鉄棒を拾ひ、打つてかからうと構へる折しも、水面に浮んだ黒姫は、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'You must not be attached to such things. Let them go!' she cried at the top of her voice. Startled by those words, Takahime threw them away on the bank of the pond, leaped up, and plunged with a splash into the blue-tinged surface of the water, fixing her gaze upon it. Following her, the four ogres likewise threw away their iron rods and leaped in with similar splashes. The moment they sank to the bottom of the water, a beautiful goddess appeared on the scene and spoke in a gentle voice: 'Thou art not yet one who should come to the Iukai; return at once. Thou hast been led astray to such a place, dragged by the demon of Shifuchiyakushin. I am Sawadahimenomikoto, also known as Jizaubosatsu. Quickly cast off this ogre's garment.' At these words of admonition, the five were startled and prostrated themselves, and in that instant, they returned to their original forms. Before they knew it, the water of the pond had vanished without a trace, and they were standing in the midst of a beautiful field where flowers of yellow, red, white, and purple were blooming in profusion, bathed in a cool breeze. Suddenly, the sound of Norito was heard. Looking up at the sky, they saw Kotoyoriwakenomikoto, Kotoyorihimenomikoto, Tamaharuwake, Kuniyoriwake, Murasakihime, Wakahiko, Otama-no-kata, Tokiokishikami, Kototeruhime, and Ohatsu, followed by Tamateruhiko, Tamateruhime, and others, descending to this place, riding on clouds. As they watched, they suddenly felt a coolness as if they had been doused with cold water, and upon opening their eyes, they found themselves held by Tokiokishikami, while Kotoyoriwakenomikoto and the others sat around their pillows, chanting the Amatsu Norito and various songs.</p>
+          <p class="en-p">From this time on, Takahime's illness was completely cured, as if it had been wiped away. What kind of activities will Takahime engage in from now on?</p>
+          <p class="en-p">Alone on the withered moor,
+With no one to ask the way, alas,
+With a pounding heart, Takahime
+Trudges along the dark path.
+In the lonely pampas grass nearby,
+A group of five with gaunt faces,
+Looking closely, what is this?
+Starting with Takayorihime,
+Kokoro-no-Kurohime and Ryūkokubetsu,
+Theristan and Carlins,
+Have become the dead and, catching sight
+Of Takahime's form, they come to attack.
+Thinking this will not do, she flees
+At full speed like clouds and mist,
+But her heart leaps at the waves
+Of the great river lying across the path.
+Looking back over her shoulder,
+The five suddenly turn into ogres,
+Brandishing iron rods and chasing after her.
+Namu Sanbō, what a great crisis!</p>
+          <p class="en-p">With the raging torrent of water before and behind,
+She plunges in with a splash,
+And reaches the opposite shore by swimming across.
+Just as she catches her breath and wrings out her wet clothes,
+The ogres cross the river and close in on her.
+With all her might, Takahime
+Hides herself in the thicket of tall reeds,
+Trembling as she waits.
+The five ogres persistently
+Search far and near, saying Takahime smells,
+Which is truly terrifying.
+The four ogre fellows, leaving one behind,
+Run off in a flurry to search for her form.
+The remaining ogre, with a kindness unsuited to an ogre,
+Carries Takahime on his back,
+Crossing many mountains and valleys,
+Until they reach the edge of a pond where clear water drifts.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『そんな物に執着してはなりませぬ。放かしなさいよ』</p>
+            <p class="ja-classical-line">と声を限りに叫ぶ。其言葉にハツと気がつき、池畔に投げ棄て、身を躍らして高姫は蒼味だつた池の面目蒐けてバサンと飛び込む。続いて四人の鬼は同じく鉄棒を投げ、同様にバサンバサンと身を躍らした。忽ち水底に沈んだ時、麗しき女神の一柱此場に現はれ、言葉淑かに、</p>
+            <p class="ja-classical-line">『汝は未だ幽界に来るべき者に非ず、一刻も早く立ち帰れ。執着心の悪魔に引き摺られ斯んな所まで迷うて来たのだ。妾は小和田姫命、亦の名は地蔵菩薩だ。早く此鬼の衣を脱げ』</p>
+            <p class="ja-classical-line">と諭しの言葉に五人はハツと鰭伏す途端に元の姿に復つて了つた。池の水は何時しか影もなく、黄紅白紫に咲き乱れたる美はしき原野の真中に花と花とに囲まれ、涼しき風を身に浴びながら立つて居た。忽ち聞ゆる祝詞の声、空を見上ぐれば、言依別命、言依姫命、玉治別、国依別、紫姫、若彦、お玉の方、時置師神、言照姫、お初を始め玉照彦、玉照姫、雲に乗り悠々として此場に降り来るよと見る間に、忽ち全身冷水を浴びたる如く涼しさを感ずると共に目を開けば、時置師神に抱かれ、言依別命以下の枕辺に端座して、天津祝詞や数歌を奏上しつつあつた。</p>
+            <p class="ja-classical-line">是より高姫の病気は、拭ふが如く全快した。今後高姫は如何なる活動をなすであらうか。</p>
+            <p class="ja-classical-line">枯野ケ原を只一人
+道問ふ人もあら涙
+胸の動悸も高姫が
+とぼとぼ進む暗の路
+かたへの淋しき薄野に
+顔痩せこけた五人連
+よくよく見ればコハ如何に
+鷹依姫を始めとし
+心の黒姫竜国別
+テーリスタンやカーリンスが
+亡者となつて高姫の
+姿見かけて攻め来る
+コリヤ叶はぬと雲霞
+一目散に逃げ出せば
+途に横たふ大河の
+波に胸をば躍らせつ
+後振り返り眺むれば
+五人は忽ち鬼となり
+金棒打振り追ひ来る
+南無三宝や一大事</p>
+            <p class="ja-classical-line">前後も水の激流に
+ザンブとばかり飛び込んで
+流れ渡りに向ふ岸
+ヤツト一息濡衣を
+搾る折しも鬼共は
+河を渡りて追ひ迫る
+一生懸命高姫は
+丈なす萱の茂みへと
+身を忍びつつ震ひ居る
+五人の鬼は執拗に
+高姫臭いと遠近を
+探し廻るぞ恐ろしき
+四ツの鬼奴は赤鬼を
+一つ残して一散に
+姿求めて走り行く
+残りし鬼は高姫を
+鬼に似合はぬ親切に
+背に負ひつつ山谷を
+幾つも越えて清水の
+漂ふ池の袂まで</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Luring them on, she cast her Kanabō suddenly into the Chichiu, and leaping into the water, she sank within. Just then, the four Shiki came running, crying out that this was where Takahime was, and brandishing their Kanabō, they struck toward her. With her Shintai thus cornered, Takahime dived into the pond, and the four Shiki followed her to the bottom. Suddenly, the water parted to the Migihidari, and the beautiful figure of a Megami appeared clearly. As she washed away their Shifuchiyakushin, Takahime and the five ogres returned to their original, noble Mitama. As I watched this, the dream suddenly broke, and looking at the Atari, I saw Kotoyoriwake-no-Kami-no-Mikoto, along with Mokusuke, Ohatsu, and others, gathered at the Biyōshiyō.</p>
+          <p class="en-p">In the midst of their offering the Amatsunorito and the Kototama to Kami, even the stubborn Takahime finally attained enlightenment, casting aside her heart of Shifuchiyaku and truly understanding the path of Ananahi. Resolving to uphold the Kamigoto of Kotoyoriwake-no-Kami and devote herself to the path, she undertook the Gokeirin of Mitamamiga. Truly, the affairs of the Kamikai are such that no matter how much a common mortal may struggle, they are beyond the reach of human wisdom. Through the noble intervention of the Kami, Takahime finally grasped the center of the target; this story is recorded here in outline. Ah, Kannagara-kamu-nagara, may the spirits be blessed.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">誘ひ行きて金棒を
+忽ち投げ棄て池中に
+身を躍らして沈み入る
+時しも四ツの鬼共は
+高姫此処かと駆け来り
+金棒翳して打向ふ
+進退茲に谷まりて
+高姫池中に飛び込めば
+四鬼も続いて池の底へ
+たちまち水は右左
+サツと別れて美はしき
+女神の姿ありありと
+現はれ給ひ執着心を
+洗ひ落せば高姫も
+五つの鬼も元の如
+尊き身魂と還るよと
+見ればたちまち夢破れ
+四辺を見れば言依別の
+神の命を始めとし
+杢助お初その外の</p>
+            <p class="ja-classical-line">人々病床に集まりて
+天津祝詞や言霊の
+神に奏上のまつ最中
+流石頑固の高姫も
+いよいよ覚りて執着の
+心を捨てて三五の
+誠の道を真解し
+言依別の神言を
+守りて道に尽すべく
+霊魂研きの御経綸
+実に神界の御事は
+凡夫の如何にあせるとも
+窮知し得べくもあらたふと
+かしこき神のお取なし
+高姫始めて中心の
+的を掴みし物語
+ここにあらあら誌しおく
+あゝ惟神々々
+御霊幸はへましませよ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 囈語 [699]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: Pure Spring [701]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

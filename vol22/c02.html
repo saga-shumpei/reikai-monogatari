@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 2: 探り合ひ [694] - Volume 22 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 22 Table of Contents</a>
+      <span>Volume 22</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 22 &bull; Chapter 2</span>
+      <h1 class="chapter-title-en">Chapter 2: 探り合ひ [694]</h1>
+      <p class="chapter-title-ja">探り合ひ〔694〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kurohime, having lost the whereabouts of the Ōgon jewel entrusted to Kotoyoriwake, returned to her own mansion while harboring suspicions toward the two men, Teristan and Karlins, and having seated the two before her, she offered them tea to appease their mood, and while threatening and coaxing them, she questioned them; though the two, being innocent and having nothing to be ashamed of, confessed with tear-choked voices, Kurohime’s heart remained troubled and would not easily clear, and as they looked at each other’s faces, wondering what to do, they sat with arms folded, looking down and remaining silent, which was a pitiful sight.</p>
+          <p class="en-p">Kurohime: 'Since humans are the living shrines of Kamisama, you must be honest to the very end. No matter what sins you may have committed, if you repent, Ōkamisama will look upon you with Kamunahohi and Ōnahohi, and will look again, listen again, and declare again to rectify you. Because this world is governed by Kamisama, who is as clear as the sun and moon from corner to corner, you cannot deceive the eyes of Kami even in the smallest matter. It would be a terrible disadvantage if you were to achieve your goals in this fleeting world only to suffer in the eternal and infinite spirit world, so I speak for the sake of Kamisama, for the sake of the people of the world, and for the happiness of your own souls, so tell me clearly where the jewel is. No matter how long you sit there with your arms folded in thought, evil will never return to good. The single act of stealing will never vanish throughout the ten thousand eons. Come, before it becomes widely known, confess every detail to me. It will become my failure and your sin, so if you only confess to me now, everything will be settled in peace and tranquility right here and now. Come, Teristan, Karlins, tell me honestly at once.'</p>
+          <p class="en-p">Teristan: 'This is yet another inquiry, but no matter what you say, is there any other way than to answer that I do not know what I do not know?'</p>
+          <p class="en-p">Kurohime: 'Eh, are you going to feign ignorance again? My, what incomprehensible people you are. Hey, hey, Karlins, you are an honest man. Since you have helped me, you have a virtuous face that seems to come from nowhere. You look just like the figure of Kamisama. Surely, because you are pure and clean in both spirit and body, you are hiding it because you think you must not break a firm promise to Teristan, but such concern is unnecessary. Think about it according to the gravity and scale of the matter. Even if you confess everything to me, it will by no means cause Teristan suffering or blame. In the end, it will be a great joy for Teristan, for me, and for you, as it was just a momentary impulse. Everyone has such things when they are young, so surely Kamisama will look again, listen again, and rectify you. No matter how bad you may have been, I will look again, listen again, and with a fresh heart, I will wash away everything that has happened into the river, and I will trust you and associate with you, so come, quickly, Karlins, speak up.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">言依別に託されし、黄金の玉の行方をば、見失ひたる黒姫は、テーリスタンやカーリンス、二人の男に疑ひを、抱きながらにトボトボと、己が館に立ち帰り、二人を前に坐らせつ、茶の湯を進め機嫌をとり、威しつ慊しつ訊ぬれば、素より二人は白紙の、疚しき所なく涙、声を絞つて弁解すれど、容易に晴れぬ黒姫の、胸に心を悩ませつ、互に顔を見合せて、如何はせむと腕を組み、差俯向いて黙然たるぞ憐らしき。</p>
+            <p class="ja-classical-line">黒姫『人間は神様の生宮だから、何処までも正直にせなくてはなりませぬぞや。如何なる罪科があつても、悔い改めたならば大神様は、神直日大直日に見直し、聞直し、宣直して下さるのだ。此の世の中は、隅から隅まで日月の如く明かなる神様の御支配であるから、どんな小さいことでも神の御眼を眩ますことは出来ない。わづかの此の世で目的を達しても、永遠無窮の神界で苦しみを受けるやうなことが出来ては大変な不利益だから、私は神様のため、世人のため、又お前達両人の身魂の幸福のために云ふのだから、綺麗薩張と玉の在処を知らしておくれ。何時まで腕組思案してゐた処で、悪が善に復る筈はない。盗むと云ふ一事は何処迄も万劫末代消えませぬぞえ。サ、あまり世間にパツとせない間、私に一伍一什を白状して下さい。私の落度にもなり、お前さまの罪にもなるのだから、今の間に私に白状しさへすれば、此場限りで何処も彼も天下泰平無事安穏に治まる訳だから。サア、テーリスタン、カーリンス、早く素直に言つておくれ』</p>
+            <p class="ja-classical-line">テーリスタン『これは又してもお訊ねですが、何と仰有つても知らぬ事は知らぬと答へるより外に途が無いぢやありませぬか』</p>
+            <p class="ja-classical-line">『エー又しても白ツぱくれなさるのか。さてもさても分らぬ人だなア。これこれカーリンス、お前は正直者だ。私を助けて呉れただけあつて、何処ともなしに徳のある顔をして居る。神様のお姿みたやうだ。屹度お前は霊肉共に清浄潔白だから、テーリスタンに対し堅い約束を破つてはならないと隠してゐるのだらうが、そんな心遣は要らぬ事だ。事の軽重大小により考へて見なさい。お前が私に全然白状をしたと云つても、決してテーリスタンを苦しめるのでも責めるのでもない。畢竟テーリスタンも、私も、お前も大慶だし、ツイ当座の出来心だから。若い時には誰しもある事だから、屹度神様は見直し聞直し、宣直して下さる。私も何程お前が悪うても、見直し、聞直し、初の心で今までの事は川へサラリと流し、心許して交際をさして貰ふから、さア、チヤツとカーリンス、言はつしやいよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Karinsu, scratching his head, said:</p>
+          <p class="en-p">Karinsu: 'Hey, Anata, I understand your Okotoba well.'</p>
+          <p class="en-p">Kurohime: 'That is right, you understand, do you not? As expected, you are Terisutan's brother, so you are clever and great. Honesty is the treasure of this world. Hey, Karinsu.'</p>
+          <p class="en-p">Karinsu: 'Moshi, Kurohime-sama, if I say I know something that I do not know, would that still be considered sincerity?'</p>
+          <p class="en-p">Kurohime: 'It is bad to say you do not know what you do know. If you simply say, "I know, and I did such and such," even you, who have committed a monstrous Tamanusuto, will have your sins erased, and Ōkamisama will praise you as a Sunaho fellow.'</p>
+          <p class="en-p">Karinsu: 'Oi, Terisutan, if we get involved with such a grandmother, it is like sticking our feet into a birdlime bucket. What should we do?'</p>
+          <p class="en-p">Terisutan: 'Even if you say that, it would be a Gonangi for Kurohime-sama, who has always treated us with Taisetsu, so it is Shikata that she asks us so strictly and Shitsuko. If you put yourself in Kurohime-sama's Tachiba, it is not Muri. But having said that, it is truly Meiwaku for us two.'</p>
+          <p class="en-p">Kurohime: 'Even though you Mahetachi understand things to that extent, why do you make me impatient? Nusubitotakedake is exactly what describes you. When others act Otona, you get carried away, and like a toothless person chewing an octopus, you only give vague answers... Eh, how irritating. You are troublesome thieves.'</p>
+          <p class="en-p">She struck the round hibachi with her long pipe with a loud clanging sound, narrowed her eyes sharply, raised one knee, sat sideways, and panted. Just then, it appeared to be dawn at the high tower of Nishiki no Miya, and the Miroku drums, signaling the start of the Norito recitation, began to resound.</p>
+          <p class="en-p">Terisutan: 'Oi, Karinsu, that is the sound of the Miroku drums; it is already time for the service. Shall we be excused for a moment and go to worship?'</p>
+          <p class="en-p">Karinsu: 'Oh, that is right. Kurohime-sama, please calm your heart and think about our innocence. We are going to worship now.'</p>
+          <p class="en-p">Kurohime: 'Ohohoho, the Miroku drums are a convenient rescue boat for you. However, whether it is Miroku or Shichigosan, you shall not worship. Until this matter is resolved, Kurohime will not permit you to worship. How could you go to worship the gods with such a thief's mentality and defile the magnificent shrine? You cursed fellows, this is a bit different from the teachings of the Alps religion.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">カーリンスは頭を掻きながら、</p>
+            <p class="ja-classical-line">『ヘイ貴女の御言葉はよく分つて居ります』</p>
+            <p class="ja-classical-line">『さうだらう、分つたぢやらう。矢張りお前はテーリスタンとは、一寸兄貴だけあつて賢い、偉いものだ。正直は此世の宝だ。なア、カーリンス』</p>
+            <p class="ja-classical-line">『モシ黒姫様、知らぬことを知つたやうに云つたら、それでも誠になりますか』</p>
+            <p class="ja-classical-line">『知つたことを知らぬと云ふのが悪いのだ。知つたことを「知つて居ります、斯様々々致しました」と言ひさへすれば、途方もない玉盗人をしたお前も、罪が消えて却て素直な奴だと大神様が誉めて下さるぞえ』</p>
+            <p class="ja-classical-line">『オイ、テーリスタン、斯んな婆さまに掛り合つたら、とりもち桶へ脚を突込んだやうなものだなア。何うしたらよからうか』</p>
+            <p class="ja-classical-line">テーリスタン『それだと云つて第一吾々を日頃から大切にして下さる黒姫様の御難儀になるのだから、あゝして厳しう執拗くお訊ねなさるのも仕方がない。黒姫様のお立場になれば無理もないよ。ぢやと云つて吾々両人は本当に迷惑だなア』</p>
+            <p class="ja-classical-line">『お前達其処迄物が分つて居りながら、何故私を焦らすのだい。盗人猛々しいとはお前達のことだよ。他が温順しく出ればつけ上り、歯抜けが蛸を噛むやうにグヂヤグヂヤと歯切れのせぬ返事ばつかりして………エー辛気臭い。困つた泥坊だなア』</p>
+            <p class="ja-classical-line">と長煙管で丸火鉢をクワンクワンとはたき、眼をキリツと釣り上げ、片膝を立てて斜に構へ息を喘ませて見せた。折柄錦の宮の高楼に夜明と見えて、祝詞奏上の始まる五六七の太鼓が響いて来た。</p>
+            <p class="ja-classical-line">『オイ、カーリンス、あれは五六七の太鼓の音、モー御礼だ。一先づ御免を蒙つて参拝をして来うかい』</p>
+            <p class="ja-classical-line">『オーそうだ、黒姫様、ゆつくり心を落着けて吾々の無実を御考へ下さいませ。これからお詣りして来ます』</p>
+            <p class="ja-classical-line">『オホヽヽ、五六七の太鼓は、お前さまの為には結構な助け舟だ。併し乍ら五六七でも七五三でもお詣りは出来ませぬよ。此の話の解決がつくまで参拝は黒姫が許しませぬ。そんな盗人根性で神様へ詣つて、結構な御宮様を汚すと云ふ事があるものか、罰当り奴が、アルプス教の教とはチツト違ふぞえ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">With that, he sharpened his voice once more and struck the Hibachi.</p>
+          <p class="en-p">Telistan: 'Hey, Kiyōdai, what shall we do? We have gotten ourselves into a terrible situation.'</p>
+          <p class="en-p">Speaker: 'Whether you are caught or not is your own Jigōjitoku. The demon of your heart is tormenting your body. You possess a Ketsukō Mitama, but that demon of your heart is likely getting in the way. Come, quickly cast out the demon, become a beautiful Mitama, and let me know the Arika of the jewel. I suspect that you are hiding it under the Sashizu of Takayorihime. You claimed you would Kiyo-ly offer the purple jewel, but you must have been plotting to catch a carp with barley rice. No matter how magnificent the purple jewel may be, it is nothing compared to the Ōgon jewel. Nakanaka, those who have been in the Alps Kyō are not to be trusted. Ah, that is right; even if I keep blaming only you, I cannot understand the situation. She is likely manipulating you from the shadows. Ever since coming to this Seichi, Takayorihime has asked me to make you two, whom she is accustomed to using, my Buka; that point alone is suspicious from the start. Since she knows well that I am the Kantokushiya of the Ōgon jewel, it must surely be the Sashizu of Takayorihime. Ho ho ho, you two are Chiujitsu indeed. You are strong in good, and you are strong in evil. The kindness with which you serve Takayorihime, whom you once revered as your master, is admirable. It is no wonder you do not tell Kurohime, your temporary master. Ah, my judgment was mistaken. Well then, I shall call Takayorihime and interrogate her now.'</p>
+          <p class="en-p">Telistan: 'Please do not say such outrageous things. Takayorihime-sama is not that kind of person. Is she not the mother of Ryōkokuwake-sama, the missionary of the Sangokyō? She says that she was able to meet her child through the divine virtue of the Lord Ōkami, and she has entered into the true faith with such gentleness. It is cruel of you to doubt her so much.'</p>
+          <p class="en-p">Speaker: 'Ah, that is understandable; if she were not so, she would not be human. I am impressed, truly impressed. I wish I had such retainers, even if only for an hour. However, think carefully. Even if you go against the true path of the Lord Ōkami, is one Takayorihime more important to you?'</p>
+          <p class="en-p">Speaker: 'This is somewhat extremely troublesome. If Takayorihime-sama were to hear such things, she would be startled and lose her liver.'</p>
+          <p class="en-p">Speaker: 'That is only natural. To be too bold is to be glared at by the gods, and the principle that heaven and earth do not permit one to be left without a liver is absolute. Oho ho ho, you are truly a stubborn lot. Well, well, the Miroku drum has sounded. I am going to perform my morning devotions, so you two must not run away anywhere. Tell Takayorihime clearly, and by the time I return, you must have brought the Ōgon jewel and placed it here.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と又もや声を尖らせ、火鉢を叩く。</p>
+            <p class="ja-classical-line">テーリスタン『オイ、兄弟、何うしようかな。エライことに取ツつかまつたものだワイ』</p>
+            <p class="ja-classical-line">『取ツつかまるも取ツつかまらぬも、お前の自業自得だよ。心の鬼が身を責めるのだ。お前は結構な身魂だが、其の心の鬼が矢張り邪魔をするのだらう。サア早く鬼を突き出して美しい身魂になつて玉の在処を知らすのだよ。大方鷹依姫の指図でお前が隠しとるのぢやないかなア。紫の玉を気好う献上するなんて言ひよつて、麦飯で鯉を釣るやうな企みをしたのだらう。紫の玉が何程立派でも黄金の玉に比ぶれば何でもない。却々アルプス教に居つた奴は油断がならぬ。アヽさうぢや、お前の事ばかり責めて居つても訳が分らぬ。大方陰から操つて居るのであらう。此の聖地へ来てから鷹依姫は、始終使ひ馴れたお前達二人を私の部下にして呉れと云つた点からが抑も疑はしい。私が黄金の玉の監督者と云ふことは、よく分つて居るのだから、屹度鷹依姫の指図であらうがな。ホヽヽヽ、お前達は忠実なものだ。善にも強ければ悪にも強い。一旦主人と仰いだ鷹依姫へ、其処まで尽す親切は見上げたものだ。俄主人の黒姫に云つて下さらぬのも無理はない。アーア私の了簡が間違つて居つた。ドレ是から鷹依姫を呼んで訊問してみよう』</p>
+            <p class="ja-classical-line">テーリスタン『滅相なこと仰有いますな。鷹依姫さまは、そんなお方ぢやございませぬ。苟くも三五教の宣伝使竜国別さまの母上ではありませぬか。大神様の御神徳で親子の対面が出来たと云つて、それはそれは温順しく誠の信仰に入つてゐられます。あんまり御疑ひなさるのは殺生でございますよ』</p>
+            <p class="ja-classical-line">『アヽ無理もない、さうでなければ人間ぢやない、感心感心。私もそんな家来をたとへ半時でも欲しいものだ。併し乍ら、よく考へて見なさい。お前は大神様の誠の道に背いても、一人の鷹依姫が大切か』</p>
+            <p class="ja-classical-line">『これは聊か迷惑千万。こんなことを鷹依姫様がお聞きにならうものなら、ビツクリして肝を潰されます』</p>
+            <p class="ja-classical-line">『ソリヤ当然だよ。余り肝玉の太い事をすると神様に睨まれ、肝が玉なしになつて了ふのは天地の許さぬ道理、オホヽヽヽ、さてもさてもしぶとい代物だなア。ドレドレ五六七の太鼓が鳴つた。朝のお勤めに行つて来るから、お前達は何処にも逃げることはならぬぞえ。鷹依姫にとつくと言ひ聞かし、私が帰る迄にそつと黄金の玉を持つて来て置くのだよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Ah, what should we do?'</p>
+          <p class="en-p">The two sighed.</p>
+          <p class="en-p">Kurohime, intending to pay Sanpai at the Nishiki no Miya, adjusted her Emon, donned her Montsuki Haori, and in a somewhat Shōgekibun, set out for the Sanpai in a sluggish Riyokaushiki, as if counting the stones on the Michi one by one; after she had departed, the two grasped the Nagagiseru that Kurohime had left behind, and Teristan sat in Kurohime's Zaseki.</p>
+          <p class="en-p">Teristan: 'Now then, Karlins, you are a very good child, so come on, tell me the Arika of the jewel at once. It is a Taisetsu and Kikifu Baahi where, not to mention Kurohime, even I, Teristan, am suffering a Sobazue, and it is about to bring trouble upon Takayorihime-sama. It might be hard to say while Kurohime is here, but since I, Teristan, as Kurohime's Dairi, have associated with you like a Kiyōdai until now, you need not have any Kokorozuka. Come, try telling me.'</p>
+          <p class="en-p">Karlins: 'Oi, oi, Aniki, what are you saying even you? Are you still doubting me?'</p>
+          <p class="en-p">Teristan: 'How can I not doubt you? When I said I would go with you the other day, you said kindly, "Teristan, you have a cold, so rest today; I will go and protect Kurohime-sama in secret in your stead," did you not? Because you are a kind and honest fellow, I thought it impossible, but when I consider the circumstances before and after, I have no choice but to doubt you. I cannot think otherwise than that you stole it.'</p>
+          <p class="en-p">Karlins: 'Ah, this has become a miserable affair. Can one be so mistaken? What an ill-fated birth I must have. Am I abandoned by the gods of heaven and earth?'</p>
+          <p class="en-p">Teristan: 'Whether you are abandoned by the gods of heaven and earth or not depends entirely on your own state of mind. If you dawdle, Kurohime-sama will return. Tell me quickly. If you do, I will share the responsibility, present it saying, "It was hidden, but actually this is it," and ask for forgiveness.'</p>
+          <p class="en-p">Karlins: 'Oi, Aniki, get down there for a moment. I cannot talk unless I go there.'</p>
+          <p class="en-p">Teristan: 'Very well, very well, as long as you tell me, it is fine. I will do whatever it takes. Come, smoke some tobacco and tell me everything. I will go down and be the listener.'</p>
+          <p class="en-p">With that, the two changed positions, and Karlins, while tapping the hibachi with the Nagagiseru, raised the corners of his eyes.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『アー何うしたらよからうなア』</p>
+            <p class="ja-classical-line">と二人は吐息をつく。</p>
+            <p class="ja-classical-line">黒姫は錦の宮に参拝せむと衣紋をつくろひ、紋付羽織を着し、稍悄気気分になつて道路の石を一つ一つ数へるやうな調子でなめくぢりの旅行式に、力なげに参拝に出掛けた後に二人は黒姫の残して置いた長煙管を握り、テーリスタンは黒姫の座席に坐り、</p>
+            <p class="ja-classical-line">『これこれカーリンス、お前は余程好い児ぢや、さあチヤツと玉の在処を云ふのだよ。何処へ隠したか、黒姫は申すに及ばず、このテーリスタンまでが側杖を食つて、終に累を鷹依姫様に及ぼさむとして居る大切な危急な場合だよ。黒姫の居る処では云ひ憎からうが、黒姫代理のテーリスタンは今まで兄弟同様に交際つて来たのだから、何一つ心遣ひは要らない。サア、言つて御覧』</p>
+            <p class="ja-classical-line">カーリンス『オイオイ兄貴、お前までが何を言ふのだい。矢張り俺を疑つて居るのか』</p>
+            <p class="ja-classical-line">『疑はずに居れぬぢやないか。此間俺が一緒に往かうと言つた時、貴様は親切さうに「テーリスタン、お前は風邪をひいて居るから今日は休め、俺が代りに黒姫様の御保護を見え隠れにして来る」と言つただらう。親切な正直な貴様のことだから、よもやとは思へども前後の事情から考へて見れば、何うしても貴様を疑はねばならぬのだ。お前が盗つたとより考へられないワ』</p>
+            <p class="ja-classical-line">『アーア、情ないことになつて来たワイ。間違へば斯うも間違ふものかなア。なんとした私は因果な生れつきだらう。天地の神様に見放されてゐるのか』</p>
+            <p class="ja-classical-line">『天地の神様に見放されようと見放されまいと、貴様の心の持ちやう一つだ。愚図々々してゐると黒姫さまが帰つて来るぞ。早く俺に云つて了へ。さうすれば俺も責任を分担して「隠してゐましたが実はこれです」とつき出して、怺へて貰ふのだから』</p>
+            <p class="ja-classical-line">『オイ兄貴、一寸お前下へ降りて呉れ。俺が其処へ行かぬと話が出来ぬ』</p>
+            <p class="ja-classical-line">『ヨシヨシ言ひさへすれば好いのだ。如何でもしてやらう。サア、煙草でも燻べもつてすつかり言つて了へ。俺は下へ降りて聞き役だから』</p>
+            <p class="ja-classical-line">と茲に二人は位置を変じ、カーリンスは長煙管で火鉢を叩きながら眼尻を釣り上げ、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Karinsu: 'Hey, Terisutan, you are truly a brazen thief. Is it not outrageous for you to smear your own evil upon me, who knows nothing of it? When I kindly spoke to you the other day, worrying about your biyōki, do you take that in reverse and slander me as a thief? You are the one with suspicious points. It was the other night, the moon was not out as it was yūbe, and at a time when you could not see if your nose were pinched, you claimed you had fallen or did not know the michi, and you took a taihen amount of hima, did you not? Come, where did you hide it? Confess in aritei. Now that it has come to this, our kiyōdai engi is severed. However, even though I say that, if you confess the jijitsu, we shall still be the kiyōdai and shiniu we were before. Since Takayorihime-sama has already undergone kaishin, there is no dauri for her to desire the jewel. If so, you must have the intention of taking that jewel to present it to Mukadehime-sama of Mikunigadake, and you have a yashin to wield influence in the Brahman kyō, do you not? Come now, will you not speak quickly? This is different from the Karinsu of imamade. Enma will soon hold it up to the Jiyōhari mirror and distinguish between good and evil. Come, what say you?'</p>
+          <p class="en-p">As he struck the hibachi with all his might, the thin bamboo stem snapped with a crack, and the metal pipe bowl bit into Terisutan's forehead.</p>
+          <p class="en-p">Terisutan, becoming sullen and angry, Terisutan: 'What, you great villain, trying to smear your own crimes onto others!'</p>
+          <p class="en-p">He spread his arms and lunged at him. Karinsu: 'What, you impudent fellow!'</p>
+          <p class="en-p">He clenched his fists, and a great struggle began in earnest while Kurohime was away.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『コリヤ、テーリスタン、盗人猛々しいとは貴様のことだ。覚えのない俺に自分の悪を塗りつけようとするのは怪しからぬぢやないか。俺が此間貴様の病気を苦にして親切に云つてやつたら、それを逆に取つて俺を盗人と誣るのか。さう云ふ貴様こそ怪しい点がある。此間の晩だつた、昨夜のやうに月は出てない、鼻を撮まれても分らぬやうな時、貴様は倒けたとか、道路が分らぬとか云つて大変に時間をとつた事があるだらう。サア何処へ隠した、有体に白状せ。もう斯うなる以上は兄弟の縁切れだ。併しさうは云ふものの、事実さへ白状すれば、矢張り元の兄弟だ、親友だ。鷹依姫様は既に改心なさつたのだから、玉を欲しがる道理はない。さすれば貴様は其の玉をもつて、三国ケ岳の蜈蚣姫様に献上し、バラモン教で羽振りを利かさうとする野心があるのだらう。サアサ、早く申さぬか、今迄のカーリンスとは訳が違ふぞ。閻魔が浄玻璃の鏡にかけて善悪を今に立別けて見せる。さア、如何ぢや』</p>
+            <p class="ja-classical-line">と力任せに火鉢を殴つた途端、細い竹の羅宇はポクリと折れて、雁首はテーリスタンの額口に喰ひついた。</p>
+            <p class="ja-classical-line">テーリスタンはムツと腹を立て、</p>
+            <p class="ja-classical-line">『なに貴様、他に己の罪を塗りつけようとする大悪人奴』</p>
+            <p class="ja-classical-line">と両手をひろげて武者振りついた。カーリンスは、</p>
+            <p class="ja-classical-line">『何ツ、猪口才な』</p>
+            <p class="ja-classical-line">と握り拳を固めて、無性矢鱈に黒姫の留守中に大格闘の幕が下りた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c01.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 1: Jewel 騒疑 [693]</span>
+      </a>
+      <a href="c03.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 3: 不知 Fire [695]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
