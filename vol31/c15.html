@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 丸 Tree Bridge [881] - Volume 31 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 31 Table of Contents</a>
+      <span>Volume 31</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 31 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 丸 Tree Bridge [881]</h1>
+      <p class="chapter-title-ja">丸木橋〔881〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sannin wa ikegomnde, Aki, Mori futari no keiriyaku no ura o kaite yaramu to, hokuhoku shite nagara susunde iku. Kochira no yamasuso kara mukau no yamasuso ni wataru sautau ni fukai tanigaha ni, nagasa yonken aina marukibashi ga kakatsute iru.</p>
+          <p class="en-p">Yasuhiko: 'Saa senjiyō ni chikatsuta. Riyōnintomo, koko de onna no koe o dashite sendenka o takaraka ni utau noda zo.'</p>
+          <p class="en-p">Yasuhiko: 'Onna no koe o dasau to omoeba, shizen hikuku hosoku naru nari, mukau no yatsu ni kikoeru yō ni seu to omoeba jigoe ga deru nari, Yasuhiko mo komatsuta mono desu wa.'</p>
+          <p class="en-p">Yasuhiko: 'Nani, Kamisama no shiyugo de, kitsuto uguisu no taniwata no yō na koe ga dete kuru yo. Soko ga kototama no meuyō da. ...Saa ikau, hara no soko kara dasazu, nichi no atari kara koe o dasuda.'</p>
+          <p class="en-p">To hosoki suzushiki matsumushi no yauna tsukurigoe de, itsuponbashi no tamoto ni sakakari,</p>
+          <p class="en-p">Yasuhiko: 'Kami ga omote ni arawarete
+Zen to aku to o tatewakeru
+Kono yo o tsukurishi kamunahohi
+Kokoro mo hiroki ōnahohi
+Tada nanigoto mo hito no yo is
+Nahohi ni minaose kikinaose
+Mi no ayamachi wa norinaose
+Koishi to omou kuni-sama wa
+Doko ni dōshite gozaru yara
+Omaetachi futari wa ore yori mo
+Hitotsu saki e to iwashiyatsuta
+Sazo imagoro wa dokoyara no
+Naisu ni tamoto o hipparare
+Hanashite okure to kuni-sama wa
+Kurenai-hime ya Erina-hime
+Tennyo no yō na tsuma ga aru
+Omado ga hiroki haya hanase
+Nazo to komatsute gozaru darau
+Watashi no koi wa okuyama no
+Hosoya-gawa no marukibashi
+
+Wataru wa kowashi wataraneba
+Kokoro no soko kara horekitta
+Akiyama-wake ni awarenai
+Akiyama-sama mo nasakenai
+Horeta yowami de iyasau ni
+Pinto hanetara man ni ukete
+Okotsute gozaru ka jirettai
+Watashi no makoto no kokorone wa
+Kuniyoriwake no shijūotoko
+Oya to ko hodo chigau none
+Dōshite sore ga horareyo
+Horeta to iu wa omotemuki
+Mata mori-sama mo kigakinu
+Tateme inaka no musume demo
+Erina to ittara kaiwai de
+Yubi o saseareda kono naisu
+Otogokoro to aki no sora
+Watashi no hara ga shiritashai
+Akiyama-sama mo amari jiya
+Morisu-sama made watashi o ba
+
+Nasakenai onna to gokai shite
+Okotsute gozaru ka nasakenai
+Amatsukamitsama yaoyorozu
+Kunatsukamitsama yaoyorozu
+Tateme noyama no hate made mo
+Akiyama-sama ya morisu-sama
+Ato o shitoute tazune yuki
+Iya to iwareyoga ikasegai
+Omoikomitaru kono koiji
+Ishi no karahitsu ni kakuruto mo
+Sagasu dasaneba oku mono ka
+Aa imajinakamigami
+Kami no mitama no saiwahite
+Akiyama-sama ya morisu-sama
+Totoki mikao o fushiogami
+Te o hikautate ikeru nara
+Kono hashi buji ni yasuyasuto
+Mukau e watashite kudasareya
+Watashi ga koi o shitogeru ka
+Shitogerarenu ka kono hashi ga
+
+Watashi ni totte no tsuiujiya
+Moshi mo watarenu sono toki wa
+Akiyama-sama ni sowarenai
+Morisu-sama ni mo awarenai
+Onna no kokoro to iu mono wa
+Suki de kanawanu otoko o ba
+Iya jiya iya jiya to hanetsukeru
+Kore ga watashi no yowadjiya
+Isso kimotama hōridashite
+Akiyama-sama ga ihiyotsuta
+Toki ni atama o tate ni furi
+Un to iu toki ya yokattani
+Dōyara otoko no orisau na
+Ka ga pun to shite kita zo
+Honto ni abunai marukibashi
+Erina yōjin nasarimase'</p>
+          <p class="en-p">Yasuhiko wa mata utau.</p>
+          <p class="en-p">Yasuhiko: 'Ie ie watashi wa daijōbu
+Hime-sama anata wa ashiyaku jiya
+Dōzo ki o tsuke nasaremase
+Moshi mo ayamari tanigaha ni
+Ochite inochi o sutetanara
+Akiyama-sama ni mōshiwake
+Dōshite dōshite tatimaseu
+Aa imajinakamigami
+Mitama saiwahimashimase yo'</p>
+          <p class="en-p">Aki, Mori futari wa marukibashi ni futoi fujizuru o kutsukuritsuke, Kuniyoriwake no koe o aizura ni 'Ichi i ni u san i' de hipparitosau to, tegotashin hiite mattsute iru. Hashi no tamoto ni tachidomatte onna no uta ga kiete iru. Yoku yoku uta no monku o kangaete mireba, omowagenaki kaguhashii uta de aru.</p>
+          <p class="en-p">Aki: 'Yayappari onna wa konna mono kaina, Morisu. Mo hitotsu oshitsuyoku ikega seikō shita noredokeredo, amari suwītohāto shita yowami ni, yō omoi kiriyaranakatta no ga kochira no fuhōdō da. Sasuga ni ore ga omoikomu dake attete, yasashii hime-sama da wai. Hajimete biwashii goshinshin o uketamawari, kore de shindemo tokushin da. Ano uta no monku de kangaete miru to, Kuniyoriwake no yatsu, dokoka de mata michikusa o kuiyotsute, subeta onna ni chiyahoya sarete, yodare o kuttsute, aburasagatte iyoru noda rau. Mikiri no yoi, mae no mieru ohime-sama wa, tautō Kuniyoriwake ni aisokotsuki, oretachi futari ga saki ni itta to iu koto o dareka ni kiite, harubaru yattsute gozatsuta noda na. Shikashi anna koto o itte, Kuniyoriwake ga majiztsute iru kamo shirenu. Nanibun kō jumoku ga shigetsute itte wa, koe wa kietemo sugata wa mienu nodakara, tsugō no yoi koto ga aru kawari ni wa, mata tsugō no warui koto ga aru wai. Nou Morikō.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三人は勢込ンで、秋、モリ二人の計略の裏をかいてやらむと、ホクホクし乍ら進ンで行く。此方の山裾から向方の山裾に渡る相当に深い谷川に、長さ四間位な丸木橋が架かつてゐる。</p>
+            <p class="ja-classical-line">『サア戦場に近寄つた。両人共に、ここで女の声を出して宣伝歌を高らかに歌うのだぞ』</p>
+            <p class="ja-classical-line">『女の声を出さうと思へば、自然低く細くなるなり、向方の奴に聞える様にせうと思へば地声が出るなり、安彦も困つたものですワ』</p>
+            <p class="ja-classical-line">『ナニ、神様の守護で、キツと鶯の谷渡りの様な声が出て来るよ。そこが言霊の妙用だ。……サア行かう、腹の底から出さず、乳のあたりから声を出すのだ』</p>
+            <p class="ja-classical-line">と細き涼しき松虫のやうな作り声で、一本橋の袂に差かかり、</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立分ける
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直せ聞直せ
+身の過ちは宣り直せ
+恋しと思ふ国さまは
+どこにどうして御座るやら
+お前等二人は俺よりも
+一足先へと言はしやつた
+さぞ今頃はどこやらの
+ナイスに袂を引つぱられ
+放してお呉れと国さまは
+紅井姫やエリナ姫
+天女の様な妻がある
+お門が広い早放せ
+なぞと困つて御座るだらう
+私の恋は奥山の
+細谷川の丸木橋</p>
+            <p class="ja-classical-line">渡るはこわし渡らねば
+心の底から惚切つた
+秋山別に会はれない
+秋山さまも情ない
+惚た弱味で厭さうに
+ピンとはねたら真にうけて
+怒つて御座るか自烈たい
+私の誠の心根は
+国依別の四十男
+親と子程違ふのに
+どうしてそれが惚られよ
+惚たと云ふは表向き
+又モリさまも気が利かぬ
+仮令田舎の娘でも
+エリナと云つたら界隈で
+指をさされた此ナイス
+男心と秋の空
+私の腹が知らしたい
+秋山さまも余りぢや
+モリスさままで私をば</p>
+            <p class="ja-classical-line">情ない女と誤解して
+怒つて御座るか情ない
+天津神様八百万
+国津神様八百万
+仮令野山の果までも
+秋山さまやモリスさま
+後を慕うて尋ね行き
+嫌と言はれよが如何せうが
+思ひ込みたる此恋路
+石の唐柩にかくるとも
+捜し出さねばおくものか
+あゝ惟神々々
+神の御霊の幸はひて
+秋山さまやモリスさま
+尊き御顔を伏し拝み
+手を引合うて行けるなら
+此橋無事にやすやすと
+向方へ渡して下されや
+私が恋を仕遂げるか
+仕とげられぬか此橋が</p>
+            <p class="ja-classical-line">私に取つての辻占ぢや
+もしも渡れぬ其時は
+秋山さまに添はれない
+モリスさまにも会はれない
+女の心と云ふものは
+好きで叶はぬ男をば
+厭ぢや厭ぢやとはねつける
+これが私の弱点ぢや
+一そ肝玉放り出して
+秋山さまが言ひよつた
+時に頭を縦に振り
+ウンと云ふときやよかつたに
+どうやら男の居りさうな
+香がプンとして来たぞ
+ホンに危ない丸木橋
+エリナ用心なさりませ』</p>
+            <p class="ja-classical-line">安彦は又唄ふ。</p>
+            <p class="ja-classical-line">『いえいえ私は大丈夫
+姫さまあなたは足弱ぢや
+どうぞ気を付けなされませ
+もしも誤り谷川に
+落ちて生命を棄てたなら
+秋山さまに申訳
+どうしてどうして立ちませう
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">秋、モリの二人は丸木橋に太い藤づるを括りつけ、国依別の声を合図に『一イ二ウ三イ』で引張りおとさうと、手具脛ひいて待つてゐる。橋の袂に立ち止まつて女の歌が聞えてゐる。よくよく歌の文句を考へて見れば、思ひがけなきかぐはしい歌である。</p>
+            <p class="ja-classical-line">『ヤツパリ女はこンなものかいな、モリス。モ一つ押強く行けば成功したのだけれど、余りスヰートハートした弱味に、ヨウ思ひ切りやらなかつたのが此方の不調法だ。流石は俺が思ひ込む丈あつて、優しい姫様だワイ。始めて美はしい御心中を承はり、これで死ンでも得心だ。あの歌の文句で考へて見ると、国依別の奴、どつかで又道草を食ひよつて、スベタ女にチヤホヤされて、涎をくつて、脂下がつて居よるのだらう。見切りのよい、前の見えるお姫さまは、たうとう国依別に愛想をつかし、俺達二人が先に行つたと云ふ事を、誰かに聞いて、はるばるとやつて御座つたのだな。併しあンな事を云つて、国依別が交つて居るかも知れぬ。何分斯う樹木が茂つて居つては、声は聞えても姿は見えぬのだから、都合の好い事がある代りには、又都合の悪い事があるワイ。のうモリ公』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Murmuring in a small voice, she twittered.</p>
+          <p class="en-p">Kuniyoriwake spoke in a woman's voice,</p>
+          <p class="en-p">Kuniyori: 'Erina-sama, how ever shall I cross this single-span bridge? My legs are trembling.'</p>
+          <p class="en-p">Yasuhiko: 'Jōsama, do not worry. Erina is right here with you. Once you cross this very log bridge, you will surely meet Akiyama-sama, whom you so deeply yearn for from the bottom of your heart. How could I ever return as I am without meeting Morris-sama, whom I fell in love with at first glance, and pouring out the very depths of my heart? That fine man is dawdling around, and it would be a terrible disaster if he were snatched up by other women, you know.'</p>
+          <p class="en-p">Kuniyori: 'Is that so? If that is the case, shall we cross stealthily? Somehow this bridge is rickety and scary.'</p>
+          <p class="en-p">Yasuhiko: 'Do not worry. If a wicked person like Kuniyoriwake were to cross, the gods might pull the ropes and drop her down, but since a woman is going in pursuit of the man she loves, even a log bridge will not be dropped. I know for sure that Akiyamawake-sama and Morris-sama will protect us so that we are not dropped, even out of the sincerity of their hearts.'</p>
+          <p class="en-p">Kuniyori: 'If I cross this bridge, I can meet Akiyama-sama... I am so happy.'</p>
+          <p class="en-p">Yasuhiko: 'That is only to be expected. After all, I am pining this much even for that dark-skinned Morris-sama. It is only natural that you should be infatuated with such a splendid man as Akiyama-sama, ho ho ho ho ho.'</p>
+          <p class="en-p">Kuniyori: 'Ho ho ho ho ho, oh how embarrassing! I say, Erina-sama, please make sure not to speak of this any further. Now let us hurry along.'</p>
+          <p class="en-p">So saying, Kuniyoriwake's party safely crossed the bridge, hid themselves in the thicket of trees along the valley path, whipped their shank's mare, and galloped off some four or five chō.</p>
+          <p class="en-p">'Ah ha ha ha, that went quite smoothly. They evidently still take us for women, don't they? Shall we shave the bark of this tree and leave some kind of mark, both of you?'</p>
+          <p class="en-p">Yasuhiko said, 'Yes, certainly,' took out a tantau, shaved a little of the bark of a young zelkova tree, picked up some ubatama berries growing nearby in her hand, and with their juice wrote:</p>
+          <p class="en-p">'Beniihime and Erina, both of us, have passed through here. By any chance, should Akiyama-sama and Morris-sama arrive here after us, please do chase after us. And if you would please drop the bridge so that Kuniyoriwake cannot come across, we shall feel even more at ease. ... From the two of us ... to the delicate woman.'</p>
+          <p class="en-p">'Ah ha, this is interesting! Shall I make Kuniyoriwake peel tree after peeled tree in advance, leaving marks everywhere, and escort her no matter how far she goes? If we do that, she will surely reform herself before she knows it. Ah ha ha ha.'</p>
+          <p class="en-p">Aki and Mori hastily scrambled up from the valley floor to the opposite side of the bridge,</p>
+          <p class="en-p">'Oi, Morris, that was definitely the voices of Beniihime and Erina, but yet they crossed away smoothly without a single hitch, isn't that somehow devoid of anything unusual? The cuckoo's voice is heard but its shape is not seen, the Konjin of Aki-Mori has been guarding you from the shadows. When they realize this, even Beniihime and Erina will go "ahun" and reform themselves... Have they guarded us even unto that extent? This is the Great Bridge of the World, and unless you cross this place you cannot meet the true man. Set apart to the west and the east, the gods provide their protection, the gods do not tell lies—thus, mimicking the Oudesaki of Omoto, the Princess surely praises the divine virtue of the Konjin of Aki-Mori and rejoices over it, is it not so? That voice we just heard could not have traveled so far on a woman's feet. Now let us whip our shank's mare and press forward. There can hardly be any risk of mistaking the single path in the valley,</p>
+          <p class="en-p">My lord shall not yet go afar, until the tears of my sleeves have dried away.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と小さい声でブツブツ囀つて居る。</p>
+            <p class="ja-classical-line">国依別は女の声にて、</p>
+            <p class="ja-classical-line">国依『エリナさま、私、此一本橋、どうして渡りませうかね。足が慄ひますワ』</p>
+            <p class="ja-classical-line">安彦『嬢さま、御心配なさいますな。エリナがついてをります。此丸木橋さへ御渡りになれば、姫様の心の底から御慕ひ遊ばす、秋山さまにキツと会はれますよ。私だつて一目見そめたモリスさまに会うて、心の丈を申上げねば、どうして此儘帰れませう。あの好い男グヅグヅして居て、外の女に取られて了つちや大変ですからねイ』</p>
+            <p class="ja-classical-line">国依『さうねい、さうなら、そつと渡りませうか。何だかグキグキして怖い橋だワ』</p>
+            <p class="ja-classical-line">安彦『御心配なさいますな。国依別のやうな悪人が通つたら、神様が綱を引ぱつておとし遊ばすかも知れませぬが、女が可愛い男の後を追うて行くのですもの、丸木橋だつて、落さうな事はありませぬワ。秋山別さま、モリスさまの一心でも、落さぬやうに守つて下さいますこと分つて居ますワ』</p>
+            <p class="ja-classical-line">国依『此橋渡ると秋山さまに会へるの……、私嬉しいワ』</p>
+            <p class="ja-classical-line">安彦『それは其筈で御座います。私だつて、あの色の黒いモリスさまにさへも是丈こがれて居るのですもの。秋山さまのやうな立派な男に御惚遊ばしますのは無理も御座いませぬワ。ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">国依『ホヽヽヽヽおゝ恥かしい、モシ、エリナさま、是きりで云はないやうにして下さいや。サア早う参りませう』</p>
+            <p class="ja-classical-line">と云ひ乍ら、国依別一行は恙なく橋を渡り、谷路の木の茂みにかくれて膝栗毛に鞭をうち、四五丁計り駆け出したり。</p>
+            <p class="ja-classical-line">『アハヽヽヽ、ズイ分甘く行つたねい。ヤツパリ吾々を女だと思つて居るらしいよ、一つ此木の皮を削つて、何とか印をしておかうかいナア、両人』</p>
+            <p class="ja-classical-line">安彦は、『ハイ、宜しう御座います』と短刀を取出し、若き欅の皮を少しく削り、あたりに実つて居る烏羽玉の実を手に取り、其汁にて、</p>
+            <p class="ja-classical-line">紅井姫、エリナの両人ここを通りました。万一、秋山別さま、モリスさま、妾よりお後で御座いましたら、どうぞ追つかけて来て下さいませ。さうして橋を国依別の来ない様に落して来て下さいますれば、尚々安心です。……御両人様……かよわき女より</p>
+            <p class="ja-classical-line">と書きしるした。</p>
+            <p class="ja-classical-line">『アハー此奴ア面白い、国依別が先繰り先繰り剥き木をして、至る所に印を入れ、どこ迄もお伴をさしてやらうかな。さうすれば何時の間にかは改心するだらう。アハヽヽヽ』</p>
+            <p class="ja-classical-line">秋、モリの二人はあわてて谷底より橋の向ふ側にかけ上り、</p>
+            <p class="ja-classical-line">『オイ、モリス、確に紅井姫にエリナの声だつたが、併しスウスウと渡つて了ひ、何とはなしに変哲がないぢやないか。時鳥お声は聞けど姿は見えぬ、秋モリの金神蔭から守りてをりたぞよ。此事分りて来たら、いかな紅井姫も、エリナもアフンと致して改心を遊ばすぞよ……そないしてまで守つて下さつたか、ここは世界の大橋、此処を渡らねば誠の男には会へぬぞよ。西と東とに立わけて、神が守護がしてあるぞよ、神は嘘を申さぬぞよと、三五教のお筆先もどきに、キツとお姫さまが秋モリの金神の御神徳を讃歎し、御喜び遊ばすにきまつてるワ、今聞えた、あの声、さう遠くは、女の足で、行つては居られまい。サア早く膝栗毛に鞭をうつて進まうぢやないか。谷間の一筋道、メツタに間違う気遣ひはあるまいて、</p>
+            <p class="ja-classical-line">君はまだ遠くは行かじ吾袖の　袂の涙かわき果てねば</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Isn't there a poem that goes like that? Surely she will not go far away. Come, let's run, run!</p>
+          <p class="en-p">Stamping their feet with otchini otchini, they climbed up a narrow mountain path where they could scarcely put their feet. They peeled the bark of a zelkova sapling about three paces around, and something was marked on it. Looking closely, as expected, Kurenaihime and Erina, the two of them, had passed through here... Seeing the wording which meant: 'Please, if you two are still behind, look at this mark and follow after us...' the two leaped up for joy,</p>
+          <p class="en-p">'Oh, thank goodness, thank goodness! This is why, no matter where it takes, if we do not carry it through, the barrier of love cannot be crossed, they say. Come, we cannot be dawdling; let's go quickly! It's one final push. If we do so, we are bound to catch up with them for sure!'</p>
+          <p class="en-p">And off they darted running again, such a comical sight.</p>
+          <p class="en-p">Kuniyoriwake's party, convinced that the two were bound to chase right after them, oiled the compass, poured a flood of water into their throat-whistles, safely passed through the Panama Canal, and ran onward with all their might. Finding a dense, bushy large yamamomo tree, the three of them scrambled up like monkeys, sat cross-legged high in the branches, and were plucking and eating the yamamomo fruit that looked as if moisture were dripping from them. The leaves and branches grew so thickly that it was utterly impossible to see them from below.</p>
+          <p class="en-p">Aki and Mori, their throats parched,</p>
+          <p class="en-p">'Hey, Morris, coming along at this much of a rapid pace, there's no way we shouldn't have overtaken them. My throat-whistle has already started to sound. I cannot walk even one more shaku. Fortunately, isn't there that delicious-looking yamamomo hanging right over there? Shall we pick some yamamomo here and moisten our throats?'</p>
+          <p class="en-p">'That's true, Akiyamawake, it looks exceedingly sweet. Well, let's take a leisurely break and go on. Even the princess may not have known she was resting in the nearby woods when she came this far, perhaps. If not that, since we came all the way with such severe hardship and great speed that we are out of breath, there is no way we wouldn't catch up to her. Well, shall we wait leisurely here? Surely, in the meantime, she is bound to grace us with her presence. It was certainly written just like that by a woman's hand, and that voice of hers when she honored us by crossing the bridge—even now, when I recall it, my mouth waters as if to drool. Ah, she truly is a lovely princess! At any rate, until she passes through here, let's rest beneath this tree. If we climbed up, there would probably be quite sweet ones, but they say that the biggest fools are those who climb trees, those who ride airplanes, and those who walk under eaves on a broad street and hit their heads on shop signs; so well, let's refrain from tree-climbing and make do by picking the delicious-looking yamamomo hanging low down.'</p>
+          <p class="en-p">So saying, they plucked the semi-ripened yamamomo from the lower branches, chewed them noisily to moisten their throats, filled their bellies, and waited with outstretched necks, wondering when they would finally appear.</p>
+          <p class="en-p">The three up in the tree exchanged glances with one another, pressed their hands over their mouths, signaled to one another not to speak, and impatiently waited for the two to depart.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">とか云ふ歌があるぢやないか。キツと遠くに行くまい。サア駆足々々』</p>
+            <p class="ja-classical-line">オツチニオツチニと四股ふみ乍ら、僅に足を入るる計り、細くついた谷道を登り行く。三尺計り廻つた、欅の若木の皮を剥いて、何だかしるしてある。能く見れば、案に違はず、紅井姫、エリナの二人がここを通り、……どうぞお二人共、まだ後ならば、此印を見てついて来てくれ……と云ふ意味の文面を見て、二人は躍りあがり、</p>
+            <p class="ja-classical-line">『ヤア、有難い有難い、是れだから、どこ迄もやり通さねば、恋の難関は越えられぬと云ふのだ。サア、グヅグヅしては居られまい、早く行かうぢやないか。モウ一きばりだ。さうすればキツと追ひ付けるにきまつてるワ』</p>
+            <p class="ja-classical-line">と又もや駆出す其可笑しさ。</p>
+            <p class="ja-classical-line">国依別一行は二人の必ず後を追つかけ来るに相違なしとコンパスに油をさし、喉の汽笛に水をドツサリ注入し巴奈馬運河を無事通過させ乍ら、一生懸命に駆出し、コンモリとした山桃の大木を見つけ、猿の如く三人は駆あがり、樹上に胡坐をかき山桃の水の垂る様なのを、むしり取つて食つて居る。枝葉密生し、どうしても下から、見ることは出来なかつた。</p>
+            <p class="ja-classical-line">秋、モリの二人は喉をかわかせ、</p>
+            <p class="ja-classical-line">『オイ、モリス、是れ丈急速力でやつて来たのに、追つつかれない筈はないぢやないか。俺やモウ喉の汽笛が鳴り出した。此上一尺だつて歩けやしない。幸ひそこに山桃の甘さうな奴がなつてるぢやないか。ここで一つ山桃でも取つて喉をうるほして行かうかい』</p>
+            <p class="ja-classical-line">『さうだなア、秋山別、随分甘さうだ。マアゆつくり一服して往くことにせう。姫さまだつて足を痛め、傍の森の中で休みて御座つたのを知らずに此処まで来たのかも知れないよ。さうでなくては、俺達が息が切れる程始終苦節の大速力大急行でやつて来たのに、追つつかぬ筈がない。マアゆつくりと此処で待つことにせうかい。キツと其間にはお出遊ばすに定まつてゐるワ。確に女の手であの通り書いてあつたなり、橋をお渡り遊ばす時のあの声つたら、今思ひ出しても涎が落つるやうだ。あゝ本当に可愛いお姫様だなア。兎も角ここへお通りになる迄、此木の下で休むことにせう。登つて見たら、ズイ分甘いのがあるだらうけれど、木登りする奴と、飛行機に乗る奴と広い街道を軒下歩いて看板で頭打つ奴程馬鹿はないと云ふから、マア木登りは止めにして、低く垂れ下つた甘さうな山桃をとつて辛抱せうかい』</p>
+            <p class="ja-classical-line">と云ひ乍ら、低き枝の半熟の山桃をむしり、ムシヤムシヤと喉をしめし、腹をふくらせ、今か今かと首を長うして待つて居る。</p>
+            <p class="ja-classical-line">三人は樹上にて互に顔を見合せ、口を押へ、物を言ふなとの合図をし乍ら、二人の立ち去るのを、もどかしげに待ち居たりける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: 樹下の宿 [880]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: 天狂坊 [882]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

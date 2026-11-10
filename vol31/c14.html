@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 14: 樹下の宿 [880] - Volume 31 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 31 Table of Contents</a>
+      <span>Volume 31</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 31 &bull; Chapter 14</span>
+      <h1 class="chapter-title-en">Chapter 14: 樹下の宿 [880]</h1>
+      <p class="chapter-title-ja">樹下の宿〔880〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Floating upon the waves, Takasago,
+Hiru and Haru's Kuniyoriwake,
+Climbing up the rugged mountains,
+With Yasuhiko and Munesuke, both men,
+Following as he ascends, crossing over the narrow valleys of Brazil,
+Journeying day and night, far and wide,
+Treading across the plains of Haru,
+Wandering unknowingly and unwittingly
+Into the forests of the Amazon River,
+Chance encounters with the party of Takayorihime
+Or meeting up with Takahime's party,
+Taming and pacifying the monsters of Morubando,
+Removing and purifying the fearsomely tragic disasters of the myriad people—
+Such is the tale we now set forth to tell here.</p>
+          <p class="en-p">Kuniyoriwake gave the name Yasuhiko to Kiji, and bestowed the name Munesuke upon Machi, and while preaching and instructing them along the way in the teachings of Ananahi, they rested their breath upon the summit of the Brazilian Pass—where of old Odoyamazuminokami had passed by together with Kagatora, who was the incarnation of Hanasakuyahime—and from thence they were to set forth out into Daigenya.</p>
+          <p class="en-p">The party of Kuniyoriwake spent the day at the foot of the Brazilian Pass, sheltering from the night dew at the root of a massive tree and passing the single night.</p>
+          <p class="en-p">Kuniyoriwake and Yasuhiko, without a care in the world from the fatigue of travel, were sleeping soundly. Munesuke felt a nameless foreboding in his breast, unable to close his eyes even for a moment, and lay sandwiched between the two. Suddenly hearing the roar of a wild beast, his heart leaping and his soul nearly vanishing with terror, Munesuke could not endure the shuddering, clung tightly to Yasuhiko's body, and prayed for the break of day to come even a moment sooner.</p>
+          <p class="en-p">Appearing as though dawn were drawing near, the cries of the wild beasts faded away imperceptibly. At that moment, two men sat upon the stump of a giant tree, engrossed in whispered conversation. Even though it was a single giant tree whose trunk measured some fifty jo around, the fact that three men were sleeping soundly on one side gave no way of catching the eyes of the two sitting upon the other.</p>
+          <p class="en-p">From somewhere or other, whispered words drifted into his ears, so Munesuke, peering stealthily into the sky, drew closer to the direction of the voices, cocked his ear, and listened so as not to let slip a single word.</p>
+          <p class="en-p">Aki, hey... I've searched all the way here, but it's no use anymore. Up at Mount Hiwashi, we were chased around by Haru and Nairu, and when I asked about how things stood, they said Kuniyoriwake set out this very morning. When I asked how many people he had in tow, he held out three fingers. His plan is to wander the realm under the pretext of propagation, taking along Mato-kiri, the Ku-in, and the E-in. Out of a man's pride, even if it costs me my life, I'm going to stalk his heels, watch for an opening in Kuniyoriwake, thrust him down to the bottom of a ravine, and unless we make those two nice girls our own, it's so foolish I won't even be able to show my face to the world, isn't it? I can't just cry myself to sleep and let it go at that when his whereabouts are no longer known, so don't you have some scheme or other, Lord Aki?</p>
+          <p class="en-p">Mori-ko, you certainly have a deep attachment, don't you. Sticking your heels in and marching all the way out to a place like this—the woman targeted by such fellows is just like a toad charmed by a snake. Truly, the more I think about it, the more pitiful those two women have become. I too was drawn here by the madness of a restless mind and a wild heart, but before I knew it, both the monkey of my heart and the horse of my desires seemed to have given up in disgust, yelled in despair, and gone on back home. There's nothing more to be done, why don't we turn back from here?</p>
+          <p class="en-p">Do as you please, I am going to carry this through to the very end. How could a man return to his homeland with such a shameless face?</p>
+          <p class="en-p">Yet, no matter how infatuated you are with the two women, as long as Kuniyoriwake is there, it's no use, isn't it? If we could only do something about that fellow...</p>
+          <p class="en-p">So speaking, they whispered something to each other in low voices right by their ears for a short while. Munesuke could not hear it no matter what, because their voices were far too low.</p>
+          <p class="en-p">...If you go about a ri ahead from here, there is a log bridge. It is a dangerously deep mountain stream, and if you were to fall in there, even the sturdiest of men would have his five limbs smashed to pieces, so let's get ahead while there's still time, remove the props of that bridge, and rig it so that the moment Kuniyoriwake takes a single stride across, down he will plunge with a crash. We'll tie one end of the bridge with wisteria vines or something, hide at the bottom of the ravine the instant Kuniyoriwake steps across, and pull that rope. Then it'll be, whoosh, slam, ugh, kyaa... and that's the end of it, a truly pitiful state of affairs indeed. Isn't that how we should do it?</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">波に浮べる高砂の
+ヒルとハルとの国依別が
+険しき山をよぢ登り
+安彦、宗介両人を
+従ひ登るブラジルの
+細き谷間を打渡り
+夜を日についではるばると
+ハルの原野を打渉り
+アマゾン河の森林に
+思はず知らず迷ひ込み
+鷹依姫の一行や
+高姫一行に巡り会ひ
+モールバンドの怪獣を
+言向け和し万民の
+さも恐ろしき災禍を
+除き清めし物語
+いよいよ茲に述べ立つる。</p>
+            <p class="ja-classical-line">国依別はキジに安彦といふ名を与へ、マチに宗介と云ふ名を与へ、道々三五の教を説き諭し乍ら、其昔淤縢山津見司が、木の花咲耶姫の化身なる蚊々虎と通過したる、ブラジル峠の山頂に息を休め、それより大原野に出づる事となつた。</p>
+            <p class="ja-classical-line">国依別一行はブラジル峠の山麓にて日を暮らし、大木の根元に夜露を凌ぎ一夜を明かす事となりぬ。</p>
+            <p class="ja-classical-line">国依別、安彦は他愛もなく旅の疲れに、よく眠つて居る。宗介は何となく、胸騒ぎがして、マンジリとも得せず、二人の間に挟まつて、横たはつて居た。忽ち聞ゆる猛獣の声、心飛び魂消ゆる計り、其厭らしさに宗介は、戦慄堪へ切れず、安彦の体にしつかり喰ひ付き、夜の明くるを一刻も早かれと祈つて居た。</p>
+            <p class="ja-classical-line">夜明に間近くなつたと見え、猛獣の叫び声は何時とはなしに消えて了つた。折柄二人の男、大木の株に腰をかけ、ヒソビソ話に耽つてゐる。同じ一本の大木と雖も、五十丈許りも周つた幹、一方の方には三人が他愛なく横たはつて居るのも、一方に腰打かけてる二人の目には止まらうやうもなかつた。</p>
+            <p class="ja-classical-line">どこともなくヒソビソ話が耳に這入つて来るので宗介は、ソツと空をすかし乍ら、声する方に近寄つて耳を立てて、一言も洩らさじと聞いて居る。</p>
+            <p class="ja-classical-line">『オイ秋……ここまで捜しに来たのだが、モウ駄目だぞ。日暮シ山では、ハル、ナイルの両人に追ひまくられ、様子を聞けば国依別は今朝程立つたと言ひよつたので、何人連れかと聞いて見れば、指を三本出して居やがつた。的切り、ク印とエ印を連れてノホホンで、宣伝をだしに天下を漫遊すると云ふ考へだ。俺も男の意地で、仮令命がなくなつても、彼奴の後をつけ狙ひ、国依別の隙を窺ひ、谷底へでも突き落し、二人のナイスを此方のものにせぬことには、阿呆らしうて、世間へ顔出しも出来ぬぢやないか。最早行方が分らぬと云つて此儘泣き寝入る訳にも行かず、何とか工夫はあるまいかなア、秋さま』</p>
+            <p class="ja-classical-line">『モリ公、お前も中々執着心が深いねい。こんな所迄スタスタと尻を付けて来るのだから、こンな連中に狙はれた女こそ、蛇に魅入られた蟇のやうなものだよ。本当に思へば思ふ程、二人の女が可哀相になつて来た。俺もここまで心猿意馬の狂ひに引かされて、来るは来たものの、何時の間にか、心の猿も思ひの馬も、どつかへ、愛想をつかして、絶望を叫び、帰つて了つたやうな気分になつて来た。モウ仕方がない、是から後へ引返さうぢやないか』</p>
+            <p class="ja-classical-line">『勝手にせい、俺は何処迄もやり遂げるのだ。男がのめのめとどの面さげて、国許へ帰る事が出来ようかい』</p>
+            <p class="ja-classical-line">『併し何程二人の女に懸想して居つても、国依別の居る以上は駄目ぢやないか。彼奴を如何かして……』</p>
+            <p class="ja-classical-line">と云ひ乍ら小声で何か耳のはたで稍暫し囁いて居る。宗介は何うしても其声が余り低いので聞えなかつた。</p>
+            <p class="ja-classical-line">『……此処を一里計り先へ行くと、丸木橋がある。相当に深い谷川で、そこへ落ちようものなら、どんな太い男でも五体がメチヤメチヤになつて了ふと云ふ事だから、今の中に先へ廻つて、其橋のつつぱりを取り、国依別が一足跨げるや否や、バサツと落ちる様に工夫をせうぢやないか。藤蔓か何かで、橋の一方を括つておき、国依別が跨げるや否や、谷底へ隠れて居つて、其綱を引くのだ。さうすると、ズヽヽヽズドン、ウン、キヤア……とそれつきり、憐れなりける次第なりけりだ。さうせうぢやないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Even if you break your bones like that, since it is after Kuniyoriwake has passed, won't it just turn out to be all bone-breaking and fatigue for nothing?'</p>
+          <p class="en-p">'Nonsense, it is daijiyōbu. Even if they set out half a day ahead, the other side is leading ashiyowaonna, and our side consists entirely of kenkiyakuka, so surely I will win and get ahead. Aitsu is no doubt still lingering two or three ri behind, dallying with the woman. Come, if we do not hurry, it will be taihen once we are caught up. If they come while the sagefu is unfinished, it will amount to nothing at all. If the woman attempts to cross, we will let her cross in silence. The very moment Kuniyoriwake takes two or three steps, we pull the rope—one, two, three. How is that, Akisama, a brilliant plan?'</p>
+          <p class="en-p">'What if one woman goes first, Kuniyoriwake stands in the middle, and another woman is at the back, making a tanjiujin as they cross all at once? Won't that turn out to be kutabiremau for nothing, catching neither horsefly nor bee?'</p>
+          <p class="en-p">'Well, the wind will blow as it pleases then, won't it? Tatohe we ochiko into the ravine, and even if we get a slight kega, there is no fear of all sannin dying together. At that point, Kuniyoriwake will be dumbfounded, so we just let him go with an innocent face and shimahi. We will make the twain women drink water, care for them... saying, 'Now now, travelers' ojiyochiu...' and rescue them. If we do that, there is no reason why Benaihime might not call us her saviors of life and cast amorous glances our way. In fact, the very reason Kuniyoriwake was rabādo was because he rescued her during the great earthquake, you see.'</p>
+          <p class="en-p">'That is true as well. Come, let us go quickly and set about the preparations. If we dawdle, it will be like chrysanthemums after the ninth day—a festival after it is all over—and amount to nothing at all. O-ne, two, three!'</p>
+          <p class="en-p">Thus, they advanced along the narrow valley path, peering suspiciously about.</p>
+          <p class="en-p">Sōsuke, after the futari had gone, muttered:</p>
+          <p class="en-p">'Just as I thought I could not sleep tonight of all nights, Akiyamawake and Morisu are plotting such wicked things. What is more, they chattered away so loudly that it reached our ears as if by tenbatsu. The gods must have placed a spirit upon me and kept me awake precisely because those two are hatching such a scheme. How thorough and far-reaching the benevolence of the gods is from beginning to end! Whenever anyone thinks nobody knows and plots evil, things always turn out just like this. Heaven knows, earth knows, and I myself know—even Sōsuke knows, they say, which makes it quite frightening. Let me see, shall I catch this secret and report it as a feat to Kuniyoriwake-sama?... No, no, wait, wait, if I speak too fast it will lose its value. When we reach the edge of the bridge, just as Kuniyoriwake-sama is about to step onto it... I will stop him, crying, 'Pardon me, wait, if I look with my tennantsū, this bridge is a floating bridge, so it is perilous. Aki and Mori are pulling the ropes...' By doing so, Kuniyoriwake-sama might be overjoyed and restore my name, which he changed, back to my old name of Sōsukehiko-sama. Oh yes, silence is golden.'</p>
+          <p class="en-p">Carried away by his own mood, before he knew it, he was chirping in a high voice. Yasuhiko woke up and said:</p>
+          <p class="en-p">'Oi Sōsuke, you are thinking foolish things, aren't you?'</p>
+          <p class="en-p">Sōsuke lowered his voice and said:</p>
+          <p class="en-p">'Oi, did you hear? It is a secret from the commander, so please keep it in mind.'</p>
+          <p class="en-p">Yasuhiko raised his voice purposely and said:</p>
+          <p class="en-p">'What about the single-plank bridge?'</p>
+          <p class="en-p">'Won't you rest without shouting so loudly? Aki and Mori are in the midst of the sagefu right now to drop the log bridge. Isn't it interesting?'</p>
+          <p class="en-p">'Tensensei-sama, do you know about this?'</p>
+          <p class="en-p">'I have heard the whole thing from the beginning. Shall I have your name changed to Sōsukehiko?'</p>
+          <p class="en-p">'Oh, thank you very much indeed. I humbly beg your kind favor.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『それ程骨を折つたつて、国依別の通つた後だつたら、骨折損の草臥儲けになつて了うぢやないか』</p>
+            <p class="ja-classical-line">『ナアニ、大丈夫だよ。半日位先に出たと云つても、向うは足弱女を連れてるんだし、此方は健脚家計りのお揃だから、キツと俺の方が先へ勝つにきまつてる。彼奴はまだ二三里位後に女と意茶ついて居よるに違ひない。サア早く行かぬと、追ひつかれると大変だぞ。作業が済まぬ中に来よつたら何にもならぬからなア。もしも女が渡りよつたら、黙つて渡してやるのだ。国依別が足を二歩三歩かけよつたが最後一イ二ウ三ツで引張るのだ。何と秋さま、妙案だらう』</p>
+            <p class="ja-classical-line">『一人の女が先に立ち、国依別が中に立ち、又一人の女が後にあり、一時に単縦陣を作つて渡りよつたら、何うするのだ。それこそ虻蜂取らずの草臥もうけになつて了うぢやないか』</p>
+            <p class="ja-classical-line">『そこは又は其時の風が吹くぢやないか。仮令落込ンだ所で、チツと位怪我をしても、三人が三人乍ら死ぬ気づかひはないワ。そこで国依別は目をまかす、そ知らぬ顔して放つとけばそれで仕舞だ。二人の女には水を呑ませ、介抱し……コレコレ旅の御女中……とか何とか云つて助けてやる。さうすれば紅井姫が、俺達に命の親様と云つて、秋波を送つてクレナイ事もあるまいぞ。現に国依別がラバーされたのも大地震の時に助けてやつたのが原因ぢやからのウ』</p>
+            <p class="ja-classical-line">『それもさうだなア。サア早く往つて準備に取りかからうかい。グヅグヅして居ると六菖十菊、後の祭りで、何にもならないワ。オ一、二、三！』</p>
+            <p class="ja-classical-line">と、細き谷路を、怪しげにすかし乍ら、進ンで行く。</p>
+            <p class="ja-classical-line">宗介は二人の往つた後で、</p>
+            <p class="ja-classical-line">『何だか俺は今夜に限つて寝られないと思へば、秋山別、モリスの両人、あンな悪い事を企ンでゐやがるのだなア。それも天罰に俺達に聞えるやうにすつかり喋つて行きよつた。神様が彼等両人がこンな計画をして居るからと、俺に霊をかけ、ねかさなかつたのだナ。何と神様の恵はどこからどこ迄も行届いたものだ。誰も知るまいと思つて、悪い事を企むと、何事も此通りだ。天知る地知る吾れも知る、宗介迄が知ると云ふのだから、怖いものだなア。ドレドレ此秘密を聞き取つて手柄話を国依別様に報告せうかなア……イヤイヤ待て待てさう早く云ふと値打がない。橋の詰まで行つた所で、国依別さまが足をかけようとなさつたら……モシ御待ちなさい、私の天眼通で見れば、此橋は浮橋ですから険呑です。秋、モリの二人が綱を引張つて居りますから……と抱止めるのだ。さうすると国依別さまも喜びて、宗介と替へて下さつた名を又、昔の名の宗彦さまと替へて下さるかも知れぬ。おゝさうだ言はぬが花だ』</p>
+            <p class="ja-classical-line">と調子に乗つて、何時の間にやら、高い声で囀つて居る。安彦は目をさまして、</p>
+            <p class="ja-classical-line">『オイ宗介、貴様は甘い事を考へて居よるなア』</p>
+            <p class="ja-classical-line">宗介小声になつて、</p>
+            <p class="ja-classical-line">『オイ、お前聞いたのか。大将に内証だから其積りで居つて呉れよ』</p>
+            <p class="ja-classical-line">安彦殊更大きな声で、</p>
+            <p class="ja-classical-line">『一本橋をどうしたと云ふのだい』</p>
+            <p class="ja-classical-line">『喧しう言はずに休まぬか。秋、モリの両人が、今頃にや丸木橋をおとす作業中だ。面白いぢやないか』</p>
+            <p class="ja-classical-line">『宣伝使様、あなた御存じですか』</p>
+            <p class="ja-classical-line">『初からスツカリ聞いて居る。宗彦と云ふ名に替へてやらうか』</p>
+            <p class="ja-classical-line">『イヤもう有難う御座います。どうぞ宜しうお頼み申します』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'In that case, I shall raise your rank by one degree and grant you the name Munehiko from this very moment.'</p>
+          <p class="en-p">'Ah, I have no words to express my gratitude... Hey, Yasuhiko, how is this? From right now, you and I are colleagues. I cannot have you treating me like a younger brother with such an arrogant air.'</p>
+          <p class="en-p">'I received the name Hiko three days ago. Didn't you just receive yours now? Even if twins are born, a distinction is made between brothers. Since there is actually a difference of three days, you are naturally the younger brother.'</p>
+          <p class="en-p">'Ah, there is no help for it then. Well, I will make a concession and become the younger brother in appearance only. In exchange, the older brother must possess the capability befitting an older brother, and he has the responsibility to cherish and care for the younger brother. If the younger brother is feeling weak, I must take his hand and look after him, or even carry him on my back, otherwise my value as an older brother is nil, you see.'</p>
+          <p class="en-p">'Hey, hey, won't you stop chattering and rest? There is still a little time before daybreak. We will rest leisurely here, and proceed step by step after daybreak. No doubt those two fellows are hiding in the tree thickets at the bottom of the valley, so you two must go using the voices of women. And then all three of you will successfully cross over.'</p>
+          <p class="en-p">'For three people to use women's voices for two women, isn't that a bit strange?'</p>
+          <p class="en-p">'As for that, it will become two. Kuniyoriwake will use the voice of Beniihime, and Yasuhiko will carry his younger brother Munehiko on his back, and thus taking on the voice of Erina, you only need to cross over and you will be safe. After you have crossed, each of you will burst into a loud laugh with a man's voice, and startle them.'</p>
+          <p class="en-p">'Kuniyoriwake-san, unlike a serious missionary, you certainly do love mischief. Will even I be able to cross a single-log bridge carrying such a man on my back?'</p>
+          <p class="en-p">'For a fellow who plots such evil things, isn't it fine if we teasingly play a trick on him just this once? After all, if it goes wrong, it's a place where we might lose our lives... And you will strap Munehiko to your back, so even if you mistakenly fall, for Kuniyoriwake it will be neither painful nor itchy, ha-ha-ha-ha-ha.'</p>
+          <p class="en-p">Yasuhiko tilted his head, gazing intently at Kuniyoriwake's face,</p>
+          <p class="en-p">'Heng, what an indifferent person you are, my goodness!'</p>
+          <p class="en-p">'Well, since we are crossing the mountain stream and falling into the valley water, it is bound to be a bit indifferent, isn't it? At the bottom of the valley, the Spirit of Water is waiting, and the moment you plunge in, it will receive you with open hands and save you, so you have nothing to worry about. You shouldn't indulge in such needless worries. Ah, how I long for the time. Missionary-san, wouldn't it be about time to set out?'</p>
+          <p class="en-p">'Didn't the two of them just go a moment ago? Preparing to pull out the bridge piles of that deep mountain stream or attaching vines to pull them is not something that can be done with a respite of one or two hours. Isn't it more interesting to take it easy here and make fools of them? Even if we are late by about half a day, it's not like we'll have a fine for tardiness deducted; come on, let's enjoy the road ahead and rest at ease.'</p>
+          <p class="en-p">So saying, he used the root of a large tree as a pillow and fell fast asleep.</p>
+          <p class="en-p">'Isn't a person called a missionary remarkably bold, hey, Munehiko? Even though the enemy is presently carrying out preparations to drop the bridge, he calmly lies down just like that and goes to sleep with a loud snore as soon as he touches the ground. Since we still cannot shake off our worldly attachments and cherish our lives, whenever we think the enemy is making preparations for murder right before us, our mental spirits become agitated here and there and we cannot sleep at all.'</p>
+          <p class="en-p">'Since you try to compare Kuniyoriwake-san with a cheap fellow like Yasuhiko, such doubts arise, you see. A living deity and a manure-producing vessel cannot be treated in the same way, why.'</p>
+          <p class="en-p">'If I am a manure-producing vessel, aren't you a manure-producing vessel too?'</p>
+          <p class="en-p">'You are a manure-producing vessel, but this Munehiko is a feces-manufacturing vessel. It sounds like the same meaning, but there is a slight difference in the nuance there. Ah-ha-ha-ha.'</p>
+          <p class="en-p">Laughing thus, while circling round and round the great tree, they decided to wait for the break of dawn. Gradually, the eastern sky began to whiten, and the voices of a hundred birds resounded noisily from the surrounding forests. The morning breeze sweeping over the green leaves blew upon the three of them an unspeakably refreshing coolness, begrudging nothing. At last, the party of three made their footgear preparations, traced the narrow path of the valley, and proceeded forward toward the log bridge.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『そんなら、一段位を上げて、只今から宗彦と名を与へる』</p>
+            <p class="ja-classical-line">『アヽ何とも御礼の申様が御座いませぬ……オイ安彦どうだい、只今から、お前も俺も同役だ。余り偉相に弟扱ひには出来ないぞ』</p>
+            <p class="ja-classical-line">『俺は彦を貰つてから三日になる。貴様は今貰つた所ぢやないか。双児が生れても兄弟の区別がつくのだ。現に三日も違ひがあるのだから、ヤツパリ弟だよ』</p>
+            <p class="ja-classical-line">『エヽ仕方がないなア。ぢやドツと譲歩して表面だけ弟になつておかうかい。其代り兄は兄丈の甲斐性がなくてはならず、弟を可愛がつて大切にせねばならぬ責任がある。弟が弱つて居れば、手を引いてやつて労はり又負うてやらなきや、兄貴の値打がないからなア』</p>
+            <p class="ja-classical-line">『コラコラ喧しう云はずに休まぬか。まだ夜明にチツと間もある。ゆつくり茲で休ンで、夜が明けてからボツボツ行くのだ。何れ彼奴ら両人は谷底の木の茂みに隠れて居るに違ひないから、お前等両人は女の声色を使つて行くのだよ。さうして三人共甘く、渡つて了うのだよ』</p>
+            <p class="ja-classical-line">『二人の女に三人が声色とは、チツと変ぢや御座りませぬか』</p>
+            <p class="ja-classical-line">『そこは二人になるのだ。国依別が紅井姫の声色を使ひ、安彦は弟の宗彦を背中に負ひ、さうしてエリナの声色になつて、渡りさへすれば大丈夫だ。渡つて了つてから、各自に男の声で大笑ひをし、ビツクリさしてやるのだ』</p>
+            <p class="ja-classical-line">『国依別さま、あなたは真面目な宣伝使に似ず、随分悪戯が御好ですなア。こんな男を、私だつて背中に負うて一本橋が渡られませうかなア』</p>
+            <p class="ja-classical-line">『あの様な悪い事を企む奴には、此方も一つからかつてやる位は良いぢやないか。まさか違へば生命を取られる所ぢやから……そしてお前は宗彦を背中へ括りつけ、もしも誤つて落ちた所で、国依別に於ては、痛い事もなければ痒い事もないのだ、アハヽヽヽヽ』</p>
+            <p class="ja-classical-line">安彦首を傾け、国依別の顔を見詰め乍ら、</p>
+            <p class="ja-classical-line">『ヘーン、何とマア水臭い御方ですなア』</p>
+            <p class="ja-classical-line">『何れ、谷川を渡り谷水の中へおちるのだもの。ちつたア、水臭からうかい。谷底には水の御霊が待つて居つて、はまつた所で、手を受けて助けて下さるから大丈夫だよ。そんな取越苦労はするものぢやないよ。あゝ待ち遠しい事だ。宣伝使様モウそろそろ出かけたら如何でせう』</p>
+            <p class="ja-classical-line">『今二人が行つたばかしぢやないか。あの深い谷川の橋杭を取つたり、蔓をつけて引つ張る用意するのは、一時や二時の猶予で出来るものぢやない。茲でゆつくりしてアフンとさしてやる方が面白いぢやないか。別に半日位遅れたつて、遅刻の罰金を取られるのでもなし、マア先を楽ンで、ゆつくり休ンで行かう』</p>
+            <p class="ja-classical-line">と言ひ乍ら、大木の根を枕に寝て了つた。</p>
+            <p class="ja-classical-line">『何と宣伝使と云ふものは大胆な者ぢやないか、ナア宗彦。現在敵が落橋準備をやつてゐるのに、平気であの通り、横になるが早いか高鼾をかいて寝て了はれた。俺達はまだ執着心が離れぬので、命が惜しくて、敵が前に殺人準備をやつて居ると思へば、どこともなしに心気興奮して寝られないがなア』</p>
+            <p class="ja-classical-line">『国依別さまと安物の安彦と比べやうとするから、そンな疑問が起るのだよ。活神さまと製糞器とは同じ様にはいかぬワイ』</p>
+            <p class="ja-classical-line">『俺が製糞器なら、お前も製糞器ぢやないか』</p>
+            <p class="ja-classical-line">『お前は製糞器だよ、この宗彦は糞造器だ。同じ意味の様だが、そこに一寸違う訳があるのだ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ひ乍ら、大木の周囲をクルクルと繞りつつ夜明を待つ事にした。漸くにして、東は白み出し、百鳥の声、あたりの森林より、かしましく聞え来たる。青葉を渡る旦の風は、得も言はれぬ涼味を惜しげもなく、三人に向つて吹きつける。いよいよ一行三人は足仕度をなし、谷の細路を伝ひ、丸木橋に向ひ進み行く事とはなりにける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c13.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 13: 姉妹 Teaching [879]</span>
+      </a>
+      <a href="c15.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 15: 丸 Tree Bridge [881]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
