@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: 不意の客 [758] - Volume 25 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 25 Table of Contents</a>
+      <span>Volume 25</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 25 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: 不意の客 [758]</h1>
+      <p class="chapter-title-ja">不意の客〔758〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tormented by the oni of her own heart,
+In days of yore, Ōriyōhime,
+At the tender age of sixteen in full bloom,
+Coldly and heartlessly
+Deep in the mountains of Seirontō,
+To Tomohiko—a rough man devoid of duty or affection,
+In a lonely bedchamber,
+Plied with wine through a trick of escape,
+Subjected to the sorrowful ordeal—that old scar,
+Even to this day, having become a queen,
+Lingered deep within her heart,
+Suffering and agonizing she had remained; but
+Illuminated by the moonlight
+Of a cloudless midautumn night,
+Pondering the inner feelings of the man she abandoned,
+Unable to bear it even for a second,
+Surrounded by the clouds of suffering and terrified,
+While gazing up at the sky,
+The heavenly vault suddenly clouded over,</p>
+          <p class="en-p">Leading numerous oni,
+Pouring a rain of steel spears,
+The oni under Tomohiko's command
+Trembled at the shadows and into a thousand-fathom
+Ravine suddenly tumbled down,
+Following them, her mother Mukadehime,
+Wishing to save Ōriyōhime,
+Descending the stairs missed her footing,
+Likewise tumbled down into the ravine,
+At the bottom of the valley paying for her sins,
+Oh, how terrifying, how terrifying,
+The workings of past sins coming around,
+Had she fallen into the realm of the nether roots?
+O gods of heaven and earth, O Tomohiko,
+Pardon my sins—
+Just as she prayed, blown by the autumn wind,
+A single withered leaf falling,
+A red safflower fluttering into my eyes,
+As she thought this, her dream awoke,
+And raising her eyes, she was in the original lofty hall,</p>
+          <p class="en-p">Bathed in the moonlight
+Along with Umekohime and the others;
+In this true dream, Koitorihime,
+Now here before the presence of the Mikumari
+God, putting her hands together,
+From the bottom of her heart to the moon-light god
+While apologizing for the discourtesy of moon-viewing,
+Proceeding deep into the inner sanctuary,
+Reciting the Futo-notori
+Before the presence of the Kami—just at that moment Kanshū,
+ Breathlessly rushed over,
+And recounted the events from within the dream
+With an air of utter truth,
+Whereupon Ōriyōhime, feeling suspicious,
+Sent Smartball outside the gate
+To have him scout the situation,
+There was not even a shadow of attacking enemies,
+And the moonlight shone brilliantly,
+Illuminating every corner without exception;
+Beginning with Ōriyōhime,</p>
+          <p class="en-p">Within the breasts of Kanshū and Bukō,
+In the black clouds not yet cleared away,
+Spawning doubt and suspicion in a haunted mind,
+Troubled by their own hands,
+A tale of awakening from delusion—
+While lying sideways, Mizuki,
+Counting the rafters of the ceiling,
+Stuffing her cheeks full of a round-shaped
+Anpan bread,
+Relates the tale of Ōriyōhime
+As it progresses, how wondrous it is!
+Ah, Kannagara Kamigami,
+May your divine spirits prosper and bless us.</p>
+          <p class="en-p">○</p>
+          <p class="en-p">In the shade of the trees in the open square inside the castle of Jionjō, generals Kanshū and Bukō alongside the gatekeeper and all the others, stretch out their bodies upon the lawn or sit about, indulging in idle chatter.</p>
+          <p class="en-p">The gatekeeper Māru (Manzō) turns toward Kanshū,</p>
+          <p class="en-p">Māru: 'Mosimosi, Ball-sama (meaning the leader), it seems the forces of Tomohiko came this way recently, how did it turn out, I wonder?'</p>
+          <p class="en-p">Kanshū: 'It is none of your concern, Māru. It was a story akin to a mirage, as far as Māru is concerned.'</p>
+          <p class="en-p">Māru: 'Your report to Ōriyōhime-sama was said to be like a dream, but even for a dream, it is quite an exaggeration.'</p>
+          <p class="en-p">Kanshū: 'It is not just me. Even Bukō saw the exact same dream, so we are completely of one mind on this. Since I truly could not believe it to be a lie, I went as far as to make a report. However, we are loyal vassals deeply concerned for the divine person of Ōriyōhime-sama, so the dreams you see differ somewhat in caliber.'</p>
+          <p class="en-p">Māru: 'Because they differ in caliber, you saw a dream of war and reported the battle situation in terror, did you not? ...Bukō-sama, did you really see such a dream too?'</p>
+          <p class="en-p">Bukō: 'I cannot exactly say I saw a dream as such, but just as I was constantly worrying whether such a thing might happen, Kanshū spoke of it in such a flustered manner that, whether it was a dream or reality I know not, I was simply swept up in it and went along to report. However, since it was the manifestation of sincere devotion born of credulous reporting (loyal service to the gods), Ōriyōhime-sama did not particularly blame us, and it ended up as if everything was settled safely.'</p>
+          <p class="en-p">Māru: 'In that case, shall I henceforth bestow upon the two of you the honorable title of Mirage Ball? ...Isn't that right, Myūzu (Myōshū)?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">心の鬼に責められて
+黄竜姫が其昔
+年も二八の花盛り
+大の男を素気無くも
+錫蘭島の山奥に
+義理も情も荒男
+淋しき閨の友彦を
+酒に酔はせて籠抜の
+憂目に会はせた古疵は
+女王となりし今日までも
+心の奥に蟠かまり
+悩み苦み居たりしが
+空澄み渡る中秋の
+月の光に照らされて
+棄てた男の心根を
+思ひ浮べて矢も楯も
+耐らぬ許り苦しみの
+雲に包まれ怖ろしく
+空を眺めて居る内に
+天空俄にかき曇り</p>
+            <p class="ja-classical-line">数多の鬼を引率れて
+鋼鉄の矛の雨降らす
+友彦幕下の鬼共が
+影に戦き千仭の
+谷間に忽ち顛落し
+続いて母の蜈蚣姫
+黄竜姫を救はむと
+階段降り踏みはづし
+同じく谷間に顛落し
+罪を償ふ谷の底
+ヤレ恐ろしや恐ろしや
+昔の罪の廻り来て
+根底の国に落ちたるか
+天地の神よ友彦よ
+妾の罪を赦せよと
+祈る折しも秋風に
+吹かれて落ち来る一葉の
+紅花の吾眼にヒラヒラと
+入るよと見れば夢醒めて
+仰げば元の高殿に</p>
+            <p class="ja-classical-line">梅子の姫や諸人と
+月の光を浴び居たる
+此正夢に小糸姫
+愈此処に三五の
+神の御前に手を合せ
+月光神に心より
+月見の無礼を謝し乍ら
+奥殿深く進み入り
+神の御前に太祝詞
+宣れる折しも貫州が
+息せき切つて駆来り
+夢の中なる出来事を
+誠しやかに宣りつれば
+黄竜姫は怪しみて
+スマートボールを門外に
+遣はし偵察せしむるに
+敵の攻め来し影もなく
+月の光は皎々と
+四辺隈なく照り渡る
+黄竜姫を始めとし</p>
+            <p class="ja-classical-line">貫州武公が胸の中
+まだ晴れやらぬ黒雲に
+疑心暗鬼を生み出し
+吾と吾手に悩みたる
+転迷開悟の物語
+横に臥しつつ瑞月が
+天井の棧を数へつつ
+形も円き餡パンを
+頬張り頬張り述べて行く
+黄竜姫が物語
+進むにつれて不思議なれ
+嗚呼惟神々々
+御霊幸倍坐しませよ。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">地恩城の城内の広場の木蔭に、貫州、武公の大将株を始め、門番其他一同、芝生の上に身を横たへ、或は坐りなどして雑談に耽つて居る。</p>
+            <p class="ja-classical-line">門番のマール（万蔵）は貫州に向ひ、</p>
+            <p class="ja-classical-line">『モシモシ、ボールさま（組長の意）此間は友彦の軍勢がやつて来たさうですが、如何なりましたかなア』</p>
+            <p class="ja-classical-line">貫州『お前の貫州する所でない。マールで蜃気楼の様な話であつたよ』</p>
+            <p class="ja-classical-line">マール『貴方の黄竜姫様への御報告は、マールで夢の様だつたと言ふことですが、夢にしても大袈裟なことですな』</p>
+            <p class="ja-classical-line">貫州『俺ばつかりぢやない。武公でさへも同じ夢を見たのだから、貫武一途だよ。どうしても嘘とは思へないものだから報告に及んだのだ。併し乍ら俺達は、黄竜姫様の御身の上を案じ煩ひ奉つて居る忠臣だから、貴様の見る夢とは、稍選を異にして居るのだ』</p>
+            <p class="ja-classical-line">マール『選を異にして居られるから、戦争の夢を御覧になり、戦々恟々として戦況を御報告なさつたのですなア。……武公さま、貴方も本当に其んな夢を見たのですか』</p>
+            <p class="ja-classical-line">武公『俺は別に夢を見たと云ふ訳ではないが、常々そんな事が在りはせぬかと、案じて居つた矢先き、貫州が周章しく話したものだから、俺も夢か現か知らぬが、ツイ捲き込まれて報告に往つたまでだ。併し軽信報告（敬神報国）の至誠の発露だから、黄竜姫様も別にお咎め遊ばさず、マア無事で事済となつたやうなものだ』</p>
+            <p class="ja-classical-line">マール『そんなら是から貴方等両人に対し、蜃気楼ボールと云ふ尊名を奉ることにしませうかい。……のうミユーズ（妙州）』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Miyūzu: 'Oh, that must be right. A thing called a shinkirō is something that appears in a slightly hazy and unclear sky, forming floating pavilions, pine groves, or projecting the sight of men and horses passing to and fro. Whenever spring and summer arrive, a shinkirō appears in the upper part of Mount Nelson, where the figures of various splendid goddesses can be seen, and among them, the shapes of ogres and giant serpents sometimes manifest. Ōkata Kuwanshiu-sama must have gazed not upon a dream, but upon that shinkirō, and being startled, thought it was the real thing and so made his report, I suppose.'</p>
+          <p class="en-p">Kuwanshiu: 'Since I came here from Onokorojima, I have heard tales that such things appear in the sky, but I have not yet seen one. I should like to see one even once, ah.'</p>
+          <p class="en-p">Maru: 'In this Riugūjima there is a place called Lake Suha, possessing a wide and beautiful water reservoir as if its lakebed were hardened with splendid gold and silver sand, and there dragons and numerous goddesses appear, and the sight of them engaging in various divine works sometimes reflects in the heavens, startling the people of our land quite frequently. However, for some reason in recent years, they have not appeared as frequently as before. Perhaps because Tomohiko with the crooked nose went to the secret village across Mount Nelson, the dragon god became angry and hid deep at the bottom of Lake Suha, suspending various divine works, and thus the shinkirō may not be appearing. Indeed, perhaps the dragon god has completely changed the shinkirō on account of Tomohiko. Aha-ha-ha-ha.'</p>
+          <p class="en-p">Kuwanshiu: 'Hey, look over there. Speak of the devil and his shadow appears, isn't that fellow who looks just like Tomohiko—with his red nose-tip and protruding chestnut eyes—coming along while bringing a beautiful woman?'</p>
+          <p class="en-p">Bukō: 'Ya, indeed a fellow who looks much like him. However, rumor has it that that fellow gained tremendous influence in the village of Janna and was treated with great respect by the villagers, so that almost all of the region west of Mount Nelson became Tomohiko's sphere of influence, advancing him to a position comparable even to Kōryūhime-sama. Therefore, even if he were to come here, he ought to be bringing an escort of ten or twenty retainers. A fellow with a crooked nose—it is not necessarily the case that there are not two or three such men in the wide world. Surely it cannot be Tomohiko, can it?'</p>
+          <p class="en-p">Kuwanshiu: 'Even so, look closely. It seems there is no mistake that it is he. That fellow has shown his true colors until now, became disliked by the villagers of Janna, could no longer stay there, and taking Princess Therese by the hand set out on an elopement; could he have come to ask the Chion Castle for relief troops, or is there no mistake that he has sneaked in as a freeloader?'</p>
+          <p class="en-p">Bukō: 'What do you intend to do if it is indeed Tomohiko?'</p>
+          <p class="en-p">Kuwanshiu: 'Needless to say, we will gather together and beat him to a pulp as a punishment. No matter how much the Sankyō preaches a doctrine of non-resistance, how could we endure letting such a fellow inside the gates? One never knows what he might do toward Kōryūhime-sama. Moreover, Kōryūhime-sama is bound to fret and worry, thinking it would be shameful if people imagined such a man had been her husband, even for a year. And besides, since he has brought his wife along, if word of such a thing gets out, one never knows what kind of commotion she might start up again by growing green with jealousy; therefore, in any case, we must not let him set even a single step inside this gate. It is best to throw him out just as we did in former years.'</p>
+          <p class="en-p">As they were thus discussing, neither a dream nor an illusion nor a shinkirō, the real Tomohiko approached this place briskly, just the two of them together with Princess Therese,</p>
+          <p class="en-p">Tomohiko: 'Ya, Kuwanshiu-sama, Bukō-sama, it has been a long time, I hope you are well.'</p>
+          <p class="en-p">Kuwanshiu: 'Ya, as expected you are indeed Tomohiko. Showing your habitual true colors, you have once again been disliked by the native fellows and have come shuffling along, but since this castle gate is a barrier post placed within our sphere of influence, passing through is impermissible. Troublesome as it is, be off with you quickly.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ミユーズ『オウそれが宜からう。蜃気楼と云ふやつは、少しくどんよりとしたやうなハツキリせぬ空に、空中楼閣が出来たり、松林が出来たり、人馬の往来する有様が映つて来るものだ。何時も春夏の頃になると、ネルソン山の上の方に蜃気楼が現はれ、色々の立派な女神の姿が見えたり、中には鬼や大蛇の姿が現はるる事がある。大方貫州さまは夢ではなくて、其蜃気楼を眺め、ビツクリして本真物ぢやと思つて報告しられたのだらう』</p>
+            <p class="ja-classical-line">貫州『俺は自転倒島から此処へやつて来たものだから、空中にそんな物が現はれると云ふ事は、話は聞いて居るがまだ見た事はない。一遍見たいものだなア』</p>
+            <p class="ja-classical-line">マール『此竜宮島には諏訪の湖と云つて、立派な金銀の砂を以て湖底を固めた様な綺麗な広い水溜りがあり、其処に竜神や沢山の女神が現れて、色々の事を遊ばして御座る姿が、時あつて天上に映じ我々国人を驚かし給ふ事が度々ありますよ。併し乍ら近年は如何したものか、今迄の様にさう度々現はれなくなつた。大方ネルソン山を向ふに越えた秘密郷へ、鼻曲りの友彦が往つたものだから、竜神が怒つて諏訪の湖の底深くお隠れ遊ばし、色々の神業を御中止になつて、蜃気楼が現はれないのかも知れない。本当に竜神も友彦の為めに、蜃気楼一転遊ばしたのかも知れないよ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">貫州『オイ向ふを見よ。噂をすれば影とやら、鼻先の赤い出歯の団栗眼の友彦に似た奴が綺麗な女を連れてやつて来るぢやないか』</p>
+            <p class="ja-classical-line">武公『ヤア、ホンによく似た奴だ。然し彼奴はジヤンナの郷で非常な勢で郷人にもてはやされ、殆どネルソン山以西は友彦の勢力範囲になり、言はば黄竜姫様に匹敵する様な地位に迄進んだと言ふ噂だから、仮令此処へ来るにしても、十人や二十人の供を連れて来るべき筈だ。鼻の曲つた奴は広い世間には、二人や三人は無いとも限らぬ。よもや友彦ではあるまいなア』</p>
+            <p class="ja-classical-line">貫州『ソレでもよく見よ。友彦に間違ひない様だ。彼奴は今迄の地金を出して、ジヤンナの郷人に愛想をつかされ、居たたまらなくなり、テールス姫と手に手を取つて駆落と出掛け、地恩城へ救援軍を願ひに来たのか、但は居候に舞ひ込んで来居つたのに間違ひあるまいぞ』</p>
+            <p class="ja-classical-line">武公『果して友彦だつたらどうする考へだ』</p>
+            <p class="ja-classical-line">貫州『無論の事、寄つて集つて懲しめの為め打ちのめすのだ。何程無抵抗主義の三五教と言つても、あんな奴を門内に入れて耐るものかい。黄竜姫様に対し、どんな事をし居るか分つたものでない。又黄竜姫様も、あんな男が仮令一年でも夫であつたと、人に思はれては恥かしいと御気を揉まれるに定つて居る。それに又嬶アを連れて来て居るから、そんな事が分らうものなら又もや悋気の角を生やして、どんな騒動をおつぱじめるか分らないから、兎も角此門内に一歩たりとも入れてはならぬ。先年の様に放り出して仕舞ふに限る』</p>
+            <p class="ja-classical-line">と話合ふ所へ夢でもなく現でも蜃気楼でもなく、本当の友彦はテールス姫とただ二人スタスタと此場に近づき来り、</p>
+            <p class="ja-classical-line">友彦『ヤア貫州さま、武公さま、久し振りで、御機嫌宜しう』</p>
+            <p class="ja-classical-line">貫州『ヤア矢張り貴様は友彦だな。日頃の地金を出して、又候土人の奴に愛想をつかされ、ノソノソと遣つて来たのだらうが、此城門は我々の勢力圏内に置かれてある関所だから、通す事は罷りならぬ。折角だがトツトと帰つて呉れ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tomohiko: 'That may well be, but today's Tomohiko is different from the Tomohiko of the hitherto body-dominant and spirit-subservient order, so I would like to be allowed to pass without worry.'</p>
+          <p class="en-p">Māru: 'I say, Ball-sama, such a fellow absolute cannot be let through, you know.'</p>
+          <p class="en-p">Kuwanshiu: 'Oh, exactly. By no means can you be let through. You had better give up and return home.'</p>
+          <p class="en-p">Tomohiko: 'While such doubts on your part are most reasonable, we have set up the teaching of the Jännäi-kyō, established the teaching of the great compassion and great mercy of the Ananai-kyō, and today we have attained a tremendous sphere of influence. Therefore, wishing to report everything to Ōriyōhime-sama regarding the divine path of the Kamisama in the very same island, to have her employ us among her subordinates, and to have her unify the entire island, we have deliberately come all the way from afar, accompanied by no retinue, just the two of us together with my wife, Princess Therese. If we are not granted an audience with Ōriyōhime-sama, we do not stubbornly demand it; but we should like to be allowed to meet even Samori-sama.'</p>
+          <p class="en-p">Māru: 'Hey, hey, Tomohiko. You just said you came without bringing any attendants, but does a companion need a company? Calling her Princess Therese, or whatever, is a wife with a strange Atlas-like face really that precious? A fellow with a red nose and a fellow with blotches of red on her face presuming to come to Jionjō and desiring an audience with Samori-sama—what kind of nonsense are you spouting there? Take a good look at your own face, you rascal.'</p>
+          <p class="en-p">Princess Therese: 'Tomohiko-sama, search-rice Jionjō, etsu-putsu, etsu-pa-etsu-pa, parchiku-parchiku, itsu-pa-pa.'</p>
+          <p class="en-p">So she was chattering in the indigenous tongue. This meant... The gatekeeper of Jionjō, without understanding the reason, is despising us and refusing our entry into the Savior Tomohiko's path, but let us not hesitate in the least, let us push right in... such was the meaning. Tomohiko,</p>
+          <p class="en-p">'Kuwanshiu, Mukō, and other gentlemen, the matter will be understood later. At any rate, upon having an audience with Samori-sama.......'</p>
+          <p class="en-p">So saying, he pulled Princess Therese's hand and attempted to advance toward the front gate. Kuwanshiu and Mukō,</p>
+          <p class="en-p">Kuwanshiu: 'Hey, this is terrible! As if we would let you in......'</p>
+          <p class="en-p">With that, they exchanged glances with Māru, Muse, and the others. Māru and the whole company chased after Tomohiko from behind, gathered around, knocked the two down on the spot, trampled, kicked, and beat them, subjecting them almost to a state of half-death. The husband and wife offered no resistance whatsoever, leaving themselves entirely to the beating of the company, joining their palms, and chanting norito of gratitude and prayer. Finding the husband and wife so utterly obedient, the company felt somewhat creeped out; and following Tomohiko's words, Kuwanshiu, Mukō, and the rest squatted down upon the earth and, raising their voices in unison, chanted norito of gratitude and prayer.</p>
+          <p class="en-p">Just as Tsurukō, the right guard, was strolling in the shade of the trees within the gate, wondering at the sound of a great chorus of norito heard outside the gate, he traced the voices, slipped through the front gate, emerged into the wide grove where the dense trees flourished outside, and recognized the figures of the assembly. Appearing there and seeing Tomohiko mingling among the crowd to chant norito, he was greatly astonished; without a word, he turned on his heel, penetrated deep into the inner palace before Ōriyōhime, and reported these circumstances in full detail. Far from looking startled, Ōriyōhime smiled gently and said,</p>
+          <p class="en-p">Ōriyōhime: 'Right Guard-dono, I hear Tomohiko has arrived. Your attendants must be numerous indeed, I suppose.'</p>
+          <p class="en-p">Tsurukō: 'Yes, there appear to be no attendants to speak of. There is only a single unfamiliar woman; by all accounts, it must be the famed Princess Therese.'</p>
+          <p class="en-p">Ōriyōhime: 'My, what a strange thing indeed. That Tomohiko-sama, who has gained such power and is like the rising sun, should come all the way here without even bringing retainers, and as a married couple at that—what on earth could be the reason for this?'</p>
+          <p class="en-p">Tsurukō: 'As I surmise, Tomohiko-sama must have once again revealed his true colors, been abandoned by the natives, and, hand in hand with his wife, fled here for his very life. What shall we do? I beg for your instructions.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">友彦『左様で御座いませうが、今日の友彦は今までの体主霊従の友彦と違ひますから、御心配なく通過させて頂きたい』</p>
+            <p class="ja-classical-line">マール『モシモシ、ボールさま、此んな奴は絶対に通す事は出来ませぬなア』</p>
+            <p class="ja-classical-line">貫州『オウさうだ。金輪際通す事は出来ぬ。諦めて帰つたがよからうぞ』</p>
+            <p class="ja-classical-line">友彦『其御疑ひは御尤も乍ら、我々はジヤンナイ教を立替へ、大慈大悲の三五教の教を立て、今日の所大変な勢力になりましたので、同じ一つ島に於ける神様の御道、黄竜姫様に一切報告し、その部下に使つて貰ひ、全島を統一して頂かうと態とに供をも連れず、女房のテールス姫と只二人遥々参りました。どうぞ黄竜姫様に御面会叶はねば、強つてとは申しませぬ。左守様になりとも会はして頂きたう御座います』</p>
+            <p class="ja-classical-line">マール『ヤイヤイ友彦、供を連れずにやつて来たと今言つたが、友に供が要るかい。テールス姫だとか言つて、妙なアトラスのやうな面した女房が、それ程有難いのか。鼻の赤い奴や、顔の斑に赤い奴が勿体なくも地恩城にやつて来て、左守様に御面会を願ひたいとは、そりや何を戯けた事を吐くのだ。チツト貴様、面と相談して見ろ』</p>
+            <p class="ja-classical-line">テールス姫『友彦さま、サーチライス地恩城、エツプツプ、エツパエツパ、パーチクパーチク、イツパーパー』</p>
+            <p class="ja-classical-line">と土人語で囀つて居る。此意味は……友彦の救世主を、地恩城の門番が、訳も分らずに我々を軽蔑して入門を拒絶して居るが、決して躊躇に及ばぬ、ドシドシ這入りませう……との意味であつた。友彦は、</p>
+            <p class="ja-classical-line">『貫州、武公其他の方々、話は後で分りませう。兎も角左守様に御面会の上………』</p>
+            <p class="ja-classical-line">と言ひ乍らテールス姫の手を引き、表門に向つて進み行かむとする。貫州、武公は、</p>
+            <p class="ja-classical-line">貫州『コリヤ大変だ、貴様を入れてなるものか……』</p>
+            <p class="ja-classical-line">と、マール、ミユーズ其他の人々に目配せした。マールを始め一同は友彦の後より追ひ縋り、寄つて集つて二人を其場に突き倒し、踏む、蹴る、殴く、殆ど半死半生の目に遇はせた。友彦夫婦は少しも抵抗せず、一同が打擲する儘に身を任せ両手を合せて感謝祈願の祝詞を奏上して居た。一同は余り友彦夫婦が従順なるに、少しく小気味悪くなり、友彦の言葉につれ、貫州、武公始め一同は、大地に蹲踞み乍ら声を揃へて感謝祈願の祝詞を唱へて居る。</p>
+            <p class="ja-classical-line">右守の鶴公は門内の木蔭を逍遥し居る折しも、門外に当つて大勢の祝詞の声が聞えたのを訝かり乍ら、声を尋ねて表門を潜り、門前の密樹茂れる広き林に立出で、一同の姿を認めて此処に現はれ来りて、友彦が大勢の中に交りて祝詞を奏上するを見て大いに驚き、無言の儘、踵を返し奥殿深く黄竜姫の前に進み此由を委曲に報告した。黄竜姫は驚くかと思ひの外、ニツコリとして、</p>
+            <p class="ja-classical-line">『右守殿、友彦が御入来になつたとやら、お供の方はいづれ沢山お在りでせうな』</p>
+            <p class="ja-classical-line">鶴公『ハイ、別に供らしき者は御座いませぬ。見慣れぬ女の方が只一人、大方噂に高きテールス姫でせう』</p>
+            <p class="ja-classical-line">『ハテ不思議な事もあるものだ。あれ丈け勢力を得たる旭日昇天の友彦さまが、供をも連れず夫婦連お越しになつたとは、一体どうした訳だらう』</p>
+            <p class="ja-classical-line">鶴公『私の察する所、友彦さまは又例の地金を現はし、土人に愛想をつかされ夫婦手に手を取つて、此処へ命からがら逃げ来られたものと思はれます。如何致したら宜しう御座いますか。御指図を願ひます』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">"It is surely, surely never for any such matter that you have come. I have something in my mind that touches upon this. At any rate, in order to pay respect to the great pillar of Ananai-kyō in Australia, I, Ōriyōhime, shall go out to the outer gate to welcome you."</p>
+          <p class="en-p">Tsurukō: 'Speaking as Umori, for one of your status as the queen of Chionjiyō to go out lightly would affect your dignity. I earnestly beg that you cancel this matter alone. Since I will go out to welcome him, I beg you to wait in the inner hall.'</p>
+          <p class="en-p">Ōriyōhime shook her head from side to side,</p>
+          <p class="en-p">"Nay, we are all differentiated spirits of the same heaven and earth, and there is no distinction of upper and lower among humans. Moreover, that Tomohiko-sama has now become a splendid personage governing the people of the village of Janna, and that I have become the queen of Chionjiyō as well, must be ties of no shallow karma. Even if we were husband and wife for only a single year, I must go out to welcome him."</p>
+          <p class="en-p">Taking advantage of the absence of Mukaderihime and Umekohime from this place, she briskly appeared at the front gate by herself, drew close to the side where Tomohiko sat in proper posture, and said,</p>
+          <p class="en-p">"I am Ōriyōhime of Chionjiyō, formerly Koitohime. Tomohiko-sama, alongside Terusuhime-sama, pray come forward with me to the inner hall."</p>
+          <p class="en-p">When Tomohiko looked up suddenly at this voice, she was indeed Koitohime, with traces of her former visage vividly lingering somewhere on her face... Tomohiko gave a start, lowered his head, respectfully placed both hands on the ground, and spoke.</p>
+          <p class="en-p">Tomohiko: 'Well, well, Your Majesty, to think you have deigned to come to such a place as this... This here is she whom I call my wife, Terusuhime. Now, as a devoted believer of Ananai-kyō, she assists me in my divine duties to the utmost of her strength. There are mountains of things I wish to tell you, but if so, let us speak leisurely in the inner hall.'</p>
+          <p class="en-p">Terusuhime: 'Your Majesty, I have the honor of meeting you for the first time. I beg for your kind favor in all things.'</p>
+          <p class="en-p">Led by Tomohiko and following behind Ōriyōhime, they hid their forms deep within the gate. Tsurukō the Umori reluctantly followed behind the three of them. Kānsuu, Takou, and all the others looked at each other's faces in utter amazement, wondering if it were a dream, reality, or an illusion, and finding themselves once more without words, gazing blankly at the clouds drifting through the sky.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『決して決して左様な事で御入来になつたのではありますまい。妾は少し心に当る事がある。兎も角オーストラリヤに於ける三五教の太柱、敬意を払ふ為めに、黄竜姫の妾門外にお迎ひに参りませう』</p>
+            <p class="ja-classical-line">鶴公『右守として申上げます。苟も地恩城の女王たる御身を以て、軽々しくお出で遊ばすは、御威勢にも関りませう。どうぞ此事許りは御中止を願ひたう存じます。私がお迎へ申して参りますから、奥殿にお待ち下さいます様にお願ひ申します』</p>
+            <p class="ja-classical-line">黄竜姫は首を左右に振り、</p>
+            <p class="ja-classical-line">『イエイエ、同じ天地の分霊、人間に上下の区別はない。又今、友彦様はジヤンナの郷の国人を主宰する立派な御方とお成り遊ばし、妾は地恩城の女王とまで成つて居るのも、浅からぬ因縁でせう。仮令一ケ年でも夫婦となつた間柄、お迎ひ申上げねばなりますまい』</p>
+            <p class="ja-classical-line">と蜈蚣姫、梅子姫の此場に在らざるを幸ひ、自らスタスタと門前に現はれ、友彦が端坐する傍に寄り添ひ、</p>
+            <p class="ja-classical-line">『妾は地恩城の黄竜姫、昔の小糸姫で御座います。友彦様並びにテールス姫様、サアどうぞ妾と共に奥殿にお進み下さいませ』</p>
+            <p class="ja-classical-line">友彦は此声にフト見上ぐれば、昔の面影アリアリと顔の何処やらに残つて居る小糸姫なので、……友彦はハツと頭を下げ恭しく両手をつき、</p>
+            <p class="ja-classical-line">友彦『これはこれは女王様、勿体ない斯様な所迄お出で下さいまして、……これなるは私が女房テールス姫と申すもの、今は熱心な三五教の信者として、友彦が神務を力限り補助致すもので御座います。申上げたき事は山々御座いますが、然らば奥殿にて悠々と申上げませう』</p>
+            <p class="ja-classical-line">テールス姫『女王様、始めてお目にかかります。何分宜しくお願ひ致します』</p>
+            <p class="ja-classical-line">と友彦に連れられ、黄竜姫の後に従いて門内深く姿を隠した。右守の鶴公は不承不性に三人の後に従ひ行く。貫州、武公其他一同は、夢か現か幻かと、互に顔を見合せ呆れて再び言葉もなく、空行く雲をアフンとして眺めて居る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: Wind Voice Crane 唳 [757]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: 握手の涙 [759]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
