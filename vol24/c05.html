@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 蘇鉄の Forest [735] - Volume 24 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 24 Table of Contents</a>
+      <span>Volume 24</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 24 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: 蘇鉄の Forest [735]</h1>
+      <p class="chapter-title-ja">蘇鉄の森〔735〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Depending on Inochi's cord as a lifeline, Takahime, raging like a yashiya, declared that no matter where the arika of the three Shinpau might be, she would search them out to the very end; crashing her boat against the island shadows of Akashigata and Ahaji where accumulated thoughts gathered, sinking, and rescued from the great dainan of kiushiitsushiyō by Tamano no Hime, one would think she might feel kanshiya, but she was obstructed by the akuma of jison lurking in the depths of her heart, various times cursing and mocking the parent of her Inochi, entrusting her body to the boat steered by Tōsuke, rushing her heart to arrive at Ejima, exhausting herself through miscellaneous ways and breaking her heart, at the ageku,</p>
+          <p class="en-p">Sinking her body into the abyss of zetsubau, pondering ikaga to do and hesitating back and forth, just as she was plunged into shian, while entrusting her body to a newly built kobune tied to the hamabe, accompanied by Kanshi, rowing out with all her might across the sea surface of the Inochi no Seto, drifting ashore at Shōkodojima, and once again attempting to search out the arika of the jewel, running up toward the mountain of Kuniki, unexpectedly straying into the mansion of Mukadehime, the chief priestess of the Brahmin God inside the cavern, prompt and witty Takahime caught the feelings of Mukadehime, only putting on an appearance of friendship on the surface, gradually escaping the poisonous hands of the enemy,</p>
+          <p class="en-p">Intending to use Mukadehime to search for the arika of the jewel, once again entrusting her body to the boat, a party of several people over the waves, passing across the Bakan Strait, proceeding west and south; Mukadehime, first of all seeking the arika of the jewel, and as two jewels for the purpose of searching for the arika of her beloved daughter, entangled by love and greed, followed by Smart Ball and others, Takahime pushed her boat with a pole and proceeded; enemy and ally whose hearts did not match, although the waves of the vast ocean were calm, the waves rising in the sea of the murakimo heart were a turbulent mood.</p>
+          <p class="en-p">The party, bathed in scorching, sun-like sunlight, squeezed out sweat like waterfalls, and feeling thirst and desiring water, at last brought their boat alongside the rocky shore of a large island floating in the midst of the sea, and seeking fresh water hither and thither, parting the grasses and trees, calling out to each other with voices saying 'Oi-oi', and maintaining contact as they advanced deep into the interior of the island. From their parched throats, even hoarse voices could no longer be uttered.</p>
+          <p class="en-p">Takahime at last arrived at the forest of sotos, and the soto trunks, measuring about a shaku in length, stood in rows as crowded as if a giant snake were standing upright and spreading an umbrella. Gazing at the soto's mara, she suddenly commanded Kanshi to pluck them off and began to cling to and gnaw at them, whereupon a sweet juice like inexplicable amrita oozed out as she chewed, and she at last felt the thought of resuscitation. …… Mukadehime and her party also at last appeared at this place, and at the very instant when they fixed their eyes on the mara plucked off by Takahime and, like ghouls, tried to bite into them to cure their thirst, the mara fruits suddenly elongated into a giant centipede about a shaku long, crawling out sluggishly, climbing right up the soto trunks, elongating like tapeworms one after another to wrap around the soto trunks without leaving a single one, and attempting to prevent even a single finger from being applied. The centipede increased its length and thickness from moment to moment, and within about the space of an hour, wrapped around this entire large island.</p>
+          <p class="en-p">Takahime, Mukadehime, and the rest of the party were enveloped by the centipede along with the trees, and with their breath failing, they chanted the Amatsu Norito, recited the scriptures of Brahmanism, and had no other thought than simply praying for the safety of their bodies.</p>
+          <p class="en-p">The centipede, formed out of the transformation of the mara, wrapped around the large island ten and twentyfold, making the four quarters dim and gloomy like darkness, and with an unspeakably unpleasant atmosphere, the function of their respiratory organs was almost halted. Takahime, having fallen into the plight of kiushiitsushiyō, thinking that this was the very end, detached herself from all clinging attachments, entrusted her destiny to Kami, and closing the eyes of contemplation, awaited death.</p>
+          <p class="en-p">Instantly, along with feeling the agony of scorching one's head as if boiling water had been poured down from overhead, a gigantic god-man revealing a skin of refined gold suddenly appeared and came to this place,</p>
+          <p class="en-p">Takahime, who art called the living palace of the Hinodewake God, if thou dost not repent now, thou shalt taste this present agony forever and be burned in the unquenchable fire of the foundational land.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">生命の綱と頼みてし
+三つの神宝の所在をば
+執念深く何処までも
+探さにや置かぬと高姫が
+夜叉の如くに狂ひ立ち
+積る思ひの明石潟
+浪の淡路の島影に
+船打ち当てて沈没し
+九死一生の大難を
+玉能の姫に助けられ
+感謝するかと思ひきや
+心の奥に潜むなる
+自尊の悪魔に遮られ
+生命の親をさまざまに
+罵り嘲り東助が
+操る船に身を任せ
+玉の所在は家島ぞと
+心を焦ちて到着し
+イロイロ雑多と身を尽し
+心砕きし其揚句</p>
+            <p class="ja-classical-line">絶望の淵に身を沈め
+如何はせむと　とつおいつ
+思案に暮るる折柄に
+浜辺に繋げる新調の
+小舟に身をば任せつつ
+貫州従へ玉の緒の
+生命の瀬戸の海面を
+力限りに漕ぎ出し
+小豆ケ島へ漂着し
+又もや玉の所在をば
+探らんものと国城の
+山を目蒐けて駆登り
+岩窟の中にてバラモンの
+神の司の蜈蚣姫
+館に思はず迷ひ込み
+早速の頓智高姫は
+蜈蚣の姫が心汲み
+表面ばかり親善の
+姿装ひ漸うに
+敵の毒手を逃れつつ</p>
+            <p class="ja-classical-line">蜈蚣の姫を利用して
+玉の所在を探らむと
+再び船に身を任せ
+一行数人波の上
+馬関海峡打過ぎり
+西へ南へ進み行く
+蜈蚣の姫は第一に
+玉の所在を索めつつ
+恋しき娘の所在をば
+探らむ為の二つ玉
+愛と欲とに搦まれて
+スマートボール其外の
+供を従へ高姫が
+船に棹さし進み行く
+心そぐはぬ敵味方
+さしもに広き海原の
+波は凪げども村肝の
+心の海に立つ波は
+穏かならぬ風情なり。</p>
+            <p class="ja-classical-line">焦つく様な暑い日光を浴びた一行は、汗を滝の如くに搾り出し、渇を感じ水を需めむと、やうやうにして海中に泛べる大島の磯端に船を横たへ、彼方此方と淡水を求めつつ草木を別けて互に『オーイオイ』と声を掛け、連絡を保ち乍ら、島内深く進み入つた。渇き切つたる喉よりは最早皺嗄れ声も出なくなりにけり。</p>
+            <p class="ja-classical-line">高姫は漸くにして蘇鉄の森に着きぬ。一丈許りの蘇鉄の幹は大蛇の突立つて雨傘を拡げた如く、所狭き迄立並ぶ。蘇鉄のマラを眺めて矢庭に貫州に命じ、むしり取らしめてしがみ始めたるに、何とも知れぬ甘露の如き甘き汁、噛むに従つて滲み出で、漸く蘇生の思ひをなせり。………蜈蚣姫一行も漸くにして此場に現はれ、高姫がむしり取つたるマラに目を注ぎ渇を医する為に、餓鬼の如く喰ひ付かんとする一刹那、マラの実は忽ち延長し一丈許りの大蜈蚣となつてノロノロと這ひ出し、其儘蘇鉄の幹にのぼり、次から次へと条虫の如く延長して蘇鉄の幹を残らず巻き、一指をも添へざらしめむとせり。蜈蚣は長さと太さを時々刻々に増し、一時程の間に此大島全体を巻き尽したりける。</p>
+            <p class="ja-classical-line">高姫、蜈蚣姫其他の一行は、樹木と共に蜈蚣に包まれ、息も絶え絶えに天津祝詞を奏上し、バラモン教の経文を唱へ、只管身の安全を祈る事のみに余念なかりけり。</p>
+            <p class="ja-classical-line">マラの変化より成出でたる蜈蚣は、大島を十重二十重に巻き、四面暗澹として暗く、得も言はれぬ不快の空気に、呼吸器の働きも停止せむ許りとなりき。九死一生の破目に陥りたる高姫は、最早是までなりと総ての執着心に離れ、運命を惟神に任せ、観念の眼を閉ぢ死を待ちつつありける。</p>
+            <p class="ja-classical-line">忽ち頭上より熱湯を浴びせかけた如き焦頭爛額の苦みを感ずると共に、紫磨黄金の肌を露はしたる巨大の神人、忽然として此場に現はれ来り、</p>
+            <p class="ja-classical-line">『汝日の出神の生宮と称する高姫、今茲に悔い改めずば汝は永遠に今の苦みを味はひ、根底の国の消えぬ火に焼るべし』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">So saying, the figure vanished. Meanwhile, Mukadehime felt an excruciating pain as if being stabbed from above by a blade of ice, and even as she writhed in agony, tossing about to and fro, a strange monster with a pitch-black, gigantic face like ink and glowing crimson eyeballs appeared, revealing its upper body and head against the darkness with an even blacker outline, sticking out its long tongue to lick Mukadehime's head and face; such was the terror that even the brave Mukadehime felt her hair stand on end with loathing, and she could only weep without any response; from the tip of the monster's tongue, countless tiny centipedes emerged like rain, enveloping Mukadehime's body without leaving an inch of open space, biting her everywhere with countless sharp, sword-like tongues, causing her to cry out 'Eek!' and collapse on the spot, rolling to the right and left. At this time, Takahime finally recovered her sanity and looked around to see the scorching sun shining brilliantly, numerous trees looking lush and green, dancing mindlessly to the blowing sea breeze. Takahime:</p>
+          <p class="en-p">'Ah, was it a dream after all. Even so, this strange sōtetsu palm—it is terrifying to linger on an island where such eerie wonders keep occurring; I shall leave this island as early as possible and search for the whereabouts of the treasure. Kanshū, come!'</p>
+          <p class="en-p">Looking around, she saw Kanshū sitting heavily, arms folded with closed eyes, frozen like a stone statue. Takahime chanted norito with all her might, pinched his cheeks, pinched his nose, and spent about half an hour trying various ways to revive him. However, Kanshū was like a stone statue without any circulation of blood, and no matter where she stroked him, not the slightest warmth remained. Takahime was seized by an inexplicable sense of loneliness, her voice mingling with tears:</p>
+          <p class="en-p">'Hey Kanshū, if you die in a place like this now, what will become of me... Please pull yourself together.'</p>
+          <p class="en-p">She pleaded while weeping. Kanshū finally opened his left eye with a blink. However, his pupil had hidden somewhere, leaving only the white of his eye exposed, with red blood surging through veins like tree roots, and his face appearing like the branches of a red coral tree.</p>
+          <p class="en-p">Takahime concentrated her prayers with all her might. At this time, Mukadehime, who had hitherto been struck down flat on the earth, rose silently and stiffly, appearing abruptly before Takahime with a fierce expression of anger, clutched her fists, exposed a face like a flat-backed crab, and began to glare at her. Once again, Smartball rose stiffly, exposing only the whites of both eyes, pursing its lips, striking a pose like a mantis, and began hammering away mechanically at Takahime's head like a day laborer digging up the earth with a pickaxe. Her hands had become as hard as iron. Desperate to avoid this sharp edge, Takahime tried to dodge, but like a tree growing out of the ground, she could not move an inch, and had no choice but to be jabbed in the same spot over and over again by the pickaxe-like fists.</p>
+          <p class="en-p">At this time, a majestic divine person parted the clouds in heaven, riding on a divine horse and descending toward this place. Accompanied by hundreds of mounted retainers, with the bells ringing jinglingly, step by step he descended through the air and spoke in a loud voice:</p>
+          <p class="en-p">'Are you not Takahime? The guardian deity who calls himself the God of Sunrise is actually a silver-furred, eight-tailed evil fox originating from the Rocky Mountains of the Land of Eternal Night. I shall now untie your spiritual bonds. Repent as of today, and do not presume to call yourself the God of Sunrise even in jest. I myself am the true God of Sunrise. For the time being, in this place, through Kami-naobi and Ō-naobi, I shall look upon this anew and set it right, and forgive your sins. From now on, you shall cross to the South Seas together with Mukadehime's entourage, reach the solitary island of Ryūgū, and save Kurahime. Do not doubt this in the least.'</p>
+          <p class="en-p">So saying, he turned his horse's head and, together with numerous attendant deities, rode side by side and ascended high into the heavens. At that moment, a great orb of light appeared from somewhere in the air, falling right in front of Takahime with a roaring sound, the fire exploded and scattered in all directions, and just as she thought the bodies of Takahime's entourage had been smashed to pieces, she opened her eyes to find herself collapsed under the great sōtetsu palm, clutching a melon. Mukadehime and the rest of the company lay at the very limit of their breath, being either stung or licked by giant horseflies and the like upon their heads on the grassy field under the blazing sun. As for Kanshū, there was not even a shadow of him around. Takahime, with all her might,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と云つた儘姿は消へたり。一方蜈蚣姫は、頭上より氷の刃を以て突き刺されし如き大苦痛を感じ、七転八倒身を踠く折しも、墨の如き黒き巨顔を現はし、眼球は紅の如く輝きたる異様の怪物、首から上許りを暗黒の中にも殊更黒き輪廓を現はし乍ら、長き舌を出して蜈蚣姫の頭部面部を舐めた其恐ろしさ、流石気丈の蜈蚣姫も其厭らしさに身の毛もよだち、何の応答も泣く許り、怪物の舌の先よりは無数の小さき蜈蚣、雨の如くに現はれ来り、蜈蚣姫の身体を空地もなく包み、所構はず無数の鋭き舌剣を以て咬みつける其苦しさ『キヤツ』と叫んで其場に倒れ、右に左に転げ廻る。此時高姫は漸く正気に復し四辺を見れば、酷熱の太陽は晃々と輝き亘り、数多の樹木青々として、吹き来る海風に無心の舞踏をなし居たり。高姫は、</p>
+            <p class="ja-classical-line">『アヽ夢であつたかイナア。それにしても此怪しき蘇鉄、斯かる怪異の続出する島に長居は恐れ、一時も早く此島を離れ、宝の所在を探らむ。貫州来れツ』</p>
+            <p class="ja-classical-line">と四辺を見れば、貫州はドツカと坐し、瞑目した儘腕を組み、石像の如くに固まり居る。高姫は一生懸命に祝詞を奏上し、頬を抓り、鼻を摘み、イロイロ介抱をすること半時ばかりを費したり。されど貫州は血の気の通はざる石像の様に、何処を撫でても少しの温か味も無くなり居る。高姫は何となく寂しさに襲はれ、泣き声まぜりになつて、</p>
+            <p class="ja-classical-line">『コレ貫州、今お前に斯んな所で死なれて、どうなるものか、……チツト確かりしてお呉れ』</p>
+            <p class="ja-classical-line">と泣き口説く。貫州は漸くにして左の目をパツチリ開けた。されど黒球はどこへか隠れ、白眼計り剥き出し、木の根の様な筋に赤き血を漲らし、赤き珊瑚樹の枝の様に顔面が見えて居る。</p>
+            <p class="ja-classical-line">高姫は一生懸命に祈願を凝らす。此時今迄大地に打つ倒れて居た蜈蚣姫は無言の儘ムクムクと立上り、高姫の前にヌツと現はれ、怒りの形相凄じく、拳を固め、平家蟹の様な面をさらして睨付け出した。又もやスマートボールむくむくと立上り、白玉計りの両眼を剥き出し、口を尖らせ、蟷螂の様な手付をし乍ら、鶴嘴を以て土方が大地を掘る様に、高姫の頭上目蒐けてコツンコツンと機械的に打ち始めた。其手は鉄の如く固くなつて居る。高姫は此鋭鋩を避くる為、身をかはさむと焦れども、土中より生えたる木の如く、一寸も身動きならず、止むを得ず同じ箇所を幾回となく、拳の鶴嘴につつかれて居るより仕方なかりけり。</p>
+            <p class="ja-classical-line">此時天上の雲を押し開き、天馬に跨り此方に向つて下り来る勇壮なる神人あり。数百人の騎馬の従卒を伴ひ、鈴の音シヤンシヤンと一歩々々空中を下り来り大音声にて、</p>
+            <p class="ja-classical-line">『汝は高姫ならずや。日の出神と自称する汝が守護神は、常世の国のロツキー山に発生したる銀毛八尾の悪狐なるぞ。只今汝が霊縛を解かむ。今日限り悔い改め、仮りにも日の出神などと名乗る可らず。我こそは真正の日の出神なり。一先づ此場は神直日大直日に見直し開き直し、汝が罪を赦すべし。是れより汝は蜈蚣姫の一行と共に南洋に渡り、竜宮の一つ島に到りて、黒姫を救へ。ゆめゆめ疑ふな』</p>
+            <p class="ja-classical-line">と云ひ棄てて馬首を転じ、数多の従神と共に、轡を並べて天上高く昇らせ玉ひぬ。此時何処ともなく空中より大なる光玉現はれ来り、高姫が面前に轟然たる響と共に落下し、火は四辺に爆発飛散し、高姫一行の身は粉砕せしかと思ふ途端に目を醒せば、大蘇鉄の下にマラをしがみながら倒れて居た。蜈蚣姫其他一同は、炎天の草の上に頭の巨大なる虻蠅などに、或は刺され、或は舐められ乍ら、息も絶え絶えに倒れ居たり。貫州はと見れば、そこらに影もない。高姫は力限りに、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kuwanshiu: 'Oi, ōi, Kuwanshiu, Kuwanshiu!ه‌'</p>
+          <p class="en-p">When he began to cry out thus, parting the weeds in the surrounding forest, if one looked at the figure of a man holding water in a large gourd and appearing here with a smile, it was unmistakably Kuwanshiu.</p>
+          <p class="en-p">Kuwanshiu: 'Takahime-sama, have you come to your senses? Come, please drink this water.'</p>
+          <p class="en-p">Scooping it up with his own hands, he made Takahime drink it. Takahime for the first time felt her mind and spirit refreshed, and said,</p>
+          <p class="en-p">Takahime: 'Ah, those one should have are retainers indeed! I do not know what would have become of me if you were not here. Accordingly, fortunately since Mukadehime and the other fellows are collapsed in this way, why not you and I, in the meantime, board that ship and cross over to Riugūjima to search out the whereabouts of the jewel?ه‌'</p>
+          <p class="en-p">So saying, she slightly tilted her head, filled her smile, peered into Kuwanshiu's face, and waited impatiently for Kuwanshiu's reply. Facing Takahime, Kuwanshiu said,</p>
+          <p class="en-p">Kuwanshiu: 'That is why you are no good. Whether friend or foe, to save them is the way of Kami. Leaving people who are so exhausted in this island, and with the two of us operating a ship to flee back—how could such a cruel thing ever be done? You have not yet been able to reform yourself, have you?ه‌'</p>
+          <p class="en-p">Takahime: 'Great achievements do not heed minor details; for the sake of the realm and the nation, must we not pay a small sacrifice? You are troubled because of that. Since you are a weak-hearted man like a rotted woman... Come, Kuwanshiu, follow me. From now on, the two of us will achieve unlimited success and rise in the world. If we were to take such fellows along with us, not only would they become a hindrance, but they are terrible nuisances. Come, let us go!ه‌'</p>
+          <p class="en-p">Fortified by her recovered vigor, she forgot the admonition of the Hinode Kami in her dream, and driven by a thirst for glory, she started forward briskly to proceed to the seashore. Looking unconcernedly at Takahime's face and pretending as if it did not enter his ears, Kuwanshiu made Mukadehime drink the fresh water from the gourd. Mukadehime got up feeling for the first time as if she were coming back to life, and joining both hands, expressed her gratitude to Kuwanshiu. Taking heart from this, Kuwanshiu began the smartball, and gave water to all the others as well. Seeing this behavior, Takahime raised her eyes angrily, puffed up her cheeks, and watched. Standing up, Mukadehime said,</p>
+          <p class="en-p">Mukadehime: 'By the command of Takahime-sama, Kuwanshiu-sama, though reluctantly and thinking it to be the master's order, generously gave us plenty of delicious water and made us recover our vigor. Thanks to you, everyone in my household has been saved. As the saying goes, "a master knows not his humble servant," Kuwanshiu-sama, who rebels against the immensely merciful great heart of Takahime-sama, is quite a lovable person. We have listened to your master-and-retainer dispute from beginning to end... Takahime-sama, thank you very much for your kindness. I will surely return this favor. Oh-ho-ho-ho!ه‌'</p>
+          <p class="en-p">She shook her shoulders and laughed unpleasantly. The smartball stood up and said,</p>
+          <p class="en-p">Smartball: 'Hey, Kuwanshiu... You are quite a bad-natured fellow, aren't you! You certainly helped me out. I will surely express my gratitude, so bear that in mind... Now, Takahime-san, since you raised a banner of revolt against Mi-Iku-Shi and founded the Uranai Teaching, you are a counterfeit shrine of Hinode Kami, so as expected you are not a good person rich in mercy and beyond reproach. You certainly did not intend to help us. I thank you warmly, warmly!ه‌'</p>
+          <p class="en-p">Takahime: 'Otsu-ho-ho-ho, that is everyone's clever sarcasm! This was certainly not spoken from Takahime's spirit. Mukadehime-sama and the guardian spirits of you people borrowed Takahime's body and spoke. Takahime's guardian spirit temporarily possessed Kuwanshiu. That is why, if one does not understand the karma of the original soul from ancient times, good looks like evil, or evil looks like good. Because it is the arrangement of the Kami's various trials to test and pull back the heart, if a person looks evil, reflect upon your own heart and reform. A person's badness is entirely my own badness. Since this Takahime is the mirror of the world of the crystal jewel, reflecting the shapes of everyone's hearts, you must not make a mistake. Ah-ah, I thought Mukadehime-sama was also a person whose soul was quite polished, but when she comes before the living shrine of Hinode Kami, she still cannot reach the completely perfected place!ه‌'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『オイ、オーイ、貫州々々』</p>
+            <p class="ja-classical-line">と叫び始めたるに、あたりの森林の雑草を踏み分けて、大なる瓢箪に水を盛り、ニコニコとして此処に現はれ来る男の姿を見れば、擬ふ方なき貫州なり。</p>
+            <p class="ja-classical-line">『高姫様、お気が付きましたか。サア此水をおあがり下さいませ』</p>
+            <p class="ja-classical-line">と自ら手に掬うて高姫に啣ませた。高姫は初めて心神爽快を覚え、</p>
+            <p class="ja-classical-line">『アヽ持つべき者は家来なりけり、お前がなかつたら妾は如何なつたか分らない。就ては幸ひ蜈蚣姫其他の連中は此通り昏倒つて居れば、今の間にお前と二人、あの船に乗つて竜宮島へ渡り、玉の所在を探さうぢやないか』</p>
+            <p class="ja-classical-line">と云ひ乍ら稍首を傾げ笑みを湛へて貫州の顔を覗き込み、貫州の返辞をもどかしげに待ちわび居る。貫州は高姫にむかい、</p>
+            <p class="ja-classical-line">『それだから貴女は不可ないのです。仮令敵でも味方でも助くるのが神の道、此島へ斯の如く弱り切つた人々を残し、我々両人が船を操り逃げ帰るなどと、左様な残酷な事がどうして出来ませうか。貴女はまだ改心が出来て居ないのですなア』</p>
+            <p class="ja-classical-line">『大功は細瑾を顧みず、天下国家の為には少々の犠牲を払はなければならぬぢやないか。お前はそれだから困るのだよ。まるで女の腐つた様な気の弱い男だから……サア貫州、妾に従いておいで、是れから二人が出世の仕放題、こんな奴を連れて行かうものなら足手纏ひになるばかりか、大変な邪魔者だ。サア行かう』</p>
+            <p class="ja-classical-line">と元気恢復したのを幸ひに、夢の裡の日の出神の訓戒を忘れ、功名心に駆られスタスタと先に立ちて磯辺に進まうとする。貫州は高姫の顔を心無げに見遣り乍ら、耳に入らざるものの如く装ひ、瓢箪の清水を蜈蚣姫の口に啣ませた。蜈蚣姫は初めて生来る心地し乍ら起きあがり、両手を合せて貫州に感謝の意を表する。貫州は是れに力を得てスマートボールを初め、其他一同に水を与へたり。高姫は此態を見て目を釣り上げ、面をふくらせ眺めて居る。蜈蚣姫は立あがり、</p>
+            <p class="ja-classical-line">『高姫様の御指図に依つて、貫州様は厭々乍ら、主人の命だと思ひ、私達に結構な水をドツサリ与へて元気を恢復させて下さいました。お陰で私の身内の者も皆助かりました。主人の心下僕知らずとやら、仁慈無限の高姫様の大御心に反抗する貫州さまは、余程可愛い人です。貴女等主従の御争論を、妾は一伍一什聞かして頂きました。……高姫様、御親切有難う御座います。此御恩はキツトお返し申します。オホヽヽヽ』</p>
+            <p class="ja-classical-line">と肩を揺り、厭らしさうに笑ふ。スマートボールは立あがり、</p>
+            <p class="ja-classical-line">『コリヤ貫州、……貴様は余程腹の悪い奴ぢや……無いワイ。よう俺を助けて呉れやがつた。キツト御礼を申すから、さう思うて居れ。……モシ高姫さま、貴女は三五教に反旗を掲げて、ウラナイ教を創立なさつた様な日の出神の偽宮だから、流石は仁慈に富み、申分の無い善人ぢや……無い。よう我々を助けてやらうと思ひくさらなんだ。アツクアツク御礼申しますぞ』</p>
+            <p class="ja-classical-line">『オツホヽヽヽ、皆さまの態のよい当てこすりワイの。こりや決して高姫の精神から言つたのぢやない。蜈蚣姫様やお前達の守護神が高姫の体内を藉つて言つたのだ。高姫の守護神は臨時貫州に憑つたのだよ。それだから昔の根本の身魂の因縁が分らぬと、善が悪に見えたり、悪が善に見えたり致しますぞや。神様のイロイロとして心をお引き遊ばす引つかけ戻しのお仕組だから、人が悪に見えたら、自分の心を省みて改心なされ。人の悪いのは皆我が悪いのだ。此高姫は水晶玉の世界の鑑、皆の心の姿が映るのだから、キツト取違ひをしては可けませぬぞや。アーア蜈蚣姫様も余程身魂の研けたお方ぢやと思うたが、日の出神の生宮の前に出て来ると、まだまだ完全な所へは往けませぬワイ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mukadehime burst into laughter,</p>
+          <p class="en-p">"Ohohoho!"</p>
+          <p class="en-p">and everyone joined in mutual laughter,</p>
+          <p class="en-p">"Ahahaha!"</p>
+          <p class="en-p">Kuwanshiu said,</p>
+          <p class="en-p">"Ah, what on earth is going on? It has become utterly impossible to form any kentau."</p>
+          <p class="en-p">Takahime jerked her chin up and said,</p>
+          <p class="en-p">"It is a settled matter. Did not Henjiyōnanshi say that it is a shigumi beyond all kentau? Has it not been revealed in the Ofudesaki that there is not even one person in sekai who understands this matter... or so it is written. If you people were to understand the true shigumi, then interference would enter along the way, and things would not be accomplished. Ohohoho!"</p>
+          <p class="en-p">Saying this, she shook her shoulders broadly and let out a war cry. Mukadehime gently touched her eyebrows with spittle and put on an innocent face...</p>
+          <p class="en-p">"Tell me, Takahime-san, just when I think you say you are the living shrine of the gokenzoku of Daijizaiten, you also talk as if you are the living shrine of Denokami; which guardian deity is actually possessing you?"</p>
+          <p class="en-p">"Being the guardian deity of Daijizaiten, who performs hengenshiyutsubotsu, senpenbankuwa, and jiyūjizai activity, sometimes I appear as Denokami, and also as the kenzoku of Ōkuninwakeshi... but in actual truth, the divine protection of Ōkuninushinomikoto is the principal one."</p>
+          <p class="en-p">"Hinode and Ōkuro... That is a tremendous gap. To Mukadehime, the distinction between good and evil seems completely like the front and back of a thing."</p>
+          <p class="en-p">"You are one to utter such a foolish question unsuited to you. Conjunction of the phenomenal and the noumenal, non-duality of good and evil; if there is a back, there is a front, and if there is a front, there is a back. To manifest the subtle and great activity of endless shifting between front and back is the true deity. Deities who act like carriage horses ultimately lack the qualification to direct people. Since we are the living shrines of Ōkuninushinomikoto, we are inherently endowed with the supreme prerogative to command all deities and men in place of Daijizaiten. We are the living shrines of the so-called opening of the rock cave of Denokami. Deities draw the heart in various ways, so please be careful not to get caught in their recoils."</p>
+          <p class="en-p">"Before I knew it, your tongue has grown remarkably agile compared to when you were sneaking around disguised as a believer of Ken'onjō. Even Mukadehime is impressed."</p>
+          <p class="en-p">"What on earth are you saying about sneaking around? I have believed in Daijizaiten with a true, sincere, and pure Yamato spirit. Whether one speaks of the Uranai teachings, the Izumo teachings, Brahmanism, or Jiannaiism, at the root they are all one stock, no different from the Great Deity who is the foundation of heaven and earth. However, for the present, I thought that the path of the Brahmanism you espouse is the most austere, relies on unsparing action, and performs severe ascetic practices, which would accord with the divine will; ever since we met at Kokujōyama, I have grown all the more fond of Brahmanism. Now, now, since things have come to this, we are like sisters, so let us set out at once to search for their whereabouts."</p>
+          <p class="en-p">"I no longer have any attachment to jewels. More than that, I have realized that it is essential to polish the jewel of my heart."</p>
+          <p class="en-p">"Hohohoho, what a convenient mouth you have. Because the whereabouts of the only Koitohime in heaven and earth has begun to become clear, this is no time to be talking about jewels. Your primary thought seems to be that you want to meet Koitohime as soon as possible. That is hardly unreasonable. No matter what, she is your only daughter who would not hurt even if she entered your eye, so naturally, your own daughter is more precious to you than the rise and fall of the nation—that is simply human emotion."</p>
+          <p class="en-p">She spoke mockingly. Mukadehime felt irritated by Takahime's words, but thinking that no matter what she said, they were in the same boat, and that she could not reach her destination unless she kept Takahime in a good mood, she deliberately assumed a pleasant tone and said,</p>
+          <p class="en-p">"Hohohoho, well, well, Takahime-sama's instruction, I am deeply moved. Drowning in the love of my own child and missing the great matter—that was my blunder; please do not laugh at me as a disgraceful woman. In that case, from now on, let us put the deities first and our own child second."</p>
+          <p class="en-p">Takahime: 'And the jewel third, is that it? As you yourself have said, once your heart is polished to that extent, rather than a tangible jewel, you must be content just to meet Koitohime-sama. Do not harbor any more attachment to jewels. In exchange, as soon as I discover that jewel, I shall take custody of it and present it to Daijizaiten with my own hands. Is that agreeable? Once something has come from your mouth, you surely cannot swallow back the spittle you have spat.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">蜈蚣姫は吹き出し、</p>
+            <p class="ja-classical-line">『オホヽヽヽ』</p>
+            <p class="ja-classical-line">一同は、</p>
+            <p class="ja-classical-line">『アハヽヽヽ』</p>
+            <p class="ja-classical-line">と共笑する。貫州は、</p>
+            <p class="ja-classical-line">『アー何が何だか、サツパリ見当が取れなくなつて来たワイ』</p>
+            <p class="ja-classical-line">高姫は腮をシヤクリ、</p>
+            <p class="ja-classical-line">『きまつた事だよ。見当の取れぬお仕組と、変性男子が仰有つたぢやないか。此事分りて居る者は世界に一人よりない……とお筆に現はされて居るだらう。お前達に誠の仕組が分りたら、途中に邪魔が這入りて、物事成就致さぬぞよ。オホヽヽヽ』</p>
+            <p class="ja-classical-line">と大きう肩を揺つて雄叫びする。蜈蚣姫は眉毛にそつと唾をつけて素知らぬ顔……</p>
+            <p class="ja-classical-line">『モシ高姫さま、貴女は大自在天様の御眷族の生宮だと仰有るかと思へば、日の出神の生宮とも仰有る様だし、実際の事は何方の守護神がお懸りなのですか』</p>
+            <p class="ja-classical-line">『変幻出没千変万化、自由自在の活動を遊ばす大自在天様の御守護神だから、時あつて日の出神と現はれ、又大国別命の眷族……実際の所は大黒主命の御守護が主なるものです』</p>
+            <p class="ja-classical-line">『日の出と大クロと………大変な懸隔ですなア。蜈蚣姫には、善悪の区別が全く裏表の様に思へますワ』</p>
+            <p class="ja-classical-line">『お前さまにも似合はぬ愚問を発する方ですなア。顕幽一致、善悪不二、裏があれば表があり、表があれば裏がある。表裏反覆常なき微妙の大活動を遊ばすのが真の神様ぢや。馬車馬的の行動を取る神は、畢竟人を指揮する資格の無いもの、妾等は大黒主命の生宮たる以上は、すべての神人を、大自在天様に代つて、指揮命令する特権を惟神に具備して居る。所謂日の出神の岩戸開きの生宮で御座る。神はイロイロとして心を曳くから引掛戻しに懸らぬ様に御用心をなされませ』</p>
+            <p class="ja-classical-line">『何時の間にやら、貴女も顕恩城の信者に化け込んで居られた時とは、口車が余程運転する様になりましたなア。蜈蚣姫も感心致しましたよ』</p>
+            <p class="ja-classical-line">『化け込んだとはソラ何を仰有る。誠正直生粋の日本魂で大自在天様を信仰して居りました。ウラナイ教と謂つても、三五教と言つてもバラモンでもジアンナイ教でも、元は一株、天地根本の大神様に変りはない。併し乍ら今日の所ではお前さまの奉ずるバラモン教の行方が一番峻酷で、不言実行で、荒行をなさるのが御神慮に叶ふと思つたから、国城山でお目に掛つてより、層一層バラモンが好になつたのですよ。サアサア斯うなれば姉妹も同様、一時も早く所在を探しに参りませう』</p>
+            <p class="ja-classical-line">『私は最早玉なんかに執着心はありませぬ。それよりも心の玉を研くのが肝腎だと気がつきました』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、重宝なお口だこと。天にも地にも唯一人の小糸姫様の所在が分りかけたものだから、玉所の騒ぎではない。一刻も早く小糸姫さんに遇ひたいと云ふのが貴女の一念らしい。それは無理もありませぬ。何と云つても目の中へ這入つても痛くない一人娘の事だから、国家興亡よりも自分の娘が大切なのは、そりや人情ですワ』</p>
+            <p class="ja-classical-line">と嘲る様に云ふ。蜈蚣姫は高姫の言葉にムツとしたが、何を云うても唯一艘の船、高姫の機嫌を取らねば目的地へ達する事が出来ないと思つて、ワザと機嫌よげに、</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、これはこれは高姫さまの御教訓、感じ入りました。つい吾子の愛に溺れ、大事を誤りました私の不覚、はしたない女とお笑ひ下さいますな。そんなら此れより神第一、吾子第二と致しませう』</p>
+            <p class="ja-classical-line">高姫『第三に玉ですか、あなたのお説の通り、そこまで研けた以上は、有形的の玉よりも、貴女は小糸姫様に会ひさへすれば結構なのでせう。モウ玉なんかに執着心を持たぬ様になされませ。其代りに妾は其玉を発見次第御預り致し、妾の手より大自在天様に御渡し申しませう。宜しいか。一旦貴女のお口から出たこと、吐いた唾液を呑み込む訳にもいきますまい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Fixing her eyes upon her, she looks briefly at Mukadehime's face. Mukadehime deliberately turns her face away, and with an innocent expression, speaks:</p>
+          <p class="en-p">Mukadehime: 'I shall leave everything to you, Anata.'</p>
+          <p class="en-p">Onikumawake: 'Now look here, Mukadehime-sama, that deviates from our objective. You too stayed long at Magayanogatake, did you not, for the purpose of seeking the whereabouts of the jewel? Why do you speak with such a faint heart? No matter what Takahime-sama may say, Smart will not agree to it.'</p>
+          <p class="en-p">Mukadehime: 'Everything resides within my own breast, so keep silent.'</p>
+          <p class="en-p">Onikumawake: 'Resides in your breast, Mukadehime-sama—what is it that resides there? Are you not saying something exceedingly insidious? If so, then what you just told me must be a falsehood.'</p>
+          <p class="en-p">Mukadehime: 'How could I, a concubine who serves the Kamisama even temporarily and the wife of Onikumawake, ever speak lies and falsehoods? If you despise me too much, even this Mukadehime will not let this matter rest as it is.'</p>
+          <p class="en-p">Shrugging her shoulders, drawing her mouth into the shape of the character he, and gnashing her teeth, she glared fiercely at Takahime's face with a dreadful countenance.</p>
+          <p class="en-p">Onikumawake: 'Ho-ho-ho-ho, do not make such a face like a Heikegani that has eaten Darasuke. Do you too get angry after all? What have you done with the treasure called patience?'</p>
+          <p class="en-p">Mukadehime: 'That is your misunderstanding; I was suffering and writhing in agony as my stomach suddenly began to ache, and as a result, my expression became frightening. Ah, thanks to Kamisama, it has eased considerably. Now, now, everyone, let us get along and cross these rough waves in a single boat. With a sufficient supply of water for everyone...'</p>
+          <p class="en-p">Each of them hugged whatever vessels they had, pushed their way through the forest overgrown with betel-palm trees, and guided by Kanshū, they sought a puddle in the valley, barely filled their water containers, finally loaded them onto the boat, and taking advantage of the moonlit night, hoisted their sails to a favorable wind, steered to the southwest, and proceeded onward, weaving among the small islands rising and falling upon the sea.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と目を据ゑて蜈蚣姫の顔を一寸見る。蜈蚣姫はワザとに顔を背け、何喰はぬ顔にて、</p>
+            <p class="ja-classical-line">『何事も貴女に任せませう』</p>
+            <p class="ja-classical-line">『モシモシ蜈蚣姫様、そりや目的が違ひませう。貴女も魔谷ケ岳に永らく御苦労なさつたのも、玉の所在を探さむ為でせう。何と云ふ気の弱い事を仰有るのだ。仮令高姫さまが何と仰有つても、スマートが承知しませぬぞ』</p>
+            <p class="ja-classical-line">『何事も私の胸に有るのだから黙つて居なさい』</p>
+            <p class="ja-classical-line">『胸に有るとは、蜈蚣姫さま、何があるのですか。余程陰険な事を仰有るぢやありませぬか。さうすると今妾に仰有つた事は詐りでせう』</p>
+            <p class="ja-classical-line">『仮にも神様に仕へる妾、鬼熊別の女房、どうして嘘偽りを言ひませう。あまり軽蔑なさると、此蜈蚣姫だつて此儘には置きませぬぞ』</p>
+            <p class="ja-classical-line">と肩を怒らし口をへの字に結んで歯ぎりし乍ら、形相凄じく高姫の顔を睨みつけたり。</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、平家蟹が陀羅助を喰つた様なお顔をなされますな。貴女もヤツパリ腹が立ちますか。忍耐と云ふ宝を如何なさいました』</p>
+            <p class="ja-classical-line">『それは貴女のお見違ひ、妾は腹が俄に痛くなつて苦しみ悶えた結果、顔付が怖くなつたのです。アヽお陰様で大分に緩んで来ました。サアサア皆さま、仲ようして一つの船でこの荒波を渡りませう。十分お水の用意をして………』</p>
+            <p class="ja-classical-line">と各自に器の有り丈を引抱へ、檳榔樹の生え茂る林の中を潜り、貫州に導かれて、谷間の水溜りを求め、辛うじて水を充たせ、漸く船に積み込み、月明の夜を幸ひ、折からの順風に帆を上げ西南に舵を取り、海上に起伏する小島を縫うて進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: 一 Island の女王 [734]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: アンボイナ Island [736]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

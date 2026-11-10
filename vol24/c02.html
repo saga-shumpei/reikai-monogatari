@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 2: 唖呍 [732] - Volume 24 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 24 Table of Contents</a>
+      <span>Volume 24</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 24 &bull; Chapter 2</span>
+      <h1 class="chapter-title-en">Chapter 2: 唖呍 [732]</h1>
+      <p class="chapter-title-ja">唖呍〔732〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tomohiko enjoyed the ever-increasing trust of Onikumawake and his wife, and at last came to serve in the inner chambers as the chief of internal affairs. Koitohime, too, was won over morning and evening by Tomohiko's kindness, and though she might have thought him an unpleasing sight before she knew it, she ended up coming to rely upon him utterly as an incomparable source of strength.</p>
+          <p class="en-p">Just as beans growing in the shade will burst open when the season arrives, the innocent maiden who had welcomed her fifteenth spring found her voice changing before she knew it, and the shape of her hips had grown considerably more mature. The primary essential point in binding the emotional intimacy of man and woman must surely be the heavy repetition of the degree of conversation, the frequency of meetings, and the great influence exerted by the matter of time.</p>
+          <p class="en-p">Before she knew it, every time Koitohime saw Tomohiko's face, she would blush, hide in the shade of a sliding screen, and go so far as to peer at him through a stolen glance. Mukadehime had entrusted the care of Koitohime's personal affairs to Tomohiko, who enjoyed her deep trust; but since the path of love knows no separation between near and far, high and low, even Tomohiko—indecisive and flaccid of waist—before he knew it gave rise to strange thoughts, and wrapped in the flames of ambition, burning his heart day and night, he intended eventually to become the husband of Koitohime and seize actual control of Brahmanism.</p>
+          <p class="en-p">Amidst Tomohiko's mounting path of love, even in the opening and closing of sliding screens, Koitohime saw them rubbing and tangling like young greens of pines standing side by side, and pine flowers blooming on a high peak where none could pluck them; at last the era of Tomohiko's triumph had arrived. Mukadehime, a dog that had eaten wild boar, shrewdly surmised the relation between the two; she exhausted words toward her husband Onikumawake, touched upon the matter on every occasion and handled every object, and circuitously employed various labors of mediation to realize her will of making Tomohiko the husband of Koitohime and causing him to become Onikumawake's successor.</p>
+          <p class="en-p">However, Onikumawake's heart was pained by Tomohiko's base character and vulgar visage, and realizing that he was utterly unsuitable as a successor to the vice-leader, he always let Mukadehime's mediation—exhausting a thousand words and ten thousand phrases—go in one ear and out the other like the wind blowing in a horse's ear.</p>
+          <p class="en-p">Tomohiko and Koitohime perceived the father's inner mind, and hiding from the eyes of others while worrying and fretting over the future of the two, they were absorbed in whispering talks.</p>
+          <p class="en-p">At a certain time Tomohiko said,</p>
+          <p class="en-p">Koitohime finally opened her mouth and with bashfulness said,</p>
+          <p class="en-p">Tomohikosan: 'What kind of reason is that, pray? Did you not assert that no matter what happened you would devote your utmost strength for the sake of Koitohime and even offer up your life?'</p>
+          <p class="en-p">Tomohiko: 'Yes, my heart has not changed in the least. Day by day, my cuteness and yearning for you increase more and more, and the flame of love comes blazing up to the point that if I cannot see your face for even a fleeting moment, I cannot remain still. However, you are the beloved only daughter of the esteemed vice-leader, and you cannot possibly enter into relations with a lowly person like myself. Your father's inner intention will by no means grant the desires of both of us. No matter how much your mother may act as an intermediary, I have understood that it is already no good. From now on, in order to forget this vexation, I shall journey far from your side, wander through the world, and undergo a hardship. Since this is the last time I shall look upon your face, please exhaust your filial piety toward your parents, possess a splendid husband, and devote yourself for the sake of Brahmanism.'</p>
+          <p class="en-p">Koitohime was startled, fell weeping upon that place, and cried out,</p>
+          <p class="en-p">Koitohime: 'Ah, what shall I do? Honorable Father, you do not hear!'</p>
+          <p class="en-p">While she wept and shouted, Tomohiko said,</p>
+          <p class="en-p">Tomohiko: 'Moshimoshi, Ojoyusama, regret cannot recover our mutual ties; please resign yourself as though you had seen a fleeting dream. I offer my apologies for the manifold sins of having committed discourtesies toward you with my truly lowly body, please forgive me... Farewell, I shall now part from you, my beloved.'</p>
+          <p class="en-p">As he attempted to leave, she pulled at the hem of his garment and said,</p>
+          <p class="en-p">Koitohime: 'Please wait a while. I too am a shred of a woman; even if heaven and earth should change, how could the path of a woman stand if I were to abandon you, with whom I once exchanged vows? The path of husband and wife is to share bitter and sweet together; no matter what you may say, I will not let you go anywhere. If we must part no matter what, then with your own hands you must stab and kill me, and go wherever you may choose.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">友彦は鬼熊別夫婦の信任益々厚く、遂には鬼熊別が奥の間に内事係の主任として仕ふる事となりぬ。小糸姫も朝な夕なに友彦の親切にほだされ、好かぬ顔とは思ひ乍らも何時とは無しにスツカリ無二の力と頼むに至りける。蔭裏に生えた豆でも時節が来ればはぢける道理、十五の春を迎へたオボコ娘も、何時とはなしに声変りがし、臀部の恰好が余程大人び来たりぬ。男女の交情を結ぶ第一の要点は談話の度を重ぬること、会見の度の多きこと、及び時間の関係に大影響を及ぼすものなるべし。</p>
+            <p class="ja-classical-line">小糸姫は何時とはなしに友彦の顔を見る毎に、顔赤らめ、襖の蔭に隠れ、窃み目に覗く迄になりぬ。蜈蚣姫は信任厚き友彦に、小糸姫の身辺の世話を委託したるが、遠近上下の隔てなきは恋の道、優柔不断フナフナ腰の友彦も何時とは無しに妙な考へを起し、遂には小糸姫の夫となつてバラモン教の実権を握らむと、野心の火焔に包まれ昼夜心を焦し居たり。</p>
+            <p class="ja-classical-line">友彦が募る恋路に、小糸姫は襖の開閉にも、擦れつ縺れつ相生の松と松との若緑、手折るものなき高嶺に咲いた松の花、遂に友彦が得意の時代は到来した。猪食た犬の蜈蚣姫は敏くも二人が関係を推知し、夫鬼熊別に向つて言葉を尽し、友彦をして小糸姫の夫となし、鬼熊別が後継者たらしめむとする意志を、事に触れ、物に接し、遠廻しにかけて鬼熊別にいろいろと斡旋の労を執りぬ。</p>
+            <p class="ja-classical-line">されど鬼熊別は友彦の下劣なる品性と、野卑なる面貌に心を痛め、到底副棟梁の後継者として不適任たることを悟り、何時も蜈蚣姫の千言万語を尽しての斡旋を馬耳東風と聞き流した。</p>
+            <p class="ja-classical-line">友彦、小糸姫は父の心中を察し、人目を忍んでは二人の行末を案じ煩ひつつ、ヒソヒソ話に耽り居たりける。</p>
+            <p class="ja-classical-line">ある時友彦は、</p>
+            <p class="ja-classical-line">『小糸姫様、私は今日限り貴方に御別れ致さねばならぬことが出来ました。今までの御縁と諦めて下さいませ』</p>
+            <p class="ja-classical-line">小糸姫は漸く口を開き恥し気に、</p>
+            <p class="ja-classical-line">『友彦様、そりや又何うした理由で御座います。たとへ何うなつても小糸姫のためには力を尽し、生命でも差出すと仰有つたではありませぬか』</p>
+            <p class="ja-classical-line">『ハイ、私の心は少しも変つては居りませぬ。日に夜に可愛さ、恋しさが弥増し、片時の間も貴女のお顔が見えねば、ジツクリとして居られないやうに、恋の炎が燃え立つて来て居ります。併し乍ら貴女は尊き副棟梁の一人娘、何時までも私のやうな賤しき者と関係を結ぶ訳には参りませぬ。御父様の御意中は決して吾々両人の意を叶へては下さいませぬ。何程御母上が御取持下さつても、最早駄目だと云ふことが解りました。私は是より此の煩悶を忘れるため、貴女の御側を遠く離れ、世界を遍歴し一苦労を致しませう。これが御顔の見納めで御座いますれば、何うぞ御両親に孝養を尽し、立派な夫を持つてバラモン教のために御尽し下さいませ』</p>
+            <p class="ja-classical-line">小糸姫は驚いて其の場に泣き伏し、</p>
+            <p class="ja-classical-line">『アー何うしませう。父上様、聞えませぬ』</p>
+            <p class="ja-classical-line">と泣き叫ぶを友彦は、</p>
+            <p class="ja-classical-line">『モシモシ御嬢様、悔んで復らぬ互の縁、暫しの夢を見たと御諦め下さいませ。誠に賤しき身を以て、貴女様に対し失礼を致しました重々の罪、何卒御赦し下さいませ……左様なら、これにて愛しき貴女と御別れ致しませう』</p>
+            <p class="ja-classical-line">と立去らむとするを裾曳き止め、</p>
+            <p class="ja-classical-line">『暫らくお待ち下さいませ。妾も女の端くれ、たとへ天地が変るとも、一旦言ひ交した貴方を見捨てて何うして女の道が立ちませう。苦楽を共にするのが夫婦の道、仮令何と仰有つても、妾は何処までも放しませぬ。何うしても別れねばならなければ貴方のお手で妾を刺殺し、何処へなりと御出で下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Weeping and prostrating himself.</p>
+          <p class="en-p">Tomohiko: 'Ah, a troublesome matter has arisen. If I say we must part, it is a matter of the young lady's strong resolve and an ichidaiji that touches upon life itself, leaving me with no excuse to offer to the deeply indebted husband and wife Onikumawake. Even so, if I were to take the precious young lady with me, it would be even less permissible; ah, there is no other way... Moshijōsama, I shall rip open my belly and perish right here. Please, anata, serve your parents and fulfill your filial duties, and when by chance you remember me, please offer even a single cup of water. I know not how joyful it would be beyond the chanting of a senmannin of sendenshi if a single drop of water were given by your own ote, Koitohimėsama. Farewell.'</p>
+          <p class="en-p">Drawing his kuwaiken smoothly, just as he was about to press it against his belly, Koitohime clung to his arm,</p>
+          <p class="en-p">Koitohime: 'Moshimoshi Yotahiko-san, please wait a moment. There is something I desire to ask.'</p>
+          <p class="en-p">Tomohiko:</p>
+          <p class="en-p">Tomohiko: 'Since I have already made up my mind, there is only death for the sake of an excuse. Please let me die properly.'</p>
+          <p class="en-p">Koitohime: 'How could this ever be allowed as a death? Since it has come to this, there is no help for it. Whether to stick to one's parents or stick to one's husband, the path to settle upon is but one. Though it may cause my parents hardship for a while, if we but live long in this world hereafter, surely we shall be able to fulfill our filial piety toward my dear riyōshin. I beg of you, Tomohiko-san, will you not take me and flee?'</p>
+          <p class="en-p">Tomohiko: 'This is astonishing, ojiyōsama; it is said that parents are for one world while spouses are for two, and surely there is nothing in this world as precious as one's parents. I am not the only man in existence; since there are plenty of much, much finer men, please put thoughts of me out of your mind from this moment onward, and practice kauyō toward your parents. Farewell, we part thus—'</p>
+          <p class="en-p">And once again he attempted to thrust the kuwaiken forward. Gripped by unbearable sorrow, Koitohime bit into his arm, pouring her utmost strength into stopping Tomohiko, desperate to prevent his death. With an expression of overwhelming emotion,</p>
+          <p class="en-p">Tomohiko: 'Ah, do you care for me even to that extent? If that is so, I shall follow your bidding, hide somewhere together with you for a while, and pass joyous days.'</p>
+          <p class="en-p">Koitohime:</p>
+          <p class="en-p">Koitohime: 'Ah, with that I am at ease.'</p>
+          <p class="en-p">Entering the inner chambers, she secretly secreted a large sum of travel funds into her robes, and waiting for the night to deepen, the two left the mansion behind and vanished from Kenonkō into nowhere.</p>
+          <p class="en-p">The two man and woman, differing in age like parent and child, walked hand in hand, wandering hither and thither through the land of Persia, and at last, crossing several lofty mountains, they advanced to the southern extremity of the land of India. Here there was a prosperous place called the Capital of Dew. The Brahmana sendenshi Ichihiko wielded considerable influence and made his name resound far and near. Deeming that wandering in such a place carried the risk of exposure, Tomohiko crossed the sea under the cover of a moonlit night, rowed across to the island of Ceylon, proceeded deep within, and built a dwelling in the valley of Mount Shiro, where the two came to live. The islanders, finding them a novelty, gazed upon Koitohime's appearance, which put flowers to shame, deemed her a heavenly maiden descended to earth, paid her reverence, and there was no end to those who visited and worshipped at this hermitage day and night. Koitohime outwardly made Tomohiko her servant, put on the airs of a queen, played the bat in a birdless island, and indulged in pleasures day and night together with Tomohiko.</p>
+          <p class="en-p">The plating of Tomohiko's mitama, which he had hastily applied, peeled off day by day; blessed by the fact that the eyes of his mother and father parents were far away, he grew arrogant and came to order Koitohime about at his beck and call. Then, taking out the travel funds that Koitohime had brought along, he immersed himself in wine day and night, or began to dally foolishly with the island women. As her dream of love finally awakened, Koitohime came to loathe everything Tomohiko said and did as if it were venomous serpents and scorpions, and even the wind blowing from Tomohiko's direction felt as though it were cutting her flesh. The summer of love, infatuated beyond a hundred degrees, passed away before she knew it, and gradually the autumn wind began to blow; day by day the chill increased like a biting winter, and the fever of love that had yearned for Tomohiko cooled down completely, ending up like ice.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と泣き伏す。</p>
+            <p class="ja-classical-line">『アヽ困つたことが出来たワイ、別れようと言へば御嬢様の強き御決心、生命にも係はる一大事、大恩ある鬼熊別の御夫婦に対し申訳が無い。さうだと云つて大切な御嬢様を伴出しては尚済まず、アヽ仕方がない……。モシ御嬢様、私は此処で腹掻き切つて相果てまする。何うぞ貴女は両親に仕へて孝養を御尽し遊ばされ、幸に私の事を思ひ出された時は、水の一杯も手向けて下さいませ。千万人の宣伝使の読経よりも貴女の御手づから与へて下さつた一滴の水が、何程嬉しいか知れませぬ。小糸姫様、さらばで御座いまする』</p>
+            <p class="ja-classical-line">と懐剣スラリと引抜き、腹に今や当てむとする時、小糸姫は其の腕に縋りつき、</p>
+            <p class="ja-classical-line">『モシモシ友彦様、暫らくお待ち下さいませ。お願ひいたし度いことが御座います』</p>
+            <p class="ja-classical-line">友彦は、</p>
+            <p class="ja-classical-line">『最早覚悟致した上は申訳のため唯死あるのみ。何うぞ立派に死なして下され』</p>
+            <p class="ja-classical-line">『どうして是が死なされませう。斯うなる上は是非がない。親につくか、夫につくか、落ちつく途は唯一つ。暫時は親に御苦労をかけるか知れないが、何れ此世に長らへて居れば、御両親に孝養を尽すことも出来ませう。何卒友彦様、妾を伴れて遁げて下さいませぬか』</p>
+            <p class="ja-classical-line">『これはしたり御嬢様、親子は一世、夫婦は二世と申しまして、此世に親ほど大切なものは御座いますまい。友彦ばかりが男ではありませぬ。モツトモツト立派な男は沢山に御座いますれば、私のことは只今限り思ひ切り、両親に御孝養願ひます。さらば、是にて御別れ……』</p>
+            <p class="ja-classical-line">と又もや懐剣を突き立てようとする。小糸姫は悲しさやる瀬なく腕に喰ひつき満身の力を籠めて友彦を殺さじと焦り居る。友彦は感慨無量の態にて、</p>
+            <p class="ja-classical-line">『アヽ其処まで私を思うて下さるか。左様なれば仰せに随ひ、暫らく私と一緒に何処かへ隠れて、楽しき月日を送りませう』</p>
+            <p class="ja-classical-line">小糸姫は、</p>
+            <p class="ja-classical-line">『あゝそれで安心致しました』</p>
+            <p class="ja-classical-line">と奥に入り、密かに数多の路銀を懐中し、夜の更くるを待つて二人は館を後に、何処ともなく顕恩郷より消えにけり。</p>
+            <p class="ja-classical-line">親子のやうに年の違うた二人の男女は、手に手をとつて波斯の国を、彼方此方と彷徨ひ、遂には高山も幾つか越えて印度の国の南の端に進んで来た。此処には露の都と云つて相当な繁華な土地がある。バラモン教の宣伝使市彦は相当に幅を利かし、遠近に名を轟かして居た。友彦は斯る地点に彷徨ふは、発覚の虞れありとなし、月の夜に紛れて海を渡り、セイロンの島に漕ぎつけ、奥深く進みシロ山の谷間に居を構へ、二人は暮す事となつた。物珍しき島人は、花を欺く小糸姫の容貌を見て、天女の降臨せしものと思ひ尊敬の念を払ひ、日夜此の庵も訪ねて参拝するもの引きも切らぬ有様であつた。小糸姫は表向友彦を下僕となし、女王気取りで無鳥島の蝙蝠王となりすまし、友彦と共に日夜快楽に耽りゐたり。</p>
+            <p class="ja-classical-line">友彦の俄に塗りたてた身魂の鍍金は、日に月に剥脱し、父母両親の目の遠く離れたるを幸ひ、横柄に小糸姫を頤の先にて使ふ様になつた。さうして小糸姫が持ち来れる旅費を取出しては日夜酒に浸り、或は島人の女に対し他愛なく戯れ出した。小糸姫は、漸く恋の夢醒むるとともに、友彦の言ふこと為すことを、蛇蝎の如く忌み嫌ひ、友彦の方より吹きくる風さへも、身を切る如くに感じた。百度以上に逆上せ切つた恋の夏も何時しか過ぎて、ソロソロ秋風吹き起り、日に日に冷気加はり凩寒き冬の如く、友彦を思ふ恋の熱はスツカリ冷却して氷の如くになり終りけり。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tomohiko grew exasperated as Koitohime's attitude grew colder day by day, occasionally swinging his fists, drinking despair-sake, and shouting with a hoarse voice, so that the relationship between the two grew increasingly discordant day and night.</p>
+          <p class="en-p">One night, watching for the moment when Tomohiko guzzled heavy sake and collapsed in a drunken stupor, Koitohime left behind a single farewell letter, rowed a small boat moored to the beach, accompanied two islander negroes, and boldly fled toward the Pacific Ocean.</p>
+          <p class="en-p">When Tomohiko's drunkenness wore off, he woke up and looked around to find that the night had cleared up completely and the voices of small birds were noisy.</p>
+          <p class="en-p">Rubbing his sleepy eyes, Tomohiko cried out,</p>
+          <p class="en-p">Koitohime: 'Water, water!'</p>
+          <p class="en-p">Though he called and shouted, there was no response at all, whereupon Tomohiko said,</p>
+          <p class="en-p">Tomohiko: 'Ah, she must have gone off to the mountain behind again to get some fruit. No matter what is said, since she is a young lady raised selfishly there is no help for it. However, even though she is such a person, she is still only sixteen so she is like a child. It is also pitiful to scold her so severely. I must cherish her a little from now on. If she stayed in Kenonkiyō, she would be revered as a young lady from both here and there, treated like a queen, and able to live in splendor and glory. That this Tomohiko, by means of an unexpected feat, used it as a trigger to skillfully coax her, and my skill at tricking an innocent novice girl—surely even the executive members of Brahmanism must have been astonished. Although my face is one that even to myself causes disgust, nevertheless thinking of me as the parent of her life, staying behind while sulking and leaping about is still rather endearing. Even if she thinks she hates me and wants to flee back, once she is brought across distant mountains and slopes to such a remote island, there is nothing a frail woman can do about it. When I think of it, how pitiful she is... Ah, my throat is parched. Let Tomohiko himself scoop up clear water and drink it to his heart's content.'</p>
+          <p class="en-p">So saying, he thrust a bamboo ladle into the mountain stream flowing past the front gate, scooped up a single cup with a gulp, changed his voice, and said,</p>
+          <p class="en-p">Tomohiko: 'Now then, my lord, please drink up. If you drink too much sake, it will not be good for your person. If you were to fall ill, what would I do? Say, my dear, if you think me dear, please do your best not to overdo the sake... is what she would usually spit out, but today of all days the mountain god has gone out on business somewhere. He will probably return home soon. I wonder if I should serve as the proxy for the mountain god until then.'</p>
+          <p class="en-p">So saying to himself, he drank it down in one gulp,</p>
+          <p class="en-p">Tomohiko: 'Ah, the deliciousness of hangover water is unknown to those who cannot drink. Ah, delicious, delicious, the love affair of two people through which not even water can leak—since I made free marriage the fashion without even a go-between, let us first have a cup assuming this ladle is the go-between. No matter how much of a ladle it is, this island is far away from Kenonkiyō, and there is hardly anyone who would pour water on the love affair of two people. However, as for Koitohime occasionally having fits of hysteria, even I am troubled for a moment... "Oh my husband, a fit of hysteria has pierced me. Please grant me a seppuku assistance"... making such truly bewitching sounds, it always gets on my nerves... no, it does not. Ah, delicious, delicious.'</p>
+          <p class="en-p">Thus scooping and drinking, scooping and drinking, he amused himself alone.</p>
+          <p class="en-p">To this place, one of the negroes appeared and came,</p>
+          <p class="en-p">Negro: 'Excuse me, Tomohiko-sama, do you know that the queen got on a boat last night and went somewhere?'</p>
+          <p class="en-p">Hearing this, Tomohiko turned pale,</p>
+          <p class="en-p">Tomohiko: 'What, Koitohime got on a boat and left this place? Is that true?'</p>
+          <p class="en-p">Negro: 'How could I tell a lie? I clearly witnessed in the moonlight that the two, Chanky and Monkey, operated the oars and set sail from the harbor. Not only me, four or five people all saw it.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">友彦は小糸姫の様子の日に日につれなくなるに業を煮やし、時々鉄拳を揮ひ、自暴酒を呑み、嗄がれ声で呶鳴り立て、二人の仲は日に夜に反が合なくなりにける。</p>
+            <p class="ja-classical-line">或夜小糸姫は友彦が大酒を煽り、酔ひ潰れたる隙を窺ひ、一通の遺書を残し、浜辺に繋げる小舟を漕ぎ、島人の黒ン坊二人を伴なひ、太平洋を目蒐けて大胆にも遁げ出したり。</p>
+            <p class="ja-classical-line">友彦は酒の酔が醒め、起き出で見れば夜はカラリと明けはなれ小鳥の声喧し。</p>
+            <p class="ja-classical-line">友彦は眠たき目を擦り乍ら、</p>
+            <p class="ja-classical-line">『小糸姫、水だ水だ』</p>
+            <p class="ja-classical-line">呼べど叫べど何の応答もなきに友彦は、</p>
+            <p class="ja-classical-line">『アヽ又裏の山へでも果物を取りに往きよつたのかなア。何を云うても御嬢さまで気儘に育つた女だから仕方が無い。併し斯う云ふものの、まだ十六だから子供の様なものだ。余りケンケン云つてやるのも可哀想だ。チツトこれから可愛がつてやらねばなるまい。顕恩郷に居れば、彼方からも、此方からも御嬢さまと奉られ、女王の様に持て囃され、栄耀栄華に暮せる身分だ。此の友彦が思はぬ手柄に依つてそれをきつかけに旨くたらし込み、世間知らずのオボコ娘をチヨロマカした俺の腕前、定めてバラモン教の幹部連も驚いたであらう。俺の顔は自分乍ら愛想の尽きるやうなものだが、それでも生命の親だと思つて、すねたり、跳たりし乍ら付いて居るのはまだ優らしい。たとへ俺を嫌つて遁げ帰らうと思つても、遠き山坂を越えコンナ離れ島へ連れ込まれては、孱弱き女の何うすることも出来よまい。思へば可哀想なものであるワイ……アヽ喉が渇いた。一つ友彦自ら玉水を、汲みて御飲り遊ばす事としよう』</p>
+            <p class="ja-classical-line">と云ひ乍ら、門前を流るる谷川の水に竹製の柄杓を突込み、グイと一杯汲み上げ声を変へて、</p>
+            <p class="ja-classical-line">『さア、旦那様、御上り遊ばせ。あまり御酒を上りますと御身のためによろしく御座いませぬ。若しも貴方が御病気にでも御なり遊ばしたら、妾は何うしませう。ねー貴方、妾が可愛いと思召すなら、何うぞ御酒を余り過ごさない様にして頂戴……ナンテ吐しよるのだけれど、今日に限つて若山の神様は何処かへ御出張遊ばした。軈て御帰館になるだらう。それまで山の神の代理を勤めるのかなア』</p>
+            <p class="ja-classical-line">と独語言ひ乍ら、グツト一杯飲み乾し、</p>
+            <p class="ja-classical-line">『アヽ酔醒めの水の美味さは下戸知らずだ。アヽうまいうまい、水も漏らさぬ二人の恋仲、媒酌人も無しに自由結婚と洒落たのだから、此の杓を媒酌人と仮定して先づ一杯やりませう。何程しやくだと云つても、顕恩郷を遠く離れた此の島、二人の恋仲に水差す奴も滅多にあるまい。併し乍ら小糸姫が時々癪を起すのには、一寸俺も困る………「もしわが夫様、癪がさしこみました。どうぞ御介錯を願ひます」………なんて本当になまめかしい声を出しやがつて、俺は何時もそれが癪に障………らせぬワ。アヽうまいうまい』</p>
+            <p class="ja-classical-line">と、汲んでは飲み汲くんでは飲み一人興がりゐる。</p>
+            <p class="ja-classical-line">斯かる処へ黒ン坊の一人現はれ来り、</p>
+            <p class="ja-classical-line">『モシモシ友彦様、女王様が夜前船に乗つて何処かへ往かれたのを、貴方御存知で御座いますか』</p>
+            <p class="ja-classical-line">と聞くより友彦は真蒼になり、</p>
+            <p class="ja-classical-line">『何ツ、小糸姫が船に乗つて此処を去つたとは、そりや本当か』</p>
+            <p class="ja-classical-line">『何私が嘘を申しませう。チヤンキーとモンキーの二人が、櫓櫂を操り港を船出しましたのを、月夜の光に慥に見届けました。私ばかりでない、四五人のものがみんな見て居りますよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Naze: 'If so, why did you not inform me at once?'</p>
+          <p class="en-p">Servant: 'We came to inform you at once, but as you know, this steep slope prevents us from coming along steadily, sir.'</p>
+          <p class="en-p">Naze: 'And do you know where Koitohime has gone?'</p>
+          <p class="en-p">Servant: 'As to that, I do not know for certain, but she set out with her prow turned toward the direction of the country of Tsuki, so she has most likely gone to the capital of Dew.'</p>
+          <p class="en-p">Tomohiko folded his arms, let out a deep groan of a sigh, and let coarse tears spill drop by drop from both eyes. After a while Tomohiko stood up,</p>
+          <p class="en-p">Tomohiko: 'You wretched pair, Chiankiy and Monkī, having seduced my precious wife, where have you fled? Even if you possess the miraculous arts of soaring through the heavens or burrowing into the earth, I shall search for you even by parting the grass, and I will not rest until I meet my wife. At that time I shall offer the two of you, Chiankiy and Monkī, as a blood sacrifice!'</p>
+          <p class="en-p">Raging like a madman, he threw pots, kettles, and the braziers, vented his grudge upon the sliding doors and paper screens, gave himself up to the utmost limits of violent rampage, smashed every piece of household goods into absolute smithereens, tore apart and shattered the garments and hand tools left behind by Koitohime, stamped his feet as he whirled round and round inside the room seven or eight times in a frenzy, rolled his eyes, and collapsed flat on the floor.</p>
+          <p class="en-p">One of the blackamoors, startled, ran up to his side,</p>
+          <p class="en-p">Blackamoor: 'My dear Tomohiko-san, have you gone mad? Come, calm your feelings; no matter how impatient you are, you cannot catch up with her now. In any case, there is a famous missionary named Ichihiko residing in the capital of Dew in the country of Tsuki, so she has most likely gone to his residence.'</p>
+          <p class="en-p">Tomohiko came to his senses with a start at these words,</p>
+          <p class="en-p">Tomohiko: 'What! What is that about Ichihiko?'</p>
+          <p class="en-p">Blackamoor: 'Everyone was whispering that the Queen-sama has most likely gone to the residence of Ichihiko in the capital of Dew, I say.'</p>
+          <p class="en-p">Tomohiko: 'That was well informed of you, you rascal. Come, I shall give you a tip.'</p>
+          <p class="en-p">When he opened the cash box and looked inside, lo and behold, it was an empty chest, Kansaeimon, not a single zeni coin remaining. Quickly grasping and unfolding a folded paper left at the bottom of the box, he looked at it,</p>
+          <p class="en-p">Tomohiko: 'Ah, I cannot make head or tail of this. In Spartan script... How malicious, knowing that I cannot read it, she must have left a will for me. Yet this is evidence for later. I must keep it carefully.'</p>
+          <p class="en-p">Stowing it away as a precious treasure inside his amulet bag, he had the blackamoor guide him, and with all his might, shouting loudly as he hurried down the steep slope of Mount Shiro, he descended with great strides.</p>
+          <p class="en-p">At last they rushed down to the port of Shiro. As a result of the blackamoor and the two of them engaging in a reckless marathon race, the moment he arrived at the port, his tension relaxed and he collapsed flat right there. Twenty or thirty blackamoors gathered around at the port, splashing water on him, pinching his nose, and doing various things until he finally came to.</p>
+          <p class="en-p">Tomohiko, looking around on all sides in a daze,</p>
+          <p class="en-p">Tomohiko: 'Oh, this is the port of Shiro. Come, you fellows, make ready a boat this very instant and send me to the country of Tsuki.'</p>
+          <p class="en-p">Blackamoor: 'How much fare will you give us?'</p>
+          <p class="en-p">Tomohiko: 'Eh, at a time like this, instead of talking about fare, we cannot delay even for a moment. The fare shall be given to you afterward as you desire. Come, be off quickly!'</p>
+          <p class="en-p">He urged them on impatiently.</p>
+          <p class="en-p">Tomohiko's pockets were in truth utterly empty. The eight blackamoors, rowing with eight oars and flying like arrows at Tomohiko's command, crossed the Indian Ocean and at last reached the shore of the country of Tsuki. This place is called Masago no Hama and has a shallow seabed. The boat anchored about ten cho offshore, and from there they were to tuck up their skirts and land on foot.</p>
+          <p class="en-p">Blackamoor: 'My dear general-sama, please give us our fare.'</p>
+          <p class="en-p">Tomohiko: 'Wait a moment; I will lavishly pay the fare for both round trips when we return to the port of Shiro. Since it is bothersome to pay in two installments, you had better float your boat here and wait.'</p>
+          <p class="en-p">Blackamoor: 'Even if you say so... we cannot reach the capital of Dew in two or three days. Although it takes ten days for the round trip, do you expect us to wait in such a place?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ソンナラ何故早速知らして来ぬのだ』</p>
+            <p class="ja-classical-line">『早速知らせに参つたのですが、御承知の通り此の急坂、さう着々と来られませぬワ』</p>
+            <p class="ja-classical-line">『さうして小糸姫は何処へ往つたか知つて居るか』</p>
+            <p class="ja-classical-line">『そこまではハツキリしませぬが、何でも舳を印度の国の方へ向けて出られましたから、大方露の都へ御越しになつたのでせう』</p>
+            <p class="ja-classical-line">友彦は両手を組みウンウンと吐息を吐き、両眼より粗い涙をポロリポロリと溢して居る。暫くして友彦は立上り、</p>
+            <p class="ja-classical-line">『おのれチヤンキー、モンキーの両人、大切な女房を唆かし、何処へ遁げ居つたか、たとへ天をかけり、地を潜る神変不思議の術あるとも、草をわけても探し出し、女房に会はねば置かぬ。其時にチヤンキー、モンキーの二人を血祭りに致して呉れむ』</p>
+            <p class="ja-classical-line">と狂気の如く荒れ狂ひ、鍋、釜、火鉢を投げ、戸障子に恨みを転じ、自ら乱暴狼藉の限りを尽し、家財を残らず滅茶苦茶に叩き毀し、小糸姫の残し置いた衣服や手道具を引裂き、打砕き、地団駄踏んで室内を七八回もクルクルと廻り狂ひ、目を廻してパタリと倒れた。</p>
+            <p class="ja-classical-line">黒ン坊の一人は驚いて側に駆寄り、</p>
+            <p class="ja-classical-line">『モシモシ友彦様、狂気めされたか。マア気を御鎮めなされ、何程焦つても追ひつくことは出来ますまい。何れ印度の国の露の都に市彦と云ふ名高い宣伝使が居られますから、其処へ大方御越しなつたのでせう』</p>
+            <p class="ja-classical-line">友彦は此声にハツト気がつき、</p>
+            <p class="ja-classical-line">『何ツ、市彦が何うしたと云ふのだ』</p>
+            <p class="ja-classical-line">『大方女王様は露の都の市彦の館へ御越しになつたのだらうと、皆の者が噂を致して居りましたと云ふのです』</p>
+            <p class="ja-classical-line">『それは貴様、よく知らせて呉れた。さア、駄賃をやらう』</p>
+            <p class="ja-classical-line">と金凾を開き見れば、こは如何に、空ツけつ勘左衛門、錏一文も残つて居ない。凾の底に残つた折紙を手早く掴み披き見て、</p>
+            <p class="ja-classical-line">『アヽ何だか些も分らない。スパルタ文字で………意地の悪い、俺の読めぬのを知り乍ら、遺書をして置きやがつたのだらう。併しこれは後の証拠だ。大切にせなくてはならない』</p>
+            <p class="ja-classical-line">と守り袋の中に大事相にしまひ込み、黒ン坊に案内させ、一生懸命にシロ山の急坂をドンドン威喝させ乍ら、大股に降り行く。</p>
+            <p class="ja-classical-line">漸くシロの港に駆ついた。滅法矢鱈に黒ン坊と二人がマラソン競走をやつた結果、港に着くや、気は弛みバツタリと此処に倒れて了つた。港に集まる黒ン坊は二三十人寄つて集つて水をかけたり、鼻を捻ぢたり、いろいろとして漸く気をつけた。</p>
+            <p class="ja-classical-line">友彦は四辺キヨロキヨロ見廻し乍ら、</p>
+            <p class="ja-classical-line">『オー此処はシロの港だ。さア、汝等一時も早く船の用意を致し、印度の国へ送れ』</p>
+            <p class="ja-classical-line">『賃銭は幾何呉れますか』</p>
+            <p class="ja-classical-line">『エーコンナ時に賃銭の話どころか、一刻も早く猶予がならぬ。賃銭は望み次第後から遣はす。さア、早く行け』</p>
+            <p class="ja-classical-line">と急き立てる。</p>
+            <p class="ja-classical-line">友彦の懐中は実際無一物であつた。八人の黒ン坊は八挺櫓を漕ぎ乍ら矢を射る如く友彦の命のまにまに印度洋を横切り、印度の国の浜辺へ漸く着いた。此処は真砂の浜と云ひ遠浅になつてゐる。船は十町ばかり沖にかかり、それより尻を捲つて徒歩上陸する事となりゐるなり。</p>
+            <p class="ja-classical-line">『モシモシ大将さま、賃銭を頂きませう』</p>
+            <p class="ja-classical-line">『ウン一寸待て、賃銭はシロの港まで帰つた時、往復共に張りこんでやる。二度にやるのは邪魔臭いから、此処に船を浮かべて待つてゐるがよからう』</p>
+            <p class="ja-classical-line">『さうだと云つて………露の都までは二日や三日では往けませぬ。往復十日もかかるのに、コンナ処に待つてゐられますかい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">If you hate waiting, you had better go back ahead and wait for me at the port of Shiro. On the way back I will take another ship anyway.........</p>
+          <p class="en-p">Please take us across without saying such things. My wife is waiting and washing the pots.</p>
+          <p class="en-p">The truth is, in my flurry, I left my money behind.</p>
+          <p class="en-p">Hah, do not talk such nonsense! You were cleanly outwitted by the Jiyōu and fled with all your money stolen, I suppose. Until now, basking in the light of Jiyōusama, we respected you; but now that things have come to this, who on earth would follow you? If you have no money, it cannot be helped. Hand over everything you are wearing to me, without exception. If you hesitate and stall, shall we all gang up and give you a water burial right here in this sea?</p>
+          <p class="en-p">Ah, it cannot be helped. Since it is a hot country anyway, and one can manage even naked, take these and be off.</p>
+          <p class="en-p">And spinning round into a state of utter nakedness, he threw them into the boat, whereupon the blackamoor cried out,</p>
+          <p class="en-p">My, this is unexpectedly fine clothing! Since it was made with an excess of money anyway......... Hey, hand over that amulet bag you are wearing around your neck to me.</p>
+          <p class="en-p">If the likes of you touch this, your bodies will instantly grow numb. Come on, take it.</p>
+          <p class="en-p">So saying, he thrust forward his neck. The eight blackamoors shouted,</p>
+          <p class="en-p">Bah, we have no use for such a terrifying thing! Take it with you as you please.</p>
+          <p class="en-p">So saying, they left him behind in the shallow sea, rowed their eight-oared sculls, and sped back like an arrow across the sea surface where the purple tides drifted.</p>
+          <p class="en-p">Tomohiko sank his feet into the sand, perforce dangling the amulet bag from his neck, and in a style reminiscent of a kept hound, sluggishly proceeded on all fours through the shallow sea, making his way toward the shore.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『待つのが嫌なら先へ帰つてシロの港で待つてゐるがよからう。帰途には又他の船に乗るから………』</p>
+            <p class="ja-classical-line">『ソンナ事を言はずに渡して下さいなア。女房が鍋を洗つて待つてゐるのですから』</p>
+            <p class="ja-classical-line">『実は金をあまり周章て忘れて来たのだ』</p>
+            <p class="ja-classical-line">『ヘンうまいこと云ふない。女王にスツパ抜けを喰はされ、金も何も持つて遁げられたのだらう。今までは女王様の光りで、貴様を尊敬して居つたが、モー斯うなつちや誰が貴様に随ふものがあるか。金が無ければ仕方がない。貴様の身につけたものを残らず俺に渡せ。グヅグヅ吐すと、寄つて集つて此の海中へ水葬してやらうか』</p>
+            <p class="ja-classical-line">『エー仕方が無い、ソンナラ暑い国の事でもあり、裸でもしのげぬ事は無いのだから、これなつと持つて行け』</p>
+            <p class="ja-classical-line">とクルクルと真裸になり、船の中に投げつけたるに黒ン坊は、</p>
+            <p class="ja-classical-line">『ヨー思ひの外立派な着物だ。何分金にあかして拵へよつた品物だから………オイその首にかけて居る守り袋を此方へ寄越せ』</p>
+            <p class="ja-classical-line">『之に貴様等が手を触れると、忽ち身体がしびれるぞ。さア持つて行け』</p>
+            <p class="ja-classical-line">と首を突き出す。八人の黒ン坊は、</p>
+            <p class="ja-classical-line">『ヤア、ソンナ怖ろしいものは要らぬワイ。勝手に持つて行け』</p>
+            <p class="ja-classical-line">と云ひ捨て遠浅の海に友彦を残し、八挺櫓を漕ぎ、紫の汐漂ふ海面を矢の如く帰つて行く。</p>
+            <p class="ja-classical-line">友彦は砂に足を没し、已むを得ず首に守袋をプリンと下げ、飼犬よろしくと云ふスタイルで、遠浅の海をノタノタと、四つ這ひになつて岸辺を指して進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c01.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 1: 粉骨砕身 [731]</span>
+      </a>
+      <a href="c03.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 3: Waves 濤の Dream [733]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
