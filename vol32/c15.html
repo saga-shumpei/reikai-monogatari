@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 万歳楽 [906] - Volume 32 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 32 Table of Contents</a>
+      <span>Volume 32</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 32 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 万歳楽 [906]</h1>
+      <p class="chapter-title-ja">万歳楽〔906〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Matsuyohime of the Miroku Kamiyo, Takenohime of the upright heart, and Umegakahime who opens all at once, appeared as the noble Mikoto and Onchichi, and Momogamihiko, the Kamutsukasa who opened the Kamuyakata in the Takasago Uzu capital and guided the Yobito, together with Satsuki-hime, received the divine Mikoto and set out for the Yomotsu islands; the Masakayamazumikami, whose father-child and fūfu bonds established such batsugun merit that their glory shone in yomo, entrusted the Uzu mansion to Kunihiko, the Oshihe no Kamutsukasa, and traveled far across the Unabara, now once again residing in the noble sacred land of Jerusalem.</p>
+          <p class="en-p">He opened the Oshihe of the San-go-kyo completely and in detail. Matsuwakahiko, born as the eldest son of the pure-hearted Kunihiko, revering his father's words, remained in the Uzu mansion and was transmitting the true path of the Sumeru-Ōkami to yomo, when he accompanied Sutehime, the youngest daughter of the eight maidens who was born as the noble child of Kami-Susanoo-Ōkami, and crossing the eight hundred paths of the tide, they descended shining brightly. The Oshihe of Kami flourished far and near, and the people of the yomo countries, moved by the divine grace and the noble governance of Sutehime, submitted with joy, rejoicing and delighting in one another, as they established the Matsu Kamiyo.</p>
+          <p class="en-p">At that very time, the great Oshihe-nushi of the San-go Kami-no-Oshihe, the Kamutsukasa Kotoyoriwake, departed from the Nishiki-no-Miya and, observing the divine imperial decree of the noble Mikoto of Tamateruhiko and Tamateruhime, arrived here. Starting with Sutehime, Matsuwakahiko and the other Kamutsukasa rejoiced, revering the Oshihe-nushi Kotoyoriwake as a living Kami, and just as the flowers of the Oshihe were blooming and flourishing in all directions, the Kamutsukasa who had set out to guide and harmonize the Kami in the forests of the Amazon River, beginning with Kuniyoriwake, Takayorihime, and Takahime, sought to assist in the Kototama battle.</p>
+          <p class="en-p">The Kamutsukasa Masazumihiko, leading four attendants—Karl, Ishikuma, and Haruko—traversed mountains and rivers day and night, crossed several ranges, and headed toward Mount Bōshi, which stands towering, pressing against the clouds in the center of the great mountain range, to meet with Kuniyoriwake. They emitted the precious spiritual light of the jewels of Ryu and Kyu, and from Mount Bōshi, they shone upon and shot at the divine army fighting against not only the fierce beasts and great serpents lurking in the Shigure forest, but also the Mallband, Ellband, and numerous other Magatsukami, harmonizing them through Kototama and achieving a great victory, standing even above the clouds in the nobility of that Kototama.</p>
+          <p class="en-p">Takahime and her party, along with many other Kamutsukasa, surged with courage and, aiming for Mount Bōshi, finally arrived here. Gazing at the scenery where the Amazon River flows like a belt, they recited the Futo-norito-goto of Kototama, and together with the Kami-people of Ryu and Kyu, Kotoyoriwake and Kuniyoriwake, and sixteen other Kamutsukasa, they returned to the Uzu mansion in the great city of Argentina, protected by Sutehime, playing songs of triumph with ease; the bravery of their appearance was such that Sutehime, Matsuwakahiko, Sutehime, and many other Kamutsukasa...</p>
+          <p class="en-p">Accompanied by many people of the Uzu capital, they went out to welcome them, celebrating their safe return and ushering them into the Uzu mansion. Such an example of the opening of Argentina is truly noble. Kuninotokotachi-Ōkami, who created and solidified this world, Toyokunihime-Ōmikami, Kaneyasutome-Ōmikami, Hinodewake, and Konohana-no-Kami-no-Mikoto also surged with courage, rejoicing that the Miroku Kamiyo was opening before their very eyes, and sent one hundred righteous Kamutsukasa to this sacred land to rejoice and celebrate the triumphant return of the divine army; the voices of acclamation echoed through heaven and earth, and in Takasago...</p>
+          <p class="en-p">It was as if the very island would shake. Ah, Kannagara-kamu-nagara. May the spirits be blessed, and may the great activities of Kotoyoriwake and Kuniyoriwake on Takasago Island, and the story of the noble and pure Kami-Susanoo-Ōkami appearing here from afar to perform the Shikum of the Kamiyo, be rolled out perfectly, in detail, and minutely, without delay, by the Kototama-guruma. Kannagara. Before the presence of the Kami, Mizuki prays with reverence and awe.</p>
+          <p class="en-p">Sutehime, celebrating the triumphant return of the party of Kotoyoriwake-no-Mikoto, spreads a golden fan and dances while singing herself.</p>
+          <p class="en-p">Sutehime: 'The world is long-lasting and ever more noble; departing from the high Takama-no-hara, to illuminate the people of Takasago Island with the noble light of the Kami of infinite benevolence, the Kamutsukasa Kotoyoriwake, together with Kuniyoriwake, boarded the Menashi-katama ship and crossed the sea route to the port of Asahi-mo-teru. Between the borders of Hiru and Teru, in the valleys of the three mountains, while saving the people suffering from near-death with the noble divine Oshihe, both in spirit and body, they parted from Kuniyoriwake and traveled here and there, saving many people, in the wilderness where tigers, wolves, bears, and lions rage and go mad.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">五六七の神世を松代姫
+心も直なる竹野姫
+一度に開く梅ケ香姫の
+貴の命の御父と
+現はれまして高砂の
+ウヅの都に神館
+開きて世人を導きし
+桃上彦の神司
+五月の姫と諸共に
+神の御言を蒙りて
+黄泉の島に出陣し
+親子夫婦が抜群の
+功を立てて其ほまれ
+四方に輝き給ひたる
+正鹿山津見神の主
+教の司の国彦に
+ウヅの館を任せつつ
+遠く海原打渡り
+今は再度ヱルサレム
+貴の聖地にましまして</p>
+            <p class="ja-classical-line">三五教の御教を
+完全に委曲に開きましぬ
+心も清き国彦の
+長子と生れし松若彦は
+父の言葉を畏みて
+ウヅの館に謹みて
+皇大神の正道を
+四方に伝ふる折柄に
+神素盞嗚大神の
+貴の御子とあれませる
+八人乙女の末子姫
+捨子の姫を伴ひて
+潮の八百路を打渡り
+光り輝き降りまし
+神の教は遠近に
+栄えて四方の国人は
+神の恵と末子姫が
+尊き政治に悦服し
+互に歓ぎ喜びつ
+松の神世を立てゐたる</p>
+            <p class="ja-classical-line">時しもあれや三五の
+神の教の大教主
+言依別の神司
+錦の宮を立出でて
+玉照彦や玉照姫の
+貴の命の神勅を
+守りてここに出でましぬ
+末子の姫を始めとし
+松若彦や其外の
+神の司は喜びて
+言依別の教主をば
+生きたる神と尊敬し
+教の花は四方八方に
+匂ひ栄ゆる折柄に
+アマゾン河の森林に
+神を言向け和さむと
+立向ひたる神司
+国依別を始めとし
+鷹依姫や高姫が
+言霊戦を助けむと</p>
+            <p class="ja-classical-line">正純彦の神司
+カール、石熊、春公の
+四人の供を引率し
+夜を日についで山河を
+いくつか渉り屏風山
+大山脈の中央に
+雲を圧して聳え立つ
+帽子ケ岳に立向ひ
+国依別に面会し
+琉と球との宝玉の
+珍の霊光発射して
+時雨の森に潜みたる
+猛獣大蛇は云ふも更
+モールバンドやエルバンド
+其外数多の曲神に
+向つて戦ふ神軍を
+帽子ケ岳より射照らして
+言向け和し大勝利
+雲の上迄立て給ふ
+其言霊の尊さに</p>
+            <p class="ja-classical-line">高姫一行其外の
+数多の司は勇み立ち
+帽子ケ岳を指して
+ここに漸く寄り来り
+アマゾン河の水流が
+帯の如くに流れたる
+景色を眺めて言霊の
+太祝詞言奏上し
+言依別や国依別の
+琉と球との神人を
+始めて外に十六の
+神の司と諸共に
+末子の姫の守ります
+アルゼンチンの大都会
+ウヅの館に悠々と
+凱歌を奏して帰ります
+其御姿の勇ましさ
+末子の姫を始めとし
+松若彦や捨子姫
+其外数多の神司は</p>
+            <p class="ja-classical-line">ウヅの都の国人を
+数多伴ひ出で迎へ
+無事の凱旋祝しつつ
+ウヅの館に迎へ入る
+アルゼンチンの開けてゆ
+かかる例しもあらたふと
+此世を造り固めたる
+国治立大神や
+豊国姫大御神
+金勝要大御神
+日の出神や木の花の
+神の命も勇み立ち
+五六七の神世は目のあたり
+開けましぬと喜びて
+百の正しき神司
+これの聖地に遣はして
+神の軍の凱旋を
+喜び祝ひ給ひけり
+歓呼の声は天地に
+響き渡りて高砂の</p>
+            <p class="ja-classical-line">島もゆるがむ許りなり
+あゝ惟神々々
+御霊幸はひましまして
+言依別や国依別の
+高砂島の大活動
+神素盞嗚大神の
+はるばる此処に現れまして
+神世の仕組をなし給ふ
+清き尊き物語
+完美に委曲に細やかに
+言霊車遅滞なく
+ころばせ給へ惟神
+神の御前に瑞月が
+畏み畏み願ぎまつる。</p>
+            <p class="ja-classical-line">末子姫は、言依別命一行の凱旋を祝し、金扇を拡げ、自ら歌ひ自ら舞ひ給ふ。</p>
+            <p class="ja-classical-line">『世は久方のいや尊き
+綾の高天を立出でて
+高砂島の民草を
+仁慈無限の大神の
+貴の光りに照らさむと
+言依別の神司
+国依別と諸共に
+目無し堅間の船に乗り
+旭もテルの港まで
+海路を渡り来りまし
+ヒルとテルの国境
+三座の山の谷間に
+瀕死に悩む国人を
+尊き神の御教に
+霊肉共に救ひつつ
+国依別に立別れ
+あなた此方と廻りまし
+数多の国人救ひつつ
+虎狼や熊獅子の
+伊猛り狂ふ荒野原</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Having crossed over and gradually arriving at the capital of Uzu, there were times when the teachings of the Kami, Tamateruhiko and Tamateruhime, were expounded in detail. The Mizumitama that cleanses this world, by the Mikoto of the Chichiōkami, borrowed the mouth of the Suteko-hime to proclaim the Futonorito. Reverently receiving this, the Kotoyoriwake-no-Mikoto departed from the Kamuyakata, and with Masazumihiko, the Oshihetsukasa, as the leader, accompanied by the four attendants Karl, Ishikuma, and Harukō, they proceeded to the great forests spreading north and south of the Amazon River, subduing and harmonizing the raging wild beasts, the Maulband, and the Elband.</p>
+          <p class="en-p">Revering the noble Miizu of the Mizu-no-Mitama, the Moon Kami enshrined in the capital of Uto, from the summit of Mount Bōshi, the spiritual lights of Ryū and Kyū shine upon each other, governing the hundred spirits eternally. Oh, the joy of returning here now, raising a song of triumph! Ah, Kannagara-kamu-nagara, may the Mitama be blessed, and may the capital of Uzu be governed eternally like the evergreen Tokiwa-no-Matsuyohime, the pure and upright Takenohime, and Umegakahime, all at once opening their Miizu, appearing as the great Ōkamuzumi of the peach fruit, and just as they achieved great merit in the battle of Yomi, beginning with the youngest Hime,</p>
+          <p class="en-p">May the great achievements of the noble Mikoto, such as Kotoyoriwake and Kuniyoriwake, shine clearly like the sun and moon, eternally with heaven and earth. O Amatsukami and Kunitsukami, the eight million Kami, and Ryūyohime, the Kunitama-no-Kami, before the presence of Gesshōhiko, the youngest Hime humbly prays and beseeches that the three-five teachings of the Kami may never wither nor scatter, but like the flowers and fruits of the Tokijiku-no-Kagu-no-Konomi, may they flourish in fragrance forever. Ah, Kannagara-kamu-nagara, before the presence of the Sumerōkami, I pray with a pure Kototama.</p>
+          <p class="en-p">Having finished singing, they bowed to one another and advanced into the inner sanctuary where the Kami Susanoo-no-Ōkami is enshrined.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">渉り給ひてやうやうに
+ウヅの都に出でまして
+玉照彦や玉照姫の
+神の教をま詳さに
+開かせ給ふ時もあれ
+此世を洗ふ瑞御霊
+父大神の御言もて
+捨子の姫の口を借り
+宣らせ給ひし太祝詞
+畏みまつりて言依別の
+神の命は神館
+立出で給ひ正純彦の
+教司を始めとし
+カール、石熊、春公の
+四人の供を従へて
+アマゾン河の南北に
+展開したる大森林
+伊猛り狂ふ猛獣や
+モールバンドやエルバンド
+言向け和し給ひつつ</p>
+            <p class="ja-classical-line">兎の都に祀りたる
+瑞の御霊の月の神
+尊き御稜威を畏みて
+帽子ケ岳の頂上より
+琉と球との霊光を
+照り合はしつつ永久に
+百の霊を治めまし
+凱歌をあげて今ここに
+帰り来ませる嬉しさよ
+あゝ惟神々々
+御霊幸はひましまして
+ウヅの都は永久に
+治まる常磐の松代姫
+清くすぐなる竹野姫
+梅ケ香姫の一時に
+御稜威も開きて桃の実の
+大加牟豆美と現れまして
+黄泉戦に大殊勲
+立てさせ給ひし其如く
+末子の姫を始めとし</p>
+            <p class="ja-classical-line">言依別や国依別の
+貴の命の御功績
+天地と共に永久に
+月日の如く明かに
+照らし給へよ天津神
+国津神たち八百万
+国魂神の竜世姫
+月照彦の御前に
+末子の姫が慎みて
+請ひのみまつり三五の
+神の教はいつ迄も
+すぼまず散らず時じくの
+香具の木の実の花の如
+薫りしげらせ給へかし
+あゝ惟神々々
+皇大神の御前に
+言霊清く願ぎまつる』</p>
+            <p class="ja-classical-line">と歌ひ終り、一同に会釈して、神素盞嗚大神の鎮まります奥殿さして進み入る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: Mountain 上の祝 [905]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: 回顧の Song [907]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 22: Bridge 架 [913] - Volume 32 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 32 Table of Contents</a>
+      <span>Volume 32</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 32 &bull; Chapter 22</span>
+      <h1 class="chapter-title-en">Chapter 22: Bridge 架 [913]</h1>
+      <p class="chapter-title-ja">橋架〔913〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kuniyoriwake, Takahime, Takayorihime, Tatsukuniwake, and other Sendenshi were each given a Kiusokushitsu, where they slept at night and rested their Kinkotsu.</p>
+          <p class="en-p">Early the Yokuasa, Matsuwakahiko visited the room of Kuniyoriwake.</p>
+          <p class="en-p">Matsuwakahiko: 'Kuniyoriwake-sama, Ohaya. I have come to you early and apologize for the Ojiyama, as I have a matter of Gosaudan that I must discuss with you in earnest.'</p>
+          <p class="en-p">He says this with a smile that seems to hold some hidden meaning. Kuniyoriwake replies:</p>
+          <p class="en-p">Kuniyoriwake: 'This is a rather formal Okotoba. What kind of Gosaudan could you possibly have for me? Since Akechi no Kotoyoriwake-dono is present, would it not be better to consult with Mikotosama?'</p>
+          <p class="en-p">Matsuwakahiko: 'The truth is, following the Ome of Kamususanōnōokami-sama last night, the three of us—Kotoyoriwake-dono, myself, and the others—held a Gosaudan, and as a result, I have been chosen as the Tokumei Zenken Koushi. If by any chance this mission ends in failure, I, this Matsuwakahiko, having been granted a travel voucher for overseas, must cut my stomach.'</p>
+          <p class="en-p">Kuniyoriwake: 'That sounds like a very grave mission, but please, tell me quickly. If it is within my power, I shall accept any task, for this body is dedicated to the Gods.'</p>
+          <p class="en-p">Matsuwakahiko: 'In truth, when my father Kunihiko went to the front at Yomotsuhirasaka with Masakayamatsumi-no-kami-sama and Suetsuhime-sama, he was given a strict command: not only to look after the people of Uzu-no-kuni, but to take charge of this Kamudate, and when the time came, the noble child of the Mizu-no-mitama of Kamususanōnōokami-sama would descend to this land. Until then, you must protect my Mikoto and keep this land and Kamudate. My father, for better or worse, has already departed to the Yūkai, but I, remaining behind, have succeeded him and have been guarding this hall. Then, just as Masakayamatsumi-no-kami-sama had foretold, the daughter of the Mizu-no-mitama no Ōkami-sama, Suetsuhime-sama, arrived. I immediately handed the hall over to the Hime-sama, surrendered this land, and as you know, have served as the Sōshi. However, this time, her father, Kamususanōnō-no-mikoto, descended from heaven, was greatly pleased, and asked, "Suetsuhime is now of a good age, and I wish to find her a suitable husband..." When we, led by Kotoyoriwake-no-mikoto, suggested, "How would it be if you made Kuniyoriwake-sama her husband?" the Ōkami-sama was greatly pleased and said, "In truth, I have come all this way for that very reason. Please, you must arrange for Kuniyoriwake, who possesses strong divine virtue, to become the husband of Suetsuhime..." With that command, I have come to you without delay, thinking that you would have no objection... Heh heh heh, I have received the role of Zenken Koushi and have come to inquire. Since it is best to act quickly, I ask for a favorable reply soon.'</p>
+          <p class="en-p">Kuniyoriwake, with a look of unexpected surprise, tilts his head, folds his hands, and while heaving a deep sigh, remains silent, with tears even dripping from both eyes.</p>
+          <p class="en-p">Matsuwakahiko: 'Moshi, Kuniyoriwake-sama, why are you so troubled? It seems you are shedding tears. Is it that you cannot accept it at all?'</p>
+          <p class="en-p">Kuniyoriwake: 'No, no, how could it be that I do not like it? It is just too much, and I feel unworthy; I have no words to express it. Since my youth, I have exhausted every indulgence, and I am a mass of sins, having caused the ruin of many women and the collapse of many families. Today, as a Sendenshi of the San-go-kyō, I have resolved to sever all relations with women and live a life of celibacy for the rest of my days. No matter how much it may be the will of the Ōkami-sama, I am a broken man, a remnant of a reckless life. No matter how much my soul may have been polished, it is like ink soaking into white cloth; no matter how much you wash it, it will never return to the original white fabric. In short, I am a scarred soul. For such a scarred man to become the husband of Suetsuhime-sama, who is a maiden of crystal Mitama, is something my conscience cannot allow. I have become fearful of the divine retribution. Therefore, as this is the situation, please, without taking offense, explain my true nature to the Ōkami-sama and kindly decline on my behalf.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">国依別、高姫、鷹依姫、竜国別其他の宣伝使は各休息室を与へられ、夜は其処に眠り、筋骨を休ませて居た。翌朝早々国依別の一室に松若彦は訪ね来り、</p>
+            <p class="ja-classical-line">『国依別様、御早う御座います。就いてはあなたに折入つて御相談が御座いまして、早くから御邪魔を致しました』</p>
+            <p class="ja-classical-line">と心ありげに笑を含んでゐる。国依別は、</p>
+            <p class="ja-classical-line">『これは又改まつた御言葉、私に対し、御相談とはどんな事で御座いますか。明智の言依別様が居らせられる以上は、どうぞ命様に御相談下さつたら、如何でせうかなア』</p>
+            <p class="ja-classical-line">『実の所は夜前神素盞嗚大神様の御召しに依り、言依別様及び私と三人三つ巴になつて、御相談あつた結果、私が特命全権公使に選まれて参りましたので御座います。万一此使が、不成功に終るやうな事があれば、此松若彦は海外旅行券を交附された手前、腹を切らねばならないのです』</p>
+            <p class="ja-classical-line">『そりやマア大変な御使命と見えますが、どうぞ早く仰有つて下さいませ。私の力の及ぶ事ならば、神様に捧げた此体、如何なる御用も承はるで御座いませう』</p>
+            <p class="ja-classical-line">『実は私の父国彦は、正鹿山津見神様が五月姫様と共に黄泉比良坂の戦ひに御出陣の砌、ウヅの国の人民は申すも更なり、此神館を御預け遊ばし、やがて時来らば、神素盞嗚大神様の瑞の御霊の貴の御子、此国に降り給ふことあるべし。それ迄汝は我命を守つて、此国及び神館を預り呉れよとの厳命で御座いました。父は幸か不幸か、最早幽界に参りましたが、後に残つた私が父の後を継ぎ、此館を守つて居ります所へ、正鹿山津見の神様の御仰せの如く、瑞の御霊の大神様の御娘子、末子姫様が御越し遊ばしたので、直ちに御館を姫様に御渡し申し、此国をも御渡しをして、私は御存じの通り総司として仕へて参りました。然るに此度、御父君神素盞嗚尊、突然天降り給ひ、大変に御悦び遊ばし、且つ末子姫も最早良い年頃であるから、適当な夫を持たせたいのだが……との御尋ね、招かれた吾々始め言依別命様は、言下に国依別様を御婿様になされましたら如何でせうと申上げし処、大神様は大変に御悦び遊ばされ、実は其事に就て、はるばるとここまで出て来たのだ。どうぞ神徳の強き国依別を末子姫の夫になつて呉れる様、其方は取り持てよ……との御命令取る物も取り敢ず、あなたに於ても御異存は御座いますまいと思ひまして……ヘヽヽヽ、一寸全権公使の役を拝命し、御伺ひに参つた次第で御座います。どうぞ善は急げですから、早く善き御返事を御願ひ申します』</p>
+            <p class="ja-classical-line">国依別は案に相違の面持にて首を傾け、双手を組み、太き息をつきながら、ものをも言はず両眼より涙さへ滴らしつつ居る。</p>
+            <p class="ja-classical-line">『モシ国依別さま、あなたは何それ程御思案なされますか、見れば涙を御垂らしになつてゐるやうですなア。如何しても御気に入らないのですか？』</p>
+            <p class="ja-classical-line">『イエイエどうしてどうして気に入らぬ所か、余りの事で、勿体なくて、申上げる言葉も御座いませぬ。私は若い時より道楽の有丈を尽し、沢山の女殺し、御家倒し、家潰しをやつてきた罪の塊で御座います。今日は三五教の宣伝使として、女と一切の関係を絶ち、生涯独身生活を続ける覚悟を致して居るので御座います。如何に大神様の思召しなればとて、私の様な横着者の成れの果て、何程魂が研けたと申しても、白い布に墨が浸んだのと同様に、いくら洗つても元の白い生地にはなりませぬ。つまり霊魂上の疵者で御座います。斯様な疵者が水晶身魂の生の処女なる末子姫様の夫になるなぞと云ふ事は、どうしても良心が咎めてなりませぬ。冥加の程が恐ろしうなつて参りました。どうぞ右様の次第で御座いますから、悪しからず、大神様に私の素性を素破ぬいた上、宜しく御断り下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'Such hesitation is not necessary in the slightest. As for Kamususanōnōokami-sama, He has already investigated everything: the fact that you were a believer in Brahmanism, that you caused women to weep and ruined households, that you were a great mischief-maker, that you visited the residence of Matsutakahiko-sama without knowing it and had various romances with Okatsu-dono, and that you are the younger brother of Maura-sama. Therefore, such hesitation is not needed at all. Kotoyoriwake-sama also spoke at length of your virtues and reported every one of your bad habits to Ōkamisama without exception. Yet, Ōkamisama was in a very good mood and expressed His will, saying, "Ah, that fellow is an increasingly interesting man. I like him. I wish to make him the husband of Suekohime as soon as possible." Kuniyoriwake-sama, since I have heard from Kotoyoriwake-sama that you are a person who is quite skilled at teasing, you may think that I am teasing you by saying such things, but I am serious today, so please listen to me earnestly.'</p>
+          <p class="en-p">Speaker: 'Teasing, buying tofu, trouble, buying fights, conch shells, pond mussels, the Spiritual Research Society, the Dai Nippon Shūsai-kai, the Diet, and the Sea of Japan—none of these exist for me at all. Your words, which are truly genuine and without falsehood, are indeed an honor to me, Kuniyoriwake. However, a marriage between a noble and a commoner is like a paper lantern and a temple bell; since a mismatch is the root of an unhappy marriage, please decline it gracefully without causing me unnecessary trouble.'</p>
+          <p class="en-p">Speaker: 'Eh, Kuniyoriwake-sama, I am serious. Are you going to display your usual habit and tease me, who am being honest? There is no doubt that your true guardian deity has already pressed a registered seal upon the contract. Besides, does the proverb not say that there is no distinction of high or low in love? The lack of such distinction is the very reason why love is called sacred.'</p>
+          <p class="en-p">Speaker: 'I have once and for all renounced any relationship with women from the bottom of my heart, so I have never felt love in my heart. Please, I beg of you, abandon this dangerous marriage proposal, which is like a carp leaping up a waterfall or riding a summer shower to ascend to heaven.'</p>
+          <p class="en-p">Speaker: 'Once again, your words are as aimless as a fish. Suekohime-sama is looking at your back with a side-glance, thinking that she wants to make that man her own husband, and day and night she is swallowing her pride, burning with the fire of love for you. So please give me a favorable and tasty reply. You are saying that you are a man who has become more and more open-minded, yet you are stuck like a shark. If you were to wag your tail and flap your fins... ah, if my carp-like wish is not fulfilled, and you were to throw yourself into a deep pool saying there is no help for it in this fleeting world, then no matter how much you wander about like a fish, it will be too late. Ōkamisama might get angry, saying that even though I have explained things so clearly, you reject it like a carp, and that you are a stubborn fool. I have explained this much to you, are you still not satisfied? Come now, try to be with her even if you are reluctant. In the end, it will become easy. It is more elegant to walk through the mountains and fields holding hands with a lovely wife than to live a solitary life. To have me say all this to you and yet remain silent—is that not too much? Today, it is the will of Ōkamisama, so you cannot get away with slippery excuses like a gourd and a catfish.'</p>
+          <p class="en-p">Speaker: 'Eh, you are a foul-smelling, troublesome monk, a decadent saint, so please do not say such things from today on. I have been tired of eating the raw flesh of women since I was young. Because I have had enough of such things day and night, please, leave me alone. Regarding this matter, I cannot agree to it in any way. Hahaha!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『左様な御遠慮はチツとも要りませぬ。神素盞嗚大神様は、あなたがバラモン教の信者であつた事も、女泣かしの御家倒し、家潰しをなさつた事も、大の悪戯者で居らつしやつた事も、松鷹彦様のお宿を知らず識らずに訪ね、お勝殿といろいろのローマンスのあつた事、それから真浦様の弟なる事、一切万事御取調の上の事で御座いますから、決してそんな御遠慮は要りませぬ。言依別様も口を極めてあなたの美点をあげ、又悪い癖を一つも残らず、大神様に申上げられました。所が大神様は大変な御機嫌で……あゝ其奴は益々面白い男だ、気に入つた、どうぞ早く末子姫の夫にしたいものだ……との思召しで御座いましたよ……国依別様、あなたは言依別様から承れば、随分からかひの上手な御方ぢやさうですから、私がこんな事をいつて、あなたをからかつてゐると思はれるか知りませぬが、今日は真剣ですから、どうぞ真面目に聞いて下さい』</p>
+            <p class="ja-classical-line">『から買ひも豆腐買も、厄介も喧嘩買も、法螺貝もドブ貝も心霊研究会も、大日本修斎会も、議会も日本海も皆目ありませぬワイ。正真正銘の偽りなきあなたの御言葉、国依別、実に光栄に存じます。併しながら貴族と卑族との結婚は提灯に釣鐘、釣合はぬは不縁の元ですから、要らぬ苦労をさせずに、どうぞ体よく断つて下さい』</p>
+            <p class="ja-classical-line">『エヽ国依別さま、真剣ですよ。又例の癖を出して、正直な私をじらしなさるのですか。あなたの本守護神はキツト契約済の実印を押捺して御座るに間違ありませぬよ。又世の諺にも、恋に上下の隔てなしと云ふぢやありませぬか。隔のないのが所謂恋の神聖なる所以です』</p>
+            <p class="ja-classical-line">『私は一旦婦人との関係を心の底より断念して居ますから、恋なんか心に起した事はありませぬ。鯉が滝上りをし、夕立に乗つて天上する様な険呑な結婚問題は、どうぞ御頼みですから、早く撤廃して下さい』</p>
+            <p class="ja-classical-line">『又しても鮒々と埒のあかぬ、あなたの御言葉、末子姫様があの飯鞘、尻目で、お前さまの後姿を睨んで、あの男を鰌なとして、私のオツトセイに持ちたいものだと、明けても暮れても、つばすを呑みこんで、あかえ年だから、鯉の炎をもやして御座るのだから、どうぞ色よいあぢのよい返事をして下さい。あなたも鱒々鯖けた人間だと云つて、鱶はまりしてゐられるのだ。それにお前さまが尾をふり、鰭をピンとはねるやうな事をなさつたら……あゝ私も折角の鯉が叶はねば、一層の事、ちぬ鯛、小鮒な浮世に生鰕したかて、サヨリがないからと云つて淵川へ身を投げて了はれたら、お前さま何程魚々とうろついて悔んでもあとの祭り、大神様からは、是程事を分けて言ふのに、鯉の様にはねつけるとは、ギギシイラぬ奴だと御立腹遊ばすかも知れませぬ。私はこれ程白魚もやさして、お前さまはそれでも気が済むの貝な。マア厭でも添うて見なさい。仕舞にやすすきになりますぞや、ヤマメで暮すより鮎らしい奥さまとガザミに手を引いて、山野を時々跋渉なさるのも乙ですよ。これ程私に八カマス鰯ておいて、だまつてゐるとは、余りぢやありませぬか。今日は大神様の思し召だから、瓢箪鯰では通りませぬぞや』</p>
+            <p class="ja-classical-line">『エエハモ鰈ヤガラ腥い厄介坊主の自堕落上人で御座いますから、どうぞ今日限りそんな事を言つて下さるな。女のスキ身も刺身もモウ若い時から食ひあいて来ました。夜も昼もレコ貝に蛤だつたものだから、どうぞ、カマスにおいて下さい。此事に付ては、イカナゴとも飯蛸致す訳には参りませぬ。アハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Matsuwakahiko went behind Kuniyoriwake, tapped him on the back with a pop, and said,</p>
+          <p class="en-p">Matsuwakahiko: 'Hey, Kuniyoriwake-sama! You have been struck by your teasing sickness once again, haven't you?'</p>
+          <p class="en-p">Kuniyoriwake: 'It is neither a teasing sickness, nor a catfish, nor a haughty fit. I once caught a stone fish in the Kokumogaha and, calling it a haughty fit, presented it to Takahime-sama. It was a very hard fish. Just like that, my desire for carp has now fossilized, and as I am a cold-hearted Ningen like an Ishijizau, this marriage proposal will surely never warm up. Since a creature called a carp dwells constantly in the water, its body is quite cold, you see. Hahaha!'</p>
+          <p class="en-p">Matsuwakahiko: 'Hey, Kuniyoriwake-sama, you must know the song of the wife-calling of Ōkuninushi-no-Kami-sama, right? A man cannot possibly stand in the world without such spirit. Without knowing passion, how can you fulfill your duty as a Sendenshi perfectly? Look at Yachihoko-no-Kami-sama. Did he not come all the way from the land of Izumo to the land of Koshi with a Koshibentau? In his song at that time, he sang:',</p>
+          <p class="en-p">Yachihoko-no-Kami-no-Mikoto, unable to find a wife in the land of Yashimaguni,</p>
+          <p class="en-p">Having heard that there is a wise woman in the distant land of Koshi,</p>
+          <p class="en-p">Having heard that there is a beautiful woman, I have come to woo her,</p>
+          <p class="en-p">I have come to seek marriage, without even loosening the cord of my Tachi,</p>
+          <p class="en-p">Without even loosening my garments, I push and pull at the wooden door that the maiden makes rattle,</p>
+          <p class="en-p">As I stand there pushing, as I stand there pulling,</p>
+          <p class="en-p">In the green mountains, the nue bird cries, and the wild pheasant echoes,</p>
+          <p class="en-p">The garden bird, the rooster, crows. Oh, what a tiresome bird it is to hear,</p>
+          <p class="en-p">Even this bird, I wish it would cease its troubling. Oh, the messenger of heaven,</p>
+          <p class="en-p">As for the words of the tale, this is it.</p>
+          <p class="en-p">Matsuwakahiko: 'He sang thus and tried to push open the wooden door of Numakawahime-sama in the land of Koshi in the middle of the night to enter. Numakawahime-sama, fearing it would be a disaster if he entered, and the man and woman pushed and pulled for a long time. At last, moved by the earnest love of Ōkuninushi-no-Mikoto-sama, Numakawahime-sama said from inside the door:',</p>
+          <p class="en-p">Yachihoko-no-Kami-no-Mikoto, as I am a woman like the soft grass,</p>
+          <p class="en-p">My heart is like a bird on the shore. Now I may be a plover,</p>
+          <p class="en-p">But later I shall be a bird of peace. Do not die, I pray you,</p>
+          <p class="en-p">Oh, the messenger of heaven,</p>
+          <p class="en-p">As for the words of the tale, this is it.</p>
+          <p class="en-p">When the sun hides behind the green mountains, the jet-black night will come out,</p>
+          <p class="en-p">When the morning sun smiles and flourishes, with arms white as the bark-cloth rope,</p>
+          <p class="en-p">With a chest as soft as the melting snow, I shall pat and embrace you,</p>
+          <p class="en-p">With true jewel-hands, entwining jewel-hands, I shall let you sleep until the morning,</p>
+          <p class="en-p">Do not yearn for me so desperately, Yachihoko-no-Kami-no-Mikoto,</p>
+          <p class="en-p">As for the words of the tale, this is it.</p>
+          <p class="en-p">Matsuwakahiko: 'She sang this, and Numakawahime finally surrendered, and a truly sacred romance took place, did it not? And what is this? You are being loved by a wise and beautiful woman even more beautiful than Numakawahime-sama, contrary to Yachihoko-no-Kami, also known as Ōkuninushi-no-Kami-sama, and yet you think nothing of it and intend to give her the cold shoulder? You really are a hopeless blockhead... Oops, wait, I became too focused and my Kototama became clouded. Please, quickly, give your reply as follows:',</p>
+          <p class="en-p">Beneath the soft fabric of the patterned fence, beneath the soft insect-quilt,</p>
+          <p class="en-p">Beneath the bright bark-cloth quilt, with a chest as soft as the melting snow,</p>
+          <p class="en-p">With arms white as the bark-cloth rope, I shall pat and embrace you,</p>
+          <p class="en-p">With true jewel-hands, entwining jewel-hands, I shall let you sleep until the morning,</p>
+          <p class="en-p">Offer the rich sacred sake.</p>
+          <p class="en-p">Matsuwakahiko: 'Unlike the messengers of others, since this is the will of the Ōkami, you must listen to this much, even if you do not want to, or else I, Matsuwakahiko, cannot stand as a man.'</p>
+          <p class="en-p">Kuniyoriwake: 'If there are no objections from the Ōkami and Suishihime-sama, I shall accept your favor. In return, as I am Kuniyoriwake, full of old scars, I do not know when my chronic illness might recur, causing the princess to bristle with anger, bare her fangs, or cause a scene about dying or running away. If you are aware of that, I ask you to kindly arrange it.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">松若彦は国依別の背中を、後へまはつてポンと叩き、</p>
+            <p class="ja-classical-line">『コレ国依別さま！　又しても、あなたは、からかひ病が起りましたね』</p>
+            <p class="ja-classical-line">『カラカギでも、鯰でもフンゾクラヒでもありませぬよ。小雲川で石の魚を釣つてフンゾクラヒだと云つて、高姫さまに贈つた事があります。随分固い魚でした。其通り私は今は鯉の欲が化石して了ひ、石地蔵の様な冷酷な人間ですから、到底此縁談は温まりますまい。鯉と云ふ奴は水の中に常住してゐますから、随分体が冷えてゐますからね、アハヽヽヽ』</p>
+            <p class="ja-classical-line">『コレ国依別さま、大国主の神さまの妻呼びの歌を知つてますだらう、男子たる者はさうなくては到底世に立つことは出来ますまい。情を知らずして、どうして宣伝使が完全に勤まりますか。八千矛の神さまを御覧なさい。はるばると出雲の国から越の国まで、腰弁当でお出でになつたぢやありませぬか。其時のお歌に、</p>
+            <p class="ja-classical-line">八千矛の　神の命は　八洲国　妻求ぎかねて</p>
+            <p class="ja-classical-line">遠々し　越の国に　賢し女を　ありと聞かして</p>
+            <p class="ja-classical-line">麗し女を　ありと聞こして　さよばひに　ありたたし</p>
+            <p class="ja-classical-line">結婚にあり通はせ　太刀が緒も　未だ解かずて</p>
+            <p class="ja-classical-line">襲ひをも　未だ解かねば　乙女の　鳴すや板戸を</p>
+            <p class="ja-classical-line">押そぶらひ　吾が立たせれば　引こずらひ　吾が立たせれば</p>
+            <p class="ja-classical-line">青山に　鵺は鳴き　野鳥　雉子は響む</p>
+            <p class="ja-classical-line">庭つ鳥　鶏は鳴く　慨たくも　鳴くなる鳥か</p>
+            <p class="ja-classical-line">此の鳥も　打ち悩めこせね　いしたふや　天はせづかひ</p>
+            <p class="ja-classical-line">ことの語り言も　こをば</p>
+            <p class="ja-classical-line">と歌はしやつて、越の国の沼河姫様の板の戸を、夜の夜中に押開け這入らうと遊ばす、沼河姫さまは這入られては大変と、男と女が押そぶらひ、引こづらひを永らく遊ばした末、遂に大国主命さまの熱心なる恋に感じ、沼河姫さまは戸の中から、</p>
+            <p class="ja-classical-line">八千矛の　神の命　軟え草の　女にしあれば</p>
+            <p class="ja-classical-line">吾が心　浦渚の鳥ぞ　今こそは　千鳥にあらめ</p>
+            <p class="ja-classical-line">のちわ　和鳥にあらむを　いのちは　な死せ給ひそ</p>
+            <p class="ja-classical-line">いしたふや　天はせづかひ</p>
+            <p class="ja-classical-line">ことの語り言も　こをば</p>
+            <p class="ja-classical-line">青山に　日が隠らば　烏羽玉の　夜は出でなむ</p>
+            <p class="ja-classical-line">旭の　笑み栄え来て　栲綱の　白き腕</p>
+            <p class="ja-classical-line">沫雪の　弱かやる胸を　そ叩き　叩き拱がり</p>
+            <p class="ja-classical-line">真玉手　玉手さしまき　股長に　寝はなさむを</p>
+            <p class="ja-classical-line">あやに　勿恋聞こし　八千矛の　神の命</p>
+            <p class="ja-classical-line">ことの語り言も　こをば</p>
+            <p class="ja-classical-line">と歌つて沼河姫がたうとう降参つて了ひ、実に神聖なローマンスが行はれたぢやありませぬか。それに何ぞや、お前さまは、八千矛の神一名大国主の神さまとは反対で沼河姫様よりズツと綺麗な賢女麗女にラバーされて、それを何とも思はず、すげなくもエツパツパを喰はす考へですか。本当に人の悪い唐変木だなア……オツトドツコイ、余り一心になつて、ツイ言霊が濁りました。どうぞ早く、</p>
+            <p class="ja-classical-line">綾垣の　ふはやが下に　虫衾　柔やが下に</p>
+            <p class="ja-classical-line">栲衾　亮ぐが下に　沫雪の　弱かやる胸を</p>
+            <p class="ja-classical-line">栲綱の　白き腕　そ叩き　叩き拱がり</p>
+            <p class="ja-classical-line">真玉手　玉手差纏き　股長に　寝をし宿せ</p>
+            <p class="ja-classical-line">豊御酒　献らせ</p>
+            <p class="ja-classical-line">と云ふやうに御返事をして下さい。外の方の御使と違ひ、大神様の思召だから、これ計りは邪が非でも聞いて貰はなくちや、松若彦の男が立ちませぬ』</p>
+            <p class="ja-classical-line">『大神様を始め末子姫様に於て、御異存なければ御世話になりませう。其代りに古疵だらけの国依別ですから、何時持病が再発して、御姫様に眉気を逆立てさしたり、牙をむかせたり、死ぬの走るの、ひまをくれのと乱痴気騒ぎをさすかも知れませぬから、それが御承知なら、宜しく御取持願ひます』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Omoshiro: 'Ahahaha, interesting, interesting, that has struck me right to the core... Kuniyoriwake-sama, once the Goketsukon is finally arranged, you will be the administrator of the land of Uzu, and since I am your Gokerai, please employ me for a long time to come. I beg you to forget, from this moment on, the rude way I have spoken until now.'</p>
+          <p class="en-p">Kuniyoriwake: 'Well, if it becomes like that all of a sudden, it will be unbearably Kiukutsu. That is why I want to live a Dokushin Seikuwatsu. If I end up having to bow my head to Amida-san, Butsuta-san, Taishiyō-san, and all the rest of the Renjiu, and have them adopt a Keien Shiyugi toward me, the Sekai will become fundamentally Mumikansau, and it will cease to be interesting or anything at all. Ah, just when I thought I had been liberated into a Jiiu Sekai, must I be bound once again in the Gokuya of Jihi? Argh, if it were to come to this, I should have brought Kurenaihime along and shown her off as my own Niyōbau; then such a Mondai would never have arisen. Argh, this is what is called an unwanted favor. Since a woman is bringing a meal tray to a man, I cannot very well treat her with such cold indifference, ahahaha.'</p>
+          <p class="en-p">Omoshiro: 'I will present it in as lighthearted a manner as possible, so please do not worry unnecessarily, and I pray you make your decision.'</p>
+          <p class="en-p">Kuniyoriwake: 'Yes, there is no other choice. I humbly accept the words of the Lord Ōkami and your mediation.'</p>
+          <p class="en-p">As he answered decisively, Matsuwakahiko smiled, bowed lightly, and hurried forward into the inner palace.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『アハヽヽヽ、面白い面白い、私もそれがズンと気に入つた……国依別さま、いよいよ御結婚が整へば、あなたはウヅの国の司、私は御家来で御座いますから、どうぞ末永くお召使ひ下さいませ。今迄の御無礼な申し様、只今限り御忘れの程を願ひます』</p>
+            <p class="ja-classical-line">『サア忽ちさうなるから、窮屈でたまらぬ。それだから独身生活がしたいのだよ。あんたはん（阿弥陀はん）、ぶつたはん（仏陀はん）、大将さんと皆の連中にピヨコピヨコ頭を下げられ、敬遠主義を取られるやうになつて了つちや、根つから世の中が無味乾燥で、面白くも何ともなくなつて了ふ。あゝ折角自由の世界へ解放されたと思つたら、又もや窮屈な、お慈悲の獄屋に繋がれねばならぬのかいなア。エヽこんな事なら紅井姫でも伴らつて来て、自分の女房のやうに見せて居つたら、こんな問題は起らなかつただらうに、エヽ有難迷惑とは此事だ。女が男にお膳を末子姫と来てゐるのだから、さう無下に無愛想に捨子姫する訳にも行こまい、アハヽヽヽ』</p>
+            <p class="ja-classical-line">『なるべく、お気楽な様に持ちかけますから、どうぞ取越苦労をなさらずに、決心をして下さいませ』</p>
+            <p class="ja-classical-line">『ハイ、是非に及びませぬ。大神の御言葉、あなたの御取持、謹んで御受け致します』</p>
+            <p class="ja-classical-line">とキツパリ答ふれば、松若彦はニコニコしながら軽く一礼し、急ぎ奥殿指して進み入る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c21.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 21: 奉答 Song [912]</span>
+      </a>
+      <a href="c23.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 23: 老婆心切 [914]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

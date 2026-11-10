@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: 鰐の Bridge [903] - Volume 32 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 32 Table of Contents</a>
+      <span>Volume 32</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 32 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: 鰐の Bridge [903]</h1>
+      <p class="chapter-title-ja">鰐の橋〔903〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Haruhiko, together with Yobu, rushed into the dense forest while shouting in a loud voice to save Takahime from her peril; yet, call and shout as he might, only the echoes of his own voice returned from the forest's Kodama, and with no sense of direction, he had no choice but to begin wandering through the forest here and there while singing in a loud voice.</p>
+          <p class="en-p">Haruhiko: 'Takahime-sama, whom we have relied upon as our master, has once again had her soul drawn out by the Kongaufue Niyoihotsushiyu and other jewels. How shameful it is that here in the center of the forest, she has had the depths of her heart examined by the Miyōjin of the sun and moon, and the rising sun; she has been squeezed dry of her spirit, and though her body is covered in mud, she still clings to her stubbornness. While uttering nothing but impudent words, she abandoned the two of us and returned to the path from which she came, setting out to search for the Arika of Takayorihime. We two have no choice but to head toward the northwest, and as we proceed, we find a stone Jizō on the side of the road, its ears gone, its hands severed, its head missing, standing frozen with a black face by the roadside. While we rested our breath for a moment before it, we spoke only of Takahime-sama, when suddenly the stone Jizō stood up, sat down before us with legs crossed, and strangely began to chatter away—what a comical sight! According to the transformed Jizō, Takahime-sama and Tsunehiko were surrounded by Morubando, climbed up into the branches of a great tree, and while they were in the midst of taking refuge, a swarm of savage beasts arrived and attacked them relentlessly. The Morubando are waiting beneath the tree, glaring with angry eyes. With their retreat cut off, even the brave Takahime-sama must be embracing Tsunehiko, sighing and wondering what on earth they should do. Haruhiko and Yobu, the two of us, having heard such a tale, how could we possibly leave them to their fate? Even if it be the lair of a great serpent or the habitat of the Morubando, we shall advance without fear or hesitation, for we cannot leave them without rescuing them. Ah, Kannagara Tamachi Hae Mase. By the light of the Ōkami, illuminate the Arika of Takahime-sama and show it to us. From now on, Takahime-sama will also reform from the depths of her heart, and even if she is called a pillar of the San-Go-Kyō or a messenger of God, she will become a soul not to be ashamed of, and surely she will perform great deeds. Open the door of her heart as quickly as possible, reveal her Arika, and let the two of us, Haruhiko and Yobu, know, O Amatsukami, Kunitsukami, and all the spirits of the land. Before the princess of the dragon world, I pray with a purified heart. Ah, Kannagara Tamachi Hae Mase. May your spirits be blessed.'</p>
+          <p class="en-p">Singing thus, he inspected the roots of the great trees one by one, and while gazing up at the sky, he searched deeper and deeper into the forest.</p>
+          <p class="en-p">Haruhiko and Yobu finally reached the vicinity of the great tree where Takahime had taken refuge, and just as the transformed stone Jizō had said, a Morubando with a body like a small mountain had chosen a spot where the forest trees were sparse, glaring at Takahime with angry eyes, and its ferocity was such that it was panting, trying to find a way to strike her dead with a single blow. Haruhiko turned pale and began to tremble, and his 'Kannagara Tamachi Hae Mase' and the heavenly counting songs became fragmented, making it impossible for him to emit any beautiful Kototama.</p>
+          <p class="en-p">The Morubando seemed to have noticed that Haruhiko and Yobu had come near, for it slowly turned its mountain-like body toward the two, coiled its long, massive tail, and showed its intention to strike them down with a single blow. The two of them, fearing for their lives, scrambled toward a nearby large tree and finally climbed to the top, and for the moment, they clung to the top of the evergreen tree as a temporary refuge, hoping that someone might come to their rescue.</p>
+          <p class="en-p">While on the tree, Haruhiko said with a trembling voice, 'Look here, Yobu-sama, is this not a terrible situation? I am not so afraid of lions, tigers, bears, wolves, or even great serpents, but no matter how much courage I muster, I cannot do anything about that Morubando. A natural trembling has come from the depths of my belly, and I have lost track of where my own body is. How about you, sir?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">春彦はヨブと共に高姫の危難を救はむと、大声に叫びながら密林の中に駆け入り、呼べど叫べど、森の木霊に吾声の反響するのみ、何の見当もつかず、已むを得ず大声に歌ひながら、森林を何処彼処となく循り始めたり。</p>
+            <p class="ja-classical-line">春彦『吾等の師匠と頼みたる
+高姫さまが又しても
+金剛不壊の如意宝珠
+其他の玉に魂ぬかれ
+アタ恥かしや森林の
+此正中で高倉や
+月日、旭の明神に
+心の底を査べられ
+散々脂を搾られて
+体は泥にまみれつつ
+尚も取れない負惜み
+へらず口のみ言ひながら
+吾等二人を振棄てて
+元来し路へ引返し
+鷹依姫の在処をば
+捜さむものと出でましぬ
+吾々二人は是非もなく
+西北指して進み行けば
+道の片方の石地蔵
+耳が取れたり手が千切れ</p>
+            <p class="ja-classical-line">頭の欠けた立ちすくみ
+黒い顔して道の辺に
+罷り立つたる其前に
+暫く息を休めつつ
+高姫さまの噂のみ
+為せる折しも石地蔵
+ソロソロ立つて吾前に
+胡坐をかいてすわり込み
+不思議や物をベラベラと
+喋り出したる可笑しさよ
+化けた地蔵の言ふことにや
+高姫さまや常彦は
+モールバンドに取巻かれ
+大木の枝にかけ登り
+避難してゐる最中に
+猅々の群奴がやつて来て
+無性矢鱈にせめかける
+モールバンドは木の下に
+目を怒らして控へ居る
+進退茲に谷まりて</p>
+            <p class="ja-classical-line">流石剛毅の高姫も
+常彦諸共抱き合ひ
+アヽアヽどうせう斯うせうと
+吐息もらして居るだらう
+春彦、ヨブの両人は
+こんな話を耳にして
+如何して見捨てておかれうか
+仮令大蛇の巣窟も
+モールバンドの棲処をも
+恐れず撓まず進撃し
+救ひ出さねばおかれない
+あゝ惟神々々
+皇大神の御光に
+高姫さまの在処をば
+てらして吾に見せ給へ
+高姫さまも是からは
+心の底より改良し
+三五教の神柱
+神の使と申しても
+恥かしからぬ魂となり</p>
+            <p class="ja-classical-line">キツト手柄を為さるだらう
+一時も早く胸の戸を
+開いて在処を明かに
+春彦、ヨブの両人に
+知らさせ給へ天津神
+国津神等国魂の
+竜世の姫の御前に
+心清めて祈ぎまつる
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と歌ひながら、大樹の根元を一々巡視し、且つ空を仰ぎなどしつつ、奥へ奥へと捜し行く。</p>
+            <p class="ja-classical-line">春彦、ヨブの二人は漸くにして、高姫の避難せる大樹の間近に辿りつけば、石地蔵のお化けの云つた通り、小山のやうな胴体をしたモールバンドが、森の樹立のマバラなる所を選み、目を怒らして高姫を睨めつけ、何とかして一打ちに打ちころさむと息まいてる其物凄さ。春彦は真蒼になり、ソロソロ慄ひ出し『惟神霊幸倍坐世』も天の数歌も千切れ千切れになり、一向美はしき言霊を発射することが出来なくなつて来た。</p>
+            <p class="ja-classical-line">モールバンドは春彦、ヨブの間近に来りしに気付きしものと見え、小山のやうな胴体を徐ろに二人の方に向け直し、長大なる尾に撚りをかけ、今や一打ちに両人を打たむとする形勢を示して居る。二人は命カラガラ傍の大木目蒐けて漸く登りつめ、後は兎も角、暫時の避難所と常磐樹の頂上にしがみついて、誰か助けに来てくれる者はなからうかと期待して居る。樹の上にて春彦は声を慄はせながら、</p>
+            <p class="ja-classical-line">『コレコレ、ヨブさま、大変な事ぢや御座いませぬか。私も獅子、虎、熊、狼、大蛇位は、さうも恐れないのだが、どれ丈肝を放り出して見ても、あのモールバンド丈は如何することも出来ない。腹の底から自然に戦いて来て、自分の体がどこにあるやら、分らなくなつて来ました。お前さまは如何ですかな？』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'It is the same for me. However, if we are to be targeted by the Morubando like this forever, we shall never be able to descend from here and escape, which is quite a predicament. Fortunately, there are hard Kudamono growing on this tree, and as long as I eat these, I would not be particularly troubled even if I were to remain besieged on this tree for ten or twenty days; yet, would it not be truly troublesome when a strong Ōkaze blows or during heavy Ōame? If it rains heavily two or three times every single day like it has been lately, my Karada will not be able to hold up, first of all. Since there is no other Hauhafu but to rely on the Kamisama and leave our fate to Heaven now that it has come to this, shall we pray with all our might right here that the Morubando will retreat?'</p>
+          <p class="en-p">Speaker: 'That is Ketsukō... but somehow, the pit of my stomach is trembling... and my voice will not come out in an Enman way...'</p>
+          <p class="en-p">He is speaking in broken fragments. Just then, a Sendenka is heard once again.</p>
+          <p class="en-p">Kamutsukasa of Kuniyoriwake / Accompanied by the Mitomo, they have come from afar / Departing from the Kunihara of the Hiru / Crossing over the Brazil Pass / Along the valley path that knows no end / Following the trail, they arrived at the side of the river / Of the season / And saw that the two men / Akiyama-wake and the official Morisu / Who had become captives of love / Were being swept along in the torrent / Floating and sinking / Seeing that this was a crisis / We, receiving the command of Kuniyoriwake / Immediately cast off our clothing / And leapt in with a splash / Drifting in the swift waves / Of the season, which is famous for its name / Just as they were about to drown / The bodies of the two men / Caught upon an unexpected rock in the river</p>
+          <p class="en-p">While catching their breath, saying 'Yatsu' / Looking down directly below the rock / The bodies of the two men / Akiyama-wake and the official Morisu / Were being tossed by the whirlpool / Floating and sinking / In a state of unconsciousness / Once again leaping into action / Yasuhiko and Munehiko / Embraced the bodies of the two / And choosing the shallower river rapids / Rescued them to the opposite shore / As they nursed them back to health / The two men gradually / Returned to consciousness / The dream of being captives of love faded / And following Kuniyoriwake / They hid in the forests of the Amazon River / To pacify the Magatsumi / Who sends spiritual disasters to the world / And to clear away and purify / The sufferings of the world</p>
+          <p class="en-p">Here, the party of five / Aims for the summit of Bōshi-ga-take / And continues to climb / Looking far into the distance / The rapid currents of the Amazon River / Are illuminated by the light of the sun / And shine like a long serpent / The forests of the south and north / Are a dense thicket of green and red / Growing lush without end / While gazing upon this scene / The Kamutsukasa of Kotoyoriwake / Together with Kuniyoriwake / While shining the divine power of Ryū and Kyū / Far into this place / To protect the victory of the Kototama / Of our party / How grateful we are / That they establish such profound and mysterious divine strategies / This forest is known by its name / As the cave of monsters</p>
+          <p class="en-p">If it is heard to be a den of monsters / The Yamata-no-Orochi goes without saying / Tigers, wolves, lions, and bears / And a hundred other monsters / Changing their forms in various and sundry ways / Might try to deceive us / Ah, Kannagara-tamachi-hae-mase / Receiving the divine spirit of the Lord God in our bodies / Without fear of any evil / We advance along the one true path of the Lord God / Without wavering and without yielding / Even if thousands of Morubando or Erubando come / By the divine power of our Kototama / We shall pacify them, and from now on / We shall make them think / Of hiding deep at the bottom of the Amazon River / And ceasing their hundred disasters / With the words of Kotoyoriwake / We have finally arrived here</p>
+          <p class="en-p">Starting with Takahime-sama / Where are Tsunehiko and Haruhiko now / In this forest that knows no end / Where might they be wandering / May the divine spirit of the Lord God bless us / And teach us the whereabouts of Takahime / As soon as possible / Whether the morning sun shines or clouds over / Whether the moon waxes or wanes / Even if the Morubando attack / And no matter how fierce the power / Of tigers, wolves, lions, and bears may be / Why should we fear / The Masurao of Yamato-gokoro / Of Shikishima / Using the light of the Lord God as a shield / And the blessings of the Lord God as a spear / We advance and advance through the forest / It is a truly courageous sight / Ah, Kannagara-tamachi-hae-mase / May the divine spirit bless us.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『私だとて同じ事ですよ。併しながら、何時迄もああしてモールバンドに狙はれて居らうものなら、何時ここを下つて逃げ帰ると云ふことも出来ず、困つたものですなア。幸に此樹に固い果物がなつて居りますが、これさへ食べて居れば、仮令十日や二十日、此樹の上に籠城したつて、別に困りもしませぬが、大風が吹いたり、大雨の時には実に困るぢやありませぬか。此頃の様に毎日日日二三回づつ大きな雨が降つて来ると、第一身体が持てませぬワイ。モウ斯うなる上からは神様におすがりして、運を天に任すより方法はないから、一つ此処で一生懸命に、モールバンドが退却する様に御祈念を致しませうかい』</p>
+            <p class="ja-classical-line">『ソリヤ結構です……併し、何だか、腹の底がワナワナして……声が円満に出て来ませぬ……』</p>
+            <p class="ja-classical-line">と千切れ千切れに話して居る。斯かる所へ、又もや宣伝歌が聞え来る。</p>
+            <p class="ja-classical-line">『国依別の神司
+御供をなしてはるばると
+ヒルの国原立出でて
+ブラジル峠を打ちわたり
+果てしも知れぬ谷道を
+辿り辿りてシーズンの
+川の片方に来て見れば
+恋の虜となりはてし
+秋山別やモリスの司
+二人の男が激流に
+浮きつ沈みつ流れ来る
+コリヤ大変と吾々は
+国依別の命を受け
+衣類をすぐに脱ぎすてて
+ザンブと計り飛込めば
+流石に名に負ふシーズンの
+速瀬の波に漂ひて
+溺れ死せむとせし所
+思はぬ河中の岩石に
+二人の身体は引つかかり</p>
+            <p class="ja-classical-line">ヤツと息をば休めつつ
+岩の真下を眺むれば
+秋山別やモリスの司
+二人の身体は渦巻に
+巻かれて浮きつ沈みつつ
+人事不省の有様に
+又もや身をば跳らして
+安彦、宗彦両人は
+二人の身体をひつ抱へ
+弱き川瀬を選みつつ
+彼方の岸に救ひ上げ
+介抱すればやうやうに
+息吹返し両人は
+恋の虜の夢もさめ
+国依別に従ひて
+アマゾン河の森林に
+潜みて世間に災の
+霊を送る曲津見を
+言向け和し世の中の
+なやみを払ひ清めむと</p>
+            <p class="ja-classical-line">茲に五人の一行は
+帽子ケ岳の頂上を
+目当に進み登り行く
+遠く彼方を見わたせば
+アマゾン河の急流は
+天津日影にてらされて
+長蛇の如く光り居る
+南と北の森林は
+緑紅こき交ぜて
+果てしも知らず茂り生ふ
+此光景を眺めつつ
+言依別の神司
+国依別と諸共に
+琉と球との神力を
+遠く此方に照らしつつ
+吾等一行が言霊の
+戦の勝を守らむと
+幽玄微妙の神策を
+立てさせ給ふ有難さ
+此森林は名にし負ふ</p>
+            <p class="ja-classical-line">妖怪窟と聞ゆれば
+八岐大蛇は云ふも更
+虎狼に獅子や熊
+其外百の怪物が
+いろいろ雑多と身を変じ
+吾等を誑かる事あらむ
+あゝ惟神々々
+神の御霊を身に受けて
+如何なる曲も恐れなく
+誠一つの神の道
+撓まず屈せず進み行く
+モールバンドやエルバンド
+仮令幾千来るとも
+吾言霊の神力に
+言向け和し今よりは
+アマゾン河の底深く
+潜みて百の災を
+思ひとまらせくれむぞと
+言依別の御言もて
+やうやう此処に来りけり</p>
+            <p class="ja-classical-line">高姫さまを初めとし
+常彦、春彦、今いづこ
+果てしも知らぬ此森の
+いづこに彷徨ひ給ふらむ
+神の御霊の幸はひて
+一日も早く高姫が
+在処を教へ給へかし
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+モールバンドは攻め来とも
+虎狼や獅子熊の
+勢いかに猛くとも
+なにか恐れむ敷島の
+大和心の益良夫が
+神の光りを楯となし
+神の恵を矛として
+進みに進む森の中
+実に勇ましき次第なり
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Singing thus, with Yasuhiko in the lead, the four, Munehiko, Akiyamawake, and Morris, whether by the divine guidance of Kami, unexpectedly advanced near the tree shade where Takahime, Haruhiko, and others were taking refuge.</p>
+          <p class="en-p">The two groups of refugees, Haruhiko and Takahime, heard this Sendenka from the trees; although it was a voice they had never heard even once, they thought, 'Surely these must be those who have been moved by the teachings of Kotoyoriwake and Kuniyoriwake and have entered the faith; ah, how grateful, how unashamed, the divine hand of salvation...' and suddenly recovering their spirits, they finished clapping, and from the trees, they began to recite the Amatsunorito in loud voices. At the sound of Haruhiko's Norito, Takahime and Tsunehiko, who were taking refuge in a tree far away, learned for the first time of Haruhiko's whereabouts, felt greatly encouraged, and with even more vigor, recited the Amatsunorito with all their might, as if to shake the very heavens and earth.</p>
+          <p class="en-p">Yasuhiko and Munehiko's party, hearing the voices of the Norito from the trees coming from both sides, realized for the first time that Takahime's party was there, and their joy was boundless; they summoned even more energy and began to recite the Amatsunorito. The Maulband did not yield in the slightest, but glared with angry eyes, lashed its tail, and charged toward the four in every direction. The four immediately managed to take refuge in a large tree nearby, and while reciting the Norito incessantly from the trees, they prayed, 'May this monster quickly flee and save our party.'</p>
+          <p class="en-p">Suddenly, a spherical great firelight, glowing as if to scorch the northwestern sky, appeared; the surroundings instantly turned red like fire. This was the spiritual light emitted by the Kami-tsukasa, Kotoyoriwake and Kuniyoriwake, from Mount Bōshi for the sake of rescue. The Maulband, startled, tucked its tail, hunched its neck, and slunk out into the forest, slipping through tens of ri of woods, and fled away to the Amazon River.</p>
+          <p class="en-p">Yasuhiko's party of four breathed a sigh of relief, climbed down from the large tree with good branches, and while calling out, Yasuhiko: 'Takahime-sama, Takahime-sama, Takahime-sama,' they circled under the trees, looking up at the sky to search for Takahime's whereabouts.</p>
+          <p class="en-p">Takahime, together with Tsunehiko, came down while feeling relieved. Haruhiko and Job also finally descended here from the hollow of a large tree, looked at each other's faces, and wept while embracing in tears of joy.</p>
+          <p class="en-p">From this point, the eight held each other's hands, celebrated their safety, and while Takahime's party expressed deep words of gratitude to Yasuhiko's party, they turned back toward the banks of the Amazon River; since Yasuhiko had conveyed from Kuniyoriwake that Takayorihime's party was living in the forest on the south bank as the king of wild beasts, they proceeded toward the riverbank without delay. At the sound of the Amatsunorito which the party recited with all their hearts, the wild beasts of the northern forest vied to gather here, and following behind the eight, they followed in a line, numbering in the hundreds and thousands, all the way to the shore of the Amazon River.</p>
+          <p class="en-p">From here, Takahime gazed at the rapid currents of the Amazon River and prayed with all her might, 'Please let us cross safely to the south bank...' Instantly, eight-fathom crocodiles appeared from the riverbed, countless in number, and overlapping one another, they immediately built a crocodile bridge. Takahime thanked the divine virtue of the Great Kami and the goodwill of the crocodiles one by one, and together with the seven, she managed to cross to the south bank. The width of the river was such that one could not tell how many ri it spanned.</p>
+          <p class="en-p">The wild beasts that lived in the northern forest had escorted them this far, and though they showed a moment of hesitation while gazing at this torrent, they gained strength when the crocodile bridge was built, and without a single one remaining, they crossed over to the southern forest, escorted Takahime's party, and proceeded toward the capital of the rabbits.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と歌ひつつ、安彦を先頭に、宗彦、秋山別、モリスの四人は、神の引合せか、期せずして、高姫、春彦等が避難せる樹蔭近く進み来れり。</p>
+            <p class="ja-classical-line">春彦、高姫の二組の避難者は樹上より此宣伝歌を聞き、未だ一度も聞きしことなき声なれども、必ず途中にて、言依別、国依別の教に感じ入信せし者ならむ、あゝ有難し辱なし、神の救ひの御手……と忽ち元気恢復し、拍手し終り、樹上より声高らかに、天津祝詞を奏上し始めた。春彦の祝詞の声に、はるか離れた樹の上に避難して居た高姫、常彦は、始めて春彦の所在を知り、非常に心強さを感じ、ますます元気を出して天津祝詞を力一杯、天地も震撼せよと許りに宣り上げた。</p>
+            <p class="ja-classical-line">安彦、宗彦の一行は双方より聞え来る樹上の祝詞の声に、始めて高姫一行のここに居ることを悟り、歓喜斜ならず、尚も元気を出して天津祝詞を宣り始めた。モールバンドは少しも屈せず、目を怒らし、尾を振りしごき、縦横無尽に四人に向つて突進し来る。四人は忽ち傍の大木に辛うじて避難し、樹上より祝詞を頻りに奏上し、早く此怪獣の遁走して、吾等一行を救ひ給へと念じつつありぬ。</p>
+            <p class="ja-classical-line">忽ち西北の空をこがして輝き来る琉、球の大火光、あたりは忽ち火の如く赤くなりぬ。これ言依別、国依別の神司が、帽子ケ岳より救援の為め発射する所の霊光なりき。モールバンドは驚いて、尾を縮め、首をすくめ、コソコソと森林を駆け出し、数十里の林を潜つて、アマゾン河に逃げ去りにけり。</p>
+            <p class="ja-classical-line">安彦一行四人はヤツと胸をなでおろし、枝振のよい大木を下り来り、</p>
+            <p class="ja-classical-line">安彦『高姫様々々々』</p>
+            <p class="ja-classical-line">と呼ばはりながら、樹下を巡り、空を仰いで高姫の居所を捜して居る。</p>
+            <p class="ja-classical-line">高姫は常彦と共にヤツと安心し乍ら下つて来た。春彦もヨブも亦一つの大木の空より此処に漸く下り来り、互に顔を見合せ、嬉し泣きに抱き合ひて泣く。</p>
+            <p class="ja-classical-line">是より八人は互に手を取り、無事を祝し、且つ高姫一行は安彦一行に向ひ厚く感謝の詞を述べながら、アマゾン河の沿岸に向つて引返し、南岸の森林中に鷹依姫一行が猛獣の王として住ひ居ることを、安彦を以て国依別より伝達したれば、取る物も取り敢ず、河端に向つて進む。一行が一心をこめて奏上したる天津祝詞の声に、北の森林の猛獣共は争つて此処に集まり来り、八人の後に従ひ、これ亦アマゾン河の岸迄、幾百千とも知れず、列を作つて従ひ来る。</p>
+            <p class="ja-classical-line">これより高姫は、アマゾン河の急流を眺め、一生懸命に、南岸に無事渡らせ給へ……と祈念した。忽ち川底より八尋鰐、幾千万とも限りなく現はれ重なり合うて、忽ち鰐橋を架けたり。高姫は大神の神徳と鰐の好意を一々感謝し、七人と共に南岸に辛うじて渡ることを得たり。此間何里とも分らぬ位、広き河幅なりけり。</p>
+            <p class="ja-classical-line">北の森林に棲める猛獣は此処まで送り来り、此激流を眺めて稍躊躇の色ありしが、忽ち鰐橋の架りたるに力を得、一匹も残らず、南森林に打渡り、高姫一行を送りて兎の都に向ひ進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: 人の裘 [902]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: 平等 Love [904]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
