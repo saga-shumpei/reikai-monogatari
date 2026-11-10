@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: 三つ巴 [778] - Volume 26 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 26 Table of Contents</a>
+      <span>Volume 26</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 26 &bull; Chapter 13</span>
+      <h1 class="chapter-title-en">Chapter 13: 三つ巴 [778]</h1>
+      <p class="chapter-title-ja">三つ巴〔778〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As if sitting in the scorching fire-chamber, / Just as if dwelling within the iron pot; / In the heat-oppressed sky, Zuigetsu / Lying down stretches forth and speaks. / The turning steering wheel lacks power, / And the half-torn record too, / With the weariness of the needle, in a creaking squeak / Scarce beginning to sound with a faint, hoarse voice. / Yamaue-shi of Meuonbosatsu / Though appearing close beside, / The hototogisu that has wept away its voice / Has exhausted even eighty-eight thousand sounds, / Unable to open its lips, Kato. / Matsumura-shi of the rare Kototama / Gazing upon the clear blue sky, / Having stated thus far, of Kitamura's / Brocade palace, Taka-hikaru / The divine teaching of the Sango moon / Protecting the divine person, Kotoyoriwake's / Beginning with the auspicious Mikoto,</p>
+          <p class="en-p">Tamateruhiko's and Tamateruhime's / Auspicious Mikoto's sacred countenance / Pushing aside the haze of the outer mountains, / Like the morning sun ascending high in abundance, / Like the sunrise deity. / Tanimura-shi of Mirokudaifu / Joining water and fire with a true friend, / Clouding his spectacles with sweat, / Pointing his fountain pen and the tip of his mouth / Fiercely and extravagantly sharp, / In the middle chamber of Shiyōunkaku, / Hanatakahime and Kurohime / In a great commotion of searching for the jewel. / The divine Lord Susanoo-no-Ōkami / From the sacred sword that He caused to be worn, / Which He broke into three parts according to His pledge, / The three goddesses who manifested: / Ichikishima hime, Takirihime, / Enshrining Takitsu no Hime, / The majestic and brilliant Chikubushima.</p>
+          <p class="en-p">Beneath the shrine buildings, the auspicious treasure / Concealed, by Kuniyoriwake / Enticed by the sudden tengu, / Here the ball-escaping of the three persons, / The ins and outs of the hustle and bustle / Written down with the brush to be preserved. / Ah, such are the gods, wondrous deities, / May your august spirits flourish and be blessed.</p>
+          <p class="en-p">The propagandist of the Sango teaching, / The lineage of Henshē danshi / Relying upon it as the sole shield, / The physical palace of the sunrise deity, / Whether false or true I know not, / The tengu's-nose Hanatakahime, / While possessing a precious august spirit, / In the vital and essential divine work / The jealousy of having been cast aside. / The whereabouts of the jewel concealed by Kotoyoriwake, / Whithersoever it may be, / Even though it become fire, even though it become a snake, / Even though it turn to bone, stubbornly / If she does not search it out, she will not leave it— / The ogre-serpent of tenacious attachment, / Enticed by the ugly Magatsuhi, / Needless to mention Jitentōshima, / Akashi's sea, Awaji Island, / Crossing Iejima to Shōodoshima, / Floating upon the waves of the southern seas,</p>
+          <p class="en-p">The cycas-grown Oshima, / Fragrant with the scent of bananas, / Ambon of the southern seas, the foremost, / Where valley waters are clear and moss is green, / Famed as Ryūgūjima, / Leaving this sacred land behind, / Flowing and drifting to a single island, / Landing upon the Island of Gold, / Appearing in the Castle of Earth's Grace, / Having her jewel extracted by Ōryūhime, / Even stout-hearted Hanatakahime, / With her breast pounding, accompanied by Kurohime / And Takayamahiko, / Rowing back across the eight hundred paths of the tide, the eight tide-paths, / The eightfold meeting of the tides, / Higashisuke of Awaji Island / By the gadflies guarding the iron gates / Having her nose broken, rowing back / Aiming for the mountains a second time, / In Ikuta forest, famed in song,</p>
+          <p class="en-p">If she visits the sacred hall of Tamano hime / With deep-seated attachment, / Kuniyoriwake and Aki, Koma, / An unexpected trio of three, / Arguing back and forth in a bustling flurry, / The end of the discussion is Chikubushima. / Into the mouth of the tengu who possesses no divine spirit, / Hanatakahime surges forth with courage, / This time with her desire fulfilled, / Running through the back door of the hall, / Slipping away into the darkness along narrow paths, / Advancing on—how pitifully she goes. / Riding past Ueno and Shinohara, / The autumn sky too, Sumiyoshi's / Village at last reaching, / Gazing upon the eastern sky, / The wish-granting jewel of adamantine indestructibility, / The morning sun of competing radiance, / The appearance of the sunrise deity, / Joining both hands and bowing prostrate,</p>
+          <p class="en-p">Nakano village too, ere she is aware, / The busy paths of reeds and rushes, / Her advancing steps too, Tachibana, / Odogō, Shibashima, Yodo River, / At last the road reaches Hirakata, / Before long turning around, Ōtsuka's / This sloping path too, Takatsuki, / Crossing Yamazaki, Mizu no Gō, / The flow of the river too, Yodo town, / The Ogura Pond where silver waves drift, / Descending to the flow of the Uji, / The water she drinks down is the supreme flavor, / Crossing Koyama and Ōtani swiftly, / The true moss of Ōsaka Hill, / Without letting people know, the reason she comes / Is the joyful jewel at Mii-dera temple, / In the age of the Mirokudaifu gods, amid the multitudes of boats / In the direction of Ōtsu, / Selecting a boat of exceptional firmness, / Hanatakahime operating the oar,</p>
+          <p class="en-p">Her heart is behind her at Okinoshima, / Sliding over the waves she proceeds, / What is seen ahead is Chikubushima. / The moon tilts toward the western mountains, / The curtain of darkness upon the face of the water / Envelops all four sides, and in the great sky / The light of stars flashes across. / Breaking the waves as she rows the boat, / With star patterns set upon light blue, / An old black woman comes along. / The boat that follows next once more, / Is the shining-headed Fukurokuju-sama. / On this island of Benten-sama, / Though there are no golden mallets for Onna Hotei or Daikoku, / To search out the auspicious treasure from beneath the earth, / Blocked by the darkness of a tenacious heart, / Upon the lake where starlight is reflected, / Holding their breath mutually one against another,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">炎熱火房に坐す如く
+恰も釜中に居る如し
+酷暑の空に瑞月が
+身を横たへて述べ立つる
+廻すハンドル力なく
+半破れしレコードも
+針の疲れにキシキシと
+鳴り出で兼ねしかすり声
+妙音菩薩の山上氏
+傍に現はれましませど
+泣き嗄したる時鳥
+八千八声も尽き果てて
+唇加藤明きかぬる
+珍の言霊松村氏
+真澄の空を眺めつつ
+此処迄述べて北村の
+錦の宮の隆光る
+三五の月の神教を
+守る神人言依別の
+瑞の命を始めとし</p>
+            <p class="ja-classical-line">玉照彦や玉照姫の
+瑞の命の聖顔は
+外山の霞掻き分けて
+豊二昇る朝日子の
+日の出神の如くなり
+五六七太夫の谷村氏
+真の友と水火合せ
+汗に眼鏡を曇らせつ
+万年筆と口の先
+素的滅法に尖らせて
+松雲閣の中の間で
+鼻高姫や黒姫が
+御玉探しの大騒ぎ
+神素盞嗚大神が
+帯ばせ給ひし御佩刀の
+三段に折りし誓約より
+現はれませる三女神
+市杵嶋姫、多紀理姫
+多岐都の姫を祀りたる
+御稜威輝く竹生島</p>
+            <p class="ja-classical-line">社殿の下に瑞宝の
+匿されありと国依別の
+俄天狗にそそられて
+此処に三人の玉抜けや
+ヤツサモツサの経緯を
+筆に写して止め置く
+あゝ惟神々々
+御霊幸はへましませよ。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">三五教の宣伝使
+変性男子の系統を
+唯一の楯と頼みたる
+日の出神の肉の宮
+嘘か真か知らねども
+天狗の鼻の高姫が
+尊き御魂を持ちながら
+肝腎要の神業に
+取り除かれし妬ましさ
+言依別が匿したる
+玉の在処を何処迄も
+仮令火になり蛇になり
+骨になるとも執拗に
+探り当てねば置かないと
+執着心の鬼大蛇
+醜の曲津に誘はれて
+自転倒島は云ふも更
+明石の海や淡路島
+家島を越えて小豆島
+波濤に浮ぶ南洋の</p>
+            <p class="ja-classical-line">蘇鉄の茂る大島や
+バナヽの薫り香ばしき
+南洋一のアンボイナ
+谷水清く苔青く
+竜宮島と聞えたる
+これの聖地を後にして
+流れ流れて一つ島
+黄金の島に上陸し
+地恩の城に現はれて
+黄竜姫に玉抜かれ
+流石剛気の高姫も
+胸轟かし黒姫や
+高山彦を伴ひて
+潮の八百路の八潮路の
+潮の八百会漕ぎ帰り
+淡路の島の東助が
+鉄門を守る虻蜂に
+鼻を折られて再度の
+山を目蒐けて漕ぎ帰り
+生田の森に名も高き</p>
+            <p class="ja-classical-line">玉能の姫の神館
+執念深くも訪ぬれば
+国依別や秋、駒の
+思ひも寄らぬ三人連れ
+やつさもつさと争論ひ
+揚句の果は竹生島
+憑依もしない天狗の口に
+鼻高姫は勇み立ち
+今度は願望成就と
+館の裏口走りぬけ
+闇に紛れて細道を
+進み行くこそ可憐らしき
+上野、篠原乗り越えて
+秋の御空も住吉の
+郷に漸く辿り着き
+東の空を眺むれば
+金剛不壊の如意宝珠
+光争ふ朝日子の
+日の出神の御姿
+両手を合せ伏し拝み</p>
+            <p class="ja-classical-line">中野の郷もいつしかに
+葭と芦屋の忙しく
+運ぶ歩みも立花や
+小田郷、柴島、淀の川
+漸く道も枚方や
+いつしか廻り大塚の
+此坂道も高槻や
+山崎越えて美豆の郷
+河の流れも淀の町
+銀波漂ふ巨椋池
+宇治の流れに下り立ちて
+飲み干す水は醍醐味や
+小山、大谷早越えて
+逢坂山の真葛
+人に知らされ来る由も
+嬉しき玉を三井の寺
+ミロクの神世に大津辺の
+幾多の船の其中に
+殊更堅固な船を選り
+高姫艪をば操りて</p>
+            <p class="ja-classical-line">心は後に沖の島
+波を辷つて進み行く
+向ふに見ゆるは竹生島
+月西山に傾きて
+闇の帳は水の面
+四辺を包む大空に
+閃き渡る星の影
+船漕ぎ浪を砕きつつ
+浅黄に星の紋つけた
+黒い婆さまがやつて来る
+又もや続いて来る船は
+頭の光る福禄寿さま
+弁天さまの此島に
+女布袋や大黒が
+黄金の槌はなけれども
+土の中より瑞宝を
+探り当てむと執着の
+心の暗に塞されて
+星影映る湖の上
+互に息を凝らしつつ</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">It is suspicious that they draw near.</p>
+          <p class="en-p">It is commonly transmitted that the lake water of Biha in the province of Afumi has this name because its shape resembles the musical instrument, the biwa. However, upon Chikubujima, which floats within this lake, when the Lord God Kamususanōnōokami caused His worn Totsuka no Tsurugi to be sworn upon in the heavenly river of Yasukaha, as a signifier of the august spirit of purity, the three Goddesses renowned for their gentleness and chastity appeared, caused their august spirit to dwell in this very place, and from the time when dragon gods occasionally came to console the august hearts of the himegami and played the biwa, it came to be called the Lake of Biwa. Moreover, Kototama scholars also call it the heavenly Manai. Although present-day Chikubujima is at the extreme north of the lake, in this era, almost in the center of the lake, three islets—Pine Island, Bamboo Island, and Plum Island—floated together, forming a mitsudomoe, and floated their magnificent figures upon the azure waves. On Pine Island, Tagirihimegami was enshrined; on Bamboo Island, Ichikishimahimegami dwelt; and on Plum Island, Tagitsuhimegami dwelt, and each island, maintaining a position of about one hundred ken, was arranged orderly. Takahime first pointed to the shrine where Ichikishimahime of Bamboo Island was enshrined and rowed up to it.</p>
+          <p class="en-p">Kurohime and Takayamahiko also, unarranged yet by the sorrow of the dark night, brought their boats to the same Bamboo Island, and gathered their heads together under the floor of the same shrine for the sake of searching for the jewel.</p>
+          <p class="en-p">As the noble child of Kamususanōnōokami,
+Eikohime who was born,
+and Kamehiko who celebrates for myriad ages,
+morning and evening pray—
+that the severe divine works of the Lord God Kamususanōnōokami
+be accomplished in detail—
+chanting the heavenly congratulatory words,
+the heavenly numbering song cleanly:
+one, two, three, four, five, six,
+seven, eight, nine, ten tallies,
+a hundred, a thousand, ten thousand—
+putting the heart of the pit of the stomach into it, at the time of praying,
+a boat is moored beyond the shore,
+and a black shadow comes patter-patter;
+without minding it at all,
+right in the midst of prayer, before the god,
+suddenly appearing and bowing low,
+chanding and offering the heavenly congratulatory words;
+though it is not distinctly known in the gloom,
+is that hoarse voice Takahime?</p>
+          <p class="en-p">Entangled by the heart of attachment,
+searching for the jewel not knowing even the place,
+seeing it as too miserable to behold, Eikohime
+quietly starts up and leaves this place,
+and making the light of the stars her strength,
+with quiet steps to her own mansion,
+dividing the dark road, of the island's shadow
+she returns to the pure mansion.
+Later, Kamehiko all alone,
+with lowered voice and the august door
+opening softly and entering inside,
+if he peers to see how the state of things is,
+Takahime, who is no god,
+knowing not that there is a person inside the shrine,
+like a Buddha without knowledge, single-heartedly,
+grateful for safe arrival,
+the sound of hand-clapping also damply,
+"Grant the wish-granting jewel indestructible as diamond,
+the golden jewel or the purple
+rare treasure to Takahime's
+two hands!"
+with a trembling voice she is praying.</p>
+          <p class="en-p">After a while, Takahime,
+like a rat, crawls close under the floor of the rare shrine,
+in the darkness where neither black nor white is told,
+while chanting divine names in a low voice,
+how amusing it is that she is searching about.
+Again, the approaching footsteps
+clapping hands before the shrine,
+while speaking of the secrets of the heart,
+dark prayer and silent supplication for a little while,
+with a eager heart, of the august shrine
+secretly peering about the four sides,
+like a mole under the floor
+she hid her figure once more.
+Although there is no light of the moon,
+illumined by the light of the stars,
+single long head,
+dividing the darkness, comes advancing.</p>
+          <p class="en-p">Is it the shadow of the setting sun or a bamboo pole?
+That great man, the Migoshi Nyūdō,
+clapping hands before the shrine once more,
+the voice of gratitude also inside the mouth,
+having finished praying about something minutely,
+suddenly under the floor of the shrine hall
+hid his long head.
+Ah, wondrous gods, wondrous gods,
+the mitsudomoe of straying souls,
+upon the divine island where even the true mechanism floats
+open upon the white waves,
+with rough waves striking against the breast,
+standing the nails on the heart's demon,
+scraping about recklessly and at random,
+sweating profusely, the three persons
+from time to time colliding their heads,
+producing sparks like a flash, a flash
+to illuminate the darkness of the surroundings,
+yet the darkness of the heart does not clear away,
+with faces toward each other like unkazu,
+thoughts that break the heart.</p>
+          <p class="en-p">Takahime thinks in her heart:
+"As Kuniyowake said,
+that high-collar of Gendaiwake
+sending two messengers,
+dug out the divine treasure of vital importance
+and buried it somewhere again quite cleverly,
+to make the noses of Hatsuwakahime and Tamanohime,
+the dear two, bleed?
+The achievements set up with much pains—
+is it a mischief to turn them into nothing?
+Hateful and bad is the ugly Mikoto of Gendaiwake,
+the vulgar high-collar.
+Hatsuwakahime and Tamanohime,
+when I think of it, when I think of it, how pitied!
+Putting the achievement of her own child on her nose,
+going up to Takamanohara,
+revered as general affairs and all,
+Mokusuke, who used to sit there acting big—"</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">進み寄るこそ訝かしき。</p>
+            <p class="ja-classical-line">近江の国の琵琶の湖水は、其形楽器の琵琶に似たるをもつて、此名ありと巷間伝へらる。併し乍ら此湖中に浮べる竹生島に、神素盞嗚大神の佩かせ給ひし十握の剣を、天の安河に於て誓約し給ひし時、瑞の御霊の表徴として、温順貞淑の誉高き三女神現はれ給ひ、此処に其御霊を止めさせられ、時々竜神来りて、姫神の御心を慰め奉るため、琵琶を弾じたるより琵琶の湖と称ふるに至つたのである。又一名天の真奈井とも言霊学者は称へて居る。今の竹生島は湖水の極北にあれども、此時代は湖水の殆ど中央に松の島、竹の島、梅の島の三島嶼相浮び三つ巴となつて其雄姿を紺碧の波上に浮べて居たのである。松の島には多紀理姫神鎮座在まし、竹の島には市杵島姫神鎮まり給ひ、梅の島には多岐都姫神鎮まらせ給ひ、各島各百間許りの位置を保つて行儀よく配列されてあつた。高姫は先ず竹の島の市杵島姫を祀りたる社を指して漕ぎつけた。</p>
+            <p class="ja-classical-line">黒姫、高山彦も期せずして闇夜の悲しさ、同じ竹の島に船を寄せ、同じ社の床下に玉探しの為め頭を集めた。</p>
+            <p class="ja-classical-line">神素盞嗚の貴の子と
+生れ給ひし英子姫
+万世祝ふ亀彦は
+神素盞嗚大神の
+厳の神業詳細に
+遂げさせ給へと朝夕に
+天津祝詞を奏上し
+天の数歌潔く
+一二三四五つ六つ
+七八つ九つ十たらり
+百千万と村肝の
+心を籠めて祈る折
+磯の彼方に船繋ぎ
+しとしと来る黒い影
+気にも止めずに一向に
+祈る最中に神の前
+忽ち現はれ額きて
+天津祝詞を奏り上ぐる
+暗に確とは分らねど
+皺嗄れ声は高姫か</p>
+            <p class="ja-classical-line">執着心に搦まれて
+当所も知らぬ玉探し
+見るも無残と英子姫
+そつと此場を立ち出でて
+己が館に静々と
+星の光を力とし
+闇路を分けて島影の
+清き館に帰りけり
+後に亀彦唯一人
+声を密めて御扉を
+そつと開いて中に入り
+様子如何にと窺へば
+神ならぬ身の高姫は
+社の中に人ありと
+知らぬが仏一心に
+無事の安着感謝しつ
+拍手の音も湿やかに
+金剛不壊の如意宝珠
+黄金の玉や紫の
+珍の宝珠を高姫の</p>
+            <p class="ja-classical-line">両手に授け給へよと
+声を震はせ祈り居る
+暫くありて高姫は
+珍の社の床下に
+鼠の如く這ひ寄つて
+黒白も分かぬ闇の中
+小声に神名唱へつつ
+探り居るこそ可笑しけれ
+又もや近づく足音は
+社の前に手を拍つて
+心の秘密を語りつつ
+暗祈黙祷稍暫し
+心いそいそ御社の
+四辺を密かに窺ひつ
+土竜の如く床下に
+又もや姿を匿しける
+月の光は無けれども
+星の光に照らされて
+長い頭の唯一つ
+闇を掻き別け進み来る</p>
+            <p class="ja-classical-line">入日の影か竿竹か
+見越入道の大男
+又もや社前に手を拍つて
+感謝の声も口の中
+何か細々願ぎ終へて
+忽ち社殿の床の下
+長き頭を匿しける
+あゝ惟神々々
+迷ふ身魂の三つ巴
+誠の仕組も白浪の
+沖に浮べる神島に
+胸に荒波打たせつつ
+心の鬼に爪立てて
+無暗矢鱈に掻き廻し
+汗をたらたら三人が
+時々頭を衝突し
+ピカリピカリと火を出して
+四辺の闇を照らせども
+心の闇は晴れやらず
+互に顔を不知火の</p>
+            <p class="ja-classical-line">心砕くる思ひなり
+高姫心に思ふやう
+国依別の云うたには
+言依別のハイカラが
+二人の使を遣はして
+肝腎要の神宝を
+掘り出させてうまうまと
+再びどこかに埋め置き
+初稚姫や玉能姫
+可愛や二人に鼻明かせ
+折角立てた功績を
+オジヤンにしようとの悪戯か
+憎さも悪い言依別の
+醜の命のドハイカラ
+初稚姫や玉能姫
+思へば思へばお気の毒
+吾子の功績を鼻にかけ
+高天原に参上り
+総務々々と敬はれ
+威張つて御座つた杢助も</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kondo afun to kuchi akete, hoezura kawaku mo me no atari, aa omoshiroi omoshiroi, saha sari nagara nanimono ka, kono ba ni futari mo yattye kite, tama o horidashi kaeraou to, itsushiyōkenmei sagashi iru, doko no yatsu ka wa shirane domo, iyoyo tama no deta toki wa, henjiyōnanshi no hitsupō ya, Hinodegami o tate ni tori, kono Takahime ga tsutsuganaku, ōki na kao de uketoraou, sore ni tsukete mo Kurohime ya, Takayamahiko wa ima izuko, kogane no tama ya murasaki no, takara wa mof ya wakarishi ka, kokoromotanaku waga omoi, tatohe kozume wa nukeru tomo, konrinnaraku tsuchi no soko,</p>
+          <p class="en-p">moguramochi mimizu ni aranedomo, tsuchi kakiwakete sagashidashi, waga te ni toraneba oku mono ka, aa Kamunagara kamunagara, kanaanu toki no kamidano, nanyōshiyotau e harubaru, kiken o okashite tamasaga, uta koto omoeba ichijiyō ya, nijiyō sanjiyō horutta tote, nani no temahima iru mono ka, Kuniyoriwake no iuta ni wa, sankaku ishi o torinozete, shimo sanjaku no fukasa zo to, tengu ni isukete yamu o enzu, hakujō itashita omoshirosa, tengu no mōshita sono gotoku, sankakukei no ishi wa aru, haya sanjaku mo horiōtete, mof ya shi-goshaku horinuita, saredo tama wa arawarenu,</p>
+          <p class="en-p">kore wa tetsukiri sanjiyō no, fukasa no kitto machigai da, sanjiyō shinjiyō wa mada oroka, tatohe jigoku no soko made mo, horutte horutte horinukuite, sagashiateneba oku mono ka, kurō to kurō no katamari de, tōtatoi hana no saku to iu, kami no o-koshi o kiku kara wa, tatohe hyakunen kakaru tomo, horaneba okanu waga kokoro, onna no makoto no isshin wa, iwa o mo inuku tameshi ari, kitto horidashi misete yaro, mededaku tama ga te ni hairu ba, iki-yōyō to tachikaeri, Kotonoriwake o hajimete, Mokusuke Ohatsu ya Oshetsu nado no, kao no iro made kaesasete, kaishin sashite sukuwaneba,</p>
+          <p class="en-p">Hinodegami no ikimiya no, dōshite kao ga tatsu mono ka, aa Kamunagara kamunagara, mitama sakihamae mashimase yo.</p>
+          <p class="en-p">To kokoro no soko ni mayoi no kumo o okashinagara, itsushiyōkenmei ase o nagashite hiinu ka moguramochi no yō ni sunajiri no tsuchi o kakiagete iru.</p>
+          <p class="en-p">Kurohime kokoro ni omou yō, Futagotayama no daitengu, Kuniyoriwake no kuchigatsute, kogane no tama no kakushi basho, Ōmi no kuni no Chikubushima, Bentensha no yukashita to, kaku ni kaku ni ihiyotta, Kuniyoriwake ga iu no nara, sukoshi wa utagau yochi mo aru, tengu no kokoro seppaku de, sukoshi mo uso wa iwanu mono, machigau kizukai aru mono ka, tengu no ōse no sono gotoku, Kotonoriwake no haikara ga, aranu chie o ba shibori-dashi, koko ni kakushite oki nagara, Takahime-sama ya Kurohime no, yūya fudan no katsudō ni, kimo o tsubushite rōbai shi, mitsukerarenai sono naka ni</p>
+          <p class="en-p">soto e kossori kakusou to, saruchie shibutte tata hito, hitashi saki ni kono shima e, horashi ni kisashita ni chigai nai, ano nesshin na sagashi yō, ikani gōki na Kurohime mo, akirete koto ga gowarenai, takara sagashi no kamiwaza wa, yui-ichigon mo kototama o, tsukuccha naranan kami no tsuge, ukai kotoba o dasu naraba, sokkaku mitsuketa hōgyoku mo, kemuri to natte keshisemu, shaku hitotsu iki hitotsu, honni rokuroku deki wa senu, kurushii toki no kamidano, norito o tonaete kamisama ni, o-negai suru koto wa shitte iru, iu ni iwarenu tama sagashi, konna kurushii koto arou ka,</p>
+          <p class="en-p">Kotonoriwake no tsukai nado, kogane no tama o hakken shi, mochikaraou to shita tokoro, Ryūgū ni zasu Ototime no, shizumari imasu niku no miya, senki ikki no kono baai, Kurohime naka naka shochu senu, tatohe jigoku no soko made mo, horutte horutte horutte horinukuite, hikari mabuki kogane dama, futatabi waga te ni osamutsuu, aya no seichi ni mochikaeri, Kotonoriwake ya Mokusuke o, afun to sasete yarimashou, aa Kamunagara kamunagara, kanaanu toki no kamidano, tayori mo naranan kuchinashi no, iki o tsumaheru oshidori no, tsugai hanarenu hazubando, Takayamahiko wa ima izuko,</p>
+          <p class="en-p">murasakiiro no hōgyoku wa, doko no shima ka shirane domo, mof ya te ni ire tamai shi ka, Takahime-sama wa ima izuko, kongō fukai no nyoi hōshu, shubi yoku o-te ni kaeri shi ka, achira kochira to ki ga momeru, aa Kamunagara kamunagara, kanaanu made mo sagashidashi, shoshin o kantetsu senya okanu, kurō to kurō no katamari no, hana no saku no wa konna toki, mata to detekanu kono jisei, Biwa no kosui wa fukai tomo, yami no tobari wa atsui tomo, Misogoto no kamitsukasa, Takayamahiko ya Kurohime ga, Kotonoriwake ni koserareta, haji no koromo o nugisutete, kamigunmitama o doko made mo,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">今度はアフンと口あけて
+吠面かわくも目のあたり
+嗚呼面白い面白い
+さはさりながら何者か
+此場に二人もやつて来て
+玉を掘り出し帰らうと
+一生懸命探し居る
+何処の奴かは知らねども
+愈玉の出た時は
+変性男子の系統や
+日の出神を楯に取り
+此高姫が恙なく
+大きな顔で受け取らう
+それにつけても黒姫や
+高山彦は今何処
+黄金の玉や紫の
+宝はもはや分りしか
+心もとなき吾思ひ
+仮令小爪は抜けるとも
+金輪奈落土の底</p>
+            <p class="ja-classical-line">土竜蚯蚓にあらねども
+土掻き分けて探し出し
+吾手に取らねば措くものか
+あゝ惟神々々
+叶はぬ時の神頼み
+南洋諸島へ遥々と
+危険を冒して玉探し
+往た事思へば一丈や
+二丈三丈掘つたとて
+何の手間暇要るものか
+国依別の云うたには
+三角石を取り除けて
+下三尺の深さぞと
+天狗に急かれて已むを得ず
+白状致した面白さ
+天狗の申した其如く
+三角形の石はある
+早三尺も掘り終へて
+もはや四五尺掘りぬいた
+されども玉は現はれぬ</p>
+            <p class="ja-classical-line">是はてつきり三丈の
+深さのきつと間違ひだ
+三丈四丈はまだ愚
+仮令地獄の底迄も
+掘つて掘つて掘り抜いて
+探し当てねば措くものか
+苦労と苦労の塊で
+尊い花の咲くと云ふ
+神の教を聞くからは
+仮令百年かかるとも
+掘らねば措かぬ吾心
+女の誠の一心は
+岩をも射貫くためしあり
+きつと掘り出し見せてやろ
+目出度く玉が手に入らば
+意気揚々と立ち帰り
+言依別を始めとし
+杢助お初やお節等の
+顔の色迄変へさせて
+改心さして救はねば</p>
+            <p class="ja-classical-line">日の出神の生宮の
+どうして顔が立つものか
+あゝ惟神々々
+御霊幸はへましませよ。</p>
+            <p class="ja-classical-line">と心の底に迷ひの雲を起しながら、一生懸命汗を流して火鼠か土竜のやうに砂混りの土を掻き上げて居る。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">黒姫心に思ふやう
+再度山の大天狗
+国依別の口借つて
+黄金の玉の匿し場所
+近江の国の竹生島
+弁天社の床下と
+確に確に云ひよつた
+国依別が云ふのなら
+些しは疑ふ余地もある
+天狗は心潔白で
+些とも嘘は云はぬもの
+間違ふ気遣ひあるものか
+天狗の仰せの其如く
+言依別のハイカラが
+あらぬ智慧をば絞り出し
+此処に匿して置きながら
+高姫さまや黒姫の
+昼夜不断の活動に
+肝を潰して狼狽し
+見付けられない其中に</p>
+            <p class="ja-classical-line">外へこつそり匿さうと
+猿智慧絞つて態人を
+一足先に此島へ
+掘らしに来したに違ひない
+あの熱心な探しやう
+如何に剛気な黒姫も
+呆れて物が云はれない
+宝探しの神業は
+唯一言も言霊を
+使つちやならない神の告
+迂濶言葉を出すならば
+折角見つけた宝玉も
+煙となつて消え失せむ
+嚔一つ息一つ
+ほんに碌々出来はせぬ
+苦しい時の神頼み
+祝詞を唱へて神様に
+お願ひする事は知つて居る
+云ふに云はれぬ玉探し
+こんな苦しい事あらうか</p>
+            <p class="ja-classical-line">言依別の使等が
+黄金の玉を発見し
+持ち帰らうとした所で
+竜宮に在す乙姫の
+鎮まりいます肉の宮
+千騎一騎の此場合
+黒姫中々承知せぬ
+仮令地獄の底までも
+掘つて掘つて掘つて掘り抜いて
+光眩き金玉を
+再び吾手に納めつつ
+綾の聖地に持ち帰り
+言依別や杢助を
+アフンとさせてやりませう
+あゝ惟神々々
+叶はぬ時の神頼み
+頼りもならぬ口無しの
+息をつまへる鴛鴦の
+番離れぬハズバンド
+高山彦は今何処</p>
+            <p class="ja-classical-line">紫色の宝玉は
+何処の島か知らねども
+もはや手に入れ給ひしか
+高姫さまは今何処
+金剛不壊の如意宝珠
+首尾よく御手に返りしか
+あちらこちらと気が揉める
+あゝ惟神々々
+叶はぬ迄も探し出し
+初心を貫徹せにやおかぬ
+苦労と苦労の塊の
+花の咲くのはこんな時
+又と出て来ぬ此時節
+琵琶の湖水は深くとも
+闇の帳は厚くとも
+三五教の神司
+高山彦や黒姫が
+言依別に着せられた
+恥の衣を脱ぎ捨てて
+神国魂をどこ迄も</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">I must show this stand,
+Though I know not what fellow you are,
+A teapot-headed wretch,
+Who looks much like Takayama-sama,
+Has come here and once more
+Fussily searches about.
+In the clash of greed and greed,
+Bangs his head over the inquiry of the jewel,
+The pain of scattering sparks!
+Even if the heaven and earth were to overturn,
+To the ends of the earth, the jewel of gold,
+Will I not leave off until I find it?
+A single-heartedness that pierces even rock
+Is the inherent nature of a woman's body.
+Ah, Kamunagara, Kamunagara,
+Mitama, may you bless and prosper us.</p>
+          <p class="en-p">So she thinks secretly, and prays secretly, while wringing out sweat like dripping tears, and with all her might scoops up the sand.</p>
+          <p class="en-p">Takayamahiko, wondering in his heart, thinks thus:
+I hear that the Great Tengu of Futatabiyama,
+Holding a grudge against Kuniyoriwake,
+At the Kamuyashiro of Chikubu Island,
+Covered a triangular stone under its floor,
+And buried a purple hōgiyoku deep in the crude metal soil.
+The triangular stone is here;
+Even so, how wondrous!
+There is one point which makes it hard to think
+He could be an envoy of Kotoyoriwake.
+The curtain of darkness has been lowered,
+So it cannot be clearly distinguished as such,
+Yet his bodily posture and manner of movement,
+The way he shakes his head hither and thither,
+Have an air that somehow resembles Takahime-sama or Kurohime.
+The ancients also say
+That Tengus are exceedingly honest,
+They surely will not tell lies recklessly.
+In this wide world, persons resembling
+Takahime-sama or Kurohime
+Must surely exist by one or two.
+Say what you may, this jewel-search
+Where even the calling of one's name as a mandarin duck is forbidden—
+In truth, I am an envoy of Kotoyoriwake;
+That I should search for the whereabouts of the treasure,
+Concealed by the decree of the divine realm
+According to its plan,
+Is something I never thought of even in a dream.
+Even so, Takahime and
+Even Kurohime grow so fretful,
+And their noisy running about, clamoring,
+'The jewel! The jewel!', is so annoying
+That I too might devise some plan,
+Find out the whereabouts of the jewel,
+And clear away the clouds of attachment
+From the hearts of the two hags.</p>
+          <p class="en-p">Led by a cow to Zenkōji,
+Against my will I galloped all the way to a single island of Ryūgū,
+Serving even at the castle of Jion as a branchī
+And even as a kuronbā,
+And employing numerous people of the country,
+I searched for the whereabouts of the jewel;
+Yet in so vast a world,
+It stands to reason that a jewel hidden deep in the soil
+Can never be known.
+If Takayamahiko too, this very day,
+Should fail right here,
+I will give up all hope from this moment on.
+Whether it be the Hinode-gami or the Otohime-sama of Ryūgū, I know not,
+But to me it does not sink into my mind by an inch.
+If she were truly the Hinode-gami,
+She surely would clearly let me know
+Whereabouts the jewel is located.
+If she were Otohime-sama of Ryūgū,
+
+All the more, where on earth would there be any reason
+For her not to know the hiding place of the jewel?
+It seems that gods bearing the same name
+Also exist in great numbers.
+The gods possessing Takahime-sama and Kurohime
+Are mere pestilent minor deities lacking divine power;
+If it were not so, in no way
+Would it settle right in my heart.
+Even while seeing the slope of my sixties,
+To be manipulated by a woman of fifty,
+And having to go to the ends of the earth
+To search for the jewel—how miserable!
+Ah, Kamunagara, Kamunagara,
+Since it cannot be fulfilled, Takahime and
+Kurohime's two attachments
+Blow away in the wind of Shinato,
+Rebuild them as newborn infants,
+And somehow please save them,
+I entreat with my heart poured out
+To the august deity of Chikubu Island.
+Ah, Kamunagara, Kamunagara,
+Mitama, may you bless and prosper us.</p>
+          <p class="en-p">So he murmurs within his heart, praying exclusively for the repentance of Takahime and Kurohime, while the purple jewel seemed almost as if it were not on his mind at all.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">見せねばならぬ此立場
+何処の奴かは知らねども
+高山さまに好く似たる
+茶瓶頭がやつて来て
+又もや　がさがさ探し出す
+欲と欲とのかちあひで
+玉の詮議に頭うち
+火花を散らす苦しさよ
+仮令天地が覆るとも
+黄金の玉は何処迄も
+探し当てねば措くものか
+岩をも射貫く一心は
+女たる身の天性だ
+あゝ惟神々々
+御霊幸倍ましませよ。</p>
+            <p class="ja-classical-line">とひそかに思ひ、ひそかに念じながら、汗をたらたら搾り出し、一生懸命に砂を掻き上げて居る。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">高山彦は訝かりつ
+心の中に思ふやう
+再度山の大天狗
+国依別の口借つて
+竹生の島の神社
+其床下に三角の
+石を蓋せて紫の
+宝玉深く荒金の
+土中に埋没せしと聞く
+三角石は此処にある
+さはさりながら訝かしや
+言依別の使とも
+思へぬ節が一つある
+闇の帳は下されて
+さだかにそれとは分らねど
+体の恰好動きやう
+頭をぶりぶり振る所
+高姫さまや黒姫に
+どこやら似て居る気配ぢやぞ
+天狗は至つて正直と</p>
+            <p class="ja-classical-line">昔の人も云うて居る
+滅多に嘘は申すまい
+高姫さまや黒姫に
+よく似た者は世の中に
+一人や二人はあるだらう
+何を云うても鴛鴦の
+名乗もならぬ玉探し
+実際俺は言依別の
+神の命が神界の
+仕組によりて匿されし
+宝の在処を探そとは
+夢にも思うた事はない
+さはさりながら高姫や
+黒姫までが焦ら立つて
+玉よ玉よとやかましく
+騒ぎ廻るが煩さに
+己も何とか工夫して
+玉の在処を探し出し
+二人の婆に執着の
+雲を晴らさしやらうかと</p>
+            <p class="ja-classical-line">牛に牽かれて善光寺
+心ならずも竜宮の
+一つ島迄駆廻り
+地恩の城にブランヂー
+クロンバー迄も勤めつつ
+数多の国人使役して
+玉の在処を探したが
+これ程広い世の中を
+土中に深く隠されし
+玉の分らう筈がない
+高山彦も今日限り
+此処で失敗したならば
+これきり思ひ切りませう
+日の出神や竜宮の
+乙姫さまかは知らねども
+俺にはチツと腑に落ちぬ
+真日の出神なれば
+玉の在処は何処其処と
+ハツキリ知らして呉れるだらう
+竜宮の乙姫さまならば</p>
+            <p class="ja-classical-line">猶更玉の匿し場所
+知らない道理がどこにあろ
+同じ名のつく神様も
+沢山あると見えるわい
+高姫さまや黒姫に
+憑つて御座る神さまは
+神力足らぬ厄雑神
+それでなければどうしても
+俺の心にはまらない
+六十路の坂を見ながらも
+五十女に操られ
+玉を探しに何処迄も
+往かねばならぬか情ない
+あゝ惟神々々
+叶ひませぬから高姫や
+黒姫二人の執着を
+科戸の風に吹き払ひ
+生れ赤子に立てかへて
+何卒助けて下しやんせ
+竹生の島の御神に</p>
+            <p class="ja-classical-line">心を籠めて願ぎまつる
+あゝ惟神々々
+御霊幸はへましませよ。</p>
+            <p class="ja-classical-line">と心の中に呟きながら、高姫、黒姫の改心を専一と祈願し、紫の玉は殆ど念頭に置かぬものの如くであつた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c12.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 12: Autumn の色 [777]</span>
+      </a>
+      <a href="c14.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 14: Great 変 Song [779]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

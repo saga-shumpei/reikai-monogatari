@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: 鈴の Sound [772] - Volume 26 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 26 Table of Contents</a>
+      <span>Volume 26</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 26 &bull; Chapter 7</span>
+      <h1 class="chapter-title-en">Chapter 7: 鈴の Sound [772]</h1>
+      <p class="chapter-title-ja">鈴の音〔772〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Isokohime, with a look of utmost joy and a smile brimming upon her face, opened her golden fan, sang a celebratory song toward the assembled gathering, and gracefully danced with her long sleeves fluttering.</p>
+          <p class="en-p">'Great Deity of Izunomitama,
+Great Deity of Mizunomitama,
+To subdue the Yamataorochi
+Coiling across the land of Yashima,
+And to sweep away the evils of this world,
+Kuniharutachinōokami
+Brooded with a thousand-fold shattered heart;
+Leaving the lofty seat
+Of the cloud-veiled sky, he concealed
+His precious divine body in the Nether-land,
+Desirous once again to protect this realm,
+And braving the hardships of water and fire
+From the crater of Mount Tenkefuzan,
+Roaming far and wide throughout
+Toyoashihara's Mizuhokuni,
+To blow away with the wind of Shinado
+The dark clouds enfolding the hearts of mortals,
+And to purify them in the rapids of Hayakaha,
+Wearying his body a myriad times,
+To guard the world where Akuma rages,
+
+How venerable and sublime he is!
+Upon the summit of Mount Ubusuna
+Stand the rows of the Isoyakata;
+Isokohime, revering her father god's imperial command,
+Descended to the village of Ken'on
+And made the path of Izanagi and Izanami's truth her shield,
+Approaching the divine officials
+Of Brahmanism, such as Onikumohiko and others,
+Thinking to transmit the path of salvation,
+Yet that too proved to be a bubble on the water;
+Helplessly departing from this place,
+Together with Umekohime,
+Crossing across the currents of Eden,
+A journey upon a pillow never trodden before,
+Exposing her body to rain and sleet,
+Combing her hair against the foul demonic winds,
+Just as she was opening the divine path hither and thither,
+
+Captured by the divine officials of Brahman,
+Her resentment is as deep as the plain of the sea;
+Like a half-rotted abandoned boat,
+The four master and servants, with lonely hearts in their breasts,
+Chanting the Great Norito before the divine presence of Heaven and Earth
+Along with their tears,
+Drifting over waves of unknown bounds,
+Sinking and floating, they arrive safely
+At the treasure isle of Ryūgū;
+The divine majesty reaches the port of Taka,
+And abandoning their divine boat they land ashore,
+Born of the noble child of Onikumawake
+Is the infant Koisohime,
+Who became the official of the path of teachings,
+Appearing in the village of Chi'on,
+Firmly and permanently erecting the great pillars of the palace in bustling prosperity,
+While the flowers of the garden of teachings fragrance give,
+And autumn skies where fruits are borne,
+
+Bidding farewell to Umekohime, Koisohime,
+And other officials,
+Together with Imokohime,
+Entrusting their bodies to a roofless boat
+Favored by the abundant grace of the gods,
+Threading through countless large and small islands
+Across the plain of the peaceful waves,
+At last arriving with joy here
+Upon the divine island of Hizuma of Jitendō;
+Galloping back and forth across the island of Jitendō
+West and East, North and South,
+Just as the great highway of Izanagi and Izanami's teachings was being spread to the four quarters,
+An unexpected secret village upon a single isle of Ryūgū,
+Where the Mani jewel is kept hidden
+Deep at the bottom of the golden lake,
+Appearing here, gazing up at the northern sky,
+
+Stepping down toward the brocade-like sacred spot,
+Together with Kotomuwake,
+Coming to look upon Akiyamahiko's residence,
+Oh, how wondrous is this!
+Beholding the severely yearning face of my father god,
+Susa-no-o no Ōkami,
+And the solemn, gentle countenance of Kunitakehiko no Ōkami,
+Bowing down in reverence,
+Within a breast of mingled joy and sorrow,
+Words fail, and there is nothing to do but weep;
+Ah, how wondrous, the divine will of the gods!
+May the divine spirit flourish and prosper,
+Fulfilling the great divine work of the father deity
+And the grand providence of Kunitakehiko,
+Bringing to complete and minute fruition
+An age of pines eternal and immovable,
+For a thousand, eight thousand, and ten thousand generations,
+Building it up, forever and ever
+In the divine land of the distant heavenly sky,
+
+Enthroned forever in the young sun palace
+Of the Sun Deity,
+Awe-struck and reverent before the august presence,
+We distantly pray:
+May the spirit of Mizunomitama shine brightly,
+And the shadow of Izunomitama be pure,
+And may the moon of Izanagi and Izanami forever
+Shine and glow, and never wane!
+Ah, how wondrous, the divine will of the gods!
+We pray before the presence of the gods.'</p>
+          <p class="en-p">So singing to an end, she took her former seat.</p>
+          <p class="en-p">Otohiko stands up, spreads out his silver fan, and himself sings and dances.</p>
+          <p class="en-p">'The Ural teachings opened
+By Ural no Hiko and Ural hime,
+Armenia whose very name is venerable,
+Leaving behind the hall of teachings,
+To open the path of the Urals,
+Floating across the sea of Persia,
+Leading a mere four or five divine officials
+And advancing to a single isle,
+Spending three or four years exhausting body
+And exhausting heart, to no avail in opening the teachings of the imperial gods,
+Even this island where golden flowers bloom
+Like the fruitless yamabuki flowers,
+Which are the barren blossoms of my faith,
+Bringing no avail whatsoever, riding over the crest
+Of the rough waves, as I am returning,
+Just at that moment upon the sea of Persia,
+The wild wind rages and the waves roar fiercely,
+When my boat is about to sink swiftly
+Into the fathomless sea—'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">五十子姫はさも嬉し気に満面に笑を湛へ、金扇を開いて満座の中に向つて祝歌を歌ひ、長袖淑やかに舞はせ給うた。</p>
+            <p class="ja-classical-line">『厳の御霊の大御神
+瑞の御霊の大御神
+八洲の国に蟠まる
+八岐大蛇を言向けて
+此世の曲を払はむと
+国治立大神は
+心を千々に砕かせつ
+雲井の空の弥高き
+位を捨てて根の国に
+尊き御身をしのばせつ
+又もや此世を守らむと
+天教山の火口より
+水火の艱苦を凌ぎつつ
+豊葦原の瑞穂国
+隈なく廻り神人の
+心を包む村雲を
+科戸の風に吹き払ひ
+速川の瀬に浄めむと
+百千万に身を窶し
+悪魔の猛ぶ世の中を</p>
+            <p class="ja-classical-line">守らせたまふぞ尊けれ
+ウブスナ山の頂上に
+建ち並びたる斎苑館
+五十子の姫は父神の
+勅を畏み顕恩の
+郷に下りて三五の
+誠の道を楯となし
+バラモン教の神柱
+鬼雲彦や其外の
+神の司に近寄りて
+救ひの道を伝へむと
+思ひし事も水の泡
+是非なく此処を立ち出でて
+梅子の姫と諸共に
+エデンの流れを横ぎりつ
+踏みも習はぬ旅枕
+雨や霰に身を曝し
+醜の魔風に梳り
+彼方此方と神の道
+開く折しもバラモンの</p>
+            <p class="ja-classical-line">神の司に捕へられ
+恨は深し海の原
+半朽ちたる捨小船
+主従四人は村肝の
+心淋しく天地の
+神の御前に太祝詞
+涙と共に唱へつつ
+果しも知らぬ浪の上
+浮きつ沈みつ竜宮の
+宝の島に辿りつく
+神の御稜威もタカ港
+御船を捨てて上陸し
+鬼熊別の貴の子と
+生れ出でませる小糸姫
+教の道の司とし
+地恩の郷に現はれて
+大宮柱永久に
+太知り立てて賑しく
+教の園の花薫り
+実を結びたる秋の空</p>
+            <p class="ja-classical-line">梅子の姫や小糸姫
+其他の司に暇乞ひ
+今子の姫と諸共に
+神の恵の著く
+屋根無し船に身を任せ
+浪太平の海原を
+大小無数の島を縫ひ
+漸う此処に自転倒の
+秀妻の国の神島に
+辿り着きたる嬉しさよ
+自転倒島を西東
+北や南と駆廻り
+三五教の大道を
+四方に伝ふる折もあれ
+思ひも寄らぬ竜宮の
+一つ島なる秘密郷
+黄金の湖の底深く
+秘め置かれたる麻邇の玉
+此処に現はれ北の空
+打ち眺めつつ綾錦</p>
+            <p class="ja-classical-line">聖地を指して参下り
+言依別と諸共に
+秋山彦の御館
+来りて見ればこは如何に
+焦れ焦れし吾父の
+神素盞嗚大神や
+国武彦大神の
+厳の温顔伏し拝み
+嬉し悲しの胸の中
+譬へむよしも泣くばかり
+あゝ惟神々々
+御霊幸はへましまして
+父大神の大神業
+国武彦の御経綸
+完全に委曲に成り遂げて
+堅磐常磐の松の世を
+千代に八千代に万代に
+築かせ給へ久方の
+天津御空の神国の
+日の若宮に永久に</p>
+            <p class="ja-classical-line">鎮まりいます日の神の
+御前を慎み畏みて
+遥に願ひ奉る
+瑞の御霊の麗しく
+厳の御霊の影清く
+三五の月の何時迄も
+照れよ光れよかくるなよ
+あゝ惟神々々
+神の御前に願ぎまつる』</p>
+            <p class="ja-classical-line">と歌ひ終つて旧の座に着き給うた。</p>
+            <p class="ja-classical-line">音彦は立ち上つて銀扇を拡げ自ら歌ひ自ら舞ふ。</p>
+            <p class="ja-classical-line">『ウラルの彦やウラル姫の
+開き給ひしウラル教
+名さへ尊きアーメニヤ
+教の館を後にして
+ウラルの道を開かむと
+波斯の海をば浮びつつ
+僅に四五の神司
+率ゐて進む一つ島
+三歳四歳と身を尽し
+心を尽し皇神の
+教を開く甲斐もなく
+わが信仰の仇花に
+実りもせない山吹の
+黄金花咲く此島も
+何の効果も荒浪の
+上を辷つて帰り来る
+時しもあれや波斯の海
+荒風すさび浪猛り
+千尋の海に吾船は
+早沈まむとする時に</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Riding in the same sacred boat, the Kamuzukasa of Ananai-kyō and the Shinjin of Hinodewake were saved from perilous places, and for the first time awakened to the Way of Kami, landing at the port of Taru, trudging across the wilderness of Fusa, singing the Sendenka as they advanced bravely at the will of Kami, appointing both Yajihiko and Yotahiko as accompanying officials, and approaching Kojikatauge, when just at that moment, surrounded by the Metsuke kami of the Ural-kyō, their advance and retreat became blocked in a ravine, casting their bodies down a thousand-fathom ravine, remaining in a state of complete unconsciousness, exploring the lonely sights of the River Shōzu and Yachimata, called back to life and revived by the Shinjin of Hinodewake, they deeply awakened to the Way of Kami, determined to transmit the Mikokoro of Sumeōkami to the utmost limits of the eighty islands and eighty countries of the islands, without distinction between far and near, wandering round and round until they finally reached the island of self-revolution, right in the midst where the Kamuzukasa of Brahmanism relied upon the iron castle of Oeyama and Onigajō as immovable and everlasting, blowing them away with our Kototama, their hearts eager and cheerful, fifty children dividing to the right and left, just at the opportune moment when sincerity is devoted for the sake of Kami, for the Way, and for the people of the world, the precious treasures of the teachings of the Ananai kami, the three sacred jewels, were eternally enshrined at the will of Kami, the heavenly pillar of augustness growing ever thicker, the mechanism of the warp and woofing loom down to the bedrock drawing near, and in the autumn sky where the flowers of the teaching began to fragrance far and near, upon hearing that the five sacred jewels, coming once again and uniting with Heaven, Fire, Water, and Earth, the Mani jewels of the five sacred jewels, would gather safely within the sacred ground of Aya, the steeds of their hearts grew brave, and shedding tears of gratitude before the august presence of Nishikinomiya, the Kamuzukasa of Ananai-kyō, obeying the parting command, came and saw at the port of Yura that the august father of Tsuma-no-mikoto appeared as the Mizunomitama, Lord Susanoo-no-Ōkami, whose sacred countenance was especially radiant, and whose body was healthy, how joyful it was that He devoted Himself to the divine work, ah, kannagara kamunagara, may the august spirits prosper and bless, so that the three sacred jewels shine brightly and the five sacred jewels gleam purely, just like the sun and moon illuminating and shining brightly in the sky of the heart, without any clouds or mist, eternally illuminating the world with the light of Kami, ramming and solidifying the foundation of the divine age of Miroku down to the bedrock, and pounding and hardening it up to the upper bedrock, O Tianjin kami, Kunitsukasa, and Yaoyorozu, protect our divine work of guarding the august teachings of the Ananai moon, and before the august presences of the two pillars, Haniyasuhiko and Haniyasuhime, possessing pure august spirits, with reverence and awe we pray and supplicate, ah, kannagara kamunagara, may the august spirits prosper and bless!</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">同じ御船に乗りませる
+三五教の神司
+日の出別の神人に
+危き所を助けられ
+始めて悟る神の道
+タルの港に上陸し
+波斯の原野をトボトボと
+神のまにまに宣伝歌
+歌つて進む勇ましさ
+弥次彦、与太彦両人を
+御供の司と定めつつ
+小鹿峠にさしかかる
+時しもあれやウラル教
+目付の神に取囲れ
+進退ここに谷まりて
+千尋の谷間に身を投じ
+人事不省の其儘に
+三途の川や八衢の
+淋しき光景探りつつ
+日の出別の神人に</p>
+            <p class="ja-classical-line">呼び生かされて甦り
+深くも悟る神の道
+皇大神の御心を
+島の八十島八十国の
+あらむ限りに伝へむと
+遠き近きの隔てなく
+廻り廻りて自転倒の
+島に漸う辿り着き
+大江の山や鬼ケ城
+バラモン教の神司
+堅磐常磐の鉄城と
+頼みて拠れる真最中
+吾言霊に吹き払ひ
+心いそいそ五十子姫
+右と左に別れつつ
+神の御為道のため
+世人の為に赤心を
+尽す折しも三五の
+神の教の貴宝
+三つの御玉は永久に</p>
+            <p class="ja-classical-line">神のまにまに納まりて
+天の御柱いや太く
+下津岩根に経緯の
+機の仕組も近づきて
+教の花も遠近に
+薫り初めたる秋の空
+又もや来る五つ御玉
+天火水地と結ぶなる
+五つの御玉の麻邇宝珠
+綾の聖地に恙なく
+集まりますと聞きしより
+心の駒も勇み立ち
+錦の宮の御前に
+感謝の涙流しつつ
+三五教の神司
+言依別に従ひて
+由良の港に来て見れば
+妻の命の御父と
+現はれませる瑞御霊
+神素盞嗚大神は</p>
+            <p class="ja-classical-line">聖顔殊に麗しく
+身も健かに神業に
+尽させ給ふ嬉しさよ
+あゝ惟神々々
+御霊幸はへましまして
+三つの御玉の麗しく
+五つの御玉の清らかに
+心の空は日月の
+伊照り輝く其如く
+雲霧もなく永久に
+神の光を世に照し
+ミロクの神世の礎を
+下津岩根に搗き凝らし
+上津岩根に搗き固め
+三五の月の御教を
+守る吾等の神業を
+守らせ給へ天津神
+国津神等八百万
+埴安彦や埴安姫の
+伊都と美都との二柱</p>
+            <p class="ja-classical-line">清き御魂の御前に
+慎み敬ひ願ぎまつる
+あゝ惟神々々
+御霊幸はへましませよ』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c06.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 6: Great Deity 宣 [771]</span>
+      </a>
+      <a href="c08.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 8: Tiger の嘯 [773]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
