@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: 茶目式 [793] - Volume 27 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 27 Table of Contents</a>
+      <span>Volume 27</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 27 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: 茶目式 [793]</h1>
+      <p class="chapter-title-ja">茶目式〔793〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Following Kotoyoriwake, they climbed up Mount Haris; Kuniyoriwake, on the way, seeing the Taiheigaki bearing heavy and beautiful fruits with drooping branches across the valley, suddenly had his appetite burst forth, and to distract his hunger, laid out plantain leaves as a seating mat by the roadside. Sitting in leisurely meditation just like Mirokuniyorai, placing his left hand lightly upon his thigh while clenching the fist of his right hand, thrusting out his index finger, he silently pointed at the Taiheigaki in the bottom of the valley. Following that, he repeatedly pointed at his own mouth and belly, as if saying: If there be any skilled tree-climbers among Charles, Base, or the others, let them cross the valley, climb up, and offer one or two of those sweet-looking persimmons to me. Though he spoke no word, by his gestures he eagerly showed such a comical sight. The Taiheigaki made the prey of the dragon god of Mount Haris—if people, rousing wild ambition, should take even a single one, it is rumored to be a most perilous fruit whose touch instantly causes the abdomen to swell with divine wrath, finally giving birth to snake pups and ending one's life. The appetite of Kuniyoriwake arose so fiercely that, unable to endure it even for a second, he urged Tsunekusai to have them plucked for him. Tsunekusai, feeling uneasy yet forced by necessity, commanded his attendants, Charles and Base, paying heed to fulfill the demand of Kuniyoriwake.</p>
+          <p class="en-p">Charles and Base, having no way to refuse the oracle of the living god, descended by vines, went down the cliff into the valley, hopped and skipped across the rock heads floating amidst the raging current to reach the opposite side, and at last crossing over, embraced the root of the persimmon tree and looked up at the sky, where a sweet fragrance came wafting to pierce their noses. Instantly the two resolved in their minds, climbed up like monkeys, and like silkworms devouring mulberry leaves, plucked the red ripe persimmons from their little mouths, opening their big mouths without a word to stuff them in—oh, the comical sight of it! From the excessive sweetness, both forgot their own duties, plucked them with all their might, and blindly crammed them into their mouths, whereupon their bellies swelled up like bulging bags, and panting with a swish-swash breath, they turned into bizarre figures resembling a blowfish climbing a tree.</p>
+          <p class="en-p">Kuniyoriwake looked up and cried out for them to drop even just one sweet fellow down to him, but the two turned a deaf ear and ate on regardless of their lives. Kuniyoriwake thought to himself: The teachings of the God of Anagama say, never rely upon others; the affairs of one's own body must be done by oneself. So thinking, he stood up from his plantain-leaf seat, descended the precipice like a monkey using vines for strength down to the bottom of the valley, and reaching the opposite bank, embraced the great persimmon tree, climbed up to the first branch, and while resting his breath there, looked down to find it immensely high, with the water spray of the raging current flying and the roar of the water terrifyingly majestic, enough to knock the very soul out of one. The two overhead flew to and fro like left and right monkeys, eating on recklessly until their guts and internal organs were about to split. Kuniyoriwake, unable to bear it any longer, thinking that unless he climbed to a perilous place he could not eat sweet ripe persimmons, caught hold of a slender branch at the risk of his life and gradually plucked a single ripe persimmon; when he took it into his mouth thinking it an incomparable delicacy, instantly his swelling belly made his breathing gradually painful.</p>
+          <p class="en-p">When he looked down at the root of the persimmon tree, a great number of large snakes bearing tortoise-shell patterns came climbing up with glaring eyes, their appearance so terrifying that advancement and retreat were here blocked. Kuniyoriwake made up his mind, leaving his fortune to heaven, transcending beyond life and death, and aimed for the blue abyss of the roaring waterfall spray as a death-defying feat; the moment it was seen as splashing water spray rising, the form of Kuniyoriwake vanished like foam. Charles and Base, seeing the snakes climbing up, trembled with fear and leaped toward the blue abyss where the precious life of Kuniyoriwake had plunged, whereupon their forms likewise vanished.</p>
+          <p class="en-p">Tsunekusai and four or five native attendants who had been gazing upon this state of affairs with their own eyes were astonished and flustered, crying out in a hubbub as they ran along the valley stream, shouting whither had the three figures gone, running back and forth in frenzy as could not be helped. The sound of the wind crossing the valley blew fiercely and terribly. Kotoyoriwake and Wakahiko, knowing nothing of such matters, sang the propagation hymn of Anagama with cool voices, quickening their steps along the valley as they advanced deep into the mountains.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">言依別に従ひて
+ハーリス山に登り行く
+国依別はその途中
+谷の向ふに美はしく
+枝もたわわに実りたる
+太平柿を見るよりも
+俄に食欲勃発し
+空腹まぎれに道端に
+芭蕉の葉をば敷具とし
+悠々端坐なし乍ら
+弥勒如来のその如く
+左手を腿にチヨイと載せ
+右手の拳を握りつつ
+食指を突き出して
+無言の儘に谷底の
+太平柿を指さしつ
+続いて我口我腹を
+幾度となく指示し
+チヤール、ベースや其他の
+木登り上手の人あらば</p>
+            <p class="ja-classical-line">谷間を越えて攀上り
+さも甘さうな彼の柿を
+われに一二個献れ
+口に言はねど仕方にて
+頻りに示す可笑しさよ
+ハーリス山の竜神が
+餌食としたる太平柿
+野心を起し人々が
+一個なりとも取るならば
+忽ち神の御怒りに
+触れて腹部は膨張し
+遂には蛇の子を生みて
+生命を果すと聞えたる
+危険極まる果実なり
+国依別の食欲は
+旺に起り矢も楯も
+怺らぬままに常楠に
+採つて呉れよと促せば
+常楠不安を感じつつ
+已むを得ずして供人の</p>
+            <p class="ja-classical-line">チヤール、ベースに命令し
+国依別の要求を
+充しやらんと気を配る
+チヤール、ベースは生神の
+託宣否むに由も無く
+蔓に下つて絶壁を
+谷間に下り激流の
+中に浮べる岩頭を
+飛び越え飛び越え向ふ側
+漸く渡りて柿の根を
+抱いて空を眺むれば
+甘さうな香がプンプンと
+二人の鼻をついて来る
+忽ち二人は意を決し
+猿の如く攀上り
+蚕の虫が桑の葉を
+食ひつくす如小口から
+赤い熟柿をむしり取り
+ものをも言はず大口を
+開いて頬張る可笑しさよ</p>
+            <p class="ja-classical-line">余りの甘さに両人は
+己が役目を忘却し
+一生懸命むしり取り
+遮二無二口に放り込めば
+忽ち膨れた布袋腹
+息をスウスウ喘ませつ
+鰒の木登りした様な
+怪体な姿となりにけり
+国依別は打仰ぎ
+一つでよいから甘い奴
+落して呉れと呼ばはれど
+馬耳東風の両人は
+生命知らずに食つて居る
+国依別は思ふやう
+三五教の神の教
+必ず人に頼るなよ
+わが身の事は我身にて
+やらねばならぬと云ひ乍ら
+芭蕉葉の席を立上り
+猿の如く断崖を</p>
+            <p class="ja-classical-line">蔓を力に谷底に
+漸く下り対岸
+柿の大木に抱きつき
+登りついたる一の枝
+ここに息をば休めつつ
+眼下を見ればいと高く
+激流飛沫の水煙
+水声轟々凄じく
+肝も抜かるる許りなり
+頭上の二人は右左
+猿の如く飛び交ひて
+五臓六腑の裂ける迄
+生命知らずに食つてゐる
+国依別は怺りかね
+危き所に上らねば
+甘い熟柿は食へないと
+生命を的に細枝に
+つかまり乍ら漸々に
+一つの熟柿をむしり取り
+天下無上の珍味ぞと</p>
+            <p class="ja-classical-line">口にふくめば忽ちに
+腹はふくれて吹く息も
+漸く苦しくなりにけり
+柿の根元を見下ろせば
+亀甲形の斑紋ある
+大蛇の群の数多く
+目を瞋らして上り来る
+その形相の凄じさ
+進退茲に谷まりて
+国依別は意を決し
+運をば天に任せつつ
+生死の外に超越し
+激潭飛沫の青淵を
+目蒐けて飛込む放れ業
+ザンブと許り水煙
+立つよと見る間に国依別の
+姿は水泡と消え失せぬ
+チヤール、ベースの両人は
+上り来れる蛇を見て
+怖れ戦き国依別の</p>
+            <p class="ja-classical-line">珍の命が飛込みし
+青淵目蒐けて飛込めば
+これ又姿は消えにけり
+此有様を目の当り
+眺めて居たる常楠や
+四五の土人の供人は
+驚き周章ワイワイと
+谷の流れに沿ひ乍ら
+三人の姿は何処ぞと
+右往左往に奔走し
+狂ひ廻るぞ是非なけれ
+谷間を渡る風の音
+いと轟々と吹き荒ぶ
+言依別や若彦は
+斯る事とは知らずして
+三五教の宣伝歌
+声も涼しく歌ひつつ
+谷を伝ひて奥深く
+足を早めて進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tsunekusu could not but hesitate here. He had to participate in the vital Goshingefu, and yet unless he helped Kuniyoriwake and the others, the way of Ningen could not be upheld...</p>
+          <p class="en-p">Tsunekusu: 'Ah, what should I do? Must I abandon this Goshingefu, which comes but once in an age, yet still save Kuniyoriwake and the rest? That being said, the life of Kuniyoriwake is also singular. If I dawdle, it will become an irretrievable matter. If I devote myself to that side, I cannot save this side. If I would save this side, I must abandon the precious Goshingefu. The command of Kamisama is most weighty, and human life is also truly precious.'</p>
+          <p class="en-p">Fretting whether to do this or that, for a while he paced back and forth over a distance of four or five ken, bewildered as to what measure to take.</p>
+          <p class="en-p">Tsunekusu: 'Ah, if I dilly-dally, on the other side the breath of life will cease entirely. As for the Goshingefu, it is not as though it cannot be fulfilled if delayed by half an hour or an hour. Oh, that is so. Saving Kuniyoriwake is surely the right thing.'</p>
+          <p class="en-p">Murmuring thus to himself, he sought the direction whence the voices of the dojin came, traced the mountain stream, parted the brushwood, and descended.</p>
+          <p class="en-p">At a point four or five cho downstream, four or five attendants raised their voices to the utmost,</p>
+          <p class="en-p">Attendants: 'Look there! Look there!'</p>
+          <p class="en-p">they clamored. When he looked, there were three black shadows, now sinking, now floating, being swept down by the fierce current. In any case, both banks were like sheer walls, and it was impossible to approach easily. Tsunekusu raised a loud voice,</p>
+          <p class="en-p">Tsunekusu: 'To the downstream! To the downstream!'</p>
+          <p class="en-p">crying out thus, he dashed off at breakneck speed toward the downstream for about ten cho.</p>
+          <p class="en-p">Here the mountain stream spread out somewhat wider, the water became considerably shallower, the flow also grew milder, and even the small pebbles at the riverbed were clearly visible. Tsunekusu and the four or five attendants splashed straight into the river, and waiting by forming a horizontal ladder formation to pick up the bodies of the three persons drifting down.</p>
+          <p class="en-p">The one who finally drifted ashore was Kuniyoriwake, and following him, the other two also safely drifted to this place. Dividing the task of handling the physical body of each person between two men, they hauled them onto the bank, made them vomit water, and after applying various forms of artificial respiration, Tsunekusu, raising his hoarse elderly voice, repeatedly and endlessly chanted the Hankonka. Kuniyoriwake at last began to move his hands and feet. Tsunekusu's face suddenly began to shine. Chanting the verses of the Hankonka once more toward the two persons, at last the two also revived. The joy of everyone was beyond all comparison.</p>
+          <p class="en-p">By the command of Tsunekusu, Kuniyoriwake and the others were sent to the hollow of a zelkova tree in the natural hotel and left in the care of the dojin, while Tsunekusu, thinking that delay would mean a great crisis, dragging his tired aged steps and taking the tara-wood staff for his strength, climbed up once more toward the valley of Mount Harris.</p>
+          <p class="en-p">Kuniyoriwake, Charles, and Base finally recovered their vigor. However, perhaps as divine punishment for eating the persimmon of the dragon god, their bellies gradually swelled up until they looked like women in their final month of pregnancy. Charles and Base, rolling about with their whole bodies curled up round like balls, writhed and suffered,</p>
+          <p class="en-p">Charles: 'I say, Kuniyoriwake Kamisama, please do something about this.'</p>
+          <p class="en-p">Kuniyoriwake: 'Now wait. I must heal my own belly first.'</p>
+          <p class="en-p">Charles: 'Originally it was because of you that we met with such a plight, so you must help us or we are done for. Somehow inside my belly it feels as though the babies of a giant snake are wriggling about, and it is so agonizing I cannot endure it, oh. The moment the infant giant snakes are born, we will die on the spot without distinction of sex, so they say. Since it hurts this much, it would be better to die, but even dying is useless. At home my wife and children remain. If you do not somehow save us quickly, it has grown gradually more painful.'</p>
+          <p class="en-p">Kuniyoriwake: 'Though vulgarity brings shame upon the world, upon one's real belly,</p>
+          <p class="en-p">Even if it swells, there can be no giant snake.'</p>
+          <p class="en-p">chanting this twice, he clenched his fists and struck his own belly three or four times,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">常楠は此処に於て迷はざるを得なかつた。肝腎要の御神業に参加せざればならず、又国依別以下を助けなくては人間の道が立たず………。</p>
+            <p class="ja-classical-line">常楠『あゝ如何したらよからうか。末代に一度の此御神業を外しても国依別その外を助けねばならぬであらうか。それだと云つて、国依別の生命もヤツパリ一つだ。グズグズして居れば取返しのつかない事になつて了ふ。彼方に尽せば此方を救ふ事が出来ぬ。此方を救はんとすれば、大切な御神業を放棄せねばならず。神様の御命令は最も重く、人命も亦実に大切である』</p>
+            <p class="ja-classical-line">兎やせん角やせんと暫くは四五間の間を上りつ、下りつ処置に迷うてゐた。</p>
+            <p class="ja-classical-line">常楠『アヽ、グヅグヅしてゐると、一方は息の根が止まつて了ふ。御神業は半時や一時遅れたとこで勤まらない事は無い。オーさうだ。国依別を助ける方が本当だらう』</p>
+            <p class="ja-classical-line">と独語云ひ乍ら、土人の声のする方を尋ねて谷川を伝ひ、灌木を分けて下つて往く。</p>
+            <p class="ja-classical-line">四五丁下流に当つて四五人の供人は声を限りに、</p>
+            <p class="ja-classical-line">『アレヨ　アレヨ』</p>
+            <p class="ja-classical-line">とさざめいてゐる。見れば三つの黒い影、浮きつ沈みつ激流に流されて下り往く。何分両方は壁の如き岩、容易に近寄る事は出来ない。常楠は大声を上げて、</p>
+            <p class="ja-classical-line">常楠『下流へ　下流へ』</p>
+            <p class="ja-classical-line">と呼ばはり乍ら、一目散に下流を指して十丁許り駆出した。</p>
+            <p class="ja-classical-line">此処には谷川稍広く展開し水も余程浅くなり流れも亦緩やかになつて、川底の小砂利迄がハツキリ見えて居る。常楠を始め四五の供人はザブザブと川に飛入り、流れ来る三人の身体を拾ひ上げんと横梯陣を作つて待つてゐる。</p>
+            <p class="ja-classical-line">漸く流れついたのは国依別、続いて二人も無事に此処に流れて来た。各一人の肉体を二人宛手分けして岸に引上げ、水を吐かせ、種々と人工呼吸を施した末、常楠は老人の皺嗄れ声を張り上げ乍ら、反魂歌を繰返し繰返し高唱した。国依別は漸くにして手足を動かし出した。常楠の面は忽ち輝き初めた。又もや二人に向つて反魂歌の数歌を唱へ上げるや、漸くにして二人も蘇生した。一同の悦びは譬ふるに物なきまでであつた。常楠の命令に依つて国依別其他を天然ホテルの槻木の洞穴に送り、土人に介抱させ置き乍ら、常楠は時遅れては一大事と、疲れた老の足を引ずり乍ら、多羅の木の杖を力にハーリス山の谷間を目がけて再び登り行く。</p>
+            <p class="ja-classical-line">国依別、チヤール、ベースの三人は漸く元気恢復した。されど竜神の柿を食つた天罰か、腹は追々膨張して臨月の女の様になつて来た。チヤール、ベースの二人は、ゴロリゴロリと身体中丸くなつて毬のやうに転げ廻り苦しみ乍ら、</p>
+            <p class="ja-classical-line">チヤール『モシモシ、国依別神様、何とかして下さいな』</p>
+            <p class="ja-classical-line">国依別『マア待つて呉れ。俺の腹から癒さなくちやならないのだ』</p>
+            <p class="ja-classical-line">チヤール『元は貴方の為に、斯んな目に会つたのですから、助けて頂かねばつまりませぬ。何だか腹の中に大蛇の児がウヨウヨして居るやうに苦しくて怺りませぬワ。大蛇の赤児が出産するや否や、男女の区別なく即座に死んで了うと言ふことです。これ丈け苦しくては死んだ方が優だが、死んでもつまらない。宅には女房や子が残つてゐる。何とかして早く助けて貰はねば、追々苦しくなつて来ました』</p>
+            <p class="ja-classical-line">国依別『いやしさに世間へ恥をかきの実の
+腹ふくれても大蛇あるまい』</p>
+            <p class="ja-classical-line">と二度くり返し口吟み、自分の腹を拳骨を固めて三つ四つ撲りつけ、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kuniyoriwake: 'Daijiya, taisan-taisanna.'</p>
+          <p class="en-p">So saying, he chanted the heavenly Kazūta with all his might, drawing painful breaths. Strange to say, Kuniyoriwake's abdomen, which had been swollen like a chōman until now, healed as it had been originally, and his breathing returned to normal. Kuniyoriwake immediately sōjiyōed the Amatsunorito, recited words of gratitude and kiguwan, and tearfully gave thanks for the shinon.</p>
+          <p class="en-p">The two persons, Chāru and Bēsu, let out voices like danmatsuma, groaning with un-un while breathing hard through their shoulders. That sanjiyō was barely able to be looked at.</p>
+          <p class="en-p">Kuniyoriwake was shedding asemizu and performing kiguwan with utmost effort for the sake of both persons.</p>
+          <p class="en-p">Kuniyoriwake: 'Chāru, Bētsu, Kuniyoriwake mo morotomo
+Tengu no hara kara kudari keru kana.
+Hara-hara to namida nagashite hara o nade
+Kaki o nusunda hara ise ni ai.
+
+Hara ga tatedomo shikata nashi
+Tatsugami hara o tateta no ka
+Nanji wa yoko ni nagai yatsu
+Hara tate tōshi mo narau mai
+Takaamahara ni aremaseru hyaku no kamitachi
+Ōminabara ni aremaseru Hayakitsuhimegami
+Hara no nayami o harai tamae kiyome tamae
+
+Hara-hara to furi kuru ame ni sora harete
+Daijiya no sora mo sumiwatari keri.'</p>
+          <p class="en-p">Chanting such makeshift and clumsy koworeuta from his mouth, he sat chiyokonanto in the middle of Chāru and Bēsu, and stroked around the Hotei-like bellies of both persons with both hands. Like peeling off a thin sheet of paper, the bellies of the two gradually reduced in volume.</p>
+          <p class="en-p">Kuniyoriwake: 'Sore mita ka nyōbō ga naderu fugu no hara
+Ottodotsukoi
+Sore mita ka Kuniyori naderu kaki tsppara
+Amatsukami Kunitsukami harai tamae kiyome tamae
+Takayama no ihori, takayama no ihori
+Kakiwakete kikoshimese yo
+Kore ga mekura no kaki no zoki
+Sekki ga kita zo sekki ga kita zo
+Kakidase kakidase
+Shigatsu to nigatsu no shi-giwa de wa nai zo
+Ima ga futari no inochi no setogiwa
+Manmō maitsdai iki tōshi
+Sumeōkamikami no mamoru mi wa
+Tatōe daijiya no hisomu tomo
+Daijiya arumai futari zure
+Ā kamunagara-kamunagara
+Mitama sachiwai mashimaste
+Chāru, Bēsu ga kurushimi o
+Katatoki mo hayaku sukuwase tamae
+Sono gen o tazunureba
+
+Kuniyoriwake yori izudishi koto
+Tsumi wa mattaku wagami ni areba
+Nanzo hayaku ryōnin no hara o hisuborase moto no genki ni kaifuku seshime tamae
+Ā kamunagara mitama sakibahese.'</p>
+          <p class="en-p">Praying with all his might and drenched in sweat, he stroked down the bellies of both persons with both hands. The divine virtue instantly manifested, and the two became as they were originally within the span of about half an hour. The four or five attendants admired that everyone was completely cured by Kuniyoriwake's kiguwan, and all speaking in unison,</p>
+          <p class="en-p">Kuniyoriwake: 'The living god of Kuniyoriwake.'</p>
+          <p class="en-p">folded their hands in prayer.</p>
+          <p class="en-p">Kuniyoriwake finished sōjinging words of gratitude to the Ōkami together with Chāru and Bēsu, quickened his steps, and climbed toward Mount Harisu once again. Singing sendenka along the way with high spirits as an eight-person group, Kuniyoriwake traced and proceeded along the place where Kuntiyoriwake had climbed.</p>
+          <p class="en-p">Kuniyoriwake: 'Asahi wa teru tomo kumoru tomo
+Tuki wa michi tomo kakuru tomo
+Tatōe daichi wa shizumu tomo
+Makoto no chikara wa yo o sukuu
+Kami no miiro wa menomatari
+Wa ga kaishin to kototama no
+Chikara ni yorite mihashira no
+Tōtoki miko wa sukuwarenu
+Ā kamunagara-kamunagara
+Mitama sachiwai mashimaste
+Hitotoki mo hayaku katatoki mo
+Kunitawariwake ya Watahiko no
+Kami no mikoto no omae e
+Michibiki tamae Harisu no
+Yama o mamorasu Takatsugami
+Shiranu shiranu ayamachi o
+Na-dini minaoshi kikinaoshi
+Tasuke tamaishi tatsugami no
+Megumi o kanshiya tatematsuru
+Tsune-Kusunokio wa ima doko
+
+Sadamete waregura ga shintai o
+Kunitawariwake no omae ni
+Kanzenni shōshini nori oete
+Ima wa futari no warai gusa
+Mori no kodama ni hibikuran
+Ten o fūjite sobiritatsu
+Ooki hayashi no tani no michi
+Susumu waregura no suzushisa yo
+Na wa taihei no kaki nareba
+Ramchiki sawagi no kono shimatsu
+Taidaikaki to na o tsukete
+Igo no imashime naninami mo
+Kono kaki bakari wa kuwa nu yō ni
+Shirushi o tatete okou kana
+Iya mate shibashi mate shibashi
+Taiheikaki wa ko yori
+Kuwa te wa naranu to satobito hito ga
+Yotsuku shōchi no ue nareba
+Watashi no yō naru awatetermo
+Yomo ya hitori mo kono shima ni'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">国依別『大蛇、退散々々』</p>
+            <p class="ja-classical-line">と云ひ了つて、天の数歌を力限りに苦しき息をつき乍ら奏上した。不思議や今迄脹満のやうにふくれてゐた国依別の腹部は、元の如くに癒り、息も平常の通りになつて来た。国依別は直ちに天津祝詞を奏上し、感謝祈願の言葉を唱へて神恩を涙乍らに感謝するのであつた。</p>
+            <p class="ja-classical-line">チヤール、ベースの二人は、断末魔の様な声を出して、ウンウンと肩で息をし乍ら呻いてゐる。その惨状目も当てられぬ許りであつた。</p>
+            <p class="ja-classical-line">国依別は両人の為に一生懸命に汗水を垂らして感謝祈願をしてゐる。</p>
+            <p class="ja-classical-line">国依別『竜神の柿食て布袋になつチヤール
+腹は忽ちヘースなるらん。
+柿取つて見ればヘースが当りまへ
+腹ふくれチヤール道理わからぬ。
+チヤール、ヘース、国依別も諸共に
+天のはらから下りけるかな。
+ハラハラと涙流してはらを撫で
+柿を盗んだ腹いせに逢ひ。</p>
+            <p class="ja-classical-line">腹が立てども仕方なし
+竜神腹を立てたのか
+汝は横に長い奴
+腹立て通しもならうまい
+高天原にあれませる百の神たち
+大海原にあれませる速秋津姫神
+はらの悩みを祓ひ玉へ清め玉へ</p>
+            <p class="ja-classical-line">ハラハラと降り来る雨に空晴れて
+大蛇の空も澄み渡りけり。』</p>
+            <p class="ja-classical-line">と口から出任せの腰折れ歌を詠ひ乍ら、チヤール、ベースの真ん中にチヨコナンと坐り、両人の布袋腹を両方の手で撫で廻して居る。薄紙を剥いだ様に二人の腹は漸次容積を減じて来た。</p>
+            <p class="ja-classical-line">国依別『それ見たか女房が撫でるふぐの腹
+オツトドツコイ
+それ見たか国依なでる柿つぱら
+天津神国津神はらひ玉へ清め玉へ
+高山の伊保理、短山の伊保理
+かき分けて聞召せよ
+これが盲の柿のぞき
+節季が来たぞ節季が来たぞ
+かき出せかき出せ
+四月と二月の死際ではないぞ
+今が二人の生命の瀬戸際
+万劫末代生き通し
+皇大神の守る身は
+仮令大蛇の潜むとも
+大蛇あるまい二人連れ
+あゝ惟神々々
+御霊幸はひましまして
+チヤール、ベースが苦しみを
+片時も早く救はせ玉へ
+その源を尋ぬれば</p>
+            <p class="ja-classical-line">国依別より出でし事
+罪は全く我身にあれば
+何卒早く両人の腹をひすぼらせ旧の元気に恢復せしめ玉へ
+あゝ惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">と一生懸命に汗みどろになつて祈念し乍ら両手にて、両人の腹を撫で下ろした。神徳忽ち現はれ、二人は半時余りの間に旧の如くになつて了つた。四五の供人も国依別の祈願に依つて忽ち全快せし事を感歎し、各口を揃へて、</p>
+            <p class="ja-classical-line">『国依別の生神様』</p>
+            <p class="ja-classical-line">と合掌するのであつた。</p>
+            <p class="ja-classical-line">国依別は大神にチヤール、ベースと共に感謝の祝詞を奏し了り、足を早めて再びハーリス山指して登り行く。国依別は道々宣伝歌を歌ひ乍ら元気旺盛八人連れにて、言依別の登りたる場所を辿り進み行く。</p>
+            <p class="ja-classical-line">国依別『朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+誠の力は世を救ふ
+神の御稜威は目の当り
+わが改心と言霊の
+力に依りて三柱の
+尊き御子は救はれぬ
+あゝ惟神々々
+御霊幸はひましまして
+一時も早く片時も
+言依別や若彦の
+神の命の御前へ
+導き玉へハーリスの
+山を守らす高津神
+不知不識の過ちを
+直日に見直し聞直し
+助け玉ひし竜神の
+恵みを感謝し奉る
+常楠翁は今何処</p>
+            <p class="ja-classical-line">定めて吾等が進退を
+言依別の御前に
+完全に詳細に宣り終へて
+今は三人の笑ひ草
+森の木霊に響くらん
+天を封じて聳り立つ
+老木林の谷の道
+進む吾等の涼しさよ
+名は太平の柿なれど
+乱痴気騒ぎの此始末
+太乱柿と名をつけて
+以後の戒め何人も
+此柿計りは食はぬ様に
+標を立てて置かうかな
+いや待て暫し待て暫し
+太平柿は古より
+食てはならぬと里人が
+よつく承知の上なれば
+私の様なる周章者
+よもや一人も此島に</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kuniyoriwake: 'They surely cannot be living there. Doing such a thing and wasting time, if we deviate completely from the vital Shingefu, how can we possibly make an excuse before the strict Mikoto of Tamateruhiko or the mild Mikoto of Tamateruhime when we return to Seichi? From today, I too will reform from the bottom of my heart, and stop the chiyameshiki teasing once and for all to become serious. At the entrance of the Tennen Hotel, facing the two men Wakahiko and Tsunekusu, I showed off my chiyameshiki teasing and pretended to be a goddess transformed from the dragon god of Mount Harris; as punishment for taking such delight in that, I have suddenly been given this failure by Kami.'</p>
+          <p class="en-p">Kuniyoriwake: 'Ah, have we fallen behind, have we fallen behind? By now, the divine officials of Kotoyoriwake, Wakahiko, along with Tsunekusu-sama, must be whispering together with drooping heads: "Appearances are deceiving; we thought Kuniyoriwake was a splendid fellow, yet he ate the persimmon forbidden by Kami, fell into a ravine, was caught by others, and had to be rescued—what a disgraceful sight. Though he calls himself a divine official, he is an empty and foolish fellow. Through that foul-mouthed Kuniyoriwake's incomprehensible actions, for which Charles and Base are entirely blameless, we suffered such bitter experiences." Though I feel somewhat relieved by Tsunekusu-sama's report, I feel sorry for those two.'</p>
+          <p class="en-p">Kuniyoriwake: 'As for Kuniyoriwake, since he violated the divine decree and suffered the dark punishment of Kami, no matter what happens to him—even if he dies—it doesn't matter, but I want to save those two fellows. By now, the three of them are probably huddled together in a secret council like the Odawara council. Ah, Kannagara kamugami-gami! Receiving the blessings of the Mitama, we who skillfully performed the acrobatic feat of aerial flight have arrived safely here thanks to Kami's grace, without any danger to our lives.'</p>
+          <p class="en-p">Kuniyoriwake: 'Kotoyoriwake and Wakahiko surely cannot even begin to think that we are this healthy. If we suddenly pop our faces in there, just like a dead child returning smiling to his home, they will surely rejoice with great courage. Oops, I went too far and said too much; I was almost starting the chiyameshiki teasing again. Naohi ni minaoshi kikunaoshi, rectifying our pronouncements, before the presence of Amatsukami and Kunitsu-omikami, in my great joy at having my life saved, I offer a song of gratitude.'</p>
+          <p class="en-p">Kuniyoriwake: 'Is this what is meant by "not knowing where one's hands dance and feet tread"? Being excessively joyful, my natural teasing nature emerged and derailed me, causing me to say inappropriate things. I apologize repeatedly. Though the morning sun may shine or be clouded, though the moon may wax or wane, even if the great earth should sink, having learned my lesson from this recent affair, not even by the breadth of a hair's width will I ever turn away, and I will strictly observe the divine teachings of Kami. Ah, Kannagara kamugami-gami! May the blessings of the Mitama be ever prosperous.'</p>
+          <p class="en-p">Singing thus with a high voice driven by high spirits, they kept their steps aligned and marched further and further into the inner depths.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">必ず住んで居らうまい
+そんな事して暇を取り
+肝腎要の神業に
+ガラリ外れて了うたら
+聖地へ帰り玉照彦の
+厳の命や玉照姫の
+瑞の命の御前に
+どうして言ひ訳立つものか
+国依別も今日よりは
+心の底から立直し
+茶目式からかひ薩張と
+止めて真面目になりませう
+天然ホテルの入口で
+若彦、常楠両人に
+向つて茶目式発揮なし
+ハーリス山の竜神の
+化けた女神と偽つて
+悦に入つたるその罰で
+俄にこんな失敗を
+神から言ひつけられたのだ</p>
+            <p class="ja-classical-line">あゝ後れしか後れしか
+嘸今頃は言依別の
+神の司や若彦が
+常楠さまと諸共に
+人は見かけによらぬもの
+国依別の宣伝使
+立派な奴ぢやと思うたに
+神の禁じた柿を喰ひ
+谷に落ちこみ他の手に
+かかつて救はれ何の態
+神の司と云ひ乍ら
+有名無実のタワケ者
+チヤール、ベースの両人に
+決して罪はない程に
+口の賤しい国依の
+わけが分からぬその為に
+あれ丈苦い目に会うた
+常楠さまの報告で
+ヤツと安心したものの
+可哀相なは両人ぢや</p>
+            <p class="ja-classical-line">国依別は神勅を
+叛いて神の冥罰を
+喰つたのなれば何うならうと
+仮令死んでも構はない
+二人の奴を助けたい
+なぞと今頃三人は
+首を鳩めてひそびそと
+小田原評定の最中だろ
+あゝ惟神々々
+御霊の幸を蒙りて
+空中飛行の曲芸を
+うまく演じた吾々は
+お蔭で生命に別条なく
+シヤンシヤンここ迄やつて来た
+言依別や若彦も
+よもやこれ丈達者ぞと
+思ひ初めては居られまい
+其処へヌツクリ顔出せば
+死んだ我子が我家に
+笑つて皈つて来たやうに</p>
+            <p class="ja-classical-line">悦び勇んで呉れるだろ
+オツトドツコイ言ひ過ぎた
+又茶目式になりかけた
+直日に見直し聞直し
+宣り直しませ天津神
+国津御神の御前に
+国依別が生命を
+助けられたる嬉しさに
+感謝の歌を奉る
+手の舞ひ足の踏むところ
+知らずと云ふは此事か
+余り嬉しうて持前の
+茶目が出て来て脱線し
+不都合な事を云ひました
+幾重にも御詫申します
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+今度の事に懲々し
+毛筋の巾の横幅も</p>
+            <p class="ja-classical-line">反かず神の御教を
+必ず守り奉る
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と元気に任せて声高らかに歌ひ乍ら、足並揃へて奥へ奥へと進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: 太平柿 [792]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: Lake 上の Monster 物 [794]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 18: Kami 格化 [800] - Volume 27 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 27 Table of Contents</a>
+      <span>Volume 27</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 27 &bull; Chapter 18</span>
+      <h1 class="chapter-title-en">Chapter 18: Kami 格化 [800]</h1>
+      <p class="chapter-title-ja">神格化〔800〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kiyohiko, Kiyokohime, Teruhiko, and Terukohime, the two couples, here celebrated their auspicious wedding ceremony. Reporting this to their father Tsunekusu, who dwelt in the cave of the Zelkova tree, and wishing also to exchange the parental cup of pledge, they set forth from this rock cave, committing themselves to the alligator boat together with M. and Semu, and four or five attendants to begin with, crossed the broad Riukiunuma, parted the boundless grassy fields, and barely reached the cave mansion of Tsunekusu at that day's dusk.</p>
+          <p class="en-p">Tsunekusu was in the very midst of praying before the altar with four or five natives for the happiness of Kiyohiko and Teruhiko, and also praying for the safe ocean journey of Kotoyoriwake's party. The two brothers returned here in high spirits, accompanied by their two fair new wives and a host of retainers. Tsunekusu had become utterly absorbed, single-mindedly intent upon his prayer. The brotherly couples sat upright beside him and offered up words of thanksgiving and prayer. When Tsunekusu finished offering the norito and looked back, Kiyohiko and Teruhiko were sitting politely with two beauties of graceful countenance.</p>
+          <p class="en-p">Kiyohiko: 'Father-sama, we have returned safely just now.'</p>
+          <p class="en-p">Teruhiko: 'You must have been waiting for us anxiously indeed.'</p>
+          <p class="en-p">Tsunekusu: 'Ah, you have returned even sooner than I thought. Ah, were not you two the Kiyokohime and Terukohime who departed from this place a short while ago? Looked at from the front or looked at from the side, you are spitting images, beautiful women without a single hair's breadth of difference, how could this be? This Tsunekusu, too, was beside himself with worry. Well, well, safely above all else, most auspicious.'</p>
+          <p class="en-p">Kiyokohime: 'Are you the father-sama of Tsunekusu, renowned in rumor? I have become the wife of Kiyohiko-sama. Please cherish me forever and ever.'</p>
+          <p class="en-p">Terukohime: 'I am the wife of Teruhiko-sama. Father-sama, for the first time... no, I meet you again. How well you have remained safe. Please love me as your child forever and ever. Since I am an incompetent person, please do not hesitate to scold me, and I beg that you will employ me for all eternity.'</p>
+          <p class="en-p">While holding back tears, Tsunekusu said,</p>
+          <p class="en-p">Tsunekusu: 'Ah, both of you have spoken so well. This Tsunekusu, too, has no remaining regrets now because of this. Husband and wife, please get along well and fulfill your divine work perfectly.'</p>
+          <p class="en-p">Kiyokohime and Terukohime lowered their heads simultaneously with a start, and are lost in tears of joy and nostalgia. Expressing his celebratory feelings and wishing to reveal his own identity, Tsunekusu unfolded a silver fan, and unlike his aged self, began to chant in a clear voice.</p>
+          <p class="en-p">Tsunekusu: 'In that ancient age of the gods, when the deities shook the thousand rock-doors,
+Jerusalem of the divine capital,
+Kunitachinotokami no Ōkami
+Permanently and forever tranquil,
+Ruling over the world at that juncture,
+Kunihiko of the distant ancestral deities,
+Together with Tsunekohime,
+Offering the hemp pillars of divine festivals,
+To no avail despite having served him,
+Ashizumi no Takebi's might being so strong,
+Descendants scattered in all directions,
+My father and mother, Tamahiko and
+Tamahime, those two, concealing their forms on the island of Jitōtō,
+While giving birth to me and nowhere to be found,
+Concealed their pure forms.
+Tsunekusu, a fledglings separated from its parents,
+Drifting to the shores of reliance,
+Touring far and near around Jitōtō,
+Came to Kinki.
+
+While sending up thin wisps of smoke,
+Passing through the merciless floating world,
+As though encountering the great upheaval of the Heavenly Rock Cave,
+Father and child are blown about by the rough waves of the world,
+Passing through life separately.
+Just around that time, through the wondrous workings of the divine,
+That intertwined parental reunion,
+Beginning with Akihiko and Komahiko,
+With hearts as pure as Kiyohiko and
+Teruhiko, meeting these four by chance,
+Rejoicing in ties that never end,
+As the days and months passed by,
+At the purification grounds of Kumano waterfall,
+When the time came to purify the heart
+With Wakahiko of the Misogakyō,
+Konohanahime having appeared,
+Both Tsunekusu and Wakahiko,
+Having received the divine treasures of
+Ri and Kyū,
+Upon the island of Riukiyu, the secret land,
+Concealed forever and ever,
+Receiving the jewel in the dragon's jaw,
+Proclaiming with stern words
+That they should present it to Kotoyoriwake
+No Mizu no Mikoto,
+Awed by that divine decree,
+Beating across the eight-hundred paths of the tide,
+Bathed in rain and combed by the wind,
+Enduring the spray of the vast ocean,
+Swallowed by waves, and gradually,
+Ascending to this island of Ri and Kyū,
+When one looks upon climbing up,
+Deep mountain paths where human footprints had long ceased,
+In the valley is a pure sea of jewels,
+Tsunekusu, now aged and rusted,
+Along with Tama no Seikatsu Wakahiko,
+Ascending day by day and night by night,
+Chanting the heavenly norito,
+And of Ōryūwake and Ōryūhime...'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">清彦、清子姫、照彦、照子姫の二夫婦は茲に芽出度結婚の式を挙げた。槻の洞穴に在る父の常楠に報告し、且つ親子の杯を結ぶべく此岩窟を立出で、エム、セムの二人を初め四五の従者と共に鰐魚の船に身を委せ、さしもに広き琉球沼を渡つて茫々たる草野を分け、辛うじて其日の夕間暮、常楠が洞穴の館に辿り着いた。</p>
+            <p class="ja-classical-line">常楠は四五の土人と共に祭壇の前に、清彦、照彦の幸福を祈りつつ、言依別一行の海上無事を祈る真最中であつた。二人の兄弟は二人の美はしき新妻を伴ひ、数多の供人を従へ意気揚々として茲に帰つて来た。常楠は一心不乱になつて祈願に余念がなかつた。兄弟夫婦は其傍に端坐して感謝祈願の言葉を奏上した。常楠は祝詞の奏上を了り後振り返り見れば、清彦、照彦は容色端麗なる二人の美女と共に行儀よく坐つて居た。</p>
+            <p class="ja-classical-line">清彦『父上様、只今無事に帰りました』</p>
+            <p class="ja-classical-line">照彦『嘸お待兼で御座いましたでせう』</p>
+            <p class="ja-classical-line">常楠『ヤア思うたよりは早く帰つて来て下さつた。ヤアお前は此間此処を立去つた清子姫、照子姫の二人ではなかつたか。縦から見ても横から見ても瓜二つ、寸分違はぬ綺麗な女、どうして御座つたか。此常楠も気が気でならなかつた。マアマア無事で何よりもお目出度い』</p>
+            <p class="ja-classical-line">清子姫『貴方が噂に高き常楠の御父上で御座いますか。妾は清彦さまの女房になりました。どうぞ末永く可愛がつて下さいませ』</p>
+            <p class="ja-classical-line">照子姫『妾は照彦さまの妻で御座います。お父様、初めて……否再びお目に懸ります。好くも御無事で居て下さいました。どうぞ末永く我子として愛して下さいませ。何分不束な者で御座いますれば、お構ひなくお叱り下さいまして、幾久しく御召使ひの程をお願申します』</p>
+            <p class="ja-classical-line">常楠は涙を浮べ乍ら、</p>
+            <p class="ja-classical-line">常彦『アヽ二人共好く言つて下さつた。此常楠も是にて最早心残りは在りませぬ。夫婦仲好くどうぞ神業を完全にお務め下さい』</p>
+            <p class="ja-classical-line">清子姫と照子姫は「ハツ」と計りに首を下げ、嬉しさと懐さの涙に暮れて居る。常楠は祝意を表し且つ自分の素性を明かす可く、銀扇を拡げて老の身にも似ず、声爽かに歌ひ始めた。</p>
+            <p class="ja-classical-line">常楠『千早振る古き神代の其昔
+神の都のエルサレム
+国治立大神の
+いや永久に鎮まりて
+世を知食す其砌
+遠津御祖の国彦が
+妻国姫と諸共に
+神の御祭り麻柱て
+仕へ奉りし甲斐もなく
+醜の建びの強くして
+子孫は四方に散乱し
+吾が父母の玉彦や
+玉姫二人は自転倒の
+島に姿を隠しつつ
+我れを生して何処ともなく
+清き姿を隠し給ひぬ
+親に離れし雛鳥の
+寄る辺渚の常楠は
+自転倒島を遠近と
+巡り巡つて紀の国に</p>
+            <p class="ja-classical-line">細き煙を立て乍ら
+情なき浮世を送る折
+天の岩戸の大変に
+逢ひしが如く親と子は
+世の荒浪に吹き捲られて
+分れ分れに世を送る
+頃しもあれや先つ年
+尊き神の計らひに
+絡み合ひたる親子の対面
+秋彦、駒彦始めとし
+心の色も清彦や
+照彦四人に巡り会ひ
+尽きぬ縁を喜びつ
+月日を送る其中に
+熊野の滝の禊場に
+三五教の若彦と
+心清むる折もあれ
+木花姫のあれまして
+常楠、若彦両人は
+琉と球との神宝の</p>
+            <p class="ja-classical-line">いや永久に隠されし
+秘密の国の琉球島
+竜の腮の宝玉を
+受取りまして言依別の
+瑞の命に献ぜよと
+言葉厳かに宣り給ふ
+其神勅を畏みて
+汐の八百路を打渡り
+雨に浴し風に梳づり
+大海原の潮をかぶり
+浪に呑まれ漸々に
+琉と球との此島に
+上りて見れば昔より
+人跡絶えし深山路の
+谷間に清き玉の海
+老錆果てし常楠も
+玉の勢若彦と
+日毎夜毎に上り来て
+天津祝詞を奏上し
+大竜別や大竜姫の</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Having turned Chindin-no-mikoto to pacify and submit, and offering the precious jewels of Ryū and Kyū to Kotoyoriwake of Ananai-kyō, the heart of the dragon god, whose murakimo heart was firmly resolved, opened at last—even such a time arrived. Parting the waves and crossing over, Kotoyoriwake, the great high priest, together with Kuniyoriwake, appeared in this cave which they had fixed as their temporary dwelling.</p>
+          <p class="en-p">Here four kami-ministers, advancing eagerly and cheerfully through the valley of Mount Harris, without any mishap obtained the precious jewel of the dragon's jaw into their hands, and oh, the joy of their return! Kiyohiko and Teruhiko, his sons, by what divine guidance had they visited his dwelling?</p>
+          <p class="en-p">Lady Kiyoko and Lady Teruko, the four of them, already residing in the temporary lodge, oh, the wonder of it! Kotoyoriwake, the great high priest, accompanied by Kuniyoriwake, declaring that he would cross the waves and go forth to the island of Takasago, made this Wakahiko, whom this Tsunekusu had brought along over the waves, carry the precious jewels of Ryū and Kyū, causing him to return afar to the island of Onokoro, while he designated this Tsunekusu as the guardian deity of the islands of Ryūkyū, and made his sons Kiyohiko and Teruhiko the gods of the left and right guards, and crossed the waves to go forth. Both Kiyohiko and Teruhiko, having formed the bond of younger sister and elder brother so auspiciously here with Lady Kiyoko and Lady Teruko to protect this floating island forever, the things they had thought became mere bubbles of water.</p>
+          <p class="en-p">Lady Kiyoko and Lady Teruko, blending into the darkness, from the time they hid their forms somewhither, the suffering within the hearts of both Kiyohiko and Teruhiko, how great it must be; and my grief as a parent is doubly intense. There is indeed avail in having prayed morning and evening with sincerity to the gods of heaven and earth; today, oh, the joy of meeting again with Lady Kiyoko and Lady Teruko as young brides! Ah, Kannagara kamugami-gami, may your august spirits prosper; may the bond of husband and wife be harmonious, for a thousand years, for eight thousand years, and eternally.</p>
+          <p class="en-p">May the pledge of the mandarin ducks never change no matter when, anywhere; may the bond of husband and wife remain unfading, deep as the color of the evergreen pine! Already I have nothing left in this world; from here I will ride across the ridge of the peaks of Mount Harris, and in order to protect this sacred island eternally for myriad ages, extending my life, I will join the throng of mountain people, become their leader, and protect the world eternally. You, Kiyohiko, and Lady Kiyoko, and Lady Teruko radiant with light, with hearts pure as Teruhiko, go forth everlastingly and forever to the southern islands, and serve in the divine works.</p>
+          <p class="en-p">Though the morning sun shine or grow cloudy, though the wax and wane of the moon take place, even should the great earth sink, as long as the spirit of my body remains on this island, blessing it as the peaceful land of Urayasu, may you cause the dew and rain of divine grace to fall everlasting and firm as bedrocks! Already there is nothing left in this world; whichever it may be, farewell,'—almost before he had finished speaking, chanting the heavenly number-song and clasping his hands in prayer, Tsunekusu instantly became pure white like snow over his whole body, and just as he stepped one or two paces out of the entrance of the wooden round palace, instantly his form became white smoke, and the sound of the wind blowing over the shore was heard loudly only in the sky.</p>
+          <p class="en-p">The brothers and their wives, astonished, ran out of the wooden round palace, gazed up at the sky and joined their hands, and the voices calling out, 'Father, oh Father,' were blocked by the blowing wind, leaving no way to search for him save to weep. Gazing up at heaven and prostrating upon the earth, this pathetic parting of parent and child, how pitiful it is to see them lamenting! Ah, Kannagara kamugami-gami, may your august spirits prosper.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">珍の命を言向けて
+琉と球との宝玉を
+三五教の言依別に
+奉らんと村肝の
+心定めし竜神の
+胸も開けし時もあれ
+浪路をわけて渡り来る
+言依別の大教主
+国依別と諸共に
+仮りの宿りと定めたる
+此洞穴に現れまして
+此処に四人の神司
+ハーリス山の谷間を
+心いそいそ進みつつ
+竜の腮の宝玉を
+恙も無しに手に入れて
+帰り来れる嬉しさよ
+伜の清彦、照彦は
+如何なる神の引合せか
+我れの住家を訪ね来て</p>
+            <p class="ja-classical-line">清子の姫や照子姫
+四人は早くも仮の家に
+来り居ませる不思議さよ
+言依別の大教主
+国依別を伴ひて
+浪路を渡り高砂の
+島に出でんと宣らせつつ
+此常楠が浪の上
+伴ひ来りし若彦に
+琉と球との宝玉を
+持たせて遥かに自転倒の
+島に帰させ給ひつつ
+此常楠を琉球の
+島の守り神と神定め
+伜清彦、照彦を
+左守右守の神として
+波を渡りて出で玉ふ
+清彦、照彦両人は
+清子の姫や照子姫
+此処に目出度く妹と背の</p>
+            <p class="ja-classical-line">契を結び永久に
+此浮島を守らんと
+思ひし事も水の泡
+清子の姫や照子姫
+闇に紛れて何処となく
+姿隠させ玉ひしより
+清彦、照彦両人が
+心の中の苦しさは
+如何ならんと父母の
+我苦しみは一入ぞ
+天と地との神々に
+朝な夕なに真心を
+籠めて祈りし甲斐ありて
+今日は嬉しき清子姫
+照子の姫の若嫁に
+巡り会うたる嬉しさよ
+あゝ惟神々々
+御霊幸倍ましまして
+夫婦の仲は睦まじく
+千代も八千代も永久に</p>
+            <p class="ja-classical-line">鴛鴦の契の何時迄も
+変らであれやどこ迄も
+常磐の松の色深く
+褪せずにあれや夫婦仲
+最早此世に残りなし
+我はこれよりハーリスの
+山の尾の上を乗り越えて
+此神島を永久に
+守らん為めに万代も
+命永らへ山人の
+群に加はり長となり
+世を永久に守りなん
+汝清彦、清子姫
+光洽き照子姫
+心も清く照彦と
+弥永久に何時迄も
+南の島に出でまして
+神の御業に仕へかし
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも</p>
+            <p class="ja-classical-line">仮令大地は沈むとも
+我の身魂の此島に
+止まる限り心安の
+浦安国と幸はひて
+神の恵の露の雨
+堅磐常磐に降らせなん
+最早此世に残りなし
+孰もサラバ』と言ふより早く
+天の数歌歌ひ上げ
+合掌するや常楠は
+全身忽ち雪の如く
+真白になりて木の丸殿の入口を
+一足二足跨げ出しと思ふ間に
+忽ち姿は白煙
+磯吹く風の音高く
+空に聞ゆる計りなり
+兄弟夫婦は驚いて
+木の丸殿を走り出で
+空を仰いで手を合せ
+父よ父よと呼ぶ声も</p>
+            <p class="ja-classical-line">吹き来る風に遮られ
+尋ぬる由も泣く計り
+天を仰ぎ地に伏して
+親子の果敢なき此別れ
+嘆き居るこそ哀れなれ
+あゝ惟神々々
+御霊幸倍ましませよ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c17.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 17: 沼の女 Kami [799]</span>
+      </a>
+      <a href="../vol28/index.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Volume 28</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

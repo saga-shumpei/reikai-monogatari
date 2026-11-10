@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: Jewel 調べ [787] - Volume 27 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 27 Table of Contents</a>
+      <span>Volume 27</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 27 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: Jewel 調べ [787]</h1>
+      <p class="chapter-title-ja">玉調べ〔787〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">If we gaze upon it, how lofty is the young palace of Hisakata, of Takaamahara, respectfully replicated upon the earth, its great pillars firmly set, with the cross-timber chigi soaring high in Takaamahara, the miraculous mansion built in reverent service, joined to the brocade palace, the vast and majestic Hall of Eight Fathoms—starting with Hidekohime, and Umekohime, Isokohime, Hatsuwakahime, and Tamanohime, beginning with Otohiko and Kamehiko, Mokusuke the sōmu, and all other yakuin and shinjiya, solemnly drawing near to the Hall of Eight Fathoms, quickly overflowing both inside and outside the sanctuary.</p>
+          <p class="en-p">Just as planned, the ritual was safely concluded. In the upper seat sat Mokusuke the sōmu, followed by Hidekohime, Isokohime, Umekohime, Hatsuwakahime, and Tamanohime, and Lady Otama, while in the highest seats were Tamateruhiko and Tamateruhime in waiting; among the leading cadres were Kamehiko, Otohiko, and Kuniyoriwake, and starting with Akihiko, Natsuhiko, and Tsunehiko, sitting alongside Hidekohime were Kōryūhime, Mukadehime, and Princess Teles in waiting, while Tomohiko took his place among the upper seats of the cadres. Dividing the crowd, coming up with high spirits, Takahime, Kurohime, and Takayamahiko, acting in their roles for today's divine service of jewel examination, adorned in splendid attire, took seats one step higher even than Hidekohime.</p>
+          <p class="en-p">Mokusuke: 'I am by nature a dull-souled, inferior-vessel, most foolish and idiotic bearer of a mitama, and I am hardly suited to fulfill the duties of sōmu; yet, finding the divine command impossible to ignore and against my own wishes accepting the appointment, I am discharging a portion of our sacred tasks with the assistance of you all, for which I deeply and warmly thank you, seeing this entirely as the grace of your universal sympathy. Therefore, having somewhat in mind for the sake of the divine realm, I desire to perform yet one more service, and I have already recommended my successor. Since the Kyōshu-sama is in retirement today due to a sudden illness, we cannot ask for his opinion, but as my successor I have thought of asking for the trouble of Tōsuke-san of Awaji Island, and I have confidentially submitted an inquiry regarding this. Now, today is truly a most auspicious day, and as you have heard, from Ryūgūjima the five-colored manijubels have been safely enshrined, and Kotoyorivake no Mikoto-sama has in any case assumed the supreme administration; today, it is the Kyōshu's words that we are to request the examination of Takahime and Kurohime, and to let all the shinjiya behold them in reverence, so with that intention please leisurely witness the sacred sight. Since you will not be able to behold them a second time, I will say just a single word so that you may fully receive the divine virtue on this occasion.'</p>
+          <p class="en-p">The gathered assembly applauds like falling rain. Mokusuke, accompanied by Hatsuwakahime, Tamanohime, Isokohime, and Umekohime, proceeds deep into the inner sanctuary, opens the nearby sacred seat with a golden key, and holding high above his head five separate willow boxes one by one, appears solemnly upon the high seat of the Hall of Eight Fathoms, where the five willow boxes are neatly placed upon the dais.</p>
+          <p class="en-p">Takahime stands up straight upon the dais, and glancing around at the assembly,</p>
+          <p class="en-p">Takahime: 'Everyone, today is truly a most auspicious day. Up until now, the three divine treasures of the Spirit of Mizu were enshrined here, and today once again the five divine treasures of the Spirit of Iku are safely enshrined, making this the unprecedented and peerless primary auspicious day on which you are blessed with the honor of reverent viewing. Since the Gods enact the divine providence of pulling back and casting forth, it is something well known to you all that they bring forth the crucial sutra of the Spirit of Iku later, and put forth the weft of Mizu first, performing transformations and disappearances beyond all ultimate comprehension. Up until today, our going as far as the neighborhood of the South Seas to search for the three jewels was by no means to seek out such weft-role jewels. Since jewels are quite prone to the possession of monsters, the likes of this Takahime and others made it appear as though we were searching for the three treasures, turning all attention in that direction, and at that time, the personages who become the foundation of the Sun God and the Otohime of Ryūgū performed arrangements deeply concealed within Lake Suwa of the Secret Village—where people can scarcely go—and that this was from the very beginning a matter well known to the two of us, nay, a matter arranged by us, is a fact. That we caused Hatsuwakahime, Tamanohime, Kōryūhime, Umekohime, Mukadehime, and five other divine officiants to perform this sacred task is precisely the infinite benevolence and arrangement of the Sun God and the divine compassion of Otohime-sama of Ryūgū. If you do not understand that, you will never be able to comprehend the arrangement of the Mitsugaku Gosoku Shinsē. Fortunately, the sincerity in the divine service of the wise Hidekohime and of Kotoyorivake no Mikoto—who has achieved a slight repentance—has manifested, enabling the Manijubel of Ryūgū to be enshrined in the sacred land, and the role of receiving and examining it is specifically one that both I, Takahime, and Kurohime ought to perform. Therefore, from this very moment we shall perform the inspection of the jewels, so everyone, it is best that you reverently behold them. Whatever may become of the three jewels, I know nothing of it. These five jewels of this time are indeed the crucial, vital, and grand sacred enterprise and great treasures of our divine work; moreover, because Tamajiwake and other half-enlightened mitama have handled them, I am worried as to whether they might be slightly tainted. Since the light of the jewel manifests in accordance with the mitama, it is truly a fearful thing, you see. Come, come, from here we shall take out from the box the yellow jewel entrusted by Omin to be handed over to Princess Teles, and examine it... Kurohime-sama, despite your trouble, please come over here for a moment. And you, Omin-sama, Princess Teles, since you are directly involved, take your places in waiting here.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">仰げば高し久方の
+高天原の若宮を
+地上に写し奉り
+大宮柱太知りて
+高天原に千木高く
+仕へ奉りし珍館
+錦の宮に連なりし
+稜威も広き八尋殿
+英子の姫を始めとし
+梅子の姫や五十子姫
+初稚姫や玉能姫
+音彦亀彦始めとし
+杢助総務其外の
+役員信者は粛々と
+八尋の殿に寄り来り
+早くも殿の内外に
+溢るるばかりなりにけり。</p>
+            <p class="ja-classical-line">かたの如く祭りも無事に終了した。上段の間には杢助の総務を始めとし、英子姫、五十子姫、梅子姫、初稚姫、玉能姫、お玉の方、最高座には玉照彦、玉照姫扣へられ、亀彦、音彦、国依別の幹部連、秋彦、夏彦、常彦を始め、英子姫と相並んで黄竜姫、蜈蚣姫、テールス姫末端に扣へ、友彦は幹部の上席に顔を並べて居た。群集を分けて意気揚々と登り来る高姫、黒姫、高山彦の三人は、今日玉調べの神務奉仕の役として、盛装を凝らし、英子姫よりも一段と上座に着いた。</p>
+            <p class="ja-classical-line">杢助『私は素より鈍魂劣器至愚至痴なる身魂の持主で御座いまして、総務なぞをお勤め申す柄ではありませぬが、神命黙し難く心ならずも拝命致し、皆様のお助けに依つて御用の一端を勤めさして頂いて居りますは、是れも全く皆様の御同情のお蔭と厚く感謝致します。就ては私も少しく思ふ所あつて、神界の為めに、もう一働き致したう御座いまするので、後任者を推薦致して置きました。教主様は今日は急病でお引籠もりで御座いますから、御意見を伺ふ事は出来ませぬが、私の後任者として淡路島の東助様を、御苦労に預りたいと思うて、内々伺ひは出して御座います。就きましては、今日は実にお目出度い日柄で御座いまして、竜宮島より、お聞及びの通り、五色の麻邇宝珠納まり、言依別命様が兎も角御主管なされて居られましたが、今日、高姫、黒姫のお取調を願ひ、信者一同に拝観をさせよと、教主のお言葉で御座いますから、其お心算で、ゆつくりと御拝観を願ひます。再び拝観する事は出来ぬので御座いますから、此際充分御神徳を戴かれる様に、一寸一言申上げて置きます』</p>
+            <p class="ja-classical-line">一同は雨霰のごとく拍手する。杢助は初稚姫、玉能姫、五十子姫、梅子姫を伴ひ、社殿の奥深く進み、黄金の鍵をもつて傍の宝座を開き、各一個の柳筥を、頭上高く差し上げながら、静々と八尋殿の高座に現はれ、五個の柳筥は、段上に行儀好く据ゑられた。</p>
+            <p class="ja-classical-line">高姫は段上にスツクと立ち、一同を見廻し乍ら、</p>
+            <p class="ja-classical-line">高姫『皆さま、今日は誠に結構なお日柄で御座います。今迄は瑞の御霊の三種の神宝此処に納まり、今日又厳の御霊の五色の神宝無事に納まり、皆様が拝観の光栄に浴さるる空前絶後の第一吉祥日で御座います。神様は引掛け戻しのお経綸をなさいますから、肝腎の厳の御霊の経を後に出し、瑞の緯を先に出したり、変幻出没究極す可らざる事を遊ばすのは、皆様御承知の事で御座いませう。今日迄三つの御玉を私共南洋あたりまで、捜索に行つたと申すのは、決して左様な緯役の玉を求めに行つたのではありませぬ。玉には随分モンスターの憑依するものでありますから、此高姫等は三つのお宝を探す様に見せて、其方に総ての精神を転じさせ、其時に日の出神、竜宮の乙姫の礎になるお方様が、一つ島に人のよう往かない如うな秘密郷の諏訪の湖に深く秘し、さうして仕組を遊ばして御座る事は、最初から我々両人の熟知する所、否仕組んで居る所で御座います。今日初稚姫、玉能姫、黄竜姫、梅子姫、蜈蚣姫其他五人の神司に、此御用をさせたのも日の出神の仁慈無限のお取計らひと、竜宮の乙姫様の御慈悲ですよ。それが分らぬ様では、三五教の五六七神政の仕組は到底、分るものではありませぬ。幸ひに賢明なる英子姫、稍改心の出来た言依別命の神務奉仕の至誠が現はれて、竜宮の麻邇の宝珠が聖地へ納まる事が出来る様になり、夫を受取り且つ調べるお役は特に此高姫、黒姫両人が致すべきもので御座います。依つて只今より御玉の改めを致しますから、皆さま、謹んで拝観なさるが宜しい。三つの御玉はどうならうとも私は知りませぬ。今度の五つの御玉こそ肝腎要な大望な御神業大事のお宝、就ては玉治別や其他の半研けの身魂が取扱つたのですから、少しは穢れて居ないかと心配を致して居るので御座います。身魂相応に玉の光が現はれるのですから、実に恐いもので御座いますよ。サアサ是れから、お民が預つてテールス姫に手渡した、黄色の玉を函から出して調べる事と致しませう。……黒姫さま、御苦労ながら一寸これへお越し下さい。さうしてお民さま、テールス姫さま、貴女は直接の関係者、此処にお扣へなされ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Hai,' replied the Riyōnin, and they approached the side of Takahime. Takahime pursed her lips into the shape of the character 'he,' untied the Keimamusu knot of the Yanagibako, and respectfully held up the Tamabako. Swaying her Karada to the rhythm of the Yakumogoto and keeping time with Tebeushi, she opened the lid of the Yanagibako with a 'shiyatchin-shiyatchin' sound, much like a Kikai Ningiyō. Expecting a Kiiro jewel to appear, a Dangoishi rolled out from within instead. Upon closer inspection, some Moji were inscribed upon it. Takahime knitted her brows and held it up to the Kuōsen, reading the inscription: 'Takahime, the Mitama of Kurohime is just like this; unless you perform Kaishin, it will never return to its original Ōgoniro jewel.' Takahime's Ganshiyoku turned as if she were in a Retsukuwa, and with a trembling voice, she spoke.</p>
+          <p class="en-p">Takahime: 'Hey, Omin-sama, Terusu-hime-sama, what were you doing going all the way to the solitary island of Kaiyōbanri with such haughty faces? How Ahau. If it were just this kind of jewel, there are enough of them in Kokumogaha to be a Jiyama.'</p>
+          <p class="en-p">Omin: 'Hai, what kind of jewel is it?'</p>
+          <p class="en-p">Takahime: 'What do you mean, what kind? There is no such thing as this kind or that kind of jewel. Because of the Kankuwa of your Mitama, even a precious jewel has ended up like this. ...Hey, you Terusu-hime, that Ahau-zuri woman of the Jiyanna natives, what is this attitude? ...How Ahau, perform Kaishin quickly.'</p>
+          <p class="en-p">Terusu-hime: 'Hai, hai, I shall perform Kaishin. I wonder why on earth it turned into such a jewel; how unpleasant.'</p>
+          <p class="en-p">Kurohime: 'That is why they say the Mitama of Mizu is easily possessed.'</p>
+          <p class="en-p">Tamawake: 'You said the Mitama of Mizu is easily possessed, but is this not the jewel of the Five?'</p>
+          <p class="en-p">Kurohime: 'They are all Mitama that are easily possessed.'</p>
+          <p class="en-p">Tamawake: 'In that case, perhaps it was your Mitama that possessed it. Let me see, I shall examine it.'</p>
+          <p class="en-p">Takahime: 'Do not bother. If a Hyōrokudama like you were to look at it, it would just end up as an ordinary jewel.'</p>
+          <p class="en-p">The crowd began to clamor noisily.</p>
+          <p class="en-p">Kuniyorawake stood upon the platform and said,</p>
+          <p class="en-p">Kuniyorawake: 'Everyone, do not make such a fuss. Today's jewel examination is also an examination of the Mitama of Takahime-sama and Kurohime-sama, so it is by no means the case that the Mitama of Terusu-hime or Omin-sama are black. As Takahime-sama said just a moment ago, no matter what is said, the two of you arranged this yourselves, so there is no need for worry. It reflects in the hearts of all who see it... It is called the Mani jewel because it is a Nyoi-hōju that changes according to the will of those who see it. There is no doubt that this is the real thing. Please, I ask you not to make a fuss. It is necessary to perform a mental test on Takahime-sama once, you see.'</p>
+          <p class="en-p">Takahime: 'Hey, Kuni-sama, do you have the qualifications to say such things?'</p>
+          <p class="en-p">Kuniyorawake: 'I certainly do; then why did you tell me at the forest of Ikuta to let you know, let you know, the whereabouts of the jewel?'</p>
+          <p class="en-p">Takahime: 'I cannot trust a single thing you say. You are a person of interest registered on the blacklist. Be silent.'</p>
+          <p class="en-p">Kuniyorawake: 'Even for me, who is recorded on the blacklist of the Takahime station, can you trust me even a little? I thought you would say that I am not to be trusted at all... That aside, please examine and show us the next white jewel quickly.'</p>
+          <p class="en-p">Takahime: 'Do not speak so noisily. If you keep putting your beak into this, the jewel might change again. Ugh, how filthy. Go over there. ...Now, this time it is your responsibility, Kusuke-sama, Tomohiko-sama. Come in here quickly.'</p>
+          <p class="en-p">The two men said 'Hai' and drew close to the left and right of Takahime. Takahime once again, just as before, respectfully opened the Yanagibako. Inside, there was a Dangoishi similar to the previous one, with similar things written upon it. Takahime opened her mouth, which she had pursed into the shape of 'he,' and stared at it for a while. The crowd began to clamor noisily once again. Kuniyorawake climbed up onto the platform again,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ハイ』と答へて両人は高姫の傍に立寄る。高姫は口をへの字に結び、柳筥の桂馬結びの紐を解き、恭しく玉函を捧げ、八雲琴の調子に合して体躯を揺り、手拍子を取りながら、機械人形の如うに柳筥の蓋を、シヤツチンシヤツチンと取つて見た。黄色の玉が出るかと思ひきや、中より団子石がゴロリと出た。よくよく見れば何か文字が記してある。高姫は眉を顰め光線にすかし見てるに、「高姫、黒姫の身魂は此通り、改心致さねば元の黄金色の玉にはならないぞ」と記されてあつた。高姫は顔色烈火の如く、声を震はせ、</p>
+            <p class="ja-classical-line">高姫『コレお民さま、テールス姫さま、お前さま達は偉さうな面をして、海洋万里の一つ島まで何しに往つて居つたのだ。アタ阿呆らしい。コンナ玉なら小雲川には邪魔になるほどあるぢやありませぬか』</p>
+            <p class="ja-classical-line">お民『ハイ、何んな玉で御座います』</p>
+            <p class="ja-classical-line">高姫『何んな玉もこんな玉もありますかい。お前の身魂の感化に依つて、折角の玉もこんな事になつて仕舞つた。……コレ、ジヤンナの土人の阿婆摺女テールス姫とやら、何の態だ、これは……阿呆らしい、早く改心なされ』</p>
+            <p class="ja-classical-line">テールス姫『ハイハイ改心を致します。どうしてマアこんな玉になつちやつたのだらう、いやな事』</p>
+            <p class="ja-classical-line">黒姫『それだから瑞の御霊は憑り易いと言ふのだ』</p>
+            <p class="ja-classical-line">玉治別『瑞の御霊は憑り易いと仰有つたが、これは五の御玉ぢやありませぬか』</p>
+            <p class="ja-classical-line">黒姫『何れも憑り易い身魂だ』</p>
+            <p class="ja-classical-line">玉治別『そんなら貴女の身魂が憑つたのでせう。どれどれ、私が調べて見ませう』</p>
+            <p class="ja-classical-line">高姫『お構ひなさんな。お前さまの如うな瓢六玉が見ようものなら、ただの玉になつて終ひます』</p>
+            <p class="ja-classical-line">群集はワイワイと騒ぎ出した。</p>
+            <p class="ja-classical-line">国依別は段上に立つて、</p>
+            <p class="ja-classical-line">国依別『皆さま、お騒ぎなさるな。今日の玉調べは高姫さま、黒姫さまの身魂調べも同様ですから、決してテールス姫やお民さまの身魂が黒いのではありませぬ。最前も高姫さまが仰有つた通り、何と云うても御両人が、自分でお仕組なさつたのですから心配は要りませぬ。皆見る人の心々に写りますから……如意宝珠、又見る人の随意々々替はるから麻邇の宝珠といふのです。之が本物に違ひありませぬ。どうぞお騒ぎなさらない様に願ひます。一度高姫さまのメンタルテストをやる必要がありますからなア』</p>
+            <p class="ja-classical-line">高姫『コレ国さま、お前さま、ゴテゴテ言ふ資格がありますか』</p>
+            <p class="ja-classical-line">国依別『ありますとも、そんなら何故私に生田の森で、玉の所在を知らせ知らせと云つたのですか』</p>
+            <p class="ja-classical-line">高姫『お前さまの言ふ事は、チツトより信用が出来ぬ。ブラツクリストに登録されて居る注意人物だ。お黙りなさい』</p>
+            <p class="ja-classical-line">国依別『高姫署のブラツクリストに記されて居る私でも、チツト位信用が出来るのですか。私は又大いに信用が出来ぬと仰有ると思つたに……それはさうとして次の白色の玉を早く調べて見せて下さい』</p>
+            <p class="ja-classical-line">高姫『八釜しう云ひなさるな。お前さまがツベコベ嘴を容れると、又玉が変化するかも知れませぬぞ。エヽ穢はしい。其方に往つて下さい。……サア今度は久助さま、友彦さま、お前さま達の責任だ。早く此処へお入来なさい』</p>
+            <p class="ja-classical-line">両人は「ハイ」と云ひながら高姫の左右に寄り添うた。高姫は又もや以前の如く、恭しく柳筥を開いて見た。中には前同様の団子石に同様な事が書いてある。高姫はへの字に結んだ口をポカンと開けて暫し見詰めて居た。群集は又もやワイワイ騒ぎ出した。国依別は又もや段上に押し上り、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kuniyoriwake: 'Everyone, do not make a fuss. Look, this is surely just a dango stone as it was before. It is entirely as if we were bewitched by foxes, but since this is also a jewel that changes according to the fluctuations of the heart, there is no need to be surprised. It is said that a petty person holding a jewel incurs guilt; no matter how splendid a jewel it may be, when a petty person handles it, that guilt immediately attaches itself and turns it into a dango stone, so you must not lose heart just because it is a dango stone. Even now, if a person whose mitama is polished looks at it, it becomes the genuine article.'</p>
+          <p class="en-p">Kurohime: 'Now, now, Kuniyoriwake-sama, you are saying unnecessary things; you yourself are the petty person. Because there is a petty person like you, the jewel changes in this way. When I handed it to Kiusuke at Riugū, it was not like this. The arrogant mitama of Kiusuke and Tomohiko attached themselves and changed it like this. To have it exposed before a great crowd that this is your mitama—truly, truly, I feel sorry for you, but please resign yourself to it.'</p>
+          <p class="en-p">Tomohiko became furiously angry, his eyes lifting upward, and gripping Kurohime's nape tightly,</p>
+          <p class="en-p">Tomohiko: 'Hey Kurohime, are you saying such disrespectful things? Is there ever a time when one speaks ill of a person's mitama in front of a crowd?'</p>
+          <p class="en-p">With nails grown long, he grabbed and pressed so hard into her nape that it seemed to bite in. Uttering 'Kee-kee', Kurohime squatted down on the spot. Takayamahiko, who was nearby, grabbed Tomohiko's collar-hair tightly and, the very moment he tried to push him down from the dais, Tomohiko nimbly dodged his body. Takayamahiko made two or three aerial rotations and fell heavily into the midst of the crowd with a groan. 'Now, this is terrible,' the crowd gathered round to tend to him, hoisted up the groaning and aching Takayamahiko, and noisily escorted him back to Kurohime's residence.</p>
+          <p class="en-p">Kuniyoriwake: 'Kurohime-sama, it was truly a regrettable affair. You must be exceedingly angry. Moreover, Takayamahiko has also suffered an unexpected disaster and you are surely deeply worried. However, this is before the gods, and since nothing out of the ordinary will happen, please rest assured.'</p>
+          <p class="en-p">Kurohime: 'From first to last, always taking care of us like this... hmm... thank you very much indeed.'</p>
+          <p class="en-p">As she spoke, her shoulders and neck trembled with a rattling motion—how odious her demeanor was.</p>
+          <p class="en-p">Mokusuke: 'Lord Tomohiko, today by virtue of my official authority I order you to leave.'</p>
+          <p class="en-p">Tomohiko: 'There is nothing to be done. I shall obey your command, retire to my residence, and await your orders. In the excess of my anger, I have carelessly committed a blunder.'</p>
+          <p class="en-p">So saying, he departed. Seeing him off, Kurohime thrust her neck right into her shoulders up to the level of her ears like a stone tortoise, thrusting her chin out and drawing it back, lightly biting her tongue with her lips, and somehow displaying a mocking air.</p>
+          <p class="en-p">Takahime: 'Mokusuke-sama, is this not simply outrageous? To turn the precious wish-granting jewel into such a state—altogether, I cannot understand the meaning of this at all. Where does this responsibility lie? ...Kiusuke-sama, Ominu-sama, Princess Teles-sama, after committing such an impropriety, how can you remain so unconcerned? I, this Takahime, command the three of you to withdraw. Surely, Mokusuke-sama, you will not raise any objection to this?'</p>
+          <p class="en-p">Mokusuke: 'Since the responsibility for everything lies with me, the three of you please remain right here without moving.'</p>
+          <p class="en-p">The three of them all at once bowed their heads, saying 'Hai.'</p>
+          <p class="en-p">Takahime: 'Ah, if so, submit to the times of the world; I will say nothing more. From here on, it is the blue jewel. ...Now, Tamajiwake, Yellow Dragon Princess, come here. And you, Kiusuke-sama, return to your original seat!'</p>
+          <p class="en-p">Raising her voice somewhat shrilly, she examined it once again as usual, and reverently took off the lid of the jewel box. Takahime's face once more began to purse up at the mouth. She rolled her tongue into a concave shape and thrust it out beyond her lips for two or three minutes, tilted her neck to the right while rolling her eyes, opened both hands and gracefully fluttered them near her breasts like an expanded folding fan, and swayed her hips two or three times. Tamajiwake gazed upon this,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">国依別『皆さま、お騒ぎなさいますな。コリヤこれも屹度以前の通り団子石ですよ。丸で狐につままれた如うですが、これも心の随意々々変化する玉ですから、驚くに及びませぬ。小人玉を抱いて罪ありと云うて、どんな立派な玉でも小人物が扱うと、其罪が直に憑つて団子石になるのですから、団子石だと言うて力を落してはなりませぬぞ。これでも身魂の磨けたお方が見れば本真物になります』</p>
+            <p class="ja-classical-line">黒姫『コレコレ国さま、いらぬ事を仰有るお前こそ小人だ。お前の様な小人が居るものだから、此通り玉が変化する。私が竜宮で久助に渡した時は、こんなものぢや無かつた。久助と友彦の慢心の身魂が憑つてこんなに変化したのですよ。大勢の前に、此様身魂ですと曝されて、誠に誠にお気の毒様ですけれどもお諦めなされ』</p>
+            <p class="ja-classical-line">友彦は大いに怒り目をつり上げながら、黒姫の頸筋をグツと握り締め、</p>
+            <p class="ja-classical-line">友彦『コラ黒姫、失敬な事を言ふか、大勢の前で人の身魂の悪口を云うと言う事があるものか』</p>
+            <p class="ja-classical-line">爪の延びた手で頸筋をグツと喰ひ入る程掴み押へつける。黒姫は「キーキー」と言ひ乍ら其場に蹲踞む。側に居た高山彦は友彦の襟髪をグツと取り、段上から突き落さうとした途端に、友彦は体をパツとかはした。高山彦は二つ三つ空中廻転をして、群集の中に唸りを立てて落ちて来た。「サア大変」と大勢は寄つて掛つて介抱をし乍ら、痛さに唸く高山彦を担いで、黒姫館にドヤドヤと送つて行く。</p>
+            <p class="ja-classical-line">国依別『黒姫さま、誠にお気の毒な事で御座いました。貴女も嘸お腹が立ちませう。又高山彦も思はぬ御災難で誠に御心配でせう。然し乍ら此処は神様の前、滅多な事は御座いませぬから御安心なさいませ』</p>
+            <p class="ja-classical-line">黒姫『何から何まで、何時もお構い下さいまして、……ヘン……お有難う御座いますワイなア』</p>
+            <p class="ja-classical-line">と肩と首をカタカタと揺つて居る、其容態の憎らしさ。</p>
+            <p class="ja-classical-line">杢助『友彦殿、今日は職権を以て退場を命じます』</p>
+            <p class="ja-classical-line">友彦『仕方がありませぬ。御命令に従ひ自宅へ控へ命を待ちまする。立腹の余り、ツイツイ粗怱を致しました』</p>
+            <p class="ja-classical-line">と帰り行く。後見送りて黒姫は肩の中に首を耳の辺りまで石亀の如に突込んで仕舞ひ、頤を出したり引込めたり、舌を唇でチヨツと噛んで、何とは無しに嘲弄気分を表はして居た。</p>
+            <p class="ja-classical-line">高姫『杢助さま、どうも怪しからぬぢやありませぬか。折角の如意宝珠の玉をこんな事にして仕舞うとは、一体全体訳が分らぬぢやありませぬかい。此責任は誰にありますか。……久助さま、お民さま、テールス姫さま、こんな不調法をして置いて、よう安閑として居れますな。此高姫が三人に対し退場を命じます。よもや杢助さま、是に向つて違背は有りますまいな』</p>
+            <p class="ja-classical-line">杢助『何事も責任は私に有りますから、三人のお方はどうぞ此処に動かずに居て下さい』</p>
+            <p class="ja-classical-line">三人一度に「ハイ」と俯向く。</p>
+            <p class="ja-classical-line">高姫『エヽそんなら時の天下に従へだ、もう何も言ひますまい。是から青玉だ。……サア玉治別、黄竜姫様、此処にお出でなさい。さうして久助さま、元の座にお帰りめされツ』</p>
+            <p class="ja-classical-line">と稍甲声を張り上げながら、又もや例の如く調査し、恭しく玉筥の蓋を取つて見た。高姫の顔は又もや口が尖り出した。舌を中凹に巻いて二三分ばかり唇の外に出し、首を右の方に傾げて目を白黒させ、両手を開いて乳の辺りで行儀好く、扇を拡げた様にパツとさせ、腰を二つ三つ振つて居る。玉治別は是れを眺めて、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamaharuwake: 'Look here, Takahime, Kurohime, you two have not repented enough. The magnificent jewel, which I carried back on the back of a Yaatagarasu across the ten thousand ri of the sky, from the Suha lake in the Himitsukiyō on an island in the Riugū of the Kaiyōbanri to the Seichi Takaamahara, has been transformed like this because a Mitama of a Kurotaka possessed it. I, Tamaharuwake, will not accept this!'</p>
+          <p class="en-p">Then, turning the tables, he snaps at Takahime.</p>
+          <p class="en-p">Takahime: 'Ha, you say such naive things. Since I, Takahime, the Kanjinkaname of the crystal ball, have been peering into it, how could there be any logic for the jewel to change? It happened because you were so full of Manshin, blowing your own trumpet about how you performed the divine service. ...Hey, Oito-dono, what is this disgraceful state? Do you call this successfully performing the divine service? I am truly so stunned I cannot even speak. Hey, Oito-dono, what are you going to do about this? By possessing the magnificent jewel with an evil Mitama, you are an intruder hindering the divine world. You are a villain who makes a grown man feel uneasy even though you are just a young girl, so there is no logic that you could perform the service of the jewel. From the beginning, when I heard that you had performed the service of the jewel, I exhaled from my nose in a Kannagara manner, saying "Fu-fu." The Hinodewake was laughing from within his belly.'</p>
+          <p class="en-p">Kōriuhime becomes stern, puts strength into her voice, and says:</p>
+          <p class="en-p">Kōriuhime: 'Are those not excessive words? If you truly polish your own Mitama, you will be able to obtain the true jewel. Surely, the Lord God has hidden it, but please perform the replacement from your own heart. If you do so, you will surely be able to obtain the true Mani jewel.'</p>
+          <p class="en-p">Takahime: 'What a magnificent eloquence, no matter what is said, I, Takahime, cannot even add a second word. Ohohoho.'</p>
+          <p class="en-p">She shakes her shoulders and thrusts her chin out again.</p>
+          <p class="en-p">Tamaharuwake: 'Excuse me, Kōriuhime-sama, there is no point in dealing with such an unreasonable old woman, so let us stop now.'</p>
+          <p class="en-p">Kōriuhime smiles broadly and says:</p>
+          <p class="en-p">Kōriuhime: 'Yes, let us do so.'</p>
+          <p class="en-p">She returns to her original seat.</p>
+          <p class="en-p">Takahime: 'Oh my, how close you two are. Hohohoho, if one does not keep a watch on a young man and woman, it is dangerous.'</p>
+          <p class="en-p">Mokusuke has a face like someone who has bitten into a bitter bug, and he remains silent and composed.</p>
+          <p class="en-p">Takahime: 'Hey, Mokusuke-sama, you were acting all important with a general manager's face, but today your calculations have gone completely awry, haven't they? Oh my, what a scary face you have.'</p>
+          <p class="en-p">Mokusuke: 'Aha-ha-ha, I do not know what it is, but it is an amusing matter. Aha-ha-ha.'</p>
+          <p class="en-p">Takahime: 'Hey, Kurohime-sama, why don't you pull yourself together? You have no energy at all, do you? Isn't your Riugū's Otohime the owner of the jewel? To be made to do such things by these people up to three times, and yet you can stay there so calmly, my.'</p>
+          <p class="en-p">Kurohime: 'Yes, well, I have my worries.'</p>
+          <p class="en-p">Takahime: 'Hmm, that is true, that is true. Since Takayamahiko-sama has been seriously injured, it is not unreasonable for you to be worried, but just a little longer, please be patient. If you do that, I will have you released safely. ...Hey, hey, Osetsu, I am going to examine the red jewel you brought back from now on, so Mukadehime-sama, please come here too. You also drew a bow against me at Matayagadake and spoke ill of me at Kunishiro-yama. I will tell you beforehand. If this red jewel has turned into a dumpling stone, what will you do?'</p>
+          <p class="en-p">Mukadehime: 'I have entrusted everything to the Kannagara, so I cannot say what I will do. I only pray for the Lord God's disposal. However, I will absolutely not accept instructions from Takahime-sama. Please understand that.'</p>
+          <p class="en-p">She drives a nail into the conversation. Takahime again purses her lips into the shape of the character 'he' and unties the knot of her keima-musubi.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玉治別『これ高姫、黒姫、矢張お前さまお二人は改心が足らぬ。海洋万里の竜宮の一つ島の、秘密郷の諏訪の湖水から聖地高天原迄、万里の天空を八咫烏に乗せられ捧持して帰つた結構な玉を、黒鷹の身魂が憑つて斯んなに変化さしよつたのだ。玉治別承知致しませぬぞツ』</p>
+            <p class="ja-classical-line">と今度は反対に高姫に喰つて掛る。</p>
+            <p class="ja-classical-line">高姫『へー甘い事を仰有いますワイ。肝腎要の水晶玉の高姫が覗いて、玉が変化する道理が何処に有りますか。お前さまがあんまり慢心して御用した御用したと、法螺を吹くものだから斯んな事になつたのだ。……コレ小糸どん、此醜態は何だいな。これで立派に御用が勤まつたのですかい。本当に呆れてものが言へませぬワイ。これ小糸どん、どうして下さる。結構な玉に悪身魂を憑して、お前さまは神界のお邪魔を致す曲者だよ。童女の癖に大の男をアフンとさせる様な悪党者だから、玉の御用が出来さうな道理がない。妾は初めから、お前が玉の御用をしたと聞いた時、フフーと惟神的に鼻から息が出ました。日の出神が腹の中から笑うて御座つたのだ』</p>
+            <p class="ja-classical-line">黄竜姫は屹となり、『高姫さま』と声に力を入れ、</p>
+            <p class="ja-classical-line">黄竜姫『ソレは余りの御言葉ではありませぬか。貴女の御身魂さへ本当にお研けになれば、本当の玉がお手に入るのですよ。屹度、神様がお隠しになつたのだが、御自分の心から御立替遊ばせ。さうすれば、本当の麻邇の宝珠がお手にお入り遊ばすのでせう』</p>
+            <p class="ja-classical-line">高姫『何と云つても立派な御弁舌、高姫も二の句が次げませぬ。オホヽヽヽ』</p>
+            <p class="ja-classical-line">と肩を揺り又も腮をしやくる。</p>
+            <p class="ja-classical-line">玉治別『モシモシ黄竜姫さま、斯様な没分暁漢のお婆アさま連に相手になつて居つても詰りませぬから、もう止めて置きませう』</p>
+            <p class="ja-classical-line">黄竜姫はニタリと笑ひながら、</p>
+            <p class="ja-classical-line">黄竜姫『ハイ、さう致しませう』</p>
+            <p class="ja-classical-line">と元の座に帰る。</p>
+            <p class="ja-classical-line">高姫『アノマアお仲の好い事ワイの。ホヽヽヽヽ、若い男と女には監視を付けて置かにや険難だワイ』</p>
+            <p class="ja-classical-line">杢助は苦虫を噛み潰した如うな顔をして、厳然として無言の儘扣へて居る。</p>
+            <p class="ja-classical-line">高姫『コレ杢助さま、お前も偉さうに総務面をして御座つたが、今日は目算ガラリと外れただらう。アノマア恐い顔ワイなア』</p>
+            <p class="ja-classical-line">杢助『アハヽヽヽ、何だか知らぬが面白い事で御座るワイ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">高姫『コレ黒姫さま、確りなさらぬかいな。一向元気が無いぢやないか。お前の竜宮の乙姫が玉の持主ぢやないか。此奴等に三つまで此様な事にしられて、それを平気でようまア、居られますな』</p>
+            <p class="ja-classical-line">黒姫『ハイ何分心配が御座いますので』</p>
+            <p class="ja-classical-line">高姫『ウン、さうだとも　さうだとも、高山彦さまがエライお怪我をなさつたから、御心配になるのも御無理と申しませぬが、もう暫らくだ、辛抱して下さい。さうしたら無事解放して上げます。……コレコレお節、お前の持つて帰つた赤玉を是から調べるのだから、蜈蚣姫さまも此処へ御出でなさい。お前さまも随分魔谷ケ岳で私に対して弓を引いたり、国城山で悪口を言ひました。先へ申して置きますよ。若し此赤玉が団子石になつて居つたら、どうなさいますか』</p>
+            <p class="ja-classical-line">蜈蚣姫『何事も惟神に委した私、どうすると云ふ訳に行きませぬ。神様の御処置を願う迄です。乍併高姫さまの指図は断じて受けませぬ。左様御心得を願ひます』</p>
+            <p class="ja-classical-line">と一つ釘を刺す。高姫は又も口をへの字に結び桂馬結びの紐を解き、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahime: 'Come, Osetsu, it is a single bound from the cauldron of Jigoku. Whether your long labors shall blossom as flowers or vanish into foam, this is the narrow sea of fortune and misfortune, luck and calamity, success and ruin. Speaking of the narrow sea, I remember how you all made such fools of me. You surely do not think I helped you, do you? Hey, what are you whining and howling for? There is a saying that good follows evil and evil follows good, so not every month is composed solely of moonlit nights. If you frown just because things are a little inconvenient, how can you ever be called a splendid Tamanohime?'</p>
+          <p class="en-p">Abusing them with foul language, she snatched open the lid of the willow box with a snap.</p>
+          <p class="en-p">Takahime: 'Kurohime-sama, look here for a moment, isn't this jewel somehow black?'</p>
+          <p class="en-p">Kurohime peered closely into it.</p>
+          <p class="en-p">Kurohime: 'Indeed, indeed, it is as black as the jewel of Mukadehime-sama. Surely the mitama of a centipede has possessed it, causing what should have been a red jewel to turn black.'</p>
+          <p class="en-p">Tamanohime: 'Kurohime-sama, your own face is hardly pure white, so you probably cannot tell whose possession has caused this. Ho ho ho ho.'</p>
+          <p class="en-p">Takahime: 'Again and again, nothing worth having—why, this is a charcoal jewel. No wonder I thought it felt a bit light. Ah, how idiotic. Shall I excuse myself from any further jewel examinations?'</p>
+          <p class="en-p">So saying, she was fuming with anger.</p>
+          <p class="en-p">Mokusuke: 'It is a trouble, but I ask you to examine one more, the purple jewel.'</p>
+          <p class="en-p">Takahime: 'Ehe, Mokusuke-sama, not again.'</p>
+          <p class="en-p">Speaking as if greatly annoyed, she nevertheless pinned her last remaining hope upon the final purple jewel. Kuniyoriwake turned toward the assembled company,</p>
+          <p class="en-p">Kuniyoriwake: 'Listen, everyone, there is only one left. No matter what anyone says, since Takahime-sama is a master of magic arts, she can turn water into fire and fire into water, swallow stones as jewels and spit them out, and in the end make heaven into earth. She is even more skilled than the magic of Amenichi, so please keep your eyes sharply peeled with that in mind. East and west, ho!ோவின்</p>
+          <p class="en-p">Takahime flared up in rage,</p>
+          <p class="en-p">Takahime: 'What kind of talk is this in the sacred Yahiroden? This is no vaudeville stage. Is this not the Yahiroden of the brocade palace where the venerable and holy Gods enshrine themselves?'</p>
+          <p class="en-p">Kuniyoriwake: 'Just because it is the Yahiroden, is there any reason why magic should be bad? Why, you yourself are right in the midst of performing magic. If you talk like that, you will fall into the trap of self-entanglement. Even in the Mikakkyo of the twentieth century, the Isuzu Hall built a theater, did it not? Do not speak of things you do not understand.'</p>
+          <p class="en-p">Takahime: 'That is why the Gods say that the methods of the Mizu-no-Mitama are disordered. Ah, I am already sick of examining this jewel. Besides, it would be a pity to put Hatsuwakahime-sama and Umekohime-sama to shame again, so I shall decide not to open this one.'</p>
+          <p class="en-p">Mokusuke: 'This jewel must be examined. Since the Gods say there is no distinction between their own children and the children of others, we must not let it be said that Umekohime-sama, the daughter of the God Susanoo-no-Mikoto, and Hatsuwakahime, the daughter of Mokusuke, were treated with partiality, so please examine it right here.'</p>
+          <p class="en-p">Takahime: 'Oh, oh, it cannot be helped. I am truly sick of it. If so, I shall make one more effort... Umekohime-sama, Ohatsu-san, come quickly here.'</p>
+          <p class="en-p">Growing somewhat desperate, she called out in a hurried voice. At her words, Umekohime and Hatsuwakahime drew smilingly close to Takahime's side. Takahime once again whipped open the lid of the willow box. Instantly, a purple light like a diamond flashed in all directions; even the proud Takahime started back two or three paces in astonishment. Kurohime jumped up with joy and instinctively clapped her hands. The sound of everyone's applause echoed like a shower of hail far outside the hall.</p>
+          <p class="en-p">Takahime: 'Ohatsu—no, Hatsuwakahime-sama, Umekohime-sama, well done, well done. It appears after all that your mitama are pure... Mokusuke-sama, you have indeed raised fine children. Well, well, with this I am at ease; the remaining four have been defiled by four-footed souls. Since they are Mani jewels possessed like the Mizu-no-Mitama, Tagosaku, Kusuke, Otami, Tomohiko, Kōryūhime, Mukadehime, Teles-hime, and Osetsu, from now on perform water austerities at Kogumogawa for a hundred days and a hundred nights. If you do so, they will surely revert to their original jewels. Even if you say you refuse, I, Takahime, will make you perform these austerities and not let you rest until you emit your original radiance.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高姫『サアお節、地獄の釜の一足飛だ。お前が長らくの苦労も花が咲くか、水の泡になつて了うか、禍福吉凶幸禍の瀬戸の海ぢやぞい。瀬戸の海で思ひ出したが、ようも馬鹿にして下さつた。助けてやつたなぞと決して思つては居ますまいな。エー何をメソメソと吠えて居るのだ。善い後は悪い、悪い後は善いと云う事があるから、何月も月夜計りは有りませぬぞ。チツとばかし都合が悪いと言つて顔を顰める様では、どうして立派に玉能姫と言はれますか』</p>
+            <p class="ja-classical-line">と口汚く罵り乍ら、柳筥の蓋をパツと開けた。</p>
+            <p class="ja-classical-line">高姫『黒姫さま、一寸御覧、何だか此玉は黒いぢやありませぬか』</p>
+            <p class="ja-classical-line">黒姫は一寸覗き込む。</p>
+            <p class="ja-classical-line">黒姫『ホンニホンニ、蜈蚣姫さまの如うに黒い玉だなア。コリヤ大方蜈蚣の身魂が憑つて、赤い筈の玉が黒くなつたのだらう』</p>
+            <p class="ja-classical-line">玉能姫『黒姫さまも随分お白くありませぬから、どちらのがお憑り遊ばしたか分りますまい。オホヽヽヽ』</p>
+            <p class="ja-classical-line">高姫『又しても又しても碌でもない、コリヤ消炭玉だ。道理で、ちと軽いと思つて居つた。アカ阿呆らしい。モウ玉調べは御免蒙りませうかい』</p>
+            <p class="ja-classical-line">とプリンプリン怒つて居る。</p>
+            <p class="ja-classical-line">杢助『御苦労ですがモウ一つ紫の玉をお調べを願ひます』</p>
+            <p class="ja-classical-line">高姫『エー杢助さま、又かいなア』</p>
+            <p class="ja-classical-line">と煩さ相に言ひ乍ら、万一の望みを最後の紫の玉に嘱して居た。国依別は一同に向ひ、</p>
+            <p class="ja-classical-line">国依別『モシモシ皆さま、モウ一つになりました。何を言つても手品上手の高姫さまで御座いますから、水を火にしたり火を水にしたり、石を玉にして呑んだり吐いたり、終ひには天を地にしたりなさいます。天一の手品よりはお上手ですから、其お心算で確りとお目にとめられます様に願ひまアす。東西々々』</p>
+            <p class="ja-classical-line">高姫はクワツと怒り、</p>
+            <p class="ja-classical-line">高姫『神聖なる八尋殿に於て何と言ふ事を言ふのか。此処は寄席では有りませぬぞい。尊き尊き神様のお鎮まり遊ばす錦の宮の八尋殿では有りませぬか』</p>
+            <p class="ja-classical-line">国依別『八尋殿だからといつて、手品が悪い道理が有りますか。現にお前さま手品をして居る途中です。そんな事を言うと自縄自縛に落ちますぞ。二十世紀頃の三五教の五六七殿でさへも劇場を拵へてやつて居るぢやありませぬか。訳の分らぬ事を言ふものぢや有りませぬ』</p>
+            <p class="ja-classical-line">高姫『それだから瑞の御霊の遣り方は、乱れた遣り方だと神様が仰有るのだよ。アアモウ此玉は調べるのが嫌になつた。又初稚姫や梅子姫さまに恥をかかすのが気の毒だから、こりやもう開けない事にして置かう』</p>
+            <p class="ja-classical-line">杢助『此玉は是非調べて頂きたい。神様は我子、他人の子の隔ては無いと仰有るのだから、神素盞嗚尊の御娘御の梅子姫様と、杢助の娘の初稚姫、依估贔屓したと言はれてはなりませぬから、どうぞ此場でお調べを願ひませう』</p>
+            <p class="ja-classical-line">高姫『エーエー仕方がないなア。本当にイヤになつちまつた。そんなら、マアマも一苦労致しませう。……梅子姫さま、お初さま、サア早く此処へ来るのだよ』</p>
+            <p class="ja-classical-line">と稍自棄気味になり言葉せはしく呼び立てる。言下に梅子姫、初稚姫は莞爾として高姫の側に寄り添うた。高姫は又もや柳筥の蓋をチヤツと開いた。忽ち四方に輝くダイヤモンドの如き紫の光り、流石の高姫もアツと驚いて二足三足後に寄つた。黒姫は飛び上つて喜び、思はず手をうつた。一同の拍手する声、雨霰の如く場の外遠く響いた。</p>
+            <p class="ja-classical-line">高姫『お初、イヤ初稚姫さま、梅子姫さま、お手柄お手柄。矢張りお前等は身魂が綺麗だと見えますワイ。……杢助さま、お前さま中々好い子を持つたものぢや。ヤレヤレ是で一つ安心、後の四つは四足魂に汚されて了うた。瑞の御魂のやうに憑る麻邇の珠だから、田吾作、久助、お民、友彦、黄竜姫、蜈蚣姫、テールス姫、お節も是から、百日百夜小雲川で水行をなさい。さうすれば元の玉に還元するだらう。嫌といつても此高姫が行をさせて元の光りを出さねば措くものかい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The Shichinin stood there, dumbfounded, scratching their heads. It was Sadahiko and Haruhiko who came running to that place.</p>
+          <p class="en-p">Sadahiko: 'I report to Mokusuke-sama. Since this morning, Kotoyoriwakenomikoto-sama has said that he is suffering from a Gobiyōki and has been in Ohikikomo, but as it was too quiet, I quietly opened the Shiyōji and Hai inside, and I found this note written on the Hagi desk.'</p>
+          <p class="en-p">He handed it over. When Mokusuke opened it and looked at it, it read:</p>
+          <p class="en-p">'This time, the four Hōgiyoku of blue, red, yellow, and white, plus three more jewels, making a total of seven jewels combined, have been hidden by Kotoyoriwake at a certain Chiten due to circumstances. By no means is this to be known to Tamanohime, Tamaharuwake, Ōriyōhime, or any other Kuwankeishiya involved with these jewels. However, Mokusuke is, as requested, relieved of the position of Sōmu, and Tōsuke of Ahaji shall be made Sōmu. When Kotoyoriwake will return to the sacred land, that time is undecided. You must never follow after me.'</p>
+          <p class="en-p">Mokusuke remained silent, tears streaming down his face, as if he were struck by a feeling of immeasurable depth.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">七人はアフンとして頭を掻いて居る。其処へ走つて来たのは佐田彦、波留彦両人であつた。</p>
+            <p class="ja-classical-line">佐田彦『杢助さまに申上げます。今朝より言依別命様は御病気と仰有つて、御引籠りになつておいでなさいましたが、余りお静かですから、ソツと障子を開けて中へ這入つて見れば、萩の机の上に斯様な書き置きがして御座いました』</p>
+            <p class="ja-classical-line">と手に渡す。杢助開いてこれを見れば、</p>
+            <p class="ja-classical-line">『此度青、赤、黄、白の四個の宝玉を始め三個の玉、三つ四つ併せて都合七個、言依別命都合あつて、或地点に隠し置いたり、必ず必ず玉能姫、玉治別、黄竜姫其他此玉に関係者の与り知る所に非ず。然し乍ら杢助は願ひの如く総務の職を免じて、淡路の東助を以て総務となす。言依別は何時聖地に帰るか、其時期は未定なり。必ず我後を追ひ来る勿れ』</p>
+            <p class="ja-classical-line">と書いてあつた。杢助は黙然として涙をハラハラと流し、千万無量の感に打たるるものの如くであつた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: Teaching 主殿 [786]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: Jewel Turmoil [788]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
