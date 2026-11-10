@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: Kami 異 [718] - Volume 23 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 23 Table of Contents</a>
+      <span>Volume 23</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 23 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: Kami 異 [718]</h1>
+      <p class="chapter-title-ja">神異〔718〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The feelings in their hearts, Akihiko and Komahiko whose spirits are also emboldened, in this miraculous reunion of father and child, their hearts melting together, pass the days night after night.</p>
+          <p class="en-p">Coming here, on the morning of the third day, a man opens the gate door with a rattle and slouches in,</p>
+          <p class="en-p">Man: 'Grandpa Tsunekusu, do you not have travelers staying in your home?'</p>
+          <p class="en-p">Tsunekusu: 'Ah, if I wonder who it is, it's Sukekō. For what business have you come out so early in the morning?'</p>
+          <p class="en-p">Suke: 'It is not that I have any particular business, but since travelers often stay at your house, depending on the matter there was something I wanted to inquire about, and I came to ask thinking I wanted to make a request as well. Two guests should have been coming since two or three days ago...'</p>
+          <p class="en-p">Tsunekusu: 'Just as you say, two sendenshi are staying here. What kind of business do you have with them?'</p>
+          <p class="en-p">Suke: 'Ah, it's just a small matter... For now I will return home, change my clothes or something, and decide to come back anew. Because it's disrespectful to be like this.'</p>
+          <p class="en-p">Sooner said than done, he turns on his heel and is about to leave. Tsunekusu forcibly calls him back,</p>
+          <p class="en-p">Tsunekusu: 'Ah, hey, hey, even if you say you are going home to your place, it is quite a distant journey. Since there is no such troublesome way about it, if you have something to inquire about, you had better inquire right as you are and go back.'</p>
+          <p class="en-p">Suke: 'I have nothing special to ask, but there is a reason why I must interrogate them. The two men staying here the other night reportedly stole and ate the persimmons of the Riujin Palace. Since the Kamisama gave precise notice to the chieftain-sama's ears and we have come to investigate, Grandpa, make sure not to let those two escape. If by any remote chance you were to let them escape, you two husband and wife will likely have to forfeit your lives in place of the two. The chieftain-sama, leading numerous subordinates, has come right up to that vicinity to capture them. In short, the truth of why I came is that I came to scout. Since he will probably be visible right around here soon... I intend to report to the chieftain... that he wasn't absent... or that he was absent, so you had better do something or other to your heart's content there. Because it's too pitiful. If you dilly-dally he might already be visible soon... Ah, this place has a back door, and it has thickets of trees, a place with fine scenery.'</p>
+          <p class="en-p">Leaking a tone as if to say escape while you can, he walks briskly away.</p>
+          <p class="en-p">Tsunekusu, startled, goes into the inner rooms,</p>
+          <p class="en-p">Tsunekusu: 'Ohisa, Komahiko, come here for a moment, a terrible thing has happened. Did you two, Akihiko and Komahiko, pluck and eat the persimmons of the Riujin Palace-sama?'</p>
+          <p class="en-p">Komahiko: 'When we were worshiping the Kamisama in front of the palace, delicious-looking persimmons were swaying in the wind and touched the edge of our faces, so the two of us took and ate them. They were persimmons of exceedingly good flavor. Hey, Akihiko, they were delicious, weren't they?'</p>
+          <p class="en-p">Ohisa: 'What kind of unseemly blunder have you gone and committed! If you do such a thing, this village will be devastated and devastated and we will have to suffer hardship. That is why the chieftain-sama strictly prohibits them; whenever there is someone who took those persimmons, the Riujin-sama goes directly to report to the side of the chieftain's ears, and it has been arranged that the humans who took the persimmons are immediately offered as human sacrifices because everyone fears the devastation... Ah-ah, just when I think we are happily reunited after all this time as parent and child, must we face misery again? To have parted from Oharu four or five days ago, and now to be parted in death with my older brother Komahiko—what kind of karmic destiny are we husband and wife?'</p>
+          <p class="en-p">She weeps and prostrates herself.</p>
+          <p class="en-p">Tsunekusu: 'Things having come to this, no matter how much we cry or regret, it is already impossible to turn back. Resigning ourselves to whatever happens as the karma of a previous existence, let us old husband and wife go in their stead. Come, quickly, Komahiko and Akihiko the sendenshi-sama, your destinations are still long, since you must hereafter exert yourselves for the sake of the world, please escape out the back door as quickly as a moment. The sin of letting the two escape, we old couple will undertake... Ah-ah, just when I thought I met my son after such a long time, must we part already?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">胸の思ひも秋彦や
+心も勇む駒彦は
+親子不思議の対面に
+互に心も解け合ひつ
+一夜々々と日を送る。</p>
+            <p class="ja-classical-line">ここへ来てから三日目の朝、一人の男、門の戸をガラリと開け、ノソノソと入り来り、</p>
+            <p class="ja-classical-line">男『常楠の爺さま、お前の内に旅人が泊つては居りませぬかな』</p>
+            <p class="ja-classical-line">常楠『アヽ誰かと思へば助公か、何用あつて朝早うからお出でになつたのだ』</p>
+            <p class="ja-classical-line">助『別に用と云つてはないのだが、よくお前の宅に旅人が泊るから、事に依つたらお尋ねしたい事があり、御願もしたいと思つて尋ねに来たのだよ。二三日前から二人のお客が来て居る筈だが……』</p>
+            <p class="ja-classical-line">常楠『お前の云ふ通り宣伝使が二人泊つて御座るのぢや、どんな用があるのだい』</p>
+            <p class="ja-classical-line">助『アヽ一寸した事が………、一先づ内へ帰つて、着物でも着替て、改めて来る事にせう。こんな風では失礼だからな』</p>
+            <p class="ja-classical-line">と云ふより早く踵を返し立ち去らうとする。常楠は無理に呼び止め、</p>
+            <p class="ja-classical-line">常楠『アヽコレコレ、お前の内へ帰らうと云つても随分遠い道程だ。そんなむつかしい方だないから、御尋ねする事があれば、其儘尋ねて帰つたがよからう』</p>
+            <p class="ja-classical-line">助『別に頼む事はないが、一つ訊問すべき訳があるのだ。此間の晩にここへ泊つて居る二人の男が、竜神の宮の柿を盗んで食つたと云ふ事だ。酋長さまのお耳に神様からチヤンと御知らせがあつて調査に来たのだから、爺イさま、其二人を取逃さぬ様にして置きなさい。万々一取逃しでもしようものなら、二人の代りにお前達夫婦が生命を取られねばなろまい。つい其付近迄酋長さまが数多の手下を引きつれ召捕に見えて居るのだ。つまり俺の来たのは、実の所を言へば偵察に来たのだよ。モウつい此処へ見えるだらうから………俺は帰つて酋長に……不在ではなかつた……とか、不在だつたとか云ふ積りだから、そこはお前の心に何々したがよからう。余り可哀相だからなア。グヅグヅして居るとモウつい見えるかも知れぬ。………アヽ此処は裏口があり、木の茂みもあり、風景の佳い所だなア』</p>
+            <p class="ja-classical-line">と今の内に逃げよと云はぬ許りの口吻を漏らし、スタスタと帰つて行く。</p>
+            <p class="ja-classical-line">常楠は驚いて奥に入り、</p>
+            <p class="ja-classical-line">常楠『お久に馬、一寸ここへ来て呉れ、大変な事が起つて来た。秋彦さまに馬は竜神の宮様の柿をむしつて食やせぬかな』</p>
+            <p class="ja-classical-line">駒彦『宮の前に神様を拝んで居ると、美味さうな柿が風に揺られて、顔のふちへ触つて来たものだから、二人が取つて食ひました。随分味の佳い柿でしたよ。なア秋彦、美味かつたなア』</p>
+            <p class="ja-classical-line">お久『それは又何とした不調法をして呉れたのだ。そんな事をしようものなら此村は荒れて荒れて難儀をせなくてはならぬ。それで酋長さまが厳しく御禁制になつて居るのぢや、何時でもあの柿を取つた者があると直に、酋長の耳の側へ竜神さまが告げに行かつしやるので、皆荒れが恐さに柿をとつた人間を早速人身御供に上げる事になつて居るのだが………アーア折角親子対面して嬉しいと思へば、又憂目を見るのか、お軽には四五日前に別れ、又兄の馬に死別れるとは、何とした因果な吾々夫婦であらう』</p>
+            <p class="ja-classical-line">と泣き伏しける。</p>
+            <p class="ja-classical-line">常楠『この場に及んで、泣いても悔んでも、最早後へは戻らない。何事も前生の因縁ぢやと諦めて、吾々老夫婦が身代りになつて行かう。サア早く、馬に秋彦の宣伝使様、あたなたは未だ行先が長い、是れから世の中の為に尽さねばならぬから、どうぞ裏口から一時も早く逃出して下され。二人を逃がした罪は老人夫婦が引受けるから………アーア折角久し振りで忰に会うたと思へば、モウ別れねばならぬか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Even the resolute Tsunekusu burst into manly tears and wept bitterly.</p>
+          <p class="en-p">Komahiko: 'Goriyōshinsama, there is no need for Goshinpai. If it is a foolish kind of Kami that gets the Murajiu in an uproar just because five or ten persimmons were taken, it is surely a Jiyashin. As they perform the Tatekahe of Zenaku... since we are Sendenshi walking with the Kamigami carried upon our backs, let us make that Riujin meet its Ōjiyō and remove the harm from this village. Please, never, ever worry.'</p>
+          <p class="en-p">Akihiko: 'Wareware have obtained good Kenkiu Zaireu. Ah, it has become Omoshiro. It seems that the Hidakagaha becoming Kahado was entirely the Gosetsuri of Kamisama. Thanks to that, to make the Riujin pacified through Kotomu and to make the Tochi in this Fukin peaceful is a sacred task that we Sendenshi must gladly perform. Come, Komahiko-san, shall we go?'</p>
+          <p class="en-p">Tsunekusu: 'Korekore, both of you, because you are young you say such reckless things, but a dreadful and mighty Riujin, spoken of since ancient times as the primary vassal of Yamata no Orochi, is enshrined at that waterfall, so you must not, absolutely must not go to such a place. Come, hurry and escape back through this backdoor. The old couple will take your place as sacrifices for the rest... Ah, is this my last sight of my child?'</p>
+          <p class="en-p">He sinks into weeping once more. Ohisa also has her eyes swollen, is lost in tears, cannot even raise her face, bites into the tatami mat, and breathes with her shoulders.</p>
+          <p class="en-p">Akihiko: 'It is simply impossible for the two of Wareware to abandon the old couple and leave. How about this as an extreme measure, shall we carry them one by one on our backs and escape to the safe zone along this mountain path? Hey Komahiko, there can be no better judgment than that.'</p>
+          <p class="en-p">Komahiko: 'For Wareware to withdraw upon seeing an enemy leaves our hearts ill at ease. Is it not our official duty, precisely at such a time, to use the power of Kototama to pacify any formidable enemy through Kotomu?'</p>
+          <p class="en-p">Akihiko: 'Ah, that is also true. If so, let us decide to wait here until the apprehenders arrive.'</p>
+          <p class="en-p">Just as they are speaking thus, outside the gate it suddenly becomes noisy, and the footsteps of many people draw closer moment by moment. The chieftain Kiyamahiko, accompanied by more than a dozen retainers, without even speaking opens the front door and bursts in,</p>
+          <p class="en-p">Kiyamahiko: 'Hey, Tsunekusu couple, I hear that two Sendenshi who stole and ate the persimmons of the Riujin's shrine are hidden in your house. Come, swiftly drag both of them out to this place and hand them over.'</p>
+          <p class="en-p">So he solemnly decrees, posting his subordinates around the house and guarding it strictly so that they may not escape. The Tsunekusu couple have no words to reply, and having merely said 'Hai,' they hang their heads and blink their tearful eyes. From the inner room, both Akihiko and Komahiko leap out,</p>
+          <p class="en-p">Akihiko: 'Hey, you who are called chieftain Kiyamahiko, thank you for your official trouble. Indeed, we are the ones who took and ate the persimmons of the Riujin's shrine to our hearts' content, what of it do you say?'</p>
+          <p class="en-p">Kiyamahiko: 'Since ancient times, when someone takes and eats the persimmons of the Riujin's shrine, due to the curse of the Riujin, natural disasters such as great floods, great winds, and great earthquakes occur throughout the entire region of Mount Hidaka. The night before last, the Riujin appeared right at my ear and gave notice that two men named Komahiko and Akihiko took and ate the persimmons and are currently staying at Tsunekusu's house. It is pitiful, but you two must be offered as human sacrifices this night to make an apology. Since this too is the law from ancient times of this village, you should resign yourselves and, as we say, meekly offer yourselves as human sacrifices.'</p>
+          <p class="en-p">Even as he dims his voice, he slightly lowers his head and is lost in thoughts of sympathy. Komahiko and Akihiko perceive the heart of Kiyamahiko,</p>
+          <p class="en-p">Komahiko: 'Hai, thank you. Please do offer me as a human sacrifice. This time, we shall make the Riujin who commits evil deeds thoroughly repent, dig up the persimmon trees from their roots, smash the Riujin's shrine to pieces, and remove future harm. Come, come, please quickly drag the two of Wareware away.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と流石気丈な常楠も男泣きに泣き立てる。</p>
+            <p class="ja-classical-line">駒彦『御両親様、御心配には及びませぬ。柿の五つや十取つたと云つて、村中荒れると云ふ様な分らずやの神なれば、てつきり邪神でせう。善悪の立替をなさる……我々は神々を背中に負うて歩いて居る宣伝使だから、一つ其竜神を往生さして、此村の害を除く事にしませう。決して決して御心配下さいますな』</p>
+            <p class="ja-classical-line">秋彦『吾々はよい研究材料を得たのだ。ヤア面白うなつて来た。日高川が川止めになつたのも全く神様の御摂理であつたらしい。其お蔭で竜神を言向け和し、此附近の土地を安楽にしてやる様にするのは、吾々宣伝使の好んで為さねばならぬ神業だ。サア駒彦さん、行きませうか』</p>
+            <p class="ja-classical-line">常楠『コレコレ両人、お前達は年が若いから、そんな無茶な事を言ふが、昔から八岐の大蛇の一の眷属ぢやと云うて、大変な強い竜神さまが、あの滝には鎮まつて御座るのだから、必ず必ずそんな処へ行つてはなりませぬ。サア早く此裏口から逃げて帰つて下され。あとは老人夫婦が身代りになるから………アーア是れが吾子の見納めか』</p>
+            <p class="ja-classical-line">と又泣き沈む。お久も目を腫らし涙に暮れて顔さへえあげず、畳に喰ひ付いて、肩で息をして居る。</p>
+            <p class="ja-classical-line">秋彦『吾々二人が老人夫婦を見棄てて立去る訳にはどうしてもゆかない。どうだ一層の事、一人づつ背に負ぶつて、此山伝ひに安全地帯まで逃げる事にしようか。なア駒彦、それより上分別はあるまい』</p>
+            <p class="ja-classical-line">駒彦『吾々は敵を見て退去するのは、何ともなしに心が済まぬ。斯う云ふ時にこそ言霊の威力を以て如何なる強敵も言向け和すのが吾々の職責ではないか』</p>
+            <p class="ja-classical-line">秋彦『あゝそれもさうだ。そんなら捕手の来るまで此処に待つことにしよう』</p>
+            <p class="ja-classical-line">斯く話す折しも門の外俄に騒がしく、数多の人の足音刻々に近寄り来る。酋長の木山彦は十数人の従者を伴ひ物をも言はず表戸を引開け、ドヤドヤと入来り、</p>
+            <p class="ja-classical-line">木山彦『ヤア常楠夫婦、汝が宅には竜神の宮の柿を盗み食つたる二人の宣伝使が匿まひありと聞く。サア速に両人を此場に引摺り出し、手渡しせよ』</p>
+            <p class="ja-classical-line">と厳かに言ひ渡し、家の周囲に手下を間配つて逃がすまじと厳重に構へて居る。常楠夫婦は答ふる言葉もなく『ハイ』と言つた限り、俯むいて涙の目をしばたたいて居る。奥の一間より秋彦、駒彦の両人は躍り出で、</p>
+            <p class="ja-classical-line">秋彦『ヤア木山彦の酋長とやら、お役目御苦労で御座る。如何にも吾々は竜神の宮の柿を腹一杯取つて喰つた者で御座る、如何すると仰有るのですか』</p>
+            <p class="ja-classical-line">木山彦『昔から竜神の宮の柿を取喰ふ者ある時は、竜神の祟りに依つて、日高山一帯の地方は大洪水、大風、大地震の天災地変が起つて来るのだ。一昨夜も吾耳許に竜神現はれ、駒彦、秋彦と云ふ二人の男、柿を取喰ひ、今常楠の家に逗留し居ると御知らせになつた。可哀相だが汝等二人を、今晩は人身御供にあげ、お詫を致さねばならぬ。これも此村の昔からの掟だから、観念して吾々の申す通り、神妙に人身御供にあがるがよからう』</p>
+            <p class="ja-classical-line">と声も曇らせ乍ら、稍俯むき同情の思ひに暮れて居る。駒彦、秋彦は木山彦の心を察し、</p>
+            <p class="ja-classical-line">駒彦『ハイ有難う。どうぞ私を人身御供にやつて下さい。今度は悪業をなす竜神をスツカリ改心させ、柿の木を根元より掘起し、竜神の宮を叩き壊し、向後の害を除きませう。サアサアどうぞ早く吾々両人を引張つて往つて下さい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kiyamahiko: 'We are satisfied with your prompt consent. However, you must stop uttering reckless words such as destroying the shrine and cutting down the trees.'</p>
+          <p class="en-p">Tsunekusu raised his tear-stained face,</p>
+          <p class="en-p">Tsunekusu: 'Oh, Chief-sama, to tell you the truth, this man is Umakusu, who was abducted by a tengu at the age of three and whose whereabouts had been unknown. Thanks to a chance occurrence a couple of days ago, parent and child were reunited, but before we could even finish rejoicing, matters have come to this sad pass. My younger sister Okaru was killed by bandits, and now our two children must leave behind an elderly couple and set out on a journey to Meido—the fact that things have come to this bitter pass is surely the ripening of the heavy sins of my past life. Please use your imagination and understand our plight.'</p>
+          <p class="en-p">So saying, he wiped his tears and lowered his head. Ohisa trembled and did nothing but weep. Immersed in tears of sorrow as well, Kiyamahiko said,</p>
+          <p class="en-p">Kiyamahiko: 'Ah, so the child called Umakusu was this person? I truly sympathize with your great grief. However, although your child was also carried off by a tengu, even if it was only for three days, you are able to have a face-to-face reunion with your parent and child before parting, so it is still somewhat better. We had a child named Kika of about the same age as your son. To this day, we do not know who carried him off; I left Mount Hiei, and from there searched every place in Yamato, Kawachi, and Kii Province, until at last I hardened my heart of resignation here, accepted that he was already dead, and chosen by the villagers, became chief. But when I think of the joy you felt upon meeting your son, I too have somehow come to remember the child I lost and feel sorrowful. Ah, it cannot be helped. Everything is fate. Now, you two, though I pity you, everything is duly prepared. Please get into this karabitsu.'</p>
+          <p class="en-p">Akihiko, as Kiyamahiko's words pierced sharply into his ears, crossed his arms and remained dumbfounded. Tsunekusu and his wife cried out at the top of their lungs. Hiding his tears and raising his voice, Kiyamahiko said,</p>
+          <p class="en-p">Kiyamahiko: 'If we delay, it will be a grave matter. Now, quickly, quickly!'</p>
+          <p class="en-p">and urged them on. Komahiko and Akihiko were about to leap directly into the karabitsu when Kiyamahiko stopped them,</p>
+          <p class="en-p">Kiyamahiko: 'Ah, you two-sama, please wait a moment. White funeral garments have been brought here. I want you to strip off your clothes completely and change into these before you go.'</p>
+          <p class="en-p">The two said, 'Ah, after such a long time, we are honored to receive new garments! ...Now, from here on is the activity of a thousand riders in one.' Taking joy in their hearts, they crawled into the karabitsu. Kiyamahiko called out, 'Sukikō-sukikō!' At his word, Sukikō and more than ten other men gathered scattering, fastened the doors of the karabitsu tightly, bound them with shimenawa ropes, had a crowd lift them, and just as they were about to set out from this house, the elderly couple hastily rushed out to the doorway and collapsed right there on the spot. Kiyamahiko left a few men behind to nurse the elderly couple and finally coax them back to breath. The chief comforted and consoled the old couple and leisurely returned home.</p>
+          <p class="en-p">Meanwhile, the two karabitsu headed toward the palace of the Dragon God, receding into the distance along with the song of the laborers. While the old couple clung to each other, their tears of grief knowing no bounds and writhing in agony, just at that moment, Komahiko and Akihiko emerged gropingly from inside the closet, patted the backs of the old couple, and said,</p>
+          <p class="en-p">Komahiko: 'Moshimoshi, it is Uma... it is Akihiko. Please be at ease. Look, we are safely here.'</p>
+          <p class="en-p">Hearing this, the couple was startled twice over, gazing into the faces of the two as if in a dream, in reality, or a hallucination, and for a short while could not utter a word, stunned. After a little while, Tsunekusu said,</p>
+          <p class="en-p">Tsunekusu: 'Well, such mysterious things do exist. How on earth did you two return here? Will the pursuers not close in once again? Come, we must quickly do something or other.'</p>
+          <p class="en-p">writhing in his body out of a mixture of joy and fear.</p>
+          <p class="en-p">Komahiko: 'Respected parents-sama, please do not worry. Just now, when I prayed to the Great Kami, the Myōjin of Takakura and Asahi appeared and went in our stead. It is now all right. However, staying here is a grave matter. Now, while there is still time, let the four of us, hand in hand, cross the Hidaka River and head toward the Kumano region. You certainly have no need to worry. Since we are traveling together with the Kami, nothing untoward will happen; let us leave this place even a single moment sooner.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">木山彦『早速の御承知、吾々満足に思ふ。が併し宮を潰し木を伐るなどとの暴言は止めて貰はねばならぬ』</p>
+            <p class="ja-classical-line">常楠涙の顔を上げ、</p>
+            <p class="ja-classical-line">常楠『モシ酋長さま、実の所此男は三才の時に天狗に攫はれて、行方の分らなかつた馬楠で御座います。二三日以前にフトした事から、親子巡り会ひ、喜ぶ間もなく斯んな悲しい事になりました。妹のお軽は賊に殺され、二人の子供は老夫婦を後に残して、冥土の旅立を致さねばならぬ破目になつたのも、私の深き前生の罪がめぐつて来たので御座いませう。御推量下さいませ』</p>
+            <p class="ja-classical-line">と涙を拭ひ俯く。お久は身を慄はせ泣く計りであつた。木山彦も悲歎の涙に暮れ乍ら、</p>
+            <p class="ja-classical-line">木山彦『アヽ彼の馬楠と云ふ子は此人だつたのか、実にお歎きの程お察し申します。併し乍らお前の子も天狗に浚はれたが、仮令三日でも、親子の対面が出来て別れるのだからまだしもだ。吾々は恰度お前の伜と同じ様な年輩で鹿と云ふ子があつた。それが何者に浚はれたか今に行方は知れず、比叡山を立出てそれより大和、河内、紀の国と所在を探し、漸う漸う此処で観念の臍を固め、最早死んだものと諦め、村人に選まれて酋長になつたのだが、お前が伜に面会した喜びを思ふに付けて、私も何だか失うた子供の事を思ひ出し悲しうなつて来た。アヽ仕方がない。何事も運命だ。サア二人の方、気の毒乍らチヤンと用意が出来て有る。此唐櫃に這入つて下さい』</p>
+            <p class="ja-classical-line">秋彦は木山彦の言葉、鋭く耳に入り腕を組み呆然として居る。常楠夫婦は声を限りに泣き叫ぶ。木山彦は涙を隠し、声を荒らげ、</p>
+            <p class="ja-classical-line">木山彦『時遅れては一大事サア早く早く』</p>
+            <p class="ja-classical-line">と迫き立てる。駒彦、秋彦は直に唐櫃の中に飛び込まうとするを、木山彦は押止め、</p>
+            <p class="ja-classical-line">木山彦『アヽお二人さま、一寸待つて下さい。ここに白装束が持つて来てある。お前さまの着物をスツクリ脱ぎ捨て、此れと着換て往て貰ひたい』</p>
+            <p class="ja-classical-line">二人は『あゝ久し振りで新しき御仕着せを頂戴致します。……サア是れから千騎一騎の活動だ』と心に喜び乍ら唐櫃の中に這入つて了つた。木山彦は『助公々々』と呼び立てる。言下に助公始め十数人の男はバラバラと集まり来り、唐櫃の戸を固く締め、七五三縄を以て縛り付け、大勢に担がせ、此家を立出でんとする時、老夫婦は慌て門口へ送り出で、其儘そこに昏倒して了つた。木山彦は二三の男を後に残し、老夫婦の看護をさせ、漸く息を吹き返さしめた。酋長は老人夫婦を労り慰め、悠々として家路に帰つた。</p>
+            <p class="ja-classical-line">一方二台の唐櫃は竜神の宮指して、人夫の唄の声と共に遠ざかり行く。老人夫婦は互にしがみつき悲歎の涙遣る瀬なく、身を悶え居る時しも、押入れの中よりムクムクと現はれ出たる駒彦、秋彦の二人、老夫婦の背を撫で、</p>
+            <p class="ja-classical-line">駒彦『モシモシ馬で御座います。……秋彦で御座います。御安心下さい。コレ此通り無事に居ります』</p>
+            <p class="ja-classical-line">と聞いて夫婦は二度ビツクリ、夢か現か幻かと二人の顔を看まもり、暫しは言葉もえ出さず呆れて居る。稍あつて常楠は、</p>
+            <p class="ja-classical-line">常楠『ハテ不思議な事もあるものだなア。如何して此処へお前達は帰つて来たのか。又もや追手が迫つて来はせぬか。サア早く何とかせねばなるまい』</p>
+            <p class="ja-classical-line">と嬉しさ恐さに身をもがく。</p>
+            <p class="ja-classical-line">駒彦『御両親さま、御案じ下さいますな。只今大神様へお願致しました所、高倉、旭の明神現はれ、身代りになつて行つて呉れられました。モウ大丈夫です。併し乍らここに居つては一大事、サア今の内に我々四人、手に手を取りて日高川を渡り、熊野方面指して参りませう。必ず御心配は要りませぬ。吾々は神様と二人連れ、滅多な事はないから、一時も早く此処を立去る事に致しませう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The old couple leaped with joy, and without a second's hesitation expressed their agreement with the words of the two, promptly set fire to their house, and hurried on, pointing toward the banks of the Hidakagaha.</p>
+          <p class="en-p">Kiyamahiko returned to his mansion with two or three of his retainers, said nothing as he entered a back room, crossed his hands, let out a sigh, and remained lost in deep thought. Kiyamahime, his wife, who appeared bearing tea into this space, felt a sense of suspicion at her husband's unusual countenance, bowed low on both hands with hesitation,</p>
+          <p class="en-p">Kiyamahime: 'Today of all days, your face looks so troubled. Has some grave matter suddenly broken out again?'</p>
+          <p class="en-p">she asked. Kiyamahiko, as if his wife's words failed to reach his ears, sat silently with lowered eyes, while bitter tears dripped one after another from both eyes. Kiyamahime, failing to make sense of it, drew close beside him,</p>
+          <p class="en-p">Kiyamahime: 'Oh, my lord husband, has some worrisome matter arisen?'</p>
+          <p class="en-p">At these words he came to his senses for the first time,</p>
+          <p class="en-p">Kiyamahiko: 'Ah, Kiyamahime?'</p>
+          <p class="en-p">Kiyamahime: 'Today of all days, your face is so unclear. Please tell me everything without concealing anything.'</p>
+          <p class="en-p">Kiyamahiko: 'Ah, nothing in this world is as fleeting as human life. I too had three children, but up to two of them had their persimmons taken by the villagers of the Dragon God's Palace and fled somewhere, so in exchange for that, my two daughters were snatched away, and my one son—who knows what manner of creature snatched him away?—has been missing since his early childhood. Thus the two of us are revered as the chieftains of the Hidaka estate, and though we spend the remnant of our old age thus, when I think of it, when I think of it, it is a lonely thing.'</p>
+          <p class="en-p">and he lowered his head once more.</p>
+          <p class="en-p">Kiyamahime: 'This is not just something for today alone. Please do not dwell on the past, and live your life brightly. Even I, woman though I am, have already resigned myself.'</p>
+          <p class="en-p">Kiyamahiko: 'If that lost son of mine, Shika-kō, were alive in this world, what would you think?'</p>
+          <p class="en-p">Kiyamahime: 'Without even needing to ask, there could be no greater joy than that. And have you come to know the whereabouts of our son?'</p>
+          <p class="en-p">Kiyamahiko: 'Nay, it is not that I know, nor is it that I do not know. ...Ah, truly it is a regrettable thing. Meeting him was worse than not meeting him, alas.'</p>
+          <p class="en-p">Kiyamahime: 'What, what are you saying? Meeting him was worse than not meeting him... those are words I cannot comprehend. You must have met your son. Why on earth did you not somehow bring him back with you?'</p>
+          <p class="en-p">Kiyamahiko: 'I would love nothing more than to bring him back, but things not going as one wishes is the way of the floating world. When I thought that the old couple, Tsunakusu, had met their son—whose whereabouts had long been unknown after their only daughter was killed by bandits—they offered him up as a human sacrifice to the Dragon God's Palace, and they were plunged into tears of grief too great for words. Ah, how pitiful. When I think of it as someone else's affair, it is my own affair. Shika-kō, the son I have always kept in my heart and yearned for... ah, I will speak no more of it, no more.'</p>
+          <p class="en-p">Once again he lowered his head and let out a sigh.</p>
+          <p class="en-p">Kiyamahime: 'That is indeed a pitiful thing for the old couple Tsunakusu as well, ah. But your words, as if you had met your son Shika—what on earth does that mean?'</p>
+          <p class="en-p">Kiyamahiko: 'There is no help for it now. Do not be startled, but the truth is I went and met Shika-kō. I could not even reveal my name, and secretly I sent him off as a human sacrifice together with Tsunakusu's son.'</p>
+          <p class="en-p">With that, the embankment of his long-enduring sorrow burst as well, and he wept aloud in a man's bitter cry. Kiyamahime too was startled with a gasp, and together, with her body shaken beyond all composure by tears, she wept and collapsed. Just as things were thus, Sukakō, the head retainer, came running up in breathless haste,</p>
+          <p class="en-p">Sukakō: 'I report to you. Just now, as we brought the two human sacrifices to the Dragon God's Palace, the shrine suddenly rumbled and shook, and from within appeared an eerie god with white hair, who shattered the doors of the portable shrine with a blow. At that very moment, the two propaganda envoys leaped forth and engaged in a fierce, grappling battle with the eerie white-haired god. In the end, the power of the propaganda envoys appeared to prevail, and the god was torn in two and hurled straight into the valley stream, turning the river water into a river of blood in an instant. While we lay flat upon the ground in awe watching this dramatic spectacle, the two propaganda envoys turned toward us... "Now that the evil god of the Dragon God's Palace has been subdued, henceforth there is no fear of demanding human sacrifices or the like. Furthermore, from now on you are free to take and eat the persimmons as you please"... thus they declared, and moreover summoned me especially close to them... "Convey this matter to Chief Kiyamahiko as swiftly as possible"... such was their strict command. When I started in fright and answered that I understood, the two propaganda envoys hid their forms somewhere along the valley stream like monkeys. Henceforth there is no longer any sorrow of human sacrifices, so please be at ease.' </p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">老夫婦は雀躍りし、一も二もなく二人の言葉に賛意を表し匆々此家に火をかけ、急いで日高川の岸辺を指して進み行く。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">木山彦は二三の従者と共に我館に立帰り、ものをも言はず奥の一間に入りて、双手を組み溜息をつき、思案に暮れて居る。此場に茶を汲んで現はれた妻の木山姫は、夫の普通ならぬ顔に不審を起し、恐る恐る両手を突き、</p>
+            <p class="ja-classical-line">木山姫『今日に限つて心配さうなあなたの御顔、何か又大事が突発致しましたか』</p>
+            <p class="ja-classical-line">と尋ねる。木山彦は妻の言葉の耳に入らざるが如く、黙然として俯むき、両眼よりは紅涙滴々として滴るのであつた。木山姫は合点行かず、側近く寄り添ひ、</p>
+            <p class="ja-classical-line">木山姫『モシ吾夫様、何か御心配な事が出来ましたか』</p>
+            <p class="ja-classical-line">と云ふ声に始めて気がつき、</p>
+            <p class="ja-classical-line">木山彦『アヽ木山姫か』</p>
+            <p class="ja-classical-line">木山姫『今日に限つてハツキリせぬあなたの御顔、どうぞ包み隠さず仰有つて下さりませ』</p>
+            <p class="ja-classical-line">木山彦『アーア人間位果敢ないものは無い。私も三人の子供があつたが二人迄、村の者が竜神の宮の柿を取り、何処かへ遁走したので、其身代りに二人の娘は奪られ、一人の伜は何者に攫はれたか、幼少の時より行方知れず、斯うして二人が日高の庄の酋長と仰がれ、老の余生を送つては居るものの、思へば思へば寂しい事だ』</p>
+            <p class="ja-classical-line">と又俯向く。</p>
+            <p class="ja-classical-line">木山姫『今日に限つた事では御座いませぬ。どうぞ過去つた事は思ひ出さずに、ハンナリとして暮して下さいませ。妾も女の身乍ら既に諦めて居ります』</p>
+            <p class="ja-classical-line">木山彦『若しも紛失致した伜の鹿公が此世に居つたら、お前は如何思ふか』</p>
+            <p class="ja-classical-line">木山姫『お尋ねまでもなく、そんな嬉しい事は御座いませぬ。して又伜の行方が貴方にお分りになつたのですか』</p>
+            <p class="ja-classical-line">木山彦『イヤ分つたでもなし、分らぬでもなし。……アーア実に残念な事ぢや。会はぬがマシであつたワイ』</p>
+            <p class="ja-classical-line">木山姫『エヽ何と仰せられます。会はぬがマシ…………とは心得ぬお言葉。あなたは伜にお会ひになつたのでせう。なぜ如何とかして連れて帰つては下されませぬ』</p>
+            <p class="ja-classical-line">木山彦『連れて帰りたいは山々なれど、儘にならぬは浮世の慣ひだ。あの常楠の老夫婦も一人の娘を賊に殺され、永らく分らなかつた伜に遇うたと思へば、竜神の宮の人身御供にあげられ、言ふに謂はれぬ悲歎の涙に暮れて居た。アヽ可哀相だ。他人の事かと思へば吾身の事だ。日頃心にかけて慕うて居つた伜の鹿公も………アヽモウ言ふまい言ふまい』</p>
+            <p class="ja-classical-line">と又もや俯向き吐息をつく。</p>
+            <p class="ja-classical-line">木山姫『それはそれは常楠の老夫婦も可愛相な事をしましたなア。併し伜の鹿にお会ひになつた様な貴方のお言葉、それは一体如何なつたので御座います』</p>
+            <p class="ja-classical-line">木山彦『モウ仕方がない。驚いて呉れな実は鹿公に会うて来た。名乗もならず、暗々と常楠の伜と共に人身御供にやつて了うた』</p>
+            <p class="ja-classical-line">と耐ばり切つたる悲しさの堤も切れて、大声に男泣きに泣き立てた。木山姫もハツと驚き共に涙に正体なく身を揺つて泣き倒れる。斯る所へ息急き切つて走つて来た小頭の助公は、</p>
+            <p class="ja-classical-line">助公『申上げます。唯今竜神の宮へ二人の人身御供を持つて参りますと、神殿俄に鳴動致し、中より白髪異様の恐ろしき神が現はれ、唐櫃の戸を叩き破りました途端に、二人の宣伝使は躍り出で、白髪異様の神を相手に組んづ崩れつ大格闘をやつて居りましたが、遂には宣伝使の力が勝れて居つたと見え、神さまは二つに引き裂かれて、谷川へドツと許りに投げ込まれ、川水は忽ち血の川となつて了ひました。吾々共は大地に平太張り恐々此活劇を見て居りました所、二人の宣伝使は吾々に向ひ……最早竜神の宮の悪神は退治致したれば、今後は決して人身御供などを請求する気遣ひはない。又今後は柿の実は汝等勝手に取つて食つて差支ない………と仰せられ、且私を特に近くお召しなされ………一時も早く此事を木山彦の酋長に伝達せよ………との厳命で御座りました。ハツと驚き承知の旨を答へますると、二人の宣伝使は谷川伝ひに猿の如く何れへか姿を隠されました、最早今後は人身御供の憂へも御座りませぬから、御安心下さりませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hearing this detailed monogatari, Kiyamahiko stood up,</p>
+          <p class="en-p">Kiyamahiko: 'What, you subjugated the kami of the dragon god's palace... and the whereabouts of those sendenshi are not known?'</p>
+          <p class="en-p">Sukekō: 'Yes, their oashi were so swift that I could not catch up to inquire, and I have not the kaimoku kentau as to where they have gone. When I reluctantly took the kiro, Tsunekusu's house was burning fiercely. Ah, how kaaisau, I wished to save the elderly fūbu, but even when I searched, there was neither shadow nor shape; Ōkata they set fire to themselves, and the fūbu must have burned to death. Truly, I have done a kaaisau thing.'</p>
+          <p class="en-p">Kiyamahiko: 'That was gokurau. The murabito must be very glad. However, did the futari sendenshi not drop anything as they went?'</p>
+          <p class="en-p">Being asked thus, Sukekō,</p>
+          <p class="en-p">Sukekō: 'Yes, such an object was lying fallen.'</p>
+          <p class="en-p">And taking a mamoribukuro from his bosom and handing it to him, Kiyamahiko said,</p>
+          <p class="en-p">Kiyamahiko: 'Hey, Kiyamahime, do you have no memory of this mamoribukuro?'</p>
+          <p class="en-p">When he thrust it before Kiyamahime, Kiyamahime said,</p>
+          <p class="en-p">Kiyamahime: 'Please let me see it for a chiyotsuto.'</p>
+          <p class="en-p">Taking it in her hands, turning it uraomote, and gazing at it,</p>
+          <p class="en-p">Kiyamahime: 'Ah, I certainly have a memory. Because it is much worn with age, I cannot tell with absolute clarity, but at the bottom of the mamoribukuro I marked a circle enclosing the character for ten, and it still remains distinctly visible. This is unmistakably the mamoribukuro of our son.'</p>
+          <p class="en-p">Kiyamahiko: 'If so, it is certainly none other than our son. With ears pointed like a rabbit's that twitch from time to time, and the point of his nose being sharp, he is the very living image of you; ah, what a magnificent thing. How I am glad our son has been saved. Then Tsunekusu's son was also safe? Ah, how grateful, it is entirely the protection of the Kumano Kamisama. Come, wife, let us also leave this mansion for a while, and, as a fūbu couple, let us make a pilgrimage of thanks to Kumano. Moreover, guided by the Kamisama, we may yet meet our son; good deeds should be done in haste, so make preparations quickly.'</p>
+          <p class="en-p">Kiyamahime: 'First of all, pray compose your mind calmly and steadily. There is also the proverb that haste makes waste...'</p>
+          <p class="en-p">Kiyamahiko, becoming flustered,</p>
+          <p class="en-p">Kiyamahiko: 'If you are reluctant, you need not come. Come, Sukekō, prepare to accompany us.'</p>
+          <p class="en-p">Sukekō: 'Yes, understood, I shall set about the preparations straightaway.'</p>
+          <p class="en-p">Kiyamahime: 'If that is so, please let me too accompany you. However, what shall we do about leaving the house unattended?'</p>
+          <p class="en-p">Kiyamahiko: 'Leaving it unattended or whatever—who needs such a thing? More than household goods, more than anything else, our precious treasure is none other than our own child. Provided we can meet our child, who needs property or anything else? Let happen what may, I care not. Come, let us set off quickly.'</p>
+          <p class="en-p">Sukekō attended to all details of locking up the house, followed behind the fūbu, and set out heading toward Kumano.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と詳細に物語るを聞いた木山彦は立ち上り、</p>
+            <p class="ja-classical-line">木山彦『ナニ竜神の宮の神様を退治致したと……さうして其宣伝使の行方は分らぬか』</p>
+            <p class="ja-classical-line">助公『ハイ余り御足が早いので、追つ付いておたづね申す事も出来ずどこへお出になつたか皆目見当が付きませぬ。已むを得ず帰路に就けば常楠の家はドンドンと燃えて居ります。あゝ可愛相に老人夫婦は助けてやりたいと思ひ、探して見ても影も形もなく、大方自ら火を放ちて、夫婦が焼け死にでもしたので御座いませう。実に可愛相な事を致しました』</p>
+            <p class="ja-classical-line">木山彦『それは御苦労であつた。さぞ村人も喜ぶ事であらう。併し乍ら二人の宣伝使は何か落して行かれなかつたか』</p>
+            <p class="ja-classical-line">と問はれて助公は、</p>
+            <p class="ja-classical-line">助公『ハイ斯様な物が落ちて居りました』</p>
+            <p class="ja-classical-line">と守袋を懐から取出し手に渡せば、木山彦は、</p>
+            <p class="ja-classical-line">木山彦『コリヤ木山姫、此守袋はお前覚えがないか』</p>
+            <p class="ja-classical-line">と木山姫の前に突出せば、木山姫は、</p>
+            <p class="ja-classical-line">木山姫『一寸見せて下さいませ』</p>
+            <p class="ja-classical-line">と手に取り上げ、裏表を打かへし眺めて、</p>
+            <p class="ja-classical-line">木山姫『あゝ確かに覚えが御座います。余り古びて居りますので、ハツキリは分りませぬが守袋の底に○に十の字を印して置きましたが、未だにウツスリと残つて居ります。これは全く伜の守袋に間違は御座いませぬ』</p>
+            <p class="ja-classical-line">木山彦『それならば確かに伜に間違ひない。兎の様な尖つた耳で時時耳を動かせる所、鼻の先の尖つた所はお前に生写、アヽ偉い者だなア。よう伜助かつて呉れた。常楠の伜もそれでは無事だつたか。あゝ有難い、全く熊野の神様の御守護だ。サア女房、吾々も此館を暫く明けて熊野へ夫婦連れ、御礼参りをしようではないか。又神様の御引合せで伜に遇へるかも知れぬ、善は急げだ、早く用意をせよ』</p>
+            <p class="ja-classical-line">木山姫『先づ先づジツクリと気を落ち着けて下さりませ。急いては事を仕損ずると云ふ諺もありますから……』</p>
+            <p class="ja-classical-line">木山彦は周章て、</p>
+            <p class="ja-classical-line">『お前厭なら来なくてもよい、サア助公、随伴の用意だ』</p>
+            <p class="ja-classical-line">助公『ハイ畏まりました、直様用意に取掛りませう』</p>
+            <p class="ja-classical-line">木山姫『左様なれば妾も一緒にお伴指して下さいませ。併し留守は如何したら宜しいか』</p>
+            <p class="ja-classical-line">木山彦『留守も何も要つたものか。家財よりも何よりも、大切な宝は吾子よりないのだ。子に会へさへすれば、財産も何も要るものか。如何なろと構はぬ。サア早く往かう』</p>
+            <p class="ja-classical-line">助公は家の戸締り万端に気を付け、夫婦の後に随ひ、熊野を指して出て行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 親子奇遇 [717]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: 知らぬが仏 [719]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
