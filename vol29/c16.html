@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 16: Waves の Echo [838] - Volume 29 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 29 Table of Contents</a>
+      <span>Volume 29</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 29 &bull; Chapter 16</span>
+      <h1 class="chapter-title-en">Chapter 16: Waves の Echo [838]</h1>
+      <p class="chapter-title-ja">波の響〔838〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Encouraged by Tsunehiko's sincere and unfeigned confession song, which also served as a celebration, Job stood up and sang a congratulatory song of initiation.</p>
+          <p class="en-p">Job: 'Fixed as Takaamahara,
+The sacred land of Jerusalem,
+The Lord God Kuniharutachi,
+Wishing to save the Sanzensekai,
+Aweing the divine words of Kami,
+Opening and revealing Oshihe,
+Enacting the Ritsupofu of Tenchi,
+Governing the world in Heian,
+Enjoying the Zuishiyō of Shinjinwaraku,
+Yet even this is but for a moment,
+As the swift-running horse passes.
+Handing over the Mihashira and Kunihashira of Ame,
+Overturned by the Magakami,
+To the guardianship of Mizuho no Kuni in Ashihara,
+Born in the land of Tokoyo,
+Into the hands of the head of crookedness,
+Descending from the fiery pit (Kuwakō) of Tenkyōzan,
+To the land of the roots,
+Secretly protecting this world,
+How venerable is that achievement!</p>
+          <p class="en-p">Such a venerable imperial Kami,
+How could He truly remain in the land of roots and the nether lands?
+Waiting for the time, appearing once again on the mountain of Tenkyō,
+Changing his name to Nodate no Hiko,
+Appearing as Haniyasuhiko,
+To save and help the straying people of the four quarters in peace,
+From a heart of infinite benevolence and compassion,
+Constructing the Misugikyō,
+Distributing the bureaus of Kami to the lands of the four quarters,
+Even up to the river rapids and mountain ridges,
+Spreading the venerable divine teachings,
+Ah, Kannagara, Kami, Kami,
+Transformed into the ugly cries of the ugly deity,
+Who appeared from the sins of Amatsuhiko and Enbōhime,
+Like white waves of the divine heart,</p>
+          <p class="en-p">How hateful it is that the hearts of the world's people grow cloudy day by day!
+Kami of the Mitama of Izu,
+Appearing as Kunitakehiko,
+Secretly abiding in this world upon the divine peaks of Mount Shio,
+Executing the grand scheme for the divine age of 567,
+While the divine spirit of Lord Susanoo,
+Appeared at the sanctuary of the guardian deities in the Caucasus Mountains,
+Sending forth Yamata no Orochi, ugly foxes, and crooked demons lurking across the land of Yashima,
+To sweep away the village clouds obstructing Tenchi with the divine breath,
+Directing His heart with care,
+Revealing Kototamawake,
+Commanding pure divine duties to the divine officials in the palace of brocade,
+Heard as Aya no Takama, the center of the self-overturning island,
+Saving the people of the world.
+Though the morning sun shines or clouds over,
+Though the moon waxes or wanes,
+Even if the great earth should sink,
+Even if Takasago Island should perish,
+How could we ever rebel against the teachings of the true Kami?
+As the child of Kami on Karlin Island, floating in the midst of Ōwada,
+Job now consents to the pure heart of Takahime,
+Even unto the ends of fields and the depths of mountains,
+To any dwelling place of tigers, wolves, lions, pythons, and warped demons,
+Without fear or hesitation, for the sake of the Way,
+Devoting body and soul,
+For the sake of the imperial Kami and the Aohitogusa of the world,</p>
+          <p class="en-p">Serving as Kannagara,
+May the blessings of Kami grace us,
+Sharpening Job's Mitama,
+Entrusting him as a venerable and noble Mihashira,
+Amatsukami, Kunitsukami, Yaoyorozu,
+Before the presence of Kunitamakamis,
+Reverently and respectfully I pray to you.
+Ah, Kannagara, Kami, Kami,
+May your divine spirits bestow grace upon us.'</p>
+          <p class="en-p">So he finished singing and sat down. Haruhiko began to sing once more.</p>
+          <p class="en-p">'Leaving the sacred land of Aya behind,
+Following the lineage of Hensei Danshi,
+Following Takahime-sama,
+Crossing over the Seto Inland Sea,
+Racing through the islands of the South Seas,
+Searching for the wish-granting jewel (Nyoi no Hōju),
+Coming near Takasago Island,
+Just when we steered our small boat,
+Colliding with a hidden rock,
+In the midst of our perplexity,
+Rescued by the Takashima-maru,
+Upon finally arriving at the port of Teru,
+Takahime pushed her way through the numerous passengers,
+Landing at the very head,
+Leaving the two of us behind,
+Hiding her figure in the pine forest of the dark mountain,
+Yet Mokisuke-sama, who appeared in the sacred land of Aya,</p>
+          <p class="en-p">Ordered her to serve as Takahime's supervising officer,
+Remaining in place, utterly losing sight of her,
+How could any excuse possibly stand?
+"Hurry, hurry, all at once,
+Tucking up our skirts and making the earth rumble with a thud,"
+When we arrived at the foot of the dark mountain and peered at the situation,
+Takahime-sama was speaking to herself:
+"To be accompanied by both Tsunehiko and Haruhiko,
+Who look like temple-bell thieves and lizard-faces,
+Like a pair of fools,
+And to be despised by the people of Takasago Island is simply unbearable.
+Let's skillfully manipulate some splendid people of the land as disciples,
+Putting on a dramatic play of a thousand transformations and ten thousand changes,
+How aloof of them to abandon the two of us and think only of sweet things!"</p>
+          <p class="en-p">]</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">常彦が祝を兼ねたる佯らざる告白歌に励まされ、ヨブは立上がり、入信の祝歌を歌つた。</p>
+            <p class="ja-classical-line">ヨブ『高天原と定まりし
+貴の聖地のエルサレム
+国治立大神は
+三千世界を救はむと
+神の御言を畏みて
+教を開き玉ひつつ
+天地の律法制定し
+世は平安に治まりて
+神人和楽の瑞祥を
+楽み玉ふも束の間の
+隙行く駒の曲神に
+天の御柱国柱
+転覆されて葦原の
+瑞穂の国の守護権
+常世の国に生れたる
+曲の頭に渡しつつ
+天教山の火坑より
+根底の国におりまして
+忍びて此世を守ります
+其功績ぞ尊けれ</p>
+            <p class="ja-classical-line">斯かる尊き皇神の
+いかで此儘根の国や
+底の御国にましまさむ
+時節を待つて天教の
+再び山に現はれて
+野立の彦と名を変じ
+埴安彦と現れまして
+迷へる四方の人草を
+安きに救ひ助けむと
+仁慈無限の心より
+三五教を建設し
+神の司を四方の国
+間配り玉ひて川の瀬や
+山の尾の上に至る迄
+尊き御教を布き玉ふ
+あゝ惟神々々
+神の心を白波の
+天足彦や胞場姫が
+罪より現れし醜神の
+醜の叫びに化されて</p>
+            <p class="ja-classical-line">世人の心日に月に
+曇り行くこそ忌々しけれ
+厳の御霊の大神は
+国武彦と現れまして
+四尾の山の神峰に
+此世を忍び玉ひつつ
+五六七の御世の経綸を
+行ひ玉ひ素盞嗚の
+神尊の瑞御霊
+コーカス山や産土の
+斎苑の館に現れまして
+八洲の国にわだかまる
+八岐の大蛇や醜狐
+曲鬼共を言向けて
+天地にさやる村雲を
+神の伊吹に払はむと
+心を配らせ玉ひつつ
+言依別を現はして
+自転倒島の中心地
+綾の高天と聞えたる</p>
+            <p class="ja-classical-line">錦の宮に神司
+清き神務を命じつつ
+世人を救ひ玉ひけり。
+旭日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+高砂島は亡ぶ共
+誠の神の御教に
+いかでか反きまつらむや
+大和田中に浮びたる
+カーリン島の神の御子
+ヨブは今より高姫が
+清き心を諾なひて
+仮令野の末山の奥
+虎狼や獅子大蛇
+如何なる曲津の棲処をも
+おめず臆せず道の為
+心を尽し身を尽し
+皇大神や世の中の
+青人草の其為に</p>
+            <p class="ja-classical-line">仕へまつらむ惟神
+神の恵の幸はひて
+ヨブが身魂を研き上げ
+尊き貴の御柱と
+依さし玉へよ天津神
+国津神達八百万
+国魂神の御前に
+謹み敬ひ願ぎまつる
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と歌ひ終つて座に着いた。春彦は又もや歌ひ出したり。</p>
+            <p class="ja-classical-line">『綾の聖地を後にして
+変性男子の御系統
+高姫さまに従ひて
+瀬戸内海を打渡り
+南洋諸島を駆けめぐり
+如意の宝珠を探ねつつ
+高砂島の手前まで
+小舟を操り来る折
+隠れた岩に突当り
+当惑したるをりもあれ
+高島丸に助けられ
+漸くテルの港まで
+到着するや高姫は
+数多の船客かきわけて
+先頭一に上陸し
+吾等二人をふりまいて
+暗間の山の松林
+姿を隠し玉ひしが
+綾の聖地に現れませる
+杢助さまに高姫の</p>
+            <p class="ja-classical-line">監督役を命ぜられ
+居乍ら　のめのめ見失ひ
+如何して言訳立つものか
+急げ急げと一散に
+尻ひつからげ大地をば
+ドンドン威喝させ乍ら
+暗間の山の麓迄
+来りて様子を窺へば
+高姫さまの独言
+常彦、春彦両人の
+半鐘泥棒や蜥蜴面
+間抜男を伴うて
+高砂島の人々に
+軽蔑されてはたまらない
+何とか立派な国人を
+甘く操り弟子となし
+千変万化の一芝居
+打つて見ようと水臭い
+吾等二人を放棄して
+甘い事のみ考へる</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hearing that Kagegoto from the thicket's shade to the end, overwhelmed by too much anger, rustlingly leaping out, Takahime-sama said: 'This is a world where vigilance cannot be lowered; although you say it is a beast, having heard the present secret, since it is a four-legged creature endowed with divine spirit, even a single word being overheard is a bit inconvenient; heaven has a mouth and walls have ears, what must be guarded is the mouth,' and the regret she displayed was truly comical.</p>
+          <p class="en-p">Tsunehiko and Haruhiko, both of them, hiding their footsteps for two or three chō, stealthily walking at the foot of the mountain, then gradually raising their footsteps, 'I am a person called Anan, a chamberlain to the King of Hiru; hearing that the Wish-granting Jewel is hidden in the dark mountain, I went to search for it; however, because I was too late, it is a post-festival,' Tsunehiko speaks in a loud voice, 'Therefore I am a man called Kanan, a chamberlain to the King of the Teru country,' when he began telling a tall tale, like a cat seeing dried bonito, Takahime-sama pounced upon them, 'I say, I say, traveler, please wait a while; I am Takahime, renowned in the world as the living shrine of the Hinode no Kami through the lineage of Henjiyōnanshi; you too are quite an eminent person, please listen to my story; to let you hear the precious karmic connection of the ancient, ancient root,'</p>
+          <p class="en-p">using an old crone's habit yet a young girl's gentle, feigned voice, she thought to burst out laughing, but thinking that laughing here would be a momentous matter and a small matter before a major one, pinching the god of laughter near her ribs with a "kyū-kyū," lowering and raising her footsteps, pretending as though she were returning from far ahead, 'Whoever you may be, what business do you have with me, make me hear quickly,' with a self-generated comical feigned voice, the astute Takahime sniffed it out, 'You say your name is Anna, but you are Tsunehiko the belfry thief, and Kanan disguised as a lizard-face is bound to be Haruhiko-sama!'</p>
+          <p class="en-p">turning up her voice and getting angry, 'Do not make such a fool of people! When the storm-assaulting low pressure and the gale disaster of the two hundred and tenth day are about to come, what I said was Anna is, just as it says in the Ofudesaki, the divine plan is an Anna person, an artifice to make people of the world astonished and go "ahun"; and what I called myself Kanan is because, although Haruhiko-sama is normally like a red baby, when the god possesses him, anyone is a Kanan soul,' making her say that, an adversarial logic to guide people onto the great road, when he hit her with one, Takahime-sama got angry,</p>
+          <p class="en-p">and throwing the two of us aside, trying to escape once more, 'When we met Kokoroyowake in the ship's cabin of the Takashima-maru, we were allowed to gaze upon the indestructible Diamond Wish-granting Jewel and other rare divine treasures,' when he threw out a feeler, Takahime, caught in the jewel, became half-dreaming, and instantly restored her good mood, 'Truly you are an eminent person, I thought you were a quick-witted man; and how did Kokoroyowake fare with the Wish-granting Jewel? Please let me know,' she said, and therefore,</p>
+          <p class="en-p">although this Haruhiko does not know, Tsunehiko, like a fox, applying spit to his eyebrows, 'The divine treasures of the three thousand worlds were secretly taken to the Takasago island, and divine overseers like Kotoyowake and Kokoroyowake came forth, doing this and that, and because it is an absolute secret, it cannot be told,' upon Kokoroyowake's words, 'Considering you a man, having revealed the vital secret, you must never tell Takahime; I too am a Tsunehiko propaganda envoy, if I say I will not tell, even if my head is torn off I will not tell,' since I promised, no matter what, it is inexcusable to Takahime-sama, but this much is forgiven—the comicalness of Tsunehiko blurting it out from his mouth and teasing her around,</p>
+          <p class="en-p">at last a quarrel burst into flower, and Tsunehiko and both of us, throwing Takahime-sama aside, this time the two of them ran away; Takahime-sama, startled, seizing the two of us, making us confess the whereabouts of the jewel, bringing it back to the sacred ground of Aya, 'The divine eye penetration of the living shrine of the Hinode no Kami is just like this; everyone, from now on you must not oppose our words,' her scheme of blowing hot air—how could we fall for such a thing? Exercising the thirty-sixth stratagem as the ultimate resort, dashing out like clouds and mist, Takahime-sama stumbled over a high pebble on the road, fell flat upon the great earth, smashed her forehead, bruised her knees, shedding raw blood, 'Ouch, ouch,' rubbing her head and her kneecaps.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">其蔭言を灌木の
+茂みに隠れて聞き終り
+余りに腹の立つままに
+ガサガサガサと飛出せば
+高姫さまの曰くには
+油断のならぬ世の中ぢや
+仮令獣といひ乍ら
+今の秘密を聞きよつた
+神の霊を授かりし
+四つ足なれば一言も
+聞かれちや都合がチト悪い
+天に口あり壁に耳
+謹むべきは口なりと
+後悔遊ばす可笑しさよ
+常彦、春彦両人は
+足音隠して二三丁
+山の麓に忍び足
+それから足音高めつつ
+ヒルの国王のお側役
+私はアナンと申す者</p>
+            <p class="ja-classical-line">暗間の山に如意宝珠
+隠してあると聞いた故
+私は捜しに行きました
+されど遅れた其為に
+後の祭りと常彦が
+声高々と話する
+そこで私はテルの国
+国王様のお側役
+カナンと申す男ぞと
+八百長話を始むれば
+猫が松魚節見た如うに
+高姫さまが飛びついて
+もうしもうし旅の人
+暫くお待ちなされませ
+変性男子の系統で
+日の出神の生宮と
+世に謳はれた高姫ぢや
+お前も中々偉い人
+私の話を聞きなされ
+昔の昔の根本の</p>
+            <p class="ja-classical-line">尊き因縁聞かさうと
+お婆アの癖に小娘の
+やうな優しい作り声
+吹出すように思へども
+ここで笑うては一大事
+大事の前の小事ぢやと
+脇のあたりでキユーキユーと
+笑ひの神をしめつけて
+足音低く高くして
+遥向うから後戻り
+して来たように作りなし
+どこの何方か知らね共
+私に向つて何御用
+早く聞かして下されと
+吾から可笑しい作り声
+流石の高姫嗅ぎつけて
+お前はアンナと云ふけれど
+半鐘泥棒の常彦だ
+カナンと名乗る蜥蜴面
+春彦さまにきまつたり</p>
+            <p class="ja-classical-line">余り人を馬鹿にすな
+声を尖らし怒り出す
+暴風襲来低気圧
+二百十日の風害も
+来らむとする其時に
+私がアンナと云うたのは
+お筆先にもある通り
+神の仕組はアンナ者
+こんな者になつたかと
+世界の人がビツクリし
+アフンとさせるお仕組ぢや
+カナンと云うて名乗つたは
+春彦さまの平常は
+赤子のやうな人なれど
+神が憑つた其時は
+誰でもカナン身魂ぢやと
+言はして人を大道に
+導くお役と逆理窟
+一本かましてやつたれば
+高姫さまは腹を立て</p>
+            <p class="ja-classical-line">私等二人を振すてて
+又も逃げよとする故に
+高島丸の船中で
+国依別に面会し
+金剛不壊の如意宝珠
+其他珍の御宝を
+拝見さして貰うたと
+カマをかけたら高姫が
+玉にかけたら夢うつつ
+忽ち機嫌を直し出し
+ホンにお前は偉い人
+気の利く男と思うてゐた
+さうして如意の宝玉は
+国依別が如何したか
+知らしてお呉れと云ふ故に
+此春彦は知らねども
+狐のやうに常彦が
+眉毛に唾をつけ乍ら
+三千世界の神宝は
+高砂島にコツソリと</p>
+            <p class="ja-classical-line">言依別や国依の
+神の司が出て参り
+何々々に何々し
+絶対秘密ぢや云はれない
+国依別のお言葉に
+お前を男と見込んでの
+肝腎要の秘密をば
+明かした上は高姫に
+決して云ふちやならないぞ
+私も常彦宣伝使
+言はぬと云つたらどこ迄も
+首がとれても云はないと
+約束したから如何しても
+高姫さまには済まないが
+これ許りは御免だと
+キ常彦口から出任せに
+からかひまはす可笑しさよ
+とうとう喧嘩に花が咲き
+常彦私の両人は
+高姫さまを振すてて</p>
+            <p class="ja-classical-line">今度は二人が逃げ出した
+高姫さまは驚いて
+吾等二人を引捉へ
+玉の所在を白状させ
+綾の聖地に持帰り
+日の出神の生宮の
+天眼通は此通り
+皆さまこれから吾々の
+言葉に反いちやならないと
+法螺吹き立てる御算段
+そんな事には乗るものか
+三十六計奥の手を
+最極端に発揮して
+雲を霞と駆け出せば
+高姫さまは道の上の
+高い小石に躓いて
+大地にバタリと打倒れ
+額を打破り膝挫き
+生血を流してアイタタと
+頭を撫でたり膝坊主</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Holding her face and grimacing,
+At this time several youths
+Came out from nowhere,
+ Cared for Takahime-sama,
+Helped her by raising and embracing her,
+And with their ever-unchanged impudence:
+'You fellows have received such wonderful grace,
+Give thanks to the Kamisama,
+Express your gratitude to me as well,
+For I was the one who tied and cast the divine rope!'
+Saying such nonsense once again,
+Deceived by a man
+Who claimed to know the whereabouts of the jewel,
+At the word 'Ah,' one ryo of gold,
+At the word 'Ri,' one ryo of gold,
+At the word 'Na,' gold was taken,
+At the word 'Waterfall,' two ryo were taken,
+And at the Mirror Pond and the six mouths,
+Once again six ryo were stripped away,</p>
+          <p class="en-p">With a knowing look, Takahime,
+While the two of us were resting
+By the wayside, with heavy steps,
+And shouldering her arms stiffly, Takahime
+Said that by the revelation of the Hinode Kami
+She had learned the whereabouts of the jewel,
+And from now on she would go alone,
+So the foolish men should not come along,
+For it would be an obstacle to the divine workings,
+And she told them by all means not to follow her;
+Leaving these words behind, she marched away with heavy thuds,
+Hurrying along the Teru Country highway.
+The two of us,
+Chasing after the back of Takahime,
+Ran out and collided with the rear of an ox,
+Struggling in a chaotic mess,
+With Ushidōmaru striking us across the cheek
+With a transverse flute so hard that our heads felt like flying off,
+And that pain when we were hit
+Was something Tsunahiko-sama experienced.</p>
+          <p class="en-p">As for me, having been given a side-blow,
+There was nothing quite so miserable;
+Receiving an ox from Ushidōmaru,
+Tsunahiko-sama rode upon the back of the ox,
+While I pulled the lead rope,
+Following along the small river into the cedar grove,
+Ascending about ten ken,
+And when we went to see Takahime-sama,
+Who was resting carelessly ahead,
+As soon as we brought the ox near, it began to bellow loudly,
+Awakening from her sleep at that great voice,
+Takahime-sama became annoyed,
+And abandoning the two of us once again,
+Head-bent to occupy the jewel all by herself
+At the Arina Waterfall,
+She tried to go, so we said to her:
+'You are going to the Mirror Pond above the Arina Waterfall,
+And the two of us are riding the ox,
+Reaching Arina a few days before you-sama,
+And we will return with the jewel in hand.'
+'Is that so?' she said as she stood up to leave,
+And Takahime-sama instantly shifted once more
+To a cajoling, sweet-toned voice:
+'Hey, hey, Tsunakō and Harukō,
+Do you not understand my heart?
+Crossing mountains and seas all the way, coming to such a place,
+How could I be apart from you?
+Let us go together!'
+She pleaded with us, and so
+'Moo, moo, Mr. Mō, please go back,'
+When we uttered this Kototama directed at the ox,
+Oh, wondrous miracle,
+it vanished, turning into smoke.
+From then on, the three of us held hands,
+And marching down the Teru highway with heavy strides,
+While gazing out at the Atlantic Ocean,</p>
+          <p class="en-p">When we came to the Mirror Pond
+Near the banks of the Arina Waterfall,
+Breaking thousands of years of silence,
+The pond began to bubble and froth,
+And groaned with a repulsive voice,
+'Un-un.'
+Where was the jewel for Takahime-sama?
+Her vital soul was sucked out of her,
+And becoming desperate out of sheer frustration,
+In a verbal exchange of the forty-eight characters
+of the Iroha poem with Tsurohiko Kamisama,
+She was so terrified that her spirit was drained and she swooned,
+Becoming completely unconscious.
+The divine ritualist of the Suspension Bridge Palace
+Appeared and when he saved Takahime, Takahime
+Was her usual hateful self,
+Lining up a million complaints,
+And the two of us who waited by her side</p>
+          <p class="en-p">Felt so excessively hateful that we thought
+We would love to slap her across the cheek.
+Such an uncomprehending and thick-headed
+Takahime-sama, yet somehow or other,
+Right in the middle of Kunugi-ga-hara,
+By the admonition of Hinodehime,
+Who is the avatar of Konohanahime
+Appeared on Mount Takashio,
+She repented from the very bottom of her heart,
+And Takahime, who had been thought a tiger,
+Suddenly transformed into a tame cat.
+From then on, she gradually became gentle,
+Even her manner of speaking changed,
+And she truly grew quite lovable.
+At the edge of the lake of the jewel,
+We spent the night in a forest of coconut palms,
+And Takahime folded her hands in adoration
+As she gazed upon the stone jizo carved with the figures
+of the divine ritualists of Takayorihime and Ryūkokuwake,
+And of Te and Ka.</p>
+          <p class="en-p">'Hey, hey, the four honored ones,
+I, this Takahime, was in the wrong.
+Please forgive me.
+For my faults regarding Kurohime-sama,
+I spoke unreasonably to you-sama,
+Abandoned the sacred ground of Aya,
+And caused you hardship; I am deeply sorry.
+As an atonement, starting today,
+I will take this heavy stone carved with the figures
+of you four honored ones,
+Carry it upon my back all the way to the island of Jitentō,
+Dedicate it by building a shrine,
+And serve you morning and evening,
+Please forgive me,'
+Such was her admirable resolve
+As she returned to a good heart from the bottom of her soul.
+Yet the transformation was so exceedingly swift
+That even I doubted it for a moment,
+When we boarded a ship at the port of Aru.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">押へて顔をしかめゐる
+此時四五の若者は
+どこともなしに出で来り
+高姫さまを介抱して
+抱き起して助くれば
+いつも変らぬ減らず口
+結構なおかげをお前等は
+頂きなさつた神様に
+御礼なされよ私にも
+御礼を仰有れ神の綱
+私がかけて上げました
+などと又もや世迷言
+玉の所在を知ると云ふ
+一人の男に騙されて
+アと云つては金一両
+リと聞いては金一両
+ナーと云つては金取られ
+滝と云つては二両取られ
+鏡の池と六つの口
+又もや六両はぎ取られ</p>
+            <p class="ja-classical-line">呑み込み顔で高姫が
+吾々二人が路端に
+憩ふ所をドシドシと
+肩肱いからし高姫は
+日の出神の御告げにて
+玉の所在を知つた故
+これから独り行く程に
+間抜男は来るでない
+神の仕組の邪魔になる
+必ず従いて来てくれな
+言葉を残してドンドンと
+テル国街道を走せて行く
+吾等二人は高姫が
+後を追ひつつ駆出して
+牛のお尻に衝突し
+ヤツサモツサと争ひつ
+牛童丸に横笛で
+首が飛ぶ程横ツ面
+やられた時の其痛さ
+常彦さまが行つた事</p>
+            <p class="ja-classical-line">私は傍杖くわされて
+あんなつまらぬ事はない
+牛童丸に牛貰うて
+常彦さまは牛の背
+私は綱を曳き乍ら
+小川を伝うて杉林
+十間許り遡り
+高姫さまが他愛なく
+休んで厶る其前に
+牛引つれて往て見れば
+モウモウモウと唸り出す
+其大声に目を醒まし
+高姫さまはうるさがり
+又も二人を振棄てて
+アリナの滝に只一人
+玉を占領せむものと
+行かうとしたので吾々は
+お前はアリナの滝の上
+鏡の池に行くのだろ
+吾等二人は牛に乗り</p>
+            <p class="ja-classical-line">お前さまより二三日
+先にアリナへ到着し
+玉を手にして帰ります
+左様ならばと立出づる
+高姫さまは又しても
+猫撫声と早変はり
+コレコレ常公春公へ
+私の心を知らぬのか
+海山越えてはるばると
+こんな所迄やつて来て
+お前に別れて如何ならう
+一緒に行かうぢやないかいと
+相談かけて呉れた故
+モウモウモーさん帰んでよと
+牛に向つて言霊を
+発射致せばアラ不思議
+煙となつて消えにける
+夫れより三人手を引いて
+テルの街道ドシドシと
+大西洋を眺めつつ</p>
+            <p class="ja-classical-line">アリナの滝のほとりなる
+鏡の池に来て見れば
+数千年の沈黙を
+破りて池はブクブクと
+泡を立てたりウンウンと
+厭らし声にて唸り出す
+高姫さまは玉どこか
+肝腎要の魂抜かれ
+焼糞気味になりまして
+月照彦神さまと
+いろはにほへとちりぬるの
+四十八文字の掛合に
+奴肝を抜かれて失心し
+人事不覚となられける
+懸橋御殿の神司
+現はれまして高姫を
+助け玉へば高姫は
+相も変らぬ憎い事
+百万ダラリと並べ立て
+側に控えた吾々も</p>
+            <p class="ja-classical-line">余り憎うて横ツ面
+擲つてやりたいよに思うた
+夫程分らぬ度し太い
+高姫さまもどうしてか
+櫟ケ原の真中で
+天教山に現れませる
+木の花姫の御化身
+日の出姫の訓戒に
+心の底から改心し
+虎と思うた高姫が
+サツパリ猫と早変り
+それから段々おとなしく
+もの言ひさへも改まり
+誠に可愛うなつて来た
+玉の湖水の畔にて
+椰子樹の森に夜を明かし
+鷹依姫や竜国別の
+神の司やテー、カーの
+姿を刻んだ石地蔵
+眺めて高姫手を合し</p>
+            <p class="ja-classical-line">コレコレ四人のお方さま
+此高姫が悪かつた
+どうぞ勘忍しておくれ
+黒姫さまの過ちを
+お前さま等に無理云うて
+綾の聖地を放り出し
+苦労をかけたは済みませぬ
+罪亡しに今日からは
+お前等四人の姿をば
+刻んだ重たい此石を
+背中に負うて自転倒の
+島迄大事に連れ帰り
+祠を建てて奉斎し
+朝晩お給仕致します
+どうぞ許して下されと
+心の底から善心に
+立返られた健気さよ
+余り早い変りよで
+私も一寸疑うた
+アルの港で船に乗り</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahime-sama's unwavering confession evoked great wonder, and even Job-sama was astonished, becoming a disciple of Takahime-sama and entering the faith—how auspicious this is! Ah, Kamunagara Kamunagara! The grace of Kami is before our very eyes; there is no greater joy than this. The heartfelt repentance of Takahime-sama and the path ahead for Job-sama, who has entered the faith, may they traverse it ever more soundly, and may they illuminate the world with the divine virtue of Kami; counting upon our fingers, we await and yearn for that day. Ah, Kamunagara Kamunagara! Mitama, may you be blessed and prosperous!"</p>
+          <p class="en-p">At the end, Takahime sang a song of joy regarding her repentance and entrance into the faith.</p>
+          <p class="en-p">"Ah, Kamunagara Kamunagara! By the grace of the precious Kami, the darkness of Tokoyo has cleared away entirely, and the moon of Shinniyo shines in the sky of the murakimo heart. My mitama, which had been instantly snared by the crafty deity of Kinmaukiubi, has at last awakened from its dream; the shadow of the magatsu-gami is gone, and the light of the Izunome spirit bestowed by Kami shines brilliantly, causing the anguish of the heart to vanish away. Whether the morning sun shines or clouds over, whether the moon waxes or wanes, even should the Great Earth sink into the depths, once repentance has been made above all else, as long as this mitama remains in this world, I swear to Heaven and Earth that I shall never change! If this repentance of Takahime had been delayed by even a single day,</p>
+          <p class="en-p">In this very ship, my life would have been taken by Job-sama. At the tip of the pen of Hensei Danshi, it is written that above all things, repentance is the most splendid thing of all. Once you repent, from that very day there are neither enemies nor hardships; it is written over and over again to repent quickly. Ah, repentance! Repentance! By the words of Konohanahime-sama, the true flavor of repentance, which I understood for the first time, is just like this. Job-sama of Karin Island, who had targeted me as an enemy, has completely transformed, looking up to Takahime as a master and entering the faith; if we seek the cause by which this place has safely settled down, it is none other than my own repentance.</p>
+          <p class="en-p">Repentance and entrance into the faith came together, raining down only good things. There is no joy greater than this! Even so, the party of four who fell into the ocean—when I think of them, how pitiful they are! At the very least, let us comfort their spirits, enshrining them morning and evening, and serving them with the utmost care. Takayorihime and everyone, look upon me with a generous heart and forgive my sins! Ah, Kamunagara Kamunagara! Revering before the presence of Kami, for today's joy to last eternally, I offer my gratitude and pray for the blessed afterlife of the director of teachings, Takayorihime, and the three others. Ah, Kamunagara Kamunagara! Mitama, may you be blessed and prosperous!"</p>
+          <p class="en-p">Having finished singing thus, she smiled gently and took her seat. The ship sped across the sea for three days and three nights, and at last arrived safely at the port of Zemu. The party of four, consisting of Takahime and her companions, landed here, and with high spirits, advancing deep into the mountains while singing propaganda songs to perform purification at the great waterfall of Mount Tenshō, which was separated from the town of Zemu by some two or three ri. Ah, Kamunagara Mutama Sachiwahimaseyo.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高姫さまが偽らぬ
+其告白に感歎し
+ヨブさま迄が驚いて
+高姫さまの弟子となり
+入信されたお目出度さ
+あゝ惟神々々
+神の恵は目のあたり
+こんな嬉しい事はない
+高姫様の御改心
+入信なされたヨブさまの
+前途益々健全に
+渡らせ玉ひて神徳を
+世界に照らし玉ふ日を
+指折数へ待ちまする
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">最後に高姫は改心と入信の悦びの歌を唄ひけり。</p>
+            <p class="ja-classical-line">『あゝ惟神々々
+尊き神の御恵に
+常夜の暗も晴れわたり
+真如の月は村肝の
+心の空に輝きて
+金毛九尾の曲神に
+すぐはれ居たる吾身魂
+今は漸く夢醒めて
+曲津の神の影もなく
+神の賜ひし伊都能売の
+霊の光輝きて
+心の悩みも消え失せぬ
+旭は照る共曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+一旦改心した上は
+身魂の此世にある限り
+天地に誓うて変らまじ
+此高姫の改心が
+一日遅れて居つたなら</p>
+            <p class="ja-classical-line">此船中でヨブさまに
+命取らるるとこだつた
+変性男子の筆先に
+何よりかより改心が
+一番結構と云うてある
+改心すれば其日から
+敵もなければ苦労もない
+早く改心なされよと
+幾度となく書いてある
+あゝ改心か改心か
+木の花姫の御言葉で
+始めて悟つた改心の
+誠の味は此通り
+私を仇と狙うたる
+カーリン島のヨブさまが
+打つて変つて高姫を
+師匠と仰いで入信し
+無事に此場の治まりし
+其原因を尋ぬれば
+ヤツパリ私の改心ぢや</p>
+            <p class="ja-classical-line">改心入信一時に
+善い事計りが降つて来た
+こんな嬉しい事はない
+さはさり乍ら海中に
+陥り玉ひし四人連
+思へば思へばいぢらしい
+せめては霊を慰めて
+朝な夕なに奉斎し
+叮嚀にお給仕致しませう
+鷹依姫や御一同
+広き心に見直して
+私の罪を赦しませ
+あゝ惟神々々
+神の御前に慎みて
+今日の慶び永久に
+感謝しまつり鷹依姫の
+教の司や三人の
+冥福祈り奉る
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">斯く歌ひ了りて、莞爾として座に着いた。船は三日三夜さ海上を逸走し、漸くゼムの港に安着した。高姫一行四人はここに上陸し、ゼムの町を二三里許り隔てたる天祥山の大瀑布に御禊をなすべく、意気揚々として、宣伝歌を歌ひ乍ら山深く進み入りにける。あゝ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c15.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 15: ヨブの入信 [837]</span>
+      </a>
+      <a href="c17.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 17: 途上の邂逅 [839]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

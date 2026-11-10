@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 2: 懸 Bridge 御殿 [824] - Volume 29 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 29 Table of Contents</a>
+      <span>Volume 29</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 29 &bull; Chapter 2</span>
+      <h1 class="chapter-title-en">Chapter 2: 懸 Bridge 御殿 [824]</h1>
+      <p class="chapter-title-ja">懸橋御殿〔824〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tatsukuniwake, Telistan, and Karlins, catching a fleeting glimpse through the trees of the banner proclaiming the presentation of the golden jewel, felt their hearts leap and their nerves suddenly tense. Adopting a solemn and dignified air, as if wholly absorbed in prayer, they prayed with all their might with feigned innocence. Meanwhile, having his palanquin carried and accompanied by numerous villagers, Ahr, the chief of Tena in the land of Hiru, arrayed in full festive attire, made his way with difficulty along the narrow path. Glancing sideways at the waterfall of Arina, he arrived before this cave, was deeply moved upon seeing the three figures at prayer, and quietly had his palanquin set down upon a beautiful rock nearby. Becoming utterly engrossed, he turned toward the Mirror Pond, kneeling and clasping his hands in reverence. The entire company, maintaining absolute silence, lined up in ranks behind the chief of Tena, knelt, and worshipped the interior of the cave across the Mirror Pond.</p>
+          <p class="en-p">From within the cave, in a strange, unearthly voice stripped of its normal resonance,</p>
+          <p class="en-p">Tsukiteruhikonomikoto is here. Hand over immediately the golden jewel to the shinshi who is there, O you soul of exquisite purity who have brought it hither from afar. Your name is bestowed by the god Tsukiteruhiko as Kunitamayoriwakemikoto.</p>
+          <p class="en-p">Chief Ahr prostrated himself with a start,</p>
+          <p class="en-p">Ahr: 'With all due reverence, Lord Tsukiteruhiko Ōkami, I am Ahr, a humble servant of the gods, and chief of the village of Tena in the land of Hiru. Having heard that the gods are gathering various jewels in accordance with the divine administration, I have consulted with my wife, Princess Aruna, and brought here this very day the golden jewel that our family has treasured and carefully guarded. I humbly pray that You will examine and accept it, and both my wife Aruna and I will be filled with supreme awe and gratitude.'</p>
+          <p class="en-p">From within the rock cave,</p>
+          <p class="en-p">Kunitamayoriwakemikoto, the time has arrived for the gods to voice their words before mortals, but for Me to manifest My physical form is not permitted by the rules of the divine realm. Therefore, let Tatsukuniwake the sanjakusha stationed there receive it as the proxy of the god Tsukiteruhiko; you would do well to understand it thus.</p>
+          <p class="en-p">The couple, Ahr and Aruna, shed tears of gratitude in sheer astonishment,</p>
+          <p class="en-p">Ahr and Aruna: 'Truly, these are wondrous divine words, a joy beyond compare. ... O shinshi of Tatsukuniwake, I humbly beseech you to examine this precious jewel well and receive it.'</p>
+          <p class="en-p">Tatsukuniwake opened his mouth with labored reluctance,</p>
+          <p class="en-p">Tatsukuniwake: 'Were you not the chief of the village of Tena, renowned in rumor? Since you are a soul deeply tied to the divine realm by karma, you have been able to perform such a magnificent sacred service. Be deeply grateful. ... Ho there, you two, Tei and Kā! Examine quickly the golden precious jewel presented by Chief Aruna and bring it forth before Me.'</p>
+          <p class="en-p">Tei and Kā muttered in undertones,</p>
+          <p class="en-p">Tei and Kā: 'What is this? How utterly ridiculous. That fellow Tatsukuniwake suddenly uses pompous kototama and treats us like mere servants. What an outrageous fellow. It would be splendid if this truly turns out to be the golden jewel we are searching for, but if by any chance it should be a mere gilded trinket, the two of us will only be compounding our foolishness.'</p>
+          <p class="en-p">So whispering, they stepped forward to the front of the palanquin. Aruna reverently opened the door of the palanquin, took out the jewel box, and presented it before the two men, Tei and Kā. Taking the jewel box into their hands from left and right, the two men held it high above their heads and, moving sideways like crabs, began to step gingerly with their four feet. Their minds being too captivated by the jewel box overhead, they paid no heed to their footing, and the moment they crashed and stumbled against a rocky corner, the two of them plunged headlong into the Mirror Pond along with the jewel box, making a loud plop. Tatsukuniwake, the chief and his wife, and all the rest rose to their feet as one, cried out 'Ah!', and gazed upon the surface of the pond. Fortunately, struck by the momentum of the two men's fall, the jewel box conveniently bounded right into the interior of the cave.</p>
+          <p class="en-p">Princess Takayori inside the cave, captivated in her heart by the jewel box that had flown so vigorously right to her feet, forgot even the presence of the chief and the other people outside. Clutching the jewel box to her breast, she hurried out of the cave with brisk steps and brought it before Tatsukuniwake,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">竜国別、テーリスタン、カーリンスの三人は、黄金の玉献上といふ旗印を、木の間にチラとすかし見て、胸を躍らせ、俄に心も緊張し、謹厳振を装うて、祈願に余念なきものの如く、素知らぬ顔にて一生懸命に祈つて居る。そこへ御輿を担がせ、数多の村人を伴ひ、ヒルの国のテーナの酋長アールは盛装を整へ、細路を漸くにして、アリナの滝を横にながめ、この岩窟の前に辿り着き、三人の祈願の姿を見て感じ入り、自分もソツと、御輿を傍の美はしき岩の上に据ゑさせ、一生懸命になつて鏡の池に打向ひ、拝跪合掌してゐる。一同は無言の儘、テーナの酋長の背後に堵列し、跪いて鏡の池を隔てて岩窟内を拝みゐる。</p>
+            <p class="ja-classical-line">岩窟の中より、奴拍子の抜けた声で、</p>
+            <p class="ja-classical-line">『月照彦命、此処に在り。黄金の玉を遥々と持参致したる身魂の美はしき信者、一時も早く其処に居る神司に手渡し致せ、汝の名は月照彦神より国玉依別命と名を賜ふ』</p>
+            <p class="ja-classical-line">酋長のアールはハツと平伏し、</p>
+            <p class="ja-classical-line">アール『恐れ乍ら、月照彦大神様、私はヒルの国のテーナの里の酋長、アールと申す賤しき神の僕で御座います。此の度神界の御経綸上いろいろの玉を、神様よりお集めになると云ふことを承はり、家の重宝として大切に保護致したる黄金の玉を、女房のアルナ姫と謀り、只今此処に持参致しまして御座います。どうぞ御調べの上、御受納め下さいますれば、私を始め妻のアルナも恐悦至極に存ずることで御座いませう』</p>
+            <p class="ja-classical-line">岩穴の中より、</p>
+            <p class="ja-classical-line">『国玉依別命、神は時節参りて、声を人民の前に発する様になりたれ共、吾姿を現はすことは、神界の規則として相成らざれば、そこに控へ居る竜国別の審神者、月照彦神が代理として受取らしめむ、左様心得たがよからうぞ』</p>
+            <p class="ja-classical-line">アール、アルナの夫婦はハツと許りに有難涙をこぼし、</p>
+            <p class="ja-classical-line">『実に有難き神の御言葉、斯様な嬉しい事は御座いませぬ。……竜国別の神司様、どうぞ此の宝玉をよく検めて御受取りを願ひ奉ります』</p>
+            <p class="ja-classical-line">竜国別は、漸くにして重たさうに口を開き、</p>
+            <p class="ja-classical-line">『其方は噂に高きテーナの郷の酋長であつたか。其方は神界に因縁深き身魂であるから、斯の如く結構な御用が勤めあがつたのであるぞよ。有難く思へ。……あいや、テー、カーの両人、酋長アルナの献上つた黄金の宝玉を早く実検めて、此方が前に差出せよ』</p>
+            <p class="ja-classical-line">テー、カー両人は小声にて、</p>
+            <p class="ja-classical-line">『何ぢや、馬鹿々々しい。竜国別の奴、俄に荘重らしい言霊を使ひよつて、まるで俺達を奴扱ひにしやがる。怪しからぬ奴だ。これが果して吾々の捜してゐる黄金の宝玉なれば結構だが、モシヤ鍍金玉でもあつたら、吾々両人の者は愈馬鹿の上塗りをせなならぬがなア』</p>
+            <p class="ja-classical-line">と呟き乍ら輿の前に進み寄る。アルナは恭しく輿の戸を開き、玉筥を取出し、テー、カーの二人の前に差出した。テー、カー両人は左右より其玉筥を手に取り、頭上高く捧げ、蟹の様になつて、四つの足をそろりそろりと運び出した。余り頭上の玉筥に心を奪られ、足許に気が付かず、岩角にガンと躓いた途端に、二人は玉筥と共に、鏡の池にドブンと音立てて落ち込んで了つた。竜国別を始め、酋長夫婦、其他一同は総立ちとなり『アツ』と叫んで、池の面を眺めてゐる。幸ひ玉筥は、二人の落ち込んだ機みに撥られて、岩窟の中に都合よく飛び込みにけり。</p>
+            <p class="ja-classical-line">岩窟内の鷹依姫は吾足許に勢よく飛込んで来た玉筥に心を奪はれ、外に酋長其他の人々の居るのも忘れ、玉筥を引抱へ、ツカツカと岩窟内を走り出で、竜国別の前に持来り、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Hey there, Tatsukuniwake, examine this carefully. This is totally and undoubtedly the real thing!ه‌'</p>
+          <p class="en-p">Tatsukuniwake: 'Mother, wouldn't it be trouble if you came out to a place like this? If you don't have patience for a little longer, our disguise will be exposed!ه‌'</p>
+          <p class="en-p">Takayorihime: 'It's fine even if it appears already, isn't it? Now that it has fallen into our hands like this, it doesn't matter what anyone says, does it?ه‌'</p>
+          <p class="en-p">While this was happening, Tē and Kā both crawled up, covered from head to foot in green algae,</p>
+          <p class="en-p">'Ah, because of that jewel, we met with terrible sights, had our livers crushed, and completely lost our faces!ه‌'</p>
+          <p class="en-p">Seeing Takayorihime's figure, the chieftain thought it met with the will of the Kamisama, and deeply believing that the Ōkamisama had transformed into the figure of an old woman and appeared here as an Ikigami, he shed grateful tears, timidly clapped his hands in reverence,</p>
+          <p class="en-p">Āru: 'This is truly, truly Tsukiteruhikonokami, who has graciously manifested the Goshintai and appeared before one of clouded Mitama like myself. If you will be so good as to accept this jewel, there will be no greater joy than this for us Fūfu and the Satobito!ه‌'</p>
+          <p class="en-p">As though greatly relieved, Takayorihime suddenly adopted a solemn tone and said,</p>
+          <p class="en-p">'You, Kunitamayoriwake no Mikoto, the Kaminari is satisfied with your utmost sincerity. However, though there are things I would command you to do, since the dirt of your Mitama has not yet been removed, go down four or five chō, let both Fūfu purify your Mitama day and night at the waterfall of Arina, and let all those who have followed you likewise strip entirely naked to perform Misogi, then come up to my presence anew. I shall bestow an important mission upon you.ه‌'</p>
+          <p class="en-p">Beginning with the Fūfu Āru and Aruna, all the attendants hearing these words,</p>
+          <p class="en-p">'Yes, we obey,ه‌</p>
+          <p class="en-p">and timidly retreating backward, they left the front of the cave and descended to perform a day and night of Misogi at the waterfall of Arina.</p>
+          <p class="en-p">The voices of the niigandori were audibly shrill among the trees of the valley.</p>
+          <p class="en-p">Having successfully directed everyone toward the waterfall of Arina, Takayorihime purred like a cat, flew upon the jewel box, and opening the lid to look inside, she saw a golden jewel shining with brilliant brilliance, yet compared to the jewel that Kurohime had kept, it felt slightly smaller. Still, thinking this must be due to her own mind, she forced herself to be content, quickly closed the lid as before,</p>
+          <p class="en-p">‘Now, once this jewel is in our hands, our desires are accomplished. However, we cannot let it go without granting some divine virtue to the chieftain of the village of Tē. Is there no good plan we can devise?’</p>
+          <p class="en-p">Tatsukuniwake: ‘Mother, if so, let us do this. We shall put the golden jewel inside this jewel box into this brocade bag and take it back with us, and here transfer the spirit of Tsukiteruhikonokami into the most excellent one among the many jewels left here… “Bestowing the name Kunitamayoriwake no Mikoto upon Āru, the chieftain of Tē, and the name Tamaryūhime no Mikoto upon Aruna. From now on, you shall permanently dwell in this hermitage, become the divine priest of Tsukiteruhikonokami, and universally save all myriads of people. This golden jewel which you have offered must never be opened for endless kalpas. Should you ever open this jewel box, the divine spirit will instantly appear, great calamities will befall the bodies of you Fūfu, and Takasago Island is in danger of sinking to the bottom of the sea due to the disaster of earthquakes and floods; do not ever, ever disobey the words of the Kaminari. Tsukiteruhikonokami shall transfer His divine spirit into this golden jewel, lead three attendants, and return to the heavens riding upon a cloud.”’ (writing this fluently around the periphery of the jewel box using the juice of the berries of the ubatama)… ‘Now, if we leave it like this, the chieftain too will receive splendid grace, and divine virtue will shine throughout the world.’</p>
+          <p class="en-p">From here, for the sake of taking leave at this Mirror Pond, they recited the Tianjin Norito, prayed well for what comes after,</p>
+          <p class="en-p">‘Grant boundless and vast divine virtue to Kunitamayoriwake no Mikoto and Tamaryūhime no Mikoto, and protect them so that they ultimately become the Ikigami of Takasago Island and gather the admiration of the people to themselves.’</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『コレコレ竜国別、よく検めて御覧なさい。全くこれは本物に相違ありませぬぞよ』</p>
+            <p class="ja-classical-line">竜国別『お母アさま、こんな所へ出られちや困るぢやありませぬか。モウ暫く幸抱して居つて下さらぬと化が現はれますよ』</p>
+            <p class="ja-classical-line">鷹依姫『モウ現はれたつて良いぢやないか。斯うして此方の手に入つた以上は、誰が何と云つても構はぬぢやないか』</p>
+            <p class="ja-classical-line">斯くする内テー、カーの両人は体中、青藻を被つて這ひ上り来り、</p>
+            <p class="ja-classical-line">『アーア、玉のおかげで、ドテライ目に会ひ、肝玉を潰し、面目玉をなくして了つた』</p>
+            <p class="ja-classical-line">酋長は鷹依姫の姿を見て、神様の御意に叶ひしと見え、大神様は婆の姿と変じ、此処に生神となつて出現し玉ひしものと深く信じ、有難涙をこぼし、恐る恐る拍手を打ち、</p>
+            <p class="ja-classical-line">アール『コレはコレは月照彦神様、よくも御神体を現はして、私如き身魂の曇つた者の前に現はれ下さいました。どうぞ此玉をお納め下さいますれば、夫婦の者の喜び、里人の喜びは此上御座いませぬ』</p>
+            <p class="ja-classical-line">鷹依姫はヤツと安心したものの如く、俄に荘重な口調にて、</p>
+            <p class="ja-classical-line">『其方、国玉依別命、神は汝の至誠を満足に思ふぞよ。併し乍ら汝に言ひ渡したき事あれ共、まだ身魂の垢取れざれば、四五丁下つて、アリナの滝に一日一夜、夫婦共身魂を浄め、又従ひ来れる者共、残らず赤裸となつて御禊をなし、更めて吾前に登り来れ。大切なる使命を汝に仰せ付けるぞよ』</p>
+            <p class="ja-classical-line">アール、アルナの夫婦を始め、供人一同は、此言葉に、</p>
+            <p class="ja-classical-line">『ハイ畏まりました』</p>
+            <p class="ja-classical-line">と恐る恐る後しざりし乍ら、岩窟の前を退きアリナの滝に一昼夜の御禊をなすべく、降つて行く。</p>
+            <p class="ja-classical-line">蜩の声は谷間の木々にけたたましく聞えて来た。</p>
+            <p class="ja-classical-line">鷹依姫は一同をうまくアリナの滝に向はせおき、猫の様に喉を鳴らし、玉筥に飛付き、中を開いて見れば、金色燦然たる黄金の玉、されど、黒姫が保管せし玉に比べては、稍小さき感じがした。されどこれも心の故であらうと、無理に得心し、手早く元の如く蓋を閉ぢ、</p>
+            <p class="ja-classical-line">『サア此玉さへ手に入れば、吾々の願望は成就したのだ。併し乍らテーナの郷の酋長に対し、何か一つの神徳を渡しておかねば済むまい。何とか良い工夫はあるまいかな』</p>
+            <p class="ja-classical-line">竜国別『お母アさま、そんなら斯う致しませう。此玉筥の中の黄金の玉は錦の此袋に納め吾々が持帰ることと致し、後へ此処にある沢山の玉の中、最も優れたるものに、月照彦神様の御霊をうつし……『テーナの酋長アールを以て国玉依別命と名を賜ひ、アルナを以て玉竜姫命と名を賜ふ。汝はこれより此庵に永住し、月照彦神の神司となり、普く万民を救へよ。此汝が献りし黄金の玉は万劫末代開く可からず。万一此玉筥を開く時は神霊忽ち現はれ、汝等夫婦の身に大災厄来り、高砂島は、地震洪水の厄に遭ひ、海底に沈没するの虞あり、必ず必ず神の言葉を反く勿れ。月照彦神は此黄金の玉に御霊をうつし、三人の眷属を引連れ、雲に乗つて天上に帰るべし』……（とスラスラと玉筥のぐるりに烏羽玉の実の汁もて書き記し）……サア斯うしておけば、酋長も結構なお蔭を戴き、御神徳が世界に輝くであらう』</p>
+            <p class="ja-classical-line">これから此鏡の池にお暇乞の為に天津祝詞を奏上し、後をよく御願ひ申し、</p>
+            <p class="ja-classical-line">『国玉依別命、玉竜姫命に宏大無辺なる御神徳をお授け下され、遂には高砂島の生神となつて、人望を一身に集むる様御守護下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Praying with itsushiyōkenmei, the party of four, lost in the darkness, crossed mountains as if clouds were mist, and continuing through the night, finally arrived at the plain called Kunugi-ga-hara in the land of Uzu.</p>
+          <p class="en-p">The chief and his wife of Aruna, convinced of the shinji of Tsukiteruhiko, finished their itsuchiuya of misogi, and when they came respectfully before the Mirror Pond, the hermitage was empty like a cicada shell, and neither the voice of the Kamisama nor the figures of the three men were to be seen. 'How fushigi,' they thought, and as they searched the hermitage thoroughly, they found a pile of beautiful stones, and upon them, the Tamabako that the jibun had brought was placed neatly. Looking closely, the same monku as before was written upon it. The chief and his wife placed the mikoshi that had been sent on the opposite side of the Mirror Pond, at the entrance of the gankutsu, enshrined the Tamabako within it once more, and firmly believing in the written monku, the husband became Kunitamayoriwakenomikoto and the wife became Tamatatsuhimenomikoto. They offered kiguwan asayufu before the mikoshi, and at night they entered the hermitage, making it their dwelling, and for the sake of the people who came from all directions, they offered kiguwan for fukutoku-enman, jumyō-chōkyū, and byōki-heiyu.</p>
+          <p class="en-p">The propaganda of the two, Te and Ka, seemed to have been highly successful, and day by day, in continuous succession, people came carrying stone blocks in the shape of jewels or bringing various nuts to offer before the deity. The number of those who requested kiguwan from the couple Kunitamayoriwake and returned after receiving appropriate goshintoku increased month by month. Eventually, due to the excessive number of pilgrims, there was no room to contain them, and the area around the Mirror Pond, which was not very wide, became so crowded that one could not move. Unavoidably, after consultation among the many believers, they built bridges from valley to valley, constructed a grand Yahiro-dono, and there re-enshrined the Tamabako. The couple served before the deity as kannushi, with people such as Kuni, Tama, Yori, Ryū, and Wake serving as executives, and they came to propagate the teachings of the 3-5 God day and night. Because this Yahiro-dono was built blocking the valley like a bridge, it was called the Kakehashi-no-Goten.</p>
+          <p class="en-p">The couple Kunitamayoriwake, feeling suspicious because strange noises were heard in the sanctuary every night at the hour of the ox, decided on a night when the fifteen-day moon was shining brightly, without informing the executives, to sit upright before the deity, just the two of them, and wait to investigate the true nature of the strange noises. From beneath the floor of the sanctuary, strange smoke rose up with a puff, and a grotesque deity with a bald head like an octopus, appearing hazy, emerged from the smoke with its waist bent in the shape of a 'ku'. It circled around the palanquin many times, spinning round and round; its strangeness and repulsiveness were profound. Tamatatsuhime lost her nerve, let out a scream of 'Kya!', and collapsed on the spot. Kunitamayoriwake, being a man of stout heart, faced the strange shadow and spoke in a stern voice:</p>
+          <p class="en-p">Kunitamayoriwake: 'I am the kannushi who, obeying the command of the god Tsukiteruhiko, has enshrined the goshinrei in the Tamabako and serves here morning and evening, having built this Yahiro-dono. Who are you, appearing night after night in this sacred sanctuary without our permission, a suspicious person lurking around the goshinpō? State your name. Depending on your answer, I shall show no mercy.'</p>
+          <p class="en-p">He stood his ground, bracing himself. The strange shadow increased in density, approached the collapsed Tamatatsuhime without a sound, and when it stretched out a thin hand and stroked her chest two or three times, the princess immediately regained consciousness. She clasped her hands together toward the monster and, without fear, expressed her gratitude.</p>
+          <p class="en-p">Kunitamayoriwake, not understanding, watched the figure of the monster in silence. The monster spoke in a cool, thin voice:</p>
+          <p class="en-p">Monster: 'I am the reitai of the god Sayohiko, who was propagating the 3-5 teachings at the gankutsu of the Mirror Pond, upstream of the Arina waterfall. After I returned to the spirit world, there was no one to worship my soul, and not a single offering was made to me. However, one year ago, the propaganda envoy of the 3-5 teachings, Takayorihime and Ryūkokubetsu, brought two attendants, came to the gankutsu of the Mirror Pond, gathered jewels, and finally stole the golden jewel, the treasure of your house, and returned with it. I appear night after night to make this known to you. They replaced the contents of that Tamabako with agate beads and made off with the golden jewel; the four of them are now out at Kunugi-ga-hara in the land of Uzu, wandering here and there on the plain. Do you not have the intention to take back that jewel?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と一生懸命に祈願し、一行四人は闇に紛れて、雲を霞と、山を越え、夜を日に継いで、漸く宇都の国の櫟が原と云ふ平原に辿り着きけり。</p>
+            <p class="ja-classical-line">アール、アルナの酋長夫婦は月照彦の神示と確信し、一昼夜の御禊を終り、恭しく鏡の池の前に来て見れば、庵の中は藻抜けの殻、神様の声もなければ、三人の男の姿も見えぬ。……ハテ不思議……と庵の中を隈なく捜し見れば、美はしき石を積み重ね、其上に自分の持来りし玉筥がキチンと載つて居る。よくよく見れば以前の文句が書き記してある。酋長夫婦は送り来りし御輿を鏡の池の向ふ側、岩窟の入口に安置し、玉筥を再び其中に納め、書置きの文句を堅く信じ、自分は国玉依別命、妻は玉竜姫命となり済まし、御輿の前に朝夕祈願を凝らし、夜は庵に入りて、夫婦はここを住処とし、普く四方より参り来る人々の為に福徳円満、寿命長久、病気平癒などの祈願を凝らし居たりける。</p>
+            <p class="ja-classical-line">テー、カー二人の宣伝は大に功を奏したと見え、日々絡繹として、玉の形したる石塊を携へ、或はいろいろの木の実を持来りて神前に供し、国玉依別命夫婦の祈願を依頼し、相当の御神徳を蒙つて帰る者、日に月に殖えて来た。遂には余り多数の参詣者にて、身を容るる所なく、余り広からざる鏡の池のあたりは、身動きならぬ計りの雑閙を来すこととなり、止むを得ず、数多の信者協議の上、谷から谷へ橋を渡し、宏大なる八尋殿を造り、ここに改めて玉筥を奉斎し、夫婦は神主として神前に仕へ、国、玉、依、竜、別などの人々を幹部とし、三五の神の教を日夜宣伝することとなりぬ。此八尋殿は谷の上を塞いで橋の如く造られたるを以て、懸橋の御殿と称へられける。</p>
+            <p class="ja-classical-line">国玉依別夫婦は、毎夜丑満の頃に、神殿に怪しき物音の聞ゆるに不審を起し、十五の月の照り輝く夜、幹部にも知らさず、夫婦只二人、神前に端坐して、怪しき物音の正体を調べむと待構へてゐた。神殿の床下より怪しき煙ポーツと立昇り、朦朧として蛸の様な禿頭の不細工な一柱の神、腰をくの字に曲げて、煙の中より現はれ、輿のぐるりを幾回となく、クルクルと廻つてゐる、其怪しさ、厭らしさ。玉竜姫は肝を潰し『キヤツ』と悲鳴をあげて其場に倒れた。国玉依別は流石気丈の男子とて、怪しき影に向ひ、言葉厳かに、</p>
+            <p class="ja-classical-line">『吾こそは月照彦神の命を奉じ、御神霊を玉筥に納め、朝夕此八尋殿を作りて奉仕する神司なるぞ。汝何者なるか、吾々の許しもなく、神聖なる神殿に夜な夜な現はれ来り、御神宝の辺りに附纏ふ曲者、名を名乗れ、返答次第に依つては容赦は致さぬぞ』</p>
+            <p class="ja-classical-line">とキツとなつて身構へした。怪しき影は追々濃厚の度を増し、そこに倒れたる玉竜姫の傍に足音も立てず寄添ひ、細き手を伸べて、二三回胸のあたりを撫でさすれば、姫は忽ち正気づき、両手を合せて怪物に向ひ、恐れ気もなく感謝の意を表し居たりける。</p>
+            <p class="ja-classical-line">国玉依別は合点行かず、黙然として怪物の姿を眺めて居た。怪物は涼しき、細き声にて、</p>
+            <p class="ja-classical-line">怪物『吾れこそはアリナの滝の水上、鏡の池の岩窟に三五の教を宣伝し居たる狭依彦の神の霊体である。吾れ帰幽後は、一人として吾霊魂を祭る者なく、御供一つ供へ呉るる者もなし。然るに一年以前、三五教の宣伝使鷹依姫、竜国別は二人の供人を引連れ、鏡の池の岩窟に来り、玉集めをなし、遂に汝が家の重宝黄金の玉を奪ひ取り帰りたり。吾れは此事を汝に知らさむが為に夜な夜な出現するものなり。其玉筥の中は瑪瑙の玉と摺替へおき、黄金の玉を引さらへて、四人の者は今や宇都の国の櫟が原に出で、草原をあちらこちらとさまよひつつあり。汝は其玉を取返す所存なきか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kunitamayori: 'Thinking it was some Kami, I find it was none other than Sayorihiko-sama, who is famed as the Kami of the Mirror Pond. I thank you for your kindness, but as I have resigned myself to everything being a matter of karmic fate, even if a golden ball were to turn into an agate ball, it would not trouble me in the least. As long as it is the august spirit of Tsukiteruhiko that is made to hang upon it, even if it were a dumpling-stone ball, to me I know not how much more precious it would be. I hold not the slightest attachment to golden balls or the like.'</p>
+          <p class="en-p">Sayorihiko: 'Truly, deeply touched am I by your mindset; precisely for that reason will the teachings of the Kami of Ananai-kyō spread throughout Tenka, and be able to save the banmin. Sayorihiko, too, is touched by the noble and pure sincerity of you husband and wife, and from this time forth, serving hidden before this shinzen, I shall assist your kamiwaza. By no means doubt it.'</p>
+          <p class="en-p">And once more, amidst a sudden rising smoke, he made his wondrous figure disappear. From this time forth, to enshrine the spirit of Sayorihiko, the husband and wife built a shrine beside the Mirror Pond, morning and evening presented various offerings, and their reverence knew no slackening. By virtue of the spiritual power of Tsukiteruhiko no Kami, the protection of Sayorihiko, and the majestic virtue of Kunitamachin, the divine altar solemnly enshrined deep within the inner chambers of the Kakehashi no Goten shone with divine virtue day by day and month by month, and at length the great fame of the married couple Kunitamayoriwake spread far and wide throughout the entirety of Takasagojima.</p>
+          <p class="en-p">As the saying goes, even the head of a sardine comes from faith; when one sees that the golden ball was switched, and even the agate ball that bore no resemblance whatsoever came to emit an infinite and supreme brilliance through the power of the divine spirit of the Kami and the sincerity of faith, one should be able to realize that treasures of a physical form are things not overly worthy of respect. Ah, Kannagara Tamashii Sakiwaimase.</p>
+          <p class="en-p">By the way, it is said that the party of Tatsukowake crossed the waves of ten thousand leagues of distant ocean to seek the whereabouts of the ball, precisely because they blindly believed in the return of the spirit into Takayahime. Of those who fall into superstition regarding the return of spirits, there can be none more pitiful. Nevertheless, on the other hand, the fact that they were thereby able to carry out the propagation and proclamation of the teachings overseas must be called the divine intent.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">国玉依『何れの神様かと思へば、昔鏡の池の神として有名なる狭依彦様で御座いましたか。御親切は有難う御座いまするが、何事も因縁づくと諦めて居りますれば、仮令黄金の玉が瑪瑙の玉に変ればとて、少しも苦しうは御座いませぬ。月照彦の御神霊の懸らせ玉ふ以上は、仮令団子石の玉にても、私に取つては、それの方が何程重宝だか知れませぬ。黄金の玉などには少しも執着はかけませぬ』</p>
+            <p class="ja-classical-line">狭依彦『実に感じ入つたる其方の心掛け、それでこそ三五教の神の教は天下に拡まり、万民を救う事が出来るであらう。狭依彦も汝夫婦が尊き、清き真心に感じ、これより此神前に幽仕して、汝が神業を助けむ。ゆめゆめ疑ふ事勿れ』</p>
+            <p class="ja-classical-line">と又もやパツと立上る煙の中に、怪しき姿を消しにける。これより夫婦は狭依彦の霊を祀るべく鏡の池の傍に宮を造り、朝夕に種々の供物を献じ、崇敬怠らざりき。月照彦神の霊力と狭依彦の守護と、国魂神の威徳に依つて、懸橋の御殿の奥深く斎き奉れる神壇は日に月に神徳輝き、遂には高砂島全部に国玉依別夫婦の盛名は隈なく喧伝さるるに至りける。</p>
+            <p class="ja-classical-line">鰯の頭も信心からとやら、黄金の玉は掏り替られ、似ても似つかぬ瑪瑙の玉も神の神霊の力と、信仰の誠に依つて無限絶大なる光輝を放つに至りしを見れば、形体上の宝の、余り尊重すべき物にあらざるを悟り得らるるなるべし。あゝ惟神霊幸倍坐世。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">因に曰ふ。竜国別一行が遥々海洋万里の浪を渡りて、玉の所在を尋ねむとしたるは、実は鷹依姫の帰神を盲信したるが故なり。帰神に迷信したるもの程、憐れむべきは無かるべし。然り乍ら又一方には、是によりて海外の布教宣伝を為し得たるは神慮と云ふべき也。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c01.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 1: アリナの滝 [823]</span>
+      </a>
+      <a href="c03.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 3: 白楊樹 [825]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
