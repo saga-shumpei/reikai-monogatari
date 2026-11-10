@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: マラソン競争 [854] - Volume 30 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 30 Table of Contents</a>
+      <span>Volume 30</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 30 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: マラソン競争 [854]</h1>
+      <p class="chapter-title-ja">マラソン競争〔854〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Here Suekohime, along with Sutekohime, Karl, Harukō, Ikukō, Takakō, and Ishikuma's party, successfully persuaded and harmonized the Great Serpent of the southeast pond, caused it to attain liberation, offered words of gratitude facing the pond, performed a deep chinkon so that henceforth no such ryūjiyashin would dwell in this pond and torment yobito, sealed away misfortune, and finally set forth toward the capital of Chin.</p>
+          <p class="en-p">At this time, by some mystery, the uneven lengths of Karl's legs had somehow become matched, and his walking had become extremely easy. Yet Karl did not notice it in the least, remaining as if he still believed himself to be a lame person with a disability. Suekohime chanted the Amatsunorito, sang the heavenly songs of numbers, turned to the company, and:</p>
+          <p class="en-p">Suekohime: 'Now everyone, thank you for your hard work. Let us now set out step by step.'</p>
+          <p class="en-p">And she took the lead and walked forward.</p>
+          <p class="en-p">Ishikuma: 'Hello everyone! Please wait. For some reason, my legs will not move at all. Please perform chinkon for me. I feel as though they are being bound tightly, and I cannot bear it.'</p>
+          <p class="en-p">Karl: 'My, Suekohime-sama, General Ishikuma says his legs cannot stand. What a troublesome fellow he is.'</p>
+          <p class="en-p">Suekohime: 'No, no, you need have no worry at all. When the proper time comes, they will surely become able to stand... Now, Karl-sama, do you know what is meant by actions speaking louder than words?'</p>
+          <p class="en-p">Karl: 'Yes, I understand. Well then, Princess, please go on ahead. Sutekohime-sama, I ask you to go together as well... Hey Haru, Iku, Taka, you three lords, please accompany the two ladies and return. I am going to fix General Ishikuma's legs a little before I return...'</p>
+          <p class="en-p">Haru: 'Hey, Karl, aren't you going to stop at a reasonable point. Divine punishment has fallen as a reward for the excessively wicked things you have done up until now. It is no use no matter how good your Kototama is or how splendid your prayers are. Unless the Gods grant permission, your legs can by no means possibly stand. Because your mitama is too defiled, the Gods have cast an immovable spell of binding so that you may not come to the sacred ground of Uzu. Why don't you just go home at a reasonable time?'</p>
+          <p class="en-p">Karl: 'How could I do such a thing? To see someone in distress and return without saving them—how could I ever act as an intermediary for the Gods? Come what may, it is the Princess's command. Stop grumbling and hurry along to accompany the Princess back. I will catch up right away...'</p>
+          <p class="en-p">Haru: 'Is that so, well that has truly become a commendable frame of mind.'</p>
+          <p class="en-p">Saying this with a sneer, he followed behind the two and walked back toward the capital of Uzu.</p>
+          <p class="en-p">Afterwards, the two continued silent prayer toward the water's surface for a short while.</p>
+          <p class="en-p">Karl: 'Hey General Ishikuma! Until now I have become your disciple and received tremendous care. Today, in return for that favor and to expiate my sins, come what may, I must fix your legs. If by any chance your legs still cannot stand, I am prepared to carry you on my back and take you to the capital of Uzu, so set your mind at ease.'</p>
+          <p class="en-p">Ishikuma: 'That is truly kind. I am sorry to put you to trouble.'</p>
+          <p class="en-p">Karl: 'The world is a reciprocal affair. If you thank me even before your illness is cured, I do not know what to say and am at a loss for a reply. Well, you had better calm your mind leisurely. Now wait, I am going to chant the Kototama for a fresh start from here on, so it is guaranteed that your legs will become like the southeast pond. When that happens, hand in hand we shall gracefully chant the song of propaganda, head briskly straight for the northwest pond toward the capital of Uzu. We are a pair between whom not even water can leak. We must exhaust our kindness toward each other like brothers, opening our hearts without hiding anything within our banks. We must no longer alter our water-distant intercourse where water is too abundant like this pond. Now, here is one living Kototama from Karl-sama. Now stick your legs out straight over there. I shall ask for one chinkon to be performed for you. And then we shall chant the Kototama song. Do not laugh!'</p>
+          <p class="en-p">}</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">茲に末子姫は捨子姫、カール、春公、幾公、鷹公、石熊の一行と共に芽出たく巽の池の大蛇を言向け和し、解脱せしめ、池に向つて感謝の詞を述べ、向後決して此池に、従前の如き竜蛇神の棲居して、世人を苦めざる様と深く鎮魂を修し、災を封じおき、いよいよ珍の都に向つて進むこととなりにけり。</p>
+            <p class="ja-classical-line">此時不思議にもカールの足の長短は何時の間にか両足相揃ひ、行歩極めて容易になつてゐた。されどカールは少しも気付かず、依然として跛の不具者と信じてゐるものの如くであつた。末子姫は天津祝詞を奏上し、天の数歌を歌ひ上げ、一同に向ひ、</p>
+            <p class="ja-classical-line">末子姫『サア皆様、御苦労で御座いました。これからボツボツと参りませう』</p>
+            <p class="ja-classical-line">と先に立つて進み行く。</p>
+            <p class="ja-classical-line">石熊『モシモシ皆様！　待つて下さい。どうしたものか、チツとも足が動かなくなりました。どうぞ鎮魂をして下さいませ。何だか締つけられる様で、仕方が御座いませぬ』</p>
+            <p class="ja-classical-line">カール『もし、末子姫様、石熊の大将、足が立たないと云つてゐます。困つた者ですなア』</p>
+            <p class="ja-classical-line">末子『イエイエ決して御心配には及びませぬ。キツと時節が参れば、立つ様になります……なア、カールさま、不言実行と云ふことを御存じですか？』</p>
+            <p class="ja-classical-line">カール『ハイ、分りました。どうぞ、そんなら姫様、一足お先へお越し下さいませ。捨子姫様も御一緒に御願致します……オイ春、幾、鷹の三公、お前はお二人様のお伴して帰つて呉れ。俺は少し石熊の大将の足を直してから帰るから……』</p>
+            <p class="ja-classical-line">春『オイ、カール、いい加減にしとかぬかい。余り今迄悪党なこと計りやつて来た酬いで神罰が当つたのだ。お前がどれ丈言霊が上手でも御祈りが立派でも駄目だよ。神様が御許しがなければ到底足が立つ筈がないワ。余り汚れた身魂だから、神様がウヅの聖地へ来ないようと、不動の金縛りをかけて御座るのだよ。いい加減に帰つたらどうだ』</p>
+            <p class="ja-classical-line">カール『そんな訳に行くものか。人の難儀を見て、それを救はずに帰る様なことで、如何して神様の取次が出来るものか。何は兎もあれ姫様の御命令だ。グツグヅ云はずに早く姫様の御伴をして帰つて呉れ。すぐに俺は追ひ付くから……』</p>
+            <p class="ja-classical-line">春『さうか、ソリヤ実に感心な心になつたものだなア』</p>
+            <p class="ja-classical-line">と嘲る様に言ひ乍ら、二人の後に従ひ、ウヅの都をさして帰り行く。</p>
+            <p class="ja-classical-line">後に二人は稍少時、水面に向つて暗祈黙祷を続けて居た。</p>
+            <p class="ja-classical-line">カール『オイ石熊の大将！　今迄俺はお前の弟子となつて、エライお世話になつたものだ。今日は其御恩返しと罪亡ぼしの為に、邪が非でもお前の足を直して、やらねばならぬ。如何しても足が立たなければ、俺が背中に負うてでもウヅの都へ連れて行く覚悟だからマア安心せよ』</p>
+            <p class="ja-classical-line">石熊『ソリヤどうも有難い。苦労をかけて済まぬなア』</p>
+            <p class="ja-classical-line">カール『世の中は相身互だ。さう病気も直らない内から礼を云つてくれると、如何云つて良いやら、俺も返答に困つて了ふ。マアゆつくりと気をしづめたが良からう。マア待て、俺が是から新規蒔直しの言霊を奏上するから、キツとお前の足が巽の池となるのは受合だ。さうなつたら二人手に手を取つて潔く宣伝歌を謡ひ、ウヅの都をさしてサツサと乾の池だよ。水も洩らさぬ二人の仲だ。池ないことは互に堤かくさず、打明けて、兄弟の如く親切を尽し合はうぢやないか。此池の様に水がタツプリ過ぎて、水臭い交際は最早改めねばならないよ。サア是から一つカールさまの生言霊だ。マアそこへ足をニヨツと出せ。一つ鎮魂を御願してやらう。さうして言霊歌を奏上することにせう。笑ふなよ！』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ishikuma: 'Motsutai, is there anyone who laughs after having a prayer offered for them? However, once the illness is cured, I might be so overwhelmingly glad that I will laugh and cry, so Soredake I make note of Mahemotsu.'</p>
+          <p class="en-p">Kāru: 'If it is a joyful laugh, laugh to your heart's content. I too will clap my hands and laugh for joy, you know.'</p>
+          <p class="en-p">Ishikuma neatly aligns his legs on the Shibafu by the edge of the pond, Tsukida them out. Kāru, as per usual, Teinei strokes them over and over from the region of the Daitaikotsu down to the Tsumasaki while chanting the heavenly Kazūta, and gradually begins to chant the prayer song. That song:</p>
+          <p class="en-p">O eight hundred myriad Amatsukami,
+O eight hundred myriad Kunitsukami,
+Because this Koitsu has been far too wicked,
+From now on let fate be Tsukiteruhiko's;
+O Kamisama, please set this leg
+Straight for Kāru!
+O Ikukunitama Kamisama,
+Who protects Takasagojima,
+So that the two legs of Ishikuma-sama,
+Swiftly as an Itsutoki, may cause Tatsuyohime
+To stand and dance, shanshan,
+And joyfully, eagerly make her way
+Toward the land of Uzu,
+Please watch over and grant this!
+Swiftly as an Itsutoki, may this cripple,
+Just as the sins of the Riujin of the Tatsumi Pond
+Were absolved and returned on high to Ten,
+Be healed instantly!
+From the waist upward there is nothing wrong;
+Why should this leg be bad?
+Surely I did a wicked thing,
+A deep Meguromeguri has come upon it,
+Sweep away the wicked and save us!
+Though you are not a Chakravartin King,
+O Kamisama who dwells in Ten,
+O Kamisama who dwells in Chi,
+Kāru offers prayers on his behalf,
+Hear them out completely and in every detail,
+And quickly save him!
+Though I find it loathsome to make a companion
+Of such a fellow as this,
+A journey has its companion and the world its human feelings,
+And because the divine admonitions are frightening,
+I tend to him because it cannot be helped.
+Ottotsukoi, Ishikuma-sama,
+This is just a joke of mine;
+Out of a gourd comes a horse,
+Out of a jest comes a gap,
+Out of an ash blower comes a snake!</p>
+          <p class="en-p">O Kamisama, so watch over him
+That the evil spirits which possessed Ishikuma
+May depart as quickly as an Itsutoki!
+Since he has entered this Koitsu's body,
+There surely must be an entrance;
+O Exit Kamisama, chase him out
+As quickly as an Itsutoki!
+Though it is not a Hyakunin Isshu,
+Like the trailing tail of the mountain bird,
+The leg-drawing Tsumadori,
+Dragging on endlessly, no matter when,
+We cannot bear remaining thus!
+He is a man who has piled up sins anyway,
+And he must have exhausted
+Innumerable acts of discourtesy.
+It is only natural that you should be angry,
+However, O Kamisama, accepting my prayer,
+Do not be angry,
+And make it so his legs can stand!
+To stand at daybreak is Oorishiya...</p>
+          <p class="en-p">Though one may never see a son
+Born at the same time as his parents, how is it that
+This Koitsu's legs simply will not stand?
+Whatever sins there may be,
+This once, I beg of you, save him,
+I earnestly entreat you!
+What is this? How strange, since when
+Has one of my long legs
+Been stolen and taken away by someone?
+Before I knew it, both legs
+Are aligned without high or low.
+Such being the case, even I
+Can no longer exercise any flexibility
+Of cutting down the long to mend the short.
+No, wait a moment, wait a while,
+Such complaints cannot be spoken of.
+Could this too be that a revered Kamisama
+Has shrunk one leg,
+Or simply stretched out the other?</p>
+          <p class="en-p">I know not what it is, but I am glad!
+My heart too has become Kāru!
+O Ishikuma-sama, look at this!
+When sincerity reaches Heaven and Earth,
+Even a lifelong severe case of the limping cripple,
+Before he even asks, the Kamisama,
+Showing clever consideration on his own,
+Has neatly cured it for you!
+Your legs are straight,
+Legs with neither long nor short.
+Fainting with fright in a place like this,
+As if standing or not standing were out of the question!
+Pull yourself together and try to stand!
+In the teachings of Izumo,
+The divine framework of warp and woof,
+As this accords with the spiritual intuition
+Of the Ushitora Kimon Konjin,
+Raise the broidered aya loom,
+Splendidly, the great divine pillar,
+Stood firmly through the bedrock below,</p>
+          <p class="en-p">Piercing deep into the upper bedrock,
+If you accumulate the virtue of faith,
+No demons whatsoever can stand against you.
+Stand up, stand, stand quickly!
+Stand, I tell you, will you not stand?
+You are quite the coward with weak loins.
+Awestruck by the might
+Of the Riujin of the Tatsumi Pond,
+With your wits crushed and your loins giving way,
+Oh, what a shameful, rough fellow,
+Fainting at the loins and what of it?
+What I faint from is merely words,
+A fellow who is always mumbling and spitting out words.
+'Be quiet,' - at some time or another,
+Did you not scold me?
+Ah, Kannagara, Kamui, Kamui!
+If it cannot be, then stand up!
+This illness of bad constitution,
+Might Jiva and Bian Que appear
+And cure it for me instantly!</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">石熊『勿体ない、祈念をして貰つて笑ふ奴があるものか。併し乍ら病気が直つたら、余り嬉しくて、笑ひ泣きをするかも知れないから、夫丈は前以てお断りをしておく』</p>
+            <p class="ja-classical-line">カール『嬉し笑ひなら、ドツサリ笑つて呉れ。俺も手を拍つて嬉し笑ひをするからなア』</p>
+            <p class="ja-classical-line">石熊は池の畔の芝生の上に足をヌツと揃へ、突出してゐる。カールは例に依り、叮嚀に大腿骨の辺りから爪先まで、天の数歌を謡ひ乍ら、幾回となく撫でおろし、そろそろ祈願の歌を謡ひ始めた。其歌、</p>
+            <p class="ja-classical-line">『天津神様八百万
+国津神様八百万
+此奴は余り悪が過ぎた故
+最早運命は月照彦の
+神様どうぞ此足を
+カールに直して下さんせ
+高砂島を守ります
+生国魂の神様よ
+石熊さまの両足が
+一時も早く竜世姫
+立つて踊つてシヤンシヤンと
+ウヅの国へと喜んで
+勇んで参ります様に
+お守りなさつて下さりませい
+一時も早く此躄
+巽の池の竜神の
+罪はほどけて天上に
+立帰りました其如く
+忽ち平癒さしてたべ
+腰から上はどうもない</p>
+            <p class="ja-classical-line">なぜ此足が悪いだろ
+ヤツパリあしき事をした
+深いめぐりが来たのだろ
+悪きを払うて助け玉へ
+転輪王ではなけれ共
+天にまします神様よ
+地にまします神様よ
+カールが代つて御願
+完美に委曲にきこし召し
+早く助けて下さりませい
+私もこんな男をば
+連れにするのは厭なれど
+旅は道伴れ世は情
+神の戒め恐い故
+せうことなさに介抱する
+オツトドツコイ石熊さま
+これは私の冗談だ
+瓢箪からは駒が出る
+冗談からは隙が出る
+灰吹きからは蛇アが出る</p>
+            <p class="ja-classical-line">一時も早く石熊に
+憑依致した悪霊が
+出る様に守つて下さんせ
+此奴の体に這入つた以上
+キツと入口あるであろ
+出口の神さま一時も
+早く追ひ出し下さんせ
+百人一首ぢやなけれ共
+足を痛めた足引の
+山鳥の尾のしだり尾の
+長々しくも何時迄も
+斯うしてゐては堪らない
+どうで罪をば重ねた男
+御無礼の数々いつとなく
+尽しましたで御座いませう
+お腹の立つのは尤もぢや
+併し神様私の
+願を容れて腹立てず
+足の立つよにしてお呉れ
+夜明けに立つは○○ぢや</p>
+            <p class="ja-classical-line">親と一度に生れたる
+伜は見ん事立つなれど
+此奴の足はどうしてか
+容易に立たうと致さない
+如何なる罪があらうとも
+今度計りはお助けを
+たつて御願申します
+こりや又不思議何時の間に
+俺の一方の長い足
+誰が盗んで帰んだのか
+いつの間にやら両足が
+高低なしに揃うてゐる
+かうなる上は俺とても
+採長補短の融通は
+コレから利かすこた出来ぬ
+いやまて暫し待てしばし
+そんな不足は云はれない
+これも尊き神様が
+一方の足を縮めたか
+但は一方を伸ばしたか</p>
+            <p class="ja-classical-line">何ぢや知らぬが嬉しいぞ
+心もカールなつて来た
+石熊さまよ！　これ見やれ
+誠が天地に通じたら
+一生病のド跛も
+いつの間にやら神さまが
+頼みもせぬのに気を利かし
+チヤンと直して下さつた
+お前の足は真直に
+長い短いない足だ
+こんな所で腰ぬかし
+立つも立たぬもあるものか
+気を引立てて立つてみよ
+三五教の御教に
+経と緯との御仕組
+艮鬼門金神の
+気勘に叶うたことなれば
+錦の綾の機をあげ
+天晴れ神の太柱
+下つ岩根に立て通し</p>
+            <p class="ja-classical-line">上つ岩根につきこらし
+信仰の徳をつむならば
+どんな悪魔もたてつかぬ
+立てよ立て立て早く立て
+立てと云うたら立たぬかい
+お前は余程腰抜だ
+巽の池の竜神の
+あの勢に辟易し
+肝玉つぶして腰をぬき
+アタ恥かしい荒男
+腰をぬかして何とする
+俺のぬかすは口計り
+何時もグヅグヅ吐す奴
+黙つて居れよと何時の日か
+俺を叱つたことがあろ
+あゝ惟神々々
+叶はぬなれば立あがれ
+性のよくない此病
+耆婆扁鵲が現はれて
+忽ち直して呉れまいか</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">If the kototama of mine does not instantly show a divine sign, it should not be so; yet shamefully, even to this degree, I drive the kototamaguruma and try straining, but still it does not stand. It stood, it stood, it stood, it stood—the rappa melody. The reward for blowing the conch shell—is this the sort of misery I am to meet? Oh, goddess of Tatsuyo, child born of your water and fire, why will you not make me stand? I feel neither pain nor itch; yet for all that, within my heart, truly it is agonizing and painful. This extremely noisy fellow Ishikuma is now already meeting his end. I will no longer be proud; as a commemoration of my repentance, once more, I beg you to let my feet stand.</p>
+          <p class="en-p">Using this staff, which bears the august name of the god of Funado who thrusts forward, as your strength, try standing up for a moment! Ah, kamunagara kamunagara, why is it that your illness will not stubbornly heal to this extent? The retinue of the youngest hime, right after they went on, left behind a pair of travelers worried out of their minds. Oh Kamisama, I beg you, stand up! Hey, hey, Ishikuma, try standing up! It is not that you cannot stand. If you rouse your heart, carry through the path of truth, and cut off the heart of suspicion, surely these feet will stand. Even when I look at you standing, or look at you from the side, you are unpleasing—a style that makes the stomach rise. With this, you will likely be of no use.</p>
+          <p class="en-p">Hey, stand! Come on, stand, stand quickly! Dotsukoidotsukoi, dotsukoishyo! Stumbling and falling, rouse your spirits, and follow behind Karl! Since I myself am at the point of standing, Lord Ishikuma, please take it easy and retire there! Whether my stomach rises or not, I do not know, but in this case I must stand. To return quickly and be of use to hime—that is my task. Come, come, let us go! Come, come, let us go! Dotsukoidotsukoi, dotsukoishyo! Stand firmly, Lord Ishikuma! Strive and stand, Lord Ishikuma! Bend your left foot a little, bend your right foot a little! Try standing by the power of Kamisama; it is not that you cannot stand. It is a matter of holding one's own heart.</p>
+          <p class="en-p">"Farewell, farewell," he turns back, leaving only Ishikuma behind.</p>
+          <p class="en-p">Ishikuma: 'Hey, hey, Karl, wait for me! To leave just the two of us behind in a place like this is heartless! Having such a merciless thing done to us, how could my stomach not rise? How could it end without my stomach rising? Extreme regret—realize it!' Muttering with gnashing teeth of vexation, swept away by anger, he forgot the pain in both feet and stood up.</p>
+          <p class="en-p">"Kola, kola, Karl, wait a moment! You truly are an unforgivable fellow; from now on, shall I not pull out your neck and take your life?" Tuck up his skirts and, dondon, he chases after Karl. Ah, kamunagara kamunagara, the august spirits blessing them, Karl's wishes too were fully and minutely heard by Tatsuyo Hime.</p>
+          <p class="en-p">The gratitude of being saved! Ishikuma, whose feet have stood, for the first time understands the divine virtue of heaven and earth, and while running away, deeply understanding Karl's heart, suddenly joining both hands, he says,</p>
+          <p class="en-p">Ishikuma: 'Hey, hey, Karl, wait for me! Thanks to you, I have stood! Suddenly divine virtue has appeared, and my body is just like this. I will never hold a grudge against you. I want to catch up with you for just a moment and express my current gratitude. I beg you, wait for me!' With the limit of his voice, dondon, he runs on, chasing from behind. Karl looks back over his shoulder,</p>
+          <p class="en-p">Karl: 'Hurry up to here, hurry up! I will let you drink amazake. In the capital of Uzu, both the youngest hime and the abandoned hime are stretching out their necks and waiting. Is there any time to talk to a hyottoko like you? If you have business, follow along! In the capital of Uzu, I will explain in detail so that it may be fully understood, nice and leisurely. Ah, kamunagara kamunagara, may the august spirits bless us!'</p>
+          <p class="en-p">As the two of them make the great earth resound as if competing for the finish line of a marathon race, advancing with the fierce momentum of asuras—how brave it truly is! This indeed is the application in practice of the divine strategy taught to Karl by the great Kami, a changing and multifaceted working.</p>
+          <p class="en-p">At last the two safely arrive in the capital of Uzu, and opening their hearts to each other, speaking together with tears of the august mind of the god of compassionate love, to give thanks is awe-inspiring indeed. Ah, kamunagara kamunagara, may the august spirits bless us.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">俺の言霊立所に
+御兆候がなければならぬ筈
+恥し乍ら是程に
+言霊車を運転し
+きばつて見れどまだ立たぬ
+立つた　立つた　立つた　立つたラツパ節
+法螺貝吹いた其酬い
+こんな憂目に合ふのだろ
+竜世の姫の神さまよ
+お前の水火に生れた子
+なぜに立たして下さらぬ
+私は痛うも痒ゆもない
+さは去り乍ら心の中は
+ホンに歯痒い痛ましい
+いたつて口のやかましい
+此石熊も今は早
+往生致して居りまする
+最早慢心致すまい
+改心記念に今一度
+足が立つよに頼みます</p>
+            <p class="ja-classical-line">衝き立つ船戸の神様の
+御名を負へる此杖を
+力にチヨツと立つて見よ
+あゝ惟神々々
+どうして是程お前の病
+しぶとう直らぬ事だらう
+末子の姫の御一行
+立つて行かれた其跡で
+気が気でならぬ二人連れ
+神さまたつて頼みます
+オイオイ石熊立つて見よ
+立つて立てない事はない
+お前の心を引立てて
+誠の道を立て通し
+猜疑の心を絶つならば
+キツと此足立つだらう
+たつからお前を眺めても
+横から見ても気にくはぬ
+ハラの立つよなスタイルだ
+これでは役に立つまいぞ</p>
+            <p class="ja-classical-line">ヤレ立て　ソラ立て　早う立て
+ドツコイドツコイ　ドツコイシヨ
+転けつ輾びつ気を引立つて
+カールの後に跟いて来い
+最早俺さまは立つ程に
+石熊さまよ御ゆつくり
+そこで御隠居なされませ
+お腹が立つかは知らね共
+立たねばならぬ此場合
+早く帰りて姫様の
+お役に立つが俺の役
+サアサア行かうサア行かう
+ドツコイドツコイ　ドツコイシヨ
+ウントコ立つたり石熊さま
+気張つて立つたり石熊さま
+左のお足を一寸屈め
+右の御足を一寸屈め
+神さま力に立つて見よ
+立つに立たれぬことはない
+心一つの持様だ</p>
+            <p class="ja-classical-line">さらばさらば』と立帰る
+後に石熊只一人</p>
+            <p class="ja-classical-line">石熊『オイオイカール待つて呉れ
+俺達一人をこんな所に
+捨てておくのは胴欲ぢや
+こんな無情な事されて
+腹が立たずにおかうかい
+腹が立たずに済むものか
+残念至極思ひ知れ』
+無念の歯がみし乍らも
+怒りにまぎれて両足の
+痛を忘れて立上がり
+『コラコラカール一寸待て
+貴様は誠に済まぬ奴
+コレから素首引抜いて
+命を取らねばおかうか』と
+尻ひつからげドンドンと
+カールの後を追うて行く。
+あゝ惟神々々
+神の御霊の幸はひて
+カールの願も竜世姫
+完美に委曲に聞し召し</p>
+            <p class="ja-classical-line">助け玉ひし有難さ
+足の立つたる石熊は
+始めて天地の神徳を
+悟ると共に逃て行く
+カールの心を能く悟り
+忽ち両手を合せつつ
+『コレコレカール待つて呉れ
+お前のおかげで立ちました
+忽ち神徳現はれて
+俺の体は此通り
+決してお前を恨まない
+一口お前に追ひついて
+今の御礼が申したい
+たつて頼みぢや待つて呉れ』
+声を限りにドンドンと
+後おつかけて走り行く
+カールは後を振返り</p>
+            <p class="ja-classical-line">カール『ここまで厶れ早厶れ
+甘酒飲まして上げませう
+ウヅの都に末子姫
+捨子の姫の両人が
+首を伸して待つて御座る
+お前の様なヒヨツトコに
+話する間があるものか
+用があるなら従いて来い
+ウヅの都でトツクリと
+お前の合点が行く様に
+詳しう説明してやらう
+あゝ惟神々々
+御霊幸はひましませ』と
+二人はマラソン競争の
+決勝点を競ふよに
+大地を威喝させ乍ら
+阿修羅の荒たる勢で
+進み行くこそ勇ましき。
+これぞカールが大神に
+教へられたる神策を</p>
+            <p class="ja-classical-line">実地に活用致したる
+千変万化の働きぞ
+いよいよ茲に両人は
+ウヅの都に安着し
+互に胸を打割つて
+慈愛の神の御心を
+涙と共に語り合ひ
+感謝するこそ畏けれ
+あゝ惟神々々
+御霊幸はひましませよ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: Kotodama の妙 [853]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: Capital 入 [855]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

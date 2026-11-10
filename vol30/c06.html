@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: 樹下の一宿 [848] - Volume 30 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 30 Table of Contents</a>
+      <span>Volume 30</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 30 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: 樹下の一宿 [848]</h1>
+      <p class="chapter-title-ja">樹下の一宿〔848〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yonin were Tanza upon the rock of a Tennen chair, and Shibaraku rested their breath.</p>
+          <p class="en-p">Sutekohime said, 'Kāru-san, you have raised quite a grand metoru, haven't you. Thanks to that, I descended here so Omoshiro and down the Kifuhan before knowing it. I felt that poetry is truly an indispensable thing for a journey. Thanks to you singing it with such a pleasing rhythm, my heavy legs and body both Yakudō-ed, and it was Taihen Yukuwai, wa.'</p>
+          <p class="en-p">Kāru said, 'Hai, I spoke Detarame with my Kāru mouth. By that Okage, your Miashi moved like a Kāru, I suppose, aha haha. However, since Ishikuma are rolling about, it must have been a Jiyama, and you must have used your eyes quite a bit.'</p>
+          <p class="en-p">Ishikuma: 'I do not know why, but such things like Dangoishi or Kāru stones are rolling all about on this steep slope, and at each bounce my feet could not even move; with such a too-ridiculous song, even my Hizabauzu were laughing, you know. With a voice like dragging a Yakan across Ishihara, I felt Zuibun Arigatameiwaku. Aha haha.'</p>
+          <p class="en-p">Kāru: 'To call it Arigatameiwaku, aren't your mouth a bit too foul? You seem to have an Ijikune... ottodokkoi, it seems Ishikuma is not going well, ah.'</p>
+          <p class="en-p">Ishikuma: 'Now, everyone, shall we Tekurimasu again, little by little?'</p>
+          <p class="en-p">Sueko: 'Hai, let us set off leisurely... Kāru-san, please pray for us again.'</p>
+          <p class="en-p">Kāru: 'Oi Ishikuma-san, how is it, you were able to endure it well, weren't you. What about your own song, how pitiful, didn't you throw out a defamed verse of mournful tone, saying it was a single hint of fondness and a letter for two Naisu? Won't you pull yourself together a bit?'</p>
+          <p class="en-p">Ishikuma: 'Do not speak so noisily, it is an attachment of unfaked emotion.'</p>
+          <p class="en-p">Kāru: 'At any rate, with Ishikuma-san's repentance and allegiance, this Kāru Great Propaganda Envoy is also overjoyed from the bottom of his heart, atsuha haha. Now, I will drive the Kototama carriage once more... one, two, three, advance altogether!'</p>
+          <p class="en-p">Ishikuma: 'Aha haha, what an incorrigible fellow... Now, Himesama, please set forth, I shall accompany you.'</p>
+          <p class="en-p">Kāru: 'Aha haha, how this is a changing Kāru world. Until now, you were a heartless fellow like stone, making a countenance as if you had bitten into a bitter bug whenever you saw a woman, yet the master of Brahmanism suddenly turned his temple-bell mouth into a puckered mouth and made his chestnut eyes narrow... Now Himesama, please set forth, I shall accompany you... No matter what anyone says, it is the height of rolling with laughter. If you are too captivated only by Himesama's style, you will truly have to capstone-topple and fall on the slope road. What a troublesome blockhead has become my companion on the road. Still, a withered tree is a bustling of the mountain; isn't it better than nothing?'</p>
+          <p class="en-p">Sueko: 'Oh my, how foul Kāru-san's mouth is.'</p>
+          <p class="en-p">Ishikuma: 'No, this Kāru's mouth is too good, and he chatters away well. Since he is a fellow like a bird called a shrike, whichever way he goes to hell, he is an article that will be troubled by the nail-puller. Aha haha.'</p>
+          <p class="en-p">Sutekohime: 'Oho haha, now let us set out at last. This time, I shall become Sarutahiko and go ahead.'</p>
+          <p class="en-p">And standing first, she descended the steep slope. Riding on the rhythm, Kāru once more kept time step by step, and began to chant in a style as if a Yakkosusha were stamping out the six directions.</p>
+          <p class="en-p">Kāru: 'Untokodokkoi, dokkoisho / Mountain path full of Ishikuma / Princess Sueko and Princess Sute / Accompanying the two honored ones / Walking down the rugged slope road / The Sun Lord is blazing hot / Teru country upon the head / The steep slope of Teru Mountain Pass / Ottodokkoi, it is dangerous / I stepped on an Ishikuma again / Is that roaring the valley river? / Do not vomit like jang-jang, cicadas / Dokkoishō, dokkoishō / Sweat and fat squeezed in a single wringing / My wife at home is dokkoisho / Without sleeping a single night, with kindness / The single-layered robe she sewed for me / Dokkoidokkoi, drenched through / It has become, dokkoisho / The two Naisu are just like this'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">四人は天然椅子の岩の上に端座し、稍少時息を休めた。捨子姫は、</p>
+            <p class="ja-classical-line">『カールさま、随分偉いメートルを上げましたねえ。おかげで面白く急坂を知らぬ間にここまで下つて来ました。歌と云ふものは本当に旅には欠く可からざるものだと感じました。面白く節をつけて歌つて下さつたおかげで、重たい足も体も躍動致しまして大変に愉快でしたワ』</p>
+            <p class="ja-classical-line">『ハイ私のカールい口で出鱈目を喋りました。其御神徳で貴女の御足がカール動きましただらう、アハヽヽヽ。併し石熊がゴロゴロして居るので、邪魔になつて、随分目を使はれたでせう』</p>
+            <p class="ja-classical-line">石熊『何だか知らぬが、此急坂に団子石かカール石のやうな物がゴロゴロしてをつて、カールはづみには足も運べず、あまり可笑しい歌で、膝坊主まで笑つて居ましたよ、石原に薬鑵を引摺る様な声で、ズイ分有難迷惑を感じました。アハヽヽヽ』</p>
+            <p class="ja-classical-line">カール『有難迷惑とはチツと口が悪いぢやありませぬか。お前さまはヤツパリ意地苦根が……オツトドツコイ　石熊が善くないと見えますなア』</p>
+            <p class="ja-classical-line">石熊『サア皆さま、又ボツボツとテクリませうか』</p>
+            <p class="ja-classical-line">末子『ハイそろそろと参りませう。……カールさま、どうぞ又頼みますよ』</p>
+            <p class="ja-classical-line">カール『オイ石熊さま、如何だい、能く持てたものだろ。お前の歌はどうだつたい、見つともない、二人のナイスに一寸ホの字とレの字だつたなどと、亡国的の哀音を駄句つたぢやないか。チツとしつかりして貰ひませうかい』</p>
+            <p class="ja-classical-line">石熊『やかましう云ふな、佯らざる情の執着だ』</p>
+            <p class="ja-classical-line">カール『兎も角石熊さまの改心帰順で、此カール大宣伝使も心の底より祝着に存ずるワイ、アツハヽヽヽ。サア又言霊車を運転しますから、……一二三、全体進めツ』</p>
+            <p class="ja-classical-line">石熊『アハヽヽヽ、仕方のない男だなア……サア姫様、御立ち遊ばせ、お伴を致しませう』</p>
+            <p class="ja-classical-line">カール『アハヽヽヽ、変ればカール世の中だなア。今迄は石の様な無情漢で女を見れば苦虫をかみ潰したやうな面構へをして御座つた、バラモン教の教主様が鰐口を俄におチヨボ口にしたり、団栗目を細うしたり遊ばして……サア姫様お立ち遊ばせ、お伴を致しませう……ナンノカンノつて、抱腹絶倒の至りだ。余り姫様のスタイル許りに気を取られてゐると、それこそ坂路で転覆絶倒せなくてはならなくなるよ。困つた唐変木が道伴れになつたものだ。併し枯木も山の賑ひだ、ないよりましかい』</p>
+            <p class="ja-classical-line">末子『あのマア、カールさまのお口の悪いこと』</p>
+            <p class="ja-classical-line">石熊『いゝえ、此カールは口が善過ぎて、よく囀るのですよ。百舌といふ鳥の様な男ですから、何れ地獄へ往つたら、釘抜の御厄介になる代物ですよ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">捨子『オホヽヽヽ、サアいよいよ発足致しませう。今度は妾が猿田彦となつて、お先へ参ります』</p>
+            <p class="ja-classical-line">と先に立ち、急坂を下り行く。調子に乗つてカールは又もや一歩々々拍子を取り、ヤツコス神が六方を踏むやうなスタイルで唄ひ出した。</p>
+            <p class="ja-classical-line">カール『ウントコドツコイ、ドツコイシヨ
+石熊だらけの山路を
+末子の姫や捨子姫
+二人のお方の御伴して
+崎嶇たる坂路下り行く
+日輪様はカンカンと
+頭の上にテルの国
+テル山峠の急坂を
+オツトドツコイ危いぞ
+又石熊に乗りました
+ゴウゴウ云ふのは谷川か
+ジヤンジヤン吐すな油蝉
+ドツコイシヨウ　ドツコイシヨウ
+汗も脂も一絞り
+うちのお嬶がドツコイシヨ
+夜の目もねずに親切に
+縫うてくれたる単衣
+ドツコイドツコイびしよ濡れに
+なつて了うたドツコイシヨ
+二人のナイスが此通り</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Walking boldly at the very front,
+The style of your descending step
+Is like the heavenly eight-fold clouds parting,
+As Tanabatahime descends from on high—
+Such is the pure and dashing grace.
+With nostrils flared and puffing loud,
+Oh, the wretched and exhausted Ishikuma,
+What a strange posture for your footfalls!
+With a loincloth measuring one fathom and two feet,
+Surely you must have some pride to uphold.
+Back in the ancient Age of Gods in the land of Uzu,
+The royal daughter of Momogamihiko,
+With the rhythmic chant of Matsutake-ume, dokkoishiyo!
+Oops, danger, I stumbled and tripped!
+A Sendenshi who puts flowers to shame,
+Alongside Odoyamazumi and Komayamahiko,
+With the rousing beats of Susanoo's playful strain,
+Marching at the front like an incarnation
+Of the god Kagatora, hand in hand with him,
+Down this steep slope, marching with bold strides,</p>
+          <p class="en-p">Until you arrived at the port of Hara—
+When you think of the journey you have made so far,
+Even if you call it steep, it is a downward slope;
+What bitter hardship could possibly remain?
+Untoko dokkoi, dokkoishiyo!
+Stubborn and crooked-hearted Ishikuma
+Is tumbling down head over heels all around.
+Everyone, please take great care!
+Lest by mischance you fall flat on your back,
+And your precious ship of jewels upon the slope
+Goes dokkoi, dokkoi, dokkoishiyo!
+Oh, excuse me, what a blunder, a failure, a song—
+Carried away by the rhythm, treating the boat like a cart,
+Disconnecting the shafts and steering wheel,
+Unawares, with a dokkoishiyo,
+You displayed the very art of derailing!
+And speaking of that, I wonder what Nero
+Is doing now and where he might be?
+To swindle Sheena, Chill, and Isaac so sweetly,</p>
+          <p class="en-p">It is truly pitiful that you followed along
+To help those two nice gentlemen!
+If they were to hear that Ishikuma-sama
+Surrendered to the divine path of Mitsugo,
+And became the follower of those two nice gentlemen
+Whom he once targeted as his deadly foes,
+Journeying all the way to the capital of Uzu with a dokkoishiyo,
+Just imagine how shocked Isaac, Sheena, and Chill
+Would surely be!
+Ah, how amusing, how amusing!
+Today's sky changes from yesterday's;
+Clear skies suddenly turn into rain,
+The blue sea transforms into earth.
+The weather alters in a flash,
+Surrendering to the enemy's camp,
+Flinging down spears and rolling up flags—
+Dokkoi, dokkoi, a skinny dog
+With a sweet-faced traveler,
+Wagging its tail with a dokkoishiyo,</p>
+          <p class="en-p">Following along in such a style,
+If they were to hear that a Brahmin priest
+Had accompanied them on the way,
+Surely they would be astounded and dumbfounded,
+Their souls flying straight up to heaven!
+Dokkoi, dokkoi, their testicles
+Would instantly take a journey across the sea!
+Dokkoi, I slipped, ouch, ouch, ouch!
+Smooth and fluid without delay,
+A carriage wheel spinning sweetly astray.
+Along with it, another stone wheel rolls on—
+A treacherous downward slope,
+I earnestly beg everyone to be on guard.
+Untoko dokkoi, danger lies ahead!
+If we descend just a little further from here,
+We hear that the lingering spawn
+Of the eight-branched Yamata no Orochi
+Are lurking about,
+And the pond of Tatsumi shines deep and blue
+Like a polished mirror.
+If you listen to the rumors, dokkoishiyo,</p>
+          <p class="en-p">They say that monster snake in the pond of Qian
+Is nothing less than its very counterpart.
+Now, O youngest princess of mine,
+Why not stop by as a further occasion,
+And conquer the spirit of the great serpent
+Through the almighty power of Kototama?
+Dokkoi, dokkoi, along the path of our journey,
+Perform a glorious feat of arms!
+I will gladly act as your guide.
+I wonder what has become of Ishikuma-sama,
+Seized as he is by a sudden chill of cowardice;
+As for me, I want to go and see no matter what.
+Your pure Kototama
+Will instantly cause evil gods and wicked demons
+To cry dokkoi, dokkoi, danger ahead!
+Ah, what a dangerous and grueling road it is!
+They will surely surrender without a doubt.
+An opportunity like this will never come again;
+I humbly and earnestly beg you.
+If you can lift the calamities</p>
+          <p class="en-p">Afflicting the people of Argentina night and day,
+Then you are truly the sacred pillar of Uzu;
+The entire citizenry will be filled with awe and joy,
+And worshiping your boundless divine virtue,
+They will yield to the sacred grace of Mitsugo.
+Ah, oh Kami, oh Kami!
+Manifest the divine heart
+And I beg you to carry this through with resolve!
+This is the heartfelt prayer to which Karl
+Has devoted his entire lifetime.
+With reverence and awe, we two
+Humbly pray before your august presence.
+Ah, oh Kami, oh Kami,
+May your august spirits flourish in peace!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お先に立つてドシドシと
+お下り遊ばすスタイルは
+天の八重雲かき分けて
+棚機姫の天降り
+遊ばす様ないさぎよさ
+鼻息荒くフウフウと
+弱り切つたる石熊の
+其足並は何のザマ
+一丈二尺の褌を
+かいた手前もあらうぞよ
+昔の神代にウヅの国
+桃上彦の御娘
+松竹梅のドツコイシヨ
+オツト危い躓いた
+花を欺く宣伝使
+淤縢山津見や駒山彦の
+ドツコイドツコイすさび男の
+お先に立つて蚊々虎の
+神の化身と諸共に
+此急坂をドシドシと</p>
+            <p class="ja-classical-line">登つてハラの港まで
+お出でなさつた事思や
+きついと云つても下り坂
+何の苦い事あろか
+ウントコドツコイ、ドツコイシヨ
+意地くね悪い石熊が
+そこらにゴロゴロ転げてる
+皆さま気をつけなされませ
+若し過つて仰向けに
+玉の御舟を坂道に
+ドツコイ　ドツコイ　ドツコイシヨ
+オツト失礼コリヤ失敗うた
+調子に乗つて舟のこと
+車の梶を取り外し
+知らず知らずにドツコイシヨ
+脱線振を発揮した
+それに付けてもネロの奴
+何処に如何して居るだろか
+シーナ、チールやイサクをば
+甘くドツコイ、チヨロまかし</p>
+            <p class="ja-classical-line">二人のナイスを助けむと
+従いて行たのは気の毒ぢや
+石熊さまが三五の
+神のお道に帰順して
+当の仇敵と狙ひたる
+二人のナイスの従者となり
+ウヅの都へドツコイシヨ
+お伴をしたと聞いたなら
+イサク、シーナ、チールの奴
+どれ丈ビツクリするであらう
+あゝ面白い面白い
+昨日に変る今日の空
+晴天忽ち雨となり
+蒼海変じて土となる
+天候忽ち激変し
+敵の陣地に降参し
+鉾を戢めて旗を巻き
+ドツコイ　ドツコイ痩犬が
+甘い顔した旅人に
+尻尾をふつてドツコイシヨ</p>
+            <p class="ja-classical-line">従いて来るよなスタイルで
+バラモン教の神司
+お伴をしたと聞いたなら
+さぞやビツクリ仰天し
+肝玉天に飛びあがり
+ドツコイ　ドツコイ睾丸は
+忽ち洋行するであろ
+ドツコイ、辷つたアイタヽヽ
+円転滑脱遅滞なく
+甘く転んだ口車
+序にモ一つ石車
+油断のならぬ下り坂
+皆さま確り頼みます
+ウントコドツコイ、危ないぞ
+これから少し下つたら
+八岐の大蛇の乾児等が
+潜んで居ると聞えたる
+巽の池が青々と
+鏡の様に光つてる
+噂にきけばドツコイシヨ</p>
+            <p class="ja-classical-line">乾の池の大蛇奴が
+片割れなりと云ふ事だ
+モウシ末子のお姫様
+一層序に立寄りて
+大蛇の霊を言霊の
+威力に征服遊ばして
+ドツコイ　ドツコイ行掛の
+功名手柄を遊ばせよ
+私が案内致します
+臆病風に襲はれた
+石熊さまは何うか知ら
+私はどしても行て見たい
+あなたの清き言霊は
+邪神悪鬼も忽ちに
+ドツコイ　ドツコイ危ないぞ
+危ないきつい道だなア
+キツと帰順をするであろ
+又と得られぬ此機会
+平に御願申します
+アルゼンチンの国人が</p>
+            <p class="ja-classical-line">日夜に悩む悪神の
+災除かせ玉ひなば
+貴女はウヅの神柱
+国民一同悦服し
+宏大無辺の神徳を
+仰ぎまつつて三五の
+神の御徳になづくだろ
+あゝ惟神々々
+神の心を発揮して
+必ず断行願ひます
+これぞカールが一生の
+生命かけての御願ひ
+謹み畏み御二方
+珍の御前に願ぎまつる
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と歌ひ了り、三人の後から蚤取眼で、一歩々々、気を附け乍ら、馬の背を立てた様な、細き険しき石原路を、右に左に体をかはし、千鳥が坂を下る様なスタイルで跟いて行く。元来此男は少しく両足に、生れ乍ら長短があるので、下り坂には非常に困難を感じ、一歩々々拍子を取らねば容易に歩めないのであつた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At last, descending the steep eight-ri slope around dusk, the party of four reached the foot of the mountain, sheltered from the night dew in a camphor grove, and resting their breath, once again indulged in conversation.</p>
+          <p class="en-p">Sueko: 'Thanks to your grace, we have safely crossed the difficult pass. The virtue of Kototama is truly a wonderful thing, ah.'</p>
+          <p class="en-p">Kāru: 'Most certainly. Especially since my Kototama achieves such harmony, the heavenly deities and divine spirits were moved, and even the scorching sun finally took pity on us and hid itself below the horizon, no doubt.'</p>
+          <p class="en-p">Ishikuma: 'Ah-ha-ha-ha, what nonsense are you spitting out. When the time for dusk comes, even without your Kototama, the sun will enter on its own accord. Do not get too carried away and become conceited.'</p>
+          <p class="en-p">Kāru: 'Look here, what a scenic view. You are a terribly inflexible and foolishly honest man, aren't you. Adjusting to the society by grasping both the long and the short is the most precious method of life. At this rate, even the teacher of Brahmanism is hopeless, ah.'</p>
+          <p class="en-p">Ishikuma: 'A human being like you, whose one leg is made shorter, doesn't have any complementing of the short with the long, so I surely cannot imitate you.'</p>
+          <p class="en-p">Kāru: 'Don't say stupid things. My leg is not short; one of my legs is longer than you fellows', ah-ha-ha-ha.'</p>
+          <p class="en-p">Ishikuma: 'You are a man who hates to lose and argues with twisted logic. Although it is not Mount Caucasus, you descended the steep slope with the style of Bikkusu God stamping out the six directions, so it was quite comical to watch.'</p>
+          <p class="en-p">Suteko: 'Ho-ho-ho-ho, it is immensely pleasant to travel with you people, ah.'</p>
+          <p class="en-p">Kāru: 'That is naturally how it should be. Since I am a teacher who has seen through pleasure, the phenomenal world, and the divine realm all at a glance, it is the natural consequence, wah. Ah-ha-ha-ha.'</p>
+          <p class="en-p">Ishikuma: 'Consequence, stumbling, there is nothing of the sort. You are a hero who tumbles and falls on a mere steep slope like this, after all.'</p>
+          <p class="en-p">Kāru: 'A rump is a rump, but I am a hero of Jean-Jahier. As a person of the populace, do not go about saying rump-rump.'</p>
+          <p class="en-p">Sueko: 'O-ho-ho-ho, ever since we departed from Ken'onkō, I have never had such a pleasant feeling as today. ...However, Kāru-sama, you mentioned earlier that a fragment of the great snake of the northwest pond is lurking in the southeast pond or somewhere, causing harm to the people, didn't you?'</p>
+          <p class="en-p">Kāru: 'Yes, if we go about three ri south from here, there is a terribly deep and large pond. A demon god of a great snake has made its dwelling there since when I know not, and whenever it sees a passing young man, it immediately transforms into a wondrously beautiful woman, deceitfully lures him into the pond, and swallows him up. One cannot know how many hundreds of people have had their lives taken by the great snake. Therefore, I wish to make one request of you.'</p>
+          <p class="en-p">Sueko: 'That sounds like it could be interesting. Tonight we shall take shelter from the rain here, drop by the southeast pond early tomorrow morning, and try beginning a Kototama battle. ...Suteko-hime-sama, what do you think?'</p>
+          <p class="en-p">Suteko: 'I am exceedingly in agreement. Enjoying tomorrow's sun, let us decide to wait here this evening.'</p>
+          <p class="en-p">Kāru: 'Thank you for your prompt consent. ...Hey Ishikuma-sama, it would be a pity if you were to fall into a tonic state again, so I shall decide to exempt you.'</p>
+          <p class="en-p">Ishikuma: 'I say, you two esteemed ones... Won't you please let me accompany you for the sake of observation?'</p>
+          <p class="en-p">Sueko: 'Please come along after us.'</p>
+          <p class="en-p">Ishikuma: 'Thank you very much. Tomorrow I too must perform with the activity of a thousand horsemen and give Kāru-sama a good surprise, you see.'</p>
+          <p class="en-p">Suteko: 'Please do so.'</p>
+          <p class="en-p">Thus the four of them sheltered from the rain and dew in the dense forest where the camphor trees sealed the sky, and spent the night bringing about the dawn.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">漸くにして下り八里の急坂を黄昏るる頃、麓に下り、樟の森に、夜露を凌ぎ、一行四人息を休めて、又もや話に耽る。</p>
+            <p class="ja-classical-line">末子『おかげ様で楽に難関を越えて参りました。言霊の徳と云ふものは、本当に結構なものですなア』</p>
+            <p class="ja-classical-line">カール『御尤も千万です。特に私の言霊はハーモニーがよく取れますから、天地神明も感動遊ばし、焼きつく様な日輪様もとうとう、吾々を可愛がつて、地平線下にお隠れになつたでせう』</p>
+            <p class="ja-classical-line">石熊『アハヽヽヽ何を吐すのだ。暮れる時が来れば、貴様の言霊がなく共、日輪様は勝手にお入り遊ばすのだ。余り調子に乗つて自惚をすな』</p>
+            <p class="ja-classical-line">カール『コリヤ一寸景物だ。余つ程融通の利かぬ馬鹿正直な男だなア。長短宜しきを得て社会に処するのが人生の最も貴ぶべき手段だ。これではバラモン教の教主も駄目だなア』</p>
+            <p class="ja-classical-line">石熊『お前の如うに、片つ方の足が短く出来て居る人間は、それや又採長補短がないのだから、到底お前の真似は出来ないよ』</p>
+            <p class="ja-classical-line">カール『馬鹿言うな。片足が短いのだない、片足がお前達よりは長いのだ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">石熊『負ん気の強い、跛理窟を云ふ男だなア。コーカス山だないが、ビツコス神がヤツコスの六方を踏むと云ふスタイルで、急坂を下るのだから、ズイ分見てゐると滑稽だつた』</p>
+            <p class="ja-classical-line">捨子『ホヽヽヽヽ、あなた方と旅行して居ると、随分愉快ですなア』</p>
+            <p class="ja-classical-line">カール『そら其筈ですよ。ゆかいも現界も神界も一目に見すかしたチーチヤーだから、当然の帰結ですワ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">石熊『帰結も転けつもあつたものかい。コレつぱかしの急坂に、こけつ輾びつと云ふ豪傑だからなア』</p>
+            <p class="ja-classical-line">カール『ケツはケツだが、ジヤンヂヤヒエールの英傑だ。人民の分際として、ケツケツ云ふない』</p>
+            <p class="ja-classical-line">末子『オホヽヽヽ、顕恩郷を出発以来、今日位愉快な思ひをした事はありませぬ。……併しカールさま、あなた最前巽の池とかに、乾の池の大蛇の片割れが潜んでゐて、国民に害を与へるとか仰有いましたねえ』</p>
+            <p class="ja-classical-line">カール『ハイ、是から三里許り南へ参りますと、大変な深い広い池が御座います。そこに大蛇の魔神が何時の程にか棲処を致し、通りかかりの若い男を見ると、直に妙齢の美人と変化し、甘く偽つて池の中へ連れ込み呑んで了ふのです。大蛇の為に生命を取られた者は幾百人あるか分りませぬ。それで貴女に一つ御願したいと思ふので御座います』</p>
+            <p class="ja-classical-line">末子『それは面白う御座いませう。今晩はここで雨宿りを致しまして、明朝早々巽の池へ立寄り、言霊戦を始めて見ませう。……捨子姫さま、あなた如何思ひますか？』</p>
+            <p class="ja-classical-line">捨子『至極賛成です。明日の日を楽しんで、今宵は此処で待つことに致しませう』</p>
+            <p class="ja-classical-line">カール『早速の御承知、有難う御座います。……オイ石熊さま、お前は又強直状態になつて了うと、気の毒だから、免除する事にしてやらう』</p>
+            <p class="ja-classical-line">石熊『モシ、お二方様……どうぞ私も見学の為、随行さして下さいませぬか』</p>
+            <p class="ja-classical-line">末子『どうぞ跟いて来て下さい』</p>
+            <p class="ja-classical-line">石熊『有難う御座います。私も明日は千騎一騎の活動を致しまして、カールさまに一つビツクリさしてやらねばなりませぬからなア』</p>
+            <p class="ja-classical-line">捨子『さうなさいませ』</p>
+            <p class="ja-classical-line">茲に四人は楠の空を封じたる密林に雨露を凌ぎ夜を明かすこととなりける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 下坂の Song [847]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: 提燈の Light [849]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

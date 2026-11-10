@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: Flower に Storm [857] - Volume 30 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 30 Table of Contents</a>
+      <span>Volume 30</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 30 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: Flower に Storm [857]</h1>
+      <p class="chapter-title-ja">花に嵐〔857〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Depending on the understanding of the sendenshi of Kotoyoriwake and Kuniyoriwake, the residents of this entire region were about to be almost entirely annihilated; however, ever since they were permitted to eat mikurauo, their genki was suddenly recovered. Moreover, they came to respect Kotoyoriwake and the sendenshi of Kuniyoriwake as if they were Kami, and straightway proclaimed that among the teachings of kiuseisaimin, none could equal Ananai-kyō. Hundreds of thousands of people withdrew from the Ural teaching and all entered Ananai-kyō. However, since Kotoyoriwake had already left this land, Kuniyoriwake alone remained behind. Centered around the shrine of Mikura, the kyōsei suddenly flourished, to the extent that everyone, high and low, came to worship the belief that unless one belonged to Ananai-kyō, it was difficult to be saved, and one could not even be considered a proper ningen.</p>
+          <p class="en-p">Kuniyoriwake patiently and persuasively taught the kyōri of Ananai-kyō, taught the Amatsunorito and kami words, and enshrined Kunichinotachinomikoto, Toyokunihikemikoto, and other various kami spirits at the shrine of Mikura, establishing them as the object of reverence and worship. Kuniyoriwake also composed a kind of sendenka, teaching and guiding the people of the country to chant it regularly in their daily lives.</p>
+          <p class="en-p">Kuniyoriwake: 'The Great Deity of the Ancestor of the Land / Who appeared in Takamanohara / Kunichinotachino Ōkami / Wishing to save all people universally / Staked fast the pillar of heaven / Pressed firm and solid the pillar of the land / Apparing as the wondrous spirit / Toyokunihime Ōkami / While joining forces together / Opened the age of Kami / Manifested as the foul spirits / Of Amatsuhiko and Hagaruhime / The Yamata-no-Orochi and foul foxes / Crooked demons and others ran rampant / And the world ended up in eternal darkness / The Imperial Great Deity inevitably / Borne the thousands of seats of offerings / Fell from the fire-pit of Mount Tenkyō / Into the land of the roots / Together with Toyokunihime / Deeply concealing her body / Protected this world / The Hiko of Ural and the Hime of Ural / The branch deities of Ōkunihiko / And Ōkuni Hime no Mikoto / Wishing to wrap the countries of the four quarters of heaven and earth / In the smoke of foulness / While opening the teachings of crookedness / How vexing it was that they clouded the world / Kami Izanagi Ōkami / Who appeared in the heavenly august sky / Standing upon the heaven-floating bridge / Extended high across the great sky / Stirred and sounded the ocean / Which had sunk into the mud / In a gurgling, swirling manner / Begetting Kami, begetting the land, and begetting people / The divine works were granted / To the august decrees of Hinojinushi and Konohanahime / Who dwell upon Mount Tenkyō / Opening the land of luxuriant rice ears / Of Ashihara / Ah, Kannagara, Kami, Kami / The august majesty of Kami is ever higher / The path of the teachings is ever broader / Changing their bodies as the august decrees / Of Haniyasuhiko and Haniyasuhime / Appeared at the foot of Mount Kogane / Preaching the august teachings of the moon of Ananai / Perfectly and in minute detail / This indeed is the true august teaching / Of the brocade loom of Ananai / Ah, all people, all people / Open your eyes as quickly as possible / To the precious light of Kami / Whether the morning sun shines or clouds over / Whether the moon waxes or wanes / Even if the great earth should sink / Never forget the august teachings of Ananai-kyō / Even in your dreams</p>
+          <p class="en-p">When you forget Kami / That is the time when suffering comes upon your body / That is the time when anguish comes into your heart / No matter what kind of matters may arise / Never forget Kami, never depart / From the truth of the path of Ananai / Kami is with you / The person who has received and inherited the august water and fire of Kami / Is a child of Kami and a shrine of Kami / The human body is the most precious being / Next only to Kami / It is by no means a lowly being / If you know that there are teachings / Which instruct and admonish that the human body / Is clouded and defiled / Pour your hearts into each other without delay / And never fall into evil paths / Ryōseihime of Mount Mikura / Who has enshrined the Kamunagara Kami / Appeared as the lord of the great earth / The branch spirit of the wondrous spirit / Of Kinshōkan Ōkami / Eternally abiding in the island of Takasago / Protecting the fortune of the people of the country / No matter what kind of teachings may come / Leaving the Kamunagara Kami aside / Never let your hearts be clouded / The shrine of the mountain of Mikura / Which enshrines the Hime of Ryōsei / Is indeed the Kami most precious / Next to Kunichinotachino Ōkami / Ah, Kannagara, Kami, Kami / Returning to the heart of Kami / Cherishing all things / Never contend with one another / Revering Kami, respecting the lord of the country / And letting the grace of Kami shine without bound / Unto the people of the world / Is the single sincere duty / Of the masses of people born as the children of Kami / At morn and at eve to observe</p>
+          <p class="en-p">The kami-tsukasa of Ananai-kyō / Kuniyoriwake, on the occasion of leaving this land / Composes a commemorative song for the people of the country / Ah, people of the country, people of the country / Practice chanting it whenever you have leisure / Combining it with song, dance, and music / Console your hearts / Pacify the august heart / Of the Imperial Great Deity / Who protects this world / With this song / Songs are the mystery / That moves the spirits of heaven and earth / If you have even a moment to spare / To speak of gossip or idle talk / Do not forget this song even in your dreams / To say nothing of before the august presence of Kami'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">言依別命、国依別の宣伝使の理解に依りて、此地方一帯の住民は殆ど全滅せむとしたるを、御倉魚を食することを許されてより、忽ち元気恢復し、且つ言依別命を始め国依別の宣伝使を神の如く尊敬し、直に救世済民の教は三五教に若くものなしと、数十万人の人々はウラル教を脱退して悉く三五教に入信して了つた。併し乍ら言依別命は早くも此地を去りたれば、跡に国依別只一人、御倉の社を中心として教勢忽ちに振ひ、猫も杓子も、三五教にあらざれば救はれ難し、又正しき人間には非ざるべしとまで崇拝するに到りける。</p>
+            <p class="ja-classical-line">国依別は三五教の教理を諄々として説きさとし、且つ天津祝詞や神言を教へ、御倉の社に国治立命、豊国姫命其他の諸神霊を合祀し、崇敬の的と定めた。国依別は、又一種の宣伝歌を作り、国人に平素高唱すべく教へ導きける。</p>
+            <p class="ja-classical-line">国依別『高天原に現れませる
+国の御祖の大御神
+国治立大神は
+普く世人を救はむと
+天の御柱つき固め
+国の御柱つきこらし
+瑞の御霊と現れませる
+豊国姫大神と
+力を合せ玉ひつつ
+神世を開かせ玉ひけり
+天足彦や胞場姫の
+醜の霊に現れませる
+八岐大蛇や醜狐
+曲鬼共がはびこりて
+世は常暗となり果てぬ
+皇大神は是非もなく
+千座の置戸を負ひ玉ひ
+天教山の火坑より
+根底の国に落ち玉ひ
+豊国姫と諸共に</p>
+            <p class="ja-classical-line">深く其身を忍ばせつ
+此世を守り玉ひけり。
+ウラルの彦やウラル姫
+大国彦や大国の
+姫の命の枝神は
+天地四方の国々を
+醜の煙に包まむと
+曲の教を開きつつ
+世を曇らせし忌々しさよ
+天津御空に現れませる
+神伊弉諾大神は
+妹伊弉冊の大神と
+大空高く渡したる
+天浮橋に立ち玉ひ
+泥に沈みし海原を
+コオロ　コオロに掻き鳴らし
+神生み国生み人を生み
+天教山にましませる
+日の出神や木の花姫の
+貴の命に神業を</p>
+            <p class="ja-classical-line">授け玉ひて葦原の
+瑞穂の国を開きけり
+あゝ惟神々々
+神の御稜威のいや高く
+教の道のいや広く
+埴安彦や埴安姫の
+神の命と身を変へて
+黄金山下に出現し
+三五の月の御教を
+完美に委曲に説き玉ふ
+これぞ誠の三五の
+錦の機の御教ぞ
+あゝ諸人よ諸人よ
+尊き神の御光りに
+一日も早く目を覚ませ
+朝日は照る共曇る共
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+三五教の御教を
+夢にも忘るること勿れ</p>
+            <p class="ja-classical-line">神を忘れし其時は
+身に苦しみの来る時
+心の悩みの来る時ぞ
+如何なる事のありとても
+神を忘れな三五の
+道の誠に離れなよ
+神は汝と倶にあり
+神の御水火を受つぎし
+人は神の子神の宮
+神に次での第一に
+尊き者ぞ人の身は
+決して賤しき者ならず
+曇り汚れし人の身と
+教へて諭す御教が
+ありと知るなら逸早く
+互に心を注ぎ合ひ
+邪道に陥ること勿れ
+国魂神を斎りたる
+御倉の山の竜世姫
+大地の主と現れませる</p>
+            <p class="ja-classical-line">金勝要大神の
+珍の御霊の分霊
+高砂島に永久に
+鎮まりゐまして国人の
+幸を守らせ玉ふなり
+如何なる教の来る共
+国魂神を余所にして
+心を曇らす事勿れ
+竜世の姫を祀りたる
+御倉の山の社こそ
+国治立大神に
+次で尊き神なるぞ
+あゝ惟神々々
+神の心に立返り
+すべての物を慈み
+互に争ふこと勿れ
+神を尊び国の君
+敬ひまつり世の人に
+神の恵を隈もなく
+輝き渡すは神の子と</p>
+            <p class="ja-classical-line">生れ出でたる人草の
+朝な夕なに守るべき
+誠一つの務めなり
+三五教の神司
+国依別が此地をば
+去るに臨んで国人に
+記念の歌を作りおく
+アヽ国人よ国人よ
+暇ある毎に読み慣ひ
+歌に踊りに音楽に
+合して心を慰めつ
+此世を守り玉ひます
+皇大神の御心を
+和めまつれよ此歌に
+歌は天地の神霊を
+感動さする神秘ぞや
+世間話や無駄話
+云ふ暇あらば一時も
+夢にも忘れず此歌を
+神の御前は云ふも更</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Whether traversing the mountain peaks or plunging into the river, in such hours let the murakimo heart sing in peace! Ah, Kamunagara, Kamunagara, may the divine spirits bring happiness! The god Kamunahohi who created this world, and the great Ōnahohi whose heart is vast. Truly, whatever happens in the world of men, behold it straightly with nahohi, listen to it straightly! If there are errors, correct the proclamation. Never, ever forget the Ananai-kyō! Leave it behind for the sake of the people of the world forever!'</p>
+          <p class="en-p">Having composed this poem, [he] bestowed the name Taruhiko upon a man named Pāksu, the cleverest among the most zealous believers, added him to the ranks of sendenshi, and commanded him to protect the shrine of Mikura while preaching and instructing the teachings of Ananai-kyō to the kunibito. Kuniyoriwake once again set forth from this place, advancing toward the capital of the land of Hiru.</p>
+          <p class="en-p">Just as they approached the storm-swept forest of the village of Chiru, four or five men appeared, blending into the gloom of twilight, spreading their arms wide before Kuniyoriwake,</p>
+          <p class="en-p">Kō: 'You are a sendenshi of Ananai-kyō, who has dared to bring shame upon us! Since it is thus, even without stating your name, you should know that our names are already clear; well then, what say you? However skilled in eloquence you may be, you cannot match practical might. Will you peaceably turn your hand, or rather cast yourself into the ravine of Chiru under our surveillance and perish by your own hand? If even that is unacceptable, we all, much to our regret, shall make you the rust of our swords. However valiant you may think you are, if hundreds of allies surround you ten or twenty layers deep, surely, surely, there will be no room for you to escape your fate. It is needless to say that we are the sendenshi of the Uraru-kyō: the individuals Būru, Yūzu, and Anan! You are the hateful instigators of the violation of heavenly law who ate the sacred fish forbidden by the gods in the valley of Mikura, and moreover caused the kunibito to eat it without exception! You are the villains who turned centuries of effort by the Uraru-kyō into bubbles in a single morning; prepare yourselves now!'</p>
+          <p class="en-p">At this shouting voice, dozens of human figures naturally gathered, coming with a noisy roar of 'Wāi-wāi!' Kuniyoriwake opened his mouth wide and broke into a loud laugh,</p>
+          <p class="en-p">Kuniyoriwake: 'Ah-ha-ha-ha! Such cowardly and base behavior of yours! In the valleys of Mount Mikura, like mice chased by cats, you could not even raise a squeak, but slinked away in cowardice. With such a wretched state, how could you ever hope to edify the people who are the children of the gods? Unthinkable! You cowardly lot, relying on numbers to torment a single sendenshi, if you are truly going to be opponents, come and try it. By the divine power of my Kototama, I shall guide and harmonize every single one of you into the path of truth, and reform the Uraru-kyō you revere from its very roots. Ah, how amusing, how amusing!'</p>
+          <p class="en-p">And once again he laughed heartily, cackling away. The leaders Būru, Yūzu, and Anan gave some signal to the dozens of allies who had gathered, and how ridiculous it was as they all rushed wildly toward Kuniyoriwake at once. Kuniyoriwake gathered his breath with a single grunt of 'Un!', and with the index finger of his right hand swung rapidly from left to right toward them like a rapid-fire gun; the divine light of Kuniyoriwake, who embodied the divine power of the orb, shone even more intensely, and some were blinded and fled in a sorry state, while others fell to the ground and writhed in agony, scattering away in utter confusion, just like petals scattered by a storm, utterly ridiculous to behold. Seeing the figure of this wretched enemy, Kuniyoriwake once again cried out in a loud voice,</p>
+          <p class="en-p">Kuniyoriwake: 'Ah-ha-ha-ha, amusing, amusing!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">山の上行くも又河へ
+浸る時しも村肝の
+心長閑に歌へかし
+あゝ惟神々々
+御霊幸はひましませよ
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直せ聞直せ
+過ちあれば宣り直す
+三五教を呉々も
+忘れざらまし何時迄も
+世人の為に残しおく』</p>
+            <p class="ja-classical-line">斯く歌を作りて、最も熱心なる信者の中にて気の利いたるパークスと云ふ男に、足彦と云ふ名を与へ、宣伝使の列に加へ御倉の社を守りつつ、国人に三五の教理を説き諭すべく命じおき、国依別は又もやここを立出でて、ヒルの国の都を指して進み行く。</p>
+            <p class="ja-classical-line">チルの里の荒しの森に差かかる時しもあれや、黄昏の暗に紛れて現はれ出でたる四五人の男、国依別の前に大手を拡げ、</p>
+            <p class="ja-classical-line">甲『其方は三五教の宣伝使、よくも吾々に恥を見せよつたなア。かく申さば別に名乗らずとも、此方の名は分つて居る筈、サアどうぢや。如何に其方、弁舌巧なりとて、実行力には叶ふまい。尋常に手をまはすか、但はチルの渓谷に、吾々監視の下に身を投げて自滅いたすか、それも不服とあらば、吾々一同気の毒乍ら、剣の錆となし呉れむ。いかに汝勇猛なればとて、数百人の味方を以て、十重二十重に取巻あらば、いつかないつかな、身を逃るるの余地なかるべし。吾れは云はずと知れたウラル教の宣伝使、ブール、ユーズ、アナンの面々だ。御倉の谷間に於て神の禁じた神魚を食ひ、剰つさへ国人に残らず食はしめたる憎くき天則違反の張本人！　ウラル教が数百年の努力を一朝にして水泡に帰せしめたる悪人輩、サア覚悟を致せ！』</p>
+            <p class="ja-classical-line">と呼ばはる声に、自然に集まる数十人の人影、『ワーイワーイ』とどよめき来る騒々しさ。国依別大口あけて高笑ひ、</p>
+            <p class="ja-classical-line">『アツハヽヽ、卑怯未練な汝等が振舞、御倉山の谷あひに於て、猫に追はれし鼠の如くチウの声さへ得あげず、コソコソと逃げ帰りたる卑怯者、かかる為体にて、いかで神の御子たる人草を教化せむ事、思ひもよらず。汝等卑怯にも衆を恃んで、只一人の宣伝使を苦めむとする腰抜共、見事、相手になるならなつて見よ。吾言霊の神力に依つて一人も残さず誠の道に言向け和し、汝が奉ずるウラル教を根底より改革しくれむ。あゝ面白し面白し』</p>
+            <p class="ja-classical-line">と又もやカラカラと打笑ふ。ブール、ユーズ、アナンの大将連は寄り来れる数十人の味方に何事か合図をなすや、一斉にバラバラと国依別に向つて武者ぶり付かむとする其可笑しさ。国依別は『ウン』と一声息をこめ、右手の示指を以て、彼等一同に速射砲的に左から右へ振りまはせば、球の玉の神力を身に納めたる国依別の霊光は一しほ光強く、何れも眼眩み這う這うの体にて逃げ去るもあり、其場に打倒れて苦悶するもあり、恰も嵐に花の散る如く、ムラムラパツと逃げ散る可笑しさ。国依別は此浅ましき敵の姿を見て、又もや大声に、</p>
+            <p class="ja-classical-line">『アツハヽヽ、面白い面白い』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: Spirit とパン [856]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: 荒しの Forest [858]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

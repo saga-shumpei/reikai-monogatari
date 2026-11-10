@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 23: ブール酒 [865] - Volume 30 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 30 Table of Contents</a>
+      <span>Volume 30</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 30 &bull; Chapter 23</span>
+      <h1 class="chapter-title-en">Chapter 23: ブール酒 [865]</h1>
+      <p class="chapter-title-ja">ブール酒〔865〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In the inner chamber of the Gankutsuyakata, the Reijiyō of Mount Higura, the Kyōshiyu Būru sat, while Anan and Yūzu waited in a dejected state.</p>
+          <p class="en-p">Būru bowed before the deity within the Gankutsunai, offering prayers that the subordinates dispatched to the City of Hiru might achieve a great victory and return in triumph as soon as possible.</p>
+          <p class="en-p">Upon finishing his prayers, he returned quietly to his Ima, but to his surprise, the two brave generals who had marched out in such a grand manner the previous night were waiting in his room, looking crestfallen.</p>
+          <p class="en-p">Seeing the two figures, who appeared strangely lacking in energy and dim of presence, he was overcome with a sense of unease.</p>
+          <p class="en-p">Būru: 'Hey, you two, Anan and Yūzu, your complexions look quite pale, do they not? You must have failed in your mission somewhere along the way, and have now returned in such a cowardly and shameful manner.'</p>
+          <p class="en-p">At these words, realizing they were in the presence of the Kyōshiyu, the two suddenly feigned vigor.</p>
+          <p class="en-p">Anan: 'Oh, was that you, Kyōshiyusama? Well, actually, it was, how should I put it... a tremendous something, and truly unpleasant... wait, no, it was a magnificent affair. Hey, Yūzu, you too, use your wits and report the war situation properly, without any omissions.'</p>
+          <p class="en-p">Yūzu: 'I shall report. Here, the Great Deity Izanami gave birth to the child Kagutsuchi-no-Kami and passed away. The Great Deity Izanagi was greatly enraged, and when he cut off the head of his child Kagutsuchi-no-Kami, the names of the deities born from the splashing Yutsu-Iwamura were Satsuparikon, the Deity of Rock-Splitting, and the Deity of Root-Splitting.'</p>
+          <p class="en-p">Būru: 'Hey, hey, what are you talking about? I am asking how the war situation is. Can you not report in detail?'</p>
+          <p class="en-p">Yūzu: 'Yes, a report, a report indeed. With red-hearted loyalty, I did my best for your sake, and while I worked my many subordinates to the point of black death, no, I mean overused them, I started the election campaign; however, regrettably, let alone winning a single seat, I became the runner-up. Well, they say war is a matter of fortune, so after we thoroughly intimidated the enemy and were about to attack the City of Hiru, we were easily routed.'</p>
+          <p class="en-p">Būru: 'Which side was routed?'</p>
+          <p class="en-p">Yūzu: 'Well, let us see. In every battle, unless one side loses, peace cannot be restored. We met with a most disgraceful and miserable fate.'</p>
+          <p class="en-p">Būru: 'I cannot understand a word you are saying... Hey, General Anan, Yūzu seems to have lost his mind. You report the whole story from beginning to end in detail.'</p>
+          <p class="en-p">Anan: 'There is no need for you to ask. We led our brave warriors, rode side by side, and marched grandly along both banks of the Higura River, forming a long snake-like formation while advancing with flags and drums. Just then, there were countless Jūyō divine crests, horse-insignia, and high-hanging lanterns, and the subordinates of Kaedewake-no-Mikoto of the City of Hiru, nearly three thousand in total, came attacking toward us, creating a human wall on both banks of the Higura River in such a menacing manner. To oppose the many with the few is a feat only heroes and great men can accomplish; we two, with only a few hundred soldiers, faced them. First, we divided our bamboo-spear unit, aimed at the enemy's surprise, and charged from the flank with spear tips aligned and war cries raised. The enemy panicked in their defeat, and we pursued them further, driving every last one of them into the rushing current of the Higura River. The many enemies who were caught by surprise immediately ran up the north bank, scrambling to escape, and as they climbed the riverbank, Yūzu's drawn-sword unit, which had been lying in wait, shouted that these were worthy opponents and waved their batons. When they gave the order to the mere three hundred allies, our brave warriors aligned their sword tips and cut and mowed them down one after another. In an instant, it was a great victory of blood-rivers and corpse-mountains; the Higura River was suddenly flooded with a deluge of blood, and the corpses of the many enemies drifted in the blood-stream, leaving not one behind, as they flowed toward the Pacific Ocean. The magnificence of it is truly beyond words.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">日暮シ山の霊場、岩窟館の教主ブールの奥の間には、アナン、ユーズの二人、悄然として控え、ブールが岩窟内の神前に額づき、ヒルの都に向つて派遣したる部下一同の大勝利を得、一日も早く凱歌を奏して帰ります様と祈願をこめ終りて、しづしづと吾居間に帰つて見れば、豈計らむや、昨夜堂々として出陣したる二人の勇将は、悄然として吾居間に待つて居る。どこともなく元気の無ささうな影うすき二人の姿を見て、不安の念に駆られ乍ら、</p>
+            <p class="ja-classical-line">ブール『ヤアお前はアナンにユーズの両人、えらう顔色が冴えて居ないぢやないか。何か途中に失敗を演じ、女々しくも、おめおめと帰つて来たのだらう』</p>
+            <p class="ja-classical-line">此声に二人は教主の前に現はれたるを悟り、俄に空元気をつけ、</p>
+            <p class="ja-classical-line">アナン『これはこれは教主様で御座いましたか、エー実は、その中々以て、何で御座いましたよ。非常な何々で、実に不愉快……オツトドツコイ壮快な事で御座いました。なア、ユーズ、お前もチツとユーズを利かして、戦況を、そこはそれ、うまく、遺漏なき様に御報告を申すのだよ』</p>
+            <p class="ja-classical-line">ユーズ『申し上げます。此処に伊弉冊大神は、御子迦具槌神を生み玉ひて、みまかりましき。伊弉諾大神いたく怒り玉ひて、御子迦具槌神の御首を切り玉へば、ユーズ（湯津）石村たばしりつきてなりませる神の名は、サツパリコンと岩拆の神、根拆の神』</p>
+            <p class="ja-classical-line">ブール『コリヤコリヤ何を言つてゐるのだ。戦況は何うだと問うてゐるのだ。詳さに報告せないか』</p>
+            <p class="ja-classical-line">ユーズ『ハイ報告も報告、赤心報国、あなたの為に所在ベストを尽し、数多の部下を黒死病否酷使し乍ら、選挙運動を開始致しました所、残念乍ら一騎当選はまだ愚か、次点者となりました。イヤもう戦ひは時の運とか申しまして、ウンと敵を屁古ませ、ヒルの都に攻め寄するに先立ち、脆くも敗走致しまして御座います』</p>
+            <p class="ja-classical-line">ブール『どちらが敗走したのだ』</p>
+            <p class="ja-classical-line">ユーズ『ハイさうですなア。すべて戦ひはどちらか一方が負なくては、平和克復は到底出来ませぬ。甚だ以て不名誉千万な悲惨な目に会ひましたよ』</p>
+            <p class="ja-classical-line">ブール『貴様の云ふ事はチツとも分らない。……オイ、アナンの大将、ユーズはどうかして居る様だ。其方詳しく、一伍一什を報告せよ』</p>
+            <p class="ja-classical-line">アナン『御尋ね迄もなく、吾々勇士を引率し、轡を並べて堂々と、日暮シ河の両岸を、長蛇の陣を張り乍ら、旗鼓堂々と攻め下る。時しもあれや、幾十百とも知れぬ十曜の神紋馬印、高張提灯、数限りもなく、堂々として丸木橋を越え、此方に向つて攻来るヒルの都の楓別命が部下の者共、総勢殆ど三千有余人、日暮シ河の両岸に人垣を作り乍ら攻上り来る其物々しさ。寡を以て衆に敵するは英雄豪傑にあらざれば能はざる所、吾々両人は僅数百の手兵を以て之に当り、先づ第一に我部下の竹槍隊を両分し、敵の不意を狙つて側面より、槍の穂先を揃へ、鬨を作つて突貫すれば、敵は敗亡うろたへ騒ぐを、尚もおつつめ、一人も残らず日暮シ河の急流につきおとしたり。不意を喰つた数多の敵は忽ち北岸に駆上り、遁走せむと先を争ひ、川土手に上り行くを待構へたるユーズの抜刀隊は、好敵御参なれと采配打振り、僅か部下三百の味方に向つて下知すれば、味方の勇士は、剣の切先を揃へ、片つ端から切りたて薙立て、忽ち血河屍山の大勝利、日暮シ河は忽ち血潮の洪水氾濫し、数多の敵の屍は一人も残さず血流に漂ひ、太平洋を指して流れ行く、其壮烈さ。語るも中々愚かなりける次第で厶る』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Būru: 'Is this not a report of a rather Shinshōbōdaiteki nature? That the Higurashi River should overflow with a turbulent Dakuriu of blood, and that three thousand corpses should have been washed away without a single one remaining, all due to the blood of a mere three thousand enemies—this report of yours does not Gaten. Unless the blood of humans were several hundred times that of their physical Nikutai, such a thing could not possibly occur. This must be some kind of mistake.'</p>
+          <p class="en-p">Anan: 'Yes, mis... not a mistake, but a mix-up of words... er, what was it, yes, it has become a bit scattered, and in my excessive joy and great Daishiyōri, my Maoshia is all topsy-turvy and Shiri-metsuretsu, but in truth, it is such a great victory and such an unexpected Kauketsukuwa that I know not where to dance with my hands or tread with my feet, and I have just come down from a state of joyful Giyakujiyō. I have only just returned to report on the Senkiyō, and my head is not yet settled. Please grant me a moment of Chinshimokukau. In return, my hundreds of subordinates have suffered not a single injury and are currently resting in the great hall, singing songs of triumph. I beg you to let them drink plenty of wine as a reward and for the celebration of our return. One who stands as a leader must love his subordinates. We are generals only because we have subordinates. You, too, are a Kyōshu only because you have us, so even if there are minor flaws, to look upon us with correction and listen with correction, and to face us with compassion, is the divine duty of a Kyōshu of infinite benevolence. To look upon all things in the Sanzenkyō with Naohi, to listen with Naohi, and to correct the errors of the body is, I believe, a splendid thing for the Ural religion. I believe it is a most convenient doctrine for us as well.'</p>
+          <p class="en-p">Būru: 'Be that as it may, it seems to have been a fierce battle. To have slaughtered over three thousand enemies without a single casualty among your own men—your achievement must have been quite taxing. It is no wonder you are Giyakujiyō. Come, come, open the storehouse, bring out the wine, and let everyone drink their fill. I shall now go to worship before the Ōkami to offer my thanks for this triumphant return, so you should drink your wine at leisure and let everyone take their rest.'</p>
+          <p class="en-p">Having said this, he turned and once again proceeded eagerly toward the shrine.</p>
+          <p class="en-p">Seeing him off, the two looked at each other, sighed with relief, stuck out their tongues, and lowered their voices.</p>
+          <p class="en-p">Anan: 'Ah, at last we have escaped the tiger's mouth. Now, I shall distribute plenty of wine to all the fellows as hush money. This, too, is the result of my knowledge. It seems the Kyōshu Būru has become a bit dull-witted of late. Since he was terrified in the valley of Mt. Okura and startled twice in the Forest of Arashi, and is now at a point where his Bikkuri-mushi has grown and he is beginning to suffer from spleen ailments, it seems he was so happy to hear the single word that we won that he was easily deceived by our disjointed and Shiri-metsuretsu explanation, as if patching bamboo onto wood. Now, wine, wine!'</p>
+          <p class="en-p">So saying, Anan took the lead and proceeded to the large room where everyone was gathered, and standing in a slightly elevated place, he spoke.</p>
+          <p class="en-p">Anan: 'Because the general Būru has permitted all subordinates to drink wine to their hearts' content today in celebration of our triumphant return, you should all rejoice. Now that the vice-general Yūzu has taken the key to the wine cellar, all of you should go before the storehouse, carry the wine here, and drink your fill. For those who do not drink, there is grape water without alcohol, so you should drink that. Since this arrangement also comes from the sincere heart of Anan who loves his subordinates, even if the Kyōshu should appear here and ask you anything, you must not say a single word. In all matters, tell him to ask the generals Anan and Yūzu; that is how you must smooth things over. In short, you must report in detail that due to the self-sacrificial great activity of all the subordinates, Kaedewake of the capital of Hiru collided with our troops at the temporary enemy position and the log bridge, and that we cut them all down, stabbed them to death, threw them into the river, and their corpses flowed into the Pacific Ocean; you must all hold to that account. Now, go quickly to the storehouse and bring the wine. This wine is a miraculous medicine to lock the mouths of all of you, so please ensure that your mouths do not open in any reckless manner.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ブール『随分針小棒大的の報告ではないか？　僅三千人の敵の血潮に依つて、日暮シ河は血潮の濁流氾濫し、三千の屍が一つも残らず流失したとは、合点の行かぬ汝の報告、人間の血液は肉体の幾百倍もなくては、左様な事が出来ない筈だ。コリヤ何かの間違ひだらう』</p>
+            <p class="ja-classical-line">アナン『ハイ、マチ……ガイではなくて、マチとキジと……エー、何だか、ウン、一寸マチマチになつて、余りの嬉しさで、大勝利で、申上げる事も後や先、支離滅裂のやうで御座いますが、実の所は余りの大勝利、意外の好結果で、手の舞ひ、足の踏む所を知らず、嬉し逆上せに、逆上せの幕が下りた所です。今ヤツと戦況の報告に帰つたまでの所、何が何だか頭のまとまりがついてゐませぬ。暫く沈思黙考の時間をお与へ下さいませ。其代り数百の部下、一人も負傷もなく、凱歌をあげて、只今広殿に休息致し居りまする。何卒御褒美と凱旋祝の為に、お酒をドツサリ呑ましてやつて下さいませ。人に将たる者は部下を愛さなくてはなりませぬ。吾々は部下あつての大将で御座います。あなたも吾々あつての教主で御座いますから、少々の瑕瑾があつても、見直し聞直し、慈愛を以て望まるるのが、仁慈無限の教主の御天職で御座います。三五教の何事も直日に見直し聞直し、身の過ちは宣り直すと云ふ事は、ウラル教に取つても結構なことだと思ひます。吾々に取つても甚だ御都合のよき教理かと存じます』</p>
+            <p class="ja-classical-line">ブール『何は兎もあれ、非常な激戦だつたと見える。三千有余の敵を皆殺しにし乍ら、味方は一人の負傷者も出さなかつた其方の手柄、さぞ気をつかつたであらう。逆上するのも無理もない。サアサア倉を開放し、葡萄酒を出し、一同に飽く迄呑ましてやつてくれ。吾は是れより大神の御前に凱旋の御礼を申上ぐる為、参拝致して来るから、ゆるゆると酒でも飲んで、一同に休養を与へるが宜からう』</p>
+            <p class="ja-classical-line">と云ひ棄て、又もや神殿にいそいそとして進み行く。</p>
+            <p class="ja-classical-line">後見送つて二人は互に顔見合せ胸なでおろし、舌を出し乍ら小声になり、</p>
+            <p class="ja-classical-line">アナン『アヽ漸うにして虎口を逃れた。サア是から皆の奴に口止め料として、葡萄酒をドツサリ振れまつてやらう。是もヤツパリ俺の知識の致す所だ。ブールの教主も此頃はチツと度呆けてゐると見える。何分御倉山の谷間で肝をつぶし、荒しの森で二度ビツクリを致し、ビツクリ虫が増長して脾疳を患ひかけてゐる様な矢先だから、木に竹をついだやうな支離滅裂な吾々の陳弁でも、勝つたと云ふ一声が嬉しかつたと見え、うまうまと騙されよつただないか。サア是から酒だ酒だ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、アナンは先に立ち、一同の集まる大部屋に進み行き、稍高き所に停立して、</p>
+            <p class="ja-classical-line">アナン『部下一同に今日は凱旋の祝として、葡萄酒を飽く迄飲む事を、ブールの大将より許されたに依つて、一同喜んだがよからう。今ユーズの副将が酒倉へ鍵を持つて行かれたから、皆の者共は倉の前に往つて、葡萄酒を此処へ運び来り、腹一杯呑んだがよからう。又下戸連中はアルコールの混ぜらない葡萄水があるから、それを飲んだがよからう。斯の如く取計らつたのも部下を愛するアナンの真心より出でたるものなれば、万々一教主がここに現はれ、其方達に何をお尋ね遊ばしても、一言も申上げてはなりませぬぞ。一切万事、アナン、ユーズの大将様に御聞き下されと、其処は甘くごみをにごすのだ。要するに部下一同の捨身的大活動に依つて、ヒルの都の楓別が仮設敵と丸木橋の畔に吾部隊と衝突し、一人も残さず切り殺し、突殺し、河に投込み、屍は太平洋に流れ行きしと、事実を詳さに報告しあれば、一同も其考へで居らなくてはなりませぬぞ。サア早く倉へ往つて、酒をお運びなさい。此葡萄酒は所謂一同の者の口に錠を卸す妙薬だから、無茶苦茶に口のあかぬ様にして下さい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Strict orders for silence have been issued.</p>
+          <p class="en-p">After a short while, mountain-like bottles of wine were brought in.</p>
+          <p class="en-p">The two, Anan and Yūzu, in order to prevent the Kyōshiyu from appearing in this place, visited the Shinden, and upon finishing their kiguwan, cleverly talked their way into the Kyōshiyushitsu, flattering the Kyōshiyu's kigen with various detaramebanashi.</p>
+          <p class="en-p">As the alcohol gradually went to their heads, tales of the previous yūbe's shitsupaidan continued to be told everywhere, regardless of surroundings.</p>
+          <p class="en-p">The first person, letting his tongue slur, spoke:</p>
+          <p class="en-p">Kō: 'Hey, all of you, how was it last yūbe? Didn't you have a zuibun sanzan time of it? Facing only one or two enemies, a great ōzei surrounded them, only to be grabbed and thrown, grabbed and thrown, having a sanzan time in the river, scraping our hizagashira, twisting the tefutsugahi of our hips, it was zuibun painful, hah. Yet what a kichinichi kefu is. I was worried that if I returned defeated in battle, my head might even be taken. And then, to be told to stuff ourselves to the limit with gafuhara-inducing, haujiyun wine until we were vomiting, making us unable to kentau anything at all. If things are going to be like this, we should follow wars at jiyōji and always come back defeated, hah.'</p>
+          <p class="en-p">Otsu: 'That's settled. Isn't there such a thing as winning by losing? Thanks to losing, we can get this sweet wine to our hearts' content. Whether losing to lacquer or losing to sumo, there's never been a boro deal like this. Whatever happens, we just act as the gods' maké will have it, ah-ha-ha-ha.'</p>
+          <p class="en-p">Hei: 'Hey, Kō and Otsu, don't go chirping about things like that. To cover up yūbe's defeat, the generals Anan and Yūzu, so that it wouldn't affect you and us, exercised their yūzu, sweetly deceived the Kyōshiyu, and brought in the wine by buru-ing it, so won't you show a little consideration for the general's feelings and be quiet?'</p>
+          <p class="en-p">Otsu: 'Whether they buru-ed it or boro-ed it, I don't know, but they ought to have gonzered it a bit sweeter.'</p>
+          <p class="en-p">Hei: 'The two generals put forth their best with all their might, and biyakuru-ed as much as they could biyaku-ed, so if you complain so much, punishment will befall you.'</p>
+          <p class="en-p">Kō: 'Don't talk so noisily. From here, let's go to buru-sama's place, and dancing to our heart's content for the celebration, won't we? Once you drink alcohol, getting drunk is natural, and once you get drunk, dancing is a matter of course. There is crying sake, laughing sake, and angry sake. Those who want to cry, cry; those who want to get angry, get angry; those who want to laugh, laugh with all your might and enjoy yourselves, hah.'</p>
+          <p class="en-p">Tei: 'Speaking of laughing, I actually want to laugh so much I can't help it. Won't you let me laugh enough?'</p>
+          <p class="en-p">Kō: 'Laugh, laugh, so that everyone can plainly tell with a do-tsu, stand erect on that high platform, and laugh so much that the magazine market quotations go crazy. Fortune comes to homes that laugh, come on, laugh and laugh!'</p>
+          <p class="en-p">Tei suddenly climbed onto the high platform, holding a bottle of wine in one hand, and while drinking straight from the bottle, spoke:</p>
+          <p class="en-p">'Ah-ha-ha-ha, how foolish. Defeated in battle, thrown into the riverbed, hitting my shin, it hurt, but it was sort of funny, and I couldn't stop laughing.</p>
+          <p class="en-p">Ih-hi-hi-hi, it's like having a weasel's final fart blown upon you, making stinky, stinky excuses, wrapping the fart-sounding buru Kyōshiyu sweetly in a smoke of farts, and treating us to fart-sounding budōshiyu, the defeated generals and soldiers getting full of themselves and gulping down alcohol—the comicality of that style.</p>
+          <p class="en-p">Uf-u-ha-ha-ha, striking and changing, those attitudes of Anan and Yūzu, the two maistros (generals) who lost their footing at the Log Bridge battle before the lord Kyōshiyu, lost their nerve, uf-u-ha-ha-ha, flustered, made a fuss, and fled back, smoothly pulling out good wine from their bōkura, making us dead drunk, and trying to hush it up—the comicality of that. The general class, who always drink wine by themselves and act all pleased with themselves, this time seem to have gotten quite flustered and thoroughly closed their mouths, don't their attitudes look changed?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と篏口令を布いてゐる。暫くあつて、山の如く葡萄酒の瓶は運ばれた。アナン、ユーズの二人は教主の此場に現はれ来るを喰ひとめむ為、神殿に詣で祈願の終ると共に、詞巧に教主室に這入らせ、いろいろと出鱈目話に教主の機嫌をとつて居る。酒は追々と酔がまはつて、彼方にも、此方にも、あたり構はず、昨夜の失敗談が語り続けられた。甲は舌をもつらせ乍ら、</p>
+            <p class="ja-classical-line">甲『オイ、皆の奴、昨夜はどうだつた。随分惨々な目に会うたぢやないか。たつた一人や二人の敵に向つて、大勢の者が取囲み、取つては投げられ、取つては投げられ、川の中で散々な目に会はされ、膝頭をすり剥いたり、腰の蝶番を歪めたり、随分苦しかつたなア。併し今日は何と云ふ吉日だらう。戦に負けて帰つたら首でも取られやせむかと心配して居つた。それに劫腹な、芳醇な酒を飽く迄喰へなんて吐しやがつて、サツパリ見当が取れぬ様になつたぢやないか。こんな事なら常時戦に従つて敗て来るのだなア』</p>
+            <p class="ja-classical-line">乙『きまつた事だよ。負て勝とると云ふ事があるぢやないか、負たお蔭で、こんな甘い葡萄酒が鱈腹頂けるのだ。漆に負たり、角力に負たつて、こんなボロいこたありやせぬぞ。何事も神様のマケのまにまに活動するのだなア、アツハヽヽヽ』</p>
+            <p class="ja-classical-line">丙『オイ、甲乙両人、そんな事を囀るものだない。昨夜の敗戦をかくす積りで、アナン、ユーズの大将が、お前たちや俺たちに、アナンのかからないように、ユーズを利かして、甘く教主をゴマかし、葡萄酒をブールつて来たのだから、チツとは大将の御心も察して静にせぬかい』</p>
+            <p class="ja-classical-line">乙『ブールつて来たか、ボロつて来たか知らぬが、モウちつと甘くゴンベリさうなものだなア』</p>
+            <p class="ja-classical-line">丙『二人の大将が力一杯ベストを尽して、ビヤクレる丈ビヤクつて来たのだから、そんなに不足を云ふと罰が当るよ』</p>
+            <p class="ja-classical-line">甲『喧しう云ふない。是からブールさまの所へ往つて、一つ思ひ切り、御祝ひに踊つて来うぢやないか。酒を飲んだら酔ふのは当り前だ、酔うたら踊るのは当然だ。泣酒もあれば笑ひ酒もあり、怒り酒もある。泣きたい奴は泣け、怒る奴は怒れ、笑ふ奴は精一杯笑つて楽むんだなア』</p>
+            <p class="ja-classical-line">丁『笑ふと云つたら、俺も実は笑ひたうて、仕方がないんだ。十分笑はして呉れないか』</p>
+            <p class="ja-classical-line">甲『笑へ笑へ、ドツと皆に分る様に、あの高座へ直立して、ニコニコ雑誌の相場が狂ふ程笑つて見よ。笑ふ門には福来りだ、サア笑つたり笑つたり』</p>
+            <p class="ja-classical-line">丁は忽ち高座に上り、葡萄酒の瓶を片手に提げ、ラツパ呑みをし乍ら、</p>
+            <p class="ja-classical-line">『アハヽヽヽ、阿呆らしい。戦ひに負て、河底へ放りこまれ、向脛打つて、痛かつたが、チツとは可笑しうて、笑ひが止まらなんだ。</p>
+            <p class="ja-classical-line">イヒヽヽヽ、鼬に最後屁を放りかけられたよな、臭い臭い言ひ訳をして、屁の音のよなブール教主を甘く屁煙にまき、屁の音の様なブードー酒をおごらして、敗軍の将卒が得意になつて、酒を食らふ其スタイルの可笑しさ。</p>
+            <p class="ja-classical-line">ウフヽヽヽ、打つて、変つたアナン、ユーズのあの態度、教主の君に丸木橋の戦ひに腰を抜かし、肝を潰し、ウフヽヽヽうろたへ騒いで逃げ帰つた二人のマイストロ（大将）がウマウマとうまい酒をボン倉からひつぱり出し、俺達をヘーベレケに酔はしやがつて、口止めせうとしてゐる其可笑しさ。いつも自分計り酒を喰つて、良い気になつてる大将株が今度は余程マゴつきやがつて、キツウ閉口しよつたと見え態度が変つたぢやないか。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ehehehehe, ah, what a cursedly bad thing. To forcefully make us drink such vile, horrible, delicious wine, and get us drunk on alcohol just to kill us—why, that's far too greedy of a notion. A loach might be killed by liquor, I know not, but we human beings won't go down that easily, now.</p>
+          <p class="en-p">Ohohohoho, the tail is white, the tail is white, the head is white too, the tail-white tanuki's belly drum; let's drink until our bellies are fit to burst, beat our bellies, pop farts from our bottoms going bur-bur, strain our utmost, and dance away, shall we?</p>
+          <p class="en-p">Hahahaahahaha, my belly gets angry, my navel gets twisted, and I grow so sad. Alcohol, they call it, what a strange fellow it is. Hey, you fellows, won't you laugh a little? The sake will sink right down.</p>
+          <p class="en-p">Hihehehehehe, when I remember last night's terrible ordeal at the Higurashi River, it makes me angry; dragged out in the middle of the night, and thrown into a river full of gravel just like a frog being pelted—when I think of that time, I felt so sad. Yet, as soon as I think that, having been made to drink a flood of such sweet sake, no matter how much I intend to be angry, it becomes interesting, comical, and joyful; how could anyone stay without laughing at this?</p>
+          <p class="en-p">Fuhehehehehe, it's a windfall dropped from the skies. Wielding the eloquence of Furuna, the deep plots of Anan and Yūzu in today's work—no matter what anyone says, as long as we drink sake, we are in the most exquisite spirits.</p>
+          <p class="en-p">Hehehehehehe, passing gas underwater—those unreliable, witless cowards, displaying ugly labels like the Gohiyakurakan, what on earth is that state of theirs when they guzzle sake? Shall we call it Hiyakukichiukau, or shall we call it Senkiyakau? It's just like giving water to hungry gaki; what a pathetic state! Every last one of them is a foul-mouthed wretch, and well, my, how they've all gathered together like this. Even Lord Būru, who keeps such creatures, must be at his wits' end.</p>
+          <p class="en-p">Hohohohoho, truly, really, if we could lose and receive such sweet sake, I'd want to go out to battle every single night and taste defeat. No matter what, since a huge crowd is facing one or two enemies, there's no anxiety about winning. Just you try winning—it's not just a matter of a sake-house. Anan and Yūzu's commanders alone get to eat the sake while we are made to endure by drinking water—that's about the extent of it.</p>
+          <p class="en-p">Wahahaahahaha, if there are bad things, there are bound to be good things afterwards. That's why we're drunk on sake, drunk on smoke, and intoxicated with faith. Drunk, drunk, getting dead drunk, lining up Ryorisuku with all our might, we are going to carry out today's victory celebration to perfection. This wine is truly full of good things. Drunk, drunk, sweet and drunk, piling up in the belly and drunk, gaining strength and drunk, even the mood is good, they say—so it's only natural that the intoxication spreads, ufuhehehehe, ehehehehehe, ohohohoho, it's the end. Someone, an angry drunk or a crying drunk, take my place. As for me, this is already the curtain call.'</p>
+          <p class="en-p">So saying, staggering unsteadily, he scrambled down the high seat and chattered away haphazardly. Here, Anan came alone, and</p>
+          <p class="en-p">Anan: 'Hey you fellows, good work. It must have been quite back-breaking, I suppose.'</p>
+          <p class="en-p">Sū: 'It was such sweet sake, and it broke our backs just to drink it. As expected of Anan-sama, standing above the waters of mankind, you are truly great. Your skillful feat of tricking Commander Būru with sweet words, making a defeated army look like victors, and opening even the grape storehouses is truly fitting for our commander. Hey Kōshū, it would be good if at least something like this could last for ten days, wouldn't it?'</p>
+          <p class="en-p">Anan: 'Hey, hey, won't you be quiet? It would be a disaster if it reached the Kōshu's ears. You won't be able to drink with such a big face.'</p>
+          <p class="en-p">Sū: 'No matter when the commander or the Kōshu comes and tells us not to drink, who cares? We've already drunk as much as we could drink, so even if you told us to drink more on top of this, who would drink such rotted-looking sake? The first two or three bottles were sweet, but the later it got, the worse the sake became, like drinking muddy water. All you fellows,</p>
+          <p class="en-p">Compared to the feelings after seeing drunkenness, I never thought the wine would taste so tasteless as this,</p>
+          <p class="en-p">that's it, ahahaha.'</p>
+          <p class="en-p">At this time, upon the announcement of 'The Kōshu's Grand Entrance,' the company suddenly pulled themselves together, re-seated themselves, straightened their collars, and broke into a great uproar.</p>
+          <p class="en-p">Būru appeared with a grand air, faced the company, and said,</p>
+          <p class="en-p">Būru: 'Just now, at the gate of the cavern, two strong warriors of Mitakekyō have come attacking; let all of you be on your guard.'</p>
+          <p class="en-p">The company merely uttered, 'Hai,' and instantly sobering up from their drunkenness, their faces turned pale green as they trembled. In accordance with the Kōshu's command, the company scattered and dashed toward the entrance.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">エヘヽヽヽ、エー怪体の悪い。こんな悪い悪い葡萄酒のうまい奴を、無茶苦茶に呑ましやがつて、俺達を酒に酔はして殺さうとは余り虫がよすぎるワイ。鰌なら酒で殺せるか知らぬが人間さまはさうはいかぬからなア。</p>
+            <p class="ja-classical-line">オホヽヽヽ、尾も白い尾も白い頭も白い、尾も白狸の腹鼓、腹がはぢけるとこ迄、呑んで腹を拍つて、尻からブールブールとお屁を弾じ、丹精こらして、踊ろぢやないか。</p>
+            <p class="ja-classical-line">ハヽヽヽヽ、腹が立つて、臍がよれて、悲しくなつて来るワイ。酒と云ふ奴ア、妙な奴だなア。オイ皆の奴、チツと笑はぬかい、酒が沈んで了ふぞ。</p>
+            <p class="ja-classical-line">ヒヽヽヽヽ、日暮シ河でひどい目に会うた昨夜の事を思ひ出すと、腹が立つワイ、夜夜中にひつぱり出され、石礫の一杯つまつた川中へ蛙をぶつけたよに投げられた時の事を思へば、悲しうなつて来た。さうかと思へば、こんな甘い酒をドツサリ飲ましやがつて、何程怒らうと思つても、面白く可笑しく嬉しくなつて、これが笑はずに居れるかい。</p>
+            <p class="ja-classical-line">フヽヽヽヽ、降つて湧いたる儲け物だ。フルナの弁を揮つて、深く企んだアナンとユーズの今日の働き、何と云つても、俺たちは酒さへ呑めば、至極御機嫌だ。</p>
+            <p class="ja-classical-line">ヘヽヽヽヽ、屁を水の中で放つたやうな、便りない、気転の利かぬ弱虫計りが、五百羅漢の様な醜いレツテルを陳列しやがつて、酒を喰ふ時の、其ザマつたら、何の事だい。百鬼昼行と云はうか、千鬼夜行と言はうか、丸で餓鬼に水を与へたよな、情ないザマ、何奴も此奴も口賤しい奴計りが、能くもマアこれ丈揃うたものだなア。こんな代物を飼つてゐる、屁こきのブールさまも閉口だらう。</p>
+            <p class="ja-classical-line">ホヽヽヽヽ、本当に誠に、失敗してこんな甘い酒を頂くのなら、毎晩でも戦ひに出て、負てみたいなア。なんと云うても、一人や二人の敵に大勢が当るのだから勝つ気づかひはないワ。もしも勝つて見よ、酒所の騒ぎぢやない。アナン、ユーズの大将計りが酒を食つて俺達は水を呑んで辛抱さされるのが落ち位なものだよ。</p>
+            <p class="ja-classical-line">ワハヽヽヽ、悪いことがあればキツとあとに善い事がある。それだから、酒に酔ひ、煙に酔ひ、信仰に酔つぱらつて居るのだ。酔うて酔うて酔ひちらし、力一杯ヨタリスクを並べ立てて、今日の凱旋祝ひを完全に勤め上げるのだよ。此葡萄酒は本当に善い事だらけだ。酔うて酔うて甘うてようて、腹にたまつてようて、力がついてようて、気分迄がよいと云ふのだから、酔ひがまはるのも当然だ、ウフヽヽヽ、エヘヽヽヽ、オホヽヽヽ、終りだ。誰か怒り上戸の奴か、泣上戸の奴代つて呉れ。俺りやモウこれで幕切れだ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、行歩蹣跚として高座を覚束なげに降り切りに喋りちらして居る。此処へアナン一人やつて来て、</p>
+            <p class="ja-classical-line">アナン『ヤアお前達、御苦労だつた。随分骨が折れただらうなア』</p>
+            <p class="ja-classical-line">戍『ズイ分甘い酒で、飲むのに骨が折れましたよ。流石アナンさまは人の水上に立つ丈あつて偉いわい。ブールの大将を甘いことだまし、敗軍を勝たよな顔して、葡萄の倉まで開かしたお手際は、吾々の大将として実に適当だ。なア甲州、せめてこんなことが十日も続くと良いのだけどなア』</p>
+            <p class="ja-classical-line">アナン『オイオイ静かにせぬかい。教主のお耳に這入つたら大変だぞ。大きな顔して酒を飲む訳にも行くまい』</p>
+            <p class="ja-classical-line">戍『モウ何時大将や教主がやつて来て呑むなと云つたつて、構ふものか。呑む丈呑んで了つたのだから、此上呑んでくれたつて、こんな腐つたよな酒を誰が呑むものかい。始めの二三本は甘かつたが、後になる程、酒が悪うなつて、泥水を飲んでるようだなア、皆の奴、</p>
+            <p class="ja-classical-line">酔ひみての後の心に比ぶれば　是程味ない酒とは思はざりけり</p>
+            <p class="ja-classical-line">だ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">此時『教主の御出場』と云ふ知らせに一同は俄に肌を入れる、坐り直す、襟をかき合はす、大騒ぎをやり出した。</p>
+            <p class="ja-classical-line">悠然として現はれたるブールは一同に向ひ、</p>
+            <p class="ja-classical-line">ブール『今岩窟の門前に三五教の強者が二人、襲ひ来りし様子、一同の者、注意を致されよ』</p>
+            <p class="ja-classical-line">一同は『ハイ』と云つた限り、忽ち酒の酔も醒め、顔を真青にして慄うてゐる。教主の命に依り、一同はバラバラと入口の方に駆出した。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c22.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 22: Great 蜈蚣 [864]</span>
+      </a>
+      <a href="c24.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 24: 陥穽 [866]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

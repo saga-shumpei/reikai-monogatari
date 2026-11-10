@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 10: Phantom Cloud 晴 [852] - Volume 30 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 30 Table of Contents</a>
+      <span>Volume 30</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 30 &bull; Chapter 10</span>
+      <h1 class="chapter-title-en">Chapter 10: Phantom Cloud 晴 [852]</h1>
+      <p class="chapter-title-ja">妖雲晴〔852〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ishikuma corrected his posture once more, and facing the water surface again, began to emit Kototama. This man was one whose spirit was not yet stable; when he was in his element, he would boast recklessly, but as soon as he felt a bit weakened, his complexion would turn deathly pale.</p>
+          <p class="en-p">Ordered by Suekohime-sama to perform the norinaoshi (rectification of invocations) again, and deeply troubled by the advice of Karl while feeling the pain in his heart, he steeled himself with an inevitable, stubborn resolve and began to chant once more.</p>
+          <p class="en-p">Yet, he manifested a sense of sorrow that lacked harmony, coming from nowhere in particular, without leaving anything to be desired.</p>
+          <p class="en-p">His song:</p>
+          <p class="en-p">High is the heaven of Hisakata, / Appearing in Takaamahara, / Through the Mikoto of Sumeōkami, / Toyoashihara's Mizuhokuni, / While creating and solidifying it, / For the sake of the Yobito, / Bestowing His Mikokoro, / The Onshigumi of the Mikoto of Kuniharutachi no Kami, / To save the Yobito universally, / Appearing as the God of Nodate, / With the teachings of Ananai-kyo, / Calling together many Kami, / How noble is the opening of the way.</p>
+          <p class="en-p">Appearing as the younger brother god / Of the great Amaterasu-ōmikami, / Susanoo-ōmikami is / The Mizumitama of infinite benevolence, / The suffering daily troubled / By demons, great serpents, and evil gods, / Through the blessings of the living Kototama, / Purifying, reviewing, and listening again, / To rectify the Yashimakuni, / In the morning rain or the evening wind, / Without wearying of the snow-piled fields, / Crossing over distant mountains and rivers, / Crossing the great ocean, / Saving all things in the universe, / How grateful we are.</p>
+          <p class="en-p">Appearing as the precious child of Sumeōkami, / Suekohime-sama appeared at the waterfall of Ken, / When Ishikuma of the Brahman religion / Was targeted by the serpent god, / And his life was in danger, / She manifested the Mikokoro of Ananai-kyo / Perfectly and in detail, / Not to mention the serpent god, / She even saved the very soul of this Ishikuma. / I, in my lowly human body, / Without fearing heaven and earth, / In the sanctuary of Takateruyama of dark clouds, / Building a hall and boasting to the people of the world / That I am a messenger of God, / Emitting and disturbing the Kototama that had become murky and defiled, / Unknowingly, I had become / A captive of the ugly evil gods. / Ah, Kannagara-kamu-nagara, / Receiving the blessings of the spirit, / The sins and defilements filling heaven and earth, / Purified and saved by the Kototama of Suekohime-sama, / Now I have completely become / A servant of the God of Ananai-kyo. / Deep in the bottom of the pond of Tatsumi, / Settled firmly and eternally, / Before the presence of the serpent god, / I, with reverence and awe, / Chant the living Kototama.</p>
+          <p class="en-p">O serpent god, O living god, / Thou art also a child of the Kami born / Of the water and fire of the imperial Kami of heaven and earth, / Even if thy form may change, / If thou lookest with pure eyes / Upon the noble Mikokoro of God, / How could there be any discrimination? / Thou art also a child of God, a palace of God, / I am also a child of God, a palace of God, / Let us be intimate and friendly with each other, / And taste the precious power of the Kototama / That opened the way of the Kami of Ananai-kyo, / Which transmits the teachings of heaven and earth, / And opening the rock-door of the heart, / Which is the essence of the soul, as soon as possible, / May the light of the moon and sun beautifully / Shine upon thy heart. / I am a person of lowly status, / Thou art the noble child of God.</p>
+          <p class="en-p">I have no power to chant / And transmit the Kototama unto thee, / Yet I, too, / Chosen as a precious pillar / By the protection of the noble God, / Have come from afar / To save thy spirit. / O serpent god, O living god, / With a calm and peaceful heart, / Do not despise the Kototama of a lowly person, / But calm thy heart and listen deeply. / This heaven and earth are very vast, / No matter how wide the pond may be, / No matter how deep the water bottom may be, / When compared to the boundless great sky, / This pond does not even count / As a thing of any consequence. / Rather than lurking in such a place, / Purify thy heart with the power / Of the Kototama that fills heaven and earth, / Soar high into the great sky, / Sit at the right hand of the noble God, / Make the rain fall and the wind blow, / Bestow moisture upon the Aohitogusa, / And become a Kami who serves / The divine administration. / Although thy body / May hide in the bottom of the pond without finding its time, / The Tokitsukaze, / The wind that blows, will suddenly / Spread between heaven and earth, / And with the wind, rain, thunder, and lightning, / Protecting the fulfillment of the divine government, / Thou art the living god who possesses the quality. / Ah, Kannagara-kamu-nagara, / Infer the heart of God, / And listen in detail / To my Kototama, Kannagara. / Before the presence of the serpent god.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">石熊は改めて姿勢を正し、再び水面に向つて、言霊を発射し始めた。此男は得意の時には無茶苦茶に威張るなり、少し弱り目になつて来ると、顔色迄真青にかへる、精神の未だ安定しない男であつた。末子姫に再び宣り直しを命ぜられ、且又カールの忠言を痛く気にして心を痛め乍ら、引くに引かれぬ因果腰を定めて又もや歌ひ始めた。されど何処ともなしにハーモニーを欠いた悲哀の情を遺憾なく現はして居た。其歌、</p>
+            <p class="ja-classical-line">『仰げば高し久方の
+高天原に現れませる
+皇大神の御言もて
+豊葦原の瑞穂国
+造り固め玉ひつつ
+世人の為に御心を
+配らせ玉ひし国治立の
+神の命の御仕組
+普く世人を助けむと
+三五教の御教を
+野立の神と現れまして
+数多の神を呼びつどひ
+開き玉ひし尊さよ
+天照します大神の
+弟神と現れませる
+神素盞嗚大神は
+仁慈無限の瑞御霊
+鬼や大蛇や曲神の
+日々に悩める苦みを
+生言霊の幸はひに</p>
+            <p class="ja-classical-line">清く見直し聞直し
+宣り直さむと八洲国
+雨の晨や風の宵
+雪積む野辺も厭ひなく
+遠き山河打わたり
+大海原を越えまして
+森羅万象悉く
+助け玉へる有難さ
+皇大神の珍の子と
+現はれませる末子姫
+乾の滝に現れまして
+バラモン教の石熊が
+大蛇の神に狙はれて
+命も危き折柄に
+三五教の御心を
+完美に委曲に現はして
+大蛇の神は云ふも更
+此石熊が身魂まで
+合せて救ひ玉ひけり
+吾れは賤しき人の身の</p>
+            <p class="ja-classical-line">天地に怖ぢず暗雲の
+高照山の聖域に
+館を構へて世の人に
+神の使と誇りつつ
+濁り汚れし言霊を
+打出し乱す四方の国
+知らず知らずに悪神の
+醜の擒となりにける
+あゝ惟神々々
+御霊の幸を蒙りて
+天地に充ちし罪穢れ
+末子の姫の言霊に
+伊吹払はれ救はれて
+今は全く三五の
+神の僕となりにけり
+巽の池の底深く
+堅磐常磐に鎮まれる
+大蛇の神の御前に
+吾れは謹み畏みて
+生言霊を宣りまつる</p>
+            <p class="ja-classical-line">大蛇の神よ生神よ
+汝も天地の皇神の
+御水火に生れし神の御子
+仮令姿は変る共
+尊き神の御心に
+清き御目に照らしなば
+いかで差別のあるべきや
+汝も神の子神の宮
+吾れも神の子神の宮
+互に睦び親しみて
+天地の教を伝へたる
+三五教の神の道
+開き玉ひし言霊の
+珍の力を味はひて
+一日も早く村肝の
+心の岩戸を開きつつ
+月日の影も美はしく
+汝が心に照らせかし
+吾れは賤しき人の身よ
+汝は尊き神の御子</p>
+            <p class="ja-classical-line">汝に向つて言霊を
+宣り伝ふべき力なし
+さは去り乍ら吾れも又
+尊き神の御守りに
+珍の柱と選ばれて
+汝の霊を救はむと
+遥々尋ねて来りけり
+大蛇の神よ生神よ
+心平らに安らかに
+賤しき者の言霊を
+さげすみ玉はず御心を
+鎮めて深く聞き玉へ
+これの天地はいと広し
+いかに御池は広くとも
+いかに水底深くとも
+限りも知らぬ大空に
+比べて見れば此池も
+物の数に這入らない
+斯かる処に潜むより
+天地に充てる言霊の</p>
+            <p class="ja-classical-line">力に心を清めまし
+大空高く翔登り
+尊き神の右に座し
+雨をば降らせ風吹かせ
+青人艸に霑ひを
+与へて神の経綸に
+仕ふる神となりませよ
+幸ひ汝の身体は
+時を得ずして池底に
+身を潜む共時津風
+吹来る風は忽ちに
+天地の間に蟠まり
+風雨電雷叱咤して
+神政成就守ります
+素質のゐます生神ぞ
+あゝ惟神々々
+神の心を推し量り
+吾言霊を詳細に
+聞し召しませ惟神
+大蛇の神の御前に</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Serving in Ananai-kyō, the servant of Kami, Ishikuma, reverently and respectfully clapped his hands eight times and offered counsel, saying: 'Ah, Kamunagara, Kamunagara, may your Mitama be blessed and prosper! '</p>
+          <p class="en-p">This time he chanted the Kototama with the utmost courtesy and in a manner befitting fine words and beautiful expressions. Yet the spectacle on the water's surface remained exactly as it had been before.</p>
+          <p class="en-p">Suekohime: 'Your Kototama this time may truly be said to have entered Kami and reached a wondrous state. However, as for why its effect does not appear, how do you think of it? '</p>
+          <p class="en-p">Ishikuma: 'Yes, no matter what is said, because the sins of the past are deep, the Kamisama of the Orochi also makes light of it, thinking with such a mindset: "What does that filthy little fellow mean by speaking in such a pretentious and self-righteous way!..." and thus will not listen to it. I am truly ashamed.'</p>
+          <p class="en-p">Sueko: 'Ah, did you think about it in that way? That is truly a good way of thinking. Please make sure not to forget that mindset. And you do not need to enter Ananai-kyō separately. Also, I remember you saying you would dedicate a splendid mansion like Takayamahiko to Ananai-kyō, but please have no such worries whatsoever. The true teachings of Kamisama are not such small, compartmentalized things. Things like making various small elegant names such as Ananai-kyō, Brahmanism, or Uralism, packing people into their respective divisions, and engaging in disputes over a snail's horns can never accord with the divine will of the Great Loving and Compassionate Great Kami. The true Way penetrates past and present, extends across East and West, is single and unmixed, eternal and vast; by being imprisoned in such names as a church or a sacred site, the heart of the true Kami cannot be understood. If you also recognize that there are good points within Ananai-kyō, use those; Brahmanism is fine too, so excise the parts you find to be bad, and if there are good things, it does not matter in the least whose words they are. I hope that you will take the good and mend the short, and expand the complete and flawless teachings of Kamisama throughout the world. Every time I am called a propagandist of Ananai-kyō, I feel as though I am being locked inside some cramped box, and it is truly painful. All teachings of Kami must be liberated freely and easily, without a single bond, and must be Kamunagara. Please, with that intention, henceforth exert your sincerity to the utmost for the sake of the world and for the sake of Kamisama. For this is the truth of the Way of Ananai, directed toward the Mototsu Mitoya Great Kami who created this world, Kuninotokotachi no Mikoto, and other precious Kamisama...'</p>
+          <p class="en-p">Ishikuma let tears fall in a steady stream,</p>
+          <p class="en-p">Ishikuma: 'Truly impartial and unselfish, with clear reason and righteousness, the teachings of Hime-sama—ah, indeed, today I have received most marvelous divine virtues. From now on, I am resolved not to hold a small mind like the one I have had up until now, but to strive diligently so as to accord with the heart of the Great Kami. I earnestly beg that you will not abandon me, and that you will guide me, a fool, a hundredfold.'</p>
+          <p class="en-p">He joined his palms, and his voice was even choked with tears of gratitude.</p>
+          <p class="en-p">Sueko: 'Moshi Sutegokohime-san! Would you be so kind as to offer the Kototama to the Kamisama of the Orochi? Since Ishikuma-sama ended with such fruitless results as you saw, as a replenishment for that, I ask you to make a valiant effort.'</p>
+          <p class="en-p">Suteko: 'If it is so, I shall obey your command and chant the Kototama.'</p>
+          <p class="en-p">So saying, facing the water's surface, which was surging and churning like a mountain, she began to chant the Kototama with a voice cool and pure.</p>
+          <p class="en-p">'In the pond of the southeast, ever abiding, the living Kami, before the august presence stands Sutegokohime. The Kototama bestowed by the Kamisama of Heaven and Earth, here with reverence I chant. Ah, Kamunagara, Kamunagara, the land of Kami created by Kami, the land of Kami protected by Kami. The multitudes of people born forth, and all things in the universe without exception, is there any that does not receive the grace between Kami and Kami? O Kamisama of the Orochi, O living Kami, that very soul and spirit received from Kami, although you speak of the times and seasons, why is it that you lurk in this bottomless pond? Even the heavenly august sky is ever so high, yet you should soar and protect this world...'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三五教に仕へたる
+神の僕の石熊が
+謹み敬ひ八平手を
+拍ちて勧告仕る
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">今度は最も叮嚀に善言美詞的に言霊を宣り上げた。され共水面の光景は依然として元の如くであつた。</p>
+            <p class="ja-classical-line">末子姫『今度のあなたの言霊は実に神に入り、妙に達したと云つても宜しい。併し乍ら、其効果の現はれないのは、あなた如何御考へなさいますか』</p>
+            <p class="ja-classical-line">石熊『ハイ、何と云うても過去の罪が深いもので御座いますから、大蛇の神様も馬鹿にして、あの汚らはしい小僧奴、何を猪口才な、殊勝らし事を言ひよるのだ！……と云ふ様なお心持で聞いて下さらないのでせう。実にお恥かしう御座います』</p>
+            <p class="ja-classical-line">末子『あゝさう御考へになりましたか、それは実に善き御考へで御座います。どうぞ其心を忘れない様にして下さい。さうしてあなたは別に三五教にお這入りにならなくても宜しい。又高照山とかの立派な館を三五教へ献るとか仰有つたように記憶して居りますが、決してそんな御心配は要りませぬ。神さまの誠の御教は左様な小さい区別されたものでは御座いませぬ。三五教だとか、バラモン教だとか、ウラル教だとか、いろいろ小さき雅号を拵へ、各自に其区劃の中に詰め込まれて蝸牛角上の争ひをして居る様なことでは、到底大慈大悲の大神の御神慮には叶ひませぬ。誠の道は古今に通じ、東西に亘り、単一無雑にして、悠久且つ宏大な物、決して教会とか霊場とか、左様な名に囚はれて居る様なことでは、誠の神の御心は分るものでは御座りませぬ。あなたも三五教の中に宜しい点があるとお認めになれば、そこを御用ゐになり、バラモン教で宜しいから、悪いと気のついた所は削り、又良いことがあれば、誰の言つた言葉でも少しも構ひませぬ。長を採り短を補ひ、完全無欠の神様の御教を何卒天下に拡充されむことを希望致します。妾も三五教の宣伝使なぞと言はれる度毎に、何だか狭苦しい箱の中へでも押込められる様な心持が致しまして、実に苦しう御座います。すべて神の教は自由自在に解放されて、一つの束縛もなく、惟神的でなくてはならないものですよ。どうぞ其お積りで今後は世界の為に、神様の御為に力一杯誠を御尽し下さいませ。これが此世を造り玉ひし元津御祖の大神、国治立命様其外の尊き神々様に対する三五の道の真相で御座いますから……』</p>
+            <p class="ja-classical-line">石熊は涙をハラハラと流し、</p>
+            <p class="ja-classical-line">石熊『如何にも公平無私にして、理義明白なる姫様の御教訓、いやモウ実に今日は結構な御神徳を頂きました。今後はキツと今迄の様な小さい心を持たず、努めて大神様の御心に叶ひまつるべく、努力する考へで御座います。何卒御見捨てなく、愚者の私、御指導の程幾重にも念じ上げ奉ります』</p>
+            <p class="ja-classical-line">と合掌し、感謝の涙に声さへかすんでゐた。</p>
+            <p class="ja-classical-line">末子『モシ捨子姫様！　あなた御苦労ですが、大蛇の神様に言霊をお手向け下さいませぬか？　石熊様があの通りの不結果に終られましたから、其補充として、貴女に御奮戦を御願致します』</p>
+            <p class="ja-classical-line">捨子『左様なれば、仰せに従ひ、言霊を宣らして頂きませう』</p>
+            <p class="ja-classical-line">と云ひ乍ら、山岳の如く、波立ちさわぐ水面に向つて、言葉涼しく清く言霊を宣り始めたり。</p>
+            <p class="ja-classical-line">『巽の池に永久に
+鎮まりゐます生神の
+いづの御前に捨子姫
+天と地との神々が
+授け玉ひし言霊を
+茲に慎み宣りまつる
+あゝ惟神々々
+神の造りし神の国
+神の守りし神の国
+成り出でませる人艸や
+森羅万象悉く
+神と神との御恵を
+受けざるものはあらざらむ
+大蛇の神よ生神よ
+神より受けし其身魂
+時世時節と言ひ乍ら
+底ひも知れぬ此池に
+忍びゐますは何故ぞ
+天津御空もいや高く
+翔りて此世を守るべき</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Thou, is not thy body indeed chosen as the precious shield of Sumekami, a noble mitama? Having accepted the divine miiki of Kototama that grants and saves the life of Eienmukiu to Shinrabanshiyō all, sooner by a day, even for a moment, parting the waves of Miike, return as an ikigami of Amatsumisora. Serving the divine oshihe of Ananahi, Sutekohime, with sincere magokoro, earnestly and wholly implores thee. Ah, Kamunagara! Receiving the mitama of Kami, manifest as a noble kami of the boundless Ōsora—the precious miko of Kamususanōnōokami, Suekohime.</p>
+          <p class="en-p">Having received that Kototama, I exhort it to thy body. I exhort it to thy body. Ah, Kamunagara! May thy mitama prosper and bless us, and do not overlook the Kototama of Sutekohime as the sound of the wind blowing through the sky or the rapids of a river. Before the presence of the kami Orochi, with all my heart I humbly proclaim, having revealed the full measure of my heart.</p>
+          <p class="en-p">Thus she finished chanting. Although the Kototama of Sutekohime was extremely simple, the heaven-bestowed spirit was pure, without a single spot of defilement and without dark clouds; and since the moon of suchness shone and gleamed like a mirror in the sea of the heart, the efficacy of that Kototama manifested remarkably, so that the high raging waves gradually subsided, the black clouds wrapping the surroundings suddenly cleared away, the scattered rain abruptly ceased falling, and in Amatsumisora the golden sun began to shine brightly. Ah, Kamunagara tamashihai mashimashite.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">汝が身は実にも皇神の
+珍の御楯と選ばれし
+尊き身魂にあらざるか
+森羅万象悉く
+永遠無窮の生命を
+与へ助くる言霊の
+神の御水火を諾ひて
+一日も早く片時も
+御池の波を掻き分けて
+天津御空の生神と
+返らせ玉へ三五の
+神の教に仕へたる
+捨子の姫が真心を
+こめて偏に請ひまつる
+あゝ惟神々々
+神の御霊を受けまして
+限も知れぬ大空の
+尊き神と現れませよ
+神素盞嗚大神の
+珍の御子なる末子姫</p>
+            <p class="ja-classical-line">其言霊を蒙りて
+汝が身に勧め奉る
+汝が身に勧め奉る
+あゝ惟神々々
+御霊幸はひましまして
+捨子の姫の言霊を
+空吹く風や川の瀬の
+音と見逃し玉ふまじ
+大蛇の神の御前に
+心をこめて宣べまつる
+心の丈を明かしつる』</p>
+            <p class="ja-classical-line">と歌ひ終つた。捨子姫の言霊は極めて、簡単なれ共、天授の精魂清らかにして、一点の汚点もなく、暗雲もなく、真如の月は心の海に鏡の如く照り輝き居たれば、其言霊の効用著しく現はれて、さしもに高かりし荒波は次第々々に静まり、四辺を包みし黒雲は忽ち晴れわたり、マバラの雨は俄に降りやみ、天津御空には金色の太陽晃々と輝き始め玉うた。あゝ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c09.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 9: Ugly の Kotodama [851]</span>
+      </a>
+      <a href="c11.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 11: Kotodama の妙 [853]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: 提燈の Light [849] - Volume 30 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 30 Table of Contents</a>
+      <span>Volume 30</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 30 &bull; Chapter 7</span>
+      <h1 class="chapter-title-en">Chapter 7: 提燈の Light [849]</h1>
+      <p class="chapter-title-ja">提燈の光〔849〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Spreading straw raincoats on the ground in the shade of the camphor trees and bathing in the light of the ninth-day moon leaking through the branches, they could not fall asleep right away, and staying up late into the night, they talked over the mysterious destiny that had arisen in the course of today. Kaāru, having been in high spirits, felt somehow joyous and emboldened by the arrival of Suekohime and Sutekohime, and furthermore, thrilled with the delight that Ishikuma, the Kyōshiyu of the Brahman religion, had yielded to Ananai-kyō without difficulty, he could not sleep and began to drive his habitual chatterbox cart.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">楠の森のこかげに蓑を布き、木の間をもるる九日の月の光を浴び乍ら、早速眠りもならず、今日一日に起りし不思議の運命を物語りつつ、夜を更かした。はしやぎ切つたカールは末子姫、捨子姫の渡来に何となく心欣々として勇み立ち、又バラモン教の石熊教主が苦もなく、三五教に帰順した嬉しさに心気興奮して眠られぬ儘に、日頃の饒舌車を運転し始めた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Karuza: 'In the valley bottom of Mount Takateruyama where the Tengu flies in the sky, building the hall of the Kyō, opening the Brahmanism far and near to guide people, Ishikuma of firm heart too, the Kamuzukasa serving at the hall, especially among them excellent in manly appearance, Karl-sama, surrounded by numerous women who flutter around and pamper him morning and evening, reflecting his figure in the water mirror, with the waves of his heart also calming down, facing the mirror pond dug in the garden of the Kyō, Ihihihi, peeking and seeing himself in his own hands, the dandy completely astounded, country girls bustling and surrounding him calling out Karl-sama, their commotion is not without reason indeed, ah, what a noisy human world this is. By what karma such a fine-looking man like an egg with eyes and nose added, a man to be fallen in love with having good looks, is the karma of a body born splendidly, it is no wonder that his wife at home worries and grows jealous. To live on in this annoying Shaba, seeing the faces of women fallen in love with, oh the annoyance of my heart. Thinking and thinking, what kind of good deeds did I perform in the world before, though it is now too late to speak of it, why wasn't I born just a little bit more like a Hyottoko, morning and evening before the gods, please, that annoying nice fellow, make me into an ugly man who completely gives up on me, casts dirt with his hind legs, spits saliva, and deals me all sorts of elbow-strikes, remake me so, please; a Hyottoko like Shiina, around the end of autumn last year, two women of fine appearance, advancing little by little toward the foot of Mount Takateruyama, viewing them keenly and drooling, narrowing his eyes and creeping up, Hey hey listen, traveler, whoever and wherever you may be, I am one called Shiina, though my figure is like this, like a lizard's face, yet in the bottom of my heart, the flower of truth blooms in confusion, truly a fragrant man am I, one should try riding a horse, one should try staying with a person, as the proverb of the world says, the Kamuzukasa of Brahmanism, especially possessing divine virtue, unto me who am here, casting amorous glances, at the earliest moment approach my side, the fragrance of a man like musk, try smelling it just once, in a world where there is no scarcity of men, an ostracized fish-face man like you, no matter how starved for men you might be, how could this ever be endured, I know not whether such unrefined rejecting words are spoken or not, yet people are not what they seem, even if called a pumpkin, compared to a fine-looking eggplant, there is a taste separating heaven and earth. A chestnut wrapped in burrs also looks as though it were frightening, but when opened and seen, there are three fragrant august spirits. If the astringent skin is stripped off just once, a sweet potato loved by women, better than play konjac or pumpkin, a hundred times a thousand times more, there is an indescribable taste. Listen to my wish from beginning to end and draw near, when I courted them, the two stopped, whoever and wherever you might be, a sudden shower on a river beach or an embankment pumpkin, a kettle head and a gourd face, like one measuring Mankintan, on that face full of bumps and hollows, no matter how ugly a woman you may be, how on earth, how on earth could an amorous glance ever be sent. Only this much, Shiina-sama, please forgive me, with an elbow-strike skillfully delivered, this side will by no means yield, the flame of the fire of passion blazing high, the dreadfulness reaching the sky, once a man has uttered words, having them turned into wastepaper by you, how could a man maintain his standing, this ruined and broken self of mine, I will not rest unless you say yes, drawing near again persistently, if a single drop of the tears of love is let fall, the two laugh scornfully, to old man Shiina, why not consult about your face, this is too much, the one I like is Karl-sama, leaving aside for evermore being able to stay together with such a person, even if it were an overnight pillow, since even that is impossible, at least serving by your side, doing water chores or sweeping the gate, washing fundoshi gladly, I shall do so morning and evening, praying to gods and Buddhas, Myōken-sama is also fishy, to the Tengu dwelling upon the Horagai Mountain of the Garakuta Country, offering prayers morning and evening, by the divine grace of the august gods, please let us meet, let us meet, the true heart of a woman who thinks thus was made into a grudge, Karl-sama, how vexing, wiping his eyes, Ihihihi, when he lamented and grieved, Shiina-sama, flying into a rage at a mere hah, the stubbornness of a man is like this, a hundred ri, two hundred ri, three hundred ri, even to the end of Tsukushi Province I will track your footsteps, not let you have your way, if you hate it then hate it, Shiina is also prepared, while saying so, alas ruthlessly pushing the two down into the valley river, rather than gazing upon them as human flowers, if I kill them outright, my lingering attachment of love will be cleared, you say, the retribution for exhausting lawlessness, the vengeful spirits of the two women, night after night becoming blue fireballs, or shaking their disheveled hair, ah, how vexing, how vexing, you are a hard-hearted Shiina-sama, I was pushed down into the deep valley bottom and died. As though I would not clear away this grudge, the ghost figure appearing night after night, even Shiina grew utterly exhausted, seeking out Karl's hall, Hey hey listen, Karl-sama, though it is an inexcusable thing to you, the vengeful spirits of Teru and Haru, please calm them down; a fine man like you, if you would just say to the vengeful spirits of Teru and Haru 'be at peace' in a single word, it would be more effective than us spending a thousand and ten thousand words making excuses. The sutras of Brahmanism, rather than a thousand monks and ten thousand monks gathering together and chanting them, he would be pleased more and die happily all at once, if you think you are going to save the precious life of a single man, listen for the sake of mercy and compassion, such annoying messenger of an arrow, this man with wide gates, how could he ever have the leisure to respond even to dead women. Pulled by the sleeves of women here and there, at any time only hearing his wife's nagging, could there be anything as boring as this, wanting to escape this suffering somehow, appearing in the capital of Chin, to the Kamuzukasa Matsuwakahiko, pouring out the whole story from beginning to end, helped by the Kamuzukasa, finally arriving here in peace, a man who escaped from woman trouble, thinking and thinking it was a dream... Ahahaha!' </p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『空に飛ぶ天狗の鼻の高照山の谷底に、教の館を構へつつ、バラモン教を遠近に、開いて人を導きし、心も固き石熊が、館に仕へし神司、中にも分けて男振り、人に優れたカールさま、あまたの女にチヤホヤと、持囃されて朝夕に、姿をうつす水鏡、心の波も静まりて、教の庭に穿ちたる、鏡の池に立向ひ、イヽヽヽ、吾れと吾手にすかし見て、呆れ果てたる色男、田舎娘がガヤガヤとカールさまよと取り巻いて、騒ぐは強ち無理でない、げにも五月蠅き人の世や。何の因果で此様に、玉子に目鼻を付けたような、お色の白い好い男、惚られる男は見目よしと、立派に生れた身の因果、宅の女房が気を揉んで、悋気するのも無理でない。うるさの娑婆に永らへて、惚れた女の顔を見る、私の心のうるささよ。思へば思へば先の世に、如何なる善事を尽せしか、今更云ふも野暮乍ら、なぜにモ少しヒヨツトコに、生れて来なんだであらう、朝な夕なに神の前、どうぞ煩雑いナイス奴が私の事を思ひ切り、後足で砂でもかけて唾吐いて、肱鉄砲の数々を喰はして呉れる醜男に、造り直して下さんせ、シーナの様なヒヨツトコが、去年の秋の末つ頃、見目容よき二人の女、高照山の麓まで、漸う漸う進み来るのを、目敏く眺めて涎くり、目を細くしてにじり寄り、コレコレモウシ旅の人、どこの何方か知らね共、私はシーナと申す者、仮令姿は此様に、蜥蜴の様な顔なれど、心の中のドン底に、誠の花は咲き乱れ、実に芳ばしき男ぞや、馬には乗つて見よ、人には添うて見よ、世の諺もあるなれば、バラモン教の神司、中にも分けて神徳の、備はりゐます此わしに、秋波を送り一時も、早く私の側に寄り、麝香の様な男の匂、一度は嗅いで見やしやんせ、男ひでりもない世の中に、お前の様な鯱面男、いかに男にかつえたとて、どうしてこれが忍ばれよう、なんぞと野暮な撥ね言葉、言はしやんすかは知らね共、人は見かけに寄らぬ者、仮令南瓜と言はれても、色好い茄子に比ぶれば、天地隔つる味がある。いがで包んだ柴栗も、恐いようには見ゆれ共、開いて見れば芳ばしき、三つの御霊が御座るぞえ。渋皮一つ剥いだなら、女の好きな薩摩芋、芝居蒟蒻南瓜より、百倍千倍いやまさる、云ふに言はれぬ味がある。私の願を一通り、聞いてお呉れとすり寄つて、口説けば二人は立止まり、どこの何方か知らね共、砂原夕立か土手南瓜、薬鑵頭に瓢箪面、万金丹を計るよな、デコボコだらけの其顔に、何程醜い女ぢやとて、どうして、どうして秋波が送られう。是ばつかりはシーナさま、お許しなされて下さりませと、態能く打出す肱鉄砲、此方は中々屈せばこそ、情火の光炎々と、天に冲する凄まじさ、一旦男の言ひ出した、言葉をお前に反古にされ、如何して男が立つ者か、破れかぶれの此私、ウンと言はさにやおきませぬと、又も執拗う摺寄つて、恋の涙の一雫、落せば二人はあざ笑ひ、コレコレシーナの爺さまへ、お前の顔と御相談、遊ばしませよ余りぢや、私の好なはカールさま、あんなお方と末永う、添はれる事はさて措いて、仮令一夜の仮枕、それも叶はぬ事なれば、せめてお側にさぶらうて、水仕事門掃きや、褌の洗濯喜んで、致しませうと朝夕に、頼む神様仏様、妙見様もチヨロ臭い、ガラクタ国の法螺貝山に、止まり給ふ天狗様に、お願を朝夕かけ巻も、畏き神の御利益で、どうぞ会はして会はしてと、思ふ女の真心を、仇になされたカールさま、恨めしいわいなと、目を拭ひイヽヽ、悔み歎けばシーナさま、ハツと計りに腹を立て、男の意地は此通り百里二百里三百里、筑紫の国の果までもお前の後を付け狙ひ、思ひ通さでおくものか、厭なら厭でシーナにも、覚悟があると云ひ乍ら、無残や二人を谷川に、力限りに突落し、人の花と眺めむよりは一層殺して了うたら、恋の亡執は晴れるだろと、無法を尽した其酬い、二人の女の怨霊は、夜な夜な青い火玉となり、或は髪を振乱し、あゝ恨めしや恨めしや、お前は気強いシーナさま、私は深い谷底に、突落されて死にました。恨みを晴らさでおくものかと、夜な夜な出づる幽霊姿、さすがのシーナも弱り果て、カールの館に尋ね来て、コレコレモウシ、カールさま、お前に済まぬ事乍ら、テルとハルとの亡霊を、どうぞ鎮めて下さんせ、お前の様な好い男、テルとハルとの亡霊に、たつた一言鎮まれと、云うて呉れたら俺達が、千言万語を費して、言訳するより効がある。バラモン教のお経をば、千僧万僧寄り合うて、唱へるよりも喜んで、一度に成仏するであろ、一人の男のあつたら生命、助けてやらうと思ふなら、慈悲ぢや情ぢや聞いてたべ、などと五月蠅い矢の使、お門の広い此男、どうして死んだ女にまで、応対してやる暇があらう。あちら此方の女奴に、袖を引かれて何時とても、女房の小言を聞く計り、こんな詰らぬ事あろか、どうぞ此苦が逃れたさ、珍の都に現れませる、松若彦の神司に、一伍一什を打あけて、神の司に助けられ、やうやう此処まで安楽に、女難に逃れて来た男、思へば思へば夢ぢやつた……アハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ishikuma: 'Aha ha ha ha, what a noisy fellow you are. It is just like having a beehive right beside one. Will you not keep silent by now?'</p>
+          <p class="en-p">Karel: 'Hi, hi, I shall keep silent. As the hour is the exact time of Hayane, everyone please go to rest early. Since I have a little business as well, I shall come to the bedchamber later.'</p>
+          <p class="en-p">Ishikuma: 'Idiot!'</p>
+          <p class="en-p">He shouts with a great roar.</p>
+          <p class="en-p">Suekohime: 'Karel-sama, the pulley has operated very well, has it not?'</p>
+          <p class="en-p">Karel: 'This is what is called Karel-mouth. Aha tsu ha ha ha.'</p>
+          <p class="en-p">Beginning with Suekohime, the three persons finally retired to sleep. Karel, finding himself unable to sleep no matter what, left the forest, and while cooling himself by the roadside, hums a nasal song in a low voice and cools himself. From the other direction, swinging round paper lanterns bearing the crest of the ten planets, the talking voices of two or three people draw closer moment by moment. Karel looks through and sees them,</p>
+          <p class="en-p">Karel: 'Ha ha, so they have come. It seems they have set out from the Capital of Uzu as messengers for Matsuwakahiko for the purpose of welcoming Suekohime and Sutekohime-sama. I shall hide in the shadow of this tree and try teasing them. Since it is too hot and there is no reason to sleep, and the group of three have finished sleeping, it is of no use for me alone to saunter about like this. I was just thinking that if a fox or a badger should come, I would try becoming its match. It appears they are three on the other side as well, ya, how interesting, how interesting.'</p>
+          <p class="en-p">Speaking thus to himself, he waited for the three to pass by. The three, not dreaming that Karel was hiding in such a place, are about to pass right by. Karel suddenly changes to a feigned female voice,</p>
+          <p class="en-p">Karel: 'Moshiboshi, travelers, upon your lanterns is borne the mark of the ten planets. Might you perhaps be people of Izanagi? I am one who has crossed over the vast ocean all the way. Because of the excessive steep slope, it took more time than expected, and we, master and servant, are seeking a peaceful rain-shelter to spend the night here; is there still a considerable distance to the Capital of Chin?'</p>
+          <p class="en-p">Lantern-holding man: 'Hi, just as you surmise, I am a person of the household of Matsuwakahiko-sama in the Capital of Chin. Excuse me, but are you not Suekohime-sama, the august daughter of the great deity Susanoo?'</p>
+          <p class="en-p">Karel: 'Just as you surmise, I am Suekohime. Where is it that you are pleased to be going, you who speak thus?'</p>
+          <p class="en-p">A: 'Hi, we have met in a good place. Actually, by divine decree, the Kyōshu-sama was pleased to learn that you, my lady, and your retinue are coming to the Capital of Uzu, and to us three... come, set out from here to welcome them, and surely you will meet them in the vicinity of Teruyama Pass... since he was pleased to say so, we have indeed come to welcome you with those whose legs are swift. ...Come, let us accompany you from here.'</p>
+          <p class="en-p">Karel: 'That is exceedingly kind and I thank you. However, since I was born with one leg that is far too long, accompanying people like you is utterly out of the question. No matter how much of a Karel I am, I have grown thoroughly exhausted, and my legs have become heavy, so I am resting—nay, sleeping peacefully in the shade of the forest. Please make it tomorrow.'</p>
+          <p class="en-p">B: 'That is a rather strange thing for you to say. That a person who is sleeping peacefully should stand up and speak is a little difficult for me to comprehend.'</p>
+          <p class="en-p">Karel: 'As the saying goes, when places change, articles change; when houses change, customs change; when wives change, faces change—in my country, it is the custom of the land to sleep peacefully while standing up, and to speak while sleeping.'</p>
+          <p class="en-p">B: 'How very strange that is. If that is so, although you are a woman, is it by the protection of the rough spirit (Ara-no-mitama)? I heard a story that a man who writes the Reikai Monogatari, calling himself the guardian deity of the gentle spirit (Nigi-no-mitama) or something, lies sideways and snores while telling tales; is it that there are such customs depending on the country, after all?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">石熊『アハヽヽヽ、喧しい奴だなア。丸で蜂の巣を側においた様なものだ。モウいい加減に沈黙せぬか』</p>
+            <p class="ja-classical-line">カール『ハーイ、ハイ、沈黙致すで御座いませう。時は早子の正刻何れも様も、早くお休みなされませい。某は少し用事も御座らば、後程寝所に参りませう』</p>
+            <p class="ja-classical-line">石熊『馬鹿ツ』</p>
+            <p class="ja-classical-line">と大喝する。</p>
+            <p class="ja-classical-line">末子姫『カールさま能く滑車が運転しましたねい』</p>
+            <p class="ja-classical-line">カール『是が所謂カール口と申します。アハツハヽヽ』</p>
+            <p class="ja-classical-line">末子姫を始め三人は漸く寝に就いた。カールはどうしても眠られぬが儘に森を立出で、路傍に涼み乍ら、小声に鼻唄を唄つて涼んで居る。向うの方より十曜の紋の印の入つた丸提灯をブラつかせ乍ら、二三人の話声刻々と近寄つて来る。カールは透かし見て、</p>
+            <p class="ja-classical-line">カール『ハハー、来よつたなア。ウヅの都から松若彦のお使として末子姫、捨子姫様を御迎への為、出張したのらしい。一つ此木蔭に潜んで、からかつて見てやらう。余り暑くつて寝る訳にも行かず、三人の連中さまは寝て了ふなり、俺一人斯うしてブラついてをつても仕方ない。狐でも狸でも来やがつたら、一つ相手になつて見ようと思つて居つた所だ。どうやら向うも三人と見える、ヤア面白い面白い』</p>
+            <p class="ja-classical-line">と独言を云ひ乍ら、三人の通りかかるを待つて居た。三人はカールがこんな所に潜んで居るとは夢にも知らず、行過ぎむとする。カールは俄に女の作り声、</p>
+            <p class="ja-classical-line">カール『モシモシ旅のお方さま、あなたの提灯には十曜のお印が入つて居ります。もしや三五教のお方では御座いませぬか？　妾ははるばると海原を渡り参つた者で御座います。余りの急坂で思ひの外、暇取りまして、此処で一夜を明かさむと主従二人が心安き雨宿り、珍の都へはまだ余程里程が御座いますかなア？』</p>
+            <p class="ja-classical-line">提灯持つた男『ハイ、お察しの通り、私は珍の都の松若彦様の身内の者で御座います。そう仰有る貴女様は失礼乍ら、素盞嗚大神様の御娘子、末子姫様では御座いませぬか？』</p>
+            <p class="ja-classical-line">カール『御察しの通妾は末子姫で御座んす。さう云ふあなたは何方へお越し遊ばすので御座いますか？』</p>
+            <p class="ja-classical-line">甲『ハイ、良い所でお目にかかりました。実は御神勅に依つて貴女様主従、ウヅの都へお越し下さる事を教主様がお伺ひ遊ばされ、吾々三人に……サア是からお迎ひに参れキツとテル山峠の近辺でお出会ひ申すであらう……と仰せられましたので、実は足の達者な者ばかりお迎へに参りました。……サア是からお伴を致しませう』</p>
+            <p class="ja-classical-line">カール『それはそれは御親切に有難う御座います。併し乍ら妾は生れ付き一方の足が長過ぎますので、あなた方の御伴は到底叶ひませぬ。何程カールでも草臥果てて、お足が重くなりまして、森蔭に休息……否安眠致して居りまする。どうぞ明日にして下さいませ』</p>
+            <p class="ja-classical-line">乙『それは又妙な事を仰せられます。安眠して御座るお方が立つてものを仰有るとは、少しく合点が参りませぬ』</p>
+            <p class="ja-classical-line">カール『所変れば品変る、お家変れば風変る、嬶が変れば顔変ると申しまして、妾の国では立つた儘安眠を致し、寝乍らものを申すのが国の習慣で御座います』</p>
+            <p class="ja-classical-line">乙『何と妙で御座いますなア。さうするとあなたは女でゐらつしやいますけ共、厳の御霊の御守護で御座いますか？　瑞の御霊の守護神とか申して、霊界物語を作る男は、横にねたまま、鼾をかき乍ら話をするとか云ふ事を聞きましたが、ヤツパリそんな、国に依つて風俗があるので御座いますかなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kāru: 'That is variously, depending on the country, Kāru... oops-a-daisy, ah, so it is,wai. Somehow the three fellows fell into a profound sleep in the midst of the forest, so with no other way, just for a moment right here, the guardian deity of Suekohime-sama is opening a branch shop, that is where it is. Aha-ha-ha-ha!'</p>
+          <p class="en-p">First Man: 'Ya! That voice is not Kāru-sama, is it?'</p>
+          <p class="en-p">Kāru: 'Because I am Kāru, the voice is also Kāru, it is the kototama saying "change to Suekohime-sama for a moment," o-ho-ho-ho!'</p>
+          <p class="en-p">First Man: 'What, thinking it was somewhat strange, from the moment you said one leg was too long, I had thought it smelled fishy, but I never imagined that you would make such a joke.'</p>
+          <p class="en-p">Kāru: 'The ashihiki (foot-dragging) shimpa (limping) Kāru assumes a knowing look, rather sweetly deceiving people... Aha-ha-ha-ha! This is the Shinpa Hyakunin Isshu... nay, Akunin Isshu. Aha-ha-ha-ha!'</p>
+          <p class="en-p">First Man: 'And so, where is Hime-sama resting? Will you not guide us?'</p>
+          <p class="en-p">Kāru: 'Do not talk foolishness. It has long since grown dark, and now it is the Hour of the Rat. Kurenai (give me / crimson)... saying such a thing, what are you talking about?'</p>
+          <p class="en-p">Second Man: 'You are a man who unchangeably strikes up foolish talk, aren't you. Will you not let us know your onarika (honorable whereabouts) quickly?'</p>
+          <p class="en-p">Kāru: 'I would like to inform you mountain-high, but somehow, as you know, being a pitch-dark night we lost track of our whereabouts, and wondering where and how things are, blindly wandering, how pitiful! If only there were at least one paper lantern, meandering about here and there, I should think I want to find her out, but say what you will, a human body which is not a beast cannot see in the night, alas, how sad; pray surmise it, travellers!'</p>
+          <p class="en-p">First Man: 'What are you spitting out? Will you not speak seriously?'</p>
+          <p class="en-p">Kāru: 'They have gone to pains and are in the very middle of resting. If you fellows come bustling up close to their side, it will not do if they wake up, so I am stopping you right here so that they may enjoy even a single breath of peaceful slumber. Well, why don't you take it easy right here? You are the three of Haru, Ikuni, and Taka, aren't you?'</p>
+          <p class="en-p">First Man: 'Ou, that is so. Nevertheless, since we have come all the way to this place, we want to exchange a brief greeting, don't we.'</p>
+          <p class="en-p">Kāru: 'You are an incomprehensible fellow. When tomorrow comes, I will let you exchange greetings until you say you've had enough. If you wake them up at this hour and disturb their peaceful sleep, you'll be done in by the police offence punishment ordinance. Or else, if you want to greet them, since you fellows are carrying lanterns, you'd better organize a search party and search for them of your own accord.'</p>
+          <p class="en-p">The loud and reciprocal arguing voices of the four men standing by the roadside echoed in the ears of Suekohime, whose ears were sensitive at night. When Suekohime slowly raised her body and looked yonder, a single round paper lantern marked with the crest of the ten celestial bodies and the shadows of two or three men could be seen glimpsing through the trees in the forest. Suekohime, worrying and feeling it would be a pity to wake up Sutekohime and Ishikuma, who were soundly asleep after much trouble, guided by the light and with groping steps, finally made her appearance on the highway.</p>
+          <p class="en-p">Suekohime: 'Are you not Kāru-sama? And whose person is the light of that lantern, I wonder?'</p>
+          <p class="en-p">At this voice the four men were startled,</p>
+          <p class="en-p">'Ha! Just now, by the command of Matsuwakahime-sama, we are messengers who have come to welcome your honorable party.'</p>
+          <p class="en-p">Suekohime: 'That is truly, truly kind of you; from a distant place, you have indeed come. Pray, come this way.'</p>
+          <p class="en-p">Kāru: 'Truly, all honorable ones, though it is a gloomy-looking thatched hut to behold, it is Kāru's residence, come, pass right on through to the inner parts without reservation.'</p>
+          <p class="en-p">Suekohime: 'Ho-ho-ho-ho!'</p>
+          <p class="en-p">Three Men: 'Aha-ha-ha-ha!'</p>
+          <p class="en-p">Laughing thus, following behind Suekohime, they groped their way into the shade of the forest where the two were sleeping.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">カール『それはいろいろと国に依つてカール……オツトドツコイ、アールさうで御座いますワイ。何分三人の連中が白河夜船で森の中にお休みになつたものですから、仕方なしに一寸此処まで、末子姫様の守護神が出張店を開いてゐられる所で御座います。アハヽヽヽ』</p>
+            <p class="ja-classical-line">甲『ヤア其声はカールさまぢやないか』</p>
+            <p class="ja-classical-line">カール『カールだから、声もカール、末子姫様に一寸カール（代る）と云ふ言霊だ、オツホヽヽヽ』</p>
+            <p class="ja-classical-line">甲『何だチツト可怪しいと思つて居つた。一方の足が長すぎると云つた時から、チと臭いと考へて居つたが、まさか貴様がそんな洒落をするとは思はなかつた』</p>
+            <p class="ja-classical-line">カール『足引のチンバのカールが、したり顔、中々甘く人をたばかる……アハヽヽヽ。これが新派の百人一首だ……否悪人一首だ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">甲『さうして、姫様はどこに休んで御座るのだ。案内して呉れないか』</p>
+            <p class="ja-classical-line">カール『馬鹿云ふな。とうに暮れて了つて、最早子の刻だ。くれない……なんて、何を言ふのだ』</p>
+            <p class="ja-classical-line">乙『相変らず馬鹿口を叩く男だなア。早く御所在を知らして呉れぬか』</p>
+            <p class="ja-classical-line">カール『御知らせ申したいは山々なれど、何分御存知の通り、暗夜の事とて御行方を見失ひ、どこにどうして御座るかと、暗にさまよふ、いぢらしさ、せめて提灯一つあつたなら、そこらブラブラ　ブラついて、見付け出したいとは思へ共、何を云うても、畜生ならぬ人の身は、悲しや夜は目が見えぬ、推量あれや旅の人』</p>
+            <p class="ja-classical-line">甲『何を吐かすのだ。真面目に云はないか』</p>
+            <p class="ja-classical-line">カール『折角お草臥になつて、お休みの最中だ。お前達がガサガサとお側へ寄らうものなら、お目をさましては済まないから、俺が斯うして一息でも御安眠遊ばす様に、喰ひ止めてゐるのだ。マア茲でゆつくりしたらどうだ。お前は春に、幾に鷹の三人ぢやないか』</p>
+            <p class="ja-classical-line">甲『オウさうだ。併し乍ら折角此処まで来たのだから、一寸御挨拶をしたいものだなア』</p>
+            <p class="ja-classical-line">カール『分らぬ奴だなア。明日になつたら、いやと云ふ程御挨拶をさしてやる。今頃にお目をさまして安眠妨害をすると、警察犯処罰令でやられるぞ。夫れ共御挨拶がしたけら、お前達提灯を持つてるのだから、勝手に捜索隊を組織して捜したがよからう』</p>
+            <p class="ja-classical-line">四人は路傍に立つて喧ましく掛合うて居る話声が、夜敏い末子姫の耳に響いた。末子姫はやをら身を起し、向うを見れば十曜の紋の記された丸提灯が一張、二三人の影が、森の中の木間をすかして見えてゐる。末子姫は折角能く寝入つてゐる捨子姫、石熊の両人に眼をさまさしては気の毒と思ひ煩ひ乍ら、明りを目当に探り足にて、街道に漸く姿を現はした。</p>
+            <p class="ja-classical-line">末子姫『あなたはカールさまぢや御座いませぬか。其お提灯のお光は何れのお方で御座いますかなア』</p>
+            <p class="ja-classical-line">此声に四人は驚き、</p>
+            <p class="ja-classical-line">『ハイ只今松若彦様の命令に依つて、あなた様御一行をお迎へに参つた使の者で御座います』</p>
+            <p class="ja-classical-line">末子姫『それはそれは御親切に、遠方の所、能くマア来て下さいました。どうぞ此方へお越し下さいませ』</p>
+            <p class="ja-classical-line">カール『誠に御一同様、見るもいぶせき茅屋なれど、カールの住宅、サア御遠慮なうトツトと奥へ御通り遊ばせや』</p>
+            <p class="ja-classical-line">末子姫『ホヽヽヽ』</p>
+            <p class="ja-classical-line">三人『アハヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ひ乍ら、末子姫の後に従ひ、二人の眠れる森蔭に探り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c06.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 6: 樹下の一宿 [848]</span>
+      </a>
+      <a href="c08.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 8: 露の Way [850]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
