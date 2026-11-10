@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: Tree 茄子 [811] - Volume 28 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 28 Table of Contents</a>
+      <span>Volume 28</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 28 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: Tree 茄子 [811]</h1>
+      <p class="chapter-title-ja">木茄子〔811〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hitate, Tsukihoko, and Yurikohime, three of them, avoiding human eyes and following the mountain ridges, crossed from Mt. Arisu through the Shiyuan mountain ranges, covering themselves with the night garments of blue clouds on stone pillows, and while spending many nights, finally arrived at the valley of Teruna.</p>
+          <p class="en-p">At that moment, the sun was hiding behind the mountains, and dusk was drawing near.</p>
+          <p class="en-p">Since their journey in the mountains for this past day or two had followed only the tops of the ridge lines, there were no desirable tree nuts, and they were in distress for food, suffering from hunger, unable to walk freely, with their throats parched and no water, being utterly exhausted.</p>
+          <p class="en-p">At this time, far off in the valley, weaving through the darkness of dusk, a single mass of firelight was flickering.</p>
+          <p class="en-p">The three gained strength from that firelight, and dragging their tired feet, proceeded onward.</p>
+          <p class="en-p">Centered around the firelight, many disgusting-looking hairy warrior men, numbering in the tens and completely naked, were laughing and clamoring loudly about something.</p>
+          <p class="en-p">The three laid their bodies down in the shade of a tree, moistened their throats with the valley water for a while, and as they were resting their breaths, there was something that brushed against the heads of the three, shaken by the valley wind blowing swiftly. Tsukihoko unexpectedly raised a hand above the head, and the moment it touched, what came into hand was a tree eggplant dripping with water.</p>
+          <p class="en-p">The three rejoiced with courage as if given by heaven, plucked the tree eggplant on the spot, and filled their bellies.</p>
+          <p class="en-p">With the fatigue of the long journey, their bellies were filled, drowsiness was suddenly induced, and all three fell into a sound sleep innocently right on that spot.</p>
+          <p class="en-p">Today was the grand festival day of Brahmanism in the village of Teruna, and it was the midst of preparations where many villagers gathered and were discussing various plans to hold a night festival.</p>
+          <p class="en-p">To offer it to today's festival, the only tree eggplant of its kind in this village had been carefully preserved without a single one being plucked until now.</p>
+          <p class="en-p">That was entirely plucked and eaten up by the three persons.</p>
+          <p class="en-p">When the time of the festival finally arrived, four or five villagers clad in white garments, waving hemp wands, and chanting the sacred songs of Brahmanism, came to pluck the precious tree eggplant to make it an offering, but when they looked, the precious tree eggplant had been stolen by someone, and not a single one remained on the branches.</p>
+          <p class="en-p">While astonished, when the whole group peered around, three men and women were sleeping nearby, snoring like thunder.</p>
+          <p class="en-p">The villagers suddenly raised a commotion, brought lit torches, and when they looked closely, one man was holding a tree eggplant in one hand, having bitten about half of it, and was sleeping soundly.</p>
+          <p class="en-p">Kō: 'Hey, hey all you fellows, a terrible fellow has come out, has taken and eaten all the tree eggplant for the divine offerings, swollen his belly, and is sleeping soundly without a care, isn't he? What an outrageous fellow. ...Hey someone, report this matter to the chieftain of Teruna as soon as possible. If you don't do that, we will be suspected of having taken and eaten it, and there is no telling what kind of fierce scolding we will get from the chieftain.'</p>
+          <p class="en-p">One of them replied 'Hey,' and ran off like Idaten towards the sacrificial ground where the crowd gathered in order to report to the chieftain.</p>
+          <p class="en-p">Kō, tapping the heads of the three repeatedly with the tip of his staff,</p>
+          <p class="en-p">Kō: 'Hey there, you audacious arch-thief, will you not wake up quickly?'</p>
+          <p class="en-p">he roared.</p>
+          <p class="en-p">When the three woke up in astonishment and looked around, four or five men holding torches, together with a man dressed in white garments, were glaring at them with demon-like faces, peeling back round chestnut eyes, and trembling their lips violently.</p>
+          <p class="en-p">Hitate: 'What persons are you to... strike the heads of us three with the tip of a staff, with such discourtesy beyond measure... what is the meaning of this?'</p>
+          <p class="en-p">Before he could even finish speaking, Kō stretched out his hairy arm and grasped Hitate's nape with a tight grip.</p>
+          <p class="en-p">Hitate's complexion turned pale from the pain as if his neck were being torn off, and he was suffering with his lips turned purple.</p>
+          <p class="en-p">The big man raised his voice,</p>
+          <p class="en-p">Big Man: 'You fellows are likely propagandists of Aisankyo. Today is the grand festival day of the Great Deity of Brahmanism; the villagers had treasured it to make it the offering for today's festival, but you have taken and eaten every last tree eggplant, and slumbered in unceremoniousness beyond measure in this sacred ground—such bold and fearless behavior of yours, just wait, the chieftain is coming to this place presently, and there will be some judgment or other for you.'
+</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">日楯、月鉾、ユリコ姫の三人は、人目を避けて峰伝ひに、アーリス山より須安の山脈を渡り、石の枕に青雲の夜具を被ぶり、幾夜を明かし乍ら、漸くにしてテルナの渓谷に辿り着いた。時しも日は山に隠れ、黄昏間近くなつて来た。茲一日二日の山中の旅行は、峰の尾の上のみを伝つて居たので、思はしき木の実もなく、食料に窮し、空腹に苦み、歩行も自由ならず、喉は渇き水は無く、弱り切つて居た。</p>
+            <p class="ja-classical-line">此時遥の谷間に黄昏の暗を縫うて、一塊の火光が瞬いて居る。三人は其火光に力を得、疲れた足を引ずり乍ら進んで行く。火光を中心に数多の厭らしき面構の毛武者男幾十人となく赤裸の儘、何事か大声に笑ひさざめいて居た。</p>
+            <p class="ja-classical-line">三人は木蔭に身を横たへ、暫し谷水に喉をうるほし、息を休めて居る折柄、サツと吹き来る谷風に揺られて三人の頭に障つたものがある。月鉾は思はず手を頭上にあげた途端に手に触つたのは、水の滴るような木茄子であつた。三人は天の与へと喜び勇んで矢庭に木茄子をむしり、腹を拵へた。長途の疲れに腹は太り、俄に眠気を催し、三人共其場に他愛もなく熟睡して了つた。</p>
+            <p class="ja-classical-line">今日はテルナの里のバラモン教の大祭日にして、数多の里人集まり、夜祭りをなさむと、種々準備の相談をして居る最中であつた。今日の祭典に奉らむと、此里に只一本よりなき木茄子を、今迄一個もむしり取らず、大切に保存して居た。それを三人の者に残らずむしり取つて喰はれて了つたのである。愈祭典の時刻となり、四五の里人は白衣を着し、大麻を打振り、バラモン教の神歌を称へ乍ら、大切なる木茄子をむしり取り、供物にせむと来て見れば、大切なる木茄子は何者にか盗み取られ、一個も枝に留まつて居ない。一同は驚き乍ら、あたりを透かし見れば、雷の如き鼾をかいて三人の男女が傍に寝て居る。</p>
+            <p class="ja-classical-line">里人は忽ち大騒ぎをなし、松明を点じ来り、よくよく見れば、一人の男木茄子を片手に持ち、半分許りかぢつた儘、熟睡してゐる。</p>
+            <p class="ja-classical-line">甲『オイオイ皆の連中、大変な奴が出て来やがつて、神饌用の木茄子を、皆取つて食ひ、腹をふくらせ、平気でグウグウ寝てゐやがるぢやないか、怪しからぬ奴だ。……オイ誰か一時も早く此由を、テルナの酋長様に報告して来い。さうせなくては俺達が取つて食た様に疑はれ、酋長よりどんなお目玉を食ふか分らないぞ』</p>
+            <p class="ja-classical-line">其中の一人は『オイ』と答へて、韋駄天走りに、群集の集まる斎場に向つて酋長に報告すべく走り去つた。</p>
+            <p class="ja-classical-line">甲は杖の先にて三人の頭をコンコンと打ち乍ら、</p>
+            <p class="ja-classical-line">甲『コラツ、大それた大盗人奴、早く起きぬか』</p>
+            <p class="ja-classical-line">と呶鳴りつけた。三人は驚いて起きあがり四辺を見れば、松明を持つた四五人の男、傍には白衣を着けた男と共に、鬼の様な顔に団栗眼を剥き出し、唇をビリビリ震はせ乍ら睨みつけてゐる。</p>
+            <p class="ja-classical-line">日楯『何人ならば……吾々三人の頭を、失礼千万にも…杖の先にて打叩くとは何事ぞ』</p>
+            <p class="ja-classical-line">と言はせも果てず、甲は毛だらけの腕を伸ばし、日楯の首筋をグツと握つた。日楯は首の千切れる様な痛さに顔色青ざめ、唇まで紫色にして苦んで居る。大の男は声を荒らげ、</p>
+            <p class="ja-classical-line">大男『其方共は大方三五教の宣伝使であらう。今日はバラモン大神の大祭日、里人が大切に致して今日の祭典の供物にせうと守つて居た、木茄子を残らず取り食ひ、此聖場に於て不行儀千万にも寝さらばひ、大胆不敵の其方等の振舞、待つて居れ、今に酋長様が此場に御越しになるから、何分の御沙汰があるであらう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Having said this, he released the hand that had been gripping the neck of Hitate. Hitate, due to the excessive pain, could not even speak, and just clung to the earth, enduring the agony.</p>
+          <p class="en-p">Tsukihoko bowed respectfully to them all, placing both hands on the ground.</p>
+          <p class="en-p">Tsukihoko: 'We three are by no means missionaries of the Ananai-kyō. We are pilgrims visiting the sacred sites of the Brahman religion. Having lost our way in the deep mountains, and while suffering from hunger, we spotted a single point of light in the valley. Relying on that, we came out as far as this place. While we were resting, the Kinasubi happened to touch our heads. Not knowing it was such a precious object, and having no intention of stealing it, we took it. It is truly an inexcusable matter. Please, we ask you to intercede with the chief on our behalf.'</p>
+          <p class="en-p">Kō: 'Today is the great festival of the Brahman religion, and it is a vital day on which we must offer human sacrifice. However, the chief, thinking it truly cruel to take human life, prayed to the Lord God, saying that he would offer this Kinasubi, of which there is only one in this valley, as a substitute for a human, and begged that the human sacrifice be spared. Since then, this fruit has been treated as the property of the God; the villagers have not even pointed a finger at it, and have kept it guarded with night watches. Now that you three have foolishly eaten it, there is no help for it. There must still be some remaining in your stomachs. You must immediately cut open your bellies, scoop out the Kinasubi, offer your bodies as a sacrifice to the God, and appease the God's wrath. All of you, you had better prepare yourselves.'</p>
+          <p class="en-p">Tsukihoko: 'That is a terrible thing indeed. However, it is the heart of a God to save people; a God who takes human life or rejoices in having sacrifices offered to it cannot be a true God. Though we are unworthy, we shall try to give that God a word of admonition.'</p>
+          <p class="en-p">Kō: 'What, are you saying something foolish? For a human to give an admonition to a God is an act of extreme insolence. If you say such things, you will incur the wrath of the God, and this village of Teruna will suffer from the failure of crops and from typhoons and great floods. You are truly an incorrigible fool.'</p>
+          <p class="en-p">Saying this, he swung his staff with all his might and struck the three of them until their spines were nearly broken.</p>
+          <p class="en-p">After a while, James, the chief of the village of Teruna, appeared on the scene with four or five attendants carrying sharp blue dragon swords. Seeing the three of them, he said in a harsh voice.</p>
+          <p class="en-p">James: 'You are great criminals who have eaten a precious fruit; I cannot forgive you as things stand. You three must now become a sacrifice to the God to appease the God's wrath. Come, prepare yourselves.'</p>
+          <p class="en-p">He gave the order. Yurikohime clasped her hands together, inched toward James, raised her sorrowful face, and shed tears.</p>
+          <p class="en-p">Yurikohime: 'I beg you, as it was done in ignorance, please overlook this matter just this once.'</p>
+          <p class="en-p">The moment James saw Yurikohime's face, his expression softened at once.</p>
+          <p class="en-p">James: 'Although you are unforgivable criminals, if you agree to become my wife, I will spare your life alone. How is it... are you grateful?'</p>
+          <p class="en-p">He peered into Yurikohime's face with a somewhat relaxed expression.</p>
+          <p class="en-p">Yurikohime: 'Please, not only me, but please spare the lives of the two men as well. If you will grant that, I will respond to any of your demands.'</p>
+          <p class="en-p">Chief: 'No, that cannot be. In any case, I must take the life of one person and make them a sacrifice. Your husband must be among them. I will spare your husband for your sake.'</p>
+          <p class="en-p">Hitate: 'James, or whatever your name is, even if we ate the fruit of the tree in ignorance, where is the reason for you to take our lives? If you want to take our lives, try taking them if you can.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と云ひ了つて、日楯の首を握つた手を放した。日楯は余りの痛さに物をも言はず、其儘大地に獅噛ついて苦痛を怺へてゐた。月鉾は一同に向ひ丁寧に両手をつき、</p>
+            <p class="ja-classical-line">月鉾『吾々三人は決して三五教の宣伝使では御座いませぬ。バラモン教の聖場を巡拝致す巡礼で御座います。馴ぬ途とて山奥にふみ迷ひ、空腹に苦みつつありし所、谷間に当つて一点の火光を認め、それを便りに此処まで出て参り、休息致して居る際、フト木茄子が頭に触り、左様な大切な物とは知らず、別に盗むと云ふ心もなく、頂戴致しました。誠に申訳のない事で御座います。どうぞ酋長様に宜しく御執成しを願ひます』</p>
+            <p class="ja-classical-line">甲『今日はバラモン教の大祭日で、人間の犠牲を献らねばならぬ大切な日である。され共人命を損するは如何にも残酷だと、酋長様が大神に御願遊ばし、此谷間に一本よりない木茄子を、人間の代りとして大神様に献りますから、人身御供丈は御許し下されと御願ひになり、それから此果物は神様の御物として、里人は指をもさへず、大切に夜廻りをつけて守つて居たのだ。それを汝等三人ムザムザと取食うた以上は、仕方がない、其方の腹中にはまだ幾分か残つて居るであらう。直に腹をかき切つて木茄子をゑぐり出し、汝の体を贄として神に献り、神の怒りを解かねばならぬ。皆の者共、其覚悟を致したがよからうぞ』</p>
+            <p class="ja-classical-line">月鉾『それは又大変な事で御座いますなア。併し神は人を助くるが神の心、人間の命を取り、或は贄を献らせて喜ぶ様な神は誠の神ではありますまい。吾々は及ばず乍ら其神に向つて、一つ訓戒を与へて見ませう』</p>
+            <p class="ja-classical-line">甲『ナニ、馬鹿な事を申すか。神様に対して、人間が訓戒を与へるなどとは、不届き千万な申条、左様な事を申すと、神の怒りにふれて、此テルナの里は果実稔らず、暴風雨大洪水の為に苦しまねばならぬ。いよいよ以て差赦し難き痴者』</p>
+            <p class="ja-classical-line">と言ひ乍ら、力に任せて杖を振上げ、三人の背骨の折れる程敲きつけた。</p>
+            <p class="ja-classical-line">暫くあつて、テルナの里の酋長ゼームスは四五の従者に鋭利なる青竜刀を持たせ乍ら、此場に現はれ来り、三人の姿を見て、声も荒らかに云ふ。</p>
+            <p class="ja-classical-line">ゼームス『其方は大切なる果物を取喰ひし大罪人、此儘にては差赦し難し。汝等三人、これより神の贄とし、神の怒りを和らげなくてはならぬ。サア覚悟を致せよ』</p>
+            <p class="ja-classical-line">と言ひ渡した。ユリコ姫は両手を合せ、ゼームスの前ににじり寄り、悲しさうな顔をあげて涙を流し、</p>
+            <p class="ja-classical-line">ユリコ姫『何卒、知らず知らずの不都合なれば、どうぞ此度は御見逃しを願ひます』</p>
+            <p class="ja-classical-line">と頼んだ。ゼームスはユリコ姫の顔を一目見るより、忽ち顔色をやはらげ、</p>
+            <p class="ja-classical-line">ゼームス『赦し難き罪人なれ共、汝は吾妻となる事を承諾するに於ては、汝の生命丈は助けてやらう。どうぢや…有難いか』</p>
+            <p class="ja-classical-line">と稍砕けた相好し乍ら、ユリコ姫の顔を覗き込んだ。</p>
+            <p class="ja-classical-line">ユリコ姫『どうぞ、妾のみならず、二人の男も生命許りは助けて下さいませ。それさへ御承諾下さらば、如何なるあなたの要求にも応じまする』</p>
+            <p class="ja-classical-line">酋長『イヤ、さうはならぬ。如何しても一人丈は生命を取つて、贄に致さねばならぬ。此中に汝の夫があるであらう。其方に免じて、夫だけは助けてやらう』</p>
+            <p class="ja-classical-line">日楯『ゼームスとやら、吾々は仮令木の実を知らず知らず取喰ひたればとて、汝等如きに命を取らるる理由が何処にある。生命取るなら勝手に取つて見よ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">James opened his mouth wide,</p>
+          <p class="en-p">"Aha, ha, ha, ha,"</p>
+          <p class="en-p">and laughing loudly while doing so,</p>
+          <p class="en-p">James: 'Thou, howsoever great thy divine power may be, surrounded as thou art by this vast multitude even with a mere two or three, canst do nothing at all. Prepare thy resolve properly in a wondrous manner and become a sacrifice.'</p>
+          <p class="en-p">Yurikohime: 'Pardon me, Chief-sama, that is my husband. And the other one is my husband's younger brother. I will humbly accept whatever may happen. In exchange, I beg you to spare the lives of the two.'</p>
+          <p class="en-p">James: 'Ah, it cannot be helped. What thou, so kaai, sayest cannot be refused flatly either. If so, I shall spare at least their lives. Today is the grand festival of Brahmanism; let both of you cross through raging fire, pass over the bridge of swords, put on nail-studded ashida, and become matsupadaka to creep through the thicket of thorns. This is the path of apology to the first kami of Brahmanism. Considering that your lives would be taken, this is an easy thing. We make such practices an annual event and do not consider them particularly bitter at all. If you too are pilgrims, you should be able to endure this much of training.'</p>
+          <p class="en-p">Both of them at once,</p>
+          <p class="en-p">"We have understood. If only our lives are spared, whatever training... we will gladly perform."</p>
+          <p class="en-p">James: 'Already the time of the festival is approaching. Come quickly hither. Then, naked and barefoot, cross through the raging fire and dispel the anger of the kami.'</p>
+          <p class="en-p">Thus having a vast multitude guard the three before and behind, he led them to the sacrificial ground.</p>
+          <p class="en-p">When they arrived at the sacrificial ground and looked, numerous fruits were decorated before the kami like small mountains, and in the open courtyard ahead, withered firewood was piled like a mountain; when fire was set to this, it blazed furiously in such a terrifying manner. The two were thrown in by the crowd and leaped inevitably into the midst of the fire. Singing the heavenly number songs with all their might, without suffering even the slightest burn amidst the fierce flames, they circled round and round countless times and returned to their original place. The whole assembly was dumbfounded by their divine power and gazed at the faces of the two.</p>
+          <p class="en-p">Yurikohime was given gorgeous garments as the sudden bride of the chief and stood side by side with the chief on the sacrificial altar. Suddenly, from nowhere, a mass of firelight came flying and exploded right here, and James's body was swept up into midair and vanished. The whole assembly was dumbfounded by this, running about in utter confusion to and fro, or losing the strength in their hips, while some had even their facial color turn purplish and were groaning in a state between life and death.</p>
+          <p class="en-p">Yurikohime cast off her gorgeous garments on the spot and immediately threw them into the fire, and together with Hinodewake and Tsukihoko, the three stood before the altar, chanted the norito of gratitude and prayer, and began to sing the propaganda song.</p>
+          <p class="en-p">Yurikohime: 'Though the morning sun shines or clouds over,
+Though the moon waxes or wanes,
+Even if the great earth should sink,
+The power of sincerity saves the world.
+The kami appear in the front
+And separate good and evil.
+The kami who created this world is Oinaobi,
+With a heart vast as Oinaobi.
+Simply, whatever happens in the world of men,
+Look straight and see anew, listen straight and hear anew,
+Confess and rectify the errors of your body.
+The people under the heaven
+Are all precious children of the kami.
+Human bodies, weak in strength,
+How could they fail to make mistakes without erring?
+The Brahmans, ignorant of sincerity,
+James, the official of the kami,
+And those who follow him,
+How pitiful their dark hearts!
+To take the lives of precious people
+
+And offer them as sacrifices
+Before the presence of the kami,
+What kind of matter is this?
+If indeed the kami
+Desire sacrifices, then the Brahman
+Ōkugahiko is Magatsuhahi.
+Such strange teachings
+He spread widely across Takasagojima,
+And the retributive punishment made by Tatsuyohime,
+the deity of the country's soul, as an outsider
+Came swiftly to requite upon his very body,
+Making them cross right through the fierce fire,
+Throwing them into the thicket of thorns,
+Crossing the swords, wearing the nail geta,
+And apologizing for heavy sins before the kami's presence
+While grieving this joyful world—
+How pitiful are the people of the world living thus!
+Ah, wondrous kami, kami,
+With the divine spirits blessing and dwelling within,
+The infinite benevolence of the three-five
+
+Teachings of the kami spreading far,
+Chasing away the strange teachings swiftly
+Beyond the seas,
+Build ye the age of the kami of supreme peace,
+O heavenly kami,
+Earthly kami, and the eight million deities!
+Before the presence of Tatsuyohime,
+May the official of the Sanju teachings,
+My husband who bore the names
+Of the sun and moon shining in heaven,
+The deity of Hinodewake and the deity of Tsukihoko,
+Make all the people of the land, without leaving a single one,
+Obey the precious teachings,
+And transform the dark and lawless world
+Into a heavenly pure land!
+Ah, wondrous kami, kami,
+Grant us the blessings of the divine spirits!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ゼームス大口をあけて、</p>
+            <p class="ja-classical-line">『アハヽヽヽ』</p>
+            <p class="ja-classical-line">と高笑ひし乍ら、</p>
+            <p class="ja-classical-line">ゼームス『汝、いかに神力あればとて、僅に二人や三人、此大勢の中に囲まれ乍ら、如何ともする事は能ふまじ。神妙に其方は覚悟をきはめて贄となれ』</p>
+            <p class="ja-classical-line">ユリコ姫『もしもし酋長様、あれは妾の夫で御座います。さうしてモウ一人は吾夫の弟で御座います。妾は如何なる事でも承はりませう。其代りどうぞ二人の命を御助け下さいませ』</p>
+            <p class="ja-classical-line">ゼームス『あゝ仕方がない。可愛い其方の申す事、無下に断る訳にも行こまい。然らば生命丈は助けてやらう。バラモン教の、今日は大祭日、両人共烈火の中を渡り、剣の橋を越え、釘の足駄を履き、赤裸となつて茨の叢を潜れ。これがバラモン教の第一の神に対する謝罪の途である。生命を取らるる事を思へば易い事である。吾々は斯様な行は年中行事として、別に辛しとも思つて居ない。其方も巡礼ならば、これ位の修業は堪へられるであらう』</p>
+            <p class="ja-classical-line">両人一度に、</p>
+            <p class="ja-classical-line">『承知致しました。生命さへ助けて頂けるならば、どんな行でも…喜んで致しませう』</p>
+            <p class="ja-classical-line">ゼームス『最早祭典の時期も迫つた。サア早く此方へ来れ。さうして裸、跣足の儘、烈火の中を渡り、神の怒りを解くがよからう』</p>
+            <p class="ja-classical-line">と三人の前後を大勢に警固させ乍ら、斎場に導いた。</p>
+            <p class="ja-classical-line">斎場に到り見れば、数多の果物小山の如く神前に飾られ、前方の広庭には山の如き枯柴を積み、これに火を放てば炎々として燃えあがる其凄じさ。二人は大勢の者に投げ込まれて、火中に止むを得ず飛び込んだ。一生懸命に天の数歌を唱へつつ、猛火の中を少しも火傷もせず、幾度となく巡つて元の所に帰つて来た。一同は其神力に肝を潰し、二人の顔を眺めてゐる。</p>
+            <p class="ja-classical-line">ユリコ姫は酋長の俄妻として美々しき衣裳を与へられ、酋長と相並んで斎壇に立つた。忽ち何処よりともなく、一塊の火光飛び来つて此場に爆発し、ゼームスの身体は、中空に捲きあげられて了つた。一同はこれに肝を潰し、右往左往に逃げ惑ひ、或は腰を抜かし、顔の色さへ紫色になつて半死半生の態に呻吟して居るものもあつた。</p>
+            <p class="ja-classical-line">ユリコ姫は美々しき衣裳を矢庭に脱ぎ捨て直ちに火中に投じ、日楯、月鉾と共に三人祭壇の前に立ち、感謝祈願の祝詞を奏上し、宣伝歌を歌ひ始めたり。</p>
+            <p class="ja-classical-line">ユリコ姫『朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈む共
+誠の力は世を救ふ
+神が表に現はれて
+善と悪とを立別る
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直せ聞直せ
+身の過ちは宣り直せ
+天が下なる民草は
+何れも貴き神の御子
+力の弱き人の身は
+いなで過ちあらざらめ
+誠を知らぬバラモンの
+神の司のゼームスや
+それに従ふ者共の
+暗き心のいぢらしさ
+尊き人の命を取り</p>
+            <p class="ja-classical-line">神の御前に贄を
+献るとは何の事
+果して神が贄を
+望むとすればバラモンの
+大国彦は曲津神
+かかる怪しき御教を
+高砂島に布き拡め
+国魂神の竜世姫
+外所になしたる天罰は
+忽ち其身に酬い来て
+猛火の中を打渡り
+茨の叢に投げ込まれ
+剣を渡り釘の下駄
+穿ちて神の御前に
+重き罪をば詫乍ら
+楽しき此世を苦みて
+暮す世人の憐れさよ
+あゝ惟神々々
+御霊幸はひましまして
+仁慈無限の三五の</p>
+            <p class="ja-classical-line">神の教の拡まりて
+怪しき教を逸早く
+海の彼方に追払ひ
+至治太平の神の代を
+築かせ玉へ天津神
+国津神達八百万
+竜世の姫の御前に
+三五教の神司
+天に輝く日月の
+名を負ひ玉ひし吾夫の
+日楯の神や月鉾の
+尊き教に国人を
+一人も残さず服従はせ
+暗黒無道の世の中を
+天国浄土と化せしめよ
+あゝ惟神々々
+御霊の幸を賜へかし』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Thus she finished her prayer. Before they knew it, James the chieftain, who had been whirled up into the mid-heaven, was now arrayed in ceremonial attire, and together with four or five attendants, he brought forth rare fruits, presented them respectfully before the three of them,</p>
+          <p class="en-p">James: 'I am James, the chieftain of this village whom you saw a moment ago. I have uttered impertinent words toward you precious ones. For the crime of rudeness in proposing such difficult challenges—such as asking the living goddess to become the wife of one as lowly as we, or to perform the fire-crossing, though it was most presumptuous—please forgive me. All this was spoken entirely in strict obedience to the precepts of Brahmanism. The only thing for which I cannot forgive myself, even from the standpoint of Brahmanism, is the grave sin of having asked the precious goddess to become my wife. Because of that, I incurred the wrath of Lord Daijizaiten, and a great fire-bullet of warning was hurled down from the heavens. At that very moment, I was whirled up into the air, and I had resigned myself to the belief that my life was already at an end. However, thanks to the profound divine protection of one known as the Kunitama-shin-Ryūsehime-sama, my precious life was saved, and moreover, I received various admonitions. Therefore, leaving behind everything, I have come in haste to offer my apologies to you. Please, with this staff, beat me anywhere upon my body until your stomach is full, and I believe a part of my sins will thus be atoned for. I humbly beg of you.'</p>
+          <p class="en-p">shedding hot tears, he pleaded from the depths of his sincerity. The numerous villagers who had fled scattered about gradually gathered again, and while feeling suspicious as to how not a single one of them had suffered any injury, seeing this attitude of the chieftain, the entire assembly pressed their palms together toward the three, expressing feelings of reverence as though toward gods, and prostrated themselves in worship.</p>
+          <p class="en-p">The three patiently explained and expounded the doctrines of Izanagi-no-Mikoto's teaching, and escorted by the chieftain and dozens of others, after several days, they finally arrived at the port of Kiel.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と祈り終つた。何時の間にやら、中天に捲き上げられたる酋長のゼームスは、礼服を着飾り、四五の従者と共に、珍らしき果物を持ち来り、三人の前に恭しく捧げ、</p>
+            <p class="ja-classical-line">ゼームス『私は最前のゼームスと申す此里の酋長で御座います。尊きあなた方等に対し、御無礼な事を申上げました。勿体なくも生神様に対し、吾々如き賤しき者の女房になれとか、火渡りをせよとか、いろいろの難題を申上げました無礼の罪、何卒御赦し下さいませ。これも全くバラモン教の掟を遵奉致しての言葉で御座いました。只済まなかつたのは尊き女神様に対し、女房になれと申上げた事のみは、バラモン教の方から申しても大なる罪悪で御座います。其為、大自在天様の御怒りに触れ、天より戒めの大火弾を投げつけられ、私は其途端に中空に捲あげられ、最早命は無きものと覚悟致して居りましたが、国魂神竜世姫様とやらの、厚き御守りに依つて大切なる生命を救はれ、且ついろいろの訓戒をうけました。それ故取る物も取敢ず、あなた様に御詫を申上げむと参りました。どうぞ此杖にて、私の身体を所かまはず、腹のいえる迄打据ゑ下さいますれば、罪の一部は贖へられるものと心得ます。どうぞ宜しく御願ひ致します』</p>
+            <p class="ja-classical-line">と熱涙を流し、真心より頼み入るのであつた。逃げ散つた数多の里人は、追々と集まり来り、何れも一つの負傷もなきに、不審の思ひをし乍ら、酋長の此態を見て、一同は三人に向ひ手を合し、神の如く尊敬の意を表し、合掌して拝み倒して居る。</p>
+            <p class="ja-classical-line">三人は三五教の教理を諄々と説き諭し酋長以下数十人に守られて数日の後、漸くキールの港に着いた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: 縺れ髪 [810]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: サワラの Capital [812]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

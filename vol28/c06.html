@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: 麻の紊れ [806] - Volume 28 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 28 Table of Contents</a>
+      <span>Volume 28</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 28 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: 麻の紊れ [806]</h1>
+      <p class="chapter-title-ja">麻の紊れ〔806〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">King Kārusu in the capital of Taian, having lost his most beloved Princess Yāchin, was gloomy and unhappy, and furthermore, being forcibly compelled by Sārubōsu's daughter, Princess Sērusu—whom he detested like a viper or scorpion—to take her as queen, as a result of his anguish finally fell ill, and built a modest mansion on the banks of Tankei, where, under the pretext of recuperation, he came to be placed in retirement. Thus, four or five officials guarded the inside and outside of the mansion, strictly prohibiting the coming and going of outsiders.</p>
+          <p class="en-p">Princess Sērusu made her father Sārubōsu the prime minister, and Hōrokēsu, who was her uncle, the vice-prime minister, seized political power north of Nihitakayama, and moreover held the position of leader of Brahmanism. There was a handsome man called Sērusuchin, who was the cousin of Princess Sērusu. He was the only son of Hōrokēsu.</p>
+          <p class="en-p">Here, on the initiative of Princess Sērusu, the mansion of Taian was rebuilt, a fortress was constructed, the citizens were put to labor, and spending nearly three years, at last the grand citadel was built. Before anyone knew it, a strange thread came to be tied between Sērusuchin and Princess Sērusu. Sērusuchin sat and slept almost inside the castle, and being behind Princess Sērusu, made her carry out all kinds of tyrannical rule.</p>
+          <p class="en-p">Here, the senior vassals inside the castle grew tired of Sērusuchin's insolence, to the extent that voices of grief and resentment overflowed the inside and outside of the castle. In the country, disturbances broke out in various places, plunder and fighting were carried out daily, and it ended up in a state like tangled hemp. Here, right-minded people with a heart secretly escaped from Castle Taian, fled far to the sacred land of Mount Tamamo, followed the teachings of Mikoto Masahikohiko and Princess Yāchin, made flowers, birds, wind, and the moon their friends, and came in continuous succession to those waiting for the time to arrive.</p>
+          <p class="en-p">In Castle Taian, welcoming the intentions of Sērusuchin, only wicked people who desired personal fame and fortune ran rampant, politics and religion declined day by day to the point of being almost irrecoverable, the smoke and fire of revolution rose in various parts of the country, causing disturbances, burning people's houses, shaming women, plundering goods, without failing to commit violence and outrage, just as if hungry ghosts, beasts, and the world of Asuras had been manifested, confusion was piled upon confusion, and the voices of curses welled up and filled like flies. Fierce beasts and poisonous snakes strutted in broad daylight, crocodiles and water buffaloes took ponds and swamps as their bases, attacked close to people's houses, injured people, and the country came to present a tragic scene just like Avici and howling hells. However, even with the power of Princess Sērusu of Castle Taian who had lost the people's hearts, Sārubōsu, and Hōrokēsu, it had come to a point where nothing could be done any longer.</p>
+          <p class="en-p">Castle Taian came to be called by everyone as a flickering lamp in the wind. Numerous countrymen far avoided disaster, crossed Mount Ārisu, and those who fled to the sacred land of Mount Tamamo, beginning with Mount Tenrē and Mount Tairē, came in continuous succession day and night. Among them,</p>
+          <p class="en-p">Hōrusāsu. Māruēsu. Tērusutan. Hōrensu. Yūtopiyāru. Tsūrensu. Shīrinsu. Ēru. Hāreyāru. Ōitsuku. Hiyūzu. Andēya. Nyūjiēru.</p>
+          <p class="en-p">such illustrious figures organized the executives of Misoshiru-kyō centering around Princess Yāchin, while proclaiming superficial doctrines, waiting for the time to arrive, driving away the flatterers of Castle Taian, welcoming King Kārusu into the castle, making Princess Yāchin queen as before, secretly expecting in their hearts to newly spread good governance, while vigorously proclaiming doctrines, and extending their sphere of influence to every corner of the land north of Nihitakayama.</p>
+          <p class="en-p">Princess Sērusu did not even dream that her country's daily disorder came from her own heedlessness, believed the false rumors of Sērusuchin and other evil deities, and that her domain's daily disorder in this way was entirely because Mikoto Masahikohiko became the leader in establishing the teachings of Misoshiru-kyō in the spiritual land of Mount Tamamo, supporting the royal families of Princess Yāchin and Princess Mariyasu, skillfully attracting the senior vassals inside the castle with words, waiting for the time to attack and destroy Castle Taian, making Mikoto Masahikohiko himself unify the whole island of Taiwan and seize both political and religious powers, and though her resentment was hard to stop and she contrived various schemes, with Mount Ali as the district, the southeastern land could not be approached easily, and as a result of a thousand thoughts and deep considerations, she selected two or three persons from among the natives, made them penetrate deeply into enemy territory, and was having them spy out its internal situation.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">泰安の都に於けるカールス王は、最愛のヤーチン姫を失ひ、怏々として楽まず、且つ蛇蝎の如く忌み嫌ひし、サアルボースの娘セールス姫を無理矢理に王妃に強要され、懊悩の結果遂に病を発し、淡渓の畔にささやかなる館を作り、これに静養の名の下に、蟄居せしめらるる事となつた。而して四五の役員、館の内外を警固し、他人の出入を厳禁しつつあつた。</p>
+            <p class="ja-classical-line">セールス姫は吾父のサアルボースを宰相となし、吾叔父に当るホーロケースを副宰相として、新高山以北の政権を握り、且バラモン教の教主を兼ねて居た。セールス姫の従兄にセウルスチンと云ふ美男子があつた。これはホーロケースの独息子である。</p>
+            <p class="ja-classical-line">茲にセールス姫の発起にて、泰安の館を改築し、城塞を築き、国民を使役し、殆ど三年を費やして漸くにして宏大なる城廓は築造された。何時の間にやら、セウルスチンとセールス姫の間には怪しき糸が結ばるる事となつた。セウルスチンは殆ど城中に坐臥し、セールス姫の背後に在りて、凡ゆる暴政を行はしめた。</p>
+            <p class="ja-classical-line">茲に城内の重臣共はセウルスチンの傍若無人なるに愛想をつかし、怨嗟の声城の内外に溢るるに至つた。国内は各所に騒擾勃発し、掠奪闘争日々に行はれ、乱麻の如き状態となつて了つた。茲に心有る正しき人々は、泰安城を窃に脱出して、遠く玉藻山の聖地に逃れ、真道彦命、ヤーチン姫の教に従ひ、花鳥風月を友として、時の到るを待つ者踵を接するに至つた。</p>
+            <p class="ja-classical-line">泰安城にはセウルスチンの意を迎へて、吾身の名利栄達を望む悪人のみ跋扈し、政教は日に月にすたれて、殆ど収拾す可らざるに至り、国内の各地には革命の煙花上つて、騒擾を起し、民家を焼き、婦女を辱め、財物を掠奪し、乱暴狼藉到らざるなく、恰も餓鬼畜生修羅道を現出せし如く、混乱に混乱を重ね、呪咀の声は五月蠅の如く湧き充ちた。猛獣毒蛇は白昼に濶歩し、鰐、水牛などは池、沼などを根拠とし、民家近く襲ひ来つて、人を傷つけ、国内恰も阿鼻叫喚の惨状を呈するに至つた。され共民心を失ひたる泰安城のセールス姫を始め、サアルボース、ホーロケースの威力を以てしても、最早如何ともする事能はざるに立到つた。</p>
+            <p class="ja-classical-line">泰安城は最早風前の灯火と、誰云ふとなく称ふるに至つた。数多の国人は遠く難を避けて、アーリス山を越え、天嶺、泰嶺を始め、玉藻山の聖地に避難する者日夜踵を接した。中にも、</p>
+            <p class="ja-classical-line">ホールサース。マールエース。テールスタン。ホーレンス。ユウトピヤール。ツーレンス。シーリンス。エール。ハーレヤール。オーイツク。ヒユーズ。アンデーヤ。ニユージエール。</p>
+            <p class="ja-classical-line">などの錚々たる人物はヤーチン姫を中心として三五教の幹部を組織し、表面的教理を宣布し乍ら、時の到るを待つて、泰安城の佞人輩を却け、カールス王を城内に迎へ入れ、ヤーチン姫を元の如く妃となして、新に善政を布かむ事を心私かに期待しつつ、盛に教理を宣布し、新高山以北の地まで隈なく勢力を扶植しつつあつた。</p>
+            <p class="ja-classical-line">セールス姫は国内の日々に乱れ行くを、吾身の不心得より来りしものとは夢にも知らず、セウルスチンを始め其他の邪神共の誣言を信じ、斯の如く吾領内の日々に乱れ行くは全く玉藻山の霊地に、三五教の教を樹つる真道彦命頭領となり、ヤーチン姫、マリヤス姫の王族を擁立し、城内の重臣を言葉巧に引付け、時を待つて泰安城を攻め亡ぼし、真道彦命自ら、台湾全島を統一し、政教の両権を握るものとなし、怨恨止み難く、種々の画策をめぐらせ共、阿里山を区域として、東南の地は容易に近付く可らず、千思万慮の結果、土民の中より二三の者を抜擢し、敵地に深く入り込ませ、其内情を探らしめつつありき。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As for the Tōnan region with Mount Ārisu as its district, descendants of Hanamorihikonomikoto and scions of the remote ancestor Mamichihikonomikoto filled the country, and in contrast to the great majority of upright and unblemished people, the lands north of Nihitakayama saw the demonic descendants of Tamatehime multiply, wickedness prevailed, natural disasters and eerie earth-portents arrived incessantly, the inhabitants constantly fell into the misery of burning coals and boiling water, and not a single day passed that was peaceful.</p>
+          <p class="en-p">After King Ārkusu, the direct descendant of Hanamorihikonomikoto, ascended to the heavens due to a fatal calamity, King Kārusu fell ill and became a person almost in a state of confinement; therefore, ever since Princess Sērusu, daughter of Sārubōsu who drew the blood of Tamatehime, seized political power, that confusion increased at a rapid speed, and now the voices of the subjects' bitter complaints were as if piercing the heavens, while even Tai'an Castle, which had been constructed as so impregnable, was pressed close to a situation where it was hard to tell when it might be overturned from its roots.</p>
+          <p class="en-p"></p>
+          <p class="en-p">The scene changing, Hidate, leaving the sacred land of Tenrei behind, with the hand of Princess Yuriko held at the lakeside of Tamamo, together with two or three attendants, was strolling while gazing at the lake surface.</p>
+          <p class="en-p">At this time, a man wearing a twisted headband, while letting blood flow in drops from his forehead, came running with great vigor, collided with one of the attendants, and staggering, collapsed flat upon that spot and fell unconscious.</p>
+          <p class="en-p">Hidate ordered a vassal to pour water from the lake upon the man's face.</p>
+          <p class="en-p">He gradually returned to his senses, and while wiping away the bloody tide of his forehead,</p>
+          <p class="en-p">Man: 'I know not of what honorable personage you may be, but upon committing a discourtesy, you have even saved my life... This benevolence I shall never forget.'</p>
+          <p class="en-p">Man: 'I am one of the woodcutters dwelling in the ravines of Mount Ārisu.'</p>
+          <p class="en-p">Man: 'Oppressed by the evil underlings of Princess Sērusu of Tai'an Castle, not knowing where to turn for a destination with my life barely intact, I have fled as far as this place.'</p>
+          <p class="en-p">Man: 'Even as we speak thus, there is no telling what sort of pursuers may come.'</p>
+          <p class="en-p">Man: 'I beg of you, will you not hide me as quickly as even a moment?'</p>
+          <p class="en-p">he pleaded in an unsettled manner.</p>
+          <p class="en-p">Hidate: 'I have heard that thou art a woodcutter dwelling in the ravine of Mount Ārisu, but for what reason art thou pursued by the subordinates of Princess Sērusu? Relate it in detail.'</p>
+          <p class="en-p">When he reproached him thus, that man wiped away his tears,</p>
+          <p class="en-p">Woodcutter: 'I had a precious daughter named Yobu, a single parent and a single child.'</p>
+          <p class="en-p">Woodcutter: 'My name is called Hāru.'</p>
+          <p class="en-p">Woodcutter: 'When Princess Sērusu, bringing along a splendid commander named Seurusuchin and numerous retainers, came on a hunt to Mount Ārisu, she stopped by my grass hut, looked upon my daughter Yobu... and commanded, "Offer this woman as my maidservant."'</p>
+          <p class="en-p">Woodcutter: 'In heaven and on earth, in the relationship of a single parent and a single child, thinking that if my most beloved daughter were taken deep into Tai'an Castle, we would probably never again be able to meet as parent and child for the rest of our lives, I exhausted words in various ways and offered a refusal; whereupon, at the words of the exalted commander named Seurusuchin... "If so, this girl shall be bestowed upon my wife"... he ordered the numerous retainers, forcefully scooped up the crying and screaming daughter, and took her away.'</p>
+          <p class="en-p">Woodcutter: 'When I frantically tried to pursue them from behind, Seurusuchin drew a single sword, slashed at my brow, and further commanded the numerous retainers... "Take his life."'</p>
+          <p class="en-p">Woodcutter: 'The numerous retainers chased after my back.'</p>
+          <p class="en-p">Woodcutter: 'However, I, who thoroughly knew the ins and outs of the mountain paths, skillfully passed through bypaths, and it is by such circumstances that I have managed to escape as far as this place.'</p>
+          <p class="en-p">Woodcutter: 'By all means, by all means, quickly hide me.'</p>
+          <p class="en-p">he pleaded, joining both hands together along with tears.</p>
+          <p class="en-p">Hidate beginning with Princess Yuriko pitied this, had two or three attendants guard his person, brought him back to the sacred land of Tenrei, and had him kindly cared for; gradually the wound on his forehead completely healed, and here he came to serve faithfully as a servant of Hidate.</p>
+          <p class="en-p">However, this man was a spy sent with the hidden intention of Princess Sērusu.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">アーリス山を区域として東南の地方は、花森彦命の子孫及び遠祖真道彦命の裔、国内に充ち、清廉潔白の民最も多きに引替へ、新高山以北の地は玉手姫の魔神の子孫蕃殖して、邪悪行はれ、天災地妖切りに到り、住民は常に塗炭の苦みに陥り、一日として安き日とてはなかつたのである。</p>
+            <p class="ja-classical-line">花森彦命の直系なるアークス王の奇禍に係つて上天せし後は、カールス王病に罹り殆ど幽閉同様の身となりたれば、玉手姫の血を引けるサアルボースの娘セールス姫の政権を握りてより、其混乱は急速度を以て増し来り、今や国民怨嗟の声は天に冲する如く、さしもに難攻不落として築造させし泰安城も、何時根底より顛覆するやも計り難き情勢に差迫つて居た。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">話変つて、日楯は天嶺の聖地を後に、玉藻の湖辺にユリコ姫の手を携へ、二三の従者と共に湖面を眺めて逍遥しつつあつた。此時捩鉢巻をした男、額に血をタラタラと流し乍ら、勢ひ込んで駆来り、従者の一人に衝突し、ヨロヨロとして其場にパタリと倒れて人事不省となつた。日楯は従臣に命じ、湖水の水を彼が面部に注がしめた。彼は漸くにして正気に返り、額の血汐を拭ひ乍ら、</p>
+            <p class="ja-classical-line">男『何れの方様かは存じませぬが、御無礼を致しました上に、生命迄も御助け下さいまして……此御恩は決して忘れは致しませぬ。私はアーリス山の渓谷に住居致す樵夫の一人で厶います。泰安城のセールス姫が部下の悪者に虐げられ、生命カラガラ何処を当途ともなく、ここ迄逃げて参りました。斯く云ふ間にも如何なる追手が来るやも計り知れませぬ。どうぞ一時も早く私を御匿まひ下さいますまいか』</p>
+            <p class="ja-classical-line">と落つかぬ態に頼み入る。</p>
+            <p class="ja-classical-line">日楯『汝はアーリス山の渓谷に住む樵夫と聞きしが、何故セールス姫の部下に追はるる理由あるか。詳細に物語れよ』</p>
+            <p class="ja-classical-line">となじれば、其男は涙を払ひ、</p>
+            <p class="ja-classical-line">樵夫『私には親一人、子一人の大切なヨブと云ふ娘が御座いました。私の名はハールと申します。セールス姫がセウルスチンと云ふ立派な大将とアーリス山に数多の家来を召連れ、狩にお越し遊ばした時、吾草庵に立寄り玉ひ、吾娘ヨブを見て……此女を吾侍女に奉れよ……と仰せられました。天にも地にも、親一人子一人の間柄、最愛の娘を泰安城内深く連れ行かれては、最早吾々は一生涯親子の対面は叶ふまじと思ひました故、いろいろと言葉を尽して、御断りを申上げますれば、セウルスチンと云ふ御大将の御言葉に……然らば此娘は吾女房に遣はすべし……と数多の家来に命じ、無理矢理に泣き叫ぶ娘を引抱え、連れて行かれました。私は一生懸命後を追はむとすれば、セウルスチンは一刀を引抜き、吾眉間に斬りつけ、猶も数多の家来に命じ……彼が生命を取れよ……と下知致しました。数多の家来衆は私の後を追つかけ来る。され共山途の勝手を知悉したる私は、巧く間道を通り抜け、漸くにして此処迄逃げのびました様な次第で御座います。何卒々々早く御匿まひ下さいませ』</p>
+            <p class="ja-classical-line">と両手を合せ涙と共に頼み入る。日楯を始めユリコ姫は之を憐み、二三の従者に彼が身辺を守らせ、天嶺の聖地に連れ帰り親切に介抱させ、漸くにして額の疵は全快し、茲に日楯の従僕となつて忠実に仕ふる事となつた。併し此男はセールス姫が意を含めて遣はしたる間者なりけり。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Since Yachinhime and Mariyashime, / Chin no Mikoto and King Kārusu, / departed from the Taianyakata, / like bats in a village without birds, / Sērusuhime has flourished with her wings spread, / and under her tyrannical rule of unbridled lawlessness, / the chief retainers, unable to remain, / fled one by one. / Concealing their bodies in the sacred ground of Mount Tamamo, / disguising themselves as teachings of Ananahi, / they awaited the blossoming spring of flowers. / The two men, Sārubōsu and Hōrokēsu, / banished King Kārusu to the far side of the forest of Tankei, / built a mere facade of a mansion, / and dispatched four or five subordinates / to guard against the coming and going of people, / causing torment—how hateful it is! / Sērusuhime, all alone, / feeling the loneliness of her bedchamber, / invited her cousin Seurusutin close to her bedchamber, / forging secret plots, / exhausting the luxuries of a wine pool and meat forest, / and letting the suffering of the people pass by like the wind blowing through empty space. / As she carried out tyranny to the utmost limit, / the people of the land, / unable to endure the increasing agony of mire and charcoal, / gathered in groups of three or five upon the mountain ridges and river rapids of near and far, / whispering to one another with winks and pulled sleeves, / plotting a great revolution, / until it became truly a dark night.</p>
+          <p class="en-p">Hearing of this tragic state within the country, / Yachinhime, Mariyashime, / and Chin no Mikoto, / though their hearts were as eager as bamboo arrows, / in their present state with no avail or strategy, / could only pray to the gods and await the spring when the flowers of the trees would bloom. / This island, famed by the name of pine, / heard to be the placenta of Takasago, / has now become an ephemeral age of warped bodies and raging deities. / Ah, Kamunagara kamugami-kamugami, / may your august spirits bless and prosper us, / with sincere hearts morning and evening, / they prayed before the gods. / Beginning with Michihiko, / together with Hinotate and Tsukihoko, / performing misogi morning and evening in the waters of Lake Nichigetsutan, / their sincere hearts praying single-mindedly / for the peace and security of Takasago Island, / before long, through the merits of the prayer-fulfilling Tatsuyahime / and the Kuninotama no Kami, / even the darkness of the eternal night cleared away, / and in the heavenly august skies the shadow of the Sun Goddess / rose abundantly and grandly. / May the august divine majesty of the gods, like the pine upon the ridge of Takasago, / eternally flourish, flourish forever and ever! / May the world be peaceful and tranquil, / and may it be governed in peace, as everyone / offered morning and evening divine words, / which the gods too will surely grant. / Ah, Kamunagara kamugami-kamugami, / may your august spirits bless and prosper us, / spreading the august teachings of the Ananahi religion / without a single shadow left in this divine island, / perfectly and in full detail proclaiming them, / with pure hearts just like in the ancient age of the gods, / superiors and inferiors, / officials and people alike, living in harmony, / bringing about an age of pine that prospers long— / with such sincere hearts, / to pray is truly noble.</p>
+          <p class="en-p">As for Hāru, who had infiltrated as a spy for Sērusuhime, and several other spies besides, and the matter of their infiltrating the sacred grounds of Lake Nichigetsutan and Mount Tamamo, to describe each one would be wordless and tedious, so for now these shall be omitted, and mentioned merely as they happen to come in the course of events.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ヤーチン姫やマリヤス姫の
+珍の命やカールス王の
+泰安館を出でしより
+鳥なき里の蝙蝠と
+羽振りを利かしセールス姫が
+傍若無人の悪政に
+居たたまらず重臣は
+次第々々に逃走し
+玉藻の山の霊場に
+身を忍びつつ三五の
+教司と身を変じ
+花咲く春を待ち居たる
+サアルボースやホーロケースの両人は
+カールス王を淡渓の
+森の彼方に放逐し
+形ばかりの館を建てて
+四五の部下をば派遣しつ
+人の出入を警戒し
+苦しめ居たるぞ忌々しけれ。
+セールス姫は只一人</p>
+            <p class="ja-classical-line">閨淋しさに従兄なる
+セウルスチンを寝間近く
+招きて秘密の謀計
+酒池肉林の贅沢を
+極めて民の苦しみは
+空吹く風と聞き流し
+あらむ限りの暴政を
+行ひければ国人は
+益々塗炭の苦みに
+堪りかねてか遠近の
+山の尾の上や川の瀬に
+三人五人と集まりて
+大革命の謀計
+目引き袖引き語り合ふ
+暗夜とこそはなりにけれ。
+ヤーチン姫やマリヤス姫の
+珍の命は国内の
+此惨状を耳にして
+心は矢竹と逸れども
+詮術もなき今の身の</p>
+            <p class="ja-classical-line">神に祈りて木の花の
+開くる春を待つばかり
+松の名に負ふ高砂の
+胞衣と聞えし此島も
+今は果敢なき曲津身の
+荒ぶる世とはなりにけり
+あゝ惟神々々
+御霊幸はひましませと
+朝な夕なに真心を
+こめてぞ祈る神の前
+真道彦を始めとし
+日楯、月鉾諸共に
+日月潭の湖に
+朝な夕なに禊して
+高砂島の安泰を
+只管祈る真心は
+いつしか願ひ竜世姫
+国魂神の功績に
+常夜の暗も晴れ渡り
+天津御空に日の神の</p>
+            <p class="ja-classical-line">影も豊に昇りまし
+神の御稜威も高砂の
+尾の上の松の末永く
+栄えよ栄え何時迄も
+世は平けく安らけく
+治まりませと一同が
+朝な夕なの神言を
+神も諾なひ玉ふらむ
+あゝ惟神々々
+御霊幸はひましまして
+三五教の御教を
+此神島に隈もなく
+完全に委曲に宣り伝へ
+昔の神代の其儘の
+清き心に上下の
+司も民も睦び合ひ
+栄え久しき松の世を
+来させ玉へと真心を
+こめて祈るぞ尊けれ。</p>
+            <p class="ja-classical-line">セールス姫の間者として入り込みしハールを始め、其外数名の間者、日月潭を始め、玉藻の山の聖地に入り込みたる件は、一々述ぶるも、くどくどしければ、今は之れを略し事の序に述ぶる事となすべし。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 難有 Delusion 惑 [805]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: 無痛の腹 [807]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

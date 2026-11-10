@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 20: 鉈理屈 [820] - Volume 28 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 28 Table of Contents</a>
+      <span>Volume 28</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 28 &bull; Chapter 20</span>
+      <h1 class="chapter-title-en">Chapter 20: 鉈理屈 [820]</h1>
+      <p class="chapter-title-ja">鉈理屈〔820〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tsunehiko and Haruhiko were startled, untied Takahime's bindings, and raised her up.</p>
+          <p class="en-p">Tsunehiko: 'Sensei, it was nothing of the sort, but it was a terribly dangerous affair. Please, from now on inside the ship, even if there is something you wish to say, endure it without speaking out. Both of us earnestly beg you.'</p>
+          <p class="en-p">Takahime: 'You fellows are called cowards just for that reason. As if the divine living shrine of the Hinodewake-sama—who acts as the right arm of Kuniharutachinomikoto, making the three thousand worlds as round as dango, as flat as mochi, triangular, or square, and playing with them freely—would ever tuck her tail between her legs and cower just for the likes of the boatmen of the humble Takashimamaru! Hmph, do not misjudge me so excessively. You fellows are just like showing gold coins to a cat. What do you take this living shrine of the Hinodewake to be, which shines with a brilliant light far superior to gold coins or diamonds? Will you not pull yourselves together properly? As long as the gods are protecting us, even if a hundred or a thousand boatmen came together, I am not a Takahime who would let them touch even a single finger of mine, you know.'</p>
+          <p class="en-p">Haruhiko: 'Even so, Milady, were you not tied up with your hands behind your back by Taltil and hoisted upside down from the mast?'</p>
+          <p class="en-p">Takahime: 'My, oh my, how troubled those with clouded spirits are, because their way of receiving divine virtue is so clumsy! The living shrine of the Hinodewake thought she would like to take a quick look at the state of Takashimajima, and so she put Taltil to divine service, having him hoist her up to the top of the mast without using her hands or troubling her feet, in an elevator-style fashion. Everyone must interpret things directly and correctly through Kaminaohi and Ōnaohi, with good intentions, without exception. That is the flawless, magnificent plan of the Hinodewake-sama; that is why I tell you until my ears are covered in barnacles to always polish your spirits and reform your hearts. That fellow Taltil finally got frightened by the divine light of the Hinodewake and went and hid somewhere like a mouse.'</p>
+          <p class="en-p">Tsunehiko: 'I was so amazed that I could hardly see straight and I do not know the clear details, but anyway, two splendid-looking persons appeared, and just as I thought they said something to the boatman, the boatman hurriedly slackened the rope, lowered you by hanging, and hid somewhere.'</p>
+          <p class="en-p">Takahime: 'There, you see, that is why Takahime is called the living shrine of the gods. When the boatman fellow hoisted me up to the top of the mast, the divine light of the Hinodewake was so intense that his eyes were about to be dazzled, and even the passengers were about to grow dizzy, so two representatives came forward, negotiated with the boatman, and for that reason he was inevitably forced to lower me. That is what is called the divine might of the gods, where things are arranged conveniently. How could such a flawless plan ever be understood by the likes of you?'</p>
+          <p class="en-p">Tsunehiko: 'Hey Haruhiko, what an obstinate sensei she is! Today of all days, I am truly exasperated. If people think we are disciples of such a person, there is simply no way we can arrive safely at Takashimajima. Once we have gone up to the continent, you may frolic, blow your own horn, or do whatever you please as Takahime-sama, but to put on such a stubborn front of not wanting to lose an argument in a place like this, to talk back insolently, and to be hated by the captain would be terrible. Come now, why don't we ask Takahime-sama right here to cut the ties of master and disciple with us, and become total strangers? It is not that we want to sever ties from the bottom of our hearts. We just want you to cut them outwardly, on this ship alone.'</p>
+          <p class="en-p">Haruhiko: 'That is an extremely brilliant idea. Let us ask Takahime-sama right away.'</p>
+          <p class="en-p">Tsunehiko: 'This is the petition of Haruhiko and myself. Will you not break the relationship of master and disciple with us for a while? That too is only outwardly; once we arrive safely at Takashimajima, please treat us as your attendants just as before. If we do not do this, it is too perilous to endure...'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">常彦、春彦は驚いて、高姫の縛を解き、抱起し、</p>
+            <p class="ja-classical-line">常彦『先生、どうも御座いませなんだが、大変な危ないこつて御座いました。モウどうぞこれから船の中は、云ひたい事があつても仰有らずに辛抱して居て下さいませ。両人が御願致します』</p>
+            <p class="ja-classical-line">高姫『お前達はそれだから腰抜といふのだよ。三千世界を団子にせうと餅にせうと、三角にせうと、四角にせうと、自由自在に遊ばす国治立尊の片腕とお成り遊ばす日の出神様の生宮、たかの知れた高島丸の船頭位に尾を巻いてなるものか、ヘン余り見損ひをして下さるなや。お前等は丁度猫に小判を見せた様なものだ。小判よりもダイヤモンドよりも立派な光の強い、日の出神の此生宮を何と心得て御座る。チツと確りなさらぬか。神様が吾々を御守護をして御座る以上は、仮令船頭の百人や千人、束になつて来た所で、指一本さへさす様な高姫ぢやありませぬぞえ』</p>
+            <p class="ja-classical-line">春彦『それでも貴女、タルチールさまに後手に縛られ、帆柱へ逆さまにして吊り上げられたぢやありませぬか』</p>
+            <p class="ja-classical-line">高姫『何とマア、身魂の曇つた者は、御神徳の頂きようが拙劣だから困りますワイ。日の出神の生宮が一寸高砂島の様子を見やうと思ひ、タルチールを御用に立てて、帆柱の上まで手も使はず、足も労せず、エレベータ式に上げさしたのだよ。何でも人は神直日大直日に見直し聞直し、善意に解釈しなくてはなりませぬぞや。それが日の出神さまの水も洩らさぬ結構なお仕組、それだから何時も身魂を研き改心をなされと、耳が蛸になる程云うて居るのだよ。タルチールの奴たうとう、日の出神の御光に恐れて、どつかへ鼠の様に隠れて了つた』</p>
+            <p class="ja-classical-line">常彦『私は余り感心して目も碌に見えず、ハツキリした事は分りませぬが、何でも立派なお方が二人現はれて、船頭さまに何か言ひつけられたと思へば、船頭は匆惶として綱をゆるめ、あなたを吊りおろして、どつかへ隠れましたよ』</p>
+            <p class="ja-classical-line">高姫『サアさうだから、高姫は神の生宮と云ふのだ。船頭の奴、帆柱の上へ吊りあげて見た所、余り日の出神の御光がきつうて、目が眩みさうになり、お客までが目舞が来さうなので代表者が二人やつて来て、船頭に掛合ひ、其為に止むを得ずおろしよつたのだ。そこが所謂神の御神力、御都合ある所だ。こんな水も洩らさぬ仕組が、お前達に分つて堪るものかい』</p>
+            <p class="ja-classical-line">常彦『オイ春彦、何とマア剛情な先生だないか。今日と云ふ今日は俺も本当に呆れて了つたよ。こんな人の弟子だと思はれたら、それこそ無事に高砂島へ着く事は出来やしないぞ。大陸へ上つてからなら、はしやぎなりと、法螺吹くなりと、如何なつと、高姫さまの勝手になさつてもよいが、こんな所で分りきつた負惜みを出し、へらず口を叩き、船長に憎まれたら大変だぞ。コりや茲で一つ高姫様にお願申して、師弟の縁を切つて貰ひ、アカの他人となつて了はうぢやないか。心の底から切つて頂かうと云ふのぢやない。此船の上だけ、表面的に切つて貰ひたいのぢや』</p>
+            <p class="ja-classical-line">春彦『それは至極妙案だ。直様高姫様にお願致さうぢやないか』</p>
+            <p class="ja-classical-line">常彦『春彦と私との御願で御座います。暫くあなたと師弟の関係を絶つて下さいませぬか。それも表面丈で、高砂島へ無事に着いたならば、又元の通りに使つて下さい。さうせないと険呑で堪りませぬから……』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahime: 'Do you say you want to cut ties? Even if you didn't say it from your end, Takahime was troubled by having you useless cowards become dead weight and getting in the way. I thought of cutting ties since you are annoying even for a moment, but since once abandoned by this Takahime, you cannot even manage to be beggars, being such good-for-nothing cowards, I have helped you until now thinking it pitiful. If you say from your end that you want leave, this is like setting sails to a fair wind. Cutting ties for all eternity and for the last 10,000 kalpas, do not ever be in a place that offends Takahime's eyes a second time. You trash scoundrels, ah, blind men and a person with open eyes—how well said that is. The ones who truly know Takahime's real power in this wide world are only Hinodewake-samas. There is nothing as annoying as having jinmin as opponents. Come on, both of you Tsune and Haru, won't you go off somewhere quickly? Looking reluctant, not acting like men, what are you fussing about for, eh!'</p>
+          <p class="en-p">Puffing up her cheeks in a huff, swinging her body to the corners, she stamped her feet strongly two or three times on the deck, and spun around two or three times to show them.</p>
+          <p class="en-p">Tsunehiko: 'Moshimoshi Takahime-sama, I cannot bear it if you get so angry. We are only asking to be given leave outwardly for just two or three days... Right, Haru, you are the same, aren't you.'</p>
+          <p class="en-p">Haruhiko: 'That's right, abandoned by Takahime-sama, what will become of us? Please, Takahime-sama, without losing your temper so quickly, interpret what we say with good intentions.'</p>
+          <p class="en-p">Takahime: 'Even if we cut ties for just a single day, from that moment on we are complete strangers. Cutting ties for three or five days is a bother. I will cut ties all the way to the end of the Miroku world, for all eternity and the last 10,000 kalpas, as well. When maggots like you are swarming, the whole place feels crawling and sickening. Ah, my illness feels cleared up now. Once ties are cut, we are neither master nor disciple. Please hide your figures quickly, wherever it may be. Even looking at you is disgusting, it makes my stomach sick.'</p>
+          <p class="en-p">Tsunehiko: 'Takahime-sama, do not utter things like hide your figures in a single moment, or you are disgusting, or my stomach is sick, as if an Aoki-daishō had crawled right into the parlor.'</p>
+          <p class="en-p">Takahime: 'It is a settled matter, you are a true foolish general. If you dawdle, I will set up incense and smoke you out. Ah, how troublesome, come the day before yesterday, come the day before yesterday!'</p>
+          <p class="en-p">So saying, from her toothless mouth, she muttered and spat saliva recklessly toward the two of them.</p>
+          <p class="en-p">Haruhiko: 'Saying come the day before yesterday like a spider or something, isn't that going a bit too far?'</p>
+          <p class="en-p">Takahime: 'You are a spider. You are a palanquin bearer in dark clouds who cannot see an inch ahead. Until now, thanks to Takahime, you have acted arrogant doing the auspicious work of the gods, but once ties are cut by Takahime as of today, you have no choice but to become a palanquin bearer, do you? No matter how much you flatten yourself like a spider to apologize or suffer, it's no use. Ottsuhohoho!'</p>
+          <p class="en-p">Tsunehiko flushed slightly in the face,</p>
+          <p class="en-p">Tsunehiko: 'Takahime-sama, we are by no means your disciples. We are persons ordered as fine propaganda emissaries from the leader of Kototamawakenomikoto, so to speak, on equal footing with you. However, observing the order of seniority, respecting you as our senior and master purely out of obligation, while treating us as disciples, how could there be any question of cutting ties or not cutting ties? If you talk on sluggishly, I shall break off relations from my side... Right, Haru, aren't you the same?'</p>
+          <p class="en-p">Haruhiko: 'Hearing it put that way, it is so. Moshi Takahime-sama, I am truly sorry, but starting right now, we shall cut ties with you for all eternity and the last 10,000 kalpas, until the end of the Miroku world—no, we break off relations! Since you are disgusting... and smell like a fool, please hide your figures somewhere quickly. If you stay sullen, I'll light incense. Ahahaha!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高姫『帳を切つてくれと云ふのかい。お前の方から言はいでも、高姫の方からお前の様なガラクタの弱虫は、足手纏ひになつて困つて居つたのだ。一時も早くうるさいから、縁を切らうと思うたけれど、此高姫に見放されたが最後、乞食一つよう致さぬ、奴甲斐性なしだから、可哀相と思つて今まで助けて来たのだ。お前の方から暇くれと云ふのなら、こつちは得手に帆だ。万劫末代帳を切るから、二度と再び高姫の目に障る所に居つて下さるな。ガラクタ野郎奴、あゝ盲万人目明き一人とはよくも言うたものだ。高姫の真の力を知つて呉れる者は此広い世界に日の出神様ばつかりだ。人民を相手にする位うるさいものはないワイ。サア常、春の両人、早くどつかへ行きなさらぬか。名残惜さうに、男らしうもない、何マゴマゴして居るのだ、エヽ』</p>
+            <p class="ja-classical-line">と頬をプツと膨らし、体を角に振つて甲板の上を二つ三つ強く踏みならし、二三遍くるりと廻つて見せた。</p>
+            <p class="ja-classical-line">常彦『モシモシ高姫様、さう怒つて貰つては堪りませぬ。ホンの二三日の間、表むき丈お暇を下されとお願して居るので御座います……なア春彦、お前もさうだろう』</p>
+            <p class="ja-classical-line">春彦『さうだとも、高姫さまに見すてられて、俺達は如何なるものか。どうぞ高姫様さう短気を出さずに、吾々の申す事を善意に解釈して下さいませ』</p>
+            <p class="ja-classical-line">高姫『仮令一日でも縁を切つたが最後、アカの他人ぢや。三日や五日の間縁切るのは邪魔臭い。万劫末代序に五六七の世の末迄縁を切りますぞや。お前の様な蛆虫がたかつて居ると、そこら中がムザムザして気分が悪い。あゝこれで病晴れがしたやうだ。縁切つた以上は、師匠でも弟子でもない。どうぞ早う、どつこへなりと姿を隠して下さい。見ても厭らしい、胸が悪うなる』</p>
+            <p class="ja-classical-line">常彦『高姫様、一時も早う、姿を隠せとか、厭らしいとか、胸が悪いとか、丸で座敷へ青大将が這うて来た様な事を仰有いますなア』</p>
+            <p class="ja-classical-line">高姫『きまつた事だよ、お前は本当の阿呆大将だ。グヅグヅしてをると、線香を立ててくすべますぞ。あゝ面倒臭い、一昨日来い一昨日来い』</p>
+            <p class="ja-classical-line">と云ひ乍ら、歯のぬけた口から、ブツブツと、唾を矢たらに、両人に向つて吹きかける。</p>
+            <p class="ja-classical-line">春彦『蛛蜘か何ぞの様に一昨日来いとは、そりや余りぢやありませぬか』</p>
+            <p class="ja-classical-line">高姫『お前は蜘蛛だよ。一寸先の見えぬ暗雲の雲助だ。今迄高姫のおかげで、結構な神様の御用をして威張つて来たが、今日限り高姫から縁を切られたが最後、雲助にでもならねば仕方がないぢやないか。何程平た蜘蛛になつて謝つても、苦悶しても駄目ですよ。オツホヽヽヽ』</p>
+            <p class="ja-classical-line">常彦は稍顔色を赤らめ、</p>
+            <p class="ja-classical-line">常彦『高姫さま、吾々は決して貴女の弟子ではありませぬよ。言依別命の教主から立派な宣伝使を命ぜられて居る者、言はばあなたと同格だ。併し乍ら長幼の序を守り、先輩の貴女を師匠と、義務上から尊敬して居る丈の者、弟子扱をしておき乍ら、帳を切るも切らぬも有るものか。グヅグヅ仰有ると、私の方から絶交致しますよ……なア春彦、お前もさうぢやないか』</p>
+            <p class="ja-classical-line">春彦『さう聞けばさうだ。モシ高姫さま、誠にお気の毒乍ら、只今限り貴女と万劫末代、五六七の世の末迄縁をきりますから、否絶交しますから、厭らしい……阿呆臭いから早く何処かへ姿を隠して下さい。渋たうして御座ると線香を立てますぞ。アハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahime: 'That is fine too. However, even if I cut off my relationship with Takahime, I suppose it is impossible to separate from the Hinode no Kamisama.'</p>
+          <p class="en-p">Tsunehiko: 'Of course, because we are in absolute obedience to the Hinode no Kamisama, no matter what anyone says, we will never separate. Haruhiko, you are the same too, aren\'t you?'</p>
+          <p class="en-p">Haruhiko: 'That goes without saying.'</p>
+          <p class="en-p">Takahime: 'Look at that, as expected, if you do that, you must be in absolute obedience to Takahime, the living shrine of the Hinode no Kami.'</p>
+          <p class="en-p">Tsunehiko: 'We will obey the true Hinode no Kamisama, but we will never obey a makeshift, self-proclaimed Hinode no Kami. If she is a Hinode no Kamisama who wanders all over the world because her jewels were hidden by the kyōshiyu of Kotoyoriwake and she cannot tell where they are hidden, her mitama can hardly be anything very splendid. Instead of the sunrise, Takahime-sama of the fleshly shrine, whose nose is high and possessed by a pitch-black, soot-covered mitama of utter darkness, who could find that foolish? Is there anyone who would obey? You would do well to moderate your conceit a bit. Ha ha ha ha!'</p>
+          <p class="en-p">Takahime: 'Tsunehiko, the splendid sendenshi, and Haruhiko, the splendid, splendid demo-sendenshi, go on blowing your horns as you please and conceiting as you please. Farewell.'</p>
+          <p class="en-p">So saying, with a shudder in her body and heavy footsteps, she hid her figure in the next cabin.</p>
+          <p class="en-p">Tsunehiko stood upon the deck, joined hands with Haruhiko, and after Takahime had gone, while indulging in various conversations about Takahime in despair, turned desperate and began to sing facing the ocean winds.</p>
+          <p class="en-p">Tsunehiko: 'The living shrine of the Hinode no Kami,
+Or whether of a lineage mitama I know not,
+Strong in self-conceit and with a high nose,
+With Takahime, a woman among men,
+Deceived and coaxed by sweet things all around,
+Leaving the splendid, splendid central land of the islands of Jitentōshima,
+The center of the land of Hinzuma,
+Leaving behind the brocade palace,
+Crossing over distant mountains and slopes,
+With our lives as a stake, parting the rough waves of the open sea,
+At last landing on the island of Ryūkyū,
+Pursuing the footsteps of the divine commands of Kotoyoriwake and Kunitayoriwake,
+Tenaciously grabbing the Mani jewel
+Into the hands of Takahime-sama,
+Intending to serve in divine works
+That even others envy,
+While pulling on the skin of our desires,
+Throwing aside our dear wives,
+
+That we came this far is foolish.
+When we came to the island of Ryūkyū,
+The Kamisama of Kotoyoriwake
+Had already received the precious jewels of Ryū and Kyū,
+And after going to the island of Takasago
+Together with Kunitayoriwake,
+Takahime-sama grew impatient,
+Changing her appearance like a yaksha,
+And boarding a ship once more,
+Viewing Fūrin Island and Taiwan Island behind,
+As the mountain ranges of Teru grew hazy,
+And she approached until they came into view,
+At that very moment, our ship,
+Which we relied upon as the rope of our lives,
+Collided with a sunken reef lurking among the waves and was shattered.
+What is to be done upon the waves,
+Just as we were advancing with difficulty,
+
+In the fierce winds that suddenly began to blow,
+The waves raged and roared, thinking our three lives
+Were now at an end,
+At the moment when we were flustered and alarmed,
+By the grace and blessing of the Kami,
+The Takashima-maru came running,
+Rescued the three of us,
+And we were invited into the captain\'s cabin,
+Where our country, place, and names
+Were asked in detail one by one.
+At the conch-shell blowing of Takahime-sama,
+As the living shrine of the Hinode no Kami,
+Even the captain was tongue-tied,
+And after much arguing back and forth,
+Finally deeming Takahime-sama mad,
+They bound her hands and feet,
+And rolled her up, upside down,
+Round and round upon the mast.
+While the two of us were heartbroken,
+And struck dumb with astonishment,
+
+Though we know not whose people they might be,
+The shadows of two noble persons appeared,
+And if they whispered something or other
+In secret to the captain of Tarchīru,
+Tarchīru in a flurry,
+With utmost reverence, immediately
+Unrolled Takahime here,
+And hid her away within a single room.
+The two of us untied
+The severe bonds of Takahime,
+And when we treated her with utmost kindness,
+Takahime-sama spouted impudence,
+With obvious sore-losing.
+Even we were left utterly amazed,
+And when we bargained with her to give us our leave,
+Takahime-sama was startled,
+And stringing together threatening phrases
+About cutting off our ties for all eternity,
+Squabbling back and forth with a fuss,
+At the very end, stamping her feet,
+
+And shaking her shoulders, to who knows where,
+She hid the figure of an old hag.
+Ah, Avatars of the Gods,
+May the Mitama prosper,
+The three of us who came thus far with such effort,
+Please let us dwell together in harmony,
+Land upon the island of Takasago,
+Seek out the whereabouts of the Mani jewel,
+And let us return safely to the sacred ground, O Kami.
+Before the presence of the noble Kami,
+Tsunehiko and Haruhiko, with deep reverence,
+Awe, and trembling, humbly pray.
+Ah, Avatars of the Gods,
+May the Mitama prosper.'</p>
+          <p class="en-p">Thus singing with all his might, he danced wildly. An albatross with wings measuring about a jo across grazed the heads of the two men, soaring gracefully back and forth, right and left.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高姫『それもよからう。併し乍ら、高姫との交際は絶つても、日の出神様に離れる事は出来ますまい』</p>
+            <p class="ja-classical-line">常彦『尤も、日の出神様には絶対服従ですから、誰が何と云つても離れは致しませぬ。春彦、お前もさうだらうなア』</p>
+            <p class="ja-classical-line">春彦『勿論の事だ』</p>
+            <p class="ja-classical-line">高姫『それ御覧、ヤツパリさうすると、日の出神の生宮の高姫には絶対服従をせなくてはなりますまい』</p>
+            <p class="ja-classical-line">常彦『誠の日の出神様には服従しますが、俄作りの自称日の出神には絶対服従致しませぬ。言依別の教主に玉を隠されて、隠され場所が分らいで、世界中うろつき廻る日の出神さまなら、余り立派な身魂でもあるまい。日の出所か、真暗がりのまつくろ黒助の身魂が憑つてゐる肉の宮の鼻の高姫さま、誰が馬鹿らしい。服従する者がありますか。自惚も良い加減にしておいたが宜しからうぜ。アツハヽヽヽ』</p>
+            <p class="ja-classical-line">高姫『常彦の結構な宣伝使様、春彦の結構な結構なデモ宣伝使さま、勝手にホラを吹き、勝手に自惚ておきなさい。左様なら』</p>
+            <p class="ja-classical-line">と体をしやくり乍ら、足音荒く、次の船室に姿を隠して了つた。</p>
+            <p class="ja-classical-line">常彦は甲板の上に立ち、春彦と手をつなぎ高姫の去つた後で、いろいろと高姫話に耽り乍ら、焼糞になつて、海風に向ひ歌ひ出した。</p>
+            <p class="ja-classical-line">常彦『日の出神の生宮か
+系統の身魂か知らね共
+自負心強い鼻高の
+男女郎の高姫に
+甘い事づくめにたらされて
+結構な結構な自転倒島の
+秀妻の国の中心地
+錦の宮を後にして
+遠き山坂打渡り
+命を的に海原の
+荒波わけて琉球の
+島に漸く上陸し
+言依別や国依別の
+神の命の後を追ひ
+執念深くも麻邇の玉
+高姫さまの手に入れて
+人も羨む神業に
+奉仕せむとて両人が
+欲の皮をば引ぱり乍ら
+可愛い女房をふりすてて</p>
+            <p class="ja-classical-line">ここまで来たのが馬鹿らしい
+琉球の島へ来て見れば
+言依別の神さまは
+琉と球との宝玉を
+すでに受取り国依別と
+小舟に乗つて高砂の
+島に行かれた後だつた
+高姫さまは気をいらち
+夜叉の如くに相恰を
+変へて又もや船に乗り
+フーリン島や台湾島
+後に眺めて漸う漸うに
+テルの連峰霞みつつ
+目に入る迄に近寄りし
+時しもあれや生命の
+綱とも頼む吾船は
+波間に潜む暗礁に
+衝突なして粉砕し
+何と詮方波の上
+辛くも進む折柄に</p>
+            <p class="ja-classical-line">俄に吹き来る荒風に
+波立さわぎ三人の
+生命最早これ迄と
+慌てふためく時もあれ
+神の恵の幸はひて
+高島丸は走せ来り
+吾等三人を救ひあげ
+船長室に招かれて
+国や所や姓名を
+一々詳しく尋ねられ
+日の出神の生宮と
+高姫さまの法螺貝に
+船長殿も舌を巻き
+押し問答の末遂に
+高姫さまを発狂と
+見なして手足を縛りあげ
+身を逆しまに帆柱に
+クルリクルリと巻あげる
+吾々二人は肝潰し
+驚き倒れて居る内に</p>
+            <p class="ja-classical-line">何処の人かは知らね共
+尊き二人の影見えて
+タルチールの船長に
+何かヒソビソ囁けば
+タルチールは匆惶と
+畏まりつつ高姫を
+即座にここに巻おろし
+一間の内に隠れ行く
+吾等二人は高姫の
+厳しき縛めとき放ち
+いと親切に労はれば
+高姫さまのへらず口
+分りきつたる負惜み
+流石の吾等も呆れ果て
+暇を呉れよと掛合へば
+高姫さまは驚いて
+万劫末代帳きると
+おどし文句を並べ立て
+ヤツサモツサと嘅み合ひ
+揚句の果は四股をふみ</p>
+            <p class="ja-classical-line">肩をゆすつてどこへやら
+婆の姿を隠された
+あゝ惟神々々
+御霊幸はひましまして
+折角茲まで来た三人
+どうぞ互に睦まじう
+高砂島に上陸し
+麻邇の宝珠の所在をば
+索めて聖地に恙なく
+帰らせ玉へ惟神
+尊き神の御前に
+常彦、春彦謹みて
+畏み畏み願ぎまつる
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と一生懸命に歌ひ乍ら舞ひ狂うて居る。左右一丈計りの羽を拡げた信天翁は二人の頭上を掠めて前後左右に潔く翺翔して居る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c19.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 19: High Island 丸 [819]</span>
+      </a>
+      <a href="c21.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 21: 喰へぬ女 [821]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

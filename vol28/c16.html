@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 16: 盲 Turtle の浮 Tree [816] - Volume 28 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 28 Table of Contents</a>
+      <span>Volume 28</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 28 &bull; Chapter 16</span>
+      <h1 class="chapter-title-en">Chapter 16: 盲 Turtle の浮 Tree [816]</h1>
+      <p class="chapter-title-ja">盲亀の浮木〔816〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Once routed by the divine forces of Mamichihiko of Ananai-kyō and lurking in various places to watch for an opportunity to rise again, the faction consisting of Shyakartan, Tororensu, Princess Sērusu, Saarbōsu, Hōrokēsu, Seurusutin, Tārusu, Tsūrensu, Nandārusu, and Biyasēru formed a Triple Alliance army, took advantage of the gloom of night to attack Taianjiyō with a great war cry, and fired stone mortars; thus, even the staunch and impregnable fortress crumbled away within a single night, and the supreme figures including King Kārusu, Tēresutan, Hōrusāsu, Hōrensu, Yūtopiyāru, Tsūrensu, Shīrinsu, Ēru, Hāreyāru, Ōitsuku, Hiyūzu, Andēyāru, Nyūjiēru, Hāru, Kanton, Maruchiru, Urāru, Kingusu, Tōmasu, Māshiyāru, Princess Yārusu, and Princess Kānēru were all taken prisoner, bound without exception in the dark dungeons of the rock cavern castle on the upper reaches of the Tankei where King Kārusu had once established his camp, and were left to suffer the cruel and unremitting tortures of day and night.</p>
+          <p class="en-p">The recaptured Taianjiyō hailed Princess Sērusu as queen, Shyakartan and Tororensu became the gods of the Left and Right Protectors, Saarbōsu, Hōrokēsu, and Seurusutin each assumed important posts, and once again grasping the political power of the lands north of Niitakayama, riding on the momentum to occupy the sacred sites of Ananai-kyō such as Jitetsu-tan and the palaces dedicated to the deities of the nation's soul, and aiming to establish the power of Brahmanism, they made Seurusutin the general, with Saarbōsu and Hōrokēsu as vice-generals, leading tens of thousands of soldiers, crossing Mount Ārisu with flags flying and drums beating, and now surged close to the expanse of the Lake of Tamamo.</p>
+          <p class="en-p">Here from the sacred mountain of Tamamo, Princess Mariyasu was made the general of the divine forces, and Hinodate, Tsukinohoko, Princess Yuriko, Princess Tērin, Princess Teruyo, and Princess Yachiyo, together with a mere handful of attendants, advanced to face this grand army and commence a Kototama battle. The enemy's vanguard and a detachment of the Shingun met on the shores of Lake Tamamo, and the numerous soldiers led by Seurusutin, despising the enemy for their small number, aligned the tips of their bamboo spears toward Princess Mariyasu's small troop and rushed forward with the fierce momentum of a lion springing upon its prey, a truly terrifying sight. Princess Mariyasu immediately issued orders to Princess Yuriko, causing her to take out the Mirror of the Great Serpent and shine it upon the rushing, ferocious soldiers. The mirror taken out by Princess Yuriko instantly emitted an intense radiance, and not a single soldier of the enemy army was left unscathed; their eyes were dazzled, their hearts trembled, and without even exchanging a single blow, they collapsed in a heap like falling dominoes right on the spot.</p>
+          <p class="en-p">Seurusutin, dazzled by the majestic virtue of the mirror, had his life narrowly saved by his subordinates and fled away to somewhere unknown. Seeing this unsightly defeat of their general Seurusutin, the left and right vice-generals Saarbōsu and Hōrokēsu fell into disorder and retreated at top speed, each trying to be first, heading back toward Taianjiyō.</p>
+          <p class="en-p">The ferocious soldiers who had advanced here as the vanguard numbered nearly five or six thousand. Losing their eyes to the last man, falling and groaning until there was scarcely any room left to move, trying to escape by groping with hands and feet only to tumble down ravines, colliding with one another to reach the utmost confusion, their tragic state was truly beyond bearing to look upon. Princess Mariyasu immediately sought to bring them to allegiance through Kototama, and with a clear voice began to sing a propaganda poem.</p>
+          <p class="en-p">When the deities manifest in the outward realm,
+Distinguishing clearly between good and evil,
+The deity who created this world is Ōnaobi,
+With a heart as vast as Great Naobi.
+Whatever may happen in the world of men,
+Look upon it straight with Naobi, listen to it straight.
+Confess and rectify the errors of your body,
+Whether the morning sun shines or is clouded,
+Whether the moon waxes or wanes,
+Even though the great earth should sink,
+The military forces of Princess Sērusu,
+No matter how fierce their momentum,
+No matter by how many tens of thousands they attack,
+Guarding the divine teachings of the true God,
+The divine army of Ananai,
+Completely beats back the approaching enemy.
+Beginning with Seurusutin,
+Who has lost the eyes of his heart,
+Led by Princess Sērusu—</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">一旦三五教の真道彦の神軍の為に潰走し、各地に潜伏して、捲土重来の時機を伺ひゐたるシヤーカルタン、トロレンス、セールス姫、サアルボース、ホーロケース、セウルスチン、タールス、ツーレンス、ナンダールス、ビヤセールの一派は三角同盟軍を作つて泰安城に夜陰に乗じ、鬨を作つて攻めかけ、石火矢を放ち、さしも堅固なる金城鉄壁も、一夜さの内に脆くも陥り、カールス王を始めテールスタン、ホールサース、ホーレンス、ユートピヤール、ツーレンス、シーリンス、エール、ハーレヤール、オーイツク、ヒユーズ、アンデーヤール、ニユージエール、ハール、カントン、マルチル、ウラール、キングス、トーマス、マーシヤール、ヤールス姫、カーネール姫の大将株を始め悉く捕虜となり、淡渓の上流なるカールス王が一旦陣取ゐたる岩窟城の暗き牢獄に残らず繋がれ、日夜の苛酷なる責苦に苦めらるることとなつて了つた。</p>
+            <p class="ja-classical-line">一旦取返されたる泰安城は、セールス姫を女王と仰ぎ、シヤーカルタン、トロレンスは左守、右守の神となり、サアルボース、ホーロケース、セウルスチンは各重要の職に就き、再び新高山以北の地の政権を掌握し、勢に乗じて三五教の聖地日月潭を始め、国魂神の祭りたる宮殿を占領し、バラモン教の勢力を樹立せむと、セウルスチンを将となし、サアルボース、ホーロケースは副将となり、数万の軍卒を率ゐ、アーリス山を、旗鼓堂々として乗越え、今や玉藻の湖水の間近くまで押寄せて来た。</p>
+            <p class="ja-classical-line">茲に玉藻山の聖地よりは、マリヤス姫を神軍の将となし、日楯、月鉾、ユリコ姫、テーリン姫、照代姫、八千代姫は僅の従者と共に、此大軍に向つて、言霊戦を開始すべく立向うた。敵の先鋒隊と三五軍の一隊とは玉藻湖の畔で出会し、セウルスチンの率ゆる数多の軍卒は、少数の敵と侮りて、マリヤス姫の小部隊に向つて、竹槍の穂先を揃へ、獅子奮迅の勢にて吶喊し来る物凄さ。マリヤス姫は直にユリコ姫に命を降し、大蛇の鏡を取出さしめ、寄せ来る猛卒に向つて射照らさしめた。ユリコ姫の取出したる鏡は忽ち強度の光輝を発し、敵軍は一人も残らず、眼眩み、心戦き、脆くも一戦をも交へずして、其場に将棋倒しとなつて倒れて了つた。</p>
+            <p class="ja-classical-line">セウルスチンは鏡の威徳に眼眩み、生命カラガラ部下に助けられ、何処ともなく遁走して了つた。大将セウルスチンの此見苦しき戦敗を見て、左右の副将サアルボース、ホーロケースは軍容を紊し、吾れ先にと泰安城指して、一目散に退却して了つた。</p>
+            <p class="ja-classical-line">先鋒隊として此処に進みたる猛卒は、殆ど五六千人に及んで居た。一人も残らず目を失ひ、処狭き迄に打倒れて呻吟しつつ、手探り、足探りに逃げ行かむとしては、谷に顛落し、互に衝突して混乱を極め、其惨状目も当られぬ計りであつた。マリヤス姫は直ちに言霊を以て彼等を帰順せしめむと、声も涼しく宣伝歌を歌ひ出したり。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立分ける
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直せ聞直せ
+身の過ちは宣り直せ
+朝日は照る共曇る共
+月は盈つ共虧くる共
+仮令大地は沈む共
+セールス姫の軍勢は
+如何に勢猛く共
+仮令幾万攻め来共
+誠の神の御教を
+守りて立てる三五の
+神の軍は悉く
+寄せ来る敵を打払ふ
+心の眼を失ひし
+セウルスチンを始めとし
+セールス姫の率ゐたる</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The hundred hosts, entirely losing not only the eyes of their hearts but also their physical eyes, writhed and groaned on the shores of Lake Tamamo—what a pitiful sight! The true Kami saves the world; I am the Kami of Princess Mariyas, a soldier of Seulstin. Listen well to my Kototama, and return to the teachings of the Kami of Ananai, which is one in truth. There is no blade that can oppose righteousness; the Kami are with us. The Kami dwell even within your bodies; become sincere as quickly as possible, and repent your past wrongs before the presence of Ōkami, O people! Human beings are fundamentally the children of the Kami, and the Mitama they received from the Kami will return to their original state if polished.</p>
+          <p class="en-p">Those whose ears attuned to my Kototama, make haste to revere the precious name of the Ōkami of Ananai-kyō, and praise Him, extol Him, ye children of the Kami! If you harmonize with the truth of the Kami, your eyes will instantly become as clear as the sun and moon, enabling you to survey all things. Ah, Kamunagara! May your Mitama be prosperous and blessed!'</p>
+          <p class="en-p">Upon finishing the chant, the thousands of soldiers who had lost their sight cried out in a manner reminiscent of praying to the Kami only when in extremity, pressing their palms together with all their might, raising their voices in unison, and chanting 'Kamunagara Kamunagara' over and over again countless times. That sound seemed as though it might shake the surrounding mountains. After a while, every single one of the blinded enemy generals and soldiers opened their eyes, knelt toward Princess Mariyas and the other divine armies, and, shedding tears of gratitude like waterfalls, expressed their submission, ultimately joining the Ananai forces to serve in the Kototama war at Taian Castle.</p>
+          <p class="en-p">Princess Mariyas, Hinodewake, and Tsukihokowake, while rejoicing and marveling anew at the great power of the Kototama, suddenly gained thousands of allies, unfurled the divine banner of Jūyō in the autumn wind, and with banners and drums in grand array, set forth to march upon Taian Castle.</p>
+          <p class="en-p">Led by the divine generals of two sons and five daughters, and drawing thousands of submissive followers in their train, as they drew close to Taian Castle, Saelbōsu and Hōrokēsu deployed double-lateral formations to resist the attack. At this time, Princess Yachiyo shone the Great Serpent's mirror toward the right-wing army of Saelbōsu, while Princess Teruyo pointed the Great Serpent's mirror toward the left-wing army of Hōrokēsu and made it shine upon them; once again, not a single person was left untouched, all becoming blind, and even Hōrokēsu and Saelbōsu were struck with dazzled vision and prostrated themselves on the spot, every last one of them expressing submission.</p>
+          <p class="en-p">However, Princess Mariyas paid no heed to the prostration of both armies, and proceeded directly to the front gate. Accompanied by Hinodewake and Tsukihokowake within the castle, she advanced deep inside, and presented red and white jewels toward Princess Sērusu and the other retainers. When she shone these upon them, Princess Sērusu instantly reverted to a golden-furred, nine-tailed evil fox, and all the other retainers likewise became evil demons and evil foxes, raising clouds and vanishing like smoke into mid-air, no one knew where.</p>
+          <p class="en-p">From this time forth, Princess Mariyas remained within the castle, and together with Princess Teruyo, Princess Teruyo, Princess Yuriko, and Princess Tērin, along with the soldiers who had surrendered at the shores of Lake Tamamo, she took charge of garrison duties. She dispatched Hinodewake and Tsukihokowake to the rock-cave prison in the upper reaches of Dankei, ordering them on an expedition to rescue King Kārusu, Princess Yāchin, and Michimichihiko no Mikoto.</p>
+          <p class="en-p">The brothers of Sun and Moon led four or five hundred of the surrendered soldiers, advanced toward the rock-cave prison, subjugated dozens of guards one after another through the virtue of the jewels, and entering the prison themselves, rescued King Kārusu above all others. King Kārusu's beard had grown long and disheveled, his complexion was pale, his body was skin and bone, and he appeared precisely like a dead person, presenting a pitiful sight to behold. Hinodewake and Tsukihokowake, upon witnessing this state, could not bear their feelings of sympathy. The resentment they had held until then—seeing him as the hateful King Kārusu who had previously imprisoned their father—vanished goodness knows where, and they were simply overcome with tears of compassion.</p>
+          <p class="en-p">King Kārusu was rescued by the two children of Michimichihiko no Mikoto, and being even more touched by the deeply compassionate hearts of the brothers, he firmly grasped their hands, shedding tears and expressing his gratitude as time slipped away. King Kārusu finally opened his mouth with composure,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">百の軍は悉く
+心の眼のみならず
+肉の眼を失ひて
+玉藻の湖畔に呻吟し
+のた打まはる憐れさよ
+誠の神は世を救ふ
+吾はマリヤス姫の神
+セウルスチンの軍人
+吾言霊を聞き分けて
+誠一つの三五の
+神の教に立返れ
+正義に刃向ふ刃なし
+神は吾等と倶に有り
+汝の身にも神ゐます
+一時も早く真心に
+なりて前非を大神の
+御前に悔いよ諸人よ
+人は素より神の御子
+神に受けたる其身魂
+研けば元に復るなり</p>
+            <p class="ja-classical-line">あが言霊の曲耳に
+通ひし者は逸早く
+三五教の大神の
+尊き御名を謹みて
+褒めよ称へよ神の御子
+神の誠に通ひなば
+汝の眼忽ちに
+月日の如く明らけく
+万の物を眺め得む
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と歌ひ終るや、数千の目を失ひたる軍卒は叶はぬ時の神頼み………と云ふ様な按配式で、一生懸命に両手を合せ、声を揃へて、</p>
+            <p class="ja-classical-line">『惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">と幾回となく、繰返し繰返し奏上した。其声は四辺の山岳も動揺するかと計り思はれた。暫くにして目を失ひたる敵の将卒は、残らず目を開き、マリヤス姫其他の神軍に向つて跪づき、感謝の涙を滝の如く流し乍ら帰順の意を表し遂には三五軍に従ひ、泰安城の言霊戦に従軍する事となつた。</p>
+            <p class="ja-classical-line">マリヤス姫、日楯、月鉾は、偉大なる言霊の力を今更の如く喜び且つ驚き乍ら、俄に数千人の味方を得て、十曜の神旗を秋風に翻し、旗鼓堂々として泰安城に立向ふ事となつた。</p>
+            <p class="ja-classical-line">二男五女の神将を先頭に、数千の帰順者を引き連れ、泰安城の間近く押寄するや、サアルボース、ホーロケースは複横陣を張つて、防戦に努めた。此時八千代姫は右翼のサアルボースの軍に向つて、大蛇の鏡を射照らし、照代姫はホーロケースの左翼軍に向つて、同じく大蛇の鏡を差向け射照らせば、又もや一人も残らず盲目となり、ホーロケース、サアルボース迄も、眼くらみて其場に平伏し、独りも残らず帰順を表した。</p>
+            <p class="ja-classical-line">されどマリヤス姫は両軍の平伏する間を目も呉れず、直に表門に向ひ、城中に日楯、月鉾を従へ、深く進み入り、セールス姫其他の侍臣等に向つて、赤、白の宝玉を差出し、之れを射照らせば、セールス姫は忽ち金毛九尾の悪狐と還元し、其他の侍臣等は残らず、悪鬼、悪狐となつて、雲を起し、何処ともなく、中空に煙の如く消えて了つた。</p>
+            <p class="ja-classical-line">これよりマリヤス姫は城内に止まり、照代姫、八千代姫、ユリコ姫、テーリン姫と共に玉藻の湖畔にて帰順したる兵士と共に、警固の任に当り、日楯、月鉾をして淡渓の上流なる岩窟の牢獄に遣はし、カールス王を始め、ヤーチン姫、真道彦命を救ふべく出張を命じた。</p>
+            <p class="ja-classical-line">日、月の兄弟は帰順せし兵士を四五百人計り引率れ、岩窟の牢獄指して進み入り、数十の番卒を片つ端より玉の威徳に帰順せしめ、自ら牢獄内に入りて、先づ第一にカールス王を救ひ出だした。カールス王は髭蓬々と長く延び、色青ざめ、身体骨立して、恰も死人の如く、見るも憐れな姿となつてゐた。日楯、月鉾は此態を見て、同情の念に堪へ難く、吾父を先に幽閉したる憎きカールス王として、今迄怨み居たりし心もどこへやら消え失せ、只同情の涙にくるるのみであつた。</p>
+            <p class="ja-classical-line">カールス王は真道彦命の二人の子に救はれ、一層其慈愛深き兄弟の心に感じ、固く二人の手を握つて涕泣感謝に時を遷した。カールス王は漸くにして、潔く口を開き、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kārusu: 'Are you not Hitate and Tsukihoko, those two? Is your father, Mamichihikonomikoto, in good health?'</p>
+          <p class="en-p">Riyōnin: 'Yes, ever since our father was imprisoned by you, he has remained groaning in this prison, or so it appears.'</p>
+          <p class="en-p">Kārusu: 'Quickly rescue your father.'</p>
+          <p class="en-p">At these words, the two left the place, patrolling here and there outside the cells,</p>
+          <p class="en-p">Riyōnin: 'We, the brothers Hitate and Tsukihoko, have come to save our father, Mamichihikonomikoto. Please make his whereabouts known...'</p>
+          <p class="en-p">They called out. Hearing this voice, Yāchin-hime extended a slender hand from a nearby cell,</p>
+          <p class="en-p">Yāchin-hime: 'Ah, you are the brothers of Sun and Moon! How very well you have come to save me. Mamichihikonomikoto is residing right in this neighboring room. Please hurry and rescue him.'</p>
+          <p class="en-p">Hearing that their father's whereabouts were known and hearing the voice of Yāchin-hime, the two were both joyful and astonished, immediately twisting and cutting the lock of the prison to rescue Yāchin-hime, next twisting open the door of their father's cell, and stepping inside to look—alas, Mamichihikonomikoto had grown thin and withered, having fallen into a dying state where even his breath scarcely passed through. The two clung to their father's limbs and, regardless of those around them, wept aloud in a mixture of joy and sorrow.</p>
+          <p class="en-p">This voice faintly reached the ears of Mamichihikonomikoto, who raised his worn-out body, opened his eyes feebly, and</p>
+          <p class="en-p">Mamichihiko: 'Ah, you are Hitate and Tsukihoko, both of you. How on earth did you come here? ... Ah, surely this must be a dream.'</p>
+          <p class="en-p">He stared at the brothers' faces with a look of wonder. The brothers said,</p>
+          <p class="en-p">Riyōnin: 'Father-sama, this is truly neither a dream nor an illusion. ... Actually, such and such are the circumstances...'</p>
+          <p class="en-p">And they recounted the events that had transpired in full detail. Hearing this, Mamichihikonomikoto suddenly regained his spirit, just as plants and trees in a drought encounter rain, and even the color of his face suddenly brightened.</p>
+          <p class="en-p">From then on, King Kārusu, Yāchin-hime, and Mamichihikonomikoto, under the protection of Hitate, were to enter Taian Castle for the time being, and escorted by hundreds of soldiers, they departed from this prison.</p>
+          <p class="en-p">Tsukihoko rescued Tērsutan, Hōrensu, and all other high retainers who had served the former King Kārusu from the prison without exception, and set off returning toward Taian Castle.</p>
+          <p class="en-p">Hitate guarded King Kārusu, Yāchin-hime, and Mamichihikonomikoto, and at last came close to the riding ground of Taian Castle. The armies of Hōrokēsu and Saarubōsu, illuminated by the mirror of the great serpent and having lost their sight, crawled on all fours like ants infested upon the riding ground and crept about. King Kārusu saw this state, unable to suppress his wonder,</p>
+          <p class="en-p">Kārusu: 'Who are they?'</p>
+          <p class="en-p">He asked Hitate. Hitate immediately replied,</p>
+          <p class="en-p">'Yes, they are retainers of Sērusu-hime and soldiers under the command of Hōrokēsu and Saarubōsu. Illuminated by the divine virtue of the great serpent's mirror on Mount Kōyō, they have become blind, their advance and retreat are blocked, and they are lost souls wandering blindly in the dark path just as you see. We used the red jewel bestowed upon us by the Immortal Tsunokusu of Mount Kōyō, applying it to the sword of shōbuku [subjugation], while my younger brother Tsukihoko used the white jewel, applying it to the sword of sesshu [acceptance], making tens of thousands of enemies surrender to the divine virtue without leaving a single one behind, just like that. Sērusu-hime revealed her true form as a golden-furred, nine-tailed evil fox and vanished high into the sky. It is truly a rare divine treasure. If we only have this divine treasure, for King Kārusu to reside in Taian Castle and govern the world is truly an easy task.'</p>
+          <p class="en-p">He briefly recounted the efficacy of the jewel and the mirror. The King, Yāchin-hime, and Mamichihikonomikoto tilted their heads and listened to this story, struck with emotion.</p>
+          <p class="en-p">Here, Hitate chanted and bestowed a Kototama song toward the tens of thousands of blind soldiers. That song:</p>
+          <p class="en-p">'God appears in the outer world,
+Dividing good and evil apart.
+The deity who created this world is Ōnaobi,
+With a heart as vast as Ōnaobi.
+Simply, in the world of men in all things,
+Look upon it rightly, listen to it rightly.
+Confess and correct the errors of your body.
+Though the morning sun shines or is clouded,
+Though the moon fills or wanes,
+Even if the great earth should sink,
+The miraculous power of the single truth of Kototama
+Saves the world.
+God is together with us;
+Man is the child of God, the palace of God.
+If one accords with the heart of God,
+Though tens of thousands of Magatsugami
+Raise battle cries and in a single rush,
+Ferocious in might, come attacking,
+How could we fear? In Shikishima,
+The grace of God instantly...'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">カールス『汝は日楯、月鉾の両人に非ざるか。汝が父の真道彦命は壮健なりや』</p>
+            <p class="ja-classical-line">と問ひかけた。二人は口を揃へて、</p>
+            <p class="ja-classical-line">両人『ハイ、吾父はあなたに幽閉されてより、未だ此牢獄に呻吟致し居る様子で御座います』</p>
+            <p class="ja-classical-line">カールス『早く汝の父を救ひ出せよ』</p>
+            <p class="ja-classical-line">二人は此言葉に此場を離れ、彼方此方と牢屋の外を巡り乍ら、</p>
+            <p class="ja-classical-line">両人『日楯、月鉾の兄弟、父の真道彦命を救はむ為に参り候。願はくは在処を知らせ玉へ……』</p>
+            <p class="ja-classical-line">と呼ばはつた。此声にヤーチン姫は間近の獄室より、細き手をさし出し乍ら、</p>
+            <p class="ja-classical-line">ヤーチン姫『ヤアそなたは日、月の兄弟、能くマア救ひに来て下さつた。真道彦命様は此隣室におゐで遊ばします。どうぞ早く救ひ出して上げて下さい』</p>
+            <p class="ja-classical-line">二人は父の在処の分りたると、ヤーチン姫の声とを聞きて、且喜び且驚き乍ら、直に牢獄の錠を捩切り、ヤーチン姫を救ひ出し、次に父の牢獄の戸をねぢ開け、進み入つて見れば、悲しや、真道彦命は痩衰へ、呼吸さへも碌に通つて居ない様な瀕死の状態に陥つてゐた。二人は父の手足に取り付き、あたりを憚らず、嬉しさと悲しさに号泣するのであつた。此声幽かに真道彦命の耳に通じけむ、やつれ果てたる身を起して、力なげに目を見開き、</p>
+            <p class="ja-classical-line">真道彦『アヽそなたは日楯、月鉾の両人、能くマアどうして此処へ来られたか。……アヽやつぱり、夢ではあるまいか』</p>
+            <p class="ja-classical-line">と不思議相に兄弟の顔を見つめてゐる。兄弟は、</p>
+            <p class="ja-classical-line">両人『父上様、決して夢でも現でも御座いませぬ。……実は斯様々々の訳……』</p>
+            <p class="ja-classical-line">と有りし次第を、こまごまと物語つた。真道彦はこれを聞いて、俄に元気づき、旱天の草木が雨に会ひたる如く、顔の色さへ俄に冴えて来た。それよりカールス王、ヤーチン姫、真道彦命は日楯保護の下に、泰安城に一先づ入城する事となり、数百の軍卒に送られて、此牢獄を立去つた。</p>
+            <p class="ja-classical-line">月鉾はテールスタン、ホーレンスを始め、其他のカースル王に仕へ居たる重臣共を、悉く牢獄より救ひ出し、泰安城指して帰り行く。</p>
+            <p class="ja-classical-line">日楯はカールス王、ヤーチン姫、真道彦命を守つて、漸く泰安城の馬場近くになつた。ホーロケース、サアルボースの軍勢は大蛇の鏡に照らされて目を失つたまま、四つ這ひとなつて、蟻のたかつた様に馬場を這ひ廻つてゐる。カールス王は此態を見て、不審に堪へず、</p>
+            <p class="ja-classical-line">カールス『彼は何者なりや』</p>
+            <p class="ja-classical-line">と日楯に尋ねた。日楯は直ちに、</p>
+            <p class="ja-classical-line">『ハイ、彼はセールス姫の家来にして、ホーロケース、サアルボースの部下の軍卒で御座います。向陽山の大蛇の鏡の威徳に照らされて盲目となり、進退谷まつて、あの通り盲目の儘、暗路に迷うてゐる亡者共で御座います。吾々は向陽山の常楠仙人より賜はりたる赤色の玉を以て、折伏の剣に応用し、弟月鉾は白色の玉を以て摂受の剣に応用し、数万の敵を彼の如く、一人も残さず、神の威徳に降服させ、セールス姫は金毛九尾の悪狐と正体を露はし、空中高く姿を消しました。実に稀代の神宝で御座います。此神宝さへあらば、カールス王が泰安城にあつて、世を治め玉ふは実に易々たる事業で御座います』</p>
+            <p class="ja-classical-line">と玉、鏡の効用を略物語つた。王を始めヤーチン姫、真道彦命は首を傾け、此話を感に打たれて聞いて居る。</p>
+            <p class="ja-classical-line">茲に日楯は数万の盲軍に向つて言霊歌を宣り与へた。其歌、</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立別る
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直せ聞直せ
+身の過ちは宣り直せ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+誠一つの言霊の
+珍の力は世を救ふ
+神は吾等と倶にあり
+人は神の子神の宮
+神の心に叶ひなば
+仮令数万の曲津神
+鬨を作つて一散に
+勢猛く攻め来とも
+いかで恐れむ敷島の
+神の恵は忽ちに</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Descend upon my very self,
+Directly opening the darkness of the chest;
+Though not jewels or mirrors, if one polishes
+The jewel of the heart,
+And illuminates the true and clear mirror
+Within the chest bestowed by Kami,
+Then, as you see now, the warped deities [Magakami],
+Every single one, struck with fear by Shinriki,
+Shall prostrate themselves flat upon Daichi,
+Surrendering before the august presence of Kami,
+Returning to the mind of birth,
+Even the blindness of the heart shall instantly
+Open, and the very eyes of flesh
+Shall shine brightly like Tsukihi;
+Ah, Kamunagara, Kamunagara,
+Beholding the august divine majesty [Miizu] right before your eyes,
+Before the august mikoto of the wondrous King Kārsu and Princess Yāchin,
+Now do I clearly reveal it;
+Ah, all you people, all you people!</p>
+          <p class="en-p">Drive out the ugly warped spirits [Magahi]
+Lurking within your hearts,
+Return to the upright spirit of Nahohi,
+Possessing the sincerity received from Kami,
+And following the true path of Ananahi
+Protected by Kuniharutachinōokami,
+Realign your strange and dubious hearts;
+Ah, Kamunagara, Kamunagara,
+With a single breath of our Kototama,
+The suffering of blindness that cannot distinguish even an inch
+Shall instantly clear away,
+And the moon of Shinniyo shall shine
+Upon the ocean of your hearts;
+Whether the morning sun shines or clouds over,
+Whether the moon waxes or wanes,
+Even if Daichi should sink,
+Never foster a double heart
+Before the august presence of Kami;
+Ah, Kamunagara, Kamunagara,</p>
+          <p class="en-p">May your august spirits be blessed and prosperous!』</p>
+          <p class="en-p">As she finished chanting with a clear and refreshing voice, the tens of thousands of armies who until then had been groaning in blindness upon Daichi all opened their eyes simultaneously, joined their hands before the four, and choking with tears of gratitude—wondering if the heavenly deities had descended—surrendered from the very depths of their hearts.</p>
+          <p class="en-p">Hinodewake addressed them all, meticulously preaching and expounding the teachings of the path of Ananahi, causing each to first return to their respective homes, and together with King Kārsu and the others, he calmly and leisurely proceeded to enter the innermost chambers of Taian Castle.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">吾身の上に降りまし
+直に開く胸の暗
+玉や鏡は非ずとも
+心の玉を研きあげ
+神の賜ひし胸中の
+真澄の鏡を照らしなば
+今見る如く曲神は
+一人も残らず神力に
+恐れて大地に平伏し
+神の御前に帰順して
+産の心に立帰り
+心の盲も忽ちに
+開けて肉の眼さへ
+月日の如く照り渡る
+あゝ惟神々々
+神の御稜威を目のあたり
+カールス王やヤーチン姫の
+珍の命の御前に
+只今明かし奉る
+あゝ諸人よ諸人よ</p>
+            <p class="ja-classical-line">汝が心に潜みたる
+醜の曲霊を追ひ出し
+神より受けし真心の
+直日の霊に立返り
+国治立大神の
+守り玉ひし三五の
+誠の道に従ひて
+怪しき心を立て直せ
+あゝ惟神々々
+あが言霊の一息に
+咫尺も弁ぜぬ盲目の
+悩みは忽ち晴れ渡り
+真如の月は汝等が
+心の海に輝かむ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+神の御前に二心
+必ず起す事勿れ
+あゝ惟神々々</p>
+            <p class="ja-classical-line">御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と声も涼しく歌ひ了るや、今迄大地に盲目となつて呻吟しゐたる数万の軍勢は、一斉に目を開き、四人の前に両手を合せ、天津神の降臨かと感謝の涙に咽びつつ、心の底より帰順するのであつた。</p>
+            <p class="ja-classical-line">日楯は一同に向つて、三五の道の教を細々と説き諭し、各々一先づ家路に帰らしめ、カールス王其他と共に泰安城の奥殿に悠々として進み入るのであつた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c15.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 15: 願望成就 [815]</span>
+      </a>
+      <a href="c17.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 17: Sincerity の告白 [817]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
