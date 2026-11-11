@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 難問題 [1119] - Volume 41 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 41 Table of Contents</a>
+      <span>Volume 41</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 41 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 難問題 [1119]</h1>
+      <p class="chapter-title-ja">難問題〔1119〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">King Seran, accompanied by the three, Thames, Rebu, and Karu, arrived at the cavernous mansion of the Kami Kitateru, the sound of their horses' hooves ringing out valiantly at last. Riūn came out to the mouth of the cavern to welcome them.</p>
+          <p class="en-p">Riūn: 'Are you King Seran-sama? I have been waiting for you. Please wait a moment, for I shall go and report to my master.'</p>
+          <p class="en-p">King Seran: 'I pray you, be so kind. We have followed the instructions of Ōgonhime-sama and Kiyoteruhime-sama, and taking advantage of the dark night, have slipped away from the castle of Iruna. I beg you to kindly intercede for us with the Kami Kitateruhiko-sama.'</p>
+          <p class="en-p">Riūn: 'Yes, I understand. I ask that you wait a while.'</p>
+          <p class="en-p">With that, he turned on his heel and proceeded deep into the interior, and bowing before the Kami Kitateru, he spoke.</p>
+          <p class="en-p">Riūn: 'It was indeed King Seran-sama who arrived. Where shall I show him to?'</p>
+          <p class="en-p">The complexion of Yasudarahime changed in a flash with joy, embarrassment, and surprise. The Kami Kitateru, filled with joy, spoke.</p>
+          <p class="en-p">The Kami Kitateru: 'Since I shall meet him now, show him to Room Number Three. And please serve him some hot water and ask him to wait for a while. I am going to the Shinden now to offer my thanks to the Kami. Come, Takenohime, Yasudarahime-dono, let us go to the inner chambers.'</p>
+          <p class="en-p">So saying, he took the lead and advanced to the room before the Kami. Riūn ran out toward the front to welcome King Seran. Leader, left behind, folded his arms and spoke to himself.</p>
+          <p class="en-p">Leader: 'What a strange thing this is. When I came to the mountain of wolves with fear, the many wolves were as docile as dogs. And here, a one-eyed old man like the Kami Kitateru, and a wife who could put flowers to shame—what a strange contrast. Thinking I had come here escorting Yasudarahime-sama, to find that King Seran-sama has arrived—what a mysterious thing this is. Surely, when the Princess sees the King's face, she will make a strange expression, caught between surprise and joy... (In the style of Jōruri) Though it is said that all living things must perish and those who meet must part, and that this is the way of the floating world, we were betrothed by our parents, separated by strange clouds, divided between the country and the capital, and I have spent my mornings and evenings worrying about your well-being. What a lucky day this is. To meet the person I have yearned for so, and in a cavern on Mount Takateru where wolves dwell of all places—a thing no mortal could have known, I have done nothing but weep. When I think of it, I am filled with gratitude; it is a divine intervention, as if the Heavenly Rock Cave itself has been opened, and my heart has been set at ease. How happy I am, how nostalgic I feel... clinging to each other without shame before others' eyes, taking each other's hands, and weeping aloud—how lovely it is. Chan, chan, chan... that is the moment. I, too, would like to taste such a romance once. A man and a woman burning with the blood of youth—how happy they must be. A man and woman who have yearned for each other meeting in a place they never expected—how could this not be a cause for joy? Ahahaha, how auspicious, how auspicious, how very auspicious. The Kami Kitateru is a man of experience, so he is quite stylish. If I am to serve a Senden-shi who understands such things, I would not mind any hardship. A vow of a thousand years, firmer than rock, inside a cavern of a thousand-pulling rock—it is a pun on 'katame' (to harden/to betroth), not just the eyes of the Kami Kitateru, isn't it? Ufufufu.'</p>
+          <p class="en-p">Riūn, who had led King Seran's party to Room Number Three and had come running to report to the Kami Kitateru, saw Leader laughing all by himself.</p>
+          <p class="en-p">Riūn: 'Hey Leader, what are you laughing at? Guests have arrived. Since there are only the two of us, husband and wife, in this mansion, we are short-handed; why don't you hurry and draw some hot water for the guests and attend to them? You are a man with no wit.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">セーラン王は、テームス、レーブ、カルの三人を従へ蹄の音も勇ましく、漸くにして北光の神の岩窟の館に着いた。竜雲は岩窟の口まで出で迎へ、</p>
+            <p class="ja-classical-line">『貴方はセーラン王様で厶いますか、お待ち受け致して居りました。一寸暫くお待ち下さいませ、主人に申上げて来ますから』</p>
+            <p class="ja-classical-line">『何分宜しく頼み入る、吾々は黄金姫、清照姫様の指揮に従ひ、暗夜を幸ひ、イルナの城より忍んで参つたもので厶る。どうぞ北光彦の神様に宜敷くお取りなしを願ひます』</p>
+            <p class="ja-classical-line">『ハイ承知致しました。暫くお待ちを願ひます』</p>
+            <p class="ja-classical-line">と其儘踵をかへし奥深く進み入り、北光の神の前に手を支へ、</p>
+            <p class="ja-classical-line">『正しくセーラン王様のお出で御座いました。どちらへお通し申しませうか』</p>
+            <p class="ja-classical-line">ヤスダラ姫の顔色は嬉しさと恥かしさと驚きとにサツと変つた。北光の神は欣然として、</p>
+            <p class="ja-classical-line">『只今御面会致すから、第三号室に御案内申して置け。さうしてお湯でも差上げて、暫くお待ちを願つて置いて呉れ。吾は是より神殿に参り、神様にお礼を申上げて来る。サア竹野姫、ヤスダラ姫殿、奥へ参りませう』</p>
+            <p class="ja-classical-line">と先に立ち神前の間に進み行く。竜雲は表へさしてセーラン王を迎ふべく駆け出す。リーダーは後に両手を組んで独り言、</p>
+            <p class="ja-classical-line">『何と怪つ体な事があるものだなア。狼の山へ怖々やつて来て見れば、沢山の狼は犬のやうに柔順しい。そこへ北光の神様のやうな、一つ目のお爺さまと、花を欺くやうな奥様、妙なコントラストだ。ヤスダラ姫様のお供をして此処へやつて来たと思へば、セーラン王様がお出でなさるとは何とした不思議の事だらう。定めし姫様も王様のお顔を御覧になつたら、ビツクリと喜びとで妙な顔をなさるだらう………（浄瑠璃口調）生者必滅会者定離、浮世の常とは云ひながら、親と親との許嫁、怪しき雲に隔てられ、国と都に引き分れ、朝な夕なに君の御身の上、案じ暮して居りました。今日は如何なる吉日ぞ。焦れ焦れた其人に、所もあらうに狼の住む高照山の岩窟でお目に懸らうとは、神ならぬ身の知るよしもなく、泣いてばかり居りました。思へば思へば有難や、尊き神の引き合せ、天の岩戸も開けたやうな、私や心になりました。嬉しいわいな、なつかしいわいな………と人目も恥ぢず縋りつき、互に手に手を取り交し、泣き叫ぶこそ可憐らしき。チヤン、チヤン、チヤン………と云ふ場合だ。俺も一度こんなローマンスを味はつて見たいものだ。青春の血に燃ゆる壮者と美人、どんなに嬉しからうぞ。互に焦れ慕うた男と女が思はぬ処で遇ふのだもの、これが嬉しうなうて何とせうぞいのう………。アハヽヽヽ、目出度い目出度い、お目出度い。北光の神様も苦労人丈あつて、中々粋が利いて居るわい。こんな事の分つた宣伝使にお仕へするのなら、俺だつてどんな苦労だつて厭ひはしない。岩より固い千代の固めを、千引の岩の岩窟の中で、北光の神様の目ぢやないが、確りカタメと云ふ洒落だな、ウフヽヽヽ』</p>
+            <p class="ja-classical-line">斯かる所へセーラン王一行を三号室に導き置き、北光の神に報告すべく走つて来た竜雲は、リーダーの唯一人面白さうに笑うて居るのを見て、</p>
+            <p class="ja-classical-line">『おいリーダー、何を笑つて居るのだ。お客さまが見えたのだよ。此館は御夫婦二人きりでお手が足らぬのだから、早くお客さまのお湯でも汲んでお世話をしないか、気の利かぬ男だなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'I have only just arrived myself, and am I not a guest? As a guest, can I do such selfish things? If I have the permission of the Kamisama of Kitateru, I shall draw water, and I shall perform any Goyō you require.'</p>
+          <p class="en-p">Speaker: 'Eh, what a dull-witted man you are.'</p>
+          <p class="en-p">Speaker: 'If I were too quick-witted or too flexible, I might end up making the same mistakes as you did at the Kauji capital on the island of Shiro. Well, do calm down and settle yourself. As they say, "The Ōtori does not rush its wings," and those with great Doriyō do not fuss over such small matters. Ehehehe.'</p>
+          <p class="en-p">Speaker: 'They say that a great Ōotoko has Sōmi but lacks Chie, and you are just a man of large Dōgara who is of no use. It would be appropriate for someone like you to become a Niō-sama and stand stiffly at the Iriguchi of the gate.'</p>
+          <p class="en-p">Speaker: 'Moshi, Riūn-sama, if you have sincerity, then practice Fugenjitsukau. You preached to me along the Michimichi that the Kyōri of Ananai-kyō is not to use a Shishiyō as a staff, nor to rely on others as a source of power. I remember it well.'</p>
+          <p class="en-p">Speaker: 'Eh, it cannot be helped, then from now on it shall be Fugenjitsukau.'</p>
+          <p class="en-p">Speaker: 'Moshi-moshi, Riūn-sama, you just said that you would practice Fugenjitsukau, but does that not already break the principle of Fugenjitsukau?'</p>
+          <p class="en-p">Speaker: 'Eh, you are noisy, mine is a special-made quasi-Fugenjitsukau.'</p>
+          <p class="en-p">Speaker: 'Seiran-ō-sama, I am sorry to have kept you waiting after you have come all this way. However, I have only just arrived myself, and my seat has not even warmed up yet. Though, it has already been two or three days, I am not a servant here, but a rare guest who arrived just a step before you, so please do not take it amiss and please look upon me with favor.'</p>
+          <p class="en-p">Speaker: 'Yes, thank you, has the Kamisama of Kitateru not arrived yet?'</p>
+          <p class="en-p">Speaker: 'He will be here soon. Please wait for a while.'</p>
+          <p class="en-p">Seiran-ō: 'Having climbed the steep mountains of Takateru, I rest my body within the rock cave. Wishing to meet the command of the Kamisama of Kitateru, I have visited following the will of the Kami.'</p>
+          <p class="en-p">Riūn: 'Wait a while longer, Kami-tsukasa. Soon the Kamisama of Kitateru will be here. Takenohime, whose Ikimitama is pure and upright, and his wife the Mikoto are also with him. The time is drawing near when you shall meet the Himegami whom your Mikoto has longed for. Yasudarahime-ki no Mikoto has been longing for you and praying morning and evening.'</p>
+          <p class="en-p">Seiran-ō: 'How mysterious, how is it that Yasudarahime is hiding in this rock cave?'</p>
+          <p class="en-p">Riūn: 'Everything is in accordance with the will of the Kami; the human body is in a world of dreams, being protected as it goes.'</p>
+          <p class="en-p">Speaker: 'I am Kitateruhiko. You have done well to enter this rock cave. Are Koganehime and Kiyoteruhime-dono doing well?'</p>
+          <p class="en-p">Speaker: 'I meet you for the first time. You are the Kamisama of Kitateru, whose name is high in Ananai-kyō; having seen your figure even once, my heart has been strengthened as if I have met a true Ikigami. I humbly ask for your guidance from now on. As you know, the castle of Iruna is in a state of life or death, so following the instructions of Koganehime-sama, I have come here in disguise, though I know it is cowardly and weak.'</p>
+          <p class="en-p">Speaker: 'Ahahaha, please do not worry at all. There is no other way but to leave everything to the Keirin of the Kamisama. We shall now apply our Kamisakura, so please calm your mind and take it easy. As you know, this is the den of wolves, and no matter what hero or great man, they cannot spy into this rock cave. Please be at ease. However, there is one thing I must ask you. It is not a matter of others, but you have a consort called Samarihime, do you not? What do you intend to do with that consort from now on?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『私だつて今来たばつかし、お客さまぢやありませぬか。客の分際として、そんな勝手な事が出来ますか。北光の神様のお許しさへあれば、お湯も汲みませう、どんな御用も致します』</p>
+            <p class="ja-classical-line">『エヽ何と気の利かぬ男だなア』</p>
+            <p class="ja-classical-line">『余り気が利いたり融通が利くと、シロの島の神地の都で失敗なさつたやうな事が出来ますからなア。まあヂツクリと落着きなさい。「大鳥は翼を急がぬ」と云ひまして、度量の大きいものは、さう小さい事にコセつきませぬからなア。エヘヽヽヽ』</p>
+            <p class="ja-classical-line">『大男総身に智慧が廻り兼ねとか云つて、胴柄ばかり大きくつて、間に合はぬ男だなア。お前のやうなものは仁王さまにでもなつて門の入口にシヤチコ張つて居るのが適当だ』</p>
+            <p class="ja-classical-line">『モシ竜雲さま、貴方に誠があるなら、不言実行ですよ。師匠を杖にするな、人を力にするな、とは三五教の教理だと、道々お説教をなさいましたなア。私はよく覚えて居りますよ』</p>
+            <p class="ja-classical-line">『エヽ仕方がない、それなら是から不言実行だ』</p>
+            <p class="ja-classical-line">と第三号室に向つて走り行かうとするのを、リーダーは裾をグツと握り、</p>
+            <p class="ja-classical-line">『モシモシ竜雲さま、不言実行だと今仰有つたが、それがもはや不言実行の原則を破つて居られるでは厶いませぬか』</p>
+            <p class="ja-classical-line">『エヽ八釜しい、俺のは特別製の准不言実行だ』</p>
+            <p class="ja-classical-line">と云ひながら袖振りきつてセーラン王の室に走り出で、恭しく両手を支へて、</p>
+            <p class="ja-classical-line">『セーラン王様、折角のお越しえらうお待たせ申しまして不都合で厶いました。併し乍ら、私もたつた今初めて参つたもの、まだ席も温かくならない位で厶います。と云つても最早二三日は暮れましたが、此処の召使と云ふ訳でもなし、貴方に一足お先に参つた珍客で厶いますから、どうぞ悪しからず見直し聞直し下さいませ』</p>
+            <p class="ja-classical-line">『イヤ有難う、北光の神様はまだお越しになりませぬか』</p>
+            <p class="ja-classical-line">『今お見えになるでせう。暫くお待ちを願ひます』</p>
+            <p class="ja-classical-line">王『高照の嶮しき山を登り来て
+岩窟の中に身をやすめぬる。
+北光の神の命に会はむとて
+神の随々訪ね来しはや』</p>
+            <p class="ja-classical-line">竜雲『今しばし待たせたまはれ神司
+やがては此処に北光の神。
+生身魂清く直なる竹野姫
+妻の命も共にいませり。
+汝が命慕ひたまひし姫神に
+会はせたまはむ時は迫れり。
+ヤスダラ姫貴の命は君を慕ひ
+朝な夕なに祈りたまへる』</p>
+            <p class="ja-classical-line">王『摩訶不思議ヤスダラ姫が如何にして
+これの岩窟に潜み居るにや』</p>
+            <p class="ja-classical-line">竜雲『何事も神のまにまに人の身は
+まもられて行く夢の世なるよ』</p>
+            <p class="ja-classical-line">かく語り合ふ所へ、北光の神は衣服を着替へ威儀を正して入り来り、王に向ひ、</p>
+            <p class="ja-classical-line">『私は北光彦で厶る。能くまア此岩窟に入らせられました。黄金姫、清照姫殿は機嫌よくして居られますかなア』</p>
+            <p class="ja-classical-line">『初めてお目にかかりました。貴方は三五教にて御名も高き北光の神様、一目其お姿を拝しまして、誠の生神様にお目にかかつたやうな心に力づきました。何卒今後の御教導をお願ひ致します。御存じの通りイルナの城は危急存亡の場合で厶りますれば、黄金姫様の御指図に従ひ、卑怯未練とは承知しながら神命を奉じて微行致して参りました』</p>
+            <p class="ja-classical-line">とやや涙ぐみける。</p>
+            <p class="ja-classical-line">『アハヽヽヽ、決して御心配遊ばすな。何事も神様の御経綸に任すより道はありませぬ。これから吾々は神策を施しますから、気を落着けてゆつくりとなさつたがよろしからう。此処は御存じの通り狼の巣窟、如何なる英雄豪傑も、此岩窟ばかりは窺ふ事は出来ませぬ。御安心なさいませ。併し乍ら、貴方に一つお尋ねして置かなければならぬ事が厶ります。それは余の儀では厶らぬ、貴方にはサマリー姫と云ふお妃があるでせう、其妃は今後どうなさるお積りですか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The King was struck dumb by these words, his heart troubled over how to answer, and he remained silent for a while, looking down.</p>
+          <p class="en-p">Kitateruhiko: 'You intend to take Samarihime, whom you have once decided upon as your wife, with you wherever you go and share your hardships with her, do you not? If, by any chance, a splendid woman whom you truly love were to appear here, would you follow your own will and make that woman your wife? Or will you continue to love the Samarihime whom you do not favor, no matter what? I would like to hear your answer to that. Even the god Kitateru has some thoughts on the matter.'</p>
+          <p class="en-p">The King, lost in thought as to how he should answer, finally replied,</p>
+          <p class="en-p">King: 'Yes, I shall leave everything to Kamunagara. We, whose hearts are clouded, cannot judge what is right. I humbly wish to hear your thoughts.'</p>
+          <p class="en-p">He skillfully diverted the words and cast the resolution of the matter back upon the god Kitateru.</p>
+          <p class="en-p">Kitateruhiko: 'Otsuhohoho, you are a King not to be underestimated. I thought you would be troubled for an answer if I, Kitateru, spoke thus, but instead, you have cast a great problem upon me, and Kitateruhiko is somewhat perplexed.'</p>
+          <p class="en-p">King: 'It is useless to hide anything before you, who know all. Furthermore, I do not wish to say things that are not in my heart. You may scold me, but in truth, no matter how I think of it, I cannot help but dislike Samarihime. There was some scheme involved; the Minister of the Right drove away my betrothed and forced his daughter upon me, so in short, it is a marriage without love. I feel that such a marriage of false love is an offense against the Kami. On the other hand, looking at it from another perspective, Samarihime seems to be harboring feelings of love for me from the bottom of her heart at this moment. Therefore, I am suffering day and night, lost in thought as to what I should do. Since it is a matter concerning the rise and fall of the castle of Iruna for the sake of Samarihime alone, I am unable to make a decision.'</p>
+          <p class="en-p">Kitateruhiko: 'What a weak-willed person you are. Why did you not act like a man and refuse firmly at the beginning? You were clinging to your position as King of Seran and consented to a marriage that was not in your heart. You should have had a betrothed permitted by your parents; why did you not fulfill that prior promise? Furthermore, you are fundamentally mistaken. To ignore a betrothed permitted by one's parents and change course halfway is a failure in the way of filial piety. Regardless of the circumstances, why did you not obey the command of your father the King and risk your life to contend for it?'</p>
+          <p class="en-p">King: 'Hearing those words, I repent my own weak will and lack of resolve more than ever. Even if it were a violation of the heavenly law, if I could become husband and wife with Yasudahime, I would have no regrets even if I were to cast away the throne.'</p>
+          <p class="en-p">Kitateruhiko: 'Ufuhohoho, you have finally spoken your true heart. That is your sincere heart without falsehood. However, if that Yasudahime-sama had already shared intimacy with a husband even once, what would you do? Would you still be happy to become her husband? If she had kept her chastity for Yasudahime and had not shared intimacy even once, that would be one thing, but if you think that it does not matter as long as you can be together, then you are no longer human, but a slave to love.'</p>
+          <p class="en-p">King: 'Yes, as you say, if such a thing were true of Yasudahime, I would give her up. However, I believe that in her case, such a thing could not be.'</p>
+          <p class="en-p">Kitateruhiko: 'There is someone I want you to meet now. Please do not be surprised.'</p>
+          <p class="en-p">King: 'Is that Yasudahime? Somehow, such a feeling has come to my mind.'</p>
+          <p class="en-p">Kitateruhiko: 'Ahahaha, as they say, a snake knows the way of a snake.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">王は此言葉にハタとつまり、如何答へむと心を悩ませ、黙然として暫しが間さし俯むいて居る。</p>
+            <p class="ja-classical-line">『一旦妻と定つたサマリー姫を何処迄も連れて、共々に苦労をなさるお考へでせうなア。万一貴方の恋ひ慕ふ立派な女が此処に現はれたとすれば、貴方は自分の意志に従つて其女を妻に致しますか。但は気に入らぬサマリー姫をどこ迄も愛して行きますか。それを聞かして頂きたい。北光の神にも少し考へが厶るから』</p>
+            <p class="ja-classical-line">王は如何は答へむかと、とつおいつ思案に暮れながら、漸くにして、</p>
+            <p class="ja-classical-line">『ハイ何事も惟神に任しませう。心の曇つた吾々、どうしてよいか判断がつきませぬ。どうぞ貴方のお考へを承はりたう御座います』</p>
+            <p class="ja-classical-line">と甘く言葉をそらし、北光の神に其解決をおつつけてしまつた。</p>
+            <p class="ja-classical-line">『オツホヽヽヽ、隅にもおけぬ王様だなア、かう北光が申せば御返答にお困りだらうと思つたが、反対にこちらへ大問題をおつかぶせられ、北光彦も聊か迷惑を致しました』</p>
+            <p class="ja-classical-line">『何も彼も御存じの貴方の前で包み隠すも無駄で厶います。又私も心にもなき事を申上げたくはありませぬ。お叱りかは存じませぬが、実はサマリー姫はどう考へても厭で厭で仕方がありませぬ。何かの策略があつて、右守の司が私の許嫁を追ひ出し、娘を無理に押しつけたので厶いますから、要するに愛のなき縁談で厶います。かかる虚偽的愛の夫婦は却て神様に対し済まないやうな気も致します。又一方より考へて見れば、今日の処サマリー姫は心の底から私に対して愛慕の念を起して居るやうで厶います。それ故に日夜心を痛め、どうしたらよいかと迷うて居る次第で厶います。サマリー姫一人のためにイルナの城の興亡に関する問題ですから、私も決し兼ねて居ります』</p>
+            <p class="ja-classical-line">『何と気の弱いお方だなア。なぜ男らしく、初めにポンと断りを云はなかつたのですか。貴方はセーラン王の位地に恋々として、心にもなき結婚を承諾したのでせう。貴方には親の許した許嫁があつた筈、なぜ先約を履行なさらなかつたか。それから第一間違つて居る。両親の許した許嫁を無視して途中から変更するといふ事は第一孝の道に欠けて居る。仮令如何なる事情があらうとも父王様の命令を遵守し、一身を賭してなぜ争はなかつたのですか』</p>
+            <p class="ja-classical-line">『そのお言葉を聞いて今更の如く自分の薄志弱行を悔みます。私も何とかして天則違反か知らねどもヤスダラ姫と夫婦となる事を得ば、たとへ王位を捨てても悔ゆる処は厶いませぬ』</p>
+            <p class="ja-classical-line">『ウフヽヽヽ、とうとう本音を吹きましたな。それが偽りのなき貴方の真心だ。併しながら、其ヤスダラ姫様が、夫に一回なりとも交はりを結んで居られたならどうなされますか。それでも貴方は喜んで夫婦になるお考へですか。もしヤスダラ姫に対し貞節を守り、一回の交はりもして居なかつたとすれば兎も角、どうでもかまはぬ、添ひさへすればよいと云ふお考へなれば、貴方はもはや人間ではない、恋の奴隷と云ふものですよ』</p>
+            <p class="ja-classical-line">『ハイ、仰せの如くヤスダラ姫にして左様な事がありとすれば私は断念致します。併し彼に限つて左様な事はあるまいと思ひます』</p>
+            <p class="ja-classical-line">『今貴方に会はせたいものがある。驚かないやうにして下さい』</p>
+            <p class="ja-classical-line">『それはヤスダラ姫で厶いますか。何とはなしにそのやうな気分が浮んで参りました』</p>
+            <p class="ja-classical-line">『アハヽヽヽ、矢張り蛇の道は蛇だなア』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: 慈訓 [1118]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: 三番叟 [1120]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
