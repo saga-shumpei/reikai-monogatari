@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 対 Song [946] - Volume 34 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 34 Table of Contents</a>
+      <span>Volume 34</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 34 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: 対 Song [946]</h1>
+      <p class="chapter-title-ja">対歌〔946〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Fusakō, drawn out by the present song and seeming to have himself fallen into a poetic mood, began to chant a clumsy verse out of the pitch-black darkness where even black and white could not be discerned.</p>
+          <p class="en-p">Fusakō now from here shall compose a poem,
+Listen well, Kurohime-sama.
+In Tsukushino, where fields and mountains flourish green,
+A black woman stands alone.
+Seeking the whereabouts of the wish-granting jewel,
+Where is Takahimetsukasa now?
+Seeking the whereabouts of the golden jewel,
+Kurohime-sama is now searching for a man.
+Rejected by the husband, the hiko of Takayama,
+She comes searching without even knowing shame.
+Thinking of Kurohime as Otohime-sama of Riugū,
+I came, but how foolish it is.
+Azuma's Otetsu must surely at this time
+Be gazing at the sky and waiting in yearning.
+Azuma, Otetsu, wait for me awhile
+Until I bring back the souvenir of love.
+Let me transfer to you the sincere heart
+With which Kurohime longs for her husband, and make you rejoice.
+Fusakō too has crossed the ocean far away,
+And has he come to yearn so for his wife?</p>
+          <p class="en-p">It is not that I say only such things,
+But it is for the sake of Kurohime's mitama possessing me.
+How foolish is the heart that forgets the way of the Kamisama
+And thinks only of a wife.
+With a heart like the murakimo in a wife, at Tsukushigata
+Deep is your heart like the shiranuhi.
+What shall I do upon the waves of Kaiyōbanri,
+How frustrating is a body without wings.
+To be deceived by Kurohime's sweet words
+And suffer in an unknown foreign land.
+At this time the mountains of Sio too are tinted with autumn leaves,
+And the brocade palace must be flourishing.
+The divine appearance of Kototabunowakenomikoto,
+It makes me feel as if I am seeing it with my own eyes.
+Even when I recall the divine appearance of Mokusuke's office of the kami,
+My heart grows courageous.
+Every time I see Kurohime's puzzled face,
+I come to grow weary of this floating world.
+Coming to see, before a pitch-dark rock,
+The voice of a mysterious kami is heard.</p>
+          <p class="en-p">How delightful it was when Kurohime, nothing yielding to the other, chanted her own clumsy verse.
+Yoshikō, you too compose a poem;
+Songs clear away the darkness of the heart.
+Enveloped by darkness and the curtain of darkness,
+Even the black face of Kurohime-sama cannot be seen.
+Ahahahaha, ohohohotsuho, ufuhahaha,
+Ehehenihi, I leave off laughing.</p>
+          <p class="en-p">Yoshikō, growing competitive, started spouting rubbish again.</p>
+          <p class="en-p">Listen well to the kototama that Yoshikō proclaims,
+A tone like rolling jewels.
+A fellow who cannot be led with a one-jo or two-jo rope,
+Kurohime binds with a three-strand thread.
+Magonkō, how is he doing now?
+A world of darkness weighing on the heart.
+Not knowing she was such a heartless woman,
+I regret having followed her.
+Far removed from the teachings of the Munetsuchi kami,
+Kurohime must be a magatsukami.
+Fearing the hideous raging of the magatsukami,
+I failed to perceive the evils close at hand.
+The office of the kami that goes forth teaching the path of three-five
+Stole a boat.
+Though this boat is old and decayed, it must be one
+That carries the divine command of Takayamahiko.
+The bitterness of living with bated breath,
+Enveloped in the smelly valley of darkness.
+From now on, I will take leave of Kurohime-sama
+And return to my country together with Fusakō.</p>
+          <p class="en-p">Fusakō, now is the time to make up your mind,
+Before Otohime-sama reveals herself.
+To be jubilant as the living shrine of Otohime-sama of Riugū
+Would be more than one could bear.
+Come, quickly part from Kurohime-sama
+And let us depart for the land of the fire kami.
+Swiftly leaving this valley behind,
+Let us carry intelligence to Takayama.
+How amusing it would be if Takayama, hearing the intelligence,
+Were to hide his form in astonishment.
+If so, no matter how Kurohime makes a fuss,
+There is no remedy like locking the stable door after the horse has bolted.
+Ahahahaha, ohohohootsuho, ufuhahaha,
+Stop it at a reasonable point and leave off.</p>
+          <p class="en-p">Kurohime, raising her voice from within the darkness,</p>
+          <p class="en-p">Listen well, you two fellows Fusayoshi,
+To the divine teachings of Riugū-sama.
+With a face like a starved dog, chattering this and that,
+Your posturing makes one's belly turn.
+Knowing nothing of anything, yet daring to find fault
+With Kurohime—what outrageous fellows.
+Kurohime is the living shrine of the true kami,
+Make no mistake, Fusayoshi.
+Fusayoshi, even if heaven and earth were to turn upside down,
+Takayamahiko is Kurohime's husband.
+If I meet with the command of my dear husband of Takayama,
+I shall report your rudeness and let him hear of it.
+Do not regret it later, both of you,
+Despising Kurohime as an unmarried woman.
+Weighing well the saying that regret avails not before the fact,
+Control your tongues.
+Born a thousand years too soon in mere talk,
+How foolish are the words of the magatsukami you spew.
+Is there anyone in the world who does not understand even this much?
+Even Kurohime is utterly disgusted.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">房公は今の歌に引出され自分も歌心になつたと見え、黒白も分かぬ闇の中から腰折れを謡ひ出したり。</p>
+            <p class="ja-classical-line">『房公がいざこれよりは歌をよむ
+黒姫さまよ確りと聞け。
+野も山も青く茂れる筑紫野に
+黒い女が一人立つなり。
+如意宝珠玉の所在を探ねたる
+高姫司は今やいづくぞ。
+黄金の玉の所在を探ねたる
+黒姫さまは今は男探ねつ。
+高山の彦の夫にはじかれて
+恥も知らずに探し来るかな。
+黒姫を竜宮さまの乙姫と
+思うて来たが馬鹿らしきかな。
+吾妻のお鉄は嘸や今頃は
+空を眺めて待ち佗るらむ。
+吾妻よお鉄よしばし待つてくれ
+愛の土産を持ちかへるまで。
+黒姫が夫を思ふ真心を
+汝に移して喜ばせて見む。
+房公も遥々海を渡り来て
+妻のみ恋しくなりにけるかな。</p>
+            <p class="ja-classical-line">こんな事計り云ふのぢやなけれども
+黒姫の御魂憑りしためぞ。
+神様の道を忘れて妻ばかり
+思ふ心の愚しきかな。
+村肝の心を妻に筑紫潟
+深き心を不知火の汝。
+如何にせむ海洋万里の波の上
+翼なき身のもどかしきかな。
+黒姫の甘き言葉に乗せられて
+知らぬ他国で苦労するかな。
+今頃は四尾の山も紅葉して
+錦の宮は栄えますらむ。
+言依別神の命の御姿
+目に見る如く思はるるかな。
+杢助の神の司の御姿を
+思ひ出しても心勇みぬ。
+黒姫のけげんな顔を見るたびに
+浮世は厭になりにけるかな。
+来て見れば真暗がりの岩の前
+怪しき神の声ぞ聞ゆる。</p>
+            <p class="ja-classical-line">黒姫が負けず劣らず腰折れの
+歌よみし時ぞをかしかりけり。
+芳公よ貴様も一つ歌を詠め
+歌は心の闇を晴らすぞ。
+闇々と闇の帳に包まれて
+黒姫さまの黒顔も見えず。
+アハヽヽヽ、オホヽヽホツホ、ウフヽヽヽ、
+エヘヽヽ、イヒヽ笑ひ置くなり』</p>
+            <p class="ja-classical-line">芳公は負けぬ気になつてまた駄句り出したり。</p>
+            <p class="ja-classical-line">『芳公が宣る言霊をよつく聞け
+玉をころばす様な音色を。
+一条や二条縄でゆかぬ奴
+三筋の糸で縛る黒姫。
+孫公は今はどうして居るだらう
+心にかかる闇の世の中。
+是程の無情な女と知らずして
+ついて来たのを悔しくぞ思ふ。
+惟神神の教に離れたる
+黒姫こそは曲神ならむ。
+曲神の醜の猛びを恐れつつ
+間近の曲を知らざりし吾。
+三五の誠の道を教へ行く
+神の司が船を盗みつ。
+此船は老朽ちたれど高山彦の
+神の命を乗するなるらむ。
+闇がりの臭い谷間に包まれて
+息はづまして暮らす苦しさ。
+是よりは黒姫さまに暇くれて
+房公と共に国へ帰らむ。</p>
+            <p class="ja-classical-line">房公よ思ひ切るのは今なるぞ
+乙姫さまの現はれぬうち。
+竜宮の乙姫さまの生宮と
+はしやがれては堪らざらまし。
+さア早く黒姫さまに立別れ
+立ち去り行かむ火の神国へ。
+逸早くこれの谷間を立ち出でて
+高山彦の注進やせむ。
+注進を聞いて高山驚いて
+姿かくせば嘸面白からむ。
+さうならば黒姫如何に騒ぐとも
+後の祭の詮術もなし。
+アハヽヽヽ、オホヽヽヽツホ、ウフヽヽヽ
+エヽイヽ加減に止めて置くなり』</p>
+            <p class="ja-classical-line">黒姫は闇の中より声を張り上げて、</p>
+            <p class="ja-classical-line">『房芳の二人の奴等よつく聞け
+竜宮様の神の教を。
+痩犬のやうな面してつべこべと
+囀る姿臍をよるなり。
+何事も知らざる癖に黒姫の
+小言云うとは怪しからぬ奴。
+黒姫は誠の神の生宮ぞ
+思ひ違ひをするな房芳。
+房芳よよしや天地はかへるとも
+高山彦は黒姫の夫。
+高山の吾背の命に出遇ひなば
+汝が無礼を告げて聞かせむ。
+独身の黒姫なりと侮つて
+後で後悔するな両人。
+後悔は先に立たぬと云ふことを
+よくわきまへて口を慎め。
+口計り千年先に生れ来て
+吐く曲神の愚しきかな。
+これ位分らぬ奴が世にあろか
+黒姫さへも愛想つかしぬ。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kurohime: 'However much I am insulted, to endure meekly is precisely because I know the way of Kami. If it were a matter of abandoning the way of Kami, this Kurohime would never forgive that scoundrel Fusayoshi. Fusayoshi, quickly reform your heart and return to walk upon the path of sincerity. If Kurohime's words are not to your liking, it would be best for you to do as you please. Wait a moment; if the two of them escape now, this Kurohime will also be somewhat troubled.'</p>
+          <p class="en-p">Fusakō: 'Is that so, or rather, are you somewhat troubled? In the Capital of Fire, it is a great trouble. The conflict between Takayama and Kurohimetsukasa is felt as if one were seeing it now. To hear the voice of jealousy—asking for a time when Kurohime will die or run away—is truly wretched. Singing and chanting, enveloped in the curtain of darkness, composing poems where no dawn breaks. Clearing away the clouds and fog of doubt, I wait for the time when Kurohime's sky of the heart will shine. The joy of cranes nesting in the branches of the pine was brought about first by Aiko no Hime. Come, tighten it more and tighten it, the two of them are making a dry dryness in the four-and-a-half tatami room. If Kurohime-sama finds this place, how damp and moist it will surely become. Having come all this way to search, yet the husband's house is a house that shuts its doors, saying one must not enter. Ah, how interesting, how amusing—the very time to clap one's hands and laugh is surely awaited.</p>
+          <p class="en-p">Aha-ha-ha-ha, ufu-ha-ha-ha-ha, oho-ha-ha-ha! What inauspicious words I hear.'</p>
+          <p class="en-p">Yoshikō began to chant once more from the darkness.</p>
+          <p class="en-p">'The night has grown near to dawning, faintly and dimly. Let us set forth early to the capital of the Land of Fire. Soon enough crows and sparrows will probably sing; it is not only crows, but there are people who weep. Remaining aimlessly here like this will not do; Magokō-sama must have gone on ahead. For me who pursues behind Magokō, Kurohime-sama becomes a hindrance. Though I thought Kurohime-sama was black only in face, I remained unaware that her heart was black as well. Men who swallow all things saying it is well, even if this body should rot away. I am a fellow who once asked will not pull back from the rear; yet Kurohime alone is one whose hand I would draw back from. Even when I say I draw back my hand, it is not the hand of this mountain slope that I draw back, O Kurohime old crone. Though I think I would like to hold her hand and climb up, the sorrow is that unfortunately the waterfall does not exist. Otakidono, around now she is probably embracing her knee-caps and gazing this way.'</p>
+          <p class="en-p">Fusakō began to sing once more.</p>
+          <p class="en-p">'Do not boast of your love, hey you Yoshikō, it is too much; I too have Otetsu staying in my country. If she were a wife like snow-white Otetsu, even if you boast of your love it is fine, and to praise her is also good. Nevertheless, a lizard-face like Otaki, understand a little, it is unsightly.'</p>
+          <p class="en-p">Yoshikō: 'What are you spitting out? Whose face did you call a lizard-face, while possessing a spouse with a weasel-face? Like a rain frog climbing up a persimmon tree, enjoy the huge Otetsu in your dreams. Do you not think it shameful—having a woman with a face as black as iron, yet acting as if you do not care, out of the weakness of falling in love?'</p>
+          <p class="en-p">Kurohime: 'Noisy, both of you like larks, the night has already broken, use water for your hands. Come quickly, offer the Amatsu Norito, finish your morning meal, and make your departure. The fruits of the fig tree are here, but there are no figs to feed to larks. By the grace of the divine spirit of Hinokami, these figs will save our lives. If there were ears of wheat, larks might also fare well, but it is truly a lamentable state. If we only had plenty of provisions, crossing mountain slopes would also be easy, by the divine grace. The pitifulness of the two who have strayed from grace, poor Fusayoshi whose belly must be empty. It is not that I am one who does not know pity, but I am utterly astonished at the excessiveness. Hearing that my lord of Takayama waits, the joy of hurrying to the capital of the Land of Fire. Kurohime has plenty of provisions, for one night, two nights, three nights.'</p>
+          <p class="en-p">Fusakō: 'Hey you, old crone, distribute some to me as well; your spiritual merit would otherwise be too bad. Think of when Momotarō went off to Demon Island and gave even half a dumpling.'</p>
+          <p class="en-p">Kurohime: 'If you were a dog, I might give you about half; if you want it, it would be best to bark bow-wow.'</p>
+          <p class="en-p">Fusakō: 'Instead of making the barking imitation of a dog saying bow-wow, I will imitate a pheasant and say ken-ken.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">如何程に侮辱されてもおとなしく
+忍ぶは神の道知ればこそ。
+神の道捨てた事なら黒姫は
+赦しちや置かぬ房芳の奴。
+房芳よ早く心を立て直し
+誠の道に歩みかへせよ。
+黒姫の言葉がお気に入らぬなら
+お前の勝手にするがよからう。
+待て暫し今両人に逃げられちや
+此黒姫も一寸迷惑』</p>
+            <p class="ja-classical-line">房公『さうか否一寸迷惑なさるかな
+火の都では大の迷惑。
+高山と黒姫司の争ひを
+今見るやうに思はれにけり。
+黒姫が死ぬの走るの暇くれと
+悋気の声を聞くぞうたてき。
+うたうたと闇の帳に包まれて
+明りの立たぬ歌を詠むかな。
+疑ひの雲霧晴れて黒姫の
+心の空の光る時まつ。
+松が枝に鶴の巣籠る悦びを
+愛子の姫が先にせしめつ。
+サア締めたもつと締めたと両人が
+四畳半にてしめりなきする。
+此処黒姫さまが見付けたら
+嘸しめじめと湿るだらうに。
+遥々と探ねて来たのに夫の家は
+入つちやならぬと戸をしめの家。
+面白いあゝをかしいと手を拍つて
+笑ふ時こそ待たれけるかな。</p>
+            <p class="ja-classical-line">アハヽヽヽウフヽヽヽヽヽオホヽヽヽ
+縁起でもない云ひ草ぞ聞く』</p>
+            <p class="ja-classical-line">芳公は又もや闇がりから謡ひ出したり。</p>
+            <p class="ja-classical-line">『ほのぼのと夜は明け近くなりにけり
+早立ち往かむ火の国都へ。
+やがて又烏や雀が鳴くだらう
+烏ばかりか泣く人がある。
+まごまごと此処にかうしちや居られない
+孫公さまは先にいただらう。
+孫公の後おつかけて進む身は
+黒姫さまが邪魔になるなり。
+顔ばかり黒姫さまと思うたに
+心黒しと知らず居たりし。
+何事もよしと呑み込む男達
+よしや此身は朽果つるとも。
+頼まれた事は後へは引かぬ俺
+されど手をひく黒姫計りは。
+手を引くといつてもこれの山坂を
+手を曳くのではない黒姫婆さまよ。
+手を曳いて登り度いとは思へども
+生憎お滝が居らぬ悲しさ。
+お滝殿嘸今頃は膝坊主
+かかへて此方を眺め居るらむ』</p>
+            <p class="ja-classical-line">房公は又もや歌ひ出したり。</p>
+            <p class="ja-classical-line">『のろけないこりや芳公よあんまりだ
+俺もお鉄が国に居るぞよ。
+色白いお鉄のやうな妻なれば
+のろけてもよしほめるのも芳。
+さりながらお滝のやうな蜥蜴面
+ちと心得よ見つともないぞよ』</p>
+            <p class="ja-classical-line">芳公『何吐す蜥蜴面とは誰に云うた
+鼬面した嬶を持ちつつ。
+柿の木に雨蛙奴が登るよな
+でかいお鉄を夢に楽しめ。
+鉄のよな黒い顔した女房を
+房いくなとは思はぬか惚れた弱みで』</p>
+            <p class="ja-classical-line">黒姫『矢釜しい雲雀のやうな二人共
+もう夜が明けた手水つかへよ。
+さア早く天津祝詞を奏上し
+朝餉すまして出立をせよ。
+無花果の木の実はここにあるけれど
+雲雀に食はす無花果はなし。
+惟神神の御霊の幸はひて
+此無花果は生命助ける。
+麦の穂があれば雲雀もよからうが
+実に気の毒な次第なりけり。
+兵糧さへ沢山あれば山坂を
+越えるも安し神の御恵。
+御恵に外れた二人のいぢらしさ
+空腹かるらむ房芳憐れ。
+憐れをば知らぬ吾にはあらねども
+余りの事に呆れ果てけり。
+高山の吾背の君が待つと聞く
+火の国都へ急ぐ楽しさ。
+黒姫は兵糧もたんと持つて居る
+一宿二宿三宿のため』</p>
+            <p class="ja-classical-line">房公『これや婆さま一つ俺にも分配せ
+余り冥加が悪からうぞや。
+桃太郎が鬼ケ島へと往く時も
+団子半ぶんやつた事思へ』</p>
+            <p class="ja-classical-line">黒姫『犬なれば半分位やろも知れぬ
+欲しくばワンワン鳴くがよからう』</p>
+            <p class="ja-classical-line">芳公『ワンワンと犬の鳴き真似するよりも
+雉の真似してケンケンと云ふ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kurohime: 'You pheasant retching with a ken-ken, don't play the fool, screech ke-ke like monkeys.'</p>
+          <p class="en-p">Fusakō: 'Don't make a fool of me, acting like Momotarau while being an old hag, it is laughable.'</p>
+          <p class="en-p">Kurohime: 'To say it is laughable is a lie, you must be starving in both bellies, wanting to eat. Seeing your pitiful expression, I almost want to give you even fig skins.'</p>
+          <p class="en-p">Yoshikō: 'Since we hear that food is given by Kami, those figs belong to me. For Kurohime to monopolize them is unreasonable, I shall charge you with the crime of violating cosmic law.'</p>
+          <p class="en-p">Kurohime: 'The right of first possession belongs to this Kurohime, if you dare plunder them, try it if you like. How pitiful to heap up the sin of plunder and suffer the strict warnings of Tengoku.'</p>
+          <p class="en-p">Fusakō: 'The Kurohime who said eating is pitiful, the joy of eating the figs she held.'</p>
+          <p class="en-p">Kurohime: 'Having my time taken by two larks, Fusakō and Yoshikō, the swift sun Kami has ascended. Shall I give them to the crows cawing, if I grudge feeding them to larks? Yet even these larks, if I think of them as the spirits of Ametsuchi, I cannot leave them aside. Now I will give you one, eat it, she throws them down and gathers the good works of social service.'</p>
+          <p class="en-p">Fusakō: 'Thank you for the generosity of Kurohime-sama, eating one fig, two figs, three figs.'</p>
+          <p class="en-p">Yoshikō: 'Only the figs with good flavor, Kurohime gave us the dregs after she ate. If even the dregs are this sweet, how sweet must the high-grade ones be.'</p>
+          <p class="en-p">Kurohime: 'O-ho-ho-ho.'</p>
+          <p class="en-p">Fusake and Yoshikō all at once, 'A-ha-ha-ha.'</p>
+          <p class="en-p">The three of them restore their good humor with the figs, and climb up Mount Tsukushigadake while singing propaganda songs.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">黒姫『ケンケンと吐く雉にはやりはせぬ
+猿のやうにキヤツキヤツと鳴け』</p>
+            <p class="ja-classical-line">房公『馬鹿にすな婆の癖して桃太郎の
+気取りで居るとは片腹痛い』</p>
+            <p class="ja-classical-line">黒姫『片腹が痛いと云ふのは嘘だらう
+両腹すいた、喰いたからうに。
+痛々しその面付を見るにつけ
+無花果の皮でもやり度ぞある』</p>
+            <p class="ja-classical-line">芳公『食物は神の与へと聞くからは
+其無花果は俺の物だよ。
+黒姫が独占しようとはそりや無理だ
+天則違反の罪に問ふぞよ』</p>
+            <p class="ja-classical-line">黒姫『先取権この黒姫にあるものを
+掠奪するならして見るも芳。
+掠奪の罪を重ねて天国の
+きつき戒め喰ふ憐れさ』</p>
+            <p class="ja-classical-line">房公『喰ふのが憐れさと云つた黒姫が
+持つた無花果喰ふ嬉しさ』</p>
+            <p class="ja-classical-line">黒姫『房、芳の二つの雲雀に暇とられ
+早日の神は昇りましけり。
+カアカアと鳴いた烏に与へよか
+雲雀に喰はすを惜しく思へば。
+さり乍ら此雲雀とて天地の
+みたまと思へば捨てて置かれず。
+さアやらう一つ喰へと投げ出して
+社会奉仕の善業つまむ』</p>
+            <p class="ja-classical-line">房公『有難う黒姫さまの奮発で
+いちじく二じく三じくを喰ふ』</p>
+            <p class="ja-classical-line">芳公『味のよい無花果だけは黒姫が
+喰うた後のかすをくれけり。
+かすでさへ是程甘い無花果は
+上等物はいかに甘からう』</p>
+            <p class="ja-classical-line">黒姫『オホヽヽヽ』</p>
+            <p class="ja-classical-line">房、芳一度に、</p>
+            <p class="ja-classical-line">『アハヽヽヽ』</p>
+            <p class="ja-classical-line">三人は無花果に機嫌をなほし、筑紫ケ岳を宣伝歌を謡ひながら登り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: Song 垣 [954]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: 蜂の巣 [947]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

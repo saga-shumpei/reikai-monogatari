@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: 蜂の巣 [947] - Volume 34 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 34 Table of Contents</a>
+      <span>Volume 34</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 34 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: 蜂の巣 [947]</h1>
+      <p class="chapter-title-ja">蜂の巣〔947〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Following behind Takayamahiko,
+Harubaru coming Kurohime,
+Accompanied by Fusakō and Yoshikō,
+Is climbing up Mount Tsukushigadake.
+Narrow valley paths to the right and left,
+Suiseigan here and there,
+While lifting their heads up,
+Putting strength into their feet,
+Matching their voices with Eiya Eiya,
+They climb up step by step,
+Groaning with Un un un,
+Yoshikō begins to chant a song.</p>
+          <p class="en-p">Yoshikō: 'Ah, Kamunagara Kamunagara,
+Mitama sakiwai mashimashite,
+This steep slope easily,
+Let us climb, Sumiyohime.
+Untokodotskoi, it is breathless,
+Haa haa haa haa, sū sū sū,
+Whenever climbing mountain slopes,
+One must not look ahead!
+Step by step, looking down,
+Feeling as though climbing a ladder,
+If you advance, before you know it to the zetsuchiyō,
+Untokodotskoi, you will arrive,
+So they say, but what a tough slope,
+Climbing up onto the old woman's -,* 
+It seems to have a bit of bone to it,
+My feet are beginning to feel mokamoka,
+Haa haa dotskoi, untokona,
+Around my hips, dotskoi shoyo,
+Somehow, haa haa, strangely,
+Fū sū fū sū, dotskoi shoyo,'</p>
+          <p class="en-p">'Has it not come to pass?
+To climb up to Takayamahiko,
+It breaks one's bones quite a bit,
+Haa haa, now now, haa haa, dotskoi shoyo,
+Kurohime-sama, listen well,
+That pass called Takayamahiko,
+Is rather difficult to climb,
+Even if you say it is hateful, you,-
+Haa haa fū fū, must be cute,
+Dotskoi shoyo, to a cute man,
+Meeting him with haa haa fū fū,
+You have joy hanging down before you,
+Untokodotskoi, on your future path,
+While I have sweat hanging down,
+If I had known it was such a pass,
+Untokodotskoi, from the very beginning,
+I would not have come at all,
+The steepness of Munetsukizaka!
+Suiseigan or igneous rock,
+Though I know not if it be gneiss,'</p>
+          <p class="en-p">'It is truly a hard stone path,
+Everyone, dotskoi, be careful!
+If you carelessly slip and scrape your shins,
+Untokodotskoi,
+To the wives and children left behind at Jitentōshima,
+So that I have no face to show them,
+Fusakō-sama, please be careful too,
+Untokodotskoi, haa haa fū,
+Yoshikō-sama, take care as well,
+Kurohime-sama is, dotskoi shoyo,
+Climbing the Takayama Pass,
+Even if your shins, dotskoi shoyo,
+Are scraped, you must be resigned,
+Like the name of your current husband,
+Tsukushigadake's, dotskoi shoyo,
+Takayama Pass, fū fū fū,
+Are you not crawling along?
+No matter how much you yearn, dotskoi shoyo,
+Even for Takayamahiko, with such,'</p>
+          <p class="en-p">'A hard and steep spirit,
+Kurohime-sama too must be troubled,
+Untokodotskoi, be careful!
+There are sharp stones right over there,
+Having come all the way to the land of Tsukushi,
+Dotskoi, it will not do to get hurt!
+Whether the morning sun shines or clouds over,
+Whether the moon waxes or wanes,
+Even if the great earth sinks,
+Must we not cross this slope?
+Kurohime-sama's, dotskoi shoyo,
+Haa haa fū fū, fū sū sū,
+Used as a sacrifice to love,
+How foolish is the body that climbs,
+Over mountain slopes it has never trodden!
+Ah, when I think of it, in the previous world,
+Untokodotskoi, sweat pours out,
+What kind of sin caused this?
+Karma turns like a small cart,
+Not a small cart, but a stone cart,'</p>
+          <p class="en-p">'Rolling in great numbers, dotskoi shoyo,
+Waiting all around in every direction,
+Untokodotskoi, how hot it is!
+Squeezing out sweat and fat,
+Being chirped at minmin by cicadas,
+My head is baked gangan,
+Untokodotskoi, ah, how terrible!
+There is nothing so pointless as this.
+Ah, Kamunagara Kamunagara,
+Praying to the gods in times of despair,
+Kokutama no Kami, Sumiyohime,
+Tsukiteruhiko no Kamisama,
+Please somehow save me!
+It is not that I am blowing a weak note,
+But to be this miserable is more than I can bear!
+Somewhere around here, let us seek out,
+Some shade of a tree and take a puff, shall we not?
+Untokodotskoi, Kurohime-sama,
+Bring out one more fig for me,
+My throat has come to feel as though it is sticking together,'</p>
+          <p class="en-p">'Haa haa fū fū, fū sū sū,
+If you trace the origin of why we endure,
+Such hardships, dotskoi shoyo,
+It is all for your sake!
+That wrinkled old woman's, dotskoi shoyo,
+Trying to climb up to the pass of Takayama,
+Forgetting her station in life,
+Because of that, even I am troubled,
+Untokodotskoi, and not just me,
+My own old woman at home is troubled too!
+If it is for the sake of the Imperial Great Deity,
+And to serve in the divine work, dotskoi shoyo,
+I begrudge no hardship whatsoever!
+When I think of it, when I think of it, how foolish,
+A thousand ri, two thousand ri, three thousand ri,
+Crossing rough waves, dotskoi shoyo,
+Guided all the way to the island of Tsukushi,
+Haa haa fū fū, ah, it is hot!
+Sweat blurs my vision so I cannot see,
+Things have come to such a pointless pass.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高山彦の後を追ひ
+遥々来りし黒姫は
+房公、芳公を伴ひて
+筑紫ケ岳を登り行く
+細き谷道右左
+水成岩の此処彼処
+頭を抬げて居る中を
+足に力を入れ乍ら
+エイヤエイヤと声揃へ
+一歩々々登り行く
+ウンウンウンと呻きつつ
+芳公は歌を謡ひ出す。</p>
+            <p class="ja-classical-line">芳公『あゝ惟神々々
+御霊幸はひましまして
+此急坂をやすやすと
+登らせ給へ純世姫
+ウントコドツコイ息苦し
+ハアハアハアハア　スウスウスウ
+すべて山坂登るときや
+向ふを眺めちやいかないぞ
+一歩々々俯向いて
+梯子を登る心地して
+進めば何時しか絶頂に
+ウントコドツコイ着くだらう
+とは云ふもののきつい坂
+お嬶の○に上るとは
+チツとは骨がある様だ
+足はモカモカして来だす
+ハアハアドツコイ、ウントコナ
+腰の辺りがドツコイシヨ
+如何やらハアハア変梃に
+フウスウフウスウ、ドツコイシヨ</p>
+            <p class="ja-classical-line">なつて来たでは無いかいな
+高山彦へ登るのは
+余程骨が折れるわい
+ハアハアこれこれハアハア、ドツコイシヨ
+黒姫さまよ聞きなされ
+高山彦と云ふ峠
+中々登り難いぞや
+にくいといつてもお前さまは
+ハアハアフウフウ可愛いかろ
+可愛い男にドツコイシヨ
+ハアハアフウフウあふのだもの
+お前は前途に楽しみが
+ウントコドツコイぶら下る
+私は汗がぶら下る
+こんな峠と知つたなら
+ウントコドツコイ初めから
+私は来るのぢやなかつたに
+胸突坂の嶮しさよ
+水成岩や火成岩
+片麻岩かは知らねども</p>
+            <p class="ja-classical-line">本当に堅い石道だ
+皆さまドツコイ気をつけよ
+ウツカリ滑つて向脛を
+ウントコドツコイ擦り剥いちや
+自転倒島にドツコイシヨ
+残して置いた女房子に
+あはせる顔が無い程に
+房公さまも気をつけよ
+ウントコドツコイ、ハアハアフウ
+芳公さまも気をつける
+黒姫さまはドツコイシヨ
+高山峠を登るのだ
+仮令向脛ドツコイシヨ
+剥いたところで得心だ
+現在夫の名の様な
+筑紫ケ岳のドツコイシヨ
+高山峠をフウフウフウ
+這うて居るのぢや無いかいな
+何程恋しいドツコイシヨ
+高山彦でも此様な</p>
+            <p class="ja-classical-line">きつい険しい心では
+黒姫さまも困るだらう
+ウントコドツコイ気をつけよ
+そこには尖つた石がある
+筑紫の国迄やつて来て
+ドツコイ怪我しちや堪らない
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+此坂越えねばならぬのか
+黒姫さまのドツコイシヨ
+ハアハアフウフウ　フウスウスウ
+恋の犠牲に使はれて
+踏みも習はぬ山坂を
+登り行く身の馬鹿らしさ
+ホンに思へば前の世で
+ウントコドツコイ汗が出る
+如何なる事の罪せしか
+因果は廻る小車の
+小車ならぬ石車</p>
+            <p class="ja-classical-line">沢山転がつてドツコイシヨ
+其処ら四辺に待つて居る
+ウントコドツコイ暑い事ぢや
+汗と脂を絞り出し
+蝉にはミンミン囀られ
+頭はガンガン照されて
+ウントコドツコイ　あゝ偉い
+こんなつまらぬ事は無い
+あゝ惟神々々
+叶はぬ時の神頼み
+国魂神の純世姫
+月照彦の神様よ
+何卒助けて下さンせ
+弱音を吹くぢや無けれども
+こんだけ辛らうては堪らない
+どこぞ此処らの木蔭をば
+求めて一服しようぢやないか
+ウントコドツコイ黒姫さま
+も一つ無花果出しとくれ
+喉がひつつきさうになつて来た</p>
+            <p class="ja-classical-line">ハアハアフウフウ　フウスウスウ
+こンな苦労をするのんも
+元を訊せばドツコイシヨ
+みんなお前の為めぢやぞえ
+皺苦茶婆さまのドツコイシヨ
+分際忘れて高山の
+峠に登らうとする故に
+俺迄迷惑するのんだ
+ウントコドツコイ俺のみか
+家のお嬶も困つてる
+皇大神の御為めに
+御用に立つならドツコイシヨ
+どんな苦労も厭やせぬ
+思へば思へば馬鹿らしい
+千里二千里三千里
+荒波越えてドツコイシヨ
+筑紫の島まで導かれ
+ハアハアフウフウ　あゝ暑い
+汗が滲んで目が見えぬ
+つまらぬ事になつて来た</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Untokodotsukoi Kurohime-sama, let us take a short break. No matter how much one hurries, in two, three, or ten days, one cannot reach the capital of fire. Even if an aunt dies, it is time for a mealtime rest. Dokkoishō dokkoishō. In an age when summer vacations are all the rage, to have no rest is greedy. I too am somehow exhausted. Please let me rest a bit. Look, look, on yonder tree branch, sweet-looking fruits are growing. Once I see those, I cannot bear it. I cannot take another step. Ah, Kamunagara kamunagara, may your Mitama be blessed and prosperous. Oops, dangerous stone wheel, just a slip away from scratching my shins.</p>
+          <p class="en-p">This too is surely the deep and precious divine protection of Kamisama. Let us rest here. Those of you with sturdy feet, please go on ahead. It cannot be bartered for greed or virtue; life is the seed of things. To reach the end and collapse is just burnt garbage. Haa haa fuu fuu, fuu suu suu. Somehow my breath is giving out. Sweat and fat have dried up completely, as if not a single drop remains, turning into a completely parched state. Untokodotsukoi, shall we rest? Saying this, she sits down heavily with a thump and lies down upon the green leaves.</p>
+          <p class="en-p">Kurohime and Fūsō, both of them, rejoiced as if finding a boat in a time of need, approached the shade of the trees to rest, and wiped away their flowing sweat.</p>
+          <p class="en-p">The three of them, while wiping their sweat, are resting in the tree shade where cicadas are singing. Huge blue wasps make a fierce attack. Glancing up suddenly at the sky, a large wasp's nest is hanging down. Crying out 'Goodness, this is terrible!', the three suddenly jump up and run away toward the slope. The swarm of blue wasps, appearing to mistake them for an enemy attack, put all their might into both pairs of wings, buzzing loudly and attacking straight for the heads of the three. Fortunately, the three were wearing sedge hats, so they escaped the sting of the wasps and, with their very lives, ran desperately up the slope for about two or three chō without knowing why. There, like no high mountain, beautiful pure water flows in a gurgling stream.</p>
+          <p class="en-p">Yoshikō: 'Haa haa haa fuu fuu fuu... Ah, how thankful I am. I had no idea such magnificent pure water was gushing out here. It is just like receiving sweet rice cakes in a dream.'</p>
+          <p class="en-p">So saying, he scoops the pure water in both hands and drinks it down cup after cup, looking delicious. Fūsō also drinks the water next.</p>
+          <p class="en-p">Fūsō: 'Ah, how thankful, it is as if I have met a rescue boat. Pure Spirit Jun'yohime-sama, you have given us the water of life. Because of this, I have properly understood the grace of the Pure Spirit. Ah, Kamunagara mitama kawahibakomaseyo.'</p>
+          <p class="en-p">Yoshikō: 'Kurohime-sama, would you not like to have a cup yourself? You must be quite thirsty.'</p>
+          <p class="en-p">Kurohime, making a bitter face, spoke.</p>
+          <p class="en-p">Kurohime: 'Do you know the distinction between the root and the branch, self and others, public and private? With your actions turning heaven and earth upside down, even if I were to thirst, I would never drink such water, why!'</p>
+          <p class="en-p">Yoshikō: 'This is a strange thing to hear again. What is it that pleases you so little?'</p>
+          <p class="en-p">Kurohime: 'Have you forgotten the rule that seniority has its order? Why did you not invite Kurohime, who is your elder, to drink first, and drink after her? For a youngster to drink first and drink afterwards, is that not quite discourteous?'</p>
+          <p class="en-p">Fūsō: 'What a difficult old hag you are. Whether one drinks afterwards or drinks beforehand, the taste of water should be no different. To have rigid rules brandished about in a place like this is quite more than one can bear. Kurohime-sama, you are going against the supreme benevolence and love of cherishing your subordinates. If you say such things, we too have quite a bit to say for ourselves. Long ago, when there was a battle at Mount Zion, among the subordinates of Kototamawake no Mikoto there was a general named Kunijiwake. At that time, many subordinates suffered severe wounds from the enemy forces and were troubled by thirst. General Kunijiwake also suffered severe wounds and wanted to drink water, but since there was no water close at hand, a subordinate vassal managed to go down to a mountain stream, fill his cap with water, and bring it before Kunijiwake. At that time, many subordinate vassals looked at that water with envious expressions. General Kunijiwake saw this, and deciding not to drink the water he himself desired, told them to let his subordinate vassals drink it, whereupon he met his death in battle on the spot. If one intends to become a leader of men, without that degree of merciful love, subordinates will not grow. You have long been blowing your own horn and engaging in propaganda, but I wondered why not a single genuine subordinate was produced—yet after all, you have a major spiritual defect. Can you do propaganda with such egoism? Even if you chatter grandly about how God is love or how saving people is God, it is useless if facts do not accompany it. Since you are all words and no action, that is why we too end up getting sick of you. When people speak of being distant, they are talking about you. To make a fuss over a mere cup of water is more than I can take.'</p>
+          <p class="en-p">Yoshikō: 'Hey Fūsō, you had better stop such distant talk. Since it would be inexcusable toward Mizu no Mitama-sama if it turned into a petty squabble over water, after all. We are not strangers to one another, so let us wash away this kind of conflict cleanly into the water.'</p>
+          <p class="en-p">Kurohime: 'What a skillful man you are, always picking holes in every word! To say that my tongue slipped while I was off guard, and to attack so hastily—surely your own judgment is not very good either. If you are going to find fault with people, first reflect on your own body and consider your own actions.'</p>
+          <p class="en-p">With that, she bared her white teeth, thrust her chin forward in a sullen pout, and grunted two or three times.</p>
+          <p class="en-p">Fūsō: 'Ah, since we still have to climb this steep slope quite a bit from here on, shall we call it quits with the quarrel around here? Now, everyone, let us set off.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ウントコドツコイ黒姫さま
+一寸一服しようぢやないか
+何程あせつて見た処が
+二日や三日や十日では
+火の国都へ行かれない
+叔母が死んでも食休み
+ドツコイシヨードツコイシヨー
+暑中休暇の流行る世に
+休なしとは胴欲ぢや
+私もどうやら屁古垂れた
+何卒一服さして呉れ
+それそれ向ふの木の枝に
+甘さうな果実がなつて居る
+あれ見てからは堪らない
+もう一歩も行けませぬ
+あゝ惟神々々
+御霊幸はひましませよ
+オツト危ない石車
+スツテの事で向脛を
+傷ひやぶる処だつた</p>
+            <p class="ja-classical-line">これも矢張り神様の
+深き尊き御守護
+此処で休んで行きませう
+御足の達者な御方等は
+何卒お先へ行つてくれ
+欲にも徳にも代へられぬ
+生命あつての物種だ
+行きつきバツタリ焼糞だ
+ハアハアフウフウ　フウスウスウ
+如何やら呼吸がきれかけた
+汗も膏も乾き果て
+もう一滴も出ない様に
+カンピンタンになりかけた
+ウントコドツコイ休まうか』
+云ひつつドスンと腰下し
+青葉の上に横たはる
+黒姫、房公両人は
+渡りに舟と喜んで
+木蔭に立寄り息休め
+流るる汗を拭ひける。</p>
+            <p class="ja-classical-line">三人は汗を拭ひ乍ら、油蝉の鳴く木蔭に息を休めて居る。巨大な青蜂等が盛に襲撃する。フツと空を見上ぐれば大きな蜂の巣がぶら下つて居る。三人は『コリヤ大変！』と俄に立ち上り坂道さして逃げ出す。青蜂の群は敵の襲来と見誤つたと見え、両方の羽翼に極力馬力を掛け、ブーンと唸りを立てて三人の頭を目蒐けて襲撃する。三人は幸ひ笠を被つて居たので蜂の剣を免れ、生命辛々二三丁許り思はず知らず坂道を駆登つて了つた。其処には高い山にも似ず美しい清水がチヨロチヨロと流れて居る。</p>
+            <p class="ja-classical-line">芳公『ハアハアハアフウフウフウ……あゝ有難い。こんな結構な清水が此処に湧いて居るとは心づかなかつた。丸で夢に牡丹餅を貰つた様なものだ』</p>
+            <p class="ja-classical-line">と云ひながら清水を両手に掬んで甘さうに何杯も何杯も飲み乾す。房公も次いで水を飲む。</p>
+            <p class="ja-classical-line">房公『あゝ有難い、助け舟に遭うた様だ。瑞の御霊の純世姫様、生命の清水を与へて頂きました。之で瑞の御霊の御恩も適切に分らして頂きました。あゝ惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">芳公『黒姫さま、貴女も一杯お飲りなさつては如何ですか、随分喉が乾いたでせう』</p>
+            <p class="ja-classical-line">黒姫は苦りきつた顔をし乍ら、</p>
+            <p class="ja-classical-line">黒姫『お前は本末自他公私の区別を知つて居ますか。天地転倒したお前の行ひ、そんな水は仮令渇しても飲みませぬワイ』</p>
+            <p class="ja-classical-line">芳公『これは又妙な事を承はります。何がそれ程お気に入らないのですか』</p>
+            <p class="ja-classical-line">黒姫『長幼序あり、と云ふ事を忘れましたか。何故長者たる黒姫に先に水を勧めて其後を飲みなさらぬ。若い者が先へ飲んで其後を飲めとはチツと御無礼ではありませぬか』</p>
+            <p class="ja-classical-line">房公『なアんとむつかしい婆んつだ喃。後から飲んでも前から飲んでも水の味に変りはあるまい。こんな処まで杓子定規をふりまはされて堪つたものぢやない。黒姫さま、お前さまは部下を可愛がると云ふ至仁至愛の心に背いて居ますな。そんな事を仰せられると俺達の方にも随分言ひ分がありますよ。昔シオン山に戦ひのあつた時、言霊別命の部下に国治別と云ふ大将があつた。其時数多の部下が敵軍の為めに重傷を負ひ喉が乾いて困つて居つた。国治別の大将も同じく重傷を負ひ水を飲みたがつて居たが、手近に水が無いので部下の臣卒がやつとの事で谷川に下り、帽子に水を盛つて国治別の前へ持つて来た。其時に沢山の部下の臣卒は其水を眺めて羨ましさうな顔色をして居た。国治別神はそれを見て自分の飲み度い水も飲まず、部下の臣卒に飲ましてやれといつて其場に討死をなされたと云ふ事だ。人の頭にならうと思へば其位な慈愛の心が無くては部下は育ちませぬよ。お前さまは永らく法螺を吹いて宣伝をして居るが、真味の部下が一人も出来ぬので不思議と思つて居たが、矢張精神上の大欠陥がある。そんな利己主義で宣伝が出来ますか。神は愛だとか、人を救ふのが神だとか、何程立派に口先で喋り立てても事実が伴はねば駄目ですよ。お前さまは有言不実行だからそれで吾々も嫌になつて了ふのだ。水臭いと云ふのはお前さまの事だ。水の一杯位でゴテゴテ云ふのだから堪らないわ』</p>
+            <p class="ja-classical-line">芳公『オイ房公、もうそんな水臭い話はよしにせい。下らぬ水掛喧嘩になつちや瑞の御霊様に対して申訳がないからな。みず知らずの仲ぢやあるまいし、もうこんな争ひは綺麗薩張と水に流さうぢやないか』</p>
+            <p class="ja-classical-line">黒姫『能うまあツベコベと揚足をとる男だなあ。妾が不用意の間に口が辷つたと云つて、それ程短兵急に攻めると云ふのはチツとお前さまも量見があまり良くはありますまい。人に叱言を言ふのなら先づ自分の身を省み、行ひを考へてからなさいませや』</p>
+            <p class="ja-classical-line">と白い歯を出し頤を前にニユウと出し、二ツ三ツしやくつてみせた。</p>
+            <p class="ja-classical-line">房公『あゝ、まだこれから此急坂を随分てくらねばなるまいから、喧嘩は此処等できり上げておかうかい。さア御一同発足致しませう』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 対 Song [946]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: 無 Flower 果 [948]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
