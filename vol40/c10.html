@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 10: 衝突 [1094] - Volume 40 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 40 Table of Contents</a>
+      <span>Volume 40</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 40 &bull; Chapter 10</span>
+      <h1 class="chapter-title-en">Chapter 10: 衝突 [1094]</h1>
+      <p class="chapter-title-ja">衝突〔1094〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Rebu: 'The early autumn wind rustles and blows fiercely over the mountain peaks. Along the slope of Tamayamatauge, Ōgonhime and her daughter Kiyoteruhime, the mother and daughter pair, were traveling. To save the Magakami of Ōkuronushi, who is possessed by the eight-forked Orochi that dwells in the capital of Haruna in the land of the Moon, and who has been led astray by the Mikoto of Kamususanōnōokami, the two have crossed rugged mountains and rivers, obeying the Kototama. While being soaked by rain and blown by the Arakaze, they have finally reached this point. Near the steep slope stands a Chibikiiha, and taking this as a stroke of good fortune, they approached it.'</p>
+          <p class="en-p">Rebu: 'As the mother and daughter sat down to rest, there came a man descending the steep slope with a thundering sound, as if shooting an arrow. When I looked closely, I saw it was the Kamuzukasa whom I had unexpectedly met at the foot of Tamayamatauge. Seeing the figure of Rebu, the mother and daughter raised their voices and beckoned, so I stopped. I climbed back up the slope I had passed, approached the two, and wiped away the sweat flowing down. You are the Kamuzukasa of the mother and daughter, and I am Rebu. By the divine guidance of the Lord, we have met in an unexpected place. When I parted from you before...'</p>
+          <p class="en-p">Rebu: 'I felt you were a cruel person and resented you deeply. Just as one man hid himself in the forest and I was searching for his whereabouts, the samurai subordinates of Kugihiko, who had crossed the river to the other side, crossed the river again. They appeared before Rebu and shouted that the pilgrims, the mother and daughter who were just there, were undoubtedly the daughter of the centipede and Koitohime, and that they would chase them down, capture them, and drag them before Ōkuronushi. Being startled and bewildered, I, Rebu, with my quick wit, put on a feigned, blank face, grabbed the horse's bridle, and shouted, "Wait, wait!"'</p>
+          <p class="en-p">Rebu: 'I am the official of Rebu, serving Onikumawake. I, like you, approached them suspecting that the mother and daughter pilgrims were the mother and daughter of the centipede. But when I examined their faces closely, they were as different as snow and ink. Looking at the face of the one-eyed old woman, it was wrinkled and pockmarked; and when I looked at the daughter, she was also a great fool. They are a mother and daughter of low status, and certainly not the people you are looking for. Rather than wasting your precious time on such trivial things, you should advance to the capital of Karumata as soon as possible and achieve great merit and fame. I scolded them with such words.'</p>
+          <p class="en-p">Rebu: 'When I scolded them, the knights under Kugihiko nodded and crossed the river again, and I was glad to see them go. Thinking it over carefully, I realize that your abandoning me was part of a deep plan. I, Rebu, who lacked the wisdom of foresight, now marvel at it. Filled with enthusiasm, I followed your trail, crossed the pass of Tamayama, and pursued you. I am happy to have met you here, and there is nothing more joyful than this. Ah, I pray, both of you, take Rebu the official to the capital of Haruna in the land of the Moon, and let me proceed to the mansion of Onikumawake. Kannagara. I pray to the Kami.'</p>
+          <p class="en-p">Rebu: 'Even if some Magakami should appear on the way and cause trouble, I, Rebu, who have entrusted myself to the Kami, will stake my life and will not let you fail to achieve your purpose. Please, I beg you to allow me to accompany you. Ah, Kannagara, Kannagara. I pray before the Kami.'</p>
+          <p class="en-p">He expressed his feelings in place of a song and earnestly requested to be allowed to accompany them to the capital of Haruna. Ōgonhime said with a stern tone,</p>
+          <p class="en-p">Ōgonhime: 'Although your request is kind, we, mother and daughter, have received a special mission from the Kami of Hinodewake, and from the beginning, we were not permitted to have any companions. Therefore, no matter how much you beg me now, I cannot take you with us. This does not mean I am rejecting you, so please do not take it the wrong way.'</p>
+          <p class="en-p">Rebu: 'If you say so, I cannot insist any further. Since that is the case, I have no choice, so I will act independently and guard the front and rear of you, mother and daughter.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">レーブ『初秋の風はザワザワと
+峰の尾上を吹きまくる
+玉山峠の坂道を
+黄金姫を初めとし
+清照姫の母娘連れ
+神素盞嗚大神の
+御言畏み月の国
+ハルナの都に蟠まる
+八岐の大蛇に憑かれたる
+大黒主の枉神を
+言向和し天地の
+尊き神の御光に
+救はむものと両人は
+険しき山川打渡り
+雨にはそぼち荒風に
+吹かれながらもやうやうに
+此処迄進み来りけり
+険しき坂の傍に
+スツクと立てる千引岩
+これ幸ひと立寄つて</p>
+            <p class="ja-classical-line">母娘二人は腰をかけ
+息を休むる折もあれ
+矢を射る如く峻坂を
+地響きさせつトントンと
+下り来れる男あり
+よくよくすかし眺むれば
+玉山峠の登り口
+思はず出会うた神司
+レーブの姿と見るよりも
+母娘は声をはり上げて
+手招きすれば立止まり
+行き過したる坂道を
+再び登りて両人が
+側に近寄りシトシトと
+流るる汗を押拭ひ
+貴方は母娘の神司
+私はレーブで厶ります
+尊き神の引合はせ
+思はぬ処で会ひました
+貴方に別れた其時は</p>
+            <p class="ja-classical-line">酷いお方と心にて
+きつく怨んで居りました
+一人の男は森林へ
+姿を隠し行衛をば
+尋ぬる折しも河渡り
+向ふへ越えた釘彦の
+手下の武士二騎三騎
+再び河を打渡り
+レーブの前に現はれて
+今居た母娘の巡礼は
+蜈蚣の姫に小糸姫
+テツキリそれに違ひない
+後追つかけて引捕へ
+大黒主の御前に
+引連れ行かむと呶鳴る故
+ハツと当惑しながらも
+早速の頓智此レーブ
+そしらぬ顔の惚け面
+馬の轡を引掴み
+こりやこりや待つた、こりや待つた</p>
+            <p class="ja-classical-line">鬼熊別に仕へたる
+私はレーブの司ぞや
+吾も汝等と同様に
+母娘二人の巡礼は
+蜈蚣の姫の母娘ぞと
+疑ひながら近寄つて
+よくよく顔を調ぶれば
+似ても似つかぬ雪と墨
+片目婆さまの皺苦茶に
+痘痕をあしらふ御面相
+娘は如何にと眺むれば
+これ亦偉いドテ南瓜
+下賤の姿の母娘づれ
+決して探ぬる人でない
+くだらぬことに骨を折り
+貴重な光陰潰すより
+一時も早くカルマタの
+都に進み抜群の
+功名手柄をしたがよい
+何ぢやかんぢやと口極め</p>
+            <p class="ja-classical-line">罵り散らせば釘彦の
+手下の騎士は首肯いて
+再び河を打渡り
+帰り行くこそ嬉しけれ
+つらつら思ひ廻らせば
+貴女が私を捨てたのは
+深い仕組のありしこと
+前知の明なき此レーブ
+今更の如感嘆し
+勢込んでスタスタと
+お後を慕ひ玉山の
+峠を越えて後を追ひ
+此処に目出度く面会し
+これほど嬉しい事はない
+あゝ願はくば両人よ
+レーブの司を月の国
+ハルナの都に伴ひて
+鬼熊別の館まで
+進ませ給へ惟神
+神に誓ひて願ぎまつる</p>
+            <p class="ja-classical-line">途中に如何なる枉神の
+現はれ来りて騒やるとも
+神に任せし此レーブ
+命を的に投げ出して
+無事に貴女の目的を
+達成せしめにやおきませぬ
+何卒お供を許されよ
+あゝ惟神々々
+神の御前に祈ぎまつる』</p>
+            <p class="ja-classical-line">と歌に代へて所感を述べ、ハルナの都まで随行を許されむ事を懇願した。黄金姫は言葉厳かに、</p>
+            <p class="ja-classical-line">『折角の其方の親切な願なれど吾々母娘は日の出別の神様の特命を受け、もとより供を許されなかつたのだから、今になつて何程お前が頼んでも連れて行く事は出来ない、さうだと云つて貴方を排斥するのではない程に、何卒悪くとらぬ様にしてお呉れ』</p>
+            <p class="ja-classical-line">レーブ『さう仰せらるれば、たつてお頼み申すわけには参りませぬ。それなら私も是非が御座いませぬから単独行動をとり、貴女方母娘の前後を守つて参りませう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kiyoteru: 'Dōzo, please proceed within a range where we, mother and daughter, cannot be seen. If it is said that we went accompanied by you, there will be no excuse for us, mother and daughter, to make.'</p>
+          <p class="en-p">Rebu: 'If that is the case, I shall not insist stubbornly. I shall maintain an attitude of Furifusoku from here on and, in any event, proceed to the capital of Haruna. Dōzo, I ask that you grant me an audience once you have arrived at the capital of Haruna. I have been commanded by my Goshiyujinsama to seek the Arika of you two, so if I can only know your Arika, that will be sufficient. In that case, I shall follow you from the shadows, so I ask for your understanding in this matter alone.'</p>
+          <p class="en-p">Koganehime: 'Ah, there is no Shikata. You may do as you please.'</p>
+          <p class="en-p">Rebu: 'Yes, Arigata.'</p>
+          <p class="en-p">Rebu was choking with Rakurui. At this moment, the sounds of Horagahi, Jindaiko, bells, and the Yasake echoed, startling the Kodama from the bottom of the valley.</p>
+          <p class="en-p">Kiyoteru: 'Suha, this is a grave matter. It must be the subordinates of Daikokunushi of the Brahman religion. It will be a disaster if we are captured by him.'</p>
+          <p class="en-p">The mother and daughter hid themselves behind a rock, intending to wait for the troop to pass. Rebu stood up gallantly.</p>
+          <p class="en-p">Rebu: 'Ah, now is the time to manifest my loyalty. Excuse me, you two, please hide yourselves in the shadow of this rock and wait. This army must not be allowed to advance to the mansion of Iso. From here, I shall fight with all my might and force the enemy to retreat.'</p>
+          <p class="en-p">Koganehime: 'You must never injure the enemy. Defend against them with the Kototama of virtuous words and beautiful phrases. This narrow valley path is a steep slope; no matter how many enemies come to attack, they cannot rush up all at once. It is in accordance with the divine will to pacify them one by one. It would be best for you to attempt the first battle. When you see that it is truly impossible, I, Koganehime, shall take your place and open a battle of Kototama.'</p>
+          <p class="en-p">Rebu: 'I understand. This is a difficult pass where it is said that if one soldier stands here, ten thousand cannot advance; I alone am sufficient.'</p>
+          <p class="en-p">Rebu braced himself and stood up with courage.</p>
+          <p class="en-p">Just then, the warrior at the vanguard, blowing a Horagahi, came climbing up, organizing his formation. The sight of dozens of banners fluttering in the wind, advancing in a single-column formation, was just like looking at an Emakimono. Rebu stood upright on top of a massive rock, gazing at this scene, waiting impatiently for the enemy army to approach.</p>
+          <p class="en-p">The warrior at the head of the line was singing a military song bravely while climbing the steep slope.</p>
+          <p class="en-p">'Surrounding the three directions of east, west, and south,
+With the blue ocean,
+The moon country, the first in the world,
+With the divine authority of the Lord God shining clearly,
+The pillar of the Brahman religion,
+Which shines and glows,
+Has appeared as Daikokunushi.
+This time, at the divine mansion of Iso,
+The subordinates of the crooked god of Lord Susanoo,
+Have gathered,
+And are training in martial arts morning and evening,
+Planning to attack the moon in one fell swoop,
+And overturn the main castle of the Brahman religion.
+Foreknowing that evil act,
+The divine pillar we serve,
+Daikokunushi, in his awe,
+Has appointed Oniharawake as the general,
+And entrusted the great warriors,
+To General Ranchi and Katahiko.
+
+We ascend on the crusade of the demons.
+How joyful is our body,
+Serving in that divine work.
+Even if the morning sun shines or clouds over,
+Even if the moon waxes or wanes,
+Even if the earth sinks,
+Shall we not overturn the main castle of the San-Go-Kyo?
+Under the protection of Daikokuhiko,
+The Jizaiten of the Tokoyo country,
+As he dwells ever more deeply,
+No matter how the crooked ones rage,
+Or how much courage they have to crush the demons,
+Why should we fear?
+This body, forged in the teachings of the Brahman,
+Shall have no enemy that can stand against it.
+Advance, advance, come, advance,
+Until the subordinates of the crooked god of Lord Susanoo perish,
+Until the army of Magatsu is lost.'</p>
+          <p class="en-p">With such a majestic and imposing air, they advanced while singing.</p>
+          <p class="en-p">The subordinates of General Ranchi had already reached the foot of the rock where Rebu stood. Rebu raised his voice loudly and...</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">清照『何卒吾々母娘の目に見えない範囲内で行つて下さいや。もしもお供をつれて行つたと云はれては吾々母娘の申訳が立ちませぬからな』</p>
+            <p class="ja-classical-line">レーブ『左様なれば、たつて無理にはお願を申しませぬ。私は之より不離不即の態度を保ち、兎も角もハルナの都へ参ります、どうぞハルナの都へおいでになつたら私を一度御引見下さる様に御願を致しておきます。私も貴女様お二人の所在を尋ぬべく御主人様に命令を受けたもので厶いますから、貴方等の所在さへ分れば、それで宜いので厶います。それなら之から見え隠れにお供をしますから、こればかりはお含みを願ひます』</p>
+            <p class="ja-classical-line">黄金『あゝ仕方がない。お前の勝手にしたが宜からう』</p>
+            <p class="ja-classical-line">レーブ『はい、有難う』</p>
+            <p class="ja-classical-line">と落涙に咽んでゐる。此時谷底より聞え来る法螺貝、陣太鼓、鐘の音、矢叫びの声、木谺を驚かして響き来る。</p>
+            <p class="ja-classical-line">『素破こそ一大事、バラモン教の大黒主が部下の者ならむ。彼に捕まつては大変』</p>
+            <p class="ja-classical-line">と母娘は岩の後に身を隠し、一隊の通過を待たむとした。レーブは勇み立ち、</p>
+            <p class="ja-classical-line">『やあ、愈忠義の現はし時、もしもし御両人様、貴女は此岩影に身を忍びお待ち下さいませ。此軍隊をイソの館へ進ませてはなりませぬ。これより私が力限り戦つて敵を退却させて見ませう』</p>
+            <p class="ja-classical-line">黄金『決して敵を傷つけてはなりませぬよ。善言美詞の言霊を以てお防ぎなさい。此細谷道、而も急坂、何程数多の敵が攻め上り来るとも、一度にドツとかかる事は出来まい。片端から言向和すが神慮に叶うたやり方、先づ其方が第一戦を試みたが宜からう。とても叶はぬと見てとつた時は此黄金姫が立ち代つて言霊戦を開いて見ようから』</p>
+            <p class="ja-classical-line">レーブ『承知致しました。一卒これに拠れば万卒進むべからずと云ふ此難所、私一人で大丈夫です』</p>
+            <p class="ja-classical-line">と武者振ひして勇み立つた。</p>
+            <p class="ja-classical-line">かかる処へブウブウと先登に立つた武士は法螺貝を吹き陣容を整へ登り来る。旗指物、幾十となく風に翻り単縦陣を作りて進む其光景、恰も絵巻物を見る如くであつた。レーブは千引の岩の上に直立し、此光景を眺め敵軍の近づくのを今や遅しと待つてゐる。</p>
+            <p class="ja-classical-line">先頭に立つた武士は急坂を上りつつ勇ましく軍歌を歌つてゐる。</p>
+            <p class="ja-classical-line">『東西南の三方に
+青海ケ原を巡らせる
+世界で一の月の国
+神の御稜威も明かに
+照り輝きしバラモンの
+教の柱は畏くも
+大黒主と現れましぬ
+此度イソの神館
+神素盞嗚の枉神が
+手下の者共集まりて
+朝な夕なに武を練りつ
+一挙に月へ攻め寄せて
+バラモン教の本城を
+覆へさむと企み居る
+其曲業を前知して
+吾等が奉ずる神柱
+大黒主は畏くも
+鬼春別を将となし
+ランチ将軍片彦の
+大武士を任け給ひ</p>
+            <p class="ja-classical-line">悪魔の征途に上ります
+其神業に仕へ行く
+吾等の身こそ楽しけれ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+三五教の本城を
+覆へさずにおくべきか
+常世の国の自在天
+大国彦の御守り
+愈深くましませば
+如何なる枉の猛ぶとも
+鬼神を挫ぐ勇あるも
+などか恐れむバラモンの
+教に鍛へし此体
+刃向ふ敵はあらざらめ
+進めよ進め　いざ進め
+神素盞嗚の曲神の
+手下の残らず亡ぶまで
+枉津の軍の失するまで』</p>
+            <p class="ja-classical-line">と歌ひながら旗鼓堂々と進み来る物々しさ。</p>
+            <p class="ja-classical-line">ランチ将軍の部下は早くもレーブの立てる岩の麓まで進んで来た。レーブは大音声を張り上げながら、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Rebu: 'Hey, hey, I am a Kamuzukasa of the Brahman Kyō, a kinsman of Onikumawake. Just now, by the revelation of Daijizaiten, I foreknew that your party would come to this place, and I have been waiting for you, thinking it long. You too are surely a subordinate of the Brahman. If I may say so, we are on the same side. Although it is my true intention to guide you, I hear from your recent Gunka that you are marching upon the mansion of Kamususanōnōokami, who possesses infinite Jinji. Having heard this, I cannot allow even a moment of Iuyo. I shall launch the Kototama of Shinpen and Fushigi from one end to the other, and I will force every one of you to surrender and submit. Wait for a while.'</p>
+          <p class="en-p">He shouted this. The warrior standing at the head was a clever squad leader named Karu. Upon hearing this voice of Rebu, Karu stopped in his tracks.</p>
+          <p class="en-p">Karu: 'Well, I do not understand your words. You are a Kamuzukasa of the Brahman Kyō, yet why do you speak such things as if you have lost your mind? You must have gone mad. Get out of the way, you are in the way.'</p>
+          <p class="en-p">As he attempted to advance, Rebu had already piled up dozens of sharp stones on the rock before anyone noticed. Holding a rock in his right hand and glaring, he threatened that if they advanced even one step, he would crush their skulls with these rocks. Karu glared with wide eyes.</p>
+          <p class="en-p">Karu: 'Hey, hey, Rebu, what do you intend to do by holding such a stone? Isn't that a bit dangerous?'</p>
+          <p class="en-p">Rebu: 'Ha ha ha, it is not dangerous in the slightest. No matter how many of your allies come rushing here, what time or effort would it take to annihilate every one of you on this narrow, difficult path? Turn back from here this instant.'</p>
+          <p class="en-p">Karu glared at Rebu's face, and as they stared at each other in silence, a voice came from behind.</p>
+          <p class="en-p">Voice: 'Advance, advance!'</p>
+          <p class="en-p">As the force climbed up, Karu was forced to advance, pushed from behind. Rebu, acting lawlessly, took the rock and, aiming so as not to hit the enemy, threw it to give them a scare. The rock made a clattering sound and tumbled down to the bottom of the valley.</p>
+          <p class="en-p">Karu: 'Hey, hey, that is dangerous. What are you doing?'</p>
+          <p class="en-p">Rebu: 'I am doing nothing. My heart will not be satisfied unless I slaughter you all from one end to the other.'</p>
+          <p class="en-p">Saying this, he grabbed two stones in both hands and showed signs of throwing them again at the approaching enemy. General Ranchi gave orders from slightly behind.</p>
+          <p class="en-p">General Ranchi: 'Advance, advance!'</p>
+          <p class="en-p">Karu was forced to advance, but Rebu stood in the middle of the path, grabbed Karu by the neck, and threw him toward the bottom of the valley. He grabbed the next one who came and threw about ten of them toward the mountain stream. Just then, a large man who had been pushing through the many soldiers from far below appeared suddenly before Rebu.</p>
+          <p class="en-p">Wakame no Haruzō: 'Who are you to obstruct my march? I am Wakame no Haruzō, known as the right-hand man of General Ranchi.'</p>
+          <p class="en-p">Saying this, he grabbed Rebu by the neck and threw him down into the mountain stream with a thud. Koganehime and Kiyoteruhime, who had been watching this situation, said:</p>
+          <p class="en-p">Koganehime and Kiyoteruhime: 'It is the end now. I do not know if it is a violation of the heavenly law, but we must do something to scatter the enemy and not let even a single person cross this pass.'</p>
+          <p class="en-p">They rolled up their sleeves and swung their Kongō-zue back and forth, left and right. As they struck at the enemy who were climbing in a single-file formation, General Ranchi, sensing a great crisis, nocked an arrow to his bow and shot at the two. Following this, the many troops took their bows from their backs and shot at the two like rain. While avoiding the arrows with their staves, the mother and daughter rampaged with the force of a lion. The two finally lost their footing on the slope and fell together to the bottom of the valley. As expected of Koganehime and Kiyoteruhime, they had knowledge of martial arts, so they suffered no injuries to their bodies. They landed lightly on the sand at the bottom of the valley and waited, spitting on their hands, for the enemy army to come. When General Ranchi ordered his men not to let the mother and daughter escape, the many soldiers searched for a convenient descent to the mountain stream and surrounded the two like clouds and mist, shooting arrows incessantly. Just as the two were cornered and resigned themselves to their fate, thinking their time had come, a wolf's howl was heard from the bottom of the valley. At the same time, hundreds of wolves bared their fangs, glared with wide eyes, and rampaged toward General Ranchi. Overwhelmed by this force, General Ranchi and all his men fled from Mount Tamayama like an avalanche.</p>
+          <p class="en-p">Koganehime and Kiyoteruhime, keeping watch in all directions, were escorted by dozens of wolves and descended Mount Tamayama leisurely while singing a Sendenka. When they reached the mouth of the valley, they looked to see what had become of General Ranchi's subordinates, but not even a shadow was to be seen. It appeared that although climbing Mount Tamayama was a shortcut, they had feared the danger and marched toward the east. Koganehime and Kiyoteruhime felt as if they were walking through an uninhabited field and proceeded leisurely.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ヤアヤア、吾こそはバラモン教の神司、鬼熊別が身内の者、只今大自在天のお告げにより汝等一行此処に来る事を前知し、今や遅しと待ち構へ居たり。汝も亦バラモンの部下に相違はない。云はば味方同士だ。案内するは本意なれども、汝等は今の軍歌によつて聞けば仁慈無限の神素盞嗚大神の館に押寄するものと聞えたり。かう聞く上は少しも猶予はならぬ。片端から神変不思議の言霊を発射して一人も残らず言向和し呉れむ。暫く待て』</p>
+            <p class="ja-classical-line">と呼ばはつた。先頭に立つた武士はカルと云ふ一寸気の利いた小頭である。カルはレーブの此声を聞くより立ち止まり、</p>
+            <p class="ja-classical-line">『ハテ、心得ぬ汝の言葉、汝バラモン教の神司でありながら、何を血迷うて左様な事を申すか。大方発狂致したのであらう。そこ退け、邪魔になるわい』</p>
+            <p class="ja-classical-line">と進まむとするをレーブは早くも尖つた石を何時の間にか岩の上に幾十となく積み重ね、一歩たりとも前進せば、此岩を以て脳天より打挫かむと右手に岩をささげて睨めつけてゐる。カルは目を瞋らし、</p>
+            <p class="ja-classical-line">『こりや、こりやレーブ、左様な石を捧げて如何致す心算だ。チツと危険ではないか』</p>
+            <p class="ja-classical-line">レーブ『ハヽヽヽチツとも、やつとも危険だ。何程汝の味方は沢山押寄せ来るとも此一条の難路、一人も残らず討滅すに何の手間暇要るものか。一時も早くここを引き返せよ』</p>
+            <p class="ja-classical-line">カルはレーブの顔を睨めつけ、互に無言のまま睨みあつて居ると、後の方より、</p>
+            <p class="ja-classical-line">『進め進め』</p>
+            <p class="ja-classical-line">と登り来る其勢にカルもやむなく後より押されて前進せむとする時、レーブは無法にも其岩をとつて一つ嚇かし呉れむと、敵に中らぬ様にと狙ひを定めて投げつくれば、岩はカツカツと音をたてて谷底へ転落して了つた。</p>
+            <p class="ja-classical-line">カル『こりやこりや危ないわい。何を致すか』</p>
+            <p class="ja-classical-line">レーブ『何も致さない。其方等を片端から殲殺しに致さねば俺の心が得心せぬのだ』</p>
+            <p class="ja-classical-line">と云ひながら今度は両手に二つの石を引掴み、又もや登り来る敵に向つて投げつけむとする気色を示した。ランチ将軍は稍後の方より、</p>
+            <p class="ja-classical-line">『進め進め』</p>
+            <p class="ja-classical-line">と下知をする。已むを得ずしてカルは前進せむとするを、レーブは道の真中に立ちはだかり、第一着にカルの首筋を掴んで谷底目がけて投げつけた。又来る奴を引掴み十人ばかりも谷川目蒐けて投げつくる。かかる処へ遥か下の方より数多の軍卒を押し分けて登り来る大の男、忽ちレーブの前に現はれ、</p>
+            <p class="ja-classical-line">『何者ならばわが行軍を妨害致すか。吾こそはランチ将軍の懐刀と聞えたる若芽の春造だ』</p>
+            <p class="ja-classical-line">と云ひながらレーブの素首引掴み、谷川目がけてドスンとばかり投げ込んで了つた。此態を窺ひ見たる黄金姫、清照姫は、</p>
+            <p class="ja-classical-line">『今は最早是までなり、天則違反かは知らね共、何とかして敵を追ひちらし、只一人も此峠を越えさせじ』</p>
+            <p class="ja-classical-line">と腕に撚をかけ金剛杖を前後左右に打振り打振り、単縦陣を張つて登り来る敵に向つて打込めば、素破一大事とランチ将軍は弓に矢をつがえ、二人を目がけて発矢と射かけた。続いて数多の軍勢は弓を背より下し雨の如く二人に向つて射かける。其間を杖を以て避けながら獅子奮迅の勢を以て前後左右に母娘が荒れまはる。二人は遂に坂道より足踏み外し、谷底にヅデンドウと母娘一時に転落した。流石の黄金姫、清照姫は武術の心得あれば少しも体に負傷をなさず、谷底の真砂の上にヒラリと体を下し敵軍来れと手に唾して待つてゐる。ランチ将軍は母娘両人を逃すなと下知すれば、数多の軍卒は都合よき谷川の下り口を探し求めて、雲霞の如く二人を取囲み弓を頻りに射かけ出した。二人は進退惟谷まつて最早運命尽きたりと覚悟の臍をかたむる折しもあれ、谷底よりウーウーと狼の呻声聞ゆると共に、幾百とも知れぬ狼軍はランチ将軍に向つて牙を剥き目を瞋らして暴れ入る。其勢に辟易し、ランチ将軍を始め一同は玉山峠を雪崩の如くバラバラバツと逃げて行く。</p>
+            <p class="ja-classical-line">黄金姫、清照姫は前後に心を配りながら、数十の狼に送られて玉山峠を宣伝歌を歌ひながら悠々として下り行く。谷口に到り見れば、ランチ将軍の部下は如何なりしか、影だにも見えずなつて居た。これは玉山峠を登れば余程の近道なれども、危険を恐れて道を東に向ひて進軍したものと見える。黄金姫、清照姫は無人の野を行く心地して悠々と進み行くのであつた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c09.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 9: 雁 Messenger [1093]</span>
+      </a>
+      <a href="c11.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 11: 三途館 [1095]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

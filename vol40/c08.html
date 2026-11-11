@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: Messenger 者 [1092] - Volume 40 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 40 Table of Contents</a>
+      <span>Volume 40</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 40 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: Messenger 者 [1092]</h1>
+      <p class="chapter-title-ja">使者〔1092〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kerisu and Tāukusu, the two, keeping the command of Terukuniwake with joy and courage, mounted their chestnut horses, dashed out of the forest of Kurusu, and headed straight for Ōnohara. As the wind blew, they combed their hair and rushed forward, leaping over valleys and crossing mountains. The voices of insects gathering in the autumn fields sounded very sorrowful. As they followed the path through the wilderness, their hearts were filled with vigor and their spirits were courageous, and it was valiant of them to advance toward the rock cave of Mount Kiyoharu.</p>
+          <p class="en-p">At the foot of Mount Kiyoharu, the two left their horses and, while climbing the rugged slope, sang the Sendenka of Ananai-kyō as they went.</p>
+          <p class="en-p">They sang and sang as they advanced.</p>
+          <p class="en-p">Kerisu and Tāukusu, the two, tethered their horses at the foot of Mount Kiyoharu and, while facing the fierce mountain wind, climbed on, putting their strength into every step with cries of 'Eiya, eiya.' Kerisu sang along the way.</p>
+          <p class="en-p">Kerisu: 'When Kami appears in the world, to distinguish between Zenshin and Jiyashin, though it is said that man is the child of Kami and the palace of Kami, how can the human body judge Kami? The Kamuzukasa of Ananai-kyō, Kamususanōnōokami, with His infinite Jinji and Goseitoku, has appeared as the Kami of 567. Though it is heard that the Kamuzukasa of Daikokunushi, who governs the Brahman religion, is a noble Kami, when one traces the source, the Kamuzukasa of Ōkunibetsu, a descendant of Ōkunihiko, the Tokoyogami-ō Jizaiten born in the land of Tokoyo, opened the teachings. This orthodoxy is the teaching that Kunibetsuhiko, the noble child, appeared to protect and govern the Brahman religion. However, Magatsuhiko appeared, banished Kunibetsuhiko, posed as the leader of the religion, changed his name to Daikokunushi, and appeared in the capital of the moon as a Magatsukami. Good and evil are clearly understood by this. When one traces and investigates in detail the source of Ururu-no-hiko, who follows the teachings of Ururu, he is one who, while alienating the orthodox lineage of the Banko-shinō, the divine pillar of Shionagahiko who opened this world, arrogantly claims to be the descendant of Hachiō-ōkami. Ururu-no-hiko and Ururu-hime deceive others by claiming to be the true lineage, spreading the teachings of crookedness far and wide, and throwing this world into chaos. The cruelty of their methods is such. Ah, Kannagara, Kannagara. May the spirits be blessed, and may the barriers of Ananai-kyō, the Ururu religion, and the Brahman religion be removed as quickly as possible. May we obey the one teaching of Kuninotokotachi-ōkami, who created and solidified heaven and earth, and for the sake of Kami and for the sake of the world, may the world unite and fulfill sincerity as quickly as possible. Please protect us, before the noble Kami of Ananai. Kerisu and Tāukusu, the two, pray with reverence and awe. Even if the morning sun shines or clouds over, even if the moon waxes or wanes, even if the earth should sink, if we protect the one teaching of sincerity of Ananai, what could possibly not be accomplished? What kind of crookedness should we fear? Kami is with us. Man is the child of Kami, the palace of Kami. This noble divine instruction is the teaching of Ananai-kyō. Compared to the Brahman religion, there is a difference as vast as heaven and earth. The sun and moon shine clearly in the sky, illuminating our heads, and with the breath of Kami, the clouds of doubt hanging over our hearts are blown away, and they shine purely. Kamunaobi, who created this world, and Ōnaobi, whose heart is vast, say: in the human world, look again and listen again with Naobi. Correct your own mistakes. The Kamuzukasa who protects such clear teachings, Terukuniwake, has forgiven our hundred sins, saved our lives, and cared for us. Without doubting us, the still-fresh believers, even a little, he has entrusted us with such a noble mission. His heart is like the sea, and his soul is like the sky. Ah, Kannagara, Kannagara. Because the protection of Kami is deep, the hearts of the Brahman followers who were lost until now have completely awakened, and what joy it is to serve the teachings of the Kami of supreme benevolence and supreme love. Ah, Kannagara, Kannagara. May the spirits be blessed.'</p>
+          <p class="en-p">Singing thus, they were climbing the steep slope of Mount Kiyoharu. They had already reached the third station of the mountain. From here on, the slope became increasingly steep, the path grew worse, and it was a difficult road that could not be climbed easily. Tāukusu, putting strength into his fingertips with every step, began to sing while keeping time, gasping for breath as he climbed.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ケーリス、タークス両人は
+照国別の命令を
+喜び勇み守りつつ
+栗毛の駒に跨りて
+クルスの森を駆け出し
+一目散に大野原
+吹き来る風に頭髪を
+梳りつつ驀地
+谷を飛び越え山渉り
+秋野にすだく虫の声
+いと悲しげに聞ゆなる
+荒野ケ原を辿りつつ
+勢ひ込んで村肝の
+心も勇み魂も
+清春山の岩窟に
+進み行くこそ健気なれ
+清春山の麓にて
+駒を乗りすて両人は
+崎嶇たる坂を登りつつ
+三五教の宣伝歌</p>
+            <p class="ja-classical-line">歌ひ歌ひて進み行く。</p>
+            <p class="ja-classical-line">ケーリス、タークス両人は清春山の山麓に駒をつなぎ、烈しき山颪に当りながらエイヤ　エイヤと一歩々々力をこめて登るのであつた。ケーリスは道々歌ふ。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善神邪神を立分ける
+人は神の子神の宮
+とはいひながら人の身の
+いかでか神を審きえむ
+三五教の神司
+神素盞嗚大神は
+仁慈無限の御聖徳
+五六七の神と現れましぬ
+バラモン教を統べ給ふ
+大黒主の神司
+尊き神と聞ゆれど
+其源をたづぬれば
+常世の国に生れませる
+常世神王自在天
+大国彦の御裔なる
+大国別の神司
+開き給ひし御教
+此正統は貴の御子
+国別彦が現はれて</p>
+            <p class="ja-classical-line">バラモン教を守りまし
+統べさせ給ふ道なるに
+鬼雲彦が現はれて
+国別彦を放逐し
+自ら教主となりすまし
+大黒主と名を変へて
+月の都に威勢よく
+現はれ来りし曲津神
+善と悪とは明かに
+これにて思ひ知られけり
+ウラルの教を奉じたる
+ウラルの彦も源を
+詳しくたづね調ぶれば
+此世を開き給ひたる
+塩長彦の神柱
+盤古神王の正系を
+疎外しながら傲然と
+八王大神の御裔なる
+ウラルの彦やウラル姫
+その正系と詐りて</p>
+            <p class="ja-classical-line">枉の教を遠近に
+拓いて此世を乱し行く
+其やり方の物凄さ
+あゝ惟神々々
+御霊幸はひましまして
+三五教やウラル教
+バラモン教の障壁を
+一時も早く撤回し
+天地を造り固めたる
+国治立大神の
+一つの教に服ひて
+神の御為め世の為めに
+世界揃うて一日も
+早く誠を尽すべく
+守らせ玉へ三五の
+尊き神の御前に
+ケーリス、タークス両人が
+慎み敬ひ願ぎまつる
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも</p>
+            <p class="ja-classical-line">仮令大地は沈むとも
+誠一つの三五の
+教を守る事ならば
+如何なる事か成らざらむ
+如何なる枉も恐れむや
+神は吾等と倶にあり
+人は神の子、神の宮
+これの尊き御諭は
+三五教の御教
+バラモン教に比ぶれば
+天地霄壌の違ひあり
+月日は空に明かに
+輝き渡り吾々が
+頭を照らし給ひつつ
+心にかかる村雲を
+神の息吹に払ひ除け
+清く照らさせ給ひけり
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は</p>
+            <p class="ja-classical-line">直日に見直せ聞き直せ
+身の過ちは宣り直せ
+かく明けき御教を
+守り給へる神司
+照国別は吾々の
+百の罪をば赦しまし
+生命を助け労りて
+まだホヤホヤの信徒をば
+少しも疑ひ給はずに
+かくも尊き御使を
+任さし給ひし有難さ
+心は海の如くなり
+魂は空の如くなり
+あゝ惟神々々
+神の守りの深くして
+今まで迷ひしバラモンの
+胸は全く覚め来り
+至仁至愛の大神の
+教に仕ふる嬉しさよ
+あゝ惟神々々</p>
+            <p class="ja-classical-line">御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と歌ひながら清春山の峻坂を登りつつあつた。最早山の三合目迄登りついた。これより坂は益々険しく道悪しく容易に登る事は出来ない難路である。タークスは一歩々々指先に力を入れながら、息を喘ませ登りつつ拍子をとつて歌ひ出した。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Untokodotsukoi, haa haa haa, fuu fuu fuu fuu, it is hard to breathe. The cliff and precipice are a difficult path. If I were to fall in a place like this, my body would instantly tumble into the thousand-fathom valley. My head would be crushed, my arms broken, and my hands, feet, and whole body would become a mess, and I would likely become a delicious meal for the wild beasts, untokosho.</p>
+          <p class="en-p">Untokodotsukoi, haa haa haa. Listen, Kerisu, be careful. The path ahead is a difficult barrier. You must fulfill the command of Terukuniwake successfully, untokosho. If you do not return and report the completion of your duty, you will not be able to repay the grace of having your life saved, untokosho. Once again, a fierce wind blows.</p>
+          <p class="en-p">Shall I climb while gripping the trees around here tightly, putting strength into my fingertips? If I am blown by such a fierce, dokkoisho, winter wind, my body feels as if it will scatter. The fellows of Poro and Shamu must be, at this time, dokkoisho, with their eyes shining, untokosho. The officials of Ōdaruwake have set out for the land of Karumata, and while their master is away, they are cooking in the back room, sitting cross-legged, untokosho, dokkoisho, dokkoisho. They take out delicious sake, drink until they are full, and ramble on, untokosho, becoming dead drunk and shaking their heads left and right like a papier-mache tiger, untokosho.</p>
+          <p class="en-p">They must be telling tall tales. I do not know what is written in the letter of Terukuniwake, but the fellow Poro will surely be surprised, dokkoisho. Untokodotsukoi, I cannot help but imagine his face as if I am seeing it right before my eyes. Whether it be rain, hail, or wind, or the rain of earthquakes, thunder, and fire, there is no doubt that confusion, dokkoisho, will arise. At that time, Kerisu, dokkoisho, you must be firm and not be deceived by the evil spirits. Once you have realized the true teachings, untokosho, haa haa haa haa, you must not turn back on the path of God.</p>
+          <p class="en-p">The path that is hard to climb is the slope. Advancing on the path of truth is like climbing this slope, untokodotsukoi. If there is even a moment of carelessness, you will tumble back, gara gara gara gara. You must not ride the cart of sharp, pointed stones and fall to the bottom of the valley, dokkoisho. When God appears in the world and distinguishes between good and evil, right and wrong, the merit of that, dokkoisho, will ring out widely across heaven and earth. Like thunder, dokkoisho, it will awaken the sleeping, drive away the crookedness of the heart, and save us in the palace of God, which is like a crystal ball. Ah, Kannagara, Kannagara, dokkoisho, dokkoisho, divine spirits.</p>
+          <p class="en-p">May you bless us, and may you make our firm hearts even firmer, O great pillars of the officials of the three-five God. I pray before the presence of the great God, Kami-Susanoo-Ōkami. Even if the morning sun shines or clouds over, even if the moon waxes or wanes, untokodotsukoi, even if the mountains split and the seas dry up, do not forget the teachings of the three-five God that you have once realized. Ah, Kannagara, Kannagara, Kerisu, steady your spirit and hold on for a little while longer. If you climb further, there is a rock cave. If you see the faces of Poro and Shamu and turn back as before, falling into Brahmanism, you will surely incur the wrath of God.</p>
+          <p class="en-p">I am your close friend. Because I care for you, I will warn you here for a moment, even though I know it may be tedious. Untokodotsukoi, dokkoisho. Aitata-tsuta, aitatsuta. Have you forgotten to watch your footing because you were talking too much? The sharp stones, untokosho, have put me on the cart of the slope, and I have struck my knee hard. The red blood, dokkoisho, is flowing out, tara tara tara. When I look at the color of this blood, my soul must surely have been purified. The fresh blood spurts out, and the eastern sky glows crimson, like the great Sun God. I submit to the path of truth.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ウントコドツコイ、ハアハアハア
+フウフウフウフウ息苦し
+断崕絶壁きつい道
+こんな処で倒けたなら
+体は忽ち千仭の
+谷間にドツコイ転落し
+頭はめしやげ腕は折れ
+手足も五体もグタグタに
+なつて猛獣のウントコシヨ
+うまい餌食になるだらう
+ウントコドツコイ、ハアハアハア
+コリヤ　コリヤ　ケーリス気をつけよ
+これから先が難関だ
+照国別の御命令
+首尾よく御用をウントコシヨ
+済まして目出度く復り言
+申し上げねば命をば
+助けて貰うたウントコシヨ
+御恩報じが出来まいぞ
+又もや烈しい風が吹く</p>
+            <p class="ja-classical-line">そこらの樹木をしつかりと
+掴まへながら指先に
+力をこめて登らうか
+こんな烈しいドツコイシヨ
+凩風に吹かれては
+俺の体は散りさうだ
+ポーロやシヤムの連中は
+嘸今頃はドツコイシヨ
+目玉の光つたウントコシヨ
+大足別の司等が
+カルマタ国へ出陣し
+主人の留守の間鍋焚き
+奥の一間に胡坐かき
+ウントコドツコイ、ドツコイシヨ
+味よい酒を取り出して
+鱈腹飲んで管を巻き
+ウントコドツコイ、ヘベレケに
+なつて頭を右左
+張子の虎のウントコシヨ
+様にプリプリふりながら</p>
+            <p class="ja-classical-line">駄法螺を吹いて居るだらう
+照国別の御手紙に
+如何なる事がドツコイシヨ
+書いてあるかは知らねども
+ポーロの奴はドツコイシヨ
+定めて驚く事だらう
+ウントコドツコイ其顔が
+今目のあたり見るやうに
+思ひなされて仕様がない
+雨か霰か又風か
+地震雷火の雨か
+何れはドツコイ悶錯が
+起つて来るに違ひない
+其時ケーリス、ドツコイシヨ
+シツカリ致して曲神に
+ちよろまかされてはならないぞ
+一旦誠の御教を
+悟つた上はウントコシヨ
+ハアハアハアハア後返り
+してはならない神の道</p>
+            <p class="ja-classical-line">登り難きは坂道だ
+誠の道を進むのは
+此坂道をのぼるやうな
+ウントコドツコイものだらう
+チツとの油断があつたなら
+ガラガラガラガラ後戻り
+鋭く尖つたガラ石の
+車に乗つて谷底へ
+落ちてはならぬドツコイシヨ
+神が表に現はれて
+善悪邪正を立分ける
+其功績はドツコイシヨ
+天地に広く鳴り渡る
+雷の如ドツコイシヨ
+眠れる人の目を覚まし
+心の枉を追ひやりて
+水晶玉の神の宮
+救はせ給ふ有難さ
+あゝ惟神々々
+ドツコイ　ドツコイ御霊</p>
+            <p class="ja-classical-line">幸はひ給ひて吾々が
+堅き心を弥固に
+練らせ給へよ三五の
+神の司の太柱
+神素盞嗚大神の
+御前に願ひ奉る
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+ウントコドツコイ山は裂け
+海はあせなむ世はありとも
+一旦悟つた三五の
+神の教は忘れなよ
+あゝ惟神々々
+ケーリスしつかり肝玉を
+据ゑてかかれよ今暫し
+登つて行けば岩窟だ
+ポーロやシヤムの顔を見て
+もとの如くに撥返り
+バラモン教に堕落して
+神の怒りに触れざらめ</p>
+            <p class="ja-classical-line">俺はお前の親友だ
+お前を思ふ心から
+くどい事とは知りながら
+一寸此処にて気をつける
+ウントコドツコイ、ドツコイシヨ
+アイタタタツタ、アイタツタ
+あんまり喋つて足許に
+眼を配るを忘れたか
+尖つた石のウントコシヨ
+坂の車に乗せられて
+したたか打つた膝頭
+赤い血潮がドツコイシヨ
+タラタラタラと流れ出す
+此血の色を眺むれば
+余程俺の魂は
+清められたに違ひない
+鮮血淋漓と迸り
+東の空に茜さす
+日の大神の如くなり
+誠の道に服ひて</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">If you keep your Nikutai active from morning till evening, your Kinniku will gradually function, and the Ketsueki circulation will improve. Untokodotsukoi, dotsukoishiyo, there will be no sorrow of Utsuketsu. Those Magakami who let their bodies remain idle and spend their days thinking only of Taishiyureijiu, the color of their Chishiho is Matsukuroke. Yattokodotsukoi, Shōjin, while living in Kankiyo, untokoshiyo, since I hear they commit Fuzen, now that you have been born as humans, you must cherish your time and remain active from morning till evening like the Tsukihi. Untokodotsukoi, do not waste your Kuōin, untokoshiyo. Do not commit acts of Fudauri Shigoku, and from morning until night, for the sake of the Way.</p>
+          <p class="en-p">If you work for the sake of Makoto, such beautiful blood will circulate. Ah, Kamunagara, Kamunagara. To the precious Mimahe of the Kamisama of Ananai-kyō, I offer my Magokoro and serve with Kanshiya.'</p>
+          <p class="en-p">At last, the Riyōnin arrived in front of the Ihaya guarded by Pōro, Shamu, and others. The Futari stood quietly at the entrance of the Ihaya, and when they secretly peered at the Yōsu inside, they could hear the noisy voices of Avici and hellish suffering coming from the depths. Kērisu and Tārisu, the Riyōnin, folded their arms and tilted their heads, saying,</p>
+          <p class="en-p">Kērisu and Tārisu: 'Hatena.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">朝な夕なに肉体を
+活動させて居るならば
+筋肉次第に活動し
+血液流通よくなつて
+ウントコドツコイ、ドツコイシヨ
+鬱血するよな憂ひない
+体をヂツと遊ばせて
+体主霊従の事ばかり
+考へ暮す枉神の
+血潮の色は真黒気
+ヤツトコドツコイ小人は
+閑居しながらウントコシヨ
+不善を為すと聞くからは
+人と生れし此上は
+月日の如く朝夕に
+タイムを惜んで活動し
+ウントコドツコイ光陰を
+空しく費やすウントコシヨ
+不道理至極の事をせず
+朝から晩まで道のため</p>
+            <p class="ja-classical-line">誠のために働けば
+こんな美しい血が循る
+あゝ惟神々々
+三五教の神様の
+貴の御前に真心を
+捧げて感謝し奉る』</p>
+            <p class="ja-classical-line">漸くにしてポーロ、シヤム等が守つて居る岩窟の前に両人は辿りついた。岩窟の口に二人はソツと佇み、中の様子を密に窺へば、奥には何となく騒々しい阿鼻叫喚の声が聞えて居る。ケーリス、ターリス両人は腕を組み頭を傾けながら、</p>
+            <p class="ja-classical-line">『はてな』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 文珠 [1091]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 雁 Messenger [1093]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

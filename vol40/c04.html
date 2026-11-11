@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4: 珍客 [1088] - Volume 40 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 40 Table of Contents</a>
+      <span>Volume 40</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 40 &bull; Chapter 4</span>
+      <h1 class="chapter-title-en">Chapter 4: 珍客 [1088]</h1>
+      <p class="chapter-title-ja">珍客〔1088〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At the hour of the horse, a young and beautiful woman wearing a deep-brimmed hat and covering her face appeared at the gate of Onikumawake's mansion. It is an undeniable fact to the reader that this is the new Isonohime. Isonohime said in a cool, slender voice,</p>
+          <p class="en-p">Isonohime: 'Excuse me, Monban-sama, please open this gate for a moment. Quickly, quickly.'</p>
+          <p class="en-p">She urged them impatiently. The gatekeeper Asanebau had just managed to wake up, and was still rubbing his sleepy eyes without even having performed his morning ablutions.</p>
+          <p class="en-p">Asanebau: 'Eh, what is this? To the house of a widowed master, a seductive woman's voice saying, "Excuse me, Monban-sama, please open this gate. Quickly, quickly"—what a fool she takes me for.'</p>
+          <p class="en-p">Saying this, he peeked outside for a moment through a knot-hole in the gate, and continued,</p>
+          <p class="en-p">Asanebau: 'Oh, what is this? Since she is wearing a deep-brimmed hat, I cannot see what her face looks like, but that figure—this is truly what is meant by a flower-like face and willow-like waist. It is a scene where a "graceful and beautiful woman knocks at the gate to visit her beloved." I thought the master of the house was quite a rigid man, but for such a creature to come visiting, one cannot be too careful. They say the Ananai-kyō will change the world and so on, but truly, if things like this happen, the world might indeed change. Well then, shall I open it?'</p>
+          <p class="en-p">As he tried to get up, another gatekeeper, while still lying down, said,</p>
+          <p class="en-p">Gonkō: 'Hey, Sutekō, you must not open this gate recklessly. Last night, the chief retainer Kumahiko-sama called me and told me to keep watch at this gate without sleeping. He especially ordered me to be careful for these next two or three days. You must not open it recklessly until we have investigated thoroughly. Sutekō, leave it alone.'</p>
+          <p class="en-p">Sutekō: 'Even so, Gon-sama, such a splendid lady is asking with a voice like a bell; how can I stay here without opening it? If it were a man, one might need to worry about danger, but for a delicate woman like that, what danger could there be in letting her through the gate? I have become unable to bear it, even without worrying too much. I will open it.'</p>
+          <p class="en-p">Gonkō: 'Did I not tell you to wait? Will you not obey the orders of your superior?'</p>
+          <p class="en-p">Sutekō: 'You were so obedient to the orders of the "superior" (hot sake) last night that you got quite drunk, didn't you? You, who had someone warm up such "superior" sake while saying, "This is just slightly warm," and then complained arrogantly, forgetting your essential duties due to a hangover—why do you interfere with my authority when you cannot even hold your head up? I will open the gate by my own authority.'</p>
+          <p class="en-p">As he tried to shake him off and go, Gonkō pulled him back firmly and said,</p>
+          <p class="en-p">Gonkō: 'Wait, wait, I will investigate it myself.'</p>
+          <p class="en-p">Sutekō: 'Hey, you are tearing my clothes, aren't you? Even if my sleeves are pulled by rough men like you, the accounts will never add up. If I am to be pulled, I would rather have that lady pull and tear them... Hehehe, oh, it is tattered, it is tattered. This is why they say one cannot quit being a gatekeeper. Judging by that style, she must be quite a beauty. She is a creature whose elegance of appearance and speech cannot be exhausted by words. Ehehe.'</p>
+          <p class="en-p">Gonkō, ignoring all this, looked outside through the knot-hole in the gate and said,</p>
+          <p class="en-p">Gonkō: 'Hey, this is serious. I cannot open it carelessly. It is a figure that I cannot quite make sense of. And it is a figure I have seen somewhere before. In any case, wait here until I go and ask the chief retainer. Until then, you must never open it, no matter how much she requests from the outside.'</p>
+          <p class="en-p">Having said this, Gonkō ran off toward the inner part of the house. From outside the gate,</p>
+          <p class="en-p">Isonohime: 'Excuse me, Monban-sama, it is frustrating, please open it quickly. I have urgent business with Onikumawake-sama. Come, quickly, quickly, it will be terrible if I am seen by people.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼熊別の館に午前の五ツ時、妙齢の美人が深編笠を被り、面を包み門前に現はれた。これは読者の耳には新たなる石生能姫たることは間違ひのない事実である。石生能姫は涼しき細き声にて、</p>
+            <p class="ja-classical-line">『もしもし門番さま、一寸此門をあけて下さい。早く早く』</p>
+            <p class="ja-classical-line">とせき立てる。門番の朝寝坊は漸く起き上り、まだ手水もつかはず、寝ぶた目を擦つてゐた所であつた。</p>
+            <p class="ja-classical-line">『エー何だ。やもめの御主人の家へ、なまめかしい女の声で「もしもし門番さま、此門をあけて下さい。早く早く」なんて馬鹿にしてけつからア』</p>
+            <p class="ja-classical-line">と云ひながら門の節孔から一寸外を覗き、</p>
+            <p class="ja-classical-line">『やあ何だ。深編笠を被つてゐるから、どんな御面相か拝見する事は出来ないが、あの姿のいい事、花顔柳腰とは此事、「窈窕嬋娟たる美人門を叩いて恋しの君を訪ふ」と云ふ幕だな。家の主人も余程堅造だと思つたが、こんな代物が訪ねて来るとは油断のならぬものだ。三五教が世が変るとか何とか云つてるが、本当に、こんな事があると世が変るかも知れない。どれどれ開けてやらうか』</p>
+            <p class="ja-classical-line">と起き上らうとする。一人の門番は寝そばつたまま、</p>
+            <p class="ja-classical-line">『オイ捨公、無暗に此門をあけちやならないぞ。夜前、遅う家老職の熊彦様が俺を呼んで、此門は寝ずに警戒して居れ。まして此二三日は特に注意しろと云ひ渡した。トツクリ調べてからでないと無暗に開けてはならないぞ。捨公、すてておけ』</p>
+            <p class="ja-classical-line">捨公『それでも権さま、あんな立派なシヤンが鈴の様な声で頼んで居るのだもの、これが開けずにをれようかい。男なら又剣呑と云ふ案じも要るが、あんな繊弱い女一人位、門を通してやつた処で剣呑な事があるものか。あまり取越苦労をせないでも俺はもう堪らぬ様になつた。開けてやるわ』</p>
+            <p class="ja-classical-line">権公『待てと云つたら待たぬかい。上官の命令に服従せぬか』</p>
+            <p class="ja-classical-line">『上燗の命に服従して昨夜も余程酔払つたぢやないか。お前は、あれほどの上燗を「こりや、一寸熱燗だ」なんて、人に燗させやがつて、あつかましい叱言ほざきやがつて、二日酔で肝腎の使命を忘れやがつて頭も上らぬ癖に、何俺の職権を干渉するのだ。俺は俺の特権を以て開門するのだ』</p>
+            <p class="ja-classical-line">とふりきつて行かうとするのを、権公はグツと引き戻し、</p>
+            <p class="ja-classical-line">『待て待て、俺が一つ調べてやらう』</p>
+            <p class="ja-classical-line">『こりや着物が破れるぢやないか。お前等の様な荒くれ男に袖を引つ張られても、根つから葉つから勘定が合ひませぬわい。同じ引かれるならあのシヤンに引つ張つて破つて貰ふわい……ヘヽヽヽやア、ぼろいぼろいぼろけつぢや。これだから門番は止められぬと云ふのだよ。あのスタイルでは随分美人だらう。あの風体の高尚、言辞の尽すべき限りに非ずと云ふ代物だ。エヘヽヽヽ』</p>
+            <p class="ja-classical-line">権公は委細構はず門戸の節孔から外を眺め、</p>
+            <p class="ja-classical-line">『ヤア此奴ア大変だ。ウツカリ開ける事は出来ない。どうも合点の行かぬ風体だ。そしてどこかに見覚えのある風体だ。兎も角、御家老様に伺つて来る迄此処に待つて居てくれ。それまで決して何程外から請求しても開けちやならないぞ』</p>
+            <p class="ja-classical-line">と言ひすてて奥をさして権公は駆け出した。門の外より、</p>
+            <p class="ja-classical-line">『もしもし門番さまエ、ジレツタイ、早く開けて下さい。鬼熊別様に折入つて急ぎの用があるのだ。サア早う早う、人に見られちや大変だから』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sutekō: 'What, you say it would be a Taihen if seen by others? That makes it all the more suspicious. However, it is no Muri. The Goshiyujin of this house does not know the Yukue of his Okusama, and his only daughter has been gone for so long that her Yukue is unknown. Even in such a Ritsupa position, he has been guarding his Kūkei all alone, so I thought he was a man to be Kanshin... but it seems he had someone hidden away somewhere after all. He is a Goshiyujin one cannot let their Yudan down with. Just as a Jishiyaku attracts iron, no matter what one says, men and women are close even when they seem far apart. Ehehehe, tell me, Jiyochiu-sama, your Udemahe is quite something. I am no Bokusekikan, you know. I am a man who has the Shikaku to speak of love; I am not such a man who lacks refinement. That unrefined man called Kumahiko, the Karau of this Tauke, and that gatekeeper Gonsuke are as stiff as Noritsukemono, spitting out things like, "You must not open this gate at your own Katsute without permission." Even if a shiyantokose-no-shiyan like you were to come, the Goshiyujin, while happy in his heart, would surely put on a Waza-filled, difficult face on the Omotemuki and say, "The master of this house lives alone and has no use for women, so drive her away at once," which is his natural way of saying the exact opposite of his heart. It is this Sutekō, who cannot be discarded even in the corner of the house, who uses his refinement for the sake of the Goshiyujin and you. In a world where they say there is a god who discards and a god who picks up, I am this Sutekō who only picks up and never discards a thing. If this Sutekō were not here, that fellow Gon-kō would have struck you with a cold shoulder, and if you were thrown out with such a cruel greeting—as if rubbing your nose against an oak tree without glue or ladle—it would truly be a disaster. If that happened, you might have fallen into despair, thinking, "I traveled far over mountains and fields only to be discarded. Ah, I am finished, my life is worth discarding," and as you were about to commit suicide, a man with a long nose under his eyes would have flown onto the stage saying, "Wait a moment. Death is easy once done; if you want to die, you can do so anytime, but will flowers and fruits bloom after death?" However, this Sutekō will put his own life at stake and, even if it costs me my job, I shall let you pass. I am not such a man who discards others, you see.'</p>
+          <p class="en-p">With these parting words, he rattled the gate open. Ishionohime did not even offer a nod, and the moment she stepped over the gate, Sutekō grabbed her sleeve tightly.</p>
+          <p class="en-p">Sutekō: 'W-w-wait, please. I do not know what kind of woman you are, but to enter without a nod or a word of thanks after causing this gatekeeper so much trouble and worry is rather impolite, is it not? You may look down on me thinking I am a lowly gatekeeper, but in the eyes of the gods, there is no distinction of high or low among humans.'</p>
+          <p class="en-p">Ishionohime: 'Oh, my, this is the gatekeeper-sama, I am sorry. Please forgive me, now hurry and guide me to the side of Onikumawake.'</p>
+          <p class="en-p">Sutekō: 'I would love to guide you, but my role is only to guard this gate, and I do not have the authority to guide you to the Ōoku.'</p>
+          <p class="en-p">Ishionohime: 'My, what a stubborn and narrow-minded family tradition in a world where equality of the races is proclaimed...'</p>
+          <p class="en-p">Sutekō: 'Now, now, Jiyochiu-sama, what are you saying? Is it not rude to start criticizing the family tradition the moment you step into the entrance? Come, come, go inside freely. The Karau Kumahiko should be there, so after negotiating with him, you may have a long and deep talk with the Goshiyujin about the mountains and the seas, and have a good cry to your heart's content after all this time.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">捨公『何、人に見られちや大変だと、愈以て怪しいわい。然し無理はない。家の御主人も奥様の行衛は知れず、たつた一人のお嬢様も永らく何処へお出で遊ばしたか行衛は知れず、こんな立派なお身の上になつても唯一人空閨を守つてゐらつしやるのだから、感心なお方だ……と思うてゐたが、矢張何処かへあんなものが囲うてあつたものと見えるわい。油断のならぬ御主人だ。磁石が鉄をひきつける様に何と云つても男と女とは遠いやうで近いものだな。エヘヽヽヽ、もしお女中さま、あなたの腕前は大したものですな。私も木石漢ではありませぬよ。チツとは恋を語る資格のある男、そんな粋の利かぬ、私ぢや厶いませぬわい。当家の家老の熊彦といふ不粋の男や権助の門番奴が無茶苦茶に糊付物の様に固ばりやがつて「此門は許しがなけりや勝手にあけちやならないぞ」なんて吐しやがるのですよ。御主人だつてお前さまのやうなシヤントコセのシヤンがおいでになつても、心の中ではお喜びでも表向は故意と七むつかしい顔して「当家の主人は一人暮しだから女に用はない、一時も早く追ひ払へよ」なんて口と心と正反対の事を仰有る事はキマつた生粋だ。そこを御主人様とお前のために粋を利かしてやるのが、家の隅にも捨てておけぬ此捨さまだ。捨てる神さまもあれば拾ふ神もあると云ふ世の中に、拾ふばかりで一寸も捨てぬと云ふ捨さまだ。すつての事で此捨さまが居らなかつたならば権公の奴が、ゴーンと肱鉄砲をかまし、膠も杓子もなく榎で鼻を擦つた様な惨い挨拶でおつ放り出しでもされようものなら、それこそステテコテンのテンツクテンだ。さうなれば折角お前さまも「山野を越えて遥々と訪ねて来て捨てられようとは知らなんだ。エーもう捨鉢だ、捨てて甲斐ある吾命だ」と自暴自棄を起し、スツテに自害と見えけるが「アイヤ暫く待たれよ。死は一旦にして易し、死にたくば何時でも死ねる、死んで花実が咲くものか」と鼻の下の長い男が飛んで出る幕だが、此捨さまは捨身になつて、職を賭してもお前さまを通過さしてあげませう。あまり捨てた男ではありませぬぞや』</p>
+            <p class="ja-classical-line">と捨台詞を振りまきながらガラガラと門を開いた。石生能姫は会釈もせず、ツツと門を跨げるや否や、捨公は小袖をグツと引掴み、</p>
+            <p class="ja-classical-line">『まゝゝゝ待つて下さい。お前さま、何処の女郎衆か知らぬが、門番にこれだけ厄介をかけて心配をさせながら目礼もせず、御苦労だとも云はず這入らうとはあまり無躾ぢや厶いませぬか。卑しい門番だと思つて軽蔑なさるのか知らぬが、神様のお目から見れば人間として貴賤の別は御座りませぬぞや』</p>
+            <p class="ja-classical-line">『ヤアこれは門番さま、済まなかつた。まア許して頂戴、さア早く鬼熊別のお側へ案内しや』</p>
+            <p class="ja-classical-line">『案内を申上げたいは山々なれど、私には此門を守るだけの役で、大奥まで御案内する権限は厶りませぬ』</p>
+            <p class="ja-classical-line">『何とまア、人種平等の唱へられる世の中へ頑迷固陋な御家風だこと……』</p>
+            <p class="ja-classical-line">『これこれ女中さま、何仰有います。御無礼千万にも門口を這入るや否や御家風までゴテゴテ云ふ事が厶いますか。サア　サア　トツトと自由に奥へ行かつしやい。熊彦の家老が屹度居りませうから、それと交渉をした上、御主人様にトツクリと積る海山の話を遊ばし、久し振りに泣き満足をなさいませや』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sute: 'Hey, you Monban, what kind of disgusting things are you saying? You should have a little Kokoroe.'</p>
+          <p class="en-p">Monban: 'You say "a little," do you? Hmph.'</p>
+          <p class="en-p">He was laughing with his nose. It was Kumahiko who came along, accompanied by Gonsuke, while making a rustling sound with his Haorihakama in a dignified manner. Kumahiko, as soon as he caught a glimpse, bowed his waist and performed an Eshiyaku with Teinei.</p>
+          <p class="en-p">Kumahiko: 'Ah, you are...'</p>
+          <p class="en-p">He started to say, then continued:</p>
+          <p class="en-p">Kumahiko: 'I do not know which Ojiyochiu you are, but Dōzo, please pass through to the back. Come, I shall provide Goannai. Oi Gonsuke, Sutezau, keep the gate properly. Come, I shall provide Goannai. Excuse me, I will go ahead. Please follow behind me. The Goshiyujinsama will surely be delighted.'</p>
+          <p class="en-p">He then hurried off, accompanying Isonohime, and hid his figure deep within the mansion.</p>
+          <p class="en-p">Sutekō: 'Oi Gon, Gon-sama, what on earth was that? I wonder if that is the house's pet.'</p>
+          <p class="en-p">He showed his thumb and little finger.</p>
+          <p class="en-p">Gonkō: 'Hmm.'</p>
+          <p class="en-p">Sutekō: '(In Kumahiko's Kowairo) "This is, this is, yes, you are... no, Ojiyochiu-sama, the Goshiyujinsama will surely be delighted. Come, I shall provide Goannai, so excuse me, I will go ahead..." and so on, he was spouting. The face of Kumahiko-sama, who usually looks as if his Fudō of the hearth had been struck with a Yakebokukuhi, had his facial strings completely loosened, and the state he was in when he crawled into the back was not worth seeing. It is noisy when a woman occasionally appears in this mansion full of men. Since she is the only red flower in a green thicket, this mansion will likely become a bit spring-like. Until now, it was so gloomy that I thought even the plum trees of this mansion were blooming gloomily, and even the warblers were singing out of tune, but from now on, the heavenly pure land will likely appear. Ah, I have suddenly started to want a wife too.'</p>
+          <p class="en-p">Monban: 'Ufu-fu-fu, you are an idiot.'</p>
+          <p class="en-p">Sutekō: 'The idiot is you. Where is there a guy who doesn't even smile when he sees such a nice lady? You are a heartless, bloodless man, a guy who does not know the taste of love and does not understand human feelings. Ah, to be made a Monban with such a troublesome guy. You have no talent other than opening the gate and drinking sake from morning till night.'</p>
+          <p class="en-p">He was vomiting uncontrollably, as the remnants of last night's sake were still haunting him. Gonsuke said nothing, clenched his fist, struck Sute's head three or four times with a thud, and returned to the guard station by the gate with composure.</p>
+          <p class="en-p">In the inner sanctum of the mansion, a Sendenka could be heard.</p>
+          <p class="en-p">The teachings of the Brahman religion, the Tokoyo-no-kuni that was opened, the God Ōkuninushi-no-kami, wishing to save the people of the world universally, exhausted his heart and body, crossed over the distant seas, appeared in the land of Tsukushi and the land of Iho, and in the capital of Egypt, opened the teachings, but by the Kototama of the Misokyo, he was repelled, and in the land of Ken-on, leading many followers, he endured the world, and at the time of opening the foundation of the teachings, by a sudden event, he became a God of the Yūkai, and starting with the Kyōshi, the believers also grieved and made a great commotion, but the God-official Onikumohiko gradually calmed this, and taking his place, he succeeded him, and calling himself the Great Master, while he was serving the divine spirit of Ōkunihiko, the eight maidens born of the God Susanoo-no-Ōkami, and the officials of the God Futodama, appeared once again, and because they emitted living Kototama, the Great Master, starting with Onikumohiko, all fled from this place, and wandered far and near throughout the world, how sad it is, Onikumohiko and we, joined our hearts and made our strength one, and because it was worth planning the revival of the Brahman, in the land of the moon where the sky shines, in the capital of Haruna where flowers bloom, the Brahman religion was opened again, and the majority of the seven thousand and more countries, all returned to the religion, and just when I thought we were somewhat at ease, the Magatsukami, watching for our lack of vigilance, entered the body of Ōkuninushi, and while urging him day and night to perform acts of wickedness and lawlessness that should not be done by a God-official, it is regrettable that he defiles the path, and being blocked by the fellows of the evil spirits serving at his side, it is regrettable that a ditch was dug between the two, ah, Kannagara-kamigami, the strict spirit of the Brahman religion, please grant your favor, and quickly, purify the soul of Ōkuninushi, and with a sincere heart,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『これ門番の捨とやら、お前は何と云ふ嫌らしい事をいふのだい。チと心得なされや』</p>
+            <p class="ja-classical-line">『チヨツコと仰有いますわい。ヘン』</p>
+            <p class="ja-classical-line">と鼻の先で笑つてゐる。そこへ羽織袴厳めしくバサバサと袴の音をさせながら権助を伴ひやつて来たのは熊彦であつた。熊彦は一目見るより腰をかがめ叮嚀に会釈し、</p>
+            <p class="ja-classical-line">『あゝ貴女はイ……』</p>
+            <p class="ja-classical-line">と云ひかけて、</p>
+            <p class="ja-classical-line">『何処の御女中か知りませぬが、何卒奥へ御通り下さいませ。さア私が御案内を致しませう。オイ権助、捨造、門番を確かり致せよ。さア御案内致しませう。失礼ながらお先へ参ります。私の後について御出で下さい。主人もさぞお喜びで厶りませう』</p>
+            <p class="ja-classical-line">といそいそとして石生能姫を伴ひ、館の奥深く姿をかくした。</p>
+            <p class="ja-classical-line">捨公『オイ権、権さま、一体ありや何だい。家のレコぢやあるまいかな』</p>
+            <p class="ja-classical-line">と親指と子指とを出して見せる。</p>
+            <p class="ja-classical-line">権公『ウン』</p>
+            <p class="ja-classical-line">捨公『（熊彦の声色）これはこれはハイ、貴女はイ……いやお女中さま、さぞさぞ御主人様がお喜びで厶りませう。サア私が御案内致しますから失礼ながらお先へ……なんて吐しやがつて、お竈の不動を焼木杭でたたかれた様な顔をしてゐる熊彦さまの顔の紐がサツパリ解けて了ひ、奥へ這入りやがつた時の態は見られたものぢやないな。男ばつかりの此館へ偶に女が出て来ると騒がしいものだ。万緑叢中紅一点だから、此お館もチツとは春めき渡るだろう。今迄はあまり陰気なものだから、此お屋敷の梅まで何となく陰気に咲き、鶯までがド拍子のぬけた鳴き声をしやがると思つてゐたが、これからは天国浄土が出現するだらうよ。アーア俺も俄に女房が欲しくなつて来たわい』</p>
+            <p class="ja-classical-line">『ウフヽヽヽ馬鹿だなア』</p>
+            <p class="ja-classical-line">『馬鹿は貴様の事だよ。あんなナイスを見てニツコリともせぬ奴が何処にあるかい。無情無血漢奴、恋の味を知らぬ人情を解せぬ奴だ。あゝ困つた奴と同じ門番をさせられたものだな。朝から晩まで酒ばつかり喰つて、お前は門を開くことと酒を喰ふことより芸がないないア』</p>
+            <p class="ja-classical-line">とまだ昨夜の酒の残りが祟つて無性矢鱈に吐いてゐる。権助は物も言はず拳骨を固めて捨の頭を三つ四つカツンカツンと殴りつけ、悠々として門の傍の番所に帰り行く。</p>
+            <p class="ja-classical-line">館の大奥には宣伝歌が聞えて来た。</p>
+            <p class="ja-classical-line">『バラモン教の御教を
+開き給ひし常世国
+大国別の神様は
+普く世人を救はむと
+心を尽し身を竭し
+遠き海原乗り越えて
+筑紫の島やイホの国
+埃及都に現れまして
+教を開き給ひしが
+三五教の言霊に
+打ちはじかれて顕恩の
+郷に数多の郎党を
+率ゐて世をば忍びまし
+教の基礎を開く折
+フトした事より幽界の
+神とはならせ給ひけり
+教司を初めとし
+信徒等も悲しみて
+上を下へと騒ぎしが
+鬼雲彦の神司</p>
+            <p class="ja-classical-line">漸う之を鎮めまし
+自ら代つて後をつぎ
+大棟梁と自称して
+大国彦の神霊に
+仕へ居たりし折もあれ
+神素盞嗚大神の
+生ませる八人乙女等
+太玉神の司等が
+又もや現はれ来りまし
+生言霊を発射して
+きため給へば大棟梁
+鬼雲彦を初めとし
+一同此処を立ち逃れ
+天ケ下をば遠近と
+彷徨ひ巡りし悲しさよ
+鬼雲彦と吾々は
+心を協せ力をば
+一つになしてバラモンの
+再起を図りし甲斐ありて
+空照り渡る月の国</p>
+            <p class="ja-classical-line">花咲くハルナの都にて
+再び開くバラモン教
+七千余国の大半は
+残らず教に帰順して
+稍安心と思ふ折
+油断を見すまし曲津神
+大黒主の体に入り
+神の司にあるまじき
+悪逆無道の振舞を
+日に夜に勧め給ひつつ
+道を汚すぞうたてけれ
+側に仕ふる悪神の
+輩の者に遮られ
+二人の仲に溝渠をば
+穿たれたるぞ嘆てけれ
+あゝ惟神々々
+バラモン教の厳霊
+幸はひまして逸早く
+大黒主の身魂をば
+払ひ清めて真心に</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Return, Kamunagara,
+I pray before the Kami.'</p>
+          <p class="en-p">Thus sang the Shiyujin of this house, Onikumawake, in a quiet voice while playing the Ichigenkin. It goes without saying that the woman who entered shizushizu and bashfully, led by the annai of Kumahiko into such a place, was Isonohime.</p>
+          <p class="en-p">Kumahiko pushed open the sliding door, supported himself with both hands, and spoke.</p>
+          <p class="en-p">Kumahiko: 'Dannasama, Isonohime-sama has come to visit all alone from afar. I wonder if something has happened. Please, listen to her story in detail.'</p>
+          <p class="en-p">Saying this, he withdrew to his own room. Onikumawake was startled from the first glance.</p>
+          <p class="en-p">Onikumawake: 'Oh, you are Isonohime-sama! Why have you visited my Setsutaku all alone? At any rate, that place is hashijika; first of all, please come this way.'</p>
+          <p class="en-p">Isonohime: 'Yes, I have no excuse for disturbing you so totsuzen. If that is the case, I shall take your leave and enter.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">かへらせ給へ惟神
+神の御前に祈ぎまつる』</p>
+            <p class="ja-classical-line">と一絃琴を弾きながら声も静かに歌ひゐるのは、此家の主人鬼熊別であつた。かかる処へ熊彦の案内につれて恥かしげに静々と入り来る女は石生能姫である事は云ふまでもない。</p>
+            <p class="ja-classical-line">熊彦は襖を押開け両手を支へ、</p>
+            <p class="ja-classical-line">『旦那様、遥々と石生能姫様が只一人御訪問になりました。何事か起つたのでは御座いますまいか。何卒詳しくお話をお聞き下さいませ』</p>
+            <p class="ja-classical-line">と云ひながら吾居間に下る。鬼熊別は一目見るより驚いて、</p>
+            <p class="ja-classical-line">『よう、貴方は石生能姫様、どうして又お一人、拙宅をお訪ね下さいましたか。何は兎もあれ、そこは端近、先づ先づこれへお直りを願ひます』</p>
+            <p class="ja-classical-line">『ハイ、突然お邪魔を致しまして申訳が御座りませぬ。左様なれば御免蒙りまして通らして頂きませう』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c03.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 3: 落 Bridge [1087]</span>
+      </a>
+      <a href="c05.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 5: 忍ぶ恋 [1089]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

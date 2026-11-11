@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: 心の反映 [1096] - Volume 40 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 40 Table of Contents</a>
+      <span>Volume 40</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 40 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: 心の反映 [1096]</h1>
+      <p class="chapter-title-ja">心の反映〔1096〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The autumn wind blows fiercely in the valley of Tamayamatauge, where Karu-shi, who served under General Ranchi—the great leader of the Brahman Kyō who ascended to conquer the mansion of Iso—clashed with Rebu and others, who were renowned for serving as children of the house of Onikumawake; as a result, they both fell into the valley and fell into a state of unconsciousness, and while walking through the withered fields of the Iukai, they rested upon a rock in the middle of the field, when the eight men who were subordinates of Karu were led away by two red and black demons, heading toward the Ichizu River through a field overgrown with withered grass, while Rebu and Karu, being led by blue demon slaves, finally arrived at the crossing of the Shōzu River, and when they looked, it was a vast river with no end in sight, its clear current flowing tautau while spitting out white foam, appearing like a writhing Orochi, and a single house on the riverbank was a Giyokurō sparkling with Konkuō, dazzling to the eyes.</p>
+          <p class="en-p">The blue demon opened the golden gate and hid himself inside the mansion, and after a while, hearing a voice saying that they had finally lured the two men here and that they should be accepted, the former demon bowed and vanished to parts unknown; as the two stood on the riverbank, they whispered about the strangeness of this beautiful house that did not suit the land, when suddenly, a clear female voice, as if shaking a golden bell, called out for them to come quickly, and as they stared with eyes of wonder and approached, they thought they had been mistaken to think her an old demon hag, for she was a beautiful woman of peerless light, appearing to be sixteen or seventeen years of age, with a graceful figure that would make even flowers shy away, smiling very pleasantly; the two were surprised and exchanged words with the woman at the river's edge for a while, but when they entered into the inner room, the inner room was a field of grass, and the Shōzu River was roaring tautau just as before.</p>
+          <p class="en-p">Led into a crystal mansion, they lost the exit and were perplexed, and as they stood there exchanging many words and begging for salvation, the beauty from the riverbank took the hands of the two, appeared before that ugly hut, and spoke: 'The house you have entered until now is but a model of the dwellings of the Shaba and the Shinkai; this thatched hut is the checkpoint of Datsueba-sama, where the old demon hag dwells for eternity, stripping the skin of the dead who have piled up heavy sins in the Shaba and are setting out on their journey to the Jūman-okudo.' No sooner had she said this than the maiden suddenly turned into an ugly old hag, stretched out her withered, shriveled hands, and grabbed the two by their bare necks; because of the nastiness and coldness of it, the two leaped into the middle shallows of the Shōzu River, plunged in with a splash, and swimming with powerful strokes, they finally managed to reach the opposite shore.</p>
+          <p class="en-p">The two, still in their clothes, had crossed the limitlessly wide river with unexpected ease and safety, and feeling as if they had performed a great feat, they could not contain their sense of exhilaration; gazing at the surface of the river, they looked into the deep blue waves.</p>
+          <p class="en-p">Rebu: 'Though I was grabbed by the neck by the old demon hag and jumped into this river at the risk of my life, I thought in the middle of this vast river that I could never cross it safely, but contrary to this torrent, it is a mystery beyond knowing that we crossed so easily and swiftly in a straight line, just as an arrow flies.'</p>
+          <p class="en-p">Karu: 'That is the point where the Genkai and the Shinkai differ. Look there. Before we knew it, the river has sunk somewhere, and beautiful flowers are blooming in full glory, are they not? Ah, a fragrance beyond knowing strikes my nose. Look there. It is not a river. It is like the Garden of Eden.'</p>
+          <p class="en-p">Rebu: 'Yes, indeed, indeed, what a mysterious thing this is. White plum blossoms are blooming here and there on the branches of large trees. Roses, peonies, clover, white lotuses, and various other flowers are blooming until there is no room left. Truly, the state of heaven is different. Now that we have come to such a place, I never want to return to the Genkai, where life is nothing but falsehoods, for ten thousand eons. Say, Karu-san, you and I, out of a little bit of stubbornness, were grinding our teeth against each other for the sake of our masters, calling it loyalty or duty, trying to boast of our honor, snarling at each other like shaggy dogs set upon by hunters, and killing each other though we had no grudges; but like dragons and tigers whose power was not equal, we finally met our end at the bottom of the valley of Tamayamatauge, and it became our departure for the Shinkai. When I think of this, there is no one more pitiful than the fellows in the Genkai.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">秋風切りに吹きすさぶ
+玉山峠の谷間で
+バラモン教の大棟梁
+イソの館の征討に
+上りしランチ将軍の
+部下に仕へしカル司
+鬼熊別の家の子と
+仕へて名高きレーブ等と
+衡突したる其結果
+互に谷間に墜落し
+人事不省に陥りて
+いつとはなしに幽界の
+枯野ケ原を歩みつつ
+野中の巌に休む折
+カルの部下なる八人は
+赤黒二人の鬼共に
+引つ立てられて枯草の
+莽々茂る野原をば
+一途の川を指して行く
+レーブとカルの両人は</p>
+            <p class="ja-classical-line">青き鬼奴に誘はれ
+三途の川の渡場に
+漸く辿り来て見れば
+果しも知らぬ広い川
+清き流れは滔々と
+白き泡をば吐きながら
+大蛇のうねる如くなり
+川の畔の一つ家は
+金光きらめく玉楼の
+眼まばゆきばかりなり
+金門をあけて青鬼は
+館の中に身を隠し
+二人の男をやうやうと
+ここ迄誘ひ参りしぞ
+受取りめされと云ふ声の
+聞えて暫し経つ間に
+以前の鬼は会釈して
+何処ともなしに消えにける
+二人は川辺に佇みて
+思はぬ美しき此家は</p>
+            <p class="ja-classical-line">土地に似合はぬ不思議さと
+囁く折しも金鈴を
+振るよな清き女声
+早く来れと呼びかくる
+不思議の眼をみはりつつ
+近づき見れば鬼婆と
+思うた事は間違か
+花も恥らふ優姿
+年は二八か二九からぬ
+神妙無比の光美人
+いとニコニコと笑ひ居る
+二人は驚き川端の
+女と暫し掛合ひつ
+一間を奥へと入りみれば
+奥の一間は草野原
+三途の川の滔々と
+以前の如く鳴りゐたり
+水晶館に導かれ
+鏡の如く透きとほる
+館の中で出口をば</p>
+            <p class="ja-classical-line">失ひ互に辟易し
+千言万語を並べつつ
+救ひを乞へば川端の
+美人は二人の手を取つて
+醜けき小屋の其前に
+立ちあらはれて言ひけらく
+今迄汝の立入りし
+家屋は娑婆と神界の
+住居の姿の模型ぞや
+此茅屋は鬼婆の
+弥永久に鎮まりて
+娑婆にて重き罪かさね
+十万億土の旅立を
+致す亡者の皮を剥ぐ
+脱衣婆さまの関所ぞと
+いふより早く忽ちに
+娘は醜き婆となり
+痩せからびたる手を伸べて
+二人の素ツ首引つ掴む
+其いやらしさ冷たさに</p>
+            <p class="ja-classical-line">三途の川の中つ瀬に
+身を躍らして両人は
+ザンブとばかり飛び込んで
+抜手を切つて向ふ岸
+やうやう渡り着きにけり。</p>
+            <p class="ja-classical-line">二人は着衣の儘、際限もなき広い川を、意外にも易々と無事に渡つたのを、非常な大手柄をしたよな気分になり、爽快の念に堪へられず、川の面を眺めて、紺青の波を見入つてゐた。</p>
+            <p class="ja-classical-line">レーブ『鬼婆アさまに首筋を掴まれ、生命カラガラ此川へ飛込んだものの、これだけ広い川、到底無事には渡れまいと真中程で思うたが、此激流にも似合はず、弓の矢が通つたやうに、一直線に易々と、而も匆急に渡られたのは何とも知れぬ不思議ぢやないか』</p>
+            <p class="ja-classical-line">カル『そこが現界と神界との異る点だ。ヤアあれを見よ。何時の間にか川はどつかへ沈没して了ひ、美はしい花が百花爛漫と咲き匂うてるぢやないか。アヽ何とも知れぬ芳香が鼻をついて来る。あれ見よ。川ぢやないぞ。エデンの花園みたいだ』</p>
+            <p class="ja-classical-line">『ヤアほんにほんに、何とマア不思議な事ぢやないか。ようよう白梅の花が大きな木の枝に所々に咲いてゐる。バラの花に牡丹の花、紫雲英に白連華其外いろいろの草花が所せき迄咲いて来た。ヤツパリ天国の様子は違つたものだ。モウこんな所へ来た以上は虚偽ばかりの生活をつづけてゐる現界へは、万劫末代帰りたくないワイ。なあカル公、お前と俺とは、少しばかりの意地から、忠義だとか義務だとかいつて主人の為に互に鎬を削り、名誉を誇らうと思つて、猟師にケシをかけられた尨犬の様にいがみ合ひ、恨も何もない者同士が、命の取りやりをやつてゐたが、竜虎互に勢全からず、とうとう玉山峠の谷底で寂滅為楽急転直下、神界の旅立となつたのだ。が之を思へば現界の奴位可哀相な者はないのう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">However, thanks to the fact that you and I engaged in a competition of hypocrisy, we have escaped the sufferings of Shiyaba and have been able to come to such a Tengoku Jiyōdo; who is to say what might turn out to be for our Gotsugafu? The enemy of Kinofu is the ally of Kefu, and even the roar of the tiger and wolf has become the floral Kunpū passing through the flower garden of Gokuraku. Now that we have come to Shinkai, there is no need for Meiijiyufuku, nor is there any Yochi for us to quarrel. We wander through the Kuōdaimuhen flower garden as we please, pick and eat the fruits of the trees in Jiiujizai, and abandon all Keirui to travel through Tengoku alone; is there anything more Yukuwai than this? However, since it is said that there is Zeninzenguwa and Akuinakukuwa, it must be that to be able to come to such a place, one must have exhausted all good in Genkai. If we look back on our past, there is no reason why we should ever be able to come to such a place. Perhaps Ōkami has made a mistake in the person, or perhaps there has been a misunderstanding. If that were the case, we would be in great trouble. This beautiful and joyful situation might suddenly change, and we might be cast into the hellish path of supreme ugliness and suffering. Thinking of this, a sense of attachment arises after all. No matter how much one says to remove attachment, how could attachment not remain in this Tengoku? Ah, Kannagara Tamachi Haemase. Please, Ōkami, even if it is but a dream, I pray that You will keep us in this state of being forever.</p>
+          <p class="en-p">He is joining his hands and worshipping heaven and earth with all his might. Before they knew it, the ground where the two were standing had risen by about twenty ken, and a level, broad road had appeared in the low-lying areas to the left and right, where various kinds of people and birds and beasts could be seen coming and going to and fro.</p>
+          <p class="en-p">Rebu: 'Hey, the situation has suddenly changed again. Oi, Karu, if you are not careful, you do not know what might happen, so you cannot let your guard down even for a moment.'</p>
+          <p class="en-p">Just as he was speaking, a scream like that of a monkey being strangled was heard from about two or three chō ahead. The two did not say a word, and thinking that if someone were being persecuted by an Akuma, they must save them, they dashed off in silence. When they drew near, they saw a round-bellied man with a pale face, wearing a white robe hanging loosely, holding a blood-stained sword in his right hand, and gripping the nape of a beautiful child of about four or five years old with his left hand, just about to plunge a short sword into the child's chest.</p>
+          <p class="en-p">Rebu and Karu, forgetting themselves, leaped at the man, trying to snatch away the blood-stained sword and save the child, but although they struggled with all their might, the man in the white robe did not move an inch, as if he were a rock grown from the earth, no matter how much they pushed or struck him. In the blink of an eye, he cruelly stabbed the child to death.</p>
+          <p class="en-p">Rebu: 'You Akuma, do you know where this place is? How can you perform such a brutal act in such a noble Tengoku?'</p>
+          <p class="en-p">Man: 'Aha! How ridiculous. For you to call me an Akuma, when you are but a vessel of an Akuma yourself, what is the meaning of this? That a dung beetle does not know the stench of dung is a description of you. Now, it is your turn; do not move from there. Ihi! What a lovely thing this is. You fake, fraudulent ghost, because of the Karma of your soul, I, this Tenrai Bosatsu, shall now defeat you, so you had better be happy to receive my blade.'</p>
+          <p class="en-p">Rebu: 'Aha! What are you spouting, calling yourself Tenrai Bosatsu? Even if one is a Bosatsu, is there such a thing as brandishing a lethal weapon and committing murder on the streets of Tengoku? Furthermore, to murder an innocent child is an outrageous act. Hey, Akuma, or rather Tenrai, listen well. We are Karu and Rebu, the masters of martial arts who were sung of in the world as heroes and great men in Brahmanism. Even if small fry like you were to gather in the millions and attack us with martial spirit, it would be like a swarm of mosquitoes attacking a Senbiki-no-iwa. Now, I shall show you our martial prowess, snatch your sword away, and hack you to pieces; you had better be prepared. You had better recite some divine text as a memento of Shinkai.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『併し乍ら、お前と俺と偽善の行り比べをやつたおかげに、互に娑婆の苦を逃れ、こんな天国浄土へ来られるやうになつたのだから、何が御都合になるとも分らぬぢやないか。昨日の敵は今日の味方、虎狼の唸り声も極楽の花園を渡る花の薫風となりにけりだ。モウ斯うして神界へ来た以上は、名位寿福の必要もなければ互に争ふ余地もない。勝手に広大無辺な花園を逍遥し、自由自在に木の実を取つて食ひ、一切の系累を捨てて単身天国の旅をするのだから、これ位愉快な事はないぢやないか。併し乍ら善因善果、悪因悪果といふからは、斯様な所へ来られる様になるのは余程現界に於て善を尽したものでなければならぬ筈だ。俺達の過去を追懐すれば、決してかやうな所へやつて来られる道理はない。ヒヨツとしたら、神様が人違を遊ばしたか、感違をなさつたかも知れぬぞ。モシそんな事であつたなら、俺達は大変だ。此美はしき楽しき境遇が忽ち一変して、至醜至苦の地獄道へ落されるかも知れない。之を思へばヤツパリ執着心が起つて来る。何程執着心をとれと云つても、此天国に執着が残らいでたまらうか。あゝ惟神霊幸倍坐世。どうぞ神様、夢でも構ひませぬから、どこ迄も此境地において下さいますやうに』</p>
+            <p class="ja-classical-line">と手を合して一生懸命に天地を拝んでゐる。何時の間にか、二人の立つてゐた地面は二十間ばかり持上り、左右の低い所に坦々たる大道が通じて、種々雑多の人物や禽獣が右往左往に往来してゐるのが見えて来た。</p>
+            <p class="ja-classical-line">レーブ『ヤア俄に又様子が変つて来たぞ。オイ、カル、気をつけないと、どんな事になるか知れぬぞ、チツとも油断は出来ないからな』</p>
+            <p class="ja-classical-line">かく話す折しも、二三丁前方に当つて猿をしめる様な悲鳴が聞えて来た。二人は物をも言はず、其声を尋ねて何人か悪魔に迫害され居るならむ、救うてやらねばなるまいと、無言のまま駆出した。近よつて見れば、白衣をダラリと着流した丸ポチヤの青白い顔をした男が、右手に血刀を持ち、左手に四五才ばかりの美はしき童子の首筋を引掴み、今や胸先へ短刀を突き刺さむとする間際であつた。</p>
+            <p class="ja-classical-line">レーブ、カルの二人は吾を忘れて、其男に飛びかかり、血刀を引つたくり、童子を助けむと、力限りにもがけども、白衣の男は地から生えた岩のやうに、押せども突けどもビクとも動かぬ。みるみる間に其童子を無残にも突き殺して了つた。</p>
+            <p class="ja-classical-line">レーブ『コリヤ悪魔奴、此処は何処と心得てゐる、勿体なくもかかる尊き天国に於て、左様な兇行を演ずるといふ事があるか』</p>
+            <p class="ja-classical-line">男『アハヽヽヽ阿呆らしいワイ。悪魔の容物の分際として、此方を悪魔呼ばはりするとは何の事だ。糞虫は糞の臭気を知らぬとは貴様の事だ。サアこれから其方の番だ、そこ動くな。イヒヽヽヽ、なんとマアいぢらしいものだなア、いかさま野郎のインチキ亡者奴、身魂の因縁に依つて、此天来菩薩が之から汝を制敗致すから、喜んで此方の刃を受けたがよからうぞ』</p>
+            <p class="ja-classical-line">レーブ『アハヽヽヽ天来菩薩とはソラ何を吐かす、苟くも菩薩たる者が凶器をふりまはし、天国の街道に於て殺生をするといふ事があるか。況して罪のない童子を殺害するとは、以ての外の代物だ。コリヤ悪魔、イヤ天来、よつく聞け、此方こそはバラモン教にて英雄豪傑と世に謳はれた武術の達人、カル、レーブの両人だ。汝の如き小童共、仮令幾百万人一団となつて武者ぶりつくとも、千引の岩に蚊軍の襲撃した様なものだ。サア今に此方の武勇を現はし、汝が剣をボツたくり、寸断にしてくれむ、覚悟を致したがよからうぞ。神界の名残に神文でも称へたがよからう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Man: 'Utsu-fu-fu-fu, you flustered fool, I am subduing this Dōji in accordance with the Hafusoku of the Shinkai to fulfill my Shimei. You are always blathering in the Genkai, are you not, that when the Kami appears on the surface to distinguish between Zen and Aku, one cannot discern the Zenaku of the Mitama unless it is the Kami? It is not for the likes of you to interfere; humans should just act like humans and go silently to where they ought to go. Even if you wish to display cheap Jihishin or Gikefushin without knowing the reason, such things do not pass in the Shinkai, which is as clear as a mirror.'</p>
+          <p class="en-p">Rebu: 'Even if this Dōji has any kind of sin, it is the Omegumi of the Kami-sama of Daiji and Daihi to interpret everything in the Shinkai with Zeni, and to Minaho, Norinaho, and Norinaho through Kamunahohi and Ōnahohi. You claim it is your Shimei, but if this were the hell of the mundane world, that would be one thing; is there any reason for a human, who is a bunrei of the Kami of Heaven and Earth, to lay hands on another and subdue them?'</p>
+          <p class="en-p">Man: 'Ehe-he-he, you have blathered, you have blathered; if you are one who understands logic so well, why do you not Minaho, Norinaho, and Norinaho me through Kamunahohi and Ōnahohi? You flaunt the martial prowess you learned a little in the mundane world, call us demons, steal my sword to commit the crime of robbery, and now you seek to cut me to pieces; is this not a gross contradiction? How can you travel the Shinkai with such an attitude? You are a fellow who truly understands nothing. Otsu-ho-ho-ho, are you trying to skim the profit off a demon? What a terrifying, self-centered creature you are.'</p>
+          <p class="en-p">Karu: 'Hey, demon, this is the Shinkai. The world you belong to is the Yūkai, is it not? How is it that you have come to such a place? Leave at once. If you dawdle, an international negotiation between the Shinkai and Yūkai may begin, and it may eventually lead to a breakdown in talks, resulting in the issuance of a declaration for the subjugation of hell.'</p>
+          <p class="en-p">Man: 'Itsu-hi-hi-hi, you have not performed a single good deed in the Genkai, and having stumbled into the Shinkai by sheer chance, you expose your face as a hypocritical good person and chirp your logic, but this demon and this blood-stained sword are all reflections of your own heart. While you are a petty villain who is the child of the child of Oniharawake, who serves under the subordinates of Daikokunushi possessed by the demon of Yamata-no-Orochi, you suck the raw blood of the Aohitogusa under heaven who are like a three-year-old Dōji, flaunt your slight martial prowess, and the sin of having galloped through the battlefields of Shura is now manifesting here. In short, because I am a demon born of your sins, if you were to truly Minaho, Norinaho, and Norinaho through Kamunahohi and Ōnahohi, and repent with a sincere heart, how could I appear on such a noble Great Path of the Shinkai? If you wish for me to perish, you had better repent from your heart. When you think others are demons, it is all about yourself. Hey, Rebu, you met Koganehime earlier and heard the teachings of the Ananai-kyō, did you not? Were you not told at the rock shade of Tamayama Pass that when you think others are evil, it is all about yourself?'</p>
+          <p class="en-p">Rebu: 'Indeed, if that is the case, then you are, so to speak, my vice-guardian deity. What a terrible vice-guardian I have had.'</p>
+          <p class="en-p">Man: 'Aha-ha-ha, do not say such convenient and selfish things. Far from being a vice-guardian deity, I am a fragment of your true guardian deity. If you do not repent thoroughly, the demon you have birthed may continue to close in on you further ahead, and there is no telling what kind of trouble you will face. Since you are capable of cutting your own neck with your own sword, you had better repent quickly. It is not just Rebu; Karu is the same. This Dōji is also an incarnation of Karu's Mitama. Do you understand now?'</p>
+          <p class="en-p">Rebu: 'Yeah, I understand. Although we have been traveling the Shinkai together as friends, to tell the truth, I have been so lonely that I could not help it, so I thought I would make you my traveling companion; and although I appeared kind and open on the surface, I had thought in the corner of my heart that once we reached our destination, I would push such a villain down into the hell-path visible below. Yeah, I was wrong. Hey, Karu-kō, I am truly sorry. Please forgive the sins of my heart.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">男『ウツフヽヽヽうろたへ者奴が、神界の法則に依つて、此方が使命を全くする為、此童子を制敗してゐるのだ。汝はいつも現界でホザいて居るだらう、神が表に現はれて、善と悪とを立別ける、神でなくて、身魂の善悪が分るものか。貴様達の容喙すべき限でない、人間は人間らしく黙つて自分の行くべき所へ行けばいいのだ。訳も知らずに安つぽい慈悲心だとか、義侠心を発揮しようと思つても、そんな事は、鏡の如き明かな神界に於ては通用致さぬぞ』</p>
+            <p class="ja-classical-line">レーブ『仮令此童子に如何なる罪があらうとも、神界に於ては何事も善意に解し、神直日大直日に見直し聞き直し宣直し給ふのが大慈大悲の神様の御恵だ。其方は使命だと申すが、娑婆地獄ならば知らぬこと、天地の神の分霊たる人間を自ら手を下して制敗するといふ道理があるか』</p>
+            <p class="ja-classical-line">男『エヘヽヽヽぬかしたりな　ぬかしたりな、それ程よく理屈の分つた其方なれば、此方を神直日大直日に見直し聞き直し宣直さぬか。娑婆で少しく覚えた武勇を鼻にかけ、吾々を悪魔呼ばはりになし、此方の刀を掠奪して盗賊の罪を重ね、又此方を寸断せむとは自家撞着も甚だしいではないか。そんな事で如何して神界の旅が出来るか。テもさても分らぬ奴だな。オツホヽヽヽ鬼の上前を貴様ははねようと致すのか、何と恐ろしい我の強い代物だなア』</p>
+            <p class="ja-classical-line">カル『コリヤ悪魔、ここは神界だぞ、貴様の居る世界は幽界だらう。かやうな所へやつて来るといふ事があるか、早く立去れ。グヅグヅ致して居ると、神界幽界の国際談判が始まり、遂には談判破裂して、地獄征伐の宣示が渙発されるやうになるかも知れぬぞ』</p>
+            <p class="ja-classical-line">男『イツヒヽヽヽ其方は現界に於て一つの善事もなさず、まぐれ当りに神界へふみ迷うて来よつて、一角善人面をさらして、ツベコベと理屈を囀つてゐやがるが、此悪魔も此血刀も、皆貴様の心の反映だ。貴様は八岐大蛇の悪魔の憑いた大黒主の部下に仕ふる鬼春別の乾児の乾児の其乾児たる小悪人で居ながら、三才の童子に等しき天の下の青人草の生血を吸ひ、少しの武勇を鼻にかけ、修羅の戦場に疾駆した其罪が今ここに顕現してゐるのだ。要するに此方は貴様の罪が生んだ悪魔だから、貴様が本当に神直日大直日に見直し宣直し、発ごんと改心を致したならば、かかる尊き神界の大道に如何して俺が現はれる事が出来ようか。俺が亡ぼしたくば、貴様の心から改心したがよからう。人が悪魔だと思うて居れば、みんな自分の事だぞ。コリヤ、レーブ、其方は今の先黄金姫に出会ひ、三五教の教理を聞いたであらう。人が悪いと思うてゐると皆われの事ぢやぞよ………と玉山峠の岩蔭で聞かされたぢやないか』</p>
+            <p class="ja-classical-line">レーブ『成程さうすると、お前は俺の言はば副守護神だなア。何と悪い副守が居やがつたものだなア』</p>
+            <p class="ja-classical-line">男『アハヽヽヽ都合のよい勝手な事をいふな。副守護神所か、貴様の本守護神の断片だ。トコトン改心致さぬと、まだまだ此先で貴様の生んだ鬼が貴様に肉迫して、どんな目に会はすか知れぬぞ。己が刀で己が首切るやうなことが出来致すから、早く改心致したがよからう。レーブばかりでない、カルも其通りだ、此童子はヤツパリ、カルの身魂の化身だ。どうだ判つたか』</p>
+            <p class="ja-classical-line">レーブ『ヤア判つた、斯うして二人仲よくして神界の旅行をやつてゐるものの、本当のことを言へば、おれも淋しくて仕方がないから、道伴れにしようと思ひ、表面こそ親切に打解けたらしくしてゐるものの、行く所まで行つたならば斯様な悪人は此下に見ゆる地獄道へつき落してやらうと、心の端に思うてゐたのだ。ヤア悪かつた、オイ、カル公、俺は本当に済まなかつた。心の罪を赦してくれ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Karu: 'Ah, is that so? Though I have been walking with you in an open manner, I was inwardly trembling with fear, thinking that I knew not when you might pull off my head. If that is the case, then that Dōji was the manifestation of my own Kiyōfushin. Since you have had such a Kaishin, I shall no longer fear you. Let us open our hearts to one another, be friends from the bottom of our hearts, and wander through this Tengoku together. Ah, Kamunagara Chihahe Mase.'</p>
+          <p class="en-p">Joining their Riyōte, the Riyōnin closed their eyes and offered a Kiguwan to the Tenchi. After a while, they opened their eyes and looked around, and there was neither the shadow of the man nor the shadow of the Dōji; what had appeared to be blood flowing upon the Daichi were flowers of crimson, blooming and fragrant in Funpun, and butterflies with beautiful wings of white, yellow, purple, and blue were dancing and playing, Henpon, aiming for the flowers. The Riyōnin awakened for the first time from the illusions of their hearts, and while reciting the Amatsunorito, they proceeded, holding hands, ever more intimately toward the north, and yet further north.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">カル『あゝさうか、おれも実はお前と打解けて歩いて居るものの、何時お前が俺の素首を引抜くか知れぬと思うて、戦々兢々と心の底でしてゐたのだ。さうするとあの童子は俺の恐怖心が塊つて現はれたのだな。お前がさう改心してくれる以上は、最早お前も恐れはせぬ。互に打解けて心の底から仲よくして、此天国を遊行しようぢやないか。あゝ惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">と両手を合せ、両人は目をとぢて天地に祈願をこめた。暫くあつて、目を開きあたりを見れば、男の影も童子の影もなく、大地に流れた血潮と見えしは紅の花、紛々と咲き匂ひ、白黄紫青などの美はしき羽の蝶翩翻と花を目がけて舞ひ遊んでゐる。両人は初めて心の迷ひを醒まし、天津祝詞を奏上しながら、北へ北へと手をつなぎつつ、いと睦じげに進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: 三途館 [1095]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: 試の果実 [1097]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

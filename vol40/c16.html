@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 16: Spring 駒 [1100] - Volume 40 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 40 Table of Contents</a>
+      <span>Volume 40</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 40 &bull; Chapter 16</span>
+      <h1 class="chapter-title-en">Chapter 16: Spring 駒 [1100]</h1>
+      <p class="chapter-title-ja">春駒〔1100〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Harukō, having been saved from a severe illness by the Sendenshi, felt gratitude toward them as his saviors of life. He now surrendered himself completely to the Shintoku of Ananahi, and it was decided that he would proceed as a guide for the party, following them toward the Capital of the Moon. While descending the steep slope of the Thames Pass, Harukō began to sing, keeping time with his feet.</p>
+          <p class="en-p">'My birthplace is Armenia. The Mioshihe of the Hiko of Ural, I have revered since the days of my parents; it is a noble and pure lineage. Both my parents have departed this world, and the brothers who remained behind, tossed by the winds of Ukiyo, have become scattered and separated. The whereabouts of my elder brother are still unknown. To open the Mioshihe of the Kami of Ural on Riugūjima, which drifts in the middle of Ōwadanaka, I was appointed as a Kamuzukasa and set forth, I, Ihahiko. Seeking the whereabouts of my brother, I came to the land of Fusa, and just as I was about to cross Wadanaka, steering a small boat, the Kamuzukasa Ōdaruwake appeared at the port of Taru.</p>
+          <p class="en-p">He preached the Mioshihe of the Brahman Kyō in great detail. As I mingled with the crowd and listened to the Mioshihe, half-attentively, I became convinced that there was a flavor to it from somewhere unknown, and I became addicted. Untokodotsukoi, what a steep slope! Everyone, please be careful. Slipping into the Brahman Kyō, I eventually became a person serving under the Great Lord God, Daikokunushi-no-Kami. Using my original name, Harukō, I was promoted to be a barrier guard here. I became a messenger sent to search for the whereabouts of the wife and children of Onikumabetsu of the Brahman sect, and to capture all the Kyōshi of Ananahi and send them to the Capital of the Moon. Mount Thames has high peaks.</p>
+          <p class="en-p">The wind that blows is fierce, and it is a difficult pass where people do not tread. Nevertheless, to proceed to the Iso Mansion and Mount Ubusuna, this is the primary shortcut. The Kamuzukasa of the Ananahi Kyō will likely cross here for the most part. Obeying the order to build a barrier station on the pass and wait, I spent my mornings and evenings drowning my heart in sake. The essential duty of the barrier guard was, in short, my side job; my main profession was drinking sake. While I was living like that, the Mukade-hime of the Brahman Kyō, Koito-hime, came riding on a horse, climbing up with a 'hi-hi-hi'. When I looked closely, there was a dignity in her presence that was somehow...</p>
+          <p class="en-p">Feeling overwhelmed, I feigned ignorance and, displaying a great magnanimity, let her pass through the barrier station with ease. When Mokusuke of the Ananahi Kyō path came riding on a truly terrifying lion, leading a great multitude, and climbed up, my heart trembled and my body shook; I felt as if I were not alive. Aitata-tatsuta, I stumbled. Untokodotsukoi, look at this. Since then, everyone became desperate. On such a dangerous mountain, how could we serve while sober? To deceive our fear, if only for a moment, by drowning it in the intoxication of sake, we drank gulp after gulp of fruit wine until we were dead drunk, and collapsed in the shape of a large character on the wind-swept pass.</p>
+          <p class="en-p">As a result of that, the Kami of Colds came along, and—untokodotsukoi, dotsukoishiyo—invaded my body. Suddenly, a headache arose. With a pain as if a hammer were crushing my brain—kan-kan-kan—I was writhing in agony. Just then, the living Kami, Terukunibetsu, the Kamuzukasa of the Ananahi Kyō, appeared and saved my life—dotsukoi. How could such a noble path of Kami exist anywhere else? No matter how noble the Brahman Kyō or the Ural Kyō may be, praying with sincerity from morning till night without a single effect appearing is ridiculous. I have come to hate it.</p>
+          <p class="en-p">O Kami Terukunibetsu, although it is said that there is a river ahead where the current of the lion is fierce, I know of one place where it can be crossed with ease. The flow is gentle and the shallows are shallow; it is a perfect spot. Although the path is a little roundabout, it is the only safe zone. Following the proverb 'more haste, less speed,' let us choose that place to cross. Beyond that, there is a small slope of Mount Tama. If Harukō, who is well-versed in the geography, serves at the head, we shall be able to go to the Imperial Capital of the Moon easily, without even realizing it. Please trust me. Untokodotsukoi, dotsukoishiyo.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">春公は宣伝使に重病を助けられ、命の恩人と感謝し、茲に全く三五の神徳に帰順して、一行に従ひ月の都へ道案内として進み行くことになつた。春公はテームス峠の急坂を下りながら足拍子をとつて歌ひ出した。</p>
+            <p class="ja-classical-line">『私の生れはアーメニヤ
+ウラルの彦の御教を
+親の代から奉じたる
+尊き清き家柄だ
+二人の親は世を去りて
+後に残りし兄弟は
+浮世の風にもまれつつ
+離れ離れとなりはてて
+兄の行方はまだ知れぬ
+ウラルの神の御教を
+大和田中に漂へる
+竜宮島に開かむと
+神の司と任けられて
+進み出でたる岩彦ぞ
+兄の所在を尋ねむと
+フサの国までやつて来て
+小舟を操り和田中を
+渡り行かむとする時に
+大足別の神司
+タルの港に現はれて</p>
+            <p class="ja-classical-line">バラモン教の御教を
+いと細々と説諭す
+群衆に紛れて御教を
+聞くともなしに聞き居れば
+どこともなしに味ありと
+思ひ込んだが病み付きで
+ウントコドツコイきつい坂
+皆さま用心なされませ
+バラモン教に辷り込み
+遂には大黒主神
+御許に仕ふる身となりて
+元の名前の春公を
+名乗りて茲に関守と
+抜擢されてバラモンの
+鬼熊別の妻や子の
+所在を探ね三五の
+教司を悉く
+捕へて月の都まで
+送る使となりました
+テームス山は峰高く</p>
+            <p class="ja-classical-line">吹来る風は荒くして
+人の通らぬ難所なり
+さはさりながらイソ館
+ウブスナ山へ進むには
+ここが第一近道ぢや
+三五教の司等は
+大半ここを越えるだらう
+峠の上に関所をば
+作つて待てとの命令を
+遵奉しつつ朝夕に
+酒に心をとろかして
+肝腎要の関守は
+つまり私の副事業
+お酒を呑むのが本職と
+勤めて暮す折もあれ
+バラモン教の蜈蚣姫
+小糸の姫は駒に乗り
+ハイハイハイと登りくる
+よくよく見ればどことなく
+威厳備はる勢に</p>
+            <p class="ja-classical-line">辟易なして知らぬ顔
+一大雅量を発揮して
+やすやすと関所を通しけり
+かかる所へ三五の
+教の道の杢助が
+さも恐ろしき獅子に乗り
+数多の群を引連れて
+登り来りし其時は
+心をののき身はふるひ
+生きたる心地はなかりけり
+アイタタタツタ躓いた
+ウントコドツコイこれわいな
+それから一同自暴になり
+こんな危険な山の上
+素面でどうして勤まらう
+お酒の酔に紛らして
+一時なりと恐怖心
+ごまかし呉れむとガブガブと
+木の実の酒に酔ひつぶれ
+風吹く峠に大の字と</p>
+            <p class="ja-classical-line">なつて倒れた其結果
+風邪の神めがやつて来て
+ウントコドツコイ　ドツコイシヨ
+私の体に侵入し
+忽ち起る頭痛
+カンカンカンと鉄鎚で
+脳天くだくよな苦しさに
+悶え居たりし折もあれ
+三五教の神司
+照国別の生神が
+現はれまして命をば
+助けてドツコイ下さつた
+こんな尊い神の道
+如何して外にあるものか
+バラモン教やウラル教
+何程尊い道ぢやとて
+朝から晩まで真心を
+こめて祈れど寸効も
+現はれ来ない馬鹿らしさ
+私は嫌になりました</p>
+            <p class="ja-classical-line">照国別の神様よ
+これから先にライオンの
+水勢激しき川がある
+とは云ふものの易々と
+渡れる個所が一所
+あるのを私は知つてゐる
+流れはゆるく瀬は浅く
+恰好の場所で厶います
+少しく道はまはれども
+唯一の安全地帯なら
+急がば廻れといふ比喩
+そこを選んで渡りませう
+それから先は玉山の
+チヨツと小さい坂がある
+地理に詳しい春公が
+先頭に仕へまつりなば
+月の御国へ易々と
+知らず知らずに行けませう
+私を信じて下さんせ
+ウントコドツコイ　ドツコイシヨ</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mukadehime, who departed just now, and Koito-hime, I wonder where they are and what they are doing at this moment. Thinking that Rebu-sama, who served as their attendant, must surely be lost in the wilderness and suffering a terrible shock, my heart grows anxious. Whipping my heart's steed, I set off at once on my Hizakurige. Ah, Kamunagara, Kamunagara. May the Mitama of the Kami grant us blessings, and may this party be led safely and with ease to the capital of victory. Before the presence of the Kami of Ametsuchi, Harukō prays with all his heart. Untokodotsukoi, dotsukoishiyo. There lies a flat road. Terukuniwake-dono, the Sendenshi, shall we take a rest?</p>
+          <p class="en-p">Sweet-looking fruits are growing. Because the Sakamichi is so steep, my throat began to play a flute. The intoxication of the sake has faded, and the condition of my head feels somehow hazy. Untokodotsukoi, yatsutokoshiyo.</p>
+          <p class="en-p">Singing with such vigor, the party of four descends the Thames Pass with grace.</p>
+          <p class="en-p">At a point about seventy or eighty percent down the slope, there is a wide road with a gentle Kuwankōbai. There, the Ichijiku are bursting open like pomegranates, as if waiting for someone.</p>
+          <p class="en-p">Harukō: 'Moshi, Sendenshi-sama, these Ichijiku here are famous; when a good person passes by, they grow large like pomegranates just like that, turn a purple-red color, and offer hospitality to the traveler. When a bad person passes, they become small, tight buds, hiding themselves so as not to catch anyone's eye—they are strange Ichijiku. I have heard rumors of this before, but never have I seen them open their mouths and look so sweet as they do today. Surely, it is because a true Ikigami is passing by that they have appeared in such a form. How would it be if we took a break here, prepared our stomachs, moistened our throats, and availed ourselves of the kindness of the Ichijiku-sama?'</p>
+          <p class="en-p">Terukuni: 'Since we have come quite a distance, let us decide to take a rest. Haru-sama, I am sorry to trouble you, but would you mind gathering a few of those Ichijiku for me?'</p>
+          <p class="en-p">Harukō: 'Hai, I understand. Moshi-moshi, you two attendants, let us go together.'</p>
+          <p class="en-p">Umekō: 'That sounds interesting.'</p>
+          <p class="en-p">Terukō: 'I will also go with Haru-sama. Sendenshi-sama, please wait here.'</p>
+          <p class="en-p">Terukuni: 'Un, yoshi-yoshi, I will wait alone, so please go and bring them back quickly.'</p>
+          <p class="en-p">Here, the three went eagerly, managed to cross a narrow valley stream, plucked the sweet-looking Ichijiku until their pockets were full, and returned. The four of them, clicking their throats, received them as a blessing from heaven and filled their stomachs.</p>
+          <p class="en-p">Terukuni: 'Haru-sama, according to your song along the way earlier, it seems you have an older brother, and that brother was called Iwahiko, was he not?'</p>
+          <p class="en-p">Harukō: 'Hai, my brother is named Iwahiko, and he is a man with a slightly stooped back. By the command of the Kami Uralhiko, he crossed to Ryūgū-jima with the Kamitsukasa known as Oto-hiko and Ume-hiko, and since then, there has been no word from him. The headquarters in Armenia is now like a lonely castle in the setting sun; it has lost its former power, and only a few remaining believers guard the Kamiyakata. It is said that the Kamiyakata has moved to the capital of a fairly large country at the southwestern foot of Chikyō-zan, which they call the Karmata country of the Moon Kingdom. And it is said that Tokoyami-hiko, a descendant of Uralhiko-sama, has become the leader and is restoring the power of the old days. I suddenly longed to meet my brother Iwahiko, and when I was about to boldly board a small boat to cross to one of the islands of Ryūgū, I heard the Kamitsukasa Ōashiwake of the Brahman religion preaching at the port of Taru. I was suddenly moved with gratitude and eventually converted to the Brahman religion. However, as the days and months passed, the gold leaf of the Brahman religion peeled off, its true nature became apparent, and it became uninteresting. Eventually, I became desperate, turned into a heavy drinker, and while I was entrusted as the chief guard of the Thames Mountain barrier, I caught a nasty cold. I was possessed by the spirit of a centipede, and in a situation where I had nine deaths and one life, I was saved by the divine guidance of the Kami and by your hand.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">さつき行かれた蜈蚣姫
+小糸の姫は今頃は
+どこに如何して厶るだろ
+お供に仕へたレーブさま
+定めて原野にふみ迷ひ
+一泡ふいてゐるだろと
+思へば俄に気がもめる
+心の駒に鞭つて
+一時にかけ出す膝栗毛
+あゝ惟神々々
+神の御霊の幸はひて
+此一行を恙なく
+勝利の都へ易々と
+進ませ給へ天地の
+神の御前に春公が
+真心こめて願ぎまつる
+ウントコドツコイ　ドツコイシヨ
+そこには平坦い路がある
+照国別の宣伝使
+一つ休んで行きませうか</p>
+            <p class="ja-classical-line">甘そな木の実がなつてます
+あんまりきつい坂路で
+喉奴が笛をふきかけた
+お酒の酔がさめて来て
+頭の具合が何となく
+ボンヤリしたよな心地する
+ウントコドツコイ、ヤツトコシヨ』</p>
+            <p class="ja-classical-line">と勢よく歌ひながら、テームス峠を一行四人潔く下りゆく。</p>
+            <p class="ja-classical-line">坂の七八分下つた所に稍緩勾配の広き道がついてゐる。そこには無花果が柘榴のやうにはじけて、人待顔である。</p>
+            <p class="ja-classical-line">春公『モシ宣伝使様、ここの無花果は有名なもので、善人が通ればあの通り柘榴のやうに大きくなり、紫赤の顔色をして、通行人に接待を致しますなり、悪人が通れば小さくカンカンの莟になり、人の目につかないやうに隠れて了ふ妙な無花果です。私は前から噂は聞いて居りますが、何時通つても今日のやうに口をあけ、甘そな顔をしてゐた事はありませぬ。キツト誠の生神様がお通りだから、あんな姿をして現はれたのでせう。ここで一つ一服して腹を拵へ、喉をうるほし、無花果さまの御厄介に預つたら如何でせうかなア』</p>
+            <p class="ja-classical-line">照国『大分里程も来た様だから、一つ休息する事にしよう。春さま、お前御苦労だが、あの無花果を少しばかり頂いて来てくれないか』</p>
+            <p class="ja-classical-line">春公『ハイ承知致しました。モシモシお二人のお供、私と一緒に参りませう』</p>
+            <p class="ja-classical-line">梅公『そりや面白からう』</p>
+            <p class="ja-classical-line">照公『私も春さまと一緒に往つて来ます。宣伝使様、どうぞ此処に待つてゐて下さいませ』</p>
+            <p class="ja-classical-line">照国『ウン、ヨシヨシ一人待つてゐるから、早く頂いて来てくれ』</p>
+            <p class="ja-classical-line">ここに三人はイソイソとして、辛うじて細い谷川を渡り、甘さうな無花果を懐に一杯むしつて帰り来り、四人は喉をならしながら、天の恵と押戴いて腹につめ込んだ。</p>
+            <p class="ja-classical-line">照国『春さま、最前お前の道々の歌によると、兄があるさうだが、其兄は岩彦といつたやうだなア』</p>
+            <p class="ja-classical-line">春公『ハイ、私の兄は岩彦と申しまして、少し腰の屈んだ男で厶います。ウラル彦の神様の命令に依つて、音彦、梅彦等といふ神司と竜宮島へ渡つたきり、今に何の消息も厶いませぬ。アーメニヤの本山は今は孤城落日、昔の勢もなく、僅に残つた信者が神館を守つてゐるばかり、何でも月の国のカルマタ国とか云つて、地教山の西南麓の可なり広い国の都へ神館が移つたさうで厶います。そしてウラル彦様の子孫たる常暗彦様が教主となつて、再び昔日の勢をもり返してゐられるといふ事で厶います。私は兄の岩彦に俄に会ひたくなり、大胆にも小舟に乗つて竜宮の一つ島へ渡らうとする時、バラモン教の大足別の神司がタルの港でバラモンの宣伝をしてゐられたのを聞き、俄に有難くなつて、とうとうバラモン教へ入信しました。併し乍ら月日が経つに従つてバラモン教の金箔がはげ、生地が分つて来て面白くなく、とうとう焼糞になつて大酒呑になつて了ひ、テームス山の関守の長を任けられてゐた所、性の悪い風邪にかかり、蜈蚣の霊に憑かれて、九死一生の場合を神様の御引合せ、あなたの御手を以て救はれたので厶います』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Umehiko: 'If that is so, were you the younger brother of Ihahiko? I am that very Umehiko. I parted from Ihahiko in the Forest of Kuru, and he leapt into the midst of the Brahman cavalry, and I have not seen his face since; yet I have a feeling that we shall meet before long, so come along and enjoy the journey.'</p>
+          <p class="en-p">Haruhiko: 'Are you, then, Umehiko-sama? Now that you say so, I feel as though I have seen you somewhere before. Has my brother Ihahiko been active together with you until this day?'</p>
+          <p class="en-p">Umehiko: 'Ihahiko-sama is a truly splendid missionary. Until this day, he has been disguised in the rocky cave of Mount Kiyoharu, the stronghold of the Brahman Ōdaruwake, and has been a man calling himself Yatsukosu.'</p>
+          <p class="en-p">Haruhiko: 'Was that Yatsukosu my brother Ihahiko? I had heard the rumors, but I have never met him. Being within the same Brahman sect, we were so separated by place that I remained unaware of it. Ah, how grateful I am; that I have discovered the whereabouts of my brother must be entirely due to the divine guidance of the Kamisama. Ah, Kamunagara chihahe mase.'</p>
+          <p class="en-p">He joins his hands in prayer and is choked with tears of gratitude.</p>
+          <p class="en-p">Terukō: 'Haru-san, the time has come for your long-cherished wish to be fulfilled as well; the Kamisama of the Sangokyō must be grateful, are they not? You will not be recklessly turning back to the Ural religion or regressing to the Brahman religion anymore, will you?'</p>
+          <p class="en-p">Harukō: 'How could I, how could I ever do such a thing? I only pray that, through the grace of the Kamisama, I may be allowed to meet Ihahiko as soon as possible. And we brothers wish to devote ourselves to the teachings of the Sango.'</p>
+          <p class="en-p">Umekō: 'Will you give up your Ural-style heavy drinking now?'</p>
+          <p class="en-p">Harukō: 'Although it is not a drink I particularly like, the world was so lonely that I could not bear it, and I was drinking out of desperation; from now on, I shall not drink a single drop. In the first place, it is not a drink I am very fond of.'</p>
+          <p class="en-p">Terukuniwake sits down on a stone by the roadside and sings:</p>
+          <p class="en-p">Through the grace of the Heavenly Gods and Earthly Gods,
+Today I have learned the whereabouts of my brother.
+Blessed by the teachings of the Sango God,
+I shall cross the Lion River in peace.
+The barrier official who guards the Thames Pass,
+Has healed the illness of Harukō-sama.
+Not only healing the illness of the body, but the path of Sango,
+Heals the illness of the soul.
+If the wind blows, how cold it must be at the Thames Pass,
+Where the barrier guard of spring stands.
+While my spirit was buffeted by the stormy winds,
+Now I have become a person of sincerity.</p>
+          <p class="en-p">As he finishes singing, Harukō replies to this:</p>
+          <p class="en-p">Had the messenger of the Sango God not come,
+I would have departed for the other world.
+My life and my soul, like a string of jewels, have been saved,
+How could I ever turn my back on the path of Sango?
+Drinking heavily morning and evening, I became a dwelling for crooked gods,
+How detestable I was.
+In my heart, which rushed to capture the ugly official Mukade-hime,
+the centipede dwelt.
+Bound by the divine thread of Koito-hime,
+I have awakened to the path of the Sangokyō.
+When I heard of the whereabouts of my brother Ihahiko,
+I felt as though I had been reborn.
+Kamunagara, for the sake of the Gods and for the sake of the world,
+My soul of spring shall not cease to serve.</p>
+          <p class="en-p">Having finished singing, they follow Terukuniwake, and the party of four descends the Thames Pass, pointing toward the southwest while singing missionary songs once again.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『それならお前は岩彦の弟であつたか。私は其時の梅彦である。岩彦はクルスの森で別れ、バラモン教の騎馬隊の中に躍り入つたきり、まだ顔を見せないのだが、何れ近い中に会ふやうな心持がしてゐるから、マア楽しんでついて来なさい』</p>
+            <p class="ja-classical-line">『あなたが、それなら梅彦さまで厶いましたか。さう仰有ると何処とはなしに見覚えがあるやうに思ひます。兄の岩彦は貴方と一緒に今日迄活動して居りましたか』</p>
+            <p class="ja-classical-line">『岩彦さまは実に立派な宣伝使だ。今日迄バラモン教の大足別が本拠たる清春山の岩窟に化け込み、ヤツコスと名乗つて居つた男だ』</p>
+            <p class="ja-classical-line">『あのヤツコスは私の兄の岩彦で厶いましたか。噂は聞いて居りましたが、まだ会つた事はありませぬ。同じバラモンの内に居りながら、余り所を隔てて居るので、それとは知らずに居りました。あゝ有難い、兄の行方が分つたのも全く神様の御引合せで厶いませう。あゝ惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">と合掌し、感涙に咽んでゐる。</p>
+            <p class="ja-classical-line">照公『春さま、お前も日頃の望みの達する時が来たのだよ、三五教の神様は有難いだらう。モウ滅多にウラル教へ裏返つたり、バラモン教へ後戻りするこたあろまいなア』</p>
+            <p class="ja-classical-line">春公『如何して如何して、そんな事が出来ませう。どうぞ一日も早く神様のおかげで岩彦に会はして貰ひたいもので厶います。そして兄弟が三五の教に尽したいと思ひます』</p>
+            <p class="ja-classical-line">梅公『モウ、ウラル式の大酒飲みはやめますかな』</p>
+            <p class="ja-classical-line">春公『余り好でもない酒だけれど、世の中が淋しくて堪まらないので、やけ酒を煽つて居たのですから、今後は一滴も飲みませぬ。大体が余り好きな酒ではありませぬから』</p>
+            <p class="ja-classical-line">照国別は路傍の石に腰打掛けながら、</p>
+            <p class="ja-classical-line">『天津神国津御神の御恵に
+兄の行方を知りし今日哉。
+三五の神の教の幸はひて
+ライオン川も安く渡らむ。
+テームスの峠を守る関司
+春公さまの病いやしつ。
+身の病直すばかりか魂の
+病を直す三五の道。
+風吹かばさぞ寒からむテームスの
+峠にたてる春の関守。
+あらし吹く風に身魂をもまれつつ
+今は誠の人となりぬる』</p>
+            <p class="ja-classical-line">と口ずさめば、春公は之に答へて、</p>
+            <p class="ja-classical-line">『三五の神の司の来まさずば
+われはあの世に旅だちしならむ。
+玉の緒の命も魂も助けられ
+いかで背かむ三五の道。
+朝夕に大酒あふり曲神の
+すみかとなりし吾ぞ忌々しき。
+蜈蚣姫醜の司を捉へむと
+あせる心に蜈蚣すみけり。
+小糸姫神の小糸に結ばれて
+三五教の道を悟りぬ。
+岩彦の兄の所在を聞きし時
+生れかはりし心地しにけり。
+惟神神の御為世の為に
+尽さにやおかぬ春の魂』</p>
+            <p class="ja-classical-line">と歌ひをはり、照国別に従つて、一行四人は又もや宣伝歌を歌ひながら、テームス峠を西南指して下り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c15.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 15: 氷嚢 [1099]</span>
+      </a>
+      <a href="c17.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 17: 天幽 Cavern [1101]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

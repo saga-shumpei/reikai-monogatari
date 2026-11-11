@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 14: 空 River [1098] - Volume 40 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 40 Table of Contents</a>
+      <span>Volume 40</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 40 &bull; Chapter 14</span>
+      <h1 class="chapter-title-en">Chapter 14: 空 River [1098]</h1>
+      <p class="chapter-title-ja">空川〔1098〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Rebu and Karu, seeing the tragedy on the low main roads on both sides, could not simply stand by as spectators, and having steeled their hearts,</p>
+          <p class="en-p">Rebu: 'Hey, Karu, you must head toward the Genkai and sing the Sendenka, striving to alleviate the Sanjiyō of the Shiyaba even if only by a little. I shall head toward the Daidau of the Iukai and sing the Sendenka to mitigate this Sangeki, so shall we not divide our tasks and fulfill our respective Tenshiyoku at once?'</p>
+          <p class="en-p">Karu: 'In that case, I shall head toward the Sadau and sing the Sendenka.'</p>
+          <p class="en-p">Rebu: 'Good, if that is decided, let us begin the Kototamasen at once.'</p>
+          <p class="en-p">Saying this, the two parted to the left and right, and while looking down at the Sangeki unfolding on the Daidau below, they began to sing.</p>
+          <p class="en-p">Rebu's song:</p>
+          <p class="en-p">Kami appears in the manifest world,
+To distinguish between good and evil.
+The Kamunahohi who created this world,
+And the Ōnahohi of vast heart.
+In the world of men, whatever may happen,
+Look straight and listen straight with the Naohi.
+Repent and rectify the errors of your body,
+According to the precious teachings of Kami.
+Though the boundaries of teachings are drawn,
+Such as the Misokyo or the Brahman,
+When one seeks their source,
+It is the infinite benevolence of the Miroku Kami.
+The true Kami is but one pillar,
+And the state of joy, anger, sorrow, and pleasure,
+Of the three worlds opened by Him,
+Are all the divine Keirin of Kami.
+There is nothing that falls outside the divine plan.
+The divine pillar of the Brahman teaching,
+Beginning with General Ranchi,
+Who serves the Ōkuninushi,</p>
+          <p class="en-p">And the Mitama who follow him,
+In the valley of the Tamayama pass,
+Revering the words of Kami Susanoo Ōkami,
+Toward the land of the moon,
+Directing the Magatsu-no-Kami,
+To construct the heavenly pure land upon the earth,
+Advancing forward,
+Protecting the future of Yoshikohime and Kiyoteru,
+While challenging the battle,
+What is this tragedy for?
+Rather than living in this short floating world,
+And sowing seeds of suffering in the eternal Reikai,
+Reflect one day sooner upon the original teaching of Ōkami,
+Straighten the horse of your heart,
+And live in mutual harmony and affection,
+Born within heaven and earth,
+Fulfill the duty of being the children of Kami,</p>
+          <p class="en-p">Completely and in every detail.
+Man is the child of Kami, the palace of Kami,
+Even if heaven and earth should change,
+In the three worlds of Gen, Iu, and Shin,
+Those who wander are the children of Kami,
+There is no mistake that they are the dwelling of Kami.
+Occupied in the fortress of the heart,
+By the eighty Magatsu and ugly Kami,
+Entrapped by petty desires,
+Beginning the struggle for precious life,
+With a look of triumph,
+Is to have gone too far in ignorance of the Way.
+If one realizes the true Way,
+Of the three worlds of Gen, Iu, and Shin,
+This battle of extreme heartlessness,
+Could surely not be left unstilled.
+Ah, Kannagara-tamachi-tamachi,
+May the spirits be blessed,
+And may the Mizu-no-Mitama,
+Of the infinitely benevolent Ōkami exist.</p>
+          <p class="en-p">Facing the mansion of Iso,
+Direct the ugly Kami,
+To be revived in the true Way,
+And cause them to bow to the teachings,
+Of the three worlds of Gen, Iu, and Shin.
+Not to mention the office of Yoshikohime and Kiyoteru,
+General Ranchi and all others,
+The hundred warriors, one and all,
+By the Kototama of the divine water and fire,
+Save and assist them, and the Tenshiyoku,
+Of being the children of Ōkami,
+Fulfill completely, in detail, and eternally,
+Let it be established, Kannagara.
+I pray before the presence of Kami,
+One, two, three, four, five, six,
+Seven, eight, nine, ten, hundred, thousand,
+All ten thousand calamities,
+Sweep them away, by the precious teachings of Kami of heaven and earth.</p>
+          <p class="en-p">Just as the wind of Shinato,
+Blows and bends the hundred grasses,
+Just as the morning wind and evening wind,
+Blow away the deep morning mist and the deep evening mist,
+Completely,
+May the defilement of the heart and the clouding of the body,
+Deep into the bottom of the blue ocean,
+Of the eight hundred paths and eight tides of the sea,
+Wash them away, Kannagara.
+Before the presence of Kuninotokotachi Ōkami,
+I revere and pray.</p>
+          <p class="en-p">Karu's song:</p>
+          <p class="en-p">The great teacher of the Brahman teaching,
+Opened by Ōkuninushi,
+Following the teaching, day and night,
+Striving to wash and purify the spirit,
+But the merit earned was blown away by the rough wind,
+And scattered at the bottom of the valley,
+At the foot of the Tamayama pass,
+I, who fell and left the manifest world,
+Am the one in charge of Karu.
+I am blessed, held in the deep grace of Ōkami,
+And now, in the happy Reikai,
+Within the precious Mahuraba,
+On the journey of the heavenly pure land,
+I advance as Kami wills.
+Just at that moment, beneath my eyes,
+Suddenly the cry of battle is heard,
+Wondering who it might be, I turn back,
+And look intently at the scene below,
+People living in the manifest world,</p>
+          <p class="en-p">Caught by joy, anger, sorrow, pleasure, love, evil, and desire,
+And the demons of fame and profit,
+The way they gesture with hands and feet,
+Is a Sanjiyō that cannot be looked at twice.
+Squeezing each other's living blood,
+Or stripping each other's flesh,
+Squeezing out the fat and hating one another,
+Is it hell, Shura, or the realm of beasts?
+This Shiyaba world beyond all metaphor,
+Thinking that this is the path of human life,
+My tears flow of their own accord,
+Like a waterfall.
+Ah, Kannagara-tamachi-tamachi,
+May the spirits be blessed,
+Even though my physical body has rotted away,
+And I am but a spiritual body,
+Could I leave this unseen?
+People passing below,
+Listen well to the words of Karu.
+Transcending life, death, misfortune, and fortune,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">レーブとカルの両人は、両側の低き大道の惨劇を見て、傍観する訳にも行かず、心を定めて、</p>
+            <p class="ja-classical-line">レーブ『オイ、カル、お前は現界の方に向つて宣伝歌を歌ひ、娑婆の惨状を幾分でも軽減するやうに努力せよ。俺は幽界の大道に向つて、此惨劇を軽減すべく宣伝歌を歌ふから、両方一度に手分けして自分の天職を全うしようではないか』</p>
+            <p class="ja-classical-line">カル『それなら俺は左道に向つて宣伝歌を歌ふ事にしよう』</p>
+            <p class="ja-classical-line">『ヨシ、さうきまらば両方一時に言霊戦を開始しよう』</p>
+            <p class="ja-classical-line">と云ひながら両人左右に別れ、眼下の大道に行はれてゐる惨劇を見下ろしながら歌ひ始めた。</p>
+            <p class="ja-classical-line">レーブの歌、</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立別ける
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直せ聞直せ
+身の過ちは宣り直す
+尊き神の御教
+三五教やバラモンと
+教の区劃は立ちぬれど
+其源を尋ぬれば
+仁慈無限の五六七神
+誠の神は一柱
+開き給ひし三界の
+喜怒哀楽の有様は
+残らず神の御経綸
+仕組にもるるものはなし
+バラモン教の神柱
+大黒主に仕へたる
+ランチ将軍初めとし</p>
+            <p class="ja-classical-line">それに従ふ身魂たち
+玉山峠の谷間で
+神素盞嗚大神の
+御言畏み月の国
+曲津の神を言向けて
+天国浄土を地の上に
+建設せむと進みゆく
+黄金姫や清照の
+姫の命の前途をば
+擁して戦挑みつつ
+其惨劇は何の事
+短き浮世に永らへて
+永遠無窮の霊界の
+苦悩の種を蒔くよりは
+一日も早く大神の
+元つ教に省みて
+心の駒を立直し
+互に睦び親しみて
+天地の中に生れたる
+神の御子たる職責を</p>
+            <p class="ja-classical-line">完全に委曲に尽せかし
+人は神の子神の宮
+仮令天地はかへるとも
+現幽神の三界に
+さまよふ人は神の御子
+神の宮居に違ない
+八十の曲津や醜神に
+心の根城を占領され
+小さき欲にからまれて
+貴重な命の取合ひを
+手柄顔して始むるは
+道を知らぬも程がある
+現幽神の三界の
+誠の道を悟りなば
+無慈悲極まる戦ひは
+どうでも止めずにやおかれまい
+あゝ惟神々々
+御霊幸はひましまして
+仁慈無限の大神の
+瑞の御霊のあれませる</p>
+            <p class="ja-classical-line">イソの館に立向ふ
+醜神たちを言向けて
+誠の道に甦り
+現幽神の三界の
+教になびかせ給へかし
+黄金姫や清照の
+姫の司は云ふも更
+ランチ将軍其外の
+百の強者悉く
+神の御水火の言霊に
+救ひ助けて大神の
+御子とあれます天職を
+完全に委曲に永久に
+立てさせ給へ惟神
+神の御前に祈ぎまつる
+一二三四五つ六つ
+七八つ九つ十百千
+万の災悉く
+払はせ給へ天地の
+尊き神の御教に</p>
+            <p class="ja-classical-line">科戸の風の百草を
+吹き靡かせる其如く
+あしたの深霧夕暮の
+深霧を朝風夕風の
+吹払ふ如悉く
+心の汚れ身の曇り
+潮の八百路八潮路の
+青海の原の底深く
+かかのみ給へ惟神
+国治立大神の
+御前に畏み願ぎまつる』</p>
+            <p class="ja-classical-line">カルの歌、</p>
+            <p class="ja-classical-line">『バラモン教の大教主
+大黒主の開きます
+教に従ひ日に夜に
+霊を洗ひ浄めむと
+尽せし功も荒風に
+吹かれて散りし玉山の
+峠の麓の谷底に
+落ちて現世を立退きし
+カルの司はわれなるぞ
+吾は幸ひ大神の
+深き恵に抱かれて
+今は嬉しき霊界の
+中にも尊き真秀良場や
+天国浄土の旅の空
+神のまにまに進み行く
+時しもあれや目の下に
+忽ち聞ゆる鬨の声
+何者ならむと振返り
+眼下をキツト見わたせば
+うつし世に住む人々が</p>
+            <p class="ja-classical-line">喜怒哀楽や愛悪欲
+名利の鬼に捉はれて
+手ぶり足ぶりするさまは
+二目と見られぬ惨状ぞ
+互に生血を搾り合ひ
+或は互に肉をそぎ
+膏を搾りいがみ合ふ
+地獄か修羅か畜生か
+比喩へ方なき娑婆世界
+これが人世の行路かと
+思へば涙自ら
+滝の如くに流れ来る
+あゝ惟神々々
+御霊幸はひましまして
+仮令肉体朽ちはてて
+霊体ばかりの吾なれど
+之が見すてておかれうか
+目下を通る人々よ
+カルの言葉をよつく聞け
+死生禍福を超越し</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Those who have received the Mitama of the Kami who neither lives nor dies, know that the Genkai is not the only eternal Sumika. Depending on the results of one's Gafuin, some are born into Tengoku, while others fall into the Iukai, receiving the infinite Eiku of the Shōnetsu Ōjigoku. It all depends on the Kokorohito and the Mochiyō. Man is the child of Kami, the temple of Kami. Let those who have heard such noble Osato reflect upon this. Unite the Sandai of Genshinkau, and for as long as Inochi continues in the Utsushiyo, fulfill your Shiyokuseki as the Onko of Kami. May the Yukusue of your soul be to spend the eternal spring in the Hanazono where the Amatsumikami dwell forever.</p>
+          <p class="en-p">Strive for sincerity, and to the souls of the Aohitogusa in the Utsushiyo, preach and transmit the true essence of the Oshihe of Kami completely and in detail. Ah, Kannagara, Kannagara. May the Mitama be blessed, and may all the people of the Utsushiyo, who are crushed by the demons of greed, have their path to the hellish ways, the vanguard of infinite Eiku, fundamentally reformed morning and evening. Make them into true Hitobito who observe the path of sincerity, born as the Onko of Kami. Ah, Kannagara, Kannagara. May the Mitama be blessed, and hear the prayers of Rebu and Karu completely and in detail. Before the noble Kami, we pray with awe, with awe.</p>
+          <p class="en-p">As the two finished singing and looked down, the tragedy that had until now been reflected in their eyes vanished like smoke. On the right path, groups of the dead wearing triangular spirit garments were dragging their staves in twos and threes, advancing toward the north with no strength left. All were thin and withered, their waists bent, and many lame spirits were mixed among them. Turning their eyes to look down at the left path, the automobiles that had been roaring and running until now suddenly transformed into cramped mountain palanquins, and many men and women were carrying poles on their shoulders, sweating profusely as they came and went. The two said nothing, looking back and forth between the left and right paths. Before they knew it, the left and right paths had become jagged and high, blocking both sides of the path they were walking on like fences. The Shinkai road, which they had thought was the highest until now, began to look as if it were running along the bottom of a river without water. The Genkai road on one side and the Iukai road on the other had risen two or three ken higher than their heads, and the sound of people and horses coming and going could be heard clearly from above.</p>
+          <p class="en-p">Rebu: 'Hey, Karu-kō, has the Tengoku suddenly transformed into a riverbed? And I seem to have suddenly become thirsty. It appears the efficacy of the Ashitama fruit we received earlier has already faded away.'</p>
+          <p class="en-p">Karu: 'The goddess said earlier that it was a sign that we would not hunger or thirst for five or six years, but perhaps those five or six years have already passed. Everything is different in the Genkai and the Shinkai, you see; if one says three thousand years in the Shinkai, it means five billion six hundred seventy million years in the Genkai, so one minute in the Shinkai must correspond to five or six years in this world.'</p>
+          <p class="en-p">Just as they were talking, from somewhere or other, someone called the names of the two.</p>
+          <p class="en-p">Voice: 'Oi! Oi!'</p>
+          <p class="en-p">When the two looked in the direction of the voice, three or four men were beckoning and calling to them from the top of a lush green mountain.</p>
+          <p class="en-p">Rebu: 'Hey, Karu-kō, those people calling us from the top of that mountain look like the proselytizers of the San-Go-Kyō. Those fellows must have also gone on a Shinkai journey and gone a step ahead of us. With my throat this dry and my stomach this empty, I cannot possibly climb such a high mountain, but staying here and loitering at the bottom of this narrow, stone-filled Sora-kawa is no use either, is it?'</p>
+          <p class="en-p">Karu: 'Whatever the case, let us charge toward the direction of the voice. If we fall, we fall.'</p>
+          <p class="en-p">Just as they were talking, something was running along the tops of the embankments on both sides, kicking up clouds of dust with a racket. When they looked closely, it was a pack of several thousand wolves. From the embankments on both sides where the two stood, the wolves opened their mouths with all their might, howling 'Woo, woo...' with such ferocity. The two crouched down in the riverbed, praying that the wolves would leave this place as soon as possible. From somewhere, cold water began to fall onto their heads, plop, plop.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">生なく死なき神さまの
+御霊を受けし人々は
+現界ばかりが永久の
+住処にあらず劫因の
+結果によりて天国に
+生るるもあり幽界に
+おちて焦熱大地獄
+無限の永苦を受くるあり
+心一つの持様ぞ
+人は神の子神の宮
+かかる尊き御諭しを
+聞きたる人は省みよ
+言心行の三大を
+合一させて現世に
+命のつづく其限り
+神の御子たる職責を
+尽して魂の行末は
+天津御神の永久に
+住はせ給ふ花園に
+常世の春を送るべく</p>
+            <p class="ja-classical-line">誠を励み現世の
+青人草の魂に
+神の教の真諦を
+完全に委曲に宣り伝ふ
+あゝ惟神々々
+御霊幸はひましまして
+現世の人ことごとく
+欲の悪魔にひしがれて
+朝な夕なに地獄道
+無限永苦の魁を
+根本的に改革し
+神の御子と生れたる
+誠の道をおしなべて
+守る真人となさしめよ
+あゝ惟神々々
+御霊幸はひましまして
+レーブやカルの願言を
+完全に委曲に聞し召せ
+尊き神の御前に
+畏み畏み願ぎまつる』</p>
+            <p class="ja-classical-line">二人はかく歌ひ了り、眼下をみれば、今まで目に映じたる惨劇は煙の如く消え、右道には三角の霊衣を被つた亡者連が三々五々杖を曳いて、力なげに北へ北へと進んで行く。何れも痩せ衰へ腰屈み、或は跛者の亡者も沢山交つてゐた。目を転じて左道を見下せば、今まで轟々と唸りを立てて走つてゐた自動車は忽ち窮屈な山駕籠と変じ、数多の男女が肩に棒を担ぎ、汗をタラタラ流しながらエチエチと往来してゐる。二人は物をも言はず、左道右道を互にキヨロキヨロと見まはしてゐた。いつの間にやら、左道右道はチクチクと高くなり、恰も自分の通つてゐる道の両側を垣の如くに塞いで了つた。今迄一番高い道だと思うてゐたる神界道路は水のない川の底を行くやうに見えて来た。そして両側の現界道路と幽界道路は自分の頭よりも二三間も高くもり上り、其上を人馬の往来する音盛に聞えて来るのであつた。</p>
+            <p class="ja-classical-line">レーブ『オイ、カル公、天国忽ち化して川底となつて了つたぢやないか。そして俄に喉が渇いて来たやうだ。最前貰つた足魂の木の実の効能も最早消え失せたと見えるなア』</p>
+            <p class="ja-classical-line">カル『最前の女神の言つたには、五六年が間は飢渇く事はないとの示しであつたが、最早五六年の歳月が暮れたのであらう。何事も現界と神界とは様子が違ふからなア、神界で三千年と言へば現界で云ふ五十六億七千万年の事だから、神界の一分間が娑婆の五六年に当るだらう』</p>
+            <p class="ja-classical-line">かく話す折しも何処ともなく、</p>
+            <p class="ja-classical-line">『オーイ　オーイ』</p>
+            <p class="ja-classical-line">と二人の名を呼ぶ者がある。二人は声する方を見つめると、青々とした山の頂から三四人の男が此方に向つて手招きしながら呼ばはつて居た。</p>
+            <p class="ja-classical-line">レーブ『オイ、カル公、あの山の上から俺達を呼んでゐるのは、如何やら三五教の宣伝使の様だぞ。あの連中もヤツパリ神界旅行をやつて、俺たちとは一足先に行つたのだらう。これ丈喉が渇き腹がすいて来ては、到底あんな高い山へは上る事は出来ない、だと云つてこんな狭い石だらけの空川の底にまごついて居つても約らぬぢやないか』</p>
+            <p class="ja-classical-line">カル『何は兎もあれ、声する方に向つて突喊する事にしよう。倒れたら倒れた時の事だ』</p>
+            <p class="ja-classical-line">かく話す折しも、両方の土手の上をけたたましく砂ぼこりを立てて走りゆくものがある。よくよく見れば数千頭の狼の群であつた。二人の佇む両側の土手の上から力一杯口をあけて、ウーウー……と唸り立てる其凄じさ。二人は川底にガワと伏し、狼の一時も早く此場を立去れかしと念じつつあつた。どこともなしに冷やかな水、二人の頭上にボトボトと落ちかかつて来た。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c13.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 13: 試の果実 [1097]</span>
+      </a>
+      <a href="c15.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 15: 氷嚢 [1099]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
