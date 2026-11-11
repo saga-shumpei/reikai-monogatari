@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 16: 四郎狸 [1028] - Volume 37 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 37 Table of Contents</a>
+      <span>Volume 37</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 37 &bull; Chapter 16</span>
+      <h1 class="chapter-title-en">Chapter 16: 四郎狸 [1028]</h1>
+      <p class="chapter-title-ja">四郎狸〔1028〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The planting of rice having also been completed, intending to thresh barley, they spread the barley all over the courtyard and dried it in the sunlight.</p>
+          <p class="en-p">Around eleven o'clock that day, three men came asking,</p>
+          <p class="en-p">Kiraku-san: 'Is Kiraku-san at home?'</p>
+          <p class="en-p">Lately, because of the barley threshing and rice planting, there were hardly any pilgrims, so intending to help with the barley threshing, he had assumed the appearance of a farmer and had been carrying barley from the paddy fields and spreading it out since early morning.</p>
+          <p class="en-p">The three men who came thither were Iwata Yatarō, Iba Kyūsuke, and Irie Koutarō from a place called Inji in Asahimura.</p>
+          <p class="en-p">Their business was that the wife of Iwata Yatarō, called Ofuji, had become a spiritual medium since two or three months ago, cooked five or six shō of rice a day and consumed it without a care, drank three shō of liquor without fail, and while helping with sericulture, she was a troublesome person who pinched and ate the silkworms that had grown with so much effort, one after another from the edge.</p>
+          <p class="en-p">However,</p>
+          <p class="en-p">Ofuji: 'This place is Shiraki Daimyōjin.'</p>
+          <p class="en-p">saying thus, she glared with strange eyes and gave various directions.</p>
+          <p class="en-p">Various sick people were completely cured by everyone through this Ofuji's prayers and the medicines she directed, and that became a rumor, so from morning till evening, pilgrims filled the small house.</p>
+          <p class="en-p">In the neighboring village, there was a church enshrining an Inari called Kurokami Daimyōjin, and the attendant priestess of that place was an old woman of about fifty.</p>
+          <p class="en-p">That old woman reported to the police box, saying that Iwata Ofuji had begun acting as a mountain shaman and was deceiving people, so a policeman came and said,</p>
+          <p class="en-p">Policeman: 'It is not allowed to gather people at your house without permission or to give directions for medicine.'</p>
+          <p class="en-p">speaking noisily.</p>
+          <p class="en-p">Nevertheless, Iwata Ofuji, being a spiritual medium, would not listen no matter what anyone said, and boldly gave divine pronouncements, performed prayers, and gave directions for medicines.</p>
+          <p class="en-p">Then, as usual, she drank heavily every day, ate huge amounts of rice, and even seized and ate the silkworms that were on the verge of making cocoons from the edge one after another, so the three men consulted on how they wanted someone to calm her down somehow, and taking advantage of the holiday after the rice planting was finished, they came to ask Kiraku for help.</p>
+          <p class="en-p">Kiraku directly commanded Komatsu, the kannushi, to perform a clairvoyant vision of Inji's Iwata Ofuji's house and appearance.</p>
+          <p class="en-p">As a result, he completely clairvoyantly saw that her house was thatched with tiles, how many tatami mats there were, how many rows of silkworm shelves were lined up, that there were pockmarks on Ofuji's face, that a little to the side of the house there was a tutelary deity's shrine, and that toward the back there was a river five or six ken wide without water, with bamboo groves on both of its banks.</p>
+          <p class="en-p">When he told the three men about this, they looked at each other's faces in mutual astonishment and exclaimed,</p>
+          <p class="en-p">The three men: 'Indeed, it is just as you say. The gods are truly awe-inspiring things, are they not?'</p>
+          <p class="en-p">admiring it.</p>
+          <p class="en-p">Therefore, Kiraku accepted the request of the three men, and accompanied by Komatsu the kannushi in a party of five, after finishing their midday meal and bathing in the scorching summer sun, they crossed the O-hashi bridges of Yoshida, Kobayashi, Ogawa, Kawaseki, and Yagi, and finally arrived at Iwata Ofuji's residence around three o'clock that day.</p>
+          <p class="en-p">When they went and looked, dozens of pilgrims were sitting in the tatami room.</p>
+          <p class="en-p">Iwata Ofuji came out to the doorway to greet them, turned toward her husband Yatarō, and asked in a low voice,</p>
+          <p class="en-p">Ofuji: 'Yatayarn, has Kiraku-san arrived?'</p>
+          <p class="en-p">Yatarō had been instructed by Kiraku,</p>
+          <p class="en-p">Kiraku: 'Say he is out, and then since it is necessary to investigate whether or not the divine possession knows that I am Kiraku, it will be fine to say that people from Kobayashi came along the way to ask for prayers.'</p>
+          <p class="en-p">so Yatarō intentionally feigned ignorance,</p>
+          <p class="en-p">Yatarō: 'Although I went with much effort, Kiraku-sensei was out. Eh, it cannot be helped.'</p>
+          <p class="en-p">he showed, drooping his head dejectedly.</p>
+          <p class="en-p">Ofuji, perhaps taking a look at Kiraku's mustache shaped like the kanji for eight and mistaking him for a policeman, asked anxiously in a low voice,</p>
+          <p class="en-p">Ofuji: 'Yatayarn, isn't that person a policeman?'</p>
+          <p class="en-p">Yatarō replied,</p>
+          <p class="en-p">Yatarō: 'No, that person is a rug merchant staying at Izutsuya in Kobayashi, and when I told him about your divine possession, he strongly agreed and said he also wanted to have a matter regarding his trade and his bodily illness divined, so he followed along. And that thick-eyed woman is a maid from Izutsuya.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">稲の植付けも出来上がり、麦かちをしようと庭一面に麦を拡げて日光に乾かして居た。其日の十一時頃三人の男が、</p>
+            <p class="ja-classical-line">『喜楽サンは在宅ですか』</p>
+            <p class="ja-classical-line">と尋ねて来た。此頃は麦かちと田植とで余り参詣者も無いので、麦かちを手伝ふ積りで農夫の姿となつて、朝早くから麦を田圃から運んだり拡げたりして居たのである。其処へやつて来た三人の男は、旭村の印地と云ふ処の岩田弥太郎、射場久助、入江幸太郎であつた。</p>
+            <p class="ja-classical-line">其用向きは岩田弥太郎の妻のお藤と云ふのが、二三ケ月前から霊感者となり、一日に飯を五六升も炊いてケロリと平げ、酒の三升も欠かさずに飲み、養蚕を手伝ひ乍ら、折角大きうなつた蚕の虫を、片端から抓んで喰べると云ふ厄介な者である。然し乍ら、</p>
+            <p class="ja-classical-line">『此方は白木大明神だ』</p>
+            <p class="ja-classical-line">と云つて、妙な目を剥いて色々な指図をする。種々の病人が此お藤の祈祷や指図した薬によつて誰も彼も全快するので、それが評判となつて朝から晩まで小さい家の中に、参詣人がつまつて居たのである。其隣村に黒髪大明神と云ふ、稲荷を祀つた教会があつて、其お台サンと云ふのが五十計りの婆アサンであつた。其婆アサンが、岩田藤が山子を始めて人を誑らかすとか云つて交番へ届けたので、巡査がやつて来て、</p>
+            <p class="ja-classical-line">『許可なしに貴様の内へ人を寄せたり薬の指図をしたりする事はならぬ』</p>
+            <p class="ja-classical-line">と八釜しく云つて来る。されども岩田藤は霊感者の事とて、誰が何といつても聞き入れず、ドシドシと託宣をしたり祈祷をしたり、薬の指図をやつて居る。さうして相変らず毎日大酒を飲み、大飯を食ひ、折角巣につきかけた蚕の虫まで片端から掴んで喰ふので、三人の男が何とかして鎮めて貰ひ度いと相談の結果、田植が済んだ其休日を利用して喜楽を頼みに来たのであつた。</p>
+            <p class="ja-classical-line">喜楽は直に神主の小末に命じて、印地の岩田お藤の家や容姿を透視せしめた。其結果其家の瓦葺である事、畳数が何枚ある事、蚕の棚が何枚並んで居る事、お藤の顔に痘痕のある事、家の少し横に氏神の社がある事、裏の方には五六間幅の水の無い川があつて其両方の堤に竹藪のある事等をスツカリ透視して了ひ、三人に其由を告げると、三人は互に顔を見合はせ、</p>
+            <p class="ja-classical-line">『如何にも其通りで御座います。神様は実に尊いもので御座いますなア』</p>
+            <p class="ja-classical-line">と感嘆して居た。そこで喜楽は三人の頼みを容れ、神主の小末を従へ五人連れで、昼飯を済ませ炎天の夏の日を浴び乍ら、吉田、小林、小川、川関、八木の大橋を越え、其日の三時頃漸くにして岩田藤の宅に着いたのである。</p>
+            <p class="ja-classical-line">行つて見れば数十人の参詣人が座敷に坐つて居た。岩田藤は門口に出で迎へ夫の弥太郎に向ひ小声で、</p>
+            <p class="ja-classical-line">『弥太やん、喜楽サンは居やはりましたか』</p>
+            <p class="ja-classical-line">と尋ねて居る。弥太郎は喜楽から、</p>
+            <p class="ja-classical-line">『留守だつたと云へ、さうして神憑りが俺を喜楽だと云ふ事を知つてるか如何かを調べる必要があるから途中で小林の人が拝んで貰ひに来られたのだと云ふが宜い』</p>
+            <p class="ja-classical-line">と教へられて居たから、弥太郎は故意と恍けて、</p>
+            <p class="ja-classical-line">弥太『折角行つて来たけれど、喜楽の先生は留守だつた。エー、仕方がない』</p>
+            <p class="ja-classical-line">と力なげに首を頷垂れて見せた。お藤は喜楽の八の字髭を見て巡査と思ふたか、小声で、</p>
+            <p class="ja-classical-line">お藤『弥太ヤン、あの人は巡査ぢやないかい』</p>
+            <p class="ja-classical-line">と心配さうに尋ねて居る。弥太郎は、</p>
+            <p class="ja-classical-line">弥太郎『いや、あのお方は小林の井筒屋に泊つて御座る段通屋サンで、俺がお前の神憑りの話をしたら大変賛成して、俺も一つ商売上の事や身体の病気の事を伺つて貰ひ度いと云つて跟いて御座つたのだ。さうしてあの独眼の太い女サンは井筒屋の女中サンだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Thus she is deceitfully smoothing things over. Ofuda suspects nothing in particular,</p>
+          <p class="en-p">Ofuda: 'Oh, is that so. Then I shall now pray to the Kamisama.'</p>
+          <p class="en-p">So saying, she turned toward the Goshinden, clapped her hands in hakushiyu, and began to chant the Kamigoto with a katakotomaji. From around the time the Kamigoto had advanced a little past the halfway point, her voice suddenly began to grow hoarse, and it came to sound like the kototama of a duck going 'quack, quack.' Kiraku,</p>
+          <p class="en-p">Kiraku: 'What a woman with muddy kototama. A tanuki is most likely possessing her, no doubt.'</p>
+          <p class="en-p">Thinking thus, while blending into the crowd, he had Kosue clearly see-through the guardian deity of the other, and holding back with an innocent expression, he waited. When the norito ended, Ofuda gnashed her teeth loudly, 'kiri-kiri-kiri,' bared her eyes like acorns, and from time to time sticking her tongue out fluttering this way and that, she abruptly turned her back to the shindan and faced the direction of the sankeinin. No matter who looked, it did not look like the face of a ningen; it had become the very physiognomy of a tanuki. Seeing her own appearance, Ofuda suddenly changed her attitude, placed both hands on the floor,</p>
+          <p class="en-p">Ofuda: 'Was this, was this Kiraku-sensei? I am Shiraki-daimyōjin, who guards the first peak of Inariyama. Today, while you were busy with the thought of hulling barley, Yatarō and both other persons intruded and partook of a grand feast. You have gracefully come over. I followed behind Yatarō and came as far as your honorable home. Therefore, when resting at the Izutsuya in Kobayashi, I have properly heard all that you said to Yatarō in order to test me. By all means, please grant me a divine name, and so that I may perform the service of the spirit world, I beg you to intercede with the Lord God.'</p>
+          <p class="en-p">She gnashed her teeth furiously once again with a 'kiri-kiri-kiri.' Dozens of worshippers concentrated their gazes upon Ofuda and Kiraku, holding their breath and staring intently.</p>
+          <p class="en-p">Kosue, leaping up with a single shout,</p>
+          <p class="en-p">Kosue: 'You!'</p>
+          <p class="en-p">Along with this, she immediately entered a state of returned possession,</p>
+          <p class="en-p">Kosue: 'You claim to be Shiraki-myōjin, a kenzoku of Inariyama, but that must be a sheer falsehood, is it not?'</p>
+          <p class="en-p">Ofuda: 'No, no, I never tell lies. There is no mistake about it being Shiraki-myōjin of Inariyama. Please examine it thoroughly.'</p>
+          <p class="en-p">She became formal in her speech and strained with tension.</p>
+          <p class="en-p">Kosue: 'Do not speak falsehoods. You are a tanuki named Shirōemon, who guards the new waterfall of Nose Myōken, are you not?'</p>
+          <p class="en-p">Having her identity pointed out, the possessing spirit of Ofuda was at a loss for words,</p>
+          <p class="en-p">Ofuda: 'Yes, now that things have come to this, there is nothing that can be done. By all means, please give me some name or other, and let me save people. I will confess everything and anything, but the truth is, I was the leader of forty-eight tanuki guarding the ○○ Church in ○○ Village, Taki County, Tanba Province. Before Kiraku-sensei, it is a matter difficult to mention even in the slightest, but since it has come to this, there is no help for it. I will confess everything and anything. As you well know, I am a tanuki named Shirōemon, but I possessed numerous ningen, caused various illnesses, and made them take doctor's medicine in order to conduct tests. Therefore, I know very well that for this illness, this medicine is effective. Thinking I would become a doctor of the spirit world, I used the bodies of many people for practice, and mistakenly took the lives of two ningen. Because of that crime, I was stripped of my role as the guardian deity of the ○○ Church, and now I am in the condition of a sad rōnin. Thinking I would possess whoever has a good stage, save people, wash away my own sins, and apologize to the spirit world, while I was thinking and searching for a good divine-possession stage, I watched for the exact opening when the physical body of this Ofuda went to a coal mine to split stones, got drunk on liquor, and collapsed flat on the mountain, and I seized it to take possession. Since I intend to use this physical body to hatch a certain scheme, by all means please grant me a name. Furthermore, I beg you to bestow an equivalent role upon the physical body of Ofuda as well.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と甘く胡魔化して居る。お藤は別に疑ひもせず、</p>
+            <p class="ja-classical-line">お藤『アーさうかい。そんなら之から神様にお願ひします』</p>
+            <p class="ja-classical-line">と云ひ乍ら、御神殿に向つて拍手し、片言交りに神言を奏上し始めた。神言の半分あまり進んだ頃から俄に声がかすり出し、『ガアガア』と鶩の様な言霊の調子になつて来た。喜楽は、</p>
+            <p class="ja-classical-line">喜楽『何と言霊の濁つた女だ。大方狸が憑いて居るのだらう』</p>
+            <p class="ja-classical-line">と思ひ乍ら、大勢の中へ紛れて小末に彼の守護神を透視させ乍ら、素知らぬ顔して控へて居た。祝詞が終るとお藤は『キリキリキリ』と大きな歯ぎしりをし、団栗の様な目を剥いて、時々舌をチヨロチヨロ出し乍ら、クレリと神壇を後にし、参詣人の方へ向き直つた。誰が見ても人間の顔とは見えない、狸其の儘の面相になつて居る。お藤は自分の姿を見て俄に態度を改め、両手をついて、</p>
+            <p class="ja-classical-line">お藤『これはこれは喜楽先生で御座いましたか、私は稲荷山の一の峰に守護致す白木大明神で御座います。今日は麦かちをなさるお考へで御忙しうして御座る中へ、弥太郎外両人がお邪魔を致しまして偉い御馳走に預かりました。能うまあお越し下さいました。私は弥太郎の後について貴方のお宅迄参りました。それ故小林の井筒屋で御休息の時、私を審神する為めに弥太郎にいろいろ仰有つた事も、チヤンと聞いて居ります。何卒私に神名を下さいまして、神界の御用が出来ます様に、大神様にお取次をお願ひします』</p>
+            <p class="ja-classical-line">とキリキリキリと又もや猛烈な歯ぎしりをする。数十人の参詣者はお藤と喜楽に視線を集中し、息をこらして見詰て居た。小末は、</p>
+            <p class="ja-classical-line">『ウン！』</p>
+            <p class="ja-classical-line">と一声飛び上がると共に、忽ち帰神状態になつて了ひ、</p>
+            <p class="ja-classical-line">小末『其方は稲荷山の眷族白木明神と申して居るが、真赤な詐りであらうがな』</p>
+            <p class="ja-classical-line">お藤『いえいえ決して嘘は申さぬ。稲荷山の白木明神に間違ひは御座りませぬ。とつくりと調べて下されよ』</p>
+            <p class="ja-classical-line">と切口上になつて力んで居る。</p>
+            <p class="ja-classical-line">小末『詐りを申すな。其方は能勢妙見の新滝に守護致す、四郎右衛門と申す狸であらうがな』</p>
+            <p class="ja-classical-line">と目星を指されてお藤の憑霊は閉口し、</p>
+            <p class="ja-classical-line">お藤『ハイ、もう斯うなる上は仕方が御座いませぬ。何卒私に何とか名を下さいまして、人助けをさせて下さいませ。何も彼も白状致しますが、実は私は丹波の国多紀の郡○○村○○教会に守護致す、四十八匹の狸の親分で御座いましたが、喜楽先生の前ではチツと申し上げかねる事なれども、斯うなれば仕方がありませぬ。何も彼も白状致します。私は御存じの通り四郎右衛門と申す狸で御座いますが、大勢の人間に憑つて色々の病を起させ、医者の薬を服ませて試験を致しました。それ故此病気には此薬が利くと云ふ事をよく知つて居ます。霊界の医者にならうと思つて、沢山の人の身体を稽古に使ひ、人間の生命を二人まで過つてとつて了ひました。其罪によつて○○教会の守護神の役を剥奪され、只今は悲しき浪人の身の上、誰かよき台があれば憑つて人を助け、自分の罪を亡ぼし神界へお詫びを致さうと、良い神懸りの台を考へて探して居る中、此お藤の肉体が石炭山へ石割りに行つて酒に食ひ酔ひ、山にぶつ倒れて居た其隙を狙ひすまして、とりつきました。此肉体を使ふて一つ思惑を立てようと思ひますから、何卒私に名をお与へ下され。又お藤の肉体にも、それ相当の役目を仰付けて下されまする様にお願ひ致します』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Shirōuemondanuki related his zangebanashi jiyunjiyun, tears brimming over his ichimen and touching his riyōte to the floor as he begged.</p>
+          <p class="en-p">Somehow Kiraku also began to feel kaaisau for him.</p>
+          <p class="en-p">Kiraku: 'You said just now that you mistakenly killed futari people, but what kind of people are they? If there is no sashitsukahe, I would like to hear about it.'</p>
+          <p class="en-p">Shirōdanuki: 'Hai, shikata ga arimasen; I will confess everything. I entered the womb of a jiyokyōshi named Otsuru-san, a kyōdaushiyoku of the ○○ church, and while testing her through various biyōki, Ōtsuru-san finally died. Besides that, there was hitori more; this was a kodomo. Because it is a matter unrelated to the senseisama's personal affairs, I must ask you to excuse me from giving only this person's name.'</p>
+          <p class="en-p">Kiraku: 'Otsuru-san of the ○○ church is my itoko and my oji's niyōbau. You probably know that, don't you?'</p>
+          <p class="en-p">Shirōdanuki: 'Hai, that is why I want you to make apologies to the divine realm for me, for my sins to be forgiven, and for me to be allowed to return splendidly to the original seat of the Kami. That is precisely why I sent Yataro, Kusuke-san, and Kōtarō-san to ask favors at the teacher's home. As proof of my repentance, I will show you evidence right here.'</p>
+          <p class="en-p">Sooner said than done, he gave a loud cough twice like a konkon.</p>
+          <p class="en-p">At that moment, a pure white hairball flew out.</p>
+          <p class="en-p">If you look closely, that hairball is moving freely as it pleases.</p>
+          <p class="en-p">Thinking that it might be moving because the wind hit it, I immediately tried putting it inside a box with a glass lid, but the hairball is still moving freely to the left and right.</p>
+          <p class="en-p">A large crowd of people gathered around, gazing at the hairball with mysterious expressions.</p>
+          <p class="en-p">Shirōuemondanuki pursed his lips,</p>
+          <p class="en-p">Shirōdanuki: 'Please sprinkle white face powder onto that hairball quickly. I am weakening.'</p>
+          <p class="en-p">he pleaded.</p>
+          <p class="en-p">Yataro found the face powder that Ofuji uses and struck it onto the white hairball.</p>
+          <p class="en-p">The hairball occupied the center of the glass box, moving countless thin hairs back and forth and left and right.</p>
+          <p class="en-p">That night, having been allowed to lodge at the house of Shiba Kusuke, giving shusai to Iwata Fuji, when the two of them walked together and returned to Anō, it was a situation where the patrolman had come and was about to drag several shugyōsha off to the kōbansha.</p>
+          <p class="en-p">And a man called Sugiyama of the Tainokai church of Mitakekyō was standing right there.</p>
+          <p class="en-p">Kiraku engaged in various reigaku-based discussions with the patrolman and Sugiyama, and finally the patrolman was convinced and returned safely.</p>
+          <p class="en-p">This man called Sugiyama was originally an outcast of Kinki who had served as the village chochō, but during the drought of the 16th year of Meiji, a gyōja of Mitakekyō named Yamashita came to Yobe in Kameoka to pray for rain, performing a two-week religious fast inside the riverbed to make rain fall.</p>
+          <p class="en-p">However, although the rain did not fall enough to be fully satisfying, it is a fact that toward the end of the two weeks, it came down in a scattering drizzle.</p>
+          <p class="en-p">At that time, a young woman named Takashima Ofumi, the wife of a certain family in Yobe, was moved by the divine virtue of Yamashita and went to the river every night to perform suigyō, when before she knew it, her body began to shake,</p>
+          <p class="en-p">'This is Inari Daimyōjin!'</p>
+          <p class="en-p">and she began to chatter.</p>
+          <p class="en-p">From then on, called the Inari-san of Yobe, people coming to worship began to emerge from all directions.</p>
+          <p class="en-p">The man who came to worship at that time was Sugiyama Tōgorō.</p>
+          <p class="en-p">This man had a fair amount of learning, possessed property, and his personality was not too bad.</p>
+          <p class="en-p">Always visiting the church of Takashima Fumi and doing reception duties and the like, before he knew it, they fell into a strange relationship, which Fumi's husband sniffed out,</p>
+          <p class="en-p">'You darn fox, take your things and get out of here,'</p>
+          <p class="en-p">and with a single word he threw them out.</p>
+          <p class="en-p">From then on, the two of them, putting on the airs of a publicly acknowledged husband and wife, rented a grandiose house in the same town of Yobe, enshrined Inari-san there, and gathered believers from the vicinity.</p>
+          <p class="en-p">However, this time Kiraku had begun performing consultations and prayers right nearby in Anō, so the believers who had been devotedly visiting this church were gathering without exception in Anō.</p>
+          <p class="en-p">Thinking that somehow or other he wanted to crush him, he had persuaded the residential patrolman and come here.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と四郎右衛門狸は自分の懺悔話を諄々と述べ立て、顔一面に涙を漲らし両手をついて頼み込む。何とはなしに喜楽も可哀相な気がして来た。</p>
+            <p class="ja-classical-line">喜楽『お前サンは今二人の人を過つて殺したと云つたが、それは何と云ふ人だ。差支がなければ聞かして貰ひ度いものだ』</p>
+            <p class="ja-classical-line">四郎狸『ハイ、仕方がありません、何も彼も白状しますが、○○教会の教導職お鶴サンと云ふ女教師の腹に這入り、種々と病気の試験中到頭お鶴サンは死んで了ひました。それから外に、も一人、これは小さい子供で御座いました。先生様のお身の上に関係のない事ですから、此人の名だけは御免を蒙りませう』</p>
+            <p class="ja-classical-line">喜楽『○○教会のお鶴サンは俺の従妹であつて叔父の女房だ。それをお前は知つて居るのだらうなア』</p>
+            <p class="ja-classical-line">四郎狸『ハイ、それだから貴方に神界にお詫をして頂き、罪を許されて天晴れ元の神の座へ復らして貰ひ度いので、態々弥太郎や久助サン、幸太郎サンを先生のお宅に頼みにやつたので御座います。改心の証に今此処で証拠を見せます』</p>
+            <p class="ja-classical-line">と云ふより早く、コンコンと二回ばかり大きな咳をした。其機に真白毛の毛玉が飛んで出た。よくよく見れば其毛玉は自由自在に動いて居る。風が当つて動くのではなからうかと思ひ、直に硝子蓋のしてある箱の中へ入れて見たが、毛玉は矢張り左右へ自由自在に動いて居る。大勢の者が寄つて集つて毛玉を不思議相に眺めて居る。四郎右衛門狸は口を尖らし、</p>
+            <p class="ja-classical-line">四郎狸『早く白粉を其毛玉にふりかけて下され。弱ります』</p>
+            <p class="ja-classical-line">と嘆願してる。お藤の使ふ白粉を弥太郎が探し出して、白い毛玉にブツかけてやつた。毛玉は硝子箱の中心に坐を占め、幾万とも知れぬ細い毛を前後左右に動かして居た。</p>
+            <p class="ja-classical-line">其夜は射場久助の家に泊めて貰ひ、岩田藤に修斎を与へ、二人連れ立つて穴太へ帰つて見ると、四五人の修業者を巡査がやつて来て交番所へ引張つて去のうとしてる処であつた。さうして御嶽教の太元教会の杉山某と云ふ男が其処に立つて居る。喜楽は巡査と杉山に向つて種々と霊学上の議論を闘はし、漸く巡査は納得して無事に帰つて行つた。</p>
+            <p class="ja-classical-line">此杉山と云ふ男は元は金岐の隠亡であつて、村の戸長を勤めて居た男であつたが、明治十六年の旱魃で、御嶽教の山下と云ふ行者が、亀岡の余部へやつて来て雨乞をして、雨を降らすと二週間の断食を河原の中でやつた。けれども雨はあまり足りになる程降らなかつたが、二週間の上りにバラバラと降つてきたのは事実である。其時に、余部の或家の女房で、高島おふみと云ふ若い女が、山下某の神徳に感じ、毎晩川へ行つて水行をやつて居ると何時の間にやら体が震ひ出し、</p>
+            <p class="ja-classical-line">『此方は稲荷大明神だ！』</p>
+            <p class="ja-classical-line">と喋り出した。それから余部のお稲荷サンと云つて、四方八方から参詣する者が出来て来た。其時に参拝したのが杉山藤五郎と云ふ男であつた。此男は相当に学問もあり財産もあり、人格もあまり悪くない。何時も高島ふみの教会へ通ふて受付等をやつて居たが、知らぬ間に妙な仲となつたのを、ふみの夫が嗅つけ、</p>
+            <p class="ja-classical-line">『ド狐もつて出て行きさらせ』</p>
+            <p class="ja-classical-line">と一言の許に放り出され、二人はそれより天下晴れての夫婦気取りで、同じ余部の町へ宏大な家を借り、そこへ稲荷サンを祀つて附近の信者を集めて居た。然るに今度喜楽が、あまり遠からぬ穴太で伺ひや祈祷をやり出したので、此教会へうつつを抜かして通ふて居た信者が残らず穴太へ集まるので、何とかして叩き潰してやらうと考へ、駐在所の巡査を説きつけてやつて来たものである。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kiraku had also been visiting Fumino Takashima's church frequently since three or four years prior because his father was ill, in order to have prayers performed or to receive guidance, and had become quite intimate with Sugiyama.</p>
+          <p class="en-p">However, Sugiyama had been incited by Fumino Takashima and was plotting to send Kiraku of Anao away somewhere.</p>
+          <p class="en-p">At the Taigenkyōkuwai in Amarube, a man named Hattori was working as the receptionist.</p>
+          <p class="en-p">It was in the spring of the 29th year of Meiji.</p>
+          <p class="en-p">Hearing that the spring grand festival was to be held, Kiraku made an early pilgrimage to see, and found only Hattori alone, waiting at the entrance while sipping sake little by little.</p>
+          <p class="en-p">At first glance, he was an old man who looked to be about fifty-seven or eight, or sixty-two or three.</p>
+          <p class="en-p">Kiraku: 'Good morning, Hattori-san. I heard today is the festival, so I came to worship.'</p>
+          <p class="en-p">Saying this, Hattori flickered his eyes and spoke.</p>
+          <p class="en-p">Hattori: 'Ah, Kiraku-san, go ahead and have a cup. The festival here is supposed to be at one o'clock in the afternoon, but since everyone is coming from distant places, no matter what it won't start until around four o'clock. Sugiyama-san and Ofumi Takashima-san went running off to the managers' houses since early this morning and are out, but even Inari-san is just so-so. ...Kiraku-san, how about you also wake up properly? You tie a fox's tail to your buttocks and poke it out from the lining of your haori now and then, deceiving people as if the real Inari-san has possessed you, so I can't bring myself to worship in earnest. It's ridiculous, being worked to the bone from morning till night for bowls of rice is unbearable. They bought and left a shō of sake calling it sacred wine, so I put water in the sacred sake flask and am drinking the sake myself.'</p>
+          <p class="en-p">He was blurting out secrets from start to finish.</p>
+          <p class="en-p">Kiraku: '...Surely there's no such thing. That fellow Hattori must be uttering such slander and defamation out of excessive discontent...' Thinking thus, he took out his bento to eat and waited for the time of the grand ceremony to arrive.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">喜楽も三四年以前から父が病気なので、祈祷して貰つたり伺つて貰ふ為めに高島ふみの教会へチヨコチヨコ通ひ、杉山とは余程懇意になつて居たのである。けれども杉山は高島ふみに唆されて、穴太の喜楽を何処かへやつてやらうと企んで来たのであつた。余部の太元教会には服部某と云ふ男が受付をして居た。明治二十九年の春の事であつた。春季大祭が行はれると云ふので早うから参拝して見ると、服部某が只一人、玄関口に酒をチヨビリチヨビリ飲み乍ら控へて居た。一見して五十七八か六十二三位に見える爺サンである。喜楽は、</p>
+            <p class="ja-classical-line">喜楽『服部サン、お早う。今日はお祭りぢやさうで参拝しました』</p>
+            <p class="ja-classical-line">と云ふと、服部は目をちらつかせ乍ら、</p>
+            <p class="ja-classical-line">服部『あゝ喜楽サンか、ま一杯やりなさい。此処の祭は午後一時と云ふのだが、皆遠い所から参るので如何しても四時頃にならぬと始まらぬ。杉山サンも高島おふみサンも朝早うから世話方の家へ奔走に行つたので留守だが、稲荷サンも宜い加減なものだぜ。……喜楽サン、お前サンも宜い加減に目を醒ましたら如何だ。尻に狐の尻尾を結びつけて羽織の裏からチヨイチヨイ出し、本当の稲荷サンが憑つて来られた様に誤魔化すので、本気に拝む気になりはせないわ。阿呆らしい、朝から晩まで椀給でこき使はれて堪つたものぢやない。お神酒だといつて一升買ふて置きやがつたから、お神酒徳利に水を入れて、酒は此通り俺が飲んで居るのだ』</p>
+            <p class="ja-classical-line">と何から何まで秘密を素破抜いて居る。喜楽は、</p>
+            <p class="ja-classical-line">……マサカそんな事はあるまい。服部奴が不平のあまりこんな中傷讒誣をするのだらう……と思ひ乍ら、弁当を出して食ひ祭典の時の至るのを待つて居た。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c15.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 15: 盲目 Bird [1027]</span>
+      </a>
+      <a href="c17.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 17: Fox の尾 [1029]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

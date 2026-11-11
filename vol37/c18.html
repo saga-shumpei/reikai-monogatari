@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 18: 奥 Field 操 [1030] - Volume 37 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 37 Table of Contents</a>
+      <span>Volume 37</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 37 &bull; Chapter 18</span>
+      <h1 class="chapter-title-en">Chapter 18: 奥 Field 操 [1030]</h1>
+      <p class="chapter-title-ja">奥野操〔1030〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Once the training ground had been ordered to retreat from the tatami room of Saitō Uichi, the old man's mood improved once again, and the secondary training ground was granted a two-bay adjoining inner parlor.</p>
+          <p class="en-p">At that time, Tada Koto, Ishida Kosue, Ueda Kaukichi, and others were experiencing the most fascinating divine possessions, displaying various wondrous divine arts.</p>
+          <p class="en-p">Tada Koto clasped both hands to become the saniha, Ishida Kosue served as the kamunushi, and when she said,</p>
+          <p class="en-p">Tada Koto: 'Now, an earthquake!'</p>
+          <p class="en-p">suddenly the house began to rattle and shake, and a roaring sound could be heard.</p>
+          <p class="en-p">However, the earthquake was confined to this house alone; upon stepping out the doorway, there was no longer anything amiss, and the great crowd of people were flabbergasted and left speechless by that unfathomable divine power.</p>
+          <p class="en-p">When Tada Koto commanded,</p>
+          <p class="en-p">Tada: 'I am Tomoegozen! Hey, retainers, pour tea for everyone!'</p>
+          <p class="en-p">a clattering sound came from the cupboard, and tea bowls soared several feet through the void, appearing before the two of them.</p>
+          <p class="en-p">When Tada gave the strict command,</p>
+          <p class="en-p">Tada: 'Distribute them one by one before everyone,'</p>
+          <p class="en-p">though no one was there, the tea bowls passed five to six inches above the tatami mats and neatly settled right before each person's knees, and the wonder was that upon settling, every single tea bowl spun around sharply two or three times.</p>
+          <p class="en-p">When Tada Koto commanded,</p>
+          <p class="en-p">Tada: 'Now, pour the tea!'</p>
+          <p class="en-p">Ishida Kosue held a clay teapot in her hand and made the motion of pouring tea. Thereupon, the teapot that had been resting on the brazier of its own accord swung through the void, and as if someone were holding it to pour tea, it went around filling each cup to about eighty percent, one after another.</p>
+          <p class="en-p">In the beginning, they praised Kiraku's spiritual science as a magnificent thing, but gradually they began to revile it to the utmost as mere sorcery and izuna-tsukai.</p>
+          <p class="en-p">Unconcerned by this, they manifested spirits to move the brazier, raised the desk two or three feet into the void, and revolved the teapot, immersing themselves day and night in research.</p>
+          <p class="en-p">At no other time was anything so amusing and exhilarating.</p>
+          <p class="en-p">The spirit possessing Tada Koto, which called itself Tomoegozen, spoke to Kiraku, saying:</p>
+          <p class="en-p">Tada: 'Since the gods are guarding and granting us various spiritual arts in this manner, why don't we form a troupe from now on, rush out to Kyoto and Osaka, become magicians, rake in a pile of money, and use that capital to build a grand divine hall and establish a headquarters?'</p>
+          <p class="en-p">Thus she urged him.</p>
+          <p class="en-p">Thinking that to do such a foolish thing in the Way of the Gods would instead defile the divine path, Kiraku hesitated, whereupon Ishida Kosue's possessing spirit stirred once again and urged:</p>
+          <p class="en-p">Kosue: 'Now, from here on I shall walk through the void! Anything and everything is as you desire. With such splendid divine arts, it is a pity to keep them hidden deep in the mountains of Tamba. If we go out to Kyoto and Osaka and splendidly display these divine arts, surely the divine virtue of the gods will be understood at once, and the Path will open up. Now, make up your mind quickly!'</p>
+          <p class="en-p">Thus the two possessed individuals, Tada and Kosue, pressed in from both sides.</p>
+          <p class="en-p">The mountain-loving father and child, Motokichi and company, swallowed their saliva in delight and said,</p>
+          <p class="en-p">'Now, this is the divine virtue of the gods! From the celestial eye, celestial ear, and celestial speech, down to such divine arts—if we show these, no man, no matter how strong his logic, will be able to avoid yielding. By making money, the Way of the Gods will be spread all the more! Hehehe, could there ever be such splendid things in this world?'</p>
+          <p class="en-p">becoming quite enthusiastic.</p>
+          <p class="en-p">Even Iwamori Toku and Saitō Takako mastered various wondrous divine arts and came to agree.</p>
+          <p class="en-p">In Kiraku's heart: ...To go out to such a place and perform like an entertainer feels somehow too embarrassing to bear; yet, if the Way of the Gods is thereby opened, perhaps there is no compelling reason to stop it either. Leaving everything to divine possession, shall I make up my mind and go to Kyoto and Osaka for a single theatrical run? ...So resolving, he went to worship at the ujigami shrine and inquired.</p>
+          <p class="en-p">When he did so, two or three lumps once again welled up from his own belly, dancing up to the vicinity of his throat.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">一旦斎藤宇一の座敷から、退却を命ぜられた修業場は、又もや爺の機嫌が直つて、再修行場に、二間続きの奥座敷を給与された。其時は多田琴、石田小末、上田幸吉などが最も面白き神懸りであり、いろいろの珍しき神術をして見せた。多田琴が両手を組み審神者となり、石田小末が神主となり、</p>
+            <p class="ja-classical-line">『サア地震だ』</p>
+            <p class="ja-classical-line">といへば、俄に家がガタガタとふるひ出し、ゴーゴーと唸り声が聞えて来る。けれ共地震は此家限りで、門口を出ると最早何の事もなかつた、大勢の者は其不可思議な神力に肝を潰し、舌を巻いてゐた。多田琴が、</p>
+            <p class="ja-classical-line">多田『われは巴御前だ、オイ家来の者、皆サンにお茶を注げ』</p>
+            <p class="ja-classical-line">と命ずると、戸棚からガチヤガチヤと音がして茶碗が人の数丈宙をたつて、二人の前に出て来る。多田は、</p>
+            <p class="ja-classical-line">多田『皆サンの前へ、一つづつ配れ』</p>
+            <p class="ja-classical-line">と厳命すると、何も居らぬのに、茶碗が畳の上五六寸の所を通つて、各自の膝の前にチヤンと据はる、据はつた時どれもこれも茶碗が二三遍キリキリと舞うてゐるのが不思議である。</p>
+            <p class="ja-classical-line">多田『サアお茶をつげ』</p>
+            <p class="ja-classical-line">と多田琴が命令すると、石田小末は手で土瓶を持つて、茶を注ぐ真似をする。さうすると、火鉢にかかつてゐた土瓶が勝手に、宙をブラブラやつて来て、誰かが持つて茶を注ぐ様に、八分許り、各次ぎ次ぎに注いでまはる。始めの中は喜楽の霊学は偉い者だとほめて居たが、ソロソロ魔法使、飯綱使と口を極めて罵り出した。それにも構はず霊をかけて火鉢を動かしたり、机を二三尺許りも宙に上げたり、土瓶を廻らしたりして、日夜研究に没頭してゐた。此時位面白くて得意な事はなかつた。多田琴に憑つた巴御前と自称する霊は喜楽に向つて曰ふ。</p>
+            <p class="ja-classical-line">多田『此通り色々の霊術を、神が守護致してさしてやるのだから、これから一座を組んで、京大阪へ飛出し、奇術師となつて、ドツサリ金を儲け、それを資本として大きな神殿を造り本部を建てようだないか』</p>
+            <p class="ja-classical-line">と勧めるのであつた。喜楽は神様の道に、そんな馬鹿な事をしては却て神の道を汚すだらうと思つて、躊躇して居ると、石田小末の憑霊が又もや発動して、</p>
+            <p class="ja-classical-line">小末『サア是から宙を歩いて見せる、何ンでもかンでも御望み次第ぢや、こんな結構な神術があるのに、丹波の山奥に隠しておくのは勿体ない、京大阪へ出て、天晴れ神術をして見せたら、それこそ一遍に神様の御神徳が分つて、お道が開けるだらう。サア早く決心なされ』</p>
+            <p class="ja-classical-line">と多田と小末の二人の神懸が両方からつめかける。山子好きの元市親子は喉をならして喜び、</p>
+            <p class="ja-classical-line">『サアこれが神様の御神徳だ。天眼通から天耳通、天言通、それにこんな神術、これを見せたら、いかな理屈の強い男でも、往生せずには居られまい。金儲けをしもつて、神様のお道が広まるのだ、エヘヽヽヽ、こんな結構な事が世にあらうか』</p>
+            <p class="ja-classical-line">と乗気になつて居る。岩森とく、斎藤高子までが色々の不思議な神術を習得して同意し出した。喜楽の心では、……そんな所へ出て、芸をして見せるのは、何だか恥しくて堪らない、乍併それで神様の道が開けるのならば、強ち止める訳にも行くまい。何事も神懸に任して、思ひ切つて京大阪へ一興行やりに行かうか……と決心し、産土神社へ参つて、伺つてみた。さうすると又もや自分の腹から塊が二つ三つゴロゴロと喉のあたりまで舞ひ上り、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Dona! Dona! Donatsu!</p>
+          <p class="en-p">It roared. Wondering if it was foolish of Kiraku to stop, or foolish to go out for the performance, which of the two might it be... as he asked back, once again from within his belly,</p>
+          <p class="en-p">"The fellow who cannot figure out that handan is even more foolish."</p>
+          <p class="en-p">was roared. Kiraku,</p>
+          <p class="en-p">"If that is so, based on a tasūketsu, I shall do just as the kamugakari and Motoichi-san say,"</p>
+          <p class="en-p">when he said this, once again from within his belly,</p>
+          <p class="en-p">"If you are going to do it, do it; I shall drop you into the kiyotaukai,"</p>
+          <p class="en-p">he was roared at, and at last he decided to give up the reigaku performance.</p>
+          <p class="en-p">As usual, when he began iusai at the shiugefuba, the yōbau of Tada Koto suddenly turned ferocious. And with a voice that sounded as if it were bursting asunder,</p>
+          <p class="en-p">"Ara! Ara! Ara!"</p>
+          <p class="en-p">she began to roar, bearing a soburi like a gekikenka lifting a shinai and standing for a tachia. Kiraku the saniha,</p>
+          <p class="en-p">"Calm yourself!"</p>
+          <p class="en-p">emitted an ichigon kototama. By that ichigon, Tada sat down neatly in her original seat, untied her crossed hands, made a soburi like an ancient bushi drawing the sword at his hip,</p>
+          <p class="en-p">"Behold this!"</p>
+          <p class="en-p">and thrust out her hands before the saniha. Keeping his eyes closed, when the saniha looked at this, it looked as though a shirakami was wrapped around the nemoto of a tantau and thrust out. And the man holding this tantau was a man of fine build, slightly reddish-faced, around shijifu years of age. Breaking the silence, Tada spoke,</p>
+          <p class="en-p">Tada: 'I was a person called Okuno Misao, fencing instructor to Lord Koide, the daimyo of Sonobe; but due to the jealousy of a colleague, I was slandered, driven out of Sonobe, came to Kameyama, became fencing instructor to Lord Matsudaira, and while serving there, I was infatuated by the eighteen-year-old younger sister of the lord, and at last was slandered once again by my colleague, swallowing tears of vexation, exactly eighty years ago tonight, I am a bushi who committed seppuku and met my end. Look upon this tantau, bloodstains must be adhering to it, you see!'</p>
+          <p class="en-p">she roared.</p>
+          <p class="en-p">Kiraku: 'Since this is a shiugefuba for the descent and possession of the kami, it is no place for human spirits and the like to come. You had best leave quickly.'</p>
+          <p class="en-p">he rebuked. The possessed spirit shook its head from side to side,</p>
+          <p class="en-p">"Though you are a hero of the realm, a fencing instructor, such rude and insolent words and intentions I will not put up with!"</p>
+          <p class="en-p">saying thus, with a leap she stood up,</p>
+          <p class="en-p">"Yaa! Yaa!"</p>
+          <p class="en-p">calling out, flying around back and forth and left and right above Kiraku's head, occasionally kicking his head and raising a commotion; no matter how much chinkon was performed, it only grew wilder and did not calm down in the least. Kiraku, almost at his wits' end, slipped away from this place and hurried back to the Ubusuna Shrine, offering up prayers. Running up thither, Ishida Kosue came,</p>
+          <p class="en-p">Kosue: 'Moshi Sensei, it has calmed down. A bushi named Misao has one favor to ask of Sensei, so he is asking you to return quickly. Please go back.'</p>
+          <p class="en-p">he said, bowing his head politely and pleading. Kiraku,</p>
+          <p class="en-p">Kiraku: 'Oh, it has calmed down already? That is indeed grateful, it is thanks to Ubusunasama.'</p>
+          <p class="en-p">saying thus, giving thanks before the shrine, he immediately returned to Motoichi's residence.</p>
+          <p class="en-p">Upon returning, Tada Koto was seated in stern solemnity,</p>
+          <p class="en-p">Tada: 'Aiya Ueda-shi, as I stated earlier, I am a person named Okuno Misao, fencing instructor to Lord Kameyama. Having neither wife nor child, nor any kin, there is none to perform memorial rites for me, and I am wandering in the void. Concerning this, the descendant of a retainer who used to frequent my house is running a waste-paper shop in Marunouchi. Since this is a person named Nishio, please investigate thoroughly; the kaimyō is inscribed as such-and-such and he is enshrined at Nishio's residence and a certain temple in Nishimachi. First of all, after investigating the truth and falsehood of this matter, if you will enshrine this spirit of mine, I shall return to the seat of the kami, and you will protect the kamiwaza; not to mention throughout the land of Japan, reaching to the corners of the world, within ten years I shall make your name resound. If you are still doubtful, go to the graveyard in Kameyoka Koseura and investigate. The third stone pagoda from the right as you enter is my stone pagoda. As a sign of my spiritual presence, if Ueda-shi stands before the stone pagoda it will move of its own accord, so please use that as proof and enshrine me. A bushi bows his head to the son of a commoner and makes this request.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『バカ　バカ　バカツ』</p>
+            <p class="ja-classical-line">と呶鳴りつけた。喜楽は止めるのが馬鹿か、興行に出るのが馬鹿か、どちらで御座ります………と問ひ返して見ると、又腹の中から、</p>
+            <p class="ja-classical-line">『其判断がつかぬ奴は尚馬鹿だ』</p>
+            <p class="ja-classical-line">と呶鳴られた。喜楽は、</p>
+            <p class="ja-classical-line">『そんなら多数決に依つて、神懸や元市サンの云ふ通りに致します』</p>
+            <p class="ja-classical-line">と言つてみれば、又もや腹の中から、</p>
+            <p class="ja-classical-line">『やるならやれ、兇党界に落してやるぞよ』</p>
+            <p class="ja-classical-line">と呶鳴りつけられ、とうとう霊学興行は思ひ切る事にして了つた。</p>
+            <p class="ja-classical-line">例の如く修業場で幽斎を始めて居ると、多田琴の容貌が俄に獰悪となつて来た。そしてはじけわれるやうな声で、</p>
+            <p class="ja-classical-line">『アラ　アラ　アラ』</p>
+            <p class="ja-classical-line">と呶鳴り出し、撃剣家が竹刀をふり上げて立合ふ様な素振りをして居る。審神者の喜楽は、</p>
+            <p class="ja-classical-line">『鎮まれ！』</p>
+            <p class="ja-classical-line">と一言言霊を発射した。多田は其一言に元の座に行儀よく坐り、組んだ手を離して、昔の武士が、腰の刀を抜く様な素振をなし、</p>
+            <p class="ja-classical-line">『之を見よ』</p>
+            <p class="ja-classical-line">と審神者の前に手をつき出す、審神者は目をつぶつた儘、之を見れば短刀の根元に、白紙が巻いてあるのをつき出してるやうに見える。そして此短刀を持つた男は、年は四十前後の稍赤みがかつた細だちの品のよい男である。多田は口を切つて云ふ、</p>
+            <p class="ja-classical-line">多田『某は園部の藩主小出公の指南番奥野操といふ者で厶つたが、同役のそねみに依つて、讒言をせられ、園部を追ひ出され、亀山に参り、松平公の指南番となり、勤めてゐた所、十八歳の殿様の妹娘に惚れられて、遂に同役より又もや讒言をせられ、無念の涙を呑んで、丁度八十年以前の今晩、切腹を致して相果てた武士で厶る。此短刀を見られよ、血汐が附いてをらうがなア』</p>
+            <p class="ja-classical-line">と呶鳴り立てた。</p>
+            <p class="ja-classical-line">喜楽『ここは神様のお憑り遊ばす為の修行場であれば、人霊などの来るべき所ではない。早く立去つたがよからう』</p>
+            <p class="ja-classical-line">ときめつけた。憑霊は首を左右に振り、</p>
+            <p class="ja-classical-line">『苟くも天下の豪傑、武道の指南番に向つて、無礼千万な其言ひ条了見致さぬぞ』</p>
+            <p class="ja-classical-line">と言ひ乍ら、ツと立上り、</p>
+            <p class="ja-classical-line">『ヤア　ヤア』</p>
+            <p class="ja-classical-line">と声をかけ、喜楽の頭の上を前後左右に飛び廻り、時々頭を蹴つて、騒ぎまはり、何程鎮魂をしても、荒くなる計りで、少しも鎮まらない。喜楽も殆ど持てあまし、此場をぬけ出し、再産土の社へかけつけて、祈願をこらして居た。そこへ石田小末が走つて来て、</p>
+            <p class="ja-classical-line">小末『モシ先生、鎮まりました。操と云ふ武士が先生に一つ御頼みがあるから、早く帰つて欲しいと頼んで居ります。どうぞ帰つて下さいませ』</p>
+            <p class="ja-classical-line">と叮嚀に頭を下げて頼んで居る。喜楽は、</p>
+            <p class="ja-classical-line">喜楽『ヤアもう鎮まつたか、そりや有難い、産土様の御蔭だ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、社前に感謝し、直に元市の宅へ帰つて行く。</p>
+            <p class="ja-classical-line">帰つて見れば多田琴は厳然として坐りこみ、</p>
+            <p class="ja-classical-line">多田『アイヤ上田氏、某は最前申せし如く、亀山公の指南番奥野操と申す者で厶る。女房もなければ子もなし、又身内もなき故に後弔ひくれるものもなく、宙に迷うて居りまする。就いては自分の家に出入を致して居つた家来の子孫が内丸町に紙屑屋を致して居る。これは西尾と申す者なれば、よく査べて下され、戒名は何々と記し西尾の宅と西町の某寺に祀つてある。先づ第一に虚実を調べた上、此方の霊を御祀り下さらば、某は神の座に直り、其方が神業を保護いたし、日本国中は申すに及ばず、世界の隅々に致るまで十年ならずして名を轟かして見せるで厶らう。猶も疑はしくば、亀岡古世裏の墓地へ往つて調べて下され。入口から右に当つて三つ目の石塔が、拙者の石塔で厶る。性念のある印には、上田氏が石塔の前に立たれたならば自然に動くに依つて、それを証拠に御祀り下され。武士が百姓の伜に頭を下げてお願申す』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He stood pompously, bracing himself. From this, Kiraku took Uichi and two or three other trainees to investigate a certain temple in Nishimachi, and went to the paper-scrap dealer Nishio's house to ask about it. Although the name Misao was not clearly known, the fact called Bōbōinden Bōbō Koji was precisely correct. Believing without a doubt that it was indeed Misao's spirit, he boldly went to look at the cemetery in Koshōra. However, the condition of the entire cemetery was, just as the wandering spirit had said, without a single inch of error; moss had accumulated on the third gravestone on the right, and though it was not entirely clear, characters that looked similar were appearing. Waiting for nearly an hour, wondering whether the stone pagoda would move now or move now, yet it remained completely motionless, not budging an inch. Thinking it strange—making a fuss over what was not even strange—he closed his eyes and investigated with his spiritual vision, whereupon he noticed a large old tanuki glaring with its eyes wide open at the back of the stone pagoda.</p>
+          <p class="en-p">"You damned old tanuki, making a fool of humans! I'll go back now and make the sahō of the Tada zither rigorous!"</p>
+          <p class="en-p">Thinking thus, he strode briskly back to the training hall in Anō. By that time, the sun had already set. In the training hall, a dim lamp was lit, and on the other side, Tada and Ishida sat stiffly and gravely in wait. The moment they saw his figure,</p>
+          <p class="en-p">"Hey, Ueda-dono, a great, great task! Well done indeed on your investigation. What this side says cannot possibly be mistaken, so quickly enshrine the spirit of so-and-so. Hey, Motoichi-dono, and the rest of you, you've gone through great trouble, ah-ha-ha-ha!"</p>
+          <p class="en-p">He let out a heroic laugh, shaking his shoulders in unison.</p>
+          <p class="en-p">Kiraku: 'Hey, you old tanuki possessing Tada, you petty follower of tanuki dabbling in trivialities, you've made a fool of this sahō master, haven't you! Now, I won't let you off. From here on, I will cast spiritual bindings and tie you down, so prepare yourself.'</p>
+          <p class="en-p">The possessing spirit of Tada shook its shoulders even more broadly, opened its mouth wide,</p>
+          <p class="en-p">"Ah-ha-ha-ha, hi-hi-hi-hi!"</p>
+          <p class="en-p">And laughing thus, it collapsed sideways with a thud. Kiraku crossed his hands and wholeheartedly applied spiritual bindings with murmurs of concentration. Along with Ishida's cry of exertion, he collapsed with a thud. In exchange, Tada's physical body rose sharply, and raising and lowering his twenty-kan body by about two shaku like pounding mochi with the rhythmic sounds of *don-don-don*, he flew around the tatami room. Kiraku became desperate,</p>
+          <p class="en-p">Kiraku: 'I humbly beg you to calm down.'</p>
+          <p class="en-p">He lowered his head and approached gently. The possessing spirit opened its mouth wide,</p>
+          <p class="en-p">"Ah-ha-ha-ha! I was asked by Komatsubayashi-sama to make you fellows undergo sahō training. The truth of the matter is Matsuoka. You were so easily fooled! When you saw the tanuki at the back of the stone pagoda, you had quite a strange look on your face! Hotsu-ho-ho-ho, ah-ha-ha-ha!"</p>
+          <p class="en-p">And holding its stomach, it laughed convulsively again.</p>
+          <p class="en-p">Abruptly, the indoor air began to smell like a dead body. ...Ah, it stinks, it stinks, everyone pinched their noses. Just as the chanting of a Buddhist priest could be heard from nowhere, pilgrim songs were heard in an annoying voice, and the funeral procession noises of *chindon* and *jaburin* entered their ears. Thinking this fellow was suspicious, they crossed their hands, closed their eyes, and illuminated their spiritual vision. Countless phantoms, each holding a sedge hat and a staff, following behind a beggar priest, caught their eye as they crawled in through the narrow holes of the shōji screen. And the face of the phantom appearing right at the very front was the exact spitting image of the face of the neighbor girl named Omon. Before he could even realize it,</p>
+          <p class="en-p">Kiraku: 'Hey, Omon-san!'</p>
+          <p class="en-p">He shouted. Yet, with no answer at all, phantoms came piling up heavily into the room, until numbering in the hundreds they piled upon one another, turning and glaring this way. The two spirit-possessed women, Saitō Takako and Iwamori Tokuko, shouting that it was terrifying, clung to Kiraku's body and trembled as they wept.</p>
+          <p class="en-p">An indescribable, unpleasant odor filled the room, and the light of the lamp naturally grew faint until the whole surrounding area became dim. Then, he tried lighting four or five candles, but every single one of them had its flame dwindle and go out. Having no other choice, he purified his body with the clear water of the narrow ditch on the east side, steadied his core, and desperately began to recite the Amatsu Norito. The shadow of the suspicious phantoms decreased by one, then by two, and finally fled away completely through the original narrow, torn hole of the shōji screen. Just as this was happening, an old woman named Oshi, the mother of Omon, arrived in a great flurry...</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と威丈高になつて構へてゐる。これより喜楽は宇一其他二三の修業者を引つれ西町の某寺を調べ、紙屑屋の西尾の宅へ行つて聞いて見たが、操と云ふ名はハツキリ分らぬが、某々院殿某々居士と云ふ事丈は的中して居た。全く操の霊に間違ないと、勇んで古世裏の墓地へ往つて見た。所が墓地全体の様子が亡霊のいつた通り寸分の間違もなく、右の三つ目の石碑には苔がたまつて、ハツキリとは分らぬが、どうも似た字が現はれてゐる。石塔がモウ動くかモウ動くかと待つ事殆ど一時間許り、されど依然としてビクとも動かない。ハテ不思議と、不思議でもない事を、不思議がつて瞑目し、霊眼で調べて見ると、石塔の裏に大きな古狸が目をむいてゐるのが目についた。</p>
+            <p class="ja-classical-line">『おのれド狸奴が、人を馬鹿にしやがつた、これから帰つて多田琴の審神を厳重にしてやらう』</p>
+            <p class="ja-classical-line">と思ひ乍ら、スタスタと穴太の修業場へ帰つて来た。其時既に日は暮れて居た、修業場には薄暗いランプが一つ、点つて其向ふに多田琴と石田が四角張つて、厳然と控えて居る。自分等の姿を見るより、</p>
+            <p class="ja-classical-line">『ヤア上田殿、大儀々々よくこそお調べ下さつた。此方の申す事に間違は厶らうまいがなア、早く某の霊をお祀り下され。ヤア元市どの、其外の面々、いかい御苦労で厶つた、アツハヽヽヽ』</p>
+            <p class="ja-classical-line">と豪傑笑ひをなし、肩を二人一時に揺すつてゐる。</p>
+            <p class="ja-classical-line">喜楽『コリヤ多田に憑つてゐる古狸奴、小末にうつつてる狸の子分奴、此審神者を馬鹿にしやがつたな、サアもう了見ならぬ。これから霊縛をかけて縛めてやるから覚悟を致せ』</p>
+            <p class="ja-classical-line">多田の憑神は一層大きく肩をゆすりて大口をあけ、</p>
+            <p class="ja-classical-line">『アハヽヽヽ、イヒヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ひ乍ら横にゴロンとこけて了つた。喜楽は両手を組み、一生懸命にウンウンと霊縛をかけた。石田はウンの声と共にゴロリと倒れた。それと引替へに多田の肉体はムクリと起き上り、ドンドンドンと餅つく様に二十貫の体を二尺許り上げ下げして、座敷中を飛び廻る。喜楽は一生懸命になつて、</p>
+            <p class="ja-classical-line">喜楽『どうぞお静まりを願ひます』</p>
+            <p class="ja-classical-line">と頭を下げて優しく出た。憑神は大口あけて、</p>
+            <p class="ja-classical-line">『アハヽヽヽおれは小松林様に頼まれて、貴様達に審神者の修業をさせてやつたのだ。実の所は松岡だ。能うだまされたのう、石塔の裏で狸を見た時は、随分妙な顔だつたのう。ホツホヽヽヽ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">と又腹を抱へて笑ひこける。</p>
+            <p class="ja-classical-line">俄に室内が死人臭くなつて来た。……あゝ臭い臭いと各自に鼻をつまんでゐると、どこともなしに坊主のお経が聞えて来るかと思へば厭らしい声で巡礼歌が聞える、チンドン、ジヤブリンと云ふ葬礼の行列が耳に入る。此奴ア怪しいと手を組み目を塞ぎ、霊眼をてらせば、幾十とも知れぬ亡者が各自に笠と杖を手に持ち、乞食坊主の後について、障子の細い穴からくぐつて這入つて来るのが目についた。そして一番先に出て来る亡者の顔が、隣のお紋と云ふ娘の顔にソツクリである。喜楽は思はず知らず、</p>
+            <p class="ja-classical-line">喜楽『ヤアお紋サン』</p>
+            <p class="ja-classical-line">と叫んだ。されど何の答もなしに座敷へドカドカと亡者が重なり来り、遂には何百とも知れず重なり合うて、こちらを向いて睨んでゐる。斎藤高子、岩森徳子の二人の神憑はコワイコワイと叫び乍ら、喜楽の体に喰ひついて震ひ泣いてゐる。</p>
+            <p class="ja-classical-line">何とも知れぬ不快の臭が室内に充ち、ランプの光は自然に細つてそこら中が薄暗くなつて来た。それから蝋燭を四五本も灯してみたが、どれもこれも火が小さくなつて消えて了ふ。仕方がないから、東側の細溝の清水で体を清め、胴を据えて、天津祝詞を一生懸命に奏上しかけた。怪しき亡者の影は一人減り二人減り、とうとう又元の障子の細い破れ穴から逃げ去つて了つた。かかる所へお紋の母親お初といふ婆アサンが、慌ただしくやつて来て、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ohatsu: 'Moshi moshi Kiraku-san, saizen kara niwa ni Omon ga biyōki ni natte uhagoto bakari itte imasu, soshite Kiraku-san dōzo korahete kudasai to, ikudo to naku kurikahete orimasu kara, dōzo, donna warui koto o shita ka shiranu ga, mada toshi no ikanu kodomo no koto dakara, kanī shite yatte kudasai. Taihen na netsu de, niuute soba e mo yori tsukemasenu'</p>
+          <p class="en-p">to ii nagara, naite iru. Kiraku wa kore o kiku yori tonari no Omon-san no ie ni iki mireba, Ohatsu-baasan no iu tōri, netsukusaku fukai niu ga tadayoi musume wa unun to unatte iru. Chiyōdo Motoichi no shiugefuba de koida niu to sotsukuri de atta. Soko de mata mo ya Amatsunorito o koedakaraka ni sōjiyō shi, chinkon o hodokoseba, Omon-san wa muchiu ni natte,</p>
+          <p class="en-p">Omon: 'nokimasu nokimasu'</p>
+          <p class="en-p">to ii nagara, nedoko kara tachiaga, futaashi miashi kadoguchi no kata e aruki dashi, batari to sono ba ni taorete shimatta. Sore to dōji de biyōki wa sutsukuri naotte shimatta no de aru.</p>
+          <p class="en-p">Kono koto ga atte kara, Jiromatsu wa, iyoiyo Kiraku wa izunatsukahi da to kuchi o kiwamete nonoshiri, Sogabe no murajiu o, gokurau ni mo shigoto o yasunde made furete aruita kitoku na ningen de aru. Ā kamugara tamachihauchisamau.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お初『モシモシ喜楽サン、最前から俄にお紋が病気になつて囈言許りいつてゐます、そして喜楽サンどうぞこらへて下さいと、幾度となく繰返して居りますから、どうぞ、どんな悪い事をしたか知らぬが、まだ年の行かぬ子供の事だから、カニーしてやつて下され。大変な熱で、臭うて側へもよりつけませぬ』</p>
+            <p class="ja-classical-line">と言ひ乍ら、泣いて居る。喜楽はこれを聞くより隣のお紋サンの家に行き見れば、お初婆アサンの云つた通り、熱臭く不快な臭が漂ひ娘はウンウンと唸つて居る。丁度元市の修業場で嗅いだ臭とソツクリであつた。そこで又もや天津祝詞を声高らかに奏上し、鎮魂を施せば、お紋サンは夢中になつて、</p>
+            <p class="ja-classical-line">『のきます　のきます』</p>
+            <p class="ja-classical-line">と云ひ乍ら、寝所から立上り、二足三足門口の方へ歩き出し、バタリと其場に倒れて了つた。それと同時に病気はスツカリ治つて了つたのである。</p>
+            <p class="ja-classical-line">此事があつてから、次郎松は、いよいよ喜楽は飯綱使だと口を極めて罵り、曽我部の村中を、御苦労にも仕事を休んでまでふれて歩いた奇篤な人間である。あゝ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c17.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 17: Fox の尾 [1029]</span>
+      </a>
+      <a href="c19.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 19: 逆襲 [1031]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

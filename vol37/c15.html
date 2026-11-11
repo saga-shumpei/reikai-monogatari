@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 盲目 Bird [1027] - Volume 37 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 37 Table of Contents</a>
+      <span>Volume 37</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 37 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 盲目 Bird [1027]</h1>
+      <p class="chapter-title-ja">盲目鳥〔1027〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As the Samidare skies hung low, the mountains on all sides were shrouded in clouds, and the calls of the Hototogisu could be heard in the enkin distance; even in the humble fuseya huts of the common folk at Anao Miyagaichi, it was now the height of the taue rice-planting season, commonly called a time when even a dog's paws are counted as human hands.</p>
+          <p class="en-p">Amidst the fierce battlefield of agricultural toil where every katatoki was contested, the hitobito near and far were bōsatsu-ed by uetsuke, mugikari, and the like, and at that very orikara when the footsteps of people passing through the gates of the oshihe had also toda-ed, a woman of humble attire, bandaging both of her eyes with white cloth, leaned upon a staff and asked:</p>
+          <p class="en-p">'Sensei, are you uchi?'</p>
+          <p class="en-p">It seemed she was guided by an old woman who accompanied her alone. Kiraku, who because there were few sanpaishiya lately had been deeply immersed in the practice of iusai to his heart's content within the shinden, heard this voice and said:</p>
+          <p class="en-p">'Mama,'</p>
+          <p class="en-p">and ushered her into the narrow tatami room. When he inquired about the purpose of her visit, she explained that she had made a long pilgrimage because she wished to have her eye affliction healed.</p>
+          <p class="en-p">Wondering vaguely why the woman looked somehow familiar as if he had seen her somewhere before, he questioned her regarding her place of residence, full name, and personal history. Blushing with embarrassment, the woman lowered her head slightly and spoke:</p>
+          <p class="en-p">'I am a person named Komosue of Nishibetsuin Village. Being a poverty-stricken soul beyond saving, with a leaking roof and fallen walls, amidst a destitute life where I had not even the leisure to store away tomorrow's provisions, my husband was afflicted by a prolonged illness, and as for me, I was heavily burdened with pregnancy.</p>
+          <p class="en-p">Since I could not even manage to work, providing for our morning and evening meals became impossible; everything of any monetary value was sold off or pawned away, until now I am a body of extreme penury with nothing left whatsoever.</p>
+          <p class="en-p">Without even the means of medicine, my husband was reduced to a state where he had no choice but to await death ruthlessly. We sustained our lives for the moment by eating wild roots and tree bark, but by some retribution, the bodies of both husband and wife swelled with dropsure, and my husband finally became a person of the yūkai realm.</p>
+          <p class="en-p">Left behind, a mere single week after childbirth, with fresh blood in my body and an infant in my arms, I completed the nominal funeral rites, and even as I spent lonely days, the heartlessness of the villagers showed itself: the rice dealer pressed us to pay for the rice, and the soy sauce dealer made harsh demands to hand over the money for the soy sauce.</p>
+          <p class="en-p">Unable to do a single thing about it, and sinking into contemplation whether I should also follow my husband's footsteps and bid farewell to this world, I was drawn by the love of my five-year-old stepchild and my single baby, making it impossible for me to die.</p>
+          <p class="en-p">As is common with weak-hearted women, without any deep thought, I decided to rely on my elder sister who is married in Osaka to escape our immediate predicament.</p>
+          <p class="en-p">Around midnight on a certain day, with the baby on my back and leading the five-year-old child by the hand, I left our home behind and set off, tracing the mountain path.</p>
+          <p class="en-p">On the way, since there is the grave where my late husband was laid to rest, I stopped by to bid him farewell and offer water.</p>
+          <p class="en-p">Fortunately, there was no shadow of a person nearby, so I poured forth endless, complaining murmurs to my heart's content, and as I was leaving the graveyard with lingering reluctance, at that very moment, from beside my husband's grave, a strange, shadowy figure emerged.</p>
+          <p class="en-p">Unawares, mother and children raised their voices together and wept aloud. Miraculously, whether that strange human shadow was the ghost of my husband or whatever it might be, shouting aloud about something incomprehensible, it ran off toward our home.</p>
+          <p class="en-p">Therefore, I thought to myself: the earth of the grave was not yet dry, and not even fifty days had passed, yet I had tried to leave the soil of my husband's tomb—that truly must have been unpardonable.</p>
+          <p class="en-p">Believing that my husband's spirit must have disliked us going to Osaka, I changed my mind and, feeling utterly weak, returned once more to our home.</p>
+          <p class="en-p">The shock of that time became a calamity, and at last I lost both of my eyes in this manner, and on top of that, I suffered endlessly day and night from agonizing pain.</p>
+          <p class="en-p">Moreover, just ten days ago, my single infant also grew lean and withered in body due to a meager supply of milk, and entered the ranks of the departed.</p>
+          <p class="en-p">My stepchild has been taken in by relatives since I became blind. Having already parted from my husband and child, I have no further hopes left in living in this world, so at least to comfort the spirits of my husband and my child and exhaust all roots of virtue is the only path left for me.</p>
+          <p class="en-p">No matter what I say, being a blind and helpless person, please, I beg of you, save me.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">五月雨の空低うして、四辺の山は雲に包まれ、杜鵑の鳴く声遠近に聞える、穴太宮内垣の賤が伏家も、今は犬の手も人の手と称する田植の最中、片時を争ふ農家の激戦場裡で、遠近の人々は植付、麦刈などに忙殺されて、教の門を潜る人々の足も杜絶えた折柄、身なり賤しい一人の婦人、両眼のあたりを白き布にて繃帯し乍ら、杖を力に、</p>
+            <p class="ja-classical-line">『先生はお在宅ですか？』</p>
+            <p class="ja-classical-line">と尋ねて来た。婆アサンが案内とみえて、一人付いて居る。此頃は参拝者がないので、神殿に於て心ゆく迄、幽斎の修行にひたつて居た喜楽は、此声を聞いて、</p>
+            <p class="ja-classical-line">『マアマア』</p>
+            <p class="ja-classical-line">と狭い座敷へ通し、来意を問へば、眼病を治して欲しいので、はるばる参拝したとの事であつた。どことなく何時かは見たことのある様な女と、訝かり乍ら住所姓名や、来歴を問うて見た。女は恥かしげに顔を赤らめ、稍俯むき気味になつて語る。</p>
+            <p class="ja-classical-line">『私は西別院村の小末と申す者で御座います。見るかげもなき貧乏人で、屋根はもり、壁はおち、明日の糧を貯ふるの余裕もなき貧しい暮しの中に、私の夫は長の病になやまされ、私は産婦の重き身の上、働きすることさへも叶はねば、朝夕の糊口に差支へ、銭となるべき物は売り払ひ、質におき尽くして、今は最早何もなき極貧の身の上、医薬の手だてさへなく、夫は無残にも死を待つより仕方のない身の上となりました。草根木皮を食ひ、一時の命をつないで居りましたが、何の因果か、夫婦の体は水腫れを起し、夫は遂に幽界の人となつて了ひました。取りのこされた私は、まだ出産後僅に一週日、血の若い身で、赤児をかかへて、形許りの弔ひをすませ、さむしい日をおくる内にも、村の人達の無情さ、米屋は米代を払へとせめてくる、醤油屋は醤油代を渡せときびしい催促に、如何することも出来ませず、一層の事私も夫の後を逐ふて此世の暇乞ひをせうかと思案に沈み乍ら、五つになつた先妻の子や、一人の赤子の愛にひかれて、死ぬことも出来ず、心弱いは女の常とて、何の考へもなきまま、大阪に嫁入つて居る姉を便つて一時の急場をのがれやうと、去る日の夜中頃、赤子を背に五つの子の手を曳いて、吾家を後に山路を辿り、出て行きました、其途中、亡夫を葬つた墓が御座いますので、暇乞の為に立寄り水を供へ、幸ひ傍に人影もなければ、心の行く丈愚痴の繰言をくり返し、心を残して墓場を立去る、時しも夫の墓の畔から現はれ出でたる怪しき物かげに、思はず知らず母子は声を揃へて泣き叫びました。不思議にも其怪しの人影は、夫の亡霊であつたか、何だか分らぬことを大声に叫び乍ら、吾家の方へ走せ行きました。そこで私の思ひますには、墳土まだ乾かず、五十日もすまぬのに夫の墓の土地を離れむとしたのは誠にすまぬことであつた。夫の霊は私等の大阪へ行くのを嫌うて居るのであらうと心を取直し、力なげに再吾家へ帰つて来ました。其時の驚きが災禍となり、遂に斯の如く両眼を失ひ、其上昼夜疼痛に苦しむこと限りなく、一人の赤子も亦十日以前に、乳のとぼしい勢か身体が痩衰へて、亡き人の数に入りました。先妻の子は私が盲になつたので親類が預つてくれました。私は最早夫や子に別れ、此世に生きて何の望みもありませぬから、せめては夫や吾子の霊を弔うて、善根を尽くすより途は御座りませぬが、何をいうても盲目の不自由な身の上、どうぞお助け下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Weeping and crying with tears flowing. To Kiraku, who heard the beginning and end of this Monogatari, every section felt as though iron staples were being driven into his breast. Ah, what touched his heart was the occurrence in the moonlit night of the past spring, on the way back from Ōsaka, when, unable to endure sleepiness, he used a certain hakaba as an ihamakura; the shadow that he had suspected of being an eukuwaihenge he had unexpectedly encountered was precisely this fujin. As he listened to the jijiyō chikuichi, he thought pitifully: could the genin by which this woman contracted ganbiyō be that, upon seeing his figure suddenly fleeing from the grave, she mistook him for the iurei of her deceased husband, and out of kiyōgaku, being of a wakachi condition, her giyagujiyō rose to her eyes, turning her into such a fugishiya? Ah, how pitiable. Even at the cost of his inochi, he must somehow cure this ganbiyō; otherwise, he would not be justified before Kamisama, nor would his sekinin be fulfilled. Right away, he spread an aragomo upon the daichi, sat straight in the lotus posture by the wellside, poured cold water over his head in a gush, recited the norito of clapping hands and bowing twice, and engaged in spiritual practice with an undivided mind. Perhaps because the Kami felt awe at his utmost sincerity, the pain in both eyes, which had hitherto suffered in agony, subsided as if forgotten. Gazing steadily around, she leaped for joy, as if about to fly, at the unexpected light of this world,</p>
+          <p class="en-p">Kiraku: 'Sensei, thanks to you, my eyes have opened. Ah, how awe-inspiring, how humbling!'</p>
+          <p class="en-p">she prostrated herself in worship. Struck with wonder at the kidzu in this place, Kiraku, the petitioner, marvelled at the instant reigen and the miraculous encounter, and felt deep reverence for the profound and subtle divine administration of the shinkai.</p>
+          <p class="en-p">This woman is named Ishida Kozue. From then on, she practiced yūsai day and night, her shinjutsu developed greatly, and at last, the high-ranking kenzoku divine spirits such as Komatsubayashi and Matsuoka descended upon her, revealing various states of the spiritual world. More than a hundred days later, she declared her parting to Kiraku, saying she would go again to her elder sister's home in Ōsaka, and has been gone ever since.</p>
+          <p class="en-p">To transmit the teachings of the Kami of Ōmoto,
+Far across the mountain paths I cross Tsu no Kuni.
+Whether the fortune of Naniwae be good or ill, as shinjutsu,
+Unknowing, I descend the flow of the Yodo.
+Aweing the teachings of the Chihayaburu Kami,
+I resettle my horse and return to original Tamba.
+As I retrace the foot-dragging mountain paths at yoha,
+The moon in the sky alone is my strength.
+In the joy of our unexpected meeting,
+I have realized the grace of the true Kami.
+Kannagara, may the mitama of the Kami bless us,
+And let this Monogatari shine upon the world.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と涙を流して泣き叫ぶ。此物語の始終を聞いた喜楽の心は、一節一節胸に釘鎹を打たるる如くであつた。あゝ心に当るは過ぎにし春の月の夜半の出来事、大阪より帰りの途次、眠けにたへずして、とある墓場に石枕、計らず会せし妖怪変化と疑うた影は、正しく此婦人であつたか、逐一事情をきくにつけ、気の毒にも此女が眼病にかかつた原因は、自分が突然墓から逃出した其姿を見て、亡き夫の幽霊と誤解し、驚愕の余り、若血の身の上とて逆上して目にあがつて、こんな不具者となつたのであるか、吁気の毒だ。何とかして生命に代へても此眼病を直してやらなくては、神さまに対して済まない。又自分の責任がすまぬと、直に荒菰を大地に布き、井戸端に端坐して、頭からザブザブと水ごりを取り、拍手再拝祈願の祝詞を奏上し、一心不乱に勤行した。其至誠に畏くも神明感じさせ玉ひけむ、今まで苦痛に悩みし両眼の痛みは忘れた様に鎮静し、あたりをじつと見まはし乍ら、思ひがけなき此世の光明に飛び立つ許り打喜び、</p>
+            <p class="ja-classical-line">『先生お蔭で目があきました。アヽ勿体ない辱ない！』</p>
+            <p class="ja-classical-line">と伏し拝む。此場の奇瑞に祈願者の喜楽も打驚き、即時の霊験と、又不思議の邂逅に、神界の深甚微妙なる御経綸に敬服したのである。</p>
+            <p class="ja-classical-line">此女は石田小末といふ。これより幽斎を日夜に修業し、神術大いに発達し、遂に小松林、松岡などの高等眷族の神霊懸らせ玉ひて、いろいろ幽界の有様を表示し、其後百余日の後再び大阪の姉の家に行かむと、喜楽に別れを告げて出て行つた儘である。</p>
+            <p class="ja-classical-line">大本の神の教を伝へむと
+山路遥に越ゆる津の国。
+浪速江のよしも悪きも神術と
+知らずに下る淀の流れを。
+千早ぶる神の教を畏みて
+駒立て直し元の丹波へ。
+足曳の山路を夜半に辿る身は
+御空の月ぞ力なりけり。
+ゆくりなく巡り会ひたる嬉しさに
+誠の神の恵悟りぬ。
+惟神神の御霊の幸はひて
+此物語世にてらしませ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: Night の Mountain 路 [1026]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: 四郎狸 [1028]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

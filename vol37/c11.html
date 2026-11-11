@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: Pine の Storm [1023] - Volume 37 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 37 Table of Contents</a>
+      <span>Volume 37</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 37 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: Pine の Storm [1023]</h1>
+      <p class="chapter-title-ja">松の嵐〔1023〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Having completed the ascetic training at the waterfall of Yada for itsushiukan, Kiraku came to engage earnestly in Shingefu at his own jitaku in Miyagaichi.</p>
+          <p class="en-p">Blind and tsunbo, rheumatism, and various other biyōnin came one after another to ask for chinkon and to beg for shinsen, and the rumor that the goshintoku was iyachiko instantly resounded far and enkin.</p>
+          <p class="en-p">People spoke of him as the Tengu-sama of Anao, Konjin-sama, or Inari-sama, and from morning till night, sankeinin built up a mountain, so that he was so busy he did not even have time for shiyokuji.</p>
+          <p class="en-p">Jiromatsu-san, of all people, came over, rolled up the skirts of his garment before the saidan, and sat down with a heavy thud.</p>
+          <p class="en-p">Without paying the slightest heed to the multitude of sanpaishiya, with a matsuka face, he glared fiercely at Kiraku,</p>
+          <p class="en-p">Jiromatsu: 'Listen here, you gokudau son, are you planning to run a mountebank business once more? All right, I am going to strip off your mask before everyone and put you to utter shame. That will be for your own future, and it will also be for the sake of the Ueda family. Making your relatives and neighbors worry endlessly, what on earth do you mean by playing the trick of a fox-medium on top of that? Why do you not apply yourself to the promising cattle-raising and dairy business that you built up here with such great effort? Spouting nonsensical gibberish about gods and divination and trying to fool the people of the world with sweet talk will get you nowhere; a tailless stray fox, that is what you are. If you can really meet the gods and receive their teachings, I will put you to a test right now. If by any remote chance your guess hits the mark, I will hand over the entirety of my property worth four hundred yen to you.'</p>
+          <p class="en-p">Abusing him foully in this manner, he put something small inside a tea-cup, pasted its opening thickly with a heavy paper glued down securely so that it would make no sound, drew it out from his breast, and placed it quietly in front of him,</p>
+          <p class="en-p">Jiromatsu: 'Now, Sensei, oh no, you gokudau son, you must not touch it even with a single fingertip. As a master of the so-called marten clairvoyance or weasel clairvoyance, guess brilliantly and tell me what kind of thing and how much of it is contained inside this tea-cup. If this hits the mark, heavens will truly turn into earth and earth into heavens. Even an arrow shot toward the moon might miss, but this thing has hardly any chance of missing. How about it, Sensei!'</p>
+          <p class="en-p">With contempt plastered all over his face, he jutted out his chin and stared hard into Kiraku's face.</p>
+          <p class="en-p">Kiraku: 'My role is to transmit the sincere teachings of the gods and to help people in distress. As for guessing such things like a conjuror, I must respectfully decline. I have never been taught such things by the gods, so I do not know.'</p>
+          <p class="en-p">With a knowing expression, Jiromatsu poked out his tongue slightly, jutted out his chin two or three times,</p>
+          <p class="en-p">Jiromatsu: 'Just look at him, you sly tanuki fellow, you have finally shown your red tail. Eh, well well, if you pull such a foolish trick at a time like this, this Matsu-san will crush you flat. Hey, Tanuki Sensei, are you getting angry? What is with that difficult face... Are you frustrated? Are you vexed? Repent quickly, you tanuki beast.'</p>
+          <p class="en-p">He rattled off one outrageous and abusive remark after another, becoming more and more brazen. Finding Jiromatsu's words altogether too annoying, Kiraku thought he might as well clear away his doubts once and for all,</p>
+          <p class="en-p">Kiraku: 'Matsu-san, since you are so profoundly suspicious, I will tell you just for today... You have put fifteen one-sen copper coins in there, haven't you?'</p>
+          <p class="en-p">The numerous sankeinin who had been listening nearby watched this actual demonstration and felt deep admiration.</p>
+          <p class="en-p">With a strange look on his face, Jiromatsu peered once again into Kiraku's face with exaggerated care, struck his own knee-cap twice with his right hand, tilted his head slightly,</p>
+          <p class="en-p">Jiromatsu: 'Ha... Just as I thought, you are a fox-medium. You are using an izuna employed by Dōryō Gongen of Mount Hakone after all. Exactly where did you buy such a tsukimono? How many of them do you have? Do they cost as much as one yen each even for such things? Show them to me just for a second, just for a tiny second; I am not asking you to show me your precious business tools for long.'</p>
+          <p class="en-p">And so forth.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">一週間の矢田の滝の行を終つてから、宮垣内の自宅に於て、喜楽は愈々神業に奉仕する事となつた。盲目や聾唖、リウマチ、其他いろいろの病人がやつて来て鎮魂を頼む、神占を乞ふ、何れも御神徳が弥顕だと云ふ評判が忽ち遠近に轟いて、穴太の天狗さまとか金神さま、稲荷さまなどといつて、朝から晩まで参詣人の山を築き、食事する間もない位、多忙を極めて居た。</p>
+            <p class="ja-classical-line">例の次郎松サンがやつて来て、祭壇の前に尻を捲つてドツカと坐り、大勢の参拝者の中をも顧みず、真赤な顔して喜楽を睨みつけ、</p>
+            <p class="ja-classical-line">次郎松『コリヤ極道息子、貴様は又しても山子商売をやる積りだな。ヨシ、今に化けの皮をヒン剥いて、大勢の前で赤恥かかして見せてやらう。それが貴様の将来のためにもなり、上田家の為めにもなるのだ。株内や近所へよい程心配をかけさらせやがつて、其上まだ狐使ひの真似をするとは何の事だ。何故折角ここ迄築きあげた、見込のある牧畜や乳屋を勉強せぬか。神さまだの、占だの、訳の分らぬ出鱈目を吐しやがつて、世間の人を誤魔かし、甘い事を仕様たつて駄目だぞ、尾の無いド狐とは貴様の事だ。貴様が本当に神様に面会が出来、又神様の教が伺へるのなら、今俺が一つ検査をしてやらう。万が一にも当つたが最後、俺の財産四百円の地価を残らず貴様にやる』</p>
+            <p class="ja-classical-line">と口汚く罵り乍ら、湯呑みの中へ何か小さい物を入れて、其口を厚紙で貼り糊をコテコテとつけ、音をせぬ様に懐から出して前にソツと置き、</p>
+            <p class="ja-classical-line">次郎松『サア先生、イヤ極道息子、指一本でも触る事はならぬ。此儘此湯呑みの中に、どんな物がどれ丈け這入つてをるかと云ふ事を、貂眼通とか鼬通とか云ふ先生、見事あてて見よ。これが当つたら、それこそ天が地になり地が天になる。お月さまに向つて放す弓の矢は中つても、こればつかりは滅多にあたる気遣ひはない。如何ですな、先生！』</p>
+            <p class="ja-classical-line">と軽侮の念を飽迄顔面に現し、喜楽の顔を頤をしやくつて睨めつける。</p>
+            <p class="ja-classical-line">喜楽『俺は神様の誠の教を伝へたり、人の悩みを助けたりするのが役だ。手品師の様に、そんな物をあてると云ふ様な事は御免蒙り度い。神さまに教へて貰ふた事はないから知りませぬ』</p>
+            <p class="ja-classical-line">次郎松はシタリ顔で、一寸舌を出し頤を二つ三つしやくつて、</p>
+            <p class="ja-classical-line">次郎松『態ア見やがれド狸奴、到頭赤い尻尾を出しやがつた。エー、おけおけ、此時節にそんな馬鹿の真似さらすと、此松サンがフンのばして了ふぞ。オイ狸先生、腹が立つのか、何だ、其むつかしい顔は……残念なか、口惜しいか、早く改心せい、ド狸野郎奴』</p>
+            <p class="ja-classical-line">と益々傍若無人の悪言暴語を連発する。喜楽はあまり次郎松の言葉が煩さくなつて来たので、一層の事、彼の疑心を晴らしてやらうと思ひ、</p>
+            <p class="ja-classical-line">喜楽『松サン、あんまりお前が疑ふから、今日一遍だけ云ふてやるが……一銭銅貨を十五枚入れてあるだらう』</p>
+            <p class="ja-classical-line">側に聞いて居つた数多の参詣者は、各自に此実地を見て感嘆して居る。次郎松は妙な顔し乍ら、御叮嚀に喜楽の顔を又もや覗き込み、自分の右の手で自分の膝頭を二つ三つ叩き、首を一寸傾けて、</p>
+            <p class="ja-classical-line">次郎松『ハア……案の定、狐使ひだ。やつぱり箱根山の道了権現のつかはしの飯綱をつかつてるのだな。一体そんな管狐を何処で買つて来たのだ。何匹ほど居るのか。そんなものでも一匹が一円もとるか、一寸俺にも見せて呉れ、ホンの一寸でよい、大切なお前の商売道具を長う見せてくれとは云はぬ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He rattles off questions that make no sense, asking what kind of translation this is. There is nothing more troublesome than a superstitious person.</p>
+          <p class="en-p">Kiraku: 'Through the spiritual arts of divine possession, clairvoyant functions become effective.'</p>
+          <p class="en-p">He tried setting forth a brief and simple explanation of spiritology. However, being an utter ignoramus by nature, whatever was said went in one ear and out the other, with nothing ever likely to sink in. Once again Jiromatsu pursed his lips and said,</p>
+          <p class="en-p">Jiromatsu: 'Whether it is clairvoyance or a water-sifter, I know nothing about such things, but please make sure you don't let small kudagitsune loose around here. It would be a terrible mess if someone were to be possessed by them all of a sudden. Everyone, please be on your guard. This fellow is an izuna-user, so if you are careless, you will be possessed. When sick people come, he momentarily removes the kudagitsune to heal their illnesses, and then after a little while attaches the kudagitsune back to make them sick again, thus starting up a lucrative business of repeatedly taking tips. At any rate, keeping your distance is the best thing of all. Whether Kiraku happens to be living in the village of Anao and worshiping the kami or not, the sun still rises from the east. There is never any danger of it turning into darkness; since Kiraku started his kami-business, it is not as if the sun's light has grown any stronger, nor does the moon come out every single night. Rather than being deceived by such a person, everyone, hurry up and go home. Can you bear to have your eyebrows plucked and your tail-hairs pulled out by a fellow like this? Since he is a relative whom I cannot cut off even if I try, I take care of things first for the sake of the Ueda family, secondly for the sake of this rascal, and also for the sake of you all.'</p>
+          <p class="en-p">Thus he exhausts his vocabulary to raise a flame of opposition. Yet not a single worshipper vanishes. They continue as before to beg for chinkon, ask for divine guidance, and return home rejoicing. From early the next morning, Jiromatsu went around every single house in the village of Anao without missing a single one,</p>
+          <p class="en-p">Jiromatsu: 'That fellow called Kiraku from my main family line has lately been buying up izuna and getting up to strange things, so do not have anything to do with him.'</p>
+          <p class="en-p">Thus he served as an unpaid advertising agent. Jiromatsu had been possessed by a demonic spirit that loathed the teachings of the kami, and before he knew it, he had ended up becoming a running dog of the evil deities.</p>
+          <p class="en-p">The following day, while Kiraku was engaged in administering chinkon and expounding divine myths to a large crowd of worshippers, a short bovine fellow who called himself a henchman of Matano the chivalrous commoner arrived. He had a bandage on his foot.</p>
+          <p class="en-p">Gyūkō: 'Hey, Kiraku-san, your business is prospering quite a bit, isn't it? Last night I hurt my foot just a little bit. I certainly hope you will stop the pain in my foot through your so-called chinkon.'</p>
+          <p class="en-p">So saying, with a haughty air he folded his arms, plumped himself down right in the middle of the tatami room, and began to mock him. He had not suffered any injury to begin with. It was all a pack of lies, and if by some remote chance Kiraku were to say,</p>
+          <p class="en-p">Kiraku: 'Is that so? That is truly unfortunate.'</p>
+          <p class="en-p">And were to immediately offer a prayer, Gyūkō had come with the malicious plot of saying,</p>
+          <p class="en-p">Gyūkō: 'Does the master of the heavenly eye-penetration not even understand this? I am not injured at all, it is a lie!'</p>
+          <p class="en-p">And then laughing among the crowd, pressing demands upon him, and causing trouble for him. If Kiraku were to say,</p>
+          <p class="en-p">Kiraku: 'You have no wound whatsoever. You are doing such a thing just to test me.'</p>
+          <p class="en-p">Then Gyūkō's calculation was to use a small knife hidden beneath his fingers to cut his foot just a little while untying the bandage, let blood flow, and shout out,</p>
+          <p class="en-p">Gyūkō: 'Look here, with this much blood coming out, what do you mean by saying I am not injured? You mountain-bumpkin fellow!'</p>
+          <p class="en-p">And make him apologize, thereby extorting even a yen of drinking money—seeing right through this calculation, Kiraku paid no heed to Gyūkō's words, cast them aside, and with an indifferent face continued administering chinkon to the numerous worshippers.</p>
+          <p class="en-p">Gyūkō's expression showed that Kiraku's attitude had thoroughly grated on his nerves, and he began to rampage like a maddened lion. Presently he committed acts of great violence—smashing to pieces the pitch-black, worm-eaten lintel of the shoji screen that had been treasured in the family from generation to generation, kicking down doors, and kicking over the brazier—and then once more plumped himself down in the middle of the tatami room to sit cross-legged.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と訳の分らぬ質問を連発する。迷信家ほど困つたものはない。</p>
+            <p class="ja-classical-line">喜楽『神懸りの霊術によつて、透視作用が利くのだ』</p>
+            <p class="ja-classical-line">と少しばかり霊魂学の説明を簡単に述べたてて見た。されど元来の無学者だけに、何をいつても馬耳東風、耳に入りさうな事はない。又もや次郎松は口を尖らして、</p>
+            <p class="ja-classical-line">次郎松『透視だか水篩だか、そんな事ア知らぬが、そこらに小さい管狐を放り出さぬ様にして呉れよ。ヒヨツと取り憑かれでもしたら大変だ。皆さま用心しなさい。此奴ア飯綱使ひだから、うつかりしてると憑けられますよ。病人が来ると、管狐を一寸除かして、病気を癒し、又暫くすると管狐をつけて病人にして、何度も礼をとると云ふ虫の良い商売を始めかけよつたのだ。何しろ近寄らぬが何よりだ。別に穴太の村に喜楽が居つて神を祀らうが祀らうまいが、矢張お日さまは東から出て御座る。暗がりになるためしもなし、喜楽が神さまを始めてから、お日さまが、光りが強くなつた訳ぢやなし、お月さまが毎晩出る訳でもないし、斯んな者に騙されるより早う皆さまお帰りなさい。こんな奴に眉毛をよまれ尻毛をぬかれて堪りますか。俺はきつてもきれぬ親類だから、第一上田家のため、又此極道の為め、お前サン達の為め気をつける』</p>
+            <p class="ja-classical-line">と口を極めて反対の気焔をあげる。然し参詣者は一人も消えぬ。依然として鎮魂を乞ひ、伺ひを願つて喜んで帰つて行く。次郎松サンは翌日の朝早くから穴太の村中一軒も残らず、</p>
+            <p class="ja-classical-line">次郎松『家の本家の喜楽と云ふ奴は、此頃飯綱を買うて来て妙な事をして居よるから、相手になつてくれるな』</p>
+            <p class="ja-classical-line">と賃金不要の広告屋を勤めて居る。次郎松は神の教を忌み嫌ふ悪魔の霊に憑依されて知らず識らずに邪神の走狗となつて了つたのである。</p>
+            <p class="ja-classical-line">其翌日大勢の参拝者を相手に、鎮魂をしたり神話を始めて居ると、侠客俣野の乾児と自称する背の低い牛公がやつて来た。足に繃帯をして居る。</p>
+            <p class="ja-classical-line">牛公『オイ、喜楽サン、随分お前の商売もよう繁昌するね。俺は夜前一寸足に怪我をしたのだ。何卒お前の鎮魂とかで足の痛みを止めて貰ひ度いものだ』</p>
+            <p class="ja-classical-line">と横柄に手を拱き、座敷の真中にドスンと坐つて揶揄ひ始めた。元より怪我などはして居ないのだ。みな嘘の皮、万々一喜楽が、</p>
+            <p class="ja-classical-line">『さうか、それは気の毒だ』</p>
+            <p class="ja-classical-line">と云つて直に祈願でもしやうものなら、</p>
+            <p class="ja-classical-line">『天眼通の先生が之が分らぬか、怪我も何もして居ない、嘘だぞ』</p>
+            <p class="ja-classical-line">と云つて大勢の中で笑つたり、ねだつたり、困らしたりしようとの悪い企みで来て居るのである。若し喜楽が、</p>
+            <p class="ja-classical-line">『お前は疵も何もして居ない。そんな事をして俺をためしに来て居るのだ』</p>
+            <p class="ja-classical-line">と云へば、自分の指の下に隠した小刀で繃帯を解き乍ら一寸足を切つて血を出し、</p>
+            <p class="ja-classical-line">『これや、これ丈け血が出て居るのに怪我して居ないとは何の事だ。ド山子奴！』</p>
+            <p class="ja-classical-line">と呶鳴り立てあやまらして、酒銭の一円も取つてやらうとの算段をして居るのだと見てとつた喜楽は、牛公の言葉を耳にもかけず放擲つて、素知らぬ顔で数多の参詣者に鎮魂を施して居た。</p>
+            <p class="ja-classical-line">牛公は喜楽の態度が余程癪に触つたと見え、狂ひ獅子の様に暴れ出した。忽ち先祖代々から家の宝としてる、虫喰だらけの真黒気の障子の桁を滅茶苦茶に叩き破る、戸を蹴破る、火鉢を蹴り倒すと云ふ大乱暴をなし乍ら、再び座敷の真中にドスンと胡坐をかき、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ushikō: 'Hey, Ankanbau's Kiraku! Can't you even manage to strike me with divine punishment for this, you good-for-nothing Koshinukegami and Hanatagami? You, who enshrine such a worthless god, are the biggest idiot in Japan. Now, since I, Lord Ushi, am going to urinate upon the Kamudoko, if you are a god with shinriki and shiyōnen, you should inflict punishment tachidokoro. If you are a Koshinukegami who cannot inflict such punishment when this is done, you are neither a god nor anything else, just something like a Dobudanuki. Even when you splash urine on a mimizu, the private parts swell up, so since this fellow is a tanuki, if you have any shiyōnen, make my private parts swell up and see!'</p>
+          <p class="en-p">While saying this, he lifted one leg straight up like a dog, and rudely began to pee, jōjō. The amata sankeishiya were bitsukuri and all fled outside. Since Kiraku had heard about the Muteikaushiyugi of Ananai-kyō since his days of Shinkai training, he put on a soshi face and left him to do as he pleased, haunin. Ushikō became masumasu emboldened, finally pulling down his black buttocks, letting off a loud fart right in front of Kiraku's nose, and laughing, 'Ahaaaaa,' scampered off quickly.</p>
+          <p class="en-p">Passing right by him, his younger brother came hurrying from the fields carrying a hoe, regretting upon hearing about Ushikō's rampage, and stamping his feet,</p>
+          <p class="en-p">Yoshimatsu: 'Hey, this kami is a kami with no power. Even though we make offerings to him every single day, can't he inflict any divine punishment at all? It would be good if he just crushed him with a booming Uun, and if he did that, neither Ushikō nor Jiromatsu would be able to look down on him, but since the one enshrined here is a sluggish, sleepwalking kami, that's why he gets made a fool of by such a fellow.'</p>
+          <p class="en-p">Clenching his teeth and stuttering, he was angry. Kiraku quietly addressed his younger brother,</p>
+          <p class="en-p">Kiraku: 'Oi, Yoshimatsu, don't say such senseless things. Try thinking about it well; that fellow is a beast. Isn't he an ox by name? Cats and mice carelessly drop shit and piss right inside the sacred altar, crows and sparrows climb up onto the kami's ridgepole and let loose shit and piss, and yet doesn't not even a whit of divine punishment fall upon them? Originally because they are beasts, there is no divine reprimand from the kami. Humans too, once they lose their human qualifications, are just like beasts. As if divine punishment would ever fall upon beasts!'</p>
+          <p class="en-p">Before he could finish speaking, Yoshimatsu,</p>
+          <p class="en-p">Yoshimatsu: 'Nani, are you talking nonsense!'</p>
+          <p class="en-p">Faster than saying it, he thrust his head beneath the altar and stood straight up just like that. The altar, the ritual implements, and the entire set of offerings came clattering down, and everything from the sacred wine to the offering water, washed rice, and various other offerings filled the room. Even the sacred goshintai of the kami was flipped over right on top of the tatami mats. Yoshimatsu picked them up and threw them outside, and the sankeishiya were bitsukuri, changing color as they scattered away in all directions. Yoshimatsu, still raging furiously,</p>
+          <p class="en-p">Yoshimatsu: 'Oi elder brother, isn't it true that enshrining and worshiping such a worthless god isn't worth a fart, so stop doing such a trivial thing as of today. Just because we enshrined such a gaki, the whole household has to worry, we get laughed at by the whole village, and our sliding paper doors get smashed; this kami is an enemy of the Ueda family. Where in the world is there such a thing as enshrining an enemy?'</p>
+          <p class="en-p">He was complaining and getting angry over such senseless things.</p>
+          <p class="en-p">Kiraku picked up the goshintai that Yoshimatsu had thrown out, purified it with salt, re-enshrined it, and apologized to the kami, and finally that day came to an end.</p>
+          <p class="en-p">Around midnight of that day, five divine figures, male and female, appeared at Yoshimatsu's pillow, and their faces appeared vividly as if they were quite angry at Yoshimatsu; he was too terrified to sleep even a wink, and, caught up in a dream, was apologizing while still lying down. Considering it was a cramped house, Kiraku, listening from the side, found it quite amusing. Thinking that Yoshimatsu would surely reflect a little on this, when early the next morning he began cleaning the sacred altar, making offerings, and reciting norito, for a short while he completely turned over a new leaf and diligently engaged in acts of reverence toward the kami. However, about ten days later, he once again began speaking ill of the kami together with Jiromatsu.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">牛公『こりや安閑坊の喜楽！　これでも罰をようあてぬか、腰抜け神の鼻垂れ神ぢやな。そんなやくざ神を祀つてる貴様は、日本一の馬鹿野郎だ。今此牛さまが神床に小便をしてやるから、神力あり正念がある神なら、立所に罰をあてるだらう。そんな事して能う罰をあてん様な腰抜神なら、神でも何でもない、溝狸位なものだ。蚯蚓に小便かけてさへ○○が腫れるぞ、此奴ア狸だから正念があるなら、俺の○○を腫らして見い！』</p>
+            <p class="ja-classical-line">と云ひ乍ら犬の様に片足をピンと上げて、無作法にもジヨウジヨウとやりかけた。数多の参詣者は吃驚して、残らず外に逃げ出して了つた。喜楽は神界修業の時から、三五教の無抵抗主義を聞いて居たから、素知らぬ顔して彼がなす儘放任して居た。牛公は益々図にのつて、終ひには黒い尻をひきまくり、喜楽の鼻の前でプンと一発嗅し『アハヽヽヽ』と笑ひ乍らサツサと帰つて行つた。</p>
+            <p class="ja-classical-line">それと擦れ違ひに、弟が野良から鍬を担げて慌だしく馳来り、牛公の乱暴した事を聞き口惜がり、地団太を踏み乍ら、</p>
+            <p class="ja-classical-line">由松『エーツ、此神さまは力の無い神だ。毎日々々物を供へてやるのに何の罰でも能うあてぬのか。ウーンとフンのばして了へばよいのに、そうすれや牛公だつて、次郎松だつて能う侮らぬのだが、此処に祀つてあるは気の利かぬ寝呆け神だから、あんな奴に馬鹿にしられるのだ』</p>
+            <p class="ja-classical-line">と歯をかみしめて吃り乍ら怒つて居る。喜楽は静に弟に向つて、</p>
+            <p class="ja-classical-line">喜楽『オイ、由松、そんな分らぬ事を云ふな。よう考へて見い、彼奴ア畜生だ。名からして牛ぢやないか。猫や鼠は尊い御神前の中でも、糞や小便を平気で垂れて居る、烏や雀は神様の棟へ上つて糞小便を垂れかける、それでもチツとも神罰があたらぬのぢやないか。元来畜生だから、神様のおとがめがないのだ。人間も人間の資格を失ふたら畜生同様だ。畜生に神罰があたるものかい』</p>
+            <p class="ja-classical-line">と云はせも果てず由松は、</p>
+            <p class="ja-classical-line">由松『ナニ、馬鹿たれるか』</p>
+            <p class="ja-classical-line">と云ふより早く、祭壇の下へ頭をつつ込み其まま直立した。祭壇も神具もお供物一式ガタガタと転落し、御神酒からお供水、洗米、其他いろいろの供物が座敷一杯になつて了つた。神様の御みと迄畳の上にひつくり返つて居る。由松は拾うては戸外へ投げつける、参詣者はビツクリして顔色を変へチリチリバラバラに逃げ出す。由松は猶も猛り狂ひ、</p>
+            <p class="ja-classical-line">由松『オイ哥兄、こんなやくざ神を祭つて拝んでも屁の役にもたたぬぢやないか、もう今日限りこんなつまらぬ事はやめてくれ。こんな餓鬼を祀つただけに家内中が心配したり、村中に笑はれたり、戸障子を破られたり、此神は上田家の敵だ。敵を祀ると云ふ事が何処にあるものか』</p>
+            <p class="ja-classical-line">と分らぬ事を愚痴つて怒つて居る。</p>
+            <p class="ja-classical-line">喜楽は由松の放かしたおみとを拾ひ塩で清め、再び祀り直し神様にお詫をして、漸く其日は暮れて了つた。</p>
+            <p class="ja-classical-line">其日の夜中頃、由松の枕許に男女五柱の神様が現はれ玉ふて、頻りに由松に御立腹遊ばした様なお顔が歴々と見え、恐ろしくて一目もよう寝ず、夢中になつて寝たままあやまつて居る。せまい家の事とて横に聞いて居る喜楽の可笑しさ。由松もこれで少しは気がつくだらうと思つて居ると、翌朝早くから御神前をお掃除したり、お供物をしたり、祝詞を奏げるやら、暫くの間は打つて変はつて敬神の行為を励んで居た。然し十日ほどすると、又もや神様の悪口を次郎松と一所になつて始めかけた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: Arrow 田の滝 [1022]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: 邪 Kami 憑 [1024]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

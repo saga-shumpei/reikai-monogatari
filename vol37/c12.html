@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: 邪 Kami 憑 [1024] - Volume 37 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 37 Table of Contents</a>
+      <span>Volume 37</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 37 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: 邪 Kami 憑 [1024]</h1>
+      <p class="chapter-title-ja">邪神憑〔1024〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kiraku, having gone to perform his ascetic practices at the Yada Waterfall, took the opportunity on his way back to briefly visit his aunt's house in Kameoka early in the morning.</p>
+          <p class="en-p">His aunt was a devout follower of Inari, and at that time she was also somewhat infatuated with Tenrikyō.</p>
+          <p class="en-p">It was precisely when she had heard that Kiraku had become possessed by a spirit and was thinking of going to see him once.</p>
+          <p class="en-p">Accompanied by Saitō Uichi, when he visited his aunt that day, it had always been her custom to disparage him mercilessly, calling him 'Kirakubau Kirakubau' unceremoniously and saying, 'You are a good-for-nothing, a man without capability; my son has a fine physical constitution and is extremely clever.'</p>
+          <p class="en-p">On this occasion, however, she changed completely; the moment he stepped into the entrance, his aunt came running over and said,</p>
+          <p class="en-p">Oba: 'Oh my, Myōdaisama, you have been so good to come; please walk right into the sitting room and make yourself comfortable. I will prepare whatever you order for a feast. Would fried tofu be to your liking, or shall I boil some red bean rice? When the divine medium of Hyōtan-sama graces us with her presence, she fancies lightly salted amberjack, so she eats it raw, and she even consumes rapeseed oil. According to the gods, she can manage about five go of kerosene as well. What is your preference? Please order whatever you like; there is nothing more delightful than having the gods partake of food with zest.'</p>
+          <p class="en-p">Thus she treated him completely like a medium who descended with Inari. Kiraku shook his head from side to side and said,</p>
+          <p class="en-p">Kiraku: 'Aunt-san, even if a god possesses me, such vulgar things are not what they partake of; it is because the Tengu-sama of Mount Fuji has possessed me...'</p>
+          <p class="en-p">Oba: 'If it is a Tengu-sama, all the more reason for him to partake of things! The Demon King of Mount Kurama always possesses Myōdaisama, and he partakes of anything and everything, and in the end even Hyōtan-sama possesses her, and when she sings and dances in a fine voice, it feels indescribably pleasant. If that is the case, your god must be a dead god, since he eats nothing...'</p>
+          <p class="en-p">His aunt, who was always summoning badgers and foxes, seemed to think that spiritual possession meant eating anything and everything. In the vicinity of Kameoka, superstitious people always gathered to invite Inari-lowering mediums and perform what was called cold-season austerities. The women who became mediums on those occasions chanted syncretic Buddhist-Shinto sutras, shook gohei, and... saying 'I am the Inari of such-and-such a place,' or the Demon King, or Gorōsuke, or Tarōhachi, even badgers would come, and they would stuff everything into one person's mouth with all their might. Swallowing about three sho of red bean rice all at once without a care, eating fifty pieces of fried tofu without difficulty, ten pieces of raw bonito, twenty pieces of kamaboko, one sho of rapeseed oil, five go of soy sauce, along with rice and sake, they consumed quantities almost beyond imagination, and then emitting fine voices, they danced and frotted nimbly. At last, when the spirit-summoning concluded, they returned to their original flesh. Then those Inari mediums—most of whom were women—would say,</p>
+          <p class="en-p">'Ah, I am terribly hungry. Shall I be served a meal?'</p>
+          <p class="en-p">prompting it themselves and eating more than a single portion. Unless it was this kind of spiritual possession, it would not be prized in the Kameoka region. Since his aunt was always seeing this tradition, when he told her that the god possessing him ate nothing, she said,</p>
+          <p class="en-p">Oba: 'There, that is your nerves. After all, it is not a god.'</p>
+          <p class="en-p">saying such things, her attitude changed completely once more, and</p>
+          <p class="en-p">Oba: 'Hey Kisō, wake up to your senses, come home quickly and go back to running your milk shop or farming. Who knows how worried your mother will be if you remain so sickly and frail. Shall I take you to the Tenri ō-sama in Hatagomachō right now and have them pray for you?'</p>
+          <p class="en-p">she said with an air of kindness. Uichi had been listening to the two of them questioning each other with a blank expression, but thinking something or other, he silently and abruptly left the house. Kiraku, taking Uichi's departure as a stroke of good fortune, slipped away from his aunt's house, caught up with Uichi in front of Arazuka Village on his way back to Anō, and from there, on that very foot, they decided to go to the place of an Inari medium named Kichikichi in Teramura to investigate.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">喜楽は矢田の滝に修行に行つた序、朝早くから亀岡の伯母の内を一寸訪問してみた。伯母は大の稲荷信者であり、又其頃一寸天理教にもかぶれてゐた。喜楽が神懸りになつたといふことを聞いて、一度参つて見たく思ふてゐた際である。斎藤宇一を伴うて、其日伯母を訪ねて見ると、何時も『喜楽坊喜楽坊』と呼びずてにし、『お前はチンコだ、甲斐性なしだ。内の伜は体格も丈夫だし、余程賢い』などと、クソカスにこきおろすのが例であつた。それに今度は打つて変つて、門口へ這入るなり、伯母が飛んで来て、</p>
+            <p class="ja-classical-line">伯母『モシモシ御台様、能う来て下さいました、どうぞ座敷へ御通り下さいまして、御ゆるりとなさいませ、何なつと御註文次第御馳走を拵へて上げます。お揚げが宜しいか、小豆飯をたきませうか、瓢箪さまの御台さまが御座ると甘鯛の一塩が好きだと云ふて、生なり食つて下さる、種油も食つて下さる、神さまによると、石油でも五合位おあがりになる、あなたは何がお好きで御座いますか、何なりと御註文なさりませ、神さまに気よう食て頂くほど気持のよいことはありませぬ』</p>
+            <p class="ja-classical-line">とサツパリ稲荷下げに人をして了うてゐる。喜楽は首を左右に振り、</p>
+            <p class="ja-classical-line">喜楽『伯母サン、私に神さまがうつつてもそんな卑しい物は御あがりにはなりませぬ、富士の山の天狗さまが憑つて御座るのだから……』</p>
+            <p class="ja-classical-line">伯母『天狗さまなら猶のこと、御あがりなさらんならん、いつも御台さまに鞍馬山の魔王さまがお憑りになり、何でもかんでも御あがりになり終ひにや瓢箪さままで御憑りになつて、よい声で歌ひ踊らはると、何とも云へぬ気持のよいものだ、さうすると、御前の神さまは死んだ神さまだな、物を食はぬから……』</p>
+            <p class="ja-classical-line">何時も狸寄せ、狐寄せをやつて居る伯母は、神懸りは何でもかんでも喰べるものと思ふて居るらしい。亀岡附近では何時も迷信家が寄つて、稲荷下げの御台さまを招いて来て寒施行といふことをする。其時御台になる女は神仏混淆の御経をとなへ、御幣を振つて……おれはどこの稲荷だ……とか、魔王だとか、五郎助だとか、太郎八だとか、狸までがやつて来て、一生懸命に一人の口へ入れて了ふ。小豆飯の三升位一遍にケロリと平げ、油揚の五十枚位苦もなく食つて了ひ生節の十本、蒲鉾の二十枚、種油一升、醤油五合御飯にお酒と殆ど想像もつかぬ程平げて了ひ、そしてよい声を出して、身軽に舞うたり踊つたりする。いよいよ神よせが済むと、元の肉体に返る。すると其稲荷下げは大抵女が多いが、</p>
+            <p class="ja-classical-line">『あゝ大変腹がへりました。御膳をよばれませうか』</p>
+            <p class="ja-classical-line">と自分から催促して、一人前以上を食つて了ふ。かういふ神憑りでないと亀岡地方では持てはやされぬのである。伯母はこの伝をいつも見て居るから、自分に懸る神さまは何も食はないと云つたら、</p>
+            <p class="ja-classical-line">伯母『ソラお前の神経だ。ヤツパリ神さまぢやない』</p>
+            <p class="ja-classical-line">などと云つて、又態度が一変し、</p>
+            <p class="ja-classical-line">伯母『コレ喜三、よい加減に目をさまして、早う帰つて元の乳屋をしたり、百姓をしなさい。お前がさうヒヨロヒヨロしてるとお米がどん丈心配するか知れぬ。私がこれから旅籠町の天理王さまへ連れて往つて御祈祷して貰つて上げよか』</p>
+            <p class="ja-classical-line">と親切相に言うてくれる。宇一はポカンとして二人の問答を聞いてゐたが何と思つたか、黙つてポイと此家を出て了つた。喜楽も宇一の出たのを幸ひ、伯母の内を甘く逃げ出し、穴太へ帰る途中、荒塚村の前で宇一に追ひつき、それから其足で寺村の重吉といふ稲荷下げの所へ調べがてら行くこととなつた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At last they arrived at the house of Jiukichi Kotani in Teramura.</p>
+          <p class="en-p">A man named Umakaha Namikaha served as the head of the caretakers.</p>
+          <p class="en-p">Uichi was on familiar terms with Umakō, due to their kinship relations.</p>
+          <p class="en-p">The moment Umakaha caught sight of Uichi,</p>
+          <p class="en-p">Umakaha: 'Ah, is that you, Uichi-san? You have come most opportunely. I was just thinking of going to Anao to consult about something. Since last night, the divine possession has been extremely violent, and I simply do not know what to do; I was thinking of having the master of Anao calm it down. What do you think? Do you suppose he would come?'</p>
+          <p class="en-p">he asked.</p>
+          <p class="en-p">Uichi:</p>
+          <p class="en-p">Uichi: 'This person is Kiraku-san; it would be well to ask him.'</p>
+          <p class="en-p">Umakaha:</p>
+          <p class="en-p">Umakaha: 'That is beyond my hopes! Oh, excuse me. Were you Kiraku-san? I humbly beg your favor in all things. Come, please step right through to the inner rooms.'</p>
+          <p class="en-p">For a thatched rural dwelling, it was a fairly large house.</p>
+          <p class="en-p">Led by Umakaha's guidance, the two passed through to the inner rooms, where an indescribably strange groaning voice could be heard coming from the adjacent room.</p>
+          <p class="en-p">Umakaha pointed briefly in the direction of the voice,</p>
+          <p class="en-p">Umakaha: 'Oh, Master Kiraku-sama, just as you hear, it has been groaning continuously for two or three days. Up to now, he has saved twenty or thirty sick people, so everyone believed in him, saying he was a mighty kami; but it seems he got a bit carried away, went mad, and is chattering on and on like this about disjointed, incomprehensible things. Is there not some way to cure him, I wonder?'</p>
+          <p class="en-p">he asked with a worried look.</p>
+          <p class="en-p">Kiraku hung his head, crossed his arms, and was lost in thought.</p>
+          <p class="en-p">Uichi:</p>
+          <p class="en-p">Uichi: 'Has he started groaning since two or three days ago? Ah, that is likely the work of a great tengu opening its mouth! Why, even when I was undergoing austerities at my place for three weeks, the house would roar and shake—ah, such tremendous things happened then. It was such a great commotion that my grandfather got angry and yelled at Kiraku-san to take his training ground elsewhere. At that time my stomach turned quite a bit too, but now that I have experience with divine possessions, a groaning voice like that is nothing at all. Even if it is not Kiraku-san, shall I go in and calm him down? Hey, Kiraku-san, what should we do?'</p>
+          <p class="en-p">Kiraku:</p>
+          <p class="en-p">Kiraku: 'Well, try doing it; if by any chance it does not go well, I shall step out.'</p>
+          <p class="en-p">Uichi:</p>
+          <p class="en-p">Uichi: 'Done! Kiraku-san, wait here... Hey, Uma-san, you come along too; I will act as a saiwain to open the tengu's mouth, and if it is an evil kami, I will place a reibaku upon it.'</p>
+          <p class="en-p">Acting as if filled with conviction and in high spirits, he crossed a short corridor and proceeded toward the two-story annex, pointing toward the direction from which the groaning voice came.</p>
+          <p class="en-p">After a while, a terribly loud and thick voice could be heard... I wonder if a wild tengu has appeared and is opening its mouth... thinking thus, he scooped some tea for himself and waited for the two to return, but no matter how much time passed, they did not come back. The groaning voice shouting 'Un, un' gradually grew more violent. The people of this house were terrified and had fled to relatives in the same village, leaving the place vacant.</p>
+          <p class="en-p">As dusk approached, the corners of the tatami room gradually grew dim.</p>
+          <p class="en-p">Crossing the narrow corridor and going to the living room where the voice was coming from, he saw that both of them had been caught in a reibaku the reverse way and lay completely stretched out flat. On top of that, Jiukichi remained possessed by the kami with his eyes rounded and glowing, looking just like Myōken-san raising the Namikirimaru treasure sword, with his bare arms full of bulging muscles shaped like the katakana character 'fu' right above his head, holding his left hand in a fist and pressing down ruthlessly on Umakaha's head.</p>
+          <p class="en-p">Jiukichi:</p>
+          <p class="en-p">Jiukichi: 'Hey, you evildoers, will you repent or not? You have been doing such and such with my wife, haven't you? Confess! Hey, Uichi, your nature is not very good either! The Great Sōjō of Mount Kurama has thoroughly investigated all your wicked deeds and is going to punish you. Now, what do you say?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">漸くにして寺村の小谷重吉の家に着いた。並河馬吉といふ男が世話係の元締をして居る。宇一は馬公と懇意の仲であつた。それは親類関係からである。馬吉は宇一の姿を見るなり、</p>
+            <p class="ja-classical-line">馬吉『ヤア宇一サンか、能う来て下さつた。今穴太へ相談に行かうと思うて居つた所だ。昨夜から神憑りが烈しうて、どうにも斯うにも仕様がない、穴太の先生にしづめて貰はうかと思つてゐた所だ。どうやろなア、来て下さるだらうか』</p>
+            <p class="ja-classical-line">と尋ねて居る。宇一は、</p>
+            <p class="ja-classical-line">宇一『此人が喜楽サンだ、頼んでみたがよからう』</p>
+            <p class="ja-classical-line">馬吉『それは願うてもないこと、イヤ失礼しました。あなたが喜楽サンで御座いましたか、何分宜しう御願申します、サア何卒奥へ御通り下さい』</p>
+            <p class="ja-classical-line">瓦葺の田舎では可なり大きな家であつた。馬吉の案内につれて二人は奥へ通ると、次の間に何とも知れぬ妙な唸り声が聞えてゐる。馬吉は一寸其声する方を指し、</p>
+            <p class="ja-classical-line">馬吉『モシ喜楽の先生様、あの通り二三日前から唸り通しで御座います。今迄二三十人病人を助けましたので、皆の者がエライ神さまだと云うて信心してゐましたが一寸調子に乗つたと見えて、逆上したのか、取止めのない訳の分らぬことを、あの通りベラベラ囀つて居ります。どうかして直す法は御座いますまいかな』</p>
+            <p class="ja-classical-line">と心配らしく尋ねてゐる。喜楽は俯いて手をくみ思案にくれてゐる。</p>
+            <p class="ja-classical-line">宇一『二三日前からうなり出したか、ソラ大方大天狗の口の切れかも知れんぞ、ズイ分俺ンとこで三週間修行した時にも、家がゴーゴー鳴る、ゆすれる、ソレはソレは大変なことがあつた。家の爺が怒つて、喜楽サンに修行場をどつかへ持つて行てくれと呶鳴つた位の大騒動だつた。其時は俺もズイ分肝を潰したが、モウ神憑りに経験がついたので、あの位の唸り声は何でもないワ。喜楽サンでなくても俺が一つ這入つてしづめて来てやらうか、ナア喜楽サン、如何せうかな』</p>
+            <p class="ja-classical-line">喜楽『マアやつて見い、万一可けなかつたら、俺が出るとせう』</p>
+            <p class="ja-classical-line">宇一『ヨシ来た、喜楽サン、ここに待つてゐてくれ……オイ馬サン、お前も一所に行てくれ、おれが一つ審神者をして天狗の口をきるか、もし悪神であつたら霊縛をかけてやらう』</p>
+            <p class="ja-classical-line">と確信あるものの如く意気揚々として、一寸した廊下をわたり、二間建の離れ座敷の、唸り声のする方を指して進んで行く。</p>
+            <p class="ja-classical-line">暫くすると大変な甲声の太いやつが聞えて来た……ハテな野天狗が現はれて口を切つてるのだなア……と思ひ乍ら、自分で茶を汲み、二人の帰つて来るのを待つてゐたが、何時までたつても帰つて来ない。『ウンウン』と唸る声は段々と烈しくなる。此家の者はビツクリして、同じ村の親類へ皆逃げて行つて不在である。</p>
+            <p class="ja-classical-line">日の暮に間近く、座敷の隅はソロソロうす暗くなつて来た。細い廊下を渡つて声のする居間へ行つて見ると、二人共あべこべに霊縛にかかり、ふンのびて了ひ、其上に小谷重吉が神憑りになつたまま目を丸く光らせ、妙見サンが波切丸の宝剣を振り上げたやうな恰好で、力瘤だらけの腕を、赤裸になつて、頭上に片仮名のフの字型にし、左の手を握つて馬吉の頭をグイグイ押へつけ乍ら、</p>
+            <p class="ja-classical-line">重吉『コリヤ悪人共、改心致すかどうぢや、きさまは俺ン所の女房と何々して居るだらう。白状せい、コリヤ宇一、貴様も余り性がよくないぞ、鞍馬山の大僧正が其悪事をスツクリ調べ上げて制敗をしてやるのだ、サア如何ぢや』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">So saying, he knocked him on the head with a bonk.</p>
+          <p class="en-p">The two men fell into a state of rigidity, shaking only their heads and suffering without even being able to produce a voice.</p>
+          <p class="en-p">Upon seeing Kiraku's figure, Kotani Jiukichi's possession descended smoothly from atop the two men, seated itself politely and neatly, and</p>
+          <p class="en-p">Jiukichi: 'Well, well, Daisensei-sama, you have come so capably.</p>
+          <p class="en-p">Am I possessed by a spirit altogether, or is my mind simply deranged?</p>
+          <p class="en-p">I cannot make sense of it myself.</p>
+          <p class="en-p">Please examine me one bit, ohohoho.'</p>
+          <p class="en-p">He laughed disgustedly.</p>
+          <p class="en-p">By no means did it look normal.</p>
+          <p class="en-p">Then, casting a Chinkon with a sharp 'Oom!', Jiukichi sat on just as before without any response.</p>
+          <p class="en-p">It seemed the spirits had attached themselves to the two men; abruptly they escaped their state of rigidity, rose up heavily, and rushed upon Jiukichi from left and right.</p>
+          <p class="en-p">Uichi forcefully twisted the left hand and Umakichi the right hand backward, attempting to bind them swiftly with a tenuguhi.</p>
+          <p class="en-p">Kiraku: 'Hey, you must not do such violent things!</p>
+          <p class="en-p">Wait, wait!</p>
+          <p class="en-p">Look here, this is a spirit possession, so the person himself is not evil.</p>
+          <p class="en-p">And since I have come here, I will surely not let them riot, so release those hands of theirs.'</p>
+          <p class="en-p">Umakichi: 'Until today, there has never been such a thing.</p>
+          <p class="en-p">He merely shouted in a loud voice with a frightening expression, but from just a moment ago the situation changed completely; he babbled about me doing this and that to this man's wife, things I have no memory of, and went on knocking our heads.</p>
+          <p class="en-p">There is no way such a possession could be tolerated.</p>
+          <p class="en-p">As this fellow has always been intensely jealous from of old, he must have thought that my coming here to play was for some strange purpose.</p>
+          <p class="en-p">They must have united in losing their minds and are babbling pitiable things; unless we draw blood from his head and pour water or something over him, it will surely not be cured, right Uichi-san, what do you think?'</p>
+          <p class="en-p">Uichi: 'I cannot readily think he is completely mad.</p>
+          <p class="en-p">I imagine some atrocious field-tengu has possessed him, mixed up with the spirit of Jiukichi's flesh, and is uttering such things.</p>
+          <p class="en-p">You will understand once Kiraku-san performs Chinkon for him, won't you?</p>
+          <p class="en-p">Today is the very first time I have ever acted as a Saniwa like this.</p>
+          <p class="en-p">If I were to keep dealing with such a fellow, it would truly be a matter of risking my life.</p>
+          <p class="en-p">A moment ago he even tried to bite into my windpipe, so when I knocked him flat on the cheek, he suddenly opened his mouth and spewed out such things.'</p>
+          <p class="en-p">Jiukichi rose up once more, swinging both arms round and round, and</p>
+          <p class="en-p">Jiukichi: 'This side is the Great Abbot Sojof of Mt. Kurama.</p>
+          <p class="en-p">From now on, riding upon the clouds of heaven, I will go off to Mt. Kurama.</p>
+          <p class="en-p">You wait here until then.</p>
+          <p class="en-p">When I return this time, I shall come back endowed with tremendous divine power, stretch out flat every single one of you fellows who yelp back, and pull you apart from the crotch to discipline you, uffoon.'</p>
+          <p class="en-p">So saying, he stepped heavily with all his might and tried to go outside.</p>
+          <p class="en-p">Kiraku clasped both hands together and sent forth a spirit with a single cry of 'Oon!'.</p>
+          <p class="en-p">Jiukichi collapsed flat on his back right on the spot and fell silent.</p>
+          <p class="en-p">Umakichi: 'Hey Kiraku-san, what good does it do to do such a reckless thing?</p>
+          <p class="en-p">Have not both his hands and feet grown cold?</p>
+          <p class="en-p">If something should happen where he does not return, we will be in great trouble, how will you make amends?'</p>
+          <p class="en-p">Changing his expression, with his breath panting and thrusting his arms straight out, he pressed forward.</p>
+          <p class="en-p">Kiraku: 'Now, there is no need to worry.</p>
+          <p class="en-p">I will return him to normal right now.'</p>
+          <p class="en-p">So saying, he clapped twice and chanted the Heavenly Number Song up to two times.</p>
+          <p class="en-p">Jiukichi,</p>
+          <p class="en-p">'Ahahaha,'</p>
+          <p class="en-p">laughing as he did so, his body softened just as before and he stood up,</p>
+          <p class="en-p">Jiukichi: 'Ah, Kiraku-san, truly magnificent divine power.</p>
+          <p class="en-p">Now with this, you yourself are safe too.</p>
+          <p class="en-p">Come, let us go to Hokigaya for ascetic practice.</p>
+          <p class="en-p">Kiraku-san, please follow along.</p>
+          <p class="en-p">Since I will teach you the secret dharma of mantras, this Great Abbot Sojof will directly bestow upon you incredible and unfathomable magic.</p>
+          <p class="en-p">Aan.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と云つては頭をコツンとなぐる。二人は強直状態となり、首計りふつて声をも能う出さず苦んでゐた。小谷重吉の神憑りは喜楽の姿を見るより、二人の上からツツと下りて叮嚀にキチンとすわり、</p>
+            <p class="ja-classical-line">重吉『これはこれは大先生さま、能う来て下さいました。私は一体神憑りですやろか、但は気が違うて居るのですやろか、自分がてに合点が行きませぬ。どうぞ一つ査べて下さいな、オホヽヽヽ』</p>
+            <p class="ja-classical-line">と厭らしう笑ふ。如何しても普通とは見えぬ。そこで『ウーム！』と一つ鎮魂をやつて見ると、重吉は何の感応もなく依然として坐つて居る。霊が二人にかかつたと見え、俄に二人は強直状態から免がれ、ムクムクと立上がり、重吉の左右に責寄つて、宇一は左の手を、馬吉は右の手をグツと後へまはし、手早く手拭で括らうとする。</p>
+            <p class="ja-classical-line">喜楽『オイそんな乱暴なことしちや可かぬ、待て待て、コリヤ神憑だから、本人が悪いのぢやない、そして俺がここへ来た以上は、キツとあばれささぬから、其手を放してやれ』</p>
+            <p class="ja-classical-line">馬吉『今日迄こんな事はなかつたのです、只大きい声で怖い面して呶なる一方でしたが、今の先から様子がガラツと変り、私が此男の女房を何々したとか云つて、覚えもないことをぬかし頭をコツきよるのです。こんな神憑があつてたまるものか、常平常から此奴ア悋気深い奴だから、私が此処へ遊びに来るのを、何か妙な目的があつて来て居るのだと思うて居つたに違ひない。それが一つになつて気が狂ひ、情ないことをぬかすのだらうから、一つ頭から血を出し、水でもかけてやらねば直りますまいで、なア宇一君、お前如何思ふか』</p>
+            <p class="ja-classical-line">宇一『俺は全くの気違とは能う思はぬワ、ドエライ野天狗が憑きやがつて重吉の肉体の精神とゴツチヤ交ぜになつて、こんな事を吐すのだと思ふ。一つ喜楽サンに鎮魂して貰うたら分るだらう、俺もこんな審神者をしたことは今日が始めてだ、こんな奴に相手になつて居らうものならそれこそ命がけだ、最前も俺の喉笛に喰ひつかうとしたので、横面をはり倒してやつたら、俄に口を切り出しあんな事吐すんだよ』</p>
+            <p class="ja-classical-line">重吉は又もや立ち上り、両腕をプリンプリン振り乍ら、</p>
+            <p class="ja-classical-line">重吉『此方は鞍馬山の魔王大僧正だ、これから鞍馬山へ天の雲へ乗つて、行つて来る、其方はそれ迄ここに待つて居れ、今度おれが帰つたら、大変な神力を受けて帰り、どいつも此奴もゴテゴテ吐かす奴を片つ端からふン伸ばし、股から引さき戒めてやる程に、ウツフーン』</p>
+            <p class="ja-classical-line">と云ひ乍ら、ドシンドシンと一足々々足に力を入れ外へ出ようとする。喜楽は両手を組んで、『ウーン』と一声霊を送つた。重吉は其場に大の字になつて倒れて了うた。</p>
+            <p class="ja-classical-line">馬吉『コレ喜楽サン、そんな無茶なことして如何なりますか、手も足も冷たうなつたぢやありませぬか、若し後へ戻らぬやうなことがあつたら吾々は大変ですがな、どうして下さる』</p>
+            <p class="ja-classical-line">と気色をかへて、鼻息をはずませ、腕をニユツとつき出して迫つて来る。</p>
+            <p class="ja-classical-line">喜楽『ナアニ心配いりませぬよ。今戻してやりますよ』</p>
+            <p class="ja-classical-line">と言ひ乍ら、二拍手して天の数歌を二回まで唱へ上げた。重吉は、</p>
+            <p class="ja-classical-line">『アハヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ひ乍ら、身体元の如く軟くなつて起あがり、</p>
+            <p class="ja-classical-line">重吉『アー喜楽サン、ホンに偉い御神力ぢや、モウ是ならお前さまも大丈夫だ、サア法貴谷へ修行に行きませう、喜楽サン従いて来て下さい、お前さまに真言秘密の法を教へて上げるから、此魔王大僧正が直接に、神変不可思議の魔術を授けますぞや。アーン』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kiraku: 'Thanks to that, I have learned various kinds of kamuwaza up at Takakumayama, so I am already ketsukō; please, if there is a ketsukō method, bestow and give it to Umakichi-san or Uichi-san.'</p>
+          <p class="en-p">Saying this in a teasing kibun. Raising his shoulders while narrowing his eyes, and his words turning into a shibai kuchō,</p>
+          <p class="en-p">Jiukichi: 'These two persons here possess by nature bad seishin, so Kami, for the sake of making an example, stretched them right out. If one were to bestow a makafushigi method upon such fellows, there is no knowing what kind of things they might do, wahu-hu-hu-hu.'</p>
+          <p class="en-p">Standing with his arms akimbo, he was displaying a tokuizura. It was a jiyōtai that was half physical body and half the kamugakari of a notengu.</p>
+          <p class="en-p">Umakichi clenched his nigirikobushi and slapped away at the yokozura of Jiukichi with a rapid pishiya-pishiya,</p>
+          <p class="en-p">Umakichi: 'Hey there, Kotani Jiukichi, kisama are a nisekichigahi under the nisekamu-gakari, and since you have been misunderstanding me from tsuneheizei you let slip such things. I am not an akunin such as you say; how about it, when you, last year, did [omitted] to the old woman of [omitted], did you not come crying and asking me to mediate? Have you forgotten that favor, you bakayarō-nomu!'</p>
+          <p class="en-p">Puffing out his cheeks and confronting him directly, he was enraged.</p>
+          <p class="en-p">Uichi: 'Oi, Umakichi, catching a half-mad fellow like this and getting angry does no good, does it?'</p>
+          <p class="en-p">Umakichi: 'Thinking of him as a relative and a friend, I have been taking care of Jūkō even when things are not going well in my own household, yet to blurt out things that never even happened before Kiraku-san makes my stomach boil with gobarabara so I cannot bear it.'</p>
+          <p class="en-p">Meanwhile, Jūkō tucked up his buttocks,</p>
+          <p class="en-p">Jiukichi: 'Oi, Umakichi, eat my ketsu too!'</p>
+          <p class="en-p">So saying, he exposed his jet-black buttocks, struck them two or three times, and bolted out the back door to goodness knows where. The sun had completely set, and it became totally impossible to distinguish where anyone had gone. When heard about afterwards, it was found out four or five days later that he had fled into a rocky mountain where an tengu called Ishigori of Hōkidani lived.</p>
+          <p class="en-p">Kiraku returned all alone to his home in Anō, and administered chinkon to the morning and evening worshippers while acting as an intermediary for kamusura.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">喜楽『おかげで私はいろいろの神術を高熊山で教はりましたから、モウ結構で御座います、どうぞ結構な法があるのならば、馬サンや、宇一サンに授けて上げて下さい』</p>
+            <p class="ja-classical-line">とからかひ気分に云ふ。重吉は肩を怒らし乍ら、言も芝居口調になつて、</p>
+            <p class="ja-classical-line">重吉『コレなる両人は、生れつきの精神が悪いに依つて、神が見せしめの為、ふン伸ばしてやつたのだ。かやうな者に魔訶不思議の法を授けやうものなら、どんなことを致すか分りませぬワイ、ウツフヽヽヽ』</p>
+            <p class="ja-classical-line">と立ちはだかつて、得意面をさらしてゐる。半分は肉体、半分は野天狗の神憑といふ状態であつた。馬吉は握拳をかためて重吉の横面をピシヤピシヤとなぐりつけ、</p>
+            <p class="ja-classical-line">馬吉『コリヤ小谷重吉、きさまは偽気違の偽神がかりだ、常平常から俺を誤解してゐやがるからそんな事をぬかしやがるんだ。俺は貴様の云ふやうな悪人ぢやないぞ、どうぢや貴様が去年、○○の嬶を○○した時に、泣いて俺に仲裁を頼みに来よつたぢやないか、其御恩を忘れたのか馬鹿野郎奴！』</p>
+            <p class="ja-classical-line">と面ふくらして真向になつて怒つてゐる。</p>
+            <p class="ja-classical-line">宇一『オイ馬公、こんな半気違をつかまへて怒つたつて仕方がないぢやないか』</p>
+            <p class="ja-classical-line">馬吉『おれも親類なり、友達だと思うて、家内でさへも能う居らぬ重公の世話をしてやつて居るのに、喜楽サンの前で、有りもせぬことを吐しやがると、業腹がにえてたまらぬのだ』</p>
+            <p class="ja-classical-line">重公は其間に尻をまくり、</p>
+            <p class="ja-classical-line">重吉『コラ馬公、けつでもくらへ！』</p>
+            <p class="ja-classical-line">と云ひ乍ら、真黒けの尻を出し、二つ三つ叩いて裏口から、どこともなし飛出して了うた。日はズツポリとくれて、何処へ行つたか、チツとも見分けがつかなくなつて了うた。後にて聞けば法貴谷の石凝とか云ふ天狗が住んでゐる岩山へ逃げ込んでゐることが四五日してから分つたのである。</p>
+            <p class="ja-classical-line">喜楽は只一人穴太の自宅に帰り、日夜の参詣者に対して鎮魂を施し神占を取次いでゐた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: Pine の Storm [1023]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: Smoke の Capital [1025]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
