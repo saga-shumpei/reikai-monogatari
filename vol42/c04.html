@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4: 下り坂 [1129] - Volume 42 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 42 Table of Contents</a>
+      <span>Volume 42</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 42 &bull; Chapter 4</span>
+      <h1 class="chapter-title-en">Chapter 4: 下り坂 [1129]</h1>
+      <p class="chapter-title-ja">下り坂〔1129〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Rebu: 'Tsukihi are shining in the sky, descending the steep slope of Teruyama pass. Following King Seran, high high high high, dough dough dough. If I do not descend this slope, I cannot go to the capital of Iruna. Karuchin, the official of Umori, has been possessed by the Akuma of greed. He has come this far with his Akugiyakubudau schemes, but there is no way such schemes will ever be accomplished. High high high high, you Chikushiyō, pull yourself together and be careful. If you stumble on a sharp stone and fall into the Chihiro valley, you will die instantly. Ha ha high high, what a steep, steep Sakamichi. Kamutsukasa of Yasudahime-hime.'</p>
+          <p class="en-p">Kamutsukasa of Yasudahime-hime: 'From now on, just a little more Goshinbau, and soon the capital will be visible. Even if that fellow Karuchin plots various evil things, as long as the Kami of Tenchi exist, there is no precedent for evil to prosper. It will vanish instantly like spring snow. High high high high, Haibō is as if seen in a mirror. Dotukkoi, Chikushiyō, be careful. You are just passing Mamebe, truly, truly, ha ha ha. Ōbakamono, you Chikushiyō, why is my horse so Tonma? Gara gara gara gara, aitatsuta. Hin hin hin hin, you Chikushiyō. Is it funny that I fell? You are a four-legged creature, while Rebu-sama is a two-legged creature by birth.'</p>
+          <p class="en-p">Rebu: 'How can a two-legged creature and a four-legged creature compete? Ah, Kamunagara, Kamunagara. Baramon Tenō, dotukkoishiyo. I should not have said that. I pray solely for the protection of Kuniharutachinōokami, the Mototsu-kami who created Tenchi. What shall I do if I encounter the Teshita of the Umori official at such a Nanshiyo? Rebu does not care at all, but what weighs on my heart is the King and the fate of Yasudahime-hime. Ryūun-sama, be firm. Your horse is also suspicious. When I look from behind, the state of your horse with its tail tucked in is something I cannot bear to look at with my own eyes. Ha ha ha ha, high high high.'</p>
+          <p class="en-p">Ryūun: 'You Chikushiyō, be careful. Why are you biting my head? It was a close call, and my hat stand was about to be bitten off. Even if you seem clever, you are a Chikushiyō. This fellow has a large frame, yet he lets out whinnies and passes gas, is handled by a small man, is ridden on his back and whipped, and yet he follows along so obediently, ha ha ha. You foolish fellow. Hey, hey, excuse me, Ryūun-sama, why do you go ahead and leave me behind? My compass is capable, but this essential horse of mine will not walk as I wish. Try being in my heart, leading a horse that passes gas. Truly, truly, it is frustrating.'</p>
+          <p class="en-p">Ryūun: 'Nevertheless, high high high. I have heard that even a slug, if it walks a hundred thousand ri, will eventually reach its destination. Teruyama pass is a Nanshiyo worthy of its name. When I have safely led the horse down this place, I will set the horse straight again, summon my courage, and with the momentum of a waterfall falling a thousand ri, proceed majestically to the holy castle of Iruna. Without any suffering, under the moonlit sky, ha ha ha ha, high high high. Whether the morning sun shines or clouds over, whether the moon waxes or wanes, whether Teruyama pass is steep or not, I will cross this journey before I know it. The future is quite promising, and the capital of victory is drawing near.'</p>
+          <p class="en-p">Ryūun: 'The Kamutsukasa of the golden world are stretching their necks and waiting. To worship the stern faces of Yoshikohime-hime and Kiyoteruhime-hime is gradually drawing closer. Following the teachings of the Kami of Hokkō, I shall turn all the Kyokutsukasa who dwell in the castle of Iruna toward the path of Makoto. I shall make the divine power of San-go-kyō shine throughout the world. As a highly praised missionary, I, Rebu, will make my name known in the land of the moon, high high high high, the land of Fusa. From Rome to Greece, to Asia Minor, and to the ends of the island of Tsukushi, leaving my footprints, I shall serve. Please grant this, my wish, O Amatsukami and Kunitsukami, the eight million Kami.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">レーブ『月日は空に照山の
+峠急坂下りゆく
+セーラン王に従ひて
+ハイハイハイハイ　ドウドウドウ
+どうしても此坂下らねば
+イルナの都に行かれない
+右守の司のカールチン
+欲の悪魔に憑依され
+悪逆無道の企み事
+ここ迄やつて来たけれど
+どうしてこんな企み事
+成り遂げさうな事はない
+ハイハイハイハイこん畜生
+確りせぬかい気をつけよ
+尖つた石に躓いて
+千尋の谷間に落ちたなら
+お前は忽ち死ぬだらう
+ハーハーハイハイ何とまあ
+嶮しい嶮しい坂道だ
+ヤスダラ姫の神司</p>
+            <p class="ja-classical-line">これから暫しの御辛抱
+やがて都が見えまする
+カールチン奴がいろいろと
+善からぬ事を企まうと
+天地の神のます限り
+悪の栄ゆる例ない
+忽ち消ゆる春の雪
+ハイハイハイハイ敗亡は
+鏡にかけて見るやうだ
+ドツコイ畜生気をつけよ
+豆屁ばつかり垂れよつて
+ほんとに誠にハアハアハア
+大馬鹿者奴、畜生奴
+何故俺の馬だけは
+これ程ハイハイ頓馬だらう
+ガラガラガラガラ　アイタツタ
+ヒンヒンヒンヒンこん畜生
+おれが転げたがをかしいか
+お前は四つ足レブさまは
+生れついての二本足</p>
+            <p class="ja-classical-line">二つの足と四つ足と
+どうして競争がなるものか
+あゝ惟神々々
+バラモン天王ドツコイシヨ
+こいつは云ふのぢやなかつたなア
+天地を造りし元つ神
+国治立大神の
+お守り偏へに願ひます
+こんな難所でペツタリと
+右守の司の手下等に
+出会すならばどうしようぞ
+レーブは些とも構はねど
+心にかかるは王様や
+ヤスダラ姫の身の上だ
+竜雲さまよ確りせ
+お前さまの馬も怪しいぞ
+私が後から眺むれば
+屁放り腰の馬のざま
+目玉をあけて見られない
+ハーハーハーハー　ハイハイハイ</p>
+            <p class="ja-classical-line">此畜生奴気をつけよ
+俺の頭をなぜ噛ぶる
+すつての事で笠の台
+がぶつとやられる所だつた
+賢いやうでも畜生だ
+此奴は大きな柄をして
+ヒンヒン吐かして屁を垂れて
+小さい男に扱はれ
+背に乗られて鞭打たれ
+いと神妙にハアハアハア
+ついて出て来る馬鹿者よ
+これこれもうし竜雲さま
+お前ばつかり先へ行て
+俺をどうして呉れるのだ
+俺のコンパスあ達者だが
+肝腎要の馬の奴
+どうしても思よに歩かない
+屁古垂れ馬を曳いて往く
+俺の心になつて見よ
+ほんとに誠にぢれつたい</p>
+            <p class="ja-classical-line">さはさりながらハイハイハイ
+蛞蝓さへも百千里
+歩めばいつか目的地
+達する例もありときく
+照山峠は名にし負ふ
+イルナで一の難所ぞや
+此処をば無事に馬曳いて
+下り終せた暁は
+再び駒を立て直し
+勇気を起して堂々と
+一瀉千里の勢ひで
+進みイルナの聖城へ
+何の苦も無く月の空
+ハーハーハーハー　ハイハイハイ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+照山峠はさかしとも
+いつしか越ゆる此旅路
+前途は中々有望だ
+勝利の都も近づいて</p>
+            <p class="ja-classical-line">首をのばして待つて居る
+黄金世界の神司
+黄金姫や清照姫の
+厳のお顔を拝むのも
+次第に近づき北光の
+神の教を遵奉し
+イルナの城に蟠まる
+曲司等を悉く
+誠の道に言向けて
+三五教の神力を
+宇内に普く輝かし
+誉も高き宣伝使
+レーブと名乗つて月の国
+ハイハイハイハイ　フサの国
+羅馬に希臘小亜細亜
+筑紫の島の果てまでも
+吾足跡を印しつつ
+仕へまつらむ吾思ひ
+叶はせ給へ天津神
+国津神等八百万</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Offering my Magokoro together with the horse, I pray to Thee. Ah, Kamunagara, Kamunagara, may Thy Mitama be blessed and prosperous.'</p>
+          <p class="en-p">As he poured out his random fervor like a Kokedotsukuri, he followed at the end of the party, descending with unsteady footing. Thames began to sing while leading the horse.</p>
+          <p class="en-p">'The steep slope of Teruyama, down which we descend, guarding the Miosaki of King Seran and the Hime-Mikoto of Yasudara, is hi-hi-hi. It is a Nanshiyo that will surely not be encountered again. The slope gradually grows steeper, and my footing has become uncertain. Like rain, it pours out; like leaves scattered by the wind, it drives them away, bara-bara-bat. Hi-hi-hi-hai, do-do-do. You Chikushiyō, be careful, it is Abunai. What is this, foaming at the mouth? Ha-ha-hat-hai, is a slope like this so painful? Though I say so, even for me, it has become painful. In times of suffering, one relies on Kami. O Kamisama of Ananai-kyō, I pray to Thee, Nanitozo Yoroshiku.'</p>
+          <p class="en-p">'May Thou let us descend this Sakamichi together with the Jinba without incident, hi-hi-hi. Kamunagara. This Thames, who advances along the path of truth, is also a Miko of Kami. Since there is the protection of Kami, even if Kutsu-no-tsu attacks and surrounds us from front, back, left, and right, and the momentum of the fierce tiger is terrible, even if the tips of their spears, hi-hi-hi, come advancing in a row, how could I fear? We Masurao have bones in our arms. We are the pure essence of the Yamato-damashii, the chosen Kami-tsukasa. No matter how wide the world may be, is there anyone who can be our enemy? The fine horse, which is useful when climbing a slope, is troubled by the downhill path. Knowing it is a hindrance,'</p>
+          <p class="en-p">'I must lead it, hi-hi-hi, or we cannot cross Onogahara. The subordinates of the Migimori-no-tsukasa are Kamunagara-dotsukoi-sho, hiding under the leaves, waiting with bated breath, hi-hi-hi, to make our party suffer miserably. Even if an enemy army of tens of thousands were to press upon us, the Kototama of the Zen-gon-bi-shi that I learned in Ananai-kyō, hi-hi-hi-hi, bu-bu-bu. Ee, you stinking Chikushiyō! I cannot stand it when you do that while the wind is blowing from behind. You should know some manners. We are the retinue of King Seran. You are a most rude Chikushiyō. Ha-ha-ha-hai, aitatsuta.'</p>
+          <p class="en-p">'I stumbled on a high rock. Everyone, please be careful. If you ride on a stone cart that is rolling around there, you will instantly fall into a thousand-fathom valley together with the horse, and you will never be able to see the light of this world again. Ha-ha-ha-hai, do-do-do. Thanks to that, we have crossed the difficult pass. Rejoice, you horse Chikushiyō. From here on, the walking is easy. I have also begun to find it interesting. The life of a person is just like crossing this mountain, hi-hi-hi-hi. When you take your eyes off for a moment, hi-hi, you instantly lose your footing, end up as a wanderer of the world, and are despised by the people of the world,'</p>
+          <p class="en-p">'ha-ha-hai-hai, until you end up being trampled by cattle and horses. Nevertheless, no matter how much a human may rush, there is a limit to that power. Rather than anything else, it is best to leave it to the providence of the noble and pure Kamisama, who possesses infinite divine power, hi-hi-hi-hai-do-do-do. Ah, Kamunagara, Kamunagara. May Thy Mitama be blessed and prosperous, and I pray that Thou wilt protect us who follow Kami, hi-hi-hi, and let us advance to the capital of Iruna without incident. Dotsukoi-dotsukoi, dotsukoi-sho. The road is gradually becoming wider, and the pebbles have become fewer. The suffering of falling seven times and rising eight times,'</p>
+          <p class="en-p">'has finally been overcome on this downhill slope. By directing the Naohi-no-mitama toward the ugly spirits of the Migimori-no-tsukasa, the victory shout is right before our eyes. Ah, how brave, how brave!'</p>
+          <p class="en-p">Singing thus, the party finally descended to the foot of the mountain pass.</p>
+          <p class="en-p">They quenched their thirst with the clear water flowing in the valley, and after resting for a while, they became people on horseback once again. With all of them lining up their bridles, the sound of the bells ringing bravely, they galloped toward the capital with the momentum of a fierce tiger crossing a river, through the Onohara where the winter wind raged.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">馬諸共に真心を
+捧げて祈り奉る
+あゝ惟神々々
+御霊幸はへましませよ』</p>
+            <p class="ja-classical-line">と倒徳利のやうにドブドブと出まかせの熱を吐きながら、一行の最後について、足許覚束なく下り行く。テームスは馬を曳きながら歌ひはじめた。</p>
+            <p class="ja-classical-line">『セーラン王やヤスダラの
+姫の命の御尾前を
+守りて下る照山の
+嶮しき坂はハイハイハイ
+又とあるまい難所ぞや
+追々坂はきつくなり
+足許あやしくなつて来た
+雨の如くに打出し
+風に木の葉の散る如く
+バラバラバツと追ひ散らし
+ハイハイハイハイドウドウドウ
+畜生気をつけ危険ぞ
+何だえ泡を吹きやがつて
+ハーハーハツハイこれしきの
+坂がそれ程苦しいか
+とは云ふものの俺だとて
+矢張り苦しうなつて来た
+苦しい時の神頼み
+三五教の神様よ
+何卒宜敷願ひます</p>
+            <p class="ja-classical-line">人馬諸共恙なく
+此坂道をハイハイハイ
+下らせ給へ惟神
+誠の道を進み往く
+此テームスも神の御子
+神の守りのある上は
+仮令曲津が襲来し
+前後左右を取り巻いて
+猛虎の勢凄じく
+槍のきつ先ハイハイハイ
+並べて進み来るとも
+如何で恐れむ益良雄の
+吾等が腕には骨がある
+日本魂の生粋と
+選りによつたる神司
+天下は如何に広くとも
+吾等に敵するものあろか
+坂を登る時重宝な
+名馬も困る下り坂
+足手纏ひと知りながら</p>
+            <p class="ja-classical-line">曳いて往かねばハイハイハイ
+大野ケ原を渡れない
+右守の司の手下等は
+神出鬼没ドツコイシヨ
+木の葉の下に隠れ居て
+吾等一行を散々に
+艱ませくれむとハイハイハイ
+固唾をのんで待つぢやらう
+仮令数万の敵軍が
+押し寄せ来る事あるとても
+三五教にて学びたる
+善言美詞の言霊を
+ハイハイハイハイブウブウブウ
+エヽこん畜生臭いわい
+後から風の吹く時に
+さうやられては耐らない
+些は行儀を知るがよい
+セーラン王のお供だぞ
+無礼極まる畜生だな
+ハーハーハーハイ　アイタツタ</p>
+            <p class="ja-classical-line">高い岩根に躓いた
+皆さま用心なされませ
+其処らあたりに転倒て居る
+石の車に乗つたなら
+馬諸共に千仭の
+谷間に忽ち顛落し
+再び此世の明りをば
+見られぬやうになりますぞ
+ハーハーハーハイ　ドウドウドウ
+お蔭で難関踏み越えた
+馬の畜生喜べよ
+これから先は歩きよい
+俺も面白なつて来た
+人の一生と云ふものは
+恰度此山渡るよな
+ハイハイハイハイものだらう
+一寸目放ししたときは
+ハイハイ忽ち失脚し
+世の落人となり果てて
+世界の奴に卑げしまれ</p>
+            <p class="ja-classical-line">ハーハーハイハイ牛馬に
+踏まれにやならぬやうになる
+さはさりながら人間が
+何程あせつて見たとこで
+其力には限りある
+無限の神力備へたる
+ハイハイハイハイドウドウドウ
+尊き清き神様の
+摂理のもとに任すより
+仕様模様も無いものぞ
+あゝ惟神々々
+御霊幸はへましまして
+神に従ふ吾々を
+厚く守りてハイハイハイ
+イルナの都へ恙なく
+進ませ給へと願ぎまつる
+ドツコイドツコイ　ドツコイシヨ
+道も段々広くなり
+小石も少うなつて来た
+七転八起の苦しみも</p>
+            <p class="ja-classical-line">漸く越えた下り坂
+右守の司の醜霊を
+直日の霊に言向けて
+勝鬨挙ぐるも目のあたり
+あゝ勇ましし勇ましし』</p>
+            <p class="ja-classical-line">と歌ひつつ漸くにして一行は峠の麓に下りついた。</p>
+            <p class="ja-classical-line">谷を流るる清水に喉の乾きをいやし、暫し休憩の上再び馬上の人となり、一同轡をならべて鈴の音も勇ましく、木枯荒ぶ大野原、暴虎馮河の勢にて、都をさして駆けりゆく。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c03.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 3: Mountain Storm [1128]</span>
+      </a>
+      <a href="c05.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 5: 恋の Trap [1130]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
