@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 1: 言の架 Bridge [965] - Volume 35 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 35 Table of Contents</a>
+      <span>Volume 35</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 35 &bull; Chapter 1</span>
+      <h1 class="chapter-title-en">Chapter 1: 言の架 Bridge [965]</h1>
+      <p class="chapter-title-ja">言の架橋〔965〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The vast and boundless Great Uchiu. Among the many, our Uchiu, preeminent and noble in Reiriyoku. Above, Jitsugetsu shine eternally, emitting the light of Iki, illuminating the Chikiu of the Gekai, and Shōrin over all Shinrabanshiyō. The Shingefu of the Kami, which revolves while possessing the three elements of the Reiriyokutai, which are Mugen, Zetsutai, Mushi, and Mushiu. The Mugen Inochi of the Taiyō, Daichi, and Taiin is the Mikuradana, the blessing of the Mikoto of the Kami. Now, the Kongen of the Daichi is Kunitokotachinōomikami and Toyokuninushinōokami, who opened the Shingefu of Seiseikuwaiku by means of the Iki of the warp and weft. Mugen, Zetsutai, Mushi, Mushiu.</p>
+          <p class="en-p">The Great Origin Spirit, who is Shison and Shikō, the Omononushi who dwells in Heaven, the Reitoku of the Sumeraōmikami pervades all things. Making Takamimusubinokami the Reikei-Soshin, and Kamimusubinokami the Taikei-Soshin. Ah, Kannagara-Kami-Kami. The three elements of the Reiriyokutai, having passed through many billions of years, finally complete the Uchiu. Our Uchiu's presiding Kami, in Heaven, is called Dainichirume, the Ōmikami who shines in Heaven; how noble it is. Kunitokotachinōokami appeared as the ruler of the earth, and together with Kinshōyōōmikami and Kamisusanōōmikami,</p>
+          <p class="en-p">They became the Reiriyokutai of the Daichi, and without distinction between day and night, they moisten all beings on earth with the dew of blessing. How noble is the divine land of Ashihara, which they protect. The hitokusa who have received life in the divine land of the great ocean, which is created and protected by the power of such noble Sumeragami, should they not reverently look up to the vast and boundless divine virtue of the Kami morning and evening? Since the Kami appear as the ancestors of our spirits and the ancestors of our bodies, our five-shaku physical bodies are all borrowed things from the Ōmikami. The Sumeraōmikami protects us eternally and accomplishes the great Keirin of Heaven and Earth.</p>
+          <p class="en-p">If you are a noble and pure being born as an organ of the Kami, polish your soul to the highest refinement and purity morning and evening, and fulfill the heavenly vocation for which you were born, O fellow countrymen. Ah, Kannagara-Kami-Kami. Tracing back to the distant age of the Kami, three hundred and fifty thousand years from now, Kunitokotachinōokami, wishing to govern the mitama of the kamibito beneath the heavens and to build and solidify a beautiful age of the Kami, hid himself in the land of the foundation. Changing his form into various miscellaneous things, he caused a hundred Kami to appear, established the Sangokyō, and transmitted the teachings to the four quarters. The noble and pure divine mansion of the Sango is Jerusalem.</p>
+          <p class="en-p">The Takumiya of Jitentōtō, distributing the spirit to the west and east, the Senden-shi who are entrusted to transmit the heart of the Kami just as it is to the four quarters; how grateful it is. Among the many divine offices that exist, the Senden-shi who serves the way of the Sango, Kurohime of firm faith, fearing the Mikoto of the Kami, and wishing to save the hitokusa of the four quarters, without regard for her own aged body, proceeds to transmit the teachings even to the eighty islands and eighty lands of the island of Tsukushi, and to the ends of the island of Tsukushi. The story of the Yūken-muhi kamibito who does not spare her life, pursuing the footsteps of Takayamahiko to save the people of the world of the Shiranuhi of Tsukushi.</p>
+          <p class="en-p">Leaving Jitentōtō, together with three believers, Sonkō, Yōkō, and Bōkō, she arrived safely at the port of Tatehi in Africa, which drifts on the waves. Climbing over steep slopes and heading toward the capital of the land of fire, Kurohime, who comes seeking the whereabouts of Takayamahiko, is still unable to clear the somewhere of her attachment, and is impatient. The story of her exhausting her heart in various miscellaneous ways. Today is the fifteenth day of the ninth month, the opening of the volume of Sango. Leaning back in an armchair in the inner room of Zuishōkaku, holding a fan in one hand, tapping her knee, and telling the story of the age of the Kami in detail.</p>
+          <p class="en-p">The person holding the brush is Mr. Matsumura. At nine o'clock in the morning, when the Amatsubi shines brilliantly in the clear sky, it is a joy to write it down. Ah, Kannagara-Kami-Kami. May the Mitama be blessed, and as the Kami wills, I speak out my Kototama to transmit it to the people of the world eternally, Kannagara. O Amatsukami, Kunitsukami, and the eight million, please illuminate the raw mitama that the Kami has bestowed. Before the presence of the Ubusunagami, I pray with reverence and awe. I pray with reverence and awe.</p>
+          <p class="en-p">The continent of Africa in current geography was called the island of Tsukushi in the ancient age of the Kami. And this island has one body and four faces. It is divided by great mountain ranges into the land of fire, the land of Toyo, the land of Tsukushi, and the land of Kumaso. And the greater part of the island is formed by a great desert.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">広大無辺の大宇宙
+数ある中に霊力の
+秀れて尊き我宇宙
+上には日月永久に
+水火の光を放ちつつ
+下界の地球を照臨し
+森羅万象悉く
+無限絶対無始無終の
+霊力体の三元を
+備へてめぐる神の業
+太陽大地太陰の
+無限の生命は御倉板挙
+神の御言の恵なり
+抑も大地の根源は
+国常立大御神
+豊国主大神の
+経と緯との水火をもて
+生成化育の神業を
+開き玉ひしものなるぞ
+無限絶対無始無終</p>
+            <p class="ja-classical-line">至尊至貴なる大元霊
+天にまします御中主
+皇大神の霊徳は
+すべての物に遍満し
+高皇産霊の神をして
+霊系祖神となし玉ひ
+神皇産霊の神をして
+体系祖神となし玉ふ
+あゝ惟神々々
+霊力体の三元は
+幾億万の年を経て
+いよいよ宇宙を完成し
+我等が宇宙の主宰神
+天にありては大日婁売
+天照します大神と
+称へまつるぞ尊けれ
+国常立大神は
+地上の主宰と現れまして
+金勝要大御神
+神素盞嗚大神と</p>
+            <p class="ja-classical-line">大地の霊力体となり
+地上に於ける万類を
+昼と夜との区別なく
+恵の露をうるほはし
+守らせ玉ふ葦原の
+神の御国ぞ尊けれ
+かかる尊き皇神の
+力に造り守ります
+大海原の神国に
+生を享けたる人草は
+広大無辺の御神徳
+朝な夕なに謹みて
+仰ぎまつらであるべきや
+神は我等の霊の祖
+体の祖と現れませば
+我等が五尺の肉体も
+皆大神の借り物ぞ
+皇大神の永久に
+守り玉ひて天地の
+大経綸を遂げ玉ふ</p>
+            <p class="ja-classical-line">神の機関と生れたる
+尊き清きものならば
+至粋至純の精魂に
+朝な夕なに磨き上げ
+人と生れし天職を
+尽しまつれよ同胞よ
+あゝ惟神々々
+今より三十五万年
+遠き神代に溯り
+国治立大神が
+天が下なる神人の
+身魂を治めて美はしき
+神代を造り固めむと
+根底の国に忍びまし
+いろいろ雑多と身を変じ
+百の神達現はして
+三五教を立て玉ひ
+教を四方に伝へます
+尊き清き三五の
+神の館をエルサレム</p>
+            <p class="ja-classical-line">自転倒島の貴の宮
+西と東に霊くばり
+神の心の其儘を
+四方に伝ふる宣伝使
+任けさせ玉ふ有難さ
+神の司も数多く
+坐します中に三五の
+道に仕ふる宣伝使
+信心堅固の黒姫が
+神の御言を畏みて
+四方の人草救はむと
+老いたる身をも顧みず
+島の八十島八十の国
+筑紫の島の果までも
+教を伝へて進み行く
+勇健無比の神人の
+不惜身命の物語
+心を筑紫の不知火の
+世人を救ひ助けむと
+高山彦の後を追ひ</p>
+            <p class="ja-classical-line">自転倒島を立出でて
+孫公、芳公、房公の
+三人の信徒と諸共に
+波に漂ふアフリカの
+建日の港に安着し
+嶮しき坂を踏み越えて
+火の国都に立向ひ
+高山彦の所在をば
+索めて来る黒姫が
+執着心のどこやらに
+まだ晴れやらず気を焦ち
+いろいろ雑多と村肝の
+心を尽す物語
+今日は九月の十五日
+三五の巻の開け口
+瑞祥閣の奥の間で
+安楽椅子によりかかり
+片手に団扇を持ち乍ら
+膝を叩いて諄々と
+繰出す神代の物語</p>
+            <p class="ja-classical-line">筆執る人は松村氏
+真澄の空に天津日の
+晃々輝く午前九時
+誌し行くこそ楽しけれ
+あゝ惟神々々
+御霊幸はひましまして
+神のまにまに説き出づる
+わが言の葉を永久に
+世人に伝へて惟神
+神の賜ひし生身魂
+照らさせ玉へ天津神
+国津神達八百万
+産土神の御前に
+慎み敬ひ願ぎまつる
+謹み畏み願ぎまつる。</p>
+            <p class="ja-classical-line">現在の地理学上のアフリカの大陸は、太古の神代に於ては、筑紫の島と云つた。さうして此島は身一つにして面四つあり。火の国、豊の国、筑紫の国、熊襲の国と大山脈を以て区劃されてゐる。さうして島の過半は大沙漠を以て形作られてゐる。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kyushu in the Seikaidau of present-day Nihonkoku is also collectively called the island of Tsukushi. It is a floating island created as the placenta of the African continent when Kokuso Kunitokotachinomikoto repaired and solidified the daichi. Also, calling Riukiu the Dragon Palace (Riugū) was because it was created as the placenta of the Dragon Palace Island of Australia. However, the Ōkami had somewhat in mind, and cast it adrift in an ashifune, causing the island of Shikoku, which is the present Nihonkoku of itshinshimen, to be newly made as a placenta. Therefore, in the Shinkai, Shikoku is also praised as an island of the Dragon Palace. Oshima floating off the coast of Tango is likewise praised in the Shinkai as a Dragon Palace Island.</p>
+          <p class="en-p">Near the ancient holy site of Jerusalem, the present-day Mediterranean Sea extended somewhat further to the east before the daikōzui. Then, dividing the Mediterranean Sea in two by the sacred mountain called Mount Zion, the eastern part was called the Dragon Palace Sea. Seen from today's geographical place names, the locations have changed considerably. Jerusalem in the Age of the Gods was located to the east of Turkey in Asia Minor, facing Armenia from north to south.</p>
+          <p class="en-p">Moreover, the Jordan River flowed through the southwest of Mesopotamia, and from today's geography, what is called the Euphrates River was precisely that. It is a different entity from the Jordan River appearing in the New Testament. And it goes without saying that the Dead Sea into which the Jordan River flows is also a different entity. Today's geographical Persian Gulf was the Dead Sea of ancient times. However, due to the world's daikōzui and great earthquakes, the sea became mountains and mountains became sea, and there are also many places where a part of a lake burst and became a bay, so it is inevitable that the tales of the Age of the Gods have some points that differ when viewed from today's maps.</p>
+          <p class="en-p">Now, as for the tale in which Kurohime, a missionary of the Izumo teachings, lands at the port of Tatehi in the Land of Kumasaso—part of present-day Africa and the island of Tsukushi—searches from there for the historic site of Tatehiwakesama, crosses over Mount Tsukushigadake together with three attendants, and advances heading toward the capital of the Land of Fire, it is just as roughly described in the previous volume. From here on, it is a fascinating and turbulent ancient tale in which Kurohime heads toward the capital of the Land of Fire, becomes obsessed with believing that Takakunibakesama, who calls himself a missionary of Takayamahiko (whose divine name is Ikatsuhikonenomikoto), is her own husband Takayamahiko, and advances to search for her husband's whereabouts. And the main focus of this volume is to orally narrate the joyous fact that neither mother nor child realized that the boy whom she had abandoned for certain reasons in her youth had grown up to become a splendid missionary serving the same path, but upon a certain opportunity, the relationship of parent and child becomes widely known, and they return with bounding joy to the sacred site of Jitentōjima, serving in the divine work of the Mani Jewel. If you refer to Volume 33, you will likely understand the circumstances of this interval. Ah, Kamukunari Tamafu Masase.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">現代の日本国の西海道九州も亦総称して筑紫の島と云ふ。国祖国常立之尊が大地を修理固成し玉ひし時アフリカ国の胞衣として造り玉ひし浮島である。又琉球を竜宮といふのも、オーストラリアの竜宮島の胞衣として造られた。されど大神は少しく思ふ所ましまして、これを葦舟に流し捨て玉ひ、新に一身四面の現在日本国なる四国の島を胞衣として作らせ玉うた。故に四国は神界にては竜宮の一つ島とも称へられてゐるのである。丹後の沖に浮べる冠島も亦竜宮島と、神界にては称へられるのである。</p>
+            <p class="ja-classical-line">昔の聖地エルサレムの附近、現代の地中海が、大洪水以前にはモウ少しく東方に展開してゐた。さうしてシオン山といふ霊山を以て地中海を両分し、東を竜宮海といつたのである。今日の地理学上の地名より見れば、余程位置が変つてゐる。神代に於けるエルサレムは小亜細亜の土耳古の東方にあり、アーメニヤと南北相対してゐた。</p>
+            <p class="ja-classical-line">又ヨルダン河はメソポタミヤの西南を流れ、今日の地理学上からはユウフラテス河と云ふのがそれであつた。新約聖書に表はれたるヨルダン河とは別物である。さうしてヨルダン河の注ぐ死海も亦別物たることは云ふ迄もない。今日の地理学上の波斯湾が古代の死海であつた。併し乍ら世界の大洪水、大震災に依つて、海が山となり、山が海となり、或は湖水の一部が決潰して入江となつた所も沢山あるから、神代の物語は今日の地図より見れば、多少変つた点があるのは止むを得ぬのである。</p>
+            <p class="ja-classical-line">さて三五教の宣伝使黒姫が現代のアフリカ、筑紫の島の一部、熊襲の国の建日の港へ上陸し、それより建日別命の旧蹟地を探ね、筑紫ケ岳を三人の供人と共に踏越えて、火の国の都を指して進み行く物語は、前巻に於て大略述べておいた通りである。いよいよこれより黒姫が火の国都に立向ひ、高山彦の宣伝使と名乗る高国別命、神名は活津彦根命を自分の夫高山彦と思ひ詰め、夫の所在を探らむと進み行く波瀾重畳としたる面白き昔語である。さうして自分の若き時に或事情の為に捨児をした男の子が、成人して立派な宣伝使となり、同じ道に仕へて居るのをも母子共に気付かなかつたのが、或機会に親子の間柄たる事が知れ渡り、喜び勇んで自転倒島の聖地へ帰り、麻邇の宝珠の神業に奉仕する芽出度き事実を口述するのが本巻の主眼である。第三十三巻を参照すれば、此間の消息が分るであらう。あゝ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="preface.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Preface & Introduction</span>
+      </a>
+      <a href="c02.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 2: 出陣 [966]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

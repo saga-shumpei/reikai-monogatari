@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 23: Pure 交 [987] - Volume 35 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 35 Table of Contents</a>
+      <span>Volume 35</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 35 &bull; Chapter 23</span>
+      <h1 class="chapter-title-en">Chapter 23: Pure 交 [987]</h1>
+      <p class="chapter-title-ja">清交〔987〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Near the gate of the Fire Kuniyakata, singing a Sendenka while entering, was one Sendenshi, Tamaharuwakenomikoto.</p>
+          <p class="en-p">Kami appearing in the outer world,
+Dividing the zenshin and jiyashin,
+Kurohime, lost in love,
+At the Seijiyō of Onokorojima,
+Morn and eve with all her heart,
+Serving and fulfilling her husband,
+Takayamahiko no Kamuzukasa,
+Having crossed to the island of Tsukushi,
+Fixing it firmly in a single heart,
+Enduring a hundred sorrows,
+The Senden of Ananai-kyō,
+Continuing to chant as we go over the waves,
+Treading across Tsukushi-ga-dake,
+Shunning the roots of rocks and trees,
+A valley path where human footprints are rare,
+Mukafutauge and Yakatamura,
+Looking back behind at Araidake,
+Accompanied by two attendants,
+Climbing up and descending down the steep slope of the first province of Fire,
+Proceeding onward.
+
+Ah, Kamunagara Kamunagara,
+If Kurohime Tsukasa should appear here now,
+How surprised she surely would be!
+Takayamahikogami, whom I thought of with all my heart as my true husband,
+Was not my true husband,
+But the husband of a person I never expected,
+Entrusted to the hand-scrolls of the hands of the Great Deity who shines in the heavens,
+In the divine essence of the Five Hundred Misumaru jewels,
+He was none other than the living Hayatuhikone no Kamuzukasa,
+Known as Takakuniwake;
+If she hears this, even the stout-hearted Kurohime,
+How astonished she surely will be!
+Thinking of it, thinking of it, how touching she is!
+Even a single day sooner, even a single moment,
+To clear away and help Kurohime-sama's delusion,
+On the wondrous island where the Kami gather,
+Leading her back to the high Plain of High Heaven,
+Together with Takayamahiko,
+Rejoicing and growing close, serving the true path of Smeragi no Kami,
+Let her serve purely in the divine work of the Mani no Hoju!
+Ah, Kamunagara Kamunagara,
+Reverence be to the words of Kami Susanuo no Ōkami,
+In the land of Fusa,
+Erecting thick great shrine pillars at the summit of Mount Ubusuna,
+Stand towering the Saienkan,
+Leaving the sacred ground far behind,
+Crossing the Eden River in a boat,
+Crossing the ocean of Fusa,
+Landing at the port of Tatehi in Kumaso-koku on the island of Tsukushi,
+Wishing to help Kurohime-sama,
+I have advanced thus far!
+
+Ah, Kamunagara Kamunagara,
+May your august spirits be blessed!</p>
+          <p class="en-p">So singing, he appeared near the gate.</p>
+          <p class="en-p">Karu-kimi, the gatekeeper, was emboldened by this Sendenka, straightened his formal posture, opened the gate, and said,
+
+'Hearing that Tamaharuwake no Kami no Mikoto has come forth,
+How my heart is emboldened!
+I hear that Kurohime Tsukasa is coming forth,
+Following behind Takayamahiko no Kami no Mikoto.
+Two persons among Kurohime's attendants,
+Powerless and weeping, have returned.
+Tamakuniwake no Kami no Mikoto no Kamuzukasa
+Has come forth to Katsura Waterfall.
+Tamaharuwake no Kami no Mikoto, swiftly
+Pass through the iron gate and enter the inner chambers.
+How deep is the grace of Kamunagara no Kami,
+That today I meet a venerable Kami!
+How blessed it is at the coming forth of Tamaharuwake,
+That the august sky has also cleared up so purely!
+How beautiful is the august spirit of Tamaharuwake,
+Resembling even the stars of the great sky!'</p>
+          <p class="en-p">He praised to the utmost and welcomed him.</p>
+          <p class="en-p">Tamaharuwake: 'Karu-kimi, who guards the iron gate of the beautiful capital of the Land of Fire, you are indeed a brave boy!
+I am none other than Tamaharuwake no Kamuzukasa,
+And I wish to meet the lord of the mansion.
+I hear that Takakuniwake no Kami no Mikoto, though brave indeed,
+has come forth to Katsura Waterfall.
+Nevertheless, the beloved princess must be within;
+I wish to speak on her behalf.'</p>
+          <p class="en-p">Karu-kimi, the gatekeeper: 'The lord of the divine mansion is not present now,
+Yet I shall cause you to meet the beloved princess.
+Tamaharuwake no Kami no Mikoto, I now
+Shall guide you for your august sake.'</p>
+          <p class="en-p">Tamaharuwake: 'Now indeed has human feeling been known,
+In the words of the person guarding the iron gate.
+Kurohime will presently come to this place;
+Pass her through easily, you who guard the iron gate.'</p>
+          <p class="en-p">Karu-kimi: 'Though I have no means to pass Kurohime through easily,
+There is no recourse against your words.
+To whom other than you should I open this iron gate,
+Without the permission of the lord of the mansion?'</p>
+          <p class="en-p">Tamaharuwake: 'Come now, let us proceed to the wondrous mansion,
+With heart and feet thanks to the grace of Karu-kimi.'</p>
+          <p class="en-p">Thus responding, before he knew it, he arrived at the entrance. Karu-kimi turned toward Tama-kimi at the reception and chanted a poem:</p>
+          <p class="en-p">Karu-kimi: 'Tama-kimi, from now on guard the outer iron gate;
+I shall henceforth become the receptionist.'</p>
+          <p class="en-p">Tama-kimi: 'Come now, standing at the exterior in a majestic manner,
+I shall guard the iron gate according to your august command.'</p>
+          <p class="en-p">With that, he stepped briskly out to the front to resume his role as gatekeeper.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">火の国館の門前近く、宣伝歌を歌ひ乍ら入り来る一人の宣伝使は玉治別命なり。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善神邪神を立別ける
+恋に迷うた黒姫が
+自転倒島の聖場に
+朝な夕なにまめやかに
+仕へつとむるハズバンド
+高山彦の神司
+筑紫の島に渡りしと
+心一つに思ひつめ
+百の悩みに堪へ乍ら
+三五教の宣伝を
+兼ねつつ来る浪の上
+筑紫ケ岳をふみ越えて
+岩の根木の根よけ乍ら
+人跡稀なる谷の路
+向日峠や屋方村
+後に眺めて荒井岳
+二人の御供を伴ひて
+火の国一の急坂を
+登りつ下りつ進み来る</p>
+            <p class="ja-classical-line">あゝ惟神々々
+黒姫司が今ここに
+現はれ来ることあらば
+さぞや驚き給ふべし
+吾背の君と只管に
+思ひし高山彦神は
+真の夫に非ずして
+思ひもよらぬ人の夫
+天照します大神の
+御手の手巻にまかせたる
+五百津美須麻琉々々々々の
+玉の精気にあれましし
+活津彦根の神司
+高国別と聞くならば
+さすがに気丈の黒姫も
+さぞや驚き玉ふらむ
+思へば思へばいぢらしい
+一日も早く片時も
+黒姫さまの迷ひをば
+晴らし助けて自転倒の</p>
+            <p class="ja-classical-line">神の集まる珍の島
+綾の高天につれ帰り
+高山彦と諸共に
+睦び親しみ皇神の
+誠の道に仕へまし
+麻邇の宝珠の神業に
+清くも仕へさせ玉へ
+あゝ惟神々々
+神素盞嗚大神の
+御言を畏みフサの国
+ウブスナ山の山頂に
+大宮柱太しりて
+そそり立ちたる斎苑館
+聖地を後にはるばると
+エデンの河を船に乗り
+フサの海原横断し
+筑紫の島の熊襲国
+建日の港に上陸し
+黒姫さまを助けむと
+ここ迄進み来りけり</p>
+            <p class="ja-classical-line">あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と歌ひ乍ら、門前近く現はれける。</p>
+            <p class="ja-classical-line">門番の軽公は此宣伝歌に勇み立ち、威儀を正して門を開き、</p>
+            <p class="ja-classical-line">『玉治別神の命の出でましと
+知るより心勇みけるかも。
+高山彦の神の命の後追うて
+黒姫司出でますと聞く。
+黒姫の御供の人が今二人
+力なくなく帰りましけり。
+高国別神の命の神司
+桂の滝に出でましにけり。
+玉治別神の命よ速かに
+鉄門をくぐり奥に入りませ。
+惟神神の恵の深くして
+今日は尊き神に会ふ哉。
+有難や玉治別の出でましに
+御空も清く晴れ渡りけり。
+大空の星にも擬ふ玉治別の
+神の身魂の美しき哉』</p>
+            <p class="ja-classical-line">と口を極めて讃美し、歓迎してゐる。</p>
+            <p class="ja-classical-line">『美しき火の国都の鉄門守る
+軽の君こそ雄々しき男の子よ。
+われこそは玉治別の神司
+館の君に会はまくぞ思ふ。
+高国別神の命は雄々しくも
+桂の滝に出でますと聞く。
+さり乍ら愛子の姫はおはすらむ
+われは代りて言問ひたくぞ思ふ』</p>
+            <p class="ja-classical-line">門番の軽公は、</p>
+            <p class="ja-classical-line">『神館主の君はいまさねど
+愛子の姫に会はせまつらむ。
+玉治別神の命よわれは今
+君の御為に導きまつらむ』</p>
+            <p class="ja-classical-line">玉治別は、</p>
+            <p class="ja-classical-line">『今こそは人の情の知られけり
+鉄門を守る人の言葉に。
+黒姫はやがては此処に来ますらむ
+易く通せよ鉄門守る人』
+『黒姫を易く通さむ術なけど
+君のことばに詮術もなし。
+君ならで誰に開かむ此鉄門
+主の君の許しなくして』</p>
+            <p class="ja-classical-line">玉治別は、</p>
+            <p class="ja-classical-line">『いざさらば珍の館へ進み申さむ
+心も足も軽公の恵に』</p>
+            <p class="ja-classical-line">かく応答し乍ら、いつの間にか玄関口につけり。軽公は受付の玉公に向ひ歌を詠む。</p>
+            <p class="ja-classical-line">『玉公よ今より表の鉄門守れ
+わはこれより受付とならむ』
+『いざさらば表に立ちていかめしく
+みことのままに鉄門守らむ』</p>
+            <p class="ja-classical-line">と、つツと立つて元の門番をなすべく表に出て行く。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">This Karukō is a Sendenshi whom Tsugarunomikoto, the master of the mansion, relies upon as his right arm. Tsugarunomikoto turns toward Tamaharuwakenomikoto and chants thus:</p>
+          <p class="en-p">Tsugarunomikoto: 'Come quickly now and pass into the inner chamber;
+Aikohime awaits you.'</p>
+          <p class="en-p">Tamaharuwakenomikoto: 'Though the master Kami of the Kamuyakata is not present,
+What shall I say to the lord of my heart?'</p>
+          <p class="en-p">Guided by Tsugarunomikoto, he proceeds forward toward the inner chamber. Hearing of the arrival of Tamaharuwakenomikoto, Aikohime hurriedly adjusts her garments, smooths her hair, and walks serenely toward this place. As she steps into the long corridor, she encounters Tamaharuwake by chance,</p>
+          <p class="en-p">Aikohime: 'Aikohime who guides and saves the people of the world,
+has come hither to welcome you.
+Hearing that your Mikoto comes to this mansion,
+I have awaited you day after day with wearying longing.
+O lovely Kami-tsukasa Tamaharuwake,
+Your lofty Mina truly echoes through the world.
+Ah, to behold and look up at the pure form of the Kami before my very eyes,
+Today is a day of joy.'</p>
+          <p class="en-p">Tamaharuwake replies to this,</p>
+          <p class="en-p">Tamaharuwake: 'Kami-tsukasa of the high capital of fire of lofty name,
+Are you indeed the lady of my heart, how wondrous.
+The beloved daughter of the Kami Susanō no Mikoto,
+I have come yearning for the Mikoto, the Hime.
+Your lovely Mikokoro is made manifest,
+And even your Misugata shines brilliantly.
+Like the moon in the bright Amatsumisora,
+Now I gaze upon your pure Misugata.'</p>
+          <p class="en-p">Chanting thus, Aikohime, with Tsugarunomikoto guarding her before and behind, proceeds leisurely into the interior of the chamber. Within the inner room, the three sit in a tripod formation, opening their hearts to each other and conversing happily.</p>
+          <p class="en-p">Aikohime: 'Tamaharuwake-sendenshi-sama, how very far you have come to visit us. Unfortunately, my husband Takakuniwake set out this morning to the Katsura Waterfall for purification, offering a hundred-day vow, and so he is away; while it is truly inconvenient, please rest at your leisure and tell us wondrous tales of various lands.'</p>
+          <p class="en-p">Tamaharuwake: 'Yes, thank you very much.'</p>
+          <p class="en-p">As Aikohime relates the whereabouts of her younger sister one by one and details her active deeds, Aikohime, with an expression of indescribable delight, speaks:</p>
+          <p class="en-p">Aikohime: 'Tamaharuwake-sama, you too have endured considerable hardships. For the sake of Kami and for the sake of the people of the world, I pray you will serve in your divine duties in good health.'</p>
+          <p class="en-p">Tamaharuwake: 'Yes, thank you very much. I too am of a fortune-crossed station, abandoned by my parents, and am truly a solitary person, but ever since I converted to Izumokyou, I took the younger sister of Kuniyoriwake-sama as my wife, and now husband and wife unite our strength and devotedly attend to the service of Kami. Ah, even if one speaks of hardships, since it is hardship walking the path together with Kami, no matter what land I visit, it is truly unbearable in its pleasantness.'</p>
+          <p class="en-p">Aikohime: 'Ah, is that so. I too wish somehow to tour the countries of the world like my sister, but no matter what I say, being a person with a husband, it does not go as I might wish. It seems one can do no other service than that which accords with the karma of one's spirit and soul.'</p>
+          <p class="en-p">Tamaharuwake: 'Indeed, that is likely so. At times, Kurohime-sama of Izumokyou has a master named Takayamahiko, but in the sacred land of Aya, they quarreled over a trifling matter, and Takayamahiko-sama, declaring he would go to the island of Tsukushi, disappeared somewhere. Therefore, Kurohime-sama, believing firmly that Takayamahiko-sama must be in Tsukushi Island, has crossed oceans and mountains far to come to this land. Since the other Mina of Takakuniwake-sama is called Takayamahiko, Kurohime-sama is convinced he is none other than her own husband, and before long she will likely come hither; therefore, I have a favor to ask of you. Please let her pass into the inner rooms and listen to her story for a moment. This is the request of Tamaharuwake.'</p>
+          <p class="en-p">Aikohime: 'That indeed is a strange matter. The Mina of Kurohime-sama's master was also Takayamahiko, was it not? Is the whereabouts of that Takayamahiko-sama known to you?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">この軽公は、津軽命といふ館の主の股肱と頼む宣伝使である。津軽命は玉治別命に向ひ又詠ふ。</p>
+            <p class="ja-classical-line">『いざ早く奥の一間に通りませ
+愛子の姫は汝を待ちます』
+『神館主の神はまさねども
+いろとの君にものや申さむ』</p>
+            <p class="ja-classical-line">と、津軽命に導かれ、奥の間さして進み入る。愛子姫は玉治別命の入来と聞き、あわただしく衣紋をつくろひ髪をなで上げ、しづしづとして此方に向つて歩み来る。長き廊下に差かかる折、玉治別にパツタリ出会ひ、</p>
+            <p class="ja-classical-line">『世の人を導き救ふ愛子姫
+汝迎へむと此処に来れり。
+汝が命これの館に来ますぞと
+きくより日々に待ちあぐみたるよ。
+うるはしき玉治別の神司
+高き御名こそ世に響きけり。
+あゝ清き神の姿を目のあたり
+拝み仰ぐ今日ぞ嬉しき』</p>
+            <p class="ja-classical-line">玉治別はこれに答へて、</p>
+            <p class="ja-classical-line">『名は高き火の国都の神司
+汝はいろとにおはすか天晴れ。
+素盞嗚の神の尊の愛娘
+姫の命を慕ひ来にけり。
+うるはしき其御心の現はれて
+御姿さへも輝き玉へる。
+照りわたる天津御空の月の如
+清き御姿今拝むかな』</p>
+            <p class="ja-classical-line">と詠ひ乍ら、愛子姫、津軽命に前後を守られ、一間の内に悠々として進み入る。奥の一間に三人は鼎座して、互に打とけ嬉しげに語り合ふ。</p>
+            <p class="ja-classical-line">『玉治別の宣伝使様、ようマアはるばると訪ねて来て下さいました。夫高国別は折悪しく、今朝桂の滝へ御禊の為に、百日の心願をこめて参りました不在中で、誠に不都合なれども、ゆるゆる御休息の上、国々の御珍らしいお話を聞かせて下さいませ』</p>
+            <p class="ja-classical-line">『ハイ有難う御座います』</p>
+            <p class="ja-classical-line">と、愛子姫が妹の所在を一々物語り、且又其活動振を詳細に伝へけるに、愛子姫はえも云はれぬ愉快なる面色にて、</p>
+            <p class="ja-classical-line">『玉治別さま、随分あなたも御苦労なさいましたなア。神様の為世人の為、どうぞ御壮健にて御神務にお仕へ下さいますやう祈ります』</p>
+            <p class="ja-classical-line">『ハイ有難う御座います。私も不運な身の上、父母に捨てられ、ホンの独身者で御座いますが、三五教に帰順いたしましてより、国依別さまの妹を女房に貰ひうけ、今は夫婦が力を協せて、神様の御用を一心に致して居ります。イヤもう苦労といつても、神さまと道伴れの苦労で御座いますから、何処の国へ参りましても、真に愉快でたまりませぬ』</p>
+            <p class="ja-classical-line">『あゝ左様で御座いますか。妾も何とかして妹の様に世界各国を巡教いたしたく存じまするが、何を云つても夫ある身の上、思ふやうには参りませぬ。身魂の因縁相応の御用より出来ないものと見えますなア』</p>
+            <p class="ja-classical-line">『いかにも左様で御座いませう。時に三五教の黒姫さまは、高山彦といふ御主人が御座いますが、綾の聖地に於て、下らぬことから喧嘩をなされまして、高山彦さまは、筑紫の島へ行くと云ひ切つた儘、何処かへお隠れになりました。そこで黒姫さまが、高山彦さまは屹度筑紫島に御座ることと思召され、はるばると海山越えて此国へ来てゐられます。高国別さまの又の御名が高山彦さまと申すので、黒姫さまは吾夫とのみ思ひつめ、やがて此処へお越しになるでせうから、どうぞお願ひで御座います。奥へ御通し下さいまして、一応話をきいて上げて下さいませ。玉治別が御願ひで御座います』</p>
+            <p class="ja-classical-line">『それは又妙な事で厶いますなア。黒姫さまの御主人の御名もヤツパリ高山彦さまで厶いましたかなア。其高山彦さまの御所在はお分りになつて居りますか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takayamahiko-sama: 'Thinking that Takayamahiko-sama had crossed over to Africa, I instead found him appearing as ever in the Seichi, serving the Kami day and night. Whenever I see that, my heart aches with pity for Kurohime-sama's okokorone. I thought of once going to the residence in the Iso where the Lord God Kamususanōnōokami dwells, crossing over here anew, meeting Kurohime-sama, and letting her know. Combining this with senden, I have come alongside to welcome her.'</p>
+          <p class="en-p">Goshinsetsu: 'That is truly a goshinsetsu matter. If Kurohime-sama were to hear your goshintei, she would surely be overjoyed.'</p>
+          <p class="en-p">Takayamahiko-sama: 'Yes, arigata. According to what I have heard, I think we will be able to have a gomenkuwai with Kurohime-sama within this residence before too long.'</p>
+          <p class="en-p">Goshinsetsu: 'I too understand it to be sayō. I do hope she comes over quickly.'</p>
+          <p class="en-p">Just as they were speaking thus, the monban Tamakō hurriedly entered, and said,</p>
+          <p class="en-p">Tamakō: 'An old hag called Kurohime of Ananai-kyō has appeared at the omotemon, bringing five araotoko, and is saying to open this gate... What shall we do?'</p>
+          <p class="en-p">Tsugarunomikoto said genka,</p>
+          <p class="en-p">Tsugarunomikoto: 'Tamakō, thank you for your trouble, but quickly open the omotemon and guide Kurohime-sama's party here.'</p>
+          <p class="en-p">Tamakō wore a suspicious expression and said,</p>
+          <p class="en-p">Tamakō: 'Hé, is it all right to let through even an old hag who brings along so many bad fellows? She was saying something like she is Takayamahiko-sama's wife, you know. If you were to drag in such an old hag, it would be terrible. Above all, Yoshikohime-sama would surely be troubled.'</p>
+          <p class="en-p">Tsugarunomikoto: 'It does not matter, so go quickly and welcome them.'</p>
+          <p class="en-p">Tamakō: 'Hai.'</p>
+          <p class="en-p">Replying thus, the monban ran off toward the front.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『高山彦さまはアフリカへ御渡りかと思ひきや、依然として聖地に現はれ、神さまに朝夕お仕へをして居られます。私はそれを見るにつけ、黒姫さまの御心根が可哀相になり、神素盞嗚大神さまのまします斎苑の館へ一旦参りまして、更めてここへ渡り、黒姫さまに巡り会つて、知らして上げたいと思ひ、宣伝を兼ねお迎へ旁参りましたので御座います』</p>
+            <p class="ja-classical-line">『それはマア御親切な事で御座います。黒姫さまがあなたの御心底をお聞きになられたら、さぞお喜びになることでせう』</p>
+            <p class="ja-classical-line">『ハイ有難う、私の伺ひでは、このお館にて余り遠からぬ内、黒姫さまに御面会が出来るやうに存じます』</p>
+            <p class="ja-classical-line">『妾も左様に心得ます。どうぞ早くお越し下さると宜しいがなア』</p>
+            <p class="ja-classical-line">かく話す折しも、門番の玉公はあわただしく入り来り、</p>
+            <p class="ja-classical-line">『三五教の黒姫と云ふ婆アさまが、五人の荒男を連れて、表門へ現はれ、此門を開け……と言つて居りまする。如何致しませうかなア』</p>
+            <p class="ja-classical-line">津軽命は言下に、</p>
+            <p class="ja-classical-line">『玉公御苦労だが、早く表門をひらき、黒姫さま一行を此処へ御案内申せ』</p>
+            <p class="ja-classical-line">玉公は不審な面持ちにて、</p>
+            <p class="ja-classical-line">『へー、あんな悪い奴を沢山伴れた婆アでも、通して宜しいか。高山彦さまの女房だなんぞと言つてゐましたよ。モシもあんな婆アさまを引つぱり込まうものなら大変ですよ。第一愛子姫さまが御迷惑を遊ばすでせう』</p>
+            <p class="ja-classical-line">『構はないから、早くお迎へ申して来い』</p>
+            <p class="ja-classical-line">『ハイ』</p>
+            <p class="ja-classical-line">と答へて門番は表をさして走り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c22.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 22: 当違 [986]</span>
+      </a>
+      <a href="c24.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 24: Joy の涙 [988]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

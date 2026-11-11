@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 案外 [969] - Volume 35 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 35 Table of Contents</a>
+      <span>Volume 35</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 35 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: 案外 [969]</h1>
+      <p class="chapter-title-ja">案外〔969〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kurohime and her party of nine finally arrived as the three senior retainers of the great serpent appeared at the front gate. The two or three young fellows who had been acting as gatekeepers, starting with the three men and women buried deep in the forest, and Torakō—who had been terrified even just hearing their names—were completely struck dumb, gazing with pale faces and vacant looks as the party arrived leading the henchmen and even accompanied by the Sendenshi.</p>
+          <p class="en-p">Kanekō assumed a bizarre posture, purposely raised his voice into a high-pitched whine, and cried:</p>
+          <p class="en-p">Ho-i, ho-i! Genkō, you rascal, Kanekō-sama has returned! A-ai-sama has also come back from the dead, rising from the grave, and we've come to claim your necks, so you'd better be prepared. My body died because I felt such bitter resentment, but my spirit has returned to life, and since I've come to thank you for your words, hurry up and let the boss of the three senior retainers, along with Yosakō, Tokukō, and my sworn brothers Taka and Kanu, know all about this! Hiyu-doro-doro-doro...</p>
+          <p class="en-p">Even though the sun of the declining afternoon was still blazing down relentlessly, he imitated the ghosts right in front of the gate, thrusting both hands forward with a whoosh two or three times, moving back and forth a few yards to the left and right while wearing a puckered, grimacing face.</p>
+          <p class="en-p">Genkō and two other henchmen were startled and scurried off to hastily report to Yosakō, Tokukō, and the others, who were drinking heavily and rambling drunkenly in the banquet room. Knowing the interior of the mansion like the back of his hand, Kanekō led the group straight into the banquet hall without a shred of hesitation or restraint.</p>
+          <p class="en-p">The comical sight of Yosakō and Tokukō losing their backbone and panicking around was so funny that it took sheer willpower not to burst out laughing. Kanekō put on a fake voice once more and said:</p>
+          <p class="en-p">Ho-i, ho-i, Yosaku, you bastard. You forgot the bond of brotherhood, suddenly slipped a rope around my neck, bound my hands and feet, and oh so ruthlessly buried me alive. Look at this, my neck has grown this long!</p>
+          <p class="en-p">As he spoke, he forcibly stretched his neck out, rolled his eyes wildly, stuck his tongue out as far as it would go, let both hands dangle eerie and limp in front of him, and trembled violently as he declared:</p>
+          <p class="en-p">Hiyu-doro-doro-doro...</p>
+          <p class="en-p">Yosakō, with his legs completely paralyzed, pressed his palms together and pleaded:</p>
+          <p class="en-p">Ya, Big Brother, please forgive me! I certainly wasn't the one who killed you. It was the boss's orders. As you well know, I begged him to spare you and let you go, but since he wouldn't listen to me no matter what, I had no choice but to do that pitiful thing. Please, have mercy on me! In return, I will definitely pray for your peace in the next world.</p>
+          <p class="en-p">The comical sight of him turning deathly pale, pressing his palms together, and trembling was too much. Torakō burst out laughing and shouted:</p>
+          <p class="en-p">Aha-ha-ha-ha! Hey, Yosaku and Toku, both of you, pull yourselves together a bit, will you? We're not ghosts or anything of the sort. We're genuine, lively men among men—Tora of Takenomura. You were kind enough to take such good care of A-ai for us, and since we're so deeply grateful, we've come to thank you. Even my little sister Oume was kindly looked after—you guys are truly heartless. Now, just calm your minds and listen to what Torakō-sama has to say!</p>
+          <p class="en-p">My, my, was it you, the boss of Takenomura? Please let bygones be bygones and wash all past troubles away, and spare my life, I beg of you!</p>
+          <p class="en-p">Hey, Yosaku and Toku, I'd really love to see what you two did with your testicles just once.</p>
+          <p class="en-p">Well, well, showing them to you would be easy enough, but from sheer fright, they seem to have moved out and relocated somewhere else... The testicles themselves are quite clever, you see. Figuring that if they got dragged around by Torakō-sama, even their parent born in the same year would suffer, they neatly hid themselves away. You really are a clever fellow, aren't you? Ever since you were young, with that wrinkled face of yours, I always thought you were an unlikable bastard, but at a time like this, it certainly comes in handy. They've always been limp and flaccid, never mustering an ounce of strength, but it seems they come in handy when the chips are down. Even my adamantine jewel has gone off somewhere. Did it carry them off and run away, I wonder?</p>
+          <p class="en-p">{}issing paragraph text</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">黒姫の一行九人は、漸くにして大蛇の三公が表門に立ち現れた。門番をして居た二三人の若い奴、森の中に埋めて置いた三人の男女を初め、名を聞いても恐れて居た虎公が、乾児を引きつれ宣伝使までも伴うてやつて来たのに肝を潰し、蒼白な顔をしてポカンと眺めて居る。</p>
+            <p class="ja-classical-line">兼公は妙な手つきをして故意とに細い声を出し、</p>
+            <p class="ja-classical-line">『ホーイホーイ、源公の奴、兼公さまが帰つて来たぞよ。お愛さまも生還り、墓から現はれて、お前等の素首を貰ひに来たから用意をして呉れ。余り怨めしいので肉体は死んだけれど霊魂が生還り、言葉のお礼に来たのだから、三公の親分を初め与三公、徳公、高、勘の兄弟分にも早く知らして下せえよ。ヒユードロドロドロ……』</p>
+            <p class="ja-classical-line">と未だ七つ下りの太陽がカンカンとして居るのに、亡者の真似をして門の前で二三遍両の手をシユウと前に出し、右に左に二三間計り進退しながら顰めた顔をして見せる。</p>
+            <p class="ja-classical-line">源公外二人の乾児は驚いて、与三公、徳公等が酒に酔ひ喰うて管を捲いて居る座敷に慌しく注進する。兼公は勝手知つたる館の内、一同を導いて遠慮会釈もなく酒宴の場に乗込み来る。</p>
+            <p class="ja-classical-line">与三公、徳公は弱腰を抜かし狼狽へ廻る可笑しさ、吹き出すばかり思はるるをジツと耐へ、兼公は尚も作り声、</p>
+            <p class="ja-classical-line">『ホーイホーイ与三の野郎。兄弟分の交誼を忘れ、俺の首へ不意に縄を引つかけ、手足を縛り、ようまあ無残にも生埋めにしよつたな。これ見よ、此通り首が長うなつたぞよー』</p>
+            <p class="ja-classical-line">と云ひながら無理に首を伸ばして見せ、眼をクリクリさせ、舌を思ひ限り突き出し、両の手を怪しく前の方へぶらさげ、ビリビリ慄はせながら、</p>
+            <p class="ja-classical-line">『ヒユードロドロドロ……』</p>
+            <p class="ja-classical-line">与三公は腰のぬけた儘両手を合せ、</p>
+            <p class="ja-classical-line">『ヤア兄貴許して呉れ。決して俺が殺したのぢやない。親分の云ひつけだ。俺は親分にお前の知つて居る通り、助けてやつて呉れと頼んだのだが、如何しても聞いて呉れぬものだから、止むを得ず可憐さうな事をしたのだ。何卒堪忍して呉れ。その代りきつとお前の冥福を祈つてやる』</p>
+            <p class="ja-classical-line">と蒼白の顔をし、両手を合せて慄つて居る可笑しさ。虎公は吹き出し、</p>
+            <p class="ja-classical-line">『アハヽヽヽ、オイ与三、徳の両人、些と確りせぬか。幽霊でも何でもないのだ。正真正銘のピチピチした男の中の男一匹、武野村の虎だ。随分御親切にお愛をしてやつて呉れて、余り有難いからお礼に来たのだよ。妹のお梅まで御親切に預つてほんとにかつちけねえ。まあ悠りと気を落ちつけて、虎公の仰しやる事を聞かつしやい』</p>
+            <p class="ja-classical-line">『これはこれは、武野村の親分で御座いましたか。何卒今までの不都合は水に流し、命だけは助けて下せえませ』</p>
+            <p class="ja-classical-line">『オイ、与三に徳の両人、手前は睾丸をどうしたのか一遍見せて貰ひてえものだ』</p>
+            <p class="ja-classical-line">『ハイハイ、お見せ申すは易い事でげすが、余りの吃驚で何処かへ転宅してしまひました。……睾丸の奴、気が利いて居らあ。虎公さまに引張られては、同じ年に生れた親までが苦しむと思つて、体好く姿をかくしよつた。貴様と云ふ奴は余程気の利いた奴だ。若い時から皺だらけの面しよつて気の喰はぬ奴だと思つて居たが、こんな時には都合がよい。何時もしんなまくらな、ブラブラとしやがつて力も出しやがらぬが、まさかの時には間に合ふと見えるわい。金剛不壊の宝珠迄何処かへいつた。どつかへ持つて逃げよつたのかなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Oai: 'Ho ho ho ho!'</p>
+          <p class="en-p">Oume: 'Ah, how funny! Toku's uncle, how unseemly. Quickly hide such a place.'</p>
+          <p class="en-p">'Hey, knowing that if hidden it will stay hidden, the testicle of a tanuki that cannot come out even if it wants to, ah ha ha ha!'</p>
+          <p class="en-p">'How is it, Yosa and Toku, are you a little relieved?'</p>
+          <p class="en-p">'I feel relieved just a little bit. Boss, I'm truly sorry, but my weak lower back has completely given out, so please massage my lower back for a bit!'</p>
+          <p class="en-p">'Hey, what a troublesome fellow!'</p>
+          <p class="en-p">Saying this, he goes around to the back, grips the lower back firmly, and puts spirit into it with a grunt,</p>
+          <p class="en-p">'Ouch ouch ouch, ah, it seems somehow to have settled back into its original sheath. As expected of the boss, thank you very much.'</p>
+          <p class="en-p">'I say, foreman, I humbly ask a favor of Tokukō as well. It cannot go on like this in any way.'</p>
+          <p class="en-p">'Hey, you mistook a ghost for an masseur!'</p>
+          <p class="en-p">'Absurd, to say thank you to a ghost, you don't need to worry about such a thing. I am definitely thinking of saying thank you... Ah, before I knew it, my lower back has healed properly. Since it has come to this, there is no place left to put the ghost, ah ha ha ha!'</p>
+          <p class="en-p">At such a place, Sankō the giant serpent, having adjusted his kimono reverently, made four or five of his henchmen carry food and drink, held his folded white fan with his right hand placed diagonally near his knee, entered quietly, sat down neatly and properly in front of everyone,</p>
+          <p class="en-p">'Well, well, everyone, you have indeed come in. Sankō considers this an extreme honor and joy. The moment the figures of your honorable party were seen flickering at the front gate, two or three small snakes crawled out from this Sankō's body. Thinking it strange as I watched them, those small snakes make for the front gate and run away with all their might. When I chased after them and watched, thinking it a strange thing, suddenly three giant serpents changed, raised their hooded heads, and ran away at full speed toward the direction of Mukou Pass. Yesterday, toward Oai-sama, Oume-sama, and the other persons, I committed a rude act out of petty grudge, but certainly it was not that this Sankō committed such evil deeds. The giant serpent that possessed me used my flesh and blood and committed such atrocities and lawlessness, therefore, I beg you, who are believers of Mitakekyō, to forgive this flesh and blood's sins up until now. Convinced that you will definitely forgive me, I have come to have this audience. Come, please partake of a cup of sake.'</p>
+          <p class="en-p">'Well, well, this is a deeply humbling greeting, and it must be just as you say. Torakō hates the giant serpent but does not hate Sankō; now, now, please set your minds at ease.'</p>
+          <p class="en-p">'Everyone, welcome indeed. Come now, although it is a filthy place, please relax comfortably and I ask that you partake of Sankō's modest cup of sake.'</p>
+          <p class="en-p">'Yes, thank you. Come, come, Oai-sama, Oume-sama, Mangkō, what are you hesitating for? Come, go up quickly. Torakō-sama's henchmen, you go up together too... Hey, excuse me.'</p>
+          <p class="en-p">Saying this, Kurohime passes straight through to the inner rooms. Torakō and the rest also follow behind Kurohime, and took their seats in a horseshoe shape, stretching in a row in the inner room.</p>
+          <p class="en-p">Sankō the giant serpent removes the barrier from the bottom of his heart toward Kurohime and the rest, and fills his sincerity as he urges them with drinks and food. Kurohime's party also, thanks to observing the teachings of Mitakekyō, completely forgot the grudge up until now as if washing their bottoms in a flowing river, became harmonious and cheerful as they exchanged cups of sake, feeling as if they had returned to their own homes without a care, either singing or dancing, and hundreds of Sankō's henchmen also spread straw mats in the courtyard outside the tatami room, re-doing their drinking, and Sankō's mansion completely transformed into a full-scale festival commotion.</p>
+          <p class="en-p">Sankō exerts all his efforts in the treatment of his rare guests, and is performing an open-hearted reception that reaches every itching spot in various ways. Sankō's poem,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お愛『ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">お梅『アー可笑しい、徳のをぢさま、見つともない。そんな処早う匿してお呉れ』</p>
+            <p class="ja-classical-line">『ヘイ、匿すれば、かくれるものと知りながら、出るに出られぬ狸の睾丸、アハヽヽヽ』</p>
+            <p class="ja-classical-line">『どうだ、与三に徳、些つと安心したか』</p>
+            <p class="ja-classical-line">『些つと許り安心したやうです。親分、誠に済まねえが、さつぱり弱腰が抜けて仕舞つたのだから、一つ腰を揉んで下せえな』</p>
+            <p class="ja-classical-line">『エイ厄介な奴だなア』</p>
+            <p class="ja-classical-line">と云ひながら後へ廻り、腰をグツと抱へウンと気合をかけると、</p>
+            <p class="ja-classical-line">『アイタヽヽ、アヽ、これでどうやら元の鞘に納まつたらしい。遉は親分だ、有難う御座いやす』</p>
+            <p class="ja-classical-line">『もしもし親方、徳公もどうか一つ願ひます。如何にも斯うにもなりませぬわ』</p>
+            <p class="ja-classical-line">『エヽ幽霊を按摩と間違へやがつたな』</p>
+            <p class="ja-classical-line">『滅相な、幽霊に礼云ふなんて、そんな御心配はいりませぬ。きつと礼云ふ積りで御座いますから……アヽ知らぬ間にちやんと腰が直つて居やがらア。もう斯うなつちや幽霊のやり場がなくなつて仕舞つた、アハヽヽヽ』</p>
+            <p class="ja-classical-line">斯かる処へ大蛇の三公は、衣紋を整へ恭しく四五人の乾児に酒肴を運ばせ、白扇をすぼめたまま右の手を膝のあたりに斜に置き、静々と入り来り、一同の前に行儀よくきちんと坐り、</p>
+            <p class="ja-classical-line">『これはこれは皆様、よくこそ入らせられました。三公誠に恐悦至極に存じます。貴方様御一行のお姿が門前にチラリと見えますや否や、この三公の体より小さき蛇二三匹這ひ出しました。ハテ不思議やと眺めている中、その小蛇は表門さして一生懸命逃げだす。不思議の事だと後を追つかけ眺むれば、忽ち変る三匹の大蛇、鎌首を立て向日峠の方面さして一目散にかけ去りました。昨日はお愛様お梅様其他の方々に対し、くだらぬ遺恨より御無礼の事を致しましたが決してこの三公が左様の悪事を働いたのではありませぬ。私に憑依して居た大蛇の奴、吾が肉体を使ひ、あのやうな悪逆無道を致したので御座いますから、何卒三五教の信者たる貴方様、今迄の此の肉体の罪を許して下さいませ。屹度お許し下さるに間違ひないと確信致してお目通り致しました。サア何卒一献召し上り下さいませ』</p>
+            <p class="ja-classical-line">『これはこれは痛み入つたる御挨拶、仰せの通りで御座らう。虎公は大蛇を憎んで三公を憎まず、マアマア御安心なさいませ』</p>
+            <p class="ja-classical-line">『皆様ようこそお越し下さいました。サア何卒、汚穢しい所では御座いますが、御緩りとお寛ぎ下さいまして、三公が寸志の御酒をお上り下さるやうにお願ひ致します』</p>
+            <p class="ja-classical-line">『ハイ有難う。サアサアお愛さま。お梅さま、孫公、何をまごまごして居るのだ。サア早く上りなさい。虎公さまの乾児共、お前も一緒に上るんだよ……ヘイ御免下さいませ』</p>
+            <p class="ja-classical-line">と云ひながら黒姫はズツと奥に通る。虎公外一同も黒姫の後に従ひ、奥の間に蹄鉄形にずらりと座を占めた。</p>
+            <p class="ja-classical-line">大蛇の三公は黒姫以下一同に心の底より障壁を除つて、誠意を籠め酒肴を勧める。黒姫の一行も三五教の教を遵奉して居るお蔭で、今迄の恨みを流れ河で尻を洗つたやうにケロリと忘れて仕舞ひ、和気靄々として盃を酌み交し、他愛もなく吾家に帰つたやうな気分になつて、或は歌ひ或は舞ひ、三公の数百人の乾児も座敷の外の庭に蓆を敷き、再び酒の飲み直しをやり、三公館は全くのお祭り騒ぎと一変して了つた。</p>
+            <p class="ja-classical-line">三公は珍客の待遇に全力を尽し、打ち解けて色々と痒い所へ手の届くやうな接待振りをやつて居る。三公の歌、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kumaso no kuni ni kakurenaki / Shikuno magatsuno iremono to / Motehayasareta narazumono / Orochino Sankō to na wo yobare / Chōshini notte doshidoshi to / Taishiyureijiu no aritake wo / Tsukushite kita no ga hazukashii / Yamata no orochi no wakemitama / Shikuno magani hiyōisare / Kami no ōji wa iu mo saraha / Hito no fumubeki michi sa e mo / Tori-chigaetaru magatsukami / Shifuchiyakushin ni toraware / Aio no kata ni kesau shite / Asana yusana ni murakimono / Kokoro wo nayamase itarishi ga / Omoi wa tsumoru koi no anura / Ayame mo wakarazu nari-hatete / Torakō-sama no rusutaku wo / Neraishimaste oshi-kakomi</p>
+          <p class="en-p">Aio no kata ya Oume-sama / Kayowaki onna wo hikittsukue / Jinsekitaeshi Mukafuyama / Hayashi no naka ni tsure-yukite / Hito no nasubeki waza de nai / Akugiyakumudau wo kankau shi / Kachidoki agete wagaya ni / Kaerite mireba murakimono / Kokoro no oni ni semerarete / Yoru mo rokuroku ni nemarezu / Sono kurushisa ni ananahi no / Sumeōkami no o-mae ni / Karada wo kiyome kuchisosogi / Onoga okaseshi tsumitoga wo / Waburu orishimo shinden ni / Araware tamahishi kamisugata / Konohanahime no okeshin / Kotoba shizuka ni norasu yau / Aio Oume wo hajime toshi / Futari no otoko wa ananahi no</p>
+          <p class="en-p">Kami no tsukasa no Kurohime ni / Sukui-dasarete ashita no hi / Kanarazu koko ni kuru beshi / Naru wa ima yori mi wo kiyome / Kokoro no koma wo tate-naoshi / Makoto hitotsu no ananahi no / Michi ni kaerite ima made no / Ashiki okonai tate-naoshi / Seijin no kagami to nare yo kashi / Torakō Aio wo hajime toshi / Kurohime-tsukasa ya Magonkō / Onmi soka i-ichidō ga / Uyauyashiku mo ide-mukahe / Tagai ni mune wo uchi-akete / Kami ni sonaeta ōmiki ni / Kokoro no aka wo arai-sari / Tagai ni te ni te wo hiki-autte / Seijin no tame ni tsukuse yo to / Norase tamahishi o-kotoba / Yume ka utsutsu ka yume naranu</p>
+          <p class="en-p">Utsutsu ni aranu ōshincho / Akugiyakumudau no Sankō mo / Mune no kumokiri fuki-chiri te / Ima wa tōtoki kami no miko / Kiyoki mitama to nari ni keri / Aa kannagara kamigami / Mitama sakahai-mashimashite / Kurohime-tsukasa wa iu mo saraha / Torakō-sama ya Aio-sama / Soka i-ichidō no shinto to / Sumeōkami no o-michi ni / Susumite yukamu waga kokoro / Kanzen ni iku ni kikoshimese / Kunidamagami no Junyohime / Gesshohiko no kamisama ni / Seishin komete Sankō ga / Tsutsushimi chikai-tatematsuru / Aa kannagara kamigami / Mitama sakahai-mashimase yo</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『熊襲の国に隠れなき
+醜の曲津の容器と
+もてはやされた無頼漢
+大蛇の三公と名を呼ばれ
+調子に乗つてドシドシと
+体主霊従のありたけを
+尽して来たのが恥かしい
+八岐の大蛇の分霊
+醜の魔神に憑依され
+神の大道は云ふも更
+人の踏むべき道さへも
+取り違へたる曲津神
+執着心に囚へられ
+お愛の方に懸想して
+朝な夕なに村肝の
+心を悩ませ居たりしが
+思ひは募る恋の暗
+黒白も分かずなり果てて
+虎公さまの留守宅を
+狙ひすまして押し囲み</p>
+            <p class="ja-classical-line">お愛の方やお梅さま
+繊弱き女を引つ捕へ
+人跡絶えし向日山
+林の中に連れ行きて
+人のなすべき業でない
+悪虐無道を敢行し
+勝鬨あげて吾家に
+帰りて見れば村肝の
+心の鬼に責められて
+夜も碌々に寝まれず
+その苦しさに三五の
+皇大神の御前に
+体を清め口嗽ぎ
+自が犯せし罪科を
+詫ぶる折しも神殿に
+現はれ給ひし神姿
+木花姫の御化身
+言葉静に宣らすやう
+お愛お梅を初めとし
+二人の男は三五の</p>
+            <p class="ja-classical-line">神の司の黒姫に
+救ひ出されて明日の日は
+必ず此処に来るべし
+汝は今より身を清め
+心の駒を立て直し
+誠一つの三五の
+道にかへりて今迄の
+悪しき行ひ立て直し
+世人の鑑となれよかし
+虎公お愛を初めとし
+黒姫司や孫公を
+御身其外一同が
+恭しくも出で迎へ
+互に胸を打ちあけて
+神に供へた大神酒に
+心の垢を洗ひ去り
+互に手に手を引き合うて
+世人のために尽せよと
+宣らせたまひし御言葉
+夢か現か夢ならず</p>
+            <p class="ja-classical-line">現にあらぬ大神勅
+悪虐無道の三公も
+胸の雲霧吹き散りて
+今は尊き神の御子
+清き身魂となりにけり
+あゝ惟神々々
+御霊幸倍ひましまして
+黒姫司は云ふも更
+虎公さまやお愛さま
+其他一同の信徒と
+皇大神の御道に
+進みて行かむ吾が心
+完全に委曲に聞し召せ
+国魂神の純世姫
+月照彦の神様に
+誠心籠めて三公が
+慎み誓ひ奉る
+あゝ惟神々々
+御霊幸倍ひましませよ』</p>
+            <p class="ja-classical-line">と歌ひ終り、一同に恭しく一礼して下座につき敬意を表せり。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: 村の入口 [968]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: Song の Virtue [970]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

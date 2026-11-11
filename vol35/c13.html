@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: Mountain 颪 [977] - Volume 35 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 35 Table of Contents</a>
+      <span>Volume 35</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 35 &bull; Chapter 13</span>
+      <h1 class="chapter-title-en">Chapter 13: Mountain 颪 [977]</h1>
+      <p class="chapter-title-ja">山颪〔977〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At the peak of Shirayamatauge, as the result of a general election, a Sendenshi of Ananai-kyō, calling himself Magokōwake, stood up with great spirit and valor, squaring his shoulders and singing a Sendenka. Just as he was singing and taking heart, a voice of Kami came from nowhere: 'I am Tamaharuwaketsukasa. Being a bonbu whose steps a mere inch ahead cannot be seen, what is the meaning of you acting as a Sendenshi and holding an election? Quickly straighten your heart,' it was told. Magokōwake, crestfallen, with hunched shoulders and marching briskly down the steep slope of Shirayamatauge toward Tōhoku, keeping the beat with his feet, while shouting: 'Untokodotskoi, dotskoishyo! Do not stumble, do not stumble, be careful!'</p>
+          <p class="en-p">He goes down shouting out. Magokōwake, with unsteady footing and putting strength into his toes, began to sing as he descended the slope:</p>
+          <p class="en-p">At the peak of Shirayamatauge, 'Untokodotskoi, it is dangerous!' To obtain the supreme commander of the departure for the Kototamasen, Tora, San, and Aoi, the three of them, held a council with heads together, and as a result, 'Untokodotskoi,' he slips again. They made me a noble Sendenshi, a messenger of Kami. Does not the proverb of the world also say, 'Untokodotskoi,' names are not guests but the true masters! Sincerely obeying the words of Mizu-no-Mitama, aligning our hearts with one another, the place we have chosen is 'Untokoshyo.' 'Dotskoi,' from the top of my head, while saying that he was Tamaharuwake, with a voice like thunder, 'Dotskoi,' he scolded me. What kind of matter is this again? The giant serpent's rogue must have transformed itself to break our spirits and performed such a farce. Tora, San, and Aoi, you three, do not worry by any means. Deceived by Magatsuhi-no-Kami, how could our divine service ever be fulfilled? Things called evil spirits pay attention from corner to corner, make airtight arrangements, and wait with open arms. Considering that point, 'Untokodotskoi,' you must not rashly advance. Keeping your footing carefully against each other, so as not to ride the smooth-talking words of the serpent, nor the stone cart, you must be cautious.</p>
+          <p class="en-p">Be that as it may, I too, for some reason, feeling unwell, 'Untokodotskoi,' my enthusiasm completely vanished. 'Dotskoidotskoi,' wait a while. Did Kami take such a measure precisely to test our hearts? What on earth is it for a bonbu; the situation is entirely incomprehensible. Truly, in human life, all matters are left to the heart of Kami. Once completely entrusted, what kind of matter would fail to be accomplished? Fierce though the serpent may be, we protect Ananai-kyō. There is nothing that can oppose the might of the infinite, merciful Sumeru-no-Kami. Since I have conviction, you all must hold your hearts firm. 'Dotskoishyo, dotskoishyo!'</p>
+          <p class="en-p">A steeper slope than expected, 'Garagaragaragarai tatatsu!' For talking too much, as divine punishment, 'Dotskoidotskoi, dotskoishyo!' Slipping and tumbling down, I hit my spine hard. This is unbearable, 'Dotskoishyo.' Be that as it may, 'Untokose.' From now on, if I lose heart, how will anything ever be fulfilled? The divine power of my constant and unceasing faith, 'Untokoshyo,' now is the time for it to manifest. When Kami appears in the open and distinguishes good from evil, right from wrong, if those words are true, do not worry at all, 'Dotskoishyo.' Rejoice, you all, there is no need. Ah, Kannagara-kamigami!</p>
+          <p class="en-p">Before the presence of Kunitama-no-Kami no Jun'yohime and Tsukihirohiko, Magokō of Ananai-kyō appeared as Magokōwake, and 'Untokodotskoi,' chosen, now a noble Sendenshi. With heart calm and peaceful, granting permission, grant us the divine power to pacify and harmonize all the giant serpents of the lake of the turtle. Praying with sincere heart before the presence of Kami, 'Untokodotskoi, dotskoishyo!'</p>
+          <p class="en-p">A record-breaking wind blows, 'Untokodotskoi,' do not be scattered. If you are careless, your hat will fly off. Not just the hat, but even your body feels as though it will scatter like tree leaves. 'Untokodotskoi,' muscle power, all over the body, 'Untokoshyo.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">白山峠の絶頂で
+普通選挙の其結果
+三五教の宣伝使
+孫公別と名のりつつ
+意気揚々と勇み立ち
+肩肱怒らし宣伝歌
+歌うて勇む折柄に
+いづこともなく神の声
+われは玉治別司
+一寸先の見えもせぬ
+凡夫の身にて宣伝使
+選挙するとは何事ぞ
+早く心を直せよと
+云はれて孫公は悄気かへり
+肩をすぼめてすたすたと
+白山峠の峻坂を
+東北さして下りつつ
+足の拍子を取りながら
+「ウントコドツコイ　ドツコイシヨ」
+倒けなよ倒けなよ気を付けよ</p>
+            <p class="ja-classical-line">言あげしながら下り行く。</p>
+            <p class="ja-classical-line">孫公別は足許覚束なく爪先に力を入れながら、坂道を下りつつ歌ひ出したり。</p>
+            <p class="ja-classical-line">『白山峠の絶頂で
+「ウントコドツコイ　危ないぞ」
+言霊戦に出陣の
+其統帥を得むものと
+虎、三、お愛の三人が
+鳩首謀議の其結果
+「ウントコドツコイ」又辷る
+俺をば尊い宣伝使
+神の使にして呉れた
+世の諺にも云ふぢやないか
+「ウントコドツコイ」名は実の
+賓ではなうて実の主と
+瑞の御霊の言の葉を
+一同遵奉仕り
+互に心を合せあひ
+選むだ処を「ウントコシヨ」
+「ドツコイ」頭の天辺から
+玉治別だと云ひながら
+雷のやうなる声をして
+「ドツコイ」叱りつけられた</p>
+            <p class="ja-classical-line">こりや又如何した事だらう
+大蛇の奴めが化けて来て
+俺等が肝を挫かうと
+あんな狂言したのだらう
+虎、三、お愛の三人よ
+必ず心配するでない
+曲津の神にだまされて
+如何して御用が勤まろか
+悪の御霊と云ふものは
+隅から隅まで気を配り
+水も漏らさぬ仕組して
+手具脛引いて待つて居る
+其処の処を考へて
+「ウントコドツコイ」軽々に
+進んで行つちやならないぞ
+互に足許気をつけて
+大蛇の吐いた口車
+石の車に乗らぬよに
+注意をせなくちやなるまいぞ
+さはさり乍ら俺も亦</p>
+            <p class="ja-classical-line">何だか気分が悪なつて
+「ウントコドツコイ」張合が
+サツパリコンとなくなつた
+「ドツコイドツコイ」待て暫し
+これも矢張神様が
+俺等の心をためす為め
+あゝ云ふ手段を取られたか
+凡夫の身では何ぢややら
+薩張り様子が分らない
+唯何事も人の世は
+神の心に任すのだ
+任せきつたる暁は
+如何なる事かならざらむ
+大蛇は如何に猛くとも
+三五教を守ります
+仁慈無限の皇神の
+威力に敵する者はない
+私は確信ある程に
+皆さま心をシヤンと持て
+「ドツコイシヨー　ドツコイシヨー」</p>
+            <p class="ja-classical-line">思うたよりもきつい坂
+「ガラガラガラガラ　アイタツタ」
+あんまり喋つた天罰で
+「ドツコイドツコイ　ドツコイシヨ」
+すつてんころりと転倒し
+強か背骨を打つたぞよ
+こいつは耐らぬ「ドツコイシヨ」
+さはさり乍ら「ウントコセ」
+今から俺が屁古たれて
+どうして成就するものか
+常住不断に信仰した
+其神力の「ウントコシヨ」
+現はれ出づる今や時
+神が表に現はれて
+善悪正邪を立て別ける
+其御言葉が実ならば
+決して心配「ドツコイシヨ」
+皆さま喜べ要らないぞ
+あゝ惟神々々
+国魂神の純世姫</p>
+            <p class="ja-classical-line">月照彦の御前に
+三五教の孫公が
+孫公別と現はれて
+「ウントコドツコイ」選まれて
+今は尊き宣伝使
+心を平に安らかに
+諾ひたまひて鼈の
+湖水の大蛇を悉く
+言向け和す神力を
+授けたまへよ惟神
+神の御前に誠心を
+捧げて祈り奉る
+「ウントコドツコイ　ドツコイシヨ」
+レコード破りの風が吹く
+「ウントコドツコイ」散らされな
+ウカウカしとると笠が飛ぶ
+笠ばつかりか体まで
+木の葉のやうに散りさうだ
+「ウントコドツコイ」力瘤
+体に一面「ウントコシヨ」</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">May your divine virtue alone be filled, and may you easily pierce through this difficult pass, I humbly and earnestly pray, reverently and awe-stricken, I pray unto You.'</p>
+          <p class="en-p">So chanting, while blown by the wind, they descend the steep slope.</p>
+          <p class="en-p">Aioata begins to sing in a quiet voice.</p>
+          <p class="en-p">Famed even in the land of Kumaso, higher than the peak of Shirayamatauge, serving in the path of the highly praised Ananai, as the attendant of Kurohime-sama, Magokō appears. Yet, the divine will of the Sumeōkami he fails to comprehend atop the mountain. Reaching the summit, enveloped in the clouds of conceit, calling himself a Sendenshi whose name is fairer than his own self, taking the name of Magokōwake, he strides forth in high spirits and rejoices. At that very moment, suddenly in the heavenly skies, the terrifying voice of Kami is heard. Magokō-sama, caught in the desire for fame and profit, remains unaware of it. Taking the Sendenshi as a shield, he descends Shirayamatauge.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara, Magokō of Ananai-kyō! Pray, correct your heart, wipe away your attachments, and as the original Magokō once more, go forth to subdue the Orochi! Freed from the desires of love, yearning once more for the honor of a Sendenshi, you advance adopting a pen name not permitted by the Kami of Heaven and Earth. How vexing is that state of your heart!</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara, O Aioata's chest prays that your heart may return to sincerity as quickly as possible—do comprehend even a little of it! Listen, listen, everyone! Take care of your feet; there are many centipedes here.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara, an unauthorized Sendenshi of Kami! How could the subjugation of the Orochi possibly go well? I cannot help but worry. Rather than harboring such ambitions, reform in the present moment, return to your original heart, crouching down in the heavenly skies, and prostrating upon the great earth, walk the path of Ananai with humility. This indeed is Aioata's true kindness toward Magokō; do not take it amiss.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara, may divine blessings prevail, and may our party of four grandly establish our achievements before Kami, so that we may return to our hometown as quickly as a single day, O heavenly deities, kunitsukami, the hundred kami, before the presence of the Kunitakamigami, with a heart filled with sincerity we pray to You.'</p>
+          <p class="en-p">So chanting, she descends quietly.</p>
+          <p class="en-p">Sankō descends the slope and begins to sing.</p>
+          <p class="en-p">"Yatsutokodotsukoi untokoshiyo!" The lake seen in the distance—our father and mother had their lives taken by what people fear as a crooked deity, a remnant of the Yamata no Orochi, "Dotsukoishiyo!" A lake of deep grievances to remember. Having heard the teachings of Ananai-kyō, reforming my heart, keeping my mind peaceful and calm, to lead and pacify the enemy with words—once I had resolved in my heart, how could this be, "Untokoshiyo!" Can I let go without avenging my grievance? Sankō of Yakata village, whose name was sold in the land of Kumaso, a matter affecting even his face. Seeing the enemies of his parents before him, how could the teaching of non-resistance be put into practice?</p>
+          <p class="en-p">Thinking and thinking, anger rises. Year in and year out, I was determined to destroy that Orochi wretch, constantly uttering "Orochi, Orochi" and chanting "Untokodotsukoi," while world's wretches said, "Dotsukoishiyo!" They called me the Orochi's Sankō. Everyone, watch your step! Centipedes and salamanders are crawling about around here. Magokō-sama, the Sendenshi, no matter how much divine power he has, somehow his shadow looks faint. If it's going to be like this, it would have been good if I had forcibly asked Kurohime to come, "Dotsukoishiyo!" Realizing it later, "Dotsukoishiyo!" A foolish idea like an epileptic's, but it's a post-festival and nothing can be done.</p>
+          <p class="en-p">From now on, we have no other way than to pray single-heartedly to the Kami of Heaven and Earth, and protected by the divine guardianship, "Untokodotsukoi," to destroy them rather than anything else.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara, before the presence of Yoshikohime, with a heart filled, we pray to You. Whether the morning sun shines or clouds over, whether the moon waxes or wanes, whether the Orochi of the lake rages, whether earthquakes, thunder, and rain of fire attack all at once—with the single breath of sincerity's Kototama, leading and pacifying the Orochi with words, we must return in triumph, "Dotsukoishiyo!" Otherwise, Sankō's manhood will not stand before the many disciples, "Dotsukoishiyo!" The retribution for the sins committed up to now instantly manifests, and he is abandoned by Kurohime-sama...</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">神徳ばかりを充実し
+この難関をやすやすと
+貫通さして下さんせ
+偏に願ひ奉る
+畏み畏み願ぎまつる』</p>
+            <p class="ja-classical-line">と歌ひながら、風に吹かれつつ急坂を下り行く。</p>
+            <p class="ja-classical-line">お愛の方は声も静かに歌ひ出す。</p>
+            <p class="ja-classical-line">『熊襲の国に名も高き
+白山峠の峰よりも
+誉の高き三五の
+道に仕ふる宣伝使
+黒姫さまの供となり
+現はれ来ます孫公が
+皇大神の御心も
+悟らせたまはず山の上
+上りつめたる慢心の
+雲に包まれ自分より
+名さへめでたき宣伝使
+孫公別と名乗りつつ
+意気揚々と勇み立ち
+喜び給ふ折柄に
+天津御空に神の声
+忽ち聞ゆる恐ろしさ
+名利の欲にかられたる
+孫公さまは気が付かず
+宣伝使をば笠にきて
+白山峠を下り行く</p>
+            <p class="ja-classical-line">あゝ惟神々々
+三五教の孫公よ
+どうぞ心を取り直し
+執着心を払拭し
+矢張元の孫公で
+大蛇退治に行くがよい
+恋路の欲に離れたる
+お前は又もや宣伝の
+司の名誉に憧れて
+天地の神の許さない
+雅号をたてに進み行く
+其心根ぞいぢらしき
+あゝ惟神々々
+お前の心が一時も
+早く誠にかへるよに
+お愛が祈る胸の中
+些つとは推量してお呉れ
+もうしもうし皆さまよ
+お足に気をつけなされませ
+此処には蜈蚣が沢山居る</p>
+            <p class="ja-classical-line">あゝ惟神々々
+神の許さぬ宣伝使
+大蛇の退治が何として
+旨く出来るで御座いませう
+私は案じて耐らない
+左様な野心を起すより
+今の間に改めて
+元の心に立ち帰り
+天津御空に跼まり
+大地に蹐なしながら
+謙遜りつつ三五の
+道を歩むで下さんせ
+これぞお愛が孫公に
+対する誠の親切よ
+悪うは思うて下さるな
+あゝ惟神々々
+御霊幸はひましまして
+吾等四人の一行が
+神の御前に功績を
+太しく立てて故郷に</p>
+            <p class="ja-classical-line">一日も早く帰るべく
+守らせたまへよ天津神
+国津神達百の神
+国魂神の御前に
+誠心籠めて願ぎまつる』</p>
+            <p class="ja-classical-line">と歌ひつつ静に下り行く。</p>
+            <p class="ja-classical-line">三公は坂を下りつつ歌ひ出す。</p>
+            <p class="ja-classical-line">『「ヤツトコドツコイウントコシヨ」
+向ふに見える湖水は
+父と母とが其昔
+八岐の大蛇の片割と
+人の怖るる曲神に
+命を取られた「ドツコイシヨ」
+思ひ出深き仇の湖水
+三五教の御教を
+聞いて心を取り直し
+心平に安らかに
+敵を言向け和さむと
+一たん心に決めたれど
+どうしてこれが「ウントコシヨ」
+恨を晴らさで置かれうか
+熊襲の国に名を売つた
+屋方の村の三公が
+顔にも係はる一大事
+親の敵を前に見て
+無抵抗主義の御教が
+どうして実行出来ようか</p>
+            <p class="ja-classical-line">思へば思へば腹が立つ
+年が年中大蛇奴を
+亡ぼしくれむと思ひ詰め
+大蛇々々と口癖に
+「ウントコドツコイ」云ひ通し
+世界の奴らが「ドツコイシヨ」
+大蛇の三公と呼び出した
+皆さま足許用心だ
+蜈蚣や蠑螈がのそのそと
+其辺あたりを這うて来る
+孫公さまの宣伝使
+何程神力あるとても
+何だか影が薄いよだ
+こんな事なら黒姫を
+無理に頼んで「ドツコイシヨ」
+来て貰つたらよかつたに
+後で気の付く「ドツコイシヨ」
+癲癇病者の馬鹿思案
+後の祭ぢや仕方ない
+もうこれからは俺達は</p>
+            <p class="ja-classical-line">天地の神を一心に
+祈りて神の御守り
+「ウントコドツコイ」守られて
+亡ぼすよりも道はない
+あゝ惟神々々
+純世姫の御前に
+心を籠めて願ぎまつる
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+湖水の大蛇は猛ぶとも
+地震雷火の雨が
+一度に襲ひ来るとも
+誠一つの言霊の
+御息に大蛇を言向けて
+凱旋せなくちや「ドツコイシヨ」
+数多の乾児に三公の
+男が立たない「ドツコイシヨ」
+今迄作つた罪悪の
+報いは忽ち顕はれて
+黒姫さまには見離され</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Magokō, whose strength fails him,
+'Untokodotsukoi,' handling what is beyond his grasp,
+With a formidable enemy waiting before him,
+How sorrowful is the body that presses onward!
+Kamunahohi who created this world,
+Ōnahohi whose heart is vast as well,
+The faults of a body that has served until now,
+Looking upon them straightway, listening to them straightway,
+'Untokodotsukoi,' proclaiming them straightway,
+Grant your forgiveness, O Amatsukami,
+Before the august presences of the Kunitsukami and the Kunitama,
+We humbly pray.
+Ah, Kamunagara, Kamunagara,
+May our august spirits prosper and bless us.'
+So singing, he descends.</p>
+          <p class="en-p">Torakō begins to sing once more.
+
+''Untokodotsukoi, dotsukoishyo'
+This mountain path is somewhat severe;
+If one should be careless, down to the bottom of the ravine
+Rolling over, enough to crack one's head,
+'Untokodotsukoi,' be on your guard!
+'Aitatatatsuta,' I have tripped.
+Here and there, 'Dotsukoishyo'
+Tall stones are rolling about
+Without any reserve;
+If one encounters such fellows as these,
+Even the chivalrous men of the village of Takeno
+Can by no means hold up their heads.
+Lions, wolves, tigers, and bears,
+Nor even ogres and great serpents do I fear,
+Yet this Torakō, 'Dotsukoishyo'
+Cannot endure this sloping path.
+When one might slip, 'Untokoshyo'
+Plummeting headlong upside down,
+Whether one will crack one's head, there is no knowing.
+If Magokō-sama possessed divine virtue
+
+In ample measure,
+There would be no such worries, but
+As a hastily made missionary,
+'Untokodotsukoi,' with a feeling like a booger
+Or a target stuck up for show,
+I can hardly feel completely at ease.
+Ah, Kamunagara, Kamunagara,
+Do not lean upon your master as a staff,
+Do not rely upon men for your strength,
+But making the true God your strength,
+If you go forth, 'Untokodotsukoi,'
+Whatever divine protection there may be shall be granted,
+Such is the divine oracle of the Great Deity.
+From now on, I, 'Dotsukoishyo'
+Will not make a strength of Magokō-sama,
+But bringing forth the sincerity of the heart of the village head,
+Into the camp of the raging and fury-maddened crooked deities
+Suddenly charging headlong,
+Raising a shout of victory, and for the people of the world,
+
+'Untokodotsukoi,' fundamentally removing
+Their calamities,
+Making the praise of being called a chivalrous man of the village of Takeno
+ Shine ever higher
+Upon the island of Tsukushi,
+For the sake of the way of Izunome,
+My vow which I must needs fulfill to the utmost,
+Hear it perfectly and in full detail,
+And protect us, O Amatsukami,
+Kunitsukami, and the eight million deities,
+Before the august presence of the local tutelary deity
+Awestruck and trembling, we humbly pray.
+Ah, Kamunagara, Kamunagara,
+May our august spirits prosper and bless us.'
+So singing, at last having descended the threeri mountain slope, by the noon of that day they reached the foot of the mountain.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">力の足らぬ孫公の
+「ウントコドツコイ」手に余る
+勁敵前に控へつつ
+進み行く身ぞ悲しけれ
+此世を造りし神直日
+心も広き大直日
+今迄尽くせし身の咎を
+直日に見直し聞直し
+「ウントコドツコイ」宣り直し
+許させたまへや天津神
+国津神達国魂の
+御前に願ひ奉る
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と歌ひながら下り行く。</p>
+            <p class="ja-classical-line">虎公は又もや歌ひ出す。</p>
+            <p class="ja-classical-line">『「ウントコドツコイ　ドツコイシヨ」
+此山道は些と酷い
+うつかりしとると谷底へ
+転むで頭を割る程に
+「ウントコドツコイ」気をつけよ
+「アイタタタツタ」躓いた
+彼方此方に「ドツコイシヨ」
+高い石奴がゴロゴロと
+遠慮もなしに転げてる
+こんな手合に出遇つたら
+武野の村の侠客も
+到底頭が上らない
+獅子狼や虎熊や
+鬼や大蛇も恐れない
+此虎公も「ドツコイシヨ」
+此坂道にや耐らない
+何時辷つて「ウントコシヨ」
+真逆様に顛倒し
+頭を割るか分らない
+孫公さまに神徳が</p>
+            <p class="ja-classical-line">十分に具はり居るならば
+こんな心配ないけれど
+俄作りの宣伝使
+「ウントコドツコイ」鼻糞で
+的張つたやうな心持
+ま一つ安心出来難い
+あゝ惟神々々
+師匠を杖につくでない
+人をば力に致さずに
+誠の神を力とし
+「ウントコドツコイ」行くならば
+どんな守護もしてやると
+大神様の神勅
+俺はこれから「ドツコイシヨ」
+孫公さまの宣伝使
+力になさず村肝の
+心の誠を発揮して
+威猛り狂ふ曲神の
+陣屋に忽ち突進し
+勝鬨あげて世の人の</p>
+            <p class="ja-classical-line">「ウントコドツコイ」禍を
+根本的に除却して
+武野の村の侠客と
+云はれた誉を弥高に
+筑紫の島に輝かし
+三五教の道のため
+尽さにやおかぬわが願ひ
+完美に委曲に聞し召し
+守らせ給へ天津神
+国津神達八百万
+産土神の御前に
+畏み畏み願ぎまつる
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と歌ひながら、漸くにして下り三里の山坂も、其日の真昼頃麓に下りつきにけり。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c12.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 12: 自称 Kami 司 [976]</span>
+      </a>
+      <a href="c14.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 14: 空気 Flame [978]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
