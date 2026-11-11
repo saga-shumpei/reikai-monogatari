@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 眩代思 Tide [1003] - Volume 36 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 36 Table of Contents</a>
+      <span>Volume 36</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 36 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 眩代思 Tide [1003]</h1>
+      <p class="chapter-title-ja">眩代思潮〔1003〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hisakata no Amatsumisora wa donyori to shite, anun teimei shi, yomo no yamayama wa shirakumo no danpen o kiyōfuku no atari ni kamure, nani to nashi ni mushiatsuku, kaze wa hotondo sono keni o ushinai, hakuyōjiyu no derikēto na yawarakana shinme sae bikutomo ugokanu inutsu no ki tadayō. Kauji no shiro no betsuden wa, ikujifujiyō tomo shirenu ganseki, chikiu no chiushin yori nezashitaru ka to omowaruru gotoku nukidashi, sono jiyōmen wa hotondo suikuwa o tate ni kitta yō na heimen o arawashite iru, fūkei yoki uhatsuihane ni kensetsu sarete aru.</p>
+          <p class="en-p">Riūn, Kērusuhime no futari wa, suzushisō na nuno o motte oriaetaru biyakue o mi ni kishi, mado o hikiake, tenkai seru yamano no midori o nagamete sake kumikawashi, kokoroyoge ni zatsudan ni tamutte iru. Sashimoni atsuki natsu no sora, nani to nashi ni, shishigoson yori nijimidadasu asamizu ni asa no koromo taku atorasu no gotoku hannon o egakite iru. Futo Kērusuhime wa Riūn no se o nagamureba, nani no seibaku mo ukenai to itta yō ni, jishi ni nijimiidetaru ase wa koromo o sukoshi kogecharairo ni some, rinkaku tadashiku, fushigina hannon ga arawashite oru no de, chikayori mireba, hito ga tatte iru yō ni mieru. Hime wa nani to naku kokorogakari, Riūn no se ni chikayori te yokuyoku nozokimireba, tōbu ni tsuno o hayashita oni no katachi de atta.</p>
+          <p class="en-p">Atsu to odoroki Riūn no mae ni mawate nakifushitsutsu,</p>
+          <p class="en-p">Riūn-sama, Riūn-sama</p>
+          <p class="en-p">to renkoshi,</p>
+          <p class="en-p">Hayaku sono koromo o nugase tamae. Anata ni wa oni ga tsukeneyotte orimasuru. Watakushi wa sore o miru yori, niwaki anata ga kowaku natte mairimashita. Iya-iya sappari iya ni narimashita. Dōzo sono asagoromo o nugisutete kudasai mase</p>
+          <p class="en-p">Riūn wa karakara to warai,</p>
+          <p class="en-p">Aha--nn, dōse oni mo iorushi, orochi mo iru de arō. Nani to itte mo ikoku no oshu o hōchiku shi, tenka no haken o nigiru to iu eiyu ni wa subete hanmen no aru mono da. Shinbutsu no kokoro o motte ikaga shite kono daibō ga suikō sareyō ka. Sonna wake no wakaranu yowa o fuku mono de nai. Soshite shizenteki ni nijimideru ase no hannon o mite, odoroku to iu hito ga doko ni arō ka. Sono kata mo kono Riūn to kokoro o kyōse, koko made daiji o yatsuketa kurai no akunin dakara, mō sukoshi dokyō o suenai to, dōtei seison kyōsō no gekiretsu naru gendai ni tatte, kanzen na seikatsu o tsuzukuru koto wa dekinakarō yo</p>
+          <p class="en-p">Nani wa toto are, niwaki wagami ga osoroshiku natte mairimashita. Dōzo otanomi desu kara watakushi ni oitoma o kudasaimase. Fugi fudō no kōi o motte, kami ni taishite chujitsu naru tsutome o nashita to wa ikaga shite mo kangaeraremasenu. Watakushi wa daiichi ni anata ni kie shi, tsugi ni Uraru no michi ni kie shi, tsugi de Banko Shinō-sama no shintoku ni kie shita mono de gozaimasu. Banko Shinō-sama wa kesshite akujin de wa gozaimai mai. Sasheba anata no kōi o kesshite oyurushi asobasu hazu wa nakarō to zonjimasu. Ima ni ikaga naru tenbatsu ga mukai kuru ya mo shiremasen mai. Anata wa akukumade shoshi o kantetsu shinakute wa, ushi e wa hikanai okishora dakara, nani hodo watakushi ga isaneme mōshitemo, dōtei dame de seou</p>
+          <p class="en-p">Kore wa mata kotonaru koto o iu de nai ka. Hito no kokoro wa mochiyō ga kinjin da. Kono Riūn dato te kyō no chichi ni osamari kaette irareru yō ni natta no wa, hachi-kyū-bu made sono kata no naijo ni yotta kara de aru. Iwaeba sono kata wa, Riūn to gyakuyaku mudō o susumeta haruhonnin da</p>
+          <p class="en-p">E h, nani to iwaremasu. Watakushi ga aku no haruhonnin to wa kikisutenaranu sono okotoba...</p>
+          <p class="en-p">Riūn wa azawarai,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">久方の天津御空はドンヨリとして、暗雲低迷し、四方の山々は白雲の断片を胸腹のあたりに纓め、何とはなしに蒸しあつく、風は殆ど其権威を失ひ、白楊樹のデリケートな柔かな新芽さへビクとも動かぬ陰鬱の気漂ふ。神地の城の別殿は、幾十丈とも知れぬ岩石、地球の中心より根ざしたるかと思はるる如く抜き出し、其上面は殆ど西瓜を縦に切つたやうな平面を現はしてゐる、風景よき上津岩根に建設されてある。</p>
+            <p class="ja-classical-line">竜雲、ケールス姫の二人は、涼しさうな布を以て織上げたる白衣を身に着し、窓を引あけ、展開せる山野の緑を眺めて酒酌みかはし、心地よげに雑談に耽つてゐる。さしもに暑き夏の空、何とはなしに、四肢五体より滲み出だす汗水に麻の衣までアトラスの如き斑紋を描いてゐる。ふとケールス姫は竜雲の背を眺むれば、何の制縛も受けないと云つた様に、恣に滲み出でたる汗は衣を少しくこげ茶色に染め、輪廓正しく、不思議な斑紋が現はれてゐるので、近寄り見れば、人が立つてゐる様に見える。姫は何となく心掛り、竜雲の背に近寄つてよくよく覗き見れば、頭部に角を生やした鬼の形であつた。「アツ」と驚き竜雲の前に廻つて泣き伏しつつ、</p>
+            <p class="ja-classical-line">『竜雲様、竜雲様』</p>
+            <p class="ja-classical-line">と連呼し、</p>
+            <p class="ja-classical-line">『早く其衣を脱がせ玉へ。あなたには鬼が付け狙つて居りまする。妾はそれを見るより、俄に貴方が怖くなつて参りました。否々サツパリ厭になりました。どうぞ其麻衣を脱ぎ捨てて下さいませ』</p>
+            <p class="ja-classical-line">竜雲はカラカラと打笑ひ、</p>
+            <p class="ja-classical-line">『アハヽヽヽ、どうせ鬼も居らうし、大蛇も居るであらう。何と云つても一国の主を放逐し、天下の覇権を握ると云ふ英雄にはすべて半面のあるものだ。神仏の心を以て如何して此大望が遂行されようか。そんな訳の分らぬ弱音を吹くものでない。そして自然的に滲み出た汗の斑痕を見て、驚くといふ者が何処にあらうか。其方も此竜雲と心を協せ、ここ迄大事をやつつけた位の悪人だから、モウ少し度胸を据ゑないと、到底生存競争の激烈なる現代に立つて、完全な生活を続くる事は出来なからうよ』</p>
+            <p class="ja-classical-line">『何は兎もあれ、俄に吾身が恐ろしくなつて参りました。どうぞお頼みですから私にお暇を下さいませ。不義不道の行為を以て、神に対し忠実なる勤めをなしたとは如何しても考へられませぬ。私は第一にあなたに帰依し、次にウラルのお道に帰依し、次で盤古神王様の神徳に帰依した者で御座います。盤古神王様は決して悪神では御座いますまい。さすればあなたの行為を決してお許し遊ばす筈はなからうと存じます。今に如何なる天罰が酬い来るやも知れますまい。あなたは飽く迄も初心を貫徹せなくては、後へは引かない御気性だから、何程私がお諫め申しても、到底駄目でせう』</p>
+            <p class="ja-classical-line">『これは又異なる事を云ふではないか。人の心は持方が肝腎だ。此竜雲だとて今日の地位に納まり返つて居られるやうになつたのは、八九分迄其方の内助に依つたからである。言はば其方は、竜雲に悪逆無道を勧めた張本人だ』</p>
+            <p class="ja-classical-line">『エヽ何と言はれます。私が悪の張本人とは聞き捨てならぬ其お言葉……』</p>
+            <p class="ja-classical-line">竜雲は嘲笑ひ、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ryūun: 'Since whatever we say makes us badgers dwelling in the same hole, this responsibility must be shared by the two of us. Yet in the present world, those who possess enough talent to carry out treachery, sycophancy, outrageous wickedness, and lawlessness are praised and feted as heroes, gallants, gentlemen, merchants, and the elite of the nation. Having experienced the essence of contemporary thought to the extreme, we two are truly the champions and conquerors of the present age. Things like good and evil change according to time, place, and status. As long as human beings possess physical bodies, no matter what is said, if we do not desire the perfection of food, clothing, and shelter, life is a lie. Individuals who are caught up in worthless old moral concepts and superstitions that performing half-human acts is the path of supreme good no longer have any value of survival or discernment in this world; they are the height of fools. Therefore, this Ryūun all the more detests religions such as Aizendō, which champions the principle of non-resistance, and Brahmanism, which nonchalantly commits contradictions such as dividing human classes into three stages and giving different social treatments to the upper, middle, and lower streams. All human races in the world, regardless of colored or uncolored, should have all things equally receive the grace of God... or in other words, natural divine blessings should be equally distributed without partiality. We must smash the habits of society today, which are full of contradictions and unreasonableness, make the wise exert their wisdom, make the brave activate their bravery, and make free competition the principle of society. If we do so, we will be able to make great activities with all our might, and the saints shouting in the fields will lift up their heads and come to exhibit their marvelous wisdom and plans which they usually harbor; this is what is called absolute equality, conforming to the partiality-free, natural divine will. That being the case, you also must completely cast aside old customs up to now, and since today is characterized by rapid daily progress, you must follow my teaching, become the newest woman in the first place of the world, and possess the resolve to make your brave name shine in the world together with Ryūun. Such a husband has such a wife; there is even a saying in the proverb about an ogre husband and a snake wife. This was unhesitatingly caused to be transmitted unconsciously into the mouths of all people in the world by Banko Shinō-sama, who created this world by creating a metaphor. To deal with a world where ogres, serpents, and demons swarm to this extent, nothing short of a pressure greater than that will ever work at all. The God made a prophecy that a husband and wife of an ogre and a serpent would appear and unify the world. The physical manifesters of that prophecy are none other than we two. We are unique wielders of authority who should exercise freely and at will. Even supposing there were a Root Land and Bottom Land provisionally, these three realms of the manifested, hidden, and divine are entirely places grasped by Banko Shinō-sama; how could those who perform actions conforming to the divine will of Banko Shinō-sama ever become guilty? You should also place your hand upon your chest a little and think well about it. Is it not said that good and evil are non-dual, and right and wrong are as one? Even a human body has a front and a back. The ogre's markings on my back are the manifestation of my sole guardian deity. Viewed from the front, I am truly a fine man of consummate perfection, a splendid King Ryūun who has reached the pinnacle of truth, goodness, and beauty. Viewed from the reverse side, I am the chieftain of wicked demons and rakshasas. If you look at the hanging scroll in the tokonoma, is it not the same? Although beautiful paintings are drawn as seen, the reverse side of that scroll is truly a bleak item consisting merely of crude paper. In one and the same body of a human being, along with both eyes, which are pure and undefiled and can be compared even to the sun and moon, are there not the outlets of excrement, both large and small, which are extremely foul? If one were to remove these outlets saying they are foul, it would be utterly impossible to maintain the peace of the whole body, and accordingly, no matter how beautiful both eyes are, they would instantly lose their brightness. If you look at the white root of a leek, is it not the same? In the foul, odoriferous place hidden in the soil, there is rather an infinite flavor. Where there are corpses, eagles gather; to muddy waters, numerous fish gather. Without understanding even this degree of the principle of heaven and earth, how could you ever become the star actor of the castle in the divine land and flourish in the world? If you do not also reform yourself a little, will this state of Ryūun not be utterly unable to be maintained?'</p>
+          <p class="en-p">Yoshikohime: 'If that is so, whatever Banko Shinō-sama brings about, if it accords with His heart, does God not blame at all those places which people recognize and treat as outrageous wickedness and lawlessness? Then, allow me to ask one thing: why was Ayms, who saved the perilous life of you, Ryūun—who possess peerless strategy and matchless divine power—thrown into prison? Did not Ayms say... I think that saving human life is the best deed as a human being. Yet, I little expected that if one helps people and becomes a criminal, tied up in a dark prison, and must continue agony day and night, we are no longer able to put our hands or feet out into this society... is that not what he said? How is that to be interpreted? This point does not make sense to me at all. While working for the sake of Banko Shinō-sama, can such a tragic thing as having one's body and soul cast once again into the prison of the Root Land for the sake of Banko Shinō-sama be avoided or not?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『何を云つても同じ穴に棲む貉だから、此責任は二人で分担せなくてはならないのだ。併し乍ら今の世の中は、奸者侫人、悪逆無道を敢行する丈の器量ある者を称して、英雄豪傑、紳士紳商、国民の選良と持て囃すのだ。現代思潮の真髄を極端に体験したる吾々両人は、実に現代に於ける勇者だ、覇者だ。善悪といふものは、時と所と地位とに依つて変るものである。人間も肉体のある限りは、何と云つても衣食住の完全を望まなければ、人生は嘘だ。下らぬ古き道徳観念に捉はれ、半死人的行為をなすを以て至善の道と迷信してゐるやうな人物は、最早此世界に生存の価値もなければ、見識もない馬鹿の骨頂だ。それだからこの竜雲は無抵抗主義を標榜する人類愛善の教の三五教や、人間の階級を三段に分けて、上中下三流に対し社会的待遇を異にするやうな矛盾を、平気でやつてゐるバラモン教は猶更嫌ひだ。すべて世界の人種は有色無色を問はず、一切平等に神の恩恵……語を換へて言へば、自然の天恵は偏頗なく均霑さるべきものだ。今日の矛盾不合理極まる社会の習慣を打破し、智者をして其智を振はしめ、勇者をして其勇を活躍せしめ、自由競争を以て社会の原則となさねばならない。さすれば力一杯の大活動もする事が出来、野に叫ぶ聖人は頭を抬げて、平素懐抱せる其妙智妙案を発揮する様になるのが所謂一切平等、偏頗なき自然の神慮に叶つたものである。さうだから姫も今迄の旧慣をスツカリ放擲し、日進月歩の今日だから、吾教に従つて、世界第一の新しき女となつて、其驍名を竜雲と共に世界に輝かすだけの覚悟を持つて貰はなくちやアならない。此夫にして此妻あり、諺にも鬼の夫に蛇の女房といふ事がある。これは取りも直さず此世界を造り玉うた盤古神王さまが、比喩を作つて、世界万民の口に知らず知らずの間に伝へさせ玉うたのである。これ程鬼大蛇悪魔の蔓る世の中に処するには、それ以上の強圧力がなくては到底駄目だ。鬼と蛇との夫婦が現はれて、世界を統一するといふ予言を神さまがしておかれたのだ。其予言の体顕者は即ち吾等両人だ。自由自在に行使すべき独特の権能者だ。仮令根の国底の国が仮りにありとしても、此現幽神の三界は残らず盤古神王様の掌握し玉ふ所、盤古神王の御意に叶うた行動をなす者が如何して罪になるものか。姫も少しは胸に手を当てて、よく考へて見たがよからう。善悪不二、正邪一如と云ふではないか。人の体だつて前後ろがある。吾背中の鬼の斑紋は吾唯一の守護神が顕現したのだ。前から見れば実に円満具足の好男子、真善美の極致に達した立派な竜雲王である。裏面より見れば即ち悪鬼羅刹の首魁である。床の間の掛物を見てもさうではないか。あの通り美しい絵画が描かれてあるが、彼の軸の裏面は実に粗末な紙計りの殺風景な品物ではないか。人間の同じ一つの体にも、清浄無垢にして日月にも比喩ふべき両眼のあると共に汚穢極まる大小便の噴出口があるであらう。此噴出口が汚穢だと云つて取り去つて了ふものなら、到底全身の安静を保つ事は出来ない、従つて何程美しい両眼も忽ち其光明を失つてしまふであらう。葱の白根を見てもさうではないか。土にかくれた汚い臭気のある所に却て無限の味がある。屍のある所には鷲集り、濁れる水には数多の魚集まり来る。これ位な天地の道理が分らなくて、如何して神地の城の花形役者となつて、世に時めく事が出来るであらうか。チツと其方も改心をして貰はねば、此竜雲の社稷は到底保たれないぢやないか』</p>
+            <p class="ja-classical-line">『そんなら盤古神王さまのお為になる事、お心に叶ふことならば、人の認めて悪逆無道とする所も、敢へて神さまはお咎めなさらないのですか。そんなら一つ伺ひますが、それだけ智謀絶倫、神力無双の竜雲さまの危き生命を助けたエームスは、なぜ牢獄へ投ぜられたのです。エームスは言つてゐたぢやありませぬか……人の生命を助くるのは、人間として最善の行ひだと思ふ。然るに思はざりき、人を助けて罪人となり、暗き獄舎につながれて、日夜苦悶をつづけねばならぬならば、吾々は最早此社会に手も足も出す事は出来ない……と云つて居りましたでせう。それは如何いふ解釈になるのでせう。一向此点が合点が参りませぬ。盤古神王さまの御為に働きながら、又もや盤古神王の為に根底の国の牢獄に身魂を投込まれるやうな悲惨な事は出来はしますまいか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ryūn shrugged his shoulders and brushed it off with a hearty laugh, saying, 'Just as there are obstructions of wind and rain in the ten, afflictions of illness in men, and clouds that gather in the heart, even though the jitsugetsu shine brightly and illuminate the gekai, when dark clouds close in across the chiukū just as they do konnichi, the light of the jitsugetsu cannot penetrate down to chijiyō. Since this ryūn is, after all, a miniature of the uchiu and a mere danpen of the tenchi, it is only natural that the jitsugetsu of the shinten should occasionally be obscured by kokūn. Yet once the clouds of doubt clear away, the shinten instantly becomes tōtetsu and clear, and the jitsugetsu of shinniyo comes to shed its radiance. That is merely a temporary obstruction by the clouds. Lord Bankoshinō has never made an oyakusoku that a clouded sky will never clear away for eien. How could anyone manage and sustain this itsukoku if one were to fret over such shōmondai? Even with all her supposed wisdom, this is truly a woman's foolish complaint; ah, I am simply too dumbfounded to speak, ha ha ha ha!'</p>
+          <p class="en-p">His cunning demeanor was such that even the great Bankoshinō Himself would surely be astonished and keep His distance by three stages.</p>
+          <p class="en-p">Princess Kērusu sat in silence with her head bowed down, struggling for a while with the judgment of good and evil, right and wrong. Witnessing the constant transformations of her own heart—at times becoming a demon, at times a god, a beast, or a giant serpent—she plunged ever deeper into a labyrinth, falling into a psychological state as dark and stifling as being sealed within a small pot. On the other side, Ryūn had also put on a bold front and spoken his piece just as before, yet somehow the whisperings of his conscience seemed to rise up with fierce momentum, striving to refute his every argument. The two of them remained silent, keeping up a curtain of speechlessness for a while.</p>
+          <p class="en-p">Into such a place came rushing hurriedly, with a changed countenance, a young man named Teiru, whom Ryūn constantly cherished as his trusted right-hand man. He was an ardent worshipper of Ryūn who had shut himself up in his private quarters, studying the scriptures of the Ural religion with single-minded devotion.</p>
+          <p class="en-p">'O two-sama, a momentous and extraordinary emergency has suddenly broken out. This is surely no time for us to remain leisurely and calm! Come, cast down a rope ladder this very instant, descend these caverns, cross the valley river, and conceal your honorable persons for a while; danger approaches by the very second!'</p>
+          <p class="en-p">As he spoke these words with an altered complexion and a restless demeanor, Ryūn and Princess Kērusu were struck with amazement at Teiru's speech. Raising himself up on his knees, Ryūn demanded in a hurried tone,</p>
+          <p class="en-p">'What manner of grave matter is this?'</p>
+          <p class="en-p">Instantly changing his posture and pressing the question with urgency, Teiru gulped down two or three mouthfuls of water from a jar placed before him, stroked his chest to calm himself, and replied, 'Indeed so; while I, Teiru, was shut up in my study researching the sacred books, the flocks of crows in the garden suddenly grew noisy, the sounds of men and horses became clamorous, and the wind brought the assaulting war drums. With the fierce, encroaching echoes of gongs and drums drawing ever closer, the enemy has pressed in near at hand. Wondering whose rebellion this might be, when I looked around, I wasted no time in calling the balustrade of the corridor my fortunate chance. Climbing up swiftly like a monkey and casting a sharp gaze out over the village roofs below, I saw the unexpected banner of the three-leaf hollyhock. Even as I thought this incomprehensible, leading the vanguard was King Sagaren, followed by Tērisu, Ēmusu, and other brave generals, who had equipped their armor and led a vast army like drifting clouds. Adopting a single-ladder formation from three directions, they attacked with piercing, successive thrusts—what a solemn and imposing spectacle! Deeming this a grave crisis, I, Teiru, gathered together the defending soldiers of our side. Several dozen brave and desperate young men, aligning their hand-spears, charged in a straight line toward the oncoming enemy. We thrust, slashed, and hacked in all directions, pressing forward with the indomitable force of a raging tiger plunging into a river. Just as I thought the enemy, startled by this, had retreated in an avalanche for about three chō while leaving behind numerous casualties and dead, suddenly from the forests on both sides emerged tens of thousands of enemy troops. Deeming this a grave matter, and thinking that to advance too deeply would only be to fall into the enemy's trap, the several dozen of our men who turned back toward the front gate to make our planned retreat were either struck down or fled in rout. Alas, the only one remaining was Teiru, so frail and helpless had we become. Keriya and Haruma were captured by the enemy before our very eyes, and the rest of the subordinates shamefully removed their helmets, hoisted white flags, and surrendered to the enemy—such was their utter lack of spine. No matter how much Teiru alone might gnash his teeth and stamp his feet in vexation, just as a great mansion is about to collapse and a single piece of wood cannot prop it up, with bitter regret I have cut and slashed my way through the swarming enemy all alone, just to report this critical emergency to you. Come, quickly evacuate this place! A prolonged stay is to be feared; hurry, hurry...'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『天に風雨の障りあり、人に病の悩みあり、心に雲のかかる事あり。仮令日月晃々として下界を照らすと雖も、中空に今日の如く暗雲とざす時は、日月の光も地上に透徹せない如く、此竜雲だとてヤハリ宇宙の模型、天地の断片だから、心天の日月、黒雲に閉ざさるる事も偶にはあるであらう。されど疑の雲一度晴れなば、心天忽ち清明となり、真如の日月は其光を放つやうになつて来る。それは一時の雲の障りだ。決して曇つた空は永遠に晴らさないといふ盤古神王さまは御約束はなさらない。そんな小問題に齷齪してゐて、此一国をどうして支へ保つて行く事が出来ようか。賢いやうでも流石は女の愚痴、イヤもう呆れて物が言はれないわい、アツハヽヽヽ』</p>
+            <p class="ja-classical-line">と肩をゆすつて豪傑笑ひに紛らす。其狡猾さ加減、流石の盤古神王も呆れて三舎を避け玉ふであらう。</p>
+            <p class="ja-classical-line">ケールス姫は黙然として差し俯むき、暫くは善悪正邪の判断に苦しみ、或は鬼となり、或は神となり、獣となり、大蛇となり、時々刻々に吾心の変化を目撃して益々迷路にふみこみ、咫尺暗澹として壺中につめこめられたる如き心理状態となつて了つた。一方竜雲も空威張して、前の如く言ひ放つてみたものの、何とはなしに良心の囁きは彼が論旨を一々否定せむと、勢猛くいき巻き来るやうであつた。二人は黙然として暫く無言の幕をつづけてゐた。</p>
+            <p class="ja-classical-line">かかる所へあわただしく顔色変へて駆込み来る一人の男は、竜雲が常に懐刀として寵愛してゐるテールといふ青年である。彼は自分の居間に閉ぢ籠り、ウラル教の経文を一心不乱に研究しつつあつた熱心なる竜雲崇拝者である。</p>
+            <p class="ja-classical-line">『モシモシ御二方様、タヽ大変な珍事が突発致しました。悠々閑々として御座る時ではありますまい。サア一時も早く縄梯子をかけ、此岩窟をお下り遊ばし、谷川を越えて暫し御身を忍ばせ玉へ、危険刻々に迫り来る！』</p>
+            <p class="ja-classical-line">と顔色変へて、何となく落付かぬ体にて言ひ放つを竜雲、ケールス姫はテールの言に打驚き、竜雲は立膝しながら、</p>
+            <p class="ja-classical-line">『一大事とは何事なるか』</p>
+            <p class="ja-classical-line">と忽ち形を更め、言葉せはしく問ひつめるを、テールは其前に据ゑおかれたる瓶の水を二口三口グツと呑み、胸を撫で下し、</p>
+            <p class="ja-classical-line">『されば候、テールの吾は書斎に閉ぢこもり、神書を研究する折しもあれ、俄に騒ぐ庭の群烏、人馬の物音かまびすしく、風が持て来る攻め太鼓、はげしく追々近寄る金鼓の響、敵は間近く押寄せたり。何者の反逆なるかと、あたりを見れば廊下の勾欄、コレ幸ひと云ふより早く、猿の如くかけ登り、眼下の村手をキツと見渡し眺むれば、思ひ掛なき三つ葉葵の旗印、合点行かぬと見る内に、先に立つたるサガレン王を始めとしテーリス、エームス其他の勇将、武備をととのへ、雲霞の如き大軍を引率し、単梯陣の構へを以て三方よりチクリチクリと攻め来る、其光景の物々しさ。こは一大事と、テールは味方の守兵を駆り集め、勇敢決死の若者数十人、手鎗を揃へて寄せ来る敵に向つて、真一文字に突進し、縦横無尽に突き立て薙ぎ立て、斬りまくり、暴虎馮河の勢を以て詰め寄れば、流石の敵も辟易し、雪崩を打つて三町許り、数多の死傷者を残こしつつ退却したりと思ひきや、左右の林の中より、俄に現れ来る数万の軍勢、こは一大事、深入りしては却て敵に謀られむ、無念ながらも、予定の退却をなさむと、表門へと引返す数十の味方は、或は討たれ或は遁走し、残るはテール只一人と脆くもなりにけり。ケリヤ、ハルマの両人は、見る見る内に敵の為に捕へられ、其他の部下は卑怯にも甲をぬぎ、白旗を掲げ、敵に降服したる其腑甲斐なさ。テール一人如何に切歯扼腕すればとて、大廈の将に覆へらむとする時、一木の支ふ能はざるの如く、無念乍らも只一人、此危急を君に報ぜむが為に、群がる敵を伐立て薙立て、此処まで無事に立帰つて候。イザ早く此場を立退き玉へ。長居は恐れ、早く早く……』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He urges them on in a trance. Since that appearance could by no means be thought false, the two suddenly changed their complexion, and though they tried forcibly to calm their pounding chests, due to the sudden marvel the beating of their hearts was like a raging storm, showing no sign of calming down like a great earthquake, their teeth began to chatter, and their limbs trembled, making it a pitiful sight to behold.</p>
+          <p class="en-p">Entering leisurely into such a place, Samorinokami no Keriya, judging from the appearance of Tēru, Ryūun, and the restless demeanor of Princess Kērusu, could not suppress his suspicion, and as he looked into the faces of the three, Tēru, seeing Keriya enter this place, spoke hastily,</p>
+          <p class="en-p">Teiru: 'Are you not Lord Samorinokami no Keriya? In such a critical and precarious situation, why are you so leisurely? Will you not quickly make preparations for defense, drive the enemy back a thousand ri, and protect the sovereign's sacred person?'</p>
+          <p class="en-p">He becomes furious and rants on. Keriya does not understand in the least,</p>
+          <p class="en-p">Keriya: 'On a summer day like today, when heaven and earth are as tranquil as can be without a sound and without a wind, what are you getting flustered about? Moreover, Lord Ryūun and Princess Kērusu, why do you act so restlessly? I cannot understand it at all. There must surely be some deep reason behind this. If you will tell me in detail, Keriya will do his best as Keriya and set the sovereign's mind at ease.'</p>
+          <p class="en-p">Ryūun speaks hastily,</p>
+          <p class="en-p">Ryūun: 'Keriya, what do you take today's enemy attack to be? There cannot be even a moment of delay. Quickly make preparations for defense!'</p>
+          <p class="en-p">Keriya: 'This is an incomprehensible saying of yours; when there is no enemy, upon what grounds should we make preparations for defense? What, could this largely be some kind of misunderstanding on your part?'</p>
+          <p class="en-p">Ryūun: 'Ah, your spineless words! The great army of King Sagaren that is pressing forward like this—what do you take them to be? Ah, I understand! You have secretly communicated with King Sagaren, invited the king's divine army smoothly in, and intend to destroy me—you must be the hateful mastermind! Now that things have come to this, there will be no mercy; prepare yourself!'</p>
+          <p class="en-p">Princess Kērusu, faster than taking down the naginata from the nageshi, rushes toward Keriya and attacks. Sweeping high and parrying low, advancing and retreating, she uses the naginata like a waterwheel. Her practiced speed is a momentum before which even fierce deities cannot approach.</p>
+          <p class="en-p">Keriya carries not an inch of steel on his person, and moreover, having lost his wits from extreme astonishment, he wanders about seeking a place of escape. Pitifully, Princess Kērusu's naginata grazes Keriya's foot. Uttering a shriek of 'Ah!' and collapsing onto the spot, the princess does not even deign to look back, but</p>
+          <p class="en-p">Princess Kērusu: 'Lord Ryūun, use that spear to follow after me...'</p>
+          <p class="en-p">arranging her tasuki in a cross shape facing the front, tying her rear headband firmly, presenting the dashing figure of a female warrior, she dashed out as if the Asura King were raging, but when she looked, there was no shadow of a person anywhere; the gatekeepers Shīru and Besu were sitting cross-legged at the gatehouse, singing hummingly with a carefree air, and sipping sake little by little. Princess Kērusu, unable to understand, returned to her own living room, while Ryūun had slumped down in the inner room, unable to move a muscle, glaring with his round, dull eyes. Tēru, who had come out to report, had likewise lost his wits, and squatting down in his former place without moving a muscle, blinked his eyes. Princess Kērusu spoke with severe words,</p>
+          <p class="en-p">Princess Kērusu: 'Tēru, you Tēru, an unpardonable fellow who made a false report and agitated our hearts, come, who put you up to this? Confess every single detail.'</p>
+          <p class="en-p">Teiru: 'Yes, when I think about it carefully now, since I was worrying too much over your honors' persons, without realizing it while I was asleep, I must have had such a terrifying dream.'</p>
+          <p class="en-p">Ryūun raised a voice blending relief and anger,</p>
+          <p class="en-p">Ryūun: 'You extremely troublesome coward—no, you fool! You would do well to be strictly prudent from now on.'</p>
+          <p class="en-p">Teiru: 'Yes, truly, truly, I committed a blunder......'</p>
+          <p class="en-p">Ryūun: 'Ha, ha, ha, ha, what a grand dream to have as a companion.'[paragraph_end]</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と夢中になつて急き立てる。其様子の決して虚偽とも思はれねば、二人は忽ち顔色を変へ轟く胸を無理に鎮めむとすれども、俄の驚異にハートの鼓動は暴風雨の吹き荒ぶが如く、大地震の如く鎮静すべくも見えず、歯はガチガチと震ひ出し、手足は戦き見るも憐れな光景なりけり。</p>
+            <p class="ja-classical-line">斯かる所へ悠々として入り来る左守神のケリヤは、テールの様子と言ひ、竜雲、ケールス姫のそはそはしき行体を眺めて不審に堪へず、三人の顔を見比べ、テールはケリヤの此処に入り来りしを見て、言葉せはしく、</p>
+            <p class="ja-classical-line">『貴殿は左守神のケリヤ殿では御座らぬか。かかる危急存亡の場合、何悠々として御座る。早く防戦の用意をなし、敵を千里に撃退し、君の御身辺をお守りなさらぬか』</p>
+            <p class="ja-classical-line">といきり切つてまくし立てる。ケリヤは少しも合点往かず、</p>
+            <p class="ja-classical-line">『今日の如き天地寂然として声もなく、風もなき夏の日に、何をうろたへ召さるか。又竜雲さま、ケールス姫さまは、何としてかくもそはそはしく遊ばすや、合点が参りませぬ。何とか是には深き仔細が御座いませう。つぶさに仰せ付け下さいますれば、ケリヤはケリヤとしてのベストを尽し、君の御心を安んじ奉りませう』</p>
+            <p class="ja-classical-line">竜雲は言せはしく、</p>
+            <p class="ja-classical-line">『ケリヤ、其方は今日の敵の攻撃を何と心得居るか。一刻の猶予もあるまい。早く防戦の用意を致せ！』</p>
+            <p class="ja-classical-line">『コレは心得ぬ其言葉、敵なきに何を以て防戦の用意に及びませう。ナニ、是は大方何かの御考へ違では御座いますまいか』</p>
+            <p class="ja-classical-line">『エー腑甲斐なき其方の言葉、斯くの如く押しよせ来るサガレン王の大軍を、其方は何と心得て居らるるか。イヤ分つた、其方はサガレン王に内通し、王の神軍を甘く引入れ、妾を滅さむとする、憎き張本人であらう。モウ斯うなる上は容赦はせぬ、覚悟せよ！』</p>
+            <p class="ja-classical-line">とケールス姫は、長押の薙刀取るより早く、ケリヤに向つて伐つてかかる。上を薙ぎ下を払ひ一進一退、水車の如く薙刀を使ふ。其修練の早業、鬼神も近付く可らざる勢なり。</p>
+            <p class="ja-classical-line">ケリヤは身に寸鉄も帯びず、又余りの驚きに度を失ひ、逃場を求めて迷ひ居る。憐れやケールス姫の薙刀はケリヤの足をかすつた。「アツ」と悲鳴を上げ其場に打倒るるを姫は見向もなさず、</p>
+            <p class="ja-classical-line">『竜雲どの、其鎗を以てわれに続かせ玉へ…』</p>
+            <p class="ja-classical-line">と表をさして襷十字にあやどり、後鉢巻リンとしめ、女武者の凛々しき姿、阿修羅王の荒れたる如く駆出し見れば、人の影は何処にもなく、門番のシール、ベスの両人は門館に胡坐かき、気楽さうに鼻唄をうたひ乍ら、チビリチビリと酒を酌みかはしてゐた。ケールス姫は合点行かず、吾居間に引返せば、竜雲は奥の間に腰をぬかして身動きならぬまま、鈍栗眼をギロつかせてゐる。報告に出て来たテールは亦同じく肝玉を潰し、以前の場所につくばつた儘身動きもせず目をパチつかせてゐた。ケールス姫は言葉きびしく、</p>
+            <p class="ja-classical-line">『テール、汝テール、虚偽の報告をなして、吾等の心を動かしたる不届きな奴、サア汝は何者に頼まれたか、一伍一什を白状致せ』</p>
+            <p class="ja-classical-line">『ハイ、今になつて能く考へて見ますれば、あまり御両人様の御身の上を案じ過して居つたもので御座いますから、知らず知らずに眠つた間に、あんな恐ろしい夢を見たので御座いませう』</p>
+            <p class="ja-classical-line">竜雲は安心と怒りの混線した声を張り上げて、</p>
+            <p class="ja-classical-line">『不都合至極の卑怯者、否馬鹿者だなア。以後はキツと慎んだがよからうぞ』</p>
+            <p class="ja-classical-line">『ハイ、誠に誠にソソウ致しました……』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、えらい夢の相伴をしたものだ』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: 歎願 [1002]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: Gate 雀 [1004]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 16: Gate 雀 [1004] - Volume 36 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 36 Table of Contents</a>
+      <span>Volume 36</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 36 &bull; Chapter 16</span>
+      <h1 class="chapter-title-en">Chapter 16: Gate 雀 [1004]</h1>
+      <p class="chapter-title-ja">門雀〔1004〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At the outer gate of the castle of Kauji, the two gatekeepers, Shīru and Besu, in order to forget their excessive boredom and the heat, are sitting cross-legged, drinking sake sip by sip, and indulging in idle chatter.</p>
+          <p class="en-p">Besu: 'Hey, Besu—no, Shīru—why on earth did Princess Kērusu rush back here with a changed expression, her sleeves corded in a crisscross fashion, her rear headband tightly bound, her skirts bare, clasping a large halberd under her arm, and with an idle look, scurrying right back to her original mansion? Doesn't she look just like a female warrior on a battlefield? Since I am dutifully keeping watch here at the gate along with the sake, why don't you step inside the mansion for a moment and go find out what is going on? I've started to feel a somewhat unsettling mood, you see.'</p>
+          <p class="en-p">Shīru: 'That's true. Such an incomprehensible state of the Princess must have some reason behind it. Even if I don't know whether I'll get scolded, I am going a little way deep inside. As gatekeepers, our station does not permit us to ascend into the hall, but something extraordinary must undoubtedly have broken out in the inner chambers. If by any remote chance a major crisis should befall Lord Ryūun's person, we too cannot afford to remain leisurely and unconcerned. Even if I get scolded I don't care; I'm stepping right into the depths. The situation will probably become clear in detail afterwards.'</p>
+          <p class="en-p">Having said thus much, Shīru—no, Besu tied a white headband, crisscrossed his sleeves with cords, tucked up his skirts, and unceremoniously advanced toward the inner palace. Catching a glimpse of Keriya's injury, and the scenes of astonishment of Ryūun, Princess Kērusu, and Tēru, while peeking at the general situation, he muttered that at this rate there shouldn't be anything too serious, just a dream-like commotion, and as he was about to briskly turn on his heels, Princess Kērusu, sharp-eyed, caught sight of Besu's figure and raised her voice shrilly,</p>
+          <p class="en-p">Princess Kērusu: 'Are you not the gatekeeper Besu? Breaking the taboos of the mansion, what have you come here to such deep inner chambers for?'</p>
+          <p class="en-p">Berating him thus, Besu trembled while scratching his head,</p>
+          <p class="en-p">Besu: 'Ha-ha-ha, tr-tr-truly I have no excuse to offer. In truth, beholding the extraordinary state of Princess Kērusu, I thought some rare and unusual event must have suddenly broken out in this inner palace. However humble a gatekeeper I may be, I cannot simply refrain from saving my lord from peril. Though I am fully and thoroughly aware of the strict prohibition against entering the hall, in such an emergency I cannot possibly observe such rules. Without fail, I had to help the two of you, so I consulted with Shīru and came all the way here disregarding any impropriety. I beg for your gracious pardon.'</p>
+          <p class="en-p">Princess Kērusu: 'Such conduct of yours is hard to forgive. Ordinarily, this should not be passed over as it is, but in consideration of your loyal devotion in thinking of us, I shall overlook it for this once only. Guard the gate carefully and strictly. Furthermore, you must not speak a word of this state of affairs in the inner palace to anyone. I strictly place a gag on your tongue.'</p>
+          <p class="en-p">Besu: 'Yes, thank you very much. Assuredly, assuredly, even if my head should fly off I will never speak of it, so please be at ease.'</p>
+          <p class="en-p">Ryūun raised her voice shrilly,</p>
+          <p class="en-p">Ryūun: 'Besu, quickly retreat from this place!'</p>
+          <p class="en-p">'Yes,' replied Besu, and left the spot. Keriya, with his foot slashed by the Princess, emitted cries of anguish and groaned, 'Un, un.' Tēru, still having lost the use of his hips, kept rotating his eyeballs with extreme speed like a gyrocompass, alternating between white and black.</p>
+          <p class="en-p">The defiled-hearted Ryūun
+Became a pet favorite, morning and evening,
+And the young Tēru who served closely
+Entered a chamber to reverently read the divine writings of the Ural religion,
+Unawares falling into a dream;
+The crooked demon lurking within the heart,
+Roamed about freely at will,
+And there are times when it traces the dream road.
+At the outer gate of the castle of Kauji,
+The sounds of men and horses are terribly fierce,
+It is the war cry of attacking enemies;
+Startled by the wonder of it, leaping up,
+Climbed the railing of the mansion,
+And if one looks fixedly across the view below,
+The Sagaren King whom hitherto he had relied upon as lord,
+Is bravely riding upon a coin-patterned dappled horse,
+Putting on a saddle with golden rings.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">神地の城の表門には、門番のシール、ベスの両人が、あまりの無聊と暑さとを忘れむため、チビリチビリと胡坐をかいて酒を汲み交し雑談に耽つて居る。</p>
+            <p class="ja-classical-line">『オイ、ベス、ケールス姫様が血相変へて襷十字に綾取り、後鉢巻を凛と締め、裾もあらはに大薙刀を小脇に抱込み、此処迄現はれ来り、手持無沙汰のお面貌でコソコソと再び元のお館に引つ返されたのは一体何だらう。まるで戦場に於ける女武者のやうぢやないか。俺は此処に門番を酒と一緒に神妙につとめて居るから、貴様一寸お館へ入つて様子を探つて来て呉れ。何だか気が落ち付かないやうな心持がして来たからなア』</p>
+            <p class="ja-classical-line">『さうだなア。合点の往かぬ姫様の御様子、之には何か訳があるのであらう。叱られるか知らないが一寸奥迄往つて来る。俺達は門番の分際として、昇殿は許されない身の上だが、何でも非常の事が大奥には突発して居るに違ひない。万々一竜雲様の御身の上に一大事があつては、吾々も悠々閑々として居る訳には往かない。叱られても構はぬ、奥迄踏込んで来る。様子は後から詳しく分るであらう』</p>
+            <p class="ja-classical-line">と云ひのこし、ベスは白鉢巻を締め襷十字に綾取りながら、尻引つからげ無雑作に奥殿さして進み入り、ケリヤの負傷や、竜雲、ケールス姫、テールの驚きの場面を一見し、且つ大体の様子を垣間見ながら、此分ならば余り大した事はあるまい、夢の騒動だと呟きながらスタスタと踵を返さむとする時、目敏くもケールス姫はベスの姿を見て声を尖らせ、</p>
+            <p class="ja-classical-line">『お前は門番のベスではないか。館の禁制を破り、斯かる大奥迄何しに来たのだい』</p>
+            <p class="ja-classical-line">と呶鳴りつけられ、ベスは慄ひながら頭を掻き、</p>
+            <p class="ja-classical-line">『ハヽハイ、マヽ誠に申訳が御座りませぬ。実はケールス姫様の唯ならぬ御様子を拝みまして、此大奥には何事か珍事突発せしならむ、如何に卑しき門番なりとて、君の危難を救はずには居られない、昇殿の御禁制は百も千も承知致しては居りますが、斯かる非常時にはそんな事を守つて居る事は出来ない、とも角お二方を助け申さねばならないと、シールと申し合せ、不都合を顧みずここ迄参りました。どうぞ御勘弁を願ひます』</p>
+            <p class="ja-classical-line">『許し難き汝の行動、常ならば此儘に差措くべきではないが、汝の吾等を思ふ誠忠に免じて唯今限り忘れて遣はす。気をつけて厳重に門を守れよ。さうして大奥の此有様を、何人にも口外してはならないぞ。堅く口留して置く』</p>
+            <p class="ja-classical-line">『ハイ有り難う御座います。決して決して首が飛んでも申しませぬから御安心下さいませ』</p>
+            <p class="ja-classical-line">竜雲は声を尖らせて、</p>
+            <p class="ja-classical-line">『ベス、早く此場を退却致せ！』</p>
+            <p class="ja-classical-line">「ハイ」と答へてベスは此場を立去る。ケリヤは姫に足を切られて苦悶の声を放ち「ウン　ウン」と唸つて居る。テールは腰を抜かした儘、目玉計りヂヤイロコンパスのやうに急速度をもつて白黒交替に転回させて居る。</p>
+            <p class="ja-classical-line">心汚き竜雲が
+寵児となりて朝夕に
+近く仕へし青年テールは
+一間に入りてウラル教の
+神の御文を拝読し
+知らず知らずに夢に入り
+前後も知らぬ其隙を
+心に潜む曲鬼は
+自由自在に跳梁し
+夢路をたどる時もあれ
+神地の城の表門
+人馬の物音物凄く
+攻め来る敵の鬨の声
+訝かしさよと飛び起きて
+館の勾欄かけ登り
+眼下をきつと見渡せば
+今迄主と頼みたる
+サガレン王は勇ましく
+連銭葦毛の馬に乗り
+金覆輪の鞍置いて</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">With horses neighing gallantly, waving their saihai, they close in. Following them, upon aokage and kurokage mounts, who are these valiant tsuhamono? Fixing his gaze to observe, they are the two yūshi Tērisu and Eimusu. Brandishing their golden saihai, with stern gechi, the tsuhamono surge forth like the tide. Ah, crying that it is an ichidaiji, he dashes down, leading sujifu of yūshi, and charges into the enemy. Relying on their numbers, the enemy presses on, but even they are hekieki; like the waves of the shore rolling and returning, the hatairo appears unfavorable.</p>
+          <p class="en-p">Yet, echoing beneath their knees, the battle cries resound. A taigun like unka, deploying in tanteijin, despising their shōsū mikata, charges like Ashiyuraō. The mikata are heukan ketsushi warriors; gauketsu who even break kishin—how must it have been? Clatter, clatter, pierced by sharp blades, they fall effortlessly on the spot. Tērusu, astonished, all alone, secretly enters deep within the gates, and locking the gates, swift as can be, makes his way straight toward the living quarters of Kērusu Hime and Riūn. The enemy has drawn close; quickly flee from this place and make preparations for another day, he speaks with plausible earnestness. Taking a daydream for reality, Riūn changes the very color of his face in a flash, instantly losing the use of his legs on the spot, trembling and quaking—how amusing it is!</p>
+          <p class="en-p">Strongest in a time of crisis is a woman's single-minded heart. Kērusu Hime stands up, snatches the naginata from the nageshi, runs out toward the front, and without leaving behind even a single horseman of the oncoming enemy, mows them down, displaying a woman's bravery. Thinking that now is the very time to rush forth and step out, Keriya of Samori enters. To this peaceful and safe castle, why on earth, Hime-sama, are you in such a grand and exaggerated guise? Stop yourself, he says. Thereupon, Hime angrily and instantly mows down Keriya's legs. Crying out with a single 'Ugh!', she falls on the spot—how pitiful! Kērusu Hime, possessed by desperation,</p>
+          <p class="en-p">tightening her rear hachimaki resolutely, crossing her tasuki in twain, declares, 'Formidable foes are indeed come! I shall teach you a lesson right now!' and rushes out like a fierce tiger. Now how is this? Before the gate, there is not even the sound of a softly blowing wind; heaven and earth are as calm as if asleep, and an atmosphere of quietude drifts. Hime, unable to bear her suspicion, returns once more to the inner chambers of the mansion, feeling at a loss. When she investigates the situation closely, it was all an empty commotion born of Tērusu's dream. Her tightly strung soul goes slack, and Kērusu Hime turns upon Tērusu in his office, blaming him for his impropriety. The panicker who dreamt a dream within a dream, Tērusu, scratching his head,</p>
+          <p class="en-p">feeling as if he had barely been pardoned and escaped the jaws of death, smoothing down his chest—how comical it is! Though there are no ogres in this world, tormented by the ogre of the murakimogokoro created by one's own self, is only Tērusu suffering and afflicted? Kērusu Hime and Riūn alike, hurting their hearts just the same, lose their composure and mannerly deportment, and tremble in fear—how terrifying.</p>
+          <p class="en-p">Fortunately, the wound from Keriya's naginata was shallower than expected; after applying clay to the cut and wrapping it with a bandage, after a few days he recovered to the point where he could barely manage to walk about the palace.</p>
+          <p class="en-p">From this time onward, incomprehensible events occurred continuously within the castle, and Riūn, beginning with all the officials high and low, spent their days in trembling anxiety without a moment of peace, living in loneliness.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">駒の嘶き勇ましく
+采配振つて寄せ来る
+続いて青鹿毛黒鹿毛に
+跨がる勇士は何人と
+眼を据ゑて眺むれば
+テーリス、エームス両勇士
+黄金の采配打ち揮ひ
+厳しき下知に兵士は
+潮の如く打ち寄する
+スワ一大事とかけ下り
+数十の勇士を引率し
+敵に向つて斬り込めば
+衆を頼みて押し寄せし
+遉の敵も辟易し
+寄せては返す磯の浪
+旗色悪く見えけるが
+膝下に響く鬨の声
+雲霞の如き大軍は
+単梯陣を張りながら
+少数の味方と侮つて</p>
+            <p class="ja-classical-line">阿修羅王の如攻め来る
+味方は慄悍決死の士
+鬼神も挫ぐ豪傑が
+如何はしけむバタバタと
+鋭き刃に貫かれ
+苦もなく其場に倒れたり
+テールは驚き唯一人
+門内深く忍び入り
+門を鎖してスタスタと
+ケールス姫や竜雲の
+居間をばさして進み入り
+敵は間近く迫つたり
+此場を早く遁走し
+後日の備へをなしませと
+誠しやかに述べ立つる
+昼寝の夢の物語
+誠となして竜雲は
+顔の色までサツと変へ
+忽ち其場に腰抜かし
+慄ひ戦くをかしさよ</p>
+            <p class="ja-classical-line">まさかの時に強いのは
+女心の一心ぞ
+ケールス姫は立ち上り
+長押の薙刀おつ取つて
+表をさして駆出し
+寄せ来る敵を一騎だも
+余す事なくなぎ払ひ
+女の武勇を現はすは
+今此時と勇み立ち
+立出でなむとするところ
+左守のケリヤは入り来り
+平穏無事の此城に
+何をもつてか姫様は
+仰々しくも其姿
+止まり給へと云ひければ
+姫は怒つて忽ちに
+ケリヤの足を薙ぎ払ふ
+ウンと一声叫びつつ
+其場に倒れし憐れさよ
+死物狂のケールス姫は</p>
+            <p class="ja-classical-line">後鉢巻凛としめ
+襷十字に綾取りて
+強敵こそは御参なれ
+唯今思ひ知らせむと
+猛虎の如く駆出せば
+こは抑如何に門前は
+ソヨ吹く風の音も無く
+天地静に寝ぬるごと
+閑寂の気は漂ひぬ
+姫は不審に堪へずして
+再び館の奥の間へ
+手持無沙汰に帰り来る
+とくと様子を調ぶれば
+テールが夢の空騒ぎ
+張りつめ居たる魂も
+グタリと緩みケールス姫は
+テールの司に打ち向ひ
+その不都合を責めかくる
+夢に夢見た慌て者
+テールは頭掻きながら</p>
+            <p class="ja-classical-line">やつと許され虎口をば
+逃れし如き心地して
+胸なで下すぞをかしけれ
+此世に鬼はなけれども
+吾身の作りし村肝の
+心の鬼に責められて
+苦しみなやむはテールのみか
+ケールス姫も竜雲も
+同じく心を痛めつつ
+挙措其度をば失ひて
+慄ひ居たるぞおそろしき。</p>
+            <p class="ja-classical-line">幸にケリヤの薙刀の創は思つたよりは浅く、切口に粘土をつけ繃帯を施したれば、数日の後には殿中歩行の自由を僅に得る処迄回復したりける。</p>
+            <p class="ja-classical-line">是より城内は間断なく不可解なる事のみ続出し、竜雲を初め上下の司達は戦々兢々として安き心もなく、淋しげに其月日を送りつつありしといふ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c15.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 15: 眩代思 Tide [1003]</span>
+      </a>
+      <a href="c17.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 17: 一目翁 [1005]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

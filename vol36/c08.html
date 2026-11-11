@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: 悪現 Spirit [996] - Volume 36 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 36 Table of Contents</a>
+      <span>Volume 36</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 36 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: 悪現 Spirit [996]</h1>
+      <p class="chapter-title-ja">悪現霊〔996〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Anan and Sēru's detachment headed toward the mansion, while Sāru and Uinchi rushed fiercely toward the prison in order to rescue Tārchin, Princess Kingusu, Zemu, Ēru, Shirurengu, and Yūzu.</p>
+          <p class="en-p">Bēru fought with all his might alongside his subordinate prison guards, but finally thinking he could not win, he hid his form like clouds and mist and vanished.</p>
+          <p class="en-p">Sāru and Uinchi successfully rescued all the loyal retainers, and next advanced pointing toward the king's mansion to join Anan and Sēru's detachment. Ryūun and Princess Kērusu, with changed complexions in the inner chamber, held hand spears tucked under their arms, and postured themselves ready to thrust if anyone approached.</p>
+          <p class="en-p">Anan, Sēru, and the others who advanced first, along with Shirurengu and Yūzu, unluckily fell into a hastily made deep pitfall inside the mansion.</p>
+          <p class="en-p">Sāru, Uinchi, and the others, including Tārchin, Princess Kingusu, Zemu, and Ēru, judging that to advance any deeper now might lead to what kind of plight was hard to tell, weighed the gravity of the situation and retreated backward, coming out to the front and continuing the battle once again.</p>
+          <p class="en-p">Keriya and Haruma wielded their command batons up and down, gathered elite weapons everywhere, and defended and fought with the limit of their lives, so that almost more than a third of the attacking forces were cut down and fell in the twinkling of an eye. Sāru and Uinchi, having no other choice, retreated from here for a while along with Tārchin, Princess Kingusu, and others, and returned their army to Barī's mansion to devise a plan for a future comeback.</p>
+          <p class="en-p">Ryūun gathered his subordinate generals and soldiers, praised to the utmost limits of his mouth the great exploits of today's defense, and had the exterior of the castle guarded thoroughly. And being surprised at the invisible figures of Sagaren-ō to start with, and Eimusu and Tērisu whom he trusted utterly, he commanded Keriya and Haruma once again to send catchpoles in all directions to search strictly for the whereabouts of the king and the other two. However, the whereabouts of the king had finally become completely untraceable.</p>
+          <p class="en-p">Ryūun, to comfort his subordinate generals and soldiers, spread straw mats in the wide courtyard of the castle, and while guarding all directions, held a grand banquet. At that banquet, Ryūun sang in a loud, clear voice.</p>
+          <p class="en-p">O Lord Shionagahiko,
+Who hast manifested as the Ancestor of this world,
+Thy divine majesty now shines bright,
+And it has become an age of the teachings of Urals.
+With the lineage of Lord Ōkunihiko,
+Sagaren-ō, who boasted in the world,
+And his ugly evil deity were by Ryūun's
+Boundless and vast divine virtue
+Blown away without a trace,
+And vanishing into smoke, they disappeared.
+I from now on shall become the ruler
+Of Shiro Island, and all officials
+And a hundred men entirely
+To the teachings of the god of Urals
+Obeying together, the dews of grace
+Abundantly I shall moisten.
+Ah, Kannagara kamigami!
+The divine authority of Lord Shionagahiko,
+Though it is a thing not beginning today,
+The grasses and trees of the four quarters all</p>
+          <p class="en-p">Without leaving a single frond, bow down and prostrate.
+Ryūun, who obeys the teachings
+Of such a noble great deity,
+Receiving into his body the divine power of
+The myriad gods of Takamanohara
+And the guardian deities of the land, the Kunitsukami,
+Like the sun and moon eternally
+Shining across, my divine majesty—
+Praise it, ye hundred officials!
+Princess Kērusu to begin with,
+Left-guard and right-guard divine officials,
+Keriya and Haruma need not even be spoken of,
+Bēru, Mēru, and even Yōru,
+Obeying my divine virtue,
+Serve purely before me!
+I am the saving deity who rules
+This world in peace.
+As long as Ryūun rules
+In this Shiro Island, ogres and giant serpents,
+Come howsoever monstrous malice may attack,</p>
+          <p class="en-p">To the extent that there is nothing to fear,
+Upper and lower harmonize with each other,
+Matching hearts and making strength
+Into one, I rule over this—
+Protect this divine country!
+Ah, Kannagara kamigami!
+With a sincere heart before the presence of God
+I offer up and pray.</p>
+          <p class="en-p">Saying that even evil has three tenths of logic, he became pleased in a certain way, shamelessly and audaciously exposing his thousand-layered mask of a face before the multitude, and looked triumphant.</p>
+          <p class="en-p">Princess Kērusu tagged along behind him in a good mood, herself singing and herself dancing, praying for Ryūun's martial fortune and his happiness—that song.</p>
+          <p class="en-p">Lord Shionagahiko,
+Who hast appeared in Takamanohara,
+The teachings of Urals protected
+By the great deity,
+Master Ryūun, official of God,
+Thy boundless and vast divine virtue
+Having manifested, now here
+Island of Shiro peacefully,
+Very tranquilly thou rulest;
+It has truly become an age of saints.
+Rejoice and be courageous, ye hundred officials,
+And people of the land all together,
+From the bottom of your hearts rejoicing in
+The divine virtue of Master Ryūun,
+Praise it, Kannagara!
+The power of God is before our eyes;
+Sagaren-ō of weak heart,
+His majesty's command, the stained
+Brahmanism morning and evening
+Revering as if it were his life,
+Disordered this world.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">アナン、セールの一隊は館に向ひ、サール、ウインチはタールチン、キングス姫、ゼム、エール、シルレング、ユーズを救ひ出さむと、牢獄の方に猛進した。</p>
+            <p class="ja-classical-line">ベールは部下の獄卒と共に死力を竭して戦うたが、つひにコリヤ叶はぬと思ひしか雲を霞と姿を隠して了つた。</p>
+            <p class="ja-classical-line">サール、ウインチは一同の忠臣を首尾よく救ひ出だし、次にアナン、セールの隊に合すべく王の館を指して進み行く。竜雲、ケールス姫は奥の間に顔の色を変へ、手鎗を小脇に抱へ、寄らば突かむと身構へしてゐる。</p>
+            <p class="ja-classical-line">真先に進んだアナン、セールを始め、シルレング、ユーズは不運にも、館の中の俄作りの深き陥穽におち込んで了つた。</p>
+            <p class="ja-classical-line">サール、ウインチを始め、タールチン、キングス姫、ゼム、エールは、此上深入りするは如何なる羽目に陥るやも計り難しと、大事をふんで後へ引返し、表に出でて再び戦ひを継続しつつあつた。</p>
+            <p class="ja-classical-line">ケリヤ、ハルマは采配を打ふり打ふり、所在精鋭の武器を揃へて、命限りに防ぎ戦ひ寄せ手の人数は殆ど三分以上瞬く間に斬り倒されて了つた。サール、ウインチは止むを得ず、タールチン、キングス姫、其他と共に一先づここを退却し、再び捲土重来の策を構ぜむと、バリーの館に軍を返した。</p>
+            <p class="ja-classical-line">竜雲は見方の将卒を集め、今日の防戦の偉勲を口を極めて賞揚し、城の外部を念入りに警護せしめた。そしてサガレン王を始め、信用し切つたるエームス、テーリスの姿の見えざるに驚き、再びケリヤ、ハルマに命じ、捕手を四方に遣はして、王、外二人の所在を厳しく捜索せしめた。併し乍ら、王の行方は到底分らなくなつて了つたのである。</p>
+            <p class="ja-classical-line">竜雲は部下の将卒を労ふべく、城の広庭に草蓆を布き、四方を警戒し乍ら、大祝宴を開いた。其席上にて竜雲は声高々と歌ふ。</p>
+            <p class="ja-classical-line">『此世の御祖とあれませる
+塩長彦大神の
+御稜威は今や輝きて
+ウラルの教の世となりぬ
+大国彦の系統と
+世に誇りたるサガレン王の
+醜の魔神は竜雲が
+広大無辺の神徳に
+吹き払はれて影もなく
+煙となつて消え失せぬ
+われは是よりシロ島の
+司となりて百司
+百人達を悉く
+ウラルの神の御教に
+まつろひ合せ御恵の
+露を普くうるほさむ
+あゝ惟神々々
+塩長彦の御威勢は
+今に始めぬ事乍ら
+四方の草木も悉く</p>
+            <p class="ja-classical-line">片葉もとめず伏しなびく
+かかる尊き大神の
+教にまつろふ竜雲は
+天津神たち八百万
+国津神たち国魂の
+神の力を身に受けて
+月日の如く永久に
+輝きわたるわが御稜威
+称へまつれよ百司
+ケールス姫を始めとし
+左守右守の神司
+ケリヤ、ハルマは云ふも更
+ベールやメール、ヨール迄
+吾神徳にまつろひて
+清く仕へよ吾前に
+われは此世を平けく
+治むる救ひの神なるぞ
+此シロ島に竜雲の
+納まる限り鬼大蛇
+いかなる曲津の攻め来共</p>
+            <p class="ja-classical-line">恐るる事はなき程に
+上と下とは睦び合ひ
+心を合せ力をば
+一つになしてわが治らす
+此神国を守れかし
+あゝ惟神々々
+神の御前に真心を
+ささげて祈り奉る』</p>
+            <p class="ja-classical-line">と悪にも三分の理屈があるとやら、一かどよい気になつて、臆面もなく大勢の前に厚かましくも其千枚張りの面の皮をさらし、得々としてゐる。</p>
+            <p class="ja-classical-line">ケールス姫は其尾に付けて機嫌よく自ら歌ひ、自ら舞ひ、竜雲の武運と其幸福を祈りたる、其歌。</p>
+            <p class="ja-classical-line">『高天原に現れませる
+塩長彦の大神の
+守り玉へるウラル教
+神の司の竜雲師
+広大無辺の御神徳
+現はれまして今ここに
+シロの島をば平けく
+いと安らけく治めます
+聖の世とはなりにけり
+喜び勇めよ百司
+国人達も諸共に
+竜雲司の神徳を
+心の底より喜びて
+称へまつれよ惟神
+神の力は目のあたり
+心の弱きサガレン王の
+君の命は汚れたる
+バラモン教を朝夕に
+命の如く崇めつつ
+此世を紊し玉ひけり</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Due to the fierce rage of the Magatsu no Kami,
+the castle of Kauji day by day,
+was declining, and the disordered and ruined state,
+like mown rice,
+of having no means to govern, weeping and entering sleep,
+at the very critical moment of utter suffering,
+the Kamutsukasa of the paths of Urals,
+Riūn of lofty Shintoku,
+riding upon the clouds of Amatsumisora,
+came down far to this place,
+manifesting his Senpenbankuwa Shinriki,
+guiding wareware to the great path of Kami,
+saving us into the precious divine Onkuni,
+how venerable it is.
+Ah, Kamunagara, Kamunagara,
+what sort of Shiaha is this for me,
+the darkness of my breast that until now was clouded,
+without a shadow in the wind of Shinado,
+being blown away, in the sky of the murakimo,</p>
+          <p class="en-p">heart, the moon shines,
+the light of the stars sparkles and shines,
+becoming a body that shines all over.
+Beginning with Keriya and Haruma,
+and the other hundreds of Tsukasa,
+assenting to our Kototama,
+from now onwards, exhausting all our Magokoro,
+exhausting our bodies,
+not letting the Mioshihe of Riūntsukasa leave the heart, guarding it well,
+saving and helping the Tamigusa under heaven, making it an unshakeable and undecaying Miyo for Tokoshihe,
+submitting and obeying the Amatsumakoto no Ōmichi, Kamunagara.
+Before the mimahe of Shihonagahiko,
+opening up all the Magokoro that Kerusuhime has,
+reverently and devoutly praying.
+Ah, Kamunagara, Kamunagara,</p>
+          <p class="en-p">May the Mitama be blessed.
+And so, becoming cheerful, they sang, danced, and finished, and pulling the hand of Riūn, they advanced deep into the inner room.</p>
+          <p class="en-p">Keruya, facing all the Tsukasa and handmaidens, proudly proclaimed and transmitted through a song, that song.</p>
+          <p class="en-p">Is it indeed a wondrous Miyo,
+pushing the punt-pole into the riverbed of heaven,
+the master Riūn who descended,
+displaying his Kōdaiunben no Shinriki,
+now here,
+becoming the lord of the capital of Kauji,
+togethers with Kerusuhime,
+to widely spread benevolent governance,
+how venerable is his raising of the voice in declaration.
+Found by the venerable lord,
+I become the Hidari-no-mamorigami,
+and everything within this castle,
+making my single body bear the responsibility,
+under heaven,
+cherishing the Tamigusa of the four quarters,
+ah, the precious and rare reign of peace.
+We, repaying one ten-thousandth of the precious grace,
+while exhausting the utmost of our hearts,
+morning and evening, before Ōkami</p>
+          <p class="en-p">and the lordly mimahe, diligently,
+we are resolved to serve.
+Beginning with Migi-no-mamorigami,
+and the other hundreds of Tsukasa,
+reaching down to Aohitogusa,
+fearfully and reverently adoring the Awase of this lord who descended from heaven,
+do not rebel even by a single word.
+Nevertheless, the black-hearted
+Taruchin, Emuzu,
+Terisu, Zemu, Yeru, and others,
+may prepare their army once again,
+and it is unpredictable whether they will come to attack.
+At that time, all of you,
+without shrinking, without timidity, making the power of Ōkami a shield, for the sake of the lord,
+for the sake of the people, of the cord of jewels,
+fight without grudging your lives.
+Even if life should be cast away,
+for the sake of Kami, for the sake of the lord,
+the life cast away, when it reaches the mimahe of Kami in heaven,</p>
+          <p class="en-p">will be granted a precious seat of treasure,
+and that soul, for Tokoshihe,
+safely, happily, delightfully,
+will be saved in the garden of joy.
+Ah, Kamunagara, Kamunagara,
+öffering Magokoro before the mimahe of Kami,
+Keruya now here,
+swears the full measure of her heart.
+Those people who think themselves [capable],
+as early as a single day, sharpening the murakimo
+heart and training the body,
+becoming warriors defending this earth,
+do and fulfill it, Kamunagara.
+Kami, guarding you,
+for a thousand years, eight thousand years, without destruction,
+manifesting lofty renown,
+shall make you prosperous spirits.
+The Kototama that Keruya now proclaims,</p>
+          <p class="en-p">carve into your heart, and not even for a moment,
+must you ever forget it.
+Hidari-no-mamorigami, now here,
+taking the place of Riūntsukasa,
+states and leaves [this] to you all.
+Ah, Kamunagara, Kamunagara,
+May the Mitama be blessed.</p>
+          <p class="en-p">So proclaiming, she leisurely took her seat.</p>
+          <p class="en-p">Although there are plenty of deviant songs by Migi-no-mamorigami Haruma and other people, since they are too wordy, they shall be omitted.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">曲津の神の猛びにて
+神地の城は日に月に
+衰へ行きて刈ごもの
+乱れ果てたる有様を
+治むる由も泣きね入り
+苦み切つたる折柄に
+ウラルの道の神司
+神徳高き竜雲が
+天津御空の雲にのり
+はるばる茲に下りまし
+千変万化の神力を
+現はし玉ひて吾々を
+神の大道に導きつ
+尊き神の御国に
+救ひ玉ふぞ尊けれ
+あゝ惟神々々
+妾はいかなる仕合せか
+今まで曇りし胸のやみ
+科戸の風に影もなく
+吹き払はれて村肝の</p>
+            <p class="ja-classical-line">心の空に月は照り
+星の光はキラキラと
+輝きわたる身となりぬ
+ケリヤ、ハルマを始めとし
+其他の百の司たち
+吾言霊を諾なひて
+今より先は真心の
+限りを尽し身を尽し
+竜雲司の御教を
+心に放さずよく守り
+天ケ下なる民草を
+救ひ助けて永久に
+ゆるがぬ朽ちざる御世となし
+天津誠の大道に
+まつろひまつれよ惟神
+塩長彦の御前に
+ケールス姫が真心の
+あらむ限りを打あけて
+つつしみ敬ひねぎまつる
+あゝ惟神々々</p>
+            <p class="ja-classical-line">御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と陽気になつて歌ひ舞ひ納め、竜雲の手を曳いて、奥の間深く進み入る。</p>
+            <p class="ja-classical-line">ケリヤは一同の司及び雑役等に向つて、鼻高々と歌を以て宣り伝へた、其歌。</p>
+            <p class="ja-classical-line">『げにも目出たき御世なるか
+天の河原にさをさして
+あもりましたる竜雲師
+広大無辺の神力を
+発揮し玉ひて今ここに
+神地の都の君となり
+ケールス姫と諸共に
+普く仁政を布かむとて
+言あげ玉ひし尊さよ
+尊き君に見出だされ
+吾は左守神となり
+此城内の一切は
+わが身一つに責任を
+負はせ玉ひて天ケ下
+四方の民草撫で玉ふ
+げに有難き珍の御代
+われ等は尊き御恵の
+万分一に報いむと
+心の限りを尽しつつ
+朝な夕なに大神と</p>
+            <p class="ja-classical-line">君の御前にいそしみて
+仕へまつらむ覚悟なり
+右守神を始めとし
+其外百の司たち
+青人草に至る迄
+天より降りし此君の
+御稜威を畏み敬ひて
+只一言も叛くなよ
+さはさり乍ら腹黒き
+タールチンやエームスや
+テーリス、ゼムやエール等が
+再び軍を整へて
+攻め来らむも計られず
+其時汝等一同は
+怯めず臆せず大神の
+力を楯に君の為
+世人の為に玉の緒の
+命を惜しまず戦へよ
+仮令生命はすつる共
+神の御為君の為</p>
+            <p class="ja-classical-line">捨てし生命は天国の
+神の御前に行きし時
+珍の宝座を与へられ
+其魂は永久に
+安く楽しく喜びの
+園に楽しく救はれむ
+あゝ惟神々々
+神の御前に真心を
+捧げてケリヤが今ここに
+心の丈を誓ひおく
+われと思はむ人々は
+一日も早く村肝の
+心を研き体を練り
+此土を守るつはものと
+なりて尽せよ惟神
+神は汝を守りつつ
+千代に八千代に亡びなき
+高きほまれを現はして
+栄えの身魂となさしめむ
+ケリヤが今宣る言霊を</p>
+            <p class="ja-classical-line">心に刻みて片時も
+決して忘るる事勿れ
+左守神が今茲に
+竜雲司に成り代り
+一同に向つて述べておく
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と宣示し、悠々として座につく。</p>
+            <p class="ja-classical-line">右守神のハルマを始め、其他の人々の脱線的歌は沢山あれ共、余りくだくだしければ省略する事とする。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 蒙塵 [995]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 濃 Mist の途 [997]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

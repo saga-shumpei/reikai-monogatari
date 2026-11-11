@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 24: 三六合 [1012] - Volume 36 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 36 Table of Contents</a>
+      <span>Volume 36</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 36 &bull; Chapter 24</span>
+      <h1 class="chapter-title-en">Chapter 24: 三六合 [1012]</h1>
+      <p class="chapter-title-ja">三六合〔1012〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kingusuhime stands up, opens her silver fan, and sings and dances.</p>
+          <p class="en-p">At the foot of Hakūnzan / Stands the sacred mansion / The dark clouds that once enshrouded Tenchi / Now completely cleared away / The light of justice has become / The radiant reign of Jitsugetsu / My husband Tārutchin / Was found by King Sagaren / Appointed as the deity of Samori / Morning and evening / Serving with sincere heart / Yet from nowhere descending / The dragon clouds of the chief of crooked ways / Pierced by the sword of tongue / And his own person becoming in peril / When I prayed morning and evening / Offering a sincere heart to the great deity of Brahmanism / The arrogant dragon clouds / Dreadful as they approached me / The love clouds which Tenchi does not allow / Their letter of lust with impure hearts / Hiding from the eyes of my dear lord / Pressing me to make a reply / Astounded to the extreme by such lawless outrage / Are there no gods in Tenchi? / If there is a true Kami / Praying that these dark clouds / May be swiftly cleared away / At that moment my lord / Advanced close by / And the dragon clouds / Saying show me your love letter, how embarrassing / Pressuring me, I have no other choice / Blushing in his face, the dragon clouds / Handed over the love letter of disordered mind / To my lord / A scheme for the harmony of husband and wife / Writing a reply here / Inviting the dragon clouds lost in love / To the wisteria forest cool with summer wind / Beneath a great tree / Tempting them into a deep pitfall / Dug right in the middle of the path / While waiting thinking it cannot be too soon / The dragon clouds, not being the body of a Kami / Knowing nothing of such a design even in a dream, mingling with the night / Leaving the mansion all alone / Only the beloved woman / Gazing at the sky and waiting for me / Oh, the foolishness of such fixed thoughts / The dragon clouds suddenly upon the steep path / Into the merciless hole dug by my lord / Having fallen down / Tārutchin, lurking in the shade of the trees / To destroy the enemy of my lord / Exhilarated that now is this very time / Holding a hoe prepared beforehand / From above the head of the suffering and writhing dragon clouds, patter-patter / With earth mixed with rocks / Covering it over nonchalantly / And returned heading for our home / The dragon clouds, whose bad luck is not yet exhausted / Unexpectedly helped by the divine officials of Emuusu / With his life barely saved into the castle / Trembling and trembling he returned / Waiting for dawn, calling Emuusu close to his side / You, though I acknowledge the merit of saving my peril / It is a scheme to join hearts with Tārutchin and Teerisu / And betray my person / Such being the case, not even for a moment / Shall there be any leniency, he declared / With merciless rough rope / Binding hands and feet into the prison / Throwing him in, how merciless / Ah, Kamugarakami-kamugarakami / The divine spirits blessing / Although we husband and wife / Are captured and put in prison / Feeling not even a little pain / Our souls granted by Kami / Wandering widely through Tenchi / Near the dawn, the morning sunbeams / Ascending, while waiting for the time / To illuminate the Rokugō / The divine officials of Anan and Yūzu / Raising a righteous army inside the castle / Attacking with war cries / How valiant is their force / We husband and wife, helped by the loyal and valiant divine officials / In the rocky cave of the village of Koito / Where King Sagaren hides / Concealing ourselves temporarily to plan the chastisement of the dragon clouds / Just as this is being arranged, the three-five / Divine officials' propagation envoy / The deity Hokkōkami appears / Fully and in detail explaining and preaching / The true heart of Kami / How joyous to have washed away / The village clouds hanging upon the heart / Beginning with King Sagaren / Princess Kuniko and Princess Kiyoko / My lord and Emuusu / Teerisu, Uinchi, Zemu, Eeru / Together with a hundred officials / Organizing the kototama army / Fluttering banners in the wind / With flags and drums in grand array along the mountain road / Forming a single-file formation / How valiant as they advanced to attack / Once again the deity Hokkōhikokami / Appearing here / Preaching the paths of good and evil, right and wrong / Without distinction between enemy and ally / The village clouds of the sky of the heart / Sweeping away and saving them / Gathering in the eight-hiro hall / To celebrate the auspicious sign of harmony between Kami and humanity / How joyous it is / Ah, Kamugarakami-kamugarakami / May your august spirits bless us / Whether the morning sun shines or becomes cloudy / Whether the moon waxes or wanes / Even if life should be cast away / For the sake of Kami, for the sake of the country / A stalwart man exhausting his heart / Dedicated to Kami and the lord / That sincere heart forever / Firmer than the thousand-pulling rock / For a thousand and eight thousand ages may it never move / Kami protects us / We are the children of Kami, the palaces of Kami / With actions equal to Kami</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">キングス姫は立上り、銀扇を拡げて歌ひ舞ふ。</p>
+            <p class="ja-classical-line">『白雲山の山麓に
+そそり立ちたる神館
+天地を包みし黒雲も
+今や全く晴れわたり
+正義の光は日月の
+輝く御代となりにけり
+タールチンの吾夫は
+サガレン王に見出され
+左守の神と任けられて
+朝な夕なに真心を
+尽して仕へゐたりしが
+何処ともなく降り来る
+曲の司の竜雲が
+舌の剣に貫かれ
+其身も危くなりければ
+バラモン教の大神に
+朝な夕なに真心を
+捧げて祈りし時もあれ
+心傲ぶる竜雲が
+妾に向つて恐ろしや</p>
+            <p class="ja-classical-line">天地許さぬ恋雲の
+心汚き其艶書
+吾背の君の目を忍び
+いらへをなせと迫り来る
+余りの無道に呆れ果て
+天地に神はなきものか
+誠の神のいますなら
+此黒雲を逸早く
+晴らさせ玉へと祈る折
+吾背の君は側近く
+進ませ玉ひて竜雲が
+艶書を見せよと恥かしや
+迫りますこそ是非なけれ
+顔赤らめて竜雲が
+心乱れし艶書を
+吾背の君に相渡し
+夫婦和合の謀計
+茲に返書を認めて
+恋に迷ひし竜雲を
+夏風涼しき藤の森</p>
+            <p class="ja-classical-line">大木の下に誘ひつ
+企みも深き陥穽
+道の真中に相穿ち
+今や遅しと待つ内に
+神ならぬ身の竜雲は
+かかる企みのある事を
+夢にも知らず夜に紛れ
+館を一人立出でて
+恋しき女の只一人
+空を眺めてわれ待つと
+思ひ詰めたる愚さよ
+竜雲忽ち坂路に
+吾背の君の穿ちたる
+無残や穴におち込めば
+木蔭に潜みしタールチン
+君の仇をば滅すは
+今此時と勇み立ち
+かねて用意の鍬をもち
+苦しみ悶ゆる竜雲の
+頭の上よりバラバラと</p>
+            <p class="ja-classical-line">岩石交りの土塊を
+蔽ひかぶせて何気なく
+吾家をさして帰りけり
+悪運尽きざる竜雲は
+思ひ掛なくエームスの
+神の司に助けられ
+命カラガラ城内に
+慄ひ慄ひて立帰り
+あくるを待つてエームスを
+吾側近く呼び出し
+汝はわれの危難をば
+救ひし功績はよみすれど
+タールチンやテーリスと
+心を協せて吾身をば
+ベツトせむとの企みなり
+かくなる上は一時も
+容赦はならぬと言ひ放ち
+情容赦も荒縄に
+手足を縛りて牢獄に
+投込みけるぞ無残なれ</p>
+            <p class="ja-classical-line">あゝ惟神々々
+神の御霊の幸はひて
+吾等夫婦は牢獄に
+捕へられたる身乍らも
+少しの苦痛も感じなく
+神の賜ひし吾魂は
+天地を広く逍遥し
+東雲近く旭かげ
+昇らせ玉ひて六合を
+照らさむ時を待つ内に
+アナン、ユーズの神司
+義兵を起して城内に
+鬨を作つて攻め来る
+其勢ぞ勇ましき
+吾等夫婦は忠勇の
+神の司に助けられ
+サガレン王の隠れます
+小糸の里の岩窟に
+暫しかくれて竜雲を
+誅伐せむと謀計</p>
+            <p class="ja-classical-line">めぐらす折しも三五の
+神の司の宣伝使
+北光神の現れまして
+神の誠の御心を
+完美に委曲に説き諭し
+心にかかりし村雲を
+洗ひ玉ひし嬉しさよ
+サガレン王を始めとし
+君子の姫や清子姫
+吾背の君やエームスや
+テーリス、ウインチ、ゼム、エール
+百の司と諸共に
+言霊軍を編成し
+風に旗をば翻し
+旗鼓堂々と山路を
+単縦陣をはり乍ら
+攻めよせ来りし勇ましさ
+又もや北光彦神
+ここに現はれましまして
+善悪正邪の道を説き</p>
+            <p class="ja-classical-line">敵と味方の隔てなく
+心の空の村雲を
+伊吹払ひて救ひまし
+神人和楽の瑞祥を
+八尋の殿に集まりて
+祝ぎまつるぞ嬉しけれ
+あゝ惟神々々
+御霊幸はひましませよ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令命はすつるとも
+神の御為国の為
+心尽しの大丈夫が
+神と君とに捧げたる
+其真心は永久に
+千引の岩のいや固く
+千代も八千代も動かざれ
+神は吾等を守ります
+吾等は神の子神の宮
+神に等しき行ひを</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">To guide the people of this manifested world into the Great Path of Kami is entrusted as the divine ministry, and it is our noble duty. Kuniharutachinōokami, Shihonagahikonōomikami, before the August Presence of Ōkunihiko, we offer our sincere hearts and pray. Ah, Kamunagara, Kamunagara, may our mitama be blessed and prosper.'</p>
+          <p class="en-p">Emsu stands up and chants a celebratory song.</p>
+          <p class="en-p">'The Jizaiten of the land of Tokoyo, enshrined with Ōkunihiko, the divine hall of Brahmanism, dwelling within Kenonjiyō, the noble miko of Ōkuniwake, our lord Kuniwakehiko, oppressed by the foul-hearted Magakami, abandoning the sacred land far behind, enduring a hundred afflictions while crossing over the great ocean, arriving at the white island floating upon the waves, reaching this wondrous land, and opening up the Great Path of Brahmanism far and near with all your heart—how wondrous it is! The people of the island of Ceylon, yearning for the august virtue of our lord, gathering without distinction of far and near, bathing in the grace of ōkami, moved to tears by the august benevolence of our lord, at last making our lord the king, cutting the trees of the great and small valleys to construct a wondrous hall, reverently proclaiming him the King of Sagaren, combining the three virtues of lord, teacher, and parent, serving him with one accord as the divine official and great sovereign, when such times existed—alas, the evil demonic wind fiercely blew, like a swift-running horse terrifyingly invading deep into the castle, seizing Princess Kērusu, and plotting to spread the teachings of Ural without exception throughout this country, the plotting Magatsu no Ryūun, heavenly fate having here reached its end, now completely and without concealment or hesitation, confesses all past misdeeds before the august presence of our Great Lord, and a world where salvation is sought has now arrived.</p>
+          <p class="en-p">When I think of it, when I think of it, on the previous midnight, wishing to view the moon at the Wisteria Forest, ascending to the peak, wiping my sweat in the night breeze blowing past, praising the light of the moon while descending the slope—at that very moment, I slipped and fell into a pitfall! Wondering what on earth this uncanny thing could be, when I peered closely, I heard a voice I never expected: whose wicked deed is this, and who is the fallen person? I sent my attendants running home to fetch many a plow and hoe, and using them, at last pulled him up. When I looked at him silhouetted against the moon, who could have expected that it was the Magakami who opposes our lord morning and evening, the foul-hearted Ryūun? The regret I felt when I realized this! Now that things have come to this, there is nothing more to be done, resigning myself to leaving it to the august will of the gods of heaven and earth, I returned home, but before I could spend even a single night in peace, Ryūun was captured by the arresting servants, and the vexation of being thrown into an unexpected prison!</p>
+          <p class="en-p">Ah, however that may be, however that may be, since the gods are of supreme love, how could they ever overlook the demon Ryūun? Ah, wait a while, wait a while! Purifying our hearts and purifying our bodies, by the august salvation of the noble gods, escaping from this prison, and for the sake of the King of Sagaren, blowing away all the foul gods harboring the Yamata no Orochi with the divine breath, and rebuilding this into a sanctuary of purity and spotlessness is right before our eyes. Ah, Kamunagara, Kamunagara, O August God Ōkunihiko, pray that you will pity the sincere loyalty we render—at the moment we pray thus, Anan, Sēru, Uinchi, and the officials of Zemu seize the opportune moment, organize an army of righteousness, and advance to save us—how joyous it is! Courage is here increased a hundredfold, and full of spirit we advance toward the living quarters of Ryūun. Alas! Starting with Yūzu, true officials such as Anan, Sēru, and Shirureng falling straight into a hastily made pitfall inside the room—all people say: 'In this hall where crookedness nests, there is peril in advancing deeply; let us turn back for now, reorganize our military preparations, cut down and slaughter Ryūun and his followers, and exterminate them,' yet how frustrating it is to turn the army back!</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara, if the gods dwell in this world, why do they not drive away evil and help the righteous gods? Grumbling thus with various thoughts, the company for the time being concealed their presence. The King of Sagaren, assisted by Tērisu and Emsu, descends the slope of the Kawamori River, letting time pass, and arrives at the village of Koito in Matsuura.</p>
+          <p class="en-p">While he gathers righteous warriors and once more advances preparations for the punitive expedition against Ryūun, the divine official of Kitakuhiko descends like a dove, followed by the appearance of Kunikohime, the propaganda envoy of Princess Kiyoko, who together with our Great Lord, uniting their hearts and making their divine power as one, advance with the spirit of chanting propaganda songs—how brave it is! The grace of the gods blessing us, building the foundation of firm and everlasting rock for today's joy in the age of pines, forever clearing the clouds of Mount Hakugun, firmly establishing the courtyard of the capital of the sacred land, fixing our dwelling of a thousand ages upon the very stones of Senbiki, revering the gods and soothing the people—</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">現はしまつり世の人を
+神の大道に導くは
+神の司と任けられし
+吾等の尊き務めなり
+国治立大神や
+塩長彦大御神
+大国彦の御前に
+真心捧げて願ぎまつる
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">エームスは立上り祝歌を謡ふ。</p>
+            <p class="ja-classical-line">『常世の国の自在天
+大国彦を祀りたる
+バラモン教の神館
+顕恩城にあれませし
+大国別の貴の御子
+国別彦の吾君は
+心汚き曲神に
+虐げられて聖地をば
+後に見すててはるばると
+百の悩みに堪へながら
+大海原を乗越えて
+波に浮べるシロの島
+珍の御国に着き玉ひ
+バラモン教の大道を
+心をつくして遠近に
+開かせ玉ふ有難さ
+セイロン島の国人は
+君の御徳を慕ひつつ
+遠き近きの隔てなく
+集まり来りて大神の</p>
+            <p class="ja-classical-line">恵に浴し吾君の
+其仁徳に感激し
+遂には君を王となし
+大峡小峡の木を伐りて
+珍の館を建設し
+サガレン王と奉称し
+主師親三徳兼備せる
+神の司よ大君と
+上下一般喜びて
+仕へまつれる時もあれ
+醜の魔風のふきすさび
+隙行く駒の恐ろしく
+城内深く侵入し
+ケールス姫を手に入れて
+ウラルの教を隈もなく
+此国内に拡めむと
+企みし曲津の竜雲が
+天運ここに相尽きて
+今は全く旧悪を
+吾大君の御前に</p>
+            <p class="ja-classical-line">つつまずかくさず言上し
+救ひを求むる世となりぬ
+思へば思へば過ぎし夜半
+月見をせむと藤の森
+峰に上りて吹き来る
+夜風に汗を拭ひつつ
+月の光をほめながら
+坂道下る折柄に
+辷り落ちたる陥穽
+訝しさよと窺へば
+思ひもかけぬ人の声
+こは何者の悪業か
+おちたる人は何人と
+供を家路に走らせて
+鋤や鍬をば数多く
+使ひて漸く救ひ上げ
+月にすかして眺むれば
+豈計らむや朝夕に
+君に仇する曲津神
+心汚き竜雲と</p>
+            <p class="ja-classical-line">悟りし時の残念さ
+斯うなる上は是非もなし
+天地の神の御心に
+任さむものと断念し
+家路に帰り一夜さを
+明かす間もなく竜雲が
+捕手の奴に捕へられ
+案に相違の牢獄に
+投込まれたる無念さよ
+あゝさり乍らさり乍ら
+神は至愛にましませば
+いかでか悪魔の竜雲を
+見のがし玉ふ事やある
+あゝ待て暫し待て暫し
+心を清め身を清め
+尊き神の御救ひに
+これの牢獄をぬけ出し
+サガレン王の御為に
+八岐大蛇の宿りたる
+醜神たちを悉く</p>
+            <p class="ja-classical-line">神の伊吹に吹き払ひ
+清明無垢の聖場と
+立直さむは目のあたり
+あゝ惟神々々
+大国彦の御神よ
+われらが尽す誠忠を
+憐み玉へと祈る折
+アナン、セールやウインチや
+ゼムの司が時を得て
+義勇の軍を編成し
+進み来りて吾々を
+救ひ玉ひし嬉しさよ
+勇気はここに百倍し
+勢込んで竜雲が
+居室をさして進み行く
+あはれやユーズを始めとし
+アナン、セールやシルレング
+誠の司は室内の
+俄作りの陥穽に
+おち入り玉へば諸人は</p>
+            <p class="ja-classical-line">曲の巣くへる此館
+深入りするは虞あり
+一先づここを引返し
+再び軍備をととのへて
+彼竜雲が輩を
+剣の威徳に斬りはふり
+殲滅せむといひ乍ら
+軍を返すもどかしさ
+あゝ惟神々々
+神の此世にましまさば
+悪を退け善神を
+何故助け玉はざる
+などと愚痴をばこぼしつつ
+思ひ思ひに一同は
+一先づ姿をかくしける
+サガレン王はテーリスや
+エームス二人に助けられ
+河森川の坂道を
+下りて時を松浦の
+小糸の里に至りまし</p>
+            <p class="ja-classical-line">正義の勇士を駆り集め
+再び竜雲誅伐の
+準備をすすませ玉ふ折
+北光彦の神司
+鳩の如くに降りまし
+続いていでます君子姫
+清子の姫の宣伝使
+吾大君と諸共に
+心を協せ御力を
+一つになして宣伝歌
+歌ひて進む勇ましさ
+神の恵の幸はひて
+今日の喜び松の世の
+堅磐常磐の礎を
+築き玉ひて永久に
+白雲山の雲もはれ
+神地の都の庭固く
+千引の岩の其上に
+千代の住処を固めつつ
+神を敬ひ民を撫で</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The day of ruling now has come,
+The dawning gateway of Miroku's reign,
+Like the flowers of the trees blooming all at once,
+The august figure of Sakuayahime,
+In the single hour of the lotus blossom,
+How miraculous is her emerging fragrance!
+Ah, Kamunagara, Kamunagara,
+May your august spirits be blessed and prosperous."</p>
+          <p class="en-p">Although there are many other congratulatory poems by numerous divine officiants, they have been omitted due to space limitations.</p>
+          <p class="en-p">By the way, through the mediation of the one-eyed god of Ame, King Sagaren took Kimikohime as his consort and came to reign eternally over the island of Shiro; furthermore, Ames took Kiyokohime in marriage through the mediation of the one-eyed god, and serving close to King Sagaren as the right guardian god, devoted himself to the divine government of the unity of the manifest and hidden realms; Princess Kērusu repented, became a disciple of the one-eyed god, was permitted to be a propaganda envoy, and made a tour of preaching throughout the lands of the four quarters under heaven; and Ryūun, being banished from this island, returned to his home country of India, reformed his heart, and engaged in the propagation of the Great Way, so it is said. Kamunagara Tamashii Sachihaimaseyo.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">治め玉はむ今日の日は
+五六七の御代の開け口
+一度に開く木の花の
+咲耶の姫の御姿
+蓮の花の一時に
+匂ひ出でたる目出度さよ
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">此の外数多の神司の祝歌は沢山あれども、紙面の都合に依りて省略したり。</p>
+            <p class="ja-classical-line">因にサガレン王は天の目一つの神の媒酌に依り、君子姫を娶つて妃となし、シロの島に永久に君臨する事となりぬ。又エームスは目一つの神の媒酌にて清子姫を娶り、サガレン王が側近く右守神となつて、顕幽一致の神政に奉仕し、ケールス姫は悔い改め、天の目一つの神の弟子となり、宣伝使を許されて天の下四方の国々を巡教し、竜雲は此島を放逐され、本国印度に帰り、心を改めて大道の宣伝に従事せしといふ。惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c23.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 23: Snow 達磨 [1011]</span>
+      </a>
+      <a href="../vol37/index.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Volume 37</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

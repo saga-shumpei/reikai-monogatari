@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 17: 一目翁 [1005] - Volume 36 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 36 Table of Contents</a>
+      <span>Volume 36</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 36 &bull; Chapter 17</span>
+      <h1 class="chapter-title-en">Chapter 17: 一目翁 [1005]</h1>
+      <p class="chapter-title-ja">一目翁〔1005〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Shīru, the sentry at the outer gate of the castle of Kauji, while sipping wine all by himself, was waiting impatiently for the return of Besu, who had advanced deep into Okuden.</p>
+          <p class="en-p">Seeing Besu returning with a smile to such a place, he eagerly and pressingly demanded:</p>
+          <p class="en-p">Besu: 'Hey, Besu, how was it? The outcome in Ōoku, or rather, the yōsu...'</p>
+          <p class="en-p">Besu: 'It is much ado about nothing. Steel-nerved, without a shred of fear, I stealthily slipped into the innermost sanctuary of Riūnō, and upon peeking in to see what kind of major crisis had suddenly erupted amidst that appearance of Princess Kērusu, lo and behold, it was sheer peace and tranquility, peace across the realm, the fulfillment of the land, the reassurance of the four classes, and an atmosphere of auspicious omens filled the chambers, while the Okimono of Fukurokuju decorated on the floor was bowing and greeting me with a bent waist—such was the leisurely state of affairs. By now, I cannot utter a single word more about this. First and foremost, this is my mission. Hahaha!'</p>
+          <p class="en-p">Shīru: 'How on earth can you serve as Plenipotentiary Ambassador with an attitude like that? Won't you report the battle situation in a bit more detail?'</p>
+          <p class="en-p">Besu: 'Even if I tried to report, the truth of the matter is there is nothing I can do. Sappari-ahun has lost its way in the void. It was like peeking into a Rakan-dō where faces of wonder are fully displayed. Yet, I have thoroughly pierced through even the unfathomable facts deeply shrouded in black clouds by a certain wise man, so I must be rather brilliant. No matter what anyone says, being the owner of a sharp intellect, it is limited to this Besu alone who touches the core of all facts, ufufufufu futsu. Ah, the big tank of urine is overflowing and my kidneys are about to burst.'</p>
+          <p class="en-p">So saying, with a strange and wobbly gait, he hid himself in the lavatory. Shīru folded his arms and soliloquized.</p>
+          <p class="en-p">Shīru: 'My, what an incomprehensible thing has come to pass. That fellow Besu is only lining up evasive answers and striving to dodge the crux of the matter. There must be some deep reason for this. I must skillfully offer him wine, drink him under the table, and make him vomit the truth; ordinary dishes won't do. Shall I pull out his backbone, open him up right to his belly, and expose everything like loach hotpot?'</p>
+          <p class="en-p">So murmuring, he waited. Besu finally finished urinating and came walking back.</p>
+          <p class="en-p">Shīru: 'Hey, how about tasting a bit of wine? Surrounded by dark clouds on all sides like this, and in a sultry, windless zone, isn't it simply unbearable? Let us make a bold effort, indulge in hearty eating and drinking, and beat the heat! As the old teachings of the Ural religion say... Drink and make merry, an inch ahead is darkness; after the darkness, the moon comes out... Since it is thus written, if you only drink wine, it will surely accord with the divine will, the gloomy clouds of the great sky will also clear away, a cool breeze will blow refreshingly across your face, the sky will be blue and the sun clear, and the opening of the Heavenly Rock Cave will surely be accomplished. What is a man's nice without wine? No matter how splendid the service of a nice may be, it is unexciting if it is only rice. Wine is the chief of all medicines, wine is yakukosu. It is Yakushi Nyorai, Hannyatō, Kanrosui, Shakka, and Jesus. The great savior who saves us into heaven is neither Pangu Shenwang nor Tokoyo no Shinō. If you drink, your heart immediately lifts, and it is the god of wine who allows you to roam freely at will through heaven. The god who actually saves us into heaven appears right before us, you see!'</p>
+          <p class="en-p">Besu: 'If you rely too much on the god of wine, your duty as a gatekeeper will be neglected, and you will end up having the character for dismissal bestowed upon you instead of the character for office. You must bear that slightly in mind.'</p>
+          <p class="en-p">Shīru: 'The preparation of wine is already fine. This is plenty. Not a single drop more can be drunk above this. Ah, I am terribly drunk... When you start saying that is when you have truly learned the joy of wine. They say that wine which is not forced cannot be drunk, so this Shīru-sama is thus pouring wine for you. Hahaha!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">神地の城の表門の番人シールは、只一人チビリチビリと酒を傾けながら、奥殿に進み入つたるベスの帰りを今や遅しと待ち居たり。かかる処へニコニコとして立ち帰り来りしベスの顔を見るより噛みつく様に忙しく、</p>
+            <p class="ja-classical-line">『オイ、ベス、如何だつたい。大奥の首尾はイヤ様子は……』</p>
+            <p class="ja-classical-line">『大山鳴動して鼠一匹だ。何事ならむと身をかため、恐れ気もなく竜雲王の奥殿に忍び入り、ケールス姫様のあの御様子にては何事の大事変突発せしかと窺ひ見れば、豈図らむや、平穏無事、天下太平、国土成就、四民安堵、瑞祥の気が殿内に漲り渡り、床に飾られた福禄寿の置物が……ベスさまお早う……と腰を屈めて挨拶をして居ると云ふ長閑さだつたよ。も早此上は一言も口外は出来ない。先づこれが俺の使命だ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">『そんな事で如何して全権公使が勤まるか。も少し戦況を詳細に報告致さぬかい』</p>
+            <p class="ja-classical-line">『報告しようにも実の処は仕方がないのだ。サツパリアフンが宙に迷つて了つた。驚異の面相を遺憾なく陳列してある羅漢堂を覗いて来た様なものだつた。されども明智の某、黒雲深く包みたる不可解の事実も、遺憾なく道破して来たのだから偉いものだらう。何と云つても明敏な頭脳の持ち主だから、凡ての事実の核心に触れるのは此ベスに限つて居るワイ、ウフヽヽヽフツフ。アヽ、小便の大タンクが溢れて腎臓が破裂しさうだ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、エチエチと怪しき足許にて便所に姿を隠す。シールは腕を組み独語。</p>
+            <p class="ja-classical-line">『マア、何と訳の分らぬ事が出来たのだらう。ベスの奴、一向不得要領の返答ばかりを並べ立て肝腎の問題を外さうとつとめて居よる。これには何か深い訳がなくてはならぬ。一つ巧く酒を勧めて酔ひ潰し、泥を吐かしてやらなくちや、一通りの料理では駄目だ。背骨を抜き取り、腹の中迄開きにして、鰌鍋の様に何もかも暴露させてやらうかナ』</p>
+            <p class="ja-classical-line">と呟き乍ら待つて居る。ベスは漸く小用を済ませ帰り来るを、</p>
+            <p class="ja-classical-line">シール『オイ、チツと酒でも聞し召したら如何だい。斯う四辺暗雲に包まれ、蒸し暑き無風地帯にあつては、やり切れないぢやないか。ドツと奮発して鯨飲馬食と洒落て、暑さを凌がうぢやないか。ウラル教の古い教にも……飲めよ騒げよ一寸先や暗よ、暗の後には月が出る……と云つてあるからにや、酒さへ飲めば屹度御神慮に叶つて、大空の陰鬱の雲も晴れ、涼風颯々として面を吹き、天青く日は清く、天の岩戸開きが出来るであらうよ。酒なくて何の己がナイスかなだ。何程立派なナイスの給仕でも、飯ばつかりでは機まないからな。酒は百薬の長だ、酒はやつこすだ。薬師如来だ、般若湯だ、甘露水だ、釈迦だ、イエスだ。吾等を天国に救ふ大救世主は盤古神王でもなければ常世神王でもない。飲めば直に心浮き立ち、天国を自由自在に逍遥せしめ給ふ酒の神様だ。現実に天国に救ひ下さる神様は吾前に出現ましますぞよ』</p>
+            <p class="ja-classical-line">『あまり酒の神の御厄介になると、門番の役が疎そかになつて、免の字に職の字を頂戴せなくては、ならなくなつて了ふぞ。チツと心得ねばなるまい』</p>
+            <p class="ja-classical-line">『酒の用意はもう宜い。これで沢山だ。此上は一滴も飲めない。アヽえらく酔うた……と云ひ出した時が本当の酒の興味を覚えた時だ。強ひられない酒は飲めぬと云ふから、此シールさまが斯うしてお前に酒をシールのだ。アハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Bes's throat-worm was urging with a squeaking sound. Unable to endure it any longer, following the words of Sheer, she summoned her courage and began to drink guzzlingly. Suddenly her tongue began to falter, and she became so drunk that even those nearby found her kototama hard to distinguish. When drunk, blurting out any sort of secret is common for a shōjin.</p>
+          <p class="en-p">Wishing to make Bes slightly upset and by that momentum force her to spit out all the secrets, Sheer raised his voice a little and said:</p>
+          <p class="en-p">Hey, Tower of Babel, you are a meibutsuotoko of Babel who serves as this gatekeeper forever, never saying a chiyotsuto thing that is good to tell, while skillfully speaking ill behind the backs of people of whom it is unnecessary to speak... oops, slip of the tongue, since you are a chatterbox, today you are going to confess everything before me. Come on, display your previous fukumei in detail right before me now.</p>
+          <p class="en-p">It is far too baka-like, and the truth of it has no kachi worth talking about. Initiated by the aonisai fellow of Tell, who happened to see a dream in which King Sagaren led numerous gunzei and came pressing into this mansion, and who reported it in a panic to Riūnsama and Princess Kērusu, that sort of commotion began. It is so baka-like that Princess Kērusu-sama issued a gag order, saying that no one must let such a thing slip to anyone. However, a secret is a secret after all, and since heavenly secrets must not be leaked, there is nothing to do but leave the rest to your own conjecture. Ahahaha!</p>
+          <p class="en-p">Hey, speaking to me alone, what do you mean by 'yūjin'? Is that not a bit of a derailment?</p>
+          <p class="en-p">Derailing is only natural. For it began with derailment and ended with derailment. Whoever hears such a thing will be left completely dumbfounded, unable even to laugh. The only things that would resonate are forest crows. Princess Kērusu-sama adorned that beautiful body with full decorations, bravely tucking a naginata under her arm, letting her red hem flutter, revealing her white shins... 'A formidable enemy appears...' When she manifested with such courage and dignity, does it not feel as though refreshing water were poured into your chest just by taking a single glance?</p>
+          <p class="en-p">Since the attendant of Tell spoke such foolish things, he must have incurred the wrath of Riūnsama and surely been subjected to an oteuchi, would he not?</p>
+          <p class="en-p">Not at all; day after day she takes pride in oteuchi, continuing to do so while chuckling with the hime-sama, does she not?</p>
+          <p class="en-p">What, I never knew that until now. Does she gladly play at such tyrannical wickedness like King Zhōu of Shang or Daji thirty thousand years in the future? To peacefully serve such a tyrant is something we must ponder a chiyotsuto bit. If the wind blows even slightly unfavorably, it would be unbearable to be struck down with an oteuchi right away. Hey, Bes, after doing oteuchi every single day like that, how are they all disposed of in the end? It seems not a single person who has received oteuchi has ever slipped through this gate.</p>
+          <p class="en-p">How could there be any difficulty? They are all dropped straight into the privy.</p>
+          <p class="en-p">The inside of the privy must be quite full of suffering ghosts, wouldn't it?</p>
+          <p class="en-p">No matter what is said, Riūnsama and Hime-sama catch them on the tips of their chopsticks and swallow them down smoothly from their mouths, so it is a neat affair. The attendant fellows seem to be watching from the side with triangular eyes and their fingers in their mouths, but what blockheaded, udon-like shiromono they are.</p>
+          <p class="en-p">What, was oteuchi actually about soba? I was worrying my head off about something unnecessary, ufuufu. However, Bes, thinking it over well, the world is a haphazard thing. King Sagaren, who went about saying 'God, God' from morning till night like a poor hairdresser, without even the protection of Lord Daijizaiten, met with such miserable sights, and now even his whereabouts are unknown, wandering in desolation over some mountains and fields. In contrast, Riūnsama, who did such lawless deeds, brazenly assumes the air of a king, faces Hime-sama from morning till night, performs oteuchi, holds hands, hugs and kisses, and exhausts every limit of prime minister and subordinate spirit while grinning from ear to ear—what kind of contradiction is this in the world? Now, thinking upon this, I am forced to conclude that there is neither Daijizaiten nor Lord Banko in this world, and that they exist only in name without any reality. Truly, it is a world of ignorance and pitch darkness. How on earth can this become a true world?</p>
+          <p class="en-p">{}</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ベスは喉の虫がキユーキユーと催促をして居る。到頭堪らなくなつてシールの言葉に従ひ、度胸を据ゑてグイグイと飲み始めた。忽ち舌は縺れ出し、近くに居つてさへ其言霊は聞き分け難き迄酔つぱらつて了つた。酔へば如何なる秘密も喋り立てるは小人の常だ。</p>
+            <p class="ja-classical-line">シールはベスを一寸むかつかせ、其勢に一切の秘密を吐かしてやらうと、稍声を高めて、</p>
+            <p class="ja-classical-line">『オイ、ハベルの塔、貴様は何時までも此門番に仕へハベル名物男で、云つてもよい事はチツとも言はず、云はいでも宜い人の蔭口は能くハベル……オツトドツコイ喋る代物だから、今日は何もかも俺の前で白状するのだ。サア、最前の復命を細さに吾前に陳列するのだぞ』</p>
+            <p class="ja-classical-line">『あんまり馬鹿らしくて、話すだけの実は価値がないのだよ。テールの青二才奴、サガレン王様が数多の軍勢を引率れ、此館に押し寄せ来り給ひし夢を見よつて、竜雲様やケールス姫に慌てて報告しよつたのが元で、あの様な空騒ぎがオツ始まつたのだ。あまり馬鹿らしいから誰にもこんな事は口外してはならないぞと、ケールス姫様から箝口令を布かれて了つたのだ。然し秘密は何処迄も秘密だから、天機洩らすべからず、此先は諸君の御推量に任すより仕方がないのだ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">『オイ、俺一人に向つて、諸君とは何だ。チト脱線ぢやないか』</p>
+            <p class="ja-classical-line">『脱線するのも当然だよ。脱線に始まつて脱線に終つたのだからな。こんな事を誰が聞いても皆唖然として笑ふにも笑はれない事になる。共鳴するものは森の烏位なものだ。ケールス姫様があの美しき身体に満艦飾を施して、甲斐々々しくも薙刀を小脇にかい込み、赤い裾をべらつかせ、白き脛を顕はして……強敵御座んなれ……と立現はれ給ひし時の其健気さ、凛々しさ。一目拝んでも、胸に清涼水を注入した様な感じがするぢやないか』</p>
+            <p class="ja-classical-line">『テールの近侍はそんな馬鹿な事を申し上げた以上は、竜雲様の怒りに触れ、屹度お手打ちになるだらうなア』</p>
+            <p class="ja-classical-line">『ならいでかい、毎日日日お手打ちを得意になつて、姫様とケラケラ云ひ乍ら続行して居られるではないか』</p>
+            <p class="ja-classical-line">『何と俺は今まで知らなかつた。三十万年未来の殷の紂王か姐己の様な悪逆無道を喜んで遊ばすのか。そんな暴君に心を安んじて仕へて居る事はチツと考へねばなるまいぞ。一つ風向が悪ければ、直にお手打ちとやられちや堪らないからな。オイ、ベス、それ丈毎日お手打ちをして後は如何片づけて仕舞はれるのだらう。根つから此門を潜つたお手打者は無い様だがのう』</p>
+            <p class="ja-classical-line">『何造作があるものか、皆雪隠へ落して了はれるのだ』</p>
+            <p class="ja-classical-line">『雪隠の中は随分沢山な亡者だらうなア』</p>
+            <p class="ja-classical-line">『何と云つても、竜雲様と姫様が箸の先にひつかけて、ツルツルと口から飲み込んで了はれるのだから埒の宜いものだ、近侍の奴等は目を三角にして、そばから指をくはへて見て居るさうだが、何と気の利かぬウドンな代物ぢやないか』</p>
+            <p class="ja-classical-line">『何だい、手打とは蕎麦の事だつたか。要らぬ事に強う気を揉ましよつた、ウフヽヽヽ。然しベスよ、よく考へて見ると世の中は宜い加減なものだな。神さま神さまと朝から晩まで、下手な調髪師の様に云つて御座つたサガレン王様は、大自在天様の御保護もなく、あんな惨めな目にお遭ひなされ、今に行方も判然せず、何処かの山野を落ちぶれて逍遥うて御座るであらうが、それに引換へ、あんな没義道な事をやつた竜雲が、ヌツケリコと王様気取りになつて、姫様と相対し、朝から晩まで手打をしたり、手を曳き合うたり、抱擁接吻したり、所在体主霊従の限りを尽して脂下つて御座るのは、コレは又何とした世の中は矛盾であらうか。俺ヤもうこれを思へば此世の中に大自在天もなければ、盤古神王も名のみあつて、其実なきものと断定せざるを得なくなつて来たよ。本当に無明暗黒の世の中だ。如何したらこれが誠の世の中になるだらうかな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Monban: 'Hey, speaking as a gatekeeper, chirping such outrageous things, what do you intend to do if it reaches the ears of Riūnsama? Won't you watch it for a bit? No matter how much you fret your heart, make a busyfooted stamp, and struggle, that will never achieve even one ten-thousandth of your will. It's the first safety valve for a gatekeeper to stop the council of the superiors, and quietly precipitate right here from morning till night, that is it.'</p>
+          <p class="en-p">Monban: 'Hey, Beth, how do you think Riūnsama's future will turn out?'</p>
+          <p class="en-p">Monban: 'We don't have the authority to meddle in such things. Anyway, wouldn't it be fine if we just enter into the throat and brush away even the dust of the beard? There is a saying that a child who goes around from under the sleeve is cute. As for that Tail fellow, not having any strength or anything, doesn't he cleverly go around and, look, just like that, stand in a position like the very dagger in the bosom of Riūnsama, and wield his influence? If you are caught up in trivial moral theories and chatter about logic, that fellow's head is old, outdated, and if we don't pull out the cork of the brain, draw out the old blood, replace it anew, and train him up once more, even if such a sleeping breath thing is put out to the night stall, not even a beggar will buy it, they say, and you will have the anatomy of your brain kindly performed. Anyway, for a human being, making one's own life safe is the first thing. Because everyone is hanging out the sheep's head and selling dog meat, using clever elegant names on the surface for the sake of the Way, for the sake of the sovereign, for the sake of the world, for the sake of people, and so on, when the world has fallen away like this, with old-fashioned foolish honesty, you will end up bitten to death even by oxen and horses. If you don't tighten up a bit, you'll have to end up as a useless thing to society, won't you? Ahaha.'</p>
+          <p class="en-p">Just as they are speaking thus, the voice of propagation song is heard coming from near the front of the gate from nowhere.</p>
+          <p class="en-p">Gods appear on the surface
+Establishing and sorting out good and evil, right and wrong
+Great Direct Deity who created this world
+Greater Direct Deity whose heart is also broad
+Just whatever happens, in the world of men
+Look anew and listen anew in a direct way
+Rewrite one's own faults
+The noble teachings of the gods
+Even if heaven and earth should change
+The one true righteous path
+Even unto the end of the age of Miroku
+Shall never change into firm and everlasting rock
+Trampled and strayed by momentary desires
+Burning, decaying, rusting, they say
+As for the august treasures upon the form
+With the branch-spirit received from heaven
+Clouding the heart and defiling the body
+Unawares falling down to the Land of Roots
+And the Land of Bottoms
+Suffering by oneself and by one's own hands</p>
+          <p class="en-p">Wishing to save the sufferings of worldly people
+Heavenly Gods and earthly gods
+Living gods who save this world
+With their teachings, lands in the four quarters
+Guiding and admonishing propagation messengers
+Have come to appear right here
+Even strong Riūnsama
+Is now like cherry blossoms in full bloom
+Enjoying it as the spring of Tokoyo
+At the time of indulging in illicit pleasures
+The heavenly firmament suddenly
+Has black clouds rise and, mercilessly too,
+Turns into a storm and blows them scattering
+Tomorrow, the day after, next year too
+Even a hundred years, a thousand years ahead
+That it will continue to flourish just like this
+Is a thought of the heart like fleeting cherry blossoms
+Suddenly beaten by a strong nocturnal storm
+Even the cherry blossoms that were praised by all people</p>
+          <p class="en-p">Scattering in the storm, the custom of the world
+To be trodden upon by the feet of young and old
+Karmic retribution suddenly
+Without knowing it, sending days
+While seeing the state of the turning floating world
+Alas, the work of Magatsuma is sad
+ah, Almighty Gods,
+May your august spirits be blessed and dwell,
+And may Riūnsama quickly
+Have the crooked deity dwelling in his heart,
+By the very high august water and fire of the gods,
+Wiped away, oh the delusion of the lord, Princess Kerusu,
+And may the wind of Sakato very purely
+Sweep it clean and make it like of old
+Let it become a red heart
+Whether the morning sun shines or is cloudy
+Whether the moon waxes or wanes
+Even if the great earth should sink
+The power of sincerity saves the world</p>
+          <p class="en-p">Sincerity is the treasure of this world
+Though there are times when the soul of evil
+Also flourishes and prospers for a time
+How could it escape the piercing eyes of the gods of heaven and earth?
+The crime of perversity
+That it will be destroyed is right before our eyes
+Quickly set your heart straight
+If you do so, the gods
+Will punish the crooked demons lurking in your hearts,
+Bestow upon you the pure august spirit
+That has become the august spirit of the gods of heaven and earth,
+Make it the treasure of this world,
+Make it the pillar of the age of the gods
+ah, Almighty Gods,
+May your august spirits be blessed and dwell</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『オイ門番の分際としてそんな大それた事を囀つて、若しも竜雲様のお耳に達したら如何する積りだい。チツと嗜まないか。何程貴様が心を苛ち、忙殺的足踏みをして藻掻いた処で、決して其意志の万分一も貫徹するものでない。門番は門番らしく上の方の評定をやめて、おとなしく朝から晩まで此処に沈澱するのが、それが第一の安全弁だよ』</p>
+            <p class="ja-classical-line">『オイ、ベス、お前は竜雲様の将来は如何なると考へるか』</p>
+            <p class="ja-classical-line">『俺達がそんな事を干渉する丈けの権能は無い。兎も角喉元へ這入つて、お鬚の塵さへ払つて居れば宜いぢやないか。袖の下からも廻る子は可愛いと云ふことがあるよ。テールの奴、力も何もない癖に敏しこく廻りよつて、アレあの通り、竜雲様の丸で懐刀の様な地位に立ち、羽振りを利かして居よるぢやないか。下らぬ道徳論に囚へられて理窟を喋つて居ると、彼奴は頭が古い、時代遅れだ、一つ頭脳のキルクを抜いて古い血をぬき取り、新しく入れ替へて今一度鍛へ上げてやらねば、こんな寝息ものは夜店へ出した処で、乞食も買つて呉れないと云つて、親切に頭脳の解剖をやられて了ふよ。兎も角、人間は自己の生活を安全にするのが第一だ。道の為め、君の為め、世の為め、人の為め等と巧い雅号を表に使つて、何奴も此奴も羊頭を掲げて狗肉を売つてるのだから、世の中が斯う堕落して了つちや、到底昔気質の馬鹿正直では、牛馬にだつて噛み殺されて了ふよ。チツとシツカリせないと社会の無用物となつて了はねばならぬからなア。アハヽヽヽ』</p>
+            <p class="ja-classical-line">斯く話す折しも、何処ともなく門前近くに宣伝歌の声聞え来る。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善悪正邪を立て別ける
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直し聞直し
+身の過ちは宣り直す
+尊き神の御教
+仮令天地は変るとも
+誠一つの正道は
+ミロクの御世の末迄も
+堅磐常磐に変らまじ
+一時の欲に踏み迷ひ
+焼け朽ち錆びて腐るてふ
+形の上の御宝に
+天より受けたる分霊と
+心を曇らせ身を穢し
+知らず知らずに根の国や
+底の国へと落ち行きて
+吾と吾手に苦しめる</p>
+            <p class="ja-classical-line">世人の艱みを救はむと
+天津御神や国津神
+此世を救ふ生神の
+教をもちて四方の国
+導き諭す宣伝使
+此処に現はれ来りけり
+勢ひ強き竜雲も
+今は桜の花盛り
+常世の春と楽しみて
+不義の快楽に耽る折
+天津御空は忽ちに
+黒雲起りて無残にも
+嵐となりて吹き散らす
+明日明後日も来年も
+百年千年先迄も
+此儘栄え行くべしと
+思ふ心の徒桜
+忽ち強き夜嵐に
+打ちたたかれて諸人に
+もて囃されし桜さへ</p>
+            <p class="ja-classical-line">嵐に散りて老若の
+足に踏まれる世の習ひ
+因果応報忽ちに
+廻る浮世の有様を
+知らず知らずに日を送る
+曲津の業ぞ悲しけれ
+あゝ惟神々々
+御霊幸はひましまして
+一日も早く竜雲が
+心に棲める曲神を
+神の御水火の弥高く
+払はせ給へケールス姫の
+君の命の迷ひをば
+科戸の風のいと清く
+払ひ清めて旧の如
+赤き心となさしめよ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+誠の力は世を救ふ</p>
+            <p class="ja-classical-line">誠は此世の宝ぞや
+悪の身魂も一時は
+茂り栄ゆる事あるも
+天地の神の敏き目に
+如何でか洩れむ枉の罪
+亡ぼされむは目の前
+早く心を立て直せ
+さすれば神は汝等が
+心に潜む曲鬼を
+罰め給ひて天地の
+神の御霊になりませる
+清き御霊を授けまし
+此世の宝となさしめむ
+神世の柱となさしめむ
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As soon as the song was finished, the singer of the song already made his appearance at the gate.</p>
+          <p class="en-p">Both Siru and Besu, with their drunken eyes hazy and dazed, felt as though their hearts were pierced by the voice of this propaganda song, and when they timidly threw open the front gate with a snap, an old man with white hair and a strange appearance was standing like a Nio statue in solemn dignity, leaning on a thick staff with his left hand and tightly grasping a fan with his right hand.</p>
+          <p class="en-p">Siru, startled by the strange figure of the old man and tangling his tongue, said, 'I do not know what grandfather you are, but today the mansion of this castle is a public holiday, so please go back. Tomorrow is Sunday again, the day after tomorrow is International Day, the day after that is the memorial day of the King's father, the day after that is his birthday, and the day after that is the princess's birthday. And then the birthdays of officials and the memorial days of parents will continue, so please come by excluding those days. Just as we are cheerfully getting high and drunk on Hannya-to, it is not amusing for a bleak one-eyed old man to come along. You probably came thinking you would fix Ryūn-sama's wicked heart, but it is utterly useless. Since nobody will listen to such meddlesome anxiety, rather than regrettably catching a cold in your mouth, it is to your advantage to hurry on back. If you speak, your lips grow cold in the autumn wind; come, come, go on home, go on home.'</p>
+          <p class="en-p">'Ahahaha, what an amusing gatekeeper to have existed. Given that there is a man of such stylish taste acting as a gatekeeper, a scene of a heaven blooming with a hundred flowers must surely be unfolding deep within the inner palace. The way of Ryūn, who is full of harmonious vapor with superiors and inferiors united and sharing in that joy, is truly the height of admiration. Oh dear, people must not be otherwise. Drink, make merry, an inch ahead is darkness, and after the darkness comes the moon. Ahahaha.'</p>
+          <p class="en-p">Besu: 'Hey, this fellow is an amusing dead-loss. Since the inner palace is such-and-such, I shall arrange to speak to Ryūn-sama to have the air inside the castle completely washed clean. Hey there, old grandfather, wait right there for a while.'</p>
+          <p class="en-p">'Ahahaha, without needing to wait for Ryūn's reply in particular, this one-eyed old man will boldly force his way in.'</p>
+          <p class="en-p">Besu: 'Hey, hello there, if you do that, it will be a-a-a great disaster. This gatekeeper would not be able to bear suddenly becoming a footwear seller's sign from today and being kicked upstairs; if we dawdle, our heads will fly. I beg for a short delay until we hear the reply from the inner palace. A gatekeeper must strictly guard his duties as a gatekeeper, you see.'</p>
+          <p class="en-p">'Ahahaha, you fellows are precisely why you are not accepted in the modern world. Because you serve too prudently as a gatekeeper, you are finally judged by the general... that fellow is the most suitable person for a gatekeeper... and you are forced to serve as a lowly gatekeeper for your whole life. The gatekeeper of the Eternal Land's Eternal Castle was once promoted to the God of the Right Guard as a result of failure. How can a stubbornly honest person like you manage to continue living completely in this world? Oh my, oh my, what a pitiful, spineless man. Ahahaha.'</p>
+          <p class="en-p">So saying, he shook his shoulders and laughed loudly.</p>
+          <p class="en-p">Siru: 'Hey, this fellow is quite a conversational old man. He utters famous arguments and brilliant theories that hit every vital spot. Hey, Besu, he is quite promising for the future. Go quickly and report to the inner palace. It is surely the Ural religion... didn't he say... drink, make merry, an inch ahead is darkness?'</p>
+          <p class="en-p">Besu: 'Oh, that is so. This fellow is amusing!'</p>
+          <p class="en-p">And Besu hurriedly advanced toward the inner palace.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と謡ひ終ると共に、早くも歌の主は門前に姿を現はしにけり。</p>
+            <p class="ja-classical-line">シール、ベスの両人は酔眼朦朧としながら、此宣伝歌の声に胸も刺さるる如き心地して、恐る恐る表門をパツと開き見れば、白髪異様の老人、左手に太き杖をつき、右手に扇を固く握り、儼然として仁王立ちになつて居る。シールは老人の異様の姿に驚いて舌を縺らしながら、</p>
+            <p class="ja-classical-line">『お前は何処の爺さまか知らぬが、今日は此お城の館は公休日だから帰つて下され。明日は又日曜、明後日は国際日、其翌日は王様のお父様の御命日、其又翌日は御誕生日、其又翌日はお姫様の御誕生日だ。さうして其先は役人共の誕生日や両親の命日が続くのだから、何卒其日を除いて来て下され。これ丈機嫌好う般若湯に喰ひ酔うて居る処へ、殺風景な独眼爺さまがやつて来ちや面白くない。何とか竜雲様の悪心を直してやらうと思うて来て呉れたのだらうが到底駄目だ。そんな老爺心は誰も聞くものはないから、可惜口に風引かすよりもトツトと帰つた方が、お前の為めにお得だ。物言へば唇寒し秋の風、サアサア帰んだり帰んだり』</p>
+            <p class="ja-classical-line">『アハヽヽヽ何と面白い門番もあつたものだな。門番にしてこれ丈けの粋人が居る以上は、随分大奥は百花爛漫たる天国の光景が展開されて居るだらう。和気靄々として上下一致、其楽しみを倶にする竜雲のやり方、誠に以て感服の至りだ。イヤもう人は斯うなくては叶はぬ。飲めよ騒げよ一寸先は闇よ、闇の後には月が出る。アハヽヽヽ』</p>
+            <p class="ja-classical-line">ベス『やア此奴ア面白い死損ひだ。あまり大奥が何々だから、一つ竜雲様に申し上げて、城内の空気を一洗して貰ふ事に取計らふて見ませう。これこれ老爺どの、其処に暫く待つて居ておくれ』</p>
+            <p class="ja-classical-line">『アハヽヽヽ別に竜雲の返答を待つまでもなく、此独眼老爺がどしどしと侵入するであらう』</p>
+            <p class="ja-classical-line">ベス『アもしもし、そんな事をして貰つてはタヽヽ大変です。此門番も忽ち今日から足袋屋の看板で足上りになつちや堪りませぬ、愚図々々して居れば首が飛びます。何卒大奥のお返事を聞いて来る迄暫時の猶予を願ひます。門番は門番としての職務を固く守らねばなりませぬからな』</p>
+            <p class="ja-classical-line">『アハヽヽヽ、お前達はそれだから現代に容れられないのだ。あまり謹んで門番を勤めるものだから、到頭大将に……彼奴ア門番には最も適当な人物だ……と鑑定されて了ひ、一生一代卑しき門番を勤めて居らねばならないのだ。常世の国の常世城の門番は、失敗の結果抜擢されて右守の神に昇進したことがあるぞよ。此世の中にお前の様な馬鹿正直な者が、如何して生活を完全に続けて行く事が出来るか。さてもさても可憐相な腰抜男だなア。アハヽヽヽ』</p>
+            <p class="ja-classical-line">と肩を揺つて大きく笑ふ。</p>
+            <p class="ja-classical-line">シール『ヤア此奴は中々話せる爺さまだ。一々肯綮に中る名論卓説を吐きよる。オイ、ベス、仲々前途有望だ。早く大奥へ報告して来い。屹度ウラル教だぞ……飲めよ騒げよ一寸先は闇よ……と云つたらう』</p>
+            <p class="ja-classical-line">ベス『オウさうだ。此奴ア面白い！』</p>
+            <p class="ja-classical-line">とベスは慌しく大奥さして進み入る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c16.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 16: Gate 雀 [1004]</span>
+      </a>
+      <a href="c18.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 18: 心の天国 [1006]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

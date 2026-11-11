@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 22: Spring の Snow [1010] - Volume 36 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 36 Table of Contents</a>
+      <span>Volume 36</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 36 &bull; Chapter 22</span>
+      <h1 class="chapter-title-en">Chapter 22: Spring の Snow [1010]</h1>
+      <p class="chapter-title-ja">春の雪〔1010〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The castle of Kauji, having been miraculously baptized by fire, saw all the Akuma within disperse without exception, every structure reduced to uiu, the heavens clear and the breeze refreshing, the earth burning away all its jinkai to its very core, thus manifesting the Shiyabasokujiyakukuōdo of tenshiyōjiyō, chishiyōjiyō, jinshiyōjiyō, and rokukonshiyōjiyō.</p>
+          <p class="en-p">Beginning with the righteous hitobito led by King Sagaren, the myriad hitobito who had remained within the castle, succumbing to the ishi of Riūn and unconsciously falling into jiyadau, all awoke from their stupor and gathered upon the spacious castle banba; shedding tears of gratitude for the divine virtue whereby not even a bishiyō was sustained upon their bodies, and beneath the guidance of the Mahito of heaven, to enshrine Kuniharutachinōokami, Shionagahiko no Ōkami, and Ōkunihiko no Ōkami, they offered up the Amatsu Norito before a hastily constructed altar, praised the shintoku, focused their prayers of repentance, devoid of any barriers between foe and friend, forgetting the differences of religion, and solely giving thanks for the divine grace, whereby the heavenly kingdom upon earth was forthwith constructed.</p>
+          <p class="en-p">Although the castle of Kauji, through the baptism of fire, had been reduced to uiu without leaving a single thing remaining upon the earth, the Yahirodono on the opposite bank of the Kawamori River, which King Sagaren had newly constructed in readiness for an emergency, remained completely intact without a single person having yet moved into it; therefore, King Sagaren led all the hitobito and entered the new Yahirodono, arranged various foods and drinks offered by the hitobito of the capital rushing in advance as fire-disaster sympathy gifts to entertain everyone, and furthermore, with the Mahito of heaven, Yoshikohime, and Kiyokohime as the guests of honor, it came to pass that a banquet of gratitude and consolation was held.</p>
+          <p class="en-p">Both Kerusuhime and Riūn also sat dejectedly, shrinking back in shame within a corner. Verily, is it not true that human nature is fundamentally good? Kerusuhime, having been temporarily led astray by the ki of ayakashi and having fallen into the trap of the schemes of evil-hearted Riūn, deeply repented from the bottom of her heart for that wicked deed of presumptuously ignoring and expelling Kunibrakuhiko no Kami, who was her own lord and master, and now sat crouching, holding her breath, and cowering in a modest corner, overwhelmed by her conscience in a state of utter wretchedness. Riūn, too, deeply regretted having been entangled by temporary greed, having become a captive of akki and jashin, and having repeated heinous and lawless atrocities; burdened by the terrifying pangs of remorse for the sins he had committed up to now, he had nowhere to hide his face, lacked the courage to look upon the hitobito, and sat cowering in a corner with lowered head. Hitherto, Riūn had been of large stature and corpulent build, appearing at first glance like a gentle and virtuous kami-man; however, along with his remorse for his own evil deeds, his being—from which the magakami that had soaked deeply into his mitama had finished escaping—suddenly shrank and withered, turning into the sorrowful sight of a changed, emaciated monk unpleasant to behold.</p>
+          <p class="en-p">Pondering this, one is made to realize that all hitobito elevate their mitama or lower them depending upon the nature of tsukimono, unconsciously conducting themselves in various mixed and miscellaneous ways of good and evil, righteousness and wickedness. As the shinyu also indicates,</p>
+          <p class="en-p">'If a kami of good guards and protects you, you perform only deeds of good; if an evil spirit guards and protects your physical body, you perform deeds of evil,'</p>
+          <p class="en-p">it must be said this is indeed so. Moreover, an akuma never manifests with an evil aspect; it always dons the mask of goodness to dazzle people's eyes and attempts to brazenly carry out evil. The fact that even those hitobito who at first glance appear to be men of utmost rectitude and straightforwardness, or saints of gentleness and compassion, as well as males who appear as docile and modest as women, perform heinous and lawless deeds is fundamentally because evil kami possess them and use their mitama freely at will. Furthermore, among those hitobito who at first glance appear terrifying like ogres or akuma, there are also a vast number in whom the mitama of the true Kami actively operates, performing good deeds and virtuous acts. Therefore, with the weak visual power of human beings, one can by no means distinguish the good and evil, righteousness and wickedness of others. Judging people is ultimately a matter beyond the power of man to accomplish; the One who possesses the authority to judge this is Kami alone. Therefore, in the propagation songs of Aisan-kyō as well,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">神地の城は、天恵的に火の洗礼を施され、城内の悪魔は残らず退散し、すべての建造物は烏有に帰し、天清く風爽かに、土また総ての塵芥を焼き尽し、天清浄、地清浄、人清浄、六根清浄の娑婆即寂光土を現出した。</p>
+            <p class="ja-classical-line">サガレン王の率ゐ来れる正義の人々をはじめ、城内に止まりて竜雲の頤使に甘んじ、知らず知らず邪道に陥り居たる数多の人々も残らず目を醒し、広き城の馬場に集まつて、何れも身に微傷だにも負はざりし神徳に感謝の涙を流しつつ、天の目一つの神の導師の下に、国治立大神、塩長彦大神、大国彦大神を斎くべく、俄作りの祭壇の前に、天津祝詞を奏上し、神徳を讃美し、悔い改めの祈願を凝らし、敵と味方の障壁もなく、宗教の異同も忘却して只管神恩を感謝するのみにして忽ち地上の天国は築かれけり。</p>
+            <p class="ja-classical-line">神地の城は火の洗礼によりて、地上に一物も止めず烏有に帰したれども、サガレン王がまさかの時の用意にと、新に造り置きたる河森川の向岸の八尋殿は、未だ一人の住込みたるものもなきままに、完全に残されありしかば、サガレン王は一同の人々を率ゐて新しき八尋殿に立入り、都下の人々が先を争うて、火事見舞として奉りたる諸々の飲食を並べ一同を饗応し、且つ天の目一つの神、君子姫、清子姫を主賓として、感謝慰労の宴会を開く事とはなりぬ。</p>
+            <p class="ja-classical-line">ケールス姫も竜雲も亦悄然として、此席に恥かしげに小さくなつて片隅に控へ居る。人の性は善なりとは宜なるかな、ケールス姫は一時、妖邪の気に迷はされ、心汚き竜雲が計略の罠に陥り、恐れ多くもわが夫たり君たる国別彦の神司を無視し、且つ放逐したる其悪業を心の底より悔い、身も世もあられぬ思ひにて、良心に責められながら、つつましやかに片隅に息を殺して畏まり居る。又竜雲も一時の欲に搦まれ、悪鬼邪神の捕虜となり、悪逆無道の醜業を繰返したることを深く悔い、今迄犯せし罪の恐ろしく心の呵責に身の置き処もなく、人々に顔を向ける勇気もなく、頭を下げて片隅に縮こまり居る。今迄の竜雲は大兵肥満にして、一見温良の神人の如く見え居たりしが、己が悪事を悔悟すると共に、深く身魂に浸み渡り居たる曲神の、身内より脱出し終りたる彼の身は、忽ち縮小し、萎微し、以前の如き気品もなければ、打つて変つた痩坊主の見るもいぶせき姿となりしぞ憐れなり。</p>
+            <p class="ja-classical-line">これを思へば、総ての人は憑霊の如何によつて其身魂を向上せしめ、或は向下せしめ、善悪正邪、種々雑多の行動を知らず知らずに行ふものなるを悟らるるなり。神諭にも、</p>
+            <p class="ja-classical-line">『善の神が守護致せば善の行ひのみをなし、悪の霊が其肉体を守護すれば悪の行ひをなすものだ』</p>
+            <p class="ja-classical-line">と示されてあるは宜なりと謂ふべし。又悪魔は決して悪相をもつて顕現するものではなく、必ず善の仮面を被りて人の眼を眩ませ、悪を敢行せむとするものである。一見して至正至直の君子人と見え、温良慈悲の聖者と見ゆる人々にも、また柔順にして女の如く淑やかに見ゆる男子の中にも、悪逆無道の行ひをなすものがあるのは、要するに悪神の憑依して、其人の身魂を自由自在に使役するからである。又一見して鬼の如く、悪魔の如く恐ろしく見ゆる人々の中に、却て誠の神の身魂活動し、善事善行をなすものも非常に沢山あるものである。故に人間の弱き眼力にては到底人の善悪正邪は判別し得らるるものでない。人を裁くは到底人の力の能くし能はざる処、これを裁く権力を享有し給ふものは、只神様計りである。故に三五教の宣伝歌にも、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Kami appears on the surface and separates good from evil,'</p>
+          <p class="en-p">It is thus declared. To rashly judge the good and evil, right and wrong of human beings is what is called usurping the authority of Kami, and from the righteous eyes of Kami, it is a grave and heinous crime. Moreover, there are times when a person whose shinkon is pure and whose conduct is upright, at a single glance, reveals the state of their heart and appears as a person of good who is supreme in goodness, beauty, and directness. Again, there are times when the physical body of a person whose heart is warped and defiled, committing wicked deeds, appears wicked and vile at a single glance. Since the yōbau of all people is a mirror of the heart, as the proverb says,</p>
+          <p class="en-p">'If a thought is within, the color will surely appear without,'</p>
+          <p class="en-p">There are also many who do not escape this shingen. However, fierce and ferocious jiyashin do not easily reveal their ugly form in the yōbau of the person they possess; on the contrary, they present a mien like that of a seijinkunshi, commit evil, afflict yobito, and take delight in this by themselves, and there are many such. Therefore, one must consider that it is utterly impossible to vainly look at the goodness, evil, beauty, or ugliness of a person's yōbau and appraise that person's goodness, evil, or character.</p>
+          <p class="en-p">Changing infinitely, manifesting and disappearing without limit, and boldly carrying out evil deeds in broad daylight is what the devil excels in. The devil detests clarity and brightness, rejoices in darkness, and hiding in the shadows, delights in committing all manner of crimes and evils. However, this is the work to be done by ordinary devils. When it comes to great devils, it is not so; on the contrary, they openly run rampant in the clear and bright heaven and earth, delude the myriad folk, boldly carry out their evil deeds in the light of the sun, and rather, by people of dark hearts, are given the honorable titles of seijinkunshi, heroes, and men of valor, and proudly boast of it, and thinking yobito are easily dealt with, they turn to the shadows and slyly stick out their tongues—it is a world where one cannot say such do not exist in great numbers.</p>
+          <p class="en-p">Tatsugumo, who once became a vessel of the devil, wielded tyrannical might in all directions, and faced multitudes of subordinates with the momentum of the rising sun in the morning sky, terrified by the divine might of the ara-mitama, vanished into the clouds and mist; thus he, who until now had been majestic in his wind and power, has now become completely like a different person, suffering mutations in various parts of his body, and has turned into a naturally inferior person of feeble and base character. Nevertheless, if this Tatsugumo should once again tread the path of justice and public righteousness, pile up faith, and bathe in the grace of Kami, it is natural that he should be bestowed with the shinkon of a seijinkunshi superior to before, and be transformed into a gentleman of warm, generous, and faithful character. Princess Kéers, stepping a step ahead of Tatsugumo, wiped away the baleful clouds of her heart, made the sun and moon of shinnyo shine in her shinkon, and came to repent of her past wrongs; thus, even finding herself in this place, she did not allow her shinkon to be shaken comparatively, and remained calm and composed while entrusting her whole self to Kami.</p>
+          <p class="en-p">Tatsugumo stood up with a look of shame, chanted a song of repentance toward the assembled company, and fulfilled his sincerity of apology to the divine spirits of heaven and earth.</p>
+          <p class="en-p">That song:</p>
+          <p class="en-p">'Heaven and earth are the ancient
+Infinite, absolute, beginningless and endless
+Great Kami of boundless divine virtue
+By means of the breath of Yin and Yang
+Formed and solidified this imperial land.
+Kuninotokotachi no Ōkami,
+By the imperial decree of Amatsumikami,
+Without regard for His precious august body,
+Descended to the bedrock
+of the luxuriant Reed-Plain Land of Fresh Rice Ears,
+And finished creating perfectly and in minute detail
+The eighty islands and eighty countries of islands
+Drifting upon the great ocean plain;
+The joy that a hundred kami and humans alike
+All protect them.
+The age of Kami was peaceful and calm,
+Governed tranquilly, and without a trace
+Of the blowing and raging ugly demonic wind,
+There was neither crime nor defilement,
+As the parents of the people born from the divine breath,</p>
+          <p class="en-p">Heavenly Foot Lord and Umayahime
+Tread aside the way of heaven and earth,
+And because they turned their backs
+Upon the august heart of Sumeru Ōkami,
+down beneath the heavens
+In the countries of the four quarters, the defiled,
+Ill-omened, and wicked breath filled to overflowing,
+And that breath coagulated to become demons,
+Generating the Yamata no Orochi, ugly foxes,
+Ugly women, and sagume,
+Until the world became perpetual darkness.
+From then on, gradually in the world,
+Devils flourished greatly,
+Clouding heaven and earth, and trampling upon
+The shinkon of yobito in the visible world,
+Turning the human bodies born forth
+As the precious living palaces of Kami,
+Before one knew it, into the dwellings
+of the treasures of magatsukami,
+I too, though a child of Kami and a palace of Kami,
+Am a person who has not missed out on grace,
+Yet before I knew it, being stalked by magatsukami,
+The terror of repeatedly accumulating grave crimes
+Too great for heaven and earth to contain,
+Though the Great Kami of supreme benevolence and supreme love
+Pitiied our defiled conduct and immediately
+Bestowed baptism upon each and every one of us,
+He effortlessly chased away
+The magatsukami lurking in our hearts.
+Ah, Kannagara Kamigami,
+Granting us your august spirit's prosperity and peace,
+Forgive our crimes of turning our backs upon King Sagaren.
+The wicked deeds of defiling Princess Kéers morning and evening,
+Though they are crimes too great for heaven and earth to contain,
+With the precious august heart of Kami,
+Look upon us anew and hear us anew with purity.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『神が表に現はれて善と悪とを立て別ける』</p>
+            <p class="ja-classical-line">云々と宣示されてあるのである。漫りに人の善悪正邪を裁くは所謂神の権限を冒すものであつて、正しき神の御目よりは由々しき大罪人である。又心魂の清く行ひの正しき人が一見して其心の儘が現はれ、至善至美至直の善人と見ゆる事もある。又心の中の曲り汚れて悪事をなす人の肉体が、一見して悪に見え卑劣に見える事もある。総ての人の容貌は心の鏡であるから諺にも云ふ通り、</p>
+            <p class="ja-classical-line">『思ひ内にあれば色必ず外に現はる』</p>
+            <p class="ja-classical-line">の箴言に漏れないものも沢山にある。然るに凶悪獰猛なる邪神は容易に其醜状を憑依せる人の容貌に現はさず、却つて聖人君子の如き面貌を表はし、悪を行ひ世人を苦しめ、以て自ら快しとする者も沢山にある。故に徒に人の容貌の善悪美醜を見て其人の善悪や人格を品評する事は到底不可能なる事を考へねばならぬ。</p>
+            <p class="ja-classical-line">千変万化、変幻出没極まりなく、白昼に悪事を敢行するは悪魔の得意とする処である。悪魔は清明を嫌ひ、暗黒を喜び、暗にかくれて種々雑多の罪悪を喜んで行ふものである。然しこれは一般的悪魔の為すべき働きである。大悪魔に至つては然らず、却つて清明なる天地に公然横行し、万民を誑惑し、白日の下正々堂々と其悪事を敢行し、却つて心暗き人々より、聖人君子英雄豪傑の尊称を与へられ、得々として誇り、世人与し易しと蔭に廻つて、そつと舌を吐き出す者も沢山ないとは云へない世の中である。</p>
+            <p class="ja-classical-line">一旦悪魔の容器となつて縦横無尽に暴威を振ひ、旭日昇天の勢を以て数多の部下に臨みたる竜雲も、悪霊の神威に恐れて雲を霞と脱出したるより、今迄威風堂々たりし彼も今は全く別人の如く、身体の各部に変異を来し、非力下劣の生れながらの劣等人格者となつてしまつた。されどもこの竜雲にして、再び正義公道を踏み、信仰を重ね、神の恩寵に浴しなば、以前に勝る聖人君子の身魂を授けられ、温厚篤実の君子人と改造さるるは当然である。ケールス姫は竜雲に一歩先んじて心の妖雲を払ひ、心魂に真如の日月を輝かし、前非を悔ゆるに至りしかば、今此場になつても比較的身魂を動揺せしめず、自若として神に一身を任せつつあつた。</p>
+            <p class="ja-classical-line">竜雲は恥かしげに立ち上り一同に向つて懺悔の歌を謡ひ、天地の神明に謝罪の誠を尽した。其歌、</p>
+            <p class="ja-classical-line">『天と地とは古の
+無限絶対無始無終
+神徳無辺の大神が
+陰と陽との息をもて
+造り固めし御国なり
+国治立大神は
+天津御神の勅もて
+尊き御身を顧みず
+豊葦原の瑞穂国
+下津岩根にあもりまし
+大海原に漂へる
+島の八十島八十国を
+完美に委曲に造り終へ
+百の神人悉く
+守らせたまふ有難さ
+神世はやすく平けく
+治まりまして吹き荒ぶ
+醜の魔風の跡もなく
+罪も汚れも無かりしが
+神の御息に生れたる</p>
+            <p class="ja-classical-line">蒼生の親とます
+天足の彦や胞場姫の
+天地の道を踏み外し
+皇大神の御心に
+背きたるより天ケ下
+四方の国には汚れたる
+妖邪の息は充満し
+其息凝りて鬼となり
+八岐大蛇や醜狐
+醜女探女を発生し
+世は常闇となりにけり
+それより漸く世の中に
+悪魔は盛に蔓りて
+天地曇らせ現身の
+世人の身魂を蹂躙し
+尊き神の生宮と
+生れ出でたる人の身を
+いつとはなしに曲神の
+珍の住家となし終へぬ
+吾も神の子神の宮</p>
+            <p class="ja-classical-line">恵に漏れぬ身なれども
+いつとはなしに曲神に
+つけ狙はれて由々しくも
+天地容れざる大罪を
+重ね来りし恐ろしさ
+至仁至愛の大神は
+吾等が汚き行ひを
+憐みたまひて忽ちに
+各自に洗礼与へまし
+心に潜む曲神を
+苦もなく追ひ出し給ひけり
+あゝ惟神々々
+御霊幸倍ましまして
+サガレン王に背きたる
+吾等が罪を許させよ
+ケールス姫を朝夕に
+汚しまつりし醜業は
+天地容れざる罪なれど
+神の尊き御心に
+清く見直し聞き直し</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Recite anew before the noble hundreds of deities of Tenchi,</p>
+          <p class="en-p">The dark clouds, sinking in sins,</p>
+          <p class="en-p">Repenting of the sins committed until now,</p>
+          <p class="en-p">Purifying their hearts and before the great presence,</p>
+          <p class="en-p">Humbly, reverently apologizing,</p>
+          <p class="en-p">The heavenly Mahito, Kamutsukasa,</p>
+          <p class="en-p">Kimiko's hime, Kiyokohime,</p>
+          <p class="en-p">And all other hundreds of people,</p>
+          <p class="en-p">Rejoicing in today's noble work,</p>
+          <p class="en-p">With reverence, from the bottom of our hearts, we praise.</p>
+          <p class="en-p">Such being the case, the dark clouds' suffering, murakimo's</p>
+          <p class="en-p">Cloudiness of the chest clears away entirely,</p>
+          <p class="en-p">Black clouds are blown far away,</p>
+          <p class="en-p">The feeling of worshiping the light of the jitsugetsu crossing the ōzora,</p>
+          <p class="en-p">Oh Kuniwakehiko Kamisama,</p>
+          <p class="en-p">Oh Kerusuhime, the dark clouds,</p>
+          <p class="en-p">The foul sins and magawaza inflicted upon you until now,</p>
+          <p class="en-p">Recite anew in your broad heart,</p>
+          <p class="en-p">And grant your forgiveness, Kamunagara.</p>
+          <p class="en-p">Swearing by the gods, declaring our future reform,</p>
+          <p class="en-p">Stepping back, roaming across the four directions under heaven,</p>
+          <p class="en-p">To the limit of life, to the limit of the body,</p>
+          <p class="en-p">Saving the yobito, and erasing the sins of the body,</p>
+          <p class="en-p">This is my resolve to make offerings,</p>
+          <p class="en-p">Grant it easily, I pray.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara,</p>
+          <p class="en-p">We pray before the august presence of the gods."</p>
+          <p class="en-p">Kerusuhime chants again.</p>
+          <p class="en-p">"Deluded by the ugly demons,</p>
+          <p class="en-p">Appearing as descendants of the gods,</p>
+          <p class="en-p">The kamutsukasa Kuniwakehiko,</p>
+          <p class="en-p">Going against my dear lord,</p>
+          <p class="en-p">To the ugly ones caught in crookedness,</p>
+          <p class="en-p">To the limit of heart, to the limit of body,</p>
+          <p class="en-p">Flattering and fawning, time and time again,</p>
+          <p class="en-p">Sinking into the abyss of sin,</p>
+          <p class="en-p">The fear of exhausting every possible wickedness,</p>
+          <p class="en-p">Illuminated by the spiritual light of the Great Compassionate Great Ōkami,</p>
+          <p class="en-p">The clouded chest clears away entirely,</p>
+          <p class="en-p">The dazzled eyes also clearly shine,</p>
+          <p class="en-p">Seeing and hearing directly the sins of the body,</p>
+          <p class="en-p">Looking back, how terrifying it is,</p>
+          <p class="en-p">Not knowing the heavy sins that the gods of Tenchi do not forgive,</p>
+          <p class="en-p">How wretched to have piled them up one upon another,</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara,</p>
+          <p class="en-p">May the august spirits be prosperous and blessed,</p>
+          <p class="en-p">By the divine words of the sun god and Konohanasakuya-hime,</p>
+          <p class="en-p">In order for the great god Lord Susanoo to universally save the yobito,</p>
+          <p class="en-p">The kamutsukasa who opens the august path of Izuruhime</p>
+          <p class="en-p">Across the countries and islands in the four directions,</p>
+          <p class="en-p">Among the many, particularly taking</p>
+          <p class="en-p">The pure and noble kamutsukasa of the northern light, Kimiko hime,</p>
+          <p class="en-p">Sent down the hime Kiyoko,</p>
+          <p class="en-p">Administered the baptism of fire,</p>
+          <p class="en-p">Blown away the ugly demons lingering in the capital of the divine land,</p>
+          <p class="en-p">How noble is their purification,</p>
+          <p class="en-p">The darkness of the heart clears away entirely,</p>
+          <p class="en-p">Though I am one who has joyfully returned to the original august spirit,</p>
+          <p class="en-p">What shall I do with this body of mine once defiled by the demons?</p>
+          <p class="en-p">A lonely boat abandoned on a lodging shore,</p>
+          <p class="en-p">With no island to cling to, in tears,</p>
+          <p class="en-p">Toward where shall I turn and spit out my grief?</p>
+          <p class="en-p">Even if the heart of Lord Sagaren forgives us,</p>
+          <p class="en-p">This body of mine with accumulated sins,</p>
+          <p class="en-p">How could it ever return to its original state?</p>
+          <p class="en-p">Viewing the holy city behind from now on,</p>
+          <p class="en-p">Enduring wind, clouds, thunder, and rain across the Mizuho no Kuni of Ashihara without a nook left unvisited,</p>
+          <p class="en-p">Opening the divine teachings of Izuruhime,</p>
+          <p class="en-p">Guiding the yobito onto the path of goodness,</p>
+          <p class="en-p">My heart is to repay one-ten-thousandth of the dew of the august god's grace,</p>
+          <p class="en-p">Please forgive me, Heavenly Gods and Earthly Gods, Eight Hundred Myriad,</p>
+          <p class="en-p">Before the presence of the guardian deity of the land,</p>
+          <p class="en-p">Kerusuhime swears and prays with a sincere heart,</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara,</p>
+          <p class="en-p">May the august spirits be prosperous and blessed."</p>
+          <p class="en-p">So she finishes chanting, and her appearance of hiding her body in a corner with a look of shame and crouching down feels pitiful even to the eyes of onlookers, and the whole assembly is overcome with unbidden tears of sympathy.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宣り直しませ天地の
+尊き百の神の前
+罪に沈みし竜雲が
+今迄犯せし罪を悔い
+心を清めて大前に
+慎み敬ひ詫びまつる
+天の目一つ神司
+君子の姫や清子姫
+其外百の人々の
+尊き今日の働きを
+喜びゐやまひ心より
+慎み讃美し奉る
+斯くなる上は竜雲が
+今迄悩みし村肝の
+胸の曇りも晴れ渡り
+黒雲遠く吹き散りて
+大空渡る日月の
+光を拝む心地よさ
+国別彦の神様よ
+ケールス姫よ竜雲が</p>
+            <p class="ja-classical-line">今迄汝に加へたる
+きたなき罪や曲業を
+広き心に宣り直し
+許させ給へ惟神
+神に誓ひて将来の
+わが改心を開陳し
+身を退きて天の下
+四方の国々駆廻り
+命の限り身の限り
+世人を救ひ身の罪を
+亡ぼしまつるわが覚悟
+安く諾ひたまへかし
+あゝ惟神々々
+神の御前に願ぎまつる』</p>
+            <p class="ja-classical-line">ケールス姫は又謡ふ。</p>
+            <p class="ja-classical-line">『醜の魔神に迷はされ
+神の末裔と現れませる
+国別彦の神司
+わが背の君に相背き
+曲のかかりし醜人に
+心の限り身の限り
+媚び諂ひて何時となく
+罪の淵へと沈淪し
+あらむかぎりの罪悪を
+尽し来りし恐ろしさ
+大慈大悲の大神の
+霊の光りに照らされて
+曇りし胸も晴れ渡り
+眩みし眼も明かに
+輝き渡りて身の罪を
+直日に見直し聞き直し
+顧みすれば恐ろしや
+天地の神の許さざる
+重き罪をば知らずして
+重ね来りしうたてさよ</p>
+            <p class="ja-classical-line">あゝ惟神々々
+御霊幸はひましまして
+日の出神や木の花の
+咲耶姫の神言もて
+神素盞嗚大神が
+世人を普く救はむと
+三五教の御道を
+四方の国々島々に
+開かせ給ふ神司
+数ある中に取りわけて
+清き尊き北光の
+神の司や君子姫
+清子の姫を下しまし
+火の洗礼を施して
+神地の都に蟠まる
+醜の魔神を吹き払ひ
+清めたまひし尊さよ
+心の闇は晴れ渡り
+元つ御霊に嬉しくも
+立ち帰りたる吾なれど</p>
+            <p class="ja-classical-line">一度魔神に汚されし
+吾身体を如何にせむ
+寄辺渚の捨小舟
+取りつく島もなく涙
+いづれに向つて吐却せむ
+サガレン王の御心は
+仮令吾等を許すとも
+重ねし罪の吾が体
+如何でか元に帰るべき
+妾は是より聖城を
+後に眺めて葦原の
+瑞穂の国を隈もなく
+風雲雷雨をしのぎつつ
+三五教の御教を
+開きて世人を善道に
+導きまつり皇神の
+恵の露の万分一
+報いまつらむ吾心
+許させたまへ天津神
+国津神達八百万</p>
+            <p class="ja-classical-line">国魂神の御前に
+ケールス姫が誠心を
+誓ひて願ひ奉る
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と謡ひ終り、恥かしげに片隅に身を潜めて蹲まり居る様、人の見る目も哀れげに感ぜられ、一同は期せずして同情の涙にかき暮れにける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c21.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 21: Fire の洗礼 [1009]</span>
+      </a>
+      <a href="c23.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 23: Snow 達磨 [1011]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

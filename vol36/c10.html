@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 10: Rock 隠れ [998] - Volume 36 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 36 Table of Contents</a>
+      <span>Volume 36</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 36 &bull; Chapter 10</span>
+      <h1 class="chapter-title-en">Chapter 10: Rock 隠れ [998]</h1>
+      <p class="chapter-title-ja">岩隠れ〔998〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">King Sagaren sings along the road.</p>
+          <p class="en-p">In the land of Tokoyo, the Jizaiten,
+As a descendant of Ōkunihiko,
+I who was born into this world
+Am the Kamutsukasa of Kuniwakehiko.
+Driven out from the capital of Iho,
+To the Kenonkiyō of Mesopotamia,
+Together with Onikumohiko,
+Just as I was transmitting the teachings,
+The Kamutsukasa of Ananai-kyō,
+Futodamakami, appeared before us.
+When he released the Kototama of Zengenbiji,
+Onikumohiko, who falsely claimed to be
+The supreme leader of the Brahmans,
+Trembled with fear and panic,
+Exposed his hideous form,
+And fled away to no one knows where.
+Treating me, who appeared as a child
+And a descendant of Ōkuniwake, as a rare prize,
+He oppressed me morning and evening,
+And the divine punishment for his rampant violence</p>
+          <p class="en-p">Was truly a terrifying warning.
+Ever since then, I fled from the land of Kenon,
+Roamed the land of Fusa, the land of the Moon,
+Wandered across all mountains and rivers,
+Enduring a thousand hardships and myriad sorrows,
+Crossing over the strait of Bona,
+Arriving safely on the shores of Shiro,
+Passing through the hardships of facing rain and wind like combing with rain and brushing with hair,
+At last advancing into the capital of the divine land, the bungalow,
+Thanks to the efforts of spreading far and wide
+The Brahmanism opened up by our ancestral deities,
+All the myriad people rejoiced and submitted,
+Until at last I was pushed forward to become king,
+Called King Sagaren,
+Together with Princess Keels,
+The teachings and rituals of the gods
+Vowing morning and evening to the great deities,</p>
+          <p class="en-p">Serving them even at this very moment,
+When suddenly raising clouds and descending, the hideous dragon cloud of Magatsuhi
+Was slaughtered by the sword-like tongue,
+And the princess was completely taken captive,
+Coming toward me and urging me
+To believe in the Ural teachings.
+Ah, Kannagara, gods, gods,
+The august spirit and body of mine
+Who am a descendant of Ōkunihiko Ōkami,
+How could I ever obtain the state
+Of serving the teachings of the Urals!
+Thinking that the wrath of the gods is also terrifying,
+Steeling my heart, all alone,
+I kept the teachings, but
+Day by day, the power of the evil deity
+Prospered, and now right here,
+I am a cold pillow of grass in my ruthlessness,
+A stray small boat on a drifting shore.
+If I approach seeking a shade to rely on,</p>
+          <p class="en-p">The dew beneath the pine of the ever-verdant tree
+Still wets my sleeves, and is cold.
+Nevertheless, the dew of the grace
+Of the imperial deities, without drying,
+Moistened my very body,
+And by the peerless loyalty and sincerity
+Of Thames and Ames both,
+I was at last saved from imminent peril,
+And this single body has safely
+Fled and arrived all the way up to this place.
+Now that I think of it, how grateful it is!
+Even more than when both Theris and Ames,
+Who served Ananai-kyō,
+Served me,
+While upholding Brahmanism,
+With their hearts maintaining a single sincerity
+Like a hempen pillar,
+They helped me and now right here,
+The sincere heart with which they guided me,
+Clearly the gods of heaven and earth</p>
+          <p class="en-p">Must be perceiving it, Kannagara.
+Before the august presence of the gods, I offer
+My sincere heart and humbly give thanks.
+Whether the morning sun shines or is cloudy,
+Whether the moon waxes or wanes,
+No matter how furiously the evil deity rages,
+The power of sincerity saves the world.
+Upholding sincerity alone,
+Entrusting one's body solely to the gods,
+Not grieving over the past, nor worrying over the future,
+Safely guarding the present moment alone, the way of the gods,
+To speak good in this very moment,
+To do good, and to think good—
+This indeed is the way that a human being,
+Born as a child of the gods of heaven and earth,
+Should observe with caution morning and evening,
+And fulfill to the utmost.
+Ah, Kannagara, gods, gods,
+May the august spirit of the gods bless us,</p>
+          <p class="en-p">All the way until reaching the village of Matsuura,
+Without any twists or turns, free from any hindrance,
+With a calm and peaceful heart,
+May we advance, Kannagara.
+Kunitokotachi no Ōmikami,
+Before the august presence of Ōkunihiko Ōkami,
+I bow with awe and pray.
+Ah, Kannagara, gods, gods,
+May your august spirit bless and prosper us."</p>
+          <p class="en-p">As the party had been fleeing day and night along rugged valley paths, their legs grew tired and their bodies somehow fell into a mood of fatigue. Thinking that having fled this far they could finally be at ease, they rested beside a huge boulder that appeared as if it had sprouted from the earth by the side of the valley path, and while reminiscing about the commotion of the night before, they were deeply and endlessly lost in conversation.</p>
+          <p class="en-p">Already the captors under the command of the dragon cloud, led by Yol, holding sharp-edged hand spears, dressed in extremely light attire, equipped with straw sandals and puttees, wearing black hoods and nimbly clad in black garments, were waiting impatiently for King Sagaren's party to flee and arrive. This valley path had steep mountains on the east and west standing like walls, and they had descended amidst the fog along the narrow path of the Morimori River flowing through the valley. Because of the dense fog, human figures two or three ken ahead could by no means be seen.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">サガレン王は路々歌ふ。</p>
+            <p class="ja-classical-line">『常世の国の自在天
+大国彦の裔の子と
+生れ出でたる吾こそは
+国別彦の神司
+イホの都をやらはれて
+メソポタミヤの顕恩郷
+鬼雲彦と諸共に
+教を伝ふる折柄に
+三五教の神司
+太玉神が現はれて
+善言美辞の言霊を
+放ちたまへばバラモンの
+大棟梁と僣称する
+鬼雲彦はおぢ恐れ
+其醜体を暴露して
+いづくともなく逃げ失せぬ
+大国別の子と現れし
+幼き吾を奇貨となし
+朝な夕なに虐げて
+暴威を振ひし天罰の</p>
+            <p class="ja-classical-line">誡めこそは畏ろしき
+吾は夫より顕恩の
+郷を逃れてフサの国
+月の国をば逍遥し
+あらゆる山河を跋渉し
+千辛万苦を忍びつつ
+ボーナの海峡打ち渡り
+錫蘭の島根に安着し
+沐雨櫛風の難をへて
+漸くここにバンガロー
+神地の都に進み入り
+御祖の神の開きてし
+バラモン教を遠近と
+布き拡めたる甲斐ありて
+万民悉悦服し
+遂に推されて王となり
+サガレン王と呼ばれつつ
+ケールス姫と諸共に
+神の教や祭り事
+朝な夕なに大神に</p>
+            <p class="ja-classical-line">誓ひて仕ふる折もあれ
+雲を起して下り来る
+醜の曲津の竜雲が
+剣の舌に屠られて
+姫は全く捕虜となり
+吾に向つてウラル教
+信仰せよと責め来る
+あゝ惟神々々
+大国彦大神の
+御裔とあれし吾身魂
+如何でかウラルの御教に
+仕へまつらむ事を得む
+神の怒りもおそろしと
+心を極めて唯一人
+教を守り居たりしが
+魔神の勢ひ日に月に
+栄え来りて今此処に
+吾はつれなき草枕
+寄る辺渚の捨小舟
+頼む蔭とて立ちよれば</p>
+            <p class="ja-classical-line">猶袖ぬらす常磐木の
+松の下露冷たけれ
+さはさりながら皇神の
+恵の露は乾かずに
+吾身を霑したまひつつ
+テームス、エームス両人が
+誠忠無比の真心に
+漸く危難を助けられ
+此身一つはやすらかに
+此処迄落のび来りけり
+思へば思へば有難や
+三五教を奉じたる
+テーリス、エームス両人が
+われに仕へし時よりも
+バラモン教を奉じつつ
+心の中は麻柱の
+誠一つを立て通し
+吾を助けて今此処に
+誘ひ来りし真心は
+天地の神も明かに</p>
+            <p class="ja-classical-line">知ろしめすらむ惟神
+神の御前に真心を
+捧げて感謝し奉る
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+魔神は如何に猛るとも
+誠の力は世を救ふ
+誠一つを立て通し
+唯身を神に打任し
+過去を憂へず将来を
+案じ過さず今のみを
+やすく守りて神の道
+この瞬間に善を云ひ
+善を行ひ善思ふ
+これぞ天地の神の子と
+生れ出でたる人の身の
+朝な夕なに慎みて
+尽しまつらむ道ならめ
+あゝ惟神々々
+神の御霊の幸はひて</p>
+            <p class="ja-classical-line">松浦の里に至るまで
+如何なる曲もさはりなく
+心平にやすらかに
+進ませたまへ惟神
+国治立大御神
+大国彦大神の
+御前にかしこみねぎまつる
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">一行は嶮岨な谷道を、夜を日についで逃れ来りしこととて、足も疲れ体も何となく倦怠の気分になつて来た。もはや此処迄落ち延ぶれば一安心と、谷道の傍に土から生えたるが如く現れたる大巨岩の傍に休息して、一昨夜の騒動を追懐しながら、窈々と話に耽りつつあつた。</p>
+            <p class="ja-classical-line">早くも竜雲の部下の捕吏は、ヨールに引率され、名自鋭利なる手槍を提げ、装束もいと軽々しく、草鞋、脚絆の扮装にて、黒頭巾を被り黒の衣を甲斐々々しく纒ひながら、サガレン王一行の落ち延び来るを今や遅しと待つて居た。此谷道は東西に嶮しき山、壁の如くに屹立し、其谷間を流るる河森川の細道伝ひに霧籠む中を下り来たのである。濃霧のため、二三間先の人影はどうしても見る事は出来なかつた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sannin at last recovered from the fatigue of their shintai, and as they were about to stand up again and descend the tanimichi, a suspicious hitogoe was heard coming from a little toward the shimote. Theris had a kogoe-like familiarity with that voice from nowhere in particular. Theris lowered his voice to a kogoe and said,</p>
+          <p class="en-p">Theris: 'If Your Majesty, that voice is certainly the voice of Yōru, Ryūn's buka. That cunning wretch Ryūn, aiming to capture Your Majesty on the road, has cleverly outpaced us and is making people wait here, it seems. Koriya, you must not be careless. First, let us lower our voices for a while... Fortunately in the nōmu, shall we decide to wait for them to tsūkuwa?'</p>
+          <p class="en-p">King: 'Their hakarigoto is watertight to the very end, truly astounding. As you say, let us lurk here for a while and peer into their dōsei.'</p>
+          <p class="en-p">Eīmusu: 'If Your Majesty, look, the voices of shigonin or so have drawn near in a buzz. Let us quickly hide behind this rock.'</p>
+          <p class="en-p">Nōodding, the King hid his person together with Futari behind the daiganseki. It was a daiganseki thought to be about chiyokukei shijiyō. Shigonin, enveloped in the nōmu, hid behind that rock and decided to wait for Yōru's buka to tsūkuwa.</p>
+          <p class="en-p">Not knowing even in a dream that King Sagaren's itsukau were hiding behind this rock, Yōru came before the great rock whispering something in a kogoe, and said,</p>
+          <p class="en-p">Yōru: 'Now everyone, rest your breath here for a while, nourish your eiki, and let us decide to wait for the akunin-tomo of King Sagaren, Theris, and Eīmusu to fall behind and reach here. This chiten is truly an exquisite spot. Rock mountains stand sheer to the east and west, one side is a tanimichi like a narrow throat, the north is a steep slope that seems to pierce the chest, and they will surely come here. If so, a rat in a bag is just the same. Well, leisurely drinking water, nourish your eiki, successfully capture all three alive, and shall we receive words of praise from Lord Ryūn? Now is the time for success in the world. Missing this opportunity, on what day will it ever be possible to manifest outstanding cleverness? Thinking and thinking, truly good fortune has come turning toward us, wai!'</p>
+          <p class="en-p">Retto: 'Yōru-sama, what shall we do if King Sagaren should by any chance not come to this road? That would be completely useless, naa. He is surely not limited to coming southward. If the King should take the road to the north, cross far over Bōka Bay, and escape toward the Deccan Plateau of India, that would be nothing but wasted labor and a fatigue profit, and is there anything at all that can be done about it?'</p>
+          <p class="en-p">Yōru: 'That is where unputenpu lies. If the god of happiness protects us, surely the King's itsukau will certainly take this road. If the god of happiness dwells in Karl's itsukau instead, surely the King's itsukau will certainly take the road crossing the Bōka Strait to run to India. Having said that, it is not possible to go to both sides with a single body, and there is a proverb... He who chases two hares catches neither... It is better for us to obey simply as the gods will. Then the gods will gaze upon our sincerity and surely grant us a feat of arms. More than that, it would be a major disaster if the hakarigoto leaked out. For a while now let us keep silence and wait for the King's troop to draw near. Up to now we have abused our speech organs considerably each for himself, but since we have now faced the battlefield just the same, I strictly command a blackout of kototama. All you fellows, speak quietly. Nay, if you want to speak in silence, it is fine if you spoke.'</p>
+          <p class="en-p">Bitto: 'Already the hikaoruma are exhausted to the limit, the raw materials for kototama are also lacking, and we have unavoidably fallen into a plight where both mouth and legs must experience a blackout. How is it, everyone, the warehouse of the belly has evidently become quite empty, and the throat has begun to blow a steam whistle. Shall we store bento into the belly right here, nourish the eiki, and wait for the right time?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三人は漸くにして身体の疲れも回復し、又もや立つて谷道を下らうとする時、些しく下手に当つて怪しき人声が聞えて来た。テーリスは其声にどこともなく聞き覚えがあつた。テーリスは小声になり、</p>
+            <p class="ja-classical-line">『もし王様、あの声は確に竜雲の部下ヨールの声で御座います。悪に抜目のなき竜雲奴、王様を道にて捕へむと、すばしこくも此処に先廻りをして待たせて居ると見えまする。コリヤうつかりしては居られますまい。先づ暫し声を潜めて……幸ひ霧の中、彼等が通過するのを待つ事に致しませうか？』</p>
+            <p class="ja-classical-line">王『どこ迄も水も漏らさぬ彼等が計略、実に呆れたものだ。汝が云ふ如く、暫く此処に潜むで彼等が動静を窺ふ事と致さう』</p>
+            <p class="ja-classical-line">エームス『もし王様、アレあの通り四五人の声がザワザワと近よつて参りました。早く此の岩の後に隠れませう』</p>
+            <p class="ja-classical-line">王はうなづきながら、大岩石の後に二人と共に身を隠した。直径四丈許りもあらうと思ふ大岩石である。三人は濃霧に包まれ、其岩の後に忍んで、ヨールの部下の通過するのを待つ事とした。</p>
+            <p class="ja-classical-line">ヨールはサガレン王の一行が此岩の後に隠れ居るとは夢にも知らず、何事か小声に囁きながら大岩の前に来り、</p>
+            <p class="ja-classical-line">『サア皆の者、此処で暫く息をやすめ鋭気を養ひ、サガレン王、テーリス、エームスの悪人共が落ちのびて来るのを待つ事にしよう。此地点は実に絶好の場所だ。東西に岩山は屹立し、一方は細き喉首のやうな谷道、北は胸突く許りの急坂、此処へやつて来るに相違ない。さうすれば袋の鼠も同様だ。マア悠りと水でも飲んで鋭気を養ひ、首尾克く三人を生擒り、竜雲様にお誉めの言葉を頂かうぢやないか。今が出世のしどきだ。この期を失しては、いつの日か抜群の巧妙を現はす事が出来よう。思へば思へば実に幸運が向いて来たものだワイ』</p>
+            <p class="ja-classical-line">レツト『ヨールさま、万々一サガレン王が此道へ来なかつたらどうしませう。それこそ薩張駄目ですなア。屹度南下して来るには限つて居りますまい。もしも王が道を北に採り、遠くボーカ湾を越えて、印度のデカタン高原の方へでも逃げて居たら、それこそ骨折損の疲労まうけ、どうする事も出来ないぢやありませぬか』</p>
+            <p class="ja-classical-line">ヨール『そこが運否天賦だ。吾々に幸福の神が守つて居れば、キツと王の一行は此道を採るに違ひない。もしも又カールの一行に幸福の神が宿つて居るならば、キツと王の一行は、ボーカ海峡を渡つて印度に走る道を採るに違ひない。それだと云つて、一つの体で両方へ行く訳にも往かず、諺に……二兎を追ふものは一兎をも得ず……と云ふ事がある。吾々は神の思召しのまにまに遵奉するに若くはない。さすれば神様は吾々の至誠を御照覧遊ばして、キツと手柄をさして下さるに違ひないわ。それよりも計略が漏れては一大事だ。ここ暫く沈黙を守つて、王の一隊の近づくのを待ち受ける事にしよう。今迄は随分各自に発言機関を虐待して来たが、もはや戦場に向つたも同様だから、言霊の停電を厳命する。皆の奴、静にものを云へ。イヤ、だまつてものを云ひたければ云つたがよい』</p>
+            <p class="ja-classical-line">ビツト『もはや膝栗毛も疲れ果て、言霊も亦原料が欠乏し、止むを得ず口脚共に停電の余儀なき羽目に陥つて了つた。どうでせう皆さま、胃の腑の倉庫が、余程空虚になつたと見え、喉が汽笛を吹き出しました。一つ此処で弁当を胃の腑へ格納して鋭気を養ひ、時期を待つ事にしませうか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yōru: 'That is also good. Now, bolt it down quickly, bolt it down quickly.'</p>
+          <p class="en-p">Saying this, each of them produced rice balls and was cramming them into their mouths with a look of delight.</p>
+          <p class="en-p">The party of the King held their breath, straining their ears to listen so as not to miss a single word of this conversation.</p>
+          <p class="en-p">Retto: 'My belly is full with this already. Those worms in my belly kept shooting arrows of urging incessantly, but as the owners of the hangar, we are now able to say that we have fulfilled our responsibility. I have come to feel a mood of carefree leisure, as if saying that the rise and fall of the nation is none of my concern. Hey Bitto, lend that gourd over here. No matter what, since we are facing the Sagaren King of high divine virtue, we cannot possibly stand against him unless we are in a cheerful drunken mood, you see.'</p>
+          <p class="en-p">Yōru: 'Hey Bitto, let us gather our spirits right here and wait for the enemy. Bring that wine out here. However, since this has a remarkably strong alcohol content, you must not drink too much. First of all, since your legs will give way first, drink with caution. You must never overdo it.'</p>
+          <p class="en-p">With that, starting from himself, he began guzzling straight from the mouth of the gourd that held about five shō, finished passing the gourd to Retto, slapped his own forehead sharply with both hands,</p>
+          <p class="en-p">Yōru: 'Ah, what kind of wine is this? I have never tasted such sweet wine since I was born. I wonder why on earth it has become so sweet.'</p>
+          <p class="en-p">Bitto: 'That would indeed be so. It is called gourd wine, a special kind that makes the flavor of the wine exceptionally good. Moreover, since it has been sloshing around for three whole days today, it is truly at the right stage for drinking. Furthermore, because your body feels relaxed all over, it seems even more delicious. ... When one is thirsty, even muddy paddy water tastes like the nectar of immortality ... is there not a dodoitsu saying just that?'</p>
+          <p class="en-p">Yōru: 'Hey Retto, do not hog it all to yourself, and pass it over to my side quickly.'</p>
+          <p class="en-p">Bitto: 'Now, now, Commander Yōru, that is somewhat unreasonable of you. Did you not take a sip earlier? Since Retto drank just now, the next turn is mine. After that, we must distribute it to the two persons, Ranchi and Rūzu. Please wait until it has gone around once. From a while ago, the worms in my throat have been rumbling and urging me on ...'</p>
+          <p class="en-p">Retto: 'If so, drink quickly. And finish the round quickly, so you can hand it over to Yōru-sama.'</p>
+          <p class="en-p">Bitto: 'Understood.'</p>
+          <p class="en-p">Sooner said than done, adopting the philosophy of removing one's hat the moment one meets someone, he began drinking greedily straight from the mouth of the gourd. Then, passing it around in a circle, they somehow forgot their own mission and completely emptied the wine in the gourd. The five of them gradually became intoxicated with the alcohol taking away their footing, and they began to babble loudly at one another.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ヨール『それもよからう。サア早く掻き込め掻き込め』</p>
+            <p class="ja-classical-line">と各自に、握飯を出して甘さうに頬張つて居る。</p>
+            <p class="ja-classical-line">王の一行は息を凝らして、此話を一言も漏らさじと聞き耳立てて居た。</p>
+            <p class="ja-classical-line">レツト『もう是れで腹は出来た。腹の虫奴が頻りに催促の矢を放射し居つたが格納庫の所有者たる吾々も、もはや是で責任が果せたと云ふものだ。悠々自適、国家の興亡われ関せず焉と云つたやうな気分になつて来た。おいビツト、其瓢箪をこちらへ借せ。何と云つても神徳の高きサガレン王に向ふのだから、一杯機嫌でなくては到底刃向ふ事は出来ないからなア』</p>
+            <p class="ja-classical-line">ヨール『おいビツト、一つ此処で元気をつけて敵を待つ事にしよう。其酒をここへ出せ。併し乍ら、こいつは余程酒精がきついから沢山飲んではいけない。第一足を先に取られるから用心して飲め。決して度を過してはいけないぞ』</p>
+            <p class="ja-classical-line">と、先づ自分から五升許り入る瓢の口から、グウグウとラツパ呑みを始め、瓢をレツトに渡し終り、両方の手で自分の額をピシヤツと叩き、</p>
+            <p class="ja-classical-line">『アヽ何と云ふ酒だ。こんな甘い酒は生れてから飲んだことはない。どうしてまアこれ程甘くなつたのだらう』</p>
+            <p class="ja-classical-line">ビツト『そりやさうでせうとも。瓢箪酒と云つて、特別酒の味がよくなるものです。さうして今日で三日間も、ドブドブドブと揺つて来たのだから、本当に呑み加減になつて居ます。そこへ体がどことはなしにホツとして居ますから、一入味がよくなつたやうに見えるのですよ。……喉のかわいた時や泥田の水も、飲めば甘露の味がする……と、都々逸にもあるぢやありませぬか』</p>
+            <p class="ja-classical-line">ヨール『おいレツト、貴様計り独占して居らずに早く俺の方へも廻さぬか』</p>
+            <p class="ja-classical-line">ビツト『もしもしヨールの大将、そりやちつと御無理です。あなたは先に一口お飲りになつたぢやありませぬか。今レツトが飲んだのだから次が私の番だ。それからランチ、ルーズの両人にも分配してやらねばなりますまい。一順まはる迄まつて下さい。最前から喉の虫がゴロゴロ云つて催促をして居ますから……』</p>
+            <p class="ja-classical-line">レツト『そんなら早く呑め。さうして早く一順すまして、ヨールさまに渡すのだぞ』</p>
+            <p class="ja-classical-line">ビツト『承知致しました』</p>
+            <p class="ja-classical-line">と云ふより早く、逢うた時に笠ぬげ主義で、ガブガブと瓢箪の口から口呑をはじめた。それからクルリクルリと廻り呑にして、いつしか自分の使命も忘れてしまひ、瓢の酒をすつぱりと空にしてしまつた。五人は漸く酒が廻り足を取られ、互に大きな声で管をまき始めた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c09.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 9: 濃 Mist の途 [997]</span>
+      </a>
+      <a href="c11.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 11: Mud 酔 [999]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

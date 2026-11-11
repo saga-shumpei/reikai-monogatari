@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: Mud 酔 [999] - Volume 36 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 36 Table of Contents</a>
+      <span>Volume 36</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 36 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: Mud 酔 [999]</h1>
+      <p class="chapter-title-ja">泥酔〔999〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Itsukau, Retto, Bitto, Ranchi, and Rūzu's party drank themselves into a stupor with the sake in the gourds, lost their footing, and collapsed right there on the spot, blowing out idle, drunken nonsense step by step from their sluggish, unmoving tongues. Drink sake and your legs give out, you make a fuss over nothing; don't drink and you commit evil acts, gamble, chase after women—they are nothing but hopeless goods no matter how you look at it.</p>
+          <p class="en-p">Retto: 'Oi, kiyōdai, don't you feel things getting into a fine mood? The tongue is tangling just moderately, and the feet have floated up onto the ground as if riding in a boat. Since it has come to this, isn't there no longer any need to sweat it out ascending this steep slope and keep doing the continuing enterprise of tramping along? ...Ranzatsukotsupahi, rakukuwamijin, enjin rolling up the sky and scattering in the wind... I am a fellow who wouldn't budge an inch even if a great commotion like that were to break out. When the divine protection of the god of sake blesses us so neatly, I somehow found myself wanting to shed a tear of a single cup's sympathy upon the state of King Sagaren's person from the other night. It is quite enough to make a man of deep regrets and great talent arouse feelings of nostalgia. Why, the hangar of the stomach is fully packed, and the sake barrel within the belly is just like the phrasing of a norito... The jars and bottles are filled high, the bellies of the jars are lined up, partake of the ears of red millet, with awe and reverence we speak... it is just that sort of style. Hey, General Yoru, once it gets to be such a good mood as this, there is no longer any such thing as Yoru or Hīru. Shall we decide to take a nap right here, resting a kettle on a tree root? Because the character for pillow is written with the radical for wood and yuto. Eh, eputsu, garagaragaragara...'</p>
+          <p class="en-p">Bitto: 'Ah, it stinks, it stinks, don't you understand a bit, turning upwind... It is not an August gale, but it is a nuisance like buckwheat. Somehow the foundation of my heart has begun to wobble, and I have come to feel so pitiful for the heart of King Sagaren-sama. No matter how much you say you will let us rise in the world, with the master of Ryūun changing his mind as quick as a cat's eyes every time you ask for this and that, isn't it a bit disheartening?'</p>
+          <p class="en-p">Yoru: 'Kora kora, don't you understand in moderation? That is why I tell you not to drink too much sake. What a troublesome fellow you are. Carrying important business and yet drinking yourself into a stupor at the very critical moment, why didn't you drink after consulting with the inside of your belly? What an ignorant wretch!'</p>
+          <p class="en-p">Bitto: 'Eh, don't talk so noisily. My legs are going to give out anyway. Whether my legs give out from fear of King Sagaren's majestic power, or whether my legs give out from being drunk on sake, either way I am fully equipped with the potential for my legs to give out. One who stands at the head of others should not catch hold of such trifling matters and fuss over them. How would it be if you made your belly a bit broader, made your liver bolder, and made your heart bigger? As the saying goes, if the head doesn't turn, the tail won't turn. Altogether, General Yoru, you talk big, but can your legs actually stand?'</p>
+          <p class="en-p">Yoru: 'There are times when I stand with Yoru, and there are times when I do not stand. At any rate, one who is a general does not need to work by himself, but must ably entrust tasks to others, face the grand strategy without fretting or being bogged down by minor details, deduce the cleverness or stupidity, goodness or badness of his subordinates, and make each exert his own ability. What a person who is to be a general must work at is the magnanimity of a general. Even if I am an alcoholic and my legs cannot stand, I have the authority to command you fellows, so do not harbor such worries. You fellows simply need to follow the orders of this Yoru and perform the labor of dogs and horses. Eh eh, what are your faces? Just when I thought they were becoming square, they turn triangular, sticking seven, eight, or even ten eyeballs onto your faces, and even for an extraordinary hero and general like Lord Yoru, an encirclement attack of ugly faces does not feel all that pleasant. Won't you subordinates pull yourselves together a bit? What, when it comes to a situation of a thousand riders against one, crying out that your legs have given out, that King Sagaren is terrifying, and uttering such defeatist mournful sounds, bearing such a despairing sorrow—to think that we have dragged out such cowardly and pusillanimous subordinates, how could we not sink into the abyss of despair... Geh, utsu, pu, garagaragara, ah, it's painful, even the villain sake has started flowing backward up the great belly river!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ヨール、レツト、ビツト、ランチ、ルーズの一行は瓢の酒に酔ひ潰れ、足をとられて其場に倒れたまま、廻らぬ舌の根からソロソロと下らぬ熱を吹き立てる。酒を飲めば腰を抜かす、愚図をこねる、飲まねば悪事をする、博奕を打つ、女を追ひ掛ける、如何にも斯うにも始末にをへぬ代物ばかりである。</p>
+            <p class="ja-classical-line">レツト『オイ、兄弟、何といい気分になつて来たぢやないか。舌は適度に縺れて来る、足は舟に乗つた様に地の上に浮いて来た。もう斯うなつては此急坂をセツセと汗を流して、テクの継続事業をやる必要もなくなつたぢやないか……乱雑骨灰落花微塵、煙塵空を捲いて風に散る……と云ふ様な大騒動が起つて来てもビクとも致さぬ某だ。かう巧く酒の神の御守護が幸はひ給ふと、何とはなしに此間の晩のサガレン王の身の上に、一掬同情の涙を濺ぎたくなつたぢやないか。大に多恨の才士をして懐旧の情を起さしむるに足るだ。何と胃の腑の格納庫は充実し、腹中の酒樽は恰も祝詞の文句ぢやないが……甕瓶高知り、甕の腹満並べて赤丹の穂に聞し召せと、畏み畏みも申す……と云つた塩梅式だ。なあヨールの大将、もう斯んな良い気分になつて来ればヨールもヒールもあつたものぢやない。一つ此処でゴロンと木の根に薬罐を載せて一眠りする事にしようかい。枕と云ふ字は木扁に尤と書くのだからな。エー、エプツ、ガラガラガラガラ……』</p>
+            <p class="ja-classical-line">ビツト『あゝ臭い臭い、チツと心得ぬか、風上に廻りよつて……八月の大風ぢやないが蕎麦の迷惑だぞ。如何やら心の土台がグラつき出して、俺やもうサガレン王様の心がおいとしうなつて来た。何程出世さして呉れると云つても、猫の目の玉ほどクレクレと変る竜雲の親方では、チツと心細いぢやないか』</p>
+            <p class="ja-classical-line">ヨール『コラコラ、宜い加減に心得ぬかい。それだから余り酒を飲むなと云ふのだ。困つた代物だなア。大事な用を持ち乍ら肝腎の時に酔ひ潰れよつて、何故腹の中と相談して飲まないのだ。身知らず奴が！』</p>
+            <p class="ja-classical-line">ビツト『エー、八釜しう云ふない。何れ腰が抜けるのだ。サガレン王の御威勢に恐れて腰を抜かすか、酒に酔うて腰を抜かすか、何れ腰を抜かす十分の可能性を具備してるのだよ。人の頭に立つ者は、さう何でもない事を捉まへてコセコセ云ふものぢやないわ。チツと腹を広う持ち、肝玉を太くし、心を大きうしたら如何だ。頭が廻らにや尾が廻らぬと云ふぢやないか。一体ヨールの大将は偉さうに云つてるが腰が立つのかい』</p>
+            <p class="ja-classical-line">ヨール『事にヨールと立つ事もあり、立たぬ事もあるわ。兎も角大将たるものは自ら働くを要せず、克く人に任じ、大局に当り小事に焦慮らず拘泥せず、部下の賢愚良否を推知して、各其能力を揮はしむるものだよ。人の将たるべき者将に務むべき事は大将の襟度だ。俺あアル中で腰が立たなくても、貴様達を指揮する権能があるのだから、そんな心配をして呉れるな。ただ貴様達は此のヨールの命令に従つて、犬馬の労を執りさへすれば宜いのだ。エーエー、貴様達の面は何だ。四角になるかと思へば三角になり、目玉を七つも八つも十も顔にひつ付けよつて、醜面の包囲攻撃は如何に英雄豪傑のヨールさまだつて、あまりいい気持はせぬワ。チツと配下の奴どもシツカリ致さぬかい。何だ千騎一騎の場合になつて、腰が抜けたの、サガレン王が恐ろしいのと亡国的の哀音を吐き、絶望的の悲哀を帯びた其弱い言霊、実に吾々も斯様な卑怯未練な部下を引ずり出して来たかと思へば、豈絶望の淵に沈まざるを得むやだ……ゲー、ウツ、プ、ガラガラガラ、アヽ苦しい、酒の奴まで大腹川を逆流しだしたワ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Retto: 'Hey, Commander Yōl, it is almost time for us to appear slowly. What kind of plan do you have to deal with it if rebels like Ames and Theris come out now? Unless we determine that right now, now that it has come to this, we won't be able to do such clumsy things as catching a thief and slowly twisting the hemp rope.'</p>
+          <p class="en-p">Yōl: 'What, do not worry. This Yōl-sama has a plan. By adopting a manly, nay, gentlemanly and civilized approach, I have the calculated success of spinning the tongue's propulsion machine with all my might and persuading the enemy with a propeller-like chatter without fighting. How could the mind of Jiyanjiahēru be understood by junk like you lot? No matter what anyone says, that is Yōl-sama for you.'</p>
+          <p class="en-p">Just as they were talking thus, someone from behind the great rock was singing with a cool voice. The five fellows could hardly see their eyes due to extreme intoxication, and their ears were ringing like a fire alarm being beaten wildly, their hearing apparatus impaired to the point where they could not even distinguish the timbre of things.</p>
+          <p class="en-p">Yōl: 'Look, how is this? They say Heaven favors justice, so taking pity on our loyal devotion, has not a Myōon Bosatsu appeared from one side of heaven, parting the eightfold clouds of heaven from behind this Thousand-Cho Rock, releasing a beautiful sound like that of a bell cricket or pine cricket to add to the excitement of the drink and bestow a new life upon our exhausted spirits? When things come to this, Yōl-sama is not such a fool either. Ah-n.'</p>
+          <p class="en-p">Retto: 'I do not know what it is, but to us it has come to feel as though caustic soda had been shoved right into our ear canals. Hey, you fellows, won't you pull yourselves together? It looks rather suspicious. Is it rain, wind, thunder, earthquake, the old man, a fire, or I do not know what, but it does not give one a very good feeling.'</p>
+          <p class="en-p">Yōl: 'Do not be so noisy. Depending on how one holds one's heart, even the Kototama of good words and beautiful phrases can sound like bad words and violent language, or even nectar can taste like muddy water. Since you drank recklessly without looking ahead, it caused an abnormality in your auditory organ, and such an oracle of Myōon Bosatsu resounds like weeping and wailing ghosts. Rather than that, steady your torso and have another cup.'</p>
+          <p class="en-p">Retto: 'When you say have another, has not the gourd fellow already put out a sold-out sign? No matter how much you beat its bottom, not a single drop of alcohol will come out above this. They say peasants and rice-bran bags yield more the more you squeeze them, but what kind of stroke of fate is this gourd, for not even a mosquito's tear comes out? Ah-ah, I've grown sick of everything. I have thoroughly reformed now. If by any remote chance the King comes here, I intend to bow my head low and apologize, bending my sevenfold knees eight, nine, ten, or twentyfold, and if even then He says He will not forgive me, I am prepared to have my head cut off. However, since my head has just a tiny bit of necessity, I will argue prematurely and have Yōl's bare neck sliced off as a representative sacrifice. If one is a commander, one cannot possibly employ subordinates without that much resolve. Hey, Commander Yōl, does what I say hit the nail on the head even a tiny bit, or rather, won't you affirm it, ah?'</p>
+          <p class="en-p">Yōl: 'Be quiet. What a clear timbre it is. I hear something like King Sagaren. Hey, won't you pull yourselves together reasonably and get up?'</p>
+          <p class="en-p">Bit: 'No matter how much you tell me to get up, this side won't budge even an iota for all eternity, so it is truly something. Ha-ha-ha-ha and ho-ho-ho-ho.'</p>
+          <p class="en-p">The voice of the song grows ever clearer.</p>
+          <p class="en-p">The gods appear in the front,
+Sorting out good and evil;
+The God Naobi who created this world,
+An Ōnaobi whose heart is also vast.
+Just whatever happens in the world of men,
+Look anew and listen anew with Naobi;
+Errors of the body are confessed anew,
+The precious divine teachings.
+Deluded by the God Magatsu,
+Appearing in the capital of the divine land,
+Opposing King Sagaren,
+People who have piled up
+Rebellious and lawless sins,
+If one seeks their source,
+Takami-musubi and Kami-musubi,
+Since they are beings born
+From the fire and water of the gods of shade and light,
+Every single one is a precious divine child.
+Blown by the ugly demonic winds
+By the power of the times and seasons,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">レツト『ヤイ、ヨールの大将、もう徐々と現はれる刻限ですぜ。今にエームスやテーリスの謀反人が出て来たら如何処置する考へだ。それを一つ今の中に決定して置かねば、さあ今となつて、盗人を捕へてソロソロ縄を綯ふ様なへまな事も出来ますまいぜ』</p>
+            <p class="ja-classical-line">ヨール『何、心配するな。此ヨールさまには一つの考案があるのだ。君子的否紳士的文明的のやり方を以て、力一杯舌の推進機を廻転し、戦はずして敵をプロペラペラと言向和す成算があるのだ。ジヤンジヤヘールの胸中が、貴様達の様なガラクタに分つて堪るかい。何といつても其処はヨールさまだよ』</p>
+            <p class="ja-classical-line">斯く話す折しも大岩の後の方から声も涼しく謡ふ者がある。五人の奴は余りの泥酔に目も碌に見えず、耳はガンガンと警鐘を乱打した様に、物の音色も弁別がつかない処まで聴音機が狂うて居る。</p>
+            <p class="ja-classical-line">ヨール『そら如何だ。天は正義に与すると云つてな、俺達の誠忠を憐れみ給ひ、天の一方より妙音菩薩が、此千引の岩の後より天の八重雲を掻き分けて現はれ給ひ、鈴虫か松虫かと云ふ様な美音を放つて酒の興を添へ、疲れきつた精神に新生命を授けて下さるぢやないか。斯うなるとヨールさまも余り馬鹿にならないぞ。アーン』</p>
+            <p class="ja-classical-line">レツト『何だか知らぬが、俺達には如何も苛性曹達を耳の穴へ突つ込んだ様な気分になつて来たワイ。オイ皆の奴、シツカリせぬか。どうやら怪しいぞ。雨か、風か、はた雷鳴か、地震か、親爺か、火事か、何んだか知らぬが、余りよい気分がせぬぢやないか』</p>
+            <p class="ja-classical-line">ヨール『八釜しう云ふな。心一つの持ち様で、善言美詞の言霊も悪言暴語に聞えたり、又甘露も泥水の味がしたりするのだ。貴様は余り向ふ見ずに酒を喰ひよつたものだから、聴声器に異状をきたし、こんな妙音菩薩の御託宣が鬼哭愁々然として響くのだ。それよりも胴を据ゑてモ一杯やれ』</p>
+            <p class="ja-classical-line">レツト『やれと云つたつて瓢箪の奴、早くも売切れ品切れの札を出しよつたぢやないか。何程尻を叩いて見た処で、もう此上は一滴の酒だつて出るものぢやない。百姓と糠袋は絞れば絞る程出ると云ふけれど、是は又如何した拍子の瓢箪やら、蚊の涙程も出て来ぬぢやないか。アーアもう何もかも嫌になつてしまつた。俺はもうサツパリ改心したよ。万々一王様が此処へお越しになつたら、低頭平身七重の膝を八重九重十重二十重に折つてお詫をして、それでも許さぬと仰有つたら首でも刎ねて貰ふ積りだ。乍然俺の首はチツとばかり必要があるから尚早論を主張し、ヨールの素首を代表的犠牲物として刎ねて貰ふのだな。大将となれば、それだけの覚悟がなくては部下を用ふる事は到底不可能だ。なあヨールの大将、吾輩の云ふことがチツとは肯綮に嵌りますかな、否肯定するでせうなア』</p>
+            <p class="ja-classical-line">ヨール『八釜しいわい。何と冴えきつた音色ぢやないか。サガレン王とか何とか聞えて来る。ヤイモウ宜い加減にシツカリして腰を上げぬかい』</p>
+            <p class="ja-classical-line">ビツト『何程上げと云つても、此方は万劫末代ビツトも動かぬのだから実に大したものだ。アツハヽヽヽのオツホヽヽヽだ』</p>
+            <p class="ja-classical-line">歌の声は益々冴え来る。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立て別ける
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直し聞き直し
+身の過ちは宣り直す
+尊き神の御教
+曲津の神に迷はされ
+神地の都に現れませる
+サガレン王に刃向ひて
+悪逆無道の罪科を
+重ね来りし人々も
+その源を尋ぬれば
+高皇産霊や神皇産霊
+陰と陽との神々の
+水火より生れし者なれば
+何れも尊き神の御子
+時世時節の力にて
+醜の魔風に吹かれつつ</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Before they are even aware, into the abyss of sin,</p>
+          <p class="en-p">Many are those who fall.</p>
+          <p class="en-p">The Sumeōkami also, having compassion,</p>
+          <p class="en-p">Upon those stained with sin and defilement,</p>
+          <p class="en-p">Wishing to save those Magahito,</p>
+          <p class="en-p">Morning and evening, Their Onkokoro,</p>
+          <p class="en-p">Bestowing, the Ananahi,</p>
+          <p class="en-p">Divine teachings, or those of Brahman,</p>
+          <p class="en-p">Opening up rare teachings,</p>
+          <p class="en-p">Appearing upon this Shiro Island,</p>
+          <p class="en-p">The Murakumo that enveloped the four quarters,</p>
+          <p class="en-p">Blown away by the wind of Shinado,</p>
+          <p class="en-p">The Kunibito straying in darkness,</p>
+          <p class="en-p">Are lifted up and saved into the light.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara!</p>
+          <p class="en-p">Kami are together with Warera.</p>
+          <p class="en-p">To the Riūn whose hearts are defiled,</p>
+          <p class="en-p">Flattering and fawning, all sorts of</p>
+          <p class="en-p">Those Hitobito who exhausted every wickedness,</p>
+          <p class="en-p">By the teaching of the true way,</p>
+          <p class="en-p">Kotomu and pacifying, in the garden of glory</p>
+          <p class="en-p">Of Tengoku, leading them,</p>
+          <p class="en-p">Wishing to save them—the Onkokoro</p>
+          <p class="en-p">Of the divine Mikoto of King Sagaren,</p>
+          <p class="en-p">When gazed upon, is lofty, soaring high</p>
+          <p class="en-p">Into the Hisakata Amatsumisora,</p>
+          <p class="en-p">The mountain of Chikyō is likewise extraordinary,</p>
+          <p class="en-p">With Izutaka upon Tenkyōzan,</p>
+          <p class="en-p">The Sumekami who settles in tranquility,</p>
+          <p class="en-p">The dew of blessings is—not to mention the Aohitogusa of Yomo's lands—</p>
+          <p class="en-p">Even down to birds, beasts, grasses, and trees,</p>
+          <p class="en-p">Bestowing pure Inochi,</p>
+          <p class="en-p">Opening Kamiyo eternally.</p>
+          <p class="en-p">That achievement is indeed awe-inspiring!</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara!</p>
+          <p class="en-p">May your august spirits be blessed and manifest,</p>
+          <p class="en-p">Without hating the two children—Bitto, Retto, and Yōru besides—</p>
+          <p class="en-p">Please save them, Kamunagara.</p>
+          <p class="en-p">We pray before the presence of Kami:</p>
+          <p class="en-p">Whether the morning sun shines or is clouded,</p>
+          <p class="en-p">Whether the moon waxes or wanes,</p>
+          <p class="en-p">Even if the great earth should sink,</p>
+          <p class="en-p">Before the rock where salvation is not forsaken,</p>
+          <p class="en-p">While the five bodies are fallen through the power of sake,</p>
+          <p class="en-p">Bestowing the pure light of the sun and moon</p>
+          <p class="en-p">Upon the five bodies and souls,</p>
+          <p class="en-p">Making them submit to the true way,</p>
+          <p class="en-p">I will grant salvation, King Sagaren.</p>
+          <p class="en-p">Confronting the three-man group of Terisu, Eimusu,</p>
+          <p class="en-p">And the five men,</p>
+          <p class="en-p">Preaching and teaching the way of enlightenment.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara!</p>
+          <p class="en-p">May your august spirits be blessed and manifest!</p>
+          <p class="en-p">Yōru: 'Hey, all you fellows, it is finally the dawn of the evil body and soul's year now. Did you hear the song just now? Once you heard that, our ears have become clear, the eyes of our hearts opened, the insides of our bellies purified, the clouds in our chests cleared away, our dislocated hips straightened, our hands dancing and feet leaping, and a feeling of the opening and clarifying of heaven and earth that cannot be described with anything has drifted in, making us feel as if we have been reborn, hasn't it? Come on, you fellows all said you would do whatever I tell you to do, so starting today reform yourselves, turn over your evil minds of until now, and devote your loyalty to King Sagaren. Surely there is nobody among you who would go against my words, is there?'</p>
+          <p class="en-p">Thus, with a thick and faltering tongue, he is vaguely preaching and persuading his four subordinates.</p>
+          <p class="en-p">Retto: 'Who on earth is there, among people who love doing evil, who is such a big fool? You say King Sagaren is evil, and that if we don't bet and finish him off, the way of good will not be established. Didn't you preach to us until our ears were calloused that Lord Riūn is truly the god of goodness? Now that it has come to this, I've completely lost track of who is good and who is evil. Frankly, let me hear clearly whether King Sagaren is good or Lord Riūn is good. If there were no collision between good and evil, there's naturally no reason for such a disturbance to break out in the first place, you know.'</p>
+          <p class="en-p">Bitto: 'Hey Retto, don't say such inferior things. It's naturally decided that rebelling against the King is evil, isn't it?'</p>
+          <p class="en-p">Retto: 'Even so, you see, Lord Riūn said this. Eh, didn't they say: If the lord is not a lord, the retainer need not be a retainer; if the father is not a father, the child need not be a child? That is why I believe Lord Riūn is truly a great god. Because he is the savior of the realm and the nation, I am convinced that working for Lord Riūn means working for Kami, and is a virtuous act working for the general populace, which is why I am working with a spirit of self-sacrifice without even getting proper sleep at night. If anyone knew that Riūn is evil, would there ever be anyone who would follow his will and act upon it?'</p>
+          <p class="en-p">Bitto: 'Saying that even if the lord is not a lord, the retainer should still act as a retainer, and even if the father is not a father, the child should still act as a child—that is the great highway of the heavenly true hemp pillar. Enduring any unreasonable demands with resignation—that is both loyalty and filial piety. If you keep uttering such petty sophistry like that, the world will never be governed in peace and safety.'</p>
+          <p class="en-p">Yōru: 'At any rate, you will obey the commands of this Lord Yōru. Come, now we are going to make our apologies to Lord Sagaren.'</p>
+          <p class="en-p">All: 'Yes, it cannot be helped.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">知らず知らずに罪の淵
+陥る者も最多し
+皇大神も憐れみて
+罪や穢に染まりたる
+其曲人を助けむと
+朝な夕なに御心を
+配らせ給ひ三五の
+神の教やバラモンの
+珍の教を開きまし
+此シロ島に現れまして
+四方を包みし村雲を
+科戸の風に吹き散らし
+闇に迷へる国人を
+明きに救ひ上げ給ふ
+あゝ惟神々々
+神は吾等と倶にあり
+心穢き竜雲に
+媚び諂ひて諸々の
+曲を尽せし人々を
+誠の道の教にて</p>
+            <p class="ja-classical-line">言向け和し天国の
+栄えの園に導きて
+救ひ奉らむサガレン王の
+神の命の御心
+仰げば高し久方の
+天津御空に聳り立つ
+地教の山も啻ならず
+天教山に厳高く
+鎮まりいます皇神の
+恵の露は四方の国
+青人草は云ふも更
+鳥獣や草木まで
+清き生命を与へつつ
+神世を永遠に開きます
+其功績ぞ畏けれ
+あゝ惟神々々
+御霊幸はひましまして
+ビツト、レツトやヨール外
+二人の御子を憎まずに
+救はせ給へ惟神</p>
+            <p class="ja-classical-line">神の御前に願ぎ奉る
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+助けにや措かぬ岩の前
+酒の力に倒れたる
+五つの身魂に日月の
+清き光りを与へつつ
+誠の道に帰順させ
+救ひ与へむサガレン王
+テーリス、エームス三人連
+五人の男に打ち向ひ
+悟りの道を説き聞かす
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">ヨール『オイ皆の奴等、もう斯うなつちや悪の身魂の年の明きだよ。今の歌を聞いたか。あれを聞いた以上は俺達の耳は爽かになり、心の眼は開き、腹の中は清まり、胸の雲は晴れ、抜かした腰は立上り、手は舞ひ足は踊り、何ともかとも云へぬ天地開明の気分が漂ひ、生れ変つた様になつて来たぢやないか。サア貴様等は何事も俺の云ふ様にすると云つたのだから、今日限り改心をして今迄の悪心を翻し、サガレン王に忠義を尽すのだよ。ヨモヤ俺の言葉に違背する奴はあるまいな』</p>
+            <p class="ja-classical-line">と廻らぬ舌から、四人の部下に朧気に説き諭して居る。</p>
+            <p class="ja-classical-line">レツト『誰だつて、悪を好んでする様な大馬鹿者が何処にあるものかい。お前はサガレン王が悪だ、あれをベツトして了はなくちや善の道がたたぬ。竜雲様が誠の善の神様だと、耳が蛸になる程お説教を聞かしたぢやないか。俺アもうかうなつて来ると何方が善だか悪だかサツパリ見当がとれなくなつて来た。一体本当のことはサガレン王が善か、竜雲が善か、と云ふ事をハツキリ聞かして呉れ。善と悪との衝突がなければ、元よりこんな騒動がオツ始まる道理がないのだからなア』</p>
+            <p class="ja-classical-line">ビツト『こらレツト、そんな劣等な事を云ふな。もとより王様に反抗すると云ふのは悪に決つてるぢやないか』</p>
+            <p class="ja-classical-line">レツト『それでも貴様、竜雲さまが斯う云つて居たよ。エー、君、君たらずんば臣、臣たるべからず、父、父たらずんば子、子たるべからず、と云はれたぢやないか。それだから俺は竜雲様は本当に偉い神様だと信じて居るのだ。天下国家の救主だから、竜雲様のために働くのは即ち神様の為に働くのだ、国民一般の為に働く善行だと確信して居るから、夜も碌に眠らず捨身的の活動をして居るのだ。誰でも竜雲を悪だと知つたら、其意志に従つて活動する奴があるものかい』</p>
+            <p class="ja-classical-line">ビツト『君、君たらずとも臣は以て臣たるべし、父、父たらずとも子は以て子たるべしと云ふのが、天津誠の麻柱の大道だよ。如何なる無理難題も甘んじて受けるのが、忠ともなり孝ともなるのだ。そんな貴様の様な小理屈を云つて居ては、何時迄も世の中は無事太平に治まるものぢやないよ』</p>
+            <p class="ja-classical-line">ヨール『兎も角も、此ヨールさまの命令に服従するのだ。サアこれからサガレン王様にお詫だよ』</p>
+            <p class="ja-classical-line">一同『はい、仕方がないなア』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: Rock 隠れ [998]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: 無住居士 [1000]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
