@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: 三ツ巴 [1045] - Volume 38 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 38 Table of Contents</a>
+      <span>Volume 38</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 38 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: 三ツ巴 [1045]</h1>
+      <p class="chapter-title-ja">三ツ巴〔1045〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">It was on the fifteenth day of the tenth month in the thirty-second year of Meiji. Adachi, Shikata, and Nakamura, the three of them, having held a secret council at the training ground in Uhedani as a united group of Kamugakari, returned to Kinmeikuwai with faces as if nothing were amiss, acting with the authority of plenipotentiary ministers, with the intention of advising Kiraku to withdraw from Ayabe; they lured him out to the summit of Hongūsanjiyō with clever words, and Shikata Haruzau, being the first to speak, opened his mouth and said:</p>
+          <p class="en-p">Shikata: 'I speak to Uheda-sensei, but last night at my house in Uhedani, all the officers of Kinmeikuwai gathered, and as a result of our consultation, it has been decided that we must have you leave Ayabe as soon as possible, even if it be but one day sooner. Since all the officers requested us three to negotiate with you, we had no choice but to come, so please listen well. As a disciple, it is truly heart-wrenching and painful for me to tell you, my teacher from whom I have long learned Reigaku, to leave so coldly; however, as long as you remain in Ayabe, it hinders the teachings of the First Kyōso-sama and the divine plan cannot be accomplished, causing the hearts of the officers and believers to become divided and impossible to unite, so please return to Anao for about a year. After that, if there is a divine connection again, we shall consult among ourselves and come to welcome you from this side. To tell you the truth, your arrival in Ayabe was a year or two too early.'</p>
+          <p class="en-p">Thus he was making his demand for withdrawal without a shred of shame. Kiraku remained silent, offering no reply, and as he stared at Haruzau's face until it seemed he would bore a hole through it, smiling slightly, Haruzau looked uneasy, his face turning pale as he hung his head and shook it incessantly. Then, Adachi Masanobu, wearing the face of a plenipotentiary commissioner, spoke:</p>
+          <p class="en-p">Adachi: 'The reason I have come to speak to you today, Sensei, is not merely my own personal opinion. First and foremost, I have come as a representative of all the officers and believers, including Ushitora no Konjin-sama, and you must listen to me with that understanding. Originally, there was a splendid Konkō church in Ayabe that opened the path of Tenchi Kane no Kami-sama, but Deguchi Onao-sama became agitated and secretly consulted with Shikata Heizō-san, and without a word of consultation with us officers and believers, invited a teacher of Reigaku from a different sect, and eventually caused the Konkō church to be completely destroyed; as you know, the Konkō religion is a properly recognized church under the direct jurisdiction of the Shintō Honkiyoku, and it is a path that engages in missionary work without fear of the world. If I may say so, the Kinmei Reigakkai that you, Uheda-san, have established has not received any official approval, and even if you preach with such an air of importance, it will ultimately come to nothing. No matter how much you, Deguchi Onao-sama, and Shikata Heizō-san exert yourselves, you will be crushed by the authorities in an instant. If that happens, you will have no face to show everyone, so while the ground is still visible beneath your feet, leave as soon as possible. You may call yourself a founder or a president now, but if you trace the origins, you are nothing but an uneducated old woman who used to buy waste paper or a milkman, and no matter how hard you try, it is beyond discussion, so pull out of here while you still have some dignity. As for Onao-sama, we will take good care of her at the Konkō church, so please make up your mind and give us a definite answer now. Are you so reluctant to leave Ayabe even though you are hated by everyone here? It seems you are a troublesome wanderer with nowhere else to go. Does this make you angry? If it makes you angry, then just to show you, why don't you try to exert yourself and build a church in the center of a grand city, not in a countryside like this? Well, since one cannot know the end of a person, even someone as incomprehensible as you might, as the saying goes that even a dog walking might hit a stick, eventually become someone great, though I cannot say for sure.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">明治三十二年十月十五日の事であつた。足立、四方、中村の三人は、上谷の修行場にて、神憑一統鳩首謀議の結果、喜楽に対し、綾部退却の勧告をなさむと、全権公使格で何喰はぬ顔して、金明会へ帰り来り、言巧みに本宮山上に誘ひ出し、第一番に四方春三は口を開いて云ふ。</p>
+            <p class="ja-classical-line">四方『上田先生に申上げますが、夜前上谷の私の宅で、金明会の役員一同が集会いたし、相談の結果、先生に一日も早う綾部を立のいて貰ふ事になりました。私等三人に対し、皆の役員サンから、先生に対し談判をしてくれと頼まれ、止むを得ず三人が出て来ましたのですから、どうぞシツカリ聞いて下され。永らく霊学を教へて貰うた先生に対して、すげなう帰つて下さいと云ふ事は、弟子の私としては誠に心苦くて気の毒でたまりませぬけれど、先生が綾部に厶ると、第一教祖さまの教の邪魔になり、お仕組が成就しませぬので、役員信者の心がハダハダになつて、如何しても一致しませぬから、どうぞ一年程穴太へ帰つて下され。其上で又御縁がありましたら、皆が相談の上、こちらの方からお迎へに参ります。実際の事を言へば、先生が綾部へお出でるのが一二年許り早すぎました』</p>
+            <p class="ja-classical-line">と立退き勧告を臆面もなくやつて居る。喜楽は黙然として何の答もなく、春三の顔を穴のあく程見つめて少しく笑うてゐると、春三は気味悪相に真青な顔をして俯むいて首を頻りに振つてゐる。さうすると足立正信が全権委員顔をして曰ふ。</p>
+            <p class="ja-classical-line">足立『足立が今日先生にお話に参つたのは、一個人の考へではありませぬ。先づ第一に艮の金神さまを始め、役員信者一同の代表者として、参つたのですから、あなたも其お考へで聞いて頂かねばなりませぬぞ。抑も綾部には、天地金の神さまのお道を開く、結構な金光教会所があつたのを、出口お直さまが気をいらつて、四方平蔵サンとひそかに相談して、吾々始め役員信者には一言の相談もなく、派の違ふ霊学の先生を呼よせて、とうとう金光教会を丸潰しにしられたのは、お前サンも御存じの通りですが、金光教は立派な公認の神道本局の直轄教会で、天下に憚らず布教伝道に従事してゐるお道です。かう申すと済みませぬが、上田サンの立てた金明霊学会は、其筋の認可もうけずに、偉相に布教してゐられても、到底、駄目です。出口お直さまや四方平蔵サン、お前サンの三人位が何程骨を折つても、瞬く内に其筋から叩き潰されて了ひますよ。さうなつてはお前サンも皆サンに合はす顔がないから、足許の明かい内に一時も早くお帰りなされ。今こそ教祖だとか、会長だとか云うてゐられますが元を糺せば紙屑買の無学の婆アサンや、牛乳屋位が、どれ丈気張つて見ても、到底お話にならぬから、花のある内にここを引上げなされ。又お直さまの方は金光教会の方で大切に世話をしますから、今の内に決心をきめて確かな御返答を願ひます。お前サン、これ丈皆の者に嫌はれて居つても綾部を帰るのがおいやですか。よくよくお前サンも行く所のない困つた人足と見えますな。腹が立ちますかなア。腹が立つならこれ見たかで、一つこんな田舎ではなく、立派な大都会の中央で、一奮発して教会でも立てて御覧。イヤ併し人間と云ふ者は末を見な分らぬから何ぼ訳の分らぬお前サンでも、又犬も歩けや棒に当ると云ふ事があるよつて、どんな偉い者に、此先に於てなれぬとも限りませぬワイ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He pressed him with a mocking tone. Kiraku, overwhelmed by the excessive insults and abusive language, had no answer, and remained silent with his head bowed. Adachi, with a pleasant smile on his face, glanced at Kiraku sideways and walked down the narrow slope, swinging his arms. Nakamura Takezau, while grinning, said:</p>
+          <p class="en-p">Nakamura: 'Uheda-san, if you trace your origins, are you not a peasant who cuts frogs, and having risen in the world a little, became a milkman? Furthermore, what is this about Reigaku or Saniha, coming to this deep, rural countryside to deceive people? You cannot keep your tail hidden forever. Even if they say Ayabe is a mountain village, there are those among us whose eyes are open. A peasant's son becoming an audacious Shindauka—such rebellion will not work. After all, the frog-leaping of a worm-cutter always has a certain earthy smell to it. Even in a small town like Ayabe, there is no fool who would be as freely manipulated as you are and still be happy. Rather than doing something that does not suit your nature, return to Anō as soon as possible and go back to being a peasant. No matter how much a frog's child, a tadpole, resembles a catfish's child, once it begins to grow a little, hands sprout, feet sprout, and before you know it, the tail falls off, and it cannot help but become a dung-frog, just like its ancestors. It is the law of heaven and earth that it can never become a catfish. Even I, having studied the path of the Lord God of Heaven and Earth for nine years, and having read the Fudesaki of the Ushitora no Konjin from morning till night for eight years, still find it so difficult that I cannot yet preach to others satisfactorily; yet you, who were leaping frogs and milking cows until last spring, to say now that you will become a Saniha and teach others about divine possession—the time is a bit too early for that. Go somewhere else as soon as possible and study the path of the Lord God much, much more. If you complete your training and become a fine person, perhaps I will be of service to you again. In Ayabe, we have the number one divine medium in Japan, such as Shikata Haruzō-san, and furthermore, a living god like Great Teacher Fukushima has appeared as the time has arrived. You must know it too, but did you not receive a letter just two or three days ago from your mother in Anō, saying that you should return as soon as possible to help with the farming, and that you are not at an age to be wandering around forever? If you return willingly now, you will be able to apologize to the Lord God of Heaven and Earth, and the many officials and divine mediums will be overjoyed; above all, it is an act of filial piety to your mother in Anō. No matter how much the Kyōso-sama pulls you along, and no matter how much you are disliked by so many people, do you still want to stay in Ayabe? You are a cowardly and irresolute person, quite unlike your appearance. Everyone is saying behind your back that you are a complete coward.'</p>
+          <p class="en-p">He exhausted every possible insult and mockery, devising means to make Kiraku angry and drive him away. Kiraku's heart was boiling over. At the very moment when the string of his patience was about to snap, Deguchi Sumiko came climbing up to Hongū-san, and said:</p>
+          <p class="en-p">Sumiko: 'Sensei, the Kyōso-sama has been saying for some time that he cannot see you, and he is very worried, so Heizō-san and Yūsuke-san are searching everywhere for you. I thought you must have gone up to Hongū-san, so I came to meet you. Come, let us return quickly, for the Kyōso-sama is waiting for you; please come and eat your meal together.'</p>
+          <p class="en-p">Taking this as a good opportunity to leave, Kiraku left Shikata and Nakamura behind and descended from Hongū-san. The two watched his retreating figure, clapped their hands firmly, and...</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と嘲弄的に責かける。喜楽は余りの侮辱と暴言に何の答もなく、黙然として俯いてゐた。足立は心地よげに微笑をうかべ、喜楽を尻目にかけて腕をふり乍ら、コツコツと細い坂路を降つて行く。中村竹蔵はニタニタ笑ひ乍ら、</p>
+            <p class="ja-classical-line">中村『上田サン、お前サンは元を糺せば百姓の蛙切り、少し出世して牛乳屋になつてゐたのぢやありませぬか。それに何ぞや、霊学だとか審神者ぢやとか云つて、草深い田舎へ人をだましに来ても、何時迄も尻尾が見えずには居りませぬぞ。なんぼ綾部が山家だと云うても、中には目のあいた者が居りますでな。百姓の伜が大それた神道家になるなんて、そんな謀反を起してもだめですよ。ヤツパリ蚯蚓切りの蛙飛ばしは、どこともなく土臭い所がある。なんぼ綾部の小都会でも、お前サン位に自由自在にしられて、喜んでゐるやうな馬鹿者はありませぬぞや。そんな性に合はぬ事するより、一日も早く穴太へ帰つて元のお百姓をしなさい。蛙の子のお玉杓子は、何程鯰の子によく似て居つても、チツと大きうなりかけると、手が生えたり、足がはえたり、いつのまにやら尻尾が切れて、ヤツパリ先祖譲りの糞蛙によりなれませぬぞや。どうしても鯰になれぬのは天地の道理ぢや。私も今年で九年振、天地金の大神さまのお道を学び、八年の間は艮の金神さまのお筆先を朝から晩まで拝読いて居つても、まだ満足に人に布教することが出来ぬ位むつかしいものだのに、お前サンは去年の春まで、蛙飛ばしや牛乳搾りをして居り乍ら、今から審神者になるの、神懸りを人に教へるといふのはチツと時節が早すぎます。一日も早うどつかへ行つて、モツトモツト神さまのお道の勉強をして来なさい。お前サンの修行が出来て、立派な人になりなさつたら、又お世話になるかも知れませぬ。綾部には四方春三サンのやうな日本一の神懸が出来てゐる上に、福島大先生のやうな生神さまが、時節参りて現はれました。お前サンも御存じだらうが、二三日前にも穴太のお母アさまから、一日も早う帰つて百姓の手伝ひをしてくれ、いつまでもウロウロしてをる年ぢやないというて、手紙が来たぢやありませぬか。今お前サンが快う帰つて下されば、天地の大神さまへもお詫が叶ひませうし、大勢の役員や神懸りサンも大喜び、第一穴太のお母アさまに孝行ぢや。何程教祖さまが引ぱりなさつても、大勢の者にこれ程厭がられても、ヤツパリ綾部に居りたいのですか。見かけにもよらぬ卑怯未練な御方ぢやなア。よつ程よい腰抜だと皆が蔭で云うて居りますで』</p>
+            <p class="ja-classical-line">と口を極めて嘲罵をきわめ、立腹させて喜楽を追ひ帰すべく手段をめぐらしてゐる。喜楽の胸はわき返る計りになつた。最早勘忍袋の緒が切れやうとする一刹那、出口澄子がエチエチと本宮山へ登つて来て、</p>
+            <p class="ja-classical-line">澄子『先生、最前から教祖さまが、先生のお姿が見えぬと云うて、大変に心配をして居られますので、平蔵サンや祐助サンがそこら中を捜して居られます。私は本宮山へ上られたに違ないと思うて、お迎へに来ました。サア早う帰つて、教祖さまがお待兼ですから、一所に御飯をおあがりなされ』</p>
+            <p class="ja-classical-line">と促すのをよい機会に、喜楽は四方、中村を後に残して本宮山を下つて行く。二人は後姿を見送つて、手を切に打叩き、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kyōso: 'Wahai wahai, it is a fitting match, long live the Gofūfu!'</p>
+          <p class="en-p">They were teasing them thus. At that time, Sumiko and he were not yet a Fūfu or anything of the sort; they were in a Mukuwankei relationship. Nevertheless, the Riyōnin were turning their thoughts to a strange matter and laughing. About an Ichijikan later, the three from before returned to the Hiroma with composed faces.</p>
+          <p class="en-p">Jibun was sitting in Tanza in a Hitoma, tilting his head and lost in Shian as to whether he should Taikiyo from this place for the time being. However, reflecting upon the spirit of Nahohi... no, no, he could not Misu the Motsuka state of the Kinmeikuwai Yakuin and their Kamugakari Jiyōtai and simply leave. If he were to return now, everything would surely fall into chaos. He thought he would endure with Nintai upon Nintai, suppress his Munen once more, and after calming the Seishin of Karera, decide his course of action. Just as he was thinking this, the Kyōso, together with Heizō-san, quietly pushed open the fusuma and entered, taking a seat before him. The Kyōso spoke first:</p>
+          <p class="en-p">Kyōso: 'Sensei, you seem to be contemplating returning to Anō, but that will not do. Since you are a person drawn here by the convenience of the Lord God, you cannot leave Ayabe no matter what happens. I am sorry to trouble you, but unless you endure for the sake of the Lord God to the very end, the essential divine plan will not be accomplished. Even if the Yakuin and believers oppose us and not a single person comes near, as long as Deguchi Nao and you, Sensei, remain in this Hiroma, the divine plan of the Lord God will be magnificently accomplished, as the Ushitora no Konjin says. Therefore, no matter what hardships arise, and no matter how much opposition there may be, you must not leave this place. Heizō-san, please be firm. As I have just said to Sensei, the Lord God will not let you go no matter what. So, Heizō-san, pull yourself together, listen to the teachings of Sensei, and do not be led astray by what other Kamugakari or Yakuin say. Those who wish to open the teachings of Konkō-sama may do so as they please. We three must maintain an unmoving resolve to the end, so please keep that in mind. Sensei, I beg of you, truly.'</p>
+          <p class="en-p">Having said this, she withdrew to her own room. From then on, the attitude of Shikata Heizō changed completely, and he came to protect Ueda both in shadow and in light, and at last, the foundation of Ōmoto began to solidify.</p>
+          <p class="en-p">Tsuchida Yūkō, who had been a teacher at the former Konkōkyō, was moved by the power of Jibun's spiritual studies and went up to Kyoto. He gathered old friends and others to open a branch of the Kinmeikuwai at the residence of Taniguchi Fusajirō, south of Shio-kōji Shichijō. After a joint consultation, they sent a man named Taniguchi Kumakichi to Ayabe for the purpose of training. Due to the earnest teachings of Jibun, after two or three weeks, he had learned the spiritual arts in a general way, and first of all, his clairvoyance began to function. Thereupon, the person himself became extremely arrogant, thinking that there was no one who had reached the level of spiritual arts that he had, that Shikata Haruzō and his like were not even worth counting, and that the reason he had become able to see through the past, present, and future must be due to his own heaven-sent spiritual ability. Triumphantly, he appeared before the Kyōso and, with brazen face,</p>
+          <p class="en-p">Taniguchi: 'This Taniguchi is a soul with a predestined connection chosen by the Lord God, and I am surely the one who should become the Kyōshu of Ōmoto in the future. If it were not so, I could not have improved so much with only two or three weeks of training. It must surely be the result of a connection from the past and divine assistance. From this day forward, though I am unworthy, I intend to serve the divine work, manifest the magnificent Ushitora no Konjin-sama to the world, and perform the duties of the Kyōshu. Therefore, it would be best if you gave Ueda-san a suitable amount of money as a token of gratitude for his help until now, and sent him back to Anō.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ワハイ　ワハイ、能う似合ますで、御夫婦万歳！』</p>
+            <p class="ja-classical-line">などと冷かしてゐる。まだ澄子とは其時は夫婦でも何でもない、無関係の仲であつた。然るに両人は妙な所へ気をまはして笑うて居る。一時間程経つてから、以前の三人は落つかぬ顔して広間へ帰つて来た。</p>
+            <p class="ja-classical-line">喜楽は一室に端坐し、首を傾けて一先づここを退去せむか、と思案にくれてゐた。が直日の霊に省みて……イヤイヤ目下の金明会の役員や、神憑の状態を見捨てて帰る訳にも行かぬ、自分が今帰つたならば、何も彼もメチヤメチヤになつて了うだらう、どこ迄も忍耐に忍耐を重ね、今一度無念を怺へて、彼等の精神を鎮定した上、進退を決しやうかと思うてゐる折しも、教祖は平蔵氏と共に、静かに襖を押あけ入り来り、自分の前に座を占めて、教祖は先づ第一に言をかけ、</p>
+            <p class="ja-classical-line">教祖『先生、あなたは穴太へ帰る積で思案をしてゐられるやうだが、それはなりませぬ。神さまの御都合で引よせられたお方ぢやから、どんなことがあつても綾部を立退くことは出来ませぬぞや。御苦労さまで厶いますけれど、神さまの為にどこまでも辛抱して貰はねば、肝腎の御仕組が成就しませぬから、役員や信者が反対して、一人も寄りつかぬやうになつても、出口直と先生と二人さへ此広間に居れば、神さまのお仕組は立派に成就すると、艮の金神が仰有いますから、どんな難儀なことが出て来ても、何ほど反対があつても此処を離れてはいけませぬ。平蔵サン、チとしつかりして下され。今先生に申した通り、神さまは如何しても御放しなさらぬから、平蔵サン、チとシヤンとして先生の教を聞き、外の神憑や役員の言ふ事に迷うては可けませぬ。金光さまの教が開きたい人は勝手に開いたが宜しい。私等三人はどこまでも動かぬ決心をせねばなりませぬから、其お積でゐて下され。先生くれぐれも頼みますぜ』</p>
+            <p class="ja-classical-line">と云ひ棄てて自分の居間へ引取られた。それから四方平蔵の態度が一変して、陰に陽に上田を庇護する事となり、漸く大本の基礎が固まりかけたのである。</p>
+            <p class="ja-classical-line">元金光教会の教師であつた土田雄弘は、喜楽の霊学の力に感じ京都に上り、旧友などを集めて金明会の支部を、塩小路七条下ル谷口房次郎の宅で開設し、一同協議の上に谷口熊吉なる者を、綾部へ修行の為に差向けた。喜楽の熱心なる教に、二三週間の後は、一通り霊術を覚え、第一に天眼通が利くやうになつて来た。そこで当人は非常に慢心を起し、自分位霊術に到達したものはない、四方春三位は物の数でもない、過去現在未来に通ずるやうになつたのは、自分の天賦の霊能が然らしむる所であらうと、得々として教祖の前に出で、厚顔にも、</p>
+            <p class="ja-classical-line">谷口『此谷口が神から選まれた因縁の身魂で、将来大本の教主になるべきものでせう。然らざれば、僅二三週間の修行でこんなに上達する事は出来ますまい。必ず昔からの因縁と神助の然らしむる所に違有りますまい。今日以後は及ばず乍ら、私が御用をつとめ、天晴れ艮の金神さまを表へあらはし、教主のつとめを致す考へでありますから、上田サンには今まで御世話になつた御礼に、相当の金を与へて、穴太へ御帰しなさつた方がよろしからう』</p>
+            <p class="ja-classical-line">と教祖の前で恐気もなく述べ立てた。教祖は余りの事に呆れて言もなく、谷口の顔をジツと見つめてゐられた。谷口はモドかし相に、言せわしく、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Taniguchi: 'Kyōsosama, what will you decide? Depending on your Gohentafu, I have an idea. If I, Taniguchi Kumakichi, establish the Kinmeikuwai, the Mioshihe of the Ushitora no Konjin-sama will spread throughout Nihonkokujiu within Ichinen, and the Zenbu of the Konkuō Kyōkuwai will surely be made to Kijiyun to the Ushitora no Konjin-sama of Ayabe. If I say this, it may sound like Manshin, but if there is a person like Uheda-san, whose reputation is poor among the Yakuin and Shinjiya in Itsupan, there is no other outcome but for Ōmoto to collapse. In any case, Ninki is Kanjin in such matters. The Yakuin, the Shinjiya, and the Kamugakari all say that if Uheda-san remains in Ayabe forever, not even Hitori will come near, and this was decided in consultation at the home of Shikata Haruzau-san in Uhedani last Sakuya. Thinking of the great affairs of Ōmoto and thinking of your own position, Kyōsosama, I tell you everything without hiding anything. Everyone says that you, Kyōsosama, are overestimating Uheda-san.'</p>
+          <p class="en-p">Taniguchi, who harbored such ambition, looked as if he could not wait for the Gohentafu, wondering what the Kyōsosama would say.</p>
+          <p class="en-p">The Kyōsosama answered immediately,</p>
+          <p class="en-p">Kyōsosama: 'Taniguchi-san, that is truly a splendid intention, and the Kami-sama must surely be pleased with the aspirations of you all. However, Makoto is not such a thing. Even if you, Taniguchi-san, were taught by Uheda-san for even three days, he would undoubtedly be your teacher. I dislike a person with the spirit of driving out such a teacher and sitting in his place. Makoto is different from such an easy thing; I am prepared to hold hands with Uheda-san to the end and perform the service of the Kami-sama. If you are a person who says such things, please return home as soon as possible.'</p>
+          <p class="en-p">Having been requested to retreat in reverse, Taniguchi, whose calculations had gone completely awry, turned pale, left the presence of the Kyōsosama with a look of failure, immediately rushed to Uhedani, and began a great movement regarding his second strategic plan.</p>
+          <p class="en-p">In the Fudesaki of the Kyōsosama, it was written repeatedly,</p>
+          <p class="en-p">'The succession of the service is determined to be the youngest child, Sumiko.'</p>
+          <p class="en-p">Thus, the one who first harbored the ambition to become the adopted son of Deguchi was Mr. Adachi Masanobu of the Konkuō Kyōkuwai. He believed that the teachings of the Ushitora no Konjin-sama would surely develop in the future, and if he became the son-in-law of the daughter of Deguchi, he would be able to grasp the rights of the future, so he was approaching the Kyōsosama both in the shadows and in the light. This man was originally a feudal retainer of Yodo and had worked as an elementary school teacher, but a Konkuō Kyōkuwai branch had been established there; he would visit that church whenever he had leisure, throw logic at the teacher in charge, cause various obstructions, and finally, he was a man who had beaten that church into a mess. Sugita Masajirō, the head of the Kyoto Shimabara branch of the higher-level church, had foolishly taken him under his own wing, paid him a proper salary, and used him as a clerk.</p>
+          <p class="en-p">When the Deguchi Kyōsosama first became Kamugakari, Mr. Shikata Heizō and his wife were staying in a place called Tsuchida village in Minami-Kuwata. At that time, because they were listening to the teachings of Konkuō-kyō from a teacher named Ōhashi Kamejirō of the Konkuō Kyōkuwai in Kameoka, they tried talking to Ōhashi in Kameoka about the Kyōsosama. Then, Ōhashi, thinking that since it was called Ushitora no Konjin, it was a phase where many Shinjiya would gather, wanted to somehow make that Deguchi Onao-san a teacher of the Konkuō Kyōkuwai and establish a church in Ayabe as a subordinate to the Kameoka church; this became the connection, and because a man named Nishimura Bun'emon of Nishihara had been saved from a difficult illness by the Kyōsosama, he went to the Kameoka church, received the Kensaki of Konkuō-kyō from Ōhashi Kamejirō, and Mr. Nishimura Bun'emon carried it on his back and borrowed a six-mat detached room from a person named Ōshima Keiboku to first worship Konkuō-san. That six-mat detached room is now preserved at Ōmoto. Ōhashi Kamejirō sent a man named Okumura Sadajirō, his disciple, to open the path as a teacher, and he had Deguchi Nao-ko act as if she were a servant to open the path. However, the Deguchi Kyōsosama could not be satisfied with such things.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">谷口『教祖様、どちらになされますか。私にも御返答次第で一つ考へがあります。谷口熊吉が金明会をかまへば、艮の金神さまの御教は一年たたぬ内に日本国中に拡まり、金光教会の全部はキツと綾部の艮の金神さまに帰順いたさせます。かう申すと慢心のやうで厶いますが、上田サンの様に、役員信者一般に受けが悪いやうな人が居つては大本が潰れるより外はありませぬ。とかく斯ういふ事は人気が肝腎であります。役員も信者も神憑も、上田サンが何時までも綾部に居すわつてるやうなら一人もよりつかぬと云つて、昨夜も上谷の四方春三サンとこで相談がきまりました。私は大本の大事を思ひ、教祖さまのお身の上を思ふ余り、何も彼も隠さず申上げます。一体教祖さまは、上田サンを買被つてゐられますと皆の者が云うてゐます』</p>
+            <p class="ja-classical-line">と野心を包蔵する谷口は、教祖がどういはれるかと、其御返答を待かね顔であつた。</p>
+            <p class="ja-classical-line">教祖は直に答へて、</p>
+            <p class="ja-classical-line">教祖『谷口サン、それは誠に結構な思召しで厶いますな、皆さまの御志は神さまもさぞ御喜びで厶いませう。乍併誠といふ者はそんなものぢやありませぬ。お前サンも上田サンに、仮令三日でも教へて貰うたら先生に違なからう。其先生を追出して自分が後にすわるといふやうな御精神の御方は私は嫌です。誠といふものはそんな易いものとは違ひますで、私はどこ迄も上田サンと手を曳いて、神さまの御用をする覚悟であります。そんな事を言ふお方は、どうぞ一日も早う帰つて下され』</p>
+            <p class="ja-classical-line">とあべこべに退却を請求され、目算がガラリと外れた谷口は青い顔して、首尾悪相に教祖の前を下り、すぐさま上谷へかけつけ、第二の作戦計画について大運動を始めて居た。</p>
+            <p class="ja-classical-line">教祖の筆先に、</p>
+            <p class="ja-classical-line">『御用継は末子の澄子と定まりたぞよ』</p>
+            <p class="ja-classical-line">と繰返し繰返し現はれてゐるので、第一に出口の養子たらむとの野心を起してゐたのは、金光教会の足立正信氏であつた。彼は艮の金神さまの教が将来発達するに違ない、さうすれば第一出口の娘の婿となつておけば、将来の権利を握る事が出来るといふので、陰に陽に教祖に近付きつつあつたのである。此男は元は淀の藩士で、小学校の教員を勤めてゐたが、そこに金光教会所が設けられてあつた、其教会へ暇ある毎に通うて受持教師に理屈をふきかけ、いろいろと妨害をなし、とうとう其教会をメチヤメチヤに叩きつぶして了うた男である。それを上級教会の、京都島原支所長杉田政次郎が甘く自分の手元へ引入れ、相当の俸給をやつて事務員に使うてゐた。</p>
+            <p class="ja-classical-line">出口教祖が始めて神懸になられた時、四方平蔵氏が妻君と共に、南桑田の土田村といふ所へ行つて居つた。其時亀岡の金光教会の大橋亀次郎といふ教師について、金光教の教を聞いてゐた関係上から、教祖の事を亀岡の大橋に話をしてみた。さうすると大橋は、艮の金神というて信者が沢山によつて来る相だから、何とかして、其出口お直サンを金光教会の教師となし、亀岡の教会の部下として、綾部に一つ教会を立てたいものだといふのが手蔓となり西原の西村文右衛門といふ男が教祖に難病を助けて貰うた関係上、亀岡の教会へ行つて大橋亀次郎から、金光教の剣先を下げて頂き、西村文右衛門氏が背中に負うて、大島景僕といふ人の離れの六畳を借つて、始めて金光サンを祭つたのである。其六畳のはなれは今大本に保存されてある。大橋亀次郎は、自分の弟子の奥村定次郎といふ男を遣はし、教師として道を開かせ、出口直子をお給仕役の様にして道を開いて居つた。乍併出口教祖はそんな事で満足しては居られず、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kyōso: 'Jibun is not opening Konkuōkyō; it is because my role is to bring forth Ushitora no Konjin-sama into the world...'</p>
+          <p class="en-p">Having said this, he warned Okumura Sadajirau time and again by issuing Fudesaki, yet fearing the higher-ranking church, he would by no means attempt to bring Ushitora no Konjin-sama to the fore. Eventually, after completing various procedures with the government, he rented an old house in Higashiyotsutsuji under the name of a branch office of the Fukuchiyama Konkuōkyō branch chief Aoki Matsunosuke, opened a Daujiyō there, and with Okumura Sadajirau becoming the teacher in charge, he was opening Konkuōkyō.</p>
+          <p class="en-p">Deguchi Kyōso, by the command of Kami, parted from Okumura, rented a Kura in the back street, enshrined Kami there, and was writing Fudesaki. The Konkuō church gradually became desolate, and as if the fire had been extinguished, Okumura-shi was forced to flee by night. This also happened exactly as Deguchi Kyōso had warned: 'If you do not listen to what Ushitora no Konjin says, you will have to flee home while weeping in the middle of the night.' After that, the Sugita-shi from Shimabara sent Adachi Masanobu to the Ayabe church as the teacher in charge.</p>
+          <p class="en-p">Next, a man named Nakamura Takezau was running an antique shop called Harimaya in Honmachi, but he had followed Kyōso-sama from the beginning, and after having a serious illness cured, he became a fervent believer and a great enthusiast of Fudesaki. Before anyone knew it, arrogance emerged in him as well; he divorced his own wife and was thinking of taking Deguchi's daughter as his bride.</p>
+          <p class="en-p">Next, Shikata Haruzō was the eldest son of a wealthy family in Uetani, and as a result of being possessed by an evil spirit, he yielded his position to his younger brother and had been requesting time and again to be adopted into the Deguchi family with a considerable fortune. The state of these three candidates for adoption, changing their tactics and trying to leap in the dark, was exactly the same as the eighty Kami in the Kojiki who had no spare days as they vied to marry Yagamihime. It is said that Adachi Masanobu, with Shiomi and the second daughter of Shikata as his advisors, ingratiated himself with Kyōso and had been persistently campaigning for two years without anyone noticing. Also, Nakamura-shi, with Shikata Gennosuke and Murakami Seijirau as his advisors, had been continuing his constant activities for two or three years as well. Shikata Haruzō, using his own small wealth as a shield, conducted a solo campaign, believing that he had already succeeded nine times out of ten, and the three of them were watching for an opening, forming a three-way deadlock. Just then, it was suddenly revealed by Kami that Kiraku would be the messenger for Ōmoto, so the three men's dissatisfaction, without a word being spoken, exploded all at once, and they began to apply various pressures on Kiraku, attempted to abuse him, and set about obstructing him in every way.</p>
+          <p class="en-p">Once again, Taniguchi Kumakichi appeared, harboring ambition and starting various campaigns. Kiraku and Sumiko, not knowing such things even in their dreams, were indifferent to everything and were devoting their hearts and minds single-mindedly to the development of Reigaku and the study of Fudesaki.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">教祖『自分は金光教をひらくのではない、艮の金神さまを世に出さねばならぬ役だから……』</p>
+            <p class="ja-classical-line">と云つて、奥村定次郎に、幾度となくお筆先を出して警告されたけれど、上級教会を憚つて、如何しても艮の金神さまを表にせうとはせず、とうとういろいろと官へ手続きをして、福知山金光教会支所長青木松之助の出張所といふ名で、東四辻の古い家を借つて、そこに道場を開き、奥村定次郎が受持教師となつて、金光教を開いて居つた。</p>
+            <p class="ja-classical-line">出口教祖は神さまの命令によつて、奥村に別れ、裏町の土蔵を借つて、そこで神さまを祀つて、筆先をかいてゐられた。金光教会はだんだん淋しくなり、火が消えたやうになつて了ひ奥村氏は止むを得ず夜逃げをして了うた。これも出口教祖が……艮の金神の言ふ事をきかねば、夜の間に泣きもつて逃げて帰らねばならぬぞよ……と注意しておかれた通りになつたのである。其後へ島原の杉田氏から、足立正信を受持教師として綾部の教会へよこしたのであつた。</p>
+            <p class="ja-classical-line">次に中村竹蔵といふ男は、本町の播磨屋というて、古物商をやつてゐたが、始めから教祖さまに従ひ、難病を助けて貰ふてから熱心な信者となり、筆先の大熱心者であつた。これも何時の間にか慢心が出て来て、自分の女房を離縁し、出口の娘を嫁に貰はうと考へてゐたのである。</p>
+            <p class="ja-classical-line">次に四方春三は、上谷で相当な財産家の総領息子で、邪神が憑つた結果、弟に後をゆづり、相当の財産を持つて出口家へ養子に入り込まうと、幾度となく申込んで居たのである。斯くの如く三人の養子候補者が、手をかへ品を替へ暗中飛躍を試みて居た有様は、恰も古事記にある八十神が八上姫を娶らむとして争奪に余日なきと同じことであつた。足立正信は塩見、四方の二女を参謀として、教祖に取入り、それとはなしに二ケ年間も根気よく運動してゐたといふ事である。又中村氏は四方源之助、村上清次郎を参謀として、これも二三年間不断の活動をつづけてゐた。四方春三は自ら少々の財富力を楯に単独運動をやつて、自分は十中の九まで最早成功したものと信じ、互に三人が三巴となつて隙を伺うてゐる。そこへ突然喜楽を神さまから、大本の御用つぎと致すぞよと示されたので三人の不平は言はず語らず一時に爆発して、喜楽に対しいろいろの圧迫を加へ、悪罵を試み、百方妨害に着手する事となつたのである。</p>
+            <p class="ja-classical-line">又もや谷口熊吉が出て来て、野心を抱きいろいろの運動を開始する。喜楽も澄子もそんな事は夢にも知らず、何事も頓着なく、一意専心に霊学の発達と筆先の研究とに、心意を傾注してゐたのである。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: Fire 事蚊 [1044]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 稍 Peace 定 [1046]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
