@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: 浮 Tree の Forest [1078] - Volume 39 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 39 Table of Contents</a>
+      <span>Volume 39</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 39 &bull; Chapter 13</span>
+      <h1 class="chapter-title-en">Chapter 13: 浮 Tree の Forest [1078]</h1>
+      <p class="chapter-title-ja">浮木の森〔1078〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">On the border of Tsuki and Fusa, by the divine Miizu of the Tenchi Kami, in the shade of the forest of Ukigahara in the great plains of Afghanistan, stand the mother and daughter Sendenshi. Having departed the mansion of Iso, they face the capital of Haruna; their Misugata is truly Ō. The leaves of the Akino are turning color, and Ōgonhime and Kiyoteruhime, in the Onkeshiki of the Kami's Mikoto, are truly as radiant as the Terutahe of a mild Koharu.</p>
+          <p class="en-p">It is well known that the mother and daughter Sendenshi are none other than Ōgonhime and Kiyoteruhime. As Kiyoteruhime gazes at the Yomo Fūkei, she speaks:</p>
+          <p class="en-p">Kiyoteruhime: 'Mother-sama, your feet must be quite tired. It has been ten days since we encountered the Warumono at Kajikatauge, and we have traveled the Yamasaka to this point without Bunan. This must surely be due to the profound protection of the Kami.'</p>
+          <p class="en-p">Ōgonhime: 'Having lived long, I have tasted the hardships of the world, so this much travel is no burden to me, but you, being young, must have felt great pain. My heart is full of the desire to have you meet your father soon, but since our faith is fundamentally different, we are, in terms of ideology, enemies. The teachings of San-iku-kyo teach that under heaven there are no strangers and no demons, and that all are precious children of the Kami. However, the teachings of Brahman do not understand the truth so broadly, so I do not know what the result will be even if we do meet as parent and child. Thinking of this, I am neither happy nor sad, and my heart cannot find peace.'</p>
+          <p class="en-p">Kiyoteruhime: 'Mother-sama, you need not worry about such things. It is our heavenly duty to use the Kototama of the infinite benevolence of San-iku-kyo to convert even the most demonic, serpentine, or crooked spirits. Much more so with a father who shares our blood; no matter how stubborn he may be, if we, mother and daughter, plead with sincerity, he will surely repent.'</p>
+          <p class="en-p">Ōgonhime: 'Since you have the skill to have become the Queen of an island, I believe it will be alright, but this problem of ideology cannot be moved so easily. In any case, I pray to the Kami that we may arrive at my husband's mansion as soon as possible, speak of the truth of Tenchi through divine power, and withdraw—no, reform—the evil and lawless Brahmanism. This is a very grave mission for me. The heart of Lord Susanoo-Ōkami is truly broad and benevolent; I am so grateful that tears fall. That He would entrust this great task to us, the wife and daughter of Onikumawake, shows a magnanimity that no ordinary Kami could ever conceive. Because He trusts us so much, I cannot betray the heart of this Ōkami, no matter what fate may befall us, mother and daughter.'</p>
+          <p class="en-p">Kiyoteruhime: 'That is so. Even if Father-sama should be angry and kill you and me, we can never submit to Brahmanism. That is your resolve as well, is it not, Mother-sama?'</p>
+          <p class="en-p">Ōgonhime: 'That is a matter of course. I cannot disobey the words of the infinitely benevolent Ōkami. We must uphold sincerity to the very end.'</p>
+          <p class="en-p">Just as they were speaking, a Brahman Sendenshi, riding a horse and leading dozens of subordinates, advanced toward the treasure forest of Ukigahara. He jumped off his horse, led his men, marched boldly before the two who were resting, glared with anger, and shouted in a loud voice:</p>
+          <p class="en-p">Ōashiwake: 'I am the Sendenshi called Ōashiwake, a retainer of the Daikokunushi of Brahmanism. Based on the report of Rebu, I have led my men here to capture you mother and daughter. Come, surrender yourselves at once!'</p>
+          <p class="en-p">He stood there shouting in a loud voice. In an instant, dozens of subordinates surrounded the mother and daughter in the shape of a full moon. Kiyoteruhime took off her hat, revealing her flower-like face, and...</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">印度と波斯との国境
+天地の神の御稜威をば
+アフガニスタンの大原野
+浮木ケ原の森蔭に
+佇む母娘の宣伝使
+斎苑の館をたち出でて
+ハルナの都に立ち向ふ
+その御姿ぞ雄々しけれ
+秋野の木の葉色づきて
+黄金姫や清照姫
+神の命の御気色
+実に麗かに照妙の
+さながら小春の如くなり。</p>
+            <p class="ja-classical-line">母娘の宣伝使とは云はずと知れた黄金姫、清照姫である。清照姫は四方の風景を眺め乍ら、</p>
+            <p class="ja-classical-line">『お母さま、随分お足が疲れたでせう。河鹿峠で悪漢に出会つてから最早十日ばかり山坂を無難に此処まで参りました。これも全く神様の御守護の厚き所以で御座いませう』</p>
+            <p class="ja-classical-line">黄金姫『私は何と云つても年をとつた丈世の中の辛酸を嘗め尽して居るから別に何とも……これ位の旅行は苦にもならぬが、年若きそなたは随分苦痛を感じたであらう。早くお父さまに会はして上げ度いは胸一杯だが、肝腎要の信仰を異にして居るのだから思想上から云へば矢張敵味方の仲、三五教の教には天ケ下には他人もなければ鬼もない、何れも尊き神の御子ぢやと教へられてある、けれどもバラモンの教はさう広く道理が判つてゐないのだから折角親子の対面をした所で其結果は如何なるやら判つたものぢやない。これを思へば嬉しいやら悲しいやらテンと心が落ち着きませぬ』</p>
+            <p class="ja-classical-line">清照姫『お母さま、決してそんな心配は要りませぬ。三五教の仁慈無限の言霊を以て如何なる鬼大蛇曲神も言向和さねばならぬ吾々の天職、況して血を分けた親子夫婦、如何に頑強な父上ぢやとて、吾等母娘が熱心に誠を以て説きつければ、屹度改心して下さるでせう』</p>
+            <p class="ja-classical-line">黄金姫『お前も一つ島のクヰーンと迄なつた丈の腕前を持つて居るのだから大丈夫とは思へども、此思想上の問題ばかりはさう易々と動かせるものではない。何は兎もあれ神様にお願ひ申して一時も早く夫の館に到着し、御神力を以て天地の真理をお話し申上げ、悪逆無道のバラモン教を脱退……否々改良せなくてはなりませぬが、これこそ私にとつては非常に重大な任務だ。神素盞嗚大神様の御心は実に寛仁大度、いやもう有難うて、涙がこぼれます。鬼熊別の妻たり、娘たる吾等を見込んで此大任を仰せつけられた其襟度の広い事、到底凡神の企て及ぶ所でない。ここ迄良く人を信じ玉ふ其御心に対しても、仮令吾等母娘が如何なる運命に陥るとも此大神の御心は背く事は出来ませぬ』</p>
+            <p class="ja-classical-line">清照姫『左様で御座います。たとへ父上様がお怒り遊ばしてお母さまと私をお殺し遊ばしても、決してバラモン教へ帰順する事は出来ませぬ。お母さまも其御決心で御座いませうなあ』</p>
+            <p class="ja-classical-line">黄金姫『それは勿論のことだ。仁慈無限の大神様の仰せには背かれぬ。どこ迄も誠一つを立てぬかねばなりませぬ』</p>
+            <p class="ja-classical-line">斯く話す折しも、馬に跨がり数十人の部下を率ゐて、浮木ケ原の宝の森を目蒐けて進み来るバラモン教の宣伝使があつた。矢庭に馬を飛び下り同勢を引つれ、二人が休息せる前に堂々と進み来り眼を怒らして、</p>
+            <p class="ja-classical-line">『此方はバラモン教の大黒主様の御家来大足別と云ふ宣伝使だ。レーブの注進に依て汝等母娘を召捕らむ為め部下を引率れここに立向うたり。サア尋常に手を廻せよ』</p>
+            <p class="ja-classical-line">と大音声に突立ち乍ら呶鳴つて居る。瞬く間に数十人の部下は母娘の周囲を満月の形に取り囲んで了つた。清照姫は笠を脱ぎ棄て花の如き顔をさらし乍ら、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kiyoteruhime: 'I am a Sendenshi of Ananai-kyō, Kiyoteruhime, whose heart is clear and shining. This here is the mother of Kiyoteruhime, Ōgonhime, who bears the great mission of constructing the Ōgonsekai. Ōdaruwake, what is the meaning of your aggressive posturing? Would it not be better to relax your shoulders, lower your waist, and negotiate with more composure? Attempting to suppress us by looking down on us as mere women is surely not the doctrine of the Brahman religion. It would be well for you to understand this a little better.'</p>
+          <p class="en-p">Ōdaruwake: 'This person is a powerful and unparalleled scoundrel who hides behind the status of a frail woman; thanks to the report of Rebu, I know everything as if I were holding it in my hand. You are a Sendenshi of Ananai-kyō disguised as a mother and daughter on a pilgrimage, who cannot be dealt with by ordinary means. I shall capture you, return to the capital of Haruna, and receive words of praise from Ōkuronushi-no-Kamisama. Men, attack!'</p>
+          <p class="en-p">As he gave this order, they replied with a shout of 'Oh!' and from all four directions, they aimed at the mother and daughter, brandishing their jitte and attacking. The mother and daughter responded, 'Understood,' and defended themselves with their kongō-tsue, making the air resound like waterwheels. The attackers were all daunted, and while circling them from a distance, they could only shout, 'Look there, look there!' one after another. Ōdaruwake, losing his patience, shouted:</p>
+          <p class="en-p">Ōdaruwake: 'Eeh, you useless little brats of allies, you fly-like wretches who are not even worth having as attendants, stay back!'</p>
+          <p class="en-p">He drew his long sword with a flourish and slashed at the mother and daughter. The two caught the blows with their hats to the right and left, slipped through, and aimed for an opening. Kiyoteruhime struck the enemy's leg with the tip of her staff with all her might. How could he possibly endure it? Ōdaruwake screamed, 'Ah!', collapsed on the spot, and lay there groaning with his eyes blinking. Seeing this state, the many subordinates, crying 'Disaster!', threw themselves into the fray, risking their lives. This side was a renowned warrior; it would be easy to stop the breath of every one of them without exception, but as they were in a position of serving the Lord God, they could not kill even a single insect-tribe creature. Thus, they were handling them with the tips of their kongō-tsue, like a cat playing with a snake, with light taps. Just then, due to the report of four or five subordinates, the army of the Brahman religion, having prepared their arms, came attacking in countless numbers, side by side, their sharp spears flashing in the sunlight. They surrounded the mother and daughter ten and twenty times over, and the ferocity of them thrusting their spears from all directions was extreme. Even the mother and daughter could not overcome the many with the few, and just as they were resolved that they would have to break the heavenly law and strike down the approaching warriors one by one, a roar that seemed to shake heaven and earth echoed. Dozens of wolves, appearing suddenly from the shade of the trees in the forest, glared at the enemy group, opened their large mouths, and attacked headlong. With that swift maneuver, General Yēru gathered his subordinates and fled like clouds and mist. At this time, the body of the fallen Ōdaruwake was also carried away, and not even a shadow of the enemy could be seen.</p>
+          <p class="en-p">The two caught their breath and scooped up the clear water gushing from between the trees of the forest to moisten their throats.</p>
+          <p class="en-p">The dozens of wolves chased the enemy in all directions, and then, lowering their heads and drooping their tails, they appeared before the mother and daughter, pretending to be in a state of reverence. They formed two lines, let out a single groan of 'Uu,' and vanished like smoke.</p>
+          <p class="en-p">From beyond the forest, a cool voice, belonging to no one known, began to sing a Sendenka:</p>
+          <p class="en-p">God appears in the world,
+To distinguish between good and evil.
+The way of the God of Ananai-kyō,
+We are the children of God, the palace of God.
+Yet even as we say this,
+How can a human body judge God?
+How much more so can the people of the world
+Understand good, evil, right, and wrong?
+The wicked officials who try to distinguish
+The karmic origins and nature of the soul,
+Appear here and there,
+Trampling upon the true path,
+And defiling the world into eternal darkness.
+Ah, Kannagara-kamigami,
+By the blessing of the spirit of God,
+Not to mention Ananai-kyō,
+The Brahman religion and the Ural religion,
+All the officials of God
+Who serve the path of the teachings,
+Rebuild the pillars of the soul,
+
+May you establish the reign of Miroku
+Forever, Kannagara.
+The lords of the land who serve God,
+Respectfully and reverently pray.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『妾は三五教の宣伝使、心も清く照り渡る清照姫であるぞよ。これなるは清照姫の母、黄金世界を建設する大任を帯び給ふ黄金姫だ。汝大足別とやら其気張り様は何事だ。も少し肩を削り腰を屈めおだやかに掛合つては如何だ。頭抑へに女と侮つて抑へつけようと致すのはバラモン教の教理ではあるまい。少しは心得たがよからうぞ』</p>
+            <p class="ja-classical-line">大足別『此者こそは繊弱き女の分際として強力無双の曲者、レーブの注進によつて何も彼も手にとる如く判つてゐる。到底一筋縄では行かぬ母娘の巡礼と化けたる三五教の宣伝使、搦め捕つてハルナの都へ立帰り、大黒主の神様に御褒美の詞を頂戴せむ。者共かかれ』</p>
+            <p class="ja-classical-line">と下知すれば『オー』と応へて四方より母娘を目蒐けて十手を打振り打振り攻めかくる。母娘は『心得たり』と金剛杖を水車の如くに空気を鳴動させ乍ら防ぎ戦ふ勢に、何れも辟易し、遠巻に巻き乍ら『あれよあれよ』と口々に叫ぶのみ。大足別は劫を煮やし、</p>
+            <p class="ja-classical-line">『えー、言ひ甲斐なき味方の小童子共、御供にも足らぬ蠅虫奴等、控へ居れ』</p>
+            <p class="ja-classical-line">と呶鳴りつけ長剣をスラリと引ぬき、母娘に向つて斬りかくるを、二人は笠を以て右に左に受けとめ、かい潜り隙を狙つて清照姫は敵の足を杖の先にて力限りに打たたけば何条以て堪るべき、大足別はアツと叫んで其場に顛倒し目をぱちつかせ呻きゐる。数多の手下共は此態を眺めて『素破一大事』と命を的に武者振りつく。此方は名うての勇者、一人も残らず息の根を止めて呉れむは易けれど神に仕ふる身の上、仮令虫族一匹でも殺すと云ふ訳には行かないので、何れも金剛杖の先にて猫が蛇にじやれる様な態度でチヨイチヨイと扱つて居る。かかる所へ四五人の部下の注進によつて武装を整へたるバラモン教の軍勢、鋭利なる鎗を日光に閃かし乍ら幾百千とも限りなく轡を並べて攻め来り、二人の母娘を十重二十重に取囲み、四方八方より鎗にて突きかけ来る物凄さ、流石の母娘も衆寡敵せず、もう此上は天則を破り寄せ来る武士を片端から打殺して呉れむと覚悟を極めし折柄に天地も揺ぐばかりの呻り声、森の木蔭より忽然として現はれ来れる数十頭の狼は敵の集団に向つて目を怒らせ大口を開いて驀地に襲撃する。其早業にエール将軍は部下を纏めて雲を霞と逃げ散つたり。此時打倒れたる大足別の肉体も運び去られて敵の影だにも見えなくなつてゐた。</p>
+            <p class="ja-classical-line">二人はハツと息をつき、森の木の間より湧き出づる清水を掬ひて咽を湿してゐた。</p>
+            <p class="ja-classical-line">数十の狼は敵を四方に追ひ散らし、頭を下げ尾を垂らし乍ら謹慎の態度を装ひつつ母娘が前に現はれ、二列となつて『ウー』と一声呻ると共に煙の如く消え失せて了つた。</p>
+            <p class="ja-classical-line">森の彼方より何人とも知れぬ涼しき声の宣伝歌が聞えて来た。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立別ける
+三五教の神の道
+吾等は神の子神の宮
+とは云ひ乍ら人の身の
+いかでか神を審かむや
+神は尚更世の人の
+善悪正邪が分らうか
+身魂の因縁性来を
+立別けむとする醜司
+彼方此方に現はれて
+誠の道を蹂躙し
+世を常暗と汚し行く
+あゝ惟神々々
+神の御霊の幸ひて
+三五教は云ふも更
+バラモン教やウラル教
+教の道に仕へたる
+神の司を悉く
+魂の御柱建て直し</p>
+            <p class="ja-classical-line">五六七の御世を永久に
+たてさせ玉へ惟神
+神に仕ふる国公が
+慎み敬ひ願ぎ奉る。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Following Terukuniwake,
+Since leaving the mansion of Iso,
+Continuing day and night to Kajikayama,
+Approaching the western pass,
+Through a mysterious occurrence,
+Two Kamutsukasa serving the path of Brahman,
+Iir and Yosefu,
+While saving and assisting their lives,
+When following behind
+Terukuniwake and Umeteru,
+Commanding to rescue
+Two men fallen on this side of the slope,
+Kunikō, who remained behind,
+In order to rescue the two men,
+Approached to see, and how could it be,
+Hamu of the land of Garanda,
+And the story of the two called Tāru,
+Born as the children of Kaguyahiko,
+Rejoicing at this as the Shigumi of God,</p>
+          <p class="en-p">Opening their hearts to one another,
+Causing them to return to the faith of Ananai-kyō,
+They have advanced thus far.
+Ah, Kamunagara, Kamunagara!
+A noble God has appeared,
+Separating the Zenshin from the Jiyashin.
+The Innen of each other's Mitama,
+He explained and exhorted according to the will of God,
+The gratitude of being saved!
+The Goikuō of the noble God,
+In this forest of Ukikigahara,
+In the highlands of Afghanistan,
+Suddenly a battle cry is heard.
+Thinking it no ordinary matter, the party
+Quickened their steeds and steadily
+Advanced to this place to see,
+That clamorous battle cry
+Has now become the wind blowing through the pines,
+And there is no shadow of a person in the surroundings.
+Ah, Kamunagara, Kamunagara!</p>
+          <p class="en-p">Driven away by the breath of God,
+Have the unruly gods quickly
+Fled and vanished? I wonder.
+Though the morning sun shines or is clouded,
+Though the moon waxes or wanes,
+Even if the great earth should sink,
+Though the roar of the demons be strong,
+To us who serve Ananai-kyō
+And protect the sincerity,
+Can there be an enemy who opposes us?
+We are the children of the righteous God,
+The rare palace where
+The noble God is born; of whom
+Should there be anything to fear?
+Advance, advance, come, advance,
+To the foot of the forest of Ukiki.
+Ah, Kamunagara, Kamunagara!
+May the spirit be blessed!'</p>
+          <p class="en-p">While singing thus, without dreaming that the mother and daughter were resting there, he quickened his steed and approached.</p>
+          <p class="en-p">Kunikō stopped his horse and stepped forward abruptly, appearing before the two.</p>
+          <p class="en-p">Kunikō: 'Ya! You are—'</p>
+          <p class="en-p">Kogane: 'Shh!'</p>
+          <p class="en-p">Kunikō: 'Koganehime-sama, there is no longer any need to hide. These four who have come here—Tāru, Hamu, Iir, and Yosefu—are good people who have returned to the faith of Ananai-kyō from the bottom of their hearts, so please treat them with affection. I shall apologize on their behalf for their repeated insolence, so I beg your forgiveness.'</p>
+          <p class="en-p">Koganehime: 'Are you not Kunikō-sama, who served as an attendant to Terukuniwake? What has become of Terukuniwake-sama? I am anxious; please tell me his whereabouts quickly.'</p>
+          <p class="en-p">Kunikō: 'The truth is, since Tāru and Hamu were injured and fallen on the mountain path of Kajika Pass, the Propagator Terukuniwake ordered this Kunikō to nurse them and went on ahead swiftly. Since then, capturing the swarming wild horses, our party of five followed after Terukuniwake-sama and came to this place, but his whereabouts are still unknown; it may be that we have accidentally gotten ahead of him.'</p>
+          <p class="en-p">Koganehime: 'Since even I, who left a step ahead, have only just arrived here, he will surely come later. There is a rumor that the evil gods of Brahmanism are entrenched in the cavern of Mount Kiyoharu and are troubling the people of the land, so the Propagator Terukuniwake has likely gone there.'</p>
+          <p class="en-p">Kunikō: 'From now on, I shall accompany you mother and daughter to the capital of Haruna; will you not please permit this?'</p>
+          <p class="en-p">Koganehime: 'Yes.'</p>
+          <p class="en-p">Kiyoteruhime: 'Kunikō-sama, such a selfish thing cannot be done. We mother and daughter are not permitted attendants, being those who go on a mission by the deep will of God; you are one who serves as an attendant to Terukuniwake-sama. If it were said that we snatched away another's attendant, we could not face God, and as Propagators, our duty would not be fulfilled. Now, quickly, Kunikō-sama, return to the cavern of Mount Kiyoharu and rescue Terukuniwake-sama from his peril; you must never follow after us mother and daughter!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">照国別に従ひて
+斎苑の館を出でしより
+夜を日に次いで河鹿山
+西の峠に差しかかり
+不思議な事よりバラモンの
+道に仕ふる神司
+イール、ヨセフの両人が
+命を救ひ助けつつ
+照国別や梅照の
+後に従ひ来る折
+坂の此方に倒れたる
+二人の男を救へよと
+命令しながら出でて行く
+後に残りし国公は
+二人の男を救はむと
+立寄り見れば此は如何に
+ガランダ国のハム初め
+香具耶の彦の子と生れし
+タールの二人の物語
+神の仕組と喜びて</p>
+            <p class="ja-classical-line">互に心を打明かし
+三五教に帰順させ
+ここまで進み来りけり
+あゝ惟神々々
+尊き神が現はれて
+善神邪神を立別ける
+互の身魂の因縁を
+神のまにまに説き諭し
+救はせ玉ひし有難さ
+尊き神の御威光を
+アフガニスタンの高原地
+浮木ケ原の此森に
+俄に聞ゆる鬨の声
+唯事ならじと一行が
+駒を早めてシトシトと
+ここ迄進み来て見れば
+さも騒がしき鬨の声
+今は松吹く風となり
+四辺に人の影もなし
+あゝ惟神々々</p>
+            <p class="ja-classical-line">神の息吹に退はれて
+荒振る神は逸早く
+逃げ失せたるかいぶかしや
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+悪魔の猛びは強くとも
+三五教に仕へたる
+誠を守るわれわれに
+刃向ふ敵はあるべきぞ
+吾等は正しき神の御子
+尊き神の生れませる
+珍の宮居ぞ何者か
+恐るる事のあるべきや
+進めよ進め、いざ進め
+浮木の森の麓まで
+あゝ惟神々々
+御霊幸ひましませよ』</p>
+            <p class="ja-classical-line">と歌ひ乍ら母娘の憩ふとは夢にも知らず駒を早めて進み来る。</p>
+            <p class="ja-classical-line">国公は駒をとどめてツカツカと二人の前に現はれ、</p>
+            <p class="ja-classical-line">『ヤア、貴方は』</p>
+            <p class="ja-classical-line">黄金『シー』</p>
+            <p class="ja-classical-line">国公『黄金姫様、もはやお隠しには及びませぬ。此処へ参りましたタール、ハム、イール、ヨセフの四人は全く三五教に心の底より帰順致しました善人で御座いますから、何卒可愛がつてやつて下さいませ。重々の御無礼は私が代つてお詫び致しますから何卒御許しを願ひます』</p>
+            <p class="ja-classical-line">黄金姫『そなたは照国別のお供に仕へた国公さまぢやないか。照国別様は如何なつたのだ。心もとなし、早く其お所在を知らしてお呉れ』</p>
+            <p class="ja-classical-line">国公『実の所はタール、ハムの両人、河鹿峠の山道に負傷を致し倒れて居たので、照国別の宣伝使は此国公に介抱を命じおき、サツサと先に立つて行かれました。それより群がる野馬を引捉へ吾々一行五人照国別様のお後を追かけて此処まで参りましたが、まだお行衛が判らず、ヒヨツとしたら私達が先になつたかも知れませぬ』</p>
+            <p class="ja-classical-line">黄金姫『一足先へ出た妾でさへも、まだここ迄到着した所だから、屹度後からおいでになるのだらう。清春山の岩窟にバラモン教の悪神共が立籠り国人を悩ますとの噂があるから、大方照国別の宣伝使はそこへ御出になつたのだらうよ』</p>
+            <p class="ja-classical-line">国公『これから私は貴方様母娘のお供をしてハルナの都まで参りませう、何卒お許し下さるまいか』</p>
+            <p class="ja-classical-line">黄金姫『ウン』</p>
+            <p class="ja-classical-line">清照姫『国公さま、そんな勝手な事は出来ませぬ。吾々母娘は供をも許されず、神様の深き思召あつてお使に参る者、其方は照国別様のお供に仕ふるものだ。他人の供人を横取りにしたと云はれては神様に申訳たたず、又宣伝使の吾々として義務が立たない。サア早く国公さま、清春山の岩窟に引返し照国別様の危難をお救ひなされ、決して吾々母娘の後へついて来る事はなりませぬぞえ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kunikō: 'Since the Sendenshi Terukuniwake-sama is accompanied by two men, it must be safe even without Kunikō alone. Whatever you may say, you are two women traveling together, and I cannot help feeling anxious about your crossing this Wilderness Plain where evil spirits rage. That Terukuniwake-sama left me behind might have been a subtle hint for me to escort you. Please allow me to accompany you, if only as far as the Port of Taru.'</p>
+          <p class="en-p">Kiyoteruhime: 'We appreciate your utmost kindness, but as for this matter, we must humbly decline.'</p>
+          <p class="en-p">Ōgonhime: 'I accept the magokoro of Kunikō-sama with gratitude. However, as I stated before, I cannot allow you to escort us. Go to the gankutsu of Kiyoharuyama as quickly as possible; Terukuniwake-sama has fallen into an enemy keiriyaku and is in great danger. It has just been reflected in my reigan. If time slips by, it will become an ichidaiji; it is a michinori of merely ten jifuri, so turn back quickly.'</p>
+          <p class="en-p">Saying thus, the oyako pair cast aside the party of Kunikō and eagerly advanced with quick steps through the Wilderness Plain. Kunikō, followed by the four—Ham, Eel, Joseph, and Tar—aligned the heads of their horses and advanced full speed back along the path they had come, heading toward the gankutsu of Kiyoharuyama. The autumn wind traversing the wild path blew as if playing a flute in the mid-sky, passing through the treetops of the forest without any reserve.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">国公『照国別の宣伝使は二人の男をお伴れ遊ばします以上は、国公一人居なくても大丈夫でせう。何を云つても貴方は女の二人連れ、魔神の猛び狂ふ此の荒野ケ原をお渡りなさるのは、何とはなしに案じられてなりませぬ。照国別様が私を後に残して行かれたのは貴方のお供をせよとの謎であつたかとも考へられます。何卒タルの港までなりとお供をさせて下さいませ』</p>
+            <p class="ja-classical-line">清照姫『折角の御親切なれどもこればかりは平にお断り致します』</p>
+            <p class="ja-classical-line">黄金姫『国公さまの誠心は有難く受けまする。然し乍ら前申した通り私のお供は許しませぬ。一時も早く清春山の岩窟へお越しなされ、照国別様は敵の計略にかかつて大変危い所で厶いますぞ。今私の霊眼に映じました。時おくれては一大事、僅かに十里ばかりの道程、早く引返しなされよ』</p>
+            <p class="ja-classical-line">と云ひ乍ら母娘二人は国公一行を振棄てて荒野ケ原をイソイソと足早に進み行く。国公はハム、イール、ヨセフ、タールの四人を従へ駒の頭を並べて元来し道を一目散に清春山の岩窟さして進み行く。野路を渉る秋風は中空に笛を吹き乍ら遠慮会釈もなく森の梢を渡り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c12.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 12: 種 Bright 志 [1077]</span>
+      </a>
+      <a href="c14.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 14: Pure Spring Mountain [1079]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

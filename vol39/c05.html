@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 人の心 [1070] - Volume 39 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 39 Table of Contents</a>
+      <span>Volume 39</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 39 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: 人の心 [1070]</h1>
+      <p class="chapter-title-ja">人の心〔1070〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Rēbu and Tāru, the two of them, were struck with terror as their three dōyaku were easily thrown into the tanizoko by the two women, and they fled for about jitsuchiyō, from where they finally descended to the tanigaha, leaping over rocks and crossing the asase to save the three, and at last managed to climb up about gorokuchiyō.</p>
+          <p class="en-p">Rēbu: 'Oi, Tāru, what a terrible person has appeared. To think that Hamu the taishiyō would take them for mere women and kodomo, and suffer such an unexpected fukaku... that bear... I thought she was a tengu of a woman.'</p>
+          <p class="en-p">Tāru: 'She is a jiyunrei with quite a bold kimodama, isn't she? Judging by the way she speaks and her bujiyutsu tanren, she is no ordinary woman. I do not know if she is a tengu, but since she said she was a believer of the Ananai-kyō, we must not treat her lightly even if we encounter women from now on. However, I wonder if the three of them are safe. That is the only thing I am worried about, and I cannot help it.'</p>
+          <p class="en-p">Rēbu: 'It is not as if they would fall straight into the tanigaha and hit their heads the moment they fell. Since the trees are so thick that they block the valley, some of them must have been caught by trees on the way, and it is unlikely that all three of them fell into the tanigaha and died. However, Hamu the taishiyō must have surely met with shinbatsu. It is because his conduct has always been bad. If he is still breathing, we must not save him. Shall we save Iiru and Yosefu first, and leave that fellow for last?'</p>
+          <p class="en-p">Tāru: 'That is true, that would be fine. But that woman was quite a wonderful person. It would be a great honor for a man to have such a nice woman as his wife.'</p>
+          <p class="en-p">Rēbu: 'This is no time to be saying such cheerful things. Come, we must quickly find the whereabouts of the three and do something. If we dawdle and spend the day in a tanizoko like this, it will be a disaster. We will end up as food for lions, wolves, or large snakes. Come, let us go.'</p>
+          <p class="en-p">Taking the lead, they climbed up along the tanigaha while thinking of various ways to proceed.</p>
+          <p class="en-p">The two finally reached the tanizoko where the three had been thrown, and when they looked around, they saw them lying half-buried in the manago between the rocks, strangely enough.</p>
+          <p class="en-p">Rēbu: 'What a strange way to be thrown. Even with so many rocks, all three of them were conveniently thrown into the manago that looks like true brocade and are sleeping peacefully; the one who threw them is quite clever, but the ones who were thrown are also quite clever.'</p>
+          <p class="en-p">Tāru: 'Oi, let us talk about that later; we must quickly give them water and revive them, otherwise it will be no use at all. However, as we agreed, shall we decide not to save Hamu? It would be better to throw him into the river now and give him a water burial so that no trouble remains.'</p>
+          <p class="en-p">Rēbu: 'First, I will attend to Yosefu, so you attend to Iiru. The procedure is to return the soul that has left the body far away back to the original body, Yosefu. Tāru, you must easily return the soul that has once left Iiru-sama back to his body. If we leave Hamu to drift in the tanigaha, he will surely croak, and a large fish will come out and eat Hamu headfirst. Aha-ha-ha-ha.'</p>
+          <p class="en-p">While saying this, the two grabbed Yosefu and Iiru and performed artificial respiration. After about an hour, they finally began to blow air out with a wheeze and started to groan.</p>
+          <p class="en-p">Rēbu: 'Come, success. The two are safe now. Look at that fellow Hamu. This guy is not even worth saving for last; because his daily conduct is bad and he is hated, no one will help him at a time like this. Even the gods will turn a blind eye to him. Humans must live so as not to be hated. A person cannot stand alone. It is a world where we help each other and get by. They say there are no demons in this floating world, but since this Hamu is hated even by us, his colleagues, this fellow is a true human-demon. It would be interesting if a demon went to the underworld and was tormented by demons. Ufu-fu-fu.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">レーブ、タールの両人は三人の同役が二人の女に脆くも谷底に、とつて放られたるに肝を潰し、十町ばかり逃げのび、そこより漸くにして谷川に下り三人を救ふべく岩を飛び越え浅瀬を渡り、漸くにして五六丁ばかり上りつめた。</p>
+            <p class="ja-classical-line">レーブ『オイ、タール、ひどい奴が現はれたものぢやないか。ハムの大将、女子供と侮つて、思はぬ不覚をとりよつて……あの熊……俺や女の天狗かと思つたよ』</p>
+            <p class="ja-classical-line">タール『随分肝玉の太い巡礼ぢやないか。あの口のきき様と云ひ、武術の鍛錬してる事と云ひ、こりや一通りの女ぢやあるまいぞ。天狗ぢやあるまいけど聞けば三五教の信者と云つて居つたから、是から女に出会つても軽々しく相手にはなれないぞ。然し三人の奴はうまく助かつて居るだらうかな。俺はそれ計りが案じられて仕方がないわ』</p>
+            <p class="ja-classical-line">レーブ『落ちた処で直様、谷川へ顛落して頭を打つと云ふ事もあるまい。これだけ谷を塞ぐ位木が茂つてるのだから、何れ途中で木にかかつて居る者もあらうし、三人が三人迄谷川に落ちて死んでゐるやうな事もあるまい。然しハムの大将、ありや屹度神罰が当つたに違ひないぞ。不断からの心掛が悪いからな。もしまだ虫の息でもあつたら助けちやならないぞ。イール、ヨセフの二人を前に助けて彼奴ア、後まはしにして放つといてやらうかい』</p>
+            <p class="ja-classical-line">タール『さうだなあ、それでも宜いわ。然しあの女は随分素敵な者だつたな。あんなナイスを女房にもつたら男子としては中々の光栄だぜ』</p>
+            <p class="ja-classical-line">レーブ『そんな陽気な事を云うてる場合ぢやあるまい。サア早く三人の所在を探して何とかせなくてはなるまい。愚図々々して、こんな谷底で日を暮したら、それこそ大変だ。獅子、狼や大蛇の餌食にしられて了ふぞ。サア行かう』</p>
+            <p class="ja-classical-line">と先に立つて、いろいろと工夫し乍ら谷川を伝ひ上り行く。</p>
+            <p class="ja-classical-line">二人は漸くにして三人の投げ込まれた谷底へ辿りつき、四辺を見渡せば不思議にも岩と岩との間の真砂の上に半分ばかりグサと体を埋めて横たはつて居る。</p>
+            <p class="ja-classical-line">レーブ『何と不思議な投げられやうぢやないか。これだけ沢山な岩石があるのに三人が三人とも都合よく真錦の様な真砂の中にグツと投げ込まれ、安閑と眠つて居やがる、投げられるものも中々気が利いて居るが投げたものも中々気が利いて居るなあ』</p>
+            <p class="ja-classical-line">タール『オイ、そんな事ア、後でゆつくり話す事にして早く水でも与へて呼び生かさぬ事にやサツパリ駄目だぞ。然し約束の通りハムだけは助けぬ事にしようかな。一層の事、今の内に川に投げ込んで此儘水葬してやつたら面倒が残らなくて宜いぞ』</p>
+            <p class="ja-classical-line">レーブ『まづ俺はヨセフを介抱するからお前はイールの方を介抱してやれ。魂返しで遠く肉体を離れた霊魂を元の肉体へヨセフと云ふ段取だ。タールお前は一旦出た魂を元の体へ易々とイール様にするのだぞ。ハムは谷川へ流して置けば、うまく、くたばり大きな魚が出て来て頭からハムだらう。アハヽヽヽヽ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、二人はヨセフ、イールを捉へて人工呼吸を施してゐる。一時ばかり経つて漸くフウフウと息を吹き出しウーンと云ひかけた。</p>
+            <p class="ja-classical-line">レーブ『サア、しめた。もう二人は大丈夫だ。ハムの奴、態ア見やがれ。此奴ア後まはし処か、日頃の行ひが悪く憎まれてゐるものだから、斯う云ふ時には誰も助け手がない。神さまだつて素知らぬ顔して厶るからな。人間と云ふものは憎まれぬ様にせなくてはいかぬぞ。人は一人で立つ事は出来ぬものだ。持ちつ持たれつ、お互に助け合うて渡る世の中だ。渡る浮世に鬼はないと云ふが、此ハムは俺達同僚にでも憎まれて居やがるから、此奴ア本当の人鬼だ。鬼が冥土に行つて鬼に苛責まれるのも面白からう。ウフヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hamu began to groan, 'Un, un, un.'</p>
+          <p class="en-p">Rebu: 'Hey, this Koitsu will revive on his own even if we leave him alone. They say that a hated child thrives in the world... he is a fellow with strong Akūn. Throw him in now, throw him in. If we do not, there will be no Jisetsu for us to get ahead.'</p>
+          <p class="en-p">Tāru: 'If we keep dealing with such a person, what we have painstakingly done with Jinkō Kokifu will end up being in Chiuto and Dame.'</p>
+          <p class="en-p">Rebu: 'That is also true. The two of us cannot stop this work now, and if we leave him as he is, Hamu will gradually revive, and I have come to want another companion. This is why they say humans are animals of Kiyōdō Seikuwatsu.'</p>
+          <p class="en-p">Hamu groaned loudly, 'Un, un, un,' and said,</p>
+          <p class="en-p">Hamu: 'Re, re, re, Rebu, Tā, tā, tā, Tāru, there will be a punishment for uttering such Burei things. Ufu, fu, fu, fu.'</p>
+          <p class="en-p">Rebu: 'Hey, this is Taihen. He has revived. Oi, Tāru, if we do not settle this quickly, something that cannot be Torikahe will happen.'</p>
+          <p class="en-p">Tāru: 'Un.'</p>
+          <p class="en-p">Hamu: 'Hey, hey, if you loosen your hands, the Inochi of you two will not be saved. I have heard every Ichibushijifu of your conversation from the beginning. Shall I, the hated child Hamu, thrive once more? Rebu, Tāru, you Kowatsupa, think that Hamu-sama will perform a Suisau on you. Ihi, hi.'</p>
+          <p class="en-p">Rebu and Tāru were Bitsukuri and said,</p>
+          <p class="en-p">Rebu and Tāru: 'Hey, this is Taihen.'</p>
+          <p class="en-p">With that, they abandoned the two on the spot and fled, following the mountain stream one after another. Hamu sat up with a start and said,</p>
+          <p class="en-p">Hamu: 'Atsu, ha, ha, ha, the heart of Ningen is something one cannot understand. Those two, Rebu and Tāru, thought I was dead, mocked me with the utmost language, and consulted on how not to save me, but the Tenbatsu is a fearful thing. In any case, I must save both Iru and Yosefu.'</p>
+          <p class="en-p">While saying this, he scooped up the valley water, held it in his mouth, and tried his best to care for them. However, it did not seem easy for the two to regain their breath.</p>
+          <p class="en-p">At that moment, a propaganda song echoed through the valley's reverberations:</p>
+          <p class="en-p">When God appears on the surface,
+He separates the good gods from the evil gods.
+The God who created this world, Kamunaobi,
+With a heart as vast as Ōnaobi,
+Looking, listening, and correcting with Naobi,
+In the world under heaven, there are no demons,
+And until there are no ugly women or searching women,
+He will Kototama-reconcile and govern.
+Lord Susanoo-Ōkami,
+Whom He protects, the three-five,
+Propagandist of the divine teachings,
+Possessing Ōkuninushi,
+He Kototama-reconciles the Yamata-no-Orochi,
+And saves them to the path of sincerity.
+In the world-renowned country of India,
+Of the shining Tianjin sun,
+As the paradise of Takamagahara,
+He goes forth to reconstruct.
+I am the messenger Terukuniwake,
+Even Onigumohiko and others,</p>
+          <p class="en-p">If the fierce evil gods are purified by the breath of Kototama,
+No matter how many strong ones there may be,
+Like dew vanishing in the morning sun,
+Demons will instantly retreat.
+Blocking the sky of the heart,
+Murakumo blows and scatters here,
+In the country of the moon, true to its name,
+Under the protection of Teruhikohiko,
+It is governed before our very eyes.
+Ah, Kannagara, kami, kami,
+Making the divine spirit shine,
+Expanding the divine power of the Sanjūgo-kyō,
+To the four corners of heaven and earth,
+Returning to the heavenly country,
+How joyful it is to speak of it.
+Whether the morning sun shines or clouds over,
+Whether the moon waxes or wanes,
+Even if the great earth sinks,
+Even if Ōkuninushi is strong,</p>
+          <p class="en-p">Even if the number of evil gods,
+Sprawling over more than seven thousand countries, is great,
+With the one sincerity of the three-five,
+Reconciling them to the teachings without difficulty,
+The heavenly path of saving and helping.
+Advance, advance, now advance,
+Terukimi, Umekimi, Kunikimi,
+God is with us.
+Even if an evil god appears,
+And wields his violent power to drop us,
+Into the deep valley of eight thousand fathoms,
+As long as there is divine protection,
+Why should we fear the evil gods?
+When the time to die comes,
+Even if one is on a tatami mat,
+One will surely die.
+Once it has pleased the heart,
+Of the Imperial Great God,
+He thinks to use us for the sake of the world,
+Even one day longer.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ハムはウンウンウンと呻り出した。</p>
+            <p class="ja-classical-line">レーブ『ヤア、此奴は放ツといても勝手に生き返るぞ。憎まれ子は世に覇張る……と云つて悪運の強い奴ぢやな。今の中に放り込め放り込め。さうせにや俺達の頭の上る時節がないワ』</p>
+            <p class="ja-classical-line">タール『そんな者にかかつて居つたら、此処迄折角人工呼吸したものが中途に駄目になつて了ふワイ』</p>
+            <p class="ja-classical-line">レーブ『それもさうだ。俺達二人は今此手を止める訳にも行かず、さうだと云つて放つて置けばハムの奴、だんだん生き返るなり、も一人、連れが欲しうなつた。これだから人間は共同生活の動物と云ふのだ』</p>
+            <p class="ja-classical-line">ハムはウン　ウン　ウンと大きく呻り、</p>
+            <p class="ja-classical-line">『レヽヽヽレーブ、タヽヽヽタール、其様な無礼な事を吐すと罰があタールぞよ。ウフヽヽヽヽ』</p>
+            <p class="ja-classical-line">レーブ『ヤア、此奴ア大変だ。生き返りやがつたな。オイ、タール、早く埒をつけぬと取返しのつかぬ事が出来るぞ』</p>
+            <p class="ja-classical-line">タール『ウン』</p>
+            <p class="ja-classical-line">ハム『コラコラ、其手をゆるめたが最後二人の生命は助からないぞ。貴様の最前からの話は一伍一什残らず聞いて居たのだ。憎まれ子のハムが、も一つ覇張つてやらうか、レーブ、タールの小童子共、ハムさまが一つ水葬をしてやるから、さう思へ。イヒヽヽヽ』</p>
+            <p class="ja-classical-line">レーブ、タールは吃驚して、</p>
+            <p class="ja-classical-line">『ヤア、此奴ア大変だ』</p>
+            <p class="ja-classical-line">と一目散に二人を其場に捨てて谷川を伝ひ伝ひ逃げ出す。ハムはムツクと起き上り、</p>
+            <p class="ja-classical-line">『アツハヽヽヽ人間の心と云ふものは分らぬものだ。レーブ、タールの二人の奴、俺が死んだと思ひやがつて、口を極めて嘲弄し、助けよまいとして相談してゐやがつたが、天罰と云ふものは恐ろしいものだ。何は兎もあれ、イール、ヨセフの両人を助けてやらねばなるまい』</p>
+            <p class="ja-classical-line">と云ひ乍ら谷水を掬ひ口に含ませ、一生懸命に介抱して居る。けれども両人は容易に息を吹き返しさうにもない。</p>
+            <p class="ja-classical-line">斯かる処へ谷の木谺を響かして宣伝歌が聞えて来た。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善神邪神を立て別ける
+此世を造りし神直日
+心も広き大直日
+直日に見直し聞き直し
+天ケ下には鬼もなく
+醜女探女もなき迄に
+言向和し治め行く
+神素盞嗚大神の
+守らせ給ふ三五の
+神の教の宣伝使
+大黒主に憑りたる
+八岐大蛇を言向けて
+誠の道に救ひ上げ
+世界に名高き印度の国
+光り輝く天津日の
+高天原の楽園と
+立て直すべく出でて行く
+われは照国別宣使
+鬼雲彦や其外の</p>
+            <p class="ja-classical-line">猛き魔神も言霊の
+伊吹に払ひ清めなば
+如何に強者多くとも
+朝日に露の消ゆる如
+悪魔は忽ち退散し
+心の空を塞ぎたる
+村雲ここに吹き散りて
+名詮自称の月の国
+月照彦の御守りと
+治まり行くは目のあたり
+あゝ惟神々々
+神の御霊を輝かし
+三五教の神力を
+天地四方に拡充し
+天津御国へ復り言
+白さむ事の楽しさよ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+大黒主は強くとも</p>
+            <p class="ja-classical-line">七千余国に蟠まる
+魔神の数は多くとも
+誠一つの三五の
+教に苦もなく言向けて
+救ひ助くる天の道
+進めよ進めいざ進め
+照公梅公国公よ
+神はわれ等と倶にあり
+仮令悪魔の現はれて
+暴威を揮ひ八千尋の
+深き谷間に落すとも
+神の守りのある限り
+如何でか魔神を恐れむや
+死すべき時の来りなば
+畳の上に居るとても
+必ず死るものぞかし
+皇大神の御心に
+叶ひまつりし其上は
+一日も長く世の為めに
+召し使はむと思召し</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Though one may pass through Iki, the Lord God shall surely save them. Ah, Kamunagara, Kamunagara. May the Mitama be blessed.</p>
+          <p class="en-p">The Keshiki of this Kajikatauge is as beautiful as Makie. Sahohime, weaving brocade, brushes her sleeves and strokes my face. The wind that blows now is the wind of Kami. The Iki of Kami that drives away Akuma. The Arashikaze that blows away the powerful Magakami. Ah, Omoshiro, Omoshiro. Whipping the horse of my heart, I shall cross the land of Fusa and the land of the moon as quickly as one Hitohi. I shall Kotomukeyaha all the fortresses of Maga, and face the capital of Haruna, which is known as an Ichidaitokuwai in the land of the moon. How joyful it will be to Kotomukeyaha the likes of Ōkuronushi and the Shikozukasa of Onikumawake.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara. May the Mitama be blessed.</p>
+          <p class="en-p">As this voice entered his ears, Hamu, who had been attending to the two people at the bottom of the valley, suddenly lost his Ganshiyoku.</p>
+          <p class="en-p">Hamu: 'Ya, this is Taihen. The kin of the woman from before have come to provide Ōen. I cannot be Guzuguzu. The lives of those two are in danger, but my own life is what matters most.'</p>
+          <p class="en-p">Saying this, he leaped over the rocks of the valley stream and crossed the shallows, moving like a monkey. From the valley path on the mountainside, Terukō suddenly caught sight of this figure.</p>
+          <p class="en-p">Terukō: 'Moshi, Sendenshi-sama, a strange fellow is running at the bottom of this valley right now. Please, look at that.'</p>
+          <p class="en-p">Pointing, he spoke. Terukuniwake replied,</p>
+          <p class="en-p">Terukuniwake: 'What, a person at the bottom of this valley?'</p>
+          <p class="en-p">Saying this, he looked down intently and could clearly see a man running like a monkey, with blood dripping from his face.</p>
+          <p class="en-p">Terukō: 'Moshi, is it not possible that some great tragedy is being enacted at the bottom of this valley? Given the suspicious behavior of that man, shall we not go down to the bottom of the valley and investigate?'</p>
+          <p class="en-p">Terukuniwake: 'Un, perhaps I shall investigate.'</p>
+          <p class="en-p">Kunikō: 'Oi, Terukō, how do you intend to descend this sheer cliff? If it were three or five ken, one might land safely even by gliding through the air, but in such a deep valley bottom, is there anything we can do?'</p>
+          <p class="en-p">Terukō: 'Un, that is true. However, since that man went as far as that place, there must be a path somewhere. First, I shall leave it to Sendenshi-sama; if you command me to investigate, I shall investigate, and if you tell me to stop, I shall stop. As long as we follow the orders of Sendenshi-sama, we shall have no faults.'</p>
+          <p class="en-p">Umekō: 'Moshi, Sendenshi-sama, it is too deep a valley bottom to be certain, but it appears as though two people have been killed. In all likelihood, the fellow who just fled killed them and ran away.'</p>
+          <p class="en-p">He pointed to the bottom of the valley, gasping for breath. Terukuniwake gazed at the bottom of the valley and said,</p>
+          <p class="en-p">Terukuniwake: 'It is indeed suspicious. I wonder if I should try to find out the situation somehow.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">水火の中を潜るとも
+必ず救はせ給ふべし
+あゝ惟神々々
+御霊幸ひましませよ。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">河鹿峠の此景色
+蒔絵の如く美はしく
+錦織りなす佐保姫の
+袖ふりはへて吾顔を
+撫でさせ給ふ風の袖
+今吹く風は神の風
+悪魔を払ふ神の水火
+勢ひ強き曲神を
+吹き払ひ行く嵐風
+あゝ面白し面白し
+心の駒に鞭韃ちて
+一日も早くフサの国
+月の国をば横断し
+枉の砦を悉く
+言向和して月の国
+一大都会と聞えたる
+ハルナの都に立ち向ひ
+大黒主を初めとし
+鬼熊別の醜司
+言向和さむ楽しさよ</p>
+            <p class="ja-classical-line">あゝ惟神々々
+御霊幸ひましませよ』</p>
+            <p class="ja-classical-line">此声、耳に入ると共に谷底に二人の介抱して居たハムは、忽ち顔色を失ひ、</p>
+            <p class="ja-classical-line">『ヤア、これや大変だ。最前の女の身内の奴が応援に来よつたのだ。愚図々々しては居られない。二人の生命も大変だが俺の生命が肝腎だ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、又もや谷川を岩を飛び越え浅瀬を渡り猿の如く渡つて行く。山腹の谷道から照公はフツと此姿を眺め、</p>
+            <p class="ja-classical-line">『モシ、宣伝使様、此谷底に妙な奴が今走つて居ます。あれ御覧なさい』</p>
+            <p class="ja-classical-line">と指す。照国別は、</p>
+            <p class="ja-classical-line">『何、人が此谷底に』</p>
+            <p class="ja-classical-line">と云ひ乍ら、よくよく見下せば顔から血を垂らし乍ら猿の如く一人の男が駆け出すのが、ありありと見える。</p>
+            <p class="ja-classical-line">照公『モシ、此谷底に何か大惨劇が演ぜられて居るのぢやありますまいか。合点の行かぬあの男の様子、一つ谷底へ下りて調べて見ようぢやありませぬか』</p>
+            <p class="ja-classical-line">照国別『ウン、調べて見ようかな』</p>
+            <p class="ja-classical-line">国公『オイ、照公、此断岩絶壁を如何して下りる積りだ。三間や五間の処なら空中滑走してでも着陸を無事にする事が出来ようが、斯う深い谷底では如何ともする事が出来ぬぢやないか』</p>
+            <p class="ja-classical-line">照公『ウン、さうだなあ。然し彼処まであの男も行つたのだから、何処かに道があるだらう。先づ宣伝使様にお任せして、調べよと仰有るなら調べるなり、もう止せと云はるれば止しにするのだ。俺達は宣伝使様の命令通りにして居れば落度はないからな』</p>
+            <p class="ja-classical-line">梅公『モシ宣伝使様、あまり深い谷底でハツキリは分りませぬが、如何らや二人の人が殺されてる様です。大方今逃げた奴が殺して逃げたのでせう』</p>
+            <p class="ja-classical-line">と息を喘まして谷底を指す。照国別は谷底を眺めて、</p>
+            <p class="ja-classical-line">『如何にも怪しい。何とかして様子を探つて見ようかな』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: River Deer Crossing [1069]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: Phantom Mist [1071]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

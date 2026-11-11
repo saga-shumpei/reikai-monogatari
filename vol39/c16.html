@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 16: 親子対面 [1081] - Volume 39 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 39 Table of Contents</a>
+      <span>Volume 39</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 39 &bull; Chapter 16</span>
+      <h1 class="chapter-title-en">Chapter 16: 親子対面 [1081]</h1>
+      <p class="chapter-title-ja">親子対面〔1081〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Semu and Shiamu, upon hearing that the Sendenshi of the Ananai-kyō had come to inquire, followed the orders of Pōro and stood at the entrance of the Gankutsu, rubbing their hands together and bowing their heads and waists repeatedly like rice-hulling grasshoppers.</p>
+          <p class="en-p">Semu: 'Ah, this is, this is, Sendenshi-sama, you have come to visit us most welcome. For you to have traveled such a long distance, I have no words to express my gratitude. Unfortunately, my master is away; he has followed the Gomeirei of Daikyōshiyusama and has departed for the Dekatan Kaugen. During his absence, he gave strict orders that no one, whoever they may be, is to be allowed in here. I am sorry, but please, do return home. Say, Shiamu, what I am saying is surely not a lie, is it? Since I am bowing my head and waist until I become a Semushi, begging you, I would be most grateful if you would use your Gariyō as a Sendenshi and return. Heh, heh, heh, I am certainly not saying this with any Akui, and the old couple of the Ananai-kyō are definitely not locked inside this Gankutsu, so even if you search, it will be a Torau. I beg you, please, make a Gotaikiyaku at once.'</p>
+          <p class="en-p">Terukuniwake: 'No, today, I cannot return just like this. There should be a couple named Kashiyahiko and Kashiyahime who were captured and brought here from Ameniya.'</p>
+          <p class="en-p">Semu: 'Please, do not say such absurd things. Where would such curious people come from, all the way from Ameniya to such a deep mountain? That must be some kind of mistake.'</p>
+          <p class="en-p">Ayame: 'No matter what you say, I must meet my parents. If you stand in my way, it will only be to your own detriment.'</p>
+          <p class="en-p">Semu: 'Hey, this is a tough negotiation. I cannot handle this alone. Hey, Shiamu, go inside and report this to Pōro-sama quickly. And do that thing with that thing.'</p>
+          <p class="en-p">Terukuniwake: 'I cannot wait even for a moment. I am going through, so show me the way.'</p>
+          <p class="en-p">Semu: 'Please wait a moment. I must ask for the opinion of the absent division commander Pōro, otherwise it will be a crime of trespassing into the Gankutsu.'</p>
+          <p class="en-p">Terukuniwake: 'Ha, ha, ha, ha, what a flustered way to act. At this rate, it is surely nothing good. I am worried about the fate of my parents. Come, Ayame-dono, let us proceed inside.'</p>
+          <p class="en-p">Semu: 'Ah, hey, wait a moment, the couple is perfectly healthy and safe. We are definitely not abusing them.'</p>
+          <p class="en-p">Terukuniwake: 'Aha, ha, ha, ha, I suppose so. It seems you are protecting them inside a Gankutsu so well-guarded that not even a gnat could pass through. Well, I shall thank you for your kindness later.'</p>
+          <p class="en-p">The scene changes, and in a room in the back, the liquor that had kept them dead drunk until now suddenly wore off. With pale faces, they opened the door of the Gankutsu, and it was in the midst of a great chaotic uproar, with some dragging the couple out and others running around clutching rice bowls. Shiamu came flying there, gasping for breath,</p>
+          <p class="en-p">Shiamu: 'Ta, ta, ta, this is terrible, terrible! Hey, General Pōro, Rail-sama, what should we do? Please lend me your wisdom.'</p>
+          <p class="en-p">He kept patting the ground with both hands and struggling.</p>
+          <p class="en-p">Pōro: 'What is it, with that hurried way of yours? What has happened?'</p>
+          <p class="en-p">Shiamu: 'There is no way to describe it, the son has come. That girl, no matter what, is insisting on entering.'</p>
+          <p class="en-p">Pōro: 'Whether she stands to enter or crawls to enter, I do not care about such things, but what do you mean by son and daughter?'</p>
+          <p class="en-p">Shiamu: 'The son and daughter of the old couple we had hidden in the back have arrived. They say it is for revenge, and they have led a force of hundreds of thousands and are standing at the front to confront us.'</p>
+          <p class="en-p">Pōro: 'How could a force of hundreds of thousands come through this narrow path?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">セーム、シヤムの二人は三五教の宣伝使の尋ね来りしと聞くより、ポーロの命に依つて岩窟の入口に揉手し乍ら米つきバツタのやうに頭や腰をピヨコピヨコ屈め、</p>
+            <p class="ja-classical-line">セーム『エーこれはこれは宣伝使様、よくこそ御入来下さいました。折角遠路の所、お越し下さつて、何とも早御礼の申上げやうも厶いませぬ。生憎主人は御不在で、大教主様の御命令を奉じ、デカタン高原まで出陣なさいました。其不在中は何人たり共、ここへ入れてはならぬとの厳しき命令、折角乍ら、どうぞお帰り下さいませ。なあシヤム、俺の言ふ事は決して嘘ぢやあろまい。セームが佝僂になる所まで頭をピヨコピヨコ、腰をペコペコさせて御願してゐるのだから、そこはどうぞ宣伝使の雅量を以てお帰り下さらば誠に有難う厶います。ヘヽヽヽ決して決して悪意で申すのでは厶いませぬ、又三五教の老夫婦は決して此岩窟の中に閉ぢ込めては厶いませぬから、折角お査べ下さいましても徒労で厶います。トツトと御退却を、偏に願ひ奉ります』</p>
+            <p class="ja-classical-line">照国別『イヤ今日はどうしても此儘では帰る事は出来ないのだ。アーメニヤから樫谷彦樫谷姫といふ二人の夫婦が捉へられて来てゐる筈だ』</p>
+            <p class="ja-classical-line">セーム『滅相もないことを仰有いませ。こんな山奥にアーメニヤなんぞからお出でる物好がどこに厶いませう、ソリヤ何かのお間違でせう』</p>
+            <p class="ja-classical-line">菖蒲『何と言はれても、私は両親に会はねばならぬ。お邪魔なさると却てお為になりませぬぞえ』</p>
+            <p class="ja-classical-line">セーム『ヤア此奴ア手ごはい談判だ、到底俺の一力では行きかねる。オイ、シヤム、奥へ行つて此由をポーロさまに早く注進せぬかい。そして今の何々を何々しておくのだぞ』</p>
+            <p class="ja-classical-line">照国別『一刻の間も猶予はならぬ、罷り通るから案内を致せ』</p>
+            <p class="ja-classical-line">セーム『一寸待つて下さいませ。不在師団長のポーロの御意見を伺つた上にして貰はねば岩窟侵入罪になりますから』</p>
+            <p class="ja-classical-line">照国別『ハヽヽヽヽ大変なうろたへ方だな。此様子ではキツと碌な事ではあるまい。両親の身の上が案じられる。サア早く菖蒲殿、奥へ進みませう』</p>
+            <p class="ja-classical-line">セーム『あゝモシモシ一寸待つて下さい、御夫婦は至極御健全に御安泰に御座遊ばします。決して虐待なんかしてはをりませぬ』</p>
+            <p class="ja-classical-line">照国別『アハヽヽヽ、さうだらう。蚋一疋通はないやうな要心堅固な岩窟内へ御保護を申上げてゐると見えるワイ。イヤ御好意は後から御礼申す』</p>
+            <p class="ja-classical-line">話変つて奥の一間では今迄酔ひつぶれてゐた酒も俄にさめ、蒼白な顔をして岩窟の戸をあけ、夫婦を引張り出すやら丼鉢を抱へて逃げ廻るやら、大乱痴気騒ぎの真最中である。そこへシヤムが飛んで来て、息を喘ませながら、</p>
+            <p class="ja-classical-line">『タヽヽヽ大変々々、これこれポーロの大将、レールさま、どうしたら宜からうか、思案を貸して下さい』</p>
+            <p class="ja-classical-line">と頻りに地を両手でパタパタと叩きもがく。</p>
+            <p class="ja-classical-line">ポーロ『何だ、あわただしい其騒ぎ方、どうしたといふのだ』</p>
+            <p class="ja-classical-line">シヤム『何うも斯うもあつたものですか、息子が来たのですよ。ソレあの娘が、何うしても斯うしても、強つて入らうと致します』</p>
+            <p class="ja-classical-line">ポーロ『立つて入らうと這うて入らうと、そんな事は頓着ないが、息子娘とは何の事だ』</p>
+            <p class="ja-classical-line">シヤム『あの奥に隠してあつた老夫婦の伜と娘がやつて来たのですよ。カヽ敵討だと云つて、数十万の軍勢を引連れ、先頭に立つて立向ひました』</p>
+            <p class="ja-classical-line">ポーロ『此の細谷路を数十万の軍勢がどうして来られるものか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Shiyam: 'I do not know what it is, but a great number of soldiers in white robes have come from the mid-air. Hey, General, if you dawdle, the subjugation of this Gankutsu will begin. Please make some preparations.'</p>
+          <p class="en-p">Pōro: 'Well, it cannot be helped. I shall first stand at the Omoteguchi and try to negotiate.'</p>
+          <p class="en-p">Saying this, while whispering something to Rēru, he rushed out to the Omoteguchi, bowed politely, and said:</p>
+          <p class="en-p">Pōro: 'I am Pōro, a humble servant who looks after this Gankutsu. I pray you take note of me and grant me your Gohiiki in the future. Now, please, although it is a mere Bauoku as you can see, do not be Goenriyo, and step right in.'</p>
+          <p class="en-p">Terukuniwake: 'Are the couple, Kashiyahiko and Kashiyahime, present within this Taugankutsunai?'</p>
+          <p class="en-p">Pōro: 'Yes, they are present. They are in excellent Gokigen and are waiting for your arrival in a state of Kinkijiyakuyaku. Now, please enter quickly and I pray for your Gotaimen.'</p>
+          <p class="en-p">Terukuniwake: 'Whatever you say, this is an unfamiliar Gankutsu, and it is hard to tell into what trap of schemes one might fall. I am sorry to trouble you, but bring that couple here to guide us. We shall have our Gotaimen here.'</p>
+          <p class="en-p">Pōro: 'That is reasonable, but at this time, our General Ōashiwake-sama is away at the Dekatan Plateau, having been summoned by the Daikyōshu from the capital of Haruna, leading tens of thousands of soldiers. Since the remaining people are only a little over twenty, and they have been drinking sake from morning till night and are helplessly dead drunk, we are certainly not plotting anything. Please, do come in.'</p>
+          <p class="en-p">Ayame: 'Hey, Brother-sama, you must not advance carelessly. You there, the guard or whatever you are, you had better bring my parents here quickly. If you dawdle, it will not be for your own good.'</p>
+          <p class="en-p">Pōro scratched his head and said:</p>
+          <p class="en-p">Pōro: 'Well, your words are reasonable, but the couple has had a recurrence of their chronic illness; they say their kakke has flared up and they have headaches in their feet, so they cannot move at all. Also, the lady has her post-natal blood path or tail path acting up, and she is just groaning and writhing, unable to move her body due to her infirmity. I pray you will advance and grant them a meeting.'</p>
+          <p class="en-p">Terukuniwake: 'If that is the case, it cannot be helped. Lead the way.'</p>
+          <p class="en-p">Pōro: 'Now, please come this way.'</p>
+          <p class="en-p">Saying this, he stood in the lead. The four in the party followed behind, and while keeping their attention on their surroundings, they advanced deeper and deeper. Suddenly, the floorboards of the mechanical device flipped over with a clatter, and the four fell all at once into a dark pit. Pōro, looking composed, locked the trapdoor, placed two or three heavy stones on it, and breathed a sigh of relief, saying:</p>
+          <p class="en-p">Pōro: 'Hey, everyone, it is safe now. Set your minds at ease. That woman is Ayame, the one whom Ōashiwake-sama was enamored with. And the other is her brother, Terukuniwake, a famous heroic propagandist of the San-go-kyō. Once one is caught in his Kototama, there is an unparalleled divine power that makes one's hands and feet go completely numb. However, if we drop them into the depths of the abyss like this, this Gankutsu will be safe and peaceful from now on. Shall we hold a second party to celebrate?'</p>
+          <p class="en-p">He shouted with a grin. Rēru, Shiyam, and Hāru gathered around joyfully.</p>
+          <p class="en-p">Rēru: 'As expected of Pōro-sama, you are fully qualified to be the acting division commander. Yay, bravo, bravo! Now that it has come to this, what is there to fear? Let us drink and drink until we fall, and shall we partake of the sacred sake until we turn into snakes or tigers?'</p>
+          <p class="en-p">With that, they brought out more sake bottles from the cellar and, singing with all their might, began a victory banquet for having escaped disaster and evil.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">シヤム『何だか知りませぬが、随分沢山な白衣の軍卒が中空からやつて来ました。モシモシ大将、グヅグヅしてゐると岩窟退治が始まります。何とか用意をなされませ』</p>
+            <p class="ja-classical-line">ポーロ『エヽ仕方がない、俺が一先づ表口に立向ひ、掛合つて見よう』</p>
+            <p class="ja-classical-line">と言ひ乍ら、レールに何か囁きつつ、表口に駆け出し、叮嚀に腰を屈めて、</p>
+            <p class="ja-classical-line">ポーロ『私は此岩窟を預つて居りまするポーロと申すはした者、何卒お見知りおかれまして今後御贔屓にお願いたします。サアどうぞ、お見かけ通の茅屋なれど、御遠慮なく、トツトとお入り下さいませ』</p>
+            <p class="ja-classical-line">照国別『当岩窟内に樫谷彦樫谷姫の夫婦の方はお見えになつてをるか』</p>
+            <p class="ja-classical-line">ポーロ『ハイお見えになつて居ります。それはそれは御機嫌麗しく、あなた方のお出でを、欣喜雀躍の体でお待ちかねで厶います。サア早くお通りあつて、御対面の程をお願致します』</p>
+            <p class="ja-classical-line">照国別『何を言つても不案内なる岩窟、如何なる計略の罠に陥らむも計り難い、御苦労ながら、其夫婦の方をここ迄案内して来てくれ。吾々は此処にて御対面申上ぐるから』</p>
+            <p class="ja-classical-line">ポーロ『それも御尤も乍ら、此頃は御大将の大足別様が、ハルナの都より、大教主のお召しにより、数万の軍卒を引率して、デカタン高原へ出陣された御不在中故、残りの人間は僅かに二十有余人、朝から晩まで留守事に酒を呑み、他愛なく酔ひ潰れて居りますから、決して計略などは致して御座いませぬ。どうぞお入り下さいませ』</p>
+            <p class="ja-classical-line">菖蒲『モシ兄上様、ウツカリ進んではなりませぬぞ。コレコレここの番人とやら、早く妾が父母をここへお伴れ申して来るがよい。グヅグヅ致すと、お前さまたちの御為にはなりますまいぞや』</p>
+            <p class="ja-classical-line">ポーロは頭をかき乍ら、</p>
+            <p class="ja-classical-line">『エー御説御尤もながら御夫婦は持病が起り、脚気が起つて、足に頭痛がすると仰有り、チヨツとも動けませぬ。又奥さまの方は産後の血の道とか、尾の道とかが目を出して、ウンウン　キヤツキヤツ唸つてばかり、身動きもならぬ御不自由さ、どうぞあなたの方から進んで御面会を願ひたう存じます』</p>
+            <p class="ja-classical-line">照国別『そんなら仕方がない、案内を致せ』</p>
+            <p class="ja-classical-line">ポーロ『サア斯うお出でなさいませ』</p>
+            <p class="ja-classical-line">と言ひ乍ら先に立つ。一行四人は後に従ひ、あたりに心を配りつつ、奥へ奥へと進み行く。忽ちカラクリ仕掛の板の間はクレンと引繰返り、四人はドツと一度に暗き陥穽に落ち込んで了つた。ポーロはしすましたりと、返し戸に錠を卸し、重き石を二つ三つのせて、ホツと一息胸撫でおろし、</p>
+            <p class="ja-classical-line">『オイ皆の奴、モウ安心だ。気をおちつけよ。彼奴は大足別様の恋慕して厶つた菖蒲といふナイスだ。そして一人は兄の照国別といふ三五教の有名な豪傑宣伝使だ。彼奴の言霊にかかつたが最後、手足も何もビリビリとしびれて了ふ無双の神力がある。併し乍らかうやつて奈落の底へおとして置けば、最早此岩窟内は無事安穏だ。モ一つ祝に二次会を開かうぢやないか』</p>
+            <p class="ja-classical-line">とニコニコとして喚き立てる。レール、シヤム、ハールは嬉々として集まり来り、</p>
+            <p class="ja-classical-line">レール『流石はポーロさま、留守師団長丈の資格は十分に具備してゐる。ヤア天晴れ天晴れかくなる上は何をか恐れむ、飲んで飲んで、飲み倒し、蛇の子になるか、虎になる所まで、お神酒をあがらうかい』</p>
+            <p class="ja-classical-line">と、又もや酒徳利を穴倉より運び出し、一生懸命に歌を唄つて、悪事災難を逃れたる祝宴を張り出した。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Once the surprise had passed, the sake that had begun to lose its effect started to circulate again. On top of that, they drank it down gulp after gulp, so there was no helping it. Everyone, this one and that one, became completely sodden and began to babble about nonsense in a state of Mugamuchiu.</p>
+          <p class="en-p">Reru: 'Hey, Poro-sama, have we not achieved a rather grand feat? We can drink sake to our heart's content, and the son and daughter who thought they had come to avenge the old man and woman have been cast into the bottom of Naraku. Now, there is not a single person left under the Ame who is to be feared. Come, shall we bring the old man and woman out here and have them pour our drinks? Hey, everyone, even if they are old, they are women. In this Gankutsu filled only with men, there should be no lack of company, right? Ahhh.'</p>
+          <p class="en-p">Shiyamu: 'No matter how much they are women, is it not unexciting if they are old? I am thinking, how about we drag out the nice girls called Ayame and Kasatsuki who just arrived, and have them pour our drinks?'</p>
+          <p class="en-p">Reru: 'Do not talk like a Baka. If you were to drag out someone like that, it would be like throwing a Bakuretsudan. They are terrifying Shiromono. Hey, Yatsukosu, why are you dawdling? Will you not drag the old man and woman here?'</p>
+          <p class="en-p">Yatsukosu: 'Do not say such noisy things. If you bring such dirty Jijibaba who are dripping with Meshiru here, the Oza of our drinking party will be ruined. Rather than that, I will dance for you in a refined manner, so please be content with that.'</p>
+          <p class="en-p">And, having already put on a Tenuguhi in the style of a sister, he tucked up his hem a little, shook his hands and hips, and clapped his hands from time to time with a sharp sound,</p>
+          <p class="en-p">'My home is at the foot of the Caucasus Mountains, / At the foot, at the very foot. / Yatsutokose, dotkoishiyo. / Hikohiko of Kashitani and Hime of Kashitani, / The messengers of the Ural God. / Thrust into a prison like this, / Yoitosah, yoitosah, / From morning until night, I am pressed to give up my daughter. / How could I ever give up my daughter? / To the kinsmen of Onigumohiko, / Dotkoishiyo, dotkoishiyo.'</p>
+          <p class="en-p">Reru: 'Hey, you, are you acting as a proxy for someone? That is useless. Why do you not sing something more clever?'</p>
+          <p class="en-p">Yatsukosu: 'The guardian deity of the old couple has possessed me and is singing. Come, shall I be possessed by another one now? This time it is Oashiwake. Utsufufufufu,'</p>
+          <p class="en-p">'The great general Onigumohiko, / Chased away from the capital of Iho, / Yatsutokosa, yatsutokosa, / When he settled his rear in the Kenon-kyo of Mesopotamia, / Yatosah, yatosah, / The propagandist of the San-go-kyo, / The Kototama priest, / Came along with his followers, / And opened his large eyes wide. / Dotkoishiyo, dotkoishiyo. / The great general Onigumohiko, / Revealed the form of a great serpent, / And ran off at full speed, / To the Oeno mountain of Jitento. / Chased away from here once again, / With his life barely intact, he fled back, / To the land of Fusa, the coward. / By the power of the times and seasons, / He became the Daikokunushi once more.'</p>
+          <p class="en-p">'While he was throwing his weight around, / Wagging his tail and bowing his head, / The clever one who brushed the dust from his beard, / With fawning flattery. / Yoitosah, yoitosah, / If you ask who that is, / It is the great general, / The ugly god Oashiwake, who reigns in the Gankutsu of Mount Kiyoharu. / Otsutodokkoi, oh, I messed up. / The Kototama priest Oashiwake, / Opens a large barrel and warms the sake. / Everyone, this one and that one, should drink. / Drink, drink, drink, the mountains and the fields, / Even down to the houses and storehouses. / The sound of the flasks lined up after drinking, / The clinking of the sake bottles, tontokoton. / You have become quite merry, have you not? / I do not drink sake, / But I have become drunk on the strange scent.'</p>
+          <p class="en-p">'The two, Reru and Poro, / The priest they sought and lost, / The one called Terunidewake, / Crushed their spirits and fell into a trap. / Knowing it was cowardly and weak, / The feat they accomplished so easily, / The gods of heaven and earth are watching. / The Jizaiten of Bonten-o, / And the god Daikokuhiko, / Must surely be rejoicing, / And must be weeping. / Weeping, laughing, and getting angry, / You all, what is it that you lack that makes you angry while eating and drinking? / Weeping, the plover on the beach of Akashi, / While weeping, the poor, / Ayame-ko must surely be, / Weeping and sobbing at the bottom of Naraku. / When I think of that, even I...'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">一旦驚きの余り、さめかけてゐた酒は再まはり出した。其上に又もやガブガブとやつたものだから堪らない。何奴も此奴もグタグタになつて無我夢中に下らぬ事を喋舌り出した。</p>
+            <p class="ja-classical-line">レール『コレコレポーロさま、随分ポーロい事が出来たぢやないか、酒は鱈腹呑めるなり、爺イ婆アの仇を討ちに来たと思うた息子娘は奈落の底へ落し込んだなり、最早天が下に恐るべき者は一人もなくなつて了つた。サアこれから爺イ婆アをここへ連れ出して来てお酌をさそうかい。オイ皆の奴、婆アでも女だぞ、男ばかりの此岩窟、滅多に不足はあろまいがな、アーン』</p>
+            <p class="ja-classical-line">シヤム『何ぼ女だつて、婆アでははづまぬぢやないか。俺は今来た菖蒲とかさつきとかいふナイスを引張り出して、酌をさしたら如何だらうかと思つてるのだ』</p>
+            <p class="ja-classical-line">レール『馬鹿を言ふな、あんな奴を引張り出して来ようものなら、丸で爆裂弾を投げたやうなものだ。恐ろしい代物だぞ。オイ、ヤツコス、何をグヅグヅしてるのだ。爺イ婆アをここへ引張つて来ぬかい』</p>
+            <p class="ja-classical-line">ヤツコス『喧し言ふない、あんな目汁水ばなを垂れてる汚い爺婆をこんな所へ連れて来ちや、酒の御座がさめて了うぞ。それよりも俺が一つ品よう踊つて見せてやるからそれで辛抱せい』</p>
+            <p class="ja-classical-line">と、早くも手拭を姐さんかぶりにして、一寸裾をからげ、手や尻をふりピシヤピシヤと時々手を叩き、</p>
+            <p class="ja-classical-line">『私が在所はコーカス山の
+麓の麓のその麓
+ヤツトコセー　ドツコイシヨ
+樫谷の彦や樫谷姫
+ウラルの神の御取次
+こんな牢屋へ突つ込まれ
+ヨーイトサー　ヨーイトサー
+朝から晩まで娘をくれいと責められる
+どうして娘がやられようか
+鬼雲彦の眷族に
+ドツコイシヨー　ドツコイシヨー』</p>
+            <p class="ja-classical-line">レール『オイ貴様、人の代理をするのか、しやうもない、モツと気の利いた事を唄はぬかい』</p>
+            <p class="ja-classical-line">ヤツコス『老人夫婦の守護神が憑つて唄つてゐるのだ。サアこれから、又一つ憑られてやらうかな。今度は大足別ぢや、ウツフヽヽヽ、</p>
+            <p class="ja-classical-line">鬼雲彦の大将が
+イホの都を追ひまくられて
+ヤツトコサー　ヤツトコサー
+メソポタミヤの顕恩郷に
+ヤツとお尻をすゑた時
+ヤートサー　ヤートサー
+三五教の宣伝使
+肝太玉の神司
+家来をつれてやつて来て
+大きな目玉をむきよつた
+ドツコイシヨー　ドツコイシヨー
+鬼雲彦の大将は
+大蛇の姿を現はして
+一目散に自転倒の
+大江の山へとつ走り
+又もやここを追ひまくられて
+命カラガラ　フサの国
+逃げ帰りたる弱虫が
+時世時節の力にて
+再び大黒主となり</p>
+            <p class="ja-classical-line">羽ぶりを利かしてゐた所へ
+尾をふり頭を下げ乍ら
+追従タラダラお髯の塵を
+払つてのけた利巧者
+ヨーイトサー　ヨーイトサー
+それが誰やと尋ねたら
+清春山の岩窟に
+時めき玉ふ御大将
+大足別の醜神だ
+オツトドツコイ　コラしまうた
+大足別の神司
+大樽あけて燗をして
+何奴も此奴も呑むがよい
+呑めよ呑め呑め山も田も
+家倉屋敷に至るまで
+呑んで並べたフラスコの
+徳利トンのトントコトン
+面白うなつておいでたな
+俺は酒は呑まないが
+けたいな匂ひで酔うて来た</p>
+            <p class="ja-classical-line">レール　ポーロの両人が
+尋ねてうせた神司
+照国別といふ奴に
+肝を潰して陥穽
+卑怯未練と知り乍ら
+甘くやつたる御手柄
+天地の神も御照覧
+梵天王の自在天
+大国彦の神様も
+さぞやさぞさぞ喜んで
+泣いて厶るに違ない
+泣いたり笑うたり怒つたり
+お前ら一体酒食うて
+何が不足で怒るのか
+泣いて明石の浜千鳥
+泣いた序に可哀相な
+さぞ今頃は菖蒲子が
+奈落の底でベソベソと
+泣いて厶るに違ない
+それを思へば俺だとて</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">I cannot help but weep, chitsu. Untokodotsukoi, dotsukoishiyo. Drink, drink, drink, and make merry. The path ahead is pitch black. Though the moon rises later, that moon shall be the end of your luck. A gathering of nothing but yakuza—the shifty, the Mago-like, and the liars—daring to open a Brahman sect; it is so absurd I have no words. Untokodotsukoi, dotsukoishiyo. They deceive Terukuniwake and Ayameko, rejoicing in their own schemes. While they are drunk and gorging on sake, if the Gauriki Musau Sendenshi appears once more, every one of these wretches will surely be blown away in a single breath. Ah, how amusing, how amusing. I am watching it all from on high.</p>
+          <p class="en-p">The coward Ōdaruwake must be riding a horse about now, plodding along the Dekatan Plateau, leading a great army, unaware that he is on a journey to the Meido. How pathetic. Yet, for all that, we are not troubled in the least. The likes of Rēru, Pōro, and Shamu Hāru, chosen as his henchmen, along with a hundred other pieces of junk, are doing such hateful things. Truly, they are all fools. They use the propagation of Kami as a shield, while in truth, they are nothing but thieves by trade. This grotto is no sacred place of the Kamisama; it is a den where wolves, lions, bears, and great serpents prowl. If only a noble Kami would come quickly,</p>
+          <p class="en-p">and wipe out every one of these wretches, that would be fine. Ah, but it cannot be done, and that is what is unbearable. Kankan chikichin, kanchikichin. Dotsukoi dotsukoi dotsukoishiyo. Truly, they are all such troublesome fellows. Just looking at their faces makes my stomach turn.</p>
+          <p class="en-p">Rēru: 'Hey, hey, you are a fellow who spits out outrageous things. You must be a spy for the Sangokyō. You dared to spit out that you are a descendant of the Yatsukosu of the Caucasus Mountains, but you must have abandoned the Ural religion and finally sunk into the Sangokyō. Come, confess plainly. A frog is known by its mouth; have you not been spitting out nothing but insults against Ōkuninushi-sama and our leader Ōdaruwake?'</p>
+          <p class="en-p">Yatsukosu: 'What a fool you are. Have you not known my true identity until now? I am the Sendenshi named Iwahiko of the Sangokyō. Do you not know that I am investigating your actions under the secret command of the Kamisama? Come, struggle as much as you like. Ah, how disgusting. You have gorged yourselves on stolen sake until you are drunk, and with your legs and loins unable to stand, how could you possibly offer resistance to me? It is as if I have come to a hospital for the crippled. Now, this Iwahiko-sama shall peel the inherited furs off every one of you with this deba knife. Prepare yourselves. Aha-ha-ha!'</p>
+          <p class="en-p">He gripped the deba knife tightly and thrust it out in front of Rēru. Although Rēru tried to escape, his tongue was the only thing sharp from excessive drunkenness, and he had lost the freedom of his hands and feet.</p>
+          <p class="en-p">Rēru: 'Hey, Pōro, Shamu, Hāru, what are you doing? All of you, gang up on this Yatsukosu and beat him to death.'</p>
+          <p class="en-p">Pōro, having become completely intoxicated:</p>
+          <p class="en-p">Pōro: 'Hey, Rēru, what you are saying, I cannot understand a single bit of it. You are blathering about killing or not killing, but if you leave them like that, the four of them will turn into mummies without us having to go to so much trouble. Well, just drink your sake slowly. I cannot stand up even one more step. Ah, it is painful. Sake is something that tastes sweet when you are drinking it, but it seems that once it enters the belly, it starts to act up, and it is so bitter I cannot bear it. Gē, garagara garagara, utsupū.'</p>
+          <p class="en-p">Rēru: 'Ehh, every one of you is nothing but a drunkard. That is why I have told you not to eat sake without knowing your own limits.'</p>
+          <p class="en-p">Shamu: 'Hey, Rēru, do not talk so grandly. You yourself are so drunk that your legs and loins cannot stand, are you not?'</p>
+          <p class="en-p">Rēru: 'I am special in my own way. Is there any reason you should try to imitate me? Aahn, come now, Iwahiko-sama, you monster, do not wave such a dangerous thing as that deba knife around, but quickly open the door of the trap and save the four Sendenshi, will you not? And why not become our representative and apologize for your rudeness? Come now, Iwa-Iwa Iwahiko Sendenshi, you are quite a cunning man. I am impressed; as expected of a Sendenshi of the Sangokyō. Aahn.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">チツとは泣かずにや居られない
+ウントコドツコイ　ドツコイシヨ
+呑めよ呑め呑め騒げよ騒げ
+一寸先は真の暗
+後から月が出るけれど
+其月こそは運のつき
+うろつき間誤つきウソつきの
+ヤクザばかりが寄り合うて
+バラモン教を開くとは
+呆れて物が言はれない
+ウントコドツコイ　ドツコイシヨー
+照国別や菖蒲子を
+甘くおとして喜んで
+酒にくらひ酔て居る内に
+剛力無双の宣伝使
+又もや現はれ来たならば
+何奴も此奴もうろたへて
+一泡吹くに違ない
+あゝ面白い面白い
+俺は高見で見物だ</p>
+            <p class="ja-classical-line">大足別の腰抜が
+さぞ今頃は馬に乗り
+デカタン高原トボトボと
+数多の軍勢を引つれて
+冥途の旅とは知らずして
+歩いて居るか情ない
+とは云ふものの俺達は
+チツとも苦しうない程に
+其れの乾児と選まれた
+レール　ポーロやシヤム　ハール
+其外百のガラクタが
+やりをる事が面にくい
+ホンに呆れた奴ばかり
+神の布教を楯となし
+其内実は泥坊を
+本職とする奴ばかり
+此岩窟は神様の
+聖場どころか狼や
+獅子熊大蛇の跳梁場
+早く尊い神が来て</p>
+            <p class="ja-classical-line">此奴ら一同悉く
+平げくれればよいものに
+あゝ叶はむからたまらない
+かんかんチキチン　カンチキチン
+ドツコイドツコイドツコイシヨー
+ホンに困つた奴ばかり
+顔見てさへも腹が立つ』</p>
+            <p class="ja-classical-line">レール『コラコラ怪しからぬ事を吐く奴だ。貴様は三五教の間者だらう、コーカス山のヤツコスの子孫だなんて吐してけつかつたが、貴様はウラル教をすてて、とうとう三五教に沈没してケツカルのに違ない。サア有体に白状せい、蛙は口からだ、大黒主様や大足別の大将の悪口ばかり吐きやがつたぢやないか』</p>
+            <p class="ja-classical-line">ヤツコス『馬鹿だなア、俺の素性を今迄知らなかつたのか。俺は三五教の岩彦といふ宣伝使だ。神様の内命に依つて貴様等の行動を調査してゐるのを知らぬのかい。サア何ぼなつともがけ、アタいやらしい、ドツサリ盗み酒に喰ひ酔うて、脛腰も立たぬ態して、如何して俺に手向ふ事が出来ようか。丸で躄の病院へ来たやうなものだ。サアこれから此岩彦さまが、此出刃庖丁で、親ゆづりの裘を一人も残らず剥いでやらう、覚悟を致せ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">と出刃庖丁をグツと握つてレールの前に突き出した。レールは逃げようとすれ共、余りの泥酔に口ばかり達者で、手足の自由を失つてゐた。</p>
+            <p class="ja-classical-line">レール『オイ、ポーロ、シヤム、ハール、何してゐるのだ。此ヤツコスを貴様等寄つて叩き殺して了へ』</p>
+            <p class="ja-classical-line">ポーロ、ヘベレケになつて、</p>
+            <p class="ja-classical-line">『オイ、レール、貴様のいふこた、一体、一寸も分らぬぢやないか。殺すとか殺さぬとかぬかして居るが、あゝしておけば四人の奴ア、そんなに骨を折らなくても、ひとり木乃伊になつて了ふワ。マア酒でもゆつくり呑め、俺やモウ一足も立つ事も出来やしないワ、アーア苦しい、酒と云ふ奴ア、呑まれる時にや甘い味をしてゐやがるが、腹中に這入つてから盛に活動しやがるとみえて、何うにも斯うにも苦くて仕方がない。ゲー、ガラガラ　ガラガラ、ウツプー』</p>
+            <p class="ja-classical-line">レール『エヽ何奴も此奴も、酔どればかりぢやなア。さうぢやから酒を身知らずに食ふなというて聞かしてあるのだ』</p>
+            <p class="ja-classical-line">シヤム『オイ、レール、偉相に言ふない、お前だつて、脛腰が立たぬとこまで酔うてゐるぢやないか』</p>
+            <p class="ja-classical-line">レール『俺は俺で特別だ。俺の真似をすると云ふ事があるものかい。アーン、コレコレお化けのヤツコスさま、そんな出刃のやうな危いものをふりまはさずに早く陥穽の戸をあけ、早く四人の宣伝使を助けぬかい。そして俺達の代表者となつて、御無礼をお詫びしてくれないか。ナア、イワイワ岩彦の宣伝使、お前も中々ぬかりのない男だ。俺もカンチンした、流石は三五教の宣伝使だワイ。アーン』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yatsukosu: 'Oh, as you say, I must quickly go to the aid of the Sendenshi-sama. I did not see his face clearly, but he seemed to resemble Umehiko quite a bit. Well, shall I rescue the four of them now and throw all of you in after them? This is interesting.'</p>
+          <p class="en-p">As he attempted to stand up, Rēru grabbed Yatsukosu's leg abruptly.</p>
+          <p class="en-p">Rēru: 'I am drunk, Rēru, so if you do something like wringing the neck of a sleeping bird, I shall have no chance to rise again. Come now, we have eaten from the same pot, so for the sake of that bond, please exempt me at least. In my stead, you may throw in Pōro, Shiyamu, Hāru, Eruma, and Emu without any hesitation. At a time like this, my own life is what matters; it is a time when one must look out for oneself, whether others die or fall. I am explaining this logic to you, so will you not listen? Ah!'</p>
+          <p class="en-p">Just then, Kiruku arrived in a flurry.</p>
+          <p class="en-p">Kiruku: 'Hey, hey Pōro, the Sendenshi of the Ananai-kyō has arrived with Tāru, Hamu, Īru, and Yosefu in his company. What shall we do?'</p>
+          <p class="en-p">Pōro: 'What, the Sendenshi has come again? And you say Hamu's brother is with him? Well, that is a clever trick; as expected of Hamu. He has lured them in quite smoothly, hasn't he?'</p>
+          <p class="en-p">Kiruku: 'No, no, that is not it at all. Hamu, Tāru, Īru, and Yosefu have completely sided with the Ananai-kyō and have come here.'</p>
+          <p class="en-p">Pōro: 'Ha-ha, he is a kobun of Onikumawake-sama, but he probably brought them here thinking they are of the same faith, hoping to gain credit for us. He is truly a sharp fellow.'</p>
+          <p class="en-p">Yatsukosu: 'What, the Sendenshi of the Ananai-kyō has come? That is interesting. Everyone here is dead drunk, and since there is no fear of any trouble from the old couple, I shall go out to meet them.'</p>
+          <p class="en-p">He ran to the entrance of the cave and said,</p>
+          <p class="en-p">Yatsukosu: 'Well, well, Sendenshi-sama of the Ananai-kyō, I do not know your name, but please, come inside. Terukuniwake and his party have just been dropped into a pit and are in trouble. Come, hurry and jump in to conquer the cave. We shall assist you as well.'</p>
+          <p class="en-p">Kokkō: 'Wait, are you not saying something that makes no sense? You are a member of the Brahman sect, are you not?'</p>
+          <p class="en-p">Yatsukosu: 'In truth, I am the Sendenshi of the Ananai-kyō, Iwahiko-no-Mikoto. By the secret command of the Ōkami, I have been disguised as a believer in this cave, waiting for the right moment until now. You appear to be a novice, but do not worry about a thing. Hurry and enter; something quite interesting is about to begin.'</p>
+          <p class="en-p">He said this with a grand air and entered the depths with a smile. Kokkō, not understanding, followed with the four others and proceeded deep inside. Seeing the drunken figures, he frowned and said,</p>
+          <p class="en-p">Kokkō: 'Ah, what a foul stench. How stifling. You have set up shop all over the place. Hey, is there any aromatic water? Or even a deodorizing liquid will do; sprinkle some, will you?'</p>
+          <p class="en-p">Iwahiko: 'That is beside the point; we must rescue Terukuniwake and the other three. Such trivial matters do not matter. The door is quite heavy, and I cannot do anything about it alone. Hey, you lot, lend me your strength. Here, stick your fingers into this round hole one by one and pull it up with a heave.'</p>
+          <p class="en-p">Kokkō said, 'Very well,' and together with the six of them, they combined their strength and pulled open the extremely heavy wooden door. Inside, the four men and women were reciting the Amatsu Norito with all their might. Kokkō peered into the hole and said,</p>
+          <p class="en-p">Kokkō: 'Ah, Terukuniwake-no-Sendenshi-sama, that was a close call. By the command of Yoshikohime-sama and Kiyoteruhime-sama, we have come to your rescue.'</p>
+          <p class="en-p">Terukuniwake: 'Ah, that was a great effort. Those Magatsukami-yatsu, to have finally dropped me into a place like this; even I was a little worried about what might happen. It is true that one should value one's retainers. Can you not lower a rope ladder or something quickly?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ヤツコス『オヽ貴様のいふ通り、早く宣伝使様をお助け致さねばならぬ。シツカリ顔を見なかつたが、何でも梅彦によく似て居つたやうだ。ドレこれから四人を救ひあげて、貴様等一同を其後へほり込んでやらうか。此奴ア面白い』</p>
+            <p class="ja-classical-line">と立上らうとするのを、レールは矢庭にヤツコスの足にくらひつき、</p>
+            <p class="ja-classical-line">『俺はレール酔うたのだから、寝鳥の首を締めるやうな事をやられちや浮む瀬がないワ。マアマア一つ鍋を食た仲だから、其誼みで俺丈は免除してくれ。其代りにポーロ、シヤム、ハール、エルマ、エム等は一寸も遠慮いらぬから、ドシドシと放り込んでくれ。モウ斯うなると吾身が大事ぢや、人が死なうが倒れやうが、吾さへ良けらよい時節だ。コレ丈道理を解けて頼むのにお前は聞いてくれぬのか。アーン』</p>
+            <p class="ja-classical-line">斯かる所へキルクは慌しくやつて来た。</p>
+            <p class="ja-classical-line">キルク『オイオイポーロ、三五教の宣伝使がタール、ハム、イール、ヨセフを供としてやつて来ました。如何致しませうかな』</p>
+            <p class="ja-classical-line">ポーロ『ナニ、又宣伝使がやつて来た？　そしてハムの兄哥が居るといふのか、ソラ洒落てる、流石はハムだ。甘く引張り込んで来やがつたな』</p>
+            <p class="ja-classical-line">キルク『イエイエ滅相もない。ハム、タール、イール、ヨセフはスツカリ三五教の味方をして、ここへやつて来よつたのだ』</p>
+            <p class="ja-classical-line">ポーロ『ハハー彼奴ア鬼熊別さまの子分だけれど、同じ教だと思つて、俺達に手柄をさそうと連れて来たのだらう。本当に気の利いた奴だ』</p>
+            <p class="ja-classical-line">ヤツコス『ナニ、三五教の宣伝使が来たか、其奴ア面白い、何奴も此奴も一人も残らず酔ひつぶれて居やがる、決して老人夫婦に対し後顧の憂ひがないから、俺が一つ出迎へに行て来う』</p>
+            <p class="ja-classical-line">と、岩戸の入口に走り出で、</p>
+            <p class="ja-classical-line">『これはこれは三五教の宣伝使様、お名は存じませぬが、マア奥へお入り下さい。照国別一行が今陥穽へおとされて困つてゐる所です。サア早く飛込んで岩窟征伐をして下さい。吾々もお手伝ひを致しませう』</p>
+            <p class="ja-classical-line">国公『ハテ、合点のいかぬ事を云ふぢやないか、お前はバラモン教の眷族だらう』</p>
+            <p class="ja-classical-line">ヤツコス『実の所は三五教の宣伝使岩彦命だ。大神様の内命に依つて、此岩窟へ信者と化けこみ、今迄時を待つてゐたのだ。お前もまだ新米と見えるが、ナーニ案じる事はない。トツトと這入つてくれ、随分面白い事が始まつてゐるから』</p>
+            <p class="ja-classical-line">と鷹揚に言ひ放ち、ニコニコとして奥に入る。国公は合点行かず、四人を従へ奥深く進み入り、酔ひどれの姿を見て、顔をしかめ、</p>
+            <p class="ja-classical-line">『アヽいやな匂がするぢやないか、何だムサ苦しい、そこら中に店出しをしよつて、オイ何か芳香水がないか、イヤ防臭液でもいい、チトふりかけてくれ』</p>
+            <p class="ja-classical-line">岩彦『それは兎も角、照国別外三人を救ひ上げねばならぬ。そんな末梢的問題はどうでもいい、中々戸が重たくて俺一人では如何ともする事が出来ない。ヤイ、一同の連中さま、俺に力を貸してくれ、ここだ此丸い穴へ一人づつ指を突込んでグイと引上げてくれ』</p>
+            <p class="ja-classical-line">国公は『ヨシ来た』と言ひながら六人力を併せて、非常に重たい板の戸を引きあけた。中には四人の男女が一生懸命に天津祝詞を奏上してゐた。国公は穴を覗いて、</p>
+            <p class="ja-classical-line">『ヤア照国別の宣伝使様、危い所でありました。黄金姫様、清照姫様の命令に依つて、あなた方をお助けに参りました』</p>
+            <p class="ja-classical-line">照国別『ヤアそれは御苦労だつた、曲津神奴、とうとうこんな所へおとしよつて流石の俺も如何なる事かと、聊か心配してゐた。持つべき者は家来なりけりだ。早く縄梯子でもおろしてくれないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ihahiko brought a nahabashigo from somewhere and cast it down with a rattle. Terukuniwake, followed by Ayame, Terukō, and Umekō, climbed up the nahabashigo like monkeys, lowered their heads slightly before Kunikō, and offered an aisatsu.</p>
+          <p class="en-p">‘Ya, arigata.’</p>
+          <p class="en-p">Ihahiko slapped Terukuniwake’s back two or three times, pon-pon.</p>
+          <p class="en-p">‘Ya, Umehiko, it has been a long time. I never dreamed I would meet you in a place like this.’</p>
+          <p class="en-p">Terukuniwake: ‘Yo, so you were Ihahiko! What a fushigi place to meet. But tell me, how are the raujin fūfu doing?’</p>
+          <p class="en-p">Ihahiko: ‘Do not shinpai. Since I have always hidden myself to provide them with jifubun gochisō and guarded them with care, both of them are shigoku kenzen. I heard they were your riyōshin.’</p>
+          <p class="en-p">Terukuniwake: ‘Where are my riyōshin? Will you not annai me?’</p>
+          <p class="en-p">Ihahiko: ‘Very well, follow me. This is the end of the otoshiana.’</p>
+          <p class="en-p">Saying this, he led them to the front of the rauya. Looking there, the door of the hitoya stood wide open. This was because that fellow Siam, startled when Terukuniwake arrived here, had left the door open. However, the raujin fūfu thought that even if they left this hitoya, they were still inside the ihaya and knew not what fate might befall them; thus, the fūfu huddled together in a small corner, trembling.</p>
+          <p class="en-p">Terukuniwake said with a clouded voice:</p>
+          <p class="en-p">‘Moshi, Otō-sama, Okā-sama, I am Umehiko. My younger sister Ayame has also come here. Please be at ease.’</p>
+          <p class="en-p">Upon hearing this voice, the raujin fūfu rushed out of the hitoya; Kashitayahiko clung to Ayame and Kashitayahime clung to Terukuniwake, blinded by tears of joy, continuing a curtain of silence for a while, only shedding hot tears like a waterfall.</p>
+          <p class="en-p">From this point, the sins of all including Pōro and Rēru were forgiven; Terukuniwake placed his riyōshin and younger sister Ayame under the protection of Kunikō, and with Tāru, Īru, Hamu, and Yosefu guarding the front and rear, he had them return to their home in Āmeniya. To fulfill the mission of the Ōkami, he himself took Terukō, Umekō, and Ihahiko, left the ihaya behind, and headed toward the land of Fusa, singing the Propagational Song as he marched forth with courage. Kannagara Tamachihaimase.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">岩彦は何処よりか縄梯子を持来り、バラリとかけ下ろした。照国別を初め、菖蒲、照公、梅公は猿の如く縄梯子を伝うてかけ上り、国公の前に首を一寸下げ、</p>
+            <p class="ja-classical-line">『ヤア有難う』</p>
+            <p class="ja-classical-line">と挨拶する。岩彦は照国別の背を二つ三つポンポンと叩き、</p>
+            <p class="ja-classical-line">『ヤア梅彦、久し振だつたねい、こんな所で会はうとは夢にも思はなかつたよ』</p>
+            <p class="ja-classical-line">照国別『ヨーお前は岩彦だつたか、何と不思議な所で会うたものだ。併し老人夫婦はどうしてゐるか、聞かしてくれ』</p>
+            <p class="ja-classical-line">岩彦『心配すな、俺がいつもかくれ忍んで十分の御馳走を与へ、大切に守つてゐたから、お二人共至極健全だ。聞けばお前の両親だつたさうだねい』</p>
+            <p class="ja-classical-line">照国別『両親はどこにゐられるか、案内してくれないか』</p>
+            <p class="ja-classical-line">岩彦『ヨシ俺に従いて来い、陥穽はモウこれ丈だ』</p>
+            <p class="ja-classical-line">と言ひつつ、牢屋の前に導いた。見れば牢獄の戸はパツと開いてある。照国別がここへ来た時にシヤムの奴、驚いて戸を開けておいたからである。されど老人夫婦は仮令此牢獄を出た所で、ヤツパリ岩窟の中だ、どんな目に会はされるか知れないと、小隅に夫婦は抱合つて、震うてゐた。</p>
+            <p class="ja-classical-line">照国別は声をくもらせ、</p>
+            <p class="ja-classical-line">『モシお父さま、お母アさま、私は梅彦で御座います、妹の菖蒲もここに参つて居ります。どうぞ御安心下さいませ』</p>
+            <p class="ja-classical-line">此声を聞くより老人夫婦は牢獄を飛び出で、樫谷彦は菖蒲に樫谷姫は照国別に抱つき、嬉し涙にかきくれ、暫しは無言の幕をつづけて、熱き涙を滝の如くに流すのみなり。</p>
+            <p class="ja-classical-line">これよりポーロ、レールを初め一同の罪を赦し、照国別は両親を初め、妹菖蒲を国公に守らせ、タール、イール、ハム、ヨセフも前後を守つて、アーメニヤの故郷へ帰らしめ、自分は大神の使命を果すべく、照公、梅公及岩彦を伴ひ、岩窟を後にフサの国をさして、宣伝歌を歌ひつつ、勇み進んで出でて行く。惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c15.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 15: 焼糞 [1080]</span>
+      </a>
+      <a href="c17.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 17: テームス峠 [1082]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

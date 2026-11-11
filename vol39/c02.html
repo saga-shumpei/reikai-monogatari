@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 2: 評定 [1067] - Volume 39 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 39 Table of Contents</a>
+      <span>Volume 39</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 39 &bull; Chapter 2</span>
+      <h1 class="chapter-title-en">Chapter 2: 評定 [1067]</h1>
+      <p class="chapter-title-ja">評定〔1067〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">To chastise the violent conduct of Ōkuronushi, the Kyōshiyu of Brahmanism, to bring about Kotomukeyaha and remove the evils of Tenka, and to purify the Mitama of Yamataorochi and the Shikogami, a strict Saudankuwai was held by the command of Kamususanōnōokami at the Yahirodono of the mansion in the Iso of the Ubusuna Sanmiyaku summit. Susanōnōokami appeared on the Kauza and proclaimed to the Ichidō through an Onuta. The Onuta was as follows:</p>
+          <p class="en-p">‘The Mioshihe of the Ananai-kyō, / Formed by uniting the Iki / Of the Kamigami of Ame and Earth, / Though it shines brightly / Throughout the Yasoshima and the Yaso lands, / The Shikogami of Yamataorochi / Has not yet fully submitted, / And lurking on the mountain ridges and river rapids, / It opens up wickedness Asayufu, / Which is truly lamentable. / The Kamitsukasa of the Ananai-kyō, / Must rouse their pure and bright sincerity / To the limit of their strength, / And for the sake of saving the Kamibito of the four quarters of heaven and earth, / Must grind their physical bodies to powder, / Crossing over the far and near, / Traversing the wilderness and crossing the seas, / Treading upon the snow and enduring the heat, / Drenched by the rain and fanned by the wild winds, / As they advance forward.’</p>
+          <p class="en-p">‘How valiant is that divine work. / At this very time, the great leader of Brahmanism, / Onigumohiko, who has appeared and coiled himself / In the land of Ken-on, / Fears and dreads the true path of the Ananai-kyō, / And has barricaded himself in Jitentōtō, / Attempting to transmit his evil Oshihe to the lands of the four quarters; / At that time, he was struck with fear / By the Kototama of the righteous men / Whom I had sent, and fled back, / Wandering here and there, entering the land of Fusa again, / And now he has appeared in Haruna, the capital of the land of India, / Piercing the rock caves to summon the Majin, / And his power has become / Hard to despise with each passing day and month. / Yamataorochi has gathered entirely / In this capital, / Plotting to overturn my great path of Ananai, / And already, with the momentum to attack / Even as far as the mansion of Iso, / The Magatsukami of the four quarters are emboldened, / And their trembling presence is indeed spirited.’</p>
+          <p class="en-p">‘Nodatehiko and Nodatehime, / Haniyashiko and Haniyashime, / By the command of the Kami, / Opened this path, / Which has become an unmoving, precious shield / Of the Kamigami of Ame and Earth, / Firm and eternal; / Therefore, no matter how the Majin may clamor, / How could it ever be toppled? / Nevertheless, in this world where the Magatsukami / Are raging violently, / Do not let your guard down. / Now, from here, the Kamitsukasa / Must bathe their bodies in the light of the Kami, / And head toward the capital of Haruna / Where Ōkuronushi lies in hiding, / To bring about Kotomukeyaha / To the pure and righteous great path of the infinitely merciful Ōkami.’</p>
+          <p class="en-p">‘Regarding this, all of the / Kamitsukasa must consult together / With the utmost sincerity, / And select the Kamitsukasa / To chastise Ōkuronushi. / I shall now proceed to the Okudono, / And offer up the strict Kototama / To the Ōkami of Ame and Earth, / Praying for the success of our divine army. / Now then, / O hundred officials and Kamibito, / With reverence and awe, / Each of you must reveal from the bottom of your hearts / Your thoughts on this battle of Kotomukeyaha, / And select those who shall serve / The divine will of the Kami. / Before the Kami, I offer up / The Mitama, purifying my heart.’</p>
+          <p class="en-p">Having finished this proclamation, he hid his form in the Okudono.</p>
+          <p class="en-p">Hinodewake, who was in the position of Omoikane-no-kami (Chairman), turned to the Ichidō and said:</p>
+          <p class="en-p">‘Gathered at the mansion of Iso by the will of the Kami, / Let us hold a divine council for the subjugation of the Majin. / Awe-struck by the precious words of the Ōkami, / Let the assembled officials deliberate. / The Kamitsukasa of Brahmanism, Ōkuronushi, / Is plotting in the capital of Haruna. / Even if he plots, what of it? The Magatsukami’s / Vile schemes shall not be permitted by the Kami. / The Mioshihe of the noble Susanōnōokami / Shines as clearly as the sun and moon. / By the Mioshihe of the Ananai moon that shines so clearly, / Bring Ōkuronushi to Kotomukeyaha.’</p>
+          <p class="en-p">Higashinowake-no-mikoto stood and replied to this:</p>
+          <p class="en-p">‘I, Higashinowake, a Kamitsukasa of the mansion of Iso of Kototama, / Speak in response. / Who shall be the Kamitsukasa / To bring Kotomukeyaha to the evil official Ōkuronushi? / I wish to hear the heart of Hinodewake, / As it is difficult to determine such a heavy mission. / Higashinowake believes / That there is no need for too many envoys.’</p>
+          <p class="en-p">Hinodewake-no-mikoto replied to this:</p>
+          <p class="en-p">‘As the sun rises, dividing the eastern sky, / In accordance with the light of the Ananai moon. / Let all those who consider themselves capable / Proclaim and convey the extent of their hearts.’</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">バラモン教の教主大黒主の暴状を懲らし、言向和して天下の害を除き、八岐大蛇や醜神の身魂を清むべく、ここにウブスナ山脈の頂上斎苑の館の八尋殿にて神素盞嗚大神の命により厳格なる相談会が開かれた。素盞嗚大神は高座に現はれ一同に向つて歌を以て宣示された。其御歌、</p>
+            <p class="ja-classical-line">『天と地との神々の
+水火を合してなりませる
+三五教の御教は
+島の八十島八十の国
+隈なく光り渡れども
+八岐大蛇の醜神は
+未だ全く服はで
+山の尾の上や河の瀬に
+潜みて枉を朝夕に
+拓き行くこそうたてけれ
+三五教の神司
+清けき明き真心を
+力限りに振り起し
+天地四方の神人を
+救はむ為めに現身の
+身を粉になして遠近と
+荒野を渡り海を越え
+雪を踏みしめ暑さを耐へ
+雨にはそぼち荒風に
+煽られ乍ら進み行く</p>
+            <p class="ja-classical-line">其神業ぞ雄々しけれ。
+時しもあれや顕恩の
+郷に現はれ蟠かまる
+バラモン教の大棟梁
+鬼雲彦は三五の
+誠の道に怯ぢ恐れ
+自転倒島に立籠り
+悪しき教を四方の国
+伝へむとする其時に
+わが遣はせし神司
+正しき人の言霊に
+恐れをなして逃げ帰り
+再びフサの国に入り
+彼方此方と徜徉ひて
+今しも印度の国の都
+ハルナに現はれ岩窟を
+穿ちて魔神を呼び集へ
+其勢は日に月に
+侮り難くなりにけり
+八岐大蛇は悉く</p>
+            <p class="ja-classical-line">これの都に集りて
+我三五の大道を
+覆がへさむと図りつつ
+早くも斎苑の館まで
+攻め来らむず勢ひに
+四方の曲神勇み立ち
+振ひ居るこそ健気なれ
+野立の彦や野立姫
+埴安彦や埴安姫の
+神の命とあれまして
+開き給ひし此道は
+天と地との神々の
+堅磐常磐に動きなき
+珍の御楯となりつれば
+如何に魔神の騒るとも
+いかで倒るる事やあらむ
+さはさりながら曲神の
+伊猛り狂ふ世の中は
+心を許すこと勿れ
+いざこれよりは神司</p>
+            <p class="ja-classical-line">神の光りを身に浴びて
+大黒主が潜みたる
+ハルナの都に立向ひ
+仁慈無限の大神の
+清き正しき大道に
+言向和し来るべし
+これに就いては諸々の
+神の司は真心の
+限りを尽して相図り
+大黒主を懲戒の
+神の司を選めかし
+われはこれより奥殿に
+進みて天地の大神に
+厳の言霊宣り上げて
+我神軍の成功を
+祈り奉らむいざさらば
+百の司よ神人よ
+謹み畏み此度の
+言向戦を各自に
+心の底より打ち明かし</p>
+            <p class="ja-classical-line">選みて神の御心に
+仕へまつれよ惟神
+神の御前に瑞霊
+心を清めて宣りまつる』</p>
+            <p class="ja-classical-line">と宣示し終つて奥殿に姿を隠し給ふた。</p>
+            <p class="ja-classical-line">思兼神（議長）の格に控へたる日出別神は一同に向ひ、</p>
+            <p class="ja-classical-line">『惟神斎苑の館に集まりて
+魔神討伐の神議りせむ。
+大神の珍の御言を畏みて
+並み居る司言議りせよ。
+バラモンの大黒主の神司
+ハルナの都に事謀ゆらし。
+はかゆとも何かあらむや曲神の
+醜の企みは神許すまじ。
+素盞嗚の神の尊の御教は
+月日の如く冴え渡るなり。
+冴え渡る三五の月の御教に
+言向和せ大黒主を』</p>
+            <p class="ja-classical-line">東野別命は立つて之に答へた。</p>
+            <p class="ja-classical-line">『言霊の斎苑の館の神司
+東の別は言問ひまつる。
+大黒主曲の司を言向くる
+神の司は何人とせむ。
+聞かまほし日出の別の御心を
+重き使を定めかねつつ。
+この使あまり多くは要るまじと
+東野別は思ひ居るなり』</p>
+            <p class="ja-classical-line">日出別命はこれに答へて、</p>
+            <p class="ja-classical-line">『日出別東の空を分け昇る
+三五の月の照らすまにまに。
+何人もわれと思はむ人達は
+心のたけを宣り伝へませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Azumanowake replied to this:</p>
+          <p class="en-p">Hinodewake-kami's command is noble indeed,
+I shall select them according to the Mikoto.</p>
+          <p class="en-p">Tokiokashinokami stood up:</p>
+          <p class="en-p">Let these envoys, Ōriyōhime and Mukadehime,
+Be sent first to scout the path.
+For the Futahashira-kami's Mikoto are those
+Who dwell in the teachings of the Brahman.
+Having departed from the land of Kenon,
+They are ones who have not met for a long time.
+Rather than the going of the Ananahi-kami's officials,
+I shall entrust my heart to Mukadehime.
+Mukadehime and Ōriyōhime shall bravely
+Kotomukeyaha Ōkuronushi.</p>
+          <p class="en-p">Ōriyōhime stood and sang:</p>
+          <p class="en-p">Ōriyōhime-kami's Mikoto knows well
+That she has entered the path of Ananahi.
+Tarachine-no-haha-no-Mikoto shall for a while
+Serve in the mansion of Iso.
+For I think it dangerous to advance to the Tekijiyō
+While bearing an aged body.</p>
+          <p class="en-p">Mukadehime replied to this:</p>
+          <p class="en-p">This life offered to the Ametsuchi-no-kami,
+Why should I fear it, even amidst water and fire?
+No matter what power Ōkuronushi may possess,
+I shall try to Kotomuke him with my Kototama.
+Ōriyōhime, do not blow forth weak Kototama
+And stain even the name of our mother.
+I shall stand against the capital of Haruna
+And persuade the husband, Onikumawake.
+Beginning with the officials of Ōkuronushikami,
+I intend to save my lord.
+If I serve as this brave Mitsukahi,
+I would have no regrets even if I were to die.</p>
+          <p class="en-p">Ōriyōhime replied to this:</p>
+          <p class="en-p">What Kenage words of my mother's Mikoto,
+The nobility of the Kami is known anew.
+How brave a Kami my mother must be,
+With such clear and piercing Kototama.
+Come then, I intend to head to the capital of Haruna
+Together with mother's Mikoto.</p>
+          <p class="en-p">Mukadehime replied to this:</p>
+          <p class="en-p">What Kenage words of Ōriyōhime,
+I shall bravely go to the Tekijiyō.</p>
+          <p class="en-p">Terukuniwake (whose original name was Umehiko), who had become the husband of Ikuyohime, the second daughter of Susanoo-no-Mikoto, stood up and expressed his thoughts through a song:</p>
+          <p class="en-p">The very solemn declaration
+Of the Kami Susanoo-no-Ōkami,
+Accepting that heart
+In every detail, the Kami officials
+Hinodewake and Yashimanushi,
+Azumanowake and Tokiokashinokami,
+While such noble Kami are present,
+Umehiko, who has filled his body and soul
+With the power of the Kami,
+All of you have recommended Ōriyōhime
+And Mukadehime to other places,
+How regrettable that is.
+I am the Kami Terukuniwake,
+Having been granted a noble divine name,
+My courage is a hundred times greater than usual,
+My heart is eager and my arms are ready,
+It has become hard to endure.
+O assembled Kami officials,
+If you were to choose me,
+I would stand against the capital of Haruna
+Where Ōkuronushi is barricaded,
+And firing my Kototama of a thousand changes and ten thousand transformations
+In every direction without limit,
+Leaving not a single evil Kami behind,
+I would Kotomukeyaha them and make the divine virtue
+Shine upon the Ametsuchi like the sun and moon,
+That is before my very eyes.
+Umehiko, who makes the plum blossoms of the three thousand worlds
+Bloom all at once,
+If you do not choose him as this envoy,
+No matter how noble Ōriyōhime
+And Mukadehime may be,
+No matter how much secret art they exhaust,
+How could they achieve their desire?
+By Tadani ni Minaoshi Kikinaoshi,
+And Norinaoshi, add Umehiko,
+And let the three of you be the envoys of the Ōkami
+To the capital of Haruna in the land of the moon.
+My heart is already
+Fully established with the intention
+To make the officials of Ōkuronushi
+Submit and harmonize,
+Completing this divine work
+Suddenly with a single command,
+If not by Kotomukeyaha of the Yamata-no-Orochi and the ugly Kami,
+Then I shall cast them down to the land of the roots.
+Divine plans and demonic strategies are in my heart,
+I only wish that you would make Umehiko,
+Terukuniwake, the chief envoy,
+And let me proceed together with the two goddesses,
+I pray to the Kami and beseech you.</p>
+          <p class="en-p">Ikuyohime stood up:</p>
+          <p class="en-p">What my husband declares is brave indeed,
+O hundred officials, please grant it.
+I wish that Ikuyohime also might go together
+To the capital of Haruna.
+How brave my husband is,
+Who bears the name of the Mikoto of Terukuniwake-kami.
+I speak to the Mikoto of Hinodewake-kami,
+Send us, husband and wife, to India.
+O officials of the teachings of Azumanowake-kami,
+Grant the request of us husband and wife.
+O Mikoto of Tokiokashinokami, Umehiko and I,
+Please listen to our request.</p>
+          <p class="en-p">Tokiokashinokami again sang:</p>
+          <p class="en-p">Though the words of your lord are clear,
+Consider the departure of a married couple.
+For a couple to be envoys of the Ananahi-kami
+Is a precedent unheard of even in the age of the Kami.</p>
+          <p class="en-p">Ikuyohime: 'My Kototama is truly shameful,
+Overflowing with the sincerity of thinking of the land of the Kami.
+Come then, please send my husband
+Alone to the land of India.'</p>
+          <p class="en-p">Hinodewake replied:</p>
+          <p class="en-p">The Mikoto of Terukuniwake-kami,
+Proceed bravely to the land of India.</p>
+          <p class="en-p">By the declaration of Hinodewake-Mikoto, it was decided here that Terukuniwake would depart for the land of India.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">東野別はこれに答へて、</p>
+            <p class="ja-classical-line">『日出別神の仰せぞ尊けれ
+神言のままに選み合ひせむ』</p>
+            <p class="ja-classical-line">時置師神は起ち上り、</p>
+            <p class="ja-classical-line">『この使黄竜姫や蜈蚣姫
+先づ遣はして瀬踏みせしめよ。
+二柱神の命はバラモンの
+教にゆかり居ます身なれば。
+顕恩の郷を立ち出で給ひてゆ
+久しく会はせ給はぬ身故に。
+三五の神の司の行くよりも
+蜈蚣姫には心許さむ。
+蜈蚣姫黄竜姫は雄々しくも
+大黒主を言向和さむ』</p>
+            <p class="ja-classical-line">黄竜姫は、立つて歌ふ。</p>
+            <p class="ja-classical-line">『黄竜姫神の命は三五の
+道に入りしと彼は知るらむ。
+足乳根の母の命は今暫し
+斎苑の館に仕へますべし。
+年老いし身をもちながら敵城に
+進まむ事の危く思へば』</p>
+            <p class="ja-classical-line">蜈蚣姫はこれに答へて、</p>
+            <p class="ja-classical-line">『天地の神に捧げし此命
+いかで恐れむ水火の中も。
+大黒主たとへ如何なる力あるも
+わが言霊に言向けて見む。
+黄竜姫弱き言霊吹き放ち
+母の名までも汚すまじきぞ。
+吾こそはハルナの都に立ち向ひ
+鬼熊別の夫を諭さむ。
+大黒主神の司を始めとし
+吾背の君を救はむとぞ思ふ。
+勇ましき此御使に仕へなば
+吾は死すとも悔ざらましを』</p>
+            <p class="ja-classical-line">黄竜姫はこれに答へて、</p>
+            <p class="ja-classical-line">『健気なる母の命の御言葉よ
+神の尊さ今更ぞ知らるる。
+吾母は如何に雄々しき神ならむ
+冴え渡りたる今の言霊。
+いざさらば母の命と諸共に
+ハルナの都に向はむとぞ思ふ』</p>
+            <p class="ja-classical-line">蜈蚣姫はこれに答へて</p>
+            <p class="ja-classical-line">『健気なる黄竜姫の言葉かな
+吾は勇みて敵城に行かむ』</p>
+            <p class="ja-classical-line">素盞嗚尊の第二の娘幾代姫の夫となりし照国別（元の名は梅彦）は起ち上り、歌を以て所感を述べた。</p>
+            <p class="ja-classical-line">『神素盞嗚大神の
+いと厳かな御宣言
+其御心を細さに
+受け入れ給ひし神司
+日出別や八島主
+東野別や時置師
+尊き神が在しながら
+神の力を身に魂に
+満ち足らはせし梅彦を
+他所に皆して黄竜姫
+蜈蚣の姫を推薦し
+給ひし事の恨めしさ
+吾は照国別の神
+尊き神名を賜はりて
+勇気は日頃に百倍し
+心は勇み腕はなり
+はや堪へ難くなりにけり
+並び給へる神司
+吾を選ませ給ひなば
+大黒主の立て籠る</p>
+            <p class="ja-classical-line">ハルナの都に立向ひ
+千変万化の言霊を
+縦横無尽に発射して
+魔神を一人も残さずに
+言向和し神徳を
+月日の如く天地に
+輝かさむは目のあたり
+三千世界の梅の花
+一度に開く梅彦を
+これの使に選まずば
+如何に尊き黄竜姫
+蜈蚣の姫の両人が
+何程秘術を尽すとも
+いかで思ひを達せむや
+直日に見直し聞き直し
+宣り直しつつ梅彦を
+加へて三人月の国
+ハルナの都へ大神の
+使とよさし給へかし
+吾胸中は早已に</p>
+            <p class="ja-classical-line">大黒主の神司
+服へ和す心算の
+数限りなく確立し
+命令一下忽ちに
+此神業を完成し
+八岐大蛇や醜神を
+言向和すかさもなくば
+根底の国へ追ひ落す
+神算鬼謀は胸にあり
+只願はくは梅彦の
+照国別を正使とし
+二人の女神と諸共に
+進ませ給へ惟神
+神に誓ひて乞ひまつる』</p>
+            <p class="ja-classical-line">幾代姫は起ち上がり、</p>
+            <p class="ja-classical-line">『雄々しくも吾が背の君の宣らすこと
+許させ給へ百の司等。
+願はくは幾代の姫も諸共に
+ハルナの都へ行かまほしさよ。
+照国別神の命と名を負ひし
+吾背の君の勇ましきかも。
+日出別神の命に物申す
+吾等夫婦を印度に遣はせ。
+東野別神の教の司たち
+吾等夫婦の乞ひを許せよ。
+時置師神の命も梅彦や
+吾願言を聞し召しませ』</p>
+            <p class="ja-classical-line">時置師神は又歌もて、</p>
+            <p class="ja-classical-line">『汝が君のその言の葉は清けれど
+見合せ給へ夫婦の出立。
+三五の神の使の夫婦連れ
+神世も聞かぬ例なりせば』</p>
+            <p class="ja-classical-line">幾代姫『神国を思ふ誠のあふれてぞ
+吾言霊のいとも恥かし。
+いざさらば吾背の君を只一人
+使はせ給へ印度の御国へ』</p>
+            <p class="ja-classical-line">日出別は答へて、</p>
+            <p class="ja-classical-line">『照国別神の命は印度の国
+いと雄々しくも進み行きませ』</p>
+            <p class="ja-classical-line">日出別命の宣示によつて茲に照国別は愈印度の国へ出張することとなつた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c01.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 1: Great 黒主 [1066]</span>
+      </a>
+      <a href="c03.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 3: 出師 [1068]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
