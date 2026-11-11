@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 23: 鉄鎚 [938] - Volume 33 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 33 Table of Contents</a>
+      <span>Volume 33</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 33 &bull; Chapter 23</span>
+      <h1 class="chapter-title-en">Chapter 23: 鉄鎚 [938]</h1>
+      <p class="chapter-title-ja">鉄鎚〔938〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tōsuke, wondering what to do, sprang straight up, and letting his voice ring out clearly to echo across the surroundings, began to chant:</p>
+          <p class="en-p">Though the living must surely die and those who meet must part, / To call this floating world a place of mere transience / Could there be anything so strange? / Like the flow of a river and the body of man, / The end of the journey is wondrous indeed! / In the Tsukushi realm of the island of Tsukushi, / Guarded by the separate guardian of the white sun, / Entrusted with a wondrous mansion, / Bestowing grace upon the myriad people of the land, / He who ruled as Takateruhiko, / The divine minister of the noble Mikoto— / His father is Kuniharutachinokami. / From the distant ages of the age of gods, / The fertile land of Toyoashihara, the Mizuhokuni, / Perfectly and intimately he created, / And the supreme deity who ruled— / His father, the lingering keepsake, / Changing his name to Yasokumawake, / Endured this world in secret, / Yet Hinodewake and Hafurihime,</p>
+          <p class="en-p">Together with the divine minister of the heavenly administration, Tsuranagihiko, / Appeared in the rich land, / Discovered Tōsuke's father, Takateruhiko, / And commanded him as the governor of the realm. / Born as a precious child of Takateruhiko, / Becoming one of the three who emerged, / I am Tōsunowakenokami. / Receiving the command of my father, / Crossing over the vast ocean, / Ascending the river of Eden, / To the city of God, Jerusalem, / Advancing to the foot of the Mountain of Gold, / Even as I came, a graceful maiden traveling alone, / At the very moment I was passing her by and leaving her behind, / Suddenly a cry was heard: / What manner of crookedness has appeared,</p>
+          <p class="en-p">Oppressing and tormenting people? / I shall not overlook this; I will save her. / Turning back at the sound of the cry, / I searched it out and drew near to look, / And the maiden of before had fallen to the earth. / Encountering an unexpected demon, / Rejoicing that she was saved from such a perilous place by your lord, / The young man and woman, amidst rare passersby, / Climb the mountain path. / Even the color of the mountains is like the spring of youth; / For the two whose blood wells up and overflows, / How could they possibly restrain themselves? / Without the permission of the god of binding, / Indulging in an unexpected bond, / Even bearing a child in that very hour, / The sendenshi of Kitahiko, / Proclaiming an investigation of faith, / To search out the origin of my own body, / Came entering straight toward my hut.</p>
+          <p class="en-p">Forgetting the mission of my father, / Since I am one who heaped up sins, / Though I thought the woman pitiful, / I abandoned her and fled from the hut, / Advancing from there into the land of Fusa, / Traversing the land of the moon, / Crossing the mountains and rivers and traversing the wastes of Tibet, Siam, and Cathay, / Advancing and advancing, / Just as I was crossing over to the island of Onogoro, / My boat shattered by the wind, / At a moment when my life was in peril— / Whether by the grace of heaven or the favor of earth, / A divine being endowed with wings / Grabbed my body abruptly, / Soaring high into the great sky, / Upon the ocean of the strait of life, / Floating wide upon Awaji Island, / At the summit of Mount Akatsuki, / Upon a soaring pine tree,</p>
+          <p class="en-p">Oh, the wonder of being carried along! / The island people of the land of Awaji, / Looking up at my figure lingering in the treetops of the pine, / Reverently welcoming me as a divine being descended from heaven, / Rejoicing from the bottom of their villager's hearts, / Raised up as the chieftain of the island of Awaji, / And in this island, / Choosing Ohyuri, whose fame as a virtuous woman was ever high, to be my wife, / Changing my name anew to Tōsuke, / I came to pass the days and months; / Yet drawn by the cord of grace of the supreme deity of Ssangyong, / I have now traveled forth to the sacred ground, / Following the princess Eiko, / And have become a teaching minister.</p>
+          <p class="en-p">Listening and seeing as a souvenir story the tale of Takahime now told, / The divine minister of the mansion of Tatehi, / Kenkokuwake is without a doubt / The august child born between him and Takamiyahime. / Ah, Kannagara kamigami! / May the august spirit of the god bring happiness, / And though the whereabouts of my child have become clear, / The glamorous figure of Takamiyahime at that time— / How things change when they change, ah! / Though I have had occasions to meet Takahime face to face many times until now, / It was thirty-five years ago in that distant past, / With the barrier of months and years growing high, / And because her complexion had changed greatly with the advancing waves of the years, / The fact of our being husband and wife of old / I did not know until this very moment. / Nevertheless, Tōsuke,</p>
+          <p class="en-p">Even if I have met my wife of old, / I am one who possesses Ohyuri. / However deep our bond may be, / There is no longer any help for it, / So resign yourself to it, Takahime! / Burning with the blood of a youthful heart, / Unknowingly and unwittingly making sin, / Making my beloved child wander here and there— / How sad that is! / Ah, Kannagara kamigami! / May the august spirit bestow its blessing, / To say nothing of Takahime-no-tsukasa, / And Kenkokuwake's own offspring— / May they live long for a thousand and ten thousand generations, to the end of time, / And devote themselves to the great highway of the supreme deity! / Confessing the shame of the past before the gods without concealing or hiding it, / Chanting aloud the kototama of repentance, / From this point onward, Tōsuke's</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">東助は何と思うてか、ツト立ち上り、音吐朗々として四辺を響かせながら歌ひ出した。</p>
+            <p class="ja-classical-line">『生者必滅会者定離
+廻る浮世と云ひながら
+怪しき事のあるものか
+河の流れと人の身の
+行末こそは不思議なれ
+筑紫の島の筑紫国
+白日の別の守りたる
+珍の館を預りて
+数多の国人恵みつつ
+治め玉ひし高照彦の
+貴の命の神司
+父は国治立神
+遠き神代の昔より
+豊葦原の瑞穂国
+完美に委曲に造りまし
+治め玉ひし皇神の
+忘れ片身の吾父は
+八十熊別と名を変へて
+此世を忍び玉ひしが
+日の出神や祝姫</p>
+            <p class="ja-classical-line">神の司の宣伝使
+面那芸彦と諸共に
+豊の御国に現れまして
+高照彦の吾父を
+見出し玉ひ筑紫国
+国の司とまけ玉ふ
+高照彦の珍の子と
+生れ出でたる三人の
+其一人となり出でし
+吾は東野別神
+父の御命を蒙りて
+大海原を渡り越え
+エデンの川を溯り
+神の都のエルサレム
+黄金山下に進まむと
+来る折しも麗しき
+孱弱き女の一人旅
+見捨てて進む折柄に
+俄に聞ゆる叫び声
+如何なる曲の現はれて</p>
+            <p class="ja-classical-line">人を虐げ苦しむる
+見遁しならじ助けむと
+後へかへして叫び声
+頼りに尋ね寄り見れば
+以前の娘は地に伏して
+思はぬ悪魔に出会し
+危き処を汝が君に
+救はれたりと喜びて
+若き男女は人通り
+稀なる山路上り行く
+山の色さへ青春の
+血の湧き充てる両人は
+何かはもつて耐るべき
+結びの神の許しなく
+思はぬ綱に耽溺し
+子迄なしたる折柄に
+北光彦の宣伝使
+信仰調べを標榜し
+吾身の素性を尋ねむと
+吾庵をさして入り来る</p>
+            <p class="ja-classical-line">父の使命を忘却し
+罪を重ねし吾なれば
+女は不憫と思へども
+見捨てて庵を遁走し
+それより進んでフサの国
+月の国をば横断し
+西蔵暹羅や唐土の
+山河を渡り荒野越え
+進み進みて自凝の
+島へと渡りて来る折
+風に船をば破られて
+命危き折柄に
+天の恵か地の恩か
+翼の生えし神人が
+吾身をムズと引き掴み
+大空高く翔りつつ
+命の瀬戸の海原に
+浮かびて広き淡路島
+暁山の山頂に
+聳り立ちたる松の上に</p>
+            <p class="ja-classical-line">連れ行かれたる不思議さよ
+淡路の国の島人は
+松の梢に佇める
+吾の姿を打仰ぎ
+天より下りし神人と
+敬ひ迎へて村肝の
+心の底より嬉しがり
+淡路の島の酋長と
+まつり上げられ此島に
+淑女の誉弥高き
+お百合を選んで妻となし
+名も東助と改めて
+月日を送り来りしが
+三五教の大神の
+恵の綱に曳かされて
+今は聖地に出張し
+英子の姫に従ひて
+教司となりましぬ
+今高姫が物語
+黒姫さまが筑紫島</p>
+            <p class="ja-classical-line">土産話に聞き見れば
+建日の館の神司
+建国別は紛れなき
+高宮姫との其中に
+生れ出でたる御子ならむ
+あゝ惟神々々
+神の御霊の幸はひて
+吾子の行方は明かに
+なりて来れど其時の
+高宮姫の艶姿
+変れば変るものだなア
+今迄幾度高姫と
+顔をば合はせし事あるも
+三十五年の其昔
+月日の関の高くして
+寄る年浪に顔色も
+太く変りてありければ
+昔の夫婦と云ふ事は
+今の今迄知らざりき
+さはさり乍ら東助は</p>
+            <p class="ja-classical-line">昔の妻に遇へばとて
+お百合の方のある身なり
+如何に縁は深くとも
+もはや詮術なきものと
+諦め玉へ高姫よ
+若き心の血にもえて
+思はず知らず罪作り
+いとしき吾子をあちこちと
+迷はせたるこそ悲しけれ
+あゝ惟神々々
+御霊幸倍ましまして
+高姫司はいふも更
+建国別の吾伜
+千代万代も末長く
+命長らへ皇神の
+大道に尽させ玉へかし
+昔の恥を神の前
+包まずかくさず表白し
+悔悟の言霊宣りあげて
+この行先は東助の</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Forgive our deep sins, / and advance us / upon the august path of the Gods, / Kamunagara! / We pray before the august presence of the Gods,'</p>
+          <p class="en-p">So singing to an end, he sat down upon his seat with composed dignity.</p>
+          <p class="en-p">Takahime for the first time realized that Tōsuke had been her lover thirty-five years ago, and blushing with maidenly shyness, she kept her head bowed for a little while, but as if resolved, she turned toward Tōsuke and:</p>
+          <p class="en-p">Ah, were you that gentle man of those days, Azumanowakenokami-sama? Not knowing this, I have committed various discourteous acts. Sazosazo, you must have been utterly disgusted by the strength of my ego. Spoken of as the time of the shipwreck at Ahajishima, or as the derailment escapade at Ejima, you must be laughing at me as such a disgraceful woman. Thinking that if I spoke of such old tales carelessly, you might despise me, wondering if the woman of those times was this very Takahime, ah, it would have been better for both of us if I had remained oblivious just as in the past; this too must have been caused by the Gods making me vomit up the old dirt. Please do not cast me aside, and treat me with affection just as before,'</p>
+          <p class="en-p">She drew close to Tōsuke's side and tried to take his hand, but Tōsuke sternly pushed her away, repulsed her, straightened his deportment, and with a solemn tone addressed Takahime:</p>
+          <p class="en-p">Takahime-sama, please restrain yourself a little. The past is the past, and now is now. If there were to be a repetition here once more of the one hundred and eight earthly desires that we had gone to such lengths to forget, an explanation would not stand before the Gods. You are also a person who has a splendid husband, and as for me, as you well know, I am a chieftain of the island of Awaji with a wife named Oyuri, and above all, as long as I perform the duties of the General Affairs Officer of the Izutsu-no-miya, I cannot afford to do such a thing even by accident. From now on, let us conduct our interactions even more strictly than with strangers. However, I will only acknowledge the fact that Kunitsukuni-no-wake, the Kami-governor of the land of Kumaso, is the son born between you and me. Even if you wish to meet that son, it should be quite well if you meet him freely. I certainly do not interfere up to that point. Yet, as this Tōsuke, no matter how beloved a child he may be, I cannot bring myself to meet him. First of all, I shall make a request to Eikohime-sama, and after receiving permission from the Kami-governors Tamateruhiko and Tamateruhime, I will confide the circumstances to my current wife, Oyuri, and after obtaining Oyuri's permission—and if the opportunity arises—I might perhaps meet him. Please forget the dreams of the past as of today, and since this Tōsuke will adopt an even stricter attitude toward you from now on, please do not think ill of me. I declare my attitude publicly before everyone.'</p>
+          <p class="en-p">Before his expression, which would not budge an inch no matter what arrows or guns were fired, Takahime shrank back, unable even to raise her face, and fell weeping alongside her tears.</p>
+          <p class="en-p">Takahime chants desolately:</p>
+          <p class="en-p">Compared to my heart now when seeing you again, / how the past has grown dear to me!</p>
+          <p class="en-p">Tōsuke: 'Rather than calling to mind the old days and lamenting, / rejoice in the unfolding august reign of Izutsu! / That one becomes a parent and is born as a child, / whether you know it or not, is the deep bond of the age of the Gods. / Having passed through thirty and five years, / I hear now of the reliance upon my child!'</p>
+          <p class="en-p">Takayamahiko: 'The karma of this world is like a revolving cart, / alas, how pitiful is the single-wheeled carriage! / Yet even so, I too am a child of past sins; / save me, O Gods of Izutsu!'</p>
+          <p class="en-p">Kurohime: 'Crossing mountains and seas, seeking my husband, / the joy of meeting my beloved child!'</p>
+          <p class="en-p">Tamajiwake: 'Without knowing the father and mother who bore me, / oh, the foolishness of a life spent in vain!'</p>
+          <p class="en-p">Akihiko: 'The grace of the Gods of Izutsu is deeper still; / today is the day I realize the whereabouts of my child!'</p>
+          <p class="en-p">Tomohiko: 'Parents and children are bound together / by the cord of the unbreakable bonds of the Gods!'</p>
+          <p class="en-p">Tellersthime: 'At the shrine dwelling at the foot of Mount Okenfuse, / oh, this evening of hearing such auspicious things!'</p>
+          <p class="en-p">Natsuhiko: 'Residing in place, to know fully the whereabouts of one's child, / how venerable is the lord who knows!'</p>
+          <p class="en-p">Sadahiko: 'Realizing the husband of old, knowing the wife, / how auspicious is the person who has met his child!'</p>
+          <p class="en-p">Yuzurihime: 'Today indeed the flower of the divine grace blooms, / and even the heart is fragrant in the autumn firmosphere!'</p>
+          <p class="en-p">Otama: 'The Kami-governor Tamajiwake-no-kami / must be feeling joyous to have met his father and mother.'</p>
+          <p class="en-p">Ryūkokuwake: 'The joy of meeting one's parent / is something I too have tasted at least once.'</p>
+          <p class="en-p">Takayorihime: 'Kurohime and Takahime, the Kami-governors, / how very joyous they must be upon realizing their child! / With the grace of Kamunagara-no-kami blessing them, / oh, what a joyous evening this is!'</p>
+          <p class="en-p">Though congratulatory poems by Tsunehiko, Haruhiko, Sunko, Yoshiko, Fusako, and others were chanted without number, as it would become overly tedious, it was decided to omit them. What kind of activities will Takahime perform from now on?</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">深き罪をば許しまし
+尊き神の御道に
+進ませ玉へ惟神
+神の御前に願ぎまつる』</p>
+            <p class="ja-classical-line">と歌ひ終り悠然として座に就きぬ。</p>
+            <p class="ja-classical-line">高姫は初めて、東助の三十五年前の恋男たりし事を悟り、遉女の恥かし気に顔を赤らめ、稍しばし俯き居たりしが、思ひ切つたやうに東助に向ひ、</p>
+            <p class="ja-classical-line">『アヽ貴方は其時の優しい男、東野別神様で御座いましたか。存ぜぬ事とて色々と御無礼を致しました。嘸や嘸私の自我心の強いのには愛想が尽きたで御座いませう。淡路島の遭難の時と云ひ、家島での脱線振りと云ひ、嘸々はしたない女だとお笑ひで御座いませう。迂濶とこんな昔話を申上げて、其時の女は此高姫であつたかと、さげすまれるかと思へば、あゝ昔のままに分らずに居つた方が互によかつたで御座いませうに、是もやつぱり神様から昔の泥を吐かされたので御座いませう。何卒お見捨てなく元の通り可愛がつて下さいませ』</p>
+            <p class="ja-classical-line">と東助の傍近く進みよつて手を握らむとするを、東助は儼然として突きのけはねのけ威儀を正し、言葉も荘重に高姫に向ひ、</p>
+            <p class="ja-classical-line">『高姫さま、ちとお慎みなさいませ。昔は昔、今は今、折角忘れて居た百八煩悩を再びここに繰返すやうな事があつては、神様に対し申訳が立ちますまいぞ。貴方も立派な夫のある身の上、私も御存じの通り淡路の島の酋長でお百合と云ふ女房もある身の上、况して三五教の総務を勤むる以上は、怪我にも左様な事は出来ますまい。此後は他人よりも一層厳重に、御交際を願ひませう。併し乍ら熊襲の国の神司、建国別は私と貴方の間に生れた伜である事だけは認めて置きませう。貴女も其伜に会ひ度くば御自由にお会ひになつても宜しからう。敢て私は其処迄は干渉致しませぬ。然し此東助としては何程恋しい吾子と雖も、会ふ訳には参りませぬ。先づ第一に英子姫様にお願ひ申し、玉照彦、玉照姫の神司に許しを受けた上、現在の妻お百合の方に事情を打ち明け、お百合の許しを得た上、それも折があつたら面会するかも分りませぬ。どうぞ今日限り昔の夢は忘れて頂き、此東助は此後貴女に対し、一層厳格の態度を取りますから、どうぞ悪く思うて下さいますな。皆様の前で私の態度を公言して置きます』</p>
+            <p class="ja-classical-line">と矢でも鉄砲でもいつかな動かぬ其顔色に高姫は縮み上り、顔をも得あげず涙と共に泣き伏した。</p>
+            <p class="ja-classical-line">高姫は力なげに詠ふ。</p>
+            <p class="ja-classical-line">『相見ての今の心に比ぶれば
+昔恋しくなりにけるかな』</p>
+            <p class="ja-classical-line">東助『古を思ひ浮かべてくやむより
+開く五六七の御代を楽しめ
+親となり子と生るるも神の代の
+深き縁と知るや知らずや
+三十あまり五つの年を経廻りて
+ここに吾子の頼りを聞くかな』</p>
+            <p class="ja-classical-line">高山彦『世の中の因果は廻る小車の
+片輪車ぞあはれなりけり
+さりながら吾も昔の罪の子よ
+救はせ玉へ三五の神』</p>
+            <p class="ja-classical-line">黒姫『海山を越えて夫を尋ねつつ
+わがいとし子に会ひし嬉しさ』</p>
+            <p class="ja-classical-line">玉治別『吾を生みし父と母とを知らずして
+あだに過ごせし身の愚さよ』</p>
+            <p class="ja-classical-line">秋彦『三五の神の恵のいや深く
+吾子の行方悟る今日かな』</p>
+            <p class="ja-classical-line">友彦『親と子は切つても切れぬ神々の
+縁の綱に結ばれにけむ』</p>
+            <p class="ja-classical-line">テールス姫『桶伏の山の麓の神屋敷
+目出度き事を聞く今宵かな』</p>
+            <p class="ja-classical-line">夏彦『居ながらに吾子の行方まつぶさに
+知り玉ひたる君ぞ尊き』</p>
+            <p class="ja-classical-line">佐田彦『古の夫を悟り妻を知り
+吾子に遇ひし人ぞ目出度し』</p>
+            <p class="ja-classical-line">紫姫『今日こそは神の恵の花開き
+心も薫る秋の大空』</p>
+            <p class="ja-classical-line">お玉『玉治別神の司は父母に
+遇ひて嬉しく思召すらむ』</p>
+            <p class="ja-classical-line">竜国別『たらちねの親に遇うたる嬉しさは
+吾も一度は味はひにけり』</p>
+            <p class="ja-classical-line">鷹依姫『黒姫や高姫司嘸やさぞ
+嬉しかるらむ御子を悟りて
+惟神神の恵の幸はひて
+今日は嬉しき夕なるかな』</p>
+            <p class="ja-classical-line">常彦、波留彦、孫公、芳公、房公其外の祝歌は数限りなく詠まれたれども、あまりくどくどしければ、省略する事となしぬ。高姫は此後如何なる活動をなすであらうか。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c22.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 22: High Palace 姫 [937]</span>
+      </a>
+      <a href="c24.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 24: Spring Autumn [939]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

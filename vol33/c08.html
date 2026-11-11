@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: Spring 駒 [923] - Volume 33 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 33 Table of Contents</a>
+      <span>Volume 33</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 33 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: Spring 駒 [923]</h1>
+      <p class="chapter-title-ja">春駒〔923〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Haruhiko also stood up, expressed his congratulations, and began to sing.</p>
+          <p class="en-p">Accompanying Takahime-sama, Haruhiko of Akitsu Island, from his beloved Furusato, shielded by the grace of the Mitama, spreads the Oshihe to the four corners of the land. A Masurao of the Yamatōnoko, together with Tsunehiko-sama, the two of them set sail from the Seto Sea. While rowing with oars, they crossed the rough Shihoji of Namitakahime-sama's Gokenmaku. Having run their ship onto an Anshō, they were saved by the captain of the Takashimamaru, Taruchiru-sama. Arriving safely at the port of Teru on the edge of the island of Namitakasago, they sought the Arika of the Kongaufue Niyoihotsushiyu and other jewels. Following the trail of the Mizu no Inochi of Kotoyoriwake, they faced the Mirror Pond, burning with various anxieties. Starting from the Amazon River, in the midst of the Shigure Forest, they encountered Mallband. While trembling in fear, together with the four Kami-tsukasa sent by Kotoyoriwake-sama, they passed through the great forest, crossed the bridge of crocodiles, and faced the Capital of Rabbits. With the Reikō of Bōshi-ga-take as their signal, they finally climbed to the top and arrived here most auspiciously. Becoming the husband of the youngest princess, the Kami-tsukasa of Kuniyoriwake, they shall bind the path of Imose in Kairōdōketsu forever.</p>
+          <p class="en-p">With that matter settled, Takahime, wondering whether her Mitama was clouded or not, clouded her own heart, ran here and there, and finally fell into a deep river. While being saved, she used twisted logic to claim she had been pushed in, which was utterly astonishing. Once again carried to the mansion, she returned to life, and while spitting out the same poisonous, hateful words as always, Karl Haruhiko became angry and glared at her. I, feeling sudden rage, lifted a nearby hibachi in my hand and, when I prepared to throw it at Takahime, Karl-sama said, 'Wait, wait, wait a moment, stop such violence.'</p>
+          <p class="en-p">As he held me back, saying this and that, the hibachi fell instantly, and the area was covered in ash. Before anyone knew it, Takahime-sama had become an ash-covered old hag. In the midst of the three of them being covered in ash, Kotoyoriwake-sama opened the front door and entered. Although he tried to admonish her by saying various things, Takahime suddenly pretended to be mute and spun her body around. Like a caterpillar on a taro leaf or a silkworm pupa, she shook her head and wiggled her hips with a sour expression on her face. Suddenly, she ran off toward the mansion of the abandoned princess, and Haruhiko thought, 'This is unbearable.'</p>
+          <p class="en-p">Together with the official Karl, when I went in pursuit, Takahime, with her Furuna-style eloquence, surrendered to the Kototama of the two, Kotoyoriwake and the abandoned princess, before anyone knew it. Reluctantly, she gave her consent, saying, 'Truly auspicious, truly auspicious, I shall also attend this evening, I shall celebrate something.' When I watched with bated breath to see what she would celebrate, she only said things that were better left unsaid, searching for faults in Kuniyoriwake. I felt angry, thinking, 'There is a limit to throwing cold water on such an auspicious banquet; what a spiteful old hag.' If it were any other time, I would not have let it go like this.</p>
+          <p class="en-p">However, today is a truly auspicious day, so I held back until now, thinking it would not do to fight, but my inner self would not accept it. What an astonishing old hag. Everyone must surely be angry after hearing that song of Takahime's. No matter how angry you may be, please forgive her just for this evening. Whether the morning sun shines or clouds over, whether the moon waxes or wanes, even if the earth were to sink, how could such a twisted soul ever return to its original state? A bent sword can never be returned to its original scabbard.</p>
+          <p class="en-p">There is no choice but to put it into a hot fire, add a heavy hammer, and re-forge it. How could a soul that is completely bent ever return to its original state? Even the straightest staff, when immersed in water and viewed, always appears bent. In the presence of the Mizu no Mitama, if one immerses a soul with a bent heart, how could it ever appear straight? Thinking that Haruhiko had come all this way following a person who does not understand this much, I am truly, truly ashamed. I did not know she was such a person; I am too astonished for words.</p>
+          <p class="en-p">Ah, Kannagara-kamu-nagara. May she see and hear things straight and true. Takahime-sama, these days...</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">春彦も立上り、祝意を表し、歌ひ始めたり。</p>
+            <p class="ja-classical-line">『高姫さまのお伴して
+秋津の島を春彦が
+いとなつかしき故里を
+御霊のふゆをかかぶりて
+教を四方にしき島の
+大和男子の益良夫が
+常彦さまと只二人
+瀬戸の海をば船出して
+艪櫂を漕ぎつつ渡り来る
+浪高姫の御剣幕
+荒き汐路を打ち渡り
+船を暗礁に乗り上げて
+高島丸の船長の
+タルチルさまに助けられ
+波高砂の島の端
+テルの港に安着し
+金剛不壊の如意宝珠
+其他の玉の所在をば
+尋ねむものと言依別の
+瑞の命の跡逐うて</p>
+            <p class="ja-classical-line">鏡の池に立向ひ
+いろいろ雑多と身をこがし
+アマゾン河を初めとし
+時雨の森のまん中で
+モールバンドに出会し
+震ひ戦く折柄に
+言依別の神さまが
+遣はし玉ひし神司
+四人のお方と諸共に
+大森林をくぐりぬけ
+鰐の架橋打ちわたり
+兎の都に立向ひ
+鷹依姫の一行と
+帽子ケ岳の霊光を
+合図に漸く登りつめ
+目出度く此処につきにけり
+国依別の神司
+末子の姫の夫となり
+偕老同穴永久に
+妹背の道を結びます</p>
+            <p class="ja-classical-line">其事きまりて高姫は
+身魂が濁つた濁らぬと
+自ら心を濁しつつ
+あちら此方とかけ廻り
+遂には深き川に落ち
+命を助けて貰ひつつ
+突き落したと逆理屈
+呆れ果てたる計りなり
+又もや館にかつがれて
+帰つて息を吹返し
+相も変らぬ毒々しい
+憎まれ口を叩きつつ
+カール春彦腹を立て
+目を釣り合うてゐたりしが
+私は腹がたちまちに
+有合ふ火鉢を手にささげ
+高姫目がけて投げつける
+覚悟した時カールさま
+待て待て暫し待て暫し
+そんな乱暴はやめておけ</p>
+            <p class="ja-classical-line">何ぢや彼ぢやと引止める
+火鉢は忽ち墜落し
+そこらあたりが灰まぶれ
+高姫さまは知らぬ間に
+灰猫婆さまとなりました
+灰にまみれた三人が
+ヤツサモツサの最中に
+言依別の神さまが
+表戸あけて入り来り
+いろいろ雑多と言わけて
+諭し玉へど高姫は
+俄に唖の真似をして
+プリンプリンと身をまはす
+芋葉に止つた芋虫か
+蚕の蛹の虫のよに
+頭をふつたり尻をふり
+御機嫌悪いお顔付
+忽ち捨子の姫さまの
+館をさして駆出す
+こりやたまらぬと春彦は</p>
+            <p class="ja-classical-line">カールの司と諸共に
+後追つかけて往て見れば
+フルナの弁の高姫も
+言依別や捨子姫
+二人の御方の言霊に
+何時の間にやら降伏し
+いやいや乍ら承諾し
+ホンに目出たいお目出たい
+今宵は私も参りませう
+何かお祝しませうと
+立派に立派に言はしやつた
+何をお祝なさるかと
+固唾を呑んで見て居れば
+言はいでもよい事ばかり
+国依別のアラ捜し
+こんな目出たい宴席で
+ケチをつけるも程がある
+意地くね悪い婆さまぢやと
+私は腹が立ちました
+外の時なら此儘に</p>
+            <p class="ja-classical-line">私は放かしちやおきませぬ
+さは然り乍ら今日の日は
+誠に芽出たいお日柄ぢや
+喧嘩をしては済まないと
+今迄きばつて居たけれど
+腹の虫奴が承知せぬ
+実に呆れたお婆アさま
+皆さま定めて高姫の
+あの歌聞いたら腹が立たう
+何程腹が立つとても
+今宵ばかりは許しやんせ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+あれ丈ねぢれた魂が
+どうして元へ帰らうか
+曲つた剣は如何しても
+元の鞘には納まらぬ
+一ぺんあつい火にかけて
+きつい重たい向ふ鎚</p>
+            <p class="ja-classical-line">ドツサリ加へて打ち直し
+焼刃を入れねば仕方ない
+曲り切つたる魂が
+如何して元へ返るやら
+何程真直な杖でさへ
+水にひたして眺むれば
+必ず曲つて見えまする
+瑞の御霊の御前で
+曲つた心の魂を
+浸した所で如何してか
+これが真直に見えませうか
+これ程分らぬ御方に
+はるばる従いて此処までも
+来た春彦と思はれちや
+誠に誠に恥かしい
+こんな人とは知らなんだ
+呆れて物が言へませぬ
+あゝ惟神々々
+直日に見直し聞直し
+高姫さまは此頃は</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Haruhiko: 'Having been struck by Shinkeikuwabin hysteria, I declare and rectify my words; please forgive me, everyone, for the Goburei I have committed until now. I, this Haruhiko, who have come following in your company, offer an apology on behalf of Takahime. Ah, Kamunagara Kamunagara. It is regrettable to speak of such things in this place, but the Fukushiyugojin who has possessed my body will not consent. I, who have chattered out insults against my will, pray to the Amatsukami, the Kunitsukami, and the Kunitamagami—please Minaho this fault of Haruhiko, and for this day alone, I beseech you to forgive me. Oh, Kuniyoriwake-sama!'</p>
+          <p class="en-p">Haruhiko: 'Please live in harmony with the Sueko Hime, and for the sake of the Kami and for the sake of the world, I pray you will serve forever. I, Haruhiko, offer this request with all my Magokoro. Ah, Kamunagara Kamunagara. May your Mitama be blessed.'</p>
+          <p class="en-p">Teristan stood up and began to sing. The song:</p>
+          <p class="en-p">In the Chiushinchi of Onokorojima,
+Appearing on Takaharuyama,
+Following Takayorihime,
+Teristan and Karlins,
+Became the gods of the left and right guards,
+And are throwing their weight around.
+Takahime and Kurohime, both of them,
+Came as far as the Forest of Heaven,
+And there, the two fought among themselves.
+Watching for the opportunity, through various
+Means, they pushed both of them
+Into a rocky cave,
+Thinking to make them vomit the
+Diamond-like indestructible wish-fulfilling jewel.</p>
+          <p class="en-p">The party of Kuniyoriwake
+Appeared here,
+And through a mysterious bond, we
+Were initiated into the Sangokyo,
+And entrusted our bodies to the Kurohime mansion,
+Near the Palace of Brocade.</p>
+          <p class="en-p">While we were serving, following the incident of the loss of the golden
+Jewel,
+We were driven out by Takahime-sama,
+And together with Karlins,
+We drifted upon the vast ocean,
+And encountered the divine officials
+Of Takayorihime and Ryukokubetsu,
+And the four of us, gathered together, finally arrived safely
+At the island of Takasago,
+Distributing our attention to various miscellaneous matters,
+While searching for the whereabouts of the jewel,
+In the forest of Shigure,
+We became the gods of the King of Rabbits,
+And while passing the days,
+Takahime and her party of eight
+Came strolling along to that place.
+'You are safe, you are well, you are healthy,
+It is a joyous occasion,'
+Before we could finish exchanging such greetings,</p>
+          <p class="en-p">While chanting the Amatsu Norito,
+They faced towards Boshigadake,
+And met squarely with the star performer of the day,
+Kunitsuyoriwake-sama,
+And emboldened, the leader of the Kototama and the others,
+The party of eighteen,
+Returned to the Capital of Uzu.
+That the unexpected Sueko Hime
+And even Kami Susanoo-no-Mikoto
+Were appearing here,
+I did not know even in my dreams.
+Ah, Kamunagara Kamunagara.
+The divine majesty of the Kami has appeared,
+And the divine official Kuniyoriwake
+Is holding the joyous ceremony
+Of the union of the bed with Sueko Hime.
+Attending this banquet,
+Not to mention the sacred sake, sacred offerings, and sacred water,
+We were served various treasures of the sea, rivers, mountains, and fields,
+Singing and dancing, how valiant,
+How joyful to celebrate a thousand years.
+Ah, Kamunagara Kamunagara.
+May your Mitama be blessed.</p>
+          <p class="en-p">To Takahime-sama, who had been cast out,
+I was told various
+Strange songs here again,
+And I, thinking 'I am impressed, I am impressed,'
+Was tilting my head.
+When I say I was impressed,
+It is that I was truly amazed
+At the stubborn, competitive soul
+Of the ill-natured Takahime.
+Ah, Kamunagara Kamunagara.
+At such a joyous banquet,
+I did not wish to have a dispute
+With Takahime-sama, but for the sake of the future,
+I offered a brief opinion
+As a warning to Takahime-sama.</p>
+          <p class="en-p">When I think of it, before the awe-inspiring Kami,
+And before the presence of Sueko Hime,
+I beg you to forgive my impoliteness
+In not being reserved.
+Teristan offers this request
+With all his Magokoro.
+Oh, divine official of Kototama,
+And all other people present,
+Let us unite our hearts,
+And while relaxing, partake of the food and drink,
+Feasting abundantly, dancing and playing,
+For a thousand autumns, ten thousand years, ten thousand times ten thousand years.
+May the world of Takasago forever
+Prosper and flourish, and may the foundation of the future world
+Be firmly established and solidified.
+Let us not let this joyous banquet
+Flow away in vain, but forever
+Engrave it in our hearts and rejoice.
+Ah, Kamunagara Kamunagara.
+We celebrate before the presence of the Kami,
+We offer blessings before the presence of the Kami.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">神経過敏のヒステリに
+かかつて御座ると宣り直し
+今迄加へた御無礼を
+皆さま許して下さんせ
+お伴についてやつて来た
+此の春彦が高姫に
+代つてお詫を致します
+あゝ惟神々々
+こんな事をば此席で
+申上げるは済まないが
+私の体に憑つたる
+副守護神が承知せぬ
+止むを得ずして悪口を
+ベラベラ喋つた此の私
+天津神達国津神
+国魂神さま春彦の
+此過ちを平けく
+見直しまして今日だけは
+どうぞお赦しなさりませ
+国依別の神さまよ</p>
+            <p class="ja-classical-line">末子の姫と睦まじう
+生き存らへていつ迄も
+神の御為世の為に
+どうぞ尽して下さんせ
+春彦ここに真心を
+こめて御願ひ致します
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">テーリスタンは立上り、歌ひ始めたり。其歌、</p>
+            <p class="ja-classical-line">『自転倒島の中心地
+高春山に現はれし
+鷹依姫に従うて
+テーリスタンやカーリンス
+左守右守の神となり
+羽振りを利かしてゐる所
+高姫黒姫両人が
+天の森までやつて来て
+茲に二人が同志打
+其機を伺ひいろいろと
+手段を以て両人を
+岩窟の中へ押込めて
+金剛不壊の如意宝珠
+喉から吐かそと思ふ間
+国依別の一行が
+ここに現はれましまして
+不思議の縁で吾々は
+三五教に入信し
+錦の宮の側近き
+黒姫館に身を托し</p>
+            <p class="ja-classical-line">仕へ居るをり黄金の
+玉の紛失事件より
+高姫さまに追ひ出され
+カーリンスと諸共に
+大海原を漂ひつ
+鷹依姫や竜国別の
+神の司に巡り合ひ
+四人揃うて高砂の
+島にやうやう安着し
+いろいろ雑多と気を配り
+玉の所在を尋ねつつ
+時雨の森の森林に
+兎の王の神となり
+月日を送る折柄に
+高姫一行八人は
+のそのそ　そこへやつて来た
+無事でおまめでお達者で
+目出たい事で御座います
+こんな挨拶そこそこに
+かはす間もなく一行は</p>
+            <p class="ja-classical-line">天津祝詞を宣り乍ら
+帽子ケ岳に立向ひ
+今日の花形役者なる
+国依別の神さまに
+ベツタリ出会うて勇み立ち
+言依別の教主等と
+十八人の一行は
+ウヅの都へ帰りけり
+思ひがけなき末子姫
+神素盞嗚尊まで
+此処に現はれゐますとは
+私は夢にも知らなんだ
+あゝ惟神々々
+神の御稜威の現はれて
+国依別の神司
+末子の姫と合衾の
+目出たき式をあげ玉ふ
+此宴席に侍りて
+神酒神饌御水は云ふも更
+海河山野種々の</p>
+            <p class="ja-classical-line">珍物をばあてがはれ
+謡ひつ舞ひつ勇ましく
+千歳寿ぐ嬉しさよ
+あゝ惟神々々
+御霊幸はひましまして
+放り出されたる高姫さまに
+又もや此処でいろいろの
+妙なお歌を聞かされて
+私は感心々々と
+頭をかたげて居りました
+感心したと申すのは
+意地くね悪い高姫の
+負けず嫌ひの魂に
+本当に呆れた事ですよ
+あゝ惟神々々
+こんな目出たい席上で
+高姫さまとの争ひを
+したくはなけれど後の為
+高姫さまの戒めに
+一寸意見を述べました</p>
+            <p class="ja-classical-line">思へば畏き神の前
+末子の姫の御前も
+憚りませぬ無作法を
+何卒許して下さんせ
+テーリスタンが真心を
+こめて御願致します
+言依別の神司
+其他一同の方々よ
+互に心をあはせつつ
+打寛ろいで酒肴
+ドツサリよばれて舞ひ踊り
+千秋万歳万々歳
+世は高砂の何時までも
+栄え栄えて後の世の
+礎固くつきかため
+これの目出たい宴席を
+仇に流さずいつ迄も
+心に刻みて喜びませう
+あゝ惟神々々
+神の御前に寿ぎまつる</p>
+            <p class="ja-classical-line">神の御前に祝ぎまつる』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 心の色 [922]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: Kotodama 結 [924]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
