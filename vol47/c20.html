@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 20: 間接内流 [1253] - Volume 47 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 47 Table of Contents</a>
+      <span>Volume 47</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 47 &bull; Chapter 20</span>
+      <h1 class="chapter-title-en">Chapter 20: 間接内流 [1253]</h1>
+      <p class="chapter-title-ja">間接内流〔1253〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">To divide the Tenkai of Takaamahara into two, namely Tengoku and Reigoku, is as stated previously.</p>
+          <p class="en-p">Generally speaking, the land of the sun, that is Tengoku, when compared to the human body, corresponds to the heart and the entire body, and corresponds to all things that should belong to the heart.</p>
+          <p class="en-p">Also, the land of the moon, that is Reigoku, corresponds to its lungs and the entire body, and corresponds to all various organs that should belong to the lungs.</p>
+          <p class="en-p">Thus, the heart and the lungs are two domains in man that should be compared to a shōuchiu and a shōtenchi.</p>
+          <p class="en-p">The heart by means of arteries and veins, and the lungs by means of nerves and motor fibers, become the rulers within the human body, and wherever power emanates and wherever action takes place, one never fails to recognize the cooperation of these two rights.</p>
+          <p class="en-p">Even within the naibun of each person, that is, within the Reikai which forms the spiritual personality of man, there are also two domains; one is called the domain of will and the other is called the domain of intellect.</p>
+          <p class="en-p">The will governs the two domains of the human naibun through affection toward good, and the intellect through affection toward truth.</p>
+          <p class="en-p">These two domains also correspond to the two domains of the lungs and the heart within the physical body.</p>
+          <p class="en-p">Therefore, the heart is Tengoku and corresponds to the domain of will, and the lungs are Reigoku and correspond to the domain of intellect.</p>
+          <p class="en-p">In Takaamahara, too, there is a correspondence such as the above.</p>
+          <p class="en-p">Tengoku is the will-power of Takaamahara, governed by the virtue of love, and Reigoku is the intellect-power of Takaamahara, governed by the virtue of faith.</p>
+          <p class="en-p">Therefore, the relationship between Tengoku and Reigoku completely corresponds to the relationship between the heart and the lungs in man.</p>
+          <p class="en-p">In sacred words, to indicate the will by means of the heart, and also to indicate the virtue of love, and to indicate the truth of intellect and faith by means of the respiration of the lungs, is because it is based upon this correspondence.</p>
+          <p class="en-p">Also, though affection is not in the heart nor comes from the heart, to attribute it to the heart is in order to be based upon the principle of correspondence.</p>
+          <p class="en-p">The correspondence between the above two domains of Takaamahara and the heart and lungs is the general correspondence between Takaamahara and man.</p>
+          <p class="en-p">And for the various limbs, various organs, and internal organs of the human body, there is a correspondence that is not general in this manner.</p>
+          <p class="en-p">Now, let us explain by comparing the entirety of Takaamahara to a giant.</p>
+          <p class="en-p">That which is in the head of the giant, namely Tenkai, dwells in love, peace, innocence, perception, and wisdom, and accordingly dwells in joy and happiness; thus throughout Tenkai there is nothing that can be compared to the good virtue in this head.</p>
+          <p class="en-p">The divine virtue flows into the human head and all things belonging to the head, and corresponds thereto.</p>
+          <p class="en-p">Therefore, the human head is to be compared to the highest Tengoku and Reigoku of Takaamahara.</p>
+          <p class="en-p">Next, that which is in the chest of the giant, namely Tenkai, dwells within the good virtues of benevolence and faith, and flows into the human chest, corresponding thereto.</p>
+          <p class="en-p">1. That which belongs to the lumbar region and generative organs in the giant, namely Tenkai, dwells in so-called conjugal love; this is the state of the second Tengoku.</p>
+          <p class="en-p">1. That which is in the legs dwells within the lowest virtues of Tenkai, namely natural and spiritual good virtues.</p>
+          <p class="en-p">1. That which is in the arms and hands dwells in the power of truth that comes forth from within good virtue.</p>
+          <p class="en-p">1. That which is in the eyes dwells in wisdom, that which is in the ears dwells in attention and obedience, and that which belongs to the nose and mouth dwells in perception.</p>
+          <p class="en-p">Also, that which belongs to the mouth and tongue dwells in speech coming forth from intellect and perception, that which belongs to the kidneys dwells in various truths that research, investigate, analyze, and correct, and that which belongs to the liver, pancreas, and spleen excels in variously refining good and truth.</p>
+          <p class="en-p">In all instances, the divine divinity flows into each local part analogous within the human body and corresponds thereto.</p>
+          <p class="en-p">Since the inner flow from Tenkai enters into the workings and uses of the various limbs, and thus manifests concrete results, it is here that the correspondence comes to be realized.</p>
+          <p class="en-p">1. People call one who has wisdom and discernment one who has a head, or say that his brain is dense, or praise him by saying he has a good head; they also call one rich in benevolence a friend of the chest, or say his heart is beautiful, or he is a person of good spirit, or his spirit and disposition are good.</p>
+          <p class="en-p">They call one superior in perception one who has an acute sense of smell, or say his nose is high; they say of one excelled in prudence that his visual sense is sharp, or call him a demon's eye.</p>
+          <p class="en-p">They say of a powerful person that his hands are long, or say that he is capable; and they call one who determines what he aims at based upon love and the heart one whose action comes from the heart, or comes from the bottom of his heart, or has deep sympathy.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高天原の天界を区分して天国、霊国の二となす事は前に述べた通りである。概して云へば日の国即ち天国は人身に譬ふれば心臓及び全身にして心臓に属すべき、一切のものと相応して居る。又月の国即ち霊国は其肺臓及び全身にして肺臓に属すべき一切の諸機関と相応してゐる。さうして心臓と肺臓とは小宇宙、小天地に譬ふべき人間に於ける二つの国土である。心臓は動脈、静脈により、肺臓は神経と運動繊維によりて、人の肉体中に主治者となり、力の発する所、動作する所、必ずや右両者の協力を認めずと云ふ事はない。各人の内分、即ち人の霊的人格をなせる霊界の中にも亦二国土があつて、一を意思の国と云ひ一を智性の国と云ふ。意思は善に対する情動より、智性は真に対する情動によつて人身内分の二国土を統治してゐるのである。之等の二国土は又肉体中の肺臓、心臓の二国土とに相応してゐる。故に心臓は天国であり意思の国に相応し、肺臓は霊国であり智性の国と相応するものである。</p>
+            <p class="ja-classical-line">高天原に於ても亦以上の如き相応がある。天国は即ち高天原の意力にして、愛の徳之を統御し、霊国は高天原の智力にして信の徳之を統御する事になつてゐる。故に天国と霊国との関係は人に於ける心臓と肺臓との関係に全く相応してゐるものである。聖言に心臓を以て意を示し、又愛の徳を示し、肺臓の呼吸を以て智及信の真を示すは此相応によるからである。又情動なるものは心臓中にもあらず、心臓より来らざれども、之を心臓に帰するは相応の理に基く為である。高天原の以上二国土と心臓及肺臓との相応は高天原と人間との間に於ける一般的相応である。さうして人身の各肢体及各機関及内臓等に対しては、斯の如く一般的ならざる相応があるのである。</p>
+            <p class="ja-classical-line">今茲に高天原の全体を巨人に譬へて説明する事としよう。</p>
+            <p class="ja-classical-line">巨人即ち天界の頭部に居るものは愛、平和、無垢、証覚、智慧の中に住し、従つて歓喜と幸福とに住するを以て天界到る所、この頭部に於ける善徳に比すべきものはない。人間の頭部及び頭部に属する一切のものに其神徳流れ入つて之と相応するのである。故に人の頭部は高天原の最高の天国、霊国に比すべきものである。</p>
+            <p class="ja-classical-line">次に巨人即ち天界の胸部にあるものは仁と信との善徳中に住して、人の胸部に流れ入り、之と相応するものである。</p>
+            <p class="ja-classical-line">一、巨人即ち天界に於ける腰部及生殖器機関に属するものは、所謂夫婦の愛に住してゐる、之は第二天国の状態である。</p>
+            <p class="ja-classical-line">一、脚部にあるものは、天界最劣の徳即ち自然的及霊的善徳の中に住してゐる。</p>
+            <p class="ja-classical-line">一、腕と手とにあるものは、善徳の中より出で来る真理の力に住してゐる。</p>
+            <p class="ja-classical-line">一、目にあるものは智に住し、耳にあるものは注意と従順に住し、鼻口に属するものは知覚に住してゐる。又、口と舌とに属するものは智性と知覚とより出づる言語の中に住し、内腎に属するものは研究し調査し分析し訂正する処の諸々の真理に住し、肝臓、膵臓、脾臓に属するものは善と真と色々に洗練するに長じてゐる。何れも神の神格は人体中に相似せる各局部に流入して之と相応し給ふ。天界よりの内流は諸肢体の働き及用の中に入り、而して具体的結果を現ずるが故に、茲に於てか相応なるものが行はれて来るものである。</p>
+            <p class="ja-classical-line">一、人は智あり覚ある者を呼んで彼は頭を持つて居るとか、頭脳が緻密であるとか、よい頭だとか云つて称へ、又仁に厚いものを呼んで彼は胸の友だとか、心が美しいとか、気のよい人だとか、心意気がよいとか称へ、知覚に勝れた人を呼んで彼は鋭敏なる嗅覚を持つてゐるとか、鼻が高いとか云ひ、智慮に秀でたものを呼んで、彼の視覚は鋭いと云ひ、或は鬼の目と云ひ、強力なる人を呼んで、彼は手が長いと云ひ、或は利くと云ひ、愛と心を基として志す所を決するものを呼んで、彼の行動は心臓より出づるとか、心底から来るとか、同情心が深いとか称へるのである。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Just as careless words and proverbs used by Ningen are countless beyond measure, so based upon the principle of sautau, the truth is, exactly as stated in the shinji of the stern Mitama, that any kotoba whatsoever originates from Shinkai is something that can be realized through jikaku.</p>
+          <p class="en-p">The party of Harukuniwake is now in the midst of touring the most central part of the Daini Tengoku, which corresponds to the heart in the human jintai.</p>
+          <p class="en-p">Thus, the organization of Tengoku is divided into three sections of upper, middle, and lower in the Saikautengoku, the intermediate Tengoku is likewise divided into three sections of upper, middle, and lower, and the lowest Tengoku is also divided into three sections.</p>
+          <p class="en-p">Each section of Tengoku is constituted by individual groups, and according to the degree of the virtue of aizen and the wisdom of shōkaku, hundreds of them stand separately and individually, so that it is utterly impossible to calculate them clearly.</p>
+          <p class="en-p">The Reikoku is similarly divided; according to the good virtues of faith and wisdom and the degree of wisdom and shōkaku, the Reikoku is broadly divided into three sections, and furthermore, innumerable groups standing independently and individually are formed.</p>
+          <p class="en-p">Moreover, even within a single group, depending on the degree of love, faith, and wisdom and shōkaku, some occupy seats in the center while others occupy seats on the periphery, by no means being uniform.</p>
+          <p class="en-p">Such shifts in the love, faith, and shōkaku of the heavenly beings exist because the natural law wherein the so-called victors guide the inferior and the inferior follow the victors is made in a kannagara way, so that all people are at ease according to their respective fundo, without the slightest anxiety, resentment, or dissatisfaction arising, and they spend a life of extreme peace.</p>
+          <p class="en-p">Now the three arrived upon a certain beautiful hill.</p>
+          <p class="en-p">The sun of heaven shone brilliantly and brightly, its reikō radiating sternly through the fumenfu, and Harukuniwake had almost become dazzled.</p>
+          <p class="en-p">Ryūkō also began to show signs of agony in various parts of his body.</p>
+          <p class="en-p">Isakō had advanced this far without wearing a fumenfu just as before.</p>
+          <p class="en-p">Isakō: 'Everyone, you seem very fatigued, so shall we look at the scenery of the mountains and fields here and rest for a while?'</p>
+          <p class="en-p">Harukuniwake: 'Yes, let us do so. I have somehow become distressed, having been struck by the reikō of the Gods.'</p>
+          <p class="en-p">Ryūkō: 'Yeah, I too feel a pain for some reason or other. If there is any radiosinter, I would like to drink a cup.'</p>
+          <p class="en-p">Isakō: 'Ha ha ha ha, radiosinter is not something to be drunk by healthy physical bodies like you people.</p>
+          <p class="en-p">That medicine harms the organization of the human jintai.</p>
+          <p class="en-p">However, for a patient with nine lives lost and one saved, it is a matter of "there it is, you see," so it must be fine.</p>
+          <p class="en-p">That medicine is a spiritual medicine descending to the ground from the Reikoku, and if those who must still live and work in the genkai take it, they will quickly recover their vigor, while if humans destined to come to the Reikoku take it, they will escape the agony of the pangs of death and easily assist in the suffering of the detachment of spirit and flesh.</p>
+          <p class="en-p">That being so, it is called a spiritual medicine and descends from the Reikoku.'</p>
+          <p class="en-p">Ryūkō: 'At the time of the separation of the spiritual body, the spirits that fall into jigoku grasp the empty air and foam at the mouth, or turn a dark color and suffer extraordinary agony, but can even such spirits safely cross the difficult pass of the detachment of spirit and flesh?'</p>
+          <p class="en-p">Isakō: 'That is so.</p>
+          <p class="en-p">Evil spirits destined to fall directly into jigoku escape swiftly from the physical body through the power of this medicine, and therefore afterward only good spirits, namely genuine guardian deities, remain, and they can safely cross the boundary of detachment.</p>
+          <p class="en-p">In the Reikoku, medicine called reidan is made by using this.</p>
+          <p class="en-p">The spiritual medicine that Harukuniwake-sama and you received from Konohanahime-mikoto at the entrance of the Daini Tengoku is precisely that.</p>
+          <p class="en-p">Because it is filled with rei, it is called reijū.</p>
+          <p class="en-p">Humans on the ground praise this as radium, but the etymology is, after all, one and the same.'</p>
+          <p class="en-p">Harukuniwake: 'Let us stop the radiosinter, and if it is that, I would like to receive the reidan once more.'</p>
+          <p class="en-p">Isakō: 'Teacher, if a thought arises to cure one's own pain by means of medicine, will you not become cold (reidan) toward the divine path of the Gods?</p>
+          <p class="en-p">Rather than that, since Tengoku is filled with the heat of love, how would it be if you wished to receive the heat of love, which is the direct internal flow of the Ookami?</p>
+          <p class="en-p">I think there is no longer any need for reidan...'</p>
+          <p class="en-p">Ryūkō: 'Isakō-san, do you not think that receiving the direct internal flow of the Ookami is somewhat frightening?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">斯の如く人間の不用意の中に使ふ言葉や諺は尚此外に何程とも限りない程あるのは、相応の理に基いて其実は厳の御霊の神示にある通り、何事も神界よりのお言葉なる事は自覚し得らるるのである。</p>
+            <p class="ja-classical-line">治国別一行は人体に於ける心臓部に相当する第二天国の最も中枢部たる処を今や巡覧の最中である。さうして天国の組織は最高天国が上中下三段に区画され、中間天国が又上中下三段に区画され、最下層の天国亦三段に区画されてある。各段の天国は個々の団体を以て構成され、愛善の徳と智慧証覚の度合の如何によりて幾百ともなく個々分立し、到底之を明瞭に計算する事は出来ないのである。又霊国も同様に区画され、信と智の善徳や智慧証覚の度合によつて霊国が三段に大別され、又個々分立して数へ尽せない程の団体が作られてゐる。さうして又一個の団体の中にも愛と信と智慧証覚の度の如何によつて或は中央に座を占め、或は外辺に居を占め、決して一様ではない。斯くの如く天人の愛信と証覚の上に変移あるは、所謂勝者は劣者を導き、劣者は勝者に従ふ天然律が惟神的に出来てゐるがために、各人皆其分度に応じて安んじ、少しも不安や怨恨や不満足等の起る事なく、極めて平和の生涯を送り居るものである。</p>
+            <p class="ja-classical-line">さて三人は、とある美はしき丘陵の上に着いた。天日晃々として輝き渡り、被面布を通して其霊光は厳しく放射し、治国別は殆ど目も眩むばかりになつて来た。竜公も稍身体の各部に苦悶を兆して来た。五三公は依然として被面布も被らず此処迄進んで来たのである。</p>
+            <p class="ja-classical-line">五三『皆さま、大変に御疲労の様ですから、此処で山野の景色を眺めて、暫く休養さして頂きませうか』</p>
+            <p class="ja-classical-line">治国『ハイ、さう致しませう。何だか神様の霊光にうたれて苦しくなつて参りました』</p>
+            <p class="ja-classical-line">竜公『ヤア私も何となしに苦痛を感じます。ラジオシンターでもあれば、一杯飲みたいものですな』</p>
+            <p class="ja-classical-line">『ハヽヽヽヽ、ラジオシンターは貴方等の様な壮健な肉体の飲むものぢやありませぬ。あの薬は人体の組織を害しますからな。然しながら九死一生の病人には、とつたか、みたかですから宜いでせう。あの薬は霊国より地上に下る霊薬であつて、之を服用すれば未だ現界に生きて働くべき人間は速かに元気恢復し、又霊界に来るべき運命にある人間が服用すれば、断末魔の苦痛を逃れ、楽々と霊肉脱離の苦しみを助くるものです。さうだから、あれは霊薬と云つて霊国から下るものです』</p>
+            <p class="ja-classical-line">竜公『霊体分離の時、地獄におつる精霊は虚空を掴み泡を吹き、或は暗黒色になり、非常な苦悶をするものですが、その様な精霊でも矢張り楽に霊肉脱離の難境を越えられますか』</p>
+            <p class="ja-classical-line">『さうです。地獄へ直接落下すべき悪霊は此霊薬の力によつて肉体より逸早く逃走するが故に、後には善霊即ち正守護神のみが残り、安々と脱離の境を渡り得るのです。霊国に於ては之を以て霊丹と云ふ薬を作ります。治国別様や貴方が、第二天国の入口に於て木花姫命よりお頂きになつた霊薬は即ちそれです。霊に充ちてゐる薬だから、霊充と云ふのです。これを地上の人間は、ラヂウムと称へて居るのですが、語源は、つまり一つですからな』</p>
+            <p class="ja-classical-line">治国『ラジオシンターは止めにして、それならもう一度霊丹が頂き度いものですな』</p>
+            <p class="ja-classical-line">『先生、自分の苦痛を薬によつて治さうなどと云ふ想念が起りますと、神様のお道に対し所謂冷淡（霊丹）になりやしませぬか。それよりも天国は愛の熱によつて充たされてゐるのですから、大神直接の内流たる愛の熱を頂く様に願つたら如何でせう。私は最早霊丹の必要もない様に思ひますが……』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'That is true; since it is a reiyaku to be used in a make-or-break moment, it is motsutai to ranyō it so casually. Rather than that, let us receive the precious heat of Kamisama's love. Ah, Kamunagara Tama Chihahe Mase.'</p>
+          <p class="en-p">Harukuniwake-sama, how is it, have your fatigues healed already?</p>
+          <p class="en-p">Hai, thanks to Goshintoku, I seem to have been revived.</p>
+          <p class="en-p">Tatsukō: 'Behold, did you not just utter Kamunagara Tama Chihahe Mase? Is not the efficacy of that Goshinmon far more kenchiyo than reijiu or reitan?'</p>
+          <p class="en-p">Hai, arigato gozaimashita.</p>
+          <p class="en-p">Thus did the Ōkami borrow the mouth of a daisanshiya, causing Harukuniwake, who was the dainishiya, to realize moromoro no shinri.</p>
+          <p class="en-p">Generally, one who teaches ningen is one who does not listen when spoken to directly. Since ningen possess a strong jisonshin and jifushin, if one were to speak something akin to kyōsetsu directly to that ningen, that ningen would inevitably dismiss it, saying, 'Hmph, I know a thing or two like that without hearing it from you. How ridiculous,' refusing to let it enter their ears at all. Therefore, rather than directly teaching the dainishiya, it is far more efficacious to initiate a dialogue with a bystander who is the daisanshiya, having them speak conversationally from their mouth so as to cause it to flow into the ears and perception of the dainishiya. Hence, even within the divine realm, there are times when the first and third parties engage in dialogue, and they occasionally bestow indirect teachings upon the second party who must by all means be made to hear. Now, here the Ōkami caused both Gosankō and Tatsukō to engage in dialogue, causing it to pass through the ears and admonish the spirit of Harukuniwake.</p>
+          <p class="en-p">Sensei, a most magnificent sun has risen, has it not? Is its appearance not vastly larger and its light far stronger than the sun we worship day by day?</p>
+          <p class="en-p">That is so; the sun we see in our genkai is because the malevolent ki of ningen has gathered and wanders about in mid-air, which is why its radiance is dimmed, I suppose. When one comes to tengoku, because it is pure and undefiled, we are able to worship the sun magnificently as well, no doubt.</p>
+          <p class="en-p">Even so, does it not look somewhat different from the sun we worship? Now, Gosankō-san, how is it?</p>
+          <p class="en-p">In tengoku, the Ōkami appears by becoming the sun. The sun seen in the earthly genkai is the so-called sun of the natural world, and compared to the sun of tengoku, it is an exceedingly dim thing. Everything that comes from the sun of the natural world is filled with self-love and worldly love, whereas the light coming from the sun of tengoku is the light of love and goodness, so there is a difference as vast as clouds and mud. Moreover, in the reikoku, the Ōkami appears as the moon. Although there is no change in the Ōkami, depending on how the love, faith, and realization of the heavenly beings are, He appears either as the sun or as the moon.</p>
+          <p class="en-p">Tatsukō: 'Even in tengoku, the sun rises from the east, I suppose.'</p>
+          <p class="en-p">In the earthly world, the highest point where the sun completes its ascent is called south, exactly opposite to this, the place located beneath the earth is made north, the place where the sun ascends to the equinoctial line of day and night is made east, and the place where it sets is made west, as you all know. Although all directions are determined from the south in the genkai in this manner, in Takamanohara, the place where the Ōkami appears as the sun is made east, that which corresponds to it is made west, then the right side of Takamanohara is made south, and the left side is made north. And wherever the heavenly beings of the heavenly realm turn their faces and bodies, they are all facing the sun and moon. That place which faces the sun and moon is called east. Therefore, the directions of Takamanohara are all determined from the east. The reason for this is that the source of the life of all things comes from the Ōkami, who is the sun. Therefore, in the heavenly realm, the Mitama of Izu and the Mitama of Mizu are called the East.</p>
+          <p class="en-p">Harukuni: 'The Ōkami of the precious Mitama of Izu and Mitama of Mizu, for the sake of instructing us who are foolish, through the mouths of Gosankō and Tatsukō, by means of indirect inner flow, you have shown unto us; for that supreme grace, I offer my grateful thanks. Ah, Kamunagara Tama Chihahe Mase, Kamunagara Tama Chihahe Mase.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『さうだな、一か八かの時に用ふる霊薬だから、さう濫用するのは勿体ない。それよりも尊い神様の愛の熱を頂く事に致しませう。あゝ惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">『治国別さま、如何です、もうお疲れは直りましたか』</p>
+            <p class="ja-classical-line">『ハイ、御神徳によつて、甦つた様です』</p>
+            <p class="ja-classical-line">竜公『それ御覧、惟神霊幸倍坐世と今仰有つたでせう。其御神文の方が霊充よりも、霊丹よりも効能が顕著でせう』</p>
+            <p class="ja-classical-line">『ハイ、有難う厶いました』</p>
+            <p class="ja-classical-line">大神は斯くの如くにして第三者の口をかり、第二者たる治国別に諸々の真理を悟させ給うたのである。</p>
+            <p class="ja-classical-line">凡て人を教ふる身は、其人直接に云つては聞かないものである。人間と云ふものは自尊心や自負心が強いものであるから、直接其人間に対して教説らしき事を云へば、其人間は「ヘン其位の事はお前に聞かなくとも俺は知つてゐる。馬鹿々々しい」と、テンデ耳に入れぬものである。故に第二者に直接教説すべき所を第三者たる傍人に問答を発し、其第三者の口より談話的に話さしめて之を第二者の耳に知覚に流入せしむる方が余程効験のあるものである。故に神界に於ても時々第一者と第三者が問答をなし、是非聞かしてやらねばならぬ第二者に対して間接に教示を垂れ給ふ事が往々あるのである。今茲に大神は五三公、竜公の両人をして問答をなさしめ、治国別の心霊に耳を通して諭さしめたのである。</p>
+            <p class="ja-classical-line">『先生、大変な立派な日輪様がお上りになりましたな。吾々の日々拝する日輪様とは非常にお姿も大きく光も強いぢやありませぬか』</p>
+            <p class="ja-classical-line">『さうだなア、吾々の現界で見る日輪様は、人間の邪気がこつて中空にさまようてゐるから、其為めに御光が薄らいで居るのだらう。天国へ来ると清浄無垢だから、日輪様も立派に拝めるのだらうよ』</p>
+            <p class="ja-classical-line">『それでも吾々の拝む日輪様とは何だか様子が違ふぢやありませぬか。もし五三公さま、如何でせう』</p>
+            <p class="ja-classical-line">『天国に於ては大神様が日輪様となつて現はれ給ひます。地上の現界に於て見る太陽は所謂自然界の太陽であつて、天国の太陽に比ぶれば非常に暗いものですよ。自然界の太陽より来るものは凡て自愛と世間愛に充ち、天国の太陽より来る光は愛善の光ですから雲泥の相違がありますよ。又霊国に於ては大神様は月様とお現はれになります。大神様に変りはなけれども、天人共の愛と信と証覚の如何によつて、或は太陽と現はれ給ひ或は月と現はれ給ふのです』</p>
+            <p class="ja-classical-line">竜公『やはり天国にても日輪様は東からお上りになるのでせうな』</p>
+            <p class="ja-classical-line">『地上の世界に於ては日輪様が上りきられた最も高い処を南と云ひ、正に之に反して地下にある所を北となし、日輪様が昼夜の平分線に上る所を東となし、其没する所を西となす事は貴方等の御存じの通りです。斯くの如く現界に於ては一切の方位を南から定めますけれども、高天原に於ては大神様が日輪様と現はれ給ふ処を東となし、之に対するを西となし、それから高天原の右の方を南となし、左の方を北とするのです。さうして天界の天人は何れの処に其顔と体躯とを転向するとも、皆日月に向つて居るのです。其日月に向うた処を東と云ふのです。故に高天原の方位は皆東より定まります。何故なれば、一切のものの生命の源泉は、日輪様たる大神様より来る故である。故に天界にては、厳の御魂、瑞の御魂をお東様と呼んでゐます』</p>
+            <p class="ja-classical-line">治国『尊き厳の御魂、瑞の御魂の大神様、愚昧なる吾々を教導せむが為に、五三公、竜公の口を通し間接内流を以て吾々にお示し下さいました其御高恩を、有難く感謝致します。あゝ惟神霊幸倍坐世惟神霊幸倍坐世』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c19.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 19: 化相 Kami [1252]</span>
+      </a>
+      <a href="c21.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 21: 跋文 [1254]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

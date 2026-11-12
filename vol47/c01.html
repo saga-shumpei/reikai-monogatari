@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 1: アーク灯 [1234] - Volume 47 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 47 Table of Contents</a>
+      <span>Volume 47</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 47 &bull; Chapter 1</span>
+      <h1 class="chapter-title-en">Chapter 1: アーク灯 [1234]</h1>
+      <p class="chapter-title-ja">アーク灯〔1234〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Manifesting Shiki, Shiraku, and Saugon entirely upon the Chijiyō, the Mizu no Mitama of Susanō, who descended upon the summit of Mount Ubusuna, known as the Takaamahara of the world, opened the Saidaiichi Tengoku and, wishing to save the Momobito of the Yomo Kuniguni beneath the heavens into the Mikuni of Kami, gathered the Sendenshi of pure heart from the Yomo Kuni and opened the noble Mioshihe of Kami; how noble it is.</p>
+          <p class="en-p">Accompanied by the Kamutsukasa of Harukuniwake, Mankō, Harukō, and Isokō, he departed from the mansion, crossed over Kajikatauge, and while encountering a hundred troubles, he advanced through the wilderness for the sake of the Way without bending or yielding.</p>
+          <p class="en-p">In the forest of Nonaka, leaving behind Mankō, Isokō, and Matsuhiko, and accompanied only by Ryūkō, he proceeded steadily through the dark night.</p>
+          <p class="en-p">He passed through the mysterious forest safely and advanced to Ukigikahara, where the many troops of the Brahman were stationed.</p>
+          <p class="en-p">Harukuniwake, leaving Matsuhiko, Isokō, and Mankō behind in the forest of Nonaka and accompanied only by Ryūkō, hurried along the road, intending to advance secretly into the camp of the Brahman in the forest of Ukigi, obeying the command of Kami. The guards of the mysterious forest were so intoxicated with sake that they did not notice the two passing by at all. When they advanced to the entrance of the village of Ukigi, which was the second barrier, the two, Tāru and Āku, were standing by with their large eyes wide open, like hornets guarding the outside of a disturbed beehive.</p>
+          <p class="en-p">Tāru: 'Hey, Āku, it seems the east is turning white. We are being made to do this night watch, but since it is already near dawn, there should be no need for a night guard; how about ordering the pupils to take a rest?'</p>
+          <p class="en-p">Āku: 'The fact that the pupils and everything else have begun to brighten is due to the light of this Āku-tō-sama. You always spit out that I am not an Āku but an evil party, but no matter how dark the night is, it is the Āku-tō that makes it bright. Therefore, one cannot tell whether the good will be in time or the evil party will be in time. Yeah, the reality world is accomplished by the intermingling of good and evil, and the crossing of beauty and ugliness. If evil is so scary to you, it would be smarter not to stick your neck into such a place from the beginning. Speaking of Brahmanism, it is evil by nature. And since it is the Āku-sama for that evil teaching, it is very suitable.'</p>
+          <p class="en-p">Tāru: 'Don't say stupid things. How could there be evil in Kami? The Kami of Daijizaiten Ōkunihiko is the creator of the world. How could this world be created perfectly with evil? It is precisely because I think He is the true Kami of supreme benevolence and love that I am doing such a painful service. I was not born a soldier, nor did I volunteer to be one, but I have joined this battle, which is against my heart, dragged by the power of faith for the sake of the Way. If we dawdle, isn't the situation such that the evil Kami Susanō-no-Mikoto of the Sango-kyō might trample upon the sacred ground of Mount Ōkumo, as fearful as it is? As believers, we must protect it with our blood.'</p>
+          <p class="en-p">Āku: 'No matter what you say about the world, it cannot stand without evil. I am pleased because I know that Brahmanism is evil. The guys of Sango-kyō spit out that the spirit is the master and the body is the follower, but this reality world is solidified by matter. Even our physical bodies are all matter. Even the sun shining in the heavens is matter. If we are to live in the material world, we must follow the laws of the material world no matter what; all self-love and worldly love originating from the sun of the reality world are, in short, evil. The survival of the fittest and the law of the jungle are the unshakeable truths of the reality world. Think about it carefully. Strong beasts catch and eat weak beasts, large fish swallow small fish, hawks catch shrikes, and shrikes catch and eat sparrows, do they not? Even humans beat and eat four-legged animals, capture fish tribes swimming happily in seas and rivers, peel the skins of fruits of plants enjoying nature, rub them, soak them in water, put weights on them, put them into boiling water, or roast them over fire; they do truly cruel things to fill their mouths and stomachs, and thus continue their lives. In short, humans are the ringleaders of evil. Try not doing such things by calling them evil, and see if you can preserve your life even for a day. Therefore, whether Susanō-no-Mikoto is good or evil, those who become obstacles in our construction of society must be destroyed by giving them the name of evil, even if they are good, or else we ourselves will be destroyed.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">至喜と至楽と荘厳を
+全く地上に現し世の
+高天原と聞えたる
+ウブスナ山の頂上に
+天降りましたる素盞嗚の
+瑞の御霊はイソ館
+最第一の天国を
+開き給ひて天が下
+四方の国々百人を
+神の御国に救はむと
+心も清き宣伝使
+四方の国より呼び集め
+尊き神の御教を
+開かせ給ふ尊さよ
+皇大神の神言もて
+治国別の神司
+万公、晴公、五三公を
+伴ひ館を立出でて
+河鹿峠を打ちわたり
+百の悩みに遭ひながら</p>
+            <p class="ja-classical-line">撓まず屈せず道の為
+荒野ケ原を進み行く
+野中の森に万公や
+五三公、松彦振り残し
+竜公伴ひ暗の夜を
+縫うてスタスタ進み行く
+怪しの森も何時しかに
+無事によぎりてバラモンの
+軍の数多屯せる
+浮木ケ原に進み行く。</p>
+            <p class="ja-classical-line">治国別は松彦、五三公、万公を野中の森に置去りにして、竜公一人を伴ひ、神の命を奉じて浮木の森のバラモンの陣中に、私かに進まむと、道を急いだ。怪しの森の守衛等は酒に酩酊して、二人の通るのを少しも気がつかなかつた。第二の関所たる浮木の村の入口に進んだ折、タール、アークの両人は大きな目の瞳孔をあけつ放しにして、いらひさがした蜂の巣の外側を守つてゐる雀蜂宜しくの体裁で控へてゐる。</p>
+            <p class="ja-classical-line">『オイ、アーク、どうやら東が白んだやうぢやないか。俺達もかうして不寝番をやらされて居るが、最早夜も明け方に近くなつたのだから、夜警の必要もあるまい、一つ瞳孔に休養を命じたら何うだらう』</p>
+            <p class="ja-classical-line">『瞳孔も彼処も明くなりかけたのは、此アーク灯さまの光だよ。貴様、いつも俺をアークぢやない悪党ぢや悪党ぢやと吐しよるが、何程暗の晩だつて、明くするのはアーク灯だ。それだから、善が間に合ふとも、悪党が間に合ふとも分るまいがな。エエー、善悪混淆、美醜相交はつて、現実世界が成就してゐるのだ。貴様のやうに悪が夫れ程怖ければ、元からこんな所へ首をつつ込まない方が気が利いてゐるぢやないか。バラモン教と言へば、元より悪に極まつてゐる。其悪の教にアークさまだから、大変に誂へ向だ』</p>
+            <p class="ja-classical-line">『馬鹿云ふな。神様に悪があつてたまらうかい。大自在天大国彦の神様は、世界の造主だ。悪を以て此世の中が何うして完全に創造する事が出来ようか、俺は至仁至愛の誠の神様だと思へばこそ、斯うして辛い御用をしてゐるのだ。元から軍人に生れたのでもなし、軍人を志願したのでもないが、お道の為に信仰の力に引きずられて、心にもない戦陣に加はつたのだ。グヅグヅして居ると三五教の悪神素盞嗚尊が、畏くも大雲山の聖地を蹂躙するかも知れないといふ形勢ぢやないか。吾々信徒としては血を以て之を守らねばならないのだ』</p>
+            <p class="ja-classical-line">『世の中は何と云つても、悪でなければ立つて行かない。俺は、バラモン教は悪だと知つたから気に入つて居るのだ。三五教の奴は霊主体従だと吐して居るが、此現実世界は物質を以て固められてゐる。吾々の肉体だつて皆物質だ。天に輝く太陽でさへヤツパリ物質だ。物質界に生きて行かうとすれば、何うしても物質界の法則に従はねばならぬ、凡て現実界の太陽よりする自愛や世間愛は要するに悪だ。優勝劣敗弱肉強食は現界の動かす可らざる真理だ。よく考へて見よ。強い獣は弱い獣を捕つて食ひ、大魚は小魚を呑み、鷹は鵙をとり、鵙は雀を捕つて食ふぢやないか。人間だつて四つ足をたたいては喰ひ、気楽相に海川を游泳してゐる魚族を捕獲し、天然を楽んでゐる植物の実を皮を剥いたり、こすつたり、水につけたり、重しをかけたり、熱湯の中へ入れたり、火あぶりにあはしたり、実に残忍極まる事をやつて口腹を充し、それで生活を続けてゐるのだ。要するに人間は悪の張本人だ。こんな事が悪だと云つてやらずに居つて見よ、一日だつて生命を保つ事は出来ぬぢやないか。それだから仮令素盞嗚尊が善であらうが悪であらうが、吾々の社会を建設するに就いて邪魔になる奴ア、仮令善でも悪と云ふ名をつけて亡ぼして了はなくちや自分達が亡ぼされて了ふのだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'In that case, if a human dies, must they not all go to hell?'</p>
+          <p class="en-p">'Hah, hell makes a laughingstock of itself! As for what is called hell, it is manifested right before our very eyes in the present Genkai. Occupying the Kokudo of others, or giant capitalists crushing small capitalists, great landowners absorbing small landowners, keeping a multitude of Gunjin and high-chanting Busauteki Heiwa—these are all the workings of hell. As if there were any such place as Gokuraku! Is there not a saying that the victor is the imperial army and the defeated are bandits? The supreme ones among the greatest villains are the overlords of Jigokukai. As for the afterlife, there is no need to worry. Drink and make merry, for an inch ahead is darkness, after the darkness the moon comes out, the moon is a moon indeed but a liar—is that not what they say? In a world of evil and Kiyogi, scattering such convenient Jirei as sincerity and goodness while stealthily carrying out Gizen—such a wretch is a true villain. Such a fellow is what is called a Yachimata artifact. Or rather, this is termed a two-sided plaster. After all, a Ningen must be manly, making the contours clear as evil is evil and good is good, otherwise people will not trust you. The stronger one is in evil, the more they are fêted as gentlemen, financial magnates, heroes, and personages of renown. If you speak of a good person, it is a synonym for a fool; that is why I have given myself the name of the arc-lamp, intending to intoxicate the world with poisonous gas, and have made my head shine brilliantly like this just as you see. Right now my boss, namely the sun of the natural world, is ascending. All light and heat coming from the sun of the natural world are the fountainhead of self-love and the specimen of egoism. A Ningen who displays egoism to the extreme is called a selfish (clever) fellow. Ee-en!'</p>
+          <p class="en-p">'Hey, Arc, you are terribly infected with materialism, a Nietzscheanism of not losing even a single hair for the sake of others!'</p>
+          <p class="en-p">'That is a settled matter. It is Nietzscheism. Is not the Anglo-Japanese Alliance just like that? When your own country reached a dead end, it raised a clever thought, used a somewhat formidable country as a watchdog, commanded it to guard not only the Orient but even the West, poked it daily with cries of oh-shi oh-shi to make it rejoice, and when the time came that it was truly Britain, it then turned its rump right round, spoke of red rice, shook hands toward the rice, and turned its rump toward the sun—the rump is none of the less the moon, and that is what is called moon-striking. Therefore, no matter what, the world must act in a selfish manner, or it will utterly come to nothing. To fight sumo in another person's loincloth is the so-called skill of a diplomat. An open mouth that cannot close due to a gape, and shit from the backside taking over the realm—such is the metaphor of a confused world. Before long, if some propagandist of Aizankyou... should come along, I will successfully deploy the Anglo-Japanese Alliance style there and plunge them into some deep trap.'</p>
+          <p class="en-p">'Hah, you should not speak with such grand airs. Were you not the very principal culprit at Kajika Pass who, when attacked with the so-called Kototama warfare by the group of propagandists of Chikokuwake, and while remaining in the vanguard, abandoned your horse and everything else and fled for your very life? You should not open your mouth too wide and talk big. There is a limit to being unblushing.'</p>
+          <p class="en-p">'To be unblushing means as if there were no person beside one. Even if you are sitting beside me, you are not a Ningen, you see. Utsu-futsu.'</p>
+          <p class="en-p">'Even I am a towering Ningen-sama. Do not make too much of a fool of me.'</p>
+          <p class="en-p">'I had thought you or again yourself were merely the coolie's tar. Now, now, just watch my skill; right now a fellow from Aizankyou is sure to ride on the wave of victory and come leisurely here. If so, we will skillfully bring out the League of Nations Treaty, execute the limitation of armaments, and plan to achieve a grand victory without a hitch. As for you, just stay frozen and do not utter a single word. If you go out of your way to display a good heart, it will become a hindrance to the conclusion of the treaty, you see.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『さうすると、人間が死んだら、皆地獄に行かねばならぬぢやないか』</p>
+            <p class="ja-classical-line">『ヘン、地獄が聞いて呆れるワイ。地獄と云へば、目のあたり現界に現はれてゐるのだ。他人の国土を占領したり、或は大資本家が小資本家を押倒したり、大地主が小地主を併呑したり、沢山の軍人を抱へて、武装的平和を高唱したりしてゐるのは、皆地獄の行方だ。極楽なんて云ふ所があつてたまらうかい。勝てば官軍、敗くれば賊と云ふ事があるぢやないか。最凶悪のすぐれた者が地獄界の覇権者だ。死後の世界なんか、心配するにや及ばぬ。呑めよ騒げよ一寸先や暗だ、暗の後には月が出る、月は月ぢやが嘘ツキぢや、と云ふぢやないか。悪と虚偽との世の中に、誠ぢや、善ぢやと、そんな体のよい辞令を振りまはして、コツソリと偽善をやつてゐるやうな奴こそ、真の悪党者だ。そんな奴こそ八衢代物といふのだ。或はこれを称して二股膏薬といふ。ヤツパリ人間は男らしう、悪なら悪、善なら善と、輪廓を明瞭にせなくちや、人が信用して呉れないぞ。悪の強い者程紳士紳商、英雄名士と持てはやされるのだ。善人と云へば馬鹿の代名詞だ、それだから俺はアークといふ名をつけて、世の中を毒瓦斯で酔はしてやる積りで、此通り頭までテカテカに光らしてゐるのだ。たつた今俺の親分即ち自然界の太陽がお上り遊ばすのだ。すべて自然界の太陽より来る光熱は、自愛の源泉だ、利己主義の標本だ。利己主義を極端に発揮する人間を利己（利巧）な奴と云ふのだ。エエーン』</p>
+            <p class="ja-classical-line">『オイ、アーク、貴様は大変な物質主義にかぶれたものだなア、他人の為には一毛も損せずといふニーチエ主義だな』</p>
+            <p class="ja-classical-line">『きまつた事だ。ニーチエ主義だよ。日英同盟だつて其通りぢやないか、自分とこの国が、日も三進も行かぬ様になつた時に英考を起して、一寸強相な国を番犬に使ひ、東洋はまだおろか、西洋迄警護の役を命じ、オツシ　オツシとケシをかけて日々喜ばせ、モウ英といふ時分になると、今度は尻をクレツと向け、赤米と云つて、米の方へ握手をし、日の方へ尻を向ける、ケツは即ち月だ、それでツキ倒しといふのだよ。さうだから、世の中は何うしても利己な行方をせなくちや、到底駄目だ。人の褌で相撲とるのが所謂外交家の手腕だ。アフンどしであいた口がすぼまらぬ、尻糞が天下を取るといふのが、混同した世界の比喩だ、今に三五教の……モシヤ宣伝使でもやつて来よつたら、うまくそこは日英同盟式を発揮して、深い陥穽へでも突つ込むのだな』</p>
+            <p class="ja-classical-line">『ヘン、偉相に云ふものぢやないワ。貴様は河鹿峠で何うだつたい、治国別の宣伝使の一行に、言霊戦とやらを打ちかけられ、先鋒隊に居乍ら馬も何も打ちやつて命カラガラ遁走した張本人ぢやないか、余り大きな口をあけて言ふものぢやないぞ。傍若無人にも程があるワイ』</p>
+            <p class="ja-classical-line">『傍若無人にとは傍に人無きが如しといふのだ。貴様は俺の傍に居つても、人間ぢやないからな。ウツフツフ』</p>
+            <p class="ja-classical-line">『俺だつて堂々たる人間様だ。余り馬鹿にすな』</p>
+            <p class="ja-classical-line">『俺や又貴様は小使のタールかと思うて居つたのだ。マアマアお手際を見て居れ、たつた今三五教の奴が勝に乗じて、悠々とここへやつて来るに違ない。さうすりやうまく国際聯盟条約でも持ち出して、武備制限を実行し、首尾よく大勝利を得る積りぢや、貴様はジーツとして一言も言はぬ様にしてくれ。なまじひ、善心を出しよると、条約締結の邪魔になるからな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Ark, look a little to the north, they are coming, they are coming!'</p>
+          <p class="en-p">'Yaa, that's Aitsu, a missionary of Ananai-kyō! Ha-ha-ha-ha, it's Harukuniwake! Ko-ko, that's Koitsu, ta-ta, this is terrible!'</p>
+          <p class="en-p">'Ihi-hi-hi, look at that panic-stricken state of his! What? Up until now he has been blowing nothing but big horns, how on earth can he serve as a plenipotentiary ambassador with such a weak waist?'</p>
+          <p class="en-p">'He's not a plenipotentiary ambassador, he intends to conclude a treaty with Zengenbishi! Hey Kisama, if you don't pull yourself together a bit, we're in trouble.'</p>
+          <p class="en-p">'I was supposed to not say anything at all, you know.'</p>
+          <p class="en-p">'E-e, what a dull-witted fellow you are! Do you understand a thing called adapting to circumstances? Ah-ah, now everywhere is trembling, and even the fiber cells of my body have begun to pulsate; it seems as though a popular movement has broken out inside my body, why!'</p>
+          <p class="en-p">'Etsu-hetsu-he, it seems that the riot in my internal country has subsided, and all the faculties... look like they have ceased activity, why. Si-si, my tongue feels like it's even being pulled out. Kiyokiyo, fear has taken up a great deal of room... it seems.'</p>
+          <p class="en-p">'Ah, it's painful, do-do, how on earth will this negotiation... ever be settled, I wonder.'</p>
+          <p class="en-p">'By applying something like Einstein's theory of relativity and smoothly cutting through this situation... aren't you.'</p>
+          <p class="en-p">Thus, the two beheld the figure of Harukuniwake, dropping their hips in astonishment, their tongue roots failing to meet, opening the pupils of their large eyeballs wider than wide, extending their pointed chins boundlessly, opening their mouths in a cubic shape, drawing their tongues deep back into their throats, and trembling.</p>
+          <p class="en-p">Harukuniwake and Ryūkō stepped forward briskly,</p>
+          <p class="en-p">Harukuniwake: 'You appear to be the checkpoint guards of the Brahmin army, but won't you guide me from here to the camp of General Ranch?'</p>
+          <p class="en-p">Ark: 'Me-me, absolutely not! I can't bear to have you pass through a place like this... Yaa, aren't you Ryūkō? When did you sink down into Ananai-kyō? Since you are the one who knows the lay of the land best, guide us to General Ranch! O-o, I am a permanent fixture at this checkpoint.'</p>
+          <p class="en-p">'Atsu-ha-ha, aren't you two Ark and Tāru? What is that unsightly posture of yours, you lost the use of your hips, didn't you. Well, Lord Harukuniwake, this fellow is no good. Without bothering with such a person, let's advance straight into the depths. Fortunately, I used to serve under the command of General Katahiko, so it is very convenient for me to be your guide. And besides, since it was a chaotic army just like that, neither General Katahiko nor Ranch has probably realized yet that I, Ryūkō, have become your disciple. It is extremely convenient!'</p>
+          <p class="en-p">'Koriya Ryūkō, once I hear that secret, this side will no longer forgive you. If you are going to enter the camp splendidly, then try entering. You are an insect flying into the fire! Right, Tāru, isn't it pitiful?'</p>
+          <p class="en-p">'Hey Ryūkō, if you are going to be a traitor, you might as well be a traitor, so you'd better turn back the way you came in the company of that missionary. If such a missionary comes along, another complication will start and it will be terrible. General Ranch will also be troubled, and the missionary will have to make some effort too. In such a dangerous world as this, there is no need to go out of your way to stir up waves on flat ground, is there? Now, Lord Harukuniwake, what do you think?'</p>
+          <p class="en-p">'Uun, we intend to impart good words to General Ranch and General Katahiko, to make their spirits and flesh save and raise them up to Takamanohara, and to share that joy even unto you, by advancing before the generals with this Ryūkō as our guide. Do you not also wish to change your minds as of today, return to the righteous path, and escape the suffering of the path of hell? No matter how much you may say it is a world where the strong triumph, evil will never last forever. What do you say, do you not intend to follow the words of Harukuniwake?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『アーク、一寸北の方を見い、来たぞ来たぞ』</p>
+            <p class="ja-classical-line">『ヤア彼奴ア、三五教の宣伝使だ、ハヽヽヽヽ治国別ぢや、コヽ此奴ア、タヽ大変だ』</p>
+            <p class="ja-classical-line">『イヒヽヽヽ、あのあわて様わいのう。何だ、今迄法螺ばかり吹きやがつて、そんな弱腰で何うして、全権大使が勤まるか』</p>
+            <p class="ja-classical-line">『全権大使ぢやない、善言美詞で条約締結する積りぢや。オイ貴様、チツと確りしてくれぬと困るよ』</p>
+            <p class="ja-classical-line">『俺は何にも言はぬ筈だつたねえ』</p>
+            <p class="ja-classical-line">『エヽ、気の利かぬ奴だな。臨機応変といふ事を、コヽ心得てゐるか。アヽヽモウそこらがビリビリして、体の繊維細胞迄が躍動し出した、何でも俺の体内にや民衆運動が勃発し出したとみえるワイ』</p>
+            <p class="ja-classical-line">『エツヘツヘ、どうやら俺も体内国の暴動が鎮定したと見えて、凡ての諸官能が活動中止と……見えるワイ。シヽ舌迄引きつつて来さうだ。キヨキヨ恐怖心が大変に巾を利かしよつた……やうだ』</p>
+            <p class="ja-classical-line">『アヽ苦しい、ドヽ何うしたら、此談判はカヽ解決がつくだらうかな』</p>
+            <p class="ja-classical-line">『アインスタインの相対性原理説でも応用して、うまく此場を切りぬけ……るのだな』</p>
+            <p class="ja-classical-line">かく二人は治国別の姿を見て、ビツクリ腰をぬかし、舌の根も合はず、大きな目玉の瞳孔を、いやが上にも開けつ放しにして、尖つた腮をホウヅもなく延長し、口を立方形に開け乍ら、舌を喉の奥の方へちぢ込めて、戦いてゐる。</p>
+            <p class="ja-classical-line">治国別、竜公はツカツカと進みより、</p>
+            <p class="ja-classical-line">治国『其方はバラモン軍の関所守と見えるが、之よりランチ将軍の陣営へ、此方を案内してくれまいか』</p>
+            <p class="ja-classical-line">アーク『メヽヽ滅相な、コヽこんな所を通過して貰つちや堪りませぬワ、……ヤアお前は竜公ぢやないか。何時の間に三五教へ沈没したのだ。貴様こそ勝手を知つてゐるだらうから、ランチ将軍の所へ案内せい、オヽ俺は此関所の常置品だ』</p>
+            <p class="ja-classical-line">『アツハヽヽ、貴様はアークにタールの両人ぢやないか、何だ、みつともない其ザマは、腰を抜かしやがつたのだな。モシ治国別様、此奴ア駄目ですよ。こんな者にかまはずドンドンと奥へ進みませう。幸ひ私は片彦将軍の部下に仕へて居つたのですから、貴方の案内役には大変都合が宜しい。そして又あの通りの乱軍でしたから、此竜公が貴方の弟子になつたといふ事は、片彦将軍もランチもまだ知つて居りますまい。大変に好都合ですよ』</p>
+            <p class="ja-classical-line">『コリヤ竜公、其秘密を聞くからは、最早此方は許しは致さぬぞ。見事陣中へ這入るなら這入つてみよ。飛んで火に入る夏の虫だ、のうタール、可哀相ぢやないか』</p>
+            <p class="ja-classical-line">『オイ竜公、貴様も謀叛人なら謀叛人でよいから、その宣伝使のお伴をして元へ引返したらよからうぞ。こんな宣伝使にやつて来られると、又一悶錯が始まつちや大変だ。ランチ将軍も困るだらうし、又宣伝使も一骨折らねばなるまい。これ程物騒な世の中に、好き好んで平地へ波を起すやうな事はするに及ばぬぢやないか。なア治国別さま、貴方は何う考へますか』</p>
+            <p class="ja-classical-line">『ウーン、吾々はランチ将軍、片彦将軍に対し、善言を与へて、彼が霊肉をして高天原へ救ひ上げ、汝等に至る迄、其歓びを分け与へむ為に、此竜公を案内者として将軍の面前に進み行く積りだ。其方も今日限り心を入れ替へて、善道に立返り、地獄道の苦みを免れる気はないか。何程強い者勝の世の中だと云つても、悪では何時迄も続きは致さぬぞ。どうぢや、治国別の言葉に従ふ気はないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Well, I do not mean to say I will not obey, but this fellow called Āku is truly a wicked shiromono, and since he is a Shiyugi follower, this koitsu is no good, I suppose.'</p>
+          <p class="en-p">'Moshi Sendenshi-sama, whether he looks like a good or looks like a good person, it is a world called Āku, so perhaps even I, seen from the eyes of the true Kami, might be a zennin. I humbly beg for your help.'</p>
+          <p class="en-p">'This koitsu is the most notorious kiken jinbutsu even among the buka of Shiyōgun Katahiko, yet since it is said that those strong in evil are also strong in good, Harukuniwake-sama, how would it be to pardon this koitsu and have him act as our guide?'</p>
+          <p class="en-p">'That is chiyōdo tsugafu well... Āku and Tāru, both of you, guide us before Generals Ranchi and Katahiko.'</p>
+          <p class="en-p">Āku: 'Hai, I understand.'</p>
+          <p class="en-p">And the hips that had hitherto been giving out had somehow recovered, and marching ahead briskly, pointing toward the south where the jinmaku was stretched all around, he started to walk.</p>
+          <p class="en-p">Harukuniwake and Tatsukō, both of them, followed behind the two, and they had gone only about ichinichiyō. Suddenly, with a crash, their ashimoto gave way, and the two fell ruthlessly into a deep pit measuring four or five ken. At the bottom of the pit, sharp spears like a forest were erected without a single empty space. Yet, perhaps because the divine protection of Kami was thick upon both of them, they fell conveniently between the spears and did not sustain even the slightest wound. Peering down into the bottom from above the pit, Āku stuck out his long tongue with a perotsu and</p>
+          <p class="en-p">'Ihihihi, what a pitiful fellow, uha-fu-fu-fu, you foolish koitsu, eh-he-he-he, serves you right, o-tsu-ho-ho-ho, interesting, interesting, atsuha-ha-ha-ha, burnt black of an Abobontan, Sendenshi of Anaari-kyō, having received the defeat of Anaari-kyō, it is best that you croak. To the strategy of Āku-sama, you must have said a-fun, right? Ihihihi, oi, Tāru, how is it, you must be in awe of the skill of Āku-sama.'</p>
+          <p class="en-p">'That we fell into the work of Āku-ma is this very thing. Even Āku upholding Āku, the way of Brahmanism, at this even I was struck dumb, wai. Moshimoshi, Sendenshi of Mitsugokyō, it is by no means Tāru who is bad, so even if you change your province, please make it so that you do not haunt me; if you are to pull off this raw head of Tāru, please pull off this head of Āku.'</p>
+          <p class="en-p">'Hen, since my head is made of iron, even if hundreds of millions of gōsha were to make a simultaneous raid, it is dame. Now that things have come to this, it is our victory. Sa, from now on I will report to General Ranchi and display the very first feat of arms. Even General Katahiko, since Harukuniwake, who fled so fragilely together with hundreds of troops, was neatly disposed of by the strategy of this Āku-sama, it is a great thing. It is a Gāteru Medal.'</p>
+          <p class="en-p">'A Gāteru Medal of shivering gata-gata makes me dumbfounded, wai.'</p>
+          <p class="en-p">'Eri, do not talk nonsense, before long I will stand shoulder to shoulder with General Katahiko, the right arm of General Ranchi, and come to command the whole army. You, stand guard over the hole here, and I am going from now on to report to General Ranchi. My figure too is something to see for the last time. When you meet me with your eyes next time, from the top of my head to the tip of my feet, it will be full of gold stripes. Look well at my face, so that you donot make a mistake and commit rudeness at that time...'</p>
+          <p class="en-p">'Hen, even if you think you will perform a feat all by yourself, that koitsu is dame. If you say such a boastful thing, shall I expose the fact that you were startled and lost the use of your hips to General Ranchi-sama? To perform a feat, it will not do unless you are together with me. Is it not too mushigayosugi to try to make it your own sole feat?'</p>
+          <p class="en-p">'It may not be that I cannot recognize your feat either. Before long I will give orders, so wait for a while. Ehen.'</p>
+          <p class="en-p">With a cough-clear, feeling already as if he had become a shiyōgun, even his manner of speech solemn, leaning backward, walking with a long stride while gripping his fists in both hands, making the broad avenue look too narrow and swinging his arms, with an indescribably triumphant face, he goes striding along with his long compass in a nosori-nosori manner.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ハイ、私は従はぬことはない事はありませぬが、此アークといふ奴、実に悪党な代物で、ニーチエ主義ですから、此奴ア駄目でせうよ』</p>
+            <p class="ja-classical-line">『モシ宣伝使様、アークに見えても、善に見えてもアークといふ世の中ですから、私こそ、真の神の目から見れば、善人かも知れますまい。どうぞお助けを願ひます』</p>
+            <p class="ja-classical-line">『此奴は片彦将軍の部下に於ても、最も悪名高き危険人物、併しながら悪に強い者は善にも強いといふ事だから、治国別様、一つ此奴を許して案内させたら何うでせうか』</p>
+            <p class="ja-classical-line">『そりや丁度都合が好からう、……アーク、タールの両人、吾々の為にランチ、片彦両将軍の前に案内致せ』</p>
+            <p class="ja-classical-line">アーク『ハイ、畏まりました』</p>
+            <p class="ja-classical-line">と、今迄抜かして居つた腰は何時の間にやら回復し、先に立つてスタスタと陣幕のはり廻した南の方を指して歩行き出した。</p>
+            <p class="ja-classical-line">治国別、竜公両人は二人の後に従つて、一二丁ばかりやつて来た。俄にガサリと足許は転落し、四五間もある深い陥穽に両人は無残にも落ち込んで了つた。陥穽の底には林の如く鋭利な鎗が空地なしに立ててあつた。されど両人共神のお守りの厚き為か、都合よく鎗と鎗との間に落ち込み、少しの疵も負はなかつた。アークは陥穽の上から底を覗きながら、長い舌をペロツと出し、</p>
+            <p class="ja-classical-line">『イヒヽヽヽ、いぢらしい者だなア、ウツフヽヽヽ、うつけ者奴、エツヘヽヽヽ、えゝ気味だなア、オツホヽヽヽ面白い面白い、アツハヽヽヽ安本丹の黒焼、三五教の宣伝使、穴有教の制敗を受けて、くたばつたがよからう。アークさまの計略には、アフンと致しただらう。イヒヽヽヽ、オイ、タール、何うだ、アークさまの腕前には恐れ入つただらう』</p>
+            <p class="ja-classical-line">『アーク魔の業に落ち込んだとは此事だな。アークまでもアークを立て通すバラモン教のやり方には、俺も唖然としたワイ。モシモシ三五教の宣伝使さま、決してタールが悪いのぢや厶いませぬから、どうぞ国替をなさつても、私には化けて出ぬやうにして下さい、此タールの生首を引抜くならば、此アークの首を抜いて下さい』</p>
+            <p class="ja-classical-line">『ヘン、俺の首は鉄で拵へてあるのだから、仮令幾百万の亡者が、一斉襲撃をしたつて駄目だ。モウ斯うなればこつちの物だ。サアこれからランチ将軍様に報告して第一番の功名手柄を現はしてくれる。片彦将軍だつて、数百の軍隊と共に脆くも敗走した治国別を、此アークさまの計略に仍つて巧く片付けたのだから、大したものだ。ガーター勲章だ』</p>
+            <p class="ja-classical-line">『ガタガタ慄ひのガーター勲章が聞いて呆れるワイ』</p>
+            <p class="ja-classical-line">『エヽゴテゴテ云ふな、今に俺がランチ将軍の片腕、片彦将軍と肩を並べて、全軍の指揮をする様になるのだ。貴様ここに穴の番をしてをれ、俺はこれからランチ将軍に報告に行く。俺の姿も今が見納めだぞ。今度目に貴様に会ふ時には、頭の先から足の先まで、金筋だらけだ。よく顔を見ておけ、其時に間違つて無礼を致さぬ様に……』</p>
+            <p class="ja-classical-line">『ヘン、自分一人手柄をしようと思つても、其奴ア駄目だぞ。そんな偉相な事を云ふと、貴様がビツクリして腰を抜かした事をランチ将軍様にスツパぬいてやらうか。手柄をしようには俺と一緒でないと駄目だぞ。自分一人の手柄にしようとは、余り虫がよすぎるぢやないか』</p>
+            <p class="ja-classical-line">『其方の手柄も認めてやらぬ訳にも行くまい。やがて沙汰を致すから、暫く待つてをれよ。エヘン』</p>
+            <p class="ja-classical-line">と咳払ひをしながら、早くも将軍になつた気分で、言葉付迄おごそかに、反り身になつて大股に両手の拳を握り、大道狭しと打振りながら、えも言はれぬ得意顔で、長いコンパスを、のそりのそりとふん張つて行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="preface.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Preface & Introduction</span>
+      </a>
+      <a href="c02.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 2: 黒士会 [1235]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

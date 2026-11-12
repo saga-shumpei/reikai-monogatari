@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 2: 黒士会 [1235] - Volume 47 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 47 Table of Contents</a>
+      <span>Volume 47</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 47 &bull; Chapter 2</span>
+      <h1 class="chapter-title-en">Chapter 2: 黒士会 [1235]</h1>
+      <p class="chapter-title-ja">黒士会〔1235〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Harukuniwake, having suffered an unexpected Fukaku, while tending to Tatsukō, said,</p>
+          <p class="en-p">Tatsukō: 'Oi Tatsukō, you were not injured anywhere, were you? I have suffered a terrible Fukaku and have fallen deeply.'</p>
+          <p class="en-p">Tatsukō: 'Hai, Arigata-u gozaimasu, I have not sustained any Kega anywhere, but having been lured into such a deep scheme and dropped into a deep hole, I feel nothing but Fukuwai. Aha-ha-ha-ha.'</p>
+          <p class="en-p">Harukuniwake: 'Ufu-fu-fu-fu, you too have become quite Ananahikyōshiki. No matter what kind of Kannan you encounter, it is no good unless you maintain that Taido.'</p>
+          <p class="en-p">Tatsukō: 'Ana arigata-ya, Ana totoshi-ya, the Kamisama of Ananai-kyō; as expected, Brahmanism is the opposite of Ananai-kyō, it is Anaarikyō, is it not.'</p>
+          <p class="en-p">Harukuniwake: 'Oi, is it not useless to remain in Chitsukiyo in a place like this forever? Why do you not try to devise a way to crawl up now that you have had enough Kagen?'</p>
+          <p class="en-p">Tatsukō: 'That is true. Fortunately, they have set up a Takusan of spears, and as they have spread a net to wrap around our Karada like a Kumo no su, shall I pull out all the spearheads, tie them together, and make a Hashigo of spears to climb up? If we dawdle, that fellow Ark will bring a Takusan of Kobun, and if he makes it rain spears from above, we shall be in trouble.'</p>
+          <p class="en-p">Harukuniwake: 'Naani, at that time, since there are this many spears, we can just make it rain spears from below to above. Let us rest for a while at the bottom of this empty well where the wind does not blow and then climb up. By the way, is there not someone at the edge of the hole?'</p>
+          <p class="en-p">Tatsukō: 'That fellow is a man called Tar. He is quite a fool, but since he is a good-natured human, he is a creature that leans whichever way. How would it be if we were to Kototama-influence him?'</p>
+          <p class="en-p">Harukuniwake: 'Try doing it for your first battle; I, Harukuniwake, will watch Tatsukō's Kototama battle from here...'</p>
+          <p class="en-p">Tatsukō said,</p>
+          <p class="en-p">Tatsukō: 'Hai, Arigata-u.'</p>
+          <p class="en-p">And while saying so, he looked up at the sky and said,</p>
+          <p class="en-p">Tatsukō: 'I, Tatsukō, secretary to General Katahiko of the vanguard of Brahmanism, now formally command you, Tar. As you know, this Tatsukō, having been crushed in one defeat by Harukuniwake at Kajika Pass and fleeing with the entire army, could not bear to see the pathetic remnants of his allies, so I devised a plan. Together with Matsukō, I feigned surrender to Harukuniwake and led him here. Lower a rope ladder or something immediately and rescue me. If you do, I shall report to General Lunch that you are a man of greater merit than Ark. How is that, Tar? You must be in awe of my divine strategy and demonic schemes, are you not?'</p>
+          <p class="en-p">Tar: 'Hai, hai, not knowing that was the case, I have truly been very rude. Come, please come up. Fortunately, there is a rope ladder here, so I will lower it now. Please, only you come up. And what has become of Harukuniwake?'</p>
+          <p class="en-p">Tatsukō: 'There is no longer any need to concern yourself with Harukuniwake. You only need to lower the rope ladder.'</p>
+          <p class="en-p">Tar: 'That is truly a pitiable, or perhaps not so pitiable, situation. Have you been turned into an Imo-sashi? Ah, Kannagara Tamachi Haema Se.'</p>
+          <p class="en-p">While saying this, he lowered the rope ladder into the dark pit. Harukuniwake climbed up the rope ladder, tonton, one step after another.</p>
+          <p class="en-p">Tar: 'Yaa, Tatsukō-sama, ah, how wonderful, how wonderful, it is best of all that you were not injured. Please, forgive my rudeness.'</p>
+          <p class="en-p">Harukuniwake: 'You called Tar, I am not Tatsukō. I am Harukuniwake.'</p>
+          <p class="en-p">Tar: 'Yaa, this is, truly, I cannot say anything at all. Man-man-man, congratulations. And what has become of Tatsukō?'</p>
+          <p class="en-p">Harukuniwake: 'Un, Tatsukō has become well-situated. Well, he is safe.'</p>
+          <p class="en-p">Tar: 'That is, well, a pitiful thing to have happened. A Takusan of blood must have come out, I suppose.'</p>
+          <p class="en-p">Harukuniwake: 'Un, before long he will become a Yūrei, light a blue fire from the bottom of the well, and come along saying hiyū.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">思はぬ不覚をとつた治国別は、竜公を労はりながら、</p>
+            <p class="ja-classical-line">『オイ竜公、どこも怪我はなかつたかなア。大変な不覚をとつて、深く落ち込んだものだ』</p>
+            <p class="ja-classical-line">『ハイ有難う厶います、別にどこも怪我は致して居りませぬが、余り深い企みに乗ぜられ、深い穴へ落されて、チツとばかり不快でたまりませぬ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">『ウフヽヽヽ、貴様も余程三五教式になつたな。如何なる艱難に出会つても、其態度でなくちや駄目だ』</p>
+            <p class="ja-classical-line">『アナ有難や、穴尊しや、三五教の神様、ヤツパリ、バラモン教は三五教の反対で穴有教ですなア』</p>
+            <p class="ja-classical-line">『オイ何時迄もこんな所に蟄居して居つても約らぬぢやないか。モウいい加減に這ひ上る工夫をしたら何うだ』</p>
+            <p class="ja-classical-line">『さうですな、幸ひ沢山な槍を立ててゐやがるし、此通り、蜘蛛の巣の如く、吾々の身体にまきつくやうに網をはつてゐよるのだから、槍の先を皆ぬいて、先ぐり之をくくりつけ、槍の梯子でも拵へて上つてやりませうか。グヅグヅしてゐると、アークの奴沢山の子分をつれて来て、上から槍の雨でも降らされると困りますで』</p>
+            <p class="ja-classical-line">『ナアニ其時は、これ丈沢山の槍だから、下から上へ向けて槍の雨を降らしてやればいいのだ。マアゆつくりと風の当らぬ空井の底で休養でもして上ることにしようかい。時に穴の縁には誰かゐるぢやないか』</p>
+            <p class="ja-classical-line">『彼奴ア、タールといふ男です。随分馬鹿ですけれど、人間のいゝ奴ですから、どちらへでも傾く代物です。一つ彼奴を言向け和したらどうでせうかな』</p>
+            <p class="ja-classical-line">『お前の初陣に一つやつて見よ、治国別はここにて、竜公の言霊戦を観戦するから……』</p>
+            <p class="ja-classical-line">竜公は、</p>
+            <p class="ja-classical-line">『ハイ有難う』</p>
+            <p class="ja-classical-line">と云ひながら、空を打仰ぎ、</p>
+            <p class="ja-classical-line">『バラモン教の先鋒隊片彦将軍が秘書役、竜公、今更めてタールの奴に申付ける。此竜公は、汝の知る如く、河鹿峠に於て治国別の為に一敗地にまみれ、全軍遁走する折しも、腑甲斐なき味方の敗残見るに忍びず一計を案じ、松公と共に詐つて治国別に降参を装ひ、ここ迄導いて来たのだ。一時も早く此方を縄梯子なりと吊り下して救ひ出せよ。さすれば汝は、アークにまさる手柄者として、ランチ将軍に奏上してやらう。どうぢやタール、此方の神算鬼謀は恐れ入つたであらうがなア』</p>
+            <p class="ja-classical-line">『ハイハイ、そんな事とは存じませず、誠に以て御無礼を致しました。サア何うぞお上り下さいませ。幸ひここに縄梯子が厶いますから、今つり下します。どうぞ貴方丈上つて下さい。そして治国別はどうなりましたか』</p>
+            <p class="ja-classical-line">『最早治国別にかまふ必要はなくなつた。縄梯子さへつり下したらいいのだ』</p>
+            <p class="ja-classical-line">『それは真に気の毒な様、気の毒でない様なことで厶いますな。芋刺しにでもおなりなさつたのですか。あゝ惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">と云ひながら、縄梯子を暗い陥穽へ吊り下した。治国別は縄梯子を伝うてトントンと上りゆく。</p>
+            <p class="ja-classical-line">『ヤア竜公さま、あゝ結構々々、怪我がなくて何よりでした。どうぞ私の御無礼は平に許して下さいませ』</p>
+            <p class="ja-classical-line">『タールとやら、拙者は竜公では厶らぬ。治国別だよ』</p>
+            <p class="ja-classical-line">『ヤア、これはこれは真にはや、何ともかとも申上げられませぬ。マンマンマンお目出度う厶います。そして竜公は何うなりましたか』</p>
+            <p class="ja-classical-line">『ウン、竜公は都合好くなつた。マア大丈夫だよ』</p>
+            <p class="ja-classical-line">『それはマア可哀相なことを致しました。沢山に血が出ましただらうな』</p>
+            <p class="ja-classical-line">『ウン、今に幽霊となつて、井戸の底から青い火をとぼし、ヒユーとやつて来るだらうよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At this moment, Tatsukō was already climbing up towards the mouth of the well, having ascended about nine-tenths of the way. Overhearing the conversation of the two, he suddenly turned into a ghostly mood, rolling his eyes round and round, opening his mouth wide, letting his tongue hang out, making his hips limp, and thrusting his hands forward powerlessly and limply,</p>
+          <p class="en-p">'How resentful I am!'</p>
+          <p class="en-p">he squeezed out in a strange voice. Tāru let out,</p>
+          <p class="en-p">'Eek!'</p>
+          <p class="en-p">falling flat on his rear on the spot, and with his mouth wide open, crying,</p>
+          <p class="en-p">'Ah, ah, ah, ah, ah!'</p>
+          <p class="en-p">he was trembling.</p>
+          <p class="en-p">'Hahaha, hey, Tāru-san, it's a lie, it's a lie. Tatsukō is just playing a trick. Hey Tatsukō, even a ghost doesn't play from early in the morning, you know!'</p>
+          <p class="en-p">'Hey, Tāru, to tell the truth I am sorry, but everything I said from the bottom of the well was a lie. Since I was dropped into a place like hell, I spoke of pretenses suitable for hell. Now, compared to the bottom of the well, we have climbed up to this flat ground which is comparable even to heaven, so I cannot speak lies and pretenses. Come, from here on, guide me towards General Ranch's mansion.'</p>
+          <p class="en-p">'Ah, because of that I too am relieved for just a moment. However, rather than going to such a place, would it not be possible for me to accompany you as well and have you help Sendenshi-sama escape? Oh my, Harukuniwake-sama and whatever your name is, I am truly saying nothing bad; before long Ark will come leading a large army, and without a doubt he will come to capture you. Ah, please turn back quickly. In exchange, I will let myself accompany you as well.'</p>
+          <p class="en-p">'Hahaha, there is no such thing as seeing the enemy, rolling up the flags, putting away the spears, and retreating; the Misrokai has no retreat towards its objective. There is only moving straight ahead.'</p>
+          <p class="en-p">Just as they were talking thus, the one who came riding astride a horse and taking the lead was Ark. Leading dozens of knights, Ark rode abreast and scattered to surround Harukuniwake's party,</p>
+          <p class="en-p">'Harukuniwake of the Misrokai, or whatever your name is, now that it has come to this, you can be no more. Come, straightforwardly put your hands behind your back and submit to the bonds. I shall lead you before the presence of General Ranch,'</p>
+          <p class="en-p">he shouted in a loud voice.</p>
+          <p class="en-p">Harukuniwake remained calm and said,</p>
+          <p class="en-p">'Well, Ark, or whatever your name is, thank you for the welcome; Harukuniwake has come forward of his own accord to meet General Ranch face to face, even without your demand. Do not worry at all, I shall neither run nor hide.'</p>
+          <p class="en-p">Saying such things, you intend to make us let down our guard, watch for an opening, and make a run for it. That trick won't work on me. Hey, men of my command, capture the rebels, starting with Harukuniwake, and put ropes on them together with Tatsukō,'</p>
+          <p class="en-p">he commanded. As Harukuniwake calmly chanted the Heavenly Number Song, the knights of the entire company had their bodies stiffened and were utterly unable to do anything, and with a patter-patter they began to tumble to the ground from horseback like camellia flowers falling in the rain. Ark also fell headlong from horseback, lying flat on his back in the shape of the character for 'big' at the feet of Harukuniwake, and stretched out flat. Harukuniwake turned to Tatsukō and had him chant the Heavenly Number Song. Feeling somewhat anxious in his heart, Tatsukō did his utmost and chanted the Heavenly Number Song about twice. Wondrously, the knights of the entire company suffered not the slightest injury, their stiffened bodies returned to normal, and nimbly mounting their horses once more, whipping their steeds, with all their might they fled back towards the encampment like a gale. Remaining behind was Ark alone; somehow or other, he had no freedom in his body.</p>
+          <p class="en-p">'O God, I thank You humbly. That a scoundrel like me should chant the precious number song and immediately manifest its miraculous efficacy is entirely, I believe, the grace and majesty of God. It is by no means the power of Tatsukō. I earnestly beg that from now on You will use my body ever more deeply. In this connection, this Ark alone, having yet to receive the divine virtue of Kototama, remains in this state of stiffness. I earnestly beg that You will save even me through my mouth. Ah, Almighty and Omnipresent Deities, bless us!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">此時早くも竜公は穴の口へ九分ばかり登つて来てゐた。そして両人の話を小耳にはさみ、俄に幽霊気分となつて、目をクルリとむき、口をポカンと開け、舌をたらし、腰をフニヤフニヤさせ、両手を力なげにグナリと前に突出し、</p>
+            <p class="ja-classical-line">『恨めしや』</p>
+            <p class="ja-classical-line">と妙な声を絞り出した。タールは、</p>
+            <p class="ja-classical-line">『キヤツ』</p>
+            <p class="ja-classical-line">と其場に尻餅をつき、</p>
+            <p class="ja-classical-line">『アヽヽヽヽ』</p>
+            <p class="ja-classical-line">と口をあけて慄うてゐる。</p>
+            <p class="ja-classical-line">『アハヽヽヽ、オイ、タールさま、嘘だ嘘だ。竜公が悪戯をしてゐるのだ。オイ竜公、朝つぱらから幽霊も、根つからはやらないぞ』</p>
+            <p class="ja-classical-line">『オイ、タール、実の処は済まなかつたが、井戸の底から俺の言つた事は皆嘘だ。地獄の様な所へ落されたのだから、地獄相応の佯りを云つたのだよ。最早井戸の底から比ぶれば、天国にも比すべき、此平地へ上つて来たのだから、嘘佯りは云ふこた出来ない。サア是から、ランチ将軍の館へさして案内をしてくれ』</p>
+            <p class="ja-classical-line">『ヤ、それで俺も一寸ばかり安心した。併しながら、そんな所へ行かないで、私も一緒に伴れて、宣伝使様に逃げて貰ふ訳には行きますまいか。なモシ治国別様とやら、決して悪いこた申しませぬ、今にアークが沢山の軍勢を引連れて、貴方を召捕りに来るに違ひありませぬ。サ早く引返して下さい。其代り私もお供さして貰ひますから』</p>
+            <p class="ja-classical-line">『ハヽヽヽヽ、敵を見て旗を捲き、矛を納めて退却するといふことはない、三五教は目的に向つては退却はない。只驀進あるのみだ』</p>
+            <p class="ja-classical-line">かく話す所へ、馬に跨り、先頭に立つてやつて来たのはアークであつた。アークは数十人の騎士を引連れ、轡を並べてバラバラと治国別一行を取囲み、</p>
+            <p class="ja-classical-line">『三五教の治国別とやら、最早かうなつては叶ふまい。サ尋常に手をまはし、縛につけ。ランチ将軍の御前に引連れくれむ』</p>
+            <p class="ja-classical-line">と大音声に呼ばはつた。</p>
+            <p class="ja-classical-line">治国別は平然として、</p>
+            <p class="ja-classical-line">『イヤ、アークとやら、出迎へ大儀、治国別は汝が要求なくとも、堂々とランチ将軍に面会すべく進んで来たものだ。必ず心配致すな、逃げも隠れも致さぬ』</p>
+            <p class="ja-classical-line">『左様なことを申して、吾々に油断をさせ、隙を窺ひ、遁走致す所存であらう。其手は食はぬぞ。ヤア部下の者、治国別を始め、反逆者の竜公諸共召捕れ、縄をかけよ』</p>
+            <p class="ja-classical-line">と下知をする。治国別は平然として、天の数歌を奏上するや、一同の騎士は身体強直し如何ともするに由なく、パタリパタリと馬上より椿の花が雨にあうて落ちるが如く、地上に顛倒し始めた。アークも馬上から真逆様に転落し、治国別の脚下に大の字になつて、ふん伸びて了つた。治国別は竜公に向ひ、天の数歌を奏上せしめた。竜公は稍心中に不安を感じながら、一生懸命になつて天の数歌を二回ばかり奏上した。不思議や一同の騎士はすこしの怪我もなく強直した身体は元に復し、手早く又馬に跨り、駒に鞭ち、一生懸命、疾風の如く陣屋をさして逃げ帰り行く。後に残るはアーク只一人、何うしたものか、身体の自由が利かない。</p>
+            <p class="ja-classical-line">『神様、有難う厶います。私の様な悪党が尊き数歌を奏上致しまして、即座に効験を現はし下さいましたのは、全く神様の御恵御稜威と存じます。決して竜公の力では厶いませぬ。どうぞ此上益々厚く私の身体を御使用下さいます様にお願ひ致します。就いては此アーク一人のみ、まだ言霊の神徳を頂かずに、此通り強直状態になつて居ります。どうぞ之も私の口を通してお救ひ下さいます様、御願ひ致します。あゝ惟神霊幸倍坐世』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">With itsushiyōkenmei, he gatsushiyō. No matter how much one prayed or performed kazūta, Āku's kiyōchiyokujiyōtai did not return to its former state.</p>
+          <p class="en-p">Harukuniwake-sama: 'What shall we do, I wonder if the Kamisama do not forgive Āku hitori?'</p>
+          <p class="en-p">Harukuniwake-sama: 'Well, this Āku intended to inflict kigai upon Harukuniwake, so if setsushiya does not perform kiguwan, it will likely be dame.'</p>
+          <p class="en-p">So saying, continuing ankimokutau for a while, waiting for the time when the invasion and jiuitsu of shinkaku filled the zenshin... as he pronounced a single word: 'Forgive'... strange to say, Āku's karada returned to its former state. Āku knelt before Harukuniwake, shedding tears, and apologized for his jiyūjiyū burei.</p>
+          <p class="en-p">Āku-dono: 'You have gone through such taihen honeo. However, thanks to you, Harukuniwake is not bearing even a single scratch, so setsushiya holds no feeling of resentment toward you. Nay, rather, I think of it as gokeikoku from the Kamisamisama and am kanshiya. The Kamisama must have used your hand to show this Harukuniwake that yudan is taiteki. If so, you are the sole dōshi to me. I am greatly kanshiya. Now, Āku-dono, you seem to be a personage holding a fairly considerable position within the Brahman army as well. You must surely have business in the camp. Hurry back and tell Harukuniwake that he will visit General Ranchi for an interview forthwith.'</p>
+          <p class="en-p">Āku: 'Hai, there are no words to express it. However, from here on, obeying your command, I shall appear before General Ranchi, state the doctrines of Izuwake, and arrange for him to surrender before you at the earliest possible moment. Then, please excuse me.'</p>
+          <p class="en-p">Quicker than it is said, he straddled his horse, gave it a single whip, and headed back toward the camp like clouds and mist.</p>
+          <p class="en-p">Yotahiko: 'Ha-ha-ha-ha, at last, General Āku has caved in. But my word, he went off talking big about making General Ranchi repent, but that fellow is dame too. When he gets close, he trembles all over like a mouse before a cat, and cannot say a single thing, you see. Considering only the movements of General Ranchi's eyes and the color of his face, he is a thing that sets waves rising in his heart, so his success is ultimately out of the question. It is a New Year's greeting at the time of parting. He will surely follow behind General Ranchi and playfully come along to conquer Harukuniwake, won't he? Sendenshi-sama, you must never be yudan, because that sort of thing is the usual routine method of the Brahman religion in general.'</p>
+          <p class="en-p">Harukuniwake: 'Well, that may be so, but we can never doubt people. Whatever happens, it is fine to leave it to Amanisuke.'</p>
+          <p class="en-p">Yotahiko: 'Hey, Ryūkō-sama, you should not underestimate them like that. Even among the Brahman religion, there are some people mixed in who have a bit of bone, and flowers and fruit as well. Lately, Āku has been forming a group within the Brahman religious army that might be called a sort of suicide squad.'</p>
+          <p class="en-p">Yoshikohime: 'What good will it ever do to have however many groups without form or substance exist? They probably make empty boasts by saying such things. With much fanfare, called such-and-such a corps or such-and-such a society, wondrous and uncanny societies are founded everywhere like bamboo shoots after the rain, but is there ever an instance where execution is possible even if the declaration is splendid? And what kind of society is the society founded by Āku? Is it a shell of boasting or a shell of a ditch, it is bound to be something worthless.'</p>
+          <p class="en-p">Kamehiko: 'Don't talk nonsense, we kokushi gather together to form a thing called the Kokushi Association, and we are doing our best with our utmost best.'</p>
+          <p class="en-p">Yotahiko: 'Ha-ha-ah, it is the society of the black death where one becomes pitch black and dies. Well, I understand it now, you are doing your best with the pest. Rather than that, if you would just negotiate with the Brahman Ministry and have them buy up every single rat for ten sen each, that would be a much shorter shortcut.'</p>
+          <p class="en-p">Kamehiko: 'It is impossible to talk with you at all. When I say the Kokushi Association, it is an organization of men of lofty purpose who grieve for the state.'</p>
+          <p class="en-p">Yotahiko: 'Bah!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と一生懸命に合掌する。何程祈つても、数歌を奏上しても、アークの強直状態は旧に復らなかつた。</p>
+            <p class="ja-classical-line">『モシ治国別様、何うしたものでせうか、アーク一人は神様がお許し遊ばさぬのでせうかな』</p>
+            <p class="ja-classical-line">『ウン、此アークは治国別に危害を加へむと致したのだから、拙者が祈願致してやらねば、駄目だらう』</p>
+            <p class="ja-classical-line">と云ひながら、暫く暗祈黙祷をつづけ、全身に神格の流入充溢せし時を窺ひ……許す……と一言を宣れば、不思議やアークの身体は旧に復した。アークは治国別の前に跪き、涙をたらしながら、重々の無礼を謝した。</p>
+            <p class="ja-classical-line">『アークとやら、大変なお骨折りで厶つたなア。併しながら治国別はお蔭に仍つて此通り、カスリ疵一つ負うて居らねば、汝に対して少しも恨むることはない。否寧ろ神々様の御警告だと思ひ感謝してゐる。神様は汝が手をとほし、此治国別に、油断の大敵たることをお示し下さつたのであらう。さすれば汝は吾に対して、唯一の導師だ。大に感謝する。サア、アーク殿、そなたもバラモン軍の中に於て、可なり相当の地位を持つてゐる人物らしい。さぞ陣中にも御用もあらう。早く帰つて治国別即刻ランチ将軍に面会の為、参上致すと伝へてくれ』</p>
+            <p class="ja-classical-line">『ハイ、何とも申上げ様が厶いませぬ。併しながら私はこれより仰せに従ひ、ランチ将軍の前に罷り出で、三五教の教理を申上げ、一時も早く貴方の前に降服致す様取計らひませう。然らば御免下さいませ』</p>
+            <p class="ja-classical-line">といふより早く駒に跨り、一鞭あてて雲を霞と陣中指して帰り行く。</p>
+            <p class="ja-classical-line">『ハヽヽヽヽ、たうとうアークの大将、ヘコたれよつたな。併しマア偉相にランチ将軍を改心させるなんて、御託を云つて行きよつたが、彼奴も駄目だ。そばへゆくと、猫の前へ出た鼠のやうにピリピリふるうて、何もよう云はないのだからなア。ランチ将軍の目の動き方や顔の色ばかり考へて、ハートに浪を立たせる代物だから、到底成功は覚束ない。別れる時のお正月言葉だ。キツとランチ将軍の後について、治国別征伐なんて、洒落てやつて来るでせうよ。宣伝使様、決して油断はなりませぬで、あゝいふことはバラモン教一般の常套手段ですからなア』</p>
+            <p class="ja-classical-line">『ウン、さうかも知れないが、吾々は決して人を疑ふこた出来ない。何事も惟神に任しておけばいいのだ』</p>
+            <p class="ja-classical-line">『オイ竜公さま、さう見くびつたものぢやないよ。バラモン教の中にもチツとは骨もあり、花も実もある人物も交ぜつてゐるからな。アークは此頃、バラモン教軍の中で、一種の決死隊ともいふべき団体を作つてるのだ』</p>
+            <p class="ja-classical-line">『有名無実の団体が幾らあつたつて、役に立つものかい。そんなことを云つて空威張りをするのだらう。コケ威した、曰く何々団、曰く何々会と、雨後の筍ほどにそこら中に奇々怪々な会が創立されるが、宣言は立派でも実行が出来るためしはないぢやないか。そしてアークの創立した会はどんな会だ、法螺の貝か、溝の貝か、どうでロクなものぢやなからう』</p>
+            <p class="ja-classical-line">『馬鹿云ふな、吾々国士がよつて、国士会といふものを作り、最善のベストを尽してゐるのだ』</p>
+            <p class="ja-classical-line">『ハハア、まつくろけになつて死ぬ黒死病の会だな。ウンそれで分つた、ペストを尽すのだ。それよりもバラモン省へ掛合つて、一匹の鼠を十銭づつに買上げさせさへすりや、それの方が余程近道だよ』</p>
+            <p class="ja-classical-line">『貴様にはテンデ話が出来ないワ。国士会と云つたら、国家を憂ふる志士の団体だ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Whether it is a lion, a tiger, a wolf, a leopard, or a rat, I know not, but surely it is not a decent band of fellows gathering together; when I hear that Āku is the hotsutōnin, is it not that one can hardly place any shinyō in it? And has some shiyuishiyo of the society even been formed?</p>
+          <p class="en-p">First, Āku-sama, the chiyōhonnin of the Fuheitau, is the shiyushiyōshiya, and we are the sanjiyoin. Just haidoku this shiyuishiyo for a chiyotsuto.</p>
+          <p class="en-p">Thus speaking with tokuige, he torida a small insatsubutsu from his bosom and showed it. Tatsukō took it in his hands, and when he read down the shiyuishiyo, the following bunshiyō was written:</p>
+          <p class="en-p">Shiyuishiyo</p>
+          <p class="en-p">Though the kokuji is not in a critical day, there is no kenishiya in the world whom tenkaichinin should chiyōjiyū; the ihayuru men of gaisei, whenever they open their mouths, speak of the henkuwa of shisau, and preach that to deal with shisau one must use shisau. Although their words are not fuka, such manzen chiushiyōron has no sunkau at this juncture. Much less when kōtau and public figures lead each other on to deceive the world, to deceive themselves, and, in their haste only to protect themselves, do not hesitate to expose the inferiority of their mental disposition, thereby increasingly encouraging the henkuwa of shisau. We subjects would rather think that the standing of one man of chivalry is preferable to a hundred debaters. Now, to rush into peril is the true character of a man of chivalry; in the large, the perils of the realm and state, and in the small, the perils of a single region and a single individual, the men of our party will by no means shirk, but desire to fling their bodies forward and rescue them. If there should be a case that the men of our party once stand up and fail to resolve, that would be nothing but the disgrace of the chivalrous way. Why is this? Because our Kokushikai does not stand unless the name is righteous; as shown in the ten oaths, we act entirely guided by the chivalrous way, and we hereby boldly proclaim this to the world.</p>
+          <p class="en-p">Year Month Day</p>
+          <p class="en-p">Kokushikai</p>
+          <p class="en-p">Ten Rules</p>
+          <p class="en-p">1. A man of chivalry prides himself on being a Brahman male.</p>
+          <p class="en-p">2. A man of chivalry takes rushing into peril as his true character, provided that it depends on time, place, and station.</p>
+          <p class="en-p">3. A man of chivalry swears never to proclaim an unnamed war. However, if it is the command of General Ranch, he dares not decline.</p>
+          <p class="en-p">4. A man of chivalry expects to be loyal by planning on behalf of his opponent. However, this shall not apply to the Sanjuu Teaching.</p>
+          <p class="en-p">5. A man of chivalry possesses no original enemy, and therefore transcends victory and defeat. (The action of our army in the Kototama warfare at Kajika Pass is a fitting example thereof.)</p>
+          <p class="en-p">6. A man of chivalry does not regret a single promise even if it is worth a single death, provided it is limited to the woman he loves best.</p>
+          <p class="en-p">7. A man of chivalry places spirit as primary and form as secondary. However, while in the midst of the Brahman army, there may be times when this is not applied.</p>
+          <p class="en-p">8. A man of chivalry does not pursue the past but believes in the future, except that the end of Daikokunushi, the great ridgepole of the Brahman teaching, is not necessarily bright.</p>
+          <p class="en-p">9. A man of chivalry is not ashamed before heaven for a meaningless day, except that at the time of a drinking feast, even if it be for three or four days, he feels no shame therefor.</p>
+          <p class="en-p">10. A man of chivalry is satisfied if he possesses a single bosom friend, provided that if it is of the opposite sex, it is deemed most excellent.</p>
+          <p class="en-p">"Oh my, you are lining up such splendid things, but are not the proviso clauses utterly hopeless? This is why they say the Brahman style cannot be depended upon. After all, they hoist a sheep's head and sell dog meat."</p>
+          <p class="en-p">"This is the most excellent means of the art of worldly survival in modern times. It is something that pierces to the true marrow of the Brahman teaching; without this, one cannot cross through the world."</p>
+          <p class="en-p">"Ahahahaha, say, Sensei, how is it? Does not the Kokushikai also say quite eccentric things?"</p>
+          <p class="en-p">"Mm, it is splendid. It is an unfeigned confession of the Brahmans. Ah, I am truly impressed."</p>
+          <p class="en-p">"If it were me, I would not enter such a society. I would say, 'Excuse me...' and be off."</p>
+          <p class="en-p">"Hahahahaha, Dora, let's go. Shall we have Taru-sama guide us? Nay, honored sanjiyoin of the Kokushikai, I pray you lead the way."</p>
+          <p class="en-p">Tatsukō: 'Long live the Kokushikai members, ahahahaha.'</p>
+          <p class="en-p">Laughing and making merry thus, the two, Chigokuwake and another, pointing toward the jinya of the Floating Tree Village, singing a propaganda song, tread upon the morning dew and vigorously press forward.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『獅子か虎か狼か豹か鼠か知らぬが、どうでロクな奴の集まる団体ぢやなからう、アークが発頭人だと聞いちや、余り信用も出来ぬぢやないか。そして何か会の趣意書でも出来てゐるのか』</p>
+            <p class="ja-classical-line">『先づ不平党の張本人アークさまが主唱者で、おれ達が賛助員だ。此趣意書を一寸拝読してみよ』</p>
+            <p class="ja-classical-line">と得意気に懐から小さい印刷物を取出して見せた。竜公は手に取り、趣意書を読み下せば左の文章が書いてある。</p>
+            <p class="ja-classical-line">趣意書</p>
+            <p class="ja-classical-line">国事日に非なれども、天下一人の聴従すべき権威者なし、所謂慨世の士、口を開けば思想の変化を言ひ、思想に対するには思想を以てせざる可らざるを説く、其言や不可なしと雖も、漫然たる抽象論は此際寸効なし。況んや公党公人相率ゐて世を欺き、己を欺き、只自ら守るに急にして、心術の陋劣を暴露して憚らず、益々思想の変化を助長しつつあるに於ておや。吾々国民は寧ろ百人の論客よりも一人の志士の立つべきを思ふ。それ難に赴くは士の本領なり、大にしては天下国家の難、小にしては一地方一個人の難、吾党の士は苟くも辞せず、身を挺して之を救はむことを欲す。もし吾党の士一度立つて解決せざる案件あらば、そは士道の汚辱たらむのみ。何とならば吾国士会は名正しからざれば、断じて立たず、誓約十則に示すが如く、悉く士道に率由して行動すればなり、敢て天下に宣す。</p>
+            <p class="ja-classical-line">年　月　日</p>
+            <p class="ja-classical-line">国士会</p>
+            <p class="ja-classical-line">十則</p>
+            <p class="ja-classical-line">一、国士はバラモン教男子たることを誇りとす。</p>
+            <p class="ja-classical-line">二、国士は難に赴くを以て本領とす、但し時処位によるべし。</p>
+            <p class="ja-classical-line">三、国士は誓つて無名の戦ひを宣せず。但しランチ将軍の命なれば敢て辞せず。</p>
+            <p class="ja-classical-line">四、国士は対者の為に計つて忠なるを期す。但三五教に対しては此限りにあらず。</p>
+            <p class="ja-classical-line">五、国士は本来の敵を有せず、故に勝敗に超越す。（河鹿峠の言霊戦に於ける吾軍の行動は其好適例なり）</p>
+            <p class="ja-classical-line">六、国士は一諾が一死に値するも悔いず、但し最愛の女性に限る。</p>
+            <p class="ja-classical-line">七、国士は精神を主とし、形式を従とす。但しバラモン軍中に在りては、或は適用せざることあるべし。</p>
+            <p class="ja-classical-line">八、国士は過去を追はず未来を信ず、但バラモン教の大棟梁大黒主の最後は必ずしも光明ならざることを。</p>
+            <p class="ja-classical-line">九、国士は無意義なる一日を天に恥づ、但酒宴の時は仮令三日四日たりとも之を恥づることなし。</p>
+            <p class="ja-classical-line">十、国士は一人の知己を有すれば足れり、但し異性なれば最もよしとなす。</p>
+            <p class="ja-classical-line">『なアんだ、立派なことを並べてゐるが但書がサツパリ駄目ぢやないか。これだからバラモン式は当にならないといふのだ。羊頭をかかげて狗肉を売るのだからなア』</p>
+            <p class="ja-classical-line">『これが現代の処世法の最優秀なる手段だ。バラモン教の真髄をうがつたものだ、之でなくちや世の中が渡れないからな』</p>
+            <p class="ja-classical-line">『アハヽヽヽ、モシ先生、どうです、国士会も、随分奇抜なことを云ふぢやありませぬか』</p>
+            <p class="ja-classical-line">『ウン結構だ、詐らざるバラモンの告白だ。イヤもう感心致した』</p>
+            <p class="ja-classical-line">『私だつたら、こんな会へは入会しませぬな。エキスキユーズ・ミー………とやりますよ』</p>
+            <p class="ja-classical-line">『ハヽヽヽヽ、ドラ行かう。タールさまに案内して貰はうかなア。否国士会の賛助員さま、御先導を願ひます』</p>
+            <p class="ja-classical-line">竜公『国士会員万歳、アハヽヽヽ』</p>
+            <p class="ja-classical-line">かく笑ひ興じながら、治国別外二人は浮木の村の陣屋を指して、宣伝歌を歌ひながら、朝露をふんで勢よく進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c01.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 1: アーク灯 [1234]</span>
+      </a>
+      <a href="c03.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 3: 寒迎 [1236]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
