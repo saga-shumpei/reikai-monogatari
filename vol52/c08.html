@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: 巡拝 [1344] - Volume 52 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 52 Table of Contents</a>
+      <span>Volume 52</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 52 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: 巡拝 [1344]</h1>
+      <p class="chapter-title-ja">巡拝〔1344〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Iku and Sāru, the two of them, finished their worship at the Shinden of the Ōhiromahe, and stood before the mansion where it is said Imoriwake was secluded.</p>
+          <p class="en-p">Sāru: 'The Kosenjiyō of Imoriwake-sama, the old woman Otora, becomes Oka as I look upon it.'</p>
+          <p class="en-p">Iku: 'This is the Kosenjiyō where the Dobin danced, the Tokuri whirled, and the sake cups were shattered.'</p>
+          <p class="en-p">Sāru: 'This mansion is also the place where Magahiko and the old woman Otora performed their Kaishin.'</p>
+          <p class="en-p">Iku: 'The drunken Kumakō-sama jumped in and Senriyō (occupied) the gold with threats. Climbing the Danbashigo built one stage higher, I go to visit the Hime.'</p>
+          <p class="en-p">The two paid their respects at a small shrine where Konohanahime was enshrined and finished their Hairei.</p>
+          <p class="en-p">Iku: 'The blessings of the Konohanahime Kami are before my eyes, beginning to bloom on the tips of the Kigi.'</p>
+          <p class="en-p">Sāru: 'Iku exposes his Hanataka before the Mimahe of the Konohanahime Mikoto. The Sumekami who descended from the mountain of Tenkyō must be laughing at my Bakazura. Bewitched by the tricks of a tanuki, the fellow Iku has come to the Ōmahe without knowing shame.'</p>
+          <p class="en-p">Having sung thus, they next proceeded before the shrine of Kanayamahiko-no-Kami and finished their Hairei.</p>
+          <p class="en-p">Iku: 'Since I heard that this is a fearful Kami who ties bonds, I could not remain still and came to worship.'</p>
+          <p class="en-p">Sāru: 'No matter how much you worship the Kami with that face, there should be someone who would become your wife.'</p>
+          <p class="en-p">Iku: 'Rather than looking at my face and laughing, go and take a look at a water mirror for a moment.'</p>
+          <p class="en-p">Sāru: 'Can a wife be made with just facial features? One must be a person with a beautiful soul. Even though I look like this, I am a trickster who is fawned upon by women here and there.'</p>
+          <p class="en-p">Iku: 'Do not be so full of yourself, even though you are a person who has been made a fool of by maidens. A fellow who chirps such things before the Mimahe of the noble Kanayamahiko-no-Kami might be a widower bird. Come, let us go; it is not a face to be called a woman, which is embarrassing to the Ōkami.'</p>
+          <p class="en-p">Iku: 'Ahahahaha.'</p>
+          <p class="en-p">Laughing thus, they approached the shrine where Tamayorihime (the maiden of Ryūgū) was enshrined.</p>
+          <p class="en-p">Iku: 'A greedy Kami who gathered various treasures and hid them at the bottom of the sea.'</p>
+          <p class="en-p">Sāru: 'Do not say foolish things; the Otohime-sama is a Kami who has already detached herself from material desires.'</p>
+          <p class="en-p">Iku: 'That was a mistake; I said something rude. Please listen again, O Otohime-no-Kami.'</p>
+          <p class="en-p">Sāru: 'Although the Kami bestows treasures upon people, you are excluded.'</p>
+          <p class="en-p">Iku: 'Excluded or unexpected, I do not know, but one cannot stand in the world without treasure.'</p>
+          <p class="en-p">Sāru: 'What is the use of seeking material treasure? Pack your soul with treasures that do not decay.'</p>
+          <p class="en-p">Iku: 'Do not say foolish things; a crystal ball is also material, yet it illuminated the dark night. If one has no money, the people of the world do not even treat one as a human being, asking what kind of person one is. Therefore, I am a person of good fortune who does not thoughtlessly discard gold, silver, and treasures.'</p>
+          <p class="en-p">Sāru: 'As proof that the fellow Iku lacks Ikuchi, you are longing for treasures. No matter how much treasure the Kami has, would the Kami give it to a poverty-stricken face? Come, let us go; rather than feasting your eyes, forget the treasure and go to pick up treasure. The treasure I speak of is not gold, silver, or crystal, but the treasure of the teachings.'</p>
+          <p class="en-p">Having finished singing thus, they next proceeded before the Chūdan no Miya. Here, the shrine of the Hi no Ōkami is built.</p>
+          <p class="en-p">Iku: 'This shrine, where the Izanagi no Sumekami is enshrined, is especially beautiful.'</p>
+          <p class="en-p">Sāru: 'That is to be expected, for it is the Kami who performed Misogi at Tachibana in Hyūga of Tsukushi.'</p>
+          <p class="en-p">Iku: 'Wash the soul, which is drowned in the sins and impurities of Kokotaku, before the Mimahe of the Kami.'</p>
+          <p class="en-p">Sāru: 'Apologize, Iku-kō, and ask to be forgiven for the foolishness of being deceived by the Magatsukami.'</p>
+          <p class="en-p">Iku: 'Whether I am struck on the head or not, it is not a matter for you to know.'</p>
+          <p class="en-p">Sāru: 'How painful it is to see a fellow traveler being struck by a tanuki and crying out. The shrine of the Hi no Kami, who descended to the mountain of Tenkyō, is especially high.'</p>
+          <p class="en-p">Leaving this place again, they next proceeded before the shrine where the Tsuki no Ōkami was enshrined.</p>
+          <p class="en-p">Iku: 'Before the shrine where the spirit of the Susanoo-no-Kami is enshrined, there is the Tsuki no Ōkami.'</p>
+          <p class="en-p">Sāru: 'You have been made a fool of by the old tanuki and owl, and have even been laughed at by a maiden. The Tsuki no Ōkami, who is indifferent, will likely laugh at your face.'</p>
+          <p class="en-p">Iku: 'The Kototama of the Kami is truly profound.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">イク、サールの二人は、大広前の神殿を拝礼しをはり、蠑螈別が籠りしと云ふ館の前に立つて、</p>
+            <p class="ja-classical-line">サール『蠑螈別お寅婆さまの古戦場
+見るにつけても可笑しくなりぬ』</p>
+            <p class="ja-classical-line">イク『この館土瓶が踊り徳利舞ひ
+盃われし古戦場なり』</p>
+            <p class="ja-classical-line">サール『魔我彦やお寅婆さまが改心を
+なしたる場所も此館なり』</p>
+            <p class="ja-classical-line">イク『酔ひドレの熊公さまが飛込んで
+脅し文句で金を千両（占領）。
+一段と高く築ける段梯子
+登りて行くも姫を訪ねて』</p>
+            <p class="ja-classical-line">二人は木花姫を祀りたる小さき祠に参拝し拝礼を了り、</p>
+            <p class="ja-classical-line">イク『木花姫神の恵は目のあたり
+開き初めにき木々の梢に』</p>
+            <p class="ja-classical-line">サール『木の花の姫の命の御前に
+その鼻高をさらすイクなり。
+天教の山より下りし皇神は
+わが馬鹿面を笑ひますらむ。
+イクの奴狸の曲に魅まれて
+恥も知らずに大前に来つ』</p>
+            <p class="ja-classical-line">斯く歌ひ、今度は金勝要神の祠の前に進み拝礼を了り、</p>
+            <p class="ja-classical-line">イク『縁結ぶ畏き神と聞きしより
+ゐたたまらずして詣で来にけり』</p>
+            <p class="ja-classical-line">サール『其面で何程神を拝むとも
+妻となるべき人のあるべき』</p>
+            <p class="ja-classical-line">イク『吾輩の顔を眺めて笑ふより
+一寸見て来い水鏡をば』</p>
+            <p class="ja-classical-line">サール『顔容姿で妻が出来ようか
+魂麗しき人でなくては。
+此様に見えても俺はをちこちの
+女にチヤホヤされる曲者』</p>
+            <p class="ja-classical-line">イク『其様に慢心ばかりするでないよ
+乙女に馬鹿にされた身ながら。
+要の神貴の御前にこんな事
+囀る奴は鰥鳥かも。
+さア行かう大神様に恥かしい
+女なんぞと言ふ面でなし</p>
+            <p class="ja-classical-line">アハハハハハ』</p>
+            <p class="ja-classical-line">と笑ひながら玉依姫（竜宮の乙女）様を祭つたる祠の前に進みよつた。</p>
+            <p class="ja-classical-line">イク『いろいろの宝をためて海の底に
+隠し給ひし欲な神様』</p>
+            <p class="ja-classical-line">サール『馬鹿言ふな乙姫様は今は早
+物質欲に離れた神よ』</p>
+            <p class="ja-classical-line">イク『これはしたり失礼な事を言ひました
+聞直しませ乙姫の神』</p>
+            <p class="ja-classical-line">サール『神様は宝を以て人々に
+与へ給へどお前には列外』</p>
+            <p class="ja-classical-line">イク『列外か又案外か知らねども
+宝なくては世に立つを得ず』</p>
+            <p class="ja-classical-line">サール『物質の宝求めて何になる
+朽ちぬ宝を霊につめよ』</p>
+            <p class="ja-classical-line">イク『馬鹿云ふな水晶玉も物質よ
+されど暗夜を照らしましける。
+金なくて何のおのれが人間かと
+世の人々は相手にもせず。
+それ故に俺は金銀財宝を
+むげには捨てぬ冥加者ぞや』</p>
+            <p class="ja-classical-line">サール『イクの奴イク地の足らぬ証拠には
+宝々と憧れゐるも。
+神様は何程宝あるとても
+貧乏面にくれるものかは。
+サア行かう目の正月をするよりも
+宝忘れて宝拾ひに。
+俺の云ふ宝といふは金銀や
+水晶でない教の宝よ』</p>
+            <p class="ja-classical-line">かく歌ひ終つて、今度は中段の宮の前に進んだ。此処には日の大神の祠が建つてゐる。</p>
+            <p class="ja-classical-line">イク『伊弉諾の皇大神を斎りたる
+この御舎は殊に麗し』</p>
+            <p class="ja-classical-line">サール『其筈だつくしの日向の立花で
+禊ぎ給ひし神に坐しませば』</p>
+            <p class="ja-classical-line">イク『許々多久の罪や汚れに溺れたる
+霊を洗へ神の御前に』</p>
+            <p class="ja-classical-line">サール『曲神に騙られたる愚さを
+許し給へと詫びよイク公』</p>
+            <p class="ja-classical-line">イク『かもてなや頭打たりよが打たりよまいが
+お前の知つた事でなければ』</p>
+            <p class="ja-classical-line">サール『道伴れの一人が狸に叩かれて
+吠面かわくを見るつらさかな。
+天教の山に天降りし日の神の
+宮は殊更高くおはせり』</p>
+            <p class="ja-classical-line">又此処を去つて、今度は月の大神を斎りたる祠の前に進んだ。</p>
+            <p class="ja-classical-line">イク『素盞嗚の神の御霊を祀りたる
+社の前に月の大神』</p>
+            <p class="ja-classical-line">サール『古狸梟の奴に馬鹿にされ
+乙女にまでも笑はれにけり。
+さながらに愛想も月の大神が
+貴様の面を笑ひ給はむ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Iku: 'Do not speak like a Baka. This is the Kamisama of Zengenbishi, and surely He shall look upon us with favor.'</p>
+          <p class="en-p">Saru: 'Since this man is a Baka rare in this Sekai, I pray, O Moon Ōkami, that Thou mayest protect him.'</p>
+          <p class="en-p">Iku: 'It is because Saru is the very proof of a Baka that he has been made to carry the Suishiyō ball by Iku.'</p>
+          <p class="en-p">Saru: 'It is only because I knew that Iku had no guts that I let you hold the ball.'</p>
+          <p class="en-p">Iku: 'Come, let us go. Illuminated by the light of the moon, it is a night that makes one feel bashful for no reason at all.'</p>
+          <p class="en-p">This time, they paid their Sanpai before the shrine of Kunitokotachinomikoto on the Saijiyōdan.</p>
+          <p class="en-p">Iku: 'Before the Onmahe of the Kami, whose name is fearful to utter, I have come as a Tsumibito. Yet, having repented, I am a Mitama of Iku who serves the path of the Ōkami.'</p>
+          <p class="en-p">Saru: 'I am the Kami of the future Saru, who has received the Mimegumi of the Sumeōkami.'</p>
+          <p class="en-p">Iku: 'With a face like that of a Bachiata Saru, how well you are called Kon. Even if the Yobito mock you as a mere imitation of Saru, you have no Shikata, do you?'</p>
+          <p class="en-p">Saru: 'You are a Bakamono who does not know that this Kamuzukasa says there is a Saru-mono on the path of Ananahi.'</p>
+          <p class="en-p">Iku: 'Who is the Bakamono whom people call the wolf of Kunidokoro-tachi-no-hiko?'</p>
+          <p class="en-p">Thus the futari finished their Hairei, and then, while teasing each other, they came upon a stylish building, neither too wide nor too narrow, standing beneath a cluster of seven or eight well-branched pine trees. That was the so-called mansion of Matsuhime.</p>
+          <p class="en-p">Iku: 'I think with nostalgia of the Matsuhime mansion, built in the shade of the evergreen pine trees.'</p>
+          <p class="en-p">Saru: 'Since the Hatsuwakahime whom I adore is there, it is a mansion I yearn for all the more.'</p>
+          <p class="en-p">Iku: 'This mansion, which has become the pivot of Kohokuzan, has been built like a folding fan.'</p>
+          <p class="en-p">Saru: 'The green of the evergreen pine trees is lush and verdant, growing on without end.'</p>
+          <p class="en-p">Iku: 'Hearing that the Kamuzukasa of Hatsuwakahime is there, my heart thunders and I can hardly advance.'</p>
+          <p class="en-p">Saru: 'The wind of cowardice has blown violently again, exposing the fact that you, Iku, have no guts.'</p>
+          <p class="en-p">Iku: 'If you say such things, shall I go first and show you my courage?'</p>
+          <p class="en-p">Saru: 'How amusing. You will go before Hatsuwakahime, be scolded, and end up crying.'</p>
+          <p class="en-p">Iku: 'Since I am the one holding the Suishiyō ball, Hatsuwakahime will surely praise me. At that time, you, Saru, had better watch with a look of resentment, sucking your finger.'</p>
+          <p class="en-p">Saru: 'When we meet the Hime-sama, I shall reveal everything and report the whole story. You had better not turn your face red then; you are a fellow who would be mocked even by an owl.'</p>
+          <p class="en-p">Iku: 'You may speak ill of me as much as you like, you wretch who failed even at hanging yourself.'</p>
+          <p class="en-p">Saru: 'You are also one of the hanging-failed fellows, are you not? How could you ever show your face to the Hime?'</p>
+          <p class="en-p">The futari, unable to bear the shame, came within four or five ken of the Matsuhime mansion, pushing each other and saying, 'You go first,' 'No, you go first.' Seeing their shadows, Smart ran up joyfully, leaping onto their chests, clinging to their backs, and licking their cheeks, full of spirit.</p>
+          <p class="en-p">Iku: 'Oh, Su-chan! First of all, I am glad you are safe. I have finally followed your trail to this place. Please, I beg you to put in a good word for us to the Hime-sama.'</p>
+          <p class="en-p">Saru: 'Hahahaha, what a Baka. Like a candidate for the House of Representatives these days, you are even fawning over a dog. Do you think a dog can speak?'</p>
+          <p class="en-p">'When a master has influence, one feels as if one must bow even to a dog. That is what human nature dictates. They say that when one visits the home where one has married off a daughter, the parents will even bow to a stray dog. You are a fellow who does not understand the reason of things. With such an attitude, how do you think you can survive in today's world of universal falsehood? You are an out-of-date antique.'</p>
+          <p class="en-p">'Leave me alone. No matter how grandly you speak, there is no authority in the words of a coward who is trembling for fear of being scolded by the Hime-sama. Well, just watch what I do. Ahem!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">イク『馬鹿云ふな善言美詞の神様だ
+必ずよきに見直しまさむを』</p>
+            <p class="ja-classical-line">サール『此男世界に稀な馬鹿なれば
+守らせ給へ月の大神』</p>
+            <p class="ja-classical-line">イク『サールこそ馬鹿の証拠にや水晶の
+玉をばイクにせしめられける』</p>
+            <p class="ja-classical-line">サール『イクの奴イク地がないと知つた故
+玉を持たせておいたばかりよ』</p>
+            <p class="ja-classical-line">イク『サア行かう月の光に照らされて
+何とはなしに恥かしき宵』</p>
+            <p class="ja-classical-line">今度は最上段の国常立尊の祠の前に参拝した。</p>
+            <p class="ja-classical-line">イク『掛巻も畏き神の御前に
+詣で来りし吾は罪人。
+さりながら悔い改めて大神の
+道に仕へしイク身魂なり』</p>
+            <p class="ja-classical-line">サール『われこそは皇大神の御恵に
+与りました未サールの神』</p>
+            <p class="ja-classical-line">イク『罰当りサールのやうな面をして
+坤とはよくもいはれた。
+お前こそ世人がサールの人真似と
+嘲るとても仕方あるまい』</p>
+            <p class="ja-classical-line">サール『三五の道にサール者ありと云ふ
+此神司知らぬ馬鹿者』</p>
+            <p class="ja-classical-line">イク『国所立のき彦の狼と
+人に言はれた馬鹿者は誰』</p>
+            <p class="ja-classical-line">斯く二人は拝礼を終り、次いで互に揶揄ひ合ひながら、枝振りのよい松の七八本かたまつた下に、余り広からず狭からざる瀟洒たる一棟が建つてゐる。それが所謂松姫の館であつた。</p>
+            <p class="ja-classical-line">イク『常磐木の松の木蔭に建てられし
+松姫館をなつかしみ思ふ』</p>
+            <p class="ja-classical-line">サール『吾慕ふ初稚姫のいます上は
+一しほ恋しき館なりけり』</p>
+            <p class="ja-classical-line">イク『小北山要となりし此館は
+扇の如くに建てられにける』</p>
+            <p class="ja-classical-line">サール『常磐木の松の緑は青々と
+とめどもなしに伸び立てるかも』</p>
+            <p class="ja-classical-line">イク『初稚姫神の司がますと聞けば
+胸轟きて進みかねつつ』</p>
+            <p class="ja-classical-line">サール『臆病風又吹き荒みイクの奴
+イク地のなきを暴露せりけり』</p>
+            <p class="ja-classical-line">イク『そんな事言ふなら俺が先に立ち
+一つ肝をば見せてやらうかい』</p>
+            <p class="ja-classical-line">サール『面白い初稚姫の前に出て
+叱り飛ばされベソをかくだろ』</p>
+            <p class="ja-classical-line">イク『水晶の玉を抱きしわれなれば
+初稚姫も褒め給ふべし。
+その時は指をくはへてサールの奴は
+恨めしさうに見てゐるがよい』</p>
+            <p class="ja-classical-line">サール『姫様に会うたら皆素破ぬき
+一伍一什を申し上ぐべし。
+その時は赤い顔をばせぬがよい
+梟鳥にもなぶられる奴よ』</p>
+            <p class="ja-classical-line">イク『イクらでも人の悪口言ふがよい
+首吊りそこねし死損ね奴が』</p>
+            <p class="ja-classical-line">サール『貴様とて矢張首吊り仲間ぞや
+何うして姫に顔があはせよう』</p>
+            <p class="ja-classical-line">二人は流石に恥かしさに堪へかね、松姫の館の四五間ばかり側までやつて来て、互に「お前から先へ行け」「イヤ貴様から先へ」と、押合ひをやつてゐる。スマートは二人の影を見るより、喜んで走り来り、胸に飛びついたり、背中に抱きついたり、頬をなめたり、勇み出した。</p>
+            <p class="ja-classical-line">イク『ヤア、スーちやんか、先づ先づ御無事でお目出度う。漸く此処までお後を慕つて参りました。何卒姫様に宜しうお取りなしを願ひますよ』</p>
+            <p class="ja-classical-line">サール『ハハハハハ馬鹿だなア。此頃の衆議院の候補者のやうに、犬にまで追従してゐやがる、犬がもの言ふかい』</p>
+            <p class="ja-classical-line">『主人に威勢があると、何だか犬に迄頭が下がるやうな気になるものだ。そこが人情の然らしむる所だよ。娘を嫁にやつてある在所へ入ると、其親は野良犬にでも辞儀をするといふぢやないか。貴様も訳の分らぬ奴だなア。そんな事で今日の虚偽万能の世の中に、どうして生存が続けられると思うてるか、時代遅れの骨董品だなア』</p>
+            <p class="ja-classical-line">『ほつといてくれ、何程偉さうに云つても、姫様に叱られるかと思つて、ビリビリしとるやうな腰抜の言葉に、何うして権威があるものか、マア、俺のすることを見てをれ、エヘン』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Saying this, he made up his mind to approach the entrance, and peered inside with a look of trepidation. Hatsuwakahime and Matsuhime were in the midst of a conversation, smiling and earnest about something. Saru slid the door open with a rattle,</p>
+          <p class="en-p">Saru: 'Heh, excuse me. Matsuhime-sama, I am meeting you for the first time. I am Saru from the Forest of the Shrine, and my other companion is called Iku. Oh, he is a spineless fellow, so please, I beg you to treat him kindly.'</p>
+          <p class="en-p">Matsuhime: 'That is, that is, you have come all this way. Now, please, come on up.'</p>
+          <p class="en-p">Saru: 'It is a great joy to see that Smart-sama is also in good health.'</p>
+          <p class="en-p">Thinking perhaps to curry favor with Hatsuwakahime, he was fawning over the dog incessantly. Iku entered like a thief breaking into an empty house, trembling all over, and stepped inside without making a sound.</p>
+          <p class="en-p">Hatsuwakahime looked at the two of them and said in a quiet voice,</p>
+          <p class="en-p">Hatsuwakahime: 'Are you Iku-sama and Saru-sama? Have you come to pay respects to the Kami?'</p>
+          <p class="en-p">The two of them replied,</p>
+          <p class="en-p">Saru and Iku: 'Heh, well, that is...'</p>
+          <p class="en-p">They scratched their heads, fidgeted, and squatted down on the earthen floor.</p>
+          <p class="en-p">Hatsuwakahime: 'Did you have some business with me? I beg you, please tell me quickly.'</p>
+          <p class="en-p">Iku made up his mind and said,</p>
+          <p class="en-p">Iku: 'Well, the truth is, we thought we would like to accompany you, Hime-sama, wherever you may go, so we followed in your footsteps. Please understand the sincerity of us both; we truly wish to accompany you.'</p>
+          <p class="en-p">Hatsuwakahime: 'You, was there anything unusual in the Forest of Yamaguchi?'</p>
+          <p class="en-p">Iku: 'Yes, well, it was quite an interesting affair. We received excellent divine power and sent those two demons running. It was, truly, quite a delightful experience.'</p>
+          <p class="en-p">Hatsuwakahime: 'That was a job well done. And you, you received something from the Kami, did you not?'</p>
+          <p class="en-p">Iku: 'Yes, we received it.'</p>
+          <p class="en-p">Hatsuwakahime: 'Have you guarded it safely until you reached this place? Did nothing happen that would allow it to fall into the hands of others along the way?'</p>
+          <p class="en-p">Iku: 'Heh, just as you see, I have it here. It is truly a magnificent crystal ball.'</p>
+          <p class="en-p">Hatsuwakahime: 'That is called a luminous gem; it is not a crystal. It is a magnificent diamond that appeared from the island of Tsukushi.'</p>
+          <p class="en-p">Iku: 'Heh, is that so? That was truly a grateful thing.'</p>
+          <p class="en-p">Hatsuwakahime: 'You, you would not do anything as foolish as being bewitched by a specter along the way and having it snatched away, would you?'</p>
+          <p class="en-p">Saru: 'Oh, I am truly humbled. The truth is, we were deceived by an old tanuki and it was taken, but thanks to Ochiyo-sama, it was returned to its original state.'</p>
+          <p class="en-p">Hatsuwakahime: 'Once that gem has entered the hands of a crooked spirit, it becomes very soiled. If you do not perform a purification now, it will become useless, you see.'</p>
+          <p class="en-p">Iku: 'Shall we get some salt water and purify it?'</p>
+          <p class="en-p">Hatsuwakahime: 'If you purify your own formless soul, the gem will naturally be purified. And you, you must have a sense of attachment to that gem, do you not? Why did you not hand it over to Saru-sama? Once it entered your hands and was taken by a demon, you effectively abandoned your right of supervision over the gem. From now on, it is better to let Saru-sama hold it. In truth, I asked the Hinodewake-kami on your behalf, and because He was moved by your earnestness, He granted one to the two of you; therefore, this gem is proof that your two spirits have become one. It is by no means something that one person should monopolize. That is to say, Iku-sama's heart is Saru-sama's heart, and Saru-sama's heart is Iku-sama's heart; it is arranged so that you become one body and act for the sake of the Divine World.'</p>
+          <p class="en-p">Saru: 'Hey, Iku-shu, how about that? As expected, the monopolization of treasure is not permitted, is it? Because you acted as if it were your own thing, and did not even let me see it properly, but shoved it into your pocket, divine punishment struck, and it was taken by that tanuki fellow, you see.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と云ひながら、思ひ切つて門口に立寄り、怖さうに中を眺めた。初稚姫と松姫は何事か一生懸命に、ニコニコしながら話の最中であつた。サールがガラリと戸を開け、</p>
+            <p class="ja-classical-line">『へーご免なさいませ。松姫様、始めてお目にかかります。私は祠の森のサールと申す者、モ一人の従者はイクと申します。イヤもう意気地のない野郎で厶いますから、何卒可愛がつてやつて下さいませ』</p>
+            <p class="ja-classical-line">松姫『それは　それは　よくマアいらせられました。サ、どうぞお上り下さいませ』</p>
+            <p class="ja-classical-line">サール『スマートさまも御壮健で、大慶至極に存じます』</p>
+            <p class="ja-classical-line">と初稚姫に御機嫌を取らうといふ考へか、切りに犬に追従してゐる。イクは不在の家へ盗人が這入るやうな調子で、ビリビリもので、足音もさせず這入つて来た。</p>
+            <p class="ja-classical-line">初稚姫は二人を見て、言葉静に、</p>
+            <p class="ja-classical-line">『貴方はイクさま、サールさま、神様へお参りで厶いますか』</p>
+            <p class="ja-classical-line">二人は、</p>
+            <p class="ja-classical-line">『へー、あの、何です』</p>
+            <p class="ja-classical-line">と頭をかき、モヂモヂとして土間に踞んで了つた。</p>
+            <p class="ja-classical-line">初稚『妾に何ぞ御用が厶いましたのか、何卒早く仰有つて下さいな』</p>
+            <p class="ja-classical-line">イクは思ひ切つて、</p>
+            <p class="ja-classical-line">『イヤ実の所は姫様の、何処までもお供をさして頂かうと思ひまして、お後を慕ひ参つたので厶います。吾々両人の真心をお汲み取り下さいまして、是非にお供をさして頂きたう厶います』</p>
+            <p class="ja-classical-line">『貴方、山口の森で何か変つたことは厶いませぬでしたか』</p>
+            <p class="ja-classical-line">『ハイ、イヤもう面白いこつて厶いましたよ。結構な御神力を戴いて鬼の奴、二匹迄遁走させました。それはそれは随分愉快なもので厶いましたよ』</p>
+            <p class="ja-classical-line">『それはお手柄で厶いましたな。そして貴方、何だか神様から頂いたでせう』</p>
+            <p class="ja-classical-line">『ハイ、頂きました』</p>
+            <p class="ja-classical-line">『無事に此処まで、貴方は守護して来ましたか。途中に他の者の手に入るやうなことはありませなんだかな』</p>
+            <p class="ja-classical-line">『へ、此通り、此処に所持して居ります。実に立派な水晶玉で厶います』</p>
+            <p class="ja-classical-line">『それは夜光の玉と云つて、水晶ではありませぬ。筑紫の島から現はれた結構なダイヤモンドですよ』</p>
+            <p class="ja-classical-line">『へーエ、さうで厶いましたか、誠に有難いこつて厶いました』</p>
+            <p class="ja-classical-line">『貴方、途中で妖怪につままれ、一旦ふんだくられるやうな、不都合な事はなさいますまいな』</p>
+            <p class="ja-classical-line">サール『イヤもう恐れ入りました。実の所は、古狸に騙かされ、取られて了つたのですが、お千代さまのお蔭で再び元へ返つたのです』</p>
+            <p class="ja-classical-line">『其玉は一旦曲神の手に入つた上は、大変に汚れて居りますよ。これは今のうちに禊をなさらぬと、役に立たなくなりますからねえ』</p>
+            <p class="ja-classical-line">イク『塩水を貰つて清めませうかなア』</p>
+            <p class="ja-classical-line">『貴方の無形の魂をお清めになれば自然に玉は浄まります。そしてお前さまは其玉に執着心を持つてゐるでせう。なぜサールさまに渡さなかつたのですか。一旦貴方の手に入り、妖魅に取られたのだから、貴方は玉に対して、監督権を自然に放棄したやうなものです。今度はサールさまに持たせておくが宜しい。実の所は妾より日の出神様にお願ひ申し、貴方等の熱心に感じて、お二人様の中へ一個をお与へ申したのですから、此玉は二人の身魂が一つになつた証拠です。決して一人が独占すべき物ではありませぬ。即ちイクさまの心はサールさまの心、サールさまの心はイクさまの心、二人一体となり、神界の為に活動なさるやうに仕組まれてあるのです』</p>
+            <p class="ja-classical-line">サール『オイ、イク州、どうだ。ヤツパリ宝の独占は許されまいがな。貴様が自分の物のやうにして、俺にも碌に見せず、懐へ捻ぢ込んで来よつたものだから、神罰が当つて、狸の野郎に一旦取られて了つたのだよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Saru: 'Moshi Hime-sama, if that is the case, is this jewel something that should be handed over to Saru from now on?'</p>
+          <p class="en-p">Hatsuwakahime: 'It is not a matter of whose it is. It would be best if you two-sama protect it by turns. And this treasure is a Goshinpau for the Sekaikiusai, not something that a Ningen should claim as their own. Consider it as something borrowed for a while, and preserve it with Taisetsu. And now that you have obtained the jewel, there is no Hitsueu for you to follow me. Please return to the forest of the shrine as quickly as you can, even if it is only for Ichiji. I am Arigata for your Goshinsetsu, but because Kamisama protect me Takusan, I shall never feel lonely, you see.'</p>
+          <p class="en-p">Saru: 'If that is so, I shall return this jewel to you. Dōzo, I will perform any Goyō, so please do not Otsushiya such things, and permit me, even if it is just Saru Hitori, to accompany you to the capital of Haruna. Moshi, I am like this.'</p>
+          <p class="en-p">He revealed his Netsusei on his face, and while shedding tears, he begged her.</p>
+          <p class="en-p">Hatsuwakahime: 'You who have obtained from Kami the treasure that shines in the night, return to the forest of the shrine. This jewel is a rare Mitakara that illuminates the Yamiyo, bestowed by the Hinodewake. Should you carry such a treasure to the land of the moon, where the Magakami rage and go mad? It is the will of Kami that you, indeed, should protect this Mitakara. It is the stern command of Kami that you may not bring an attendant to Haruna.'</p>
+          <p class="en-p">Iku: 'I cannot disobey those words of Hime-sama, yet how can I return just like this?'</p>
+          <p class="en-p">Saru: 'No matter what command you may give me, please permit me, reconsidering your decision.'</p>
+          <p class="en-p">Hatsuwakahime: 'Though the flower of the heart of a Masurao may bloom, it is sad that there is no way to pluck it.'</p>
+          <p class="en-p">Iku: 'Even so, can I return just like this? Even if I die, I shall serve Hime.'</p>
+          <p class="en-p">Saru: 'If you will not permit me no matter what, I shall cut my stomach here.'</p>
+          <p class="en-p">Matsuhime: 'Pitiful are the people who wander, not listening to the stern words of Himegimi. My tears fall as I measure the heart of the Masurao, from whom sincerity overflows. Yet, can I, a propagandist, disobey the will of the Sumeru-Ōkami?'</p>
+          <p class="en-p">Hatsuwakahime: 'Iku, Saru, you two officials, calm your hearts and look back upon yourselves.'</p>
+          <p class="en-p">Iku: 'I shall settle my thoughts for a while and then answer. In any case, I beseech you.'</p>
+          <p class="en-p">Saru: 'It is not that I disobey the words of Himegimi, but I cannot suppress my intense heart. Nevertheless, I shall rest over there for a while and ask my own heart how to conduct myself.'</p>
+          <p class="en-p">Thus, they answered Hime with poems, and withdrew to the former residence of the leader where Imoriwake and Otora had lived. The two of them, while sipping tea, crossed their arms, let out sighs, were at a loss for what to do, and spent their time in tears. From this point, Hatsuwakahime bade farewell to Matsuhime, watched for a gap in the two men's attention, and accompanied by Sumāto, quickly departed from the sacred ground and set out on her journey. Iku and Saru, both of them, remained convinced that Hatsuwakahime was still at the residence of Matsuhime, and spent the night being served sake by Okiku. Then, hearing of the critical condition of Bunsuke, they rushed out of the residence in the middle of the night, went down to the Kajika River to perform water ablutions, and prayed with all their might for his recovery.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『モシ姫様、さうすると此玉は、これからサールに渡すべき物で厶いますか』</p>
+            <p class="ja-classical-line">『誰の物といふ訳には参りませぬ。お二人さまが交代に保護なさるれば宜しい。そして此宝は世界救済の為の御神宝で、人間の私すべき物ではありませぬ。暫く拝借してゐる考へになつて、大切に保存なさいませ。そして其玉が手に入つた以上は、妾について来る必要はありませぬ。一時も早く祠の森に帰つて下さい。貴方の御親切は有難う厶いますが、妾は神様が沢山に守つて下さいますから、決して淋しい事は厶いませぬからな』</p>
+            <p class="ja-classical-line">サール『それなら、此玉を貴方に御返し致します。何卒、どんな御用でも致しますから、そんな事仰有らずに、サール一人でも、ハルナの都までお供を許して下さいませ。モシ此通りで厶います』</p>
+            <p class="ja-classical-line">と熱誠を面にあらはして、涙を流しながら頼み込むのであつた。</p>
+            <p class="ja-classical-line">初稚姫『夜光る宝を神に得し君は
+祠の森に帰り行きませ。
+この玉は日の出神の賜ひてし
+暗夜を照らす珍の御宝。
+曲神のたけり狂へる月の国へ
+かかる宝を持ち行くべしやは。
+汝こそは此御宝を守るべく
+計り給ひし神の御心
+ハルナへは供を連れ行く事ならず
+神の厳しき仰せなりせば』</p>
+            <p class="ja-classical-line">イク『姫様のその御言葉には背かれず
+さりとて此儘帰るべきやは』</p>
+            <p class="ja-classical-line">サール『いかならむ仰せ受けさせ給ふとも
+許させ給へ見直しまして』</p>
+            <p class="ja-classical-line">初稚姫『益良夫の心の花は匂へども
+手折らむ由もなきぞうたてき』</p>
+            <p class="ja-classical-line">イク『さりとても此儘これが帰らりよか
+仮令死すとも姫に仕へむ』</p>
+            <p class="ja-classical-line">サール『どうしても許し給はぬ事ならば
+われは此処にて腹を切るなり』</p>
+            <p class="ja-classical-line">松姫『姫君の厳の言葉を聞かずして
+迷へる人ぞ憐れなりけり。
+赤心の溢れ出でたる益良夫が
+心はかりて涙こぼるる。
+さりながら皇大神の御心に
+背くべしやは宣伝使のわれ』</p>
+            <p class="ja-classical-line">初稚姫『イク、サール二人の司よ村肝の
+心鎮めてかへりみませよ』</p>
+            <p class="ja-classical-line">イク『今暫し思案定めていらへせむ
+何は兎もあれ頼み参らす』</p>
+            <p class="ja-classical-line">サール『姫君の言葉を背くにあらねども
+弥猛心を抑ゆるすべなし
+さりながら暫し彼方に休らひて
+身の振方を胸に問ひみむ』</p>
+            <p class="ja-classical-line">斯く歌を以て姫に答へ、蠑螈別、お寅の住居せし元の教主館に退きて、二人は茶を啜りながら、腕を組み、吐息をもらし、進退谷まつて、涙に暮れてゐた。これより初稚姫は松姫に別れを告げ、二人の隙を窺ひ、スマートを伴ひ、逸早く聖場を立ち出で、征途に上ることとなつた。イク、サールの両人は、依然として初稚姫は松姫館にいます事と確信し、お菊に酒を勧められ一夜を明かした。そして文助の危篤を聞いて、夜中頃館を飛出し、河鹿川に降つて水垢離を取り、一生懸命に其恢復を祈つた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: Jewel 返志 [1343]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 黄 Spring 帰 [1345]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

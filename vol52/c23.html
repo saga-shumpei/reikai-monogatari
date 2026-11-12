@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 23: 盲動 [1359] - Volume 52 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 52 Table of Contents</a>
+      <span>Volume 52</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 52 &bull; Chapter 23</span>
+      <h1 class="chapter-title-en">Chapter 23: 盲動 [1359]</h1>
+      <p class="chapter-title-ja">盲動〔1359〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At the Yachimata Sekishiyo, which manifested the season of autumnal shigure where one moment it would rain and the next it would clear up, Bunsuke sat upon a low bench, listening with a thumping heart to the judgment of the amata spirits passing through this Kuwanmon. There arrived an old woman with a haughty expression, her face caked in oshiroi. Bunsuke, thinking what a fushigi creature had appeared and that her judgment would surely be omoshiro, waited with some kiyōmi.</p>
+          <p class="en-p">She appeared to be a spirit possessing a nikutai, approaching with a swaying, unsteady gait while looking slightly downward. She bumped squarely into the gate of the Sekishiyo, struck her forehead, and exclaimed:</p>
+          <p class="en-p">Takahime: 'Aitata! To build an Akamon in such a place without notice and make a passerby strike her head is beyond the pale. It is a great futsugafu that you would do such a thing when the Giritenjiyō-sama of Hinodewake is passing through... Hey, you appear to be the Monban here, why do you not take your shiyokumu seriously? If you continue such taida behavior, Hinodewake will not shiyōchi it.'</p>
+          <p class="en-p">She spoke with a fierce kenmaku. Bunsuke, hearing the name Hinodewake, looked closely and realized it was Takahime. Takahime had been snatched away by Eugenbau, and while flying through the air, she had been dropped by Eugenbau at a certain point on the Dekatan Plateau, falling from the sky onto a sandy field where she had fainted. In the meantime, her spirit had wandered to this place. However, Takahime was not in the least aware that she had lost her sanity or that she had come to the Reikai, and she felt as if she were still walking in the Genkai.</p>
+          <p class="en-p">The red guard shouted in a loud voice:</p>
+          <p class="en-p">Red Guard: 'Takahime, wait a moment, there is an investigation to be conducted.'</p>
+          <p class="en-p">Takahime: 'Hen! It is laughable for a mere Monban to investigate the Giritenjiyō Hinodewake-sama. There is something I must investigate from this side instead. Where have you hidden the Kami of Tokiokishi, one of the three crows of the San-go-kyo? Come, confess clearly. If you dally, I shall cast you not only into the Yachimata of Heaven, but into the very bottom of the cauldron of Hell.'</p>
+          <p class="en-p">Red Guard: 'You are a ghost who was dropped from the air by a demon called Eugenbau on the Dekatan Plateau, fainted, and arrived here. Once you have come here, you must follow the rules of the Meido. As I am about to examine your crimes, you had best confess everything without hiding a thing.'</p>
+          <p class="en-p">Takahime: 'Ohohoho, what is with that solemn face of yours, as if a single koku of rice cost a hundred ryo? It seems you too have been struck by the difficulty of life lately and find your accounting painful. If you follow the Giritenjiyō-sama of Hinodewake, there will be no recession or worries in this world. It is I, the living shrine Takahime-sama of Hinodewake, the savior of the three thousand worlds. My, my, there are so many pitiful people in the world. That is why they say that unless the restoration of the Genkai, Yūkai, and Shinkai is carried out as soon as possible, the Miroku Shinsei will not be achieved. Ah, the Hinodewake-sama who must save the people of the world, and this nikutai-miya of Takahime, it is no ordinary task. Ah, Kannagara Tamachi Haese.'</p>
+          <p class="en-p">The red guard, finding Takahime's derailment too intense to investigate, and knowing she was not dead in the Seishibo and would return to the Genkai before long, thought it best to dismiss her and send her back without a serious investigation, and said:</p>
+          <p class="en-p">Red Guard: 'Oi, Takahime, what do you think this place is?'</p>
+          <p class="en-p">Takahime: 'Hen, do not say things like preaching to Buddha. There is a limit to how much you can make a fool of someone. Is this not about one ri before the Daimon Shrine? You must be the kenzoku of the Yakuzagami of Susanoo-no-Mikoto. Rather than standing stiffly in a place like this, why not listen to the teachings of this Giritenjiyō nikutai-miya and serve the purpose of opening the great gate? I shall tell you something splendid.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">一しきり雨が降るかと思へば、又一しきり晴れわたる秋の時雨の季節を現はした八衢の関所に、文助はロハ台に腰打ちかけて、此関門を通る数多の精霊の審判を、胸を轟かせながら聞いてゐた。そこへやつて来たのは、顔に白粉をベツタリとつけた、高慢さうな面付をした婆アである。文助は不思議な奴が出て来たものだなア、さぞ彼奴の審判は面白いだらうと、稍興味を以て待つてゐた。これは肉体のある精霊とみえて、稍俯いてヒヨロリ　ヒヨロリとやつて来る。関所の門にトンと突き当り、額を打ち、</p>
+            <p class="ja-classical-line">『アイタタ、こんな所に、断りもなく赤門を拵へ、通行人の頭を打たすとは以ての外だ。日の出神の義理天上さまがお通り遊ばすのに、何と云ふ不都合だ……ヤアお前はここの門番と見えるが、なぜ職務を大事に致さぬのかい。こんな怠惰な事をして居ると、日の出神が承知致しませぬぞや』</p>
+            <p class="ja-classical-line">とエライ権幕である。文助は日の出神といふ声を聞いて、よくよく透しみれば高姫であつた。高姫は妖幻坊にかつ攫はれ、空中を翔り行く途中に於て、デカタン高原の或地点で妖幻坊に取放され、空中より砂つ原に顛落して気絶してゐた。其間に精霊が此処へ迷うて来たのである。されど高姫は自分が正気を失つた事も、霊界へ来てゐることも少しも気がつかず、依然として現界を歩いてゐるやうな心持であつた。赤色の守衛は大喝一声、</p>
+            <p class="ja-classical-line">『高姫、暫く待て、取調べることがある』</p>
+            <p class="ja-classical-line">と呶鳴りつけた。</p>
+            <p class="ja-classical-line">『ヘン門番の分際として、義理天上日の出神様を取調べるとは片腹痛いワ。それよりも此方から取調べにやならぬ事がある。三五教の三羽烏の一人、時置師の神様を何処へ隠したか。サ、キツパリと白状しなさい。グヅグヅ致すと、天の八衢はまだおろか、地獄の釜のドン底へ堕しますぞや』</p>
+            <p class="ja-classical-line">『其方はデカタン高原に於て、妖幻坊といふ悪魔のために空中から取落され、気絶を致して此処へやつて来た亡者であるぞ。最早此処へ来れば冥土の規則に従はねばならぬ。これから其方の罪状を調べるに依つて、包まず隠さず申開きを致したがよからうぞ』</p>
+            <p class="ja-classical-line">『オホホホホ、あのマア鹿爪らしい顔わいの、一石の米が百両するやうな、其しやつ面は何だい、お前も余程此頃は生活難に襲はれて、会計が辛いと見える。日の出神の義理天上さまに従うて来れば、此世の中に不景気もなければ心配もいりませぬ。三千世界の救ひ主、日の出神の生宮高姫さまで厶るぞや。さてもさても、世の中に可哀相な人民が沢山あるものだなア。これだから一時も早く現界、幽界、神界の立直しを致さねば、五六七神政成就は致さぬと仰有るのだ。あああ、世界中の人民を助けねばならぬ日の出神様も、此高姫の肉宮も、並大抵ぢやありませぬワイな、ああ惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">赤の守衛は、余りきつい高姫の脱線振に、取調べる訳にも行かず、又生死簿には死んでゐない、近き中に現界へ帰る奴だから、本真剣に調べる訳にも行かず、いい加減にあしらつて追ひ帰さむものと思ひながら、</p>
+            <p class="ja-classical-line">『オイ、高姫、お前はここを何と心得てるか』</p>
+            <p class="ja-classical-line">『ヘン、釈迦に経を説くやうな事を云ふものぢやありませぬぞや。馬鹿にするにも程がある。此処は大門神社の一里許り手前ぢやないか。お前達は素盞嗚尊の厄雑神の眷属だらう。こんな所にしやちこ張つて居るよりも、此義理天上の肉宮の教を聞いて、一度大門開きの御用に立つたら何うだ。結構な事を聞かしてやるぞや』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Bunsuke pulled the sleeve of Takahime and said,</p>
+          <p class="en-p">Bunsuke: 'Excuse me, Takahime-sama, I have met you in such an unusual place. I am Bunsuke of the Ananai-kyō.'</p>
+          <p class="en-p">Takahime: 'Oh, I thought there was a strange man here for some time, and it is you, Bunsuke. But my, you have such a lonely face; what are you doing in a place like this? Come, Bunsuke-don, follow me. I shall let you hear the true essence of the Uranai-kyō. What could such red-faced or blue-gourd-faced ones possibly know? It is I, this Takahime, who has grasped the root of the root of the origin of the world. How could gods who sprang up midway, or those with high noses whose wisdom is merely a product of learning, understand the truth? ...If you wish to hear, come and visit. When the Kami appears in the front, becoming the Giritenjiyō Hinodewake, Takamiyahimenomikoto, I shall explain everything about the world to you. ...Hmph, do you think a midway high-nose like you, who is acting as a gatekeeper, could possibly understand the truth of the Shinkai? Come, come, Bunsuke-don, follow me.'</p>
+          <p class="en-p">Akazura: 'Takahime, it is a little too early for you to come here. From now, return to the Genkai, fully display your mad behavior, and you will realize it only after you are unable to move hand or foot. Only then will you understand the preciousness of the Ananai-kyō and the Mikokoro of Susanōnomikoto-sama. It hinders my work, so leave this place at once.'</p>
+          <p class="en-p">Takahime: 'Hmph, Akazura-sama, it must be inconvenient for you that I am here. Haha, this is, as I suspected, the gateway to the Ananai-kyō after all. You must have successfully dragged the Kami of Tokiokishi into this. I will not move, not even if you use force. Come, come, quickly bring the Kami of Tokiokishi out here.'</p>
+          <p class="en-p">Akazura: 'The Kami of Tokiokishi is in charge of the general affairs of the Saien mansion. Since he is still in the Genkai, there is no way he would come here. My, what an ignorant thing you are.'</p>
+          <p class="en-p">Takahime: 'Hmph, you speak so smoothly, ho ho ho ho ho. It seems you have taken the evil teachings of the hensei-joshi into your belly, as you lie so skillfully. I am not a Giritenjiyō who would be deceived by such things, Akazura-sama.'</p>
+          <p class="en-p">She narrowed her eyes, jutted out her chin, and mocked him.</p>
+          <p class="en-p">Bunsuke: 'Excuse me, Takahime-sama, this is the barrier of the Yatsumado of the Meido. This is certainly not the Genkai, so you should not say such things. Come, return at once. Then, apologize to the Ananai-kyō, return to a sincere soul, and pray so that you may ascend to heaven anew.'</p>
+          <p class="en-p">Takahime: 'Oh my, Bunsuke-don, you are playing dumb. It seems that the spirit of the hensei-joshi has possessed you quite thoroughly. It is a path where not a single lie can be told. The path of Ananai, solidified with lies, oh ho ho ho ho, I, Takahime, am truly impressed. Since your eyes are bad, you must be dreaming. Why don't you pull yourself together?'</p>
+          <p class="en-p">She slapped his face repeatedly. Bunsuke, feeling a little offended, said,</p>
+          <p class="en-p">Bunsuke: 'Now, Takahime, I have explained things to you this much, yet you still do not understand? Why do you not follow the words of the official and return? What is with that white powder on your wrinkled face? Is this not the behavior of a complete madman?'</p>
+          <p class="en-p">Takahime: 'Hmph, no need for your concern. Even like this, since To-sama says it is fine, I do not need to be seen by blind people like you. Come, I will now step into the inner sanctum, meet To-sama, and whether you like it or not, I will take you back to the Uranai-kyō. Even though I look like this, this Takahime is different from before. As the wife of Takamiyahiko, the lord of the Kuruwa castle, I am the living shrine of the Hinodewake. Without saying such things, just once, follow me to the Kuruwa castle in the Ukiki forest. Even you would be surprised if you saw that palace. Having learned the art of flying high in the mid-heaven through the Kuruwa law of divine wonders, there is no one in the world that this Takahime fears anymore. Please associate with me with that in mind.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">文助は高姫の袖を引いて、</p>
+            <p class="ja-classical-line">『モシモシ高姫さま、珍しい所でお目にかかりました。私は三五教の文助で厶いますよ』</p>
+            <p class="ja-classical-line">『ヤア、最前から怪体な男が居ると思うたら文助だな。ても扨ても淋しさうな面をして、こんな所に何をしてゐるのだい。サ、文助どん、高姫に跟いて厶れ。ウラナイ教の誠生粋を聞かして上げよう。こんな赤面や青瓢箪面が、何を知つてゐるものか。世の元の根本の根本の元を掴んだ、此高姫ぢやぞえ。途中から湧いた神や、学で知恵の出来た鼻高が、何うして誠の事が分るものか。……聞きたくば訪ねて厶れ。神が表に現はれて、義理天上日の出神、高宮姫命となつて、世界の事を何もかも説いて聞かすぞや。……こんな門番を致して居るやうな、途中の鼻高に、ヘン、神界の誠が分つてたまりますかい。サアサア文助どん、私に跟いて厶れ』</p>
+            <p class="ja-classical-line">赤『高姫、まだ其方がここへ来るのはチツと早い。これから現界へ帰り、充分に狂態振りを発揮し、手も足も出なくなつてから始めて気がつくだらう。さうすれば三五教の尊い事や、素盞嗚尊様の御心が分るであらう。事務の妨げとなるから、トツトと此処を立ち去れ』</p>
+            <p class="ja-classical-line">『ヘン、赤さまは、私が居ると都合が悪いでせう。ハハア、ここは案に違はず、ヤツパリ三五教の門口だな。時置師の神様を、うまく引張り込みやがつたに違ない。挺でも棒でも動きは致さぬぞや。ササ早く時置師の神様を、此処へ出して下され』</p>
+            <p class="ja-classical-line">『時置師の神様は、斎苑の館の総務をして厶るのだ。まだ現界にゐらつしやるから、此処へお越しになる筈がない。さてもさても分らぬ代物だなア』</p>
+            <p class="ja-classical-line">『ヘン、うまい事仰有いますワイ、ホホホホホ、流石は変性女子の悪の教を腹へ締め込みて居るとみえて、上手に嘘をつきますな。そんな事にチヨロまかされるやうな義理天上ぢや厶りませぬワイな、赤さま』</p>
+            <p class="ja-classical-line">と目を細うして頤をしやくつて嘲弄する。</p>
+            <p class="ja-classical-line">文助『モシ高姫さま、此処は冥土の八衢の関所ですよ。決して現界ぢやありませぬから、そんな事を言ふものぢやありませぬ。ササ、トツトと帰りなさい。そして三五教にお詫をして誠の魂に立帰り、改めて天国に昇れるやうに御願ひなさりませ』</p>
+            <p class="ja-classical-line">『ようマア、文助どん、しらばくれますね。お前も余程変性女子の霊が憑つたとみえますワイ。嘘は一つも言はれぬお道ですよ。嘘で固めた三五の道、オホホホホ、高姫誠に感心致しました。お前は目が悪いから、夢でも見て居るのだらう。チツと確りしなさらぬかいな』</p>
+            <p class="ja-classical-line">と横面をピシヤピシヤと撲りつけた。文助は少しばかりムツとして、</p>
+            <p class="ja-classical-line">『コリヤ高姫、これだけ事を分けて知らしてやるのに、まだお前は分らぬのか。なぜお役人さまの言葉を守つて帰りなさらぬのだ。皺だらけの面に白い物を塗つて、何だ。まるきり気違ひの所作ぢやないか』</p>
+            <p class="ja-classical-line">『ヘン、お構ひ御無用。これでも、トさまが可いと仰有るのだから、別にお前の様な盲共に見て貰はなくても宜しい。サ、之から奥へ踏み込んで、トさまにお目にかかり、厭でも応でもウラナイ教へ連れて帰らなおきませぬぞや。かう見えても、此高姫は今迄とは違ひますぞや。曲輪城の城主高宮彦の妻、高宮姫とは日の出神の生宮の事だ。そんな事を言はずに、一遍浮木の森の曲輪城まで私に従いて来てみなさい。いかなお前でも、あの御殿を見たら吃驚致すぞえ。神変不思議の曲輪の法によつて、中天高く飛行の術を習ひ覚えた此高姫、最早天下に恐るる者はチツともありませぬ。どうか其積りで交際つて下さいや』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahime did not seem to have noticed yet that the Eukuwai in the forest of Ukiki had been exposed. To such a place, riding upon a large Shishi and descending straight from one side of Ten, came none other than Mokusuke.</p>
+          <p class="en-p">Takahime, seeing this figure, rejoiced greatly,</p>
+          <p class="en-p">Takahime: 'Hohohohoho, what a feat, what a feat! Mokusuke-sama, how on earth did you become such a great person? To be able to use such a Mauaku Karajishi with Jiiujizai, you are indeed my husband. Hey, Bunsuke-dono, look at that! Since he can perform such a feat through the Hofuriki of the Magawa, the Uranai-kyō must be something great, must it not? Can even one person from that Ananai-kyō do such a thing? I would love to show Hatsuwakahime, Harukuniwake, Kotoyoriwake, and Tōsuke the Atsupare Mushiyaburi of Mokusuke-sama. Ehehehehe, Namu Mokusuke Daimiyōjin-sama.'</p>
+          <p class="en-p">Such was the Oka of her pressing her hands together and bowing. Mokusuke leaped lightly from the back of the Shishi, and without even glancing at Takahime, he turned to the red Shiyuei,</p>
+          <p class="en-p">Mokusuke: 'I am sorry for the trouble with your duties. Please convey that Mokusuke of the Ananai-kyō requests an audience with Ibukido-nushi-no-kami-sama.'</p>
+          <p class="en-p">The red Shiyuei bowed his waist many times, and while showing his respect, he ran quickly into the gate. Takahime thought that although there were parts of Mokusuke's words that she could not quite grasp, he must be saying such things on purpose, for Mokusuke-sama is skilled at jesting... and so she decided in her heart,</p>
+          <p class="en-p">Takahime: 'Hey, Mokusuke-sama, stop your jesting at a reasonable point. After being thrown out by Tōsuke of the Saien mansion, it is filthy to say such things as Mokusuke of the Ananai-kyō. Come, let us go home together.'</p>
+          <p class="en-p">Mokusuke: 'Takahime-dono, it seems you have been deceived by Yōgenbō and have become convinced that the demon is Mokusuke, and you are performing quite a mad act. However, this Mokusuke has never met you to talk about the Uranai-kyō, nor have I ever met you in the forest of the shrine. Much less have I ever set foot in the Magawa-jō, so I would like you to place your hand upon your heart and pray for the discernment of truth and falsehood.'</p>
+          <p class="en-p">Takahime: 'Hohohohoho, how transparent. Mokusuke-sama, you should not put on such airs just because you think we are in front of others. Hey, Takamiyahiko-sama, do not make such a difficult face, and come, let us return to Magawa-jō quickly. Hey, Bunsuke-dono, how is that? The one who is the number one husband in the three countries for Takahime is this Mokusuke-sama. He is Tokiokishi-kami-sama, known as one of the three crows, now the great leader of the Uranai-kyō and the lord of Magawa-jō. Come, follow me. Because of our old friendship, I will surely make you a fine official. It would not be a disgrace even if you were to work at the reception desk of Kohokuzan.'</p>
+          <p class="en-p">Bunsuke: 'Ah, what a troublesome person. There is nothing more difficult to deal with than the blind, the insane, and the foolish. I had thought that Takahime-sama was a greater person... but even though she is currently at Yachimata, because her attachment is deep, she seems to think it is still the mundane world. Ah, what a pitiful thing.'</p>
+          <p class="en-p">He muttered this. Takahime, being quick of ear, heard it and said,</p>
+          <p class="en-p">Takahime: 'Hen, you speak so much of madness and foolishness. Ohohohoho, your deluded and ignorant soul has been reflected in the mirror of the heart of Hinode-kami. ...If you think it is about others, it is all about yourself. The people of today are all blind and deaf. When Hinode-kami appears and turns the world of the protection of the night into the protection of the sunrise, and when the age of Miroku arrives, the blind will see and the deaf will hear... as it is written in the Fudesaki of the Hensei-danshi. It is also properly written in the Fudesaki that imitates Hinode-kami. ...Hey, Mokusuke-sama, please stop playing dumb at a reasonable point.'</p>
+          <p class="en-p">To such a place, the red Shiyuei appeared respectfully before Mokusuke,</p>
+          <p class="en-p">Shiyuei: 'Mokusuke-sama of the Ananai-kyō, Ibukido-nushi-no-kami-sama says that he would like to see you immediately. Come, please follow me.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と高姫は浮木の森の妖怪のばれた事はまだ気がついて居らぬらしい。斯かる処へ大きな獅子に乗つて驀地に天の一方から降つて来たのは、まがふ方なき杢助であつた。</p>
+            <p class="ja-classical-line">高姫は此姿を見て大に喜び、</p>
+            <p class="ja-classical-line">『ホホホホホ、お手柄お手柄、杢助さま、お前は何うしてマア、それ程偉いお方になつたのだ。これほど猛悪な唐獅子を自由自在に使ふとは、ヤツパリ私の夫だな。コレ文助どん、アレ御覧、曲輪の法力によつて、あんな離れ業が出来るのだもの、ウラナイ教は偉いものでせう。三五教の奴に一人だつて、こんな事が出来ますか。初稚姫や治国別、言依別や東助に、杢助さまの、天晴武者振を見せてやりたいものだなア。エヘヘヘヘ、南無杢助大明神様』</p>
+            <p class="ja-classical-line">と手を合はして拝む可笑しさ。杢助は獅子の背からヒラリと飛びおり、高姫には目もくれず、赤の守衛に向ひ、</p>
+            <p class="ja-classical-line">『御役目御苦労です。一寸伊吹戸主神様にお目にかかりたいと、三五教の杢助が申し入れたと伝へて下さい』</p>
+            <p class="ja-classical-line">赤の守衛は幾度も腰を屈め、敬礼を表しながら走早に門内に入る。高姫は杢助の言葉に少し合点の行かぬ節があるとは思へども、ワザとあんな事を言つて居るのであらう、杢助さまは洒落が上手だから……と心の中にきめて了ひ、</p>
+            <p class="ja-classical-line">『コレ杢助さま、ええ加減に洒落ておきなさい。斎苑の館の東助に放り出され、アタ汚らはしい、三五教の杢助なんて、言ふものぢや厶りませぬぞや。サア、一緒に帰りませう』</p>
+            <p class="ja-classical-line">『高姫殿、お前さまは妖幻坊にチヨロまかされ、其悪魔を杢助だと思ひ詰め、随分狂態を演じてるやうだが、此杢助にはお前さまに会つて、ウラナイ教の話をした事もなし、又祠の森で面会した事もない。まして曲輪城などには足踏みも致して居らぬから、よく胸に手をおいて、真偽の判別を願ひたいものだ』</p>
+            <p class="ja-classical-line">『ホホホホホ、白々しい、杢さまの言ひ様、人の前だと思つて、そんな体裁を作るものぢやありませぬぞや。コレ高宮彦さま、そんな六ケしい顔せずに、ササ早く曲輪城へ帰りませう。コレ文助どん、何うだえ、高姫の三国一の婿といふのは、此杢助さまだぞえ。三羽烏の一人と聞えたる時置師神様、今はウラナイ教の大教主、曲輪城の城主様だ。サ、私に従いて厶れ。昔の厚誼で、キツと立派な役にして上げよう。小北山の受付位して居つてもはづみませぬぞや』</p>
+            <p class="ja-classical-line">文助『あああ、困つた人だな、盲と気違と馬鹿位始末に了へぬものはないワ。私も、モツと高姫さまは偉い人だと思うて居つたに……現在八衢へ来てゐながら、執着心が深い為、ヤツパリ娑婆だと思うてるらしい。ああ気の毒なものだなア』</p>
+            <p class="ja-classical-line">と呟く。高姫は耳敏く之を聞き取つて、</p>
+            <p class="ja-classical-line">『ヘン、気違だの、馬鹿だのとよう仰有いますワイ。オホホホホ、日の出神の心の鏡にお前の迷妄暗愚な魂が写つたのだよ。……人の事だと思うてゐると皆吾事であるぞよ。今の人民は皆盲聾ばかりであるぞよ。日の出神が現はれて、夜の守護の世の中を日の出の守護に致し、五六七の世が参りたならば、盲も目があき、聾も耳が聞えるやうになるぞよ……と変性男子の筆先にも現はれてゐませうがな。日の出神の真似の筆先にもチヤンと出てますよ。……コレ杢助さま、エエ加減にとぼけておかんせいな』</p>
+            <p class="ja-classical-line">かかる所へ赤の守衛は恭しく杢助の前に現はれ、</p>
+            <p class="ja-classical-line">『三五教の杢助様、伊吹戸主神様が、早速お目にかからうと仰有います。サ、私に従いてお越し下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Yes, Arigata-gozaimasu. I ask that you keep this lion in your Oazuka for a while.'</p>
+          <p class="en-p">'Yes, that is fine. I shall protect it with Teinei. Now, Shiro-sama, please guard this Koko. ...Come, Mokusukesama, come this way.'</p>
+          <p class="en-p">She attempts to walk ahead. Mokusuke follows behind and begins to pass through the gate. Takahime clings to his sleeve, lets out a Kanakirigoe, and with Namidamaji, says:</p>
+          <p class="en-p">'Hey, Mokusukesama, is this not too much? This is the Bashiyo where the Yatsura of the Ananai-kyō gather. Why, after making such a firm Yakusoku, do you commit Henshin now? Do you not fear the Giritenjiyō Hinodewake?'</p>
+          <p class="en-p">'Takahime-sama, I am going to meet Ibukidonushisama by my own Kenri. Anata, please return from here.'</p>
+          <p class="en-p">He attempts to leave. Takahime bites onto his sleeve and will not let go, saying:</p>
+          <p class="en-p">'No, no, no matter what you Otsushiya, as long as the eyes of this Takahime are black, I shall not let you pass through the gate of the Ananai-kyō, not even by Hitoashi. An-an-an-an-an, a man's heart is like the autumn sky; even if they say it changes, this is too much. A-e, Zannen, Zannen, kuku, Kuchio.'</p>
+          <p class="en-p">'Ahahahaha, what an Omoshiro Shibai I have been shown. Ah, Bunsuke-dono, follow behind me.'</p>
+          <p class="en-p">As he says this, he kicks out, and Takahime involuntarily releases his hem, rolls two or three times like a ball along the Kaidau, and at its Shiuten, falls flat, spread out in the shape of a large character.</p>
+          <p class="en-p">Mokusuke and Bunsuke shut the gate with a clatter and hide their figures in the inner garden. Takahime, lying in the shape of a large character, moves her hands and feet while shouting:</p>
+          <p class="en-p">'This woman, if one traces her origin, is the reincarnation of Tokoyohime-no-Mikoto, who was born bearing the body of a man in woman's clothing, Takamiyahime. Since I was young, I was a mischievous girl nicknamed 'man-woman'; once I became husband and wife with Tōsuke-sama and even bore a child, but because Tōsuke's heart was too heartless and cruel, I gave him a clean break at the Saien mansion, returned to the forest of the shrine, became husband and wife with Mokusuke-sama, and now I have built a Kuruwa castle in the forest of Ukiki, changed my name to Takamiyahime, and am the divine pillar of the Uranai-kyō; just wait and see what happens.'</p>
+          <p class="en-p">The spirits coming to the Yachimata hear this voice, and each hurries their steps, rushing over in a scattered crowd.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ハイ有難う厶います。此ライオンは暫く御預りを願ひます』</p>
+            <p class="ja-classical-line">『ハイ宜しう厶います。叮嚀に保護致します。コレ白さま、お前さま此処に守つてゐて下さい。……サア杢助様、かうお出でなさいませ』</p>
+            <p class="ja-classical-line">と先に立つて行かうとする。杢助も後に従ひ門を潜りかけた。高姫は袖にすがり、金切声を出して、涙交りに、</p>
+            <p class="ja-classical-line">『コレ杢助さま、余りぢや厶んせぬか。ここは三五教の奴等の集まる場所、なぜあれ程固い約束をしながら、今となつて変心をなさるのだえ。義理天上日の出神は恐れませぬか』</p>
+            <p class="ja-classical-line">『高姫さま、拙者は拙者の権利を以て、伊吹戸主様にお目にかかるのだ。貴女は之からお帰りなさい』</p>
+            <p class="ja-classical-line">と行かうとする。高姫は袖に喰ひついて放さず、</p>
+            <p class="ja-classical-line">『イエイエ何と仰有つても、此高姫の目の黒い中は、一足たりとも、三五教の門は潜らせませぬぞや。アンアンアンアンアン、男の心と秋の空、変ると言うても余りだ。エーエ残念や残念や、クク口惜しい』</p>
+            <p class="ja-classical-line">『アハハハ、何と、面白い芝居を見せて貰うたものだ。ああ文助殿、拙者の後へついて厶れ』</p>
+            <p class="ja-classical-line">と言ひながら、ポンと蹴れば、高姫は思はず裾を放し、二つ三つコロコロコロと街道に毬の如く転げて、其終点でパツと大の字に拡がり倒れて了つた。</p>
+            <p class="ja-classical-line">杢助、文助は門をガタリと締めて、奥庭へ姿を隠した。高姫は大の字になつて、手足を動かせながら、</p>
+            <p class="ja-classical-line">『此女は、元を糺せば、変性男子の体をかつて、生れ出でたる常世姫命の再来、高宮姫。若い時から、男女と綽名を取つたヤンチヤ娘、一度は東助さまと夫婦になり、子までなしたる仲なれど、余り東助の心が無情冷酷なるが故、斎苑の館でキツパリ暇をくれて、祠の森に立帰り、杢助さまと夫婦となり、今は浮木の森に曲輪城を築き、高宮姫と名を改めてウラナイ教の神柱、先をみてゐて下されよ』</p>
+            <p class="ja-classical-line">と大音声に呼ばはつてゐる。八衢へ来る精霊は此声を聞きつけ、各歩を急ぎバラバラと駆けつけた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c22.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 22: 空走 [1358]</span>
+      </a>
+      <a href="c24.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 24: 応対盗 [1360]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

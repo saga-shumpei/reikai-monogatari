@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3: 楽屋内 [1339] - Volume 52 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 52 Table of Contents</a>
+      <span>Volume 52</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 52 &bull; Chapter 3</span>
+      <h1 class="chapter-title-en">Chapter 3: 楽屋内 [1339]</h1>
+      <p class="chapter-title-ja">楽屋内〔1339〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Iku and Sāru, the two of them, took a path through the forest from the back entrance, slipped through a shallow valley for about two or three chō, emerged onto the main road, and from there rushed to the forest of Yamaguchi, singing songs with all their might as they descended the steep slope, determined to be permitted to accompany Hatsuwakahime by any means necessary.</p>
+          <p class="en-p">Iku: 'Following the Brahman army, while I was serving as a guard in the rock cave of Kiyoharuyama, Matsuhiko and Tatsukō appeared, welcomed Itakōtsukasa, and surrendered to Ananai-kyō. Moved by that sincere heart, we too completely surrendered to the Oshihe of the Ōkami, and serving in the forest of the shrine, we have served until now. But the Sendenshi who descended, parting the eight-fold clouds of Ame, Hatsuwakahime, her Shintoku has stolen both heart and soul, and now we have become true believers of Ananai-kyō. Nevertheless, although the divine officials of the Saienkwan are as numerous as the stars in the sky, officials who can be called the incarnation of love and goodness are rare. Aside from the divine person of Hatsuwakahime, there is no true god who can save us. From here on, we shall follow her footsteps wherever she may go, and illuminated by her Shintoku, chosen as messengers of the path of sincerity, living as officials of the Oshihe in the earthly world, and dying as officials of the Reikoku and Tenkoku, we are a pair who must perfectly and thoroughly fulfill the final purpose of life and achieve merits that replace heaven and earth. Advance, advance, come, advance! Aiming for Yamaguchi, swiftly, what are the rocky, undulating valley paths to us, Takahime?'</p>
+          <p class="en-p">Iku: 'Even if Yōgenbō uses all kinds of magic on the way and tries to torment and attack us, what is there to fear? We are the brave men of Yamato, the sons of Shikishima, illuminated by the light of the gods, breaking through the mountain path where demons rage at top speed. This departure is truly valiant. "Untokodotsukoi dotsukoishiyo." The slope has gradually become steep. Sāru-tsukasa, be careful. This is the very place where Yōgenbō and the ugly official Takahime appeared. "Untokodotsukoi," come on! This time I am fine. The Sendenshi who has gathered the strength of a million people into one, starting with Hatsuwakahime, and Smart-sama are coming. Even if a hundred Yōgenbō or ten thousand Takahime come, once it has come to this, it is as solid as a rock. Ah, how interesting, how interesting! This body entrusted to the gods, I run with single-minded devotion for the sake of the gods and for the sake of the world. "Untokodotsukoi, yatsutokoshiyo." Sāru-tsukasa, what are you doing? Even if you say your compass is shorter than mine, this is too much. You are a fellow with such slow feet. If you dawdle, Hime-sama will look at your back, and what will you do if she calls out, "Hey, hey, wait, you two"? The farce that we squeezed out our wisdom to plan this far will come to nothing. Ah, Kannagara-kamu-nagara. May the spirits be blessed, and may the divine official Hatsuwakahime graciously allow us two to accompany her on her long journey. O Ōkami, please arrange this and let us fulfill our single-minded desire. I pray before the precious presence. Whether the morning sun shines or clouds over, whether the moon waxes or wanes, whether the earth is submerged in mud, this departure we have decided upon is like a mulberry bow that will not be pulled back. Following her wherever she may go, illuminated by the divine character of Hatsuwakahime, we are the Yamato-damashii that will not stop until we have fulfilled our duty. Ah, how valiant, how valiant!'</p>
+          <p class="en-p">Iku: 'Speaking of which, Haru, Teru, and the likes of Iru are fools. Why didn't they use their wits and excuse themselves to go ahead? As expected, what people without wisdom do is always lacking somewhere. When the moment of truth comes, they are like deflated air. When I think about it, it is funny. Please protect us, Kannagara. I pray before the presence of the gods.'</p>
+          <p class="en-p">Sāru sings again.</p>
+          <p class="en-p">Sāru: '"Untokodotsukoi dotsukoishiyo." No matter when I come to see it, this slope is a difficult place that makes walking painful. Wait a moment, you Iku. Why are you in such a hurry? The divine official Hatsuwakahime will surely come from behind. Just go along slowly. If you stumble by mistake, Takahime and Yōgenbō, who have been watching for your weakness, will appear, and what will you do if you are made to suffer as you were before? Are you planning to be saved by Smart again, and this time, to be saved from the jaws of death by Smart again? That is too greedy. There is a saying that you will not find a loach under the willow tree twice or three times.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">イク、サールの両人は、裏口より森の中に道をとり、二三町ばかり水浅き谷底を潜つて本街道に出で、それより山口の森に駆けつけ、初稚姫に、如何なる手段を以てしても随行を許されむ事をと一生懸命に歌を歌ひながら急坂を下り行く。</p>
+            <p class="ja-classical-line">イク『バラモン軍に従ひて
+清春山の岩窟に
+留守居を勤めゐたる折
+松彦、竜公現はれて
+伊太公司を迎へとり
+三五教に帰順した
+其赤誠にほだされて
+吾等も全く大神の
+教に帰順し奉り
+祠の森に奉仕して
+今迄勤め来りしが
+天の八重雲かき分けて
+降り給ひし宣伝使
+初稚姫の神徳に
+心も魂も奪はれて
+今は全く三五教の
+正しき信者となりにけり
+さはさりながら斎苑館
+神の司は綺羅星の
+如くに数多ましませど</p>
+            <p class="ja-classical-line">愛と善との権化とも
+云ふべき司は稀ならむ
+初稚姫の神人を
+おいて吾等を救ふべき
+誠の神はあらざらめ
+吾等は之より御後をば
+何処々々までも慕ひ行き
+其神徳に照らされて
+誠の道の御使と
+選まれ生きては地の世界
+死しては霊国、天国の
+教司と任けられて
+人生最後の目的を
+完全に委曲に遂行し
+天地に代る功績を
+立てねばおかぬ二人連れ
+進めよ進め、いざ進め
+山口さして逸早く
+岩石起伏の谷道も
+何のものかは高姫や</p>
+            <p class="ja-classical-line">妖幻坊が途中にて
+あらゆる魔法を使ひつつ
+吾等を艱め攻むるとも
+何かは恐れむ敷島の
+大和男の子の益良夫が
+神の光に照らされて
+悪魔の猛る山道を
+最急行で突破する
+此首途ぞ勇ましき
+「ウントコドツコイ　ドツコイシヨ」
+そろそろ坂がきつなつた
+サールの司、気をつけよ
+即ち此処が妖幻坊や
+醜の司の高姫が
+出現したる場所ぞかし
+「ウントコドツコイ」やつて来い
+今度は俺は大丈夫
+百万人の力をば
+一つにかためた宣伝使
+初稚姫を始めとし</p>
+            <p class="ja-classical-line">スマートさまが出て厶る
+妖幻坊の百匹や
+高姫万匹来るとも
+もう斯うなれば磐石よ
+ああ面白し面白し
+神に任せし此身体
+神の御為め世の為めに
+一心不乱に走り行く
+「ウントコドツコイ、ヤツトコシヨ」
+サールの司何してる
+何程お前のコンパスが
+俺に比べて短いと
+云つても之又あんまりだ
+滅相足の遅い奴
+愚図々々してると姫様が
+後姿を御覧じて
+こらこら待てよ両人と
+呼止められたら何とする
+折角智慧を搾り出し
+ここまで企んだ狂言が</p>
+            <p class="ja-classical-line">水泡に帰して了ふぞや
+ああ惟神々々
+御霊幸はへましまして
+初稚姫の神司が
+吾等二人を快く
+長途の旅の御供を
+許させ給ふ計らひを
+廻らせ吾等が一念を
+遂げさせ給へ大御神
+珍の御前に願ぎ奉る
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+大地は泥に浸るとも
+思ひ立つたる此首途
+ひきて帰らぬ桑の弓
+何処々々までも従ひて
+初稚姫の神格に
+照らされ吾等が本分を
+尽さにやおかぬ大和魂
+ああ勇ましし勇ましし</p>
+            <p class="ja-classical-line">之につけてもハル、テルや
+イルの奴等は馬鹿者だ
+気転を利かして何故早く
+お先へ失敬せなんだか
+ヤツパリ智慧のない奴の
+する事ア何処かに間がぬけて
+まさかの時には空気ぬけ
+思へば思へば面白い
+守らせ給へ惟神
+神の御前に願ぎまつる』</p>
+            <p class="ja-classical-line">サールは又歌ふ。</p>
+            <p class="ja-classical-line">『「ウントコドツコイ　ドツコイシヨ」
+何時来て見ても此坂は
+行歩に苦しむ難所だな
+これ待て暫しイクの奴
+それ程慌てて何にする
+初稚姫の御司は
+後から厶るに違ひない
+まアボツボツと行くがよい
+もし過つて転けたなら
+弱味を見すまし高姫や
+妖幻坊が現はれて
+先度の様にえらい目に
+遇はしよつたら何とする
+さきにはスマートに助けられ
+又も今度はスマートに
+九死一生の所をば
+助けて貰ふ目算か
+それはあんまり虫がよい
+柳の下に二度三度
+鰌は居らぬと云ふ事を</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Do you understand? Have you forgotten the teaching to take the overturning of the front cart as a warning for the rear cart? There is a limit even to being a reckless warrior. Even if it is said that there is no retreat in the teachings of Ananai-kyō, it is something to think about, even a little, to rush forward recklessly.</p>
+          <p class="en-p">Ah, you fast-footed fellow. Your figure has disappeared. You ran along this mountain path like an arrow, but your eyes must have been clouded; you stumbled on a stone again, overturned with a thud, and while suffering, clutching your shin and groaning, you must surely be laughing and crying. Haste makes waste; take it one step at a time.</p>
+          <p class="en-p">I shall proceed slowly. 'Ottodokkoi,' this is a steep slope. There is no place to plant one's feet. If one were to slip by mistake, that would be the very place to cast away one's life. No matter how lowly one's status may be, this is an Ikumitama of Kami, an Ikimiya that Kami deigns to inhabit. People should not forget the responsibility of their own Jishin while standing in this world. No matter how great one's Mitama may be, a body is necessary to work in the Genjitsukai. To preserve both spirit and body in perfection and serve the great divine work of the Ōkami is the duty of a human being. Ah, Kannagara-tamachi-haemase. Blessed by the grace of Kami, the two of us are safe.</p>
+          <p class="en-p">Running down this steep slope, we shall wait for the appearance of Hatsuwakahime in the forest ahead, and by exhausting a thousand words and ten thousand phrases, we must do our utmost to be allowed to accompany her. Even if she does not listen, through the protection of the Imperial Ōkami, we shall borrow the body of Hatsuwakahime and use her Kototama to be permitted to accompany her. Whether the morning sun shines or clouds over, whether the moon waxes or wanes, if we do not achieve this purpose, we shall not return to the forest of the shrine, even if we two must die. Please have mercy on our sincerity and grant us permission, O Great Kami. We pray before your precious presence. 'Untokodokkoi, dokkoishiyo.'</p>
+          <p class="en-p">The road has gradually become gentler. Iku-san is likely resting his breath around here. He must have broken through the great barrier without incident. This, too, is entirely due to the pure and noble protection of Kami. I am happy and offer my gratitude.</p>
+          <p class="en-p">While singing this, he went 'tonton-ton' along the narrow valley path, keeping a distance of two or three chō, appearing and disappearing among the trees, and finally arrived at the foot of a large oak tree at the entrance to the mountain.</p>
+          <p class="en-p">Yotahiko: 'Hey, Saru, how is it? You are quite slow, aren't you? Even if you were wearing iron sandals, you should have been able to come faster. I have been here and cooling down, and since I still cannot see your figure, I was slightly worried that you might have met Yōgenbō on the way again and been defeated; if that were the case, I was going to pick up your bones. Well, well, I will praise you a little for arriving here safely. However, what is with your face? Isn't it pitch black?'</p>
+          <p class="en-p">Saru: 'When I was slipping out from behind the mansion, I thought it would be terrible if I were discovered, so I followed behind you wearing a charcoal sack, and perhaps the charcoal dust got on me. I feel as if everything around here has become gloomy.'</p>
+          <p class="en-p">Yotahiko: 'Hahaha, because you sweated while wearing a charcoal sack, the charcoal juice has blended well, and your face looks like a piece of calligraphy paper. But what happened to that charcoal sack?'</p>
+          <p class="en-p">Saru: 'Do you think I have the leisure to think about where I dropped it or threw it away? Because you abandoned me and ran off with all your might, I had to look ahead and watch my footing, and I truly had a hard time, but I finally arrived here while praying to Kami. Fortunately, there is a mountain stream flowing here, so I will go wash my face and hands, so please wait for me. There should still be quite a while before the Princess arrives.'</p>
+          <p class="en-p">Yotahiko: 'Wait, wait. That blackness of yours might be very convenient. Your face is so black that one cannot tell which way you are facing. With this, let us perform a kyōgen to move the Princess's heart and get her to let us accompany her successfully. I, too, would like to paint something on my face; is there not something convenient?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お前は合点してゐるか
+前車の顛覆するを見て
+後車の必ず戒めと
+なせとの教を忘れたか
+猪武者にも程がある
+三五教の御教に
+退却なしと云つたとて
+猪突猛進することは
+チツとは考へ物ぢやぞよ
+あああ足の早い奴
+姿が見えなくなりよつた
+此坂道を矢の様に
+走つて行つたが目がくらみ
+又もや石に躓いて
+スツテンドウと顛覆し
+向脛打つてウンウンと
+苦しみながら笑ひ泣き
+屹度してるに違ひない
+急げば廻れと云ふ事だ
+一足々々気をつけて</p>
+            <p class="ja-classical-line">俺はボツボツ進みませう
+「オツト、ドツコイ」きつい坂
+足を踏み込む所はない
+もし過つて辷つたら
+それこそ命の捨て所
+何程下賤の身なりとも
+ヤツパリ神の生身魂
+かからせ給ふ生宮だ
+人は持身の責任を
+忘れて此世にたてよまい
+何程身魂が偉くとも
+現実界に働くは
+如何しても体が必要だ
+霊肉ともに完全に
+保全しまつり大神の
+大神業に仕ふるは
+人の人たる務めなり
+ああ惟神々々
+神の恵の幸はひて
+吾等二人は恙なく</p>
+            <p class="ja-classical-line">此急坂を駆け下り
+初稚姫のおでましを
+行手の森で待ち迎へ
+千言万語を費して
+御供に供へまつるべく
+あらゆるベストを尽すべし
+それでも聞き入れ給はずば
+皇大神の御守護で
+初稚姫の体をかり
+其言霊を使用して
+御供を許させ給ふべし
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+此目的を達せねば
+吾等二人は死すとても
+祠の森へは帰らない
+吾誠心を憐れみて
+許させ給へ大御神
+珍の御前に願ぎまつる
+「ウントコドツコイ　ドツコイシヨ」</p>
+            <p class="ja-classical-line">そろそろ道が緩うなつた
+大方此処等でイク公が
+息を休めて居るだらう
+大難関も恙なく
+突破したるに違ひない
+之も全く神様の
+清き尊き御守護
+嬉しく感謝し奉る』</p>
+            <p class="ja-classical-line">と歌ひながら、細い谷道をトントントンとイクと二三町の間隔を保つて、木の間に見えつ隠れつ、漸くにして山口の樫の大木の麓に着いた。</p>
+            <p class="ja-classical-line">『おいサール、何うだ。随分足が遅いぢやないか。鉄の草鞋を穿いても、もちと早く来れさうなものだ。俺が此処に着いて冷たうなつてるのに、まだ貴様の姿が見えぬので、又も途中で妖幻坊に出会し、やられてゐるのぢやなからうか、もしさうだつたら貴様の骨なつと拾つてやらうと、聊か御心配をして厶つた所だ。まアまア無事に此処迄やつて来たのは聊か褒めてやる。併しながら貴様の顔は何だ。真黒気ぢやないか』</p>
+            <p class="ja-classical-line">『俺は館の裏から抜け出す時に、見つかつては大変だと思ひ、貴様の後から炭俵を被つて跟いて来たものだから、ヒヨツとしたら炭の粉が着いたのかも知れぬわ。何だか其処辺中が鬱陶しくなつて来た様な気がするわい』</p>
+            <p class="ja-classical-line">『ハハハハ、炭俵を被つて汗をかいたものだから、うまく炭汁の調和が出来て、貴様の顔は草紙のやうだ。然し其炭俵は何うしたのだ』</p>
+            <p class="ja-classical-line">『何処で落したか、捨てたか、そんな事を考へてる余裕があるかい。貴様が俺を捨てて一生懸命駆けだすものだから、先も見にやならず、足許も気をつけにやならず、本当に辛い目をして、神様を念じつつ漸く此処に着いたのだ。幸ひ此処に谷川が流れてゐるから、顔や手を洗つて来るから貴様待つて居て呉れ。まだ姫様がおいでになるのは余程間があるだらうからな』</p>
+            <p class="ja-classical-line">『待て待て、其黒いのが大変都合のよい事がある。貴様の顔はどつち向いてゐるか分らぬ位黒いぞ。之で一つ狂言をやつて姫様の心を動かし、うまく御供をさして頂くのだな。俺も一つ何か顔に塗りたいものだが、何ぞ都合の好いものはあるまいかな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sāru: 'Actually, I slipped the Oshiroi that Kaede-sama uses into my bosom without thinking and brought it here. I will give this to you, so you paint your entire face with it and become a white-faced Jiyōdono, while I, fortunately with this black face, will become a black-faced Jiyōdono, and we shall return to the original Yashiki... that is how we will bluff. If we do that, Hatsuwakahime-sama might return to the forest of the original shrine. If she does not return, you should immediately untie your obi, hang it swiftly on this oak tree, and hang your chin to swing to and fro.'</p>
+          <p class="en-p">Nanige: 'Oh, that is Omoshiro.'</p>
+          <p class="en-p">Taking the Oshiroi that was in Sāru's bosom and smearing it thickly onto his face, the white powder stuck to the beard growing all over his cheeks, and he ended up looking just like a Biyakuko. The Futari broke off suitable tree branches, held a fan in one hand, and regarding the twig in the other hand as a bell, they waited at the base of the oak for Hatsuwakahime to approach, having devised various Kufū to begin dancing the Sanbasō all at once as soon as her figure appeared.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『実は楓さまが使つてゐる白粉を、何気なしに懐へ捻込んでやつて来た。之を貴様にやるから、貴様は顔一面に塗つて、色の白き尉殿となり、俺は幸ひ此黒い顔で黒い尉殿となり、元の屋敷へお直り候……とかますのだ。さうすると初稚姫様が、もとの祠の森へ帰つて下さるかも知れぬ。もし帰つて下さらなかつたら、直様帯を解いて此樫の木にフイと引懸つて、腮を吊つてプリンプリンとやるのだな』</p>
+            <p class="ja-classical-line">『やあ、それは面白い』</p>
+            <p class="ja-classical-line">とサールの懐にあつた白粉をとり、顔にベタベタと塗りつけると、顔の頬一面に生えてゐる髯に白い粉がひつついて、まるで白狐の様になつて了つた。二人は恰好な木の枝を折り、片手に扇を持ち、片手に其梢を鈴と看做して、樫の元に初稚姫の進み来るを待ち構へ、姿が見えたら一斉に三番叟の舞を初めむものと、いろいろと工夫を凝らして待つてゐる。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c02.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 2: 哀別の Song [1338]</span>
+      </a>
+      <a href="c04.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 4: 俄狂言 [1340]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: Jewel 返志 [1343] - Volume 52 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 52 Table of Contents</a>
+      <span>Volume 52</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 52 &bull; Chapter 7</span>
+      <h1 class="chapter-title-en">Chapter 7: Jewel 返志 [1343]</h1>
+      <p class="chapter-title-ja">玉返志〔1343〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At the reception of Kogitayama, Bunsukejii-sama had his head severely cracked by the two, Hatsu and Toku, and subsequently fell ill with a fever, lying in bed and occasionally muttering delirious words, which caused great distress to the many believers and officials. Furthermore, Magahiko was absent, and the two, Hatsu and Toku, had fled, causing the operational organization to suddenly face the calamity of near-total suspension. Okiku, being a spirited woman, took on the dual roles of receptionist and shrine attendant, performing prayers for the sick who came to worship, or having them listen to sermons, and appearing at the reception desk, she was extremely busy to the point of dizziness. Okiku felt overwhelmed, her body feeling as if it were made of rope, and she began to grumble a little.</p>
+          <p class="en-p">Okiku: 'Ah, the role of the receptionist is nothing much; I always thought Bunsuke-sama was just drawing pictures for fun. I had assumed he was doing it out of boredom with nothing else to do, but when I try doing it myself, it is quite busy. I must perform Chinkon, and I must also offer prayers; truly, truly, it was hard work for Bunsuke-sama too. If only he would recover quickly; even though beautiful flowers are blooming everywhere like this, I cannot even go flower picking. On top of that, because Hatsuwakahime-sama has arrived, Matsuhime-sama is too busy to help me even a little, and Ochiyo-sama seems busy with the shrine's chores and such, so I have truly become fed up. If only Maga-sama would return at least; what a thoughtless fellow he is. Mankō-sama is also Mankō-sama; I wonder where on earth he is wandering. If he would just return, I would tease him to pass the time with a look as if he were love-struck. Ah, it cannot be helped; no matter how much I exert myself, the old women keep coming one after another, and Okiku-sama cannot bear it. Perhaps I should take a nap here for a while. With the days being so long and the nights so short, I am sleepy beyond measure. Even the camellia flowers are dozing off, dropping their heads one by one, startling the carp in the reservoir and dyeing the water surface deep red. Since I am a living being too, I suppose I cannot help but take a little rest.'</p>
+          <p class="en-p">Saying this to herself, she fell fast asleep. Just then, an old man of about sixty came trudging along, carrying a girl of twelve or thirteen on his back.</p>
+          <p class="en-p">Old Man: 'Yes, excuse me, I am a Shuda from the nearby neighborhood, but my granddaughter has gotten a sea bream bone or something stuck in her throat, and she is writhing in agony, on the verge of losing her breath. Would it be possible for you to remove it through the divine virtue of the gods?'</p>
+          <p class="en-p">Okiku, who had been dozing, suddenly opened her eyes.</p>
+          <p class="en-p">Okiku: 'Uniya, uniya, uniya, uniya, welcome. It is a very long day, is it not? What time is it now?'</p>
+          <p class="en-p">Old Man: 'It is still the hour of the horse. I have a matter I wish to request urgently, so I have come hoping for your assistance. This is my granddaughter, but something is stuck in her throat, and I am troubled; would it be possible to have you perform what is called Chinkon?'</p>
+          <p class="en-p">Okiku: 'Hey, very well, but I must ask for your address and name.'</p>
+          <p class="en-p">Old Man: 'Yes, I shall tell you my address and name later. As you can see, my granddaughter is in a critical situation, so I would like you to perform the prayer quickly.'</p>
+          <p class="en-p">Okiku: 'In that case, I shall make an exception, perform the procedure later, and make the request first. However, if I do not hear the child's name, I cannot make the request.'</p>
+          <p class="en-p">Old Man: 'That is quite reasonable. The girl's name is Takino.'</p>
+          <p class="en-p">Okiku: 'Yes, very well. Now, bring her here. If we pray to the Ōkami, He will save her immediately. Now, Ojii-sama, please come up.'</p>
+          <p class="en-p">Old Man: 'I am terribly sorry to ask, but as you can see, I am wearing straw sandals, so my feet are dirty. Please, I beg you to bring only the girl up.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">小北山の受付には、文助爺さまが初、徳の両人にしたたか頭をかち割られ、それから発熱して床につき、時々囈言を云ひ、大勢の信者や役員が頭を悩ましてゐる。そして魔我彦は不在なり、初、徳の両人は遁走し、俄に運用機関は殆ど停止の厄に遭うた。お菊は勝気な女とて、受付兼神殿係を兼務し、参詣して来る病人の祈願をなし、或は説教を聞かせ、又受付に現はれて、目も廻るばかりの多忙を極めて居つた。お菊はホツと持て余し、体は縄のやうになつて、チツとばかり愚痴り出した。</p>
+            <p class="ja-classical-line">『あああ、受付と云ふ役は何でもないものだ、遊び半分に何時も文助さまが絵を描いてゐる。之も用がなくて暇潰しにやつてゐるのだらうと思うて居つたが、中々自分がやつて見ると忙しいものだ。鎮魂もしてやらねばならず、御祈願もせなならず、ホンにホンに文助さまも御苦労だつたなア。何卒早く治つてくれれば可いに、これ丈そこら中に美しい花が咲いてるのに、花摘みに行く事も出来やしない。そこへ又初稚姫様が御越しになつたものだから、松姫さまは忙しいのでチツとも手伝うては下さらず、お千代さまもお宮のお給仕やなんかで忙しいさうだし、本当に厭になつちまつた。せめて魔我さまなつと帰つてくればよいのに、気の利かぬ奴だな。万公さまも万公さまだ、何処を一体彷徨いてるのだらう。帰つて来りや可いに、そしたら又惚れたやうな顔をして、退屈ざましに嬲つてやるのだけれどなア。あああ仕方がないワ、何程きばつた所で、先繰り先繰り婆、嬶がやつて来るのだから、お菊さまもやり切れない。一つここらで昼寝でもやつたらうかなア。此夜の短い日の永いのに、睡ぶつたくて仕様がないワ。椿の花でさへも居睡つて、ボトリボトリと首を抜かして溜池の鮒を脅かし、水面を真赤に染めてゐる。私だつて生物だから、チツとは休養もせなくちや叶ふまい』</p>
+            <p class="ja-classical-line">と独言を言ひながら、グツと眠つて了つた。そこへ、六十許りの爺が十二三の娘を背中に負ひ、トボトボとやつて来た。</p>
+            <p class="ja-classical-line">『ハイ、御免なさいませ、私はつひ近在の首陀で厶いますが、娘が喉に鯛の骨か何かを立てまして、苦しみ悶え、息が切れさうになつて居ります。何卒神様の御神徳で除つて頂くことは出来ますまいかなア』</p>
+            <p class="ja-classical-line">居眠つてゐたお菊はフツと目をさまし、</p>
+            <p class="ja-classical-line">『ウニヤ　ウニヤ　ウニヤ　ウニヤ、ようお出でなさいませ、随分日の永いこつて厶いますな。モウ何時ですか』</p>
+            <p class="ja-classical-line">『まだ四つ時で厶います。至急に御願ひ致したい事が厶いますので、お世話に預かりたいと思ひ参りました。之は私の孫で厶いますが、喉に何だか立ちまして、困りますので鎮魂とやらをして貰ふ訳には行きませぬだらうかな』</p>
+            <p class="ja-classical-line">『ヘー、宜しい、併し住所姓名を伺ひます』</p>
+            <p class="ja-classical-line">『ハイ、住所姓名は後から申上げます。此通り孫娘が危急存亡の場合で厶いますから、早く御祈願をして頂きたいもので厶います』</p>
+            <p class="ja-classical-line">『それなら特別を以て、先にする手続を後にし、お願ひ致しませう。併しながら此子の名を聞きませぬと、願ふ訳には参りませぬワ』</p>
+            <p class="ja-classical-line">『それは御尤もで厶います。娘の名は滝野と申します』</p>
+            <p class="ja-classical-line">『ハイ宜しい、サア此方へ連れて来なさい。大神様に願へば直様助けて下さいます。サ、お爺さま、お上りなさい』</p>
+            <p class="ja-classical-line">『甚だ申し兼ねますが、此通り草鞋をはいて居りますから、足が汚れて居ります。何卒娘だけ上げて下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">She took it down from her back. The girl rolled as if tumbling and went before the Saidan where Okiku was praying. Okiku wore purple hakama, and over her white Kimono, she put on a Kakui, held a Chiukei, and reverently performed the Sōjiyō of the Amatsunorito, concentrating on her Kiguwan. Despite Okiku’s Itsushiyōkenmei Kiguwan, shedding sweat like Netsutau, the effect did not easily manifest, and the girl only suffered and writhed more and more. When Ochiyo came down the Kaidan to the Uketsuke during a break in her duties, she saw a suspicious old man crouching in the corner of the garden with a pale face. Looking at the Shinden, she saw Okiku concentrating on her Itsushiyōkenmei Kiguwan. Seeing this, Ochiyo said,</p>
+          <p class="en-p">Ochiyo: 'The Uketsuke is completely Akiya. Well, I shall serve as a Dairi for a while.'</p>
+          <p class="en-p">Saying this, she sat down at the Uketsuke with a thud. Then, two men came up the Sakamichi, panting with a wheezing breath. These were the two, Iku and Saru.</p>
+          <p class="en-p">Iku: 'Gomen-nasai, I am Iku from the forest of the shrine, and this is Saru. Has Hatsuwakahime-sama by any chance stopped by with a dog called Smart?'</p>
+          <p class="en-p">Ochiyo: 'You have come at a good time. Please, have a Goitsupuku. She has been here since Yazen, but she seems to be having a lively Ohanashi with her mother. I will let you know when I am free, so please go and visit the shrines in this Keidai once.'</p>
+          <p class="en-p">Iku: 'Yes, thank you. In any case, let us go and pay our respects. Hey, Saru, she seems to be only twelve or thirteen, but she is quite composed. Since a small child like this can manage the Uketsuke at Kokitayama, it is quite something. It is a great difference from those teachers who act important, show their faces at the Uketsuke only to drink sake, use up paper claiming it is Fudesaki, and just wait for the sun to set.'</p>
+          <p class="en-p">Saru: 'Truly, it is admirable. Hey, Uketsuke-sama, what is your name?'</p>
+          <p class="en-p">Ochiyo: 'Why do you ask my name? You have no particular business with it, do you?'</p>
+          <p class="en-p">Saru: 'Oh, I am humbled; then I shall ask no more.'</p>
+          <p class="en-p">Iku: 'Hahaha, Saru, you were finally done in. Know your shame.'</p>
+          <p class="en-p">Saru: 'What are you saying, you? Did you not have the essential crystal ball taken by a dog? You thought it was a dog, but you were deceived by a tanuki, fed a fool's errand, and on top of that, you were showered with insults and abuse; you have disgraced yourself, so do not act so important.'</p>
+          <p class="en-p">Iku: 'That is mutual. Is there anyone who comes to a place like this and says such foolish things?'</p>
+          <p class="en-p">Ochiyo: 'My, you people have faces that look like the air has leaked out of them from somewhere. I heard you say just now that you had your ball taken; you are truly people like those who drop a marble, ho ho ho.'</p>
+          <p class="en-p">Iku: 'Oh, this is embarrassing, I am being struck on the mask, the gauntlet, and the torso. Oh, how scary, how scary. Come, Saru, let us go.'</p>
+          <p class="en-p">Saru: 'Hey, wait a moment. This old man is suspicious, is he not? He is trembling violently when he sees our faces.'</p>
+          <p class="en-p">Iku: 'Truly, he is a strange old man. Hey, old man, where on earth did you come from?'</p>
+          <p class="en-p">Old man: 'Please, do not say such things. My grandchild has caught a terrible illness and is suffering, so I have come here to ask for prayers. It will affect the illness, so you should hurry and go to the shrine.'</p>
+          <p class="en-p">Saru: 'Hey, Iku, in any case, greeting the gods is essential. Come, let us go.'</p>
+          <p class="en-p">Saying this, they left the Uketsuke and began to visit the many shrines one by one. Okiku was praying with Itsushiyōkenmei. The girl began to suffer and writhe more and more, and perhaps the fish bone stuck in her throat had fallen deeper; her breath was almost cut off, and she began to grab at the air in a trance. Ochiyo was startled, and when she approached, she saw a large tanuki's tail visible from the girl's buttocks. Thinking that this must be a monster, she immediately rushed outside and beckoned to the two, Iku and Saru, saying, 'Hurry, hurry.' The two, thinking that some urgent business had arisen, cut their pilgrimage in half, decided to pray later, and came back quickly. The figure of the old man who had been trembling beside the Uketsuke until now had vanished, and a beautiful woman of marriageable age was sitting there. Thinking that they had seen this woman somewhere before, the two followed Ochiyo to the Shinden and performed the Sōjiyō of the Norito. The girl began to suffer even more. At the moment Ochiyo tapped the girl's Senaka twice while singing the song of the heavenly numbers, there was a sharp sound, and what flew out was not a fish bone, but a crystal ball about one sun in diameter. Before everyone could be surprised and say 'Ah!', the girl instantly turned into an old tanuki, and the woman who had been at the Uketsuke also turned into a large tanuki, and they hid their figures over the mountain with Itsushiyōkenmei.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と背中から下した。娘は転げるやうにして、お菊が願ふ祭壇の前に行つた。お菊は紫の袴を着け、白い着物の上に格衣を羽織つて中啓を持ち、恭しく天津祝詞を奏上し、祈願を凝らした。お菊が熱湯の汗を流しての一生懸命の祈願も容易に効顕はれず、娘は益々苦しみ悶えるばかりである。お千代は用のすきまに階段を下つて受付へ来て見ると、怪しい爺が庭の隈に青い顔してしやがんでゐる。神殿を見れば、お菊が一生懸命に祈願を凝らしてゐた。お千代は之を見て、</p>
+            <p class="ja-classical-line">『受付はサツパリ空屋だ。どれ暫く私が代理を勤めておかうか』</p>
+            <p class="ja-classical-line">と云ひながら、受付にチヨコナンと坐つてみた。そこへ坂路を登つて、息をスースー喘ませながら二人の男がやつて来た。これはイク、サールの両人である。</p>
+            <p class="ja-classical-line">イク『御免なさい、私は祠の森のイク、サールといふ者で厶います。もしや初稚姫様はスマートといふ犬を連れてお立寄になつては居りませぬか』</p>
+            <p class="ja-classical-line">『それはようお出でなさいました。マア御一服なさいませ。夜前からお見えになつて居りますが、お母さまと何だか御話がはづんで居ります。何れ手があきましたら御知らせ致しますから、此境内のお宮様を一遍、御巡拝なさいませ』</p>
+            <p class="ja-classical-line">『イヤ有難う、兎も角参拝さして頂きませう。オイ、サール、まだ十二三らしいが随分しつかりしたものだね。小北山はこんな小さい子供で受付が出来るのだから、大したものだよ。イルやハルの奴、偉さうに受付面を晒しよつて酒ばかり喰ひ、筆先だとかいつて紙ばかり使ひよつて、日の暮れるのばかりを待つてゐるサボ先生とはえらい違だなア』</p>
+            <p class="ja-classical-line">『本当に感心だ。コレ受付さま、お前さまの名は何と云ひますか』</p>
+            <p class="ja-classical-line">『私の名を尋ねて何となさるのですか。別に用がないぢやありませぬか』</p>
+            <p class="ja-classical-line">『イヤもう恐れ入りました、それならモウお伺ひ致しませぬワ』</p>
+            <p class="ja-classical-line">『ハハハハ、サール、とうと、やられよつたな。恥を知れよ』</p>
+            <p class="ja-classical-line">『貴様なんだ、肝腎の水晶玉を犬にとられたぢやないか。犬かと思へばド狸につままれよつて、スコタンを喰はされ、おまけに悪口雑言を浴びせかけられ、よい恥をさらしたぢやないか、偉さうに言ふまいぞ』</p>
+            <p class="ja-classical-line">『そりやお互さまだ、こんな所へ来て、そんな馬鹿な事を云ふ奴があるかい』</p>
+            <p class="ja-classical-line">『何とマアお前さま達は、どこともなしに空気のぬけた面をしてますね。今聞きますれば玉を取られたとか仰有いましたが、本当にラムネの玉落みたいなお方ですねえ、ホホホ』</p>
+            <p class="ja-classical-line">イク『ヤ、此奴ア恐れ入ります、お面、お小手、お胴といかれてけつかる。ヤアこはいこはい、サ、サール行かう』</p>
+            <p class="ja-classical-line">『オイ一寸待て、此爺さまは、怪しいぢやないか。俺達の顔を見るとビリビリ慄うてゐるぞ』</p>
+            <p class="ja-classical-line">『ホンにけつ体な爺さまだなア。オイ爺さま、お前一体何処から参つたのだい』</p>
+            <p class="ja-classical-line">『何卒、そんな事云つて下さるな。孫が大変な病気にかかつて苦しんで居るので、今ここへ願つて貰ひに来たのだよ。病気にさはるから、お前さまは早くお宮さまへ参つて来なさい』</p>
+            <p class="ja-classical-line">『オイ、サール、兎も角神様へ御挨拶が肝腎だ、サ参らう』</p>
+            <p class="ja-classical-line">と云ひながら、受付を立つて沢山の宮を一々巡拝し始めた。お菊は一生懸命に頼んでゐる。娘は次第に苦しみ悶えだし、喉につまつた鯛の骨はますます深くおち込んだものか、息が殆どつまり、無我夢中になつて空を掴み出した。お千代は吃驚して、側へよつて見れば、大きな狸の尾が娘の尻からみえてゐる。此奴は化物に相違ないと、早速外へ飛出し、イク、サールの両人を「早く早く」と手招きした。両人は何事か急用が出来たらしいと、巡拝を半にして打切り、後から拝む事とし、スタスタと帰つて来た。今まで受付の横に慄うてゐた爺の姿は何時しか消えて、妙齢の美人が坐つてゐる。二人はどつかで見た事のある女だと思ひながら、お千代に跟いて神殿に進み、祝詞を奏上した。娘は益々苦しみ出した。お千代は娘の背中を、天の数歌を歌うてポンポンと二つ叩いた拍子に、クワツと音がして飛出したのは鯛の骨でもなく、直径一寸許りの水晶玉であつた。一同はアツと驚く間もなく、娘は忽ち古狸となり、受付に居つた女も亦同じく大狸となつて、一生懸命に山越しに姿を隠して了つた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Iku: 'Hey, you Chikushiyō, look at your state! You tricked me so well, stole the Suishiyōdama, and now that Shinbatsu has struck you and it is stuck in your throat, you have no Shikata but to transform and come here to be saved, haven't you? Hey, I must be careful this Kondo. Hey, O-Chiyo-sama, thanks to you, the treasure has returned to its rightful place; I am Arigata. Iku offers you his Orei many times over.'</p>
+          <p class="en-p">Chiyo: 'Anata, are you a relative of the tanuki? Why on earth did you let that jewel be taken again?'</p>
+          <p class="en-p">Iku: 'Alas, it is embarrassing to speak of, but unless I explain the Yurai of how this jewel came into my hands and the Innen of how it was taken, your doubts will not be cleared. I shall explain the Tenmatsu in detail.'</p>
+          <p class="en-p">He told the Shiyōsai of the Monogata of how he was deceived by the tanuki and had the Suishiyōdama taken. O-Chiyo and O-Kiku fell over laughing.</p>
+          <p class="en-p">O-Kiku: 'Oh my, how Baka! You asked a tanuki for Gokitau. I was wondering why your ears were moving. Thanks to O-Chiyo-sama, both the tanuki and I were saved. If I had continued to pray any longer, I would have run out of breath.'</p>
+          <p class="en-p">Saru: 'Oi, Iku, it is Kennon to leave it in your possession. This time I shall carry it, so hand it over to Kochira.'</p>
+          <p class="en-p">Iku: 'Me-metsusau! Is it not fine if I keep it? It makes me nervous to leave it with a hasty person like Kisama. Well, it is safer to leave things to an Otona, not a Kodomo.'</p>
+          <p class="en-p">Saru: 'Hen, that is what you Otsushiya. Dōzo, I pray you supervise it carefully so it is not taken by the tanuki again. In any case, let us offer our Orei before the gods.'</p>
+          <p class="en-p">The four formed a line, and with sincere hearts, they chanted prayers of gratitude with all their might.</p>
+          <p class="en-p">Iku: 'The treasure jewel stolen by the specter / Has returned to my hands by the grace of God.'</p>
+          <p class="en-p">Saru: 'Because Iku has such a foolish face / The tanuki has plucked his eyebrows.'</p>
+          <p class="en-p">Iku: 'Do not say Baka, it was because you were possessed by a Magatsu-kami / And mistook her for a hanging woman.'</p>
+          <p class="en-p">Saru: 'Slapped on the cheek by the tanuki / What a funny fellow who fell into the rice field.'</p>
+          <p class="en-p">Iku: 'You may speak ill of others as much as you like / But you have forgotten the path of good words and beautiful language.'</p>
+          <p class="en-p">Saru: 'Do not say Baka, you were the one who had your head slapped / For trying to grab my testicles.'</p>
+          <p class="en-p">Iku: 'Slapped again by the man who slapped you / Saru the Baka is crying now.'</p>
+          <p class="en-p">Saru: 'If you are going to keep spouting such insolence / Hand the Suishiyōdama over to me.'</p>
+          <p class="en-p">Iku: 'It is precisely because it is the spirit of crystal / That I am made to guard the Suishiyōdama.'</p>
+          <p class="en-p">Saru: 'You fool who let the jewel slip away / Do not commit sin by holding the Suishiyōdama.'</p>
+          <p class="en-p">Iku: 'This jewel has returned through the protection / Of the great gods of the northern mountains and the grace of us two. / However, Saru, change your heart / If your sins stain the jewel. / If it becomes stained, this jewel will flee again / Disliking the jewel of Saru once more.'</p>
+          <p class="en-p">O-Chiyo: 'From which god did you receive / The divine spirit of the crystal?'</p>
+          <p class="en-p">Iku: 'This jewel is a gift from the Hinodewake / A jewel that shall never be parted with for eternity.'</p>
+          <p class="en-p">O-Chiyo: 'No one says to let it go, but do not let it be taken / By the tanuki again through your own negligence.'</p>
+          <p class="en-p">Iku: 'These are words I never expected to hear / I shall never let it go for ten thousand generations.'</p>
+          <p class="en-p">O-Kiku: 'I am worried about the future / Of these two men with faces like jewel-losers. / It is no wonder that the spirit of Hatowakahime-kami / Dislikes these two. / They have a style that I do not like at all / Perhaps they were among the Brahmin army.'</p>
+          <p class="en-p">Iku: 'Unbecoming of a woman, you speak so glibly / And mock an Otona to the bone.'</p>
+          <p class="en-p">Saru: 'Since I was born a man / I cannot let myself be outdone by a woman. / O maiden, it is too much / To mock a rough man.'</p>
+          <p class="en-p">O-Kiku: 'I have not a grain of intent to mock you / But somehow, it becomes funny.'</p>
+          <p class="en-p">O-Chiyo: 'O-Kiku-sama, looking at their faces / I also thought they were empty-headed fellows. / If they are men who cry and wail / After having the jewel taken by a tanuki.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">イク『ヤア畜生、ザマを見い、ウマク俺をチヨロまかして、水晶玉を盗みよつて、神罰が当つて喉につまり、仕方がないものだから、こんな所へ化けて助けて貰ひに来よつたのだな。ヤア今度は確かり気を付けなくちやならないぞ。ヤア娘さま、貴女のお蔭で宝が元へ帰りました、有難う厶います。イク重にも御礼申します』</p>
+            <p class="ja-classical-line">千代『貴方、狸と御親類で厶いますか、どうして又あの玉を取られたのです？』</p>
+            <p class="ja-classical-line">『イヤ、お話し申せば恥かしう厶いますが、此玉の手に入つた由来から、取られた因縁を申し上げねばお疑ひが晴れますまい。それでは逐一申上げます』</p>
+            <p class="ja-classical-line">と狸に騙されて水晶玉を取られた顛末を詳細に物語つた。お千代とお菊は転けて笑つた。</p>
+            <p class="ja-classical-line">『アレマア、馬鹿らしい、狸に御祈祷を頼まれたのだワ。何だか耳が動くと思うて居つたのよ。お千代さまのお蔭で、狸も助かり、私も助かりましたワ。モウ此上お祈りをしようものなら、息が切れる所でしたワ』</p>
+            <p class="ja-classical-line">『オイ、イク、貴様に持たしておくと、どうも剣呑だ、今度は俺が持つて行くから此方へ渡せ』</p>
+            <p class="ja-classical-line">『メメ滅相な、俺が持つて居つたら可いぢやないか。貴様の様な慌て者に持たしておくと気が気でならぬワ。マア子供は大人に一任した方が安全だよ』</p>
+            <p class="ja-classical-line">『ヘン、仰有いますワイ。何卒狸に取られぬ様に確かり御監督を願ひますよ。何は兎もあれ、神前に御礼を申しませう』</p>
+            <p class="ja-classical-line">と四人は横縦陣を作り、赤心を籠めて一生懸命に感謝祈願の詞を奏上した。</p>
+            <p class="ja-classical-line">イク『妖怪に騙し取られた宝玉も
+神の恵に吾手に還れり』</p>
+            <p class="ja-classical-line">サール『イクの奴まぬけた面をしてる故
+狸の奴に眉毛よまれし』</p>
+            <p class="ja-classical-line">イク『馬鹿云ふな貴様が曲津につままれて
+首つり女と見違へた故よ』</p>
+            <p class="ja-classical-line">サール『横面を狸の奴に擲られて
+田圃に落ちし可笑しき奴かな』</p>
+            <p class="ja-classical-line">イク『イクらでも人の悪口つくがよい
+善言美詞の道を忘れて』</p>
+            <p class="ja-classical-line">サール『馬鹿云ふな俺の睾丸握らうと
+思うて頭擲られた癖に』</p>
+            <p class="ja-classical-line">イク『擲りたる男に又も擲られて
+サールの馬鹿がベソをかくなり』</p>
+            <p class="ja-classical-line">サール『其様な減らず口をば叩くなら
+水晶玉をこつちへ渡せよ』</p>
+            <p class="ja-classical-line">イク『水晶の霊なればこそ水晶の
+玉の守護をさせられてゐる』</p>
+            <p class="ja-classical-line">サール『玉脱けの間抜男が水晶の
+玉を抱いて罪を作るな』</p>
+            <p class="ja-classical-line">イク『この玉は小北の山の皇神の
+守りと二人の恵にかへれり。
+さりながらサール心を持ち直せ
+お前の罪が玉を汚せば。
+汚れなば又この玉は逃げて行かむ
+サールの玉をまたも嫌ひて』</p>
+            <p class="ja-classical-line">お千代『水晶の瑞の御霊は何神に
+頂きましたか聞かまほしさよ』</p>
+            <p class="ja-classical-line">イク『この玉は日の出神の賜ぞ
+いや永久に離されぬ玉』</p>
+            <p class="ja-classical-line">お千代『放せとは誰も言はねど油断から
+狸の奴に取られ玉ふな』</p>
+            <p class="ja-classical-line">イク『これは又思ひもよらぬお言葉よ
+万劫末代放しは致さぬ』</p>
+            <p class="ja-classical-line">お菊『玉脱けのやうな面した二人男の
+この行先が案じられける。
+初稚姫神の命は此二人を
+嫌ひ玉ふも宜よとぞ思ふ。
+どことなく虫の好かないスタイルだ
+バラモン軍に居つた人だらう』</p>
+            <p class="ja-classical-line">イク『女にも似合はずよくもベラベラと
+大人なぶりの骨嬲りするよ』</p>
+            <p class="ja-classical-line">サール『吾とても男と生れた上からは
+女に負けて居れるものかい。
+乙女子よがんぜなしとて余りだよ
+荒男をば嘲弄するとは』</p>
+            <p class="ja-classical-line">お菊『嘲弄する心は微塵もなけれども
+何とはなしに可笑しくぞなる』</p>
+            <p class="ja-classical-line">お千代『お菊さま私も二人の顔をみて
+空気ぬけ野郎と思ひましたよ。
+ド狸に玉を取られてメソメソと
+吠面かわく男なりせば』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sāru: 'I did not know that such a glib-tongued Otomego existed, and thus I came to visit.'</p>
+          <p class="en-p">Iku: 'This Otome does not seem to be one to be handled by ordinary means; her background of being raised by chivalrous commoners is showing.'</p>
+          <p class="en-p">Ochiyo: 'You are a Bakamono who does not know of me, O-Chiyo, who has Matsuhiko and Matsuhime-sama as parents.'</p>
+          <p class="en-p">Iku: 'Oh, this is a surprise; are you the Jiyōsama of Matsuhiko-sama? I have committed a Goburei, not knowing who you were.'</p>
+          <p class="en-p">Ochiyo: 'Since I shall not blame you if you apologize, you had better be prudent from now on.'</p>
+          <p class="en-p">Iku: 'I am made an Ōbaka by a tanuki, laughed at by an owl, and once again I am playing the fool.'</p>
+          <p class="en-p">Sāru: 'Ahahaha, I am so astonished that I cannot speak. Bakemono appear Anatakonata. Try applying saliva to this woman's eyebrows; surely a Shitsupo will be attached.'</p>
+          <p class="en-p">Ochiyo: 'With a face like an Omoshiro tanuki, it is Atarimahe that you should be pinched.'</p>
+          <p class="en-p">Sāru: 'To be made a fool of by two Otome to this extent, where can a man stand with dignity?'</p>
+          <p class="en-p">Iku: 'More than anything, if the Suishiyōdama can be obtained, I shall endure whatever is said to me. It is precisely because there are such Tenbamusume that a Baketanukiyarau has revealed its Shitsupo. Ochiyo-sama, thanks to you, the Haugiyoku has been returned, so I shall bow to you.'</p>
+          <p class="en-p">Ochiyo: 'O-Kiku-sama, what kind of Kami is it that gave the jewel to such Koshinukeotokora?'</p>
+          <p class="en-p">O-Kiku: 'It must be the status of a Giritenjiyō Hinodewake Kami, if it is a Kami that hands it over without even examining the soul. A true Hinodewake Kami would never hand it over to such a tonma man.'</p>
+          <p class="en-p">While mocking each other in this way, they gathered at the reception desk to moisten their throats with hot water, and from there, the two began to visit each shrine.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">サール『これ程に口の達者な乙女子が
+居るとは知らず訪ね来しよな』</p>
+            <p class="ja-classical-line">イク『この乙女一筋縄では行かぬらし
+侠客育ちの生地が見えてる』</p>
+            <p class="ja-classical-line">お千代『松彦や松姫さまを親に持つ
+お千代の方を知らぬ馬鹿者』</p>
+            <p class="ja-classical-line">イク『これはしたり松彦さまの嬢様か
+知らぬ事とて御無礼しました』</p>
+            <p class="ja-classical-line">お千代『あやまれば別に咎めはせぬ程に
+これからキツト謹しむがよい』</p>
+            <p class="ja-classical-line">イク『狸には大馬鹿にされ梟には
+笑はれ又も馬鹿をみるかな』</p>
+            <p class="ja-classical-line">サール『アハハハハ呆れて物が言はれない
+彼方此方に化物が出る。
+この女眉毛に唾をつけてみよ
+キツト尻尾がついて居らうぞ』</p>
+            <p class="ja-classical-line">お千代『面白い狸のやうな面をして
+つままれるのは当然ぞや』</p>
+            <p class="ja-classical-line">サール『どこまでも二人の乙女に馬鹿にされ
+どこで男の顔が立たうか』</p>
+            <p class="ja-classical-line">イク『何よりも水晶玉が手に入らば
+何と云はれても辛抱せうかい。
+此様なお転婆娘があればこそ
+尻尾を出した化狸野郎。
+お千代さまお前のお蔭で宝玉が
+返つたのだから拝みますぞや』</p>
+            <p class="ja-classical-line">お千代『お菊さまこんな腰抜男等に
+玉を与へた神は何神』</p>
+            <p class="ja-classical-line">お菊『義理天上日の出神の格だらう
+魂も調べず渡す神なら。
+真正の日の出神は此様な
+頓馬男に渡す筈なし』</p>
+            <p class="ja-classical-line">と互に揶揄ひながら、受付に集まつて白湯に喉を潤ほし、それより二人は各神社を参拝し始めた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c06.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 6: 梟の笑 [1342]</span>
+      </a>
+      <a href="c08.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 8: 巡拝 [1344]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
