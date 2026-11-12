@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: Mountain 下り [1175] - Volume 44 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 44 Table of Contents</a>
+      <span>Volume 44</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 44 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: Mountain 下り [1175]</h1>
+      <p class="chapter-title-ja">山下り〔1175〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Harukuniwake, Tamakuniwake, and their party are gathered before a sunny shrine, listening to Yoru's account.</p>
+          <p class="en-p">Harukuniwake: 'Yoru-sama, it seems General Ranch is setting up a camp at Ukigahara with the intention of fighting a war of attrition. Why on earth are they not advancing in full force to cross Kajikatauge?'</p>
+          <p class="en-p">'Not at all, General Ranch has fallen into a predicament where his advance and retreat are both deadlocked, you see. As long as you honorable ones remain here like this, there is no way to break through this pass. Therefore, having no choice, he set up camp at Ukigahara and dispatched a hurried messenger to the capital of Haruna with this report: "The enemy's army of several hundred thousand has rushed upon us; to advance blindly is to labor without merit. For a while we shall pitch camp at Ukigahara and plan to make the enemy surrender naturally." Yet, seeing that there is no prospect of ultimate victory, General Oniharuwake, accompanied by General Kumehiko, claims it is to offer explanations to Great Lord ōkuninushi, but in truth they are to cross the land of Fusa and advance toward the Golden Mountain of Jerusalem.'</p>
+          <p class="en-p">'What? Advance to the Golden Mountain, you say? That is news to me indeed. Tamakuniwake-sama, we cannot simply remain here like this. Our mission is to guide and reconcile the Great Lord ōkuninushi of the land of Haruna, but since Terukuniwake and Golden Princess have already gone forth as the vanguard, you must hold this Kajikatauge and block the enemy's assault. We shall break through the enemy's encirclement and head to the rescue of Jerusalem. Now, Ikozakohime-sama, what do you think?'</p>
+          <p class="en-p">'Indeed so, this is by no means an ordinary problem, let us ask the God for guidance. You must decide according to that divine oracle.'</p>
+          <p class="en-p">'Very well, you have thought of a splendid place. Then, please become the priestess from now on. I shall perform the shinji (divine divination).'</p>
+          <p class="en-p">'Since I have stopped being a medium for a while, I am not sure how it will go, but anyhow let us ask the Gods.'</p>
+          <p class="en-p">So saying, Ikozakohime spreads a straw raincoat upon the earth, sits squarely upon it, closes her eyes, joins both hands, and lets her spirit wander into the cosmos. After a while, there appears to be a divine spirit response, and Ikozakohime's face begins to shine ever more radiantly. Harukuniwake and the others all start with a gasp, bow their heads low, and are filled with awe. Ikozakohime breaks the silence and says,</p>
+          <p class="en-p">'I am the spirit of Kuniteruhime. You, the divine officials Harukuniwake and Tamakuniwake, seem to be hesitating regarding your course of action concerning the fact that Oniharuwake, a Brahmin, is leading an army to advance toward the Golden Mountain. Now, embodying the divine heart of the Great God Kami-Susanoo, I shall proclaim and transmit everything unto you. From here on, Harukuniwake, together with Mankō, Harukō, Gosankō, Matsukō, and Ryūkō, shall break through General Ranch's camp, cross Persia, and advance to the Golden Mountain. Oniharuwake's army has not yet gone far; if we pursue them now, it is hard to tell whether we might perhaps intercept and stop them midway. Furthermore, Tamakuniwake shall build the dwelling of the Land's Ancestor Great God and Toyokunihime-no-Mikoto right here, establish the gardens of teachings side by side, and guard Kajikatauge, which must serve as the throat of the Saien no Yakata (Mansion of the Purified Garden). Come, starting tomorrow, fell the trees of the forest, level the earth, and engage in the construction. Since carpenters, plasterers, assistants, stonemasons, and others are already on their way hither from the Saien no Yakata, Tamakuniwake shall remain here and nurse your eyes to health. Moreover, Ikozakohime, together with Imokozahime, shall remain and tend to her husband until his eye disease is completely cured—such is the divine proclamation of the Great God. I have nothing more to proclaim or transmit to you with this, farewell.'</p>
+          <p class="en-p">Leaving these words behind, the divine spirit returns. Matsu, Ryū, and the others, who had surrendered from the Brahmin teachings, along with Iru, Iku, Sāru, Yoru, Teru, and Haru, are struck by the majestic and awe-inspiring divine possession of Ikozakohime, straighten their collars, hold their breath, and cower in fear.</p>
+          <p class="en-p">'According to the divine oracle just given, we must somehow intercept and stop Oniharuwake's army. We shall set out without a moment's delay from now on. Pray, do you act according to the divine oracle, take on the role of the commandant here, and perform the duty of guarding the throat, even though you will be busy with the construction for a while. First of all, smashing General Ranch's camp to smithereens and displaying divine power is our joy, and we go forth with high spirits. Tamakuniwake-sama, do take good care of yourself. Ikozakohime-sama, Imokozahime-sama, and all the rest, farewell then.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">治国別、玉国別の一行は日当りのよき祠の前に集まつてヨルの話を聞いて居る。</p>
+            <p class="ja-classical-line">治国『ヨルさま、さうしてランチ将軍は、浮木ケ原に陣屋を構へ持久戦をやる心算だな。なぜ大挙して河鹿峠を渡らないのだらうか』</p>
+            <p class="ja-classical-line">『どうしてどうして、ランチ将軍は進退維谷まると云ふ羽目に陥つて居るのですよ。貴方方が此処にかうして居られる限り、この峠は突破する事は出来ないのです。そこで止むを得ず浮木ケ原に陣屋を構へハルナの都に急使を馳せて、「敵の軍勢数十万押寄せ来れり、徒に進まば労して功なし、暫く浮木ケ原で陣を構へ敵を自然に降伏せしむる計劃なり」との報告をやつたのですよ。併し到底勝利の見込がつかぬので、鬼春別将軍は久米彦将軍を伴ひ、大黒主様に対し言ひ訳のためだと云つて、実の処はフサの国を渡り、エルサレムの黄金山に向つて進軍する事になつて居ります』</p>
+            <p class="ja-classical-line">『何？　黄金山へ進軍するとな、それや初耳だ。玉国別さま、これやかうしては居られますまい。吾々はハルナの国の大黒主を言向け和すのが使命だが、先鋒隊として照国別、黄金姫が出て居られるのだから、貴方は此の河鹿峠を扼し、敵の襲来を喰ひ止めなさいませ。吾々は敵の囲みを突破してエルサレムの救援に向ひませう。なア五十子姫さま、どンなものでせう』</p>
+            <p class="ja-classical-line">『左様で厶りますなア、これは容易ならざる問題ですから、一つ神様に伺つて見ませう。其神勅によつてお極めなさいませ』</p>
+            <p class="ja-classical-line">『なる程よい処へお気がつきました。それなら、これから貴女神主となつて下さい。私が審神を致しますから』</p>
+            <p class="ja-classical-line">『暫く霊媒はやめて居ましたからどうか存じませぬが、兎に角神様に願つて見ませう』</p>
+            <p class="ja-classical-line">と云ひながら、五十子姫は大地に蓑を敷きて其上に端坐し、目を閉ぢ両手を組み、霊魂を宇宙に馳せける。暫くありて神霊感応ありしと見え、五十子姫の面部は益々麗しく輝き初めたり。治国別外一同は、ハツと其場に頭を下げ畏まる。五十子姫は口を切つて、</p>
+            <p class="ja-classical-line">『我は国照姫の命なり。汝治国別、玉国別の神司、バラモン教の鬼春別が黄金山へ軍隊を引きつれ進撃する件に関し去就に迷うて居るやうだが、我は今神素盞嗚大神の御心を体して汝に一切を宣り伝ふべし。これより治国別は万公、晴公、五三公、松公、竜公と共に、ランチ将軍の陣営を突破し、ペルシヤを越えて黄金山に進めよ。鬼春別の軍隊は未だ遠くは往かじ、今追跡せば、或は途中にて喰ひとめ得むやも計り難し。又玉国別は此処に国祖大神、豊国姫命の御舎を造り且つ教の庭を立て並べ、斎苑の館の咽喉たるべき河鹿峠を守るべし。サア明日より森の樹を伐採し土引きならし建築に従事せよ。早くも斎苑の館よりは、大工、左官、手伝、石工など此方に向つて急ぎ来る途中なれば、玉国別は此処に留まつて眼の養生を致されよ。又五十子姫は今子姫と共に夫の眼病全治する迄留まつて介抱すべしとの大神の御宣示である。我はこれにて汝に宣べ伝ふる事なし、サラバ』</p>
+            <p class="ja-classical-line">と一言を残し、神霊は帰らせたまひぬ。バラモン教から帰順した松、竜を初めイル、イク、サール、ヨル、照、晴の面々は、五十子姫の荘厳なる神懸の威勢に打たれて襟を正し、息を凝らし畏縮し居たりける。</p>
+            <p class="ja-classical-line">『唯今の御神勅によれば、どうしても吾々は鬼春別の軍勢を喰ひ止めなければなりませぬ。これから時を移さず出陣致しませう。何卒貴方は御神勅通り、此処の探題となつて咽喉扼守の御用をして下さい、暫くは御造営でお忙しい事でございませう。まづ第一にランチ将軍の陣営を、メチヤメチヤに踏み砕き、神力を現はすのを楽しみに、勇ンで参ります。玉国別様、何卒御自愛なさいませ。五十子姫様今子姫様其他御一同左様ならば』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Even before those words were finished, he strode briskly down the steep slope, leading his five companions. Harukuniwake sang the Sendenka along the path.</p>
+          <p class="en-p">'He who formed and solidified this world,
+The true Kami has descended to earth,
+Sweeping away and purifying with His breath
+The cloud and mist blocking the four quarters,
+Distinguishing and establishing zenshinjiyashin,
+Reaching down to aohitogusa, birds and beasts,
+And even down to the grasses and trees,
+How noble is His saving grace!
+I am a joyful sendenshi,
+Obeying the imperial edict of Kamususanōnōokami,
+Advancing forward upon the seito of magakami,
+Going up and down the steep slope of Kajikatauge,
+Chasing away and scattering the numerous attacking enemies,
+Encountering in an unexpected place
+My younger brother for whom I have pined day by day,
+My yūki increased a hundredfold compared to usual,
+At last rushing forward here against the attacking forces of the Brahmans,
+
+The time has truly come now
+For Ananai-kyō to manifest
+Its unique daishintoku!
+Whether the Asahi shines or clouds over,
+Whether the moon waxes or wanes,
+Even if the great earth should sink,
+Shall the sendenshi of the path of truth
+Leave the people of the world
+Who fall into the floating rapids and suffer
+Without saving them?
+Directing all evil spirits
+Toward the living Kototama,
+A sendenshi proceeding by letting them live,
+No matter how many tens of thousands
+Of the army of Kishunbetsu there may be,
+Striking out the living Kototama
+Granted by the Imperial Kami,
+Without leaving a single one, we shall save them
+Into the true path of the imperial Kami!
+Be courageous, be courageous, all be courageous,
+Advance, advance, now advance!
+
+Though Kajikatauge is rugged,
+Though tigers and wolves rage fiercely,
+Since there is the protection of Kami,
+There is nothing in the heavens and earth to fear!
+Ah, Kamnagara, Kami, Kami,
+May the blessings of Kami favor us,
+And grant that the path ahead of our party
+Be extremely smooth and peaceful,
+Guiding us swiftly, and returning our words of report
+Before the august presence of Kami,
+Praying before Your august presence!
+Ah, Kamnagara, Kami, Kami,
+May Your august spirit multiply and flourish!'</p>
+          <p class="en-p">Mankō descended the steep slope, keeping time with his foot and singing.</p>
+          <p class="en-p">'Winds blow wild on Mount Kajika,
+Upon the steep slope famous throughout the world,
+Setting out from the mansion of the Saien,
+The sendenshi Harukuniwake,
+Accompanied by Harukō and Gosankō,
+How valiant is their advance!
+At last climbing up to the peak,
+Bathed in the moonlight,
+As we descend facing south,
+What has come is a band of cowards
+Of the Brahman cowardly samurai!
+Untoko-dotsukoi, they have come, haven't they?
+This is the time to test my power,
+To try out rapid-firing bursts
+Of the living Kototama upon the mountain path,
+Spreading wide my arms and striking out
+Is the Kototama of infinite divine power!
+Filled with fear, the enemy army at once
+Flees in disorder,
+Untoko-dotsukoi, dotsukoishiyo!
+
+How amusing is that style,
+Taking advantage of our victory down the steep slope,
+While singing the sacred poems of Kami,
+Untoko-dotsukoi, dotsukoishiyo!
+Keeping time with our feet,
+When we come to the grove of the shrine,
+Upon hearing that Tamakuniwake's sendenshi,
+Itako-san, had been seized by the enemy army,
+Feeling various heartaches at the clutter of it all,
+At last by the divine grace of Kami,
+Yesterday's enemy is already today
+Our ally, Matsukō-san,
+When I heard he was Harukuniwake's younger brother,
+The astonishment was as though the mountains were collapsing!
+Untoko-dotsukoi, this slope
+Has gradually become more rugged,
+Harukō, Gosankō, be careful,
+Matsukō and Ryūkō, the same applies to you!
+
+Watch your toe-tips,
+Come down so that you do not slip!
+Your left hand is a valley a thousand fathoms deep,
+Your right hand is a sheer precipice!
+Those monkey fellows are crying
+With bizarre voices, kiat-kiat!
+Hey, hey, you brute monkey fellows,
+This is different from Tamakuniwake!
+The sendenshi of peerless divine power,
+Harukuniwake is passing through!
+If you display any unworthy behavior,
+This Mankō will not overlook it!
+Go away quickly and run for your lives,
+This is no stage for the likes of you!
+Ouch, ouch, ouch, ouch, I slipped again,
+I grazed the skin of my heel!
+Whether the Asahi shines or clouds over,
+Whether the moon waxes or the moon wanes,
+Even if the great earth should sink,
+We of Ananai-kyō,
+
+Clad in the power of Kami within our bodies,
+Shall drive away and scatter
+The ugly spirits of the Yamata no Orochi
+Lurking in the castle of Haruna,
+To the mountain ridges and river rapids,
+Facing the Golden Mountain
+Towering in the capital of Chin in Jerusalem,
+Directing our words one and all
+Against the army of Kishunbetsu,
+Shall our party fail to transmit
+The gospel of the imperial land?
+Protect us abundantly,
+O spiritual lands of Takamanohara,
+And all the Kami gathered in the heavenly paradise,
+Pitying the peerless loyal sincerity
+Of us, our party,
+Swiftly returning our words of report
+Before the severe august presence of Kamususanōnōokami,
+Pray, Kamnagara!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と云ふより早く、スタスタと五人の伴を引き連れ急坂を下りゆく。治国別は道々宣伝歌を歌ふ。</p>
+            <p class="ja-classical-line">『此世を造り固めたる
+誠の神が地に下り
+四方に塞がる雲霧を
+息吹に払ひ清めつつ
+善神邪神を立てわけて
+蒼生や鳥獣
+木草のはしに至るまで
+救はせたまふ尊さよ
+吾は嬉しき宣伝使
+神素盞嗚大神の
+勅畏み曲神の
+征途に上り進み往く
+河鹿峠の急坂を
+上りつ下りつ攻め来る
+数多の敵を追ひ散らし
+日頃焦がれし弟に
+思はぬ処で巡り遇ひ
+勇気も日頃に百倍し
+いよいよ此処にバラモンの
+寄手に向つて突喊し</p>
+            <p class="ja-classical-line">三五教が独特の
+大神徳を発揮する
+時こそ正に来りけり
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+誠の道の宣伝使
+浮瀬に落ちて苦しめる
+世人を救はでおくべきか
+悪の霊を悉く
+生言霊に言向けて
+生かして進む宣伝使
+鬼春別の軍勢は
+たとへ幾万ありとても
+皇大神の与へたる
+生言霊を打ち出し
+一人も残さず皇神の
+誠の道に救ふべし
+勇めよ勇め皆勇め
+進めよ進めよ　いざ進め</p>
+            <p class="ja-classical-line">河鹿峠は嶮しとも
+虎狼は猛るとも
+神の守りのある上は
+天下に恐るるものはなし
+あゝ惟神々々
+神の恵の幸はひて
+吾一行の往く先を
+いと平らけく安らけく
+守らせたまひて逸早く
+神の御前に復り言
+申させたまへ惟神
+貴の御前に願ぎまつる
+あゝ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">万公は急坂を下りながら足拍子を取つて歌ふ。</p>
+            <p class="ja-classical-line">『風吹き荒ぶ河鹿山
+世界に名高き急坂を
+斎苑の館を立ち出でて
+治国別の宣伝使
+晴公、五三公従へて
+進み出でます雄々しさよ
+漸く絶頂に登りつき
+月の光を浴びながら
+南に向つて下る折
+やつて来たのはバラモンの
+腰抜け武士の一団だ
+ウントコドツコイやつて来たな
+俺の力の試し時
+生言霊の連発を
+やつて見ようと坂道に
+大手を拡げて打ち出すは
+神力無限の言霊だ
+恐れて忽ち敵軍は
+算を乱して逃げて往く
+ウントコドツコイ　ドツコイシヨ</p>
+            <p class="ja-classical-line">其スタイルの面白さ
+勝に乗じて急坂を
+神の御歌を歌ひつつ
+ウントコドツコイ　ドツコイシヨ
+足の拍子を取りながら
+祠の森に来て見れば
+玉国別の宣伝使
+伊太公さまを敵軍に
+奪はれたりと聞くよりも
+いろいろざつたと胸痛め
+漸く神の御恵で
+昨日の敵も今日は早
+味方となつて松公さま
+治国別の弟と
+聞いたる時の驚きは
+山の崩るるやうだつた
+ウントコドツコイ此坂は
+だんだん嶮しくなつて来た
+晴公、五三公気をつけよ
+松公と竜公も其通り</p>
+            <p class="ja-classical-line">足の爪先に気をつけて
+辷らぬやうに降りて来い
+左手は千尋の谷間だ
+右手は断岩絶壁だ
+猿の奴めがキヤツキヤツと
+怪体な声で啼いて居る
+これやこれや畜生猿の奴
+玉国別とは違ふぞよ
+神力無双の宣伝使
+治国別のお通りだ
+下らぬ真似をさらしよると
+この万公が承知せぬ
+早く立ち去れ逃げて往け
+貴様の出て来る幕ぢやない
+アイタヽヽアイタヽヽ又辷る
+踵の皮をすりむいた
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+三五教の吾々は</p>
+            <p class="ja-classical-line">神の力を身に帯びて
+ハルナの城に蟠る
+八岐大蛇の醜魂を
+山の尾上や河の瀬に
+追ひのけ散らしエルサレム
+珍の都に聳りたつ
+黄金山に向ふなる
+鬼春別の軍隊を
+片つ端からことむけて
+神の御国の福音を
+伝へにや置かぬ吾一行
+厚く守らせたまへかし
+高天原の霊国や
+天国楽土に集まれる
+神々様も吾々が
+忠誠無比の真心を
+憐れみたまひて逸早く
+神素盞嗚大神の
+厳の御前に復り言
+申させたまへ惟神</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Humbly and reverently we pray unto Thee. Ah, Kamunagara, Kamunagara. May Your Mitama be blessed and prosper.</p>
+          <p class="en-p">Harukō sings again.</p>
+          <p class="en-p">The party of the Sendenshi, peerless throughout the past and present, and of Harukuniwake, praised as the flowers of Tenchi, shall make their fine name resound for banse. Having finished all matters of the manifest world, to proceed triumphantly to Tengoku, the spiritual kokiyō, it is the departure for the purpose of creating the great foundation of that kuwanraku. Ah, arigata, arigata. By the oboshimeshi of the glorious Mitama of Kamususanōnōokami, no matter how strong the storm may be, no matter how fiercely the rain may fall, the daiennetsu of the summer sun which burns like fire is nothing at all. This body of mine is entrusted to Kami; how could I ever grow weary? Untokodotsukoi, dotsukoishyo. The slope gradually becomes steeper.</p>
+          <p class="en-p">Is that roaring sound the valley water? When I look through the gaps in the trees, white spray is glittering. It is a scenic view unmatched in Tenka. When I too have accomplished the divine work, I should like to gaze upon this lovely valley water and spend my days in a pleasant retirement, saying untokodotsukoi. Yattokodotsukoi. If I think about such things, I do not know whether I might receive divine punishment. The steed of my heart leaps forth, and unwittingly it derails, dotsukoishyo. Ouch, ouch, ouch, I have done it. Punishment is immediate; upon the nail of my toe, I struck it with a pointed stone. Indeed, it is a dangerous slope. Human fate is also just like this; if you are careless, dotsukoishyo.</p>
+          <p class="en-p">Suddenly a fall right before your eyes. In whatever you do or perform, stumbling, you will likely not be able to reach the capital of victory. Ah, Kamunagara, Kamunagara. Naobi ni minaoshi kikinaoshi, grant us your forgiveness, O Sumeraōkami of Tenchi and the hundred Kami. Before the august presence, we pray. Waiting for us on the path we go, General Lunch, dotsukoishyo. Though one be brave enough to crush fierce gods, relying upon the divine power of the living Kototama, dotsukoidotsukoishyo, you will perish without a single endurance. When I think of it, when I think of it, how brave it is! Whether the morning sun shines or is cloudy, whether the moon waxes or wanes, even though the great earth should sink—how could this interesting battle of the Kototama ever be stopped?</p>
+          <p class="en-p">Mankō, Isankō, hold fast. You are originally faint-hearted, a person of mere words. From now on, reform your mind, firmly seat your reikon below your navel, and press forward. I will never say bad things; because I think of you as precious, though it may be old-womanly care, I take heed out of the worthiness of friendship. Untokodotsukoi, yattokoshyo. From here on the slope is gentle, and the advance of your feet becomes easy. Singing songs is from now on. The party of Harukuniwake, executing the sincere path of trust and love unashamed before Tenchi, praised as mirrors for the people of the world, reveal yourselves as the light of the dark realm, Kamunagara.</p>
+          <p class="en-p">Before the august presence of Kami we humbly pray. Ah, Kamunagara, Kamunagara. May Your Mitama be blessed and prosper.</p>
+          <p class="en-p">So singing, he descends toward the mountain exit.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">謹み敬ひ願ぎまつる
+あゝ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">晴公は又歌ふ。</p>
+            <p class="ja-classical-line">『古今無双の宣伝使
+治国別の一行は
+天地の花と謳はれて
+美名を万世に轟かし
+現し世の事皆終へて
+霊の故郷の天国へ
+意気揚々と進むべく
+其歓楽の大基礎を
+造らむための首途だ
+あゝ有難し有難し
+神素盞嗚大神の
+瑞の御霊の思召
+如何に嵐は強くとも
+雨は烈しく降り来とも
+焼くるが如き夏の日の
+大炎熱も何のその
+神に任ししこの体
+如何でか吾はたゆまむや
+ウントコドツコイ　ドツコイシヨ
+段々坂がきつくなつて</p>
+            <p class="ja-classical-line">轟々云ふのは谷水か
+木の間を透して眺むれば
+白き飛沫が光つて居る
+天下に無比の絶景だ
+俺も一旦神業を
+遂行したる暁は
+この麗しき谷水を
+眺めて一つ楽隠居
+ウントコドツコイして見たい
+ヤツトコドツコイそンな事
+思うて居つたら神様に
+御罰をうけるか分らない
+心の駒が躍り出し
+思はず脱線ドツコイシヨ
+アイタヽタツタ致しました
+罰は覿面足の爪
+尖つた石で打ちました
+まことに危ない坂道だ
+人の運命もこの通り
+油断をしたらドツコイシヨ</p>
+            <p class="ja-classical-line">忽ち転落目のあたり
+する事為す事躓いて
+勝利の都にや往かれまい
+あゝ惟神々々
+直日に見直し聞き直し
+許させたまへ天地の
+皇大神や百の神
+珍の御前に願ぎまつる
+吾往く先に待つて居る
+ランチ将軍ドツコイシヨ
+鬼神を挫く勇あるも
+生言霊の神力に
+かけてはドツコイドツコイシヨ
+一耐りなく亡ぶだらう
+思へば思へば勇ましや
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+此面白き言霊の
+戦がどうしてやめられうか</p>
+            <p class="ja-classical-line">万公、五三公しつかりせ
+お前は元来気の弱い
+口計りの人間だ
+これから心を取り直し
+お臍の下に霊魂を
+確り据ゑて進み往け
+決して悪い事は云はぬ
+お前を大事と思ふ故
+老婆心かは知らねども
+友達甲斐に気をつける
+ウントコドツコイ、ヤツトコシヨ
+これから先は緩勾配
+足の進みも楽になる
+歌を歌ふはこれからぢや
+治国別の一行は
+天地に恥ぬ信愛の
+誠の道を実行し
+世人の鑑と歌はれて
+暗黒界の光明と
+現はしたまへ惟神</p>
+            <p class="ja-classical-line">神の御前に願ぎ奉る
+あゝ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">と歌ひながら山口さして下り往く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 不眠症 [1174]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: Mountain 口の Forest [1176]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

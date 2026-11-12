@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: Light と熱 [1177] - Volume 44 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 44 Table of Contents</a>
+      <span>Volume 44</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 44 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: Light と熱 [1177]</h1>
+      <p class="chapter-title-ja">光と熱〔1177〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Descended from the spirits of Tenōsei, Jisaiten, with Ōkunihiko as the principal deity, made plans to cause the teachings of Reishiyutaijiu to shine brilliantly throughout Udai and to save and protect Yobito; thus the teachings of Brahmanism that were established were originally not evil.</p>
+          <p class="en-p">However, failing to understand the truth of Geniu and vainly preaching the path of Keiseijiushi, falling into Yūgenfujitsukau, people on Chijiyō endure Kannan and, shedding Ikichi while making Sonahemono to Kami, mistaken in thinking that this is the way to satisfy Mikokoro, unconsciously deceived by the crooked deity Yamatanōrochi, instead of saving people, for that very purpose lead people astray into the root country and the bottom country.</p>
+          <p class="en-p">Pitying that tragic Sanjiyō, the great deity of Izumitama who appears as the lord Kami of Takaamahara, Kuniharutachi no Ōkami, making no distinction between Tenjiyō and Chijiyō, raises up the spirits of Ōmitakara into eternal and infinite salvation, and day and night devotes His heart to leading them into the righteous path of compassion and faith and bestowing upon them the divine grace—truly a most precious state of affairs.</p>
+          <p class="en-p">Tokoyohikokami and Tokoyohime, themselves also bewitched by demons, established the teachings of Ural and, looking up to Pangu Shiwang as the lord Kami, went forth to open up the world; how formidable is that momentum!</p>
+          <p class="en-p">How could the Kami of supreme benevolence and love ever forgive this? Desiring to wash and purify the bodies and souls of Hitokusa, who are the children of Kami, making them pure and beautiful, and to open the imperial garden of heaven, descending the divine pillar of Izumitama and the august pillar of Mizunomitama into thiskonoyo, changing and transforming in various and miscellaneous ways, Haniyasuhiko and Haniyasuhime appeared as the imperial commands of Kami, establishing Sogo no Oshihe, not to mention Koganeyama, Ubusunayama, Manjuyama, Caucasus Mountain, and Mount Griddhakuta, and crossing over to Onogorojima, reflecting the form of heaven upon the sacred land of Aya, saving Yobito into the true great path—how precious it is!</p>
+          <p class="en-p">Kami Susanoo no Ōkami, who has arisen as Mizunomitama, with the desire to save without exception the bodies and souls of the three realms of Geniukami, brought down His precious august body into the world, burdened with Chiza no Oketo, appearing in the form of man without a single corner left throughout the under-heaven, braving wind and rain, facing ice and snow, becoming the heat of thiskonoyo, becoming light, becoming salt, appearing as the flower of fruition, and saving all the bodies and souls lost in darkness—truly this is of the utmost preciousness.</p>
+          <p class="en-p">The propagation emissary of the teachings of Kami, the party of Harunotowake, receiving the august words of Izumitama, left behind the mansion of the sacred garden where the original Daijin is enshrined, crossed over the rugged mountain slopes of the wild moor where the wild wind blows, arrived at the grove of the shrine, unexpectedly met the party of Tamakuniwake, spent two nights there, and reunited with his younger brother Matsukimi and others whom he had parted from some time ago; suppressing the tears of joyful surprise, leading five companions in accordance with the divine oracle, singing the most auspicious propagation song as he climbed the steep slope of the Kajika Pass, he finally arrived safely and securely in the shade of the grove where old trees grow thick in Yamaguchi. Ah, indeed, Kami be praised! The spirits of Kami blessing them, the party of Harunotowake executed the divine mission without mishap and, so as to speak of the return words before the august presence of Kami, while bathing in the morning sun of Mizuzuki as she lay horizontally in the Ryūgū Mansion stretching out with her pillow to the east, ah, indeed, Kami be praised! For the precious divine grace, let this story proceed without delay, which we reverently pray before the august presence of Kuniharutachi no Ōkami, who has appeared as the original ancestors of heaven and earth, Toyokunihime no Ōmikami, and Kami Susanoo no Ōkami.</p>
+          <p class="en-p">The party of Harunotowake arrived at last at twilight at the Yamaguchi grove on the southern foot of Mount Kajika, where old trees grow dense, and it came to pass that they spent a night in this grove, which is dark even by day. Here, only the foundation stones of the site of an ancient shrine remained. In former times it was called the shrine of the mountain deity, and Ōyamatsumi no Kami had been enshrined there. Exposed to the natural wind and rain and left to ruin, having suffered the calamity of the god of fire on account of the bonfires of beggars, without the opportunity for reconstruction nor any zealous believers, it retained only its pitiful and desolate remains. Therefore, almost no one knew what deity had been enshrined in this grove. However, this grove was quite large, and no one had ever set foot within it. Those who mistakenly ventured deep into the forest never returned, and so it was also called the Demon's Grove. It was even rumored that a gigantic snake lurked there, swallowing men, and it was feared by the people.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">天王星の精霊より
+降り玉ひし自在天
+大国彦を主神とし
+霊主体従の御教を
+普く宇内に輝かし
+世人を救ひ守らむと
+計りて立てるバラモンの
+教は元より悪からず
+さは去り乍ら現幽の
+真理を知らず徒に
+軽生重死の道を説き
+有言不実行に陥入りて
+地上の人は艱難に
+耐へ忍びつつ生血をば
+出して神に供物
+なす時や神の御心に
+叶ふものぞと誤解して
+知らず知らずに曲つ神
+八岐大蛇に迷はされ
+人を救はむ其為に</p>
+            <p class="ja-classical-line">却て人を根の国や
+底の国へとおとしゆく
+其惨状を憐みて
+高天原の主の神と
+現はれ玉ふ厳御霊
+国治立の大神は
+天上地上の別ちなく
+大御宝の霊をば
+永遠無窮に救ひ上げ
+慈愛と信仰の正道に
+導き恩頼をば
+与へむものと日に夜に
+心を配らせ玉ふこそ
+実に有難き次第なり
+常世彦神常世姫
+これ亦悪魔に魅せられて
+ウラルの教を建設し
+盤古神王を主の神と
+仰いで世界を開き行く
+其勢ひの凄じさ</p>
+            <p class="ja-classical-line">至仁至愛の大神は
+いかでか許し玉はむや
+神の御子たる人草の
+身魂を清く美はしく
+洗ひ清めて天国の
+御苑を開かせ玉はむと
+厳の御霊の神柱
+瑞の御霊の御柱を
+此世に降し玉ひつつ
+いろいろ雑多に変化して
+埴安彦や埴安姫
+神の命と現はれつ
+三五教を建設し
+黄金山は云ふも更
+ウブスナ山や万寿山
+コーカス山や霊鷲山
+自凝島に渡りては
+綾の聖地に天国の
+姿を映し玉ひつつ
+世人を誠の大道に</p>
+            <p class="ja-classical-line">救はせ玉ふぞ有難き
+瑞の御霊とあれませる
+神素盞嗚の大神は
+現幽神の三界の
+身魂を残らず救はむと
+尊き御身を世に下し
+千座の置戸を負はせつつ
+天が下をば隅もなく
+人の姿と現はれて
+沐雨櫛風氷雪を
+凌ぎて此世の熱となり
+光ともなり塩となり
+みのりの花と現はれて
+暗に迷へる諸々の
+身魂を救ひ玉ふこそ
+実にも尊き限りなれ
+神の教の宣伝使
+治国別の一行は
+厳の御言を蒙りて
+元つ御神の祭りたる</p>
+            <p class="ja-classical-line">斎苑の館を後にして
+荒風すさぶ荒野原
+険しき山坂乗越えて
+祠の森に到着し
+玉国別の一行に
+思ひ掛なく出会し
+茲に二夜を明かしつつ
+別れて程経し弟の
+松公其他に巡り会ひ
+驚喜の涙抑へつつ
+又もや神の御宣示に
+五人の伴を引きつれて
+河鹿峠の峻坂を
+世にも目出度き宣伝歌
+歌ひてやうやう山口の
+老樹茂れる森かげに
+安全無事に着きにけり
+あゝ惟神々々
+神の御霊の幸はひて
+治国別の一行は</p>
+            <p class="ja-classical-line">神の使命を恙なく
+実行なして復り言
+神の御前に申すべく
+守らせ玉へと瑞月が
+旭の光を浴び乍ら
+竜宮館に横臥して
+東枕に述べ立つる
+あゝ惟神々々
+尊き神の御恵に
+此物語遅滞なく
+進ませ玉へ天地の
+元つ御祖と現れませる
+国治立の大神や
+豊国姫の大御神
+神素盞嗚の大神の
+御前に謹み願ぎまつる。</p>
+            <p class="ja-classical-line">治国別一行は老樹鬱蒼たる河鹿山の南麓山口の森に黄昏時漸く到着し、昼猶暗き此森に一夜を明かす事とはなりぬ。茲には古き社殿の跡が礎石計り残つてゐる。昔は山神の祠と云つて、大山祇神が祀られてあつた。自然の風雨に晒らされ荒廃に任され、乞食の焚き火の為に祝融子の災にかかりしまま、再建するの機会もなく、又熱心なる信仰者もなく、憐れ果かなき残骸を止めてゐたのである。それ故に此森は何神の祀られありしやを知る者は殆ンどなかつた。併し乍ら此森は相当に広く足を踏み入れた者はない。もし誤つて森林深く進み入りし者は、再び帰り来ることなきを以て、一名魔の森とも称へてゐた。何でも巨大なる蛇潜み居りて、人を呑むとさへ称へられ人々に恐れられてゐた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The grove of the shrine at Kajikatauge is actually dedicated to Daijisaiten, but somehow it came to be called the shrine of Yamakami. It was confused with the god of this Yamaguchi grove. It seems that most cases where the Saijin of ancient shrines become Fumei are due to reasons like this.</p>
+          <p class="en-p">Mankō, in a darkness so pitch-black that one could not tell if one's nose were pinched, looks up at the sky, gazing upward with a heart of Akogare to see if even a fragment of a star might be visible through the treetops.</p>
+          <p class="en-p">Mankō: 'However dark one might say it is, there is no grove as dark as this. It looks as if the moon, stars, and Taiyō have all without a single exception been swallowed up like Orochi. Since this place is called the Yamaguchi grove, it is no wonder it swallows up mountains. It is a suspicious grove that is said to swallow up even the stars of Ten without a single one remaining. Hey, Harukō, if you are not careful, who knows if this fellow of a grove might swallow our Karada along with us? Mankō will be careful.'</p>
+          <p class="en-p">Harukō: 'Come now, it is just cloudy. Since this Harusama has entered presently, it is a Ukea that the sky will clear up immediately.'</p>
+          <p class="en-p">Mankō: 'What are you saying? No matter how much it clears up, how on earth could human eyes see the stars of Ten through the shade of these Mitsujiyu?'</p>
+          <p class="en-p">Harukō: 'Come now, Matsukō-san, have no worries. By the divine power of Harukō's living Kototama, we shall drive Orochi and demons a thousand ri away, clear the heavenly expanse as clear as crystal, and show it to you; then you too will clear away your doubts, right?'</p>
+          <p class="en-p">Mankō: 'Your Kototama is also a dubious thing. The teacher's Kototama immediately manifests divine power, but as for Harukō's Kototama, it is a hoarse, croaking voice; far from clearing up, even our hearts become gloomy, and my ears hurt so much that I feel as if I were falling down to the nethermost country—at least this Mankō-sama does.'</p>
+          <p class="en-p">Harukō: 'Come now, whether it is the teacher's Kototama or Harukōsama's Kototama, is there any difference in Kototama? Does not the Kami say that there is no distinction of old and new in faith?'</p>
+          <p class="en-p">Mankō: 'If so, why don't you use the Kototama to make this darkness even a little bit bright? That is the proof of reality, and after seeing that, this Mankō-sama will also be satisfied.'</p>
+          <p class="en-p">Harukō: 'Is there any real difference between the word Aoueiya uttered by the teacher and the word Aoueiya uttered by Harukōsama? As for the Kototama, if one only brings it forth smoothly, calmly, roundly, and brightly, the shinmei of Ten and Chi will be moved with awe. We can repeat the Kototama a hundred times and not suffer a bit—though if I say this, I might receive a reprimand from the teacher, but the other day when the teacher emitted the Kototama of Aoueiya, he broke out in a heavy sweat and was wiping his face stealthily with a Hanpen. It seems that when one grows old, one lacks strength in the belly after all. Hey teacher, isn't that so?'</p>
+          <p class="en-p">Teacher: 'Un, even when I was young, whenever I recited the Kototama a hundred or a thousand times, I never thought it grand or painful, but lately, whether for reasons of age as you say, even when I chant the Amatsu Norito just once, my whole Karada gets soaking wet even on a bitter cold day. However, today's once has more efficacy than a thousand times in my youth, so it is a wondrous thing.'</p>
+          <p class="en-p">Mankō: 'Hey, Harukō, your Kototama is secretly a gun. You are probably firing blind shots without even knowing the direction of the target. You let out a voice somewhat like a refreshing Naniwabushi, but has it ever once been effective? Effective, that is, only to our ears. Since not the slightest efficacy of the Kototama comes forth, no matter what you say, a kobushi-musha is a kobushi-musha after all! Ah-ha-ha-ha!'</p>
+          <p class="en-p">Harukō, becoming fired up and puffing his nose a little:</p>
+          <p class="en-p">Harukō: 'Hey Manshū, do not make too much fun of me. People are not always what they seem. There is no telling what hidden arts one might possess. Wait, wait; I will manifest the divine power of the Kototama and make that fellow Mankō burst into repeated cries of wonder and astonishment. Tie a twisted headband so your head does not split, rearrange your navel so it does not shift, and fasten your bellyband tightly. It is a Kototama like firing a forty-eight-centimeter giant cannon, so make preparations so as not to damage your listening apparatus. Now, it is the opening of the barrel for the Kototama emission. One, two, three!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">河鹿峠の祠の森は、実際は大自在天を祀つたものであるが、いつとはなしに山神の祠と称へらるるやうになつた。それは此山口の森の神と混同されて了つたのである。すべて古き神社の祭神の不明になるのは、右様の理由に依るものが甚だ多いやうである。</p>
+            <p class="ja-classical-line">万公は鼻をつままれても分らぬ様な暗さに、空を打仰ぎ、梢をすかして星の半片だも見えざるやと、憧憬の心を以て、上方を眺めて居る。</p>
+            <p class="ja-classical-line">『何とマア暗いと云つてもこれ位暗い森はありませぬなア。月も星も太陽も、一つも残らず、大蛇の様に呑ンで了つたと見えますワイ。此奴ア山口の森といふから、山位呑むのは何でもないと見える。天の星さへ一個も残らず呑ンで了うといふ怪しい森だからなア。オイ、晴公、気をつけないと、此森の奴、俺達の身体も一緒に呑みよるか知れぬぞ。万公が気を付けるぞよ』</p>
+            <p class="ja-classical-line">『ナアニ、曇つてゐるのだよ。やがて此晴さまがお這入りになつたのだから、すぐに空が晴るるのは受合ひだ』</p>
+            <p class="ja-classical-line">『そら何を言ふ。何程晴れたつて、此密樹の蔭をすかして、如何して人間の目で、天の星が見えるものかい』</p>
+            <p class="ja-classical-line">『ナアニ松公さま、心配御無用だよ。晴公の生言霊の神力に依りて、大蛇も悪魔も千里の外に卻け、天津御空を水晶の如く晴らして御覧に入れる、さうすればお前も疑を晴らすだろ』</p>
+            <p class="ja-classical-line">『お前の言霊も怪しいものだ。先生の言霊はすぐに神力が現はれるが晴公の言霊と云つたら、ダミ声の皺枯れ声、晴れる所か俺達の心迄陰欝になり、耳が痛くつて、根底の国へ落ちるやうな気分がするよ、この万公さまにはよ』</p>
+            <p class="ja-classical-line">『ナアニ、先生の言霊だつて、晴公さまの言霊だつて、言霊に違があるか、信仰に古い新しの区別がないと、神さまは仰有るぢやないか』</p>
+            <p class="ja-classical-line">『それなら一つ言霊を以て、万よく此暗をチツとでも明かくしてみたらどうだ、それが現実の証拠だから、それ見た上で万公さまも満足するからナ』</p>
+            <p class="ja-classical-line">『先生がアオウエイと仰有る言葉も、晴公さまのアオウエイと云ふ言葉も別に違ひはないぢやないか、言霊といふものは円満清朗スラスラと楽に出さへすれば、天地の神明が感動遊ばすのだ、俺達は百遍位言霊を繰返してもチツとも苦しうないが、かう云ふと先生にお目玉を頂戴するか知らぬが、此間も先生がアオウエイの言霊を発射された時、ズツポリと汗をかき、半巾を以てソツと顔を拭いてゐらつしやつたぞ。年が老るとヤツパリ腹に力がないと見えるワイ。なア先生、さうでしたねエ』</p>
+            <p class="ja-classical-line">『ウン、俺も若い時や、言霊の百遍や千遍言つた所で、チツともエライとも苦しいとも思はなかつたが、此頃はお前の言ふ通り年の為か、天津祝詞を一回奏上しても、身体中が厳寒の日でもビシヨぬれになるのだ。併し乍ら、若い時の千遍よりも今の一遍の方が効能があるのだから、不思議だよ』</p>
+            <p class="ja-classical-line">『オイ、晴公、お前の言霊は暗に鉄砲だ。的の方向も知らずに、安玉を乱射してゐるのだらう。一寸涼し相な浪花節のやうな声を出しよるが、根つから利いたことはないぢやないか、きくといふのは俺達の耳丈だ。チツトも言霊の功能が現はれて来ぬのだから、何と云つても、ヤツパリ木つ端武者は木つ端武者だよアツハヽヽ』</p>
+            <p class="ja-classical-line">晴公は躍気となり、少しく鼻息を荒くし乍ら、</p>
+            <p class="ja-classical-line">『コレヤ万州、余り馬鹿にするない。人は見かけによらぬ者だ。どンな隠芸があるか分つたものぢやないぞ。待て待て一つ言霊の神力を現はして、万公の奴に万々々と驚異の歎声を連発さしてやらう。捻鉢巻をして頭のわれぬやうに、臍の宿替をせぬやうに、腹帯をしつかりしめて居れ。四十八珊の巨砲を打出したやうな言霊だから、聴音器を破損せぬやうに用意をしておけよ。サア、いよいよ言霊発射の筒開きだ。一二三ン』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">So saying, he gathered breath in his Saikatanden, gripped the area of his sash firmly with both hands, made his Karada stand upright,</p>
+          <p class="en-p">Ubatamano yami uchiharau ware naruzo
+Misora o harase Amatsukamitachi.
+
+U……n</p>
+          <p class="en-p">Ha ha ha ha ha. It's like going to the Senchi in the dark, making a grunt like straining out a dump, and forcing out such a Bansei, doesn't it brighten up even a bit? It seems the degree of Ankoku is gradually increasing in Mankō-sama's eyes, you know.</p>
+          <p class="en-p">Even the Kamisama of Ten has preparations. Is there such a thing as saying it now and it happening just now? Before it grows bright, it once becomes dark; it is the Ankoku before the Kuōmiyō. It's not Ural Kyō, but... it's Yamiyo just an step ahead, and the moon will come out after the dark, so wait for about Futatoki, ma'a. If you do that, the moon will brilliantly shine from the Tōten by my Kototama, and I will clear away doubts as Shiyōko of it.</p>
+          <p class="en-p">Ha ha ha ha. Konya is the Jifuhachinichi, and it is decided that the moon will rise when it becomes the Futatoki. What you are saying is like saying you'll make flowers bloom when spring comes. The Kototamasen is also a complete Zerohai. Ha ha ha ha ha, even the great Mankō-sama is utterly astonished.</p>
+          <p class="en-p">Because you talk back, the sky I thought was Harukō gradually grows cloudy. It seems you have greatly offended the Kamisama's august mood. Look at this, my Kototama has worked in reverse and it has become more and more dark. Isn't it wonderful? Anyway, as long as there is some kind of change, it's a sign that the Kototama has worked.</p>
+          <p class="en-p">Sensei, wouldn't it be terrible if it turns out like this? Please make it so that at least shadows can be seen by your Kototama. Not only has it grown dark, but somehow a gloomy Qi drifts, and doesn't it feel like a graveyard full of sorrowful wailing of ghosts?</p>
+          <p class="en-p">That is true. It seems the Kototama has worked too well. In that case, shall I pray to Kamisama for once?</p>
+          <p class="en-p">So saying, he reverently clapped his hands, filled water and fire into his Saikatanden, entered the state of mushin (no-self) and mu-ga (absence of ego), chanted the Amatsu Norito with a clear and resounding voice, and upon finishing chanting,</p>
+          <p class="en-p">Omokage mo miwakekanetaru yami no mori o
+Harasase tamae tenchi no kami</p>
+          <p class="en-p">As soon as he finished chanting this, the pitch-black curtain of darkness thinned, and a light resembling a hazy moonlit night drifted about. Harukowake chanted the divine words once again, and expressed his gratitude to the Kami for the fact that the divine power of his own Kototama had manifested under his utterance.</p>
+          <p class="en-p">My, ma'a, the difference between black and white is just this thing, isn't it? Sensei, e'e, didn't you say in the sacred words of the Kamisama that in the beginning was the Word, the Word was with Kami, and Kami was with the Word, and all things were made by it and so on? Truly, words are things that possess incomprehensible power.</p>
+          <p class="en-p">Un, the Word is the root and source of all things. It is the Creator.</p>
+          <p class="en-p">However, Sensei, if all things can be made by words, it seems likely that if you were to command right here and now that a single human being be born, one would appear right here. Considering that it does not appear, somehow the true nature of words is something Mankō cannot comprehend. I should like to hear a detailed explanation.</p>
+          <p class="en-p">Harukowake answered this with a poem.</p>
+          <p class="en-p">Takamanohara no tengoku ni
+Sumu tenjin wa hito no goto
+Chisei to ishi to o mina usu
+Chiseiteki shōgai o tsukuridasu
+Mono wa tenkai no hikari nari
+So wa kono hikari wa kami makoto
+No naka yori izuru kamichi zoya
+Sono isshiteki shōgai tsukuridasu
+Mono wa tenkai no netsu to shire
+Somo kono netsu wa kami no zen
+Kore yori kamiai izuru nari</p>
+          <p class="en-p">Sate tenjin no seimei wa
+Kami no zen naru netsu yori su
+Seimei no netsu yori kuru koto wa
+Netsu naki mono wa seimei no
+Horobu o mite mo akeshi
+Muai no makoto to muzen shin
+Kore mata seimei horobubeshi
+Makoto wa shinshin no hikari nite
+Zen wa aizen no netsu zokashi
+Kore ra no jibutsu wa kamikai no
+Netsu to hikari ni ōsō suru
+Ittō fuhen no chikara nari
+Chijō o mamoru netsu mata wa
+Hikari o mireba ryōryō ni
+Kore ra no dōri o obori emu
+Sekai no netsu wa hikari to washi
+Chijō no banbutsu o keihatsu shi
+Nokoru sumi naku seiku su
+Netsu to hikari to ga aiwasu wa
+Shunka no ryōki ni aru mono zo</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と言ひ乍ら、臍下丹田に息をつめ、左右の手で、帯のあたりをグツと握り、身体を直立になし、</p>
+            <p class="ja-classical-line">『烏羽玉の暗打ち払ふ吾なるぞ
+御空を晴らせ天津神たち。</p>
+            <p class="ja-classical-line">ウ…………ン』</p>
+            <p class="ja-classical-line">『アハヽヽヽ。暗がりで雪隠へ行つた様な按配式だ、何だウンウンと、きばり糞をたれるやうな、蛮声をこき出しよつて、チーツとも明かくならぬぢやないか。万公さまの目にはだんだん暗黒の度が増して来た様だよ』</p>
+            <p class="ja-classical-line">『天の神様にも準備がある。今いうて今といふ事があるかい。明かくなる前には一旦暗くなるものだ、光明の前の暗黒だ。ウラル教ぢやないが……一寸先や暗夜、暗の後には月が出るのだからマア二時計り待つてゐよ、さうすれば俺の言霊で月がパツと東天から輝いて来るワ、それを証拠に疑を晴らすのだよ』</p>
+            <p class="ja-classical-line">『アハヽヽ今夜は十八日、四ツ時になれば月の上るのはきまつてゐるワイ。貴様の言ひ草は春になつたら花を咲かしてやろと云ふやうなものだ。サツパリ言霊戦も零敗だ。アハヽヽヽヽ、さすがの万公さまも呆れ返るよ』</p>
+            <p class="ja-classical-line">『貴様が交つ返すものだから、晴公と思つた空が段々曇つて来る。余程神様の御機嫌を損ねたとみえるワイ。コレ見ろ、俺の言霊が逆に利いていよいよ益々暗くなつて来た、偉いものだろう、兎も角どちらなりと変化さへあれば言霊の利いた印だよ』</p>
+            <p class="ja-classical-line">『先生、斯うなつちやたまらぬぢやありませぬか、どうぞ貴郎の言霊で面影位見えるやうにして下さいな。暗くなつた計りか、何となく陰鬱の気が漂ひ、鬼哭愁々墓場の如き感がするぢやありませぬか』</p>
+            <p class="ja-classical-line">『さうだなア。余り言霊が利き過ぎたと見える。そンなら私が一つ神様に願つて見やうかな』</p>
+            <p class="ja-classical-line">と云ひつつ恭しく拍手をなし、臍下丹田に水火をつめ、無我無心の境に入つて、音吐朗々と天津祝詞を奏上し終つて、</p>
+            <p class="ja-classical-line">『面影も見分けかねたる暗の森を
+晴らさせ玉へ天地の神』</p>
+            <p class="ja-classical-line">と歌ひ了はるや、真黒なる暗の帳はうすらいで朧月夜の如き明かりが漂ふた。治国別は再び神言を奏上し、吾言霊の神力の言下に現はれし事を神に向つて感謝した。</p>
+            <p class="ja-classical-line">『何とマア黒白の違といふのは此事だなア。先生、エヽ神さまの聖言に、初に道あり、道は神也、神は道と共にあり、万の物之に依つて造らる云々と云ふことがありましたなア。実にことばといふものは不可思議力を持つたものですなア』</p>
+            <p class="ja-classical-line">『ウン、道は万物の根元だ。造物主だよ』</p>
+            <p class="ja-classical-line">『併し乍ら先生、言葉で万物が出来るのならば、貴方が今茲で、人間一人生れよと仰有つたら、茲に現はれ相なものですなア。それが現はれないことを思へば、何うも言葉の正体が万公には解しかねます。詳細の説明を承はりたいものですなア』</p>
+            <p class="ja-classical-line">治国別は歌を以て之に答へける。</p>
+            <p class="ja-classical-line">『高天原の天国に
+住む天人は人の如
+智性と意志とを皆有す
+智性的生涯を作り出す
+ものは天界の光なり
+そはこの光は神真の
+中より出づる神智ぞや
+その意志的生涯作り出す
+ものは天界の熱と知れ
+そもこの熱は神の善
+これより神愛出る也</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">扨て天人の生命は
+神の善なる熱よりす
+生命の熱より来ることは
+熱なきものは生命の
+亡ぶを見ても明けし
+無愛の真と無善真
+これ亦生命亡ぶべし
+真は信真の光にて
+善は愛善の熱ぞかし
+これ等の事物は神界の
+熱と光りに相応する
+一定不変の力なり
+地上を守る熱または
+光を見れば明瞭に
+これ等の道理を覚り得む
+世間の熱は光と和し
+地上の万物を啓発し
+残る隅無く成育す
+熱と光とが相和すは
+春夏の両期に在るものぞ</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Light without heat cannot cause all things to act, but rather leads them to destruction.</p>
+          <p class="en-p">The winter season lacks the harmony of heat and light, possessing light alone without heat.</p>
+          <p class="en-p">That the heavenly realm of Takaamahara is called a paradise is because there is a correspondence of heat and light.</p>
+          <p class="en-p">That truth and goodness harmonize, and that faith and love unite, is when it comes to the spring season on earth, as if light and heat were in harmony.</p>
+          <p class="en-p"></p>
+          <p class="en-p">In the beginning of Ametsuchi there was the Way, and the Way was with Kami, and the Way was precisely Kami.</p>
+          <p class="en-p">All things were created by this.</p>
+          <p class="en-p">Not a single created thing was made without depending on this.</p>
+          <p class="en-p">In this there is pure life, and life is the light of men.</p>
+          <p class="en-p">He was in the world, and the world was completely created by Him.</p>
+          <p class="en-p">For the Way became flesh and dwells among Warera.</p>
+          <p class="en-p">Having seen His kuōei, the way of the seijiya signifies the power of the Lord Kami.</p>
+          <p class="en-p">Why is this? Because it is due to the fact that the Way became flesh.</p>
+          <p class="en-p">Yet what does the Way especially express?</p>
+          <p class="en-p">There is probably none who knows further.</p>
+          <p class="en-p">Proceeding from this, Kamehiko shall explain it very minutely.</p>
+          <p class="en-p">What is called the Way is the seigen.</p>
+          <p class="en-p">The seigen is precisely the shinshin.</p>
+          <p class="en-p">Since this shinshin resides in the Lord Kami, it is the light appearing from Sushin.</p>
+          <p class="en-p">Light is the shinshin of Sushin.</p>
+          <p class="en-p">That which possesses all power in Takaamahara is the shinshin.</p>
+          <p class="en-p">Without shinshin there is no power.</p>
+          <p class="en-p">Therefore, all tenjin are called power by summoning them.</p>
+          <p class="en-p">Indeed, tenjin are not only the receivers of divine power, but also the vessels that should contain divine power.</p>
+          <p class="en-p">Viewing it as mentioned above, tenjin are precisely power.</p>
+          <p class="en-p">Because they possess this divine power,</p>
+          <p class="en-p">They can subdue even the jigokukai and completely control those who rebel against it.</p>
+          <p class="en-p">Even if tens of thousands of rebellious enemies should appear,</p>
+          <p class="en-p">When they encounter the single path of radiance shining forth from the shinshin praised as the divine light of Takaamahara,</p>
+          <p class="en-p">At that very moment they shall tremble directly.</p>
+          <p class="en-p">As above, because tenjin are those who can purely receive the shinshin,</p>
+          <p class="en-p">That which organizes the root of all Tenkai is never other than the light of the shinshin.</p>
+          <p class="en-p">For those who organize Tenkai are tenjin.</p>
+          <p class="en-p"></p>
+          <p class="en-p">That such a great and infinite divine power lurks within the shinshin is something that scholars who think that the truth of genkai is nothing more than thought or language can by no means believe.</p>
+          <p class="en-p">Thought and language do not possess power in themselves,</p>
+          <p class="en-p">And are made to produce power only when they act in accordance with the command of Sushin.</p>
+          <p class="en-p">However, the shinshin has a power of its own within it, and Tenkai is created precisely by this.</p>
+          <p class="en-p">The world of chijiyō and all things within it together are also things created by this.</p>
+          <p class="en-p">That such a noble divine power exists within the shinshin,</p>
+          <p class="en-p">There are two comparisons and proofs for this here.</p>
+          <p class="en-p">Namely, the power of goodness and truth existing in humans, and next, the power of light and heat of the sun from the world, by which the divine awe can be clearly perceived.</p>
+          <p class="en-p">Ah, Kamagara Kami-kami, according to Kami, I return the answer.'</p>
+          <p class="en-p">'Oh, thank you very much indeed. Mankō is wholly, wholly satisfied.'</p>
+          <p class="en-p">'Mankō, you, did you really understand what I said?'</p>
+          <p class="en-p">'Man-man, it is about a half-understanding. However, a half-opened flower will surely bloom in full. Please give it time. The time Mankō understood is precisely the full bloom of the flower, you see. Might you explain it a little more minutely and analytically?'</p>
+          <p class="en-p">'After this matter is roughly understood, I shall teach again. I leave this resolution as an assignment for you all; if you want to hear the next, it is good to make this poem repeat and soak into your spirits, for it is said that reading a book a hundred times lets its meaning naturally reveal itself. If I give bait all at once, the spirits will suffer from indigestion, and if I cause bellyaches and diarrhea, it will be troublesome for me too, so I will stop at a point where I say just a little more. If I fill your bellies, the rare feast will cease to be a feast, you know. Haha-ha-ha!'</p>
+          <p class="en-p">'Now, everyone, Mankō is the guide, and from this on we shall chant the Amatsunorito.'</p>
+          <p class="en-p">'Next is the god of Ametsuchi, and next is the procedure of chanting the Kamigoto; hey, Mankō, if it is imitating people, even this Harukohiko-sama can do it. Utshu-hu-hu!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">熱なき光は万物を
+活動せしむることを得ず
+却て死滅に到らしむ
+冬期は熱と光との和合なく
+光のみにて熱はなし
+高天原の天界を
+楽園なりと唱ふるは
+熱光の相応あればなり
+真と善とが相合し
+信と愛との合するは
+地上の春期に当るとき
+光熱和合する如し</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">天地の太初に道あり
+道は神と共にあり
+道は即ち神なるぞ
+万物これにて造らるる
+造られたるもの一として
+之に由らずして造られし
+ものは尠しもあらじかし
+之には清き生命あり
+生命は人の光なり
+かれ世に在まし世は彼に
+全く造り上げられぬ
+蓋し道は肉体と
+なりて吾曹の間に宿る
+吾その光栄を見たりてふ
+聖者の道は主の神の
+力を意味するものぞかし
+如何となればそは道
+肉体となれりと云ふに由る
+されど道は殊更に
+何を表はすものなるか</p>
+            <p class="ja-classical-line">知るもの更に無かるべし
+これより進むで亀彦は
+いと細やかに説示せむ
+道といふは聖言ぞ
+聖言即ち神真ぞ
+この神真は主の神に
+存し玉へば主神より
+現はれ来る光なり
+光は主神の神真ぞ
+高天原にて一切の
+力を有つは神真ぞ
+神真なくば力無し
+故に一切の天人を
+呼びて力と称ふなり
+実に天人は神力の
+所受者なるのみならずして
+神力を収むべき器なり
+如上の如く観ずれば
+天人即ち力なり
+此神力を有つ故</p>
+            <p class="ja-classical-line">地獄界まで制裁し
+それに反抗するものを
+全く制禦し得らる也
+たとひ数万の叛敵の
+現はれ来る事あるも
+高天原の神光と
+称へまつれる神真ゆ
+かがやき来る一道の
+光明に遭ひしその時は
+直に戦慄するものぞ
+以上の如く天人の
+天人たるは神真を
+清けく摂受し得る故に
+全天界の根元を
+組織するものは神真の
+光に決して外ならず
+そは天界を組織する
+ものは天人なればなり</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">神真中に斯の如く
+偉大無限の神力の
+潜み居るとは現界の
+真理を以て只思想
+又は言語に外なしと
+思ふ学者の中々に
+信じ能はぬ所なり
+思想や言語は自身にて
+力を有するものならず
+主神の命に従ひて
+活動する時始めてぞ
+力を生ずるものとなす
+されど神真はその中に
+自らなる力ありて
+天界こそは造られぬ
+地上の世界もその中の
+万物併せて悉く
+之にて造られたるものぞ
+斯くも尊き神力の
+神真の中にあることは</p>
+            <p class="ja-classical-line">二個の茲に比証あり
+即ち人間にある善と
+真との力その次に
+世間よりする太陽の
+光と熱との力にて
+神の稜威を明かに
+覚り得らるるものぞかし
+アヽ惟神々々
+神のまにまに答へおく』</p>
+            <p class="ja-classical-line">『イヤどうも有難う御座いました。万公マンマン満足致しました』</p>
+            <p class="ja-classical-line">『万公、お前、本当に私の云ふことが分つたのか』</p>
+            <p class="ja-classical-line">『マンマン、半解位なものですなア。併し乍ら半開の花はキツと満開します。与ふるに時間を以てして下さい。万公の了解した時が、即ち花の満開ですからなア。モウ少し、細かく分解的に仰有つて貰へますまいかナ』</p>
+            <p class="ja-classical-line">『此事が略了解がついた上で、又教ることにしよう。此解決をお前達の兼題としておくから次が聞たくば、此歌を繰返し繰返し霊魂に浸み込ますが良い、読書百遍意自ら通ずと云ふからな、余り一時に餌を与へると霊魂が食傷し、腹痛下痢を起しちや、俺も厄介だから、モウチツとといふ所で止めておかう。腹に一杯与へては、折角の御馳走が御馳走にならぬからなア。アハヽヽヽ』</p>
+            <p class="ja-classical-line">『サア、一同の方々、万公が導師で之から天津祝詞を奏上致しませう』</p>
+            <p class="ja-classical-line">『其次に天地の神、其次に神言の奏上といふ段取だな、オイ万公、人の真似ならこの晴公さまでも出来るよ。ウツフヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: Mountain 口の Forest [1176]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: Monster Light [1178]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

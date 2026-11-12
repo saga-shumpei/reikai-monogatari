@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 18: 一本 Bridge [1187] - Volume 44 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 44 Table of Contents</a>
+      <span>Volume 44</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 44 &bull; Chapter 18</span>
+      <h1 class="chapter-title-en">Chapter 18: 一本 Bridge [1187]</h1>
+      <p class="chapter-title-ja">一本橋〔1187〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Matsuhiko and his party leave the Nonaka forest behind and proceed toward Ukikegahara, singing the Sendenka.</p>
+          <p class="en-p">Here lies the lower stream of the Kajikagaha.</p>
+          <p class="en-p">This river is said to flow into the Lion River.</p>
+          <p class="en-p">Across a fairly wide river, a single-plank bridge is built, anchored on natural rocks in the middle of the river.</p>
+          <p class="en-p">Two women were returning, having crossed the bridge.</p>
+          <p class="en-p">One is a middle-aged woman, and the other is a young girl of fifteen or sixteen.</p>
+          <p class="en-p">The party of six stood at the bridge approach, looking at the clear, rushing current and catching their breath.</p>
+          <p class="en-p">Mankō turned to the two women and said,</p>
+          <p class="en-p">Mankō: 'It is quite a violent current, yet as women you managed to cross such a single-plank bridge so well. Tell me, where on earth have you come from?'</p>
+          <p class="en-p">Woman: 'Yes, we are from the village of Ukiki, but recently a large number of soldiers occupied our village, and they drafted every woman house by house to do cooking and subjected us to all sorts of insults, so everyone fled. As for me, being an old woman, they would not pay attention to me, but as the women gradually dwindled down, they said they did not care if it was an old woman or a girl, they would drag away anyone who was female, so I fled my village, crossed this bridge, and went into hiding in the sanctuary of the deity of Mount Kobakiyama; but there were far too many women and no place to sleep, and we were turned away, so the two of us, mother and child, came back this far.'</p>
+          <p class="en-p">Aku spoke hurriedly,</p>
+          <p class="en-p">Aku: 'Hmm, about how many tens of women in all are hiding in Kobakiyama?'</p>
+          <p class="en-p">Woman: 'Yes, about a hundred have gathered, but since I went later, every single room was packed like vinegar barrels and there was no place to sleep even under the eaves. That is why we came back. I am at my wits' end wondering what to do from now on. The crest on your straw hat is the Jūyō crest, but strangely enough, the deity of Mount Kobakiyama also had the Jūyō crest on it.'</p>
+          <p class="en-p">Aku: 'And what kind of deity is enshrined there?'</p>
+          <p class="en-p">Woman: 'Yes, I heard it is Kuninotachiritsu no Mikoto-sama.'</p>
+          <p class="en-p">Aku: 'Well now, it is hard to believe that Kuninotachiritsu no Mikoto-sama is enshrined there. Could it not be a faction of the Izunome-kyō?'</p>
+          <p class="en-p">Woman: 'I do not know what it is, but we came here calling it the deity of Mount Kobakiyama. You cannot quite tell from the outside, but look over there, a thin smoke is rising, is it not? That is where the deity is enshrined. And there is a gate, and many deities are enshrined as well; I do not remember all their names, but they are all deities with complicated names.'</p>
+          <p class="en-p">Itsukau: 'Matsuhiko-sama, isn't this old woman's story rather encouraging? She said the deity Kuninotachiritsu no Kami is enshrined there and that the Jūyō crest is attached to it, didn't she? By any chance, could the teacher Chikunikubetsu have gone there?'</p>
+          <p class="en-p">Matsuhiko: 'It may not be so, but I too would like to drop by that place called Mount Kobakiyama for a moment and see how things are.'</p>
+          <p class="en-p">Itsukau: 'If so, shall I accompany you? Hey, Gosan-sama, Mankō-sama, Taku, Teku, you guys agree too, don't you?'</p>
+          <p class="en-p">The four all shouted in unison, 'Agreed, agreed.'</p>
+          <p class="en-p">Aku: 'Ah, thank you very much on Aku's part for approving my proposal unanimously.'</p>
+          <p class="en-p">Itsukau: 'Ha-ha-ha-ha-ha, Aku-sama, do you intend to leave these two women to die? Isn't it pitiful not to take them along somehow? Surely there should be room for two among a place with a hundred people. Didn't this old woman commit some kind of petty theft or something?'</p>
+          <p class="en-p">Aku: 'That is right, she must have done it. After all, there are some people with very sticky fingers even among women.'</p>
+          <p class="en-p">Old Woman: 'Now, now, you people, you called me a person with sticky fingers, but since you say it so boldly, do you have some kind of proof? Come on, let me hear it. Hearing a thing like this, no matter how much one says I am a woman, I cannot let it pass. Being branded with the name of a thief, what excuse do I have to my ancestors? I cannot even show my face to my daughter. On what grounds do you say such a thing?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">松彦一行は野中の森を後にして、宣伝歌を歌ひながら浮木ケ原をさして進み往く。此処には河鹿川の下流が横たはつて居る。此の河は、ライオン川に注ぐと伝へられて居る。</p>
+            <p class="ja-classical-line">可なり広い河に、天然の河の中の岩を土台として、一本橋が架けられてある。橋を渡つて帰つて来る二人の女があつた。一人は中年増、一人は十五六才の少女である。一行六人は橋の詰めに立つて清らかな激流を眺めて息を休めて居た。万公は二人の女に向ひ、</p>
+            <p class="ja-classical-line">『随分、烈しい流れだが、こンな一本橋を女の身としてよく渡れたものだなア、一体お前さまは、何処から来たのだイ』</p>
+            <p class="ja-classical-line">『ハイ私は浮木の里の者で厶いますが、此間から沢山の軍人が私の村に陣取り、女と云ふ女を軒別に徴集して炊事をさせたり、いろいろと辱たりするので、誰も彼も皆逃げて仕舞ひました。私は婆の事なり、相手にはして呉れませなンだが、段々と女が減るにつけ、婆でも少女でも構はぬ、女でさへあれば引張つて帰りますので吾村を逃げ出し、此橋を渡つて小北山の神様のお館へ身を隠して居りましたが、あまり沢山の女で寝る所もなく断られて、親子二人が此処迄帰つて来たので厶います』</p>
+            <p class="ja-classical-line">アクは言葉せはしく、</p>
+            <p class="ja-classical-line">『ウン、女計りが小北山に隠れて居るとは一体幾十人程居るのだい』</p>
+            <p class="ja-classical-line">『ハイ、一寸百人計り集まつて居りますが、私は後から行つたものですから、部屋と云ふ部屋は酢司詰の有様で軒下にも寝る所がないので厶ります。それ故帰つて参りました。此先何うしたらよからうかと思案に暮れて居ます。貴方の笠には十曜の紋がついて居ますが、不思議の事には小北山の神様にも十曜の紋がつけてありました』</p>
+            <p class="ja-classical-line">『さうして何といふ神様が祭つてあるのだ』</p>
+            <p class="ja-classical-line">『ハイ国治立命様とか承はりました』</p>
+            <p class="ja-classical-line">『ハテ国治立命様を祭つてあるとは合点が往かぬ。三五教の一派ではあるまいかなア』</p>
+            <p class="ja-classical-line">『何だか知りませぬが、小北山の神様と云うて参つて居ります。一寸外からは分りませぬが、あれ御覧なさい、細い煙が立ち上つて居りませう、あすこが神様を祭つてある所です。そして門もあり、沢山の神様も祭つてあつて一々名は覚えて居ませぬが何でも六ケ敷名のついた神様計りで厶います』</p>
+            <p class="ja-classical-line">『松彦さま、此婆さまの話は耳寄りぢやありませぬか。国治立神様が祭つてあると云ひ十曜の紋がついて居ると云つたでせう。ひよつとしたら治国別の先生が、其処へ往かれたのではありますまいかな』</p>
+            <p class="ja-classical-line">『さうでもあるまいが、松彦もその小北山とやらへ一寸立寄つて様子を考へて見度いものだなア』</p>
+            <p class="ja-classical-line">『そンならお伴致しませうか。オイ、五三さま、万公さま、タク、テク、お前等も賛成だらうなア』</p>
+            <p class="ja-classical-line">四人一度に「賛成々々」とばつを合した。</p>
+            <p class="ja-classical-line">『ヤア小生の提案を満場一致賛成下さいまして、アクの身に取り有り難う厶います』</p>
+            <p class="ja-classical-line">『ハヽヽヽヽ、アクさま、この二人の女は見殺にする積りかな、何とかして連れて往つてやらねば、可愛さうぢやないか。百人も居る処へ二人位融通のつかぬ筈はあるまい。此婆さまは何か万びきでもやつたのぢやあるまいかな』</p>
+            <p class="ja-classical-line">『さうだなア、やりよつたのだらう。随分手癖の悪い奴が、女の中にもあるからなア』</p>
+            <p class="ja-classical-line">『これこれあなた方、私を手癖が悪いと仰有つたが、さうどんどんと仰有るからには何ぞ証拠がありますかな、サアそれを聞かして貰はう、こンな事を聞いては、何程女だと云うて聞き捨てになりませぬ、盗人の名をきせられて、先祖に対して申訳がありますか、娘にだつて合す顔がない。何を証拠にそンな事を仰有いますか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Frowning fiercely, he glares at him.</p>
+          <p class="en-p">Aku: 'Ah, this is a blunder! I am truly and excessively sorry for my slip of the tongue. My mouth just happened to slip, you see.'</p>
+          <p class="en-p">Yoshikohime: 'Can an excuse be made with such an excuse as a slipped mouth or slipped feet? Come now, how are you going to dry the false accusation you pinned upon me? You seem to be a person who goes about guiding the people of the world, but how can you perform the sacred service of Kamisama with such ways?'</p>
+          <p class="en-p">Aku: 'Ah, I am truly struck dumb with shame, my mitama has been completely beaten!'</p>
+          <p class="en-p">Yotahiko: 'Hey, Aku-sama, look at your posture! If you use the kototama too much, things happen like a man over seven shiyaku tall being made a fool of by a woman. Ha-ha-ha-ha-ha, what a worthless thing you are!'</p>
+          <p class="en-p">Kamehiko: 'So you say your name is Aku? No wonder you have the face of a man who commits manbiki. Oh, how terrifying, how terrifying! It would be a taihen if we were to be robbed by ohihagi in a place like this. Come, Kiku, a nagai stay is to be feared, let us hurry back.'</p>
+          <p class="en-p">Okiku: 'Mother, if we return to the village of Ukiki, we will be robbed by Brahmin gunjin or subjected to a nenbutsukau, so we cannot endure it. Shall we instead throw ourselves into this place and die? Even if we go to Kogitayama, we are cast out; if we come here, we are made victims of ohihagi. If we return home, we are scolded by gunjin. Is there anything at all that we can do?'</p>
+          <p class="en-p">Yajihiko: 'Now, now, Mother and daughter goriyōnin, I am one called Isokō, and I am certainly no dorobō. I am a companion of the missionaries of Hirokai. Even if you asked me to do so, I would never do such things as tormenting people or acting as ohihagi, so please be at ease. To end a precious life in a place like this is a bad intention. There is a limit to being short-tempered. Now, Okiku-san, this uncle is not such a scary person, so please set your mind at ease.'</p>
+          <p class="en-p">Okiku: 'No, no, you are a dorobō! The three persons sitting right over there are the very ones who came out to my village the other day and came to snatch people away, saying, "Female conscription!" I remember their faces. Even if you say such things, I will not accept it. Right, Mother, is that not so?'</p>
+          <p class="en-p">Otora: 'Indeed, those three men over there are the very men who even came to my house. The ones who tried to snatch away neighbor Okame are those three. They acted all proud, saying they were inspectors of the Brahman religion. Listen here, you three wretches! Though this old woman may look like this, she is Otorabō of Ukikigahara, a female robber who in her youth opened gambling dens. Now that my daughter has resolved to throw away her life, this Otora has no encumbrances and can act with all her might. Come now, you brats, this Otora will throw you into the river and avenge the villagers. Now, what do you say about that?'</p>
+          <p class="en-p">Lifting her eyes and glaring with a fierce expression, she stared them down. The three men, Aku, Taku, and Teku, were daunted by Otorabō's momentum, stepped back, and scratched their heads.</p>
+          <p class="en-p">Yotahiko: 'Ha-ha-ha-ha-ha! Hey, Aku, you three have been talking big, but you have done quite a few bad things, haven't you? It is time to pay your yearly tax. Why not try being thrown into this torrent together with the old granny? If you like, I wouldn't mind lending granny a hand either, since Mankō is the mirror of good for all eternity.'</p>
+          <p class="en-p">Aku: 'Now, now, Grandmother, you will make things difficult for us if you get that angry. I, Aku, went out on female conscription because it was my official duty. Just think of it as my duty and reconsider, please.'</p>
+          <p class="en-p">Otora: 'No matter what you say, Otorabō is desperate—do you think I will forgive you? Hey, you called Mankō, you must be of the same kind too. Now, Okiku, since you have made up your mind to die, it is a waste to die all by yourself. Why don't you throw all six of these people into the river without exception, make a great show of activity, become a splendid warrior, and boast of your heroic name when you go to the underworld?'</p>
+          <p class="en-p">Okiku: 'Mother, if that is so, I too shall make a desperate effort. Unless I take even one person along with me as a companion, my anger will not be appeased, you see.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と眉を逆立て、睨みつける。</p>
+            <p class="ja-classical-line">『ヤアこいつは失敗つた、まことに粗疎千万アク言を申上げました。つい口が辷りましてなア』</p>
+            <p class="ja-classical-line">『口が辷つたの、足が辷つたのと、そンな事で云ひ訳が立ちますか。私に着せた濡れ衣をサアどうして乾かして下さる。お前さまも世界の人を導いて歩くお方だと見えるが、そンな事でどうして神様の御用が出来ますか』</p>
+            <p class="ja-classical-line">『イヤ誠に閉口頓首だ、アクの身魂はやられた哩』</p>
+            <p class="ja-classical-line">『オイ、アクさま、態を見ろ、余り言霊を使ひ過ぎると、七尺以上の男が女に屁古まされるやうな事が起るのだよ。アハヽヽヽ万の悪い代物だなア』</p>
+            <p class="ja-classical-line">『さうするとお前はアクと云ふのかい、道理で万引の様な面をして厶るわい。オヽ恐ろしい恐ろしい、こンな所で追剥せられては大変だ、サア菊、長居は恐れ、早く帰りませう』</p>
+            <p class="ja-classical-line">『お母さま、浮木の里へ帰ればバラモンの軍人に追剥をされたり、念仏講に合はされたりしては耐りませぬから、一層此処へ身を投げて死にませうか。小北山へ行つても放り出される、ここへ来れば追剥にせられる。家へ帰れば軍人に訶まれる、何うする事も出来ぬぢやありませぬか』</p>
+            <p class="ja-classical-line">『これこれ母子御両人さま、私は五三公と申すもの、決して盗人ぢやありませぬ。三五教の宣伝使のお伴だ。決して人を難めたり、追剥なンどはして呉れと云はれても致しませぬから安心して下さい。大切な命をこンな所で果すとは悪い了見だ。気の短いにも程がある。これお菊さま、この叔父さまはそンな怖い者ぢやない、まア安心してお呉れ』</p>
+            <p class="ja-classical-line">『イエイエお前さまは泥棒だよ。そこに厶る三人のお方は、此間私の村へ出て来て「女徴集だ」と云つて、掻つ攫ひに来たお方ぢや。顔に見覚があります。そんな事を仰有つても私は承知は出来ませぬよ。なアお母さま、さうでせう』</p>
+            <p class="ja-classical-line">『成る程、そこの三人の男は家へもやつてきた男だ。隣のお亀を攫へよつたのはそこの三人だ。バラモン教の目付けだと云つて威張りよつた。こら三人の奴、此婆はかう見えても浮木ケ原のお寅と云つて若い時には賭場を開帳して居つた白浪女だ。もはや娘が命を捨てると覚悟した以上は、このお寅も足手纏ひがなくて力一ぱい活動が出来る。サア小童共このお寅が河へ投げ込ンで村の人の仇を打つてやらう。サアどうぢや』</p>
+            <p class="ja-classical-line">と目を釣上げ、偉い剣幕で睨めつけた。アク、タク、テクの三人はお寅婆の勢に辟易し、後ずさりして頭を掻いて居る。</p>
+            <p class="ja-classical-line">『ハヽヽヽヽ、オイ、アク、貴様等三人偉さうに云つて居るが随分悪い事をしよつたなア、年貢の納め時だ。一つ婆アサンとこの激流に投げ込まれて見よ、俺も何なら婆アさまの助太刀をせぬ事もないワ、万公末代の善の鏡だから』</p>
+            <p class="ja-classical-line">『これこれお婆さま、さう怒つて呉れては困る、アクの俺は役目で止むを得ず女徴集と出たのだ。役目だと思うてまア見直して呉れ』</p>
+            <p class="ja-classical-line">『何と云つてもお寅婆が死物狂ひ、許すものかい。これや万公とやら貴様も同類であらう。これお菊、お前は死ぬと覚悟を極めた上は一人死ぬのも勿体ない。これ等六人を残らず河へ投げ込ンで、大活動をし、天晴れ勇者となつて、冥途に行つた時に其勇名を誇らうぢやないか』</p>
+            <p class="ja-classical-line">『お母さまそンなら一つ私も死物狂の活動を致しませう。仮令一人でも道連にしてやらねば腹が癒へませぬからなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Matsuhiko opened his mouth for the first time,</p>
+          <p class="en-p">Matsuhiko: 'Now then, Otora-san, Okiku-san, first of all calm down; truly we are not bad men at all. Even within Brahmanism, good people are mixed in occasionally, you see. It is true that these three went for the women's levy, that much is a fact. But today they have already repented and are walking along accompanying the missionaries of Ananai-kyō, so please forgive them.'</p>
+          <p class="en-p">Otora-san: 'Just because you have a somewhat clever-looking face, you speak of somewhat sensible things. Though an unforgivable imp of a fiend, I will let you off with a blind eye today. In return, unless I make the three imps become dog-crouching and offer apologies saying "We were truly bad," I will not consent, you know. I will spare only your lives.'</p>
+          <p class="en-p">Matsuhiko: 'Hey, Aku, Teku, Taku, all three of you are completely pale in the complexion, aren't you? With such a state trembling because of being overwhelmed by one or two women, how can a man's face stand? Considering this, bad things must not be done, must they. It is a disgrace for ten thousand generations to the end of time. Ha ha ha ha!'</p>
+          <p class="en-p">Aku: 'Not at all, I have no reason to apologize to this old woman. I haven't even touched a single hair of the old woman or her daughter's body; I merely went as far as the neighboring house. Hey old woman, isn't it old-fashioned to call it a vendetta for the neighboring house? You too are quite old-fashioned in your head, aren't you.'</p>
+          <p class="en-p">Okiku: 'Heh! Since the fellow just now snaps and chews up blue covers and crab letters, he spits out such petty logic. If you are bold and will not apologize, it is fine even if you do not apologize. Since we too have our resolve.'</p>
+          <p class="en-p">Aku: 'Ha ha ha ha, what an obstinate old woman. You are trying to strike an Edo enemy in Nagasaki. Hey, let us three cross this single-plank bridge to the other side, and so that the old woman cannot come, let us drop this bridge, shall we? Taku, Teku, come now!'</p>
+          <p class="en-p">And rolling up his skirts, trying to cross the single-plank bridge recklessly, Aku in his panic plunged plump into the swirling raging torrent. Both Teku and Taku managed to cross to the other side. Otora and Okiku raised both hands, bustling about with cries of "Uwai, uwai."</p>
+          <p class="en-p">Matsuhiko, astonished,</p>
+          <p class="en-p">Matsuhiko: 'Hey, Mankō, Gosankō, we cannot just stay like this. The old woman is an old woman, but we must help Aku; come, let's cross.'</p>
+          <p class="en-p">So saying, Matsuhiko took the lead and began to cross the single-plank bridge. Following him, Gosankō also started across.</p>
+          <p class="en-p">Mankō: 'Helping Aku is strange, isn't it. If it were me, I'd help the good, you know.'</p>
+          <p class="en-p">He was spouting off. From behind, Otora grabbed Mankō firmly by the nape of the neck, while Okiku swept out her legs, knocking him down with a thud onto the riverbank.</p>
+          <p class="en-p">Mankō: 'Ba-ha-ha-ha, old woman, what-what are you doing? Don't-don't I know nothing in the slightest?'</p>
+          <p class="en-p">Otora: 'Whether you know it or not is fine. Since you are a remnant of the enemy, mother and child gather together and we will take your life.'</p>
+          <p class="en-p">Mankō, startled,</p>
+          <p class="en-p">Mankō: 'Hey, Matsuhikosama, Gosankokosama, it's murder, save me!'</p>
+          <p class="en-p">He cried out at the top of his lungs. Drowned out by the sound of the raging torrent, it could not be heard on the opposite bank. The four were running about in confusion, hither and thither, trying to rescue Aku. As for Aku, somehow swimming and reaching the bank two or three chō downstream, he became completely naked and began to squeeze his wet clothes.</p>
+          <p class="en-p">Matsuhiko: 'Ah, it's safe now; as expected, Aku is a great fellow. Matsuhiko is impressed. Having strong bad luck must be this very thing, ha ha ha ha.'</p>
+          <p class="en-p">Okiku: 'Now, Matsuhikosama, isn't Mankō missing?'</p>
+          <p class="en-p">Matsuhiko: 'What, Gosankō, is Mankō not there?'</p>
+          <p class="en-p">So saying, when he looked at the opposite bank, he was being pinned down by two women and struggling.</p>
+          <p class="en-p">Matsuhiko, hurriedly,</p>
+          <p class="en-p">Matsuhiko: 'Hey, both Teku and Taku, go toward Aku's side and take care of him. Gosankō, I am sorry to trouble you, but cross the single-plank bridge and go save Mankō.'</p>
+          <p class="en-p">Gosankō: 'Hey, I understand. But what are you intending to do?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">松彦は初めて口を開き、</p>
+            <p class="ja-classical-line">『もしもし、お寅さま、お菊さま、先づお静まりなさい、決して吾々は悪人ではありませぬよ。バラモン教の中にもたまには善人が混つて居りますからなア。此三人は成る程女徴集に往つたのは事実でせう。併し今日は最早改心をして三五教の宣伝使のお伴して歩いて居るのだから、どうぞ許してやつて下さい』</p>
+            <p class="ja-classical-line">『お前さまは一寸賢さうな顔をして居るだけに一寸分つた事を仰有る。許し難き餓鬼なれども、今日は見逃しておきませう。そのかはり三人の餓鬼に「どうも悪かつた」と犬蹲ひになつてお詫をさせにや承知しませぬよ。命だけは助けてやります』</p>
+            <p class="ja-classical-line">『オイ、アク、テク、タク三人薩張顔色無しだナ、女の一人や二人にこみわられて慄つて居るやうな事で、どうして男の顔が立つか。是を思へば悪い事は出来ぬものぢやなア。万公末代万年の恥だよ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">『何も俺は此婆さまにあやまりの条がないのだ。婆さまや娘の体に指一本さへたのでもない、隣の家まで往つたのみだ。オイ婆さま、隣の家の敵打だなンて旧いぢやないか。お前も随分頭が旧いなア』</p>
+            <p class="ja-classical-line">『エヽつべこべと今の奴は青表紙や蟹文字を噛つてけつかるから、そンな小理屈を吐すのぢや、強太う致して謝罪らぬなら謝罪らないでもよい。此方にも覚悟があるのだから』</p>
+            <p class="ja-classical-line">『ハヽヽヽヽ剛情な婆だな、江戸の敵を長崎で打たうとして居る。オイ、俺達三人はこの一本橋を向ふへ渡つて、婆の来ぬやうに、この橋を落してやらうぢやないか、タク、テク、サア来い』</p>
+            <p class="ja-classical-line">と尻を引き捲り一本橋を無性矢鱈に渡らむとし慌てアクは渦まく激流にドブンと落ち込ンだ。タク、テクの両人は辛うじて向ふへ渡る。お寅とお菊は両手を上げて、ウワイ　ウワイとぞめいて居る。</p>
+            <p class="ja-classical-line">松彦は驚き、</p>
+            <p class="ja-classical-line">『オイ、万公、五三公、これやかうしては居られない。婆さまも婆さまだがアクを助けてやらねばなるまい、サア渡らう』</p>
+            <p class="ja-classical-line">と云ひながら松彦は先に立つて一本橋を渡り初める。続いて五三公も渡り出した。万公は、</p>
+            <p class="ja-classical-line">『アクを助けるとは妙だなア、俺だつたら善を助けるがなア』</p>
+            <p class="ja-classical-line">とほざいて居る。後からお寅は万公の首筋をグツと引き、お菊は足を浚へ、ドスンと河端に倒して仕舞つた。</p>
+            <p class="ja-classical-line">『バヽヽヽ婆さま、ナヽヽ何をするのだ。俺はスヽヽ些しもシヽヽ知らぬぢやないか』</p>
+            <p class="ja-classical-line">『知つても知らぬでもよいわ。貴様は敵の片割れだから親子寄つて集つて命を取つてやるのだ』</p>
+            <p class="ja-classical-line">万公は吃驚して、</p>
+            <p class="ja-classical-line">『オイ松彦さま、五三公さま、人殺だ、救けて呉れ』</p>
+            <p class="ja-classical-line">と声を限りに叫び居る。激流の音に遮られて向ふ岸には聞えなかつた。四人はアクを助けむと右往左往に周章へ廻つて居る。アクはどうしたものか二三町下手の岸に漸く泳ぎつき、真裸体となつて濡れた着物を圧搾し初めた。</p>
+            <p class="ja-classical-line">『アーもう大丈夫だ、矢張アクは偉い奴だ。松彦も感心した。悪運強いとは此事であらう、ハヽヽヽヽ』</p>
+            <p class="ja-classical-line">『もし松彦さま、万公が居らぬぢやありませぬか』</p>
+            <p class="ja-classical-line">『何、五三公、万公が居らぬか』</p>
+            <p class="ja-classical-line">と云ひながら向ふの岸を見ると、二人の女に押へられ藻掻いて居る。</p>
+            <p class="ja-classical-line">松彦は言せはしく、</p>
+            <p class="ja-classical-line">『オイ、タク、テクの両人はアクの方へ往つて世話をしてやつて呉れ、五三公は御苦労ぢやが一本橋を渡つて万公を助けて来い』</p>
+            <p class="ja-classical-line">『ヘイ承知致しました、併し貴方はどうなさるお積りです』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">I am the deputy of the Sendenshi, so I intend to take a seat first in the center and critique the combat styles of both armies. Come on, won't you hurry and go?</p>
+          <p class="en-p">Ah, it can't be helped.</p>
+          <p class="en-p">Isokō crossed the Itsuponbashi bridge once again,</p>
+          <p class="en-p">Hey there!</p>
+          <p class="en-p">As he shouted, Otora and Okiku remained completely unconcerned,</p>
+          <p class="en-p">Hey you, what are you interfering for? Isn't the Sensei waiting over yonder? Hurry on over there right now. This fellow is called Mankō, the rogue who deceived my daughter. He's the scoundrel who lay in wait where Okiku's older sister Osato went out to the fields, ambushed her, and finally lived together with her in my house for about a year as if they were a married couple. Osato's belly swelled from an evil bond, and as a result of a difficult birth, she ended up dying. When that happened, this heartless man ran away kicking sand back behind him. I had been searching everywhere to find where he went, but fate cannot be evaded, and we happened to meet right here. He is my daughter's enemy, and no matter what, I won't be satisfied unless I kill him. Mankō thinks I have bad eyes and puts on an innocent face, but I'm not an old woman who doesn't understand such things. Taste this iron fist, you enemy of my daughter!</p>
+          <p class="en-p">So saying, she raised her clenched fist and struck him repeatedly, tap, tap, tap.</p>
+          <p class="en-p">Ouch, ouch, ouch, ouch! Mankō-Mankō-Mankō, please pardon me!</p>
+          <p class="en-p">Enemy of my sister, I won't let you off!</p>
+          <p class="en-p">So saying, she clenched her fist again and struck him, tap, tap, tap.</p>
+          <p class="en-p">Hey, Isokō, won't you help me? I'm not a man who gets weak over three or four women, but Mother Otora is a hundred-dan master of judo, so once you're grabbed tightly, there's nothing at all you can do.</p>
+          <p class="en-p">Ho, ho, ho, ho! Now, you called Isokō, if you lay even a single finger of yours on this old woman's body, I won't let you off.</p>
+          <p class="en-p">Well now, even Isokō has no way to intervene. There probably won't be any chance of taking your life, so just endure the beatings with all your might. Now, Grandma, please hit him firmly yet softly, I beg you.</p>
+          <p class="en-p">Mother, it's no use beating such a spineless man. Shall we forgive him already? Rather than that, it might be more worthwhile to return to Ukigahara, plunge into the camp of General Lunch, and die a glorious death by fighting and being cut down.</p>
+          <p class="en-p">That's right, it's no use taking two or three such blowflies as opponents; let's forgive him. What a lucky fellow who has been spared his life. From now on, you must surely reform yourself, you scoundrel Mankō.</p>
+          <p class="en-p">Yes, I shall be careful.</p>
+          <p class="en-p">Always remember what I say, listen well to what that Sensei says, and return to a good heart. Now, you are a creature set free in the three thousand worlds, go wherever you please, Mankō.</p>
+          <p class="en-p">With a sudden release, she let go of the hand she had been grasping. Mankō stood up with a sluggish heave,</p>
+          <p class="en-p">Grandma, thank you very much for your trouble. Thanks to you, my stiff shoulders have been cured.</p>
+          <p class="en-p">Leaving behind those parting words, he ran away.</p>
+          <p class="en-p">What a hopeless man. That fellow still hasn't straightened his loach bones, it seems. I'll chase after him from behind and administer one more reprimand, come on, Okiku.</p>
+          <p class="en-p">Trying to cross the Itsuponbashi bridge, Isokō spread both his arms and said,</p>
+          <p class="en-p">Grandma, please, please wait. Since I will reason with him thoroughly, please forgive him this once and for all. Since you yourself said you forgave him, please let it go just this once. Isn't it fine if you don't chase after him with such deep grudge?</p>
+          <p class="en-p">Even though he is a hateful fellow, he is a man whom my dear daughter cherished even if only for a year, so just to lecture him thoroughly, punish him, and turn him into a proper man, we mother and child acted so roughly. The reason we struck Mankō was still because we are fond of him. Why would we hate him and strike his head if we didn't care?</p>
+          <p class="en-p">So saying, she wiped away her tears with her sleeve. Okiku also hid her face and softly wiped her tears.</p>
+          <p class="en-p">Ah, how precious a parent's grace is! Farewell, Grandma.</p>
+          <p class="en-p">With that parting remark, Isokō hurriedly crossed the Itsuponbashi bridge once again and hastened toward the sacred ground of Kitagata.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『私は宣伝使代理だから先づ中央に坐を占めて両軍の戦闘振を講評する積りだ、サア早くゆかないか』</p>
+            <p class="ja-classical-line">『エヽ仕方がない』</p>
+            <p class="ja-classical-line">と五三公は一本橋を又もや渡り、</p>
+            <p class="ja-classical-line">『これやツ！！』</p>
+            <p class="ja-classical-line">と呶鳴りつけるを、お寅にお菊は平気なもので、</p>
+            <p class="ja-classical-line">『これお前さま何を邪魔をするのだイ。向ふに先生が待つて厶るぢやないか、とつととあちらに往かつしやれ。此奴は万公と云つてな、私の娘をチヨロマカした奴だよ。お菊の姉のお里が野良へ往つた処を待ち伏して野倒しをやり、たうとう夫婦気取りで、一年計りも私の家で暮して居つた奴ぢや。お里は悪縁で腹が膨れ、其ために難産をした揚句に死ンで仕舞ひよつた。さうするとこの薄情男奴後足で砂をかけて逃げてしまひよつたのだ。どこへ往つたかと探して居たが、天命遁れず此処で廻り合つたのだ、娘の敵だ、どうしても殺さねや承知しないのだ。目が悪いと思うて万公の奴知らぬ顔して居るが、そンな事の分らぬ婆さまぢやない。娘の敵この鉄拳でも喰へ』</p>
+            <p class="ja-classical-line">と握り拳をふり上げてコンコンと叩く。</p>
+            <p class="ja-classical-line">『アイタヽヽヽ万々々どうぞ勘弁へてお呉れ』</p>
+            <p class="ja-classical-line">『姉さまの敵承知しないぞ』</p>
+            <p class="ja-classical-line">と又拳を固めてコンコンと打つ。</p>
+            <p class="ja-classical-line">『オイ五三公の奴、助けて呉れないか。私も三人や四人の女に弱るやうな男ぢやないが、お寅婆アさまは柔道百段だから、グツと掴まれたら、どうする事も出来ないのだ』</p>
+            <p class="ja-classical-line">『オホヽヽヽ、これ五三公とやらこの婆に指一本でもこの体にさへたら承知せぬぞ』</p>
+            <p class="ja-classical-line">『これや五三公も手の出しやうがないわい、滅多に命を取るやうな事もあるまいから、精出して叩いて貰へ。なアお婆さま何うぞ強つく、柔かう頼みますよ』</p>
+            <p class="ja-classical-line">『お母さま、こンな腰抜け男を叩いても仕方がない。もう勘忍してやりませうか。それよりも浮木ケ原へ帰り、ランチ将軍の陣営に飛び込み、斬つて斬つて斬り死をした方が死甲斐があるかも知れませぬぜ』</p>
+            <p class="ja-classical-line">『さうだ、こンな蠅虫の二匹や三匹相手にしたつて仕方がない、許してやらう。命冥加の奴だ。今後はきつと慎め、万公奴』</p>
+            <p class="ja-classical-line">『ハイ謹みます』</p>
+            <p class="ja-classical-line">『私の云ふ事を何時迄も覚えて居つて、あの先生の云ふ事を好う聞いて善心に立ち帰るのだよ。サア三千世界の放ち飼ひ、何処へなりと万公勝手に往け』</p>
+            <p class="ja-classical-line">と掴むで居た手をパツと放した。万公はムクムクと起き上り、</p>
+            <p class="ja-classical-line">『婆さま大きにお世話になりました。お蔭で肩の凝りが癒りました』</p>
+            <p class="ja-classical-line">と捨台詞を残して逃げて行く。</p>
+            <p class="ja-classical-line">『仕方のない男だな。彼奴はまだ、どせう骨が直つて居ないと見える。後より追つついて、も一つ折檻してやらう、サアお菊』</p>
+            <p class="ja-classical-line">と一本橋を渡らうとする。五三公は両手を拡げ、</p>
+            <p class="ja-classical-line">『お婆さま、まあまあ待つて下さい、私がとつくと言うて聞かしますから、もうこれ切り許してやつて下さい。貴女も一旦許すと仰有つたのだから、もう、これ切り許して下さい。さう執念深く追駆ないでもよいぢやありませぬか』</p>
+            <p class="ja-classical-line">『憎い奴ではあるけれど、たとへ一年でも可愛娘の可愛がつて居た男だから、十分言うて聞かして懲してやり、一人前の男にしてやりたい計りに、かうして母子が手荒い事をしたのだ。万公を打擲したのは矢張可愛いからだよ。何しに憎うて頭の一つも叩かれやうぞ』</p>
+            <p class="ja-classical-line">と云ひながら涙を袖に拭ふ。お菊も顔を隠し涙をそつと拭いて居る。</p>
+            <p class="ja-classical-line">『アヽ親の恩と云ふものは有り難いものぢやなア。お婆さま左様なら』</p>
+            <p class="ja-classical-line">と云ひ捨て、五三公は又もや一本橋を慌しく渡つて仕舞ひ、小北の霊場へと急ぎける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c17.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 17: 罵狸 Ogre [1186]</span>
+      </a>
+      <a href="c19.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 19: 婆口露 [1188]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
