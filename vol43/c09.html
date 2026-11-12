@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9: 輸入品 [1160] - Volume 43 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 43 Table of Contents</a>
+      <span>Volume 43</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 43 &bull; Chapter 9</span>
+      <h1 class="chapter-title-en">Chapter 9: 輸入品 [1160]</h1>
+      <p class="chapter-title-ja">輸入品〔1160〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In the wood where the moon shone brightly, there were two people talking in whispers. Needless to say, these two were Tamakuniwake and Sumikō. The full moon of perfect bliss, which had hitherto been covered in bronze-colored cloud robes, seemed to be peering down upon the dialogue of the two as if it had a mind of its own.</p>
+          <p class="en-p">Sumikō: 'Sensei, after this desolate path of the demonic army, those shattered-sounding laughter echoing from nowhere—is this not a scene as though a paradise of pleasure has opened up in the wake of the Shura realm? It is extremes meeting extremes, indeed.'</p>
+          <p class="en-p">Tamakuniwake: 'Mhm, when things reach an extreme they reverse; the height of sorrow is joy. The height of joy is sorrow once more. It seems some comedy is being enacted around the shrine as its center. Hearing that laughter, my headache too seems to have been wiped away and vanished completely. Whenever one suffers from illness, laughing is the best remedy. That very moment of opening wide one's mouth and laughing merrily without guile is the state of the supreme heaven. Ah, I too am feeling somehow cheerful. Ha ha ha ha!'</p>
+          <p class="en-p">Sumikō: 'Ah, just when I thought I had beheld the face of the glorious moon Ōkami once more, I have beheld a smile brimming upon your crystal-jewel-like gentle countenance, Sensei. I too feel somehow gladdened and emboldened. Ha ha ha ha!'</p>
+          <p class="en-p">Tamakuniwake: 'That loud laughter sounded very much like Michikō's voice, didn't it?'</p>
+          <p class="en-p">Sumikō: 'It was a similar voice. This is the first time I have heard that man laugh with such a loud voice. However, why does he not clap his hands as per your command? I suspect those fellows of the Brahmanism are intoxicated with wine, swelling with the spirit of triumphant return, and bursting into loud laughter.'</p>
+          <p class="en-p">Tamakuniwake: 'That can hardly be. Michikō must be casting himself into the vortex of laughter as well.'</p>
+          <p class="en-p">Sumikō: 'With such a wind of peace blowing near the shrine, it does no good to remain here in peaceful retirement forever. There can be little time left before the army of Brahmanism, smitten by the Kototama of Hinodewake-sama, comes fleeing back. At any rate, let us make our way toward that shrine. Ah, hands have clapped. That is surely Michikō's signal. Come, let us go.'</p>
+          <p class="en-p">Tamakuniwake: 'If so, let us go.'</p>
+          <p class="en-p">So saying they stood up, the two hats shining white in the air and the two staves striking the earth while glistening in the moon, as they descended.</p>
+          <p class="en-p">Before the shrine, exposing his smiling face to the moonlight, Michikō squatted all alone.</p>
+          <p class="en-p">Sumikō: 'Hey, Michikō-san, were you all by yourself?'</p>
+          <p class="en-p">Sumikō: 'Did you make the voices of two or three people all by yourself at once? You are a remarkably dexterous fellow. Sensei is here. Will you not offer a greeting?'</p>
+          <p class="en-p">Michikō: 'Are we not just parted there a moment ago? Between master and disciple, even if separated by ten or twenty ken, is such a burdensome and overly polite greeting required? If we go about doing such meticulous and elaborate courtesies, nothing will be accomplished. Sensei, you know my heart, do you not?'</p>
+          <p class="en-p">Tamakuniwake: 'Mhm, I know it well. Tell me, Michikō, was there no one else? Were there only two people?'</p>
+          <p class="en-p">Michikō: 'Yes, descendants of monkeys, totaling just two of them, squatted like dogs before the shrine and were groaning together. By my divine power, I finally made them laugh themselves away. Ha ha ha ha!'</p>
+          <p class="en-p">Tamakuniwake: 'Ah, while bathing in the moonlight, let us borrow the front of this shrine and wait for the enemy army to return.'</p>
+          <p class="en-p">So saying, he seated himself on a suitable stone in front of the shrine.</p>
+          <p class="en-p">Michikō: 'Hey, judging from what those two fellows were saying just now, Itakō seems to have somehow become a prisoner of the enemy. However, as things now stand, it is of no use to regret it. From now on, in order to save Itakō, shall we not fulfill our duty as friends?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">月照り渡る森の木蔭に小声で話し合つて居る二人があつた。これは玉国別、純公の二人なる事は云ふ迄もない。今迄銅色の雲の衣をかぶつて居た円満具足の望の月は心ありげに二人の対話を窺くものの如くであつた。数十間隔たつた祠の森の辺りには二三人の男の笑ひ声が聞えて来た。</p>
+            <p class="ja-classical-line">純公『先生、此殺風景な魔軍の通つた後に、何とも知れぬ砕けたやうなあの笑ひ声、修羅道の後へ歓楽郷が開けた様な光景ぢやありませぬか。極端と極端ですなア』</p>
+            <p class="ja-classical-line">玉国別『ウン、窮すれば達す、悲しみの極は喜びだ。喜びの極みは又悲しみだ。祠を中心に何か喜劇が演ぜられて居ると見える。あの笑ひ声を聞くと私の頭痛も拭ふが如く消え散つて仕舞つたやうだ。凡て病に悩む時は笑ふのが一番ぢや。大口をあけて他愛もなく笑ひ興ずるその瞬間こそ無上天国の境涯ぢや。ヤア私も何となく面白くなつて来た。アハヽヽヽ』</p>
+            <p class="ja-classical-line">純公『ヤア初めて麗しき月の大神様のお顔を拝したかと思へば又もや先生の玲瓏玉の如き温顔に笑ひを湛へられた所を拝みました。何だか私も嬉しく勇んで参りました。アハヽヽヽ』</p>
+            <p class="ja-classical-line">玉国別『あの大きな笑ひ声は、どうやら道公の声のやうだつたなア』</p>
+            <p class="ja-classical-line">純公『似たやうな声でしたな。あの男があれだけ大きな声で笑つたのは今が聞初めです。併し、なぜ貴方の御命令通り手を拍たないのでせうか。察する処バラモン教の奴、酒にでも酔つぱらつて凱旋気分になり哄笑して居るのぢやありますまいかな』</p>
+            <p class="ja-classical-line">玉国別『さうではあるまい。道公も矢張笑ひの渦中に投じて居るのだらう』</p>
+            <p class="ja-classical-line">純公『かう平和の風が祠の近辺に吹いて居るのに、いつ迄此処に楽隠居して居た処で仕方がありますまい。バラモン教の軍隊が治国別様の言霊に打たれて遁走して来るのにもう間もありますまい。兎も角もあの祠を指して参りませうか。ヤア手が鳴りました。あれはキツと道公の合図でせう。サア参りませう』</p>
+            <p class="ja-classical-line">玉国別『そんなら行かう』</p>
+            <p class="ja-classical-line">と立ち上り、二つの笠は空中に二本の杖は白く月に照り乍ら地を叩いて下つて往く。</p>
+            <p class="ja-classical-line">祠の前には、ニコニコした顔を月光に曝し、道公が唯一人踞んで居る。</p>
+            <p class="ja-classical-line">純公『オイ道公さま、お前一人だつたか』</p>
+            <p class="ja-classical-line">道公『ウン合計〆て一人だ。何も居ないよ。あいさに木の葉がそよ風に吹かれて何だか訳の分らぬ事を、舌を出してペラペラと喋つて居よるが、俺の耳には植物の声はトンと聞えないわ』</p>
+            <p class="ja-classical-line">純公『お前一人で二人も三人もの声を一時に出したのか、余程器用な男だねえ、先生様のお越しだ。挨拶をせぬか』</p>
+            <p class="ja-classical-line">道公『今其処で別れた計りぢやないか。師弟の間柄、十間や二十間分れたつて七六ケ敷う挨拶が要るものか。そんな繁文縟礼の事をやつて居ると埒は明かないぞ。先生、貴師は私の心を御存じでせうね』</p>
+            <p class="ja-classical-line">玉国別『ウンよく分つて居る。時に道公誰も居なかつたか、二人計り居つただらう』</p>
+            <p class="ja-classical-line">道公『ハイ、猿の子孫が〆て二人計り祠の前に犬踞ひになつて唸り合つて居りましたよ。私の神力で、とうとう笑ひ散らしてやりました。アハヽヽヽ』</p>
+            <p class="ja-classical-line">玉国別『アヽ月の光を浴び乍ら此祠の御前を借用して敵軍の帰り来るのを待つ事にしよう』</p>
+            <p class="ja-classical-line">と云ひながら祠前の恰好の石に腰打ちかけた。</p>
+            <p class="ja-classical-line">道公『オイ、今二人の奴の話を聞けば伊太公はどうやら敵の捕虜になつたらしいよ。併し乍ら、今となつては悔んでも及ばぬ事だ。此後吾々は伊太公を救ふため、友人の義務を尽さうではないか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sumikō: 'That is true, it cannot be helped. Since Kamisama grants His protection even to Itakō, there is no need to be so pessimistic.'</p>
+          <p class="en-p">Michikō: 'For over half an hour from now, waiting in a place like this crouching like guardian dogs is hardly clever, is it? Won't you bathe in the moonlight, go down to the mountain stream and dabble in the water, or if not that, tell some old tales and wait for the time to come?'</p>
+          <p class="en-p">Sumikō: 'Did not Senseisama strictly command us to keep silence?'</p>
+          <p class="en-p">Michikō: 'Look here, Sensei, if we stay silent too much, spiderwebs will stretch inside our mouths. Furthermore, since shelf spiders will build nests in the holes of my ears, please let me tell a little old tale to sweep away the spiders. Since I am a troublesome fellow whose hands, feet, and mouth must constantly move like a baby or else my inner worms will not settle, I beg you with a broad mind to look again, listen again, and here once more grant me a re-proclamation.'</p>
+          <p class="en-p">Tamakuniwake: 'Hmm, there is no objection to that. But are the preparations for the Kototamasen complete?'</p>
+          <p class="en-p">Michikō: 'Since propellers will rust and fail to rotate smoothly if left unused for too long, please let me use my vocal organs for a moment, thinking of it as a rehearsal for the Kototamasen.'</p>
+          <p class="en-p">Tamakuniwake: 'Hmm, very well, very well. Since we will enter the actual combat phase in a little while, you may talk about whatever you like until then.'</p>
+          <p class="en-p">Michikō: 'Hey Sumikō, my request is granted at once. Come, now there is no need to hold back before anyone; Michikō-sama, the peerless orator of the realm, will spin out the eloquence of Bruno to his heart's content, so do you become the listener. And in the pauses, you must say "Hmm", "I see", or "What happened next?" or else the story will not come to a neat conclusion, so I count on you. First of all, I shall array a romance from my young days and offer it to your ears for your amusement.'</p>
+          <p class="en-p">Sumikō: 'Hey, Michikō, even a man like you who looks like a green gourd with eyes and a nose appended surely has romances, how strange.'</p>
+          <p class="en-p">Michikō: 'You must not make too much a fool of me; I am Michikō-sama of the snakes know the ways of snakes. Various wonderful, teeth-loosening journey-tales are overflowing within my heart. Since it would not benefit the realm and the state for me alone to let a treasure rot in storage, here I shall try telling an old tale as a side show with the intent of dedicating it to the god of the shrine grove, so listen with reverence. Ahem, now around the time when this Michikō-sama was eighteen years old, there was a beauty of wondrous and boundless extremity in my birthplace called Hall. And then, that Hall-sama, together with her nurse, daintily carrying a pack of opera on her slender arm, holding a parasol to her shawl, and clad in a magnificent costume with plum blossoms scattered on the skirt pattern, went out to view the cherry blossoms. At that time I was still eighteen, in the prime of my color with a fine gloss on my face, strolling along leisurely blessing the official holiday with one hand thrust into my pocket and squeezing my testicles, while carrying a cherry walking stick with a stylishly curved tip tucked under my arm, so please imagine. Then you must imagine that here and there, there were groups of three, five, or seven people drinking gourd-sake. It seems that fellows of the Ural religion and fellows of the Brahman religion were also plentiful, blathering away such things as "Drink and make merry, an inch ahead is darkness, behind the darkness comes the moon, and though the moon is the moon, it's the moon of destiny," getting dead drunk. Out into that place Hall-sama appeared with a graceful figure at which even flowers would be shy, led by the hand by her nurse, looking like Konohanahime of Mount Tenkyō with her slender posture. Then you must imagine how it was truly poetic for Michikō-sama to be strolling about there once more in the stylish guise mentioned earlier. It was just like being a person within a painting. Hall-sama looked around at everyone making strange faces and gorging themselves on drunkenness, and with a gentle mouth opening like dew on plum blossoms, she laughed, saying "Ho-ho-ho-ho." Then you must imagine that the sake-drinking fellows began to pick a quarrel, looking at the young lady one by one.'
+</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">純公『さうだなア、仕方がないなア。神様が伊太公にも御守護を遊ばすからさう悲観するにも及ぶまい』</p>
+            <p class="ja-classical-line">道公『これから半時以上も、こんな所でチヨコナンとして狛犬然と待つて居るのも気が利かぬぢやないか。月の光を浴びながら、谷川へ下りて水でもいぢつて来るか、さうでなければ昔話でもして時の到るを待つたらどうだ』</p>
+            <p class="ja-classical-line">純公『それでも先生様が沈黙を守れと堅く仰有つたぢやないか』</p>
+            <p class="ja-classical-line">道公『モシ先生、あんまり黙言て居ますと、口の中で蜘蛛の巣が張ります。又耳の穴にも棚蜘蛛が巣をかけますから蜘蛛払ひのために少し昔話でもさして下さいな。手なと足なと、口なつと赤坊のやうに始終動かして居らねば虫の納まらない厄介の奴だから、どうか広き心に見直し聞直し、ここは一つ宣り直しを願ひます』</p>
+            <p class="ja-classical-line">玉国別『ウンそれも差支へはない。併し言霊戦の準備は整うて居るかな』</p>
+            <p class="ja-classical-line">道公『プロペラーも、余り長らく使用しないと錆がついて思ふやうに円滑に回転しませぬから、言霊戦の予行演習だと思つてチツと発声機関を使用さして下さい』</p>
+            <p class="ja-classical-line">玉国別『ウンよしよし、もう暫くすれば実戦期に入るのだから夫れ迄何なりと話したがよからうぞ』</p>
+            <p class="ja-classical-line">道公『オイ純公、忽ち願ひ済みだ。サア最早誰人に遠慮も要らぬ、天下唯一の雄弁家道公さまが布婁那の弁を縦横無尽にまくし立てるから、聞き役になつて呉れ。そして間さには、ウンとか、なる程とか、其次はどうなつたとか云うて呉れなくては旨く話の結末がつかないから頼むよ。先づ俺の若い時のローマンスでも陳列してお慰みにお耳に入れることにしよう』</p>
+            <p class="ja-classical-line">純公『オイ、道公、お前のやうな青瓢箪に目鼻をつけたやうな男でも矢つ張りローマンスはあるのか、妙だねえ』</p>
+            <p class="ja-classical-line">道公『余り馬鹿にして貰ふまいか、蛇の道は蛇の道の道公様だ。種々の素晴しい歯の浮く様な道行話が胸中に満ち溢れて居るのだ。俺計り宝の持ち腐りをして居ても天下国家のためにならないから、一つ此処で祠の森の神様に奉納の積りで余興に昔語りをやつて見るから謹んで拝聴せよ。エヘン抑此道公さまの御年十八才の頃、俺の生れ在所にホールと云ふ素的滅法界の美人があつたのだ。そした所が、其ホールさまが、乳母と一緒にオペラパツクを細い腕にプリンと提げ、シヨールに蝙蝠傘を携へ裾模様に梅の花を散らした素晴しい衣装をお召しになり桜見物にお出なさつたのだ。その時俺はまだ十八の色盛り顔の艶も好く、ブラリブラリと公休日を幸ひ片手を懐に入れ握り睾丸をしながら桜のステツキの乙に曲つたやつを小脇に挟みやつて行つたと思ひ給へ。さうすると彼方にも此方にも、瓢箪酒を呑んで居る三人五人七人の団隊があつたと思ひ給へ。ウラル教の奴も、バラモン教の奴も沢山居たと見えて「飲めよ騒げよ一寸先は闇よ、闇の後には月が出る。月は月でも縁のつき」だなんてぬかしやがつて、ヘベレケに酔つて居る。そこへホールさまが花も恥らふ優姿、乳母に手を曳かれ天教山の木花姫様のやうなスラリとした姿でお出なさつた。そこへ又道公さまが最前いつた様な意気な姿でブラついて居た様は実に詩的だつたネー。まるで画中の人のやうだつたよ。ホールさまは、何奴も此奴も妙な顔をして酒に酔ひ喰つて居るのを打ち眺め、梅花の露に綻ぶやうな優しい口許で「ホヽヽヽヽ」と笑ひたまうたと思ひたまへ。さうすると酒喰ひの奴、そろそろお嬢さまを見て喰つてかかつたのだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sumikō was drawn in by Michikō's story, unconsciously drawing his knees closer and opening his eyes wide,</p>
+          <p class="en-p">Sumikō: 'Eh, and what happened after that? Why won't you tell me quickly?'</p>
+          <p class="en-p">Michikō: 'The rest is a heavenly secret that must not be leaked. From here on is the crucial and critical climax, you see. Hey, this is a world where bribes run rampant. If you want to hear such a mysterious story, shell out a bit of sakate; even at the Haruna grand theater you couldn't hear such a tale of actual experience.'</p>
+          <p class="en-p">Tamakuniwake: 'Atsuhahaha.'</p>
+          <p class="en-p">Sumikō: 'Come, won't you tell me the next part quickly? Isn't it exasperating?'</p>
+          <p class="en-p">Michikō: 'How does it go after this? It's a matter that should be called a treat for tomorrow evening, but shall I pay heavily and leak the rest of this, ehhehehehe? Ah, that traitorous saliva, a defiant rascal trying to gush forth freely without even obtaining the protagonist's permission. Ehehehehe, should I not tell it anymore? No, no, since it was said to be dedicated to the god of the grove of the shrine, I suppose it won't do to be tight-fisted. Ehehehehe. Exactly and thus, among the drunkards, a giant who grew Kumasohige all over his face, with a reddish-black skin showing only around his eyes and nose, stood up abruptly, grabbed the Hime's neck fiercely by the scruff, and blurted out, "Hey you stupid Ama, what is this, how rude! While I am taking a good mood and getting dead drunk, what is so funny? Eeee, you looked at my face and laughed, but for the very reason you laughed there must be some cause. Come, pour me a cup of saké with your own hands!" Thus he came out so grandly. Hōru-sama instantly changed her complexion and let out a trembling voice, "Oh, scary nurse, what shall I do?", running about in a panic. The big man became all the more fierce and majestic, "Who do you think I am? I am none other than Sumikō with the dark complexion, whose name is sold even in the land of the moon! How can a man maintain his dignity if he is mocked by a frail Ama? Come, gracefully pour the saké!" So he spat it out. Hōru-sama called out desperately with a sorrowful voice, "Oh, scary, save me, save me!". When she did that, the drunkards who were drinking all around took up the cry, "Hey, what is it, what is it? A fight, a fight!", and surrounded the Hime and Sumikō. As for that spectacle, it was truly imposing and solemn. To the extent that there was hardly a space for an ant to crawl out, it was a mountain of people, one crowding upon another. At that, this Michikō said, "Wait, wait, wait for a while," spreading his arms wide, tying his twisted hachimaki tightly, and cutting right in between the two. Sumikō stood in anger and glared with rogue's slang, "I don't know who or what you are, but if you interfere, it won't be good for you!" I too am someone to be reckoned with, catching Sumikō's neck by the scruff with the skill of a hundred judo dan learned daily, aiming for the air, and when I threw him with purin, purin, purin, even the mighty giant tumbled down onto the grassy plain with a dosun, and without saying it hurts or anything, he looked back resentfully and sneaked off. How delightful, how pleasant. Even now, when I think of it, it is like a wonder why such strength came out. So if you look around to see what Hōru-sama is doing, led by the nurse, she pushes through the crowd and flees away briskly. Seeing her retreating figure, even I somehow, without caring that people were there, sucked on my finger and stood on tiptoe to watch.'</p>
+          <p class="en-p">Sumikō: 'Ahahaha, the curtain has fallen on what is called working to exhaustion for nothing, hasn't it? I thought it would mostly be something like that. Pity you, ufuhehehe. If it were me, I would have gone a step further and made the gracious Hime speak words of gratitude, but you evidently still have a weak spirit after all, ufuhehehe.'</p>
+          <p class="en-p">Michikō: 'What, this isn't the end yet! From here on is the crucial moment. Ehehehehe, and then, I somehow felt a slight sentiment of longing, and wondering how much I fretted to see the face of Hōru-sama like a heavenly maiden just one more time, you have no idea. However, as she is a renowned wealthy young lady who is not even exposed to the gap's wind as she is raised, no matter what, I could not manage to meet her. As a result of various thoughts, I entered the bathhouse there. In other words, I sneaked in as a bathhouse attendant. Because I thought if I did that, I would surely be able to behold the Hime's face someday, eeen.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">純公は道公の話に釣り込まれ、思はず知らず膝を寄せ目を丸くしながら、</p>
+            <p class="ja-classical-line">『エ、それから其後はどうなつたのだ、早く云はないか』</p>
+            <p class="ja-classical-line">道公『この先は天機漏らすべからずだ。これからが肝腎要の正念場だからな。オイ袖の下の流行する世の中だ。こんな神秘的の話を聞かうと思ふなら、些酒代をはり込め、ハルナの大劇場だつてこんな実歴談は聞く事は出来ないぞ』</p>
+            <p class="ja-classical-line">玉国別『アツハヽヽヽ』</p>
+            <p class="ja-classical-line">純公『サア早く次を云はぬかい。もどかしいぢやないか』</p>
+            <p class="ja-classical-line">道公『後はどうなりますか。又明晩のお楽しみと云ふべき処だが、どつと張り込んでこの後を漏らさうかなア、エヘヽヽヽヽあゝ涎の奴、主人公の許しも得ずに自由自在に迸出せむとする不届きの奴だ。エヘヽヽヽもう云ふまいかな。イヤイヤ矢張祠の森の神様に奉納すると云うたから出惜みをしては済むまい。エヘヽヽヽ然り而うして泥酔者の中から顔一面に熊襲髯を生し、目と鼻とのぐるり計り赤黒い肌を現はした大男がムツクと立ち上り、姫様の首筋をぐつと鷲掴み「コリヤ阿魔つちよ、何だ失礼な、此方が折角機嫌よく酩酊して居るのに何がをかしいのだ、エーン俺の面を見て笑うたが笑ふに付けては何か訳があらう。サア貴様の手で俺に一杯酒をつげ」とかう大きく出やがつたのだ。ホールさまは忽ち顔色を変へ「アレ恐い乳母どうしようか」とおろおろ声を出して狼狽廻つて厶るのだ。大の男は益々威猛高になり「俺を誰だと思つて居る。おれこそは月の国にても名の売れた色の黒い純公だぞ、繊弱い阿魔つちよに嘲弄されてどうして男が立つか。サア神妙に酌をせい」と吐かすのぢや、ホールさまは一生懸命「アレ恐い　助けて　助けて」と悲しさうな声を出して叫ばれたのだ。さうすると其辺中に酒に酔つて居た泥酔者が「ヤ何だ何だ、喧嘩だ喧嘩だ」と姫様と純公の廻りを取り巻く、其光景と云つたら実に物々しいものだつた。殆ど蟻の這ひ出る隙もない迄に、寄つたりな、寄つたりな、人の山。そこで此道公は「まつた　まつた、暫く待つた」と大手を拡げ、捻鉢巻をグツと締め、二人の中に割つて入る。純公は怒り立ち「どこの何者か知らないが、邪魔をするとお為にならないぞ」と白浪言葉で睨めつける。俺もさる者日頃覚えた柔道百段の腕前で純公の素つ首引とらへ、空中目蒐けて、プリン　プリン　プリンと投げやれば、遉の大男も草原へドスンと転落し、痛いとも何とも云はず、恨めしげに後を眺めてスゴスゴと帰つて往つた愉快さ、心地よさ。今思うてもなぜあんな力が出たかと不思議のやうだ。そこでホールさまはどうして厶るかと四辺を見れば、乳母に手を引かれ人込を押わけサツサと逃げて往かれる。後姿を見て俺も何となく、人の居るのも構はず、指を銜へ伸びあがつて見て居たよ』</p>
+            <p class="ja-classical-line">純公『アハヽヽヽ、骨折り損の疲労儲けと云ふ幕が下りたのだな。大方そんな事だらうと思うて居た。お気の毒様、ウフヽヽヽ俺だつたら、も一つ進んで優しい姫様の口からお礼を云はすのだが、お前は矢張気が弱いと見えるのう。ウフヽヽヽ』</p>
+            <p class="ja-classical-line">道公『何これで終極ぢやないよ、これからが正念場だ。エヘヽヽヽ、それからな、俺も何となく聊か恋慕の心が起り、も一度天女のやうなホールさまのお顔が見たいと、どれだけ気を揉んだか分らない。併し名に負ふ富豪、隙間の風にさへ当てられないで育つて居るお嬢さまだからどうしても遇ふことは出来はしない。いろいろと考へた結果俺はそこの風呂焚に入つたのだ。即ち三助に入り込んだのだ。さうすればいつか姫様のお顔を拝する事が出来るであらうと思うたから、エーン』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sumikō: 'What a faint-hearted fellow you are. If it were I, I would have declared my name to her parents, saying, "It was a very dangerous affair the other day. I trust you have suffered no harm to your Karada? I am Michikō, the one who helped the Jiyōsama when she encountered the Warumono during the Hanami," and I would have had a cup of tea poured for me by the hand of the gentle Hime-sama. You, however, are such an Usunoro that you have all but lost the jewel in your Shiyōchiu. Why not bring such a Shitsurenbanashi to an end? You are merely wasting Jikan in vain.'</p>
+          <p class="en-p">Tamakuniwake: 'Otso-ho-ho-ho.'</p>
+          <p class="en-p">Michikō: 'The third act begins from here. Listen well. I snuck in as a Furota, the Furoban, and wore a Happi with a circle-cross crest, waiting for the day the Hime-sama would take a Nifuyoku. I waited to see if it would be today or Asu, but to my surprise, that Furo was the one used by the Kamijiyochiu, and the Hime-sama never even peeked in. You cannot imagine my disappointment at that time. Eeen!'</p>
+          <p class="en-p">Sumikō: 'Aha-ha-ha, that is the scene of an owl's evening scheme failing to secure a midnight snack. Ufu-hu-hu-hu.'</p>
+          <p class="en-p">Michikō: 'Hey, do not mock me so much; there is still more to come. Thus, when a full year had passed since I began serving as a Furoban, it was decided that the Jiyōsama would be married off to a certain wealthy family in the neighboring country of Penchi. I lamented and grieved, thinking, "Ah, what a waste. If I had known this, I would not have spent a whole year as a Furoban; I have neither heard her voice nor seen her figure, more cruel than the hototogisu." But that was only for a moment, for the head clerk, that Tempura-fellow, came and said, "Hey Furoban, I have a task for you, come here." Wondering what it could be, I approached the Tempura with fear and hope, and unexpectedly, he said, "Since it is the Jiyōsama's wedding, would you go as a palanquin bearer?" I replied, "Oh, how joyful, the time for my desire to be fulfilled has arrived," and after nodding my head twenty times, I said, "I shall accept the duty." The very next day, the wedding procession finally took place. When I saw her figure as she entered the palanquin, I felt as if my soul were being stolen and my spirit vanishing; I nearly fainted. Then, while carrying the Hime-sama's palanquin with my partner, I sang a song. That song was quite eccentric, too.'</p>
+          <p class="en-p">I am eighteen, the Jiyōsama is seventeen, in the prime of her bloom,
+Led by the hand of a single nurse,
+With a pattern of scattered plum blossoms on her hem,
+In a costume of black crepe,
+Slowly, slowly, slowly, to see the cherry blossoms,
+At the time you came,
+Five people over there, and here,
+Seven others were drinking sake,
+Drink and make merry, the future is a dark night,
+After the darkness, the moon will rise,
+The moon is a moon, but it is the moon of fate,
+Untoko-dotsukoi, dotsukoisho,
+Sumikō, the bearded warrior,
+Caught the Hime-sama, who is shy even of flowers,
+And while he was being stubborn, demanding she pour him a drink,
+It was I who flew out,
+That fellow Sumikō got angry,
+I caught him as he lunged like a warrior,
+And with the Judo I had learned,
+With a shout of "Un!" I threw him,
+He spun two or three times in the air,
+And fled for his life,
+When I looked back,
+The Hime-sama of the Hall was already,
+Being led by the hand by her nurse,
+Returning toward the mansion,
+Such a beautiful Hime-sama,
+I want to see her face once more,
+Is there no way to devise a plan?,
+Seeking a connection, I became a Furoban,
+And while waiting through the days and months,
+An unexpected marriage,
+Ah, it cannot be helped, it cannot be helped,
+Like a kite having its fried tofu snatched away,
+Feeling as if I were in a daze,
+I took it as a blessing that I was allowed to accompany the palanquin,
+And I have followed "untoko" all the way here,
+Untoko-dotsukoi, dotsukoisho.</p>
+          <p class="en-p">Michikō: 'When I sang that in time with my steps, a thin, cool voice of the Hall-sama came from inside the palanquin, saying, "Wait a moment, this palanquin. I have suddenly developed a stomachache, so I hate this marriage, I hate it, I am going home," and she would not listen to anyone. Oh, it was a disaster; since the Hime-sama had turned back in the middle of the wedding, both houses were in an uproar. Eventually, the palanquin returned home, and the Hime-sama went straight into the inner room, forgetting all about her stomachache. If you listen closely, you must imagine that she was being stubborn, saying, "If you do not let me marry that palanquin bearer, I shall die." Now, this is where it gets good. In the end, I was called into the Hall-sama's room, served rare delicacies of mountain, field, river, and sea, had sake poured for me by the Hime-sama's thin, white hands, and for the first time, we held the wedding ceremony, became husband and wife, and I was given a great deal of wealth. Then, just as the moon is obscured by clouds and flowers are scattered by storms, while the Hime-sama and I were exchanging nuptial cups, the one who entered like the raging Ashura-ō was Sumikō. He smashed the sliding doors and threw the brazier. It was a scene of violence and disorder, so I, needing to show the Hime-sama my prowess once more, spread my arms and said, "Come, come now!" But the moment I did, I woke up, and what do you know, I was in a two-mat shack, drenched in sweat, having been dreaming. Aha-ha-ha.'</p>
+          <p class="en-p">Tamakuniwake: 'Utsu-fu-hu-hu-hu.'</p>
+          <p class="en-p">Sumikō: 'Waha-ha-ha, do not make a fool of me.'</p>
+          <p class="en-p">Michikō: 'What, it is just a wholesale of imported goods directly from the country of Brahman, aha-ha-ha.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">純公『何と気の弱い奴だな。俺だつたら、「先日は甚いお危ない事で厶いましたね。別にお身体にお障りは厶いませぬか。花見の時お嬢様が悪漢にお遇ひなされた時お助け申した私は道公だ」と両親に名乗り優しい姫様の手からお茶の一杯も汲んで貰つて来るのだに、貴様は薄惚だから殆ど掌中の玉を失うて来たのだ。そんな失恋話は好い加減に切り上げぬかい。徒に時間を空費する計りぢや』</p>
+            <p class="ja-classical-line">玉国別『オツホヽヽヽ』</p>
+            <p class="ja-classical-line">道公『是からが三段目だ。確かり聞かうよ。風呂焚きの三助に入り込んで丸に十字のついた法被を着用に及び、姫様が今日は入浴か、明日は入浴かと待つて居たが、豈図らむやその風呂は上女中の入る風呂で、姫様は根つから覗きもしない。其時の俺の失望と云つたらあつたものぢやない。エーン』</p>
+            <p class="ja-classical-line">純公『アハヽヽヽ、梟の宵企み、夜食に外れたと云ふ光景だな。ウフヽヽヽ』</p>
+            <p class="ja-classical-line">道公『コリヤ、あまり軽蔑すな、まだ先があるのだ。斯の如くにして、三助を勤むる事満一年に及んだ暁、お嬢様は隣国のペンチ国の或富豪の家へお嫁入りと云ふ事になつたのだ。「アヽしまつた。こんな事なら一年も三助をするのぢやなかつたに、お声も聞かねばお姿も見ず杜鵑よりも酷い」と歎き悲しんだのも夢の間、番頭のテンプラ奴が「一寸三助お前に用があるから此方へ来い」と云うて来よつた。何事ならむと稍望みを抱きながら、恐る恐るテンプラの前に罷りつん出ると思ひも掛けなく、「お嬢様のお嫁入りだから貴様駕籠舁にいつて呉れないか」とお出なさつた。「ヤレ嬉しや、願望成就時到れり」と二十遍も首を縦に振り「御用を承はりませう」と云つた処、其翌日いよいよお嫁入りの段となつた。駕籠にお這りの時のお姿を見た時は魂奪はれ、魄消えむと思ふばかり、殆ど卒倒しかけたよ。それからお姫様の駕籠を相棒の奴と舁ぎながら歌うて見たのだ。その歌がまた奇抜だつたよ。</p>
+            <p class="ja-classical-line">俺は十八お嬢さまは十七の花盛り
+一人の乳母に手を曳かれ
+梅を散らした裾模様
+黒縮緬の扮装で
+ぞろ　ぞろ　ぞろと桜見に
+お越しなさつた其時に
+彼方に五人此方には
+又七人と酒を呑み
+呑めよ騒げよ一寸先暗夜
+闇の後には月が出る
+月はつきだが縁のつき
+ウントコドツコイ　ドツコイシヨ
+髯武者男の純公が
+花も恥らふお嬢さまを
+とつ捕まへて酌せいと
+駄々を捏ねたる最中に
+飛んで出たのは俺だつた
+純公の奴めが腹を立て
+武者振りつくのをとつかまへ
+習ひ覚えた柔道で</p>
+            <p class="ja-classical-line">ウンと一声なげやつた
+空中二三度回転し
+命辛々逃げて往く
+後振りかへり眺むれば
+ホールの姫は逸早く
+乳母にお手を引かれつつ
+館をさして帰り往く
+あれ程美しいお姫さま
+も一度お顔が拝みたい
+何とか工夫はないものか
+手蔓を求めて三助と
+なつて月日を待つ中に
+思ひも掛けぬ御結婚
+あゝ是非もなし是非もなし
+爺が鳶に油揚
+もつていなれた心地して
+せめては駕籠の御供を
+さして貰つたを幸ひと
+此処迄ウントコついて来た
+ウントコドツコイ　ドツコイシヨ</p>
+            <p class="ja-classical-line">と足に合せて唄つたら、駕籠の中から細い涼しいホールさまの声として、「この駕籠一寸待つた。俄にお腹が痛み出したから、今日の結婚嫌だ嫌だ　帰る」と仰有つてお聞きにならぬ。サア大変だ、結婚の途中お姫様が引返したのだから、どつちの家も大騒動、それからとうとう駕籠は家に帰り、奥の間にサツサとお姫さまは腹痛も忘れて入つて仕舞つた。よくよく聞けば「あの駕籠舁きと夫婦にして呉れねば妾は死ぬ」と駄々を捏ねたと思ひ給へ。サアこれからがボロイのだ。とうとう俺はホールさまの座敷に呼び入れられ、山野河海の珍肴、姫の細い白い手でお酌をして貰ひ、初めて結婚の式を挙げて夫婦となり、沢山の財産を与へて貰ふ事になつたのだ。さうすると、月に村雲花に嵐、姫様と俺と盃を交はして居る所へ、阿修羅王の荒れ狂ふが如く入つて来たのは純公だつた。サア此方の襖は叩き毀す、火鉢をなげつける。乱暴狼藉、そこで俺も、も一度姫に吾手並を見せておく必要があると思ひ、「サア来い来れ」と手を拡げた途端、目が醒めたら、何の事だ、破れ小屋の二畳敷で汗ビツシヨリかいて夢を見て居たのだつた、アハヽヽヽ』</p>
+            <p class="ja-classical-line">玉国別『ウツフヽヽヽ』</p>
+            <p class="ja-classical-line">純公『ワハヽヽヽ、馬鹿にするない』</p>
+            <p class="ja-classical-line">道公『何、バラモン国から直輸入した計りの舶来品の卸し売りだ、アハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c08.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 8: 噴飯 [1159]</span>
+      </a>
+      <a href="c10.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 10: Night の昼 [1161]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: Forest 議 [1158] - Volume 43 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 43 Table of Contents</a>
+      <span>Volume 43</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 43 &bull; Chapter 7</span>
+      <h1 class="chapter-title-en">Chapter 7: Forest 議 [1158]</h1>
+      <p class="chapter-title-ja">森議〔1158〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Leaving the mansion of Iso, / ascending to subjugate the demons, / the party of Tamakuniwake / encountered them at Kajikatauge.</p>
+          <p class="en-p">Seeking to escape / the record-breaking fierce winds, / they concealed their bodies / in the bosom of a valley.</p>
+          <p class="en-p">Though their two eyes / had been gouged out by mountain monkeys / and for a while they brought down / the curtain of tragedy,</p>
+          <p class="en-p">at last, by the aid of the Kami, / only a single eye was completely restored, / and they bravely advanced, descending / to the south of the pass of Kajikayama.</p>
+          <p class="en-p">The sun sank into Seizan, / and relying upon the moonlight / shining in the late autumn sky / close to twilight as their strength,</p>
+          <p class="en-p">the party, resting their breath before / a time-worn shrine, stood up,</p>
+          <p class="en-p">exchanging poems with one another, / and at the moment they thought of leaving this place once more to advance, / there came to be heard from below the slope / the neighing of steeds and the voices of men.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">斎苑の館を立出でて
+悪魔の征討に上りゆく
+玉国別の一行は
+河鹿峠に出会した
+レコード破りの烈風を
+遁れむものと懐の
+谷間に身をば忍ばせつ
+山猿共に両眼を
+掻きむしられて暫くは
+悲惨の幕を下せしが
+漸く神の御助けに
+一眼のみは全快し
+勇み進んで河鹿山
+峠の南に下り行く
+日は西山に舂きて
+黄昏近き晩秋の
+空に輝く月影を
+力と頼み古ぼけし
+祠の前に一行は
+息を休らひ立上り</p>
+            <p class="ja-classical-line">互に歌を詠みかはし
+又もやここを立出でて
+前進せむと思ふ折
+坂の下より聞え来る
+駒の嘶き人の声
+訝かしさよと立ち止まり
+耳をすまして窺へば
+鬼春別の率ゐたる
+先鋒隊と知られたり
+スワ一大事兎も角も
+敵の様子を探らむと
+常磐木茂る森蔭を
+これ幸ひと奥深く
+忍びて待つこそ危けれ。</p>
+            <p class="ja-classical-line">玉国別は俄に聞ゆる人馬の物音に噂に聞くハルナの都の大黒主の軍勢、我大神の鎮まります斎苑の館へ魔軍を引つれ進撃せむとするものならむ、何は兎もあれ、此森蔭を幸ひ様子を窺はむ……と三人に目配せし乍ら、祠の裏深く、樹蔭に身を隠した。望の夜の月は皎々と照り輝け共、常磐木の老樹の枝を以て天を封じた祠の森は、際立つて暗い。併し乍ら祠の前は少し広庭があつて、木立も疎なる為、森の中よりハツキリと庭の小石迄が見えてゐる。道公は声をひそめて、</p>
+            <p class="ja-classical-line">『モシ先生様、アリヤ一体何者で厶いませうかな。あの物音にて察すれば、余程の人数と見えます。此様な急坂を隊を組んで登つて来るとは、合点の行かぬ話ぢやありませぬか。貴方は其物音を聞くなり、直様此森蔭にお忍びになりましたが、又しても卑怯な奴と、神様にお叱りを蒙り、折角助けて貰つた一箇の目を猿どもにえぐり取られるやうな事は厶いますまいか。烈風に恐れて右の目を神様から間接に取上げられ、貴方は神業をおろそかに致した罪ぢやと云つて、神様にお詫をなさつたでせう。まだ其の舌の根の乾かぬ先に、天下の宣伝使が人馬の足音を聞いて、斯様な所へお忍びになるとはチツと卑怯ではありますまいか。若しも斎苑の館へ進撃するバラモン教の軍隊であらうものなら、それこそ宣伝使の職務はゼロでせう。どうしてもここで喰ひ止めなくては、貴方のお顔が立ちますまい。アレアレ早くも祠の前に騎馬の軍卒が現はれました。一つ此辺で出しぬけに言霊を打出さうぢやありませぬか』</p>
+            <p class="ja-classical-line">玉国別は小声になつて、手で空を押へるやうにして、</p>
+            <p class="ja-classical-line">『お前のいふも一応尤もだが、さう急ぐに及ばない。マアとつくりと様子を聞いた上、臨機応変の策を施せば良いぢやないか。わしも今頭が痛んで仕方がないから、言霊の使用機関たる肉体を完全に修理した上でなくては思ふやうに働けない。お前等三人の言霊に力さへあれば、わしは只司令官の地位に立つて采配を揮つて居れば良いのだが、一切万事今の所では、自分一人で主要なる職務をやつてのけねばならぬのだから、マアさう急がずに私の言ふ通りになつて居るがよからうぞ』</p>
+            <p class="ja-classical-line">道公『モシ先生、信心に古い新しいはないぢやありませぬか。私の言霊が信用出来ないやうに仰有いましたが、貴方のお声も吾々の声も、ヤツパリ其原料は同じ神様の水火のイキを調合されたものでせう。千騎一騎になれば、キツと神様は応援して下さるでせう。あれ御覧なさいませ、祠の前にだんだんと妙な影が殖えて来るぢやありませぬか。何奴も此奴も皆馬に乗つて居ります。エーエ、腕が鳴りますわい、これだから猪突主義も何だが、余り退嬰主義の先生も困つたものだ。予定の退却ばかりやつてゐては、千年万年経つたとても、ハルナの都までは行けませぬぞえ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamakuniwake: 'Do not be so hot-headed and hasty. Rather than rashly pushing forward and thereby giving the enemy an advantage, it is better to remain perfectly calm, consider the situation from all angles, and, if you slowly recognize the necessity of the Kototama, concentrate your full strength and strike all at once. First of all, you had better calm down. Please become a little more cool-headed.'</p>
+          <p class="en-p">Michikō: 'As a man of hot-blooded valor and fiery loyalty, my entire body's blood is already boiling and surging, and I can no longer sit still. In that case, Sensei, since you surely have your own ideas, please grant me independent action. No matter how much of a teacher you may be, you cannot possibly suppress and obstruct our actions taken for the sake of the Kamisama.'</p>
+          <p class="en-p">Tamakuniwake calmly shook his head from side to side, looked around at the faces of the three men,</p>
+          <p class="en-p">Tamakuniwake: 'Michikō, what you say is plausible enough at first glance. However, among our party of four... I am the leader. No matter how much of a genius you may claim to be, you do not understand the ultimate secrets of the Six Secret Teachings and Three Strategies. The path of the Kamisama is never monotonous; there are ever-changing secret tactics, so you had better hold back for a while.'</p>
+          <p class="en-p">Putting strength into the end of his words, he spoke as if glaring at him. Michikō muttered an unpleasant 'Hē' in response and fell silent. In front of the shrine, the vanguard commanders Katahiko and Kumehiko were calling the roll, and their voices could be heard counting in order: one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve... Every single voice sounded as if the ends of the words were pitched upward steeply like a slope. Tamakuniwake spoke in a small, perfectly calm voice,</p>
+          <p class="en-p">Tamakuniwake: 'Those are clearly the vanguard troops of Brahmanism, as expected. It seems they are coming to attack the Saiin Mansion. When you consider the divine administration of the Kamisama up to now, it is truly the height of ingenuity. Fascinating, fascinating; only through this can we manifest the glory of our departure.'</p>
+          <p class="en-p">Michikō opened his mouth once more, crept closer to Tamakuniwake's knees, peered into the face of the propagandist hidden by the tree shade, and breathed slightly out of breath,</p>
+          <p class="en-p">'Sensei, by your recent words, it seems you too acknowledge them as the enemy army attacking the Saiin Mansion. Knowing that, why do you remain so unconcerned and fail to initiate activity? You said it is time to manifest the glory of our departure, but if you let the enemy slip away unmolested and allow them to enter the mansion, how can that possibly be considered a feat of arms? Have you too perhaps had one eye taken from you, your mind and spirit suddenly plunged into discouragement, and become enveloped in the clouds of cowardice and irresolution?'</p>
+          <p class="en-p">Tamakuniwake calmly replied,</p>
+          <p class="en-p">'Now wait; there is a deep strategy behind this.'</p>
+          <p class="en-p">Michikō: 'Hē, what a strange strategy indeed. Do you suppose it is the only strategy, like Kuropatkin's planned retreat?'</p>
+          <p class="en-p">Itakō: 'Hey Michikō, that is the final resort of the thirty-six stratagems.'</p>
+          <p class="en-p">Michikō: 'That is outrageous. How can our faces be saved by that, and above all, Sensei's face will not be saved either. There is a saying that beneath a brave general there are no weak soldiers. However, since the reverse is that beneath a weak general there are brave soldiers, the rules of the game are a bit different. Still, no matter how weak the commander may be, if the subordinates are strong, the commander's name is elevated. Hey, Itakō, Junkō, why don't you ally with me to force Sensei into retirement, carry out a major reform, and let me become the commander to try out great activities?'</p>
+          <p class="en-p">Junkō: 'What are you talking about, you lowly commoner? How could we ever fathom Sensei's inner mind? If Sensei were someone whose depth we could measure, wouldn't his stature be pretty much fixed? Sensei's great personality leaps and bounds precisely in that vague and obscure realm where he cannot be grasped. Our duty is simply to follow commands and orders in all things. As a lowly person, do you have any right to criticize even Sensei's official authority? Besides, since you are a reckless fighter without an ounce of forethought, you even bring up the theory of banishing Sensei—what on earth are you thinking? Why don't you calm down a bit? How can petty warriors like fallen leaves, fluttering noisily at the slightest breeze, ever hope to accomplish this divine work?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玉国別『さう血気にはやるものではない。軽々しく進んで却て敵に利益を与へるよりも落着き払つて前後を考へ、徐に言霊を必要と認むれば、全力を集注して、打出す迄のことだ。先づ先づ鎮まつたがよからう。少しく冷静になつて呉れ』</p>
+            <p class="ja-classical-line">道公『忠勇義烈の熱血男子、最早全身の血が沸き返り立つてもゐても居られなくなりました。そんなら先生、貴方は貴方の御考へが厶いませうから、どうぞ私に単独行動を許して下さいませ。何程先生だつて、神様の為活動する吾々の行動を、頭抑へに阻止なさる訳には行きますまい』</p>
+            <p class="ja-classical-line">玉国別は冷静に首を左右に振り乍ら、三人の顔を見廻し、</p>
+            <p class="ja-classical-line">玉国別『道公、お前の言ふものも一応尤もだ。併し乍ら一行四人の……私は支配者だ。何程道公が天才家だと云つても、六韜三略の奥の手は分らない。さう神様の道は単調なものではない、千変万化の秘策があるのだから、先づ暫く控へたがよからうぞ』</p>
+            <p class="ja-classical-line">と言葉尻に力をこめて、睨めつけるやうに言つた。道公は『ヘー』と厭相な返詞をし乍ら黙り込んで了つた。祠の前には片彦、久米彦の先鋒隊長が人員点呼をやつてゐる声、一二三四五六七八九十十一十二………と順々に大小高低の声が聞えてゐる。何れの声も皆言葉尻が坂道のやうに立向けにはねてゐる様に聞えた。玉国別は小さい声で落つき払つて、</p>
+            <p class="ja-classical-line">玉国別『ヤツパリあれはバラモン教の先鋒隊と見えるなア。どうやら斎苑の館に向つて攻撃に参るものらしい。神様の御経綸は今となつて考へれば、実に巧妙を極めたものだ。面白い面白い、これでこそ吾々の首途の功名をあらはす事が出来る』</p>
+            <p class="ja-classical-line">道公は又もや口を開き、玉国別の膝近くにぢり寄り、木蔭に蔽はれた宣伝使の顔を覗き込み、稍息を喘ませ、</p>
+            <p class="ja-classical-line">『先生、今のお言葉では貴方もヤツパリ、斎苑館へ攻めよせる敵軍とお認めになつたやうですなア。それが分つて居乍ら、なぜ泰然自若として活動を開始なさらぬのか、首途の功名を現はす時だと仰有いましたが、ムザムザ敵を見遁し、お館へ進入させて、如何してそれが手柄になりませう。貴方も片眼をお取られ遊ばして、心気頓に沮喪し、卑怯未練の雲に包まれ遊ばしたのぢや厶いませぬか』</p>
+            <p class="ja-classical-line">玉国別は冷静に、</p>
+            <p class="ja-classical-line">『マア待て、これには深い戦略のあることだ』</p>
+            <p class="ja-classical-line">道公『ヘエー、妙な戦略もあるものですなア。クロパトキンの様に予定の退却を以て唯一の戦略と思召すのですか』</p>
+            <p class="ja-classical-line">伊太公『オイ道公、三十六計の奥の手だよ』</p>
+            <p class="ja-classical-line">道公『ソリヤ怪しからぬ。如何して吾々の顔が立つものか、第一先生のお顔も立つまい。勇将の下に弱卒なし、といふことがある。併し乍ら弱将の下に勇卒ありだから、チツと勝手が違ふわい。併し乍ら何程大将が弱くても部下さへ強ければ大将の名があがるものだ。オイ、伊太公、純公、一つ俺と同盟して先生に退隠を迫り、一大改革を断行し、道公が司令官となつて大活躍を試みようぢやないか』</p>
+            <p class="ja-classical-line">純公『匹夫下郎の分際として何を云ふのだ。先生の御胸中が吾々に分つて堪らうか。吾々が測量し得らるるやうな先生なら、大抵貫目はきまつてゐるぢやないか。瞹昧模糊として捕捉す可らざる所に先生の大人格が勇躍してゐるのだ。何事も指揮命令に従ふのが俺達の勤めだ。先生の職権まで、下郎の分際として批評する価値があるか。それに貴様は猪武者だから、前後の弁へもなく、先生放逐論まで持出しよつて何の事だ。チツと落着かないか。少し風が吹いてもバタバタ騒ぐ木の葉の様な木端武者が、如何して此御神業が勤まるか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Michikō: 'That may well be, but look yonder—does it not make one's blood boil with irrepressible fury? Before the shrine enemies gather like a black mountain, even conducting a roll call, and marching on with flying banners and magnificent dignity; how can one possibly overlook this sight? If I had a three-foot shiusui, I would flash it in the moonlight and, with the vigor of a lion emerging from the thicket, cut down and mow them all down one by one, making them blow a single bubble of defeat—such are my heartfelt thoughts, but whatever one may say, Ananai-kyō is of the principle of non-resistance; if we speak of our weapons, they are merely the launching of Kototama, or failing that, weapons of fist-like rocks. Ah, what a vexing matter!'</p>
+          <p class="en-p">Itakō: 'I too feel something within me, my whole body throbbing so that I cannot help it. In contrast to this, the Sensei, while facing a formidable enemy, remains as cold as a rock, silent as a mute. Now, whatever shall we do about this?'</p>
+          <p class="en-p">Tamakuniwake quietly opened both his hands with a snap, making a gesture as if to hold down the three men, pressing the air down two or three times,</p>
+          <p class="en-p">Tamakuniwake: 'Wait for a while,
+Until the divine edict descends,
+On the workings of heaven and earth
+Deeper than the sea.'</p>
+          <p class="en-p">Michikō: 'Can this again be calmly looked over and ignored,
+With the enemy plainly confronting us right before our eyes?'</p>
+          <p class="en-p">Tamakuniwake: 'To leave everything to the will of God alone,
+Know that this is the duty of you three.'</p>
+          <p class="en-p">Michikō: 'This is astonishing, an unexpected teaching from our master's lips;
+I am simply struck dumb by such idle talk.'</p>
+          <p class="en-p">Sumikō: 'Michikō, you speak of things you do not understand.
+Would you turn your back on the teachings of Tamakuniwake?'</p>
+          <p class="en-p">Itakō: 'Whether this turning away is the path or truth, I know not,
+Yet somehow my heart is filled with impatience.'</p>
+          <p class="en-p">Michikō: 'Itakō's heart is the very same as mine;
+Come, come, then, shall the two of us stand up?'</p>
+          <p class="en-p">Tamakuniwake: 'Casting aside the life received from the imperial gods as a discarded bowl,
+How they clamor, these foolish pranks of the ignoble ones!'</p>
+          <p class="en-p">Michikō: 'That indeed is an unexpected command;
+The foolish pranks belong to you, our master!'</p>
+          <p class="en-p">Sumikō: 'Hey, you two, do not utter such rude things!
+What could blockheads possibly understand?'</p>
+          <p class="en-p">Michikō: 'Two cowards and two heroes,
+Here at last we stand and part ways.'</p>
+          <p class="en-p">Tamakuniwake: 'A pair of fellows with interesting words of bravado,
+Do not act against truth and commit a blunder.'</p>
+          <p class="en-p">Tamakuniwake was by no means intimidated by the force of Katahiko's and Kumehiko's troops, nor had he hidden in the shadows of this forest for such a reason. His divine calculation and strategy were to let Katahiko's and Kumehiko's troop pass safely, and by the time they climbed as far as the direction of Kaikoku, Chiguniwake's party would surely arrive. If he did so, he intended to let the enemy pass ahead, shoot forth Kototama simultaneously from front and rear, and make the enemy rats trapped in a bag submit. However, it seemed to him of little value to reveal this secret strategy to his three subordinates. Indignant at Tamakuniwake's attitude, Michikō spoke in strong words,</p>
+          <p class="en-p">Michikō: 'Hark, Sensei, as of this moment I take my leave.'</p>
+          <p class="en-p">Tamakuniwake: 'Humph, if it is your desire, I shall grant you leave. It appears the enemy has frightened you greatly. What is that demeanor and action? You are altogether like konnyaku.'</p>
+          <p class="en-p">Michikō: 'Yes, I have become frightened. It is because your hips are too weak that I find it frightening. We must consider the relative weight of attaching ourselves to God or following a master. I have not the slightest particle of a heart to abandon you, but for the sake of God, I swallow my tears and go against you. They say one must not step even three feet within the shadow of one's master, and so my feeling of heart in turning against you is more painful than swallowing red-hot iron, but please forgive me. This Michikō makes his life a target and charges toward the enemy. Even if by good fortune I obtain victory, I shall never make it my own achievement. It will still remain Sensei's great achievement, you see...'</p>
+          <p class="en-p">Shedding tears, Tamakuniwake said in a small voice,</p>
+          <p class="en-p">Tamakuniwake: 'Michikō, draw near, I have something to tell you from my ear.'</p>
+          <p class="en-p">Feeling as though he had been brought back to life, Michikō gave two or three bounds before he knew it, leaping upon him and clinging to him just as a dog meeting a master it had not seen for a while, and pressed his ear to Tamakuniwake's lips.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">道公『ソリヤさうかも知れないが、アレ見よ、腹が立つてたまらぬぢやないか。祠の前は黒山の如く敵が集り、人員点呼迄やりよつて、旗鼓堂々と行きよる此姿を見て、如何して之が看過出来ようか。三尺の秋水があらば月光に閃めかし、獅子奮迅の勢を以て、片つぱしから斬り立て薙ぎ立て、一泡吹かしてくれたいは山々なれど、何と云つても無抵抗主義の三五教、吾々の武器と云つたら、言霊の発射か、マサカ違へば巌の如き拳骨の武器を有するのみだ。エヽ残念な事だなア』</p>
+            <p class="ja-classical-line">伊太公『俺も何だか、体中が躍動して仕方がない。それに引替へ先生は勁敵を前に控へ乍ら、冷然として岩の如く、黙然として唖の如しだ。こりやマア如何したら良いのだらうかなア』</p>
+            <p class="ja-classical-line">玉国別は静に両手をパツと開き、三人を押へつける様な真似をして二三回空中を抑へ、</p>
+            <p class="ja-classical-line">玉国別『まてしばし神の御言の下るまで
+海より深き天地の仕組を』</p>
+            <p class="ja-classical-line">道公『これが又ジツと見のがし居れませう
+みすみす敵を前に控へて』</p>
+            <p class="ja-classical-line">玉国別『何事も神の心に任すこそ
+汝等三人の勤めと覚れ』</p>
+            <p class="ja-classical-line">道公『これはしたり思ひもよらぬ師の君の
+へらず口には呆るる而已なり』</p>
+            <p class="ja-classical-line">純公『道公よ貴様は分らぬことを言ふ
+玉国別の教に背くか』</p>
+            <p class="ja-classical-line">伊太公『背かぬが道か誠か知らね共
+何とはなしに心せかるる』</p>
+            <p class="ja-classical-line">道公『伊太公の心は俺と同じこと
+いざいざさらば二人立たうか』</p>
+            <p class="ja-classical-line">玉国別『皇神に受けし命を棄て鉢に
+さやぎける哉醜のたぶれが』</p>
+            <p class="ja-classical-line">道公『それは又思ひもよらぬ仰せ哉
+醜のたぶれは吾師の君よ』</p>
+            <p class="ja-classical-line">純公『コリヤ二人失礼なことをぬかすない
+唐変木に何が分らう』</p>
+            <p class="ja-classical-line">道公『卑怯者二人豪傑又二人
+いよいよ茲に立て別れたり』</p>
+            <p class="ja-classical-line">玉国別『面白い勇み言葉の二人連れ
+真理に反きて過ちをすな』</p>
+            <p class="ja-classical-line">玉国別は決して片彦、久米彦の一隊の勢に辟易し、此森蔭に隠れたのではない。片彦、久米彦の一隊を無事に通過させ、彼が懐谷の方面迄登つた頃には、治国別一行がやつて来るに違ない。さうすれば敵をやりすごし、前後より一斉に言霊を打出し、敵を袋の鼠として帰順せしめようとの、神算鬼謀を抱いてゐたからである。併し乍ら三人の部下に其秘策を示すのは余り価値なき様に思はれたからであつた。道公は玉国別の態度に憤慨し、言葉つよく、</p>
+            <p class="ja-classical-line">道公『モシ先生、只今限りお暇を頂戴致します』</p>
+            <p class="ja-classical-line">玉国別『ウン望みとあれば暇を与らう。大分敵が恐ろしくなつたと見えるのう。其挙措動作は何だ。丸で蒟蒻の様だ』</p>
+            <p class="ja-classical-line">道公『ハイ恐ろしくなりました。余り貴方の腰が弱いので、それが恐ろしいのですよ。神様につくか、師匠に従くか、其軽重を考へねばなりませぬ。決して先生を捨てる心は微塵もありませぬが、神様の為には涙をのんで反きます。師の影は三尺隔てて踏まずといふことさへあるに、貴方に背く私の心根、熱鉄を呑むよりも辛う厶いますが、どうぞ許して下さいませ。此道公は命を的に敵に向つて突喊致します。幸にして勝利を得ましても、決して私の手柄には致しませぬ。ヤツパリ先生の御手柄になるので厶いますから……』</p>
+            <p class="ja-classical-line">玉国別は涙を流し乍ら、小さい声で、</p>
+            <p class="ja-classical-line">玉国別『道公、近う寄れ、耳よりの話がある』</p>
+            <p class="ja-classical-line">道公は甦生つたやうな気分になり、二足三足思はず飛び上り、犬が暫く会はなかつた主人に出会うた時のやうに飛び付き抱へつき、玉国別の口元に耳を寄せた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Michikō repeatedly nodded his head vertically,</p>
+          <p class="en-p">Michikō: 'Understood. In that case, I too am reassured. As expected of Sensei. Truly a brilliant and miraculous strategy. It is something that the likes of humble scoundrels could never hope to attempt. Hey Sumikō, Itakō, rest easy; after all, my Sensei is magnificent. He differs somewhat in caliber from ordinary, everyday teachers. We who have such a Sensei are truly fortunate fellows.'</p>
+          <p class="en-p">Itakō: 'Is that so? Well, that is a relief. What kind of thing is it? Won't you whisper it to me just a bit?'</p>
+          <p class="en-p">Michikō: 'As long as I, the vice-commander, know it, that is enough. For mere scoundrels to attempt to pry into the state of mind of a hero is completely out of the question. If he were going to reveal it to the two of you, how could there be any reason for him to whisper it softly right into my ear? It is without a doubt a divine mystery not to be leaked. I am not a Michikō who would fail to notice such a thing. Come now, submissively and blindly following whatever I do is your true calling. Heh!'</p>
+          <p class="en-p">Sumikō: 'Well, if even you are convinced, there is no need for me or anyone else to ask anything. Hey Itakō, isn't that right? Since Michikō is convinced, it's pretty much settled. First of all, it's best for us to rest easy.'</p>
+          <p class="en-p">A marching song could be heard coming from in front of the shrine. The four of them strained their ears, listening so as not to miss a single word.</p>
+          <p class="en-p">'He who created this world,
+Bonten, Taishaku, Jizaiten,
+Descendants of the soul of Ōkunihiko,
+Appeared in the capital of Haruna,
+Calling himself Ōkuroto,
+Throughout the Reed-Plains Land of Fresh Rice Ears,
+Down to the very last of the green-grass people,
+Bestowing the dew of grace,
+Opening the heavenly pure land upon the earth,
+How noble it is!
+Yet even so, in this world,
+Clouds gathering over the moon, wind upon the flowers,
+Evil Magatsuhis, far and near,
+Obstructing, go on to disorder the world.
+Above all, Susanoo's
+Evil demon god of the Saien-kan,
+Calling together countless demon gods,
+Morning and evening, plotting
+To overturn the divine work of Ōkuroto,
+How dreadfully presumptuous it is!
+
+We are the children of God, the palaces of God,
+With bodies equal to God,
+Shall we ever, ever forgive
+These evil gods who lay waste to this world?
+Come to the forest of Kurusu and see,
+The evil god, God Susanoo,
+Dispatched a propaganda envoy,
+Encountering unexpectedly and unknowingly
+Terukuniwake's party,
+Manifesting and vanishing with complete freedom,
+ plying sorcery and illusion,
+Our party, like leaves
+Scattering in a violent wind,
+The humiliation of being forced
+To make a scheduled retreat just once!
+Yet even so, in this world,
+How long will evil continue?
+The evil god of swift Susanoo
+Who closed the Heavenly Rock Cave—
+If we and our party proudly
+
+Line up our bits and charge in,
+How on earth could we possibly endure?
+Will we swallow the wind and flee in disarray,
+Or surrender outright,
+Crying with wry faces and apologizing?
+Crossing over Lake Biwa,
+With the sun gradually turning into the evening sea,
+Will we flee to the Caucasus Mountains?
+Whatever else may be, our army's
+Victory is as though taken in the hand.
+Ah, how valiant, how valiant!
+Raising the shout of victory is but a fleeting moment.
+Advance, advance, come on, advance!
+There is no blade that stands against righteousness.
+With the sacred words of Ōkuroto,
+We who advance are truly the palaces of God,
+The army of God, proudly!
+Advance, advance, come on, advance!
+Though the Kajika Pass be steep,
+Though the blowing wind be strong,
+
+Propaganda envoys of Miroku,
+Though tens of thousands should come,
+Like a lamp before a storm,
+They shall vanish fleetingly as a matter of course.
+Advance, advance, come on, advance!
+Until the evil demon hosts perish.'</p>
+          <p class="en-p">With voices full of valor, the evil gods sang the marching song without shame before heaven and earth, as if they firmly believed their own side to be righteous. Itakō became frantic, and without uttering another word, running with the speed of Idaten, he pointed straight toward the dense formation, swinging his kongō-staff about and raging like a yaksha.</p>
+          <p class="en-p">The army led by Katahiko and Kumehiko suddenly raised a clamor, running hither and thither through the steep and narrow valley paths, and their shouting voices echoed through the echoes of the valley.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">道公は幾度も首を縦に振り、</p>
+            <p class="ja-classical-line">道公『ハイ分りました。それならば私も安心致します。流石は先生だ。如何にも妙案奇策です。到底匹夫下郎の企て及ぶ所では厶いませぬ。オイ純公、伊太公、安心せい、ヤツパリ俺の先生は偉いワ。普通一般のお師匠さまとは聊か選を異にしてゐるのだ。こんな先生を持つた俺達は実に幸福なものだぞ』</p>
+            <p class="ja-classical-line">伊太公『さうか、そりや有難い。どんな事だい。一寸洩らしてくれないか』</p>
+            <p class="ja-classical-line">道公『副司令官の俺が知つて居りさへすれば、それでいいのだ。匹夫下郎の分際として英雄の心事を伺はむとするは以ての外だ。貴様二人にお明かしなさるのならば、如何して俺の耳許へ小声で囁きなさる道理があらう。天機洩らすなとの謎に相違ない。そんな事に気の付かぬやうな道公ぢやない。マア神妙に、俺のするままに盲従する方が、お前達の天職だ。エーン』</p>
+            <p class="ja-classical-line">純公『イヤお前さへ得心すれば、俺や何にも尋ねる必要はないのだ。ナア伊太公、さうぢやないか。道公が得心する位だから大抵定つてるワ。先づ先づ安心したがよからうぞ』</p>
+            <p class="ja-classical-line">祠の前より進軍歌が聞えて来る。四人は耳を澄まして、一言も洩らさじと聞いてゐる。</p>
+            <p class="ja-classical-line">『此世を造り玉ひたる
+梵天帝釈自在天
+大国彦の魂の裔
+ハルナの都に現れまして
+大黒主と名乗りつつ
+豊葦原の瑞穂国
+青人草の末までも
+恵みの露を垂れ玉ひ
+天国浄土を地の上に
+開かせ玉ふぞ尊けれ
+さはさり乍ら世の中は
+月に村雲花に風
+醜の曲津は遠近に
+さやりて世をば紊しゆく
+中にも分けて素盞嗚の
+醜の魔神は斎苑館
+数多の魔神を呼び集ひ
+大黒主の神業を
+覆へさむと朝夕に
+企みゐるこそゆゆしけれ</p>
+            <p class="ja-classical-line">吾等は神の子神の宮
+神に等しき身を以て
+此世を荒す醜神を
+ゆめゆめ許しおくべきか
+来栖の森に来て見れば
+神素盞嗚の悪神が
+差遣はしし宣伝使
+照国別の一行に
+思はず知らず出会はし
+変幻出没自由自在
+妖術幻術使ひたて
+吾等一行は荒風に
+木の葉の散りゆく其如く
+一度は予定の退却を
+余儀なくされし悔しさよ
+さはさり乍ら世の中は
+悪がいつ迄続かうか
+天の岩戸を閉したる
+速素盞嗚の悪神も
+吾々一行堂々と</p>
+            <p class="ja-classical-line">轡を並べて攻め込めば
+何条以てたまるべき
+風をくらつて逃げちるか
+但は降参致さむと
+吠面かわいてあやまるか
+ビワの湖乗越えて
+日も漸くにくれの海
+コーカス山に逃げ行くか
+何は兎もあれ吾軍の
+勝利は手に取る如く也
+あゝ勇ましし勇ましし
+勝鬨あぐるは時の間ぞ
+進めや進めいざ進め
+正義に刃向ふ刃なし
+大黒主の御言もて
+進む吾れこそ神の宮
+神の軍ぞ堂々と
+進めよ進めいざ進め
+河鹿峠は峻しとも
+吹来る風は強くとも</p>
+            <p class="ja-classical-line">三五教の宣伝使
+仮令幾万来るとも
+嵐の前の灯火と
+はかなく消ゆるは案の内
+進めよ進めいざ進め
+悪魔の軍勢の亡ぶ迄』</p>
+            <p class="ja-classical-line">と声勇ましく、悪神は悪神としてヤハリ自分の味方を善と信じてゐるものの如く、天地に恥ぢず進軍歌を歌つてゐる。伊太公は逆上せあがり、其まま物をも言はず、韋駄天走りに密集部隊を指して、金剛杖を打ふり打ふり夜叉の如くにあばれ込んで了つた。</p>
+            <p class="ja-classical-line">片彦、久米彦の率ゐる軍隊は俄にどよめき立ち、嶮しき細き谷路を右往左往に駆まはり喚き叫ぶ声、谷の木霊を響かせてゐる。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c06.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 6: 祠前 [1157]</span>
+      </a>
+      <a href="c08.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 8: 噴飯 [1159]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: 双遇 [1163] - Volume 43 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 43 Table of Contents</a>
+      <span>Volume 43</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 43 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: 双遇 [1163]</h1>
+      <p class="chapter-title-ja">双遇〔1163〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Harukō descended the night path, breaking into song with the mood of an ape imitating a person.</p>
+          <p class="en-p">Even in the daytime, the precipitous mountain path / Going down with a boom, boom, boom / What kind of matter is this again? / Untoko-dotsukoi, yatsutokosho / This too is surely for the sake of / The moon-sama shining upon us / No matter what, if the tsukihi in the world / Are not present, dotsukoi, it will not settle / The horses of tsukihi are like arrows / The night road growing dark early / Hinhinhin, in the far and near / The neighing of horses is heard coming / The fellows of Brahmanism / The horses left behind and abandoned / Their voices are also so wretched, aren't they? / To be impoverished is to be dull, such a saying / I too have heard from before / Upon the lean horse that neighs hinhinhin / A dull man has come riding / At the steep slope of Kajikatauge</p>
+          <p class="en-p">Blowing a single bubble and starting to flee / Whenever I look at that pathetic plight / Losing all affection, untokosho / At once my mouth cannot be closed / The generals Katahiko and Kumehiko / Are quite weak fellows, aren't they? / Frightened and terrified by the living kototama / Of Haru-sama alone / The whole lot completely routed in total collapse / Scattering everywhere upon the slope / As if small stones were being tossed out / Treading over and riding over their own allies / Escaping for their very lives and vanishing / What cowards there are in the world / Daikokunushi, untokosho / No matter how many military forces you possess / Such weak substitutes / Untoko-dotsukoi, yatsutokosho / How could a journey ever be made with them? / Being a burden, dotsukoi-shyo</p>
+          <p class="en-p">Only fellows who are a nuisance, enyaraya / The grain-eaters of the three thousand worlds / The reason why rice has become precious / Is because such worthless rubbish in abundance / Is crawling and swarming around / At this rate, no matter what / The food problem, dotsukoi-shyo / Unless it is brought up, it will not be settled / Thanks to that, the clothing of clouds / That concealed the moon has come off, it seems / The road suddenly appears white / What on earth is this footprint? / At the toes of the lean horses / The crescent-moon shapes of the horseshoes / Firmly hammered in, in great numbers / Are fallen here and there / Ah, how amusing, how amusing / Illuminated by the divine mizei / The howling wolves and tigers / This mountain famed in rumor</p>
+          <p class="en-p">We, who advance without difficulty / Untoko-dotsukoi, best in the realm / Unrivaled heroes of past and present / The propaganda emissaries of Chikokuwake / Surely you must be feeling very proud / A good disciple like me / Well, my, what a find you made / Search the world over as much as you will / There is definitely no second one / Ottodotsukoi, dotsukoi-shyo / Unawares, the demon of arrogance / Has shaken its horns aloft / And talking about trivial things, dotsukoi-shyo / Spat forth from the mouth of Harukō / Ah, Kannagara, Kamigami / By the protection of the precious gods / This state of the palace of mizei / Without any attacks from evil demons / Very luxuriantly, the divine path / Cause us to advance, O Heaven and Earth!</p>
+          <p class="en-p">Before the precious gods of Heaven and Earth / Harukō, whose heart is also clearing / Reverently, reverently praying / Ah, Kannagara, Kamigami / May your spirits multiply and prosper!</p>
+          <p class="en-p">Itsukimaro also began to sing.</p>
+          <p class="en-p">The morning sun shines, the moon is full / In the divine wind of the mansion of the Saien / We who advance, blown along / Following Chikokuwake / At the summit of Kajikatauge / Once more by the wind, dotsukoi-shyo / Buffeted and troubled in our journey / Ah, Kannagara, Kamigami / The gods, untokosho / Will not abandon us, directly / The slope of such a difficult pass / Peacefully and safely / The gratitude of having been made to cross over / The divine officials of Brahmanism / Both Katahiko and Kumehiko / Leading a multitude of soldiers / Untokosho of our entourage / Without knowing that we were waiting for them / Whipping their horses, ei-ei / The road of the slope where it was difficult to go</p>
+          <p class="en-p">Coming up climbing is amusing / Receiving the permission of Chikokuwake / Mankō leaps out / Opening his great hands wide upon the chest-clinging slope / And suddenly standing like a Niō guardian / Whether it suits him or not, I do not know / The kototama engine became blocked / Rolling his eyeballs about with a kyoro-kyoro / The fact that he was struck dumb is amusing / Untoko-dotsukoi, yatsutokosho / Once more, black clouds to the moon / Have come to hang over completely / O my master, O my lords / Please watch your footsteps as you descend / The forest of the shrine has also drawn near / Seeing the valley of Kaikoku on the right hand / Hearing the voices of the apes / Advancing with a cheerful heart / I am the propaganda emissary of the realm / Though I say so, dotsukoi-shyo</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">晴公は夜道を下りながら、猿の人真似気分で歌ひだした。</p>
+            <p class="ja-classical-line">『昼さへ嶮岨な山道を
+ドンドンドンと下りゆく
+こりや又何とした事か
+ウントコドツコイ　ヤツトコシヨ
+是も矢張お月さまの
+吾等を照らしたまふ為め
+どうしても月日は世の中に
+なければドツコイをさまらぬ
+月日の駒は矢の如く
+早暮れかかる夜の道
+ヒンヒンヒンと遠近に
+馬の嘶き聞え来る
+バラモン教の奴原が
+乗り捨て置いたお馬さま
+声まで貧相な奴ぢやなア
+貧すりや鈍すと云ふ事は
+俺も前から聞いて居る
+ヒンヒン吠える痩馬に
+鈍な男が乗つて来た
+河鹿峠の峻坂で</p>
+            <p class="ja-classical-line">一泡吹いて逃げかかる
+その為体を見るにつけ
+愛想が尽きてウントコシヨ
+早速口が塞がらぬ
+片彦久米彦将軍は
+余程弱いやつぢやなア
+唯一人の晴さまの
+生言霊に怯ぢ恐れ
+全体残らず総崩れ
+バラバラバラと坂道に
+小石を打ちあけたその如く
+味方を踏み越え乗り越えて
+命からがら逃げ失せぬ
+よい腰脱けもあるものぢや
+大黒主がウントコシヨ
+何程軍勢持つとても
+あれ程弱い代者を
+ウントコドツコイ　ヤツトコシヨ
+連れて道中がなるものか
+足手纏ひにドツコイシヨ</p>
+            <p class="ja-classical-line">なる奴ばかり、エンヤラヤ
+三千世界の穀潰し
+お米が貴うなつたのも
+ガラクタ共が沢山に
+ウヨウヨして居るその為だ
+この調子ではどうしても
+食料問題ドツコイシヨ
+持ち上らねば治まらぬ
+お蔭で月を隠したる
+雲の衣がぬげたよだ
+道が俄に白みえる
+此足形は何だらう
+痩馬共の爪先に
+堅く打ちたる蹄鉄の
+半月形が沢山に
+あちらこちらに落ちて居る
+あゝ面白や面白や
+神の御稜威に照らされて
+虎狼の咆えたける
+噂に高き此山を</p>
+            <p class="ja-classical-line">苦もなく進む吾々は
+ウントコドツコイ天下一
+古今無双の豪傑ぞ
+治国別の宣伝使
+嘸や得意で厶いませう
+私のやうなよい弟子を
+よくマア探し当てたもの
+何程世界を探しても
+二人と決してありませぬ
+オツトドツコイ　ドツコイシヨ
+知らず識らずに慢心の
+鬼奴が角を振りたてて
+つまらぬ事をドツコイシヨ
+晴公の口から吐きよつた
+あゝ惟神々々
+尊き神のお守りに
+稜威の宮居の此体
+悪魔の襲ふ事もなく
+いとすくすくと神の道
+進ませ給へ天地の</p>
+            <p class="ja-classical-line">尊き神の御前に
+心も晴るる晴公が
+畏み畏み願ぎまつる
+あゝ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">五三公は又歌ひ出したり。</p>
+            <p class="ja-classical-line">『朝日は輝く月は盈つ
+斎苑の館の神風に
+吹かれて進む吾々は
+治国別に従ひて
+河鹿峠の頂上で
+又もや風にドツコイシヨ
+吹きまくられて行き悩む
+あゝ惟神々々
+神は吾等をウントコシヨ
+捨てさせたまはず直々と
+さしも難所の坂道を
+心平に安らかに
+渡らせたまひし有難さ
+バラモン教の神司
+片彦久米彦両人は
+数多の兵士を引率し
+吾等一行のウントコシヨ
+彼等を待つと知らずして
+駒に鞭ちエイエイと
+行き難みたる坂の道</p>
+            <p class="ja-classical-line">登り来るぞをかしけれ
+治国別の御許しを
+受けて万公が飛び出し
+胸突坂に大手をば
+拡げて忽ち仁王立ち
+似合ふか似あはぬか知らないが
+言霊機関が閉塞し
+眼玉をキヨロキヨロ剥きだして
+絶句したるぞをかしけれ
+ウントコドツコイ　ドツコイシヨ
+又々月に黒雲が
+すつかりかかつて来たやうだ
+吾師の君よ皆さまよ
+足許気をつけ下りませ
+祠の森も近づいた
+懐谷を右手に見て
+猿の声を聞きながら
+心いそいそ進み行く
+吾は天下の宣伝使
+とは云ふもののドツコイシヨ</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Though it cannot be said with a loud voice,</p>
+          <p class="en-p">As we are barely candidates,</p>
+          <p class="en-p">Still warm and tender are we, the oretachi.</p>
+          <p class="en-p">Untokodotskoi, dotskoishiyo,</p>
+          <p class="en-p">Once again the moon has appeared.</p>
+          <p class="en-p">Just as expected, we are dotskoishiyo,</p>
+          <p class="en-p">Dotskoidotskoi, yatsutokoshiyo.</p>
+          <p class="en-p">Our military fortune is surely strong.</p>
+          <p class="en-p">Isokō, Isokō, so very much</p>
+          <p class="en-p">Does Mankō-sama say,</p>
+          <p class="en-p">Yet precisely because this Isokō exists,</p>
+          <p class="en-p">An unprecedented and fascinating</p>
+          <p class="en-p">Journey along the mountain path is made possible.</p>
+          <p class="en-p">Aitatsutatsuta, I stumbled!</p>
+          <p class="en-p">Talking far too much, it seems my footing</p>
+          <p class="en-p">Has slipped your mind, indeed.</p>
+          <p class="en-p">Descending the slope, the primary</p>
+          <p class="en-p">Attention required is at the tips of the toes.</p>
+          <p class="en-p">When the mouth is excessive, untokoshiyo,</p>
+          <p class="en-p">Unto our teacher's lord, untokoshiyo.</p>
+          <p class="en-p">Told to keep silence,</p>
+          <p class="en-p">It is truly a harsh slope.</p>
+          <p class="en-p">In the vast sky the moon shines bright,</p>
+          <p class="en-p">Even my own breast clears completely,</p>
+          <p class="en-p">The blowing wind is nothing to me,</p>
+          <p class="en-p">It does not weigh on my heart at all.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara,</p>
+          <p class="en-p">Now more than ever, the grace of Kami</p>
+          <p class="en-p">I revere and give thanks for.</p>
+          <p class="en-p">Whether the morning sun shines or is clouded,</p>
+          <p class="en-p">Whether the moon hides in dark clouds,</p>
+          <p class="en-p">Even in fields where wolves and fierce beasts howl,</p>
+          <p class="en-p">The departure for the subjugation of the demons</p>
+          <p class="en-p">Can never, ever be stopped, down to the nethermost hell.</p>
+          <p class="en-p">Could there be any joy like this?</p>
+          <p class="en-p">Ah, omoshiro, omoshiro!</p>
+          <p class="en-p">Aitatatsutatsuta, I have fallen again!</p>
+          <p class="en-p">I have utterly ruined my doterai bottom,</p>
+          <p class="en-p">Hitting it as hard as can be said.</p>
+          <p class="en-p">Hey there, hey there, Harukō and Mankō,</p>
+          <p class="en-p">Won't you wait for me a while?</p>
+          <p class="en-p">My legs have grown strange.</p>
+          <p class="en-p">Having followed you all the way here with such effort,</p>
+          <p class="en-p">To abandon a friend and march right on,</p>
+          <p class="en-p">What kind of behavior is that?</p>
+          <p class="en-p">You are a man devoid of friendship's worth.</p>
+          <p class="en-p">If you do such heartless things,</p>
+          <p class="en-p">When you leave this world and fall</p>
+          <p class="en-p">Into the Yūkai, dotskoishiyo,</p>
+          <p class="en-p">Things like this—aitatsutatsuta,</p>
+          <p class="en-p">Aitatatsutatsuta, it hurts indeed!</p>
+          <p class="en-p">The demon servants of hell will come running,</p>
+          <p class="en-p">Throw me down into the eighty thousand hells,</p>
+          <p class="en-p">And surely punish me, no doubt.</p>
+          <p class="en-p">If you care for the sake of your future life,</p>
+          <p class="en-p">It would be well to help me along.</p>
+          <p class="en-p">It is by no means for my own sake,</p>
+          <p class="en-p">It is for you in the world to come, untokoshiyo,</p>
+          <p class="en-p">The joy of good cause and good effect,</p>
+          <p class="en-p">Taking it all for yourself without sharing it with others,</p>
+          <p class="en-p">That is the sowing of seeds, dotskoishiyo.</p>
+          <p class="en-p">Have some sympathy for me, I pray.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara,</p>
+          <p class="en-p">Though existing in the great land of Kami,</p>
+          <p class="en-p">Mankō knows nothing of human duty and righteousness,</p>
+          <p class="en-p">And oh, how cold Harukō-sama is!</p>
+          <p class="en-p">Hey, hey, mōshi, propaganda emissary,</p>
+          <p class="en-p">Please give these two a good scolding.</p>
+          <p class="en-p">I pray to Kami and make my vow."</p>
+          <p class="en-p">Mankō stops in his tracks, bends at the waist, gazes down at the descending Isokō, and says,</p>
+          <p class="en-p">Isokō: 'Chie, what is it? Collapsing at the very most crucial time—what on earth is the posture of your lower back? It is practically a double-waist!'</p>
+          <p class="en-p">Isokō: 'That is why I told you from the very beginning to wait for me, isn't it? It seems as though the bone in my lower back has slipped out. Won't you take a quick look?'</p>
+          <p class="en-p">Mankō: 'Talk nonsense! How could someone whose lower back has slipped out walk even a single step? You most likely struck your femur against a rocky corner. Ah, what a troublesome fellow. If we dawdle, we will fall behind the propaganda emissary-sama. However, since this is a boat we have already boarded, come, I will heal you.'</p>
+          <p class="en-p">Saying this, he slapped Isokō's lower back area three or four times with the flat of his hand, pishiya pishiya.</p>
+          <p class="en-p">Isokō: 'Aitatatsuta, my breath has become easy with this. Yay, thank you! A true friend is indeed the one you should rely upon.'</p>
+          <p class="en-p">Mankō: 'Come, let us hurry on. At last, the teacher's shadow has vanished from sight. Hurry, hurry.'</p>
+          <p class="en-p">Isokō: 'Understood. Kakeashikakeashi,' he says as he follows behind Mankō, descending the steep mountain path.</p>
+          <p class="en-p">To return to the original story, the three—Tamakuniwake, Michikō, and Sumikō—pondering the disappearance of Itakō, and wishing to soothe and pacify with words the enemy who would now come returning, struck by the kototama of Chirokuwake, sat waiting with sleeves tucked up.</p>
+          <p class="en-p">Sumikō: 'Michikō certainly saw a strange dream, didn't he? Because you have always been thinking about useless things from your very ordinary days, you saw such a bizarre dream that even a baku wouldn't eat. Truly, when you think about this, your mi-tama appears to be the ultimate fool since the opening of heaven and earth, ufufufufu.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">大きな声では云はれない
+やつとの事で候補生の
+まだぬくぬくの俺達だ
+ウントコドツコイ　ドツコイシヨ
+又々月が現はれた
+矢張俺等はドツコイシヨ
+ドツコイドツコイ　ヤツトコシヨ
+武運が強いに違ひない
+五三公五三公と沢山に
+万公さまが仰有るが
+この五三公があればこそ
+前代未聞の面白い
+山路の旅が出来るのだ
+アイタヽヽタツタ躓いた
+あんまり喋べつて足許が
+お留守になつたと見えるわい
+坂を下るに第一の
+注意を要する足の先
+口が過ぎるとウントコシヨ
+吾師の君にウントコシヨ</p>
+            <p class="ja-classical-line">沈黙守れと叱られる
+ほんとにきつい坂路だ
+み空に月は輝きて
+吾胸さへも晴れ渡り
+吹き来る風も何のその
+些も心にかからない
+あゝ惟神々々
+神の恵を今更に
+謹み感謝し奉る
+朝日は照るとも曇るとも
+月黒雲に隠るとも
+虎狼の咆ゆる野も
+悪魔の征討の旅立ちは
+金輪奈落やめられぬ
+こんな愉快の事あろか
+あゝ面白し面白し
+アイタタツタツタまた倒けた
+ドテライお尻を台なしに
+ウンと云ふ程打ちました
+こりやこりや晴公万公よ</p>
+            <p class="ja-classical-line">暫く待つて呉れぬかい
+足が怪しくなつて来た
+折角此処まで従いて来た
+友を見捨ててスタスタと
+進み往くとは何の事
+友達甲斐のない男
+そんな薄情な事すると
+此世を去つて幽界へ
+落ちた其時ドツコイシヨ
+かういふもののアイタタツタ
+アイタタツタツタ痛いわいな
+地獄の鬼奴がやつて来て
+八万地獄へ突落し
+きつと成敗するだらう
+後生の為を思ふなら
+俺を助けて往くがよい
+決して俺の為ぢやない
+お前が来世にウントコシヨ
+善因善果の喜びを
+人にも分けずまる貰ひ</p>
+            <p class="ja-classical-line">其種蒔きぢやドツコイシヨ
+俺に同情して呉れよ
+あゝ惟神々々
+神の大地にありながら
+仁義をしらぬ万公や
+晴公さまのすげなさよ
+これこれモーシ宣伝使
+二人を叱つて下しやんせ
+神かけ念じ奉る』</p>
+            <p class="ja-classical-line">万公は立ち止まり、腰を屈めて下りゆく五三公を眺め、</p>
+            <p class="ja-classical-line">『チエ、何だい、肝腎要の時に斃りやがつて一体其腰付はどうしたのだい、まるで二重腰ぢやないか』</p>
+            <p class="ja-classical-line">五三公『さうだから、最前から待つて呉れと云つたぢやないか、どうやら腰の骨が外れたやうだ。一寸見て呉れないか』</p>
+            <p class="ja-classical-line">万公『馬鹿云へ、腰が外れたものが一足だつて歩けるかい。大方大腿骨を岩角で打つたのだらう。エヽ厄介者だなア。グヅグヅして居ると宣伝使様に後れて仕舞ふ。併し是も乗りかけた船だ、サア癒してやらう』</p>
+            <p class="ja-classical-line">と云ひながら、平手で三つ四つ五三公の腰のあたりをピシヤピシヤと打つた。</p>
+            <p class="ja-classical-line">五三公『アイタタツタ、これで息が楽になつた。ヤア有難う、持つべきものは矢張親友だ』</p>
+            <p class="ja-classical-line">万公『サア早う往かう。とうとう先生の影が見えなくなつて了つた。いそげ　いそげ』</p>
+            <p class="ja-classical-line">五三公は、『よし来た。駆歩々々』と云ひ乍ら万公の後について嶮しき坂路を下り行く。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">話は元へ戻る。玉国別、道公、純公の三人は、伊太公の行方不明となつたのを打ち案じ乍ら、今や治国別の言霊に打たれて帰り来るべき敵を、言向和さむと、手具脛ひいて待つて居た。</p>
+            <p class="ja-classical-line">純公『随分道公も妙な夢を見たものだなア。矢張常平生から、仕様もない事を考へて居るから、貘も食はないやうな、怪つ体な夢を見よつたのだ。本当に是を思へばお前の身魂は開闢以来のデレさまと見えるのう、ウフヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Michikō: 'Our dreams are first of all roughly like that magnificent one. The dreams you guys see are merely things like being chased by an Onibaba or failing to escape and falling right into a Kusotsubo. Even a dream should not be made too much of a Baka. Since it is a floating world of dreams, at some time or other it will become a Genjitsu. After all, you are a Riyōseinen of Zentotabau.'</p>
+          <p class="en-p">Sumikō: 'As if a Riyōseinen would dream such a nasty dream, rattling along like that... This is in front of Senseisama, so this is going far too far with Fukinshin. Hey Sensei, he is truly a funny guy. My navel almost packed up and moved out (Tentaku) because of how excessive it was.'</p>
+          <p class="en-p">Tamakuniwake is pressing his eyes, looking quite calm and quietly laughing 'Ufuhehehe.' At this time, a noisy Monōto was heard from beyond the slope. Before one's eyes, seven or eight saddle-equipped Areuma gained speed and fled away before the shrine.</p>
+          <p class="en-p">Michikō: 'Ya, interesting, interesting, we have finally encountered them. Rakukuwarauzeki, even the horses are frightened and appear to be in rout. Before long, the defeated soldiers will come along, so now from here on it is a tightened headband. It is a rapid-fire gun of living Kototama, hey Sumikō, count on me firmly.'</p>
+          <p class="en-p">So saying, while tightening his headband, he stomped his feet four times like a sumo wrestler and gave a fierce roar.</p>
+          <p class="en-p">To such a place, dozens of enemies driven to desperation came running to gather their remaining forces at the shrine's grove. Catching sight of Tamakuniwake's party, Katahiko raised his voice in anger,</p>
+          <p class="en-p">Katahiko: 'Ya, you are the propagandists of Izumokyō, you have met us at a good place. Not knowing that I made your retainers prisoners and brought them back with me, you have boldly come walking right out. Now you too are a fragment of Izumokyō, I may not know if it is a vendetta in Edo being settled in Nagasaki, but I will make you vent my spleen. Hey you fellows, level the tips of your spears at these wretches and attack them.'</p>
+          <p class="en-p">Thus he gave a stern command. Several enemies aimed at the three of them with the intense momentum of fierce tigers and rushed to thrust at them. Taken by surprise, the three nimbly dodged and tried to defend and fight using the shrine as a shield. Even so, the general Tamakuniwake is suffering from injured eyes and a fierce headache. No matter how much bravery one has, against enemies coming out with reckless abandon one must go with reckless abandonment, and the enemies are an overwhelming army. Just when the lives of the three were in a critical moment comparable to a candle in the wind, a lion's roar was suddenly heard, enough to make even the mountains crumble. At this voice, the enemies trembled and shook, and unconsciously pressed their ears to the earth and squatted down. Looking, Tokiokishigami is straddling a gigantic lion. Seeing this, Tamakuniwake unconsciously put his hands together,</p>
+          <p class="en-p">Tamakuniwake: 'Konohanahimesama, thank you very much.'</p>
+          <p class="en-p">And he choked with tears of gratitude. Tokiokishigami, riding the lion, without saying a word galloped up the steep mountain and hid his figure somewhere unknown.</p>
+          <p class="en-p">From beyond the slope, propaganda songs were heard flourishingly. The enemies who had once squatted on the ground got up in a lumbering fashion, and fighting to be first, scattered everywhere together with horses and men, fleeing toward the downward slope without a single one remaining.</p>
+          <p class="en-p">Michikō: 'Hahaha, what they call divine power is truly a grand thing, since Izumokyō is protected by splendid living gods, it is a wonderful thing. Well Senseisama, is this not splendid? Escaping the jaws of death is just this thing, I should think.'</p>
+          <p class="en-p">Tamakuniwake: 'Un, it is truly a grateful thing. However, the voice of the propaganda song heard now is precisely Jirokuwake-sama, it would be well to go out and welcome him.'</p>
+          <p class="en-p">Michikō: 'What, Jirokuwake-sama? Ya, that is helpful, you have come to a good place. Indeed, there is not a single fraction of a hair's breadth of error, just as Sensei said, is there? Oh, I am already deeply impressed. Hey Sumikō, what are you staring around for? Hurry up and make preparations to welcome him. Eh, what a dreary fellow you are.'</p>
+          <p class="en-p">Sumikō: 'I am so grateful and so happy that I do not know what I ought to do. Hey Michikō, this must not be a dream. Just now you were telling stories about dreams, and I somehow cannot think it is real at all. Mosimosi Senseisama, is this Genjitsu?'</p>
+          <p class="en-p">'Un, it is certainly Genjitsu. You must hurry and go to welcome him, if only by a single step, or it will not do.'</p>
+          <p class="en-p">Sumikō: 'Ya, if it is truly real, I cannot keep staring around, hey Michikō, let us go. There, there, a black figure has somehow become visible over there. Ah, Ameno-mi-kuma-no-kamunagara-tamachihau-mase, ah, Ameno-mi-kuma-no-kamunagara-tamachihau-mase.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">道公『俺達の夢は先づザツトあのやうな華々しいものだ。お前達の見る夢は、鬼婆に追ひかけられたり、逃げ損なつて糞壺に落ち込んだ位なものだ。夢だつて余り馬鹿にならぬぞ。夢の浮世だから、何時かはそれが現実になるのだ。前途多望の良青年だからなア』</p>
+            <p class="ja-classical-line">純公『良青年がそんな厭らしい夢を見るものか、ジヤラジヤラとした……先生様の前だぞ、不謹慎にも程があるわ。ナア先生、本当に可笑しいやつですね。あまりの事で臍が転宅しかけましたよ』</p>
+            <p class="ja-classical-line">玉国別は目を押へながら、いとも冷然として『ウフヽヽヽ』と静かに笑つて居る。この時坂の彼方より騒々しき物音が聞えて来た。見るまに鞍をおいた荒馬七八頭速力を出して祠の前を逃げて往く。</p>
+            <p class="ja-classical-line">道公『ヤア面白い面白い、いよいよ出会したな。落花狼藉、馬迄が驚いて敗走と見えるわい。軈て落武者共がやつて来るだらう、サアこれから一つ捻鉢巻だ。生言霊の連発銃だ、オイ純公、確り頼むぞ』</p>
+            <p class="ja-classical-line">と捻鉢巻きをしながらお相撲さまのやうにトントンと四股踏んで雄猛びして居る。</p>
+            <p class="ja-classical-line">かかる所へ死物狂となつた数十人の敵は祠の森にて残党を集めむとやつて来た。玉国別一行の姿を見て片彦は声を怒らせ、</p>
+            <p class="ja-classical-line">片彦『ヤア其方は三五教の宣伝使、いい所で出会つた。貴様の家来を生擒に致して、連れて帰つたのも知らず、のめのめとよう出て来やがつた。サア貴様も三五教の片割れ、江戸の仇を長崎かも知らぬが腹いせにやつてやらう。オイ者共、此奴等に槍の切つ先を揃へて取り掛れ』</p>
+            <p class="ja-classical-line">と厳しく号令して居る。数人の敵は三人を目蒐けて猛虎の勢凄じく突いて掛る。三人は不意を喰つて手早く身をかはし祠を楯にとつて防ぎ戦はむとする。されども大将の玉国別は目を痛め、激烈なる頭痛に悩んで居る。如何に勇ありとて無茶で出て来る敵には無茶で行かねばならず、敵は目に余る大軍、あはや三人の命は風前の灯火と云ふ危機一髪の際俄に聞ゆる獅子の唸り声山岳も崩るる許りであつた。此声に敵は顫ひ戦き思はず知らず大地に耳を押つけて踞んで了つた。見れば巨大なる獅子に時置師神が跨つて居る。玉国別はこれを見て思はず知らず両手を合せ、</p>
+            <p class="ja-classical-line">『木花咲耶姫命様、有り難う厶います』</p>
+            <p class="ja-classical-line">と感謝の涙に咽ぶ。獅子に乗つた時置師神はものも云はず嶮しき山を駆け登り何処ともなく姿を隠した。</p>
+            <p class="ja-classical-line">坂道の彼方より盛に宣伝歌が聞えて来た。一旦大地に踞んだ敵はムクムクと起き上り、先を争ひバラバラと人馬諸共、下り坂目蒐けて一人も残らず逃げて往く。</p>
+            <p class="ja-classical-line">道公『ハヽヽヽヽ、御神力と云ふものは偉いものだなア、三五教には立派な生神様が御守護していらつしやるからうまいものだ。モシ先生様、結構ぢや厶いませぬか、虎口を逃れるとは此事で厶いませう』</p>
+            <p class="ja-classical-line">玉国別『ウン、実に有難い事ぢや。併し今聞える宣伝歌の声は正しく治国別様ぢや、お出迎へするがよからうぞ』</p>
+            <p class="ja-classical-line">道公『ナニ、治国別さまですか、ヤそいつは有難い、よい所へ来て下さつた。如何にも先生の仰有つた通り一分一厘間違ひは厶いませぬねえ。いやもう感心致しました。オイ純公何をキヨロキヨロして居るのだ、早くお迎への用意をせぬかい。エ、辛気臭い奴ぢや』</p>
+            <p class="ja-classical-line">純公『余り有難いのと嬉しいのとで、どうしてよいか分りやしないわ。こりや道公夢ぢやあるまいかな。今お前は夢の話をして居つたであらう、俺は如何しても本当と思へないわ。モシモシ先生様、現実ですか』</p>
+            <p class="ja-classical-line">『ウン、確に現実だ。早く一足なりとお迎へに往かねば済むまいぞ』</p>
+            <p class="ja-classical-line">純公『ヤア本当とあればキヨロキヨロしては居られない、オイ道公サア往かう。それそれそこにどうやら黒い姿が見えて来た。あゝ惟神霊幸倍坐世、あゝ惟神霊幸倍坐世』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: 帰 Horse [1162]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: 軍談 [1164]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
