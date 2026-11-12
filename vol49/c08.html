@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: スマート [1282] - Volume 49 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 49 Table of Contents</a>
+      <span>Volume 49</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 49 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: スマート [1282]</h1>
+      <p class="chapter-title-ja">スマート〔1282〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The night wind is cold, and even with the snow falling, it is a lonely grass pillow. Though Hatsuwakahime sleeps peacefully on her bed of dew, Rokukō and Hachikō, the two men enticed by the wind of cowardice, tremble and shake, their teeth chattering as they embrace each other. Praying that the breaking of the night might come even a moment sooner, they feel the pitiful state of their souls, which have been cast into the void with nowhere to rest. The darkness grows ever deeper, and even the stars in Amatsusora are hidden by black clouds, causing their hearts to pound with fear. Just then, a lantern bearing the family crest of Tokiokashi-no-Kami swings to and fro, approaching from the other side of the Itsuponbashi.</p>
+          <p class="en-p">As the figure advances quickly toward them, the two men watch and, with a start, stroke their chests. 'This is surely Tokiokashi-no-Kami, who has come all the way from the Iso mansion to save us, his servants. He must have set out to rescue us.' Wishing not to show their Hikefumiren state, the two men suddenly stand up and, gazing at the approaching lantern, speak: 'Are you Mokusuke-dono, our master? We are Rokukō and Hachikō. Following your orders, we came here to test Hime-sama's courage, but though she resembles Hatsuwakahime, she is but a seventeen-year-old novice, and she speaks things that do not suit her character.'</p>
+          <p class="en-p">'This woman is surely a monster. She intends to devour Hatsuwakahime-sama and, having transformed into her to deceive us, is sleeping here with Guusū Hachibē in such bold defiance. We beseech you, master, now that you have arrived, please join your strength with ours to strike down the enemy of Hime-sama. It is a most regrettable situation. I, too, was about to become prey to the monster, but through the divine virtue of Ubusuna-yama, you have been sent here to strike down the enemy of Hime-sama and save your servants. We are grateful for your arrival. Please, investigate quickly. Look, look, right there as I said.'</p>
+          <p class="en-p">'With a bamboo hat pulled low, she is snoring away. She is a bold and fearless monster,' they say, even their voices trembling. Hearing this, Mokusuke laughs. 'You cowardly Roku and Hachi. In the first place, there is no such thing as a monster in this world. You are quite the cowards. Where is this monster? Guide me there at once.' When he shouts this, the two men reply, 'Yes, yes, right there, she is snoring. Please, you go first. My waist and bones have begun to tremble for no reason, and they will not obey my commands. If my body becomes free, I will listen to anything you say.'</p>
+          <p class="en-p">Just as they say this, the figure wearing the hat stands up. In the long pampas grass on one side, Hatsuwakahime turns toward the three men with a gentle air. 'You three rough men, for what purpose do you follow in my footsteps in the middle of the night? Setting aside the two of you, Roku and Hachi, the absurdity of coming here pretending to be Mokusuke! Mokusuke is a man who serves in the role of general affairs at the Iso mansion. With the dignity of a high official, he would be concerned for his child, but he is not so reckless as to forget his divine duties and follow me all the way here. I have no such parent who would act in such an incomprehensible way. You are surely a manifestation of a demon.'</p>
+          <p class="en-p">'You have blocked our path and, I suspect, plotted to prevent me from carrying out my divine duties. Leave this place at once. I am Hatsuwakahime-no-Kami. I have no time to deal with you, so I shall depart from here. You three should have a thorough discussion about your wicked plans.' Saying, 'Excuse me for going ahead,' she puts on her straw cape, takes up her staff, and walks away. Mokusuke calls out from behind, and saying, 'Hey, hey,' he follows after Hime, with Roku and Hachi in tow.</p>
+          <p class="en-p">Hatsuwakahime chants the Amatsu Norito in a rhythmic tone and proceeds while singing a divine song. As the night begins to brighten, the surroundings become clear, and she sits on a rock on the side of the road to catch her breath, spending a short while lost in thought.</p>
+          <p class="en-p">Hatsuwakahime sits on a rock at the mountain pass of Kajika-tōge and thinks:</p>
+          <p class="en-p">'The monster that appeared last night is something I cannot comprehend. Both the two men, Roku and Hachi, and my father, Mokusuke—it is all beyond my understanding. When I set out on my journey, my father spoke to me so coldly; if he were to follow me, he should have been able to speak a few kinder words. Is this perhaps a divine arrangement by the Great God to test my heart? In any case, it is something I cannot comprehend.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">夜風は寒く吹雪さへ
+まじりて淋しき草枕
+露の蓐をやすやすと
+初稚姫は眠れ共
+臆病風に誘はれし
+六公八公両人は
+歯の根も合はずガタガタと
+慄ひ戦き抱き合ひ
+夜の明けゆくを一時も
+早かれかしと祈りつつ
+宙に飛ばした魂の
+据ゑ所なき憐れさよ
+暗はますます深くして
+天津空には星さへも
+見えぬ許りの黒雲に
+包まれ胸はドキドキと
+戦く折しも時置師
+神の命の家の紋
+付けた提灯ブラブラと
+一本橋の向方より</p>
+            <p class="ja-classical-line">此方に向つて足早に
+進み来るを両人は
+眺めてハツと胸を撫で
+これぞ全く時置師
+神の命のわれわれを
+救はむ為に遥々と
+イソの館を立出でて
+来らせ玉ふものならむ
+卑怯未練な有様を
+見せまいものと両人は
+俄にムツクと立上り
+近寄る提灯打ながめ
+貴方は杢助御主人か
+六公八公で厶ります
+仰せに従ひ姫様の
+度胸を甘くためさむと
+茲まで進み来て見れば
+初稚姫に似たれ共
+まだ十七の初心娘
+柄に合はないことを言ふ</p>
+            <p class="ja-classical-line">此奴ア、テツキリ妖怪奴
+初稚姫の御身をば
+うまうま喰ひ吾々を
+騙さむ為に姫となり
+ここにグウスウ八兵衛と
+大胆至極に寝てゐます
+何卒々々御主人の
+お出でありしを幸に
+姫の仇を吾々と
+力を併せ討つてたべ
+残念至極で厶います
+私もすでに妖怪の
+餌食たらむとせし所
+ウブスナ山の神徳で
+貴方を茲に遣はして
+一つは姫の仇を討ち
+一つは家来を助けむと
+お越しなさつた有難さ
+早く御査べ下さんせ
+それそれそこにあの通り</p>
+            <p class="ja-classical-line">バツチヨ笠をばひつかぶり
+グウグウ鼾をかいてゐる
+大胆不敵の化物と
+いふ声さへも慄ひつつ
+語れば杢助打笑ひ
+卑怯未練な六八よ
+そも世の中に化物と
+誠のあるべき筈がない
+貴様は余程卑怯者
+其化物はどこにゐる
+早く案内致せよと
+一声呶鳴れば両人は
+ハイハイ只今それ其処に
+鼾をかいて居りまする
+貴方は先へ御出張
+遊ばしませ腰の骨
+何とはなしに慄ひ出し
+私の命令を聞きませぬ
+自由の身体となつたなら
+どんなことでも聞きませう</p>
+            <p class="ja-classical-line">斯かる折しもムクムクと
+笠を被つて立上る
+片方の長き芒原
+初稚姫は優しげに
+三人の男に打向ひ
+汝等三人の荒男
+何用あつて真夜中に
+妾が跡を慕ひ来る
+六、八、二人は兎も角も
+杢助などと佯つて
+ここに来れる可笑しさよ
+そも杢助はイソ館
+総務の役に仕へたる
+尊き司の身を以て
+吾子のことが気にかかり
+神務を忘れてはるばると
+慕ふて出て来る向ふ見ず
+左様の訳の分らない
+妾は親は持ちませぬ
+正しく悪魔の変化して</p>
+            <p class="ja-classical-line">吾等の行手を妨害し
+神務を遂行させまいと
+企みしものと覚えたり
+早々此場を立去れよ
+妾は初稚姫神
+汝に構つてゐる暇は
+なければ是より出でて行く
+汝等三人トツクリと
+善からぬ相談するがよい
+お先へ御免と云ひながら
+蓑を被つて杖をつき
+スタスタ進み出でて行く
+杢助後より声をかけ
+オーイオーイと云ひ乍ら
+六、八、二人を従へて
+姫の後をば追ひ来る
+初稚姫はトントンと
+天津祝詞を奏上し
+神歌を歌ひ進み行く
+夜はホノボノと明けそめて</p>
+            <p class="ja-classical-line">あたりも明くなりぬれば
+道の片方の岩石に
+腰うちかけて息休め
+少時思案に暮れにける。</p>
+            <p class="ja-classical-line">初稚姫は河鹿峠の坂口の岩の上に腰うちかけ、</p>
+            <p class="ja-classical-line">『昨夜現はれし怪物は合点のゆかぬ代物だナア。六、八両人と言ひ、父の杢助と云ひ、合点のゆかぬことだなア。妾が首途の時、あの様に素気なく云つた吾父が、妾を慕つて追つかける位ならば、モウ少し優しい言葉をかけさうな筈。大神様の、妾が心を試さむ為の御計らひだらうか、何につけても合点のゆかぬことだなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sashiutsumu, lost in Shian. Suddenly, Mokusuke, Roku, and Hachi appeared.</p>
+          <p class="en-p">Mokusuke: 'Hey, are you not Hatsuwakahime? Why do you not wait when your father calls you so much? There was something I wanted to say about your Tabidachi. Because I forgot it, I have come chasing after you to tell you.'</p>
+          <p class="en-p">Hatsuwaka: 'I do not have a cowardly and irresolute parent like you, sir. Think carefully and Goran. If you are truly the person called Mokusuke, why do you not Senshin serve at the Iso mansion? Are you not the Mokusuke who swore to dedicate your entire Itsushinitsuka to serving Kami? It seems you have aged and Mauroku, just as I thought. I am a splendid Sendenshi who received a Chiyokusetsu Shimei from the Ōkamisama of the Iso mansion, even if I am young. Once I have embarked on the Seito of Akuma, I have no use for the likes of Mokusuke-sama until I have fulfilled my Shimei. Please Okahe quickly. However, you are surely not the real Mokusuke-sama. What is with those ears? Are they not flapping about like a beast's? You must have heard that Hatsuwakahime was going to the capital of Haruna, and you are trying to lead me astray just before my Shiyutsupatsu and hinder my purpose. No amount of magic will work on Hatsuwakahime. Ho ho ho ho, my, you have transformed quite skillfully.'</p>
+          <p class="en-p">Mokusuke: 'What rude things are you saying to your father? Look here, no matter how much my ears move, it is because the wind is blowing. If the wind blows, not only ears, but even tree leaves and large trees move, do they not? You are a child after all. The saying that a parent's heart is unknown to the child refers to you. No matter how cold I may appear, the hot tears of love are welling up inside my heart. Do not say such things; human life is uncertain. Thinking that this might be our parting, as you participate in the Fushakushinmyo divine work, I have come chasing after you, sacrificing my sleep and thinking of the gaps in my duties. Please try to understand a parent's heart at least a little, Hatsuwakahime-dono.'</p>
+          <p class="en-p">Hatsuwaka: 'Ho ho ho ho, you transform quite well. I do not have two fathers; return home already. No matter what you say, it is useless.'</p>
+          <p class="en-p">Roku: 'Excuse me, Hime-sama, is this Mokusuke-sama not the real one?'</p>
+          <p class="en-p">Hatsuwaka: 'Whether he is real or a fake, look closely from the top of his head to the tips of his toes and Goran.'</p>
+          <p class="en-p">Hachi: 'Hey Roku, just as Hime-sama says, his appearance is strange. He truly resembles our master, but there is something that does not sit right, is there not?'</p>
+          <p class="en-p">Roku: 'Hey, you! Mokusuke-monster, what is this? Have you surrendered to Hime-sama's power of discernment?'</p>
+          <p class="en-p">Mokusuke: 'Hey Roku, how dare you treat your master like a monster! Hachi, you are the same kind of fellow as Roku. I am dismissing you as of today, so there is no need for you to return to the Iso mansion!'</p>
+          <p class="en-p">Roku: 'I will not stand to be the underling of a monster like you. Right, Hachi-kou, is that not so?'</p>
+          <p class="en-p">Hachi: 'Indeed, indeed, we are the retainers of the real Mokusuke-sama. I will not stand to be the retainer of someone whose ears move like that. Hey, monster, what time do you think it is? It is already dawn, is it not? Why do you not just give up?'</p>
+          <p class="en-p">Mokusuke: 'Atsu ha ha ha ha, Roku, Hachi, both of you, what will you do if I am the real Mokusuke?'</p>
+          <p class="en-p">Roku: 'What, even if you were the real Mokusuke, I would not care. Once I am dismissed, I will follow behind Hime-sama and accompany her wherever she goes. Right, Hachi-kou?'</p>
+          <p class="en-p">Hatsuwaka: 'Roku, Hachi, both of you, return home as soon as possible. I must go on this journey alone to the end. I will soon reveal the true form of this monster and make him surrender, so you two should return home quickly.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と差俯いて思案に暮れてゐる。そこへ突然現はれたのは杢助、六、八の三人であつた。</p>
+            <p class="ja-classical-line">杢助『オイ其方は初稚姫だないか、なぜ父があれ程呼び止めるのに待つてくれないのだ。一言お前の旅立について言つておきたいことがあつた。それを忘れたに仍つて、後追つかけ、言ひきかしに来たのだ』</p>
+            <p class="ja-classical-line">初稚『妾はお前さまの様な卑怯未練な親は持ちませぬ。能く考へて御覧なさい。貴方が果して杢助とやら言ふお方ならば、なぜイソの館に専心お仕へなされませぬか。何事も一身一家を捧げて神に仕へるとお誓ひなさつた杢助ぢやありませぬか。ヤツパリ貴方も年が老つたとみえて耄碌しましたねえ。妾はイソの館の大神様より直接使命を受けた、年は若うても、立派な宣伝使で厶います。最早悪魔の征途に上つた上は、立派に使命を果す迄、杢助さま何かに用は厶いませぬ。早く御帰りなさいませ。併しお前は本当の杢助さまぢやありますまい。其耳は何ですか、獣の様にペラペラと動いているぢやありませぬか。初稚姫がハルナの都に参ると聞き、手をまはして出発の間際に妾を邪道に引入れ、目的の妨げを致さうとするのだらう。いかなる魔術も初稚姫に対しては一切駄目ですよ。ホヽヽヽヽ、マアマア能くも巧に化けましたねえ』</p>
+            <p class="ja-classical-line">杢助『其方は父に向つて何といふ無礼なことを言ふのだ。これ見よ、何程耳が動いても、これは風が吹いてゐるからだ。風が吹けば耳許りか、木の葉でさへも、大木でも動くだないか、流石は子供だなア。親の心は子知らずとはお前のことだ。此杢助は何程冷淡に見せて居つても、心の中には愛の熱涙が沸き立つてゐるのだ。左様なことをいはずに人間は老少不定だ。不惜身命的神業に参加するお前、これが別れにならうも知れぬと思ひ、態々ここ迄、夜の目も寝ずに、御用の隙を考へて追つかけて来たのだ。親の心もチツとは推量してくれ、初稚姫殿』</p>
+            <p class="ja-classical-line">初稚『ホツホヽヽヽ、うまい事お化けなさいますなア。妾は二人の父は持ちませぬ、いい加減にお帰りなさい。何と云つても駄目ですよ』</p>
+            <p class="ja-classical-line">六『もし姫様、此杢助様はさうすると本真物ぢや厶いませぬか』</p>
+            <p class="ja-classical-line">初稚『本真物か贋物か、頭の上から足の爪先迄、能く見て御覧』</p>
+            <p class="ja-classical-line">八『オイ六、姫様の仰有る通り、様子が変だぞ。御主人に本当に能く似てゐるが、何となしに腑におちぬ所があるぢやないか』</p>
+            <p class="ja-classical-line">六『コヽコラ、モヽ杢助のバヽ化物、ドヽ何うぢや、姫様の眼力には往生致したか』</p>
+            <p class="ja-classical-line">杢助『コラ六、主人に向つて不都合千万な、化物扱ひに致すことがあるか、八、貴様も六と同じやうな奴だ。今日限り暇を遣はすから、モウ、イソ館へ帰るには及ばぬツ』</p>
+            <p class="ja-classical-line">六『貴様の様な化物の乾児になつてたまるかい。のう八公、さうではないか』</p>
+            <p class="ja-classical-line">八『さう共さう共、本当の杢助様の御家来だ。こんな耳の動く奴の家来になつてたまるかい。コラ化州、何時だと考へてる、モウ夜明けだないか。可いかげんスツ込まぬかい』</p>
+            <p class="ja-classical-line">杢助『アツハヽヽヽ六、八の両人、若も此方が本当の杢助であつたら何と致す』</p>
+            <p class="ja-classical-line">六『ナアニ、本当の杢助であつた所が構ふものかい。暇を貰つたら姫様の後に従いて、何処迄でもお供するのだ。のう八公』</p>
+            <p class="ja-classical-line">初稚『六、八の両人、一時も早く御帰りなさい、妾は飽迄一人旅でゆかねばならぬ。今に此化物の正体を現はし往生さして見せるから、お前さまは早く御帰りなさい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Saying this, she chanted the Kazūta of Ama. Mokusuke instantly transformed into a Kuwaibutsu like an ox,</p>
+          <p class="en-p">Mokusuke: 'Ugh!'</p>
+          <p class="en-p">He let out a roar, his eyes glaring in rage, his fangs bared, and as he attempted to leap at Hatsuwakahime, he dug his Maheashi claws into the earth, sharpening them as he stood in a Sakada posture. Hatsuwakahime remained Heizen and began to Sōjiyō the Amatsunorito. Seeing this sight, the Riyōnin, Roku and Hachi, had their Ganshiyoku turn the color of earth; they fell to the ground, unable to even raise a sound of 'chiu,' and trembled. If one looked closely at the face of the Kuwaijiu, it was a Kiyodai Karashishi. The Karashishi glared intently at Hatsuwakahime, and in the Ichisetsuna that it moved Mauzen to bite her, a roar of 'Ugh!' came from behind. Wondering who it might be, she looked back and saw a sturdy, large Yamainu. The Yamainu leaped at the Ōshishi like a Shitsupū. The Shishi became small and fled Ichimokusan, and the Yamainu pursued the tracks of the Shishi. Hatsuwakahime Mioku and Uchiwara,</p>
+          <p class="en-p">Hatsuwakahime: 'Ho-ho-ho, having encountered the first trial of the Kamisama, thanks to that, it seems I have passed. Hey, Roku, Hachi, there is no need for worry any longer. Return to our home as quickly as possible and tell my father, Mokusuke, that Hatsuwakahime is safe, so please be at ease. If so, farewell.'</p>
+          <p class="en-p">No sooner had she said this than she climbed the Kajika Pass with quick steps. The Riyōnin, Roku and Hachi, sighed with relief, and while chanting the words of the gods, they headed toward the Mokusuke mansion, hurrying back for fear that if the sun set, it would be a serious matter. Hatsuwakahime, all alone, climbed the Kajika Pass while singing a song of propaganda. The aforementioned fierce dog came running in a flurry, moving in front of and behind Hatsuwakahime, wagging its tail, and running around while barking 'wan-wan' as if happy. Hatsuwakahime finally reached the top of the slope, and while gazing at the scenery in all directions, she sat down for a short while to rest. The aforementioned fierce dog crouched before Hatsuwakahime, drooping its ears, narrowing its eyes, and wagging its tail.</p>
+          <p class="en-p">Hatsuwakahime: 'I do not know what mountain you are from, but you are a creature of quite agile work. From now on, I shall take you as my retainer. You shall follow me to the capital of Haruna. And for you, I shall give you the name "Smart."'</p>
+          <p class="en-p">Saying this, she held the fierce dog and stroked its neck, comforting it. Smart wagged its tail incessantly, barking 'wan-wan' to express its gratitude. Hatsuwakahime felt very reassured to have obtained this dog, and while singing a song of propaganda, she sang as she descended the southern slope of the Kajika Pass.</p>
+          <p class="en-p">The God appears in the world / To distinguish between good and evil / Upon the path of the demon's conquest / Is it to examine the soul / Of Hatsuwakahime that He became my father / Or became a giant lion / To block my departure / And test my intentions / Or is it a true evil god / Though there are things my heart cannot fathom / Since I have entrusted my whole being / To the God in all things / No matter what may happen / Without bending my original intent, steadily / Relying not on men, but on the Imperial God / My heart shall go forth / Devoting my sincerity / Just as the words of the God dictate / Even if the Magatsu-kami / Obstructs the path ahead and does me harm / I have the protection of the God.</p>
+          <p class="en-p">Now again the God makes Smart / A companion on my journey / How precious is this gift / The God is with us / We are the children of the God, the palace of the God / How could I fear / Awakening the Yamato-gokoro / Of Shikishima / And speaking to the Yamata-no-Orochi / That dwells in the capital of Haruna / Manifesting the sincerity / Of the great God Susanoo / Constructing the reign of Miroku in detail / Widely upon the earth / The way of the God that manifests / The divine power of the San-go-kyo / How joyful it is to advance / Ah, Kannagara-kamu-nagara / May your spirits be blessed.</p>
+          <p class="en-p">She sang this as she went forward.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と云ひ乍ら、天の数歌を唱へ上げた。杢助は忽ち、牛の如き怪物となり、</p>
+            <p class="ja-classical-line">『ウー』</p>
+            <p class="ja-classical-line">と唸りを立て、目を怒らし、牙を剥き出し、初稚姫を目がけて飛びかからむとし、前足の爪を逆立て、大地の土をかいて、爪を尖らしてゐる。初稚姫は平然として天津祝詞を奏上し始めた。六、八の両人は此姿をみて、顔色土の如くに変り、其場に打倒れ、チウの声も得上げず慄ふてゐる。怪獣の顔をよくよくみれば、巨大なる唐獅子である。唐獅子は初稚姫をグツと睨めつけ、猛然として咬みつかむとする一刹那、後の方より『ウー』と又唸り声、何者ならむと、後ふり返れば、逞しい大きい山犬である。山犬は大獅子に向つて、疾風の如く飛び付いた。獅子は一目散に細くなつて、逃げてゆく、山犬は獅子の跡を追跡する。初稚姫は後見送つて打笑ひ、</p>
+            <p class="ja-classical-line">『ホツホヽヽ、始めての神様の試しに会うて、お蔭で及第した様だ。ヤア六、八、最早心配は要らぬ、一時も早く吾家へ立帰り、父の杢助に、初稚姫は大丈夫だから御安心遊ばせと伝へてくれ、左様ならば』</p>
+            <p class="ja-classical-line">といふより早く、足早に河鹿峠を登り行く。六、八両人はヤツと胸を撫でおろし、神言を称へ乍ら、杢助館を指して、又日が暮れては一大事と急ぎ帰り行く。初稚姫は只一人宣伝歌を歌ひ乍ら、河鹿峠を登り行く。以前の猛犬慌ただしく駆来り、初稚姫の前になり、後になり尾を掉つて、嬉しさうにワンワンとなき乍ら、駆けめぐる。初稚姫は漸く坂の頂上に達し、四方の景色を眺め乍ら、少時腰を卸して休息した。以前の猛犬は初稚姫の前に蹲まり、耳を垂れ目を細くし、尾を掉つてゐる。</p>
+            <p class="ja-classical-line">『其方はどこの山犬か知らぬが、随分敏活な働きをする者だ。これから妾の家来として上げよう。ハルナの都まで従いて来るのだよ。而してお前には「スマート」といふ名を上げませう』</p>
+            <p class="ja-classical-line">と云ひ乍ら、猛犬を抱へ、首筋を撫でなどして労はつてゐる。スマートは頻りに尾を掉り、ワンワンと叫び乍ら、感謝の意を表してゐる。初稚姫は此犬を得て非常に心強くなり、宣伝歌を歌ひ乍ら、河鹿峠の南坂を下りつつ歌ふ。</p>
+            <p class="ja-classical-line">『神が表に現はれて
+善と悪とを立別ける
+悪魔の征途に上り行く
+初稚姫の魂を
+査べむ為か父となり
+或は巨大な獅子となり
+妾が首途を遮りて
+所存の程を調べしか
+但しは誠の曲神か
+心に解せぬ事あれど
+只何事も一身を
+神に任せし上からは
+仮令如何なる事あるも
+初心を曲げずドシドシと
+人にたよらず皇神の
+神言のままに真心を
+尽して往かむ吾心
+仮令曲津は行先に
+さやりて仇をなすとても
+吾には神の守りあり</p>
+            <p class="ja-classical-line">今又神はスマートを
+吾行先の供となし
+与へ玉ひし尊さよ
+神は吾等と共にあり
+吾等は神の子神の宮
+いかでか恐れむ敷島の
+大和心をふり起し
+ハルナの都に蟠まる
+八岐大蛇を言向けて
+神素盞嗚の大神の
+誠をあらはし奉り
+五六七の御代を詳細に
+普く地上に建設し
+三五教の神力を
+現はし奉る神の道
+進みゆくこそ嬉しけれ
+あゝ惟神々々
+御霊幸ひましませよ』</p>
+            <p class="ja-classical-line">と歌ひ乍ら進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 剛胆娘 [1281]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: Goodness Illusion 非志 [1283]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

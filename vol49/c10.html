@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 10: 添書 [1284] - Volume 49 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 49 Table of Contents</a>
+      <span>Volume 49</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 49 &bull; Chapter 10</span>
+      <h1 class="chapter-title-en">Chapter 10: 添書 [1284]</h1>
+      <p class="chapter-title-ja">添書〔1284〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Harukuniwake caused the Rānchi Shiyōgun and the Katahiko Shiyōgun of the forest of Ukiki to surrender, and while preaching and instructing them in the Kyōri of Ananai along the way, he advanced as far as the forest of Kurusu. Then, turning to Otora, he said:</p>
+          <p class="en-p">Harukuniwake: 'Otora-sama, you were an enthusiastic Kimoiri of the Uranai-kyō, but it is truly a great joy for us that you have thus surrendered to the Ananai-kyō and become a fine Shinjiya. However, how would it be if you were to make a Gosanpai to the mansion of Iso, receive the permission of Ōkamisama, and serve as a fine Sendenshi? It might be far more convenient than remaining a common Shinjiya.'</p>
+          <p class="en-p">Otora: 'Yes, thank you very much. I wonder if even an old woman like me could be made into a Sendenshi.'</p>
+          <p class="en-p">Harukuniwake: 'Whether you are an old woman or anything else, there is never any Kubetsu of Rauniyaku in your Mitama itself. Since old people are inevitably innocent, you might even become a finer Sendenshi than us. I shall write a letter, so take this, cross the river of Kajika, make a pilgrimage to the mansion of Iso, and after meeting with Lord Yashimano-mikoto, undergo training for about a hundred days; then, become a fine Sendenshi and serve for the sake of the divine realm. That is for the sake of your afterlife more than anything else.'</p>
+          <p class="en-p">Otora: 'If even a wicked old woman like me can repent, I wonder if I could perform work even as much as the dirt under your fingernails. If so, I shall follow your instructions and make a pilgrimage once.'</p>
+          <p class="en-p">Harukuniwake: 'In that case, I shall write the letter for you now. Please take this and go.'</p>
+          <p class="en-p">So saying, he took out his yatate from his waist and wrote something fluently on a sheet of paper. According to the text of the letter:</p>
+          <p class="en-p">'From Harukuniwake, I offer this introduction to Lord Yashimano-mikoto. I have now received various trials from the gods along the way, have received vast and boundless divine virtue, and while thanking for the depth of divine grace, I have finally arrived safely at the forest of Kurusu. Furthermore, the vanguard of the Brahman army, Rānchi and Katahiko Shiyōgun, have now completely surrendered to the Ananai-kyō due to the divine virtue of Ōkamisama, so I humbly request that you report this to Ōkamisama. As I am thinking of having these people undergo a little more preparatory education and then, by means of a letter, have them enter the mansion for training and request that they be appointed as Sendenshi as a result of their training, I ask for your kind favor in all matters. Now, the bearer of this letter is a woman called Otora, a former female chivalrous person of the village of Ukiki who held the reins of the Uranai-kyō of Mount Kokita. Harukuniwake, on the way to the expedition, met my foolish younger brother Matsuhiko, who was the secretary to Katahiko Shiyōgun in the forest of the shrine, and that Matsuhiko immediately surrendered to the path of Ananai and went to the headquarters of the Uranai-kyō of Mount Kokita, and it is he who finally caused Tokage-wake, Magahiko, and Otora to surrender under the divine virtue. Therefore, I ask for your kind favor toward the bearer of this letter, Otora-sama. She is somewhat superstitious and has a tendency to go off track, but I believe that if you educate her sufficiently, she will become a suitable Sendenshi. That is all.'</p>
+          <p class="en-p">He wrote this and handed it to Otora. Otora, with a look of triumph filling her face and squaring her shoulders, bade farewell to Harukuniwake and his party, and set off alone toward the mansion of Iso.</p>
+          <p class="en-p">On the way, she passed by Mount Kokita and, thinking she would at least stop by once to meet her beloved Okiku, and also meet Katsuhime, Magahiko, and others to tell them of the Kyōri she had realized, and to make the sacred ground of Mount Kokita flourish all the more, she returned in high spirits during her pilgrimage. The sacred ground of Mount Kokita still had a fair number of Shinjiya gathered. However, she did not see many faces that Otora recognized. This was because, although they had believed the Hegure Shrine of Mount Kokita and other gods to be the true gods, it was exposed that they were merely nameless evil gods, and because it was ridiculous to be mocked by relatives, friends, and acquaintances, the former Shinjiya did not come around much. Furthermore, since the reform, the former Shinjiya had been filled with dissatisfaction for some reason. This is because there were those who, having believed in the living shrines or the karmic connections of the souls of noble gods and having been proud of their faith, had their faith exposed as nothing but evil gods, and although they were saved from great calamity by small calamity, their hearts had become unhappy for some reason.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">治国別は浮木の森のランチ将軍、片彦将軍其他を帰順せしめ道々三五の教理を説き諭し乍らクルスの森迄進んで行つた。さうしてお寅に向ひ、</p>
+            <p class="ja-classical-line">治国『お寅さま、お前さまはウラナイ教の熱心な肝煎であつたが、かうして三五教に帰順し立派な信者となられたのは実に吾々も大慶です。併し乍ら、之から一度イソの館へ御参拝になり、大神様の御許しを受けて立派な宣伝使となつてお尽しになつては如何です。平の信者となつて行くよりも余程便宜かも知れませぬよ』</p>
+            <p class="ja-classical-line">お寅『はい、有難う厶ります。私の様な婆でも宣伝使にして頂けませうかな』</p>
+            <p class="ja-classical-line">治国『婆だつて、何だつて貴方の身魂其者は決して老若の区別はありませぬ。老人は如何しても無垢な者ですから却て吾々よりも立派な宣伝使になれませう。私が手紙を書きますから此を以て河鹿峠を渡りイソの館に参拝し八島主さまに御面会の上、百日ばかりも修行して其上立派なる宣伝使となり神界のためにお尽しなされ。それが何よりの後生の為めですよ』</p>
+            <p class="ja-classical-line">お寅『私の様な悪たれ婆でも改心さへすれば貴方の爪の垢位な働きが出来ませうかな。それなら之から仰せに従ひ一度参拝をして参りませう』</p>
+            <p class="ja-classical-line">治国『そんなら今手紙を書いてあげませう。之を以ておいでなさいませ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、腰の矢立をとり出し一枚の紙にスラスラと何事か書き記した。其文面によると、</p>
+            <p class="ja-classical-line">『治国別より八島主命様に御紹介申上げます。私は今や途中に於て種々雑多の神様のお試しを頂き広大無辺の御神徳を蒙り、神恩の深きを感謝し乍ら漸くクルスの森迄安着致しました。さうしてバラモン軍の先鋒隊、ランチ、片彦将軍は今は全く大神様の御神徳によつて三五教に帰順致しました故、何卒大神様へ御奏上の程願上げ奉ります。何れ之等の人々はも少し予備教育を施した上、手紙を以て御館へ参籠致させ修行の結果宣伝使にお取立て下さる様御願ひ致す考へなれば万事よろしく願ひます。扨て此手紙の持参者は小北山のウラナイ教に牛耳を執つて居た、もとは浮木の村の女侠客お寅と云ふ婦人で厶ります。治国別が出征の途中祠の森に於て片彦将軍の秘書役たりし愚弟松彦に巡り合ひ、彼松彦は直に三五の道に帰順致し小北山のウラナイ教の本山に参り蠑螈別、魔我彦及お寅を漸くにして御神徳のもとに帰順せしめたる者で厶ります。就いては此手紙の持参人即ちお寅さまを宜しく願ひます。稍迷信深く脱線の気味が厶りますれど十分御教育下さるれば相当の宣伝使にならうかと存じます。左様ならば』</p>
+            <p class="ja-classical-line">と書き記しお寅に渡した。お寅は得意の色を満面に泛べ肩を怒らし治国別及び一行に別れを告げイソの館をさして只一人進み行く。</p>
+            <p class="ja-classical-line">途中小北山の傍を通り兎も角一度立寄つて最愛のお菊に巡り合ひ且松姫、魔我彦其他に面会し自分の悟り得た教義を云ひ聞かし、小北山の聖場をして益々栄えしめむと、参拝の途中意気揚々として立帰つた。小北山の聖場は依然として信者が相当に集まつてゐる。然し乍らお寅の見覚えのある顔は余り沢山に見当らなかつた。何故ならば小北山のヘグレ神社、其他の神々を誠の神と信じてゐたが、サツパリ名もなき邪神たりし事を曝露され、親族朋友知己等より嘲笑さるるのが馬鹿らしさに、前の信者はあまり寄り付かなかつたからである。さうして改革以来何とはなしに前の信者は不平に充たされたからである。今迄尊き神の生宮又は霊魂の因縁を信じ得意になつて信仰してゐたのが、何でもない邪神であつた事をスツパぬかれ大難を小難に救はれ乍ら何とはなしに心面白くなくなつた者もあるからである。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otora stepped up to the Uketsuke and saw that Bunsuke was still working with all his might on a painting. Looking closely, it was neither a turnip, nor a daikon radish, nor a Kurokuchinaha. On the side, he had written 'Protection of the Sunrise,' and a sun like crimson was shining on the trunk of an old pine tree. He was painting a quite splendid picture. Otora suddenly called out to him,</p>
+          <p class="en-p">Otora: 'Hey, Bunsuke-sama, I hope you are well. You are painting a splendid Kakejiku as always. Have you given up on the Riujinsama already?'</p>
+          <p class="en-p">Bunsuke, whose eyes were poor, did not dream that it was Otora, and replied,</p>
+          <p class="en-p">Bunsuke: 'Welcome, pilgrim. I do not know who you are, but please pass through to the back. Until now, this Seichi has enshrined the Hegure Jinshiya, the Tanemono Jinshiya, and various other Kamisama, but since the Kyōso Imoriwake-sama and Otora-sama have fled, we have replaced them with the Ōkamisama of Ananai-kyō. Therefore, I must repaint the Kakejiku as well, so with the permission of the Ōkamisama, I am writing this Kakejiku of a pine tree and the sunrise as you see. If you also wish to practice Goshinkau, I will give it to you, so please mount it and enshrine it. They call it the age of the sunrise and the age of the pine; if you enshrine this, your family will be safe, your business will prosper, and even when you become a spirit, it will serve as a passport to heaven.'</p>
+          <p class="en-p">Otora: 'Hey, Bunsuke-sama, will you not pull yourself together? A pine and a sunrise are truly splendid, but I am Otora.'</p>
+          <p class="en-p">Bunsuke: 'I thought you were someone I remembered hearing. Ah, is it Otora-sama? Well then, thank you for returning; Okiku-sama and everyone else must be overjoyed, to say nothing of myself. I feel a sense of excitement rising within me. In that case, I shall report this to Matsuhime-sama and Magahiko-sama. Please wait a moment.'</p>
+          <p class="en-p">Otora: 'No, no, you stay here and attend to the Uketsuke. Rather than having a person with poor eyesight move about, I, this capable Otora, will return to my own living quarters... Okiku should be there as well. If I do that, I will have Okiku notify Matsuhime-sama and Magahiko.'</p>
+          <p class="en-p">So saying, she hurried toward her own living quarters. Behind her, Bunsuke tilted his head repeatedly and muttered to himself,</p>
+          <p class="en-p">Bunsuke: 'Ah, Otora-sama’s character has truly improved immensely. She was like a completely different person. The way she spoke and everything about her seemed to make light emanate from her body. Even I, who have associated with her for so long, can hardly recognize her; the power of divine virtue is truly a magnificent thing. Now then, I shall go and offer my thanks to the Kamisama for the joy of Otora-sama’s return.'</p>
+          <p class="en-p">So muttering to himself, he trudged toward the shrine. Before returning to her own quarters, Otora visited the shrines of Kohitayama one by one, and just as she was about to rest upon returning to her quarters, the rumor that Otora-sama had returned spread before she knew it, and Magahiko and Okiku came running from the Matsuhime mansion in a panic,</p>
+          <p class="en-p">Okiku: 'Mother, you left with Matsuhiko-sama for the sake of propagation, so have you returned after only a few days have passed? Did you shrink back and flee again?'</p>
+          <p class="en-p">Otora: 'What, shrink back? I have returned having received splendid divine virtue. Okiku, have you been performing your duties well since then?'</p>
+          <p class="en-p">Okiku: 'Yes, I have been doing well. Please do not worry about me. And has Mankō-sama been doing well?'</p>
+          <p class="en-p">Otora: 'Ho ho ho, so you are concerned about Mankō after all. No, I am relieved to hear of your reliable state of mind.'</p>
+          <p class="en-p">Okiku: 'Mother... oh, how unpleasant, you immediately let your mind wander to strange places.'</p>
+          <p class="en-p">Otora: 'Even so, you do not say how Gosankō-sama is, or how Aku-sama is, do you?'</p>
+          <p class="en-p">Maga: 'Otora-sama, thank you for returning. Since then, the divine work in this Seichi has been developing extremely harmoniously, so please be at ease.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お寅はスツと受付に立寄り見れば文助が依然として一生懸命に画を書いてゐる。よくよく見れば蕪でもなく大根でもなく黒蛇でもない。傍に日の出の守護と書き記し老松の幹に紅の様な太陽が輝いてゐる。かなり立派な画を描いて居た。お寅は突然声をかけ、</p>
+            <p class="ja-classical-line">お寅『これ文助さま、御機嫌宜しう。相変らず立派な御掛軸が画けますな。竜神様はモウお止しなさつたのですか』</p>
+            <p class="ja-classical-line">目のうとい文助はお寅とは夢にも知らず、</p>
+            <p class="ja-classical-line">文助『ようお詣りなさいませ。誰方か知りませぬが奥へ御通り下さいませ。さうして今迄は此聖地もヘグレ神社や種物神社、其外いろいろの神様が祀つて厶りましたが、教祖の蠑螈別さまやお寅さまが逐電されましてから、三五教の大神様を祀り代へました。それで掛軸も亦画き替へねばなりませぬので、大神様のお許しを得て此通り、松に日の出の御掛軸を認めております。貴方も御信仰遊ばすなら上げますから表具をしてお祀りなさい。日の出の世、松の世といつて之さへ祀つて居れば家内安全商売繁昌、霊になつても天国へ行く旅券になりますよ』</p>
+            <p class="ja-classical-line">お寅『これ文助さま、シツカリしなさらぬか。松に日の出は誠に結構だが、私はお寅ですよ』</p>
+            <p class="ja-classical-line">文助『何だか聞き覚えのある方だと思つてゐました。アヽお寅さまですか、それはマア、よう帰つて下さいました、お菊さまは申すに及ばず皆さまお喜びでせう。私も何だか気がいそいそして来ました。それでは松姫さまや魔我彦さまに申上げませう。一寸待つてゐて下さい』</p>
+            <p class="ja-classical-line">お寅『いえいえお前はここに受付をしてゐて下さい。目の悪い人に動いて貰ふよりも此達者なお寅が私の居間へ帰りますから……お菊もゐるでせう。さうすればお菊を以て松姫様や魔我彦に通知をさせますから』</p>
+            <p class="ja-classical-line">と云ひ乍ら自分の居間をさして急ぎ行く。後に文助は首を頻りにかたげて独言、</p>
+            <p class="ja-classical-line">文助『あゝお寅さまも大変に人格が上つたものだな。丸で別人の様だつた。物の云ひ様と云ひ何とはなしに身体から光が出る様だつた。之丈長らくつき合ふて居つた私でさへも見違へる位だから、神徳と云ふものは偉いものだな。どれどれお寅さまが帰つて下さつた此嬉しさを神様へお礼申して来う』</p>
+            <p class="ja-classical-line">と独語つつトボトボと神殿さして進み行く。お寅は吾居間に帰るに先立ち小北山のお宮を一々巡拝し、吾居間に帰つて休息せむとする処へ、何時のまにかお寅さまが帰つたと云ふ噂が立つたので魔我彦、お菊は慌てて松姫館から走り来り、</p>
+            <p class="ja-classical-line">お菊『お母アさま、貴方は松彦様と宣伝のためにおいでになつてから、未だ幾何も日が経たないのにお帰りになつたのですか。又我でも出して縮尻つたのではありませぬか』</p>
+            <p class="ja-classical-line">お寅『何、縮尻る処か、結構なお神徳を頂いて来たのだよ。お菊、お前も其後機嫌よう御用をして居たのか』</p>
+            <p class="ja-classical-line">お菊『はい、機嫌ようしてゐました。何卒私の事は案じて下さいますな。さうして万公さまは機嫌ようしてゐましたかな』</p>
+            <p class="ja-classical-line">お寅『ホヽヽヽヽ、ヤツパリ万公のことが気にかかるかな。いや頼もしいお前の心掛、私もそれ聞いて安心を致したぞや』</p>
+            <p class="ja-classical-line">お菊『お母さまの……マア嫌な事、直に妙な処へ気を廻しなさるのだね』</p>
+            <p class="ja-classical-line">お寅『それだつて、五三公さまは如何だとも、アクさまは如何だとも云はぬぢやないか』</p>
+            <p class="ja-classical-line">魔我『お寅さま、よう帰つて下さつた。其後は此聖地も極めて円満に御神業が発達してゐますから、安心して下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otora: 'Magahiko-sama, please guard this Seijiyō so that no Datsusen may occur. I have received a letter of introduction from that distinguished personage, Harukuniwake, who is the Sensei of Matsuhiko-sama, and I intend to go to the mansion of Iso to perform a one-hundred-day ascetic practice and return as a splendid Sendenshi, so please be happy for me.'</p>
+          <p class="en-p">Magahiko: 'That is extremely Ketsukō. By all means, please perform your training without any Buchōhafu and return as a splendid Sendenshi. If I were granted permission, I too would like to make a Sanpai once as a commemoration of my Kaishin.'</p>
+          <p class="en-p">Otora: 'Why don't you also inquire about the Gotsugafu of Matsuhime-sama, receive leave, and make the Sanpai together with me? As they say, seeing is believing; unless you visit and worship at the Seichi of Ubusuna-yama at least once, you will not be able to practice the Oshihe of Manzoku, nor will you receive the divine virtues.'</p>
+          <p class="en-p">Magahiko: 'If you wish for that, it would be Ketsukō, but...'</p>
+          <p class="en-p">Okiku: 'Mother, Magahiko-sama, I shall go and inquire with Matsuhime-sama now. Please take your time and wait while drinking tea with Magahiko-sama.'</p>
+          <p class="en-p">Saying this, she leaves and hurries up the narrow stone steps of two hundred to the mansion of Matsuhime. Afterwards, Magahiko turns to Otora.</p>
+          <p class="en-p">Magahiko: 'Otora-sama, it seems your personality has completely changed. Look at the luster of your face and even your hair has turned black, has it not? Truly, even your voice has changed, so you seem like a different person.'</p>
+          <p class="en-p">Otora: 'Thanks to you, I have been rejuvenated by the heat of the love of the Gods. And illuminated by the light of faith, I feel as if light is emanating from my body from nowhere, ho ho ho ho. If I get conceited from being praised again, I will fall into the bottom of the valley, so let us stop at this point.'</p>
+          <p class="en-p">Magahiko: 'By the way, Otora-sama, have you obtained the money that Imoriwake-sama ran away with?'</p>
+          <p class="en-p">Otora: 'Magahiko-sama, are you still thinking about such things as money? Even hearing about money makes me feel ill. Imoriwake-sama is also a person of a naturally detached disposition, so he gave all that money away to others and is now penniless. And he is living in harmony with Otami.'</p>
+          <p class="en-p">Magahiko: 'What, is he living together with Otami? Eh, eh.'</p>
+          <p class="en-p">Otora: 'Hey, Magahiko-sama, what is that "eh"? Do you still have feelings of attachment remaining for Otami? If so, you cannot achieve Kaishin. What is that "eh"?'</p>
+          <p class="en-p">Magahiko: 'I was about to say that you have done an "eh" (excellent) thing. Eh, the thing called En (fate) is a mysterious thing.'</p>
+          <p class="en-p">Otora: 'It is useless to try to deceive me by saying half-hearted things. Otami also seems to have awakened, and now she is only associating with Imoriwake-sama as a friend of the Hon no Oshihe. Otami has also achieved a great deal of Kaishin. I am thinking that once you receive splendid divine virtues, I will act as a mediator and have you two married.'</p>
+          <p class="en-p">Magahiko: 'Will you really take care of that for me?'</p>
+          <p class="en-p">Otora: 'Why, would I tell a lie? I have been watching the situation of Otami and Imoriwake-sama, and it seems neither has any lingering attachment. Rather, it seems Magahiko-sama is the one who is favored by Otami, so please be happy.'</p>
+          <p class="en-p">Magahiko: 'Ehe-tsu-he-ho-ho-ho, are you not mistaken?'</p>
+          <p class="en-p">Otora: 'The "eh" from before and this "eh" have a very different tone, don't they? Oho ho ho, what a mercenary man you are.'</p>
+          <p class="en-p">Magahiko: 'Otora-sama, have your feelings of attachment toward Imoriwake-sama already been removed? It is somehow suspicious. Judging by your appearance, you seem somehow happy and youthful. This is something that cannot be unless there is something happy.'</p>
+          <p class="en-p">Otora: 'Hey, Maga-yan...'</p>
+          <p class="en-p">She taps his shoulder two or three times with her open palm.</p>
+          <p class="en-p">Otora: 'Do not make a fool of me. It is not such a thing that makes this Otora happy. Once I have awakened to the path of sincerity... how ridiculous... at my age, to think of such foolish things as love or money in my dreams? Do not look down on people so much. This Otora is a little different from such weak-willed women. Hen, to try to judge my heart by comparing it to your own, you are an outrageous man.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お寅『魔我彦さま、どうか脱線せぬ様に此聖場を守つて下さいや。私は、松彦さまの先生の治国別と云ふ立派なお方から添へ手紙を頂いてイソの館へ参り、百日の行をして立派な宣伝使となつて来る積りだから喜んで下さい』</p>
+            <p class="ja-classical-line">魔我『それは至極結構です。何卒、不調法のない様に修行して立派な宣伝使となつて帰つて下さい。私もお許しさへあれば一度改心の記念に参拝したいものですがな』</p>
+            <p class="ja-classical-line">お寅『お前も松姫様の御都合を伺つてお暇を頂き、私と一所に参拝したら如何だい。百聞は一見に如かずと云ふから、ヤツパリ一度ウブスナ山の聖地を拝んで来ねば、満足の教も出来ず、御神徳も貰へませぬぞや』</p>
+            <p class="ja-classical-line">魔我『さう願へば結構ですがな……』</p>
+            <p class="ja-classical-line">お菊『お母さま、魔我彦さま、之から私が松姫様に伺つて来ませう。まアゆつくりと魔我彦さまとお茶なと飲つて待つてゐて下さい』</p>
+            <p class="ja-classical-line">と云ひ捨て足早に細い二百の石の階段を上つて松姫の館へ急ぎ行く。後に魔我彦はお寅に向ひ、</p>
+            <p class="ja-classical-line">魔我『お寅さま、貴方はスツカリ御人格が変つた様ですな。お顔の艶と云ひ髪の毛迄が黒くなつたぢやありませぬか。本当に声迄が変つてゐるので別人の様ですわ』</p>
+            <p class="ja-classical-line">お寅『お蔭様で神様の愛の熱に若やぎました。さうして信仰の光に照らされて何処ともなしに身体から光が出る様な気分ですよ、ホヽヽヽヽ、又褒められて慢心をすると谷底へ落ちますから、もう此位でやめておきませう』</p>
+            <p class="ja-classical-line">魔我『時にお寅さま、蠑螈別さまの持ち逃げしたお金は手に入りましたか』</p>
+            <p class="ja-classical-line">お寅『魔我彦さま、お金の事なんか、まだ貴方は思つてゐるのかい。此お寅は金なんかは話を聞いても気持が悪うなります。蠑螈別さまも生来が淡白な人だから、あの金をスツカリ人にやつて了ひ、今では無一物ですよ。そしてお民と仲ようして居ります』</p>
+            <p class="ja-classical-line">魔我『何、お民と一所に居りますか。エーエー』</p>
+            <p class="ja-classical-line">お寅『これ、魔我彦さま、エーとは何だ。お前はヤツパリお民に対し恋着心が残つてゐるのかな。それでは改心が出来ませぬぞや。何がエーだい』</p>
+            <p class="ja-classical-line">魔我『エー事をなされましたな、と云ひかけたのですよ。エー、エーン（縁）と云ふものは不思議なものですな』</p>
+            <p class="ja-classical-line">お寅『エー加減な事を云つて誤魔化さうと思つても駄目ですよ。お民も如何やら目が覚めて蠑螈別さまと、今はホンの教の友として、つき合つてる丈けのものですよ。お民も随分改心が出来ましたからな。何れお前が立派な神徳を頂いたら私が媒介をしてお前と夫婦にして上げたいと思ふて考へてゐるのよ』</p>
+            <p class="ja-classical-line">魔我『本当に世話をして下さいますか』</p>
+            <p class="ja-classical-line">お寅『何、嘘を云ふものか。私はお民と蠑螈別さまの様子を気をつけて考へてゐたが、どちらにも未練がない様だ。却て魔我彦さまの方がお民の気に入つてる様だから、マア喜びなさい』</p>
+            <p class="ja-classical-line">魔我『エーヘツヘヽヽヽ、違やしませぬかな』</p>
+            <p class="ja-classical-line">お寅『最前のエーとは同じエーでも大変に調子が違ますな。オホヽヽヽ、何と現銀な男だ事』</p>
+            <p class="ja-classical-line">魔我『お寅さま、お前さまは蠑螈別さまに対する恋着は、最早、とれたのですか。何うも怪しいものですな。貴女の御様子と云ひ、何だか嬉し相に若々してゐられます。之は何か嬉しい事がなくては叶はぬ事だ』</p>
+            <p class="ja-classical-line">お寅『これ魔我ヤン……』</p>
+            <p class="ja-classical-line">と肩を平手で二つ三つ叩き、</p>
+            <p class="ja-classical-line">お寅『馬鹿にしておくれな。此お寅はそんな事が嬉しいのではありませぬよ。一旦誠の道に目が覚めた上は……阿呆らしい……恋の、金のと、よい年をして、そんな馬鹿げた事が夢にも思へますか。あまり人を見下げて下さいますな。お寅はそんな柔弱な女とはチツと違ひますよ。ヘン、自分の心に引き比べて私の心を忖度しようとは、怪しからぬ男だな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Magahiko: 'My apologies. There is a saying that a sparrow does not forget its nature until it is a hundred, so... I just happened to ask. I pray you will overlook and forgive my rudeness. If you would please change your mood and obtain the permission of Matsuhime-sama, I ask that you take this Magahiko to the Seijiyō of Mount Ubusuna just once.'</p>
+          <p class="en-p">Otora: 'Ah, very well. Since one cannot become a Sendenshi if one is like a frog at the bottom of a well who has never seen the world, it is excellent to make a Sanpai to the Goshiyutsugenchi of the Ōkami to broaden your Kenbun.'</p>
+          <p class="en-p">As they were speaking, Okiku returned with Matsuhime and Chiyo.</p>
+          <p class="en-p">Okiku: 'Mother, Matsuhime-sama has arrived. Come, offer your Goaisatsu.'</p>
+          <p class="en-p">Otora looked back, saw Matsuhime, and while smiling with great joy, spoke gently with her hands placed on the ground.</p>
+          <p class="en-p">Otora: 'This is indeed Matsuhime-sama, thank you for your daily Goshinmu. I am sure my naughty Okiku has been a great trouble to you. I received a letter from the Sendenshi of Chikokuwake and was on my way to train at the Iso mansion, so I stopped by to offer my Goaisatsu and make a Sanpai to the Kami. I humbly ask for your continued favor regarding Okiku.'</p>
+          <p class="en-p">Matsuhime: 'Is that you, Otora-sama? Thank you for stopping by. Please do not worry about Okiku-sama. After you departed, Okiku-sama, Bunsuke-sama, and Magahiko-sama have all been studying very hard. Thanks to that, believers come for Sanpai every day, and the Goshintoku increases day by day, which is truly Ketsukō. And Otora-sama, your face has gained a wonderful luster. Judging by the color of your hair, you look as if you have become twenty years younger even at a glance. Truly, Goshintoku is a grateful thing.'</p>
+          <p class="en-p">Otora: 'Yes, well, I am but a water-dipper in a privy, ho ho ho ho.'</p>
+          <p class="en-p">Magahiko: 'Ha ha ha ha, if that is the case, it seems you have floated quite a bit in the Forest of Ukiki, Otora-sama.'</p>
+          <p class="en-p">Otora: 'Ho ho ho ho, I have found a lover. That is why I have become young like this.'</p>
+          <p class="en-p">Magahiko: 'Ha ha ha ha, I thought something was funny, and at last you have spoken your true heart.'</p>
+          <p class="en-p">Matsuhime: 'The lover of whom Otora-sama speaks must be the Mizu no Mitama Kami, Susanoo Ōkami-sama. That is truly a fine lover you have chosen. I also consider Susanoo-no-Mikoto-sama to be my only lover, ho ho ho ho.'</p>
+          <p class="en-p">Magahiko: 'This is outrageous. It is fine for Otora-sama, but does not Matsuhime-sama have a splendid lover, or rather a husband to whom you pledged your life in two worlds, named Matsuhiko-sama? Is this not a bit unfaithful?'</p>
+          <p class="en-p">Matsuhime: 'Firstly, I yearn for the Ōkami, and secondly, I yearn for my husband. That is why I call him my husband of two worlds.'</p>
+          <p class="en-p">Magahiko: 'My, I have heard plenty of your self-praise. Magahiko is satisfied with this. However, I have one request; I would like to accompany Otora-sama for a while to visit the Seijiyō of Mount Ubusuna, would you not permit it?'</p>
+          <p class="en-p">Matsuhime: 'That is a wish come true; in fact, I had been thinking I wanted to have Magahiko-sama go for training once. However, I refrained because I did not want it to be thought of as a woman's meddling. That is Ketsukō, but Otora-sama, I entrust Magahiko-sama to you, so please take good care of him.'</p>
+          <p class="en-p">Otora: 'Yes, yes, once I have taken charge of him, I will not let him do anything reckless. Please be at ease.'</p>
+          <p class="en-p">Magahiko: 'Then, Matsuhime-sama, I shall take my leave for a while.'</p>
+          <p class="en-p">Matsuhime: 'When you visit the sacred ground, please say that Matsuhime sent her regards.'</p>
+          <p class="en-p">Otora: 'Yes, I understand.'</p>
+          <p class="en-p">After resting for a while, Otora accompanied Magahiko, offered remote worship at each shrine, finished greeting Bunsuke at the reception and the many believers, crossed the single-log bridge, and headed toward the mountain pass of Kajika, her elderly feet moving quite vigorously as she chanted the sacred text and advanced with great spirit.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">魔我『こりや失礼致しました。雀百迄雄鳥を忘れぬと云ふ譬もありますから……ツイお尋ねしたのです。御無礼の段は何卒、見直し聞直しを願ひます。どうか御機嫌を直して松姫さまの許しがあれば此魔我彦を一度ウブスナ山の聖場へ連れて行つて下さいませ』</p>
+            <p class="ja-classical-line">お寅『あゝよしよし、井戸の底の蛙で世間見ずでは宣伝使等は出来ないから、一度見聞を広くするために大神の御出現地へ参拝するのは結構だ』</p>
+            <p class="ja-classical-line">かく話す処へお菊は松姫、お千代と共に帰り来り、</p>
+            <p class="ja-classical-line">お菊『お母さま、松姫様がお越しで厶りますよ。さア御挨拶なさいませ』</p>
+            <p class="ja-classical-line">お寅は後ふり返り松姫の姿を見て、さも嬉しげに打笑み乍ら言葉穏かに両手をつき、</p>
+            <p class="ja-classical-line">お寅『これはこれは松姫様、日々御神務御苦労様で厶ります。お菊のヤンチヤがお世話に預かりまして嘸御迷惑で厶りませう。私は治国別の宣伝使から御手紙を頂いてイソの館へ修行に参る途中、一寸御挨拶旁神様へ参拝致しました。何卒お菊の身の上、宜しくお願ひ致します』</p>
+            <p class="ja-classical-line">松姫『お寅様で厶りますか、よう御立寄り下さいました。お菊さまの事は御心配下さいますな。貴女が御出立の後はお菊さまも、文助さまも、魔我彦さまも、大勉強で厶ります。其お蔭で信者も日々御参拝なされ御神徳は日に日に上りまして誠に御結構で厶ります。そしてお寅さま、貴女は大変にお顔に艶が出来ましたな。お髪の色と云ひ一寸見ても二十年ばかりお若うお成りなさつた様に厶りますわ。本当に御神徳と云ふものは有難いもので厶りますな』</p>
+            <p class="ja-classical-line">お寅『はい、何分雪隠の水つきで厶りますからな、ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">魔我『アハヽヽヽ、さうするとお寅さまは、浮木の森で余程浮いて来たと見えますな』</p>
+            <p class="ja-classical-line">お寅『オホヽヽヽ、私は恋人が出来ました。それ故此通り若くなつたのですよ』</p>
+            <p class="ja-classical-line">魔我『アハヽヽヽ、何だか可笑しいと思つてゐたて、到頭本音を吹きましたね』</p>
+            <p class="ja-classical-line">松姫『お寅さまの恋人と云ふのは瑞の御霊神素盞嗚大神様でせう。それは本当によい恋人をお定め遊ばしましたね。妾も矢張り素盞嗚尊様を唯一の恋人と致して居りますよ、ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">魔我『これは怪しからぬ、お寅さまはそれで宜いとして、松姫さまは立派な松彦さまと云ふ恋人否二世を契つた夫があるぢやありませぬか。チと不貞腐れぢやありませぬか』</p>
+            <p class="ja-classical-line">松姫『第一に大神様を恋ひ慕ひ第二に夫を慕つてゐます。それで二世の夫と云ふのですよ』</p>
+            <p class="ja-classical-line">魔我『ヤア、自惚気をタツプリと聞かして頂きました。魔我彦も之で満足致します。併し一つお願ひが厶りますが、暫く私はお寅さまのお伴してウブスナ山の聖場へ詣り度いのですが許して頂けませぬか』</p>
+            <p class="ja-classical-line">松姫『それは願うてもなき事、実は妾より一度魔我彦さまに御修行に行つて貰ひたいと思つて居たのです。併し乍ら女の差出口と思はれちやならないと差控へて居りました。それは結構で厶りますが、お寅さま、何卒魔我彦さまをお預けしますから宜しくお願ひ申します』</p>
+            <p class="ja-classical-line">お寅『はいはい私が預かりました以上はメツタの事はさせませぬ。御安心下さいませ』</p>
+            <p class="ja-classical-line">魔我『然らば松姫様、暫く御暇を頂戴致します』</p>
+            <p class="ja-classical-line">松姫『何卒聖地へお詣りになりましたら、松姫が宜しう申上げたと云つて下さいませ』</p>
+            <p class="ja-classical-line">お寅『はい、承知致しました』</p>
+            <p class="ja-classical-line">とお寅は暫し休息の上、魔我彦を伴ひ各神社を遥拝し、受付の文助や数多の信者へ挨拶を終り一本橋を打渡り河鹿峠の山口さして老の足もともいと健かに、神文を称へ乍ら、勢ひ込んで進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c09.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 9: Goodness Illusion 非志 [1283]</span>
+      </a>
+      <a href="c11.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 11: 水呑同志 [1285]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

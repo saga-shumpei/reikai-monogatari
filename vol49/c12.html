@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: お客さん [1286] - Volume 49 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 49 Table of Contents</a>
+      <span>Volume 49</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 49 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: お客さん [1286]</h1>
+      <p class="chapter-title-ja">お客さん〔1286〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At the Genkuwanguchi of the forest of the shrine, Yoru is acting as the Uketsuke as usual. A man of immense stature, tall enough to pierce the clouds and wearing a Fukaamigasa, appears there, and in a deep, rumbling voice says:</p>
+          <p class="en-p">Man: 'Setsushiya am a person who has come from the Iso mansion of Mount Ubusuna. Takahime-dono should be here; please convey to her that I wish to see her privately for a moment.'</p>
+          <p class="en-p">Yoru: 'Yes, it is not that I cannot convey your message, but I must ask for your Goseimei, for this is the Ikimiyasama of Giritenjiyōhinodenokami, after all...'</p>
+          <p class="en-p">Man: 'Indeed, I apologize for the delay. There are circumstances that make it difficult to give my name, so it will suffice if you simply say that a man whose name includes the sound To has come. And if you convey that I am a person holding a Jiueu position at the Iso mansion, Takahime-dono will surely understand.'</p>
+          <p class="en-p">Yoru: 'I have heard that you are a Jiueu Yakuninsama of the Iso mansion; I am Yoru, who has Kijiyun from the Brahman Kyō, and I ask for your kind favor in all matters.'</p>
+          <p class="en-p">Man: 'Ah, so you are the man called Yoru. I have certainly heard of you from Isokohime-dono. That is Gokurau. You should pay a visit to the Iso mansion sometime.'</p>
+          <p class="en-p">Yoru: 'Yes, Arigata-gozaimasu. Although I am serving in this Goyō, I cannot even hold a conversation without knowing the true Honzan, so I desire to go very much, but the Ikimiyasama of Hinodewake says that my spirit is not yet polished, and that I must not make a pilgrimage until she permits it, so I am refraining. I truly wish to polish my spirit quickly and be allowed to tread upon the grounds of the sacred land. It makes me uneasy to be acting as Uketsuke without even knowing the sacred land.'</p>
+          <p class="en-p">Man: 'In any case, please convey that a person whose name includes To says that he has a matter he wishes to discuss in secret.'</p>
+          <p class="en-p">Yoru says:</p>
+          <p class="en-p">Yoru: 'I understand. Please wait here for a while.'</p>
+          <p class="en-p">Having said this, he hurries to the living quarters of Takahime, opens the sliding door to the inner room softly, and sees that Takahime is leaning against an armrest, in the midst of being lost in thought.</p>
+          <p class="en-p">Yoru: 'Excuse me, Hinode-no-Kami-sama, a large man whose name includes To has arrived from the Iso mansion, saying he wishes to see you; he said he has a matter he wishes to discuss in secret, so I am reporting this to you for a moment.'</p>
+          <p class="en-p">Takahime: 'What, you say a large man whose name includes To has come from the Iso mansion?'</p>
+          <p class="en-p">Yoru: 'Yes, he is a very large man indeed. And he said he is a person serving in the most high-ranking duty of the sacred land.'</p>
+          <p class="en-p">Takahime nods happily and says:</p>
+          <p class="en-p">Takahime: 'Ya, Yoru-dono, tell him I shall see him. However, please wait in the next room for a while; if I have him come immediately, I will not be prepared, so when I ring this bell, you shall come out slowly. Until then, please wait in the waiting room, perhaps smoking some tobacco.'</p>
+          <p class="en-p">Yoru: 'Yes, I understand. Please ring the bell firmly, for I shall take that sound as the signal to come and welcome him...'</p>
+          <p class="en-p">Takahime: 'Ah, I ask that of you. But Yoru, until Hinode-no-Kami permits it, you must not tell anyone that a person named To has arrived.'</p>
+          <p class="en-p">Yoru: 'Ehehehe, I am not a Yoru who would speak of any secret, so please rest assured. You are under the protection of Hinode, and I am under the protection of Yoru, so Yoru's pleasure is also quite grand, indeed.'</p>
+          <p class="en-p">Takahime: 'Kore-kore, Yoru, you should not say unnecessary things. Now, hurry and wait in the next room. And who did you ask to take over the Uketsuke?'</p>
+          <p class="en-p">Yoru: 'Yes, I asked Haru-ko to do it.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">祠の森の玄関口には、例の如くヨルが受付をやつてゐる。そこへ深編笠を被つた雲突く許りの大の男現はれ来り、底づつた太い声で、</p>
+            <p class="ja-classical-line">男『拙者はウブスナ山のイソの館より参りし者で厶る。高姫殿はここにゐられる筈、一寸内々お目にかかりたいと申し伝へて下さい』</p>
+            <p class="ja-classical-line">ヨル『ハイ、申伝へぬ事は厶いませぬが、御姓名を承はらなくては、何と云つても義理天上日出神の生宮様で厶いますから……』</p>
+            <p class="ja-classical-line">男『如何にも申遅れました。今少し様子があつて名乗り難い場合で厶いますから、只一口トといふ名のつく男だといつて貰へば宜しい。そしてイソの館の重要なる職に就いている者だと御伝へ下さらば、高姫殿には成程と合点がゆくでせう』</p>
+            <p class="ja-classical-line">ヨル『あなたはイソの館の重要なる役人様と聞きましたが、私はバラモン教から帰順致しましたヨルと申すもので厶います、何分に宜しく御願いたします』</p>
+            <p class="ja-classical-line">男『あゝヨルといふ男はお前であつたか、五十子姫殿より確に承はつてゐる。それは御苦労だ。一度イソ館へお参りなさるがよからう』</p>
+            <p class="ja-classical-line">ヨル『ハイ、有難う厶います。かうして御用をさして戴いてゐるものの、肝腎の御本山を知らいでは話も出来ませぬので、参りたいのは山々で厶いますが、日出神の生宮様が……まだ身魂が研けないから、此方が許す迄参拝してはならぬと仰せられますので差控えてをります。どうぞ早く霊を研いて聖地のお庭を踏まして戴きたいもので厶います。聖地も知らずに受付をして居りましては何だか気掛りでなりませぬ』</p>
+            <p class="ja-classical-line">男『兎も角も、トといふ名のついたものが内証で折入つて話のしたい事があると云つて居ると伝へて下さい』</p>
+            <p class="ja-classical-line">ヨルは、</p>
+            <p class="ja-classical-line">『承知致しました。暫くここにお待を願ひます』</p>
+            <p class="ja-classical-line">と云ひすて、高姫の居間に急ぎ、奥の間の襖をソツと開き、見れば高姫は脇息に凭れ、何か思案にくれてゐる最中であつた。</p>
+            <p class="ja-classical-line">ヨル『もし、日出神様、貴女にお目にかかりたいと云つて、イソの館からトと名のついた大きなお方が見えました、内証でお話申し上げたい事があると云つてお出になりましたから、一寸御報告申上げます』</p>
+            <p class="ja-classical-line">高姫『ナニツ、イソの館から、大きな男の、トといふ名の付いたお方がお出でになつたと申すのか』</p>
+            <p class="ja-classical-line">ヨル『ハイ、それはそれは大きな男で厶います。そして聖地の最も高級な職務に仕へて居るお方だと仰有いました』</p>
+            <p class="ja-classical-line">高姫は嬉しげに打ちうなづき、</p>
+            <p class="ja-classical-line">高姫『ヤア、ヨル殿、お目にかかると云つておくれ。併し暫く次の間に控えて居つて下さい、今すぐ行つて貰ふと、此方の準備が出来ぬから、私が此鈴を叩いたら、ソロソロと出てゆくのだよ、それ迄控室で煙草でも呑んで待つて居て下さい』</p>
+            <p class="ja-classical-line">ヨル『ハイ、承知致しました。どうぞ鈴をしつかり叩いて下さい、さうすれば其音を合図にお迎へに参りますから……』</p>
+            <p class="ja-classical-line">高姫『あゝさう頼む。併しヨルや、日出神が許す迄、誰にもトと云ふお方がみえたとは云つてはなりませぬぞや』</p>
+            <p class="ja-classical-line">ヨル『エヘヽヽヽ、どんな秘密でも申すよなヨルぢや厶いませぬ、まづ御安心なさいませ。貴女は日の出の御守護、私はヨルの守護で厶いますから、ヨルのお楽みも結構で厶いますワイ』</p>
+            <p class="ja-classical-line">高姫『コレコレ、ヨル、いらぬ事を云ふものぢやありませぬ。次の間に、サア早く控えなさい。そして受付は誰に頼んでおいたのだい』</p>
+            <p class="ja-classical-line">ヨル『ハイ、ハル公に頼んでおきました』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahime: 'Un, good, good, that is fine; that man is a sensible Ningen, after all. You too, when the person called To arrives, must be sensible.'</p>
+          <p class="en-p">Yoru: 'He-he-he-he, Isai shiyōchi itashimashita.'</p>
+          <p class="en-p">Scratching his head, he went to the next room and decided to wait for Takahime's ahizu. Takahime stood up smoothly, and while peering out of the windows here and there, as if relieved that not a single person was around, she sighed with relief and spoke to herself,</p>
+          <p class="en-p">Takahime: 'No matter what one says, he is a man after all. Because Tōsuke-sama said such Kizuyo things, I had been resenting him just a little, but he must have spoken so coldly because he thought we were in front of Ōzei no hito. Ah, I have done a terrible thing by not knowing a man's heart. Ah, Tōsuke-sama, if I hear of that gentle heart of yours, Mohaya Takahime can die Tokushin with this. Now, I must fix my face, smooth my hair, and Kika my Kimono.'</p>
+          <p class="en-p">Suddenly, she applied white powder thickly and with Neni, tied her hair in the Masaoka style, changed into a new Kimono, donned a purple hakama with a flourish, let a bit of the red collar show, and while standing and sitting before the Kiyōdai,</p>
+          <p class="en-p">Takahime: 'Ah, this is good, this is good. It is as if the Sangokuichi bridegroom-dono is coming. With this, Takahime's Guwanmau will finally reach Jiyōjiyu. Ah, Tōsuke-sama, Osananajimi are truly wonderful things. My, you have come so well. Is it not a bond that we even had a child together? I truly feel as if flowers have bloomed on a Kareki. You are a manly person from nowhere; as I expected of Takahime's desire, you have advanced even to the position of Fukukyōshiyu, one step Ichidanuhe of Mokusuke-sama, so it is no wonder that Takahime feels anxious. Now, now, it would not do to keep you waiting forever; now that I have applied this much makeup, there is no problem whenever you come. However, I have started to feel somewhat embarrassed. Ho-ho-ho-ho, even though I have aged, I somehow recall the old days, and my face feels as if it has suddenly become hot. Truly, a woman's heart is a gentle thing. If Tōsuke-sama were to see this innocent heart, he would surely be satisfied. I-hi-hi-hi-hi, ah, here, here, Yoru-kō, it is fine now, please go and tell that person called To so.'</p>
+          <p class="en-p">Forgetting to ring the bell, she called out in a seductive voice. Yoru, who had been waiting for the bell to ring, heard Takahime's unexpected voice, opened the sliding door, and fearfully poked his head out,</p>
+          <p class="en-p">Yoru: 'Hinode-kami-sama, do you have any business with me?'</p>
+          <p class="en-p">As he said this and looked up, Takahime had completely changed; she was wearing splendid attire, had applied white powder thickly, and the wrinkles on her cheeks were all smoothed over. Yoru was surprised and said,</p>
+          <p class="en-p">Yoru: 'Iya, this is, this is, Hinode-kami-sama, how young you have become. Ya, now I understand. As expected of a Kami-sama, is it not? Heen, I am envious.'</p>
+          <p class="en-p">Takahime: 'Hey, Yoru, you should not tease me so much. Come, quickly, go and guide To-sama here.'</p>
+          <p class="en-p">Yoru: '(In a theatrical tone) Etsu-he-he-he, certainly... shiyōchi... itashimashita, I shall go immediately.'</p>
+          <p class="en-p">Takahime: 'Hey, Yoru, what are you saying? Go quickly. Truly, truly, you are a man who is not sensible.'</p>
+          <p class="en-p">Yoru: 'Hinode-kami-sama, well, please try using me; I am quite sensible...'</p>
+          <p class="en-p">Saying this, he ran out to the front, faced the large man, and said,</p>
+          <p class="en-p">Yoru: 'This is, this is, To-sama, when I spoke to Hinode-kami-sama, she pondered for a short while and did not give an easy reply, but when I, this Yoru, spoke of various things, she said that since you had come all the way here, she must meet you even if only out of duty. She said that no matter what, she is the Giri-tenjō Hinode-kami who values duty, and she gave orders to guide you to the back... Come, please follow me. She is a very beautiful person.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高姫『ウンよしよし、それで能い、あの男は気の利いた人間だからなア。お前もトといふ人がお出でになつたら気を利かすのだよ』</p>
+            <p class="ja-classical-line">ヨル『ヘヽヽヽ、委細承知致しました』</p>
+            <p class="ja-classical-line">と頭を掻き乍ら、次の間に行つて、高姫の合図を待つ事とした。高姫はツツと立つて、そこらの窓を覗き乍ら、一人も人のゐないのにヤツと安心したものの如く、胸をなでおろし独言、</p>
+            <p class="ja-classical-line">高姫『何と云つても、ヤツパリ男だなア、あのよな気強い事を、東助さまは仰有つたので、チツと許り恨んで居つたが、ヤツパリ大勢の人の前だと思つて、あのよにつれなく言はんしたのだろ。あゝあ、男の心を知らずにすまぬ事を致しました。なア東助さま、その優しいお心を承はれば、最早高姫はこれで死んでも得心で厶んす。ドレ、顔でも作つて髪をなであげ、着物を着替にやなるまい』</p>
+            <p class="ja-classical-line">と俄に白いものをコテコテと、念入りにぬり立て、髪を政岡に結び、着物を新しいのと着替へ、紫の袴をゾロリとつけ、赤い襟を一寸出し、鏡台の前に立つたり坐つたりし乍ら、</p>
+            <p class="ja-classical-line">高姫『あゝこれでよい　これでよい、三国一の、言はば婿どのが来るやうなものだ。これで高姫もいよいよ願望成就だ。なア東助さま、ヤツパリ幼馴染はよいものですなア。マア能う来て下さつた。縁あればこそ子迄なした仲だ厶んせぬかい。本当に枯木に花の咲いたよな心持が致しますぞや。ドコともなしに男らしいお方、さすが高姫の思ふ丈あつて、杢助さまの一段上となり、副教主の地位迄進ましやんしたお方だもの、高姫が気をもむのも無理は厶いませぬわいの。ドレドレいつ迄もおまたせ申してはすまない、モウこれ丈化粧した上は、何時お越しになつても差支ない。併し何とはなしに恥かしいやうな気がして来た。ホヽヽヽヽ、年はよつても何だか昔の事が偲ばれて、顔がパツとあつくなつたやうだ。ホンに女の心と云ふものは優しいものだ。此初心な心を東助様が御覧になれば、キツと御満足なさるだろ、イヒヽヽヽヽ、あゝコレコレ、ヨル公や、モウ可いから、トと云ふお方に、さういつて来て下さい』</p>
+            <p class="ja-classical-line">と鈴を叩くのを忘れて了ひ、なまめかしい声で呼んでゐる。ヨルは、モウ鈴がなるかなるかと待つてゐたのに、思ひ掛けない高姫の声を聞いて、襖を開き恐る恐る首をニユツと出し、</p>
+            <p class="ja-classical-line">『日出神様、何ぞ御用で厶いますか』</p>
+            <p class="ja-classical-line">と云ひ乍ら、顔をあげて見ると、高姫はうつて変つて、立派な装束をつけ、白いものをコテコテとぬり、頬辺の皺も何もツルツルに埋まつてゐる。ヨルは驚いて、</p>
+            <p class="ja-classical-line">『イヤア、これはこれは、日出神様、何とお若うおなりなさいましたなア。ヤアこれでよめました。ヤツパリ神様でも、ありますかいな、ヘーン、お浦山吹きで厶います』</p>
+            <p class="ja-classical-line">高姫『コレ、ヨル、余り冷かすものぢやありませぬよ。サ早く、ト様を御案内してお出で』</p>
+            <p class="ja-classical-line">ヨル『（芝居口調）エツヘヽヽヽ、確に……承知……仕りました、急ぎ参上仕ります』</p>
+            <p class="ja-classical-line">高姫『コレ、ヨル、何を云つてゐるのだい、早く行つて来なさいよ。ホンにホンに、気の利かぬ男だなア』</p>
+            <p class="ja-classical-line">ヨル『日出神さま、マア使つてみて下さい、中々能う気が利きますで……』</p>
+            <p class="ja-classical-line">と云ひすて、表へかけ出し、大の男に向ひ、</p>
+            <p class="ja-classical-line">ヨル『これは　これは、ト様、日出神様に申上げました所、一寸少時御思案遊ばし、容易に御返事を遊ばしませぬので、此ヨルがいろいろと申上げました所、折角はるばるお出で下さつたのだから、義理にでも会はねばなるまい。何を云つても、義理を重んずる義理天上日出神だと仰有いまして、奥へ御案内せいとの仰せ……サア私についてお出で下さいませ。随分きれいな方で厶いますよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Man: 'Yes, Arigata, but since I have come on a Naimitsu matter, I wish to keep my Kazuki on as it is; would that be a Sashitsukahe?'</p>
+          <p class="en-p">Yoru: 'I am not a Yoru who would be so lacking in wit for such a thing. I am the Yoru-kō who is your Shiyugo. He-tsu-ha-ha-ha!'</p>
+          <p class="en-p">Man: 'Aha-ha-ha-ha, then I ask for your Goannai.'</p>
+          <p class="en-p">Guided by Yoru, he proceeded with loud footsteps, thumping and stomping, into the Ima of Takahime. Takahime, with her heart pounding—doki, doki—at the sound of the footsteps approaching step by step, was waiting for her Kohibito to enter with the feeling of Hitoikisenshiu. And when the Ōotoko opened the sliding door, it seemed that a sense of bashfulness surged over her all at once, and she sat with her head bowed limply.</p>
+          <p class="en-p">Man: 'Gomen-nasai, Takahime-sama, I was Shitsurei the other day; you must surely be in a state of Goritsupuku, I suppose.'</p>
+          <p class="en-p">Takahime finally opened her mouth and said,</p>
+          <p class="en-p">'Tōsukesama, you have done well to come and visit me. I am truly sorry for having resented you out of the immature heart of an onago... Wait, are you not Yoru? Did you not say you would be witty?'</p>
+          <p class="en-p">Yoru: 'Ha-i, Shiyōchi-itashimashita. Please, do enjoy yourselves intimately, with Tō-sama...'</p>
+          <p class="en-p">Takahime: 'E-i, you should not say such unnecessary things. Is that not Shitsurei to our Kiyakusama?'</p>
+          <p class="en-p">Yoru, holding his head with both Riyōte, bent his waist and left this place, walking away dejectedly.</p>
+          <p class="en-p">Takahime: 'Moshi, Tōsukesama, please take off your Kazuki. And since no one will come to this Ima, please Uchikutsuro and I request that you speak with me at your leisure.'</p>
+          <p class="en-p">Man: 'I feel somewhat awkward, and remembering things of the past, I feel embarrassed even though I have grown old, atsu-ha-ha-ha-ha.'</p>
+          <p class="en-p">Takahime: 'Moshi, Tōsukesama, I too feel embarrassed, you know, just like on the mountain path in Jerusalem, ho-ha-ha-ha.'</p>
+          <p class="en-p">The man said, 'Takahime-dono, Gomen-kaburimasu,' and suddenly removed his Kazuki. When she looked, it was not Tōsuke, but the god of the Tokiokishi, Mokusuke.</p>
+          <p class="en-p">Takahime: 'Ya, you are the Tokiokishi-kami-sama... My, my, what a bad stomach you have...'</p>
+          <p class="en-p">Tokioki: 'Aha-ha, it would be fine if it were Tōsukesama, but a truly unsophisticated man has come, so this must be a great nuisance for you.'</p>
+          <p class="en-p">Takahime: 'This is indeed a welcome visit. What is the matter for which you have sought me out?'</p>
+          <p class="en-p">Tokioki: 'The truth is, I have taken my leave from the Iso mansion and have come here.'</p>
+          <p class="en-p">Takahime: 'How is it that you, a person of such high divine virtue, have come to such a situation?'</p>
+          <p class="en-p">Tokioki: 'It is difficult to say such things in front of you, but in truth, due to a dispute over administrative matters with Tōsukesama, I resigned against my will; that is the outward appearance, but in fact, I was thrown out by Tōsukesama.'</p>
+          <p class="en-p">Takahime: 'My, my, what a pitiful thing that must be. Tōsukesama was not such a bad person, so why did he become so hard-hearted? The human heart is a thing that cannot be understood.'</p>
+          <p class="en-p">Tokioki: 'Takahime-sama, you must feel the same, must you not? He made nothing of the kindness you showed by following him all the way from Jitentō-shima, and he gave you the cold shoulder in front of many people like that, putting you to shame; you must understand well enough. If it were me, being a kind person like you, how could I ever do such a hard-hearted thing?'</p>
+          <p class="en-p">Takahime: 'That is true, Tōsukesama is truly a heartless person. He was not such a cold person when he was young, you know.'</p>
+          <p class="en-p">Tokioki: 'It is unbearable to have as many women as Tōsukesama does. Even Imokohime-sama and Isokohime-sama of the Iso mansion, while having husbands, cast amorous glances at him, and besides that, he is a man who is diligent with his chopsticks toward all the women of the holy land, regardless of age, so he is picking them all up; it is because you do not know that, that you made such a mistake. As for me, as you know, I am an unsophisticated widower, so not even a single female cat would look my way. Atsu-ha-ha-ha-ha.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">男『ハイ有難う、併し少しく内密の用で参つたのですから、被物は此儘で願ひたい、差支厶らぬかなア』</p>
+            <p class="ja-classical-line">ヨル『そんな事に気の利かぬようなヨルぢや厶いませぬ。ヨルの守護のヨル公で厶いますよ。ヘツヘヽヽ』</p>
+            <p class="ja-classical-line">男『アハヽヽヽ、然らば御案内、お頼み申す』</p>
+            <p class="ja-classical-line">とヨルに導かれ、高姫の居間に足音高く、ドシンドシンと進み行く。高姫は一足一足近付く足音に胸をドキ……ドキとさせ乍ら、恋人の入り来るを、一息千秋の思ひにて待つてゐた。そして大男が襖を開いた時は、恥かしさが一時に込み上げて来たと見え、グタリと俯いてゐた。</p>
+            <p class="ja-classical-line">男『御免なさいませ、高姫さま、先日は失礼致しました、定めて御立腹で厶いませうな』</p>
+            <p class="ja-classical-line">高姫はやうやう口を開き、</p>
+            <p class="ja-classical-line">『東助様、能う尋ねて来て下さいました。本当に女子の至らぬ心から、お恨み申しまして誠に済みませぬ……コレお前はヨルぢやありませぬか、気を利かすと云つたぢやないか』</p>
+            <p class="ja-classical-line">ヨル『ハーイ、承知致しました。どうぞ、シツポリとねえ、お楽み遊ばせ、ト様と……』</p>
+            <p class="ja-classical-line">高姫『エヽいらぬ事を云ふものぢやありませぬ。お客様に失礼ぢやありませぬか』</p>
+            <p class="ja-classical-line">ヨルは両手で頭を抱へ乍ら、腰を屈めて、スゴスゴとここを立去つた。</p>
+            <p class="ja-classical-line">高姫『モシ、東助様、どうぞ被物を取つて下さいませ、そして此居間は誰も来ませぬから、どうぞ打寛いで、御ゆるりと御話を願ひます』</p>
+            <p class="ja-classical-line">男『何だか体裁が悪くつて、昔の事を思ひ出し、年がよつても恥かしくなりましたよ、アツハヽヽヽ』</p>
+            <p class="ja-classical-line">高姫『モシ東助さま、私だつて、ヤツパリ恥しいワ、エルサレムの山道でねえ、ホヽヽヽ』</p>
+            <p class="ja-classical-line">男は『高姫殿、御免被ります』と被物をパツと除つた。見れば東助にはあらで、時置師の神杢助であつた。</p>
+            <p class="ja-classical-line">高姫『ヤ、貴方は時置師神様……マアマア、お腹の悪いこと……』</p>
+            <p class="ja-classical-line">時置『アハヽヽ、東助さまだと宜しいに、誠に不粋な男が参りまして、さぞ御迷惑で厶いませう』</p>
+            <p class="ja-classical-line">高姫『これはこれは能くこそ御入来下さいました。お尋ね下さいました御用の筋は、如何な事で厶います』</p>
+            <p class="ja-classical-line">時置『実の所は、私はイソの館をお暇を頂き、此処へ参つたのです』</p>
+            <p class="ja-classical-line">高姫『それは又、神徳高き貴方が、何うして左様な事にお成り遊ばしたので厶ります』</p>
+            <p class="ja-classical-line">時置『お前さまの前で、こんな事は申し上げにくいが、実の所は東助様と事務上の争ひから、止むを得ず、拙者は辞職したといふのは表向、実は東助さまに放り出されたのですよ』</p>
+            <p class="ja-classical-line">高姫『それはマアマア何とした気の毒な事で厶いませう。東助さまもそんな悪い方ぢや厶いませなんだのになア、どうしてそんな気強いお心になられたのでせうか、人間の心といふものは分らぬもので厶いますなア』</p>
+            <p class="ja-classical-line">時置『高姫さま、貴女だつてさうでせう。はるばると自転倒島から後を慕つてお出なさつた親切を無にして、あの通り大勢の前で肱鉄をかまし、恥をかかすやうな人だもの、大抵分つたものでせう。私だつたら、貴女のやうな親切な御方なら、何うしてあんな気強い事が出来ませう』</p>
+            <p class="ja-classical-line">高姫『そらさうですなア、本当に東助さまは無情な方ですワ。若い時はあんな水臭いお方だなかつたですがなア』</p>
+            <p class="ja-classical-line">時置『あれ丈、東助さまのやうに沢山女があつてはたまりませぬワイ。イソ館の今子姫さまだつて、五十子姫さまだつて、夫のある身でゐ乍ら秋波を送り、其外聖地の女は老若の嫌ひなく、箸まめな方だから、皆つまんでゐられるのです、それをお前さまが御存じないものだから、あんな不覚を取つたのです。私などは御存じの通り不粋な鰥鳥ですから、牝猫一匹だつて、見向いてもくれませぬワ。アツハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahime: 'You are truly a great man. To think you have endured being single until now. If I had a husband like you, I do not know how much of a support it would be, ho-ho-ho.'</p>
+          <p class="en-p">She blushes and hides her eyes with her sleeve.</p>
+          <p class="en-p">Tokioka: 'Oh, Takahime-sama, you are teasing me severely. Do not say such unpleasant things; for some reason, this Tokiokashi is feeling quite strange.'</p>
+          <p class="en-p">Takahime: 'Please, you must stay here comfortably tonight. The other room is where the executives sleep, so it would be inconvenient. Please, if you would be so kind as to rest in my living room, I shall even massage your feet. Come, have a cup of sake.'</p>
+          <p class="en-p">Tokioka: 'Oh, this is most welcome. I have been on the path of the Kamisama for some time and have learned to appreciate sake, but tonight I shall enjoy it here at my leisure. To have sake poured by Takahime-sama—my, such a wonderful thing has not happened in recent years, ha-ha-ha!'</p>
+          <p class="en-p">Takahime: 'Tell me, Tokiokashisama, you are the one who was called one of the Three Crows of Ananai-kyō, are you not? It is ridiculous to be cast out by the likes of Tōsuke; what do you intend to do from here on? Even a tiny insect has a soul of five bu, as they say.'</p>
+          <p class="en-p">Tokioka: 'That is why, in truth, I have come to consult with you privately. After all, since the forest of Ikuta, we have been on terms of special intimacy.'</p>
+          <p class="en-p">Takahime: 'Indeed, indeed. That I have become the guardian of your mansion must also be some kind of destiny. Tell me, Mokusuke-sama, would you not like to join forces with me to humble Tōsuke’s arrogant nose and make him repent for the sake of Ananai-kyō?'</p>
+          <p class="en-p">Tokioka: 'That is true. If I were to join you, it would be very interesting. But what do you intend to do about the forest of Ikuta?'</p>
+          <p class="en-p">Takahime: 'Yes, I have left the forest of Ikuta to Komahiko, so it will be fine even if I do not return for a year or two. Why don't you raise a banner here and make a name for yourself?'</p>
+          <p class="en-p">Tokioka: 'Oh, that is a brilliant idea. If you do not mind an old man like me, I shall accept your favor. However, I have a daughter named Hatsuwakihime, as you are surely aware. In truth, because I love my daughter, I have lived a single life until now so as not to subject her to a stepmother, but now that she has become a full-fledged missionary, I too wish to spend the rest of my life in peace while serving the Lord God.'</p>
+          <p class="en-p">Takahime: 'That lovely Hatsuwakihime-sama... even if I were a stepmother, I would be satisfied to be her mother. I will certainly cherish her, so please rest assured.'</p>
+          <p class="en-p">She looks at Tokiokashi with a strange expression, glaring at his face from an angle.</p>
+          <p class="en-p">Tokioka: 'Come, Takahime-sama, let us have a cup.'</p>
+          <p class="en-p">He hands her the sake cup and pours it from the decanter with a gurgling sound. Takahime wears an indescribably happy expression, holds the cup properly with both hands, drinks it down with a gulp using her mouse-like wrinkled mouth, takes paper from her bosom to wipe the cup gently, shakes her head two or three times, offers the cup with both hands, and while swaying her body to the left and right, says:</p>
+          <p class="en-p">Takahime: 'Excuse me, sir, shall we exchange cups?'</p>
+          <p class="en-p">She holds it out. Tokiokashi,</p>
+          <p class="en-p">Tokioka: 'Ha-ha-ha-ha!'</p>
+          <p class="en-p">He laughs as he receives the cup, has it filled to the brim, drinks it down, and says:</p>
+          <p class="en-p">Tokioka: 'The bird that cries, saying "I shall, I shall,"
+Is a widower bird among all birds.
+Ah, kori-ya, kori-ya.'</p>
+          <p class="en-p">He gets into the rhythm, claps his hands, and begins to sing. Takahime has never seen Mokusuke in such an unreserved state. Thinking, 'What an interesting and cute person he is,' she sings:</p>
+          <p class="en-p">Takahime: 'At the root of Ananai-kyō,
+Mokusuke-sama of the Three Crows,
+Are you the moon, or a flower, or perhaps the snow?
+The more I look, the more beautiful you are.
+To be a wife to such a gentleman,
+How happy a woman must be.
+Yoito-na, yoito-na,
+Dokkoisho, dokkoisho.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高姫『貴方は本当にお偉いですな。よう独身で今迄御辛抱なさいました。私も貴方のやうな夫があつたら、何程力になるか知れませぬがなア、ホツホヽヽ』</p>
+            <p class="ja-classical-line">と顔赤らめ、袖で目をかくす。</p>
+            <p class="ja-classical-line">時置『イヤもう、高姫様にきつう冷かされました。腹の悪い事いつて下さるな、何だか此時置師も妙な気分になりますワ』</p>
+            <p class="ja-classical-line">高姫『どうぞ、貴方、今晩ゆつくりとお泊り下さいませ。そして外の間は役員共が休みますので、不都合で厶います。どうぞ私の居間で、失礼乍ら、おやすみ下されば、お足でも揉まして頂きます。サ、マア一杯お酒でもおあがり下さいませ』</p>
+            <p class="ja-classical-line">時置『ヤア、これは有難い、暫く神様のお道に入つて、お酒を心得て居りましたが、今晩はここでゆつくりと頂きませう。高姫様のお酌で、何とマア、こんな結構な事は近年厶りませぬワ、アツハツハヽヽ』</p>
+            <p class="ja-classical-line">高姫『モシ時置師様、貴方は三五教の三羽烏といはれたお方でせう、バカらしい、東助如きに放り出されて、此後何うなさる積りですか、一寸の虫も五分の魂といふ事が厶りませう』</p>
+            <p class="ja-classical-line">時置『それで実の所は、ソツと御相談に参つたのですよ。何分生田の森以来、特別の御昵懇に願つた仲なのですからなア』</p>
+            <p class="ja-classical-line">高姫『左様左様、私も又貴方のお館の守役となりましたのも、何かの因縁で厶いませう。どうぞ杢助様、私と力を併せて、東助の高慢な鼻を挫き、三五教の為に彼を改心さしてやる気はありませぬか』</p>
+            <p class="ja-classical-line">時置『さうですなア、貴方と一所に願へば、大変面白いでせう。併し生田の森は何うなさる積ですか』</p>
+            <p class="ja-classical-line">高姫『ハイ生田の森は、駒彦に一任しておきましたから、私が仮令一年や二年帰らなくても大丈夫ですよ。一つ貴方、此処で○○になり一旗挙げちや何うで厶いませうかな』</p>
+            <p class="ja-classical-line">時置『イヤ此奴ア妙案です。私の様な老ぼれでもお構ひなくば御世話になりませう。併し私には初稚姫といふ一人の娘が厶いますが、それは御承知で厶いませうな。実の所は娘が可愛いので、継母にかけまいと思ひ、今迄独身生活をやつて来たのですが、最早娘も一人前の宣伝使となりましたので、私も神様の御用を勤め乍ら、気楽に余生を送りたいのです』</p>
+            <p class="ja-classical-line">高姫『あの可愛らしい初稚姫さまの……私は仮令継母にもせよ、母となるのは満足で厶います。キツト大切に致しますから、御安心下さいませ』</p>
+            <p class="ja-classical-line">と妙な目をして、斜かいに時置師の顔を睨んでゐる。</p>
+            <p class="ja-classical-line">時置『サア高姫さま、一杯行きませう』</p>
+            <p class="ja-classical-line">と盃をわたし、ドブドブと徳利から注いでやる。高姫はえもいはれぬ嬉しさうな顔をして、キチンと両手に盃を持ち、鼠のやうな皺のよつた口で、グーツと呑み、懐から紙を出して盃をソツと拭き、首を二つ三つ振つて、盃を両手にささげ、手を左右左に体グチふり乍ら、</p>
+            <p class="ja-classical-line">高姫『モシこちの人、返盃致しませう』</p>
+            <p class="ja-classical-line">とさし出す。時置師は、</p>
+            <p class="ja-classical-line">時置『アツハヽヽヽ』</p>
+            <p class="ja-classical-line">と笑ひながら盃を受取り、なみなみとつがしてグツと呑み、</p>
+            <p class="ja-classical-line">時置『○せう○せうと言つて鳴く鳥は</p>
+            <p class="ja-classical-line">鳥の中でも鰥鳥</p>
+            <p class="ja-classical-line">あゝコリヤコリヤ』</p>
+            <p class="ja-classical-line">と調子にのつて手を拍ち歌ひ出した。高姫は杢助のこんな打解けた姿を見た事は始めてである。『なんと面白い可愛い人だなあ』と思ひ乍ら、</p>
+            <p class="ja-classical-line">高姫『三五教の大元で
+三羽烏の杢助さまは
+月か花かよ、はた雪か
+見れば見る程美しい
+こんな殿御と添ひぶしの
+女はさぞや嬉しかろ
+ヨイトナ　ヨイトナ
+ドツコイシヨ　ドツコイシヨ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Clapping his hands, he got into the rhythm and began to sing.</p>
+          <p class="en-p">Mokusuke: 'Drunkenly sleeping on the lap of Euchō Takahime, / Upon waking, I grasp the authority of the great Tenka.'</p>
+          <p class="en-p">Like a Hakubun, he used Takahime's lap as a pillow, raised his feet, clapped his hands, and sang in a relaxed manner.</p>
+          <p class="en-p">Takahime: 'Within the Ananai-kyō, / Is there anyone as fortunate as I? / With one of the Sanbagarasu, / Toki-sama, who is flourishing, / As my husband, I shall oppose / The Ijiwaru Tōsuke-sama. / From now on, I shall grandly / Raise my flag. / The Giritenjiyō of Hinodenokami, / Its Shintoku is just like this. / I must make those fools / Who do not understand the reason / Go "Afun!" / Truly, how happy I am. / If I were to show / Such a Ketsukō place / To Takayamahiko or Kurohime, / I wonder what they would think? / I do not care about anything at all. / Truly, it is Mede, it is Mede. / Come, come, Toki-sama, shall we sleep? / The evening bell echoes in the Tohone.',</p>
+          <p class="en-p">'The Muregarasu seek their nests, / Even the Kotori return to their own nests, / So it is useless to stay awake until when? / Yātoko-sē yōiyana, / Arewaise, korewaise, / Sassā, yatsutokose.'</p>
+          <p class="en-p">Just then, Yoru came running in.</p>
+          <p class="en-p">Yoru: 'Excuse me, Takahime-sama, did you call for me? Oh my, I am sorry to disturb you in the Saichiu of your enjoyment.'</p>
+          <p class="en-p">Takahime was startled and let out a Tonkiyō cry.</p>
+          <p class="en-p">Takahime: 'Hey, Yoru, who called you? Go over to Atsuchi, you are truly a person who lacks tact.'</p>
+          <p class="en-p">Yoru: 'Yes, the truth is, I was waiting in the next room and listening to how things were going. Worried that someone might say such things and cause you harm, the reception was left aside, and Iru, Iku, Sāru, Teru, Haru, and even Kaede-sama were listening to every single word of your conversation from the next room. Well, if this is the case, it is Ketsukō, congratulations.'</p>
+          <p class="en-p">Takahime became desperate.</p>
+          <p class="en-p">Takahime: 'This person is my husband. You must have heard it too, but since we have been betrothed since long ago, there is no need to hide it. Now, go over to Atsuchi.'</p>
+          <p class="en-p">Yoru: 'Yes, I understand. You say such sweet things. Hey, hey, Kaede-sama, Iru, Iku, Sāru, Haru, Teru, let us go to Atsuchi. If we dawdle, Takahime-sama will... if it comes to Yoru, she will strike our heads, that is the Teru... no, that is not it. From now on, since the Iku-sāru of Takahime-sama and To-sama is beginning, come, come, let us withdraw over there, withdraw. Truly, truly, you are such a close couple, how Medetai.'</p>
+          <p class="en-p">While saying this, the seven of them ran out to the front with loud footsteps, thud, thud, thud.</p>
+          <p class="en-p">Takahime: 'Hey, Toki-sama, will you not wake up? You are Ijiwaru. Young people are hopelessly curious. They were listening to my conversation with you from the next room the whole time.'</p>
+          <p class="en-p">Tokioki: 'Ahahaha, that is interesting. Since we are going to get married when we get older anyway, it will not do if we do not have a little courage. Is it not better this way? There is no need to make a public announcement... right, Taka-chan?'</p>
+          <p class="en-p">Takahime: 'That is so. Since To-chan arrived, I have felt somehow encouraged and reassured. Now, let us go to sleep.'</p>
+          <p class="en-p">Tokioki: 'Even if you say that, we cannot rest right away. How about I go to the shrine, offer my thanks, and say that Tokioki-shi and Takahime are having a temporary marriage?'</p>
+          <p class="en-p">Takahime turned her back with a pout.</p>
+          <p class="en-p">Takahime: 'Hey, Toki-sama, I do not like the sound of a temporary marriage. It must be an eternal and infinite marriage, or it is a lie.'</p>
+          <p class="en-p">Tokioki: 'Even if you say that, we cannot have a grand wedding ceremony so suddenly, can we? Let us have a temporary marriage for tonight, and if we like each other, we shall pledge our troth until the eight thousand generations of the jade camellia. Since we are a couple who love each other, let us enjoy ourselves slowly, and while waiting for the wedding, we can examine each other's strengths and weaknesses. When we both feel that we can truly pledge to grow old together in the same grave, then we shall hold a formal wedding ceremony, shall we not?'</p>
+          <p class="en-p">Takahime: 'I am not feeling well tonight, so please excuse me from offering thanks. One should not visit the gods when one has a guest, you see.'</p>
+          <p class="en-p">Tokioki: 'Do you mean to say you have a guest seven days a month? In that case, a temporary wedding ceremony will not work either, will it?'</p>
+          <p class="en-p">Takahime: 'Hohoho, what a slow-witted person you are. When I say guest, I mean this person here.'</p>
+          <p class="en-p">While saying this, she narrowed her eyes and tapped Tokioki-shi on the shoulder. Tokioki-shi intentionally acted limp, narrowed his eyes, and said,</p>
+          <p class="en-p">Tokioki: 'Ehetsuhehe.'</p>
+          <p class="en-p">While having such a conversation, the two extinguished the lamp and spent the night together in harmony.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と手を拍つて、調子に乗り歌ひ出したり。</p>
+            <p class="ja-classical-line">杢助『酔ふては眠る窈窕高姫の膝</p>
+            <p class="ja-classical-line">醒めては握る堂々天下の権』</p>
+            <p class="ja-classical-line">と博文もどきに高姫の膝を枕に、足を上げ、手を拍ち打解けて歌ひ出した。</p>
+            <p class="ja-classical-line">高姫『三五教の其中で
+私ほど仕合せ者が又あろか
+三羽烏の一人と
+時めき渡る時さまを
+夫に持つて意地悪い
+東助さまの向ふ張り
+これから一つ堂々と
+旗挙致してみせませう
+日出神の義理天上
+其神徳は此通り
+訳の分らぬ奴共を
+アフンとさせねばなりませぬ
+ホンに嬉しい事だなア
+こんな結構な所をば
+高山彦や黒姫に
+お目にかけたら何うだらう
+何でもかんでも構やせぬ
+ホンに目出たいお目出たい
+サアサア時さま　ねよかいな
+遠音に響く暮の鐘</p>
+            <p class="ja-classical-line">塒求める群烏
+小鳥も吾巣へ帰るのに
+いつ迄起きてゐたとてせうがない
+ヤートコセーヨーイヤナ
+アレワイセー、コレワイセー
+サツサ、ヤツトコセー』</p>
+            <p class="ja-classical-line">かかる所へヨルは走り来り、</p>
+            <p class="ja-classical-line">ヨル『モシ、高姫様、お呼びになりましたか、何とマアお楽みの最中を失礼致しました』</p>
+            <p class="ja-classical-line">高姫はビツクリして頓狂な声を出し、</p>
+            <p class="ja-classical-line">『コレ、ヨル、誰が呼んだのだい、彼方へいつてなさい、本当に気の利かぬ方だなア』</p>
+            <p class="ja-classical-line">ヨル『ハイ、実の所は次の間に控えて御様子を承はつてゐました。あんな事云つて貴方に危害を加へるのぢやあるまいかと、受付はそつちのけにして、イル、イク、サール、テル、ハル、楓さま迄が、次の間で貴方方の御話を一伍一什聞いてゐましたよ。マア此分ならば結構で厶いますワ、お目出たう』</p>
+            <p class="ja-classical-line">高姫は焼糞になり、</p>
+            <p class="ja-classical-line">高姫『此方は私の夫だよ。お前も聞いてをつただらうが、昔からの許嫁だから、別に隠す必要もないのだ、サア彼方へ行かつしやれ』</p>
+            <p class="ja-classical-line">ヨル『ハイ、承知致しました。甘い事仰有いますワイ、コレコレ楓さま、イル、イク、サール、ハル、テル、彼方へ行かう、グヅグヅしてると、高姫様が、事にヨルと、頭をハルと、いふテル……でもない。これから、夜にイルと、高姫さまとトさまのイクサールが始まるのだから、サアサアあちらへ控えたり控えたり、ホンにホンに、仲のいい事だ、お目出たいなア』</p>
+            <p class="ja-classical-line">と云ひながら、七人は足音高く、ドスドスドスと表へ駆け出した。</p>
+            <p class="ja-classical-line">高姫『コレ時さま、起きなさらぬかいな、意地が悪い、若い奴といふ者は、物珍し相に仕方のないものですよ。最前から貴方との話を、皆次の間で聞いてゐたのですもの』</p>
+            <p class="ja-classical-line">時置『アハヽヽヽ、そりや面白い、何れ年が老つて、結婚をせうと云ふのだから、チツと度胸がなくちや駄目だ。一層の事いいぢやないか、披露する必要もなくて……なア、高ちやん』</p>
+            <p class="ja-classical-line">高姫『さうですなア、私もトちやんがお出でになつてから、何だか気がイソイソして心強くなりましたワ。サ就寝みませう』</p>
+            <p class="ja-classical-line">時置『それだと云つて、今すぐに休む訳にや行くまい。御神殿へ行つて御礼を申上げ、そして時置師と高姫が臨時結婚を致しますと申上げて来たら何うだらうなア』</p>
+            <p class="ja-classical-line">高姫はプリンと背中をそむけ、</p>
+            <p class="ja-classical-line">高姫『コレ時さま、臨時結婚なんて、厭ですよ、永遠無窮の結婚でなくちや嘘ですわ』</p>
+            <p class="ja-classical-line">時置『さうだと云つて、さう俄に大層な婚礼式も出来ぬぢやないか、今晩は一寸仮結婚としておいて、互に気に入つたら玉椿八千代迄も契るのだ。想思の男女の事だから、マアゆつくりと楽しんで、婚礼迄に互の長短を調べて、いよいよ両方から、これならば偕老同穴を契つてもよいといふやうになつたら、それこそ改めて公々然と結婚式を挙げやうぢやないか』</p>
+            <p class="ja-classical-line">高姫『あてえ今晩は、体の都合が悪う厶いますから、御礼はこらへて戴きます、お客さまのある時に神様へ参るものぢやありませぬからな』</p>
+            <p class="ja-classical-line">時置『月に七日のお客さまがあるといふのかな、ソリヤ仮結婚式も駄目だないか』</p>
+            <p class="ja-classical-line">高姫『ホツホヽヽ、合点の悪いお方だこと、お客さまといへば此人だよ』</p>
+            <p class="ja-classical-line">と細い目をし乍ら、時置師の肩をポンと叩いた。時置師はワザとグナリとし乍ら、細い目をして、</p>
+            <p class="ja-classical-line">時置『エヘツヘヽヽ』</p>
+            <p class="ja-classical-line">こんな話をし乍ら二人は灯火を消して、睦じく一夜を明しける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: 水呑同志 [1285]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: 胸の轟 [1287]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
