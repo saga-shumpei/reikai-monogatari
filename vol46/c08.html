@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: 黒 Fox [1218] - Volume 46 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 46 Table of Contents</a>
+      <span>Volume 46</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 46 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: 黒 Fox [1218]</h1>
+      <p class="chapter-title-ja">黒狐〔1218〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Even past noon, Imoriwake did not return, so Otora gradually began to doubt the divine power of Kami, and rushed into Matsuhimeyakata.</p>
+          <p class="en-p">Otora: 'Excuse me, are I interrupting? In the lower hall quite a rowdy uproar has broken out, but since your husband-and-wife harmony is so exceptionally fine, it seems it did not reach your ears. Well, that is quite understandable, oh my!'</p>
+          <p class="en-p">Matsuhime: 'Ah, Otora-sama, thank you so much for coming. Has some urgent matter come up?'</p>
+          <p class="en-p">Otora: 'Hey, you counterfeit Jiyōgihime-sama, how can you calmly say such things? What have you done with Imoriwake-sama? Did you not say that you would draw him back by daybreak at the earliest, or by noon at the latest? It is already nearly the hour of the horse, and yet there is not even a sign of Imoriwake-sama!'</p>
+          <p class="en-p">Matsuhime: 'Ah, is that so. You must be feeling anxious. I say, Matsuhiko-sama, what could have happened to Imoriwake-sama?'</p>
+          <p class="en-p">Matsuhiko: 'Well now, that depends on Otora-sama's repentance. If someone gets pinched a second time or has their nose twisted, anyone would become stubborn, you see.'</p>
+          <p class="en-p">Otora: 'Hey, you counterfeit Matsudaisama, what did you say to me? Telling such lies, is it right for someone who serves the work of Kamisama? Until this very moment I deeply believed that while other people's shiyugojin might be false, Matsuhime-sama was Jiyōgihime and you were undoubtedly Matsudaisama, but if you say such things, I cannot help but doubt both Matsudaisama and Jiyōgihime!'</p>
+          <p class="en-p">Matsuhime: 'Ho ho ho ho! What a difficult face you are making, Otora-sama. Although I say I am Matsuhime, since you people arbitrarily attached the character for pine to me, there is no doubt I am the spirit of Matsudaisama's wife. That being said, was it not you people who gathered around and elevated me as the living shrine of Jiyōgihime? I certainly never proclaimed myself to be Jiyōgihime from my side. Even if you now call me a fake or the real thing, it has no relation or responsibility to me whatsoever, does it?'</p>
+          <p class="en-p">Otora: 'Such a matter can be heard afterward. Once and for all, what on earth has happened to Imoriwake-sama? Make a clear confession whether he is returning today or tomorrow.'</p>
+          <p class="en-p">Matsuhime: 'Ho ho ho ho! To tell me to make a confession as though I had hidden him or something is quite amusing. Is it not fine even if such a drunken man does not show his face for two or three days? If he cannot fit in with worldly society anywhere and does nothing but drink, any eccentric person would lose affection and abandon him. In that case, he has no choice but to return here, does he not?'</p>
+          <p class="en-p">Otora: 'If he went out without money he might come back, but no matter what anyone says, he had nine thousand ryo of gold with him, so with that money he is likely wandering about everywhere with that woman Otami, you know.'</p>
+          <p class="en-p">Matsuhiko: 'They say that no matter how much you wander, if you live in idleness even mountains will disappear, so once the money is gone he will be able to return. No matter how lavishly he spends it, nine thousand ryo will last Otami and her husband twenty or thirty years without a problem, so well, why don't you wait until then?'</p>
+          <p class="en-p">Matsuhiko: 'Heh heh heh heh!'</p>
+          <p class="en-p">Otora: 'Hey, Matsudai-sama, what is so funny? When I am worrying this much, are you laughing at me? Is my sorrow funny to you?'</p>
+          <p class="en-p">And she attempts to snap at him.</p>
+          <p class="en-p">Matsuhime: 'Hearing the circumstances, it is regrettable, but after all, since this is rust arising from your own self, what can be done? Collecting money by having believers who seem to have a little gold shed tears of joy after bestowing upon them non-existent names such as Minister Rintōbiten, the Kamisama of Five-Six-Seven Fulfillment, Toyosaka Noborihime of the Morning Sun, Iwateruhime, and Kiso Yoshihime—why would such money ever become truly yours? Imoriwake-sama went away taking that gold because he intended to take away your sins. In short, Imoriwake-sama and Otami-sama are your sin-removers, rescuing boats, and benefactors of your life, so you should rejoice. Viewed from the standpoint of true faith, Otora-sama, you have received quite a wonderful blessing, have you not?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お寅は昼過になつても蠑螈別が帰つて来ないので、ソロソロ神の神力を疑ひ出し、松姫館に駆け込んだ。</p>
+            <p class="ja-classical-line">お寅『ご免なさいませ、お邪魔にはなりませぬかな、下の御広間は随分乱痴気騒ぎが起つてゐましたが、余り御夫婦仲がいいので、お耳に達せなかつたと見えますな。ソリヤ無理も厶いませぬワ』</p>
+            <p class="ja-classical-line">松姫『あゝお寅さま、よう来て下さいました、何か急用でも出来ましたのですか』</p>
+            <p class="ja-classical-line">『コレ、贋の上義姫様、ようそんな事をヌツケリコと言うてゐられますな。蠑螈別さまはどうして下さつたのです。早うて夜明、遅くて昼時分には引寄せてやらうと仰有つたぢやありませぬか。モウ殆ど八つ時、蠑螈別さまの影もささぬぢやありませぬか』</p>
+            <p class="ja-classical-line">『あゝさうでしたねえ、お気のもめた事でせう。もし松彦さま、蠑螈別さまはどうなつたのでせうかな』</p>
+            <p class="ja-classical-line">松彦『さうだなア、お寅さまの改心次第だ。二つ目にはつねられたり、鼻をねぢられたりしられちや、誰だつてコリコリするからな』</p>
+            <p class="ja-classical-line">お寅『コレ、贋の末代様、お前さまは私に何と仰有つた。そんなウソを言つて、神様の御用する人が、よいのですか。他の人の守護神はウソにした所で、松姫さまは上義姫様、あなたは末代様に違ないと、今の今まで深く信じて居りましたが、そんなこと仰有ると、末代様も上義姫様も、疑はずには居られませぬぞや』</p>
+            <p class="ja-classical-line">松姫『ホヽヽヽヽ、あのお寅さまの六かしいお顔わいの。私は松姫だと云つてるのに、お前さま等が勝手に松と云ふ字がついとる以上は、末代様の奥様の霊に違ひない。さうすると上義姫の生宮だと、お前さま等がよつてかかつて祭り上げたのぢやないか。決して私の方から上義姫だと名告つたのぢやありませぬよ。今更贋だの本物だと云つて貰つても、私に関係も責任もないぢやありませぬか』</p>
+            <p class="ja-classical-line">『そんなこた、あとで承はりませう。一体全体、蠑螈別さまは何うなさつたのですか。今日帰るとか明日帰るとか、ハツキリと白状しなさい』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、私がかくしたものか何ぞのやうに、白状しなさいとは痛み入ります。あんな酒飲男が二日や三日居らなくてもいいぢやありませぬか。何一つ世間の間にも合はず、酒ばかり飲んでゐられちや、どんな物好な人だつて、愛想をつかして放り出して了ひますよ。さうすりや止むなく此処へ帰つて来な仕方がないぢやありませぬか』</p>
+            <p class="ja-classical-line">『お金なしに出て居るのなら帰つて来るかも知れませぬが、何と云つても九千両の金を持つてゐたのですから、其金を持つて、そこら中をお民の奴とウロつきますわいな』</p>
+            <p class="ja-classical-line">『何程ウロついたつて、遊んで食へば山もなくなるとか言ひますから、金さへなくなれば帰つて来られますワイ。何程沢山に使つても、九千両あれば、お民さまと夫婦が二十年や三十年は大丈夫ですからなア、マアそれ迄お待ちやしたら何うです』</p>
+            <p class="ja-classical-line">松彦『ウツフヽヽヽ』</p>
+            <p class="ja-classical-line">お寅『コレ、末代さま、何が可笑しい、私がこれだけ気をもんでるのに、お笑ひ遊ばすのか。人の悲しみがあなたは可笑しいのですか』</p>
+            <p class="ja-classical-line">と喰つてかからうとする。</p>
+            <p class="ja-classical-line">松姫『事情を聞けばお気の毒ですが、併しこれも自分から出た錆だから仕方がないぢやありませぬか。チイと金のありさうな信者に、リントウビテン大臣とか、五六七成就の神様だとか、旭の豊栄昇り姫、岩照姫、木曽義姫などと、ありもせぬ名をお附け遊ばして、随喜の涙をこぼさせて集めたお金が、なぜあなたの身につきますか。蠑螈別さまは、お前さまの罪を取つて上げようと思つて、其金を持つてお逃げ遊ばしたのですよ。つまり蠑螈別さまとお民さまはお前さまの罪取主、助け舟、命の御恩人だから御喜びなさい。正しき信仰上の目から見れば、お寅さま、あなたは随分よい御かげを頂きましたね』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otora: 'How ridiculous, where on earth is there such divine grace? I shall hereafter pursue Imoriwake's footsteps, recover the gold, and I will not be satisfied unless I utter my grudges.'</p>
+          <p class="en-p">Chōsaibau: 'Ohohoho, your grudges may not take effect well. If it were the words of pure and immaculate you, even nails might take effect, but as you are companions who know each other's weak points, it will end up in a husband-and-wife quarrel that even dogs would not eat. Besides, Otami-sama is a beautiful person in the prime of her youth, and you-sama are an old hag, if I may say so, who has made a fifty-year-old bottom; naturally, whoever is a fickle person would take the side of Otami-sama. Isn't it a bit too audacious of you, at your good age, to try to monopolize the love of Imoriwake-sama? You, what has happened to that nose of yours? Isn't it bursting? Most likely you tripped and hit it last night when you were chasing him. Doesn't the teaching of Kamisama also show that if you do not repent, a thing will come to pass where you must strike your nose? You have received practical education and obtained splendid divine grace, haven't you? I truly feel envious of you.'</p>
+          <p class="en-p">Otora: 'Hmph, do not make a fool of me, leave off making a laughingstock of people at a reasonable point. Since even this Otora is not a stone Jizō or a doll, she has at least a bit of conscience. You have met a husband called Matsuhiko-sama and have been blessed with a child, so you are happy, aren't you, and you are also strong in spirit. That is why you can say such bold things. Just try putting yourself in my shoes.'</p>
+          <p class="en-p">Matsuhiko: 'Moshi Otora-sama, how would it be if you gave up thinking about Imoriwake-sama at a reasonable point now? And if you simply must have a husband no matter what, I will arrange a suitable man for you.'</p>
+          <p class="en-p">Otora: 'Hmph, do not make too much a fool of me, I am not making a fuss because I want a man. It is simply because Imoriwake-sama is one who must not be lacking for the sake of Kamisama and for the sake of the people of the world, that I am putting my mind on edge for the sake of all-under-heaven. Making a fifty-year-old bottom, would I ever need a man? If you take me to have such a weak soul, hmph, it makes my sides ache a little.'</p>
+          <p class="en-p">Chōsaibau: 'Ah, is that so? That is why you occasionally perform various bizarre farces such as sake bottles dancing, wine cups shattering, twisting noses, and fainting.'</p>
+          <p class="en-p">Otora: 'Heh, say whatever you please and go on. Enjoy yourselves cozily and harmoniously as husband and wife, farewell; it would not do for a long-dreary old hag to soil the scene of a joyful weeping of a long-awaited reunion. I have been a terrible nuisance. Since I am a dull-witted old hag, please forgive me.'</p>
+          <p class="en-p">Just as she was venting her venom like this, the one who came up briskly was Oku.</p>
+          <p class="en-p">Oku: 'Pardon me, Otora-sama, or rather, Mother-sama, is she here, I wonder?'</p>
+          <p class="en-p">Otora: 'Hey Oku, what on earth are you coming to such a place for? Come, go back, go back; even though you are not of age, you are precocious, coming right away to listen to my private talk.'</p>
+          <p class="en-p">Oku: 'It is not that I particularly wanted to come and listen, but since you are always getting drunk on sake with Imoriwake-sama and having a loud jealousy quarrel, I came along anxiously wondering if you had come here to burn with jealousy again. Mother-sama is good at jealous fits, after all.'</p>
+          <p class="en-p">Otora: 'Go home quickly.'</p>
+          <p class="en-p">Oku: 'The living shrine of the Gojifu-nijūshi-ōchi-sumera-no-mikoto and the living shrine of Hinodewake no Yoshikohime have dashed out of the great hall, and even Spring-sama has followed behind them, descending the Kototama-daradara Slope, going to the base of the Shinsei Pine, pulling up sixteen pine trees, and trying to shatter the rocks, or so I heard, so I came to let you know for a moment.'</p>
+          <p class="en-p">Otora: 'Even if you pull up pine trees, you can just replant them. No matter how strong Ofuku-sama or Take-sama are, that rock will not budge an inch, so just leave it alone. More than that, go home quickly.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お寅『馬鹿らしい、こんな御かげが何処にありますか。私もこれから、蠑螈別の後を追つかけて、金を取返し、恨みを言はねば承知しませぬ』</p>
+            <p class="ja-classical-line">『オホヽヽヽ、貴女の恨はよう利きませうよ。清浄潔白の貴女のお言葉なら釘も利きませうが、弱点を知り合うた仲、犬も食はぬ夫婦喧嘩になつて了ひますよ。それにお民さまは娘盛りのキレイなお方、お前さまは五十の尻を作つた、言ふとすまぬが古手婆アさま、誰だつて浮気者だつたらお民さまの方へ肩をもつのは当然ですわ。お前さまもいい年して蠑螈別様の愛を独占しようなぞとは余り虫がよ過ぎるぢやありませぬか。貴女、其鼻何うなさいました。ハヂケてゐるぢやありませぬか。大方夜前追つかけていた時に転けて打ちなさつたのでせう。神様の教にも、改心致さぬと鼻を打たねばならぬ事が出来るぞよと示されてあるぢやありませぬか。貴方は実地教育をうけ、結構な御かげを頂きやしたねえ、本当にお羨ましう厶いますワ』</p>
+            <p class="ja-classical-line">『ヘン、馬鹿にしなさるな、よい加減に人を嘲斎坊にしておきなさい。此お寅だつて石地蔵や人形ぢやありませぬから、チツとは性念がありますよ。お前さまは松彦さまといふ夫に会ひ、吾子が分つたのだからソラ嬉しいでせう、又勢も強いでせう。それだからそんな気強い事がいへるのだ。私の身になつて御覧なさい』</p>
+            <p class="ja-classical-line">松彦『モシお寅さま、モウいい加減に蠑螈別さまのこたア思ひ切られたら何うです。又何うしても夫がなくちやならぬのならば、適当な男をお世話致しますワ』</p>
+            <p class="ja-classical-line">『ヘン、余り馬鹿にして下さるな、私は男が欲しいので騒いでるのぢやありませぬ。只神様の為、世人の為になくてはならぬ蠑螈別さまだから、天下の為に気をいらつてゐるのですよ。五十の尻を作つて男なんか要つてたまりますか。そんな柔弱な魂だと思つて貰ひますと、ヘン、チツト片腹痛い』</p>
+            <p class="ja-classical-line">『あゝさうですか。それで時々徳利が舞うたり、盃が砕けたり、鼻をねぢつたり、気絶したり、いろいろな珍妙な活劇をおやりなさるのですな』</p>
+            <p class="ja-classical-line">『エヽなになつと勝手に言つておかつしやい。御夫婦仲よう、しつぽりとお楽しみ、左様なら、永らく殺風景な婆アが久しぶりの御対面、嬉し泣きの場面を汚しましてはすみませぬ。エライお邪魔を致しました。気の利かぬ婆アで厶いますから、どうぞお許し下さいませ』</p>
+            <p class="ja-classical-line">かく毒ついてる所へ、スタスタと上つて来たのはお菊であつた。</p>
+            <p class="ja-classical-line">お菊『ご免なさいませ、お寅さま、否お母アさまは来てゐられますかな』</p>
+            <p class="ja-classical-line">お寅『コレお菊、お前は何しに、こんな所へ来るのだい、サアお帰りお帰り、年も行かぬくせに小マしやくれた、ぢきに私の内証話を聞きに来るのぢやな』</p>
+            <p class="ja-classical-line">『別に聞きに来たいこたないのだけれど、何時も蠑螈別さまと酒に酔うて、大きな声で悋気喧嘩をなさるものだから、又ここへ岡焼にでもしに厶つたのかと案じて来て見たのよ。お母アさまは法界悋気が上手だからねえ』</p>
+            <p class="ja-classical-line">『早く帰りなさい』</p>
+            <p class="ja-classical-line">『五六七成就の生宮さまと、旭の豊栄昇り姫の生宮さまとが大広間を飛出し、春さままでが後について、悪口タラダラ坂を降り、神政松の下へ行つて、十六本の松を引抜き、岩を砕かうとして居るさうぢやから、一寸知らしに来たのよ』</p>
+            <p class="ja-classical-line">『松位引いたつて、また植ゑ替へたらいいのだ。何程お福さまや竹さまが力が強うても、あの石はビクツともならないから、放つときなさい。それよりも早くお帰り』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'In that case, I shall return. Mankō-sama is waiting with his neck stretched out, you see.'</p>
+          <p class="en-p">Matsuhime: 'Ho ho ho ho.'</p>
+          <p class="en-p">Otora: 'Is there such a thing as making a fool of one's parent? Are you that much in love with Mankō-sama?'</p>
+          <p class="en-p">Okiku: 'I am in love, indeed... in love, in love, what is in love? The horse urinated and the ground was in love... that is how much I am in love. Ho ho ho ho. However, Mother, I had something that would please you, but since you say such hateful things, I will not say it anymore. Tell me, Matsuhime-sama, even if one is a daughter, one cannot bring oneself to speak to a mother who utters such hateful words, can one?'</p>
+          <p class="en-p">Matsuhime: 'A splendid person has arrived, has he not? You must surely be delighted, Mother...'</p>
+          <p class="en-p">Otora: 'What is this, Okiku? What is this splendid thing? Tell me quickly, for I have my own affairs to attend to.'</p>
+          <p class="en-p">Okiku: 'That is true, is it not? Shall I say it, or shall I not? If I speak of such things so bluntly, the joy for both of us will diminish, so shall we leave this as a dream?'</p>
+          <p class="en-p">'Oh, how impatient I am! Will you not tell me quickly?'</p>
+          <p class="en-p">'The person whose name begins with I has returned, thanks to Kamisama, walking along briskly.'</p>
+          <p class="en-p">'What? Imoriwake-sama has? Yes, that must be it, that must be it. Oh, Matsuhiko-sama, Matsuhime-sama, I am truly sorry. Your Goshinriki is indeed great. Although it was about an hour and a half behind the Mioshihe, now that he has returned, the Futobashira for the Shinsei Jiyōjiyu can be grasped. Kamisama must be very pleased as well.'</p>
+          <p class="en-p">'I do not know if Kamisama will be pleased or not, but Mother must be very pleased, must she not? Even for me, it is not as if there are no unpleasant things, ho ho ho ho.'</p>
+          <p class="en-p">The lover whom she forgets not even in her dreams,</p>
+          <p class="en-p">At the very moment she had grown weary of waiting,</p>
+          <p class="en-p">Hearing that Imoriwake had returned,</p>
+          <p class="en-p">Otora leaped up in joy,</p>
+          <p class="en-p">Her face, once like Enma,</p>
+          <p class="en-p">Instantly transformed into Jizau,</p>
+          <p class="en-p">Turning toward Matsuhiko and his wife,</p>
+          <p class="en-p">She chattered on about rude things,</p>
+          <p class="en-p">And apologized for her loose tongue,</p>
+          <p class="en-p">'Now, now, Okiku, you stay here,</p>
+          <p class="en-p">And be taken care of for a while,' she said,</p>
+          <p class="en-p">While saying it would be unsightly,</p>
+          <p class="en-p">To have their Naishiyōbanashi overheard,</p>
+          <p class="en-p">Not knowing he was a fox spirit,</p>
+          <p class="en-p">Believing him to be her truly beloved man,</p>
+          <p class="en-p">She stepped over the narrow Kaidan,</p>
+          <p class="en-p">Skipping two or three steps at once,</p>
+          <p class="en-p">Dizzy and tumbling down with a crash,</p>
+          <p class="en-p">Hitting her head in the Hiyōshi.</p>
+          <p class="en-p">Saying 'Ouch, ouch, ouch,'</p>
+          <p class="en-p">Having had her heart stolen by the man,</p>
+          <p class="en-p">She paid no mind to the pain in her head or waist,</p>
+          <p class="en-p">And went down as if rolling,</p>
+          <p class="en-p">In any case, she went to the Kyōsoden,</p>
+          <p class="en-p">And poured out all her Fusoku to the returned Imoriwake-sama,</p>
+          <p class="en-p">Extorted money to this side,</p>
+          <p class="en-p">Making it so he could not move,</p>
+          <p class="en-p">Monopolizing the man's love,</p>
+          <p class="en-p">Whispering that she must guard him,</p>
+          <p class="en-p">So that this joy would not go elsewhere,</p>
+          <p class="en-p">And luring him with sake,</p>
+          <p class="en-p">So that he would not go outside at all.</p>
+          <p class="en-p">When she returned, there was Imoriwake,</p>
+          <p class="en-p">Sitting composedly in front of the brazier,</p>
+          <p class="en-p">Still wearing his tanzen, how happy she was.</p>
+          <p class="en-p">Otora: 'My, my, my, you have remembered your home and returned. I thought, who could this be? That calm face of yours.'</p>
+          <p class="en-p">Imoriwake: 'I had not intended to return, but there was one thing I could not give up, so I turned back. Well, bring me some sake.'</p>
+          <p class="en-p">'The thing you could not give up must be this warmed sake bottle and cup. Come, come, if you drink in a place like this, I am sorry if you get into a bad mood again, so hurry and go to the fox forest and have a good time with Otami.'</p>
+          <p class="en-p">'It is troublesome for you to harbor such malice. That woman Otami, when crossing a single-log bridge, panicked and fell into the river, and that was the end of her.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『それなら帰りますワ。万公さまが首を伸ばして待つてゐますからねえ』</p>
+            <p class="ja-classical-line">松姫『オホヽヽヽ』</p>
+            <p class="ja-classical-line">お寅『親を弄るといふ事があるものかいな、お前はそれ程万公さまに惚れてゐるのかい』</p>
+            <p class="ja-classical-line">お菊『惚れてますとも……ほれたほれた、何がほれた、馬が小便して地がほれた……といふ程惚れてますのよ。ホツホヽヽヽ、併しお母アさま、あなたの喜ぶ事が出来たのだけれど、余り憎らしい事をいふから、もう言はないワ、ねえ松姫さま、こんな憎い口を叩くお母アさまには、何ぼ娘だつて、バカらしうて言つてやれませぬわねえ』</p>
+            <p class="ja-classical-line">松姫『結構な方がみえましたね、定めてお喜びでせう、お母アさまは……』</p>
+            <p class="ja-classical-line">お寅『ナアニ、結構な事とは、コレお菊何ぢやいなア、早く言つておくれ、私も都合があるから』</p>
+            <p class="ja-classical-line">お菊『そらさうでせう。言はうなかなア、ヤツパリ言はうまいかなア、こんな事さうヅケヅケといつて了ふと、互に楽みが薄くなるから、これは夢にしておきませうかい』</p>
+            <p class="ja-classical-line">『エヽ焦心たい、早く言はぬのかいなア』</p>
+            <p class="ja-classical-line">『イのつく人が、神様のおかげで、スタスタと帰つて来ましたよ』</p>
+            <p class="ja-classical-line">『ナアニ、蠑螈別さまがな、さうだろさうだろ、ヤア松彦さま、松姫さま、誠にすみませなんだ。貴方の御神力は偉いものですな。御教とは一時半程遅れましたけれど、帰つてさへくれたら、これで神政成就の太柱がつかめます。神様もさぞお喜びで厶いませう』</p>
+            <p class="ja-classical-line">『神様はお喜びなさるか、なさらぬか知りませぬが、お母アさまは嘸お喜びでせうね。私だつて余りイヤな事は、ない事はありませぬわねえ、ホツホヽヽヽ』</p>
+            <p class="ja-classical-line">夢寐にも忘れぬ恋男
+待ちあぐみたる其時に
+蠑螈別が帰つたと
+聞いてお寅は飛び上り
+閻魔のやうなきつい顔
+忽ち変る地蔵さま
+松彦夫婦に打向ひ
+失礼な事をベラベラと
+お喋り申してすみませぬ
+コレコレお菊、お前さま
+ここで暫く御世話に
+なつてゐなされ又しても
+内証話をきかれては
+みつともないと言ひながら
+狐のお化と知らずして
+誠の恋しき男だと
+細き階段トントンと
+二つ三つもふみまたげ
+眼くらんでガラガラと
+ころがる拍子に頭打ち</p>
+            <p class="ja-classical-line">アイタヽタツタと言ひながら
+男に心を取られてや
+頭や腰の痛みをも
+さのみ心にかけずして
+転げるやうに下りゆく
+何は兎もあれ教祖殿
+帰つて蠑螈別さまに
+不足のありだけ言ひ並べ
+お金をこちらへボツたくり
+動きの取れぬやうにして
+男の愛を独占し
+此喜びはここよりは
+外にやらじと酒でつり
+チツとも外へは出さぬよに
+守らにやならぬと囁きつ
+帰つて見れば蠑螈別
+火鉢の前に丹前を
+かぶつたままに泰然と
+すわつてゐるぞ嬉しけれ。</p>
+            <p class="ja-classical-line">お寅『マアマアマア、よう家を覚えて帰つて来なさつたな。私は又、どこのどなたか知らぬと思ひましたよ。あのマアすましたお顔わいの』</p>
+            <p class="ja-classical-line">蠑螈『帰つてくる積ではなかつたのだが、どうしても思ひ切れないものが一つあつたので引返して来たのだ。マア酒でも出してくれ』</p>
+            <p class="ja-classical-line">『思ひ切れないものとは、此燗徳利と猪口でせう。サアサアこんな所で飲んで貰ふと、又御機嫌をそこねるとすみませぬから、早く狐の森へでもいつて、お民とシツポリやつて来なさい』</p>
+            <p class="ja-classical-line">『さう悪気をまはして貰つちや困るぢやないか。お民の奴、一本橋を渡る時、あわてて川へおち込み、それきりになつて了つたのだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otora: 'What, Omin... fell into the river and died, you say? Ah, how pleasing... no, no, how pitiful a thing indeed. You must have been so sad, too. Why did you not jump in and commit double suicide together, how terribly aloof and like a stranger you are acting.'</p>
+          <p class="en-p">She spoke with an aloof and formal air.</p>
+          <p class="en-p">Imoriwake: 'What can I say, Magahiko has done a regrettable thing. If Magahiko hears of this, he will surely regret it; what a pitiable fellow.'</p>
+          <p class="en-p">Otora: 'The person who regrets it must be different, hey, what are you talking about. We are not some umisenyamasen who would be deceived by such a thing, you know. Even if you tried to deceive an old tanuki baba who has passed through far, far greater trials, it would be useless. By the way, Imoriwake-sama, what have you done with the money?'</p>
+          <p class="en-p">Imoriwake: 'The money, you see, because I was in such a panic, I dropped it scattering down from the top of the itsuponbashi. I thought about trying to pick it up, but somehow with the force of a yashiya, though I know not what old hag she was, she came chasing after me, so I became suddenly frightened and fled all the way to the grove in the nonaka.'</p>
+          <p class="en-p">Otora: 'It is useless to tell such a lie. Is it not right there in your bosom?'</p>
+          <p class="en-p">Imoriwake: 'That is there, but this is money I picked up; your money was dropped once, and even if you say you want to pick up what was dropped, it is no use. Since Imoriwake has newly picked it up, the right of ownership has shifted to me. I will not even let you touch a single finger of it anymore, so do not harbor any lingering attachment to this money. Because it is the preparation money for that time, you see.'</p>
+          <p class="en-p">Otora: 'Calling a thief bold is just like you. No matter what, no matter how, I cannot let it be unless I snatch it over here.'</p>
+          <p class="en-p">Imoriwake: 'Ha ha ha ha, if you can take it with your power, try and take it. This Imoriwake is a bit different from how he has been until now, so if you carelessly even touch a single finger, you will meet with a terrible experience.'</p>
+          <p class="en-p">Otora: 'Now, if you keep dilly-dallying, shall I twist your nose again? Without saying such things, honestly produce it. If you hand it over when I need it again, I will give it out without regret, so today do partake of some sake and rest soundly from early evening. Because you went flying out, a great commotion has broken out in this shinkan. The faith of the believers is beginning to waver, and it is a life-or-death situation where we do not know whether this castle can be held or not, so at the very least I cannot help feeling anxious unless I have this money. I will let you keep just a thousand ryo, so return the eight thousand ryo to this side.'</p>
+          <p class="en-p">Imoriwake: 'If so, it is already a nuisance, so I will give you just one-tenth of it. Now, examine and receive it.'</p>
+          <p class="en-p">What he thrust forward with a pop was a grand koban worth thirty thousand ryo. Grandmother Otora was startled and said,</p>
+          <p class="en-p">Otora: 'Hey Imoriwake-sama, is this, oh my, thirty thousand ryo, is it not?'</p>
+          <p class="en-p">Imoriwake: 'Un, it is thirty thousand ryo, and I still have twenty-seven thousand ryo in my bosom. If I have just this much, I can live at ease playing for a lifetime.'</p>
+          <p class="en-p">Otora: 'That money, let us keep it in custody over here.'</p>
+          <p class="en-p">Imoriwake: 'Your money was nine thousand ryo, and did I not add twenty-one thousand ryo in interest? You too should be satisfied with just that, as I have the right to use the twenty-seven thousand ryo, so I will by no means hand it over. If you were to take this by force, that truly would be robbery.'</p>
+          <p class="en-p">Otora: 'I am by no means saying I will take it, I am saying we will keep it in custody. Since it is perilous to let you keep this money, I am saying we will keep it.'</p>
+          <p class="en-p">Imoriwake: 'With this money, the truth of the matter is that I have left Omin in custody at a certain place. Omin has also been provided with twenty thousand ryo of money. Now, I will take my leave from here; Grandmother Otora-sama, please live in good health, farewell.'</p>
+          <p class="en-p">As he tried to stand up, Otora was startled and stood up, spreading her arms wide,</p>
+          <p class="en-p">Otora: 'Ah, hearing that, no matter what you say, I will not let you go. Even risking my life, I will never hand you over to Omin!'</p>
+          <p class="en-p">At the very moment she lunged at him like a warrior, Imoriwake's body was covered in long hair. The instant she started in surprise and let go of her hands, Imoriwake's figure was nowhere to be seen, and a great fox resembling a black calf went scampering away, looking back over its shoulder toward the forest yonder. This was Grandmother Otora's fukushugoshin, and the ringleader who might be called the initiator of Shōkitayama. Overawed by the divine might of Matsuhiko, Matsuhime, and Gosankō, it had completely detached itself from Otora's physical body.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『何、お民……が……川へはまつて死にましたとな。エヽ気味のよい………イヤイヤ気の毒な事だなア。さぞお前さまも悲しかつただらうな。なぜ飛込んで一緒に心中なさらぬのだい、随分水臭いぢやありませぬか』</p>
+            <p class="ja-classical-line">とツンとして他人行儀になつてゐる。</p>
+            <p class="ja-classical-line">蠑螈『何ともはや、魔我彦は惜い事をしたものだ。魔我彦が聞いたらさぞ悔むだろ、不憫な者だ』</p>
+            <p class="ja-classical-line">お寅『悔む人が違ひませう、ヘン、仰有いますワイ。そんな事に化かされる、海千山千ぢやありませぬぞえ。モツトモツトすぐれた劫を経た狸婆アを騙さうと思つても、ダメですよ。時に蠑螈別さま、お金はどうなさつたの』</p>
+            <p class="ja-classical-line">『お金か、ありやお前、余りあわてたものだから、一本橋の上からパラパラと落して了つたのだ。拾つてみようと思つたけれど、何分夜叉のやうな勢で、どこの婆アさまか知らぬが、追つかけて来るものだから、つい恐ろしくなつて野中の森までに逃げていつたのだよ』</p>
+            <p class="ja-classical-line">『そんなウソを云つたつて駄目ですよ。お前さまの懐にチヤンとあるぢやないか』</p>
+            <p class="ja-classical-line">『ソリアある、併しこれは拾うた金だ、お前の金は一旦落したのだ、落したものを拾はうと云つたつてダメだらう。それを改めて蠑螈別が拾うて来たのだから、所有権は俺にうつつてるのだ。最早指一本さへる事はさせないから、此金に未練はかけてくれるなよ。其時の用意の金だからなア』</p>
+            <p class="ja-classical-line">『盗人たけだけしいとはお前さまの事だ。どうあつても斯うあつても、此方へひつたくらねばおきませぬ』</p>
+            <p class="ja-classical-line">『アハヽヽヽ、お前の力で取れるものなら取つてみろよ。此蠑螈別は今までとはチツト様子が違ふのだから、ウツカリ指一本でもさへようものなら、大変な目に会ふぞ』</p>
+            <p class="ja-classical-line">『ナアニ、グヅグヅ言ふと又鼻をねぢようか。そんな事を言はずに素直に出しなさいよ。又要る時にや私にこたへてさへ下さつたら、惜気もなく出して上げますから、今日はお酒を上つて宵からグツスリとお休見なさい。お前さまが飛んで出たものだから、此神館は大騒動が起つてゐるのよ。信者の信仰がグラつき始めて、此城が持てるか持てぬか分らないといふ九死一生の場合だから、せめて此お金なつと持つてゐなくちや心細くて仕方がない。千両だけお前に持たしておくから、八千両こちやへお返しなさい』</p>
+            <p class="ja-classical-line">『それならモウ邪魔臭いから、十分の一だけお前にやらう。サア検めて受取つてくれ』</p>
+            <p class="ja-classical-line">とポンと前へつき出したのは、三万両の大判であつた。お寅婆アはビツクリして、</p>
+            <p class="ja-classical-line">『コレ蠑螈別さま、コリヤ、サヽ三万両ぢやないかい』</p>
+            <p class="ja-classical-line">蠑螈『ウン三万両だ、まだ二十七万両懐にあるのだ。これだけあれば、一代遊んで暮しても大丈夫だ』</p>
+            <p class="ja-classical-line">『其お金、こちらへ預つて上げませう』</p>
+            <p class="ja-classical-line">『お前の金は九千両、二万一千両も利をつけてやつたぢやないか。お前もそれだけあれば得心だろ、二十七万両は俺の使用権利があるのだから決して渡さない。もしも之を無理にも取らうものなら、それこそ泥棒だ』</p>
+            <p class="ja-classical-line">『決して取らうといふのぢやない、預つておかうといふのだ。お前さまに此金持たしておいては険難だから、預らうといふのだよ』</p>
+            <p class="ja-classical-line">『此金を以て、実の所はお民を或所へ預けて来たのだ。お民にも二十万両の金がもたしてあるのだ。サア之から御免蒙らう、お寅婆アさま、随分まめで暮して下さい、左様なら』</p>
+            <p class="ja-classical-line">と立ち上らうとする。お寅はビツクリして立上り、大手をひろげ、</p>
+            <p class="ja-classical-line">『エヽそれ聞くからは、何と云つても行かしはせぬ。命にかけてもお前をお民に渡してなるものか』</p>
+            <p class="ja-classical-line">と武者ぶりつく途端に、蠑螈別の体は長い毛だらけであつた。ハツと驚き手をはなす途端に、蠑螈別の姿はどこへやら、黒い牛の子のやうな大狐がのそりのそりと後ふり返りながら向ふの森林さして逃げて行く。これはお寅婆アの副守護神で、小北山の発頭人ともいふべき親玉であつた。松彦、松姫、五三公の神威に恐れて姿を現はし、お寅の肉体からスツカリと放れて了つたのであつた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 妻難 [1217]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 文 Bright [1219]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

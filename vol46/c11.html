@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: 変化 Kami [1221] - Volume 46 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 46 Table of Contents</a>
+      <span>Volume 46</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 46 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: 変化 Kami [1221]</h1>
+      <p class="chapter-title-ja">変化神〔1221〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mankō: 'No sooner had Akukō-sama climbed onto the endai than the revealing of the secrets of the Kogitayama Hegure Jinshiya, unflinching and unblinking, in a tautau stream before the eyes of amata shinjiya, backfired and sparked a massive ōsaudō, turning things upside down; and as the ranchiki commotion began, Takekō, whom people and he himself believed to be the ikimiya of the Mirokujiyōjiyu, came rushing forward with the fierce momentum of a shishi, while Akukō, using Taku as a gisei, nimbly slipped out of that place, whereupon Mankō alone went around inspecting the Hegure Jinshiya ichiichi, and stood stock-still right in front of the shrine at the chiyōjiyō before the Moon Ōkami and Sun Mikami.'</p>
+          <p class="en-p">Mankō: 'Imoriwake-sama being manipulated by a dogitsune—enshrining such a kami with all sorts of motsutai, there is a limit to acting like a baka. When you look at the faces of the believers who come out, deceived by foxes and tanuki, not a single one of them is any good; wretches missing an eye, the deaf, the crippled, haibiyō sufferers, yokone, kansau, bone aches, testicular swelling, and those suffering from ringworm—rubbish humans swarming out like hatching spider eggs, hitori of them of no use in this world, clumping together is utterly laughable. That is why, having built a shrine for such rubbish, an old fox, an old tanuki of an eight-mat spread, giving it a grand-sounding name, ancestral Hinodewake, Heavenly Kami,'</p>
+          <p class="en-p">Mankō: 'Yoshikohime and Tokoyohime, reverently enshrined as commander-in-chief, how utterly ridiculous it is to worship them. Though they call it a world of darkness, I never knew there were so many fools in this world. Well, from now on, from now on, if we completely strip off the cat skin that Matsuhiko-sama and Matsuhime were wearing, expose the true nature of the magatsukami, and open the eyes of the people, how astonishing it would be! Thanks to the fact that my, Mankō's, mind is sound, it is a wonder that I am not deceived by the magatsukami of foxes and tanuki.'</p>
+          <p class="en-p">Mankō: 'It is truly pitiable that people of the world—whether noble, wealthy, lowborn, or humble—let their hearts be dazzled by greed, unconsciously straying into delusion, and being made playthings by the magatsukami. When I think of this, unless we spread the Mikkyō teachings as quickly as a single day, make them the light of this dark world, illuminate the dark night, and save it, the three-thousandfold world will instantly turn into a desolate wilderness. Ah, immaculate Kami, grant us your divine blessings.'</p>
+          <p class="en-p">At such a place, Okiku came walking briskly up.</p>
+          <p class="en-p">Okiku: 'If it is you, Mankō-sama, you have no idea how long I have been searching for you since earlier. What on earth were you doing all by yourself in such a cold place?'</p>
+          <p class="en-p">Mankō: 'Having been given the cold shoulder by you and scolded by Takekō-sama, I had nowhere to put myself, so I came all the way to the front of Yulahiko-sama's shrine to take refuge. Why on earth did you, too, climb such a steep mountain all by yourself?'</p>
+          <p class="en-p">Okiku: 'I too have legs. Besides, since my sweethearted Mankō-sama is here, my legs felt unexpectedly light, and before I knew it, I climbed up here.'</p>
+          <p class="en-p">Mankō: 'Don't be ridiculous; even though you're not of age yet, is there such a thing as flirting with a man? You certainly gave me a terribly rough time.'</p>
+          <p class="en-p">Okiku: 'Well, that goes without saying. In front of my parents or other people, no matter how much I like you, can I make a fond face? Because I was embarrassed, I said I hated you.'</p>
+          <p class="en-p">Mankō: 'And yet, didn't you put me to great shame last night? At that time, even though nobody was there, wasn't there far too much deliberate intent in it?'</p>
+          <p class="en-p">Okiku: 'What on earth are you talking about? Even then, in the gloom, Aku, Teku, and Taku-sama were hiding and listening to our conversation standing face-to-face, you and I, were they not? That is why I said such a thing.'</p>
+          <p class="en-p">Mankō: 'Indeed, that was so. You certainly pay attention to the tiniest details.'</p>
+          <p class="en-p">Okiku: 'Of course I do; if we don't watch our step before and behind and get discovered by people, it would be a disaster, you see.'</p>
+          <p class="en-p">Mankō: 'What of it even if we are discovered? We are going to become husband and wife anyway.'</p>
+          <p class="en-p">Okiku: 'Even so, if people call us a wild-matched husband and wife, it would be a disgrace for generations to come.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">万公『アク公さまが演台に
+登るや否や小北山
+変化神社の種あかし
+怯めず臆せず滔々と
+数多の信者の目の前で
+喋り立てたが仇となり
+上を下へと大騒動
+乱痴気騒ぎが始まりて
+五六七成就の生宮と
+自ら信じ人も亦
+許して居たる竹公が
+獅子奮迅の勢で
+攻めかけ来るアク公が
+タクを犠牲に立てながら
+敏くも其場を立ち出づる
+此時万公は只一人
+ヘグレ神社を一々に
+調べて廻り頂上の
+月の大神日の御神
+社の前に突つ立つて</p>
+            <p class="ja-classical-line">蠑螈別が奴狐に
+つままれよつてこんな神
+勿体らしくも祀りこみ
+馬鹿を尽すも程がある
+狐狸に騙されて
+出て来る信者の顔見れば
+一人も碌な奴はない
+目玉の一つ無い奴や
+聾に躄、肺病やみ
+横根、疳瘡、骨うづき
+陰睾、田虫で苦しんだ
+ガラクタ人間蜘蛛の子が
+孵化つたやうにウヨウヨと
+此世で役に立たぬ奴
+固まり居るこそ可笑しけれ
+それ故こんなガラクタの
+お宮を立てて古狐
+八畳敷の古狸
+厳めしさうな名をつけて
+末代日の王天の神</p>
+            <p class="ja-classical-line">上義の姫や常世姫
+大将軍と斎ひこめ
+祀つて居やがる馬鹿らしさ
+闇の世界と云ひながら
+これ程阿呆が世の中に
+沢山居るとは知らなんだ
+さアこれからはこれからは
+松彦さまや松姫が
+被つて居つた猫の皮
+すつぱり脱いで曲神の
+素性を露はし諸人の
+眼をさましやるならば
+如何に驚く事だらう
+この万公は精神が
+確りして居る其お蔭
+狐狸の曲神に
+騙されないのが不思議だよ
+世界の奴は尊きも
+富めるも卑きも賤しきも
+欲に心を眩ませて</p>
+            <p class="ja-classical-line">知らず知らずに迷ひ込み
+曲神どもの玩弄に
+されて居るのが気の毒ぢや
+これを思へば一日も
+早く三五教をして
+暗き此世の光とし
+暗夜を照らして救はねば
+三千世界は忽ちに
+荒野ケ原と変るだらう
+あゝ惟神々々
+御霊幸倍坐しませよ』</p>
+            <p class="ja-classical-line">かかる所へお菊はスタスタ登つて来た。</p>
+            <p class="ja-classical-line">お菊『もし万公さま、私最前からどれだけ探したか知れないのよ。こんな寒い所に一人何してゐらしたの』</p>
+            <p class="ja-classical-line">万公『お前には肱鉄をかまされ竹公さまには怒られ、身を置く所がないので、ユラリ彦さまのお宮の前まで避難のためにやつて来たのだ。お前は又、こんな強い山をどうして一人登つて来たのだ』</p>
+            <p class="ja-classical-line">『私だつて足がありますわ。況してスヰートハートした万公さまがゐらつしやるのだもの、思ひの外足が軽くて知らぬ間に此処に登つて来たのよ』</p>
+            <p class="ja-classical-line">『馬鹿にするない、年端も行かないのに男に調戯ふと云ふ事があるものか。随分酷い目に会はしたねえ』</p>
+            <p class="ja-classical-line">『そりや極つた事ですわ。親の前や人さまの前で、何程好きだとて好きな顔が出来ますか、恥かしいから嫌ひだと云つたのよ』</p>
+            <p class="ja-classical-line">『それでも昨夜大変俺に恥をかかしたぢやないか。あの時こそ誰も居なかつたのに、ありや余り念が入り過ぎるぢやないか』</p>
+            <p class="ja-classical-line">『何を言つてゐらつしやるの、あの時も暗がりに、アク、テク、タクさまが隠れて、私と貴方との立ち話を聞いて居たぢやありませぬか。それだから私あんな事を云つたのよ』</p>
+            <p class="ja-classical-line">『成程さうだつたな、お前は随分細かいとこへ気がつくな』</p>
+            <p class="ja-classical-line">『そらさうですとも、前後に気をつけにや人に発見されては大変ですもの』</p>
+            <p class="ja-classical-line">『発見されてもよいぢやないか、何れ夫婦になるのぢやもの』</p>
+            <p class="ja-classical-line">『それだつて、野合夫婦なんか云はれては末代の恥だわ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'If so, Naze did you come to a place like this? Even if it were nighttime, isn't it true that anyone might see us?'</p>
+          <p class="en-p">'If it were nighttime, it couldn't be helped if we were suspected, but in the middle of the day, who would be suspicious? On the contrary, if you keep things secret, people only grow suspicious. Being here, we're completely fine no matter what we were doing.'</p>
+          <p class="en-p">'Heheha, oi Okiku, I've thought of you as ankaai girl ever since you were little, but you really are a cute thing, do you think of me that much?'</p>
+          <p class="en-p">'It's a settled matter, you know! Even though I signaled to you so much with my memoto, Man-sama, you didn't notice even a chiyotsuto, and you were fuming with anger, so I was truly anxious.'</p>
+          <p class="en-p">'How is it that I really didn't notice? I am impressed. If there isn't that much devotion, there's no relish to renai; however, what do you plan to do if O-Tora-sama doesn't agree?'</p>
+          <p class="en-p">'There's no way she'll easily agree. That's why I also have a plan in mind. Man-sama came to a place like this and was doing nothing but speaking ill of Kamisama, wasn't he?'</p>
+          <p class="en-p">'Un, I was so gofuhara that I gave a send-off to the fox kami right from the koguchi.'</p>
+          <p class="en-p">'You didn't need to play such itazura; what will you do if the fox gets angry and bewitches you?'</p>
+          <p class="en-p">'Haha, don't worry about that; I don't have a seishin that would be deceived by a fox. As for the fox, the moment it sees my face, it tucks its tail and instantly runs off about jifuri, so it's quite something.'</p>
+          <p class="en-p">'At the same time, Man-sama, please rejoice. I have gotten my hands on Nijifushichimanriyō of gold.'</p>
+          <p class="en-p">'How on earth did you get your hands on such money?'</p>
+          <p class="en-p">Okiku placed her mouth to his ear and said,</p>
+          <p class="en-p">'Just now Imoriwake brought Sanjifumanriyō of gold and returned from Nonaka Forest. Then he gave Sanriyō of gold to O-Kaa-sama, stuffed Nijifushichimanriyō of gold into his bosom, and started drinking sake, so I made him drink sake until he was dead drunk, snatched Nijifushichimanriyō of gold, and secretly escaped all the way to Koko.'</p>
+          <p class="en-p">'You are a bold one unbefitting a woman; what are you going to do with such money?'</p>
+          <p class="en-p">'Hoho, I escaped with the intention of taking this money, crossing the mountain, and eloping with you and me. Come on, while our footprints aren't found, shall we cross this mountain to the south and escape to the Land of the Moon?'</p>
+          <p class="en-p">'Yaa, well, wait a minute, I am one who goes to the Land of the Moon by the august command of Kamisama, but now I am accompanying Chigokuwake-sama to Armenia, so during that time I cannot be together with you.'</p>
+          <p class="en-p">'Now, Man-sama, stop playing dumb to a reasonable degree. If that is so, you don't really love this Okiku, do you?'</p>
+          <p class="en-p">'Am I not loving you?'</p>
+          <p class="en-p">'Then please listen to what I say.'</p>
+          <p class="en-p">'Un, it's not a time to listen, but wait until my official business is done.'</p>
+          <p class="en-p">'Ehe, how hateful, isn't it fine whatever happens to Kamisama's official business? Come on, let's go with me from now on; as long as we have Nijifushichimanriyō of gold, any splendid house can be built, and rather than accompanying a propaganda envoy to sleep in the fields or doing beggar-like things to conquer such dangerous Brahmanism, this is a time to think it over. Come on, please go, I beg you.'</p>
+          <p class="en-p">'This is troublesome, ah, e, it can't be helped, it is despair; if so, I shall hand in hand go across this mountain with you.'</p>
+          <p class="en-p">'Oh, thank you very much, you have said it well. I hate clinging to such a yancha parent, and staying in a place like this of Kamisama is even more hateful, and if I am to suffer hardships in a foreign country without knowing he is my elder brother, there is nothing as happy as this.'</p>
+          <p class="en-p">'You say such things, but I hope you won't abandon me halfway through again.'</p>
+          <p class="en-p">'By no means; it is a man's heart that easily changes, so Man-sama must be the one not to change your heart. Hey dear, I like you so much, so much I can't help it.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『それなら、何故こんな処へ来たのだ。夜分なら兎も角も、誰が見とるか分らぬぢやないか』</p>
+            <p class="ja-classical-line">『夜分なら疑はれても仕方がないが、昼の最中だもの、誰が怪しみませう。却つて物事は秘密にすると人に感づかれるものですよ。此処なら何しとつたて大丈夫だわ』</p>
+            <p class="ja-classical-line">『エヘヽヽヽ、オイお菊、お前は小さい時から可愛い奴だと思うて居たが、ほんとに可愛いものぢやな、それ程私を思うて呉れてるのか』</p>
+            <p class="ja-classical-line">『極つた事ですよ。あれ程目許で知らして居るのに、万さまは一寸も気がつかないのだもの、ポンポン怒つて居らつしやるのだから本当に焦つたかつたわ』</p>
+            <p class="ja-classical-line">『なんと本当に分らぬものだな。恐れ入つたよ。そこまで念が入らなくては恋愛の趣味がない、併しお寅さまが承知せなかつたらどうする心算だ』</p>
+            <p class="ja-classical-line">『何れ容易に承知しては呉れますまいよ。それだから私も一つ考へがあるのよ。万さまはこんな所へ来て、神様の悪口ばかり云つて居ましたでせう』</p>
+            <p class="ja-classical-line">『ウン、余り業腹だから、小口から狐の神に引導を渡してやつたのだ』</p>
+            <p class="ja-classical-line">『そんな悪戯せいでもよいに、狐が怒つて魅んだらどうします』</p>
+            <p class="ja-classical-line">『ハヽヽヽヽ、そんな心配して呉れるな、狐に騙されるやうな精神ぢやない。狐の奴、俺の顔を見ると尾を巻いて忽ち十里位逃げ出すのだから大したものだよ』</p>
+            <p class="ja-classical-line">『時に万さま、喜んで下さい。二十七万両の金を手に入れました』</p>
+            <p class="ja-classical-line">『そんな金を何うして手に入れたのだ』</p>
+            <p class="ja-classical-line">お菊は耳に口をあて、</p>
+            <p class="ja-classical-line">『今蠑螈別が三十万両の金をもつて野中の森から帰つてきたのよ。そして三万両をお母アさまに与へ、二十七万両の金をグヅと懐に入れて酒を飲みだしたから、私が酒を飲まして酔ひ潰し、二十七万両の金を引つたくつて、そつと此処まで逃げて来たのよ』</p>
+            <p class="ja-classical-line">『女に似合はぬ豪胆者だな、そんな金何にするのだ』</p>
+            <p class="ja-classical-line">『ホヽヽヽヽ、この金もつて山越しにお前と私と駆落をする積りで逃げて来たのよ。サア足のつかない間にこの山を南に渡つて月の国へ逃げようではありませぬか』</p>
+            <p class="ja-classical-line">『ヤアまア待つて呉れ、私は神様の御命令で月の国へ往く者だが、今は治国別さまのお供してアーメニヤにゆくのだから、其間はお前と一緒に居る訳にはいかない』</p>
+            <p class="ja-classical-line">『これ万さま、好い加減に呆けて置きなさい。それならお前はこのお菊は本当に可愛いのぢやないのだな』</p>
+            <p class="ja-classical-line">『可愛くなうてかい』</p>
+            <p class="ja-classical-line">『それなら私の云ふ事聞いて下さいな』</p>
+            <p class="ja-classical-line">『ウン、聞くの段ぢやないが、御用の済むまで待つて呉れ』</p>
+            <p class="ja-classical-line">『エヽ好かぬたらしい、神様の御用なんかどうでもよいぢやないか。サアこれから私と行きませう、二十七万両の金さへあれば、どんな立派な家も建つし、そんな危ないバラモン教を征伐するため、宣伝使のお供して野宿したり、乞食のやうな真似するよりも、茲は一つ考へ所だ。サア往つて下さい、頼みぢやから』</p>
+            <p class="ja-classical-line">『困つたなア、エヽ仕方がない、自暴だ、それならお前と手に手を取つて此山越しに行かう』</p>
+            <p class="ja-classical-line">『そりやまア有難う厶います、よう云つて下さいました。私もあんなやんちや親にひつついて居るのは嫌だし、こんな神様の所へ居るのは猶ほ嫌だし、兄様と知らぬ他国で苦労するのなら、こんな嬉しい事はないわ』</p>
+            <p class="ja-classical-line">『そんな事言つて又中途で俺を放かすやうな事はすまいなア』</p>
+            <p class="ja-classical-line">『滅相な、変り易いは男の心だから、万さまこそ心を変へないやうにして下さい。ねえ貴方、私好きで好きで仕方がないわ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Ehehehe.'</p>
+          <p class="en-p">Drooling as she spoke, she continued:</p>
+          <p class="en-p">Okiku: 'Well then, though I feel sorry for Matsuhiko-sama and Isokō, I shall take the two hundred and seventy thousand ryō of gold and make a high flight, Takato!'</p>
+          <p class="en-p">Okiku walked along the mountain ridge, singing as she went, leading the way before Mankō.</p>
+          <p class="en-p">Okiku: 'Born into this world,
+What joy do people live for?
+The pleasures of this floating world,
+Are but sake, gambling, and lust.
+There can be no greater pleasure,
+In the human world than this.
+Yet Harukuniwake-dono,
+Is immersed in the teachings,
+Of the stiflingly strict Ananahi,
+And wanders about like a beggar.
+Leaving his lovely wife at home,
+Claiming it is for the sake of the Way,
+He wanders aimlessly here and there,
+How ridiculous it is to see him walk about.
+Mankō-sama too, has fallen a little,
+Into the teachings of the Kamisama,
+Crossing the steep slopes of Kajikatauge,
+And finally reaching the hall,
+of the Uranai-kyō at Kogitayama,
+It is amusing that he has come this far.
+
+He is the man I always love and yearn for,
+The most important of all important men.
+I shall devise some plan,
+To ensnare Mankō-sama,
+To achieve my long-held desire,
+And live in seclusion in some unknown land,
+Thinking that I would try to endure any hardship,
+When, oh, what a wonder,
+At the foot of the single-log bridge,
+By the guidance of the God of Union,
+I met him, what joy it was.
+Nevertheless, I must find a way,
+To steal the ten thousand ryō,
+That my mother has saved up,
+And until I can elope with Mankō-sama,
+I will insist to my parents,
+That he is a hateful man,
+To make them let their guard down,
+And achieve my goal, I thought,
+When a windfall suddenly descended.
+
+Seeing Imoriwake-wake returning,
+With a large sum of money,
+Smiling as he came,
+My heart leaped with joy,
+I urged him to drink sake repeatedly,
+And until he was drunk and passed out,
+I snatched the twenty-seven thousand ryō,
+That he had tucked into his breast,
+Having successfully obtained it, I went to Kogitayama,
+And when I climbed to the front of the shrine,
+At the summit, Mankō-sama was waiting,
+All by himself.
+Could there be anything more wonderful?
+We immediately pledged our love,
+And as we crossed the mountain ridge,
+We cared not for the blowing winter wind,
+With the warmth in our pockets giving us strength,
+I am so happy to be with my lover,
+Hand in hand, going somewhere,
+How happy is this body of mine fleeing away.
+
+Ah, Kannagara-kami-kami,
+May the spirits be blessed.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『エヘヽヽヽ』</p>
+            <p class="ja-classical-line">と涎を繰りながら、</p>
+            <p class="ja-classical-line">『サア、それなら松彦さまや五三公に済まないけれど、二十七万両の金を有つて弥高飛びぢや』</p>
+            <p class="ja-classical-line">お菊は山の尾の上を伝ひながら、万公の先に立ち歌ひつつ進んで行く。</p>
+            <p class="ja-classical-line">『此世の中に生れ来て
+何楽しみに人は生く
+浮世の中の楽みは
+酒と博奕と色ばかり
+これに越したる楽みは
+人間界にはあらうまい
+それに治国別さまは
+窮屈至極の三五の
+教のお道に耽溺し
+乞食のやうにブラブラと
+可愛い女房を家におき
+お道のためとは云ひながら
+そこらあたりをウロウロと
+うろつき歩くをかしさよ
+万公さまも神様の
+教に些つと陥りこみ
+河鹿峠の峻坂を
+越えて漸く小北山
+ウラナイ教の広間まで
+やつて来たのは面白い</p>
+            <p class="ja-classical-line">私がいつも恋ひ慕ふ
+大事の大事の殿御ぞや
+何とか工夫を廻らして
+万公さまを銜へ込み
+日頃の思ひを達成し
+知らぬ他国で水入らず
+一つ苦労をして見よと
+思うて居たらアラ不思議
+一本橋の袂にて
+結びの神の引き合せ
+お目にかかつた嬉しさよ
+さはさりながら何うかして
+母の蓄へおかれたる
+一万両のそのお金
+盗み出して万さまと
+駆落するまで親の前
+嫌な男と云ひはつて
+油断をさして目的を
+達せむものと思ふ中
+降つて湧いたる儲けもの</p>
+            <p class="ja-classical-line">蠑螈別が沢山の
+お金をもつてニコニコと
+帰り来るを見るにつけ
+心の中に雀躍りし
+頻りに酒を勧めつつ
+思ふ存分酔ひ潰し
+内懐にしめ込んだ
+二十七万両の金
+旨く手に入れ小北山
+頂上の宮の御前に
+登りて見れば万さまが
+たつた一人で待つて居る
+こんな結構な事あろか
+早速情約締結し
+山の尾の上を渡りつつ
+吹く凩も何のその
+温いポツポに勢を
+得たる嬉しさ恋人と
+手に手を取つて何処となく
+逃げ往く身こそ嬉しけれ</p>
+            <p class="ja-classical-line">あゝ惟神々々
+御霊幸倍坐しませよ』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: 唖 Fox 外れ [1220]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: Monster the Episode of [1222]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

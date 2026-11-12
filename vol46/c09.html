@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9: 文 Bright [1219] - Volume 46 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 46 Table of Contents</a>
+      <span>Volume 46</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 46 &bull; Chapter 9</span>
+      <h1 class="chapter-title-en">Chapter 9: 文 Bright [1219]</h1>
+      <p class="chapter-title-ja">文明〔1219〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">From morning till night Bunsuke sat like a motionless statue, clad in Shiroshiyōzoku and Shirobakama, continuing to draw a black snake with a single horn entwined around a pine tree, along with turnips and daikon radishes. Okiku came stealthily up to him and spoke,</p>
+          <p class="en-p">Okiku: 'I say, Bunsuke-sama, won't you please come over here for a moment? I will show you something most fascinating.'</p>
+          <p class="en-p">Bunsuke: 'No matter how fascinating it may be, asking me to look at it is an impossible request. It is the same as watching a blind man's play or listening to a deaf man's jiyōruri recitation, so you had best stop.'</p>
+          <p class="en-p">Okiku: 'What, if you are able to draw turnips and daikon radishes, you cannot possibly be unable to see. If you wish to see, surely you can see. Indeed, something truly strange is happening. Come quietly before anyone notices.'</p>
+          <p class="en-p">Bunsuke: 'As the receptionist cannot simply leave his post and abandon this place, I shall ask you to let me see it another time when I am free.'</p>
+          <p class="en-p">Okiku: 'It will not do if you speak of such a leisurely matter. You must come and see right now. The truth of the matter is that Imoriwake-sama has returned. And he is giving thirty thousand ryo in gold to our mother-sama.'</p>
+          <p class="en-p">Bunsuke: 'What, he has given thirty thousand yen in money to mother-sama? As expected of Imoriwake-sama. Since he slipped away secretly last night, there has been a tremendous commotion turning heaven and earth upside down, and I was worried about how it would all turn out, but oh, how grateful and thankful I am! If he has returned, Kogitayama is safe. Thank you, O Kami, how grateful I am.'</p>
+          <p class="en-p">Okiku: 'Please come and take a brief look. I simply cannot get over how wondrous it is.'</p>
+          <p class="en-p">Bunsuke: 'What, money is something that humans possess, so there is nothing particularly wondrous about him bringing back some thirty thousand yen. Since it is he, there is no way he would steal someone's property. It must be that the Kami graciously caused the money to fall down. And what did mother-sama do with that money?'</p>
+          <p class="en-p">Okiku: 'She immediately stuffed it right into her bosom.'</p>
+          <p class="en-p">Bunsuke: 'Well, she has done a very good thing. It would not do to leave it in his keeping. Thank you, O Kami, how grateful I am.'</p>
+          <p class="en-p">And he worshipped again.</p>
+          <p class="en-p">Okiku: 'What, that is not all of it. When I asked about it afterwards, he said he still has another two hundred and seventy thousand ryo hidden in his bosom.'</p>
+          <p class="en-p">Bunsuke: 'What, twenty-seven myriads of yen? Ha, ha, ha, that is most likely a mishearing. It must be twenty-seven sen.'</p>
+          <p class="en-p">Okiku: 'How absurd! I am not such a fool as to mistake twenty-seven myriads of yen for twenty-seven sen. He certainly has twenty-seven hundred thousand ryo, and saying he would give a tenth, he tossed out thirty thousand ryo; and moreover, he said he had given twenty myriads of ryo to Otami-sama. Bunsuke-sama, please hurry and come. He is saying he will go right now to Otami-sama's place. Hearing that, I was beside myself with worry, so I secretly came to rely upon you. Imoriwake-sama will listen to what you say, but he will not listen to what our mother says.'</p>
+          <p class="en-p">Bunsuke: 'That is a terrible affair. If such a person is left holding such a vast sum of money, one never knows what sort of things he might do. Because he is of a good nature, he might be straightway taken advantage of by others, and it would be a terrible thing if he brought the name of the Kami into disrepute. In that case, let us go.'</p>
+          <p class="en-p">Okiku: 'Bunsuke-sama, please come quietly. It might not be convenient if too many people hear of it.'</p>
+          <p class="en-p">The receptionist Bunsuke,
+hearing a tale he never expected,
+was stirred with eagerness he knew not why,
+and as he raised his heavy lower limbs,
+possessing eyes that could not see an inch before him,
+relying on his staff as he trudged along,
+following closely behind Okiku,
+making straight for the mansion
+where Imoriwake had his dwelling.
+Okiku, walking on ahead,
+said,
+'Hark, hark, I pray you, Bunsuke-sama,
+here is the outer entrance.
+Come, come, let me take your hand
+and guide you to the revered chamber of the Kyōso.'
+Hearing this, Bunsuke nodded in assent,
+while wearing a gentle smile,
+showing a maturity far beyond his youth,
+praising her as a thoughtful maiden
+who noticed everything,
+from turnips down to the very tips of rapeseed greens.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">文助は朝から晩まで置物然として白装束に白袴を着け、相変らず松に一本角の黒蛇、蕪、大根を描いて居た。そこへお菊がソツとやつて来て、</p>
+            <p class="ja-classical-line">『もし、文助さま、お前チヨツト此方へ来て下さらぬか。大変面白いもの見せてあげますよ』</p>
+            <p class="ja-classical-line">文助『何程面白いものでも、俺に見せてやらうと云ふのは無理な註文だ。盲の芝居、聾の浄瑠璃聞と同じだから、まあ止めておかう』</p>
+            <p class="ja-classical-line">お菊『何、お前さま、蕪や大根が書ける位なら見えぬ筈がない。見ようと思つたら屹度見えるだらう。本当に妙な事があるのよ。人に分らぬ中、ソツと来ておくれよ』</p>
+            <p class="ja-classical-line">『さう受付役が席を立つて此処をあけておく訳にもゆかないから、又暇の時に見せて貰はう』</p>
+            <p class="ja-classical-line">『そんな気の長い事を云つてゐたら駄目よ。今の中に来て見なくちやいけない。実の処は、蠑螈別さまが帰つて来たのよ。さうして三万両の金をお母さまにやつて居るのよ』</p>
+            <p class="ja-classical-line">『何、三万円のお金をお母さまにあげられましたか。流石は蠑螈別さまだ。夜前夜ぬけをなさつたとかで随分上を下への大騒動、どうなることかと俺も心配してをつたが、あゝ有難い有難い、あの方が帰つて下さつたら小北山は大丈夫だ。神様有難う厶ります』</p>
+            <p class="ja-classical-line">『一寸見に来て下さいな。どうも不思議で堪らないのよ』</p>
+            <p class="ja-classical-line">『何、お金は人間の持つものだから三万円位持つて帰つたつて別に不思議はない。あの方だから人の物を泥棒なさる筈がない。それは神様からお情でお金を降らして下さつたのでせう。さうして其お金をお母さまは如何なさいました』</p>
+            <p class="ja-classical-line">『直様懐へ捻込んで了つたのよ』</p>
+            <p class="ja-classical-line">『そりや良い事をなさいました。あの方にお持たせして置くといけませぬから。神様有難う厶ります』</p>
+            <p class="ja-classical-line">と又拝む。</p>
+            <p class="ja-classical-line">お菊『何、そればつかしぢやないのよ。後から聞いて見れば、まだあと二十七万両、懐に持つて居ると云つてゐたよ』</p>
+            <p class="ja-classical-line">文助『何、二十七万円、ハヽヽそりや大方聞き違ひだ。二十七銭だらう』</p>
+            <p class="ja-classical-line">『阿呆らしい、二十七万円と二十七銭と取違へる様な私は馬鹿ぢやありませぬ。確に二十七万両、十分の一与らうと云つて三万両放り出したのだもの、さうしてまだお民さまに二十万両やつて来たと云つてゐましたよ。文助さま、早う来て下さいな。お民さまの処へ、これから行くなんて云つてゐますよ。私、それ聞いて気が気でないので、ソツと貴方を頼みに来たのよ。蠑螈別さまは貴方の云ふ事は聞いて呉れるけれども、お母さまの事は聞いてくれぬのだから』</p>
+            <p class="ja-classical-line">『そりや大変だ。あんな人に、そんな大金を持たせておいたら、どんな事をするか知れやしない。人間が好いから直に人にとられて了ひ、神様の名を悪くするやうにしちや大変だから。それなら行きませう』</p>
+            <p class="ja-classical-line">『文助さま、ソツと来て下さいや。あまり人に聞えちや都合が悪いかも知れぬから』</p>
+            <p class="ja-classical-line">受付係の文助は
+思はぬ話を聞かされて
+何とはなしに勇み立ち
+重たい尻をあげながら
+咫尺も見えぬ目を持つて
+杖を力にトボトボと
+お菊の後に従ひて
+蠑螈別の住居なる
+館をさして出でて行く
+お菊は先に立ちながら
+『これこれもうし文助さま
+此処が表の入口よ
+さあさあ私が手を曳いて
+教祖のお居間へ参りませう』
+云へば文助首肯いて
+一寸笑をば湛へつつ
+年の若いに似もやらず
+何から何まで蕪から
+大根菜種の端までも
+気のつく娘と褒めながら</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Stepping forward and entering the inner room,</p>
+          <p class="en-p">Bunsuke: 'Hey there, hey there, Otora-sama! A wonderful thing has happened. The Kyōso-sama of Imoriwake has returned home safely, and I am so glad. Moreover, bringing a whole lot of money as a souvenir upon his return, I heard and leaped up, and straightway offered my thanks to the Ōkamisama. Ever since I heard last night that Imoriwake-sama had made a kakeochi, the upper and lower rooms of the mansion have been in a great uproar. The faith of numerous believers began to wobble, and even I have been racking my brains. On top of that, by the precious grace of the Kamisama, he is returning safely with three hundred thousand ryo of gold—there is nothing to compare it to, it is the height of joy! Hey there, hey there, Kyōso-sama, stealing the reception time of Bunsuke the receptionist, I have come here led by the hand of Okiku-sama, thinking I must offer my greetings. Please do let me hear your splendid story! It is truly a happy thing. Cranes dance and play for a thousand years, turtles sing and dance for ten thousand years—how on earth did such a happy, happy thing come about? This must surely be the virtue of the divine protection of Yurarihiko, the eternal Sun King, the God of Heaven, the Great Deity of Miroku Completion, Rintōbiten Ōkami, the righteous heavens of the Hinodewake God, the Great General, Tokoyahime, Asahi no Toyosaka Noborihime, and all the other precious Kamisama! Ah, marvelous are the gods, marvelous! No matter how much I say how happy I am, there is no way my mouth will close! Imoriwake-sama, Otora-sama, do not tease me too much and tell me quickly, my heart is getting impatient!'</p>
+          <p class="en-p">As he shouted thus, Otora picked up her astonished and collapsed body abruptly, spread a cushion neatly in front of the brazier, sat down properly, placed both hands on her knees, and replied,</p>
+          <p class="en-p">Otora: 'Bunsuke-sama, how well you have trudged along to visit with your poor eyesight! Today I have received wonderful divine virtue for the very first time. It feels as if the Heavenly Rock Cave has opened. Please rejoice with me, it is truly an auspicious day.'</p>
+          <p class="en-p">Hearing this, Bunsuke sprang up in high spirits,</p>
+          <p class="en-p">Bunsuke: 'Well now, that was a splendid thing! The Kyōso-sama of Imoriwake received great divine virtue and came home putting three hundred thousand ryo into his bosom, and gave one-tenth of it, thirty thousand ryo, clean to you, just as I heard from Okiku-sama! It is truly a happy thing. I feel as happy as if I had received it directly myself. And yet, is Imoriwake-sama's voice naturally inaudible, or is he sleeping soundly because he is utterly exhausted? If that is the case, it would truly be a regrettable matter of disturbing his sleep if I were to stay, so I will take my leave now. Hey there, hey there, Otora-sama, young mistress Okiku-sama, from now on, with your permission, after completely finishing the picture of the turnip I left half-drawn, receiving my leave to stand watch on the stage, I shall stretch out my legs and sleep soundly tonight of all nights! Goodbye to you all!'</p>
+          <p class="en-p">As he stood up, Otora called out to him,</p>
+          <p class="en-p">Otora: 'Bunsuke-sama, when I said just now that I had received splendid divine virtue and that the Heavenly Rock Cave had opened, I was not talking about money. A million ryo is still foolish; I have received divine virtue beyond all bounds, countless like tens of millions, that cannot be compared in any way! Just as Imoriwake-sama suddenly returned to this place and lined up thirty thousand ryo of koban dazzlingly right before my eyes, before I knew it, Imoriwake-sama suddenly changed his form, and crying 'Kuwai, kuwai, kuwai' like an ox resembling an old fox, hid his figure by heading toward the forest in the valley yonder. Perhaps because my greed was too great, and only thinking of foul things morning and evening became a sin, causing my pure and precious soul to naturally grow cloudy—rather than seeing this state, the lotus flower opening all at once, the darkness of my heart opening smoothly, there is nothing so happy as this! As you already know, the Kyōso-sama of Imoriwake lets his body and soul rot in alcohol, shakes his head in a daze before and after, and has become a mental patient. No matter how much you cherish such an incomprehensible man, the divine path will never expand anywhere. Moreover, that man is bewildered by a woman named Otami, yearns for Takahime who is on the path of Sanmi, and suffers in his chest morning and night, drinking sake to dispel his melancholy—knowing that no matter how much I cherish such a person, it is already no use, my attachments and everything else—'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">奥の一間へ進み入り</p>
+            <p class="ja-classical-line">『これこれもうしお寅さま
+目出度い事が出来ました
+蠑螈別の教祖さまは
+御無事でお帰り遊ばして
+私も嬉しう厶ります
+その上沢山のお金をば
+土産にもつてお帰りと
+私は聞いて飛び上り
+大神様に御礼を
+直様申上げました
+昨夜蠑螈別様が
+駆落なさつたと聞いてから
+館の上下大騒動
+数多の信者の信仰が
+ぐらつき出して私まで
+頭を痛めて居りました
+其上尚も神様の
+尊き恵みによりまして
+三十万両の金もつて
+無事にお帰りなさるとは</p>
+            <p class="ja-classical-line">何に譬へむものもなき
+歓喜の極みで厶ります
+これこれもうし教祖さま
+私は文助受付の
+時間を盗んで御挨拶
+致さにやならぬとお菊さまに
+お手をひかれて参りました
+何卒結構なお話を
+私に聞かして下さんせ
+真に嬉しい事ですよ
+鶴は千歳と舞ひ遊び
+亀万歳と歌ひ舞ふ
+こんな目出度いお目出度い
+事が如何して来たものか
+これもやつぱりユラリ彦
+末代日の王天の神
+五六七成就の大御神
+リントウビテン大神や
+日の出神の義理天上
+大将軍や常世姫</p>
+            <p class="ja-classical-line">旭の豊栄昇り姫
+其外尊き神様の
+御守護の徳で厶りませう
+あゝ惟神々々
+何程嬉しいと云つたとて
+口が塞がる筈がない
+蠑螈別さま、お寅さま
+あまり私をじらさずに
+早くお話し下さんせ
+気がせきます』と呼ばはれば
+お寅は呆れて倒れたる
+身体ムツと引き起し
+火鉢の前に座蒲団を
+キチンと敷いて行儀よく
+膝に両手をおきながら
+『文助さまか、よくもまあ
+お目の悪いにトボトボと
+お訪ねなさつて下さつた
+私は結構な御神徳
+今日は初めて受けました</p>
+            <p class="ja-classical-line">天の岩戸が開けたる
+やうな心地が致します
+何卒喜んで下さんせ
+本当に目出度い吉日』と
+申せば文助勇み立ち
+『そりやまあ結構な事でした
+蠑螈別の教祖さまは
+大きな神徳頂いて
+三十万両を懐に
+入れてお帰り遊ばして
+十分一の三万両
+お前さまにスツパリ下さつた
+やうにお菊さまに聞きました
+本当に目出度い事ですな
+私に直接頂いた
+やうに嬉しう厶ります
+さうして蠑螈別さまは
+お声が根つから聞えぬが
+疲れ果ててグツスリと
+お寝みなさつて厶るのか</p>
+            <p class="ja-classical-line">それならそれで私も
+お寝みなさる邪魔をしちや
+真に済まない事故に
+これからお暇申します
+これこれもうしお寅さま
+娘御寮のお菊さま
+これから御免蒙つて
+書き残したる蕪の画
+スツカリ仕上げた其上で
+お暇を頂き見えの番
+足を伸ばして今夜こそ
+グツスリ寝さして貰ひませう
+何れもサラバ』と立上る
+此時お寅は声をかけ
+『文助さまよ今私が
+結構なお神徳を頂いた
+天の岩戸が開けたと
+云つたは金の事でない
+百万両はまだ愚か
+幾千万とも限りなき</p>
+            <p class="ja-classical-line">譬へ方なき神徳を
+スツカリ受けた事ですよ
+蠑螈別が突然と
+此場に帰り来りまし
+三万両の小判をば
+ゾロリと私の目の前に
+並べて呉れたと思ふうち
+豈図らむや蠑螈別
+忽ち姿を変更し
+牛の様なる古狐
+クワイ　クワイ　クワイと泣きながら
+向ふの谷の森林を
+目蒐けて姿をかくしました
+あまり私は胴欲で
+汚い事のみ朝夕に
+思つて居たのが罪となり
+清い尊い魂が
+自然に曇つて居つたのか
+此有様を見るよりも
+一度に開く蓮花</p>
+            <p class="ja-classical-line">サラリと開いた胸の暗
+これ程嬉しい事はない
+蠑螈別の教祖さまは
+お前も知つてゐる通り
+酒に身魂を腐らして
+前後夢中に首をふり
+精神病者となつてゐる
+あんな分らぬ男をば
+何程大切にしたとても
+神のお道は何処までも
+拡まりさうな事はない
+又あの人はお民と云ふ
+女に迷ひ三五の
+お道に厶る高姫を
+慕うて朝晩胸痛め
+鬱散ばらしに酒をのみ
+居るやうな人を私が
+何程大切に思うても
+最早駄目だと知る上は
+執着心も何もかも</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Cast away and abandoned in the rapids of Hayakaha, / Now blissful like the crystal-clear / August sky have I become. / Rejoicing and taking courage, to Kamisama / Offer your expressions of gratitude. / I too, from now on, changing my soul / And resetting the worship of the Tenchi Oyagami, / In all solemnity / Will serve with single-hearted devotion. / Bunsuke-sama, look upon my past / Unseemly conduct with a changed eye, / And without losing affection, to the ends of the earth / Continue our companionship. / Today, anew, I earnestly pray. / Though the morning sun shines or clouds over, / Though the moon waxes or wanes, / Even should the great earth sink, / Henceforth, my heart / Shall never, never change. / O deities of Tenchi, O Momogami,</p>
+          <p class="en-p">For the first time we realize / The august light of the true path; / Illuminating us evermore into eternity, / Not to mention this physical body, / When we depart this world and journey forth / To Shinkai, save our souls in peace. / Kami are our saviors; / Inclining both heart and body, / We devotedly pray to You. / Ah, Kamunagara Kamunagara, / May Your august spirits prosper and bless us!</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">速河の瀬に流し棄て
+今は嬉しき水晶の
+御空の如くになりました
+喜び勇み神様に
+お礼を申して下さんせ
+私もこれから魂を
+入れ替へ天地の祖神を
+祀り直して神妙に
+一心不乱に仕へます
+文助さまよ今迄の
+私の醜行見直して
+愛想つかさず何処までも
+交際なされて下さんせ
+今日更めて願ひます
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+もう此上は吾心
+決して決して変らない
+天地の神よ百神よ</p>
+            <p class="ja-classical-line">初めて悟る吾々が
+真の道の御光を
+いや永久に照らしつつ
+此肉体は云ふも更
+此世を去つて神界へ
+旅立ちする時吾魂を
+安きに救ひ給へかし
+神は吾等の救ひ主
+心も身をも傾けて
+偏に願ひ奉る
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c08.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 8: 黒 Fox [1218]</span>
+      </a>
+      <a href="c10.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 10: 唖 Fox 外れ [1220]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
