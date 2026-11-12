@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 曲角狸止 [1205] - Volume 45 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 45 Table of Contents</a>
+      <span>Volume 45</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 45 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 曲角狸止 [1205]</h1>
+      <p class="chapter-title-ja">曲角狸止〔1205〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Thanks to his explanation of the Kuwanbutsusanmaikyō, Isokō was finally given the nickname 'Sensei' by the four of his companions. Isokō, feeling pleased to be called Sensei, began to respond with 'Un-un.' Furthermore, they began calling each other by nicknames: they dubbed Aku-kō 'Chiujiyō-sensei,' Mankō 'Chiuge-sensei,' Taku 'Banguwai-sensei,' and Teku 'Chyobochyobo-sensei.'</p>
+          <p class="en-p">Taku: 'Excuse me, Sensei, you sang earlier in front of Otora-bā-sama regarding the connection to the Kami of Kogitayama, but how on earth could such a foolish thing have come to pass?'</p>
+          <p class="en-p">Isokō: 'Regarding that, there is a very interesting secret. It is the so-called secret of the Ichirin. A very old Hanko that came over from the land of Tokoyo led two white foxes, three Kurosan, and countless wild foxes, appeared at the main mountain of Kitayama Village in the land of Persia, and possessed a woman named Takahime, a hypochondriac with a mental deficiency who had stuck her neck out into Brahmanism. The origin of this was her attempt to disturb this world and make it her own world, using the Lord God Kuninotokotachi-no-Ōkami as a signboard. However, since this Takahime was quite fond of amorous affairs in her youth, she could not use her body as that Hanko-san wished, so it had no choice but to borrow the body of a young man named Netaguma and attempt a rebellion in a place called Uetani. When that happened, the spirit of the Hensei-danshi and the spirit of the Hensei-joshi appeared and performed a Shinshin, so the Hanko-san could not bear it, took its subordinate fox and raccoon spirits, and fled headlong back to the mountain of Kogita. Then, the body of Netaguma stopped coming to Kogitayama, and while staying there for two or three days, it suffered divine punishment and underwent a Kunigae. After that, the Hanko-san nested in the body of a man named Sakaguma, obtained the Nikumiya of Kan-katsuyō-shin, drove away the Hensei-joshi, and thought to perform a play, but it was seen through by the spirit of the Joshi again. Unable to stay, it fled to Armenia and sank into the Ural religion. Then, the persistent Hanko-san nested in the body of a man named Ishidaka, challenged the Hensei-joshi, called itself Hinodewake, and tried to trample the Sangokyō, but this time it was seen through by the Hensei-danshi and Joshi, and because of the harsh divine punishment, the body underwent a Kunigae. This time, it took the body of a mountain man named Misoku, and tried to oppose the Joshi again, but it did not achieve its goal, and this fellow also fled to the Armenia region. After that, it used the body of Taneguma, fought a great battle, troubled the Joshi, and finally, this fellow also underwent a Kunigae due to divine punishment. The one it possessed this time is Imoriwake-sama. The Hanko-san is holding a castle in Imoriwake, and the white fox-sans standing on the left and right as attendants have transferred their kin to Tomokiyo, Tsunokiyo, Misokan, Ishigurohiko, Sakamushi, and others, and they are now in the midst of planning to destroy the Sangokyō from all directions. However, since the things evil Kami do can never be tied up at the end, it is like the story of children piling up stones at the Sai no Kawara.'</p>
+          <p class="en-p">Mankō: 'If that is the case, this Kogitayama is a place not to be taken lightly. We must reform it fundamentally and cut off the disasters of the world, or it will be no good, Sensei.'</p>
+          <p class="en-p">Isokō: 'That is why Matsuhiko-sama has come. The Kami are great; they have properly dispatched Matsuhime ahead of time. Since evil Kami cannot see those above themselves, they do not know the heart of Matsuhime-sama, and they are rejoicing and serving her, thinking that a true and unique divine pillar has been formed.'</p>
+          <p class="en-p">Mankō: 'Hahaha, that is interesting. In that case, they truly think that Matsuhime-sama is Jōgihime, don't they?'</p>
+          <p class="en-p">Isokō: 'It is interesting because they are convinced that Matsuhime-sama is the true and genuine Nikumiya of Jōgihime-sama, and the fact that they firmly believe Matsuhiko-sama is Yurarihiko-no-Mikoto is their blind spot. It is as good as the castle having already fallen.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">五三公は観物三昧経説明のおかげで、四人の連中からたうとう先生といふ仇名をつけられて了つた。五三公も先生と言はれてよい気になり、ウンウンと返詞をすることになつて了つた。そしてアク公を中上先生と仇名し、万公を中下先生と称へ、タクは番外先生、テクはチヨボチヨボ先生と互に呼びなす様になつた。</p>
+            <p class="ja-classical-line">タク『モシ先生、小北山の神の因縁に付いては最前お寅婆アさまの前でお歌ひになりましたが、如何して又こんなバカなことが出来たものでせうかな』</p>
+            <p class="ja-classical-line">五三『之に就ては随分面白い秘密があるのだ。所謂一輪の秘密だ。常世の国から渡つて来た大変古い斑狐が白い狐を二匹、古狸を三疋、それから野狐を幾疋ともなく引率して、波斯の国北山村の本山に現はれ、バラモン教に一寸首を突出してゐた精神上に欠陥のあるヒポコンデル患者高姫といふ女に憑依して、此世を紊し、国治立の大神様を看板にして、自分の世界にせうと考へたのが起りだ。そした所、此高姫も若い時は随分情交が好きで、其斑狐サンが思ふ様に肉体を使ふことが出来なかつたものだから、やむを得ず、ネタ熊といふ若い男の体をかり、上谷といふ所で、謀反を企みかけたのだ。そした所、変性男子の御霊と、変性女子の御霊が現はれて審神を遊ばしたものだから、斑狐サンたまりかね、部下の狐狸共を引つれ、小北の山へ一目散に逃帰つて了つたのだ。さうすると、ネタ熊の肉体は小北山へ来なくなり、二三日逗留する内に、神罰を蒙つて国替をして了つた。それから今度は斑狐サン、又もや坂熊といふ男の肉体に巣ぐひ、金勝要神の肉宮を手に入れ、変性女子を却け、一芝居やらうと思うた所、又もや女子の御霊に看破され、ゐたたまらなくなつて、アーメニヤへ逃出し、ウラル教に沈没して了つた。そこで今度執念深い斑狐サンは、石高といふ男の肉体に巣をくみ、変性女子の向うを張り、日出神と名乗つて、三五教を蹂躙せむとした所、今度は変性男子、女子に看破され、これ又キツイ神罰で肉体が国替したので、今度はミソ久といふ山子男の肉体をかつた、そして又女子に大反対をやつてみたが、目的達せず、此奴もアーメニヤの方面へ逃失せて了つた。それから又種熊の肉体を使ひ、大奮闘をやつて女子を手古づらせ、たうとう此奴も神罰で国替をして了つた。それから今度憑つたのが蠑螈別さまだ、蠑螈別には斑狐サンが籠城遊ばし、左右のお脇立の白狐サンは、伴鬼世、角鬼世、味噌勘、石黒彦、坂虫、などに眷族をうつして、四方八方から三五教を打こわさむと、今や計画の真最中なのだ、併し乍ら悪神のすることはいつも尻が結べないから賽の河原で子供が石をつむ話の様なものだよ』</p>
+            <p class="ja-classical-line">万公『さうすると此小北山は容易ならない所だ。根本的に改革して世界の災をたたねばダメだなア、先生』</p>
+            <p class="ja-classical-line">五三『さうだから、松彦様がお出でになつたのだ。神様は偉いものだ、チヤンと松姫を先へ派遣しておかれたのだからなア、悪神といふ者は、自分より上の方は見る事が出来ないので、松姫さまの肚の中を知らず、本当に唯一の神柱が出来たと喜んで奉つてゐるのだよ』</p>
+            <p class="ja-classical-line">万公『アハヽヽヽ、其奴ア面白い、さうすると、松姫さまを真から上義姫だと思つてゐるのだなア』</p>
+            <p class="ja-classical-line">五三『松姫様は、上義姫様の誠生粋の肉の宮様と確信してるから面白いのだ、そして松彦さまをユラリ彦命だと確く信じてゐる所がこちらの附目だ、最早落城したも同様だよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mankō: 'It has become more and more delightful, hasn't it, Chiujiyō-sensei, Banguwai-sensei, Chiyobochiyobo-sensei? Isn't it ketai, eh?'</p>
+          <p class="en-p">Aku: 'We shall cut off the roots of evil once and for all, cultivate the path of sincerity so that Mankōmatsudai does not end up in gosagosa, and proceed step by step, hahahahaha.'</p>
+          <p class="en-p">The five of them were so absorbed in this conversation that they forgot they were standing outside the window of Imoriwake's kiyoshitsu and ended up speaking in loud voices. It seems Imoriwake had finished his sutras and had begun to drink sake again with gusto. The sound of a kantokuri and a sake cup clinking together could be heard. Otora had heard every detail of the five men's tachibanashi.</p>
+          <p class="en-p">Otora prepared sake for Imoriwake and, with an innocent face, said:</p>
+          <p class="en-p">Otora: 'Now, Imoriwake-sama, please have plenty. I am going to the hiromahe for a moment to offer my thanks. Here, Okiku, you keep Kyōsosama company while he drinks.'</p>
+          <p class="en-p">Okiku: 'No, I don't want to! Serving sake is Mother's job. I am going to the hiroma, so Mother, please serve Kyōsosama yourself. And please make sure you don't pinch him or twist his nose; I am worried sick about it.'</p>
+          <p class="en-p">Otora: 'If I am the one serving, it will be a disaster if that kind of ruckus starts again, which is why I told you to serve him.'</p>
+          <p class="en-p">Okiku: 'Even so, I don't want to. Kyōsosama has body odor, so even if you don't twist it, Mother, my own nose will twist itself.'</p>
+          <p class="en-p">Otora: 'Oh, what a foul-mouthed girl you are. It is inexcusable to say such rude things. Imoriwake-sama, please do not take it to heart, as it is only what a child says.'</p>
+          <p class="en-p">Imoriwake lifted his narrow eyes, pursed his lips, and while making them compete with his nose in length, said:</p>
+          <p class="en-p">Imoriwake: 'Ufuhahaha, now Okiku, that is fine, isn't it? There are people who enjoy even my body odor, so you should not disparage it so heartlessly.'</p>
+          <p class="en-p">Okiku: 'That is true, the people who like Kyōsosama's body odor are Takahime-sama or Mother, ohohohoho.'</p>
+          <p class="en-p">Otora: 'Now, now, what are you saying? However, as you say, Imoriwake-sama likes Takahime-sama's body odor, doesn't he? I wish I could somehow have body odor too, but I was born clumsy, so I have none at all. Hohohoho.'</p>
+          <p class="en-p">Imoriwake: 'Otora-sama, you have the scent of tobira instead of body odor, so that provides a balance, I suppose.'</p>
+          <p class="en-p">Okiku: 'Hohohoho, body odor and tobira, what a fine contrast! The gods are quite ironic, ihihihi.'</p>
+          <p class="en-p">Otora: 'Imoriwake-sama, I am going to the goshinzen for a moment; I will be back shortly.'</p>
+          <p class="en-p">Imoriwake: 'Hmm, drinking alone is actually more interesting. It is not very pleasant when the scent of tobira mixes with the sake.'</p>
+          <p class="en-p">Otora: 'It would be better if my scent mixed with it, hmph.'</p>
+          <p class="en-p">Saying this, she stood up stiffly, struck the tatami once with her heel in a show of defiance, and dashed out to the front. Imoriwake, while muttering unintelligible things deep in his throat to Okiku, had her pour for him and offered it to the eight million gods.</p>
+          <p class="en-p">Okiku: 'Hohohoho, what a pale face you have. It looks just like the turnip that Bunsuke-sama is always painting, with eyes and a nose added to it. Even so, you like that white kantokuri shaped like a daikon radish, don't you? Hohohoho, and this morning-glory-shaped cup resembles Takahime-sama's mouth, which is interesting. Kyōsosama, come now, give this cup a kiss. It tastes quite good, you know.'</p>
+          <p class="en-p">Imoriwake: 'Hey, a morning-glory-shaped cup is considered dangerous, so I shall refrain from it.'</p>
+          <p class="en-p">Okiku: 'That is true, it is a cup that brings curses. Even I feel a chill when I see this cup, as it triggers things like being pinched, having one's nose twisted, or having one's breath taken away. It is truly a hateful, impudent little cup. Because of this cup, the direct action of body odor and tobira begins, so this cup truly contains radical thoughts.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">万公『益々愉快でたまらなくなつた、なア中上先生、番外先生、チヨボチヨボ先生、怪体ぢやないか、エヽー』</p>
+            <p class="ja-classical-line">アク『アク迄アクの根を断ち切り、万公末代五三々々せぬ様に誠の道を開拓し、テクテク歩を進めるとするのだなア、ハツハヽヽヽ』</p>
+            <p class="ja-classical-line">五人はこんな話に現をぬかし、蠑螈別の居室の窓外に自分の立つてゐる事を忘れ大声で喋つて了つた。蠑螈別はお経をすませ、又もやグイグイと酒を呑み始めたらしい。ケチン、ケンケラケンと燗徳利や盃のかち合ふ音が聞えてゐる。お寅は五人の立話を一伍一什聞いて了つた。</p>
+            <p class="ja-classical-line">お寅は蠑螈別に酒の用意をなし、何くはぬ顔で、</p>
+            <p class="ja-classical-line">お寅『サア蠑螈別さま、ドツサリおあがりなさいませ。一寸私はお広前まで御礼にいつて参ります、コレお菊、教祖様のお酒の相手をするのだよ』</p>
+            <p class="ja-classical-line">お菊『あたえ、厭だワ、お酒のお給仕はお母アさまの役だよ。あたえはお広間へ参つて来ますから、お母アさまは教祖さまのお給仕をして上げて下さいな、そして抓つたり鼻をねぢたりせぬ様にして下さい、あたえ心配でならないワ』</p>
+            <p class="ja-classical-line">お寅『私がお給仕をしてゐると又あんなランチキ騒ぎが起つちや大変だから、それでお前にお給仕をしてくれと云つたのだよ』</p>
+            <p class="ja-classical-line">お菊『さうだつて、あたえ、嫌なのよ。教祖さまは腋臭だから、お母アさまにねぢられなくても、私の鼻が独りでねぢ曲るのよ』</p>
+            <p class="ja-classical-line">お寅『エヽ口の悪い娘だな、そんな失礼なことを云つちやすまないよ、蠑螈別さま、どうぞ子供の云ふことだから気にかけない様にして下さいよ』</p>
+            <p class="ja-classical-line">蠑螈別は細い目をつり上げ、口を尖らして鼻と背比べさせ乍ら、</p>
+            <p class="ja-classical-line">蠑螈『ウフヽヽヽ、これお菊、マア良いぢやないか、おれの腋臭でも喜ぶ人があるのだもの、そうムゲにこきおろすものだない』</p>
+            <p class="ja-classical-line">お菊『さうよ、教祖さまの腋臭の好きな人は高姫さまかお母アさまだよ、オホヽヽヽ』</p>
+            <p class="ja-classical-line">お寅『コレコレ何を言ふのだ。併し乍らお前の云ふ通り、蠑螈別さまは高姫さまの腋臭が好きなのだからねえ、私もどうかして腋臭になりたいのだけれど、不器用な生れつきだから、チツとも持合せがないのよ。ホツホヽヽヽ』</p>
+            <p class="ja-classical-line">蠑螈『お寅さまは腋臭の代りにトベラだから、マアそれでバランスが取れるといふものだ』</p>
+            <p class="ja-classical-line">お菊『ホヽヽヽヽ、腋臭にトベラ、何とマアいいコントラストだこと、神さまも随分皮肉だね、イヒヽヽヽ』</p>
+            <p class="ja-classical-line">お寅『蠑螈別さま、一寸之から御神前へ参つて来ます、ぢきに帰りますから』</p>
+            <p class="ja-classical-line">蠑螈『ウン、独酌の方が却て興味がある、トベラの匂ひが酒に混合すると余りうまくないからなア』</p>
+            <p class="ja-classical-line">お寅『わいがの匂ひが混合するといいんだけれど、ヘン』</p>
+            <p class="ja-classical-line">と云ひ乍ら、ツンとして立上り、畳を踵でポンと一つ威喝させ乍ら表へ飛出した。蠑螈別はお菊を相手にグヅグヅと口の奥で分らぬことを喋りつつお菊につがせては八百万の神にお供へしてゐる。</p>
+            <p class="ja-classical-line">お菊『ホツホヽヽヽ、何とマア青白い顔だこと、丸で文助さまの何時も書いてゐらつしやる蕪に目鼻つけたよな顔だワ。それでも大根の様な形した白い燗徳利がお好きだからねえ。ホヽヽヽヽ、そして此朝顔型の盃は高姫さまの口元に似とるんだから面白いワ、教祖さま、サア、此盃で一つキツスなさいませ。随分よい味が致しますよ』</p>
+            <p class="ja-classical-line">蠑螈『ヤア朝顔型の盃は、危険視されるから止めておこう』</p>
+            <p class="ja-classical-line">お菊『さうですねえ、よう祟る盃ですなア。あたえも此盃みるとゾツとするワ、又つねられたり、鼻を捻られたり、息の根をとめられたりするよなことを突発させるのだから、本当に憎らしい猪口才な猪口ですねえ、此猪口のおかげでチヨコチヨコと腋臭とトベラの直接行動が始まるのだから、本当に此盃こそ過激思想を包蔵してゐるのだワ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Imori: 'You are just as much Otora's daughter, a woman with quite a sharp tongue, what a troublesome person you are.'</p>
+          <p class="en-p">Okiku: 'There is no reason at all for you to be troubled, since it is this chiyoko here that is instigating a quarrel over what even a dog won't eat, so the one who is troubled is this Okiku watching from the side.'</p>
+          <p class="en-p">Imori: 'If so, it would be safe if you had a cup from this chrysanthemum-shaped sakazuki here, hey Okiku.'</p>
+          <p class="en-p">Okiku: 'I refuse, to have a sakazuki resembling my own name held to my mouth is something I most humbly decline.'</p>
+          <p class="en-p">So saying, she gripped the thin, flat ceramic sakazuki tightly and thrust it away into her sleeve on the spot.</p>
+          <p class="en-p">Imoriwake began to get steadily drunk.</p>
+          <p class="en-p">Looking down at the valley from Takahimeyama,
+Otora's wretch goes wandering about,
+Leading Okiku's little tiger,
+And grilling mochi that even a dog won't eat.
+Ah, is this what the floating world has come to,
+Whenever I think of it, how irritating it is.
+Though there are countless women in the world,
+Compared to the woman of Tobera,
+That high-chan with a strong underarm odor
+is Imoriwake's parent of life.
+What you like does not appear, what you dislike comes,
+Ah, the floating world never goes as one wishes.
+Takachan and I are the rice of Okura,
+Someday we will emerge into the world and become mamas.
+If she can become a mama, that old hag of Tobera,
+I would like to send her off to someone's marriage.
+The character called Yagi is the rice of Beikoku,
+The character called Hinode is the character for the sun of Nihon,
+Lord Imoriwake takes the light of Hinodenokami
+Upon his body and becomes a mama.
+
+Deccanshiyō, deccanshiyō... that's it. Hey Okiku, you are a woman whose mouth is quite noisy, so you'll probably go straight away and tell tales to Otora, won't you?'</p>
+          <p class="en-p">Okiku: 'Go ahead and vent all your abuse while you still can. I certainly shall not tell. But when you get drunk on sake, you speak of such things without looking ahead or behind in front of o-kaa-sama, so it really makes me shudder; when the Great Deity of the Sovereign Sun of the Last Age is descending, how unsightly it is to start up a lover's quarrel, what a contemptible person you are.'</p>
+          <p class="en-p">Imori: 'If only you don't say anything, that's fine, and I intend to say as little as possible. But that wretch Otora, since she is your mother—ah, no, it would probably be bad to say such a thing—she is a lecher who doesn't match her face, and I am already thoroughly and utterly sick of it.
+
+Unwanted yet fortunately liked, should I let my affection wear out?
+Though my mouth says I hate it, I hate it,
+If it comes to cutting ties, I hate that too.'</p>
+          <p class="en-p">Okiku: 'Ho-ho-ho-ho, go on, catch yourself a young widow and flash her about.'</p>
+          <p class="en-p">Imori: 'Ha-ha-ha-ha, you're getting a bit jealous, aren't you? A young widow, you say, when she hasn't even the memory of ever having a man, to call her a young widow is absurd; in that case, Okiku, you are not a pure maiden, are you? Who was it that put a nose-ring on you?'</p>
+          <p class="en-p">Okiku: 'To speak of a nose-ring like a cow or something, how you look down on me! The one you cannot let your guard down around is a maiden. When the time comes for even the beans behind the shadow to pop, they pop naturally. Ho-tsu-ho-ho-ho.'</p>
+          <p class="en-p">Thus, with Okiku as his companion, wearing a light-blue, soiled cotton everyday garment without a change of day-and-night wear, he continued to drain cup after cup without even knowing how time passed. Meanwhile, Otora recognized five men standing at the doorway,</p>
+          <p class="en-p">Otora: 'Hey everyone, what are you all doing in a place like that, could it be that you were doing something like eavesdropping?'</p>
+          <p class="en-p">Gosaku: 'Yes, we have allowed ourselves to listen in. What that Kyōso-sama was chanting was the Kanbutsu Zanmai-kyō, wasn't it? Both the voice and the melody were truly well-matched, and before we knew it our bodies were throbbing, drawn in by the virtue of that Kototama, and before we realized it we were pulled right up to the outside of the window; my, what a splendid teacher he is.'</p>
+          <p class="en-p">Thus Gosaku skillfully smoothed things over. Otora widened her eyes in perplexity and wore a slightly displeased demeanor, but out of an excess of joy at the words of praise—saying that Imoriwake's voice was good and his melody skillful—she forgot everything else, and while smiling broadly,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">蠑螈『お前もお寅の娘丈あつて、随分口の良い女だ、困つた者だのう』</p>
+            <p class="ja-classical-line">お菊『何も貴方が困る筈はないワ、犬もくはない喧嘩の煽動するのは此猪口だから、困るのは側に見てゐる此お菊だワ』</p>
+            <p class="ja-classical-line">蠑螈『そんなら此処にある菊型の盃で一杯やつたら安全だろ、なアお菊』</p>
+            <p class="ja-classical-line">お菊『イヤですよ、私の名に似た盃を口に当てて貰うこた、真平御免だ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、薄い平たい陶器の盃をグツとひん握り矢庭に袂へかくして了つた。</p>
+            <p class="ja-classical-line">蠑螈別はソロソロ酔がまはり出した。</p>
+            <p class="ja-classical-line">『高姫山から谷底見れば
+お寅の奴めがウロウロと
+お菊の小虎を引つれて
+犬も喰はない餅を焼く
+ホンに浮世はこしたものか
+思へば思へば自烈たい。
+世界に女は沢山あれど
+トベラの女に比ぶれば
+腋臭の強い高チヤンは
+蠑螈別の命の親だ。
+好きは出て来ず厭は来る
+ホンに浮世は儘ならぬ。
+わしと高ちやんはお倉の米よ
+いつか世に出てママとなる。
+ままになるならトベラの婆さま
+どつかへ嫁入りさして見たい。
+八木と云ふ字は米国の米よ
+日の出といふ字は日本の日の字
+蠑螈別さまは日出神の
+光を身に受けママとなる。</p>
+            <p class="ja-classical-line">デツカンシヨウ　デツカンシヨウ……だ。オイお菊、お前は随分口八釜しい女だから、お寅に直様密告するだらうなア』</p>
+            <p class="ja-classical-line">お菊『今の内に十分悪口をついておきなさい。私や決して言ひませぬ。併し貴方がお酒に酔ふと後先見ずに、お母アさまの前でそんなこと仰有るからホンにオロオロするワ、末代日の王天の大神様がおこし遊ばしてるに、みつともない、イチヤ付喧嘩をおつぱじめるなんて、見くびつた人ですねえ』</p>
+            <p class="ja-classical-line">蠑螈『お前さへ言はなきやそれで良い、俺も成るべく言はぬ積りだ。併しあのお寅といふ奴ア、お前のお母アだから、エヽこんなこといつたら悪からうが、顔にも似合はぬ助平だよ、おりやモウ、スーツカリと厭になつちやつたのだ。</p>
+            <p class="ja-classical-line">いやで幸ひ好かれてなろか
+愛想づかしをまつわいな。
+いやぢや　いやぢやと口では言へど
+縁を切るとなりや又いやだ』</p>
+            <p class="ja-classical-line">お菊『ホヽヽヽヽ、いいかげんに若後家をつかまへて、てらしておきなさい』</p>
+            <p class="ja-classical-line">蠑螈『ハヽヽヽヽ、ちつと妬いてゐやがるなア、若後家だといの、男も持つた覚えもないのに、若後家とはふるつてる、さうするとお菊お前は純粋な処女ではないなア、誰にハナヅルを入れて貰つたのだ』</p>
+            <p class="ja-classical-line">お菊『牛か何ぞの様に鼻づるなんて、バカにして下さいますな、油断のならぬは娘ですよ。かげ裏の豆もハヂける時が来れば、自然にハヂけますわ。ホツホヽヽヽ』</p>
+            <p class="ja-classical-line">斯の如くお菊を相手に水色のうす汚れた昼夜着替なしの木綿着物を着たまま、クビリクビリと時の移るも知らず、盃の数を重ねて居る。一方お寅は門口に立つてゐる五人の男を認め、</p>
+            <p class="ja-classical-line">お寅『コレ皆さま、そんな所に何してゐらつしやるの、何か立聞でもしてゐなさつたのだありませぬかい』</p>
+            <p class="ja-classical-line">五三『ハイ立聞をさして頂きました。あの教祖様がお上げになつて居つたのは観物三昧経でしたね。声音といひ節まはしと言ひ、本当に調子がよく合つて、知らず知らず吾々の身体が躍動し、其言霊の徳に吸引されて、何時の間にやら窓の外まで引よせられて了つたのですよ、何とマア偉い先生ですね』</p>
+            <p class="ja-classical-line">とうまく五三公はさばいた。お寅は怪訝の目を見はつて、聊か不機嫌の態であつたが、蠑螈別の声がよいとか、節が上手だとか言つて褒めた詞に嬉しさの余り、何もかも打忘れ、ニコニコし乍ら、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otora: 'Did you hear it like that? Truly it is a fine voice, is it not? Come, let us proceed to the spacious hall.'</p>
+          <p class="en-p">Mankō: 'Yes, thank you, I shall accompany you.'</p>
+          <p class="en-p">While twitching her nose with a look of triumph, Otora cheerfully takes the lead. Aku speaks in a low voice,</p>
+          <p class="en-p">Aku: 'Indeed, if one is dealt with like that by those muddy Kototama, true gods detest them and will not draw near, so it is only natural that worthless junk gods throng densely. Kototama is something one must be careful about, you know.'</p>
+          <p class="en-p">And carelessly he uttered the latter part too loudly. Otora rounds her eyes, turns back, and says,</p>
+          <p class="en-p">Otora: 'What on earth are you saying? Are the Kototama of Imoriwake-sama muddy?'</p>
+          <p class="en-p">Aku: 'No, no, there are muddy parts and there are crystal-clear parts, which is why I called him a great personage. It is said that the great ocean receives muddy rivers without changing its hue, and so on; I am truly impressed by the breadth of mind of Imoriwake-sama, who embraces both purity and turbidity.'</p>
+          <p class="en-p">Otora again restores her cheerful mood and says,</p>
+          <p class="en-p">Otora: 'Truly, that is so.'</p>
+          <p class="en-p">Teku: 'Hey, Aku—or rather, Sensei Chiujiyō—what does embracing purity and turbidity mean? Does Imoriwake-sama partake of pure sake and turbid sake in the same place?'</p>
+          <p class="en-p">Aku: 'Idiot, shut up and stay put!'</p>
+          <p class="en-p">Teku: 'Hah, you speak with such an air of importance! Hee-hee-hee-hee!'</p>
+          <p class="en-p">Otora: 'Now, everyone, let us all gather together and offer our expression of gratitude.'</p>
+          <p class="en-p">She sits down before the Shinden with a serious demeanor. While clapping four times, Otora raises her voice loud and performs the Magatsuhi Norito:</p>
+          <p class="en-p">'Hunger demons cram the belly of Kakama. With the Mikoto of the heated sake flask and warm sake, the master sparrow, the Mikoto of Kantakahime, of the falsehood-telling Hinode, in the stink-grass field of Takahime, when the ground is rubbed clear of miso, those who weep, the Okami of the Metal-Sweeping Gate, the gossiping paramours of Mosa-kusa, O Okami, sweep away sins and defilements and purify us, as the demons declare. Magatsuhi, Kudakegami, together with the wolf-tigers of Yamakomano, with ears of fools erected, listen well to this, we declare with a kachikome kachikome. The Great August Deity of Oracle Sparrows, curve, rebel, pon-pon.'</p>
+          <p class="en-p">Mankō: 'Aha-ha-ha-ha.'</p>
+          <p class="en-p">Otora: 'Hey, whoever you may be, what on earth is the meaning of laughing while the Magatsuhi Norito is being offered? Please be a little cautious. This is before the wolves, you know. Otora is offering the Norito to the wolves-sama.'</p>
+          <p class="en-p">Mankō: 'A tigress and wolves—what a fine contrast that is! This is the very reason why the Oracle Teachings are the Oracle Teachings.'</p>
+          <p class="en-p">Otora began to pray with all her heart.</p>
+          <p class="en-p">'O Wolf-sama of Lies, O Wolf-sama of Yaku Days, O Jewel of Magatsuhi, O Wolf-sama of Weasel Heaven, O Wolf-sama of the Swift Torrent of Ochitakitsu, O Wolf-sama of the Tenteikumai, O Wolf-sama of Rintō-hachimaki Bitengu, O Wolf-sama of Princess Kiso Yoshinaka, O Wolf-sama of Princess Uesugi Kenshin, O Wolf-sama of the Shrine of Ikuhanukare-hiko, O Wolf-sama of Princess Irateko, O Wolf-sama of the Disturbance of 567 Attainment, O Wolf-sama of the Evening Sun's Descent of Toyosaka, O Wolf-sama of Fire Emerging from Within Unrighteous Heaven, O Wolf-sama of Princess Tamanori the Acrobat, O Great General of Fools, O Wolf-sama of Tokodaihime who guards the bedchamber of Imoriwake, O Married Couple of the Seed Shrine, the Sixteen Pillars of Wolves at the Root Ground of Devils, O Sacred Pine Tree of the Sakai Shinssei. By all means, morning and evening, may we receive your divine virtues, so that Imoriwake may cast aside his longing for Kumotakahime, and may he cherish and love this Ushitora Crone-hime-mikoto above all else. Next, if there is a karmic bond between Princess Okiku and Mankō, I beg of you to unite them as swiftly as possible, even for a moment. Please be on your guard so that the true identity of the Fox-san is not revealed anywhere; this is my first prayer. And may the flesh-shrine of the Great Deity of Heaven, the Fire King of the Last Age, and the flesh-shrine of Princess Fujo ever abide in peace here in Kobatayama, so that our objective of an impure and free heart-nature may be attained. May Susanō-no-Mikoto not rampage forth again, may the Heavenly Rock Cave open up, and may the dark-complexioned old man and the white old man return to the heavenly mansion. We humbly offer our protection against errors and ugliness. Pon-pon-pon-pon.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お寅『さう聞えましたかなア、本当によい声でせうがな、サアお広間へ参りませう』</p>
+            <p class="ja-classical-line">万公『ハイ、有難う、お伴致しませう』</p>
+            <p class="ja-classical-line">お寅は得意の鼻うごめかし乍ら、機嫌よげに先に立つ。アクは小声で、</p>
+            <p class="ja-classical-line">アク『成程あの濁つた言霊でああやられちや、誠の神は嫌つて寄り付き玉はず、せうもないガラクタ神が密集するのは当然だ、言霊といふものは謹まねばならぬものだなア』</p>
+            <p class="ja-classical-line">とウツカリ後の方を大きく云つて了つた。お寅は目を丸くし、後ふり返り、</p>
+            <p class="ja-classical-line">お寅『エヽ何と仰有ります、蠑螈別さまの言霊が濁つてゐるのですか』</p>
+            <p class="ja-classical-line">アク『イエイエ濁つた所もあり澄切つた所もあります、それだから偉いお方と云つたのですよ。大海は濁川を入れて其色を変ぜずとかいひましてなア、清濁合せ呑む蠑螈別様の度量には随分感服致しましたよ』</p>
+            <p class="ja-classical-line">お寅は又機嫌を直して、</p>
+            <p class="ja-classical-line">お寅『本当にさうですね』</p>
+            <p class="ja-classical-line">テク『オイ、アク、否中上先生、清濁併せ呑むといふのは何か、清酒と濁酒と一所に蠑螈別さまはおあがりなさるかい』</p>
+            <p class="ja-classical-line">アク『バカツ、スツ込んで居れ』</p>
+            <p class="ja-classical-line">テク『へン、偉相に仰有るワイ、イヒヽヽヽだア』</p>
+            <p class="ja-classical-line">お寅『サア、皆さま、一同揃うて御礼を致しませう』</p>
+            <p class="ja-classical-line">と神殿の前に仔細らしくすわる。お寅は四拍手し乍ら声高らかに曲津祝詞を、</p>
+            <p class="ja-classical-line">『かかまの腹に餓鬼つまります。かん徳利燗ざましのみこともちて、雀の親方、かんたか姫の命、嘘をつくしの日の出の、高姫のおいどのクサギが原に、味噌すり払ひ玉ふ時に、泣きませる、金払戸の狼達、モサクサの間男、罪汚れを払ひ玉へ清め玉へと魔の申すことの由を、曲津神、クダケ神、山子万の狼虎共に、馬鹿の耳ふるひ立てて、おみききこしめせと、カチコメ　カチコメ申す。ウラナイの雀大御神、曲り玉へ逆らへ玉へ、ポンポン』</p>
+            <p class="ja-classical-line">万公『アハヽヽヽ』</p>
+            <p class="ja-classical-line">お寅『コレ何方か知らぬが、曲津祝詞を上げてる時に笑ふとは何事ですか、チツと謹んで下さい、ここは狼の前ですよ、狼さまにお寅が祝詞を上げて居るのだ』</p>
+            <p class="ja-classical-line">万公『寅に狼、何とよい対照だなア、ここがウラナイ教のウラナイ教たる所以だ』</p>
+            <p class="ja-classical-line">お寅は一生懸命に祈り出した。</p>
+            <p class="ja-classical-line">『嘘つきの狼様、ヤク日の狼様、曲津日の玉、イタチ天の狼様、落滝津速川の狼様、てん手古舞の狼さま、リントウ鉢巻ビテングの狼様、木曽義仲姫の狼様、上杉謙信姫の狼様、生羽ぬかれ彦神社の狼様、岩テコ姫の狼様、五六七成就お邪魔の狼様、夕日の豊栄下りの狼様、不義理天上内から火の出の狼様、軽業師玉のり姫の狼様、バカの大将軍様、蠑螈別のおね間を守り玉ふお床代姫の狼様、種物神社御夫婦様、悪魔の根本地の十六柱の狼様、堺の神政松の御神木様、何卒々々朝な夕なの御神徳を蒙りまして、蠑螈別がヨクの熊高姫を思ひ切りますやうに、そして此丑寅婆サン姫命を此上なきものとめでいつくしみくれます様に、其次にはお菊姫命、万公と因縁が厶りまするならば、どうぞ一時も早く添はしておやり下さいませ、ハン狐さんの、どこ迄も正体が現はれませぬ様、御注意下さいますやう、これが第一の御願で厶います。そして末代火の王天の大神様の肉宮、不情誼姫様の肉宮が、どこ迄も此小北山に鎮まり遊ばして、吾々の心性不浄自由の目的が達します様に、再び素盞嗚尊があばれ出しませぬ様に、天の岩戸が開けます様に、色の黒き尉殿と白き尉殿が、天の屋敷にお直り候ふやうに、誤醜護御願申上げます、ポンポンポンポン。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Everyone, thank you for your hard work. Now, please rest freely for tonight. I will have the bedding arranged in the grand hall.</p>
+          <p class="en-p">Mankō: 'No, please do not worry about us; we must look after ourselves. If you will only tell us where the bedding is, I will lay out the beds and rest myself.'</p>
+          <p class="en-p">Otora: 'Ah, if you open the sliding door of this closet, it might hurt a bit when you pinch your finger, but there are wooden pillows as well, and there is plenty of futon bedding, so Mankō, please take care of laying out the beds for everyone and helping them to sleep.'</p>
+          <p class="en-p">Mankō: 'Yes, I have grasped everything. Please go back quickly. Kyōsosama is feeling lonely, you see.'</p>
+          <p class="en-p">Otora: 'Ho ho ho ho ho, you are a man who thinks of everything so attentively. Well, Isokō-sama and everyone else, please rest at your leisure until tomorrow morning.'</p>
+          <p class="en-p">So saying, she hurriedly points toward Imoriwake's living room and departs.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">皆さま、御苦労で厶いました。サア之で今晩は御自由にお休み下さいませ。御広間に夜具を並べさせますから』</p>
+            <p class="ja-classical-line">万公『イヤどうぞ心配して下さいますな、自分のことは自分にせなくてはなりませぬ。夜具の在処さへ聞かして貰へば、自分で床をのべて休まして貰ひます』</p>
+            <p class="ja-classical-line">お寅『あゝそんなら此押入の襖をあけると、チツと痛いけれど、木の枕もある也、蒲団も沢山にあるから、万公、お前が皆さまに床を布いて寝て貰う様に世話をやいて下さい』</p>
+            <p class="ja-classical-line">万公『ハイ何もかも呑み込みました。どうぞ早くお帰り下さいませ。教祖様が淋しがつてゐられますからなア』</p>
+            <p class="ja-classical-line">お寅『ホヽヽヽヽ、何から何迄、よう気のつく男だこと。ヤア五三公さま、其外の御一同さま、どうぞ御ゆるりと明日の朝迄お休み下さいませ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、慌ただしく蠑螈別の居間を指して帰り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: 三昧経 [1204]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: Rain 露 Moon [1206]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

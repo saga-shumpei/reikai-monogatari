@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 20: 蛙行列 [1210] - Volume 45 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 45 Table of Contents</a>
+      <span>Volume 45</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 45 &bull; Chapter 20</span>
+      <h1 class="chapter-title-en">Chapter 20: 蛙行列 [1210]</h1>
+      <p class="chapter-title-ja">蛙行列〔1210〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Imoriwake, oblivious to everything around him, was dead drunk and snoring like thunder, when Omin gently slid open the back door and crept in, trembling all over.</p>
+          <p class="en-p">Omin: 'Sensei, something terrible has happened. I cannot stay here any longer. I am escaping from here tonight, so I came to give you a quick word. Please do not think ill of me.'</p>
+          <p class="en-p">Imoriwake suddenly woke from his drunken stupor, sat up, and rubbing his eyes said,</p>
+          <p class="en-p">Imoriwake: 'Aren't you Omin? What do you mean by something terrible? If we dawdle and Otora finds us, it will be disastrous for both you and me, so tell me your business quickly and get out of here.'</p>
+          <p class="en-p">Omin: 'What I mean by terrible is none other than this: just a moment ago, Otora-sama came out to my living room and insisted that I become Magahiko's wife. Oh, how disgusting, as if I would ever become his wife, even if I died! The only reason I came here is because I have a promise with you, and I look forward to catching glimpses of your face during your service; that is why I came to tell you this, and since I will be heading back ahead of you now, if you have any kindness in you, please chase after me later.'</p>
+          <p class="en-p">Imoriwake: 'That is terrible! You go on ahead as far as Noguchi Forest and wait for me there. Taking advantage of the fact that I am now going to Otora's Matsuhimeyakata while she is away, and having more or less figured out where Otora keeps her hidden money, I will wrap nine thousand ryo of gold around my waist and catch up with you later.'</p>
+          <p class="en-p">As he urged her on, Omin smiled sweetly and said,</p>
+          <p class="en-p">Omin: 'Imoriwake-sama, you must promise! In that case, I will go on ahead for a moment...'</p>
+          <p class="en-p">So saying, fearing a long stay and wanting to leave before the moon came out, she hurried down the slope panting. Imoriwake immediately changed his clothes, prepared his straw raincoat and hat, tightly fastened nine thousand ryo of gold inside his garment, put on his leggings and straw sandals, firmly grasped his iron-tipped staff, and just as he was about to leap out the doorway, he frantically struck his forehead against a pillar, uttered a single groan, and collapsed on the spot.</p>
+          <p class="en-p">That such a thing was happening was more than a mere mortal could know, while Otora was absorbed in earnest efforts to obstruct the secret agreement between Imoriwake and Omin, sitting knee to knee with Matsuhime and indulging in whispers.</p>
+          <p class="en-p">Otora: 'Hey, Okiku, even though they say it is time to sleep, a child should not be staying up until the middle of the night. This child is already seventeen and never listens to a single word her parents say. I am truly at my wits' end.'</p>
+          <p class="en-p">Okiku: 'Mother, somehow my eyes are wide awake, and I cannot sleep a wink. Tonight is the twenty-first night, so the moon will soon cast a sickle-like light upon the earth and make its way up Kita-yama, so it would be much better to go moon-viewing.'</p>
+          <p class="en-p">Otora: 'Don't talk such foolishness. Outside, the winter wind is howling and it is snowing. What is fun about moon-viewing on a night like this? And what will you do if you catch the flu from the wind?'</p>
+          <p class="en-p">Okiku: 'Mother, it is snowing—is that not all the more splendid? In the sky is the moon, down below is the snow, and right there emerges the chrysanthemum flower in bud, so is it not like gazing at the moon, snow, and flowers all at once? Such a fine opportunity rarely ever comes.'</p>
+          <p class="en-p">Otora: 'What a saucy child. Won't you hurry up and put her to bed? Now, Matsuhime-sama, as you can see, she is such a tomboy, and I am truly having a hard time handling her.'</p>
+          <p class="en-p">Matsuhime: 'Indeed. Why are young girls nowadays so mischievous? Even Ochiyo says nothing but cheeky things and talks back to us with twisted logic, leaving us with no recourse.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">蠑螈別は前後も知らず、酒に酔ひつぶれて雷の如うな鼾をかいてゐる、其処へ裏口の戸をソツと開いて、震ひ震ひやつて来たのはお民であつた。お民は蠑螈別をゆすりおこし小声で、</p>
+            <p class="ja-classical-line">お民『モシ先生、大変な事がおこりました。私は此処に居れませぬ。今晩限り此処を逃出しますから、一寸貴方に応へに参りました。どうぞ悪くは思つて下さいますな』</p>
+            <p class="ja-classical-line">蠑螈別は俄に酒の酔ひもさめ起上つて目をこすり乍ら、</p>
+            <p class="ja-classical-line">蠑螈『お前はお民ぢやないか。大変とは何事だ。グヅグヅしてゐるとお寅に見つかつたら、俺もお前も大変だから、早く要件を云つて、此処を立去つて呉れ』</p>
+            <p class="ja-classical-line">お民『大変と申すのは外でもありませぬ、最前もお寅さまが私の居間へ出て来て、是非共魔我彦の女房になれと仰有るのです。アタ好かぬたらしい、誰が、死んでも女房になりますものか。私が此処へ参つて来て居るのも貴方にお約束があるばつかりで、御つとめの時にチヨイチヨイお顔を見るのを楽しみに来て居るのでせう、それだから一寸貴方に此事を申上げ、これから私は一足先へ帰りますから、御親切がありますなら後から追つかけて来て下さいな』</p>
+            <p class="ja-classical-line">蠑螈『ソラ大変だ。お前は一先づ野口の森まで行つて待つとつてくれ。俺はこれからお寅の松姫館へ行つた留守を幸ひ、お寅の隠しとつた金の所在も略分つたから九千両の金子を腰に捲きつけ、後から追ひつくよ』</p>
+            <p class="ja-classical-line">とせきたつればお民は莞爾と笑ひ、</p>
+            <p class="ja-classical-line">お民『蠑螈別さま、キツトですよ、そんなら一歩お先へ行つて居りますから……』</p>
+            <p class="ja-classical-line">と云ひ乍ら、長居はおそれ、月の出ぬうちにと坂道をスタスタと息を喘ませ下り行く。蠑螈別は早速に衣類を着かへ、蓑笠の用意をなし、九千両の金を内懐にグツト締め込み、脚装束をして草鞋脚袢迄も首尾よくつけ、金剛杖をひんにぎり、今や門口を飛び出さむとして、あわてて柱に額を打ちウンと一声其場に倒れて了つた。こんな事が出来て居るとは神ならぬ身の知る由もなく、お寅は頻に蠑螈別、お民の密約成立の妨害運動に熱中し、松姫と膝を交へてヒソヒソ話に耽つてゐる。</p>
+            <p class="ja-classical-line">お寅『コレお菊、モウお休みと云ふのに、夜更まで子供が起きてゐるものぢやないよ。此子はマア十七にもなつて一寸も親の言ふ事を聞かない子だ。本当に困つ了わ』</p>
+            <p class="ja-classical-line">お菊『お母さま、何だか目がさえざえして、一寸も寝られないのよ。今晩は廿一夜だから、モウお月様が鎌の様な光を地上に投げて小北山を御上り遊ばすから、月見でもした方が好いわ』</p>
+            <p class="ja-classical-line">お寅『馬鹿な事お言ひでないよ。外は凩が吹いて吹雪がして居るよ。こんな夜さに月見したつて何が面白いか。又風に当つてインフルエンザにでも罹つたら何うするのだい』</p>
+            <p class="ja-classical-line">お菊『お母さま、雪が降つとるの、ソレは尚結構ぢやありませぬか。空にはお月さま、下には雪、そこへ花の蕾のお菊の花が出るのですもの、月雪花を一時に眺めるやうなものぢやありませぬか。こんなよい機会は滅多に有りはしませぬわ』</p>
+            <p class="ja-classical-line">お寅『コマシヤクレた子だな。早く休ましてお貰ひなさらぬか。モシ松姫さま、此通りお転婆娘で、本当に親も手こずつてゐますのよ』</p>
+            <p class="ja-classical-line">松姫『さうですね、今時の女の子はどうして、これ程ヤン茶になるのでせう。お千代だつてコマシヤクレた事ばかり云つて、私達に逆理屈をこね、仕方がありませぬわ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otora: 'That is so, indeed; if such a child were to be given a modern education, she would undoubtedly become completely unsuited to her parents' expectations. I intend to stop her schooling at the ordinary level; if I were to enter her into a school like Kauchikuji Girls' School, she would trouble her parents by uttering such trivial sophistries as the equality of men and women or the expansion of women's rights.'</p>
+          <p class="en-p">Matsuhime: 'Does that Kauchikuji have a girls' school? If so, I suppose the daughters of priests and the like enroll in it.'</p>
+          <p class="en-p">Otora: 'My word, not a single daughter of a priest enrolls there! They are all just the daughters of Bishiya and Shiyuda, and every single day they are taught nothing but worthless things like ball-playing, marathon running, tennis, and dancing.'</p>
+          <p class="en-p">Ho ho ho ho ho! That surely cannot be Kauchikuji Girls' School; it must be an upper girls' school. You must have read the character for "higher" (kau) by splitting it into "bamboo" (take) and "temple" (tera).</p>
+          <p class="en-p">Otora: 'By the way, Matsuhime-sama, what shall we do about Magahiko's marriage problem? I am most eager to settle it within this very evening, come what may.'</p>
+          <p class="en-p">Matsuhime: 'Now then, in any case, I shall go directly to meet Omin-san myself, listen carefully to her honorable opinions, and exert myself so that the matter may be settled as harmoniously as possible.'</p>
+          <p class="en-p">Otora: 'That would be most helpful; I beg of you to succeed through your eloquence and divine virtue.'</p>
+          <p class="en-p">Matsuhime: 'In that case, I shall now proceed to Omin-san's sitting room.'</p>
+          <p class="en-p">So saying, she descends the narrow two-hundred-step staircase. Otora and Okiku follow right behind Matsuhime. Matsuhime walks straight toward the room adjacent to the kitchen, which is Omin's bedroom, making her way through the drifting snow. When Otora returns to Imoriwake's sitting room, lo and behold, he is collapsed right there in his travel attire.</p>
+          <p class="en-p">Otora: 'Goodness me, what on earth is the meaning of this? Hey, Imori-sama, why are you lying flat out here in such solemn attire? Oh my, where on earth did Magahiko go? Since you were charged with being the watchman, it seems you were wandering about at night while the snow was falling. What a troublesome man you are; hey, Okiku, bring some water.'</p>
+          <p class="en-p">Okiku: 'When you say bring water, if we do not go all the way down to draw it, there will not be a single drop to be had. Rather than that, just pinch his nose; if you do that, he will surely regain consciousness.'</p>
+          <p class="en-p">Otora, thinking this a capital idea, grips Imoriwake's nose firmly with her right hand as usual, and strikes his back three or four times with her left. Imoriwake gasps back to consciousness,</p>
+          <p class="en-p">Imoriwake: 'Omin, oh how you have saved me! At the very end, while running, I tripped and it was a terrible ordeal. I was just on the verge of making a netherworld journey in utter collapse. That woman Otora came chasing after me…'</p>
+          <p class="en-p">Otora fiercely grabs him by the collar,</p>
+          <p class="en-p">'You rascal Imoriwake, what on earth are you talking about? What is this you say about Omin?'</p>
+          <p class="en-p">Startled by this voice, Imoriwake opens his eyes wide to see Otora glaring at him with teeth clenched and trembling violently, wearing a face like Emma having licked a darasuke pill, while she tightly grasps his collar.</p>
+          <p class="en-p">Imoriwake: 'What? I just had a dream. It, it, it, it, it is nothing at all; let go of me, it hurts, it hurts!'</p>
+          <p class="en-p">Otora: 'Where on earth do you intend to go dressed in such extravagant leg guards?'</p>
+          <p class="en-p">Imoriwake: 'What? I just thought I would like to meet Matsuhime-sama.'</p>
+          <p class="en-p">Otora: 'To go to Matsuhime-sama's place wearing travel attire… What on earth is the meaning of this? Is it not rather suspicious?'</p>
+          <p class="en-p">Imoriwake: 'What? I just intend to go as far as the grand hall to offer my thanks.'</p>
+          <p class="en-p">Otora: 'Is there any need to go today, of all days, while this snow is falling? Do not make such a fool of me, treating me like a blind person…'</p>
+          <p class="en-p">Imoriwake: 'What? Because the snow is falling, I thought snow would pack into the teeth of my geta and make me trip, so I put on straw sandals instead.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お寅『さうですねー、こんな子は今の教育でもさした位なら、到底親の挺には合はぬようになりますぢやろ。モウ学校は尋常で止めるつもりですわ。高竹寺女学校へでも入れようものなら、男女同権だとか、女権拡張だとか、下らぬ屁理屈をいつて両親を困らせますからね』</p>
+            <p class="ja-classical-line">松姫『あの高竹寺には女学校がありますか。さうすると坊さまの娘なんかが入学するのでせうね』</p>
+            <p class="ja-classical-line">お寅『イエ坊さまの娘なんか一人も入学してゐやしませぬわ。みんな毘沙や、首陀の娘ばかり入学して毎日日日、球突きだとか、マラソン競走だとか、テニスだとか、ダンスだとか、せうもない事ばつかり教へられてゐますのよ』</p>
+            <p class="ja-classical-line">松姫『ホヽヽヽヽ、ソラ高竹寺女学校ぢやありますまい、高等女学校でせう。等の字を竹と寺とに分けてお読みになつたのでせう』</p>
+            <p class="ja-classical-line">お寅『時に松姫さま、魔我彦の結婚問題は何ういたしませうかなア。是非共今晩の間にきめたいのですが』</p>
+            <p class="ja-classical-line">松姫『サ、兎も角もこれから私が直接にお民さまに逢うて、トツクリと御意見も承はり、成る可く円満に話がまとまりますやうに骨を折つて見ませう』</p>
+            <p class="ja-classical-line">お寅『ソレは済みませぬな、何卒貴女の雄弁と御神徳によつて成功する様にお願ひ致します』</p>
+            <p class="ja-classical-line">松姫『ソンなら是からお民さまのお居間へ伺ひませう』</p>
+            <p class="ja-classical-line">と云ひ乍ら細い二百段の階段を下つて行く。お寅もお菊も松姫の後からついて来る。松姫はスツと炊事場の隣室、お民の寝間を指して吹雪をぬひつつ行つて了つた。お寅は蠑螈別の居間に帰つて見ると、豈図らむや、旅装束をしたまま打倒れてゐる。</p>
+            <p class="ja-classical-line">お寅『コレヤまあ何の事だいなア、コレ蠑さま、何こんな所に厳めしい装束をして倒れてゐるのだい。アーア魔我彦は何処へ行つたのだい。番犬を仰せつけておくのに雪の降るのに、のそのそと夜歩きをしてをると見える。困つた男だな、コレお菊、水を持つて来い』</p>
+            <p class="ja-classical-line">お菊『水持つて来いといつたつて、下まで汲みに下りなくちや一滴もあれやしないわ。ソレよりも鼻をつまんでおやり、そしたら屹度気がつくわ』</p>
+            <p class="ja-classical-line">お寅は合点だと蠑螈別の鼻を例の如くグツと右の手で捻ぢ、左の手で背を三つ四つ喰はした。蠑螈別はハツと気がつき、</p>
+            <p class="ja-classical-line">蠑螈『お民、ヨウ助けて呉れた。到頭走る最中、蹴つまづいて、ひどい事だつた。もうスツテの事で幽冥旅行をやるところだつた。お寅の奴追ひかけて来やがつて………』</p>
+            <p class="ja-classical-line">お寅はグツと胸倉を握り、</p>
+            <p class="ja-classical-line">『コラ蠑螈別、何を云ふとるのだい。お民が何うしたと云ふのだいなア』</p>
+            <p class="ja-classical-line">蠑螈別は此声に驚いて目を見ひらけば、閻魔が駄羅助を舐つたやうな顔してブルブル震ひ乍らお寅が胸倉をとり、歯をくひしめて睨んでゐる。</p>
+            <p class="ja-classical-line">蠑螈『ナニ一寸夢を見たのだ。ナヽヽヽヽナンでもない、そこ放してくれ、苦しい、苦しい哩』</p>
+            <p class="ja-classical-line">お寅『たいさうな脚装束をして何処へ行くつもりだい』</p>
+            <p class="ja-classical-line">蠑螈『ナニ一寸松姫さまに逢ひたいと思つて』</p>
+            <p class="ja-classical-line">お寅『松姫さまとこへ行くのに旅装束をして………何の事だいなア。些怪しいぢやありませぬか』</p>
+            <p class="ja-classical-line">蠑螈『ナニ一寸大広間まで御礼に行つて来るつもりだ』</p>
+            <p class="ja-classical-line">お寅『此雪の降つて居るのに今日に限つて行く必要がありますか。アンマリ馬鹿にしなさるな、人を盲にして……』</p>
+            <p class="ja-classical-line">蠑螈『ナニ雪が降つて居るから、下駄の歯に雪がつまつてこけると思つて、草鞋をはいたのだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otora: 'Is there any such thing as putting on heavy travel gear just to go to a grand hall that is no more than five or six ken away? Moreover, wearing straw raincoats and hats with such elaborate politeness—what in the world is this? The place you are going to must be outside, right?'</p>
+          <p class="en-p">Imori: 'Yeah, it's outside. I am just going to pay my respects near the sacred tree at the base of the pine tree.'</p>
+          <p class="en-p">Otora: 'If you make too much of a fool out of me, I'll twist your nose off!'</p>
+          <p class="en-p">Imori: 'No, just spare my nose.'</p>
+          <p class="en-p">Otora: 'If so, shall I pinch you up instead?'</p>
+          <p class="en-p">Imori: 'Nooo, pinching me in this cold weather is something I'd rather avoid. Otora, please forgive me already. I am not going anywhere else anymore.'</p>
+          <p class="en-p">Otora: 'Hey, you Hiyōrokudama, what do you take this Otora for? Even if she is called Ushitora, the Shiranamionna of the village of Ukiki, she is an elder sister whom nobody fails to know! Do you think you can pull the wool over this elder sister's eyes? There is no way a scoundrel's power could ever deceive them! Come on, confess cleanly and frankly; if you do not confess, affection will overflow into a hundredfold hatred, and I'll twist and crush you to pieces!'</p>
+          <p class="en-p">Imori: 'Actually—ugh, the truth is... well, the truth is just the truth. No matter what you tell me to say, while you are grabbing me by the collar, my breath is so tight I can't even speak, can I? Let go, let go!'</p>
+          <p class="en-p">Otora: 'If so, I'll let go, so confess frankly. You intend to elope with Omin tonight, don't you? Omin is waiting around the forest of Noguchi, right?'</p>
+          <p class="en-p">As she spoke, she suddenly let go of the hand with which she had been gripping his collar. The moment Imoriwake stood up straight, the oval gold coins in his pocket dropped with a rattling sound. Seeing this, Otora's anger reached the peak of her heart, and she became like one mad,</p>
+          <p class="en-p">Otora: 'You thieving rascal, you intended to scoop up the money and elope with Omin, didn't you! Wait, just wait, I'll make you rue this before long!'</p>
+          <p class="en-p">Flustered, she tripped over the brazier, and her overexcited body suddenly fell flat on its face with a thud, banged her forehead hard against the corner of a pillar, cried out 'Ouch!', and crouched down right on the spot. Imoriwake quickly picked up the oval gold coins, reattached them to his waist, took his Kongo-staff in hand,</p>
+          <p class="en-p">Imori: 'Otora, I am going away on a brief training journey, so I leave the house in your care. They say youth and age are uncertain, and meeting is the beginning of parting; if there is a bond between us, let us meet again in the future. This is a keepsake from me to you, Otora-sama, on the occasion of our parting.'</p>
+          <p class="en-p">So saying, he tapped her head repeatedly with his Kongo-staff, said 'Adieu!', and dashed away like clouds and mist. Otora, whose senses had been dulled by hitting her forehead against the pillar, regained consciousness the moment her head was tapped, raised her face, and looked outside to see Imoriwake running about a cho down the slope, illuminated by the sharp sickle-like moon rising just then. Otora went frantic,</p>
+          <p class="en-p">Otora: 'You wretch Imoriwake, making a fool of this Otora!'</p>
+          <p class="en-p">Raising a voice of anger, with her skirts flying, she chased after him over the snowy path, tumbling and stumbling.</p>
+          <p class="en-p"></p>
+          <p class="en-p">Now Matsuhiko, starting with Matsuhime and consulting with Mankou, Gosankou, Aku, Taku, Teku, and others, performed purification at Kobakayama, pacified one by one the deities of heaven and earth numbering eight million who protect the Gokuritsutei no Ōkami and the Misankyō, expounded the truth to Matsuhime, Ochiyo, Okiku, and the receptionist Bunsuke and others, had this sacred place kept pure and righteous, and then Matsuhiko, Mankou, Gosankou, Aku, Taku, Teku, and their party left Kobakayama behind and quickened their pace toward the forest of Ukiki.</p>
+          <p class="en-p">Incidentally, Magahiko, hearing that Omin had fled away from this mansion, determined that he would find her no matter where she went, tucked up his skirts just like that, and chased after Otora while maintaining a distance of about three cho, dashing away with a pit-a-pat toward the forest of Noguchi as his mark.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お寅『五間や六間の距離よりない大広間へ行くのに大変な旅装束すると云ふ事がありますかい。しかも御叮嚀に蓑笠をかぶり、何の事だいなア。お前さまの行く処は外にあるのだらう』</p>
+            <p class="ja-classical-line">蠑螈『ウン外にある、笠松の根元の御神木の傍まで一寸御礼に行くのだよ』</p>
+            <p class="ja-classical-line">お寅『あまり馬鹿になさると、鼻を捩ますぜ』</p>
+            <p class="ja-classical-line">蠑螈『イヤ鼻ばつかりは御免だ』</p>
+            <p class="ja-classical-line">お寅『そんなら、つめつて上げようかい』</p>
+            <p class="ja-classical-line">蠑螈『イヤア此の冷たいのに抓るのは御免だ。お寅、モウ怺へてくれ。もう何処へも行きはせぬから』</p>
+            <p class="ja-classical-line">お寅『コレ兵六玉、此お寅を何と思つて居るのだ、これでも浮木の村の白浪女丑寅さまといつたら誰知らぬものもない姐さまだぞ。此姐さまの目を晦まさうと思つたつて、野郎の力でくらまさるるものか、サ綺麗薩張りと白状すればよし、白状せぬに於ては、可愛さあまつて憎さが百倍ひねりつぶしてやるぞ』</p>
+            <p class="ja-classical-line">蠑螈『実はエーンその実は………実はやつぱり実だ。何を云へといつたつて、胸倉とつてゐては息が苦しくつて云へはせぬぢやないか。はなせ　はなせ』</p>
+            <p class="ja-classical-line">お寅『そんなら放すから、薩張り白状せ、お前はお民と今晩駆落ちするつもりぢやろ。お民は野口の森辺りに待合して居るのだろ』</p>
+            <p class="ja-classical-line">といひ乍ら、胸倉を握つた手をパツとはなした。蠑螈別はスツと立つた途端に懐の小判が、ガタツと音がして落ちた。お寅は之を見るより怒り心頭に達し、狂気の如くなり、</p>
+            <p class="ja-classical-line">お寅『此の泥坊奴、金子を掻浚へてお民と駆落するつもりだつたのだなア、待て待て今に思ひ知らしてやらう』</p>
+            <p class="ja-classical-line">とあわてて火鉢につまづき逆上て空ぶつた身体は忽ちスツテンドウと倒れて、柱の角に額をグワンと打ち「アイタ」と云つたきり、其場にしやがんで仕舞つた。蠑螈別は手早く小判を拾ひ上げ腰につけ直し、金剛杖を手に持ち、</p>
+            <p class="ja-classical-line">蠑螈『お寅、俺は寸時修行に行て来る程に留守を頼むぞや。人間は老少不定、会ふのは別れの初めとやら、御縁があつたら又未来で御目に掛りませう。之がお寅さまと別れに際しての形見だ』</p>
+            <p class="ja-classical-line">といひ乍ら、金剛杖で頭をコツコツと打たたき「アリヨース」といひ乍ら、雲を霞と駆け出した。柱に額を打つて気が遠くなつてゐたお寅は、頭を叩かれた途端に気がつき、面を上げ屋外を見れば、蠑螈別は下の坂を一丁許りも走つて居るのが、折柄上る鋭鎌の如き月に照らされ見えてゐる。お寅は狂気となり、</p>
+            <p class="ja-classical-line">お寅『おのれ蠑螈別、此お寅を馬鹿にしをつたなア』</p>
+            <p class="ja-classical-line">と怒りの声をはり上げ乍ら裾もあらはに雪の路をこけつ転びつ追つかけて行く。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">偖て松彦は松姫を始め万公、五三公、アク、タク、テク等と相談の上、小北山に修祓を行ひ、国治立の大神を始め三五教を守ります天地八百万の神を一々鎮祭し、松姫、お千代、お菊並に受付の文助其他に真理を説きさとし、此聖場を清く正しく祭らしめおき、松彦、万公、五三公、アク、タク、テクの一行は、小北山を後に眺めて浮木の森を指して足を早めた。</p>
+            <p class="ja-classical-line">因に魔我彦はお民の此館を逃去つた事を聞き何処迄も探しあてねばおくものかと、是又尻ひつからげ、お寅の後を追うて三丁許り距離を保ち乍ら、トントントンと野口の森を目当にかけり行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c19.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 19: 吹 Snow [1209]</span>
+      </a>
+      <a href="../vol46/index.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Volume 46</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

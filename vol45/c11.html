@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: 仲裁 [1201] - Volume 45 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 45 Table of Contents</a>
+      <span>Volume 45</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 45 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: 仲裁 [1201]</h1>
+      <p class="chapter-title-ja">仲裁〔1201〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In the room of Kyōshiyu, Imoriwake, Magahiko, Otora, and Kumakō, four persons, sat cross-legged and, in a free-and-easy manner, were drinking and exchanging cups of sake gulped down rapidly. Without restraint, Otora pressed strong sake upon Kumakō. The foundation is liked, the royal will is good; why should one refuse? The worms of the throat could not help demanding it with a croaking sound. Like a cat pouncing upon a dried bonito, where had the initial fierce bearing gone? Suddenly becoming beaming-faced, they began to do it with a drinking-at-first-sight manner. The fact that Kumakō had raised a loud voice in the crowd and attacked Imoriwake's sake was, at the bottom of his heart, a calculation that he wanted to somehow reach the sweet sake; therefore, it was a fair wind for a crossing ship and a sail for a favored hand—a most convenient circumstance. Kumakō's tongue gradually began to twist, and raising a gong-like voice, he started to chant:</p>
+          <p class="en-p">'Drink and make merry, an inch ahead is darkness;
+After the darkness, the moon comes out.
+Though the moon is the moon, it is the moon of sake;
+Drinking tiny sips is a nuisance.
+From the mouth of the earthen vessel, dekkansho,
+Directly imported into the tank of the stomach,
+Wholesale right down to the privy.
+Have you come to feel pleasant?
+Sake belongs to the sake shop, good tea to the tea house,
+This mansion is for young nice folk.
+Grandma Otora is a bit old,
+Yet Imoriwake-sama,
+With narrow eyes clings to her,
+Sucking, weeping, crying, and biting like a lion,
+Entering the laughing pot, he is getting intoxicated.
+Dokkoisho, dekkansho!
+If it is a matter of responding, there is no help for it;
+Surely the gods would not utter
+Such a philistine thing as telling you not to drink sake.
+There is no god who does not partake of sacred sake.
+
+From now on, this Kumakō too
+Will be an attendant close to Imoriwake.
+As for the service of sake, until whenever,
+Not to mention the gods of heaven and earth,
+Yamata no Orochi or ugly foxes,
+Be it demons, foxes, or tanuki,
+Whatever it may be, do not mind, come on!
+Instead of you, I will drink.
+Even if a fox were to drink it,
+Still it passes down my throat;
+At that time I too am sweet, am I not?
+Dekkansho, dekkansho!'</p>
+          <p class="en-p">Magahiko: 'Now, now, Kuma-sama, you should not sing with such a loud voice. Will it not be heard in the great worship hall? How would it be if you exercised a little discretion?'</p>
+          <p class="en-p">Kumakō: 'What are you babbling about, finding fault with sake that I drank with such fine spirits? If I drank little by little like one stealing a drink in silence, what fun would there be? If one drinks sake, it is bound to make one drunk. If one gets drunk, it is bound to make a commotion. Are you telling me to kill the splendid sake and drink it? Heh, now, Imoriwake-sama, is what Kumakō says different?'</p>
+          <p class="en-p">Imoriwake: 'Aha-ha-ha-ha! It is not different in the least.'</p>
+          <p class="en-p">Kumakō (in a loud voice): 'Did you see that, Magahiko? Did not the exalted master say it was not different?'</p>
+          <p class="en-p">Magahiko turned pale, and</p>
+          <p class="en-p">Magahiko: 'Hey, Kuma-sama, unless you consider decorum no matter what, can this castle be maintained?'</p>
+          <p class="en-p">Kumakō: 'To one drunk on sake, what decorum or shit is there? If one were to put on decorum, could one not drink sake? If that is the way of it, you said that the Uranai teachings have no reverse side, but after all they do have a reverse side, don't they? While spouting solemn things on the front, what is this? Once you step into the inner chambers, from morning till night you are dead drunk on sweet sake, setting aside the teachings of the gods, and from the principal master himself down to Grandma Otora, you flirt, quarrel, pinch, and strike each other—it is truly appalling.'</p>
+          <p class="en-p">Otora: 'Hey, Kuma-sama, you have bad liquor, so it truly becomes a bother. If you would only fathom the heart of the exalted master a little bit and consider my heart as well, how would it be? While receiving such splendid sake, is it proper to say things that become a nuisance here? Please consider the matter of duty just a little bit.'</p>
+          <p class="en-p">Kumakō: 'Watsu-ha-ha-ha-ha! Well now, what are you vomiting up? The unrighteous heaven, the advent of the Sun God. Heh, hey Otora, you too have grown quite senile, haven't you? The female knight of the floating-tree forest; when it came to Ushitora, at one time it was a grand momentum capable of bringing down even flying birds, but before one knew it, you have sunk into the Uranai teachings and become limp and flabby, haven't you? Hey Otora, you surely have not forgotten the old days yet, have you? Heh, this Kumakō is fully endowed with the right to be as unreasonable as he pleases toward you. Since it is before Imoriwake, I will refrain from exposing you, but if I have gone this far, Imoriwake, as long as he is not a fool, will surely understand for the most part. Without knowing that this Kumakō has slipped among the believers and is waiting with all his might to track down Otora's whereabouts, lining up with a saintly face, well did you manage to mount the platform! "The wolf transforms into court nobles and ministers"—well said indeed. The world is truly full of fools, isn't it? Atsu-ha-ha-ha!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">教主の間には蠑螈別、魔我彦、お寅、熊公の四人は胡坐をかき、無礼講の体でグビリグビリと酒汲み交はして居る。無性矢鱈にお寅は熊公にきつい酒をすすめる。下地は好きなり御意はよし、何条以て断るべき、喉の虫がクウクウと催促して堪らない。猫が鰹節に飛びついた様、初めの権幕何処へやら、俄に恵比須顔となつてグイグイと、会うた時に笠脱げ式でやり初めた。熊公が群集の中で大声を出し蠑螈別の酒を攻撃したのも、心の底は何とか云つて甘酒にありつかうと云ふ算段だつたから渡りに舟、得手に帆と云ふ好都合だ。熊公はソロソロ舌が縺れ出し銅羅声を出して唄ひ出した。</p>
+            <p class="ja-classical-line">『飲めよ騒げよ一寸先や暗よ
+暗の後には月は出る
+つきはつきぢやが酒づきぢや
+チヨビチヨビ飲むのは邪魔臭い
+土瓶の口からデツカンシヨ
+胃の腑のタンクへ直輸入
+直に雪隠へ卸売
+面白うなつておいでたな
+酒は酒屋に、よい茶は茶屋に
+若いナイスは此館
+お寅婆さまぢや一寸古い
+それでも蠑螈別さまが
+細い目をして抱きつき
+吸ひつき泣きつき獅噛みつき
+笑壺に入つて厶るのだ
+ドツコイシヨ、デツカンシヨ
+応対づくなら仕様がない
+酒を飲むなと神さまが
+野暮の事をば仰有るまいぞ
+御神酒上らぬ神はない</p>
+            <p class="ja-classical-line">此熊公も之からは
+蠑螈別のお側づき
+お酒の御用なら何時迄も
+天地の神は云ふも更
+八岐大蛇や醜狐
+鬼でも狐でも狸でも
+何でも構はぬやつて来い
+お前の代りに俺が飲む
+仮令狐が飲んだとて
+矢張俺が喉通る
+其時や俺も甘いぞや
+デツカンシヨ　デツカンシヨ』</p>
+            <p class="ja-classical-line">魔我『こりやこりや熊さま、そんな大きな声で唄ふものぢやない。大広前へ聞えるぢやないか。チツと気を利かしたら如何だ』</p>
+            <p class="ja-classical-line">熊公『折角機嫌よう飲んだ酒を何ゴテゴテ云ふんでえ、黙つて盗んで酒を呑む様にチヨビリチヨビリと飲んだつて何が面白い。酒を飲めば酔ふにきまつてる。酔うたら騒ぐにきまつてる。お前は結構な酒を殺して飲めと云ふのか。エーン、なア蠑螈別さま、熊公の云ふ事が違ひますかな』</p>
+            <p class="ja-classical-line">蠑螈『アハヽヽヽチツとも違ひはせぬ』</p>
+            <p class="ja-classical-line">熊公（大声）『それ見たか魔我彦、教祖様が違はぬと仰有つたぢやないか』</p>
+            <p class="ja-classical-line">魔我彦は青くなり、</p>
+            <p class="ja-classical-line">魔我『これ、熊さま、何ぼどうでも体裁と云ふ事を考へて呉れなくちや此城がもてぬぢやないか』</p>
+            <p class="ja-classical-line">熊公『酒に酔うたものに体裁も糞もあるものかい。体裁を作らうものなら酒を飲まれぬぢやないか、さうすりやウラナイ教には裏がないと云つたが矢張裏があるのだなア。表には鹿爪らしい事を吐き乍ら何でい。奥へ這入れば朝から晩まで甘酒に酔ひつぶれ、神の教は其方除けにして肝腎の教祖さまからお寅婆アさまと意茶つき喧嘩をしたり、抓つたり叩いたりするのだからな、呆れたものだ』</p>
+            <p class="ja-classical-line">お寅『これ熊さま、お前は悪酒だから本当に困つて了ふよ。チツとは教祖様の御心中も察し俺の心も酌んで呉れたら如何だい。結構な酒を頂き乍ら、ここの迷惑になる様の事を云つても宜しいのか。チツとは義理と云ふ事も考へて下さいな』</p>
+            <p class="ja-classical-line">熊公『ワツハヽヽヽそらア、何を吐しやがるんだい。不義理の天上、日出神様の御入来だ。エーン、こりやお寅、貴様も大分に老耄たねえ、浮木の森の女侠客、丑寅と云つたら一時は飛つ鳥も落す様な豪勢な勢だつたが、何時の間にやらウラナイ教に沈没してフニヤフニヤになつて了つたぢやないか。こりやお寅、昔の事をまだ忘れては居めえな。エーン、此熊公はお前に対しては十分駄々を捏ねるだけの権利が具備してるのだ。蠑螈別の前だから素破抜くのは廃とくが、ここ迄云つたら蠑螈別だつて馬鹿でない限りは大抵合点が行くだらう。此熊公が信者の中へ紛れ込み、お寅の行衛をつきとめむと腕に撚をかけ待つて居るのも知らずに聖人面を列ねて、よくもまア演壇に立ちやがつたな。虎狼野干は化して卿相雲客となるとは、よく云つたものだ。世の中は比較的に馬鹿者の多いものだなア。アツハヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otora: 'Hey, hey Kumakō-sama, isn't this a bit too much? If you have something you want to say, let me hear it properly afterwards. Aren't you before Imoriwake?'</p>
+          <p class="en-p">Kumakō: 'Aha ha ha ha, is it a bit inconvenient? If it is inconvenient for you, it is convenient for me. If it is convenient for you, my face is out of face. Anyway, things in this world go up and down like a mortar pestle. Is this Kumakō, who promised vows for two existences, that much of a nuisance? Well now, no doubt you are doing some bold business with Imoriwake. Come on, confess the truth, I won't go home just like this, eeh!'</p>
+          <p class="en-p">Imori: 'Kumakō-sama, please do take Otorasama away as you please. I certainly have no lingering attachment left, naah.'</p>
+          <p class="en-p">Otora: 'Hey Imoriwake-sama, what a distant thing you are saying. I have my own thoughts about it too. Shall I twist your nose again?'</p>
+          <p class="en-p">Imori: 'Kumakō-sama save me, save me'</p>
+          <p class="en-p">Otora: 'Aitata tata, what a cruel man you are! Hey, Kumakō-sama, what do you think this place is? This is a sacred ground where the gods gather and play, so shouting in such a place, knocking people down, and doing such violence will never do. Please understand a little. Hey Magahiko, what are you dawdling for? Quickly report this matter to Matsudaisama, stop Kumakō's violence, and send him packing.'</p>
+          <p class="en-p">Kumakō: 'Aha ha ha ha, that wench Otora has finally weakened! Despite flirting and squabbling with Imoriwake from morning till night, saying things like please stop fighting in such a sacred ground, ke ke ke ke, my buttocks are astounded! No, it is ridiculously funny. Watsu ha ha ha!'</p>
+          <p class="en-p">Otora: 'Hey Kumakō-sama, I beg you, drink sake in a good mood and go home today. And if you want to drink sake again, please come back. If you drink quietly like that, I will treat you to as much sake as you want.'</p>
+          <p class="en-p">Kumakō: 'Treat me, you say? That is outrageous! For a husband to come to his wife's place and be treated or not treated—what kind of talk is that? Didn't you leave me behind, run away all the way to Ukiki no Mori, become a female chivalrous person beyond your station, keep a lot of fellows, and put on a bold front? When I was driven out of the house by you and stumbling around in Ukiki no Mura, I don't know how many times I went to your doorway. Even then, didn't you have a rotten-like old man and have this Kumakō beaten up in sacks with the help of many people time and time again? When I heard the rumor that Tagokō, who was acting as your husband, took my blow, fell ill from it, and fragilely changed his domain, my joy, my delight—it was as if three to of phlegm had been cleared away! Uwa tsu ha ha ha, by today you too are at the end of the world. strutting around as Oba-san playing with hags and children, you won't even be able to touch this Kumakō with a single finger. I am a man too. Having been given an elbow blow by a wife, I won't say become my wife again. No, even if you begged me, I would refuse from this side. However, if there is a fish's heart there is water's heart. I certainly want you to give me some greetings, naah.'</p>
+          <p class="en-p">Otora: 'When you say give greetings, are you trying to extort money or something? There is no such thing as money in the way of the gods.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">お寅『これこれ熊さま、あまりぢやありませぬか。云ひ度い事があるなら後でしつぽり聞かして下さんせ。蠑螈別の前ぢや厶いませぬか』</p>
+            <p class="ja-classical-line">熊公『アハヽヽヽ、チツと都合が悪いかの。其方に都合が悪けりや此方に都合がよい。其方に都合が好けりや此方の面工が悪い。何でも彼でも世の中の事は上つたり下がつたり唐臼拍子に行くものだ。二世を契つた此熊公が、それ丈け煩さいのか。うんよし、大方貴様は蠑螈別と太え事をやつてゐやがるのだらう。サア有態に白状せい此儘には帰らないぞ、エーン』</p>
+            <p class="ja-classical-line">蠑螈『熊さま、何卒お寅さまを貴方の御自由に連れて帰つて下さい。決して私には未練はありませぬからナア』</p>
+            <p class="ja-classical-line">お寅『これ蠑螈別さま、貴方は何と云ふ水臭い事を仰有るのだ。私にも量見がありますぞや。又鼻を捻て上げませうか』</p>
+            <p class="ja-classical-line">と立ち上り強力に任せて蠑螈別の鼻を捻やうとする。蠑螈別はお寅の鼻抓みには懲々してゐるから両手で顔を隠し俯向いて畳にかぶりついたまま、</p>
+            <p class="ja-classical-line">蠑螈『熊さま助けて呉れえ助けて呉れえ』</p>
+            <p class="ja-classical-line">と恥も外聞も忘れて叫んでゐる。熊公はお寅の首筋をグツと握り後へ引いた。途端にお寅はドスンと尻餅を搗く。</p>
+            <p class="ja-classical-line">お寅『アイタヽヽヽ何とひどい事をする男だ事、これ、熊さま、お前ここを何と心得て居る。ここは神様のお集まり遊ばす聖場で厶んすぞえ、斯様な処で呶鳴つたり、人を転したり、そんな乱暴をなすつちや済みますまい。チツと心得て下さんせえな。これ魔我彦、何をグヅグヅして居るのだ。早く末代様に此事を申し上げ熊さまの乱暴を喰ひ止め追つ帰して下さいな』</p>
+            <p class="ja-classical-line">熊公『アハヽヽヽお寅の奴、到頭弱りよつたな。蠑螈別と朝から晩まで意茶つき喧嘩をして居る癖に、こんな聖場で喧嘩する事アやめて呉れえなんて、ケヽヽヽヽ尻が呆れるわい。いや、チヤンチヤラ可笑しいわい。ワツハヽヽヽ』</p>
+            <p class="ja-classical-line">お寅『これ熊さま、頼みだから機嫌ようお酒を飲んで、今日は帰つて下さいな。そして又お酒が飲みたくなつたら来て下さい。さうしておとなしう飲んで下さつたら酒位は何程でも振舞つてあげますから』</p>
+            <p class="ja-classical-line">熊公『振舞つてくれるとは、そりや怪しからぬ、夫が女房の処へ来て振舞ふも、振舞はぬもあつたものかい。貴様は俺を置去りにして浮木の森迄逃げ失せ、柄にもない女侠客となり沢山な野郎共を飼ひやがつて、虚勢を張つてゐよつただないか。俺は貴様に宅を飛び出され、浮木の村に間誤ついてゐる時、幾度門口へ行つたか分らない。その時も腐つた様な親爺を持ち、此熊さまを多勢の力を借つて袋叩きに致した事が幾度もあるぢやないか。貴様の亭主としてゐた田子公の奴、俺の当身を喰つて、それが病み付となり脆くも国替をしたと、噂に聞いた時の嬉しさ、いや愉快さ、溜飲が三斗ばかり下りた様にあつたわい。ウワツハヽヽヽ、もう今日となつては貴様も世の末だ。婆嬶や子供を相手に致し、お寅婆サンと威張つてゐる様では此熊公に指一本触える事も出来やしめえ。俺も男だ。女房に肱鉄を喰らはされて再び女房になれとは云はねえ。いや頼まれても此方からお断りだ。然し乍ら魚心あらば水心だ。何とか挨拶をして貰ひ度えものだなア』</p>
+            <p class="ja-classical-line">お寅『挨拶をせえと云ふのはお金でも強請らうと云ふのかい。お金なんか、神様の道にありやせないわ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kumakō: 'Hahaha! What a fool, what a fool! With such a stout backbone as this, even if you say it is worth nothing, a thousand or ten thousand rō of gold ought to be staring you in the face! Won't you make a clean and neat break of it and shell it out for me? Even if Imoriwake made free with my niyōbau without my knowing, since he's using her without permission, you won't be able to say no, will you?'</p>
+          <p class="en-p">With this, he stripped off both shoulders, swung his tattoo-covered arms, bared his raw skin, and repeatedly spouted out shiranami lingo.</p>
+          <p class="en-p">Magahiko: 'Otora-sama, if things come to this, it won't be settled easily. Without saying stingy things, hey, why don't you hand over that ten thousand ryō of gold? Wouldn't it be a nuisance if you kept having people come and say things like this all the time?'</p>
+          <p class="en-p">Otora: 'Now, now Magahiko, did you even see a dream? Where on earth is such a huge amount of gold? When you say ten thousand ryō, it's about as much as a garden tree with red berries growing on its tip. Aren't you causing trouble by saying such useless things? Control yourself. Even if it existed, this is the mansion of Imoriwake. Can it be at my disposal?'</p>
+          <p class="en-p">Kumakō: 'Hahaha! It's as though I've finally found the whereabouts of the ten thousand ryō. Come now, since things have come to this, it's ten thousand ryō! Right or wrong, it's ten thousand ryō! Chasing away this Kumakō is also ten thousand ryō! Cutting off this annoying enen is also ten thousand ryō!'</p>
+          <p class="en-p">Otora: 'Now, now Kuma-sama, you say ten thousand ryō at every turn, what on earth are you talking about? Don't make such a fool of me! If I were to listen to what you've been saying since a while ago, wouldn't five thousand ryō be needed as well? If I had gold to give you, even a ten-mon coin or a single mon, I would offer it to Hachiman-sama. If you harbor such greedy thoughts, you will fall into the eighty thousand hells!'</p>
+          <p class="en-p">Kumakō: 'Hells of eighty thousand? This Kumakō is enjoying a journey to the ten hundred million Buddha lands instead! If you think of Kumakō, I am a true, genuine Akumakō. Ten thousand ryō is a cheap price for an exorcism. Come, come, pay up, pay up, pay me, purify me!'</p>
+          <p class="en-p">Otora: 'Stop talking such nonsense and hurry up and go home, I beg of you!'</p>
+          <p class="en-p">Kumakō: 'In that case, I'll discount the five thousand ryō and let you off with ten thousand ryō. Ten thousand ryō must be a cheap bargain, right?'</p>
+          <p class="en-p">Otora: 'How hateful! Look here Kuma-sama, what are you talking about? When I converted into this Uranai Teachings, I used the ten thousand ryō of gold I had saved up to build this splendid shrine just as it is. If you want that ten thousand ryō, take that stone shrine into your bosom, hoist it on your shoulders, and carry it home as you please! There is no such thing as money here!'</p>
+          <p class="en-p">Imoriwake, in a small voice with a tangled tongue,</p>
+          <p class="en-p">Imoriwake: 'Hey Otora, since it's annoying, why don't you just take whatever there is and send him home? And you should make him write a note that he won't make any complaints from now on.'</p>
+          <p class="en-p">Otora: 'Now look, Imoriwake-sama, what kind of faint-hearted thing are you saying? If I were to hand over that ten thousand ryō, which is as precious as my life, wouldn't it be better to die? How on earth are you and I going to get along from here on? Shut your mouth. Even if I had money to throw into a gutter, I have no money to give to the likes of Kuma-sama! Coming here so brazenly and causing me unexpected hardship—hey Kumakō, what do you take this Otora-sama for? If you speak of the female kyōkaku of Ukigi no Mori, Umitora-san—humph, daring to say so, it's this older sister here! I am not an older sister who gets frightened into wetting herself just by being threatened by a bantam cock like you lot!'</p>
+          <p class="en-p">With this, she gave up all hope, rolled up her tattooed arms with a stout grip, thrust out one knee as a standing leg, spat out foam, and roared. Kumakō flew into a raging fury, grabbed old woman Otora by her topknot, and dragged her around with all his might. Imoriwake and Magahiko were scared out of their wits by this fierce momentum, hid themselves inside the chōkamu in the inner room, and sat trembling in terror. Hearing these voices, the five men—Mankō, Gosankō, Aku, Taku, and Teku—came running up in a noisy clatter.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">熊公『アハヽヽヽ惚けな惚けな、これ丈け太え屋台骨をしやがつて何程ないと云つても金の千両や万両は目を剥いて居る筈だ。手切れに綺麗薩張と出して貰ひませうかい。蠑螈別だつて俺の女房を自由にしたかせぬか知らぬが断りなく使つて居るのだから、否応は云えまい』</p>
+            <p class="ja-classical-line">と両肌を脱ぎ入墨だらけの腕を振りまはし、生地を現はして白浪言葉を頻りに連発しだした。</p>
+            <p class="ja-classical-line">魔我『お寅さま、斯うなつちや容易に片づきますまいぜ。吝な事云はずに、それ、あの一万両の金を渡したら如何です。常時こんな事云つて来て貰うては煩いぢやありませぬか』</p>
+            <p class="ja-classical-line">お寅『これこれ魔我彦、お前夢でも見たのか。何処にそんな大した金がありますか。万両と云つたら庭先に赤い実のなつてる植木位なもんだよ。しやうもない事云つて困るぢやないか。慎みなさい。仮令あつた処でここは蠑螈別のお館だ。私の自由になりますか』</p>
+            <p class="ja-classical-line">熊公『アハヽヽヽ到頭一万両の所在を見つけ出した様なものだ。サアもう斯うなる上は、一万両だ、非が邪でも一万両だ。此熊さまを追払ふのもヤツパリ一万両だ。煩さい因縁を切つて貰ふのもヤツパリ一万両だ』</p>
+            <p class="ja-classical-line">お寅『これこれ熊さま、一つ云ふては一万両、一つ云ふては一万両とそりや何を云ふのだい。あんまり馬鹿にしなさんな、最前からお前の云ふ事を聞いて居りや五万両も要るぢやないか。お前に一万両でも一銭でもあげる金があれや、八幡さまに奉納致しますわいな。そんな欲な事を考へてをると八万地獄に落ちますぞや』</p>
+            <p class="ja-classical-line">熊公『八万地獄所か十万億土の旅立を楽んで居る此熊公だ。熊公と思や正真正銘の悪魔公だよ。悪魔払ひに一万両は安いものだ。サアサアキリキリ払うたり払うたり払ひ給へ、清め給へだ』</p>
+            <p class="ja-classical-line">お寅『そんなヤンチヤを云はずにトツとと帰つて下さい。お頼みだから』</p>
+            <p class="ja-classical-line">熊公『そんなら五万両は割引して一万両にまけておく。一万両は安いものだらう』</p>
+            <p class="ja-classical-line">お寅『好かぬたらしい。これ熊さま、何を云ふのだい。俺が此ウラナイ教へ入信した時、貯めて置いた一万両の金で此通り立派なお宮を建てたのだ。其一万両が欲しければ、あの石の宮さまを懐へ入れてなつと、担いでなつと勝手に帰んで下さい。お金なんぞ、ありやせないよ』</p>
+            <p class="ja-classical-line">蠑螈別は、小さい声で舌をもつらせ乍ら、</p>
+            <p class="ja-classical-line">蠑螈『おいお寅、煩いから有る丈け持つて帰なしたらどうだ。そして今後は文句は云はないと書付けをとつておくのだな』</p>
+            <p class="ja-classical-line">お寅『これ蠑螈別さま、何と云ふ気の弱い事を仰有るのだ。生命と懸替の、あの一万両を渡す位なら死んだがましぢやないか。何うしてお前さまと私と此先やつて行くのだい。黙つて居なさい。溝壺へ捨てる金が有つても熊さまなんかへ渡す金はありませぬぞ。こんな処へヌツケリコとやつて来て思はぬ苦労をかけやがつて、これ熊公、此お寅さまを何と心得てる。浮木の森の女侠客丑寅サンと云つたら、ヘン、憚り乍ら此姐さまだ。お前達の様な一羽鶏に脅かされて屁古垂れる様な姐さまぢやありませぬぞや』</p>
+            <p class="ja-classical-line">と棄鉢気分になり、入墨のした腕をグツと捲り、一方の足を立膝し乍ら泡を吹き飛ばし呶鳴りつけた。熊公は猛り狂うてお寅婆の髻を引つ掴み力限り引張りまはす。蠑螈別、魔我彦は此権幕に肝を潰し、奥の間の長持の中へ身を隠し、慄ひ戦いてゐる。此声を聞きつけて万公、五三公、アク、タク、テクの五人はドヤドヤと走り来り、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mankō: 'Wait, wait, if I tell you to wait, you had better wait!'</p>
+          <p class="en-p">Iso: 'I know not what entanglement this may be, but the arbitration of this place shall be undertaken by me, Isokō.'</p>
+          <p class="en-p">Saying this, he deliberately adopts the language of the shiranami to begin intimidating them.</p>
+          <p class="en-p">Kumakō: 'Aha-ha-ha-ha! For a mere kowatsupa yarou to leap out into such a place and arbitrate our kenkuwa is kataharaite indeed! This is mere karaiba of a Yanosukeningiyō! Do you think to make a hekotare at such a thing, and make the face of Kumakō the yohidore stand? This is no stage for kowatsupamushiya! Get on back and clear out!'</p>
+          <p class="en-p">Aku: 'Ho there, you called the drunken rogue Kumakō, you had best wait a while. I am none other than Katahiko Shiyōgun, the great inspector of Brahmanism. What are you chimayo to rush into such a place and make such a ranbau? An outrageous shiromono indeed! Ho, my kerai, bind this ranbausha soundly with the wondrous art of kanashiba bestowed upon us by Daijizaiten!'</p>
+          <p class="en-p">Iso: 'Now, now, Katahiko Shiyōgun-sama, your anger is natural enough, but to bind a man without even listening to the circumstances is what they call merciless. Might I ask if you would be so kind as to leave this matter to me, Iso-san, the chivalrous hero of Iruna?'</p>
+          <p class="en-p">Aku: 'Though he is a most hateful fellow, yet since you, a chivalrous hero currently making a name, say so, I suppose I cannot refuse you flatly. If that is so, I entrust the resolution of this place entirely to you. Should you fail to settle it satisfactorily, there shall be no forgiveness!'</p>
+          <p class="en-p">Iso: 'Hai, I understand the details completely. As a chivalrous hero currently making a name, even at the cost of my life I shall bring about a settlement here and show it to you. If by any chance it does not go well, I shall perform seppuku right here and show you. Then you may punish me as you please, honorable sir.'</p>
+          <p class="en-p">Aku: 'If that is so, I shall wait a while in the inner room. Mankō, Taku, Teku, follow behind me. Oyabun Isokō, farewell then.'</p>
+          <p class="en-p">Sticking out his elbows, he strides leisurely toward the grand hall while suppressing a laugh.</p>
+          <p class="en-p">Otora: 'My, my, Katahiko Shiyōgun-sama, that you should grace us with your noble person! This too must be the divine virtue of the gods; oh, I am deeply grateful.'</p>
+          <p class="en-p">Iso: 'Katahiko Shiyōgun, famed as the minister of the right guard of Ōkuninushi who reigns flourishingly in the land of Haruna, is now leading tens of thousands of troops on his march toward the mansion of Saien, having heard of the divine virtue of Kobakayama—nay, hearing whispers of it, and in order to pray for victory, he halted his troops in the forest of Ukiki, and accompanied by a small number of retainers, came to worship. According to the divine revelation, he heard that a debauched man named Kumakō attempted unlawful coercion against the divine minister Imoriwake-dono and others, as well as Otora-dono. Without a moment's delay, upon coming here, to find this unacceptable state of affairs—thus Katahiko Shiyōgun-sama conveyed it through the spirit to the spirit of this Iso-san. Even if this Iso-san, possessed by the august spirit of Katahiko Shiyōgun, stands as mediator, surely it will not be found lacking, eh, you called Kumakō?'</p>
+          <p class="en-p">Kumakō: 'Hai, that a noble personage like yourself should trouble yourself with the labor of arbitration is an absolute honor. Oh, from this day forth I shall cast aside my old heart completely, and hereafter I shall never set foot in this mansion again. Please be completely at ease.'</p>
+          <p class="en-p">Iso: 'A prompt acquiescence! Ah, the divine spirit of Katahiko Shiyōgun and the older brother of Iso-san are both thoroughly satisfied. Regarding this, Otora-dono, Imoriwake-dono, I too am a chivalrous hero. I cannot do things by halves. Consider this as straw-sandal money for the nonce, and hand over one thousand ryo of gold flatly to this Kuma-san. If Imoriwake-sama can have this resolved with just this, it must be a cheap bargain. It is merely pinch-money. Aha-ha-ha-ha!'</p>
+          <p class="en-p">Otora: 'How could I possibly disobey the honorable oyabun's arbitration? I too was formerly a female chivalrous hero, and I understand the pride of a chivalrous hero well. If that is so, out of regard for your honorable face, I will hand over the one thousand ryo of gold, so please make sure that Kumakō-sama never comes saying anything further hereafter.'</p>
+          <p class="en-p">Iso: 'Ah, I understand completely. As expected of an elder sister! You are truly decisive. Ho, Kumakō, how is this? You should have no complaints now, surely?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">万公『待つた待つた、待てと申せば待つたが宜からうぞ』</p>
+            <p class="ja-classical-line">五三『何事の縺れか知らねえが、此場の仲裁は此五三公が預かりやせう』</p>
+            <p class="ja-classical-line">と故意とに白浪言葉を使つて嚇しにかかる。</p>
+            <p class="ja-classical-line">熊公『アハヽヽヽ小童子野郎が斯んな処へ飛び出し、俺達の喧嘩を仲裁するとは片腹痛え、弥之助人形の空威張り、そんな事に屁古垂れて、酔泥の熊公のお顔が立つと思ふかエーン、小童子武者の出る幕ぢやない。すつこんで厶れ』</p>
+            <p class="ja-classical-line">アク『あいや酔泥の熊公とやら、暫く待つたがよからうぞ。吾こそはバラモン教の大目付片彦将軍で厶るぞ。何を血迷うて斯様な処へ乱暴にやつてうせたか、怪しからぬ代物だ。おい家来共、大自在天より授かりし金縛りの妙法を以て此乱暴者を手痛くふン縛れ』</p>
+            <p class="ja-classical-line">五三『もしもし片彦将軍様、お腹立ちは御尤も乍ら様子も聞かず、ふン縛るとは無慈悲と申すもの、何卒イルナの侠客五三公サンに此場はお任し下さる訳には行きますめえか』</p>
+            <p class="ja-classical-line">アク『飽迄憎き奴なれど、当時売出しの侠客の其方が申す事、無下に断る訳にも行くまい。そんなら其方に此場の解決を一任する。万一ゴテゴテ吐すに就いては容赦はならぬぞ』</p>
+            <p class="ja-classical-line">五三『ハイ、委細承知仕りやした。私も当時売出しの侠客、命に代へても此場の落着をつけて御覧に入れやせう。万々一行かねば此場で割腹致して見せやせう。さすれば貴方の御自由に御成敗遊ばしやせえ』</p>
+            <p class="ja-classical-line">アク『然らば暫く別間に控へて居る。万公、タク、テク、余が後に従つて来い。五三公親分、さらばで厶る』</p>
+            <p class="ja-classical-line">と肱を張り悠々として笑ひを忍び乍ら大広間さして立つて行く。</p>
+            <p class="ja-classical-line">お寅『これはこれは片彦将軍様、尊き御身を以て入らせられました。これと申すも神様の御神徳、いやもう有り難う厶います』</p>
+            <p class="ja-classical-line">五三『ハルナの国に時めき給ふ大黒主の右守の司と聞えたる鬼春別将軍の部下、片彦将軍は、今や数万の軍勢を引き率れ斎苑の館へ進軍の途中、小北山の神徳、いやちこなりと聞き戦勝祈願のため、浮木の森に軍隊を留め、少しの部下を伴ひ参詣致したもの、神のお示しによればアバ摺れ男の熊公なるもの、神の司の蠑螈別殿、其他お寅殿に向つて無体の脅迫を試みしと聞き、取るものも取り敢ず、此処に来て見れば、不都合千万な此始末、と片彦将軍様が霊を以て此五三公が霊に伝へ給うた。片彦将軍の御身魂が宿つた此五三公様が仲裁に立つても、よもや不足ぢやあるめえ、のう、熊公とやら』</p>
+            <p class="ja-classical-line">熊公『ハイ、貴方の如き尊きお方に仲裁の労を煩はし、誠に光栄に存じます。いやもう今日限りスツパリ心を改め、今後は決して此館へ足踏みを致しませぬ。何卒御安心下さいませ』</p>
+            <p class="ja-classical-line">五三『早速の納得、いや片彦将軍の神霊も五三公の哥兄もズンと満足いたした。就いてはお寅殿、蠑螈別殿、わつちも侠客だ。片手落ちの事はやられねえ。当座の草鞋銭だと思つて此熊サンに一千両の金をスツパリとお渡しなせえ。蠑螈別さまもこれで解決つくならば安いものだらう。ほんの抓み銭だ。アハヽヽヽ』</p>
+            <p class="ja-classical-line">お寅『親方さまの御仲裁、何しに背きませう。私も、もとは女侠客、侠客の意地はよく呑み込んで居ります。そんなら貴方のお顔に免じて千両の金を渡しますから、今後は熊さまが何にも云つて来ない様にして下さいませ』</p>
+            <p class="ja-classical-line">五三『いや承知致しやした。流石は姐貴だ。スツパリしたものだ。おい熊公、如何だ。これで文句はあるめえな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kumakō: 'Why, I thank you truly. With as much as a thousand ryō of gold, I can have five or ten years of sweet saké. Ah, I thank you indeed.'</p>
+          <p class="en-p">Otora brought out a thousand koban from the next room,</p>
+          <p class="en-p">Otora: 'Now, Oyabun Isokō-sama, please take this and keep the bond in exchange.'</p>
+          <p class="en-p">Iso: 'Ahahaha. Taking a bond is something for the people of the future. A man once making a promise is like the everlasting bedrock, never to be shaken at all. How is that, Kumakō?'</p>
+          <p class="en-p">Kumakō: 'Yes, yes, I too am a man. How could I say a word against it? Hey, Otora, rest assured. Thankful I am; with you, there being this and that or not, such fine saké can be drunk. Chiyoi, chiyoi, chiyoi, I receive it.'</p>
+          <p class="en-p">And joining both hands, he turned his palms upward and shook them up and down.</p>
+          <p class="en-p">Iso: 'There, it is a thousand ryō. Receive it securely.'</p>
+          <p class="en-p">Kumakō: 'Yes, thank you. For all eternity, I will not forget your great favor. And as for Otora, I forget her from this very moment.'</p>
+          <p class="en-p">Sooner said than done, he shoved them into his bosom, and as if saying that lingering was to be feared, he hurried away down the slope like an arrow shot from a bow.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">熊公『いやもう有難う厶ります。千両の金さへあれば五年や十年の甘え酒が頂けます。いやもう有難う厶りやした』</p>
+            <p class="ja-classical-line">お寅は次の間から小判を千両とり出し、</p>
+            <p class="ja-classical-line">お寅『さあ五三公の親分さま、これを引替へに証文を取つて置いて下さいませ』</p>
+            <p class="ja-classical-line">五三『アハヽヽヽ証文をとるのは未来の人間のする事だ。男が一旦約束をした事は万古末代磐石の如く決して動くものぢやねえ。熊公如何だ』</p>
+            <p class="ja-classical-line">熊公『はいはい、私も男です、如何してゴテゴテ申しませう。おい、お寅、安心して呉れ。有難え、お前が、ありや、こりや無けりや、こりや、うまいお酒が飲めるのだ。チヨイ　チヨイ　チヨイの頂戴だ』</p>
+            <p class="ja-classical-line">と両手を合せ掌を仰向けにして上下へ揺つて居る。</p>
+            <p class="ja-classical-line">五三『それ、千両だ。確に受取れ』</p>
+            <p class="ja-classical-line">熊公『ハイ、有難う。万古末代、あんたの御恩は忘れませぬ。そしてお寅の事は只今限り忘れます』</p>
+            <p class="ja-classical-line">と云ふより早く懐に捻込み長居は恐れと言はぬばかりトントントンと坂道を矢を射る如く帰り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: 棚卸志 [1200]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: 喜苔 Song [1202]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
