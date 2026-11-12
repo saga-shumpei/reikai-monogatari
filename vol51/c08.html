@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: 曲輪 Castle [1323] - Volume 51 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 51 Table of Contents</a>
+      <span>Volume 51</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 51 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: 曲輪 Castle [1323]</h1>
+      <p class="chapter-title-ja">曲輪城〔1323〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Born in the land of Tokoyo, claiming herself to be the reincarnation of the Hime of Tokoyo, Takahime, who dwells in the Kiyōtaukai—the second Jigokudau that is neither Jigoku, Chiū, nor Shiyabasekai—is an Akurei of the Kinmaukiubi and one of the hundred Magakami. Watching for an opportunity when her parents were away, she slipped out, passed through Armenia, and headed toward the capital of Jerusalem. In the prime of her youth, Takamiyahime unexpectedly fell into a strange relationship with Azumanowake, and having even borne a child, this love was obstructed by Kitaterugami, leading to a parting of the living. Forced to wander here and there, Takamiyahime's fate was thus cast.</p>
+          <p class="en-p">The result of this was that, having heard bits and pieces of the teachings of the Brahman, the Ural religion, and the Ananai-kyō, and due to her own petty cleverness, her entire body was swayed by the Seirei of the Nikutaikai. Drifting and flowing, she arrived in the land of Fusa, where she built a training ground for the teachings of divination in Kitayama Village. Calling together her trusted right-hand woman Kurohime, Magahiko, and other disciples, day by day she deceived the people of the world by claiming to be the living shrine of the Hinodewake and the lineage of the Hensei-danshi. Finally, she crossed over to the island of Jitentō, and after various hardships and sufferings, she was moved by the infinite benevolence of the heart of Kami Susanoo-no-Ōkami.</p>
+          <p class="en-p">Squeezing out tears of gratitude, she changed her heart and was saved by the Ananai-kyō, becoming a minister of Kami. However, deceived once again by evil spirits, she became obsessed with grasping the golden jewel—the Nyoi-hōju that is indestructible like diamond. With her monkey-like mind and horse-like will unrestrained, the pathos of her madness began. Wandering around the eighty islands and the eighty countries, including Takasago-jima and Ryūgū-jima, she finally repented of her ego and pride, becoming like a cat once more. She served at the sacred site of Aya and propagated the path for a while, but after learning that her childhood sweetheart was the chieftain Tōsuke of Awaji, the heart of Takahime wandered in darkness.</p>
+          <p class="en-p">Leaving her child and the jewel entirely out of her mind, she yearned for her lover and traveled far and wide, crossing mountains, seas, and rivers. Day and night, she arrived at the Saien-kan on the great plateau of Ubusuna, the Takamagahara where Kami Susanoo-no-Ōkami resides. Though she was exhorted by Azumanowake on the principles of heaven and earth and repented once, her horse-like will went mad again. Agonizing over how to recover from this unrequited love, and while weeping tears of love, the persistent old woman, now over fifty, braced herself with courage. As the wind blew fiercely and lions, bears, tigers, and wolves roared, she climbed up and down the Kajika Pass with heavy, thumping steps.</p>
+          <p class="en-p">When she finally arrived at the forest of the shrine, she wondered, 'What is this? What is this?' Seeing the palace pillars built upon the lower foundation stones and the Chigi rising high, she gazed upon the sacred dwelling of the Imperial Kami who resides there. Secretly nodding and smirking, she thought, 'This is the famous Kajika-yama, the throat of the Saien-kan. Here, I shall unfurl my banner, make it flutter in the blowing divine wind, and strike down the many officers and believers like falling dominoes. I shall build the Takahime Kingdom, oppose the Ananai-kyō, and make a name for myself.' Thus, Takahime, who appeared as the lineage of the Hensei-danshi and the righteous heaven-sent Hinodewake, stood up with resolve.</p>
+          <p class="en-p">Striving with the conviction that she was the soul and spirit of the original lineage that had grasped the source since the beginning of the opening of heaven and earth, even unto the end of many eons, she used her clever words to persuade Tanehiko and the other hundred ministers of the shrine forest, displaying her hateful tyranny. Just then, Yōgenbō appeared as the right arm of the Yamata-no-Orochi of the Kiyōtaukai. Quickly discerning the evil heart of Minister Takahime, he changed his form and appeared as Mokusuke of the Saien-kan. He skillfully deceived Minister Takahime, and there they pledged their marriage. Settling in the shrine forest, they exerted all their power to obstruct the divine government of the Miroku-kami.</p>
+          <p class="en-p">Just as she was exerting all her efforts to assist the great ambition of Ōkuninushi-no-Ōkami, she poisoned the uncooperative Tanehiko and his wife. Having become a person who feared no one, she plotted to carry out her original intention. Just then, Hatsuwakahime, a missionary of the path of the Ananai-kyō, appeared. She saw through the evil plot and, humbling herself, tried to obstruct the wicked desires of the two villains and save them by restoring them to a good heart. Though she exhausted her sincerity, the ugly soul, stained with the filth of the Magatsu-mi, feared the exposure of its true nature and, chased away like a dog, fled down the Kajika Pass with a clattering sound.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">常世の国に生れたる
+常世の姫の再来と
+自ら名乗る高姫は
+地獄中有娑婆世界
+ならぬ第二の地獄道
+兇党界に蟠まる
+金毛九尾の悪霊や
+其外百の曲神に
+魅られ茲に両親の
+隙を窺ひアーメニヤ
+ソツとぬけ出でエルサレム
+都を指して進み行く
+高宮姫の若盛り
+東野別とゆくりなく
+怪しき仲となり果てて
+子まで成したる恋仲を
+北光神に遮られ
+ここに生木のさき別れ
+高宮姫は止むを得ず
+彼方此方と漂浪の</p>
+            <p class="ja-classical-line">其成果はバラモンの
+神の教やウラル教
+三五教を聞きかじり
+小才の利きし所より
+肉体界の精霊に
+其全身を左右され
+流れ流れてフサの国
+北山村にウラナイの
+教の射場を建設し
+股肱と頼む黒姫や
+魔我彦其他の弟子達を
+呼び集へつつ日に月に
+変性男子の系統ぞ
+日の出神の生宮と
+名乗りて世人を欺きつ
+遂に進んで自転倒の
+島に渡りていろいろと
+艱難辛苦の其結果
+神素盞嗚の大神の
+仁慈無限の御心に</p>
+            <p class="ja-classical-line">感喜の涙絞りつつ
+茲に心を翻し
+三五教に救はれて
+神の司と成りけるが
+又もや兇霊に欺かれ
+金剛不壊の如意宝珠
+黄金の玉を握らむと
+心猿意馬の止め度なく
+狂ひ出したる果敢なさよ
+高砂島や竜宮島
+島の八十島八十の国
+廻り廻りて末遂に
+我情我慢を後悔し
+又もや猫の如くなり
+綾の聖地に奉職し
+暫く道を布きけるが
+淡路の酋長東助が
+幼馴染の恋人と
+分りし後は高姫の
+心は暗に彷徨ひて</p>
+            <p class="ja-classical-line">吾子も玉も念頭を
+悉皆離れ恋人の
+後を慕ひてはるばると
+山海河野打渡り
+夜を日についでウブスナの
+大高原の斎苑館
+神素盞嗚の隠れます
+高天原に参上り
+東野別に懇々と
+天地の道理を諭されて
+一度は悔悟せしものの
+又もや意馬は狂ひ出し
+此失恋を如何にして
+回復せむかといらちつつ
+恋の涙にくれながら
+五十を越えた身を以て
+執念深き婆々勇み
+風吹きすさび獅子熊や
+虎狼の吠えたける
+河鹿峠をドンドンと</p>
+            <p class="ja-classical-line">登りつ下りつ漸くに
+祠の森に来て見れば
+こはそも如何に此は如何に
+下つ磐根に宮柱
+太しき建てて千木高く
+鎮まりゐます皇神の
+瑞の御舎拝観し
+ひそかに、うなづくほくそ笑
+此処は名に負ふ河鹿山
+斎苑の館の喉首よ
+われは此所にて一旗を
+吹く神風に靡かせて
+数多の役員信徒等を
+将棋倒しに説き伏せつ
+高姫王国建設し
+三五教の向ふ張り
+名を挙げくれむと思ひ立ち
+日の出神の義理天上
+変性男子の系統と
+現はれ出でし高姫よ</p>
+            <p class="ja-classical-line">天地開けし始めより
+幾万劫の末までも
+元を掴んだ因縁の
+身魂はわれよと頑張つて
+祠の森の珍彦や
+其外百の司等を
+言葉巧に説き伏せて
+暴威を揮ふ憎らしさ
+斯かる所へ兇党界
+八岐大蛇の片腕と
+現はれ出でし妖幻坊
+高姫司の悪心を
+目敏く探り身を変じ
+斎苑の館の杢助と
+現はれ来りウマウマと
+高姫司を誑惑し
+茲に夫婦の約結び
+祠の森に居すわりて
+五六七神政の妨害を
+力限りに遂行し</p>
+            <p class="ja-classical-line">大黒主の大望を
+助けむものと全力を
+尽してゐたる折もあれ
+思ひに任せぬ珍彦を
+妻諸共に毒殺し
+誰憚らぬ身となりて
+初心を貫徹せむものと
+企む折しも三五の
+教の道の宣伝使
+初稚姫が現はれて
+曲の企みを洞察し
+身を謙り両兇の
+非望を妨げ善心に
+復して救ひ助けむと
+真心尽し給へども
+いかがはしけむ曲津見の
+垢に汚れし醜魂は
+其正体の暴露をば
+恐れて犬に逐はれつつ
+河鹿峠をトントンと</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Fleeing with all his might, Magatsu Eugenbau once again deceived Takahimetsukasa. Climbing to the sacred ground on the mountain of Kogita, he thought to perform a single scheme here, and plotted various evil things. Illuminated by the spiritual light of Tsukiōkami, he was suddenly struck with terror, tumbled onto the rugged rocks, and having sustained injuries, he slunk away. At the very moment he fled from this place, he lost the treasure of the Magawa. Leaving the mountain of Kogita behind, he crossed the fields where spring grasses were budding, and until he reached this side of the forest of Ayashi, he stumbled over a stone by the roadside and fell flat. When he searched his bosom, the Shinadama used for the magic of Eugenbau's transformation had somehow become an empty shell, and in the sorrow of not knowing where his form had gone, he sat heavily on the earth with his legs crossed, lost in thought with his arms folded.</p>
+          <p class="en-p">To such a place, Takahime, who had been following behind, caught up with the two, Hatsukō and Tokukō. While they rested their breath for a while, they heard the lamentations of Eugenbau, who said that he had dropped the essential treasure on the mountain of Kogita. Upon hearing this, Takahime became irritated and strictly ordered the two, Hatsu and Toku, to go and retrieve the treasure of the Magawa. Having no reason to refuse the master's command, they secretly returned to the sacred ground of Kogita and looked to see how the reception was going.</p>
+          <p class="en-p">As they listened to the blind old man Bunsu-sama, who was drawing pictures while telling the story of the origin of the Bunbun-dama, the two tried to use various clever words to get it back. However, Bunsu-sama was firm, and his reluctance to hand it over easily was frustrating. The two decided here to make their move, suddenly knocked the old man down, snatched the ball in the meantime, and with their painful feet dragging, they arrived at the forest of Ayashi like clouds and mist. When they received words of praise from Eugenbau and Takahime, there was a moment of joy, but suddenly their wounds began to ache, and since they could not take another step, they decided to spend the night here.</p>
+          <p class="en-p">The four reached a consensus, and Hatsu and Toku suddenly fell into a deep sleep, dreaming in the midst of their slumber. Takahime, who had listened to the loud snoring heard all around, urged Eugenbau on, and taking advantage of the darkness, they headed toward the village of Ukiki. At the entrance of the village of Ukiki, they stopped by the Tamadaki waterfall, where the sound of water was high, and washed the ball of the Magawa. When they looked, the Magawa began to shine brightly, and Takahime was blinded and dizzy, falling down on the spot. Eugenbau quickly took advantage of the moment when Takahime had fainted, and using his sorcery, he created a pavilion here.</p>
+          <p class="en-p">Suddenly, a mirage appeared, the Jerusalem of the capital of Chin. Compared to its magnificence, it was a building that was dozens of times more astonishing, and it was mysterious that he had manifested it by employing many evil gods. Eugenbau laughed, 'With this, my plan has finally reached its beginning.' No matter how much magic one uses, it is an ugly act that cannot be done without using humans with strong hearts, created in the image of God. Here, one can understand the pride of the evil god who has captured the foolish Takahime. Eugenbau scooped up the clear water of the waterfall for Takahime, made her take it into her mouth, and called out to her with all his might.</p>
+          <p class="en-p">She regained her breath and came to her senses, looking around in wonder. Staring at the mysterious light that was brighter than the day, she clicked her tongue in amazement, 'Ah, how mysterious, how mysterious.' She bowed her head, lost in thought, wondering if the Hinode-kami of the Tianjin-hi had suddenly appeared, which was a comical sight. Eugenbau laughed, 'Ahahaha, Takahime! I am the god-official Mokusuke. Now that the treasure of the Mizu-no-Mitama is in my hands, I have turned the darkness into day, manifested the power of God, and instantly transformed this field where the spring breeze blows into a castle. How brave it is to have drawn this out!'</p>
+          <p class="en-p">He rubbed her back and called out, 'Rejoice and celebrate, Takahime!' Takahime was suddenly moved and said, 'Whether Mokusuke-kami-tsukasa is good or evil, I do not care anymore. Please look at the finish of the work. Starting with the Sumeru-ōkami of heaven and earth, and all the other hundred gods, the duty of the Hinode-kami is now heavenly. From now on, I will work with Mokusuke for the sake of God and for the sake of the people of the world. I will build the reign of Miroku before my eyes, make the people under heaven rejoice, and surprise the god-official of the San-go-kyō, the Mizu-no-Mitama, as well as Higashinowake and the other hundred officials, and make them say 'Afun!''</p>
+          <p class="en-p">Suddenly regaining her energy, she took Eugenbau's hand, passed through the front gate of the pavilion that had just appeared, and advanced toward the inner palace. The Magatsu-mitama is truly detestable.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">力限りに逃げ出す
+又もや曲津妖幻坊
+高姫司を誑かし
+小北の山の聖場に
+登りてここに一仕組
+なさむと思ひいろいろと
+よからぬ事を企らみつ
+月大神の霊光に
+照らされ忽ち仰天し
+崎嶇たる岩上に顛落し
+負傷をなしてスゴスゴと
+此処を逃出す其途端
+曲輪の宝を紛失し
+小北の山を後にして
+春草萌ゆる野路を越え
+怪志の森の此方迄
+来る折しも道の辺の
+石に躓きバツタリと
+倒れて懐査ぶれば
+妖幻坊が変身の</p>
+            <p class="ja-classical-line">魔法に使ふ品玉は
+いつしか藻脱の殻となり
+姿も知れぬ悲しさに
+大地にドツカと胡床かき
+腕くみ思案にくれゐたる
+かかる所へ後逐うて
+追つつき来る高姫や
+初公、徳公両人と
+しばし息をば休めつつ
+肝腎要の宝をば
+小北の山に落せしと
+妖幻坊のかこち言
+聞くより高姫いらだちて
+初、徳二人に命令し
+曲輪の宝を取返し
+来れと厳しく下知すれば
+主命拒むに由もなく
+再び小北の聖場に
+忍び帰りて受付の
+様子いかにと眺むれば</p>
+            <p class="ja-classical-line">盲爺さまの文助が
+絵をかきながら物語る
+ブンブン玉の因縁を
+聞くより二人はいろいろと
+言葉巧に言ひなして
+取返さむと思へども
+流石の文助頑張りて
+容易に渡さぬもどかしさ
+二人は茲に意を決し
+忽ち爺さまを突倒し
+其間に玉をふんだくり
+雲を霞と痛い足
+無理に引ずりドスドスと
+怪志の森に到着し
+妖幻坊や高姫に
+お褒めの言葉を頂いて
+笑壺に入りし時もあれ
+俄に疵は痛み出し
+モウ一歩も進まねば
+ここに一夜を明かさむと</p>
+            <p class="ja-classical-line">四人は評議一決し
+初、徳二人は忽ちに
+白河夜船の夢うつつ
+四辺に聞ゆる高いびき
+聞きすましたる高姫は
+妖幻坊を促して
+暗を幸ひドシドシと
+浮木の里を指して行く
+浮木の里の入口に
+水音高き玉滝の
+落つるを目当に立寄つて
+曲輪の玉を洗滌し
+見れば曲輪は皎々と
+輝き初めて高姫は
+眼を射られ眩暈し
+其場にドツと倒れける
+妖幻坊は逸早く
+失心したる高姫の
+隙を伺ひ妖術を
+使つて此処に楼閣を</p>
+            <p class="ja-classical-line">忽ち現はす蜃気楼
+珍の都のエルサレム
+其壮観に比ぶれば
+幾十倍とも知れぬよな
+驚く許りの建築を
+数多の魔神を使役して
+現出せしぞ不思議なれ
+妖幻坊は打笑ひ
+これにて吾の計画は
+いよいよ其緒につきにけり
+いかに魔法を使ふとも
+神の形に造られし
+心の強き人間を
+使はにや出来ぬ醜の業
+ここにウマウマ高姫を
+擒にしたる曲神の
+得意や思ひ知らるべし
+妖幻坊は高姫に
+滝の清水を掬ひ上げ
+口にふくませオイオイと</p>
+            <p class="ja-classical-line">声を限りに呼ばはれば
+息吹返し正気づき
+四辺キヨロキヨロ打眺め
+昼より明かき怪光に
+目を見はりつつ舌をまき
+あああ不思議、ああ不思議
+最早俄に天津日の
+日の出神のお出ましか
+合点いかぬと俯いて
+思案にくれる可笑しさよ
+妖幻坊は打笑ひ
+アハハハハツハ高姫よ
+われは杢助神司
+瑞の御霊の御宝
+手に入る上は此通り
+暗を変じて昼となし
+神の力を現はして
+春風渡る此野辺を
+忽ち変じて城廓を
+ゑがき出したる勇ましさ</p>
+            <p class="ja-classical-line">喜び祝へ高姫と
+背なでさすり呼ばはれば
+高姫頓に感激し
+仮令杢助神司
+善であらうが悪だろが
+モウ此上は構はない
+細工は流々仕上をば
+みて下されよ天地の
+皇大神を始めとし
+其他百の神様よ
+日の出神の義理天上
+いよいよ之から杢助と
+力を併せ神の為
+世人の為に活動し
+五六七の御代を目のあたり
+築きまつりて天の下
+四方の民草喜ばせ
+三五教の神司
+瑞の御霊を初とし
+東野別や其他の</p>
+            <p class="ja-classical-line">百の司を驚かせ
+アフンとさしてやらむずと
+俄に元気を盛返し
+妖幻坊と手をひいて
+今現はれし楼閣の
+表門をばくぐりつつ
+奥殿指して進み入る
+曲津身魂ぞ忌々しけれ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 曲輪 Jewel [1322]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 鷹 Palace 殿 [1324]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

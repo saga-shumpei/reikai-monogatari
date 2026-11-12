@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 14: 自惚鏡 [1329] - Volume 51 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 51 Table of Contents</a>
+      <span>Volume 51</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 51 &bull; Chapter 14</span>
+      <h1 class="chapter-title-en">Chapter 14: 自惚鏡 [1329]</h1>
+      <p class="chapter-title-ja">自惚鏡〔1329〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Eugenbau's Takamiyahiko sent the lady-in-waiting Satsuki to the living quarters of Takamiyahime, and commanded her to come to his room at once. This beauty called Satsuki is in fact a Mamedanuki living inside the bamboo grove.</p>
+          <p class="en-p">Satsuki: 'Excuse me. Takamiyahime-sama, Gojiyōshiyusama is calling for you.'</p>
+          <p class="en-p">Takahime was leaning against her kefusoku, dozing off, but she opened her eyes wide and said,</p>
+          <p class="en-p">Takahime: 'Ah, was it you, Satsuki? Does my Kimisama have some business with me?'</p>
+          <p class="en-p">Satsuki: 'Yes, he wishes for you to come immediately.'</p>
+          <p class="en-p">Takahime: 'Tell him that I shall come at once, so please wait a moment.'</p>
+          <p class="en-p">Satsuki answered, 'Yes,' and left the place with quick steps. Takahime sat properly before her kiyōdai, brushed up her disheveled hair, adjusted her emon, opened and pursed her lips, and exhausted all manner of biganjiyutsu, saying,</p>
+          <p class="en-p">Takahime: 'Ho ho ho ho, my, did I eat a mermaid or something? Even I, this Takahime who has reached the age of fifty, have become so young that I am surprised at myself. I look completely like a fresh, young girl of sixteen or seventeen. No matter how beautiful Hatsuwakahime is said to be, she surely cannot surpass this Takamiyahime, ho ho ho ho. The thing called the Nyoi-hōju is truly a magnificent thing. Mokusuke-sama now calls himself Takamiyahiko with a straight face, but he is indeed a great one. My, how he managed to cleverly swindle the treasures of the Saien-no-yakata. This is why one cannot trust people. With the blind god Susanoo-no-Mikoto, the super-modern Kotoyoriwake, the green gourd Yashimano-nushi, and the blockhead Higashinowake, they are nothing but a collection of junk; they must think that the crafty Mokusuke-sama is an honest person, he he he he, and having swallowed the bait, the Saien-no-yakata must now be looking quite troubled, as if it had missed the owl's midnight meal. Ah, how pleasant, how delightful. Come now, shall I show this beautiful figure to my husband and delight him? The more I look, the more beautiful I am; what a fine woman I am. No matter how fickle Mokusuke-sama may be, how could he ever abandon this Takachiyan, who has not a single flaw, and whose very hair tips are overflowing with charm? No matter how many beauties there are in the world, this is truly exceptional. I truly do not want to leave the side of this mirror. Mokusuke-sama would surely be happy if he saw this mirror too, but then again, I am a beauty who makes myself fall in love with myself. I have fallen deeply in love with my own figure. However, I cannot see my own figure except when I stand before this mirror. Ah, I do not want to leave, mirror-sama, it is hard to part, but I shall go and attend to Mokusuke-sama's mood for a while, so mirror-sama, wait for me happily, for I shall return and reflect this beautiful figure again.'</p>
+          <p class="en-p">Takako: 'Ufu fu fu fu.'</p>
+          <p class="en-p">Miyako: 'Ho ho ho ho.'</p>
+          <p class="en-p">Takahime: 'Eh, were you two here? If you were here, why did you not say so? You must have heard all of my soliloquy.'</p>
+          <p class="en-p">Takako: 'Ho ho ho ho.'</p>
+          <p class="en-p">Miyako: 'Fu tsu fu fu fu.'</p>
+          <p class="en-p">Takahime: 'Eh, I was so captivated by my own figure that I did not even notice that two ladies-in-waiting were beside me. Now that I think of it, it seemed as if human figures were reflected in the distance, but I did not notice. Listen, you two daughters and ladies-in-waiting, you must not tell anyone about this, starting with my husband. Now, now, let us go.'</p>
+          <p class="en-p">The two answered, 'Yes,' and accompanied Takahime, one in front and one behind, as she proceeded to Eugenbau's living room. When they softly opened the door and peered inside, it was so dazzling that their eyes were blinded, for it was shining with brilliant gold. The walls on all four sides were shining like mirrors, and Takahime's bewitching figure was reflected so many times that it seemed as if there were countless people, reflecting off the mirror surfaces one after another. Takahime, thinking with a proud face that there was likely no beauty in heaven or earth other than herself, had come fully dressed and with her face meticulously repaired, but seeing that beauties identical to herself were surrounding Eugenbau in the dozens, she suddenly grew horns of jealousy with a flash.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">妖幻坊の高宮彦は侍女の五月を高宮姫の居間に遣はし、一度吾室へ来れと命令した。此五月といふ美人は実は竹藪の中に棲んでゐる豆狸さまである。</p>
+            <p class="ja-classical-line">『御免なさいませ。高宮姫様、御城主様が御招きで厶いますよ』</p>
+            <p class="ja-classical-line">高姫は脇息にもたれて、うつら　うつら居眠つてゐたが、パツと目を開き、</p>
+            <p class="ja-classical-line">『ああ其方は五月であつたか、吾君様が、妾に御用があると仰有るのかい』</p>
+            <p class="ja-classical-line">『ハイ、直様お出でを願ひたいとの事で厶います』</p>
+            <p class="ja-classical-line">『すぐに参りますから、一寸御待ち下さいませと、云つておいておくれ』</p>
+            <p class="ja-classical-line">五月は、</p>
+            <p class="ja-classical-line">『ハイ』</p>
+            <p class="ja-classical-line">と答へて、ここを足早に立去つた。高姫は鏡台の前にキチンと坐り、髪のほつれをかき上げ、衣紋を整へ、口をあけたり、すぼめたり、種々と美顔術の限りを尽し、</p>
+            <p class="ja-classical-line">『ホホホホ、何とマア、人魚でも食つたのかいな。五十の尻を作つてをる此高姫も、自分ながらに吃驚を致す程若くなつたものだなア。まるきり、十七か六位な、うひうひしい姿だ。初稚姫が何程綺麗だと云つても、此高宮姫には、ヘン、叶ひますまい、ホホホホホ。如意宝珠の玉といふものは、本当に偉いものだワイ。杢助さまも今は高宮彦と、真面目な顔して名乗つて厶るが、ヤーパリ、偉いものだ。ようマア、斎苑の館の宝物を甘くチヨロまかされたものだなア。之だから人に気は許されぬといふのだなア。素盞嗚尊の盲神や、言依別のドハイカラ、八島主の青瓢箪、それに東野別のウスノロ、ガラクタばかりが居りやがつて、奇略縦横の杢助様を、真正直な人間だと思ひつめ、ヘヘヘヘヘ、蛸の揚壺を喰つて、今では斎苑の館は梟鳥の夜食に外れたやうな、小難しい顔をして居るだらう。あああ、心地よや、気味がよや、ドレドレ此綺麗な姿を吾背の君にお目にかけ、一つ喜ばして上げませうかな。見れば見る程御綺麗な、何とした良い女だらう。何程杢助さまに気が多いと云つても、どこに一つ点のうち所もない、髪の毛の先まで、愛嬌がたつぷり溢れてゐる此高ちやまを、どうして捨てられるものか。何程世界に美人があると云つても、之は又格別だなア。本当に此鏡の側を離れたくないやうだ。杢助さまも此鏡を見たら、さぞ嬉しからう、併し自分が自分に惚れる位な美人だからなア。私だつて、私の姿にゾツコン惚込んで了つた。併し自分の姿を見る訳にゆかず、此鏡の前に立つた時ばかりだ。ああ離れともない、鏡の君、お名残惜しいけれど、暫く杢助さまの御機嫌を伺つて来る程に、鏡さま、又帰つて来て此綺麗な姿を写して上げるから、楽しんで待つてゐなさいや』</p>
+            <p class="ja-classical-line">高子『ウフフフフ』</p>
+            <p class="ja-classical-line">宮子『ホホホホ』</p>
+            <p class="ja-classical-line">『エーエ、お前は此処に居つたのかいな。居るなら居るとなぜ言はぬのだい、皆私の独言を聞いたのだらう』</p>
+            <p class="ja-classical-line">高子『ホホホホ』</p>
+            <p class="ja-classical-line">宮子『フツフフフ』</p>
+            <p class="ja-classical-line">『エーエ、余り自分の姿に見とれて、二人の侍女が横に居るのも気が付かなかつた。ホンにさう思へば、向ふの方に人間の姿がうつつてるやうだつたが、気がつかなかつた。コレ二人の娘兼侍女、こんな事、吾背の君を始め、誰にも言つちやなりませぬよ。サアサア参りませう』</p>
+            <p class="ja-classical-line">『アイ』</p>
+            <p class="ja-classical-line">と答へて二人は高姫の前後につき添ひ、妖幻坊の居間へ進んで行く。ソツとドアを開いて中を伺ひ見れば、目もくらむ許り、金色燦爛と輝いてゐる。そして四方の壁は残らず鏡のやうに光り、高姫の妖艶な姿は、鏡面を互に反射して、幾十人とも知れぬ程映つてゐる。高姫は自分のやうな美人は恐らく天地の間に、自分一人よりないと誇り顔に思つて、盛装を凝らし、顔の造作まで修繕してやつて来たのに、自分と同様の美人が、幾十人ともなく妖幻坊を中心に取巻いてゐるので、俄にクワツと悋気の角を生やし、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Otafuku: 'Well, well, Takamiyahiko-sama, I am sorry to disturb you while you are enjoying yourself, and I am sure this is a great Gomeiwaku. Since you have so many Bijin in your company, you surely have no time to spare for an Otafuku like me. Naruhodo, I understand that you say you will not live with me. I am, after all, a Bakamono who does not even count; you keep so many Bijin by your side, and yet you keep only one Amatsuchiyo by your side to keep watch, while you yourself live in Eieueiguwa, playing with Bijin who are like butterflies and flowers. Truly, what a grand Udemahe, I am quite intimidated.'</p>
+          <p class="en-p">Takamiyahiko: 'Hahahaha, look here, Takamiyahime, what are you saying? There is no one here. This Takamiyahiko is all alone, guarding a Korui. Ōkata, your own figure is reflected in the Hariheki, and they are reflecting each other. That is why it looks as if there are many Bijin, but they are all your own figure.'</p>
+          <p class="en-p">Takamiyahime: 'Eh, you speak so well. It may be true that one figure is reflected in a mirror, but there is no Dauri for it to be reflected in all directions like this. Goran at that; are they not looking to the right, to the left, forward, and turning their backs? I am not Rinki, but why are you so Mizukusa? If you have women, why do you not tell me that you have this many? It must be your scheme to make me feel Rinki and get angry so that you can enjoy it. And you intend to show this many women the frantic state of Takamiyahime and make them laugh. Hen, who would fall for that trick? I will never get angry. However, everyone, I am sorry, but this Takamiyahiko is my husband. I will show you how we flirt here, so watch with your fingers in your mouths. Hen, excuse me. Look, look, you people there, no, no, my dear husband, how are you, are you in a good mood...?'</p>
+          <p class="en-p">Takamiyahiko: 'Iya, Takamiyahime, I am glad you came. Although there are so many women here, there is not one that I like. No matter what, your skin is fine and soft. From the tips of your back to your private parts, you have an indescribable fragrant scent, and you are especially fragrant to me.'</p>
+          <p class="en-p">Saying this, he sucked on Takamiyahime's cheek. Takamiyahime went limp, narrowed her eyes, and faced the reflection in the mirror.</p>
+          <p class="en-p">Takamiyahime: 'Oi, you standing there, hen, excuse me. Takamiyahime-sama is monopolizing the love of Takamiyahiko. I shall show you the affection of a married couple here.'</p>
+          <p class="en-p">Saying this, she looked around in all directions and stuck her tongue out. Every figure and this figure all stuck their tongues out in the same way.</p>
+          <p class="en-p">Takamiyahime: 'Eh, you fool!'</p>
+          <p class="en-p">As she shouted this while thrusting her chin forward, they all thrust their chins forward and opened their mouths at once.</p>
+          <p class="en-p">Takamiyahime: 'Kora, how rude, are you mocking me? This Takamiyahime is the legitimate wife, you piece of junk!'</p>
+          <p class="en-p">Saying this, she clenched her fist and charged, hit her nose against the wall, and fell to the spot with a groan. Yōgenbō was startled, thinking this was a disaster, and sent a Mametanuki to draw water from the well, which he sprayed over the head and face of Takamiyahime without reserve. Gradually, Takamiyahime returned to her senses. When she looked around, the Mametanuki who had gone on the errand had been sitting there quietly without changing its form, feeling relieved that Takamiyahime would not regain consciousness for a while. Yōgenbō, as expected, had not let his guard down even while Takamiyahime was unconscious, thinking she might wake up at any moment.</p>
+          <p class="en-p">Takamiyahime: 'You Mametanuki!'</p>
+          <p class="en-p">Saying this, she struck it on the head. The blow landed in a bad spot, and one of the tanuki fainted on the spot. The other one desperately flew out through a hole in the window.</p>
+          <p class="en-p">Takamiyahime: 'Ah, that hateful woman hit my nose, and I am quite worn out. Takamiyahiko-sama, I beg of you, please send them all away. I feel quite unwell and cannot bear it.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『これはこれは、高宮彦様、お楽しみの所を、お多福がお邪魔を致しまして、さぞ御迷惑で厶いませう。これだけ沢山に美人をお抱へになつてゐる以上は、私のやうなお多福には到底手がまはりますまい。成程私と同棲しないと仰有るのは分りました。私はどうせ数にも入らぬ馬鹿者、これだけ沢山の美人を側に侍らし、私だけは只一人、こんな少女を側において監視させ、自分は栄耀栄華に、蝶の如き花の如き美人に戯れ、ホンにマア偉いお腕前、恐れ入りまして厶います』</p>
+            <p class="ja-classical-line">『ハハハハ、コレ高宮姫、そりや何を云ふのだ、誰もゐないぢやないか。此高宮彦は只一人、孤塁を守つてゐるのだ。大方お前の姿が玻璃壁に映つて、それが互に反射してゐるのだ。それ故沢山の美人がゐるやうに見えるのだが、皆お前の姿だよ』</p>
+            <p class="ja-classical-line">『エー、うまいこと仰有いませ。鏡に一つの姿がうつる事は、それは厶いませう、これ程四方八方に映る道理はありませぬ。あれを御覧なさい、右を向いたり、左を向いたり、前へ向いたり、背を向けたりしてるのぢやありませぬか。私は妬くのぢや厶りませぬが、なぜ貴方は水臭い、女があるなら、これだけあると仰有つて下さいませぬのか。私に悋気させ、怒らせて楽しまうとの企みで厶いませう。そしてこれだけの女に高宮姫の狂乱振を見せて、笑はしてやらうとの御考へ、ヘン、誰が其手に乗るものですか。決して怒りませぬよ。併しながら皆さま、お気の毒ながら、此高宮彦は私の夫、ここで意茶ついて御覧に入れるから、指をくはへて御覧なさい。ヘン、すみまへんな。コレコレもうしこちの人、否々吾背の君様、どうで厶います、御機嫌は……』</p>
+            <p class="ja-classical-line">『イヤ、高宮姫、よくマア来て下さつた、これだけ沢山女は居れども、気に入つたものは一人もない、何と云つてもお前の肌は細かい、そして柔かい。背の先まで尻の穴まで、何とも云へぬ香ばしい匂ひがする、又ワイガは特別香ばしい』</p>
+            <p class="ja-classical-line">と云ひながら、高姫の頬に吸ひ付いてみせた。高姫はグニヤグニヤになり、目を細うして鏡の映像に向ひ、</p>
+            <p class="ja-classical-line">『オイ、そこな立ん坊、ヘン、すみまへんな。高宮姫さまは高宮彦の愛を独占して居りますよ。ここで夫婦の親愛振を見せて上げませう』</p>
+            <p class="ja-classical-line">と云ひながら、四方八方を見まはし、舌をペロツと出して見せた。どの姿も此姿も同様に舌をペロリと出す。</p>
+            <p class="ja-classical-line">『エー馬鹿ツ』</p>
+            <p class="ja-classical-line">と腮を前へ突き出して呶鳴ると、又一時に腮を突き出し、口をあける。高姫は、</p>
+            <p class="ja-classical-line">『コラ、失敬な、真似をしやがるか、此高宮姫は正妻だ、ガラクタ奴』</p>
+            <p class="ja-classical-line">と云ひながら、握り拳を固めて突貫し、壁に鼻を打つてウンと一声其場に倒れた。妖幻坊は此奴ア大変と打驚き、豆狸に渭の水を汲ませにやり、高姫の頭部面部の嫌ひなく吹きかけた。漸くにして高姫は正気に返つた。四辺を見れば使ひに行つた豆狸が、まだ高姫は中々気がつかうまいと安心してゐたものだから、変相もせず、其儘にチヨコンと坐つてゐた。流石の妖幻坊は高姫が失神した間も、何時気が付くか知れぬと思ひ、其体を崩さなかつた。高姫は、</p>
+            <p class="ja-classical-line">『此豆狸』</p>
+            <p class="ja-classical-line">と云ひながら、ポンと頭を叩いた。当り所が悪うて、一匹の狸は其場に悶絶した。他の一匹は一生懸命に窓の穴から飛出して了つた。</p>
+            <p class="ja-classical-line">『ああ、あの憎い女に鼻をこつかれて、ふん伸びました。高宮彦様、何卒お願ひだから、彼奴を皆帰なして下さいな。私は何だか気分が悪くてたまりませぬワ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Eugenbau: 'That is your own figure reflected in the mirror, but if you cannot understand that much, I shall smear mud over this shining wall; if I do that, it will no longer reflect, and your doubts will surely clear.'</p>
+          <p class="en-p">While saying this, Eugenbau took the leftover wall plaster from the back Setoguchi, filled a large basin to the brim, held it up in one hand, grasped mud in the other, and smeared the entire interior of the room. Then, he took the basin outside, washed his hands, and came back in.</p>
+          <p class="en-p">Eugenbau: 'Takahime, your doubts should be cleared now, should they not?'</p>
+          <p class="en-p">Takahime: 'Indeed, you truly do love me, do you not? The skill with which you have used magic to flatten all those many women with mud, as if they were mere Hahemushi or something of the sort, is truly Atsupare.'</p>
+          <p class="en-p">Eugenbau: 'It is you and I who have gathered the happiness of Tenchi into our own persons. However, Takahime, you have gone to great trouble. Lunch and Katahiko, both of them, have fallen easily into your Keiriyaku, and now they are almost like mice in a trap; the power of life and death is as good as in the Shiyōchiu of this Takamiyahiko. Ho-ho, how reliable, how reliable. Such work is best left to you. This Takamiyahiko will not let his heart be led astray no matter how many other beauties there may be besides you, so rest assured and, taking Takako and Miyako with you, please go to pull people under the camellia tree at least once a day. This is your duty. It should not be too bad for you to take a walk in the suburbs while picking the flowers of the spring fields...'</p>
+          <p class="en-p">Takahime: 'Yes, I shall do so. Truly, when things go as smoothly as they did yesterday, I feel quite wonderful. And what have you done with those two? They have not shown their faces to me at all since then.'</p>
+          <p class="en-p">Eugenbau: 'No matter how much I tell those wretches, there is no prospect of them submitting to the path of divination, and if I leave them alive, they will become missionaries for the San-Go-Kyō and hinder our world of evil parties... no, our path of good. Therefore, I have thrown them into a stone prison. If I do this, they will naturally reach Jakumetsu-Iraku, and they will be mine. Without needing to break a sweat, it is murder without holding a blade, exactly the same method as yours. Aha-ha-ha.'</p>
+          <p class="en-p">Takahime: 'Hey, my dear husband, to say that I am a murderer, is that not going a bit too far? When have I ever killed anyone?'</p>
+          <p class="en-p">Eugenbau: 'Aha-ha-ha, once someone is glared at by your beautiful face, they are seized by the sickness of love, chased by the dog of worldly desires whether awake or asleep, unable to forget, and finally they fall ill, take to their beds permanently, become skin and bone, and die of longing. When this Takamiyahiko thinks of you, even my bones feel as if they are being rattled. To kill this Takamiyahiko, not even a blade is needed. Once you have shaken your hips even once, I shall immediately follow the path of Jakumetsu-Iraku. Aha-ha-ha-ha. What a sinful, man-killing beauty you are. Even so, you intend to kill the couple Hiko-hime with poison; oh my, how terrifying, you are a creature that makes one unable to sleep night or day. Aha-ha-ha-ha.'</p>
+          <p class="en-p">Takahime: 'Hey, you fool, what are you saying? Are you not the mastermind? Was it not you who taught me and had me do it? Do not say such excessive things, as if there were no guard station at your mouth.'</p>
+          <p class="en-p">Eugenbau: 'My dear wife, if you tease me, do it in moderation. I am sad, on-on-on-on.'</p>
+          <p class="en-p">Eugenbau: 'Aha-ha-ha, interesting, interesting, humans certainly possess various arts, do they not?'</p>
+          <p class="en-p">Takahime: 'Hmph, humans, that is a little different, is it not? Well, I may be human. However, my spirit is the living shrine of the Giritenjō Hinodewake, so please do not mistake me.'</p>
+          <p class="en-p">Eugenbau: 'Ha-ha-ha-ha, oh, I am humbled. Giritenjō-sama, I shall certainly be careful from now on.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『あれは其方の姿が鏡に映つてゐるのだが、それ程分らねば、此光つた壁に泥を塗つて上げよう、さうすれば映らなくなつて疑が晴れるだらう』</p>
+            <p class="ja-classical-line">と云ひながら、裏の背戸口に使ひ余りの壁土があるのを、妖幻坊は大きな盥に一杯盛り、片手にささげ、片手に泥を握つて、一面に室内を塗つて了つた。そして盥を外へ出し、手を洗つて再び入り来り、</p>
+            <p class="ja-classical-line">『高姫、これで疑が晴れただらうな』</p>
+            <p class="ja-classical-line">『なる程、貴方はヤツパリ私が可愛いのですな、あれだけ沢山の女を、縄虫かなんぞのやうに、皆泥で魔法を使つて平げて了つた其手並は、実に天晴なものですよ』</p>
+            <p class="ja-classical-line">『天地の間の幸福を一身に集めたのは其女と某だ。併し高姫、御苦労で厶つたなア。ランチ、片彦両人は、甘く其方の計略にかかり、今は殆ど嚢中の鼠、活殺の権利は此高宮彦の掌中にあるも同然だ。ホホー頼もしい頼もしい。かふいふ仕事は其女に限るよ。此高宮彦も其女より外に何程美人があつても心を迷はさないから、安心して高子、宮子を伴ひ、何卒日に一遍は、椿の下まで人曳きに行つてくれ。これがお前の勤めだ。お前も春野の花を摘みながら、郊外散歩は余り悪くはあるまいから……』</p>
+            <p class="ja-classical-line">『ハイ、さう致しませう。本当に昨日のやうに甘く行きますと、心持がよう厶います。そうしてあの両人は如何なさいました。其後根つから私に顔を見せませぬがな』</p>
+            <p class="ja-classical-line">『彼奴は何程云ひ聞かしても、到底ウラナイの道に帰順する見込がないによつて、生かしておけば三五教の宣伝使となり、吾々兇党界……否善のお道の邪魔を致すによつて、石牢の中にブチ込んでおいた。かうしておけば自然に寂滅為楽、モウ此方のものだ。別に骨を折らなくとも、刃物持たずの人殺、丁度お前と同じやり方だ、アハツハハハ』</p>
+            <p class="ja-classical-line">『コレ、もし吾夫様、私が人殺とは、ソラ余りぢや厶いませぬか。何時人を殺しました』</p>
+            <p class="ja-classical-line">『アハハハハ、其方の美貌で一寸睨まれたが最後、恋の病に取りつかれ、寝ても醒めても煩悩の犬に追はれて忘れられず、遂には気病を起して不断の床につき、身体骨立してこがれ死ぬやうになつて了ふのだ。此高宮彦も其方の事を思へば、骨までザクザクとするやうだ。此高宮彦を殺すのには、チツとも刃物はいらぬ。お前が一つ尻をふつたが最後、忽ち寂滅為楽の道を辿るのだ。アハハハハハ、てもさても罪な男殺のナイスだなア。それさへあるに、毒酸を以て珍彦夫婦を殺さうとなさるのだから、イヤハヤ恐ろしい、安心して夜も昼も眠られない代物だ、アハハハハハ』</p>
+            <p class="ja-classical-line">『コレ、杢ちやま、ソラ何をいふのだい、お前さまが発頭人ぢやないか。私は教へて貰つてやつたのぢやないか。口に番所がないかと思うて余りな事を云うて下さるな』</p>
+            <p class="ja-classical-line">とソロソロ生地を現はし、野卑な言葉になりかけたが、フツと気がつき、俄に言葉を改めて、</p>
+            <p class="ja-classical-line">『吾背の君様、揶揄ひなさるも、いい加減に遊ばせ。妾は悲しう厶います、オンオンオンオン』</p>
+            <p class="ja-classical-line">『アハハハハ、面白い面白い、人間といふものはいろいろの芸を持つてゐるものだなア』</p>
+            <p class="ja-classical-line">『ヘン、人間なんて、チツと違ひませう。ソリヤ私は人間でせう。併し霊は義理天上日の出神の生宮ですよ、何卒見損ひをして下さいますな』</p>
+            <p class="ja-classical-line">『ハハハハ、イヤもう恐れ入りました。義理天上様、今後はキツと慎しみませう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Hey, Takasama, Miyasama, why are you giggling so? Is it that funny? Children are truly helpless creatures, aren't they?'</p>
+          <p class="en-p">Takako: 'Even so, Mother, isn't it funny? You are having such a silly quarrel, aren't you, Miyasama? It is uncontrollably hilarious, is it not?'</p>
+          <p class="en-p">Eugen: 'Hahahaha, hey, Takamiyahime-sama, the children are laughing at you.'</p>
+          <p class="en-p">'It is because you say such absurd things that the two of them are laughing.'</p>
+          <p class="en-p">Takako: 'Still, Mother, it was funny in your room, was it not? Father was not there at that time, was he? You made such funny gestures all by yourself that we two could not help but laugh.'</p>
+          <p class="en-p">Eugen: 'Ahahahaha, you must have seen me doing something silly, I suppose.'</p>
+          <p class="en-p">Miyako: 'Yes, that is right. You were shaking your hips, twisting your mouth, talking to yourself, and falling in love with your own reflection, and you said, "If I show this figure to my dear husband, he will surely be delighted." Isn't that right, Takasama? I am not mistaken, am I?'</p>
+          <p class="en-p">Takako: 'It was truly just like that; Mother, you are a very amusing person.'</p>
+          <p class="en-p">Eugen: 'Ahahahaha.'</p>
+          <p class="en-p">Takahime: 'Ah, to be teased and mocked by my husband and my own children—it is a difficult thing to be born a beauty. Hohohoho, ahahahahaha, fufufufufu.'</p>
+          <p class="en-p">The four of them laugh all at once. The Mamedanuki, who had been lying dead after being struck on the head by Takahime, suddenly regained consciousness at the sound of this laughter, scrambled up, ran around the room two or three times, and quickly hid its figure through the window.</p>
+          <p class="en-p">Takahime: 'My, is it not strange that a tanuki should live in such a magnificent palace? If we kept a dog, it would surely run away, would it not?'</p>
+          <p class="en-p">Eugen: 'No, as I always say, I was born in the Year of the Monkey, so I despise dogs. That is why the proverb says that a bad relationship is like that between a dog and a monkey.'</p>
+          <p class="en-p">'By "monkey," you mean the man giving the woman a dismissal, and by "dog," you mean the wife giving her husband a dismissal and returning home, I suppose. From now on, let us both be careful not to say such ominous things as "dog" or "monkey," shall we?'</p>
+          <p class="en-p">'I am being careful, but it is troublesome because you are the one who always breaks our promises, ahahaha.'</p>
+          <p class="en-p">'If that is the case, since it is time to prepare for the night, I shall withdraw to my room.'</p>
+          <p class="en-p">'Hey, Takamiyahime-dono, is it not a bit much for you to monopolize the two maids... no, the children? Could you not leave one of them here with me?'</p>
+          <p class="en-p">'Indeed, if you are left alone, a man alone, one never knows when the devil might tempt you. Hey, Takako-chan, it is a bit of a chore, but please stay by your father's side and attend to his needs. And if any other woman should come in here, be a good girl and let me know secretly.'</p>
+          <p class="en-p">Takako says in a deliberately loud voice:</p>
+          <p class="en-p">'Yes, if anyone, whoever she may be, comes into Father's room, I will certainly let you know in secret.'</p>
+          <p class="en-p">'Hey, Takako-sama, is there such a thing as a secret? Oh, what a dim-witted child you are.'</p>
+          <p class="en-p">Eugen: 'Hahahaha, you are cautious to the very end; alas, I am overwhelmed. In short, Takako is my monitor, is she not? Oh, how scary, how scary. Hey, Takako-sama, please go easy on me. No matter what happens, you must never report back to Takamiyahime, ahahahaha.'</p>
+          <p class="en-p">Takahime: 'Oh, say whatever you like, if that is how it is.'</p>
+          <p class="en-p">She takes Miyako by the hand, and with her shoulders swaying, the brave flapping of her sleeves, and her long hakama trailing behind, she returns, walking with the elegant, rhythmic gait of a high-ranking courtesan.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『コレ高さま、宮さま、何をクツクツ笑つてゐるのだい、それ程可笑しいのか。子供といふものは、仕方のないものだなア』</p>
+            <p class="ja-classical-line">高子『それでもお母さま、可笑しいぢやありませぬか。チンチン喧嘩をなさるのだもの、ねえ宮さま、可笑しいてたまらないぢやないか』</p>
+            <p class="ja-classical-line">妖幻『ハハハハ、オイ、高宮姫さま、子供が笑つてゐるよ』</p>
+            <p class="ja-classical-line">『貴方が、しようもない事仰有るから、二人が笑ふのですよ』</p>
+            <p class="ja-classical-line">高子『それでもお母さま、貴女のお居間で可笑しかつたぢやありませぬか。あの時はお父さまはゐませぬでしたね。お母さま一人で私等二人が堪へきれない程、可笑しい身振をなさいましたワ』</p>
+            <p class="ja-classical-line">妖幻『アハハハハ、大方おやつしの所を見たのだらう』</p>
+            <p class="ja-classical-line">宮子『ハア、さうですよ。お尻をふつたり口を歪めてみたり、独言をいつたり、自分の姿に惚れたり、そして此姿を吾背の君に見せたら、さぞお喜びだろツて言つてゐらつしやいましたよ。ねえ高さま、違ひありませぬだらう』</p>
+            <p class="ja-classical-line">高子『本当に其通りでしたね、お母さまも余程面白いお方だよ』</p>
+            <p class="ja-classical-line">妖幻『アハハハハ』</p>
+            <p class="ja-classical-line">高姫『あああ、夫や吾子に、ぞめかれ、ひやかされ、別嬪に生れて来ると辛いものだ。ホホホホホ、アハハハハハ、フフフフフ』</p>
+            <p class="ja-classical-line">と四人は一度に笑ふ。高姫に頭をくらはされて死んでゐた豆狸は、此笑ひ声にフツと気がつきムクムクと起上り、室内を二三遍駆けまはり、窓の口から、手早く姿を隠した。</p>
+            <p class="ja-classical-line">高姫『何とマア、これ程立派な御殿に狸が棲んでゐるとは不思議ぢやありませぬか。犬でもおいたら、皆逃げて行くでせうにねえ』</p>
+            <p class="ja-classical-line">妖幻『イヤ俺は何時も申す通り、申の年の生れだから、犬は大嫌ひだ。それだから諺にも、仲の悪い間柄を犬と猿みたやうだといふではないか』</p>
+            <p class="ja-classical-line">『申といふのは、男の方からヒマをくれる事、犬といふのは女房の方から夫にヒマを呉れて帰ることで厶いませう。モウ之から、犬だの申だの、縁起の悪い事はいはぬやうに、互に慎しみませうね』</p>
+            <p class="ja-classical-line">『こつちは慎しんでゐるが、お前の方から、何時も約束を破るのだから困つたものだよ、アハハハハ』</p>
+            <p class="ja-classical-line">『左様ならば、又夜の拵へも厶いますから、妾は居間に引取りませう』</p>
+            <p class="ja-classical-line">『コレ高宮姫殿、二人の侍女を……否子供をお前が独占しようとは余りぢやないか。どうか一人ここにおいてゐてくれまいかなア』</p>
+            <p class="ja-classical-line">『如何にも、貴方は一人、男が一人居ると、何時魔がさすか分つたものぢやありませぬ。コレ高子ちやま、お前御苦労だが、お父さまのお側に御用を聞いてゐて下さい。そして、もしも外の女がここへ入つて来たら、いい子だから、ソツと私に知らすのだよ』</p>
+            <p class="ja-classical-line">高子はワザと大きな声で、</p>
+            <p class="ja-classical-line">『ハイお父さまの居間へ、どんな女にもせよ、入つて来たものがあつたら、キツと内証で知らしてあげますワ』</p>
+            <p class="ja-classical-line">『コレ高子さま、そんな内証がありますか。エーエ気の利かぬ子ぢやなア』</p>
+            <p class="ja-classical-line">妖幻『ハハハハ、何処までも御注意深いこと、イヤハヤ恐れ入りました。高子は要するに、私の監視役だなア。ヤアこはい　こはい。コレ高子さま、お手柔かく願ひますよ。何事があつても決して高宮姫に内通しちや可けませぬぞ、アハハハハ』</p>
+            <p class="ja-classical-line">高姫『エー、なんぼなと仰有いませ、さようなれば』</p>
+            <p class="ja-classical-line">と宮子の手をひき、吾居間に肩をゆすり、袖の羽ばたき勇ましく、長い襠衣を引きずつて、シヨナリシヨナリと太夫の道中宜しく帰り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c13.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 13: 槍襖 [1328]</span>
+      </a>
+      <a href="c15.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 15: 餅の皮 [1330]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

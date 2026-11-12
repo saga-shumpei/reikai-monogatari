@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4: 乞食劇 [1319] - Volume 51 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 51 Table of Contents</a>
+      <span>Volume 51</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 51 &bull; Chapter 4</span>
+      <h1 class="chapter-title-en">Chapter 4: 乞食劇 [1319]</h1>
+      <p class="chapter-title-ja">乞食劇〔1319〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Matsuhime quietly broke the seal of the letter and raised it respectfully to her forehead as she read through it. Gradually her countenance changed and her hands trembled, for the contents of the letter appeared to be of no ordinary gravity. Having finished reading the letter, Matsuhime let out a sigh of relief.</p>
+          <p class="en-p">Chiyo: 'Mother, what I said was not wrong, was it? Takahime does not come by order of the Hall of Iso. And that person calling himself Mokusuke must be a bakemono. It is written here that this dog is Hatsuwakahime-sama's beloved dog, named Smart.'</p>
+          <p class="en-p">Matsuhime: 'Ah, ah, what a treacherous evil world this is. I cannot remain idle like this. Nevertheless, according to the words of Hatsuwakahime-sama, I must reform Takahime-sama strictly through pure goodness to the very end. Yet in Hatsuwakahime-sama's words... it is written: "Since you are the Kamutsukasa of Kogitayama, you must never leave this place under any circumstances." If Takahime-sama should stubbornly insist on remaining here as the Kyōshiyu to the end, whatever shall I do? If only Magahiko-sama were here, we could hold a good consultation; this is truly a troublesome matter.'</p>
+          <p class="en-p">Chiyo: 'Mother, you must not worry at all. In any case, she will surely visit the shrine at least once, so when she opens the door of the upper shrine, she will certainly be startled and flee. The angel-sama told me so.'</p>
+          <p class="en-p">Matsuhime: 'Ah, is that so? I truly hope things go smoothly. However, you too must take Smart-sama and go play for a while somewhere out of Takahime-sama's sight. It would be inconvenient if you were present.'</p>
+          <p class="en-p">Chiyo: 'In that case, Mother, please stay strong. Please ensure that you do not get dragged into this. Here, Smart-sama, you are a lovely dog, aren't you?'</p>
+          <p class="en-p">Saying this, she embraced the dog around its neck. Smart licked Chiyo's cheek with her thin, flat tongue. Surprised, Chiyo pushed Smart down onto the garden floor. Smart remained turned on her back in a carefree manner, paddling the air with her legs.</p>
+          <p class="en-p">Chiyo: 'Ah, this dog is a female. Now, my dear little Suma-chan, since it is early spring and the weather is so fine, let us go play in the woods together with Chiyo. If there are any rabbits, let us give them a scare.'</p>
+          <p class="en-p">Saying this, she stroked the dog's head. Smart rose up briskly and followed behind Chiyo to play in the mountain forest. Left behind, Matsuhime clasped her hands together in solitude and fell deep into thought.</p>
+          <p class="en-p">Matsuhime: 'Ah, ah, Takahime-sama is a truly difficult person. How can a true conversion be brought about for her? According to Hatsuwakahime-sama's letter, her spirit has been completely deranged of late, and she has become a free lodging house for evil nine-tailed golden foxes, toads, serpents, badgers, and weasels. Furthermore, the one calling himself Mokusuke is not Hatsuwakahime-sama's father, but Yōgenbō of Mount Daikumo; bringing such a truly repulsive bakemono, acting like a married couple, coming out to a place like this to drive Matsuhime away and make herself the Kyōshiyu—whatever is the meaning of this? I have no personal attachment to being the Kamutsukasa of this place, but I cannot simply hand this place over to evil gods and leave. Doing such a thing would be unpardonable before the gods. I must be prepared to fight a lonely battle to the very end here. Ah, Kunitokotachi-no-Ōkami-sama, Toyokunihime-no-Ōkami-sama, Konohanahime-no-Ōkami-sama, Kanakatsu-Kaname-no-Ōkami-sama, protect me and bless me, Kannagara Tamachi Hae Mase, Kannagara Tamachi Hae Mase.'</p>
+          <p class="en-p">Thus she prayed with all her heart.</p>
+          <p class="en-p">Thereupon, Hatsu and Toku came running over noisily. Treading unsteadily with trembling feet, the two spoke:</p>
+          <p class="en-p">Hatsu and Toku: 'Matsuhime-sama, ah, we have come to make a brief report; Takahime-sama, the missionary of Sango-kyō and former leader of Uranai-kyō, has arrived. And she says, "Why does Matsuhime not come to greet me when she knows I have arrived? Though she said she would come out as soon as her business was finished, she has not yet come out," and she is in a tremendous rage. She further says, "From today, Takahime is the Kyōshiyu of this hall. Mokusuke-sama has come to supervise," speaking with truly formidable arrogance. If you do not quickly go to pay your respects, a major incident affecting your very life will take place, so we have come quietly to warn you.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">松姫は静に封を押切り押戴いて読み行く。おひおひと顔色変り両手は慄ひ、容易ならざる文面の如く思はれた。そして松姫は手紙を読み了りホツと溜息をついた。</p>
+            <p class="ja-classical-line">千代『お母さま、私の云つた事違やしますまいがな。高姫は斎苑の館からの命令ぢやありますまい。そしてあの杢助と云つてるのは化物でせうがな。此犬は初稚姫様の愛犬でスマートと書いてありませう』</p>
+            <p class="ja-classical-line">『あああ、油断のならぬ魔の世界だな。こりや斯うしては居られますまい。併しながら初稚姫様の仰せ、何処までも善一つで高姫様を改心させにやならぬ。然し初稚姫様のお言葉に……お前は小北山の神司だから、何処までも此処を動いてはいかぬ……と書いてある。もしも高姫さまが何処までも此処の教主と頑張つたら、何うしようかな。せめて魔我彦さまでも居つてくれたら、何とかいい相談が出来るだらうに、困つた事だ』</p>
+            <p class="ja-classical-line">『お母さま、決して心配要りませぬ。どうせ一度はお宮さまを巡拝するでせうから、上のお宮のお扉を開いたら、屹度ビツクリして逃げるでせうよ。エンゼルさまが私にさう仰有いました』</p>
+            <p class="ja-classical-line">『ああさうかな。何卒まア都合よくやりたいものだ。然しお前も此スマートさまを連れて高姫さまの目にかからぬ処へ暫く遊びに行つて来て下さい。お前が居ると都合が悪いからな』</p>
+            <p class="ja-classical-line">『それならお母さま、確りなさいませや。何卒巻き込まれぬ様になさいませ。これ、スマートさま、お前は可愛い犬ね』</p>
+            <p class="ja-classical-line">と云ひながら首たまに抱付いた。スマートは薄い平たい舌でお千代の頬をペラツと舐めた。お千代はビツクリしてスマートを庭に押し倒した。スマートは仰向に転けたまま呑気な風で足で空をかいて居る。</p>
+            <p class="ja-classical-line">『ア、此犬は牝だわ。さアおスマちやま、お千代と春先でもあり、陽気がいいから、林の中へ行つて遊んで来ませう。兎でも居つたら脅してやりませうね』</p>
+            <p class="ja-classical-line">と云ひながら頭を撫でる。スマートはムツクと起き上り、お千代の後について山林の中へ遊びに行く。後に松姫は只一人手を組んで思案にくれてゐた。</p>
+            <p class="ja-classical-line">『あああ、高姫さまは困つた方だな。どうしたら本当の御改心が出来るのだらう。初稚姫様の御手紙によれば、此頃はスツカリ精神乱れ、金毛九尾の悪狐や蟇や蛇や狸、鼬などの無料合宿所になつてゐられるとの事、それに又杢助と名告つてるのは、初稚姫様のお父さまでなくて大雲山の妖幻坊だとか、ほんとにいやらしい化物をつれて、夫婦気取りで、こんな処に出て来て松姫を追ひ出し、自分が教主にならうとは、どうした事だらう。私は別に此処の神司に執着心はないのだけれど、悪神にみすみす此処を開け渡して出る訳にも行かない。そんな事しては神様にも済まない。ここは何処までも孤軍奮闘の覚悟でなければならない。ああ国治立大神様、豊国姫大神様、木花姫大神様、金勝要大神様、守り給へ幸へ給へ、惟神霊幸倍坐世惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">と一生懸命に祈つてゐる。</p>
+            <p class="ja-classical-line">そこへバラバラとやつて来たのは初、徳の両人であつた。足許もヨロヨロしながら両人は、</p>
+            <p class="ja-classical-line">『松姫さま、エー、一寸御報告に来ましたが、三五教の宣伝使、ウラナイ教の元の教祖高姫さまがお越しになつて居ります。そして松姫は何故私が来てゐるのが分つてゐるのに挨拶に来ないのか。御用が済んだら出て来ると云つておきながら、まだ出て来ないと云つて、大変な立腹で厶ります。そして此館は今日から高姫が教主だ。杢助様が監督に来たのだと、それはそれはえらい御権幕で厶りますよ。早く御挨拶においで下さいませぬと、貴女のお身の上に関した一大事が出来致しますから、ソツと御注意に参りました』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Even if Takahime-sama were to become the Kyōshiyu of this place, as long as the Jimu has not been handed over, this place remains under the jurisdiction of Matsuhime. Therefore, although I said I would ask, I cannot ask on my own, so please have Takahime-sama and Mokusuke-sama come out here. That is the only proper way.</p>
+          <p class="en-p">Hatsu: 'Matsuhime-sama, what a fierce attitude you have. They say you cannot win against a crying child or a Jitō, so it might be to your advantage to yield from your side. I am sure I mean no harm. Since you have been here for four years, counting the start and end of the years, it would not be pleasant to be suddenly ordered to vacate today. I do sympathize with that. However, you should accept this as Innen, and it would be best to meet Takahime-sama and Mokusuke-sama with a Sunaho heart. If you do, they will surely make arrangements that are convenient for you.'</p>
+          <p class="en-p">Hatsu: 'No matter what you say, there is no such Riiu. As for my Shikaujiyō, Takahime-sama is my Shishiyō, so I feel bad, but from the perspective of public duty, I am the Kamutsukasa here, so I have no reservations. I have matters I must investigate as part of my duties, so please convey to the two of them that they must come here immediately.'</p>
+          <p class="en-p">Hatsu: 'Even so, with such a terrible temper, it seems unlikely to move. If I were to convey such a thing, I would be stripped of the duties I have worked so hard to attain as the right arm of Mokusuke-sama. Isn't that right, Toku?'</p>
+          <p class="en-p">Toku: 'Un.'</p>
+          <p class="en-p">Matsuhime: 'Hey, Hatsu-sama, you just said that you have become the right arm of Mokusuke-sama, didn't you?'</p>
+          <p class="en-p">Hatsu: 'Yes, I certainly said so. Since the husband of the new Kyōshiyu Takahime-dono, Mokusuke—also known as the god of Tokiokishi—has made us, Hatsu-sama and Toku-sama, the two arms of Mokusuke-sama who manages the Sōmu of the Saien no Yakata, and we who command all the propagandists, even you, Matsuhime-sama, now that it has come to this, cannot help but obey the orders of us, Hatsu-sama and Toku-sama. How is it? I shall await your reply.'</p>
+          <p class="en-p">Matsuhime: 'Ho ho ho ho ho. With a figure like a Sanesuke doll or a dried grasshopper, you certainly do boast. I do not know if you have become the two arms of Mokusuke-sama, but while you are here, you must listen to the orders of this Matsuhime. You must at least receive a notice of dismissal from your duties from Magahiko, and then, upon the recommendation of Mokusuke-sama, receive a proper letter of appointment from Yashimanushi-sama. It would be best if you woke up from such dreams.'</p>
+          <p class="en-p">Hatsu: 'No matter what you say, it is no use. It was actually spoken from the mouth of Mokusuke-sama. And Takahime-sama is the witness. Hen, there is no mistake about this, right, Toku-kō?'</p>
+          <p class="en-p">Hatsu-kō: 'Un, un, un.'</p>
+          <p class="en-p">Matsuhime: 'Ho ho ho ho ho.'</p>
+          <p class="en-p">Hatsu-kō: 'Look here, Matsuhime, this is extremely rude. I am the second-in-command of the Saien no Yakata, known as the right arm of the Sōmu. How can you laugh when you see my face, or rather, how can you look down on me? If you do not know the difference between public and private, the root and the branch, and self and others, you can never be a Kamutsukasa. The truth is, although it was while drinking, Mokusuke-sama entrusted us with full authority and ordered us to drive Matsuhime out. Now, the words of Hatsu-kō are the words of Mokusuke. Now, tuck up your skirts and get out quickly. If you delay, I shall not forgive you.'</p>
+          <p class="en-p">Matsuhime: 'Utsufufufufu. My, how good you are at beggar theater. Now, I will give you one mon, so please go home. I have seen enough.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『仮令高姫さまが此処の教主になられようが、事務を引継がぬ間は此処は松姫の管轄権内にあるのだから、折角伺ふと云つたけど、私の方からよう伺はないから、高姫さまと杢助さまに、此方へ出て来て貰つて下さい。それが至当だからな』</p>
+            <p class="ja-classical-line">初『松姫さま、何とえらい勢ですな。泣く子と地頭とには勝たれないと云つて、そこは貴女の方から折れてかかりなさるがお得かも知れませぬよ。きつと悪い事は申しませぬ。貴女も足掛け首掛け四年振此処に厶つたのだから、今日俄に立退き命令を下されては面白う厶りますまい。それは私もお察し申して居ります。併しながら、これも因縁だと諦めて、素直に高姫さまや杢助さまに御面会をなさるが宜しい。そしたら又何とか貴女の都合のいいやう取計らつて下さるでせうからな』</p>
+            <p class="ja-classical-line">『何と云つても、そんな理由はありませぬから、高姫さまに私交上としては私の師匠だから済まないが、公の道から行けば私は此処の神司、何の遠慮もありませぬから、何卒私の職務として調べたい事がある、よつて直様御両人に此方へ来て下さる様に伝達して下さい』</p>
+            <p class="ja-classical-line">『それでも大変な権幕で、動きさうにや厶りませぬ。そんな事をお伝へしようものなら、私は折角杢助さまの片腕になつた職務まで剥奪されて了ひます。のう徳よ、さうぢやないか』</p>
+            <p class="ja-classical-line">徳『ウン』</p>
+            <p class="ja-classical-line">松姫『これ、初さま、お前さまは杢助さまの片腕になつたと今云ひましたね』</p>
+            <p class="ja-classical-line">初『ハイ、確に申しました。新教主高姫殿の夫杢助、又の御名は時置師の神、斎苑の館の総務を遊ばす杢助様の両腕と両人がなつたのだから、凡ての宣伝使を頤で使ふ初さま、徳さまですよ。如何に松姫さまだつて、もう斯うなつた上は此初さま、徳さまの命令を聞かずには居られますまい。如何で厶る。返答承はりませう』</p>
+            <p class="ja-classical-line">『ホホホホホ愈三助人形か痩バツタの様なスタイルをして、よくも威張つたものだね。お前さまは杢助さまの両腕になつたか知らないが、此処に居る間は此松姫の命令を聞かなくちやなりますまい。魔我彦からお役目解除の辞令でも受けた上、杢助さまの推薦によつて、八島主さまから立派な辞令を頂いて来なくちや駄目ですよ。そんな夢なんか、いい加減にお覚ましなさるが宜からうぞや』</p>
+            <p class="ja-classical-line">『何と云つても駄目ですよ。現に杢助様の口から仰有つたのですもの。そして高姫さまが証拠人ですもの。ヘン、之が違ひつこはありませぬわい、のう徳公』</p>
+            <p class="ja-classical-line">と初公は、</p>
+            <p class="ja-classical-line">『ウン　ウン　ウン』</p>
+            <p class="ja-classical-line">と拳を握り反身となり、稍酒気を帯びし事とて、高慢面をして得意気に雄猛びして見せた。松姫はあまりの可笑しさに吹き出し、</p>
+            <p class="ja-classical-line">『ホホホホホ』</p>
+            <p class="ja-classical-line">と笑ひ転けた。初公は大いに怒り、</p>
+            <p class="ja-classical-line">『こりや、松姫、無礼千万な、勿体なくも総務の片腕と聞えたる、斎苑の館の二の番頭さまだ。某の面体を見て笑ふと云ふ事があるものか、いや軽蔑致すと云ふ事があるか。公私本末、自他の区別を知らねば決して神司たる事は出来ませぬぞ。実の所は杢助さまが、お酒の上ではあるが、私等に全権を任すから松姫をボツ払へとの仰せ、さア初公の言葉は杢助の言葉だ。さア尻を紮げてトツトと出て行け。猶予に及ばば了簡致さぬぞや』</p>
+            <p class="ja-classical-line">『ウツフフフフあのまア、乞食芝居が上手なこと。さア一文あげるから帰んで下さい。もう沢山拝見致しました』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Matsuhime: 'You are saying things that are truly outrageous. Amatsuchiyo of Matsuhime, come now, hand over the administrative duties this very moment and get out at once. You no longer have any business or rights here at Kogitayama. Hey Tokukō, are you not the proxy for Takahime-sama? Why are you keeping silent?'</p>
+          <p class="en-p">Tokukō, assuming the air of Takahime, shook his shoulders, wagged his head, and spoke in an old woman's voice: 'Now, Matsuhime-sama, I am the proxy for Takahime. You have worked hard for a long time. However, until today, you have been allowed to perform your duties by the grace of the Kamisama. But Jiyōgihime has no more use for you here. From now on, since the Giritenjiyō Hinodewake will be managing this place, please leave at once. Or, if you thoroughly reform and listen to what Mokusuke and Takahime say, I might consider letting you work as a maid in the Suijiba. But since you have grown accustomed to living here, it must be a pity to be driven out. Takahime understands that well, too. So, Matsuhime-sama, just lower your pride and do the chores or clean the latrines. If you do not endure that much hardship and continue to act haughty, calling yourself a leader, there is a saying that even a monkey can fall from a tree. Come now, answer me, what will you do? I, the proxy of Takahime, shall hear your reply right here. My, my, what a regretful face you have. Even I, a stranger, feel tears welling up. Aahn, aahn-aahn-aahn-aahn, hahahaha, are you crying or laughing? Oh, I can no longer tell. When I think of Matsuhime-sama, I want to cry, and when I think of Takahime-sama, I want to laugh. Sadness and joy have come at once. It is like the feeling of a bride appearing at the place where a parent has died. Sorrow and joy are mixed together, and suffering and pleasure have arrived at once. Those who rise and those who fall, truly this floating world is beyond one's control. Atsuhahaha, aahn-aahn-aahn-oon-oon-oon, what shall I do, what shall I do? When I think that I must take Amatsuchiyo and go begging and asking for alms, my heart feels as if it is being torn apart... (Gidayū) This is all because of the sins I committed in a previous life, the sadness and the pain, this miserable feeling of being unable to exist in body or world, eehehehehen, eeeee, what shall I do? Ee, at last, the assistant guardian deity of Matsuhime-sama has possessed my body, making me cry and laugh; is a crystal soul that is so easily influenced always this painful? Say, Hatsukō, has spring not come for us as well? If we miss this golden opportunity, when will we ever find a time to succeed? Hey, now that we have a powerful supporter, even if it is a bit unreasonable or pitiable, it is best to abandon slave morality, assert our rights and obligations, and raise our own status. Say, Hatsukō, do it firmly. I am going all out this time too, itsuhihihihi.'</p>
+          <p class="en-p">'Hohohoho, my, you two, how did you manage to learn such a play? The dogs are laughing at you.'</p>
+          <p class="en-p">Hatsukō: 'Look here, Matsuhime, you still carry that leader-like face; what do you take the two of us for? Is that not rude? If you say such disrespectful things, I will not let you off as you are.'</p>
+          <p class="en-p">Tokukō: 'Look here, Matsuhime, what do you take us for? The Tokukō and Hatsukō of until now are a bit different in value. Eh, unlike those hastily purchased fakes, we are high-class imported goods. Would you not mind changing your opinion of us?'</p>
+          <p class="en-p">'Hohohoho, you are like the dung-eating fox that borrows the tiger's power. Since it has come to this, Matsuhime can no longer be lenient. Come, I am dismissing you from this day and this moment, so please go home. I cannot allow a heartless person like you to remain in this sacred place for even a minute.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『愈以て怪しからぬ事を申す。松姫の阿女奴、さア只今限り事務を引渡しトツトと出て失せう。最早其方は小北山には何一つ用もなければ権利もない。おい徳公、貴様は高姫さまの代理ぢやないか。何故黙つてゐるか』</p>
+            <p class="ja-classical-line">徳公は高姫気分になり、肩を揺り首をふり婆声を出して、</p>
+            <p class="ja-classical-line">『これ松姫さま、私は高姫の代理ぢやぞえ。長らく御苦労で厶りました。併しながら今日迄お前さまは神様の御都合で御用をさせてあつたのだ。然し上義姫はもう此処に用事はない。之から義理天上日の出神が此処を構ふによつて、お前はトツトと出て行つて下さい。それとも十分改悪して、杢助や高姫の云ふ事を聞くなら、炊事場のおサンどんに使つて上げぬ事もない。然しお前も此処に住み慣れて来たのだから、此処を追ひ出されるのは残念だらう。それは高姫もよく分つてる。それでお前さまは、どんと、かばちを下げて炊事の御用か雪隠の掃除をなさいませ。そこまで苦労をなさらぬと、今から偉さうに教主だなんて威張つて居ると、猿も木からバツサリ落ちる例もありますぞや。サアサア、返答々々、如何で厶る。高姫の代理が此処でキツパリと承りませう。さてもさても残念さうなお顔だな。他人の俺でさへ涙が零れませぬわい。アーン、アーンアーンアーンアーン　アハハハハハ、泣くのか笑ふのか、いやもう訳がわかりませぬ。松姫さまの事を思へば泣きたくなり、高姫さまの事は思へば笑ひたくなる。悲しい事と嬉しい事と一度になつて来た。親の死んだ処へ花嫁が出て来た様な心持だ。悲喜交々相混り苦楽一度に到来す。上る人と下る人、ほんに浮世は儘ならぬものだな。アツハハハハ「アーンアーンアーンオーンオーンオーン如何しようぞいなー如何しようぞいなー。此行先はお千代を連れて袖乞ひ、物貰ひに歩かにやならぬと思や、俺は胸が引裂けるやうに思ふワイのー……（義太夫）之と云ふのも前の世で、如何なる事の罪せしか、悲しさ辛さ、身も世もあられぬ憂き思ひ、エエヘヘヘヘンエーーーー、如何しようぞいなー」エーエ、到頭俺の体に松姫さまの副守護神がのり憑りやがつて、泣いたり笑つたり、いやもううつり易い水晶魂は斯んなに苦しいものかなア。のう初公、俺等もヤツパリ春が来たぢやないか。此好機を逸して、何時の日か、出世の時を得むやだ。おい、有力なる後援者が出来たのだから、チツとは無理でも気の毒でも、奴隷的道徳は廃めにして権利義務を主張し、自分の位地を高めるのが一等だぞ。のう初公、確りやつてくれ。俺も今度は大車輪だから、イツヒヒヒヒヒ』</p>
+            <p class="ja-classical-line">『ホホホホホ、あのまアお二人さま、揃ひも揃うて、何時の間に、そんな芝居を覚えて来たの。犬が笑ひますよ』</p>
+            <p class="ja-classical-line">初『こりや、松姫、何処までも教主面をさげやがつて、俺達二人を何と心得てる。無礼ぢやないか。左様な失礼なことを申すと、此儘には差許さぬぞ』</p>
+            <p class="ja-classical-line">徳『こーりや松姫、何と心得てる。今迄の徳さまや初さまとはチツと値段が違ふのだ。エー、俄仕入れのバチ者とは違つて上等舶来品だ。あまり見違へを致して貰はうまいかい』</p>
+            <p class="ja-classical-line">『ホホホホホ、虎の威をかる糞喰ひ狐とはお前達の事だよ。もう斯うなつちや松姫も了簡なりませぬ。さア今日只今から暇をつかはすによつてお帰りなさい。一分間も此聖場にはお前の様な薄情者置く事は出来ませぬ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hatsu: 'Hen, do not make a fool of me. This Kogitayama is no longer your right. It is under the supervision of Mokusuke-sama, and it is the jurisdiction of Takahime-sama. Rather than you giving us notice, we are the ones giving you notice. Be grateful. Come, come, let us go, let us go. If you dawdle, you will be a nuisance.'</p>
+          <p class="en-p">Toku: 'Oi, it is useless to negotiate with such an ignorant woman for so long. Did Mokusuke-sama not say to finish her off? Oi, finish her off, finish her off.'</p>
+          <p class="en-p">'Very well, here we come.'</p>
+          <p class="en-p">The two stood in a Niōdachi posture, placing Matsuhime in the middle, and now, clenching their fists, they were about to pounce like Hichō. Matsuhime remained Taizenjijiyaku, not in the least disturbed, and stared into the eyes of the two. Although the Riyōnin tried to strike, for some reason, it seemed as if light emanated from Matsuhime's body, and their eyes were dazzled, making them unable to pounce. Matsuhime, with a calm heart, sang a song.</p>
+          <p class="en-p">'The old fox borrowing the tiger's might,
+Appearing on the mountain of Kogita,
+Invading the Matsuhimeyakata,
+Blowing unreasonable demands,
+In a cowardly and unrefined manner, the two,
+Line up their threatening words,
+With that appearance like a wooden puppet,
+Clenching their fists,
+Trembling, how laughable it is.
+Hatsu-kō, Toku-kō, listen well.
+He who calls himself Mokusuke-tsukasa,
+He is not a person of truth.
+Coiling in Ōkumoyama,
+As one arm of the Yamata-no-Orochi,
+Dominating in the world of the wicked,
+He is the Magatsu of Yōgenbō.
+Takahime-tsukasa, in the abyss of love,
+Unknowingly has fallen,
+Not knowing he is a Yōkai-henge,
+Thinking him to be Mokusuke-tsukasa,
+Becoming proud and now here,
+Though you have come acting like a married couple,
+By no means the words of the true Sango,
+Of the Lord of Yashima,
+Are they things that have followed.
+To seize this mansion,
+Instigated by the god of Magatsu,
+To carry out acts of wickedness and lawlessness,
+That is what you intend to do.
+You two, by the crooked god,
+Have had your souls extracted and your eyes dazzled,
+Lost in the desire for fame and profit,
+Performing a mad state that is unbearable to watch,
+How pitiful it is.
+Quickly reform your hearts,
+And listen fully and in detail,
+To the words of this Matsuhime.
+Awaken quickly, awaken quickly,
+The God is with thee,
+Thou art also a child of God, a shrine of God,
+Illuminated by the light of grace,
+Become a child of the righteous God,
+If thou repentest here and now,
+The sins thou hast committed against me,
+I shall forgive thee, Kannagara.
+Swearing to God, to the two,
+I proclaim fully and in detail,
+Ah, Kannagara, Kami, Kami,
+May the spirits be blessed.'</p>
+          <p class="en-p">As she finished singing, the two shed tears falling from both eyes. And they moved their heads slightly, expressing their intention to repent. Matsuhime instantly released the spiritual binding. The two returned to their original state and ran out to the front, pattering away. Did those two truly repent? Or will they again harbor evil intentions and attempt to inflict some kind of harm upon Matsuhime? It shall become clear in the later sections. Ah, Kannagara, Kamunagara, Tamashii Saiwai-mase.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">初『ヘン、馬鹿にすない。もう此小北山は貴様の権利ぢやないぞ。勿体なくも杢助さまの御監督の許に高姫さまの御管轄区域だ。お前の方から暇を貰ふよりも、こつちの方から暇をくれてやるのだ。有難く思へ。さアさア出て行かう出て行かう。グヅグヅして居ると邪魔になるわい』</p>
+            <p class="ja-classical-line">徳『おい、こんな分らぬ女に何時まで掛合つた所が駄目だ。杢助さまがやつつけて了へと仰有つたぢやないか。おい、やつつけろ　やつつけろ』</p>
+            <p class="ja-classical-line">『よし来た』</p>
+            <p class="ja-classical-line">と二人は仁王立となり、松姫を中に置いて、今や拳骨を固めて飛鳥の如く飛びかからむとしてゐる。松姫は泰然自若として少しも騒がず、二人の目を見つめてゐる。両人は打掛らうとすれども、何故か、松姫の身体から光が出る様に思はれて、目が眩み飛びつく事が出来ない。松姫は心静かに歌を歌つてゐる。</p>
+            <p class="ja-classical-line">『虎の威をかる古狐
+小北の山に現はれて
+松姫館に侵入し
+無道の難題吹きかけて
+卑怯未練に両人が
+嚇し文句を並べ立て
+木偶坊の様なその姿で
+握り拳を固めつつ
+慄ひゐるこそ可笑しけれ
+初公、徳公よく聞けよ
+杢助司と名告りゐる
+彼は誠の人でない
+大雲山に蟠まる
+八岐大蛇の片腕と
+兇党界にて幅利かす
+妖幻坊の曲津ぞや
+高姫司は恋淵に
+知らず知らずに陥りて
+妖怪変化と知らずして
+杢助司と思ひつめ</p>
+            <p class="ja-classical-line">得意になつて今此処に
+夫婦気取りで来たなれど
+決して誠の三五の
+八島の主のお言葉に
+従ひ来りしものでない
+これの館を奪はむと
+曲津の神に唆られて
+悪逆無道の企みをば
+敢行せむとするものぞ
+汝等二人は曲神に
+魂をぬかれて目が眩み
+名利の欲に迷ひつつ
+見るに堪へざる狂態を
+演ずるものぞ、いと惜しや
+早く心を改めて
+此松姫が言の葉を
+完全に委曲に聞くがよい
+早目を覚ませ目を覚ませ
+神は汝と倶にあり
+汝も神の子神の宮</p>
+            <p class="ja-classical-line">恵みの光に照されて
+正しき神の御子となり
+吾に犯せし罪科を
+此場で直に悔悟せば
+許してやらむ惟神
+神に誓ひて両人に
+完全に委曲に宣り伝ふ
+ああ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と歌ひ終るや、両人は両眼より涙をハラハラと流した。そして少しく首を動かし改心の意を表した。松姫は忽ち霊縛を解いた。二人は身体もとの如くになり、パタパタと表へ駆け出した。果して彼等両人は改心したであらうか。但は再び悪意を起して、松姫に対し如何なる危害を与へむとするであらうか。後節に於て審らかになるであらう。ああ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c03.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 3: 犬 Horse の労 [1318]</span>
+      </a>
+      <a href="c05.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 5: Teaching 唆 [1320]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

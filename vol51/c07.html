@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: 曲輪 Jewel [1322] - Volume 51 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 51 Table of Contents</a>
+      <span>Volume 51</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 51 &bull; Chapter 7</span>
+      <h1 class="chapter-title-en">Chapter 7: 曲輪 Jewel [1322]</h1>
+      <p class="chapter-title-ja">曲輪玉〔1322〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At a point about twelve or thirteen steps up the Kaidan, Bunsuke had his face scratched by Eugenbau, was knocked down, groaned with a 'Ugh,' and for a while, his consciousness faded. Therefore, he knew nothing at all about Takahime, Hatsu, and Toku who had run after him. He remained under the impression that they were all still resting at the Kyōshiyuyakata.</p>
+          <p class="en-p">When he finally came to and looked, he heard a sound like a beehive coming from his bosom. Bunsuke thought:</p>
+          <p class="en-p">Bunsuke: 'Well, this is Fushigi. I wonder if I collided with Mokusuke-sama, lost my senses, and am now delirious.'</p>
+          <p class="en-p">Thinking this, he put his hand into his bosom and found a round, not-too-heavy lump remaining there. The surface was soft like Ishiwata, and when he held it to his ear, it was groaning, 'Uun, un.' Bunsuke spent some time holding it in his palm and pressing it to his ear, pondering.</p>
+          <p class="en-p">Then, he suddenly slapped his knee with one hand and said:</p>
+          <p class="en-p">Bunsuke: 'Ah, this is a beehive. If I carelessly break it, it will be unbearable to have these evil eyes stung by it. Mokusuke-sama is quite Itazurazu; he must have tucked it into my bosom thinking I could not see. Because he came down with such great force, he collided with me and I was knocked down. My face feels a bit stinging. It seems I scraped my face on a stone.'</p>
+          <p class="en-p">He judged this to himself.</p>
+          <p class="en-p">Bunsuke: 'And it would be Kaaisau to the bees if I crushed it; however, if I leave it around here, it will be troublesome if someone plays a prank with it. I wonder if I should put this into the Mitamabako. Un, fortunately, there is an Akibako for a ball here. It seems to be Chiyōdo the right Guahi.'</p>
+          <p class="en-p">Saying this, he put the ball into the thick Itabako, tied it tightly with rough white hemp, placed it by his side, and once again busily colored his painting of the sunrise over the pines. He did not think it strange that the box was jumping up and down naturally, assuming that the bees were struggling violently, and he placed a rare stone paperweight on top of it. The groaning became increasingly intense.</p>
+          <p class="en-p">Bunsuke: 'Haha, it seems the bees have finally broken the hive and are coming out. Eh, eh, they say the hive is broken, but it is certainly noisy, is it not.'</p>
+          <p class="en-p">He muttered to himself, and once again busily moved his paintbrush.</p>
+          <p class="en-p">The scene changes. As Eugenbau fled, he dropped the Kuruma-no-tama, which was indispensable for his transformation arts, somewhere, and his physical condition suddenly began to deteriorate. If this Kuruma is separated from the skin for one day and night, the transformation will be revealed. Then, because Sumāto roared from the top of the mountain with a voice like thunder, he collapsed flat onto the grass by the roadside. Takahime caught up to him with all her might and said:</p>
+          <p class="en-p">Takahime: 'Hey, Mokusuke-sama, are you collapsed in a place like this? Come now, get up, get up. Are you not injured anywhere?'</p>
+          <p class="en-p">Eugenbau searched his bosom, realized the Kuruma was missing, turned pale, and said:</p>
+          <p class="en-p">Eugenbau: 'Ah, I failed. I have lost the essential treasure. If I do not have this, my true form will be revealed immediately. Ah, what should I do?'</p>
+          <p class="en-p">Takahime: 'Hey, Mokusuke-sama, you just said that your true form would be revealed, but what on earth does that mean? And you mentioned something called a Kuruma just now; what does that Kuruma do?'</p>
+          <p class="en-p">Eugenbau: 'Un, this is called the Kongō-fukai-no-nyoi-hōju; if one only has that, the world becomes free and at one's will. I have finally dropped it. Ah, what a troublesome thing I have done.'</p>
+          <p class="en-p">Takahime: 'What, the Kongō-fukai-no-nyoi-hōju? Where did you get that, Mokusuke-sama? I, too, have suffered quite a lot regarding that Hōju. I once swallowed it into my stomach, so it is frightening how fate works that you were the one holding it. How, Mokusuke-sama, did it come into your hands?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">階段を十二三階上がつた所で、文助は妖幻坊に顔をひつかかれ、突倒され、ウンと呻いて、暫くは気が遠くなつてゐた。それ故、後から走つた高姫や初、徳の事はチツとも知らなかつた。依然として、彼等一同は教主館に休息し居るものとのみ考へてゐた。ヤツと気が付き見れば、懐に何物か蜂の巣のやうな声が聞えて来る。文助は、</p>
+            <p class="ja-classical-line">『ハテ此奴ア不思議だ。杢助さまに衝突して気が遠くなり逆上せて居るのかなア』</p>
+            <p class="ja-classical-line">と思ひながら、懐へ手を入れると、余り重くない、丸い塊の物が懐に残つてゐた、周囲は石綿のやうに軟かく、そして耳へあてて見ると「ウーン、ウン」と呻つてゐる。文助は少時掌に載せたり、耳に当てたりして考へてゐた。そしてハタと片手に膝を打ち、</p>
+            <p class="ja-classical-line">『ヤ、此奴ア、蜂の巣だ。うつかり破らうものなら、此悪い目を此上に刺されちやたまらぬ。杢助さまも随分悪戯好きだな、人が目が見えぬかと思うて、懐へつつ込んで行つたのだな。余りエライ勢でおりて来たものだから、私と衝突して、それでつき倒されたのだ。何だか顔がピリピリする。石で顔をすり剥いたと見える』</p>
+            <p class="ja-classical-line">と独り判断してゐる。</p>
+            <p class="ja-classical-line">『そして握りつぶしちや蜂が可愛相だ、併しながら、そこらに放つておけば人がいたづらすると困る、此奴ア一つ、御玉筥の中へでも入れておかうかなア。ウン、幸ひ、ここに鞠の空箱がある。丁度具合がよささうだ』</p>
+            <p class="ja-classical-line">と云ひながら、あつい板箱に玉を入れ、荒白苧で固く結び、自分の座右において、又もや松に日の出の絵の書きさしを、せつせと彩色つてゐた。箱はカタカタと自然に飛上るのを別に怪しとも思はず、蜂が非常にあばれてをるのだと早合点し、其上に珍石の風鎮を載せておいた。唸りはますます烈しくなつて来た。</p>
+            <p class="ja-classical-line">『ハハア、蜂がたうとう巣を破つて出よつたとみえる、エーエー蜂の巣を破つたやうだといふが、いかにも喧しいものだなア』</p>
+            <p class="ja-classical-line">と独語ちつつ、又もや絵筆をせつせと走らしてゐる。</p>
+            <p class="ja-classical-line">話変つて妖幻坊は逃げしなに、自分の変相術に必要欠く可らざる曲輪の玉を、どつかにおとし、俄に体の具合が悪くなつて来た。此曲輪は肌を離れてから一昼夜経てば、変相が現はれるのである。そして山の上からスマートが雷の如き声で唸つたので、ペタリと路傍の芝生の上に倒れて了つた。そこへ高姫が一生懸命に追つ付き、</p>
+            <p class="ja-classical-line">『コレ杢助さま、お前さまはこんな所に倒れてゐるのかいな、サアサア起きなさい起きなさい、どつこも怪我はありませぬかなア』</p>
+            <p class="ja-classical-line">妖幻坊は、懐を探り、曲輪のない事に気がつき、蒼白な顔をし、</p>
+            <p class="ja-classical-line">『ヤ、失敗つた、肝腎の宝を失つて了つた。これがなければ忽ち正体が現はれるがなア、ああ如何したらよからうかなア』</p>
+            <p class="ja-classical-line">『コレ杢助さま、正体が現はれると今仰有つたが、ソラ一体何の事ですか。そして曲輪とか、今云はれたやうだが、其曲輪は何をするものですか』</p>
+            <p class="ja-classical-line">『ウン、これは一名金剛不壊の如意宝珠と云つて、あれさへあれば、世の中は自由自在になるのだ。それをたうとう落して了つたのだ、ああ困つた事をしたわい』</p>
+            <p class="ja-classical-line">『何、金剛不壊の如意宝珠？　それはお前さま、何処から手に入れたのだい。私も其宝珠については随分苦労したものだよ。一旦私の腹に呑込んだ事があるのだからな、それをお前さまが持つてゐたとは、因縁といふものは怖いものだな。如何して、杢助さま、貴方のお手に入りましたか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'Because I was acting as the general manager, I was supervising it as the treasure of the Iso mansion all the time. I secretly took it while coming here.'</p>
+          <p class="en-p">Speaker: 'What do you mean you did with it?'</p>
+          <p class="en-p">Speaker: 'It seems I dropped it at Kogitayama. I am certain it was in my pocket when I went down the Kaidan, but when I ran into that Bunsuke, he might have taken it. Ah, once it falls into his hands, I can no longer get it back. Conversely, if he were to use it against us, there would be nothing we could do.'</p>
+          <p class="en-p">Speaker: 'Mokusuke-sama, can you really say such a carefree thing? Even if we have to jump into fire or enter water, must we not retrieve it to fulfill our Omowaku? If we only had that jewel, would it not be an Asameshimahe-shigoto to destroy the Ananai-kyō and make the world under the rule of the Uranai-kyō? You cannot know how much work that single jewel does, no matter how much we rush. I will go and investigate it now. If Bunsuke has it, I will snatch it away.'</p>
+          <p class="en-p">Speaker: 'No, that jewel is not something for the likes of you to handle; it disappears if a person touches it.'</p>
+          <p class="en-p">Speaker: 'Do not say such Baka things. I have held it in my hand once and even swallowed it. There is no fear of it disappearing so easily. Now, I shall go and retrieve it.'</p>
+          <p class="en-p">Speaker: 'No matter what you say, you must not move from here; stay here. One never knows when Smart will come.'</p>
+          <p class="en-p">Speaker: 'Hmph, Smart this, Smart that, what is it? Is it not just a four-legged beast?'</p>
+          <p class="en-p">Speaker: 'That dog in particular gives me such a headache that I cannot help it.'</p>
+          <p class="en-p">They are talking like this. Just then, panting for breath, both Hatsu and Toku finally caught up.</p>
+          <p class="en-p">Yōgen: 'Oh, Hatsu, Toku, you followed us? Ah, that is great. You are our allies after all.'</p>
+          <p class="en-p">Hatsu: 'Yes, well, now that it has come to this, I cannot stay at Kogitayama either. Thinking that I have no choice but to rely on you, I have come chasing after you.'</p>
+          <p class="en-p">Takahime: 'Ah, is Toku not here as well?'</p>
+          <p class="en-p">Speaker: 'Yes, I beg for your kind favor. I cannot bear to show my face at Kogitayama anymore. There is no longer any path for me to live other than to rely on you.'</p>
+          <p class="en-p">Speaker: 'You, it is a trouble to ask, but could you go to Kogitayama for me just once?'</p>
+          <p class="en-p">Hatsu: 'Well, it is not that I will not go, but did you forget something?'</p>
+          <p class="en-p">Speaker: 'Mokusuke-sama dropped a small, round object. It is certain that Bunsuke must have picked it up, so please trick him skillfully and receive it from Bunsuke's hands. You are a good child, after all.'</p>
+          <p class="en-p">Hatsu: 'Well, it is not that I will not go, but I cannot bear to be whipped three hundred times on my backside again, so I would like you to spare me from Kogitayama at least. You really whipped me after breaking your promise, so my legs hurt, and it was no ordinary feat to run all the way here. To tell me to climb that steep slope again with these painful legs is a bit cruel. Toku, how about you? Your wounds seem much lighter than mine, so could you go on this errand for me?'</p>
+          <p class="en-p">Toku: 'Mine are much worse than yours. They hurt so much, they are throbbing, and I can hardly walk. My legs have become like stiff sticks.'</p>
+          <p class="en-p">Speaker: 'Then please both of you go. It does not matter if you are a little late, as I will be waiting with Mokusuke-sama, praying to the gods in the Kaishi-no-mori over there...'</p>
+          <p class="en-p">The two turned back reluctantly, and while making their feet clatter, they picked up broken bamboo to use as canes, crossed the single-log bridge precariously, and climbed the steep slope of Kogitayama, finally arriving in front of the reception area. Looking, Bunsuke was drawing a picture with all his might.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『私が総務をやつてゐたものだから、始終斎苑の館のお宝物として監督してゐたのだ。それをば此方へ来がけに、ソツと物して来たのだよ』</p>
+            <p class="ja-classical-line">『それを何うしたと云ふのだい』</p>
+            <p class="ja-classical-line">『どうも小北山でおとして来たやうだ。確に階段を下る時には懐にあつたやうに思ふが、あの文助に行当つた時に、彼奴に取られたかも知れない。ああ向ふの手に入るからは最早取返す事も出来まい。反対に、あちらからあれを使はれようものなら、何うする事も出来ぬからのう』</p>
+            <p class="ja-classical-line">『杢助さま、そんな気楽な事言うてをれますか。仮令火の中へ飛込まうが、水の中へ入らうが、取返さなくちや、思惑が立たぬぢやありませぬか。其玉さへあれば三五教を崩壊させ、ウラナイ教の天下にするのは朝飯前の仕事ぢやないか、何程吾々があせるよりも、其玉一つがどれだけ働きをするか分りますまい。之から私が調べて来ます。もしも文助が持つて居つたら、ひつたくつて来ますから』</p>
+            <p class="ja-classical-line">『イヤ、あの玉はお前なんぞが、いらふものぢやない、人がいらふと消えて了ふからな』</p>
+            <p class="ja-classical-line">『馬鹿な事を言ひなさるな、私だつて一度は手に持つた事もあり、口に呑んだ事もあるのだ。滅多に消える気遣ひはありませぬぞや。サ、これから私が取返して来ませう』</p>
+            <p class="ja-classical-line">『何と云つても、お前は此処を動いちや可かない、此処に居つてくれ。何時スマートがやつて来るか、分つたものぢやないから』</p>
+            <p class="ja-classical-line">『ヘン、スマートスマートて、何ですか、ありや四足ぢやありませぬか』</p>
+            <p class="ja-classical-line">『俺はあの犬に限つて、頭が痛くつて仕方がないのだ』</p>
+            <p class="ja-classical-line">と話してゐる。そこへハアハアと息を喘ませながら、初、徳の両人が漸く追付いた。</p>
+            <p class="ja-classical-line">妖幻『ヤ、初、徳、お前はついて来たのか、ああ偉いものだ。ヤツパリ俺たちの味方だ』</p>
+            <p class="ja-classical-line">初『ハイ、もうあなた、かうなつちや、私だつて小北山には居られませぬ。貴方等のお世話になるより仕方がないと思つて、後追つかけて参りました』</p>
+            <p class="ja-classical-line">高姫『ああ徳も来て居るぢやないか』</p>
+            <p class="ja-classical-line">『ハイ、何卒宜しう願ひます。到底小北山へは帰る顔が厶いませぬからな。貴方等の御世話になるより、最早活路は厶いませぬ』</p>
+            <p class="ja-classical-line">『お前、御苦労だが、一寸マ一度、小北山まで行つて来て貰へまいかな』</p>
+            <p class="ja-classical-line">初『ヘー、行かぬこた厶いませぬが、何かお忘れにでもなつたのですか』</p>
+            <p class="ja-classical-line">『杢助様が一寸した、丸いものを落して厶つたのだ。大方、あの文助が拾うて居るに違ひないから、お前うまくチヨロまかして、文助の手から受取つて来て下さい。いい子だからな』</p>
+            <p class="ja-classical-line">『ヘー、行かぬこた厶いませぬが、又尻の三百も叩かれちや堪りませぬから、小北山ばかりはこらへて貰ひたいものですな。約束を破つて、貴女は本当に叩いたものですから、足が痛くつて、ここまで走つて来るのが並大抵のこつちやなかつたですよ。此痛い足で、あのきつい坂を再び登れとは、チツと酷いですな。徳、お前何うだ。おれとは余程疵が軽いやうだから、一寸使に行つて来てくれまいかなア』</p>
+            <p class="ja-classical-line">徳『俺だつて、貴様より余程きついぞ。どうも痛くつて、いのこがさして、碌に歩かれやしないワ。足が丸切り棒のやうになつて了つたよ』</p>
+            <p class="ja-classical-line">『それなら二人行つて来て下さいな。少々ばかり遅くなつても構はないから、私は向ふの怪志の森で、杢助さまと、神様に祈つて待つてゐるから……』</p>
+            <p class="ja-classical-line">二人は不承々々に踵を返し、足をチガチガさせながら竹切れを拾つて杖となし、一本橋を危く渡り、小北山の急坂を登つて、漸く受付の前に行つた。見れば文助は一生懸命に絵を描いてゐる。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hatsu: 'If I may, Bunsuke-sama, you, you fell quite hard just now, did you not? Are you sure you have not sustained any injuries?'</p>
+          <p class="en-p">'Yes, thank you. Mokusuke-sama was coming down the slope with such force, and since my eyes are poor, I was stumbling as I climbed up. Because the stairs are narrow, we collided, and I was sent flying, suffering this little wound. It is stinging and I cannot help it. Still, thanks to the grace of the Kamisama, the pain subsided quite a bit after I applied the Goshinsui. I intend to receive plenty of soil tonight and get some rest.'</p>
+          <p class="en-p">'Oh my, what a terrible wound! Is that not a claw mark?'</p>
+          <p class="en-p">'Because there are so many sharp stones laid out, I was injured like this. Mokusuke-sama is at the Kyōshiyuyakata, is he not? And I wonder if Takahime-sama is in a good mood.'</p>
+          <p class="en-p">Hatsukō, realizing that Bunsuke did not yet know that Mokusuke, Takahime, and the others had escaped, breathed a sigh of relief and said,</p>
+          <p class="en-p">'Yes, they are resting in the back now. And, er, they told me to apologize to you, Bunsuke-sama, for colliding with you. They said to tell you that Mokusuke-sama is also resting because he says he feels dizzy, and since Takahime-sama is nursing him, they cannot come to visit you personally.'</p>
+          <p class="en-p">'That is very kind and I am grateful. Please, by all means, convey to them that Bunsuke said so. Ah, those who follow the path of the Kamisama are so thoughtful in every way.'</p>
+          <p class="en-p">'By the way, Bunsuke-sama, did you not pick up anything strange, you?'</p>
+          <p class="en-p">'I do not recall picking up anything in particular, but when I collided with Mokusuke-sama, there was a strange sound coming from my bosom, and when I searched, something like a beehive came out. And when I held it to my ear, it was buzzing. This must be it—Mokusuke-sama must have been holding a Dokabachi nest and, wanting to surprise me, stuffed it into my bosom. I think he is a person who plays pranks even at his age. However, no matter how old one gets, when one enters the path of the Kamisama, one becomes like a child, so everyone eventually wants to play a prank.'</p>
+          <p class="en-p">'Would you mind showing me that beehive for a moment?'</p>
+          <p class="en-p">'No, no, what would happen if you touched such a thing? I thought it would be terrible if the bees came out around here, so I put it inside a box. It seems the bees have broken the nest, as it is quite noisy. If you mess with something like this, you will be stung in the eyes all at once.'</p>
+          <p class="en-p">Toku: 'I would very much like to see that beehive; it does not matter if I get stung, does it?'</p>
+          <p class="en-p">'No, stop it, stop it. It is not just your own trouble; if they were to run wild in a place like this, everyone would have to face a terrible ordeal. That is why I have properly put it away in a box.'</p>
+          <p class="en-p">Hatsu: 'Please, just once, show me that box. I will not say that I want to open it...'</p>
+          <p class="en-p">'No, no, how could I hand it over to you? I am to deliver this directly to Mokusuke-sama. If he is sleeping, he will wake up eventually. At that time, I intend to hand it over to him with my own hands. This looks like a beehive, but when I think about it carefully, it seems to be some kind of treasure, so I cannot hand it over to you. If you insist that I hand it over, please bring some token from Mokusuke-sama; if you do that, I will hand it over in exchange for that token. Bunsuke would be in trouble if any complications arose later.'</p>
+          <p class="en-p">'Ah, this is a difficult situation. We must find a way to take it back, or it will be no good.'</p>
+          <p class="en-p">'Hey, what are you saying? Where are you taking it back to?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">初『もし文助さま、お前さま、最前はひどうこけましたなア、どつこもお怪我はありませなんだかなア』</p>
+            <p class="ja-classical-line">『ハイ有難う、杢助さまが、余り勢よく坂を下つて厶るのに、私は目が悪いものだからヨボヨボして上るのと、細い階段だから、衝突し、はね飛ばされて、チツとばかり、こんな疵をしました。ピリピリして仕方がないのだ。それでも神様のお蔭で、御神水をつけたら余程痛みが止まりましたよ。今晩はお土をドツサリ頂いて休まして貰はうと思つてゐるのだ』</p>
+            <p class="ja-classical-line">『ヤア、何とえらい疵だな、爪形が入つて居るぢやないか』</p>
+            <p class="ja-classical-line">『尖つた石が沢山に敷いてあるものだから、こんなに傷いたのだよ。杢助さまは教主館にゐられるだらうな。そして高姫さまも機嫌がよいかなア』</p>
+            <p class="ja-classical-line">初公は文助が、まだ杢助、高姫等が逃出した事を知らぬものと悟り、稍安心の胸をなで、</p>
+            <p class="ja-classical-line">『ハイ、今奥に休んでゐられますよ。そして、エー、文助さまに衝突してすまなかつたから、断りを云つて来てくれと仰有るのですよ。杢助さまも目がまはるとか云つて休んでゐられます、高姫さまも介抱して厶るものだから、貴方にお伺ひにも行かれないからと云つてくれと云はれました』</p>
+            <p class="ja-classical-line">『それはマア御親切に有難いことだ。何卒宜しう、文助が云つて居つたと伝へて下さい。ああ神様のお道の方は、何から何までよく気の付くものだなア』</p>
+            <p class="ja-classical-line">『時に文助さま、お前さま何か不思議なものを拾はなかつたかな』</p>
+            <p class="ja-classical-line">『別に何にも拾つた覚はないが、杢助さまと衝突した時、私の懐に妙な声がするので探つて見れば、蜂の巣のやうなものが出て来たのだ。そしてそれを耳にあてて見ると、ブンブンブンと唸つてゐる。此奴ア杢助さまが土窩蜂の巣を握つて来て、私を吃驚ささうと思つて、私の懐へ捻込んだのだな。エエ年してテンゴする人だと思つてゐる。併し何程年寄つても、神様のお道へ入ると子供のやうになるから、つい誰しも悪戯のしたくなるものだ』</p>
+            <p class="ja-classical-line">『其蜂の巣とやらを一寸見せて下さらぬか』</p>
+            <p class="ja-classical-line">『イヤイヤそんな物いらつて、何うなるものか。私はそこらへ蜂に出られちや大変だと思つて、箱の中へ入れて了つたのだ。どうやら蜂が巣を破つたとみえて、喧しい事いの。こんなものをいぢつたら、それこそ一遍に目を刺されて了ひますよ』</p>
+            <p class="ja-classical-line">徳『其蜂の巣を是非とも見せて頂きたいものだな、刺されたつて構やしないぢやないか』</p>
+            <p class="ja-classical-line">『イヤ、おきなさい　おきなさい、お前さまばかりの難儀ぢやない、こんな所であばれられようものなら、誰もかれも大変な目に遇はねばならぬ。それだから私がチヤンと箱に入れてしまつておいたのだ』</p>
+            <p class="ja-classical-line">初『何卒一遍、其箱なつと見せて下さいな。中まで開けようとは言ひませぬから……』</p>
+            <p class="ja-classical-line">『イヤイヤ、お前達に渡してたまらうか、之は直接に杢助様にお渡しするのだ。お寝みになつて居れば、何れお目が醒めるだらう。其時私が手づから御渡しする積りだ。これは蜂の巣のやうだが、よくよく考へると、何かの宝らしいから、お前さまに渡すこたア出来ませぬワイ。たつて渡せと云ふなら、杢助様から何か印をもつて来て下さい、さうすりや其印と引替に渡しませう。後から面倒が起ると文助も困るからなア』</p>
+            <p class="ja-classical-line">『ああ困つた事だなア、何とかして持つて帰ななくちや駄目だぞ』</p>
+            <p class="ja-classical-line">『コレ、お前は何といふ事を仰有る。どこへ持つて帰ぬのだい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'I shall take it back to Mokusuke-sama's room and use that Bunbun-tama for his amusement. If I do that, it will surely comfort his heart, and he will likely recover quickly.'</p>
+          <p class="en-p">Speaker: 'If it is that necessary, I shall visit Mokusuke-sama's room, as it is only about five ken away, and hand it to him directly. It is not a distant place, and no troublesome procedures are required, so...'</p>
+          <p class="en-p">Speaker: 'Hey, Hatsukō, this fellow is hopeless. It is time for direct action. Why don't we knock this Bunsuke down and take it?'</p>
+          <p class="en-p">Speaker: 'Hmph, do not speak so arrogantly. Since I am the one who has hidden it, as long as I do not let it out of my mouth, there is no way you could find its arika even if you spent two or three years searching for it. In any case, that must be a treasure possessing magnificent Shinriki, and it might even be destined to accompany me. Somehow, I have suddenly become reluctant to part with it. Since Mokusuke-sama went so far as to knock me down to put it in my pocket, even if you ask me to return it now, the Kenri has shifted to me, and it is already Bunsuke's property. I shall not return it so easily.'</p>
+          <p class="en-p">At this moment, the Tamabako, which had been hidden in a Furoshiki nearby, began to hum louder and louder with a low, droning sound. The two men said,</p>
+          <p class="en-p">Speaker: 'Hey, it seems to be somewhere near here. Hey, you, pin this Mekurajii down, and I will search for it in the meantime...'</p>
+          <p class="en-p">Speaker: 'Listen here, even if I cannot see, when the time comes, I am a man who can draw fine pictures just like this. I am only pretending to be blind to observe your behavior. If you want proof that I am not blind, look at this picture; you can tell from this, can you not? Furthermore, I hold a certificate of the hundredth rank in Judo. Bunsuke is not the kind of man who would be fazed even if ten or a hundred of you came at me in a group. This ball is called the Bunsuke-tama because it hums "bun-bun" and was bestowed upon Bunsuke. It is not something to be handed over to the likes of you; stop buzzing like mosquitoes in early autumn and keep quiet. It would be better for you to go to the kitchen quickly and prepare the meal. If you keep grumbling, I shall report you to Matsuhime-sama.'</p>
+          <p class="en-p">Hatsukō: 'Hey, this fellow is a bit troublesome. Once I hear "hundredth rank in Judo," I cannot easily lay a hand on him. If my rear were not hurting, a single old man like this would be nothing, but it has swollen up and I cannot walk.'</p>
+          <p class="en-p">Toku: 'But are Mokusuke-sama and Takahime-sama not waiting in the Kaishi-no-mori?'</p>
+          <p class="en-p">Speaker: 'What, waiting in the Kaishi-no-mori? Haha, so that is it; you were scolded by Matsuhime-sama and ran away, I see. So that is why the dogs were barking "wan-wan" earlier.'</p>
+          <p class="en-p">Speaker: 'Hey Hatsukō, this fellow is lying about being able to see. It must be here if we search thoroughly. You, have a fight with this old man, and I will search while you do.'</p>
+          <p class="en-p">Speaker: 'My body is not free to move, so you fight with Bunsuke instead, and I will find the ball and take it away while you do...'</p>
+          <p class="en-p">Speaker: 'All right.'</p>
+          <p class="en-p">Toku then grabbed Bunsuke's legs and knocked him to the ground. Bunsuke was, in fact, truly blind. Bunsuke shouted with all his might while struggling with Toku. Toku, whose rear was swollen and whose legs could not move freely, was being twisted and pinned down by the blind Bunsuke, gasping for air. Hatsukō strained his ears to listen to the sounds, but he could not tell where they were coming from at all; he thought they were in front, but then they sounded behind, then to the right, then to the left, then above his head, or perhaps under the floorboards. The sounds of the two men crashing and banging about and their shouting voices were all jumbled together, and he could not determine the location at all. Suddenly, as he stumbled over the Furoshiki, an old square box appeared. He quickly picked it up and held it to his ear, and it was humming with a low, droning sound. Hatsukō said,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『杢助さまのお居間まで持つて帰つて、其ブンブン玉をお慰みにするのだ。さうすればお気の慰めになつて、早くお治りになるだらうからな』</p>
+            <p class="ja-classical-line">『それ程必要なら、之から私が、つい五間許りだから、杢助さまのお居間へお訪ね申して、直接お手に渡しませう。遠い所ではなし、面倒な手続きもいらないから……』</p>
+            <p class="ja-classical-line">『オイ、初公、此奴ア迚も駄目だぞ。直接行動だ。此文助を押倒しといて持つて行かうぢやないか』</p>
+            <p class="ja-classical-line">『ヘン、偉さうに云ふない、私が隠してあるのだから、口から外へ出さぬ限り、お前たちが二年三年かかつて探した所で、其所在が分つてたまるものか。何でも、あれは結構な神力を持つてゐる宝に違ひない、私の身に添うてゐるのかも知れない。何だか俄に惜しくなつて来た。杢助さまが私を突き倒してまで、懐に入れてくれたのだから、今になつて返せと云つたつて、権利が此方へ移れば最早文助の物だ。滅多に返しませぬぞや』</p>
+            <p class="ja-classical-line">此時側において風呂敷で隠してあつた玉箱が、ウーンウーンと一層高く唸り出した。二人は、</p>
+            <p class="ja-classical-line">『ヤ、何でも此近くにあるらしいぞ。オイ、此盲爺を貴様、突倒して抑へてをれ、其間に俺が捜索するから……』</p>
+            <p class="ja-classical-line">『コリヤ、目がみえなくても、まさかの時になればコレ此通り、細かい絵を描く俺だぞ。俺はワザとに盲と云つて、貴様たちの様子を考へて居るのだ。盲でない証拠は此絵をみい、これでも分るだろ。そして柔道は百段の免状取りだ。お前達が十人や百人束になつて来たとて、こたへるやうな文助ぢやないぞ。此玉はブンブンいふから文助に授かつた文助玉だぞ。貴様達に渡すべき物ぢやない、秋口の蚊のやうにブンブンぬかさずに、すつ込んでゐなさい。それよりも早く炊事場へ行つて、御飯の用意でもしたがよからうぞや。ゴテゴテ申すと、松姫さまに申上げるぞえ』</p>
+            <p class="ja-classical-line">初『ヤア、此奴ア、一寸グツが悪いワイ。柔道百段と聞いちやア、滅多に手出しは出来ぬぞ。俺も尻さへ痛くなけりや、こんな爺さまの一人や二人何でもないが、だんだん腫れて来て歩けないからな』</p>
+            <p class="ja-classical-line">徳『それでも杢助さまや高姫さまが怪志の森に待つて厶るぢやないか』</p>
+            <p class="ja-classical-line">『ナニ、怪志の森に待つて厶ると。ハハア、さうすると、松姫様に叱られて、逃げよつたのだなア、フーン、それで何だか犬がワンワン吠いて居つたて』</p>
+            <p class="ja-classical-line">『オイ初公、此奴、目が見えるなんて嘘だよ。何でも此間中捜せばあるのだ。貴様、此爺と一つ格闘してをれ、其間に俺が捜すから』</p>
+            <p class="ja-classical-line">『俺は体が自由にならぬから、ヤツパリ貴様、文助と格闘してをれ、其間にマンマと玉を捜し出して持つて行くから……』</p>
+            <p class="ja-classical-line">『ヨーシ』</p>
+            <p class="ja-classical-line">と徳は文助の足をさらへ、其場に倒した。文助は実際目が見えぬのである。一生懸命に文助は呶鳴りながら、徳と格闘をしてゐる。徳も尻がはれ、足が自由に動かぬので、盲の文助に捻ぢ抑へられ、フーフーいつて居る。初公は音のするのを耳をすまして考へてゐたが、前にするかと思へば後に聞える、右に聞えたり左に聞えたり、頭の上に聞えたり又床下のやうでもあり、チツとも見当がつかなかつた。そこへ二人がドタン、バタンと騒ぐ音、喚く声がゴツチヤになつて、如何しても処在が分らない。フト風呂敷に躓いた拍子に、古い四角い箱が出て来た。手早く手に取つて耳にあてると、ウンウンウンと唸つてゐる。初公は、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Ah, there is no mistake about this.'</p>
+          <p class="en-p">He shoved it into his breast pocket and rapped Bunsuke on the head three or four times. Bunsuke was startled and let go; at that very moment, Tokukō finally escaped, and together with Hatsukō, they went down the mountain path, crawling as they stumbled along. At last, they returned to the Forest of Ayashi, barely escaping with their lives. Then, appearing before Eugenbau as if they had performed a great feat,</p>
+          <p class="en-p">Riyōnin: 'Hey, after much trouble, we have just returned.'</p>
+          <p class="en-p">Eugen: 'Oh, that was hard work, was it not? Did you understand?'</p>
+          <p class="en-p">Hatsu: 'Hey, we do not understand at all. That fellow Bunsuke hid it somewhere, and while making a fuss, he just kept spouting small excuses, saying he knew nothing of such a thing. So, when Tokukō and I pressed him from both sides, saying there is no way he could know nothing and that he must hand over that Bunbun-dama, that Bunsuke, being a holder of a hundred-dan certificate in Jiudau, kept saying this is sharp and that is not, throwing us both to the right and left, taking us like toys and tossing us about. Ordinarily, I could pin down an old man like that with a single finger, but since I was beaten by you people and am swollen up like this, and on top of that, had my sore bottom struck, alas, I have had a miserable time.'</p>
+          <p class="en-p">'That aside, did you obtain the jewel? Well, why do you not speak quickly?'</p>
+          <p class="en-p">Hatsu: 'Hey, this Bunbun-dama has an Innen with Bunsuke because it goes bun-bun, and Mokusuke-sama gave it to me. He shoved it into his pocket even while pushing me aside, so even if I tell him to return it, he persists, saying he will never return it no matter what. And although I thought at first this jewel might be a beehive, it is by no means that; he says it is a magnificent treasure, and that old man has such a strong attachment to it that he will not return it no matter what I say.'</p>
+          <p class="en-p">Takahime: 'Oh my, you are truly a messenger of a pheasant. You are a man who is useless no matter what he does. Where did you drop your testicles, you?'</p>
+          <p class="en-p">Hatsu: 'Hey, I was struck on the bottom so much that I was startled and they must have rolled off somewhere.'</p>
+          <p class="en-p">Toku: 'However, the two of us fought a fierce battle, sparks flying, and as a result of the fight, we brought that Bunbun-dama back here as a war trophy. Now, please accept it properly.'</p>
+          <p class="en-p">'What is this? You are really sickening, you have made my heart jump, have you not? Bring it out here quickly. Now, Mokusuke-sama, please rejoice. I thought these two were good for nothing, but it seems they were wonderfully useful.'</p>
+          <p class="en-p">Eugen: 'Hey you two, did you really take back that jewel?'</p>
+          <p class="en-p">Riyōnin: 'Heh heh, that is Hatsu-sama for you, indeed.'</p>
+          <p class="en-p">Riyōnin: 'While I was performing a great struggle with Bunsuke-jii, I ordered Hatsukō to snatch it away during that opening.'</p>
+          <p class="en-p">Eugen: 'That was hard work. Please, come, quickly slip it into my pocket.'</p>
+          <p class="en-p">Takahime: 'Show it to me for a moment. If it is the Nyoi-hōju jewel, I also have an Innen with it. I need to check once whether it is true or false, so come, show it to me quickly.'</p>
+          <p class="en-p">'No, you must never show it. Hand it to me immediately. If I hand it to Takahime, there will be some inconvenient matters. This is a jewel that I am told not to hand to anyone.'</p>
+          <p class="en-p">'Hen, you say such things. Did Hatsukō not just bring it back now? Why can I, your wife, not see it even for a moment? It is not as if I am saying I will not return it to you; you should not say such cold things.'</p>
+          <p class="en-p">'Even so, I say I cannot hand it over because you have a great attachment to the Nyoi-hōju. This Hōju will become soiled if it is not held by someone who has not even a bit of greed.'</p>
+          <p class="en-p">'Hen, will it become soiled? If so, do not drink sake or sleep together with a soiled woman like me. My, what a convenient thing a mouth is. Do you hate me that much? Hen, very well, I have my own thoughts on the matter.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ヤ、これに間違ひない』</p>
+            <p class="ja-classical-line">と懐に捻込み、文助の頭を三つ四つこついた。文助はビツクリして手を放した、トタンに徳公は漸く遁れ、初公と共に足をチガチガさせながら、坂路を這ふやうにして下つて行く。漸くにして命カラガラ怪志の森へ帰つて来た。そして手柄さうに妖幻坊の前に現はれ、</p>
+            <p class="ja-classical-line">両人『ヘー、やつとの事で、只今帰りました』</p>
+            <p class="ja-classical-line">妖幻『ヤ、それは御苦労だつた、分つたかなア』</p>
+            <p class="ja-classical-line">初『ヘー、中々分りませぬ。文助の奴、どつかへ隠して了ひ、すつたもんだと、小理窟ばかり吐して、そんな物は知らぬといふのです。そこで私と徳公が、何知らぬ筈があるものか、其ブンブン玉を渡せと左右よりつめよりますと、あの文助、柔道百段の免状取ですから、はしかいの、はしこないのつて、吾々両人を右へ投げ左へ投げ、手玉に取つて翻弄致します。私も常なら、あんな爺位指一本で押へてやるのですが、何しろお前さまらに打たれて此通り腫れ上つたものだから、其上又痛い尻を叩かれ、イヤハヤ苦しい目を致しました』</p>
+            <p class="ja-classical-line">『それはさうと、玉は手に入つたのか。どうだ、早くいはぬか』</p>
+            <p class="ja-classical-line">『ヘー、此ブンブン玉は、ブンブンいふから文助に因縁がある、これは杢助さまが私にくれたのだ。私を突飛ばしてまで懐へ捻込んで下さつたのだから、返せというても、何処までも返さないと頑張ります。そして此玉は始めは蜂の巣かと思つてゐたが、決してさうではない、結構な宝だと云つて、あの爺、執着心が強く、何と云うても返さないのです』</p>
+            <p class="ja-classical-line">高姫『エーエ、雉子の直使とはお前の事だ。何をさしても役にたたぬ男だな、お前さまは睾丸を何処へ落したのだ』</p>
+            <p class="ja-classical-line">初『ヘー、余り尻を叩かれたものですから、ビツクリしてどつかへ転宅して了ひました』</p>
+            <p class="ja-classical-line">徳『併し両人が奮戦激闘火花を散らし、戦ひの結果、戦利品として、其ブンブン玉をここへ持つて帰りました。イザ、改めて、お受取り下さいませう』</p>
+            <p class="ja-classical-line">『何だ、本当に腹の悪い、肝をつぶしたぢやないか。早く此処へお出し、コレ杢助さま、喜びなさい。此奴等二人、碌でなしだと思つて居つたが、みんごと役に立つたやうです』</p>
+            <p class="ja-classical-line">妖幻『オイ両人、本当に其玉を取返して来たのか』</p>
+            <p class="ja-classical-line">『ヘーヘ、それは流石初さまですワイ』</p>
+            <p class="ja-classical-line">『某が文助爺と大格闘を演じてゐる、其隙に初公に命じてぼつたくらしたのですよ』</p>
+            <p class="ja-classical-line">『それは御苦労だつた、どうぞ、サ、早く俺の懐へソツと入れてくれ』</p>
+            <p class="ja-classical-line">高姫『一寸私に見せて下さい、如意宝珠の玉なれば私も因縁があるのだ、真か偽か一遍調べておく必要があるから、サ、チヤツと見せなさい』</p>
+            <p class="ja-classical-line">『イヤ決して見せちやならないぞ、直様私に渡すのだ、高姫に渡すと、一寸都合の悪い事がある、之は誰にも渡さないといふ玉だから』</p>
+            <p class="ja-classical-line">『ヘン、よう仰有いますワイ。初公が今現に持つて帰つたぢやありませぬか。女房の私が何故一寸位見られぬのです。お前さまに返さぬといふぢやなし、そんな水臭い事云ふものぢやありませぬぞや』</p>
+            <p class="ja-classical-line">『それでもお前は、大変に如意宝珠に執着心を持つてゐるから、渡せないと言ふのだ。此宝珠はチツとも欲のない者が持たなくちや汚れるからな』</p>
+            <p class="ja-classical-line">『ヘン、汚れますかな。それなら、よう私のやうな汚れた女と酒を飲んだり、一緒に寝んだりなさいますな。何とマア口といふものは調法なものだ。それ程私が憎いのですか。ヘン、宜しい、私も私で、考へがありますから』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'It is troublesome for you to be so angry. Even if I do not show it now, it is safely inside the box like this, so will I not show it to you later, slowly and carefully? Hey, you two, Hatsu and Toku, did you open the middle and look inside? How is it?'</p>
+          <p class="en-p">Hatsu: 'Oh, that is out of the question. It is buzzing like this, so if I carelessly opened it and got stung by a bee or something, it would be a disaster; that is why I brought it here with such trepidation.'</p>
+          <p class="en-p">'Ha, you have done well; that is perfect. Hey, Takahime-sama, I will show it to you alone later tonight, so please wait until then. If I open it here, these two will see it. If that happens, the Shinriki will diminish by that much.'</p>
+          <p class="en-p">Takahime: 'Indeed, I understand now. You will surely show it to me, will you not?'</p>
+          <p class="en-p">'Yes, when a man says he will show it once, he will show it.'</p>
+          <p class="en-p">Takahime: 'You promise, do you not?'</p>
+          <p class="en-p">'Yes, I promise. If I am mistaken, I will present my one and only head to you, as many times as you wish. No matter what is said, are we not a close Fūfu? You should not doubt my heart like that.'</p>
+          <p class="en-p">Takahime: 'I am truly sorry. Now, Mokusuke-sama, shall we go a little further to the Mukafu?'</p>
+          <p class="en-p">Hatsu: 'If I may, Mokusuke-sama, Takahime-sama, my feet are so painful that I have become unable to walk even one step. Please, I beg you to stay here and spend the night in the open.'</p>
+          <p class="en-p">Toku: 'I cannot walk either. I have been whipped on the buttocks too much, so please decide to stay here until tomorrow morning; if you do that, by tomorrow I will surely be able to walk.'</p>
+          <p class="en-p">Takahime: 'Oh my, what helpless men. Now, Mokusuke-sama, shall we stay here for the night? Are these two not too Kaaisau?'</p>
+          <p class="en-p">Eugen: 'Ah, it cannot be helped. Can you not manage to walk at least one more Ichiri? Hey, you two, pull yourselves together and follow us for another Ichiri, how about that?'</p>
+          <p class="en-p">Hatsu: 'No matter what you say to me, my body simply will not move.'</p>
+          <p class="en-p">'Hmm, that is troublesome. How about you, Toku? You can walk a little, can you not?'</p>
+          <p class="en-p">Toku: 'For me, it is the same thing; it is far worse than Hatsu's wounds. You truly put us through a painful experience. I never thought that our Yahochiyō Shibai would turn out like this. My spirits are high now, but in truth, it is so painful that I cannot help it.'</p>
+          <p class="en-p">Takahime: 'Ah, this is also a matter of circumstance. It cannot be helped; then, let us spend the night here in this forest. Mokusuke-sama, please do the same.'</p>
+          <p class="en-p">'Hmm, if that is the case, then that will do. However, Takahime, please be careful so that Smart does not come. I do not know why, but there is no one I dislike as much as that fellow.'</p>
+          <p class="en-p">Takahime: 'Even for me, when I hear that fellow's voice, it is so painful that it feels as if my insides are turning over.'</p>
+          <p class="en-p">Hatsu: 'If I may, you two-sama, if you listen to what I say and stay here, I will stand guard over the dogs. If it is dogs, even if fifty or a hundred come, I will not flinch at all. I am a man who has been nicknamed a dog-expert since I was young. Since I have gone all over the place for dog-fighting, I have fully grasped the rhythm of dogs.'</p>
+          <p class="en-p">Takahime: 'Oh, that is a useful man. In that case, I shall have you serve as the dog-guard tonight. Even in geisha houses where foxes and badgers gather, they still keep a dog-guard, after all.'</p>
+          <p class="en-p">Hatsu: 'In that case, Toku and I will serve you faithfully. Ah, how grateful, how grateful. It is the arrangement of a bed of stars and a mattress of grass. The scent of peach blossoms permeates my body in some way. Ah, how time flies; it seems the sun has finally set. They say this is the Forest of Kai-shi and that monsters appear here, but no matter what, we are in the company of Tokiokishi-kami-sama, so it is safe. Besides, since we have that buzzing jewel there, no matter what comes, there is nothing to fear at all, right Toku?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『さう怒つて貰つちや困るぢやないか。今見せなくても、かうして立派に箱へ入つてるのだから、トツクリと又見せてやるぢやないか。オイ初、徳の両人、中を開けて見たか、何うだ』</p>
+            <p class="ja-classical-line">初『エエ滅相な、かうブンブン唸つてるのだから、うつかり開けて蜂にでも刺されたら大変ですからな、コハゴハ持つて来たのですよ』</p>
+            <p class="ja-classical-line">『ヤア、そりや出かした、それで結構だ。オイ高姫さま、又今晩ゆつくりと、お前だけに見せるから、それまで待つてゐてくれ。ここで開けると、此両人が見るからなア。さうすりや、それだけ神力がおちるのだから』</p>
+            <p class="ja-classical-line">『成程、それなら分りました。キツト見せて下さるでせうなア』</p>
+            <p class="ja-classical-line">『ウン、男が一旦見せると云つたら見せるよ』</p>
+            <p class="ja-classical-line">『キツトですなア』</p>
+            <p class="ja-classical-line">『ウン、キツトだ。もし間違つたら、俺の一つよりない首を、幾つでもお前に進上する。何と云つても、親しい夫婦の仲ぢやないか、さう俺の心を疑ふものぢやないワ』</p>
+            <p class="ja-classical-line">『誠に済みませぬ。サ、杢ちやま、モウちつと許り先方まで行きませうか』</p>
+            <p class="ja-classical-line">初『もし杢助さま、高姫さま、私は足が痛くつて、モ一歩も歩けぬやうになりました。どうぞ此処で今晩は露宿して下さいな』</p>
+            <p class="ja-classical-line">徳『私も歩けませぬ。余り尻を叩かれたものですから、どうぞ明日の朝まで、ここでとまる事にして下さい、さうすれば明日になつたら、キツト歩けるやうになるでせうから』</p>
+            <p class="ja-classical-line">高姫『エーエ、仕方のない男だなア。コレ杢助さま、ここに、今晩は泊つてやりませうか。二人が余り可愛相ぢやありませぬか』</p>
+            <p class="ja-classical-line">妖幻『ああ仕方がないなア。せめてモウ一里許り、何うとかして歩くことが出来ぬのか。オイ両人、チツと気をはりつめて、モウ一里許り従いて来たら何うだ』</p>
+            <p class="ja-classical-line">初『何と云つて貰つても、とても体が動きませぬワ』</p>
+            <p class="ja-classical-line">『ウーン、そいつア困つたのう。徳は何うだ、チツと位歩けるだろ』</p>
+            <p class="ja-classical-line">『私だつて、同じ事ですわ、初の疵よりも余程ひどいのですからなア。本当に貴方等は甚い目に遇はしましたねえ。八百長の芝居がこんなにならうとは思ひませなんだ。今こそ気が張つて居りますが、実の所は痛くつて痛くつて仕方がありませぬワ』</p>
+            <p class="ja-classical-line">高姫『あああ、これも係り合せだ。仕方がない、それなら此森で、今晩は一夜明かす事にしませう。なア杢助さま、貴方もさうして下さいな』</p>
+            <p class="ja-classical-line">『ウーン、それなら、さうしてもよい。併し、高姫、お前はスマートが来ないやうに気をつけてゐてくれよ。俺は何だか知らぬが、あれ位気にくはぬ奴はないのだから』</p>
+            <p class="ja-classical-line">『私だつて、彼奴の声を聞くと、腹の中がデングリ返るやうに苦しいのですよ』</p>
+            <p class="ja-classical-line">初『もし、お二人さま、私の云ふ事を聞いて下さつて、ここでお泊りになるのなれば、私は犬の番を致します。犬なら、仮令五十匹や百匹やつて来たつて、ビクとも致しませぬ。若い時から犬博労と綽名を取つた男です。随分犬の咬み合せに、そこら中へ行つたものですから、犬に対する呼吸は充分呑込んで居りますからなア』</p>
+            <p class="ja-classical-line">高姫『ヤ、それは重宝な男だ。さうすると、お前は今晩は犬番を勤めて貰はうかな。狐狸の集まつてゐる芸者屋でも、ヤツパリ、ケン番がおいてあるからな』</p>
+            <p class="ja-classical-line">初『それなら、徳と両人が神妙に御用致しませう、ああ有難い有難い、いよいよ星の蒲団に草の褥、といふ段取だ。桃の花の香りが、何とはなしに、身に沁みるやうだ。あああ早いものだ、たうとう日が暮れたとみえるワイ。ここは怪志の森と云つて、化物が出るといふ事だが、何と云つても、時置師神様のお供だから大丈夫だ。そこへ、あのブンブン玉があるのだから、何が来たつて、チツとも恐るる事はない、なア徳』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec07">
+        <div class="sec-header">
+          <span class="para-num">&sect; 7</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Un, that is right, that is right; in that case, Takahime-sama, Mokusukesama, good night.</p>
+          <p class="en-p">Takahime: 'Hey, you two, will you not offer the Norito before you sleep? Since my spirit is different, I cannot worship the Kamisama together with Mokusukesama and you two. No matter what, I am a spirit of the Tennin of the Reigoku in Takaamahara, and bound by the Giritenjiyō of the Denokami; you two are still wandering in Yachimata, so to speak, you are Shiyabamaujiya... therefore, so that you may be sent to Tengoku, you must always recite the Amatsunorito when you wake and when you sleep.'</p>
+          <p class="en-p">Eugen: 'No, for both of you, I shall exempt you from the Amatsunorito tonight. If many Tenninsama were to appear, I would be troubled in offering my Goaisatsu, ha ha ha.'</p>
+          <p class="en-p">Takahime: 'Hey, today I shall forgive you because of Mokusukesama's Goaisatsu, but from tomorrow on, you must surely recite the Amatsunorito.'</p>
+          <p class="en-p">Futari: 'Hai, we understand.'</p>
+          <p class="en-p">Before they had even finished speaking, they were exhausted and, while lying down, were already rowing the Shirakahayobune. In the meantime, Takahime urged Mokusuke on, and with all their might, they escaped the forest, pointed themselves toward the village of Ukiki, and dashed along the dark path at the speed of Idaten.</p>
+          <p class="en-p">What kind of activities will Takahime and Eugen-bō engage in from now on?</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ウン、さうださうだ、それなら高姫様、杢助様、お休みなさいませ』</p>
+            <p class="ja-classical-line">高姫『コレコレ、お前達、お祝詞をあげて寝まぬかいな。私は霊が違ふから、杢助さまと二人は神様を拝む訳には行かない。何と云つても高天原の霊国の天人の霊、日の出神の義理天上だから、お前達は八衢にまだうろついてをる、言はば娑婆亡者だから……天国へやつて下さるやうに、起きた時と寝る時には、必ず天津祝詞を奏上するのだよ』</p>
+            <p class="ja-classical-line">妖幻『イヤ、両人、今晩は天津祝詞は免除しておく。沢山の天人様がお出でになると、一寸御挨拶に困るからなア、ハツハハハ』</p>
+            <p class="ja-classical-line">『コレ、今日は杢助さまの御挨拶で、許して上げるけれど、明日からはキツト天津祝詞を上げるのだよ』</p>
+            <p class="ja-classical-line">両人は、</p>
+            <p class="ja-classical-line">『ハイ承知致しました』</p>
+            <p class="ja-classical-line">と言ひも了らず、疲労れはてて横になつた儘、白河夜船を漕いでゐる。其間に高姫は杢助を促し、一生懸命に森を脱け出し、浮木の里を指して、暗の道を韋駄天走りに駆出した。高姫及び妖幻坊は、今後如何なる活動をするであらうか。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c06.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 6: Dance 踏 Monster [1321]</span>
+      </a>
+      <a href="c08.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 8: 曲輪 Castle [1323]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
