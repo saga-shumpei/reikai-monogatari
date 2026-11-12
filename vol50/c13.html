@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: 盲嫌 [1307] - Volume 50 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 50 Table of Contents</a>
+      <span>Volume 50</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 50 &bull; Chapter 13</span>
+      <h1 class="chapter-title-en">Chapter 13: 盲嫌 [1307]</h1>
+      <p class="chapter-title-ja">盲嫌〔1307〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In the living room of Hatsuwakahime, Hatsuwakahime and Kahedehime are sitting with a round hibachi placed between them, and a conversation begins in gentle voices.</p>
+          <p class="en-p">Hatsuwakahime: 'Kahede-sama, you may feel angry, but to endure that is what is called being a yūshiya. It is said that anyone can endure what is easy to endure, but to endure what is hard to endure is true endurance, and there is no virtue greater than patience. All things in this world are settled in peace through patience, and conversely, disturbances arise through a lack of patience. The character for "endure" is written with the character for "heart" beneath the character for "blade," is it not? To swallow a blade in one's chest—such bitterness and regret—to be able to withstand this is what it means to endure. Kokusōōkami-sama created this vast world and allowed many shinjin to live in peace, and just when one might think it is time for a rest, due to Kinmaukiubi and other akugami, Kuniharutachinomikoto was, on the contrary, reviled even by Yahoyorozu-no-Kamisama as an akugami and a cursed god, and was burdened with the chikura-okido, suffering hardships beyond description; yet, despite all that bitterness and regret, He did not utter a single word of complaint. The living god of the Saien-no-Yakata, Susanoo-no-Mikoto-sama, was also falsely accused of crimes beyond description, had the hairs of His head plucked out one by one, His fingernails and toenails torn off, His beard cut, and on top of that, His noble self was banished from Takamagahara as a wanderer; yet, He did not hold a grudge in the slightest, but took the sins of all the people under heaven upon Himself, manifested as the Mizu-no-Mitama, and now, with the intention of guiding misguided humans toward the path of virtue and saving them so that they may enjoy the life of the heavenly kingdom forever and ever without letting even one person fall into the abyss, He has opened the San-Ikkyō to the world, and I, too, am serving as His hands and feet to propagate it throughout the world. You are also the daughter of Tanehiko-sama, who serves this noble Ōkami, and since you are a pure and noble believer of the San-Ikkyō, no matter how unreasonable the demands Takahime-sama may make, you must not resent her even for a word. If a human being gets angry even a little, demons will take advantage of that opening to destroy their spirit, and eventually destroy their physical body as well, so there is nothing as frightening or as detrimental as getting angry.'</p>
+          <p class="en-p">Kahedehime: 'Hai, thank you very much. I, too, have been told by my father that patience is the most necessary thing, that patience is the foundation of all success, and that it is the basis of character; but as I am an immature woman, waves of emotion suddenly rose in the sea of my heart, and as a woman who should be obedient, I uttered violent words toward Takahime-sama. Now that I think about it, I am truly ashamed. The Kamisama must surely hate my selfishness and stubbornness.'</p>
+          <p class="en-p">Hatsuwakahime: 'No, no, please do not worry at all. If you realize that and cultivate the virtue of patience from now on, the Kamisama will certainly not blame you; on the contrary, He will be very pleased, and will cast the light of love upon both your spirit and your body, making you the purest, most beautiful, and greatest being in this world.'</p>
+          <p class="en-p">Kahedehime: 'Your various teachings sink deep into my body, and tears of joy are spilling out before I know it. Now, Hatsuwakahime-sama, will Takahime-sama reform her current evil heart? If not, we cannot help but worry about the situation of our parents.'</p>
+          <p class="en-p">Hatsuwakahime: 'That is quite understandable. It is truly a touching sentiment that you, as a daughter, are so concerned about your parents. However, I am sorry to say that Takahime-sama has various evil spirits swarming within her body, so it is beyond our power alone. That said, I do not wish to let Takahime-sama fall into the path of evil. We must make her a fine person through benevolence and patience, for otherwise, we who serve the San-Ikkyō cannot fulfill our duty to the Kamisama.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">初稚姫の居間には初稚姫、楓姫の二人が丸火鉢を中に置いて、やさしい声で談話が始まつてゐる。</p>
+            <p class="ja-classical-line">『楓さま、お腹が立つでせうけど、そこを忍ぶのが勇者と云ふものですよ。なる勘忍は誰もする、ならぬ勘忍するが勘忍と申しまして、忍耐位善徳はありませぬ。世の中の一切の事は忍耐によつて平和に治まり、又忍耐せざるによつて騒動が起るのです。忍ぶと云ふ字は刃の下に心と云ふ字を書きませうがな。胸に刃を呑む様な苦しさ残念さも、之に耐へ得るのが之が忍ぶです。国祖大神様は此広大な世界をお造り遊ばし数多の神人を安住させ、サアこれで一息と云ふ処で、金毛九尾其他の悪神の為に、反対に国治立尊は悪神だ、祟り神だと八百万の神様にまで罵られ、又千座の置戸を負はされて、あるにあられぬ苦労を遊ばし、口惜し残念を耐りつめて只の一言も御不足らしい事は仰有らなかつたのですよ。斎苑の館の生神様、素盞嗚尊様も、あるにあられぬ無実の罪をきせられ、頭の毛を一本一本抜きとられ、手足の爪を剥がれ、髭を切り、其上に尊き御身を漂浪人として高天原より放逐され給ひながら、少しもお恨み遊ばさず、天下万民の罪を一身に引受けて、瑞の御霊と顕現し給ひ、今や不心得千万な人間を善道に導き、天国の生涯をいや永久に嬉しく楽しく、一人もツツボに落さず助けてやらうとの思召で、三五教を天下にお開き遊ばし、妾も其手足となつて天下に其宣伝をしてゐるので厶ります。貴女も亦此尊き大神様にお仕へ遊ばす珍彦様のお娘子、そして貴女は三五教の清き尊き信者なれば、何程高姫さまが無理難題を仰有つても、一言も怨んではなりませぬぞえ。人間はチツとでも腹を立てたり致しますと、悪魔が其虚に乗じて其霊を亡ぼし、遂には肉体迄も亡ぼしますから、腹を立てる位恐ろしいものの、損なものは厶りませぬよ』</p>
+            <p class="ja-classical-line">『ハイ、有難う厶ります。妾も父から忍耐の最も必要なること及び忍耐は万事成功の基であり、人格の基礎であると云ふ事を聞かされて居りますが、何分はしたない女ですから、つひ心の海に荒波が立ちまして、柔順なるべき女の身として高姫様に対し暴言を吐きました。今になつて思へば本当に恥かしう厶ります。神様は妾の我情我慢をさぞお憎しみ遊ばすで厶んせうな』</p>
+            <p class="ja-classical-line">『いえいえ、決してお案じなさいますな。貴女に其お気がついて今後忍耐の徳をお養ひなさいますれば、決して神様はお咎め遊ばす所か、大変にお喜び遊ばし、貴女の霊にも肉にも愛の光明を投げ与へ給ひ、此世に於て最も清き美はしき大いなるものと成さしめ給ふもので厶ります』</p>
+            <p class="ja-classical-line">『いろいろの御教訓、身に沁み渡つて嬉し涙が思はず零れて参ります。扨て初稚姫様、高姫様は今の悪心を改良して下さいますでせうか。さうでなくては吾々は父母両親の身の上案じられてなりませぬがな』</p>
+            <p class="ja-classical-line">『御尤もで厶ります。貴女が子として御両親をそこ迄お思ひ遊ばすのは実に感じ入つた御心掛けで厶ります。然しながら高姫様には御気の毒ながら、いろいろの悪霊が体内に群居して居りますから、到底吾々の力では及びませぬ。それだと申して高姫様を魔道へ落したくはありませぬ。飽まで仁慈と忍耐とを以て立派なお方にして上げなくては、吾々三五教に仕ふるものの神様に対する役が勤まりませぬからな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'How might we be able to save Takahime-sama?'</p>
+          <p class="en-p">'Beyond this, there is no other way but to borrow the divine power of the Lord God. And no matter what is said, when we face her with sincerity, kindness, true intent, and patience, she will surely become a good person through the grace of the Lord God. It is as if we have been given a Shikenmondai by the Lord God. If I cannot make Takahime-sama repent, I cannot go about calling myself a Sendenshi.'</p>
+          <p class="en-p">'You are truly doing a great Gokurausama. I, too, shall henceforth make patience my priority and treat Takahime-sama with the same respect and love as my own Chichihaha.'</p>
+          <p class="en-p">'Ah, you have said it so well. Arigata-gozaimasu. Now, Kaede-sama, since your father and mother must be waiting for you, I am sorry to seem as if I am driving you away, but please return for now and come again to visit. Since Takahime-sama was just dragged away so smartly and is in a state of great Giyakujiyō, if she were to see your face, her usual Biyōki might recur again.'</p>
+          <p class="en-p">'If that is the case, I shall take my leave. You and I shall join our hearts to, well, Takahime-sama...'</p>
+          <p class="en-p">Before the words were finished, Takahime kicked open the sliding door and burst in with the force of a Yasha, her expression of anger terrifying. She glared sharply at the two of them, and while trembling with voice, said:</p>
+          <p class="en-p">'They say there is nothing that remains hidden and does not eventually appear. What were you two consulting about? You were saying just now, were you not, that you and I would join our hearts to target Takahime, and so on? If you are plotting such evil, it will surely be revealed by divine punishment. Even if you think no one knows, Heaven knows, Earth knows, others know, and I know. Now, you two, I can no longer forgive you. What were you plotting? Now, confess clearly. You, Kaede, you tricked this Giritenjō no Ikimiya, grabbed my leg from behind, threw me into the garden, and caused me to scrape my shin and bleed from my knee, did you not? Now, what are you going to do about it? I will not forgive you anymore.'</p>
+          <p class="en-p">'I have truly done a terrible thing. Please, I beg you to forgive me. I was in the wrong.'</p>
+          <p class="en-p">'Hmph, you say that so easily. "I was in the wrong," what does that even mean? If things could be settled just by saying you were wrong, the world would be full of evil deeds. A word for a word, what one receives must be returned. Since you scraped my shin, which is so precious that not even an ant should be allowed to touch it, I cannot let this pass and have my sense of duty satisfied. I will now strike you as much as I please in return, so show me your shin. In this world, duty is important. This Giritenjō will give you a full return of favors.'</p>
+          <p class="en-p">She shouted this with a trembling, angry voice, mixed with tears.</p>
+          <p class="en-p">'Oh, Mother, please, I beg you to forgive her. She is still young and does not know better; I shall also advise her to repent and, by the grace of Kaminaohi and Ōnaohi, to be careful from now on.'</p>
+          <p class="en-p">'Hmph, you, Hatsuwaka, how can you say such transparent things? Were you not just now with Kaede, saying that the two of you would join your hearts to target this Takahime? This Giritenjō is not so easily deceived by such things. Did you not say that you turned away that evil dog by listening to the orders of Mokusuke-sama? Furthermore, you must have hidden me somewhere, and it was your plot that caused me to suffer such a terrible experience and be dragged to the depths of the forest. If Iru, Iku, Saru, Haru, and Teru had not come for me, I would have been killed. You are a devil, a great villain who wears a beautiful face but hides needles in your heart. From today, I dismiss you. Ugh, how filthy; do not call me Mother. You are the mastermind of a murder, a demon girl; this Giritenjō will not tolerate you any longer.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『如何致しましたら、高姫様を救ふ事が出来ませうかな』</p>
+            <p class="ja-classical-line">『この上は神様の御神力を借るより外に道は厶りませぬ。そして何と仰有つても、此方は誠と親切と実意と忍耐とを以て相対する時は、神様のお恵によりまして屹度よいお方になつて下さるでせう。吾々は神様から試験問題を与へられた様なものですからな。高姫様を改心させる事が出来ない様だつたら、妾は宣伝使等と云つて歩く事は出来ませぬ』</p>
+            <p class="ja-classical-line">『本当に御苦労様で厶りますな。妾もこれから忍耐を第一とし、高姫様をわが父母同様に敬ひ愛する事に致しませう』</p>
+            <p class="ja-classical-line">『ああよう云うて下さいました。有難う厶ります。サア楓さま、お父さまやお母さまがお待ち兼ねで厶りませうから、追ひ立てた様で済みませぬが一先づお帰り下さつて、又改めて遊びにおいで下さいませ。高姫さまが今スマートに引きずられ、大変に逆上して居られますから、貴女のお顔を見られたら、何時もの病気が又再発するかも知れませぬからな』</p>
+            <p class="ja-classical-line">『左様なれば御免を蒙ります。貴女と妾と心を合せて高姫様を、ねー、……』</p>
+            <p class="ja-classical-line">と言葉終らぬに、高姫は襖を蹴破り夜叉の如き勢にて、闖入し来り、怒りの面色物凄く、二人をハツタと睨めつけ、声を震はせながら、</p>
+            <p class="ja-classical-line">『隠れたるより現はるるはなしとかや。お前等両人は何を相談して厶つた。貴女と妾と心を協して高姫を、ねー……とか狙ふとか現に今云つて居ただらう。其様な悪い企みを致して居ると、天罰で忽ち現はれませうがな。誰知らぬかと思うても天知る、地知る、人も知る、吾も知る、サア二人の方、もう、了簡がなりませぬ。何を企んで厶つた、サア、キツパリと白状なさいませ。これ楓、お前は大それた義理天上の生宮を騙討に致して、後から小股を攫へ、私を前栽へおつ放り出し、これ此通り向脛を擦り剥かせ、膝頭から血を出さしたぢやないか。サア如何して下さる。もう了簡はしませぬぞや』</p>
+            <p class="ja-classical-line">『真に済まない事を致しました。何卒御了簡して下さいませ。妾が悪う厶りました』</p>
+            <p class="ja-classical-line">『ヘン、よう仰有いますわい。「妾が悪う厶いました」とは、それは何の事だい。悪いと云つて謝つて事が済むのなら世の中は悪の仕放題だ。売言葉に買言葉、貰つたものは必ず返礼せなくちやならない。お前さまも、蟻一匹とまつてもならぬと云ふ大切な向脛を擦り剥かして下さつたのだから、私も此儘で措いちや真に義理が済みませぬ。之から返礼に思ふ存分こついて上げるから向脛を出しなさい。世の中は義理が大切だ。此義理天上が充分にお礼を申しますぞや』</p>
+            <p class="ja-classical-line">と震ひ声に怒りを帯び、涙交りに喚き立てる。</p>
+            <p class="ja-classical-line">『もし、お母様、何卒許してあげて下さいませ。まだお年も行かぬなり、何卒神直日、大直日に見直し聞直し、以後お慎みなさるやうに妾からも御注意を申上げますから』</p>
+            <p class="ja-classical-line">『ヘン、これ初稚、ようまあツベコベとそんな白々しい事が云はれますな。お前さまは今楓と二人で、現に此高姫を二人が心を協して狙うてやらうと云つて居つたぢやありませぬか。そんな事に誤魔化される義理天上ぢやありませぬぞや。お前は杢助さまの命令を聞くと云つて、あの悪い犬を追ひ返したと云うたのぢやないか。それに何処かへ隠して置いて、私をあんな非道い目に遇はし、森の奥まで引張つてやらしたのも、お前さまの企みだらう。イル、イク、サールやハル、テルが来て呉れなかつたら私は殺されて居る所だ。大悪人奴が、美しい顔して、心に針を包んでをるお前は悪魔だ。もう今日から暇をやります。アタ穢らはしい、お母さま等と仰有つて下さいますな。人殺の張本人奴が、鬼娘奴が、此義理天上はもう承知しませぬぞや』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hatsuwakahime: 'Mother-sama, please do not be so Muiki in your anger. Dōzo, listen to me Hitotoho.'</p>
+          <p class="en-p">Takahime stuck out her tongue with a jerk, made a red face, jerked her chin three or four times, wore a Reishō, and with a mocking Kuchiburi, said:</p>
+          <p class="en-p">Takahime: 'Hmph, so that is what you Otsushiya. You are quite a Nakanaka old tanuki. Ever since you came here, I thought you were no mere tanuki. But thinking you were the daughter of my beloved, beloved Mokusuke-sama, I have treated you with Kaai until now, and you have become Zōchiyō; to plot such an outrageous thing, are you not a Gongodaudan Daiakutau? If you speak with such Shinsetsu, Naze did you not come to save me when I was being dragged by that Inuchikushiyō? Even if we speak only in terms of Meigijiyō, are you not my daughter? If you had even a little bit of sincerity, you should understand Girininjiyō. Even a naughty child like Iru, Iku, or Saru came to save me in a moment of crisis, did they not? And what is this Nanigoto? You dragged the Ama named Kaede, who caused me such an Ōkega, into your own Heya, and were plotting a grand Inbō to do such-and-such to me while acting so Kiraku, were you not? Eh, if I dawdle, I might be done in by you Mahetachi; he who strikes first controls the others. Kakugo nasare.'</p>
+          <p class="en-p">As she said this, she swung her club, and at the very moment she was about to strike Hatsuwakahime, Smart suddenly rushed in, let out a single 'Woof,' caught the hem of Takahime's garment, and pulled her down backward once again. Hatsuwakahime turned to Smart and said:</p>
+          <p class="en-p">Hatsuwakahime: 'Here, you, what kind of violent thing are you doing? Will you not let go quickly?'</p>
+          <p class="en-p">She chided him. Smart was trembling as if in a fit of rage. However, finding it difficult to disobey his master's command, he obediently let go of the hem with a snap. Takahime stood up with a jerk and struck Smart on the head with a palm broom with a thud. As Smart was about to jump at her in anger, Hatsuwakahime gave a single command, 'Here,' and Smart, looking disappointed, hung his head.</p>
+          <p class="en-p">Hatsuwakahime: 'Here, Smart, you must never threaten Mother-sama. However, since you are a clever dog, it was great that you did not bite her anywhere, even though you dragged Mother-sama along.'</p>
+          <p class="en-p">She stroked his head and neck, soothing Smart's heart. Takahime raised her voice in anger:</p>
+          <p class="en-p">Takahime: 'Eh, you filthy Hatsu, you Ama named Kaede, take that beast and get out of here. If you dawdle, Giritenjō will be desperate. I do not know what I might do.'</p>
+          <p class="en-p">She was in a state of almost total madness. Thinking that making her too angry would be a pity, Hatsuwakahime spoke gently, placed both hands on the floor, and said:</p>
+          <p class="en-p">Hatsuwakahime: 'Mother-sama, I am terribly sorry. If that is the case, I shall follow your command and wait over there, so if you have any need for me, Dōzo, please clap your hands.'</p>
+          <p class="en-p">Takahime: 'Hmph, I am not the sort to eat such flattering words. Go, go, hurry off to Uzuhiko-sama's place or somewhere, and hold a consultation meeting on the conquest of Takahime to your heart's content. Shoo, shoo, shoo, you beast.'</p>
+          <p class="en-p">Saying this, she spat from her toothless mouth, swung her broom, and tried to sweep them out.</p>
+          <p class="en-p">Hatsuwakahime and Kaede, together with Smart, said:</p>
+          <p class="en-p">Hatsuwakahime and Kaede: 'Please excuse us.'</p>
+          <p class="en-p">They said this, left the place in a hurry, and headed toward the mansion of Uzuhiko.</p>
+          <p class="en-p">Afterward, Takahime gritted her teeth in frustration and, raising a savage voice like that of a tiger or wolf, cried out:</p>
+          <p class="en-p">Takahime: 'Eh, how regrettable, how vexing. Caught in the schemes of evil gods, the essential Mokusuke-sama has been injured and gone off somewhere, and while this Giritenjō is called a living shrine of God, because of Uzuhiko's sorcery, my eyes have been poked, my waist has been sprained, and on top of that, I have been thrown at an Ama-tsuchiyo like that Kaede, and dragged by a beast; truly, can one endure this in silence?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『お母さま、さう無息に怒つて下さいますな。何卒一通り聞いて下さいませ』</p>
+            <p class="ja-classical-line">高姫はニユツと舌を出し、赤ベイをしながら腮を三つ四つシヤくつて見せ、冷笑を浮べて、嘲るやうな口吻で、</p>
+            <p class="ja-classical-line">『ヘン、仰有りますわい。中々劫経た狸だな。ここへ来た時から只の狸ぢやないと思うてゐたのだ。けれど、恋しい恋しい杢助さまの娘だと思つて、今まで可愛がつてやれば増長しよつて、大それた事を企むとは、言語道断な大悪党ではないか。それ程お前さまが親切さうに云ふのなら、何故私があの犬畜生に引張られてゐた時に助けに来なかつたのだ。お前は仮令名義上から云つても私の娘ぢやないか。チツと位誠があれば義理人情も弁へて居る筈だ。イル、イク、サールのやうな訳の分らぬヤンチヤでさへも、マサカの時は私を助けに来たぢやないか。それに何事ぢやい。ヌツケリコと、現在母の私を大怪我さした楓の阿魔を自分の部屋に引張り込み、気楽さうに私を○○しよう等と、大それた陰謀を企てて居つたぢやないか。エー、グヅグヅしておればお前達にしてやられるかも知れぬ、先んずれば人を制すだ。覚悟なされ』</p>
+            <p class="ja-classical-line">と言ひながら棍棒を打振り、初稚姫を打伸めさうとする一刹那、俄に駆け込んで来たスマートは「ワン」と一声、高姫の裾を喰はへて又もや後へ引倒した。初稚姫はスマートに向ひ、</p>
+            <p class="ja-classical-line">『これ、お前、何と云ふ乱暴の事をなさるのだい。早くお放しなさらぬか』</p>
+            <p class="ja-classical-line">とたしなめた。スマートはビリビリと腹立たしさうに震うてゐた。けれども主人の命令には背き難く、素直にパツと裾を放した。高姫はツと立上り、棕櫚箒を以てスマートの頭をガンと殴つた。スマートは怒つて飛びつかうとするのを初稚姫は「これ」と一声かくれば、スマートは残念さうにして俯向いて了つた。</p>
+            <p class="ja-classical-line">『これ、スマートや、決してお母さまに対し、嚇かしちやなりませぬよ。然しお前は賢い犬だから、お母さまを引きずつて行つても、何処も咬まなかつた事だけは偉かつたね』</p>
+            <p class="ja-classical-line">と頭や首を撫でスマートの心を和めて居る。高姫は声荒らげて、</p>
+            <p class="ja-classical-line">『エー、汚らわしい初、楓の阿魔、ド畜生をつれて、其方行つてくれ。グヅグヅしてゐると義理天上は死物狂だ。どんな事を致すか知りませぬぞや』</p>
+            <p class="ja-classical-line">と殆ど発狂の態である。初稚姫は余り怒らしては却つて気の毒と思ひ言葉優しく両手をついて、</p>
+            <p class="ja-classical-line">『お母さま、えらい済まない事で厶りました。左様なれば仰せに従ひ、彼方に控へてゐますから、御用が厶りますれば何卒お手をお打ち下さいませ』</p>
+            <p class="ja-classical-line">『ヘン、そんな、諂ひ言葉を喰ふやうな私ぢや厶りませぬわいの。さアさア早く珍彦さまの処へでも行つて、シツポリと高姫征伐の相談会でも開いたがよいわいのう。シーツ　シーツ　シーツこん畜生』</p>
+            <p class="ja-classical-line">と云ひながら歯の脱けた口から啖唾を吐きかけ、箒を振り廻し、掃出さうとした。</p>
+            <p class="ja-classical-line">初稚姫、楓はスマートと共に、</p>
+            <p class="ja-classical-line">『御免なさいませ』</p>
+            <p class="ja-classical-line">と云ひ捨て、匆々に此場を辞し珍彦の館をさして出でて行く。</p>
+            <p class="ja-classical-line">後に高姫は無念の歯をかみしめ、虎狼の如き蛮声を張上げて、</p>
+            <p class="ja-classical-line">『エー、ザ残念や、口惜しやな。悪神共の計略にかかり、肝腎の杢助様は怪我を遊ばし何処かへお出でになり、此義理天上は神の生宮と云ひながら、珍彦の魔法使のために目をこつかれ、腰を挫かれ、其上あんな楓の様な阿魔ツチヨに投げつけられ、ドン畜生には引きずられ、実に之が黙つて辛抱が出来ようか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Saying this, she threw the Hibachi, pulled out the trays, bowls, and dishes from the Todana, threw them out into the Koguwai, and having performed a Kaguramahi without Ikan, accompanied by the sounds of 'Gatan-bishan, gachiya-gachiya,' she sat down heavily in the Mannaka of the Zashiki, shook her head in Jiyōge and Saiu, and sobbed.</p>
+          <p class="en-p">Suddenly, from within the Fukuchiu of Takahime, a voice laughed of its own accord:</p>
+          <p class="en-p">Voice: 'Watsuhahahaha, I am the Shiyugojin of Hatsuwakahime. I have entered at the request of Hatsuwakahime to destroy this Nikutai. The other one is the Shiyugojin of Kaede. How Kogimi it is, ufufufufu.'</p>
+          <p class="en-p">However, this voice was by no means the Shiyugojin who had entered at the request of Hatsuwakahime, nor was it the Shiyugojin of Kaede. It was the voice of the Akuko that was Izen lurking within the Tainai of Takahime.</p>
+          <p class="en-p">Yet, because Takahime believed that both of them had Shinnifu into her Nikutai to destroy it, watching for an opening, she could not bear it.</p>
+          <p class="en-p">From that moment, she felt such hatred for the two, like Dakatsu, and Ketsushin that if she ever found an opening, she would punish them.</p>
+          <p class="en-p">Whenever an Akurei intends to harm or torment a person, it adopts such a Shiyudan.</p>
+          <p class="en-p">For instance, there are many among the demons who, intending to destroy the Ōmotokyō, quietly enter the Nikutai of a person with some Shiyakuwaiteki influence, whisper slander against the Ōmotokyō from within, and attempt to destroy it through the hands of such people.</p>
+          <p class="en-p">Furthermore, lesser demons enter the Nikutai of the sick and babble, 'I have been sent by Ōmoto to take your life,' plotting to ruin its reputation.</p>
+          <p class="en-p">Such Akuma appear frequently in every age.</p>
+          <p class="en-p">Therefore, those who are officials or believers must be fully conversant with the news of the spirit world and must not be led astray by their deceitful words.</p>
+          <p class="en-p">Now, Takahime, while striking her stomach with her fists as usual, raised her voice in anger like a madwoman:</p>
+          <p class="en-p">Takahime: 'Hey, you ringleaders of evil gods, Hatsuwakahime and the living spirit of Kaede-hime, what do you think you are doing? The soul of Toyohime, who would die for such things, is not the living palace of the righteous Hinodewake. Come, you had better confess the details of your plot one by one; if you do not, I have my own intentions. Well, answer me!'</p>
+          <p class="en-p">From within her stomach, the voice replied:</p>
+          <p class="en-p">Voice: 'Yes, I have truly done a terrible thing. I am the living spirit of Hatsuwakahime. And the other one is the living spirit of Kaede-hime. We both joined our powers and entered, plotting to destroy the living palace of Hinodewake. However, because your divine virtue is so strong, we can do nothing. Oh, it is painful, it is painful, please forgive us, please forgive us.'</p>
+          <p class="en-p">Thus, it apologized from within the stomach, using the voices of Hatsuwakahime and Kaede-hime.</p>
+          <p class="en-p">However, in reality, it was still the words of the original fierce spirit, and that fierce spirit, fearing the majesty of Hatsuwakahime, plotted to make them fight with the Nikutai of Takahime, drive both of them out, and dwell in the Nikutai of Takahime at its leisure to achieve its own purpose.</p>
+          <p class="en-p">Upon hearing this, Takahime shouted:</p>
+          <p class="en-p">Takahime: 'Yes, very well, you four-legged soul of evil and lawlessness, I will not forgive you!'</p>
+          <p class="en-p">With these words, she tucked a club under her arm and, with a ferocity like that of the raging King of Ashura, spitting the heat of flames and with her hair standing on end, she headed toward the mansion of Mezuhiko.</p>
+          <p class="en-p">Hatsuwakahime and Kaede were talking quietly.</p>
+          <p class="en-p">Takahime appeared there and shouted:</p>
+          <p class="en-p">Takahime: 'You four-legged creature of evil and lawlessness, know your place!'</p>
+          <p class="en-p">Just as she raised her oak club to strike, Smart came running through the air from nowhere, and with his great strength, he knocked Takahime down to the ground with a thud.</p>
+          <p class="en-p">Seeing this fierce dog, Takahime was terrified, shrank back, fled to her own living room, braced the sliding doors from the inside, and sat trembling, covered in her bedding.</p>
+          <p class="en-p">Smart chased after Takahime, scratched at the outside of the door, and growled incessantly:</p>
+          <p class="en-p">Smart: 'Woo-woo, woo-woo, wow-wow-wow.'</p>
+          <p class="en-p">Both Takahime and the Akurei within her body shrank at this sound, becoming small and trembling, huddled together like a chestnut left on a branch.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と云ひながら火鉢を投げつけ、戸棚の膳椀鉢等を引つ張り出しては戸外へ投げつけ、「ガタンビシヤン、ガチヤガチヤ」と神楽舞を遺憾なく演じ終り、再び座敷の中央にドツカと坐り、首を上下左右に振り、泣きしやくつてゐる。忽ち高姫の腹中より、</p>
+            <p class="ja-classical-line">『ワツハハハハハ、俺は初稚姫の守護神だ。初稚姫に頼まれて此肉体を亡ぼすべく入り込んだのだぞよ。もう一人は楓の守護神だ。何と小気味のよいことだわいのう、ウフフフフフ』</p>
+            <p class="ja-classical-line">とひとりでに笑ひ出した。然し此声は決して初稚姫に頼まれて這入つた守護神でもない、又楓の守護神でもなかつた。依然として高姫の体内に潜居してゐる悪狐の声である。されど高姫は全く両人が高姫の肉体を亡ぼすべく、吾肉体に隙を窺うて侵入して来たものと思うてゐるから堪らない。これから両人を憎む事蛇蝎の如く、隙さへあれば両人を懲してやらねばおかぬと決心したのである。凡て悪霊が人を傷つけ又人を苦しましめむとする時は、右の如き手段を採るものである。例へば大本教を破壊せむとする悪霊は、或社会的勢力を有する人間の体内にソツと入り、内部より大本教に対する悪口を囁き、之等の手によつて破壊せむとするものも魔の中には沢山あるのである。又稍小なる魔に至つては病人の体に入り込み「此方は大本から頼まれて其方の命を取りに来たものだ」等と口走り、名を悪くせむと企むものである。斯の如き悪魔は何時の世にも頻々として現はれ来るものである。故に役員たり信者たりするものは、充分に霊界の消息に通じ、彼等の詐言に迷はされてはならぬのである。</p>
+            <p class="ja-classical-line">扨て高姫は自分の腹を例の如く握り拳で三つ四つ打叩きながら、狂乱の如く怒りの声を張り上げて、</p>
+            <p class="ja-classical-line">『こりや、悪神の張本、初稚姫、楓姫の生霊奴、何と心得てる。そんな事に往生致す常世姫の身魂、義理天上日出神の生宮ではないぞよ。サア其方は企みの次第を逐一白状致せばよし、致さぬに於ては此方にも了簡があるぞよ。どうだ、返答致せ』</p>
+            <p class="ja-classical-line">と喚き立てる。腹中より、</p>
+            <p class="ja-classical-line">『はい、真に済まない事を致しました。私は初稚姫の生霊で厶ります。そしても一人は楓姫の生霊で厶ります。どうかして吾々二人が力を協せ、日出神の生宮を亡ぼしてやらうと企んで這入りました。併しながら貴女の御神徳があまり強いので、如何する事も出来ませぬ。ああ苦しい苦しい許して下さいませな許して下さいませな』</p>
+            <p class="ja-classical-line">と初稚姫、楓姫の声色を使つて腹の中から詫び出した。然し其実は依然として、もとの兇霊の言葉であり、其兇霊が初稚姫の威光に畏れ、何とかして高姫の肉体と喧嘩をさせ、ここを両人とも追ひ出し、悠々閑々として高姫の体内に棲み、わが目的を達せむと企んだのである。高姫は之を聞くより、</p>
+            <p class="ja-classical-line">『うん、よし、悪逆無道の四足身魂、了簡ならぬ』</p>
+            <p class="ja-classical-line">と喚きながら棍棒を小脇に掻い込み、珍彦の館をさして阿修羅王の荒れたる如き勢凄じく、火焔の熱を吐きながら頭髪を逆立て進み行く。初稚姫、楓の二人はヒソビソと話をしてゐた。そこへ高姫は現はれ来り、</p>
+            <p class="ja-classical-line">『悪逆無道の四足、思ひ知れ』</p>
+            <p class="ja-classical-line">と樫の棍棒を真向にふり翳し、今や打下さむとする一刹那、何処ともなくスマートは宙を駆りて飛んで来り、強力に任せて高姫をトンと其場に押倒した。高姫はこの猛犬を見て怖気づき、細くなつて再びわが居間に逃げ帰り、中から戸障子に突張りをして、夜具をひつ被つて震へてゐた。スマートは高姫の後を追つ駆け来り、戸の外に足掻きをしながら、</p>
+            <p class="ja-classical-line">『ウーウ　ウーウ、ワウワウワウ』</p>
+            <p class="ja-classical-line">と頻りに呻り立ててゐる。高姫も体内の悪霊も此声に縮み上り、小さくなつて梢に残つた柴栗の様に固まつて震うてゐる。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c12.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 12: 敵愾心 [1306]</span>
+      </a>
+      <a href="c14.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 14: 虬の盃 [1308]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

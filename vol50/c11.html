@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: 鸚鵡返 [1305] - Volume 50 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 50 Table of Contents</a>
+      <span>Volume 50</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 50 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: 鸚鵡返 [1305]</h1>
+      <p class="chapter-title-ja">鸚鵡返〔1305〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In the Miyakata of the forest of the shrine, Mokusuke appeared; his true Shiyōtai is a beast of mystery, possessing the hybrid nature of a lion and a tiger, known in the world of Eumi as the right arm of the Yamataorochi that coils around Taiunzan. Known as Eugenbau, he appears and disappears here and there, using Shinshiyutsukibotsu Eujiyutsu to torment the Yobito, turning the Chijiyō world into a Makai, destroying all goodness, and plotting to make the world one of Jiyaaku and Kiyogi; his madness is Yuyu.</p>
+          <p class="en-p">The Sendenshi of Ananai-kyō, Tamakuniwake, has served with Tansei the strict Mitama and the Mizumitama. As he comes forth to trample the sacred shrine of the noble Kami, he deceives Takahime-tsukasa, who has had her soul stolen by the demon, and posing as husband and wife, he remains in hiding. Suddenly, the Sendenshi famous in the way of Ananai-kyō, Hatsuwakahime, arrives with her spiritual light, accompanied by a fierce dog. Fearing this, he begins to flee, but Smart, who serves the Kami, sees through his true Shiyōtai and suddenly summons his courage. He latches onto the Kyūtsu, who possesses a body many times larger than his own, and bites into the area between his brows. As they grind their teeth near the valley water flowing through the forest, the Eumi is suddenly struck with astonishment.</p>
+          <p class="en-p">Pointing toward the mountain ridge as if the clouds were mist, he flees for the time being. Smart, having injured his leg, returns while limping and enters the living room of Hatsuwakahime. While licking his wounds for a while, his self-healing is ingenious. Takahime-tsukasa, in her sadness of not knowing that Mokusuke is a ferocious and fearless Kyūshin, loves and yearns for him as her own husband, and secretly plans evil deeds. First, she plots to poison Uzuhiko and Shizuko-no-kata, who are eyesores to her, and by falsely claiming Kaedehime as her own child, she intends to take a position in the sacred grounds forever, and while the Kami Susanoo-Ōkami resides in the hall of the Saien, she whispers with her head bowed, plotting to obstruct his divine strategy for the salvation of the Sekai; how terrifying.</p>
+          <p class="en-p">An angel appeared at the bedside of Kaedehime, solemnly as Monju Bosatsu, the incarnation of Kototama-wake. Accompanied by the brave Smart, the angel commanded that she save her parents from their crisis, gave her the divine elixir of Hyakudoku-kaisan, hid his body in the clouds, and departed to parts unknown. Kaedehime awoke with a start, and upon checking the fist of her hand, she found she was clutching the spiritual medicine she had received in her dream; how mysterious. Eugenbau Mokusuke, following his own will, drove Smart away from this place for the time being, but before they could find peace, Takahime, in order to heal the wounds of Mokusuke-tsukasa, sought to secretly obtain the Tamatake growing on the treetops of a great cedar.</p>
+          <p class="en-p">Hiding from the eyes of others, she leaned a ladder against the trunk of the great tree. With her heavy body swaying, she finally reached the high first branch, and while getting caught in spider webs, she searched the treetops to the right and left. Suddenly, she recognized the two eyes of an owl and, thinking this was the Tamatake, reached out with joy and courage. The owl, startled, pecked at the two eyes of Takahime with its hook-like beak with all its might. Taken by surprise, Takahime fell from the high place with a thud, suddenly crashing to the ground; her eyes blurred, her waist ached, and she was left breathless.</p>
+          <p class="en-p">Iru, who served as the receptionist, was astonished at the sight and immediately spread the word throughout the hall. Uzuhiko, Shizuko, and the young men Iru, Iku, Saru, Haru, and Teru carried Takahime into the living room. Through the earnest nursing of Hatsuwakahime, Takahime caught her breath for a while, but she urged them to summon Mokusuke-sama quickly; how pitiful is her heart. Her face suddenly swelled up, and the terror of her having changed into a hideous visage that one could not bear to look at twice was great. Fearing her as a monster of the forest of the shrine, no one would approach her.</p>
+          <p class="en-p">Nevertheless, the Sendenshi who guards the teachings of Ananai-kyō, Hatsuwakahime, kindly cared for Takahime-tsukasa. As she nursed her for seven or eight days, the days passed, and her two eyes suddenly opened wide as before, the pain ceased abruptly, and even the swelling of her face subsided. Before they could even rejoice, Takahime, fearing the divine power of Hatsuwakahime, began to plot evil schemes once again; how wicked it is.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">祠の森の神館に
+現はれ来りし杢助の
+其正体は月の国
+大雲山に蟠まる
+八岐大蛇の片腕と
+妖魅の世界に名も高き
+獅子と虎との中性を
+備へし怪しの動物ぞ
+妖幻坊と謳はれて
+彼方此方に出没し
+神出鬼没の妖術を
+使ひて世人をなやませつ
+地上の世界を魔界とし
+所在善を亡ぼして
+邪悪と虚偽の世にせむと
+狂ひ廻るぞ由々しけれ
+三五教の宣伝使
+玉国別が丹精を
+凝らして仕へまつりたる
+厳の御霊や瑞御霊</p>
+            <p class="ja-classical-line">尊き神の御社を
+蹂躙せむと出で来る
+悪魔に御魂を奪はれし
+高姫司を誑かし
+茲に夫婦となりすまし
+生地を隠して居たる折
+忽ち来る三五の
+道に名高き宣伝使
+初稚姫の霊光と
+伴ひ来る猛犬に
+恐れて逃げ出すその途端
+神に仕ふるスマートが
+其正体を看破りて
+忽ち勇気を振り起し
+幾層倍の巨体をば
+有する曲津に取りついて
+眉間のあたりを一噛ぶり
+森を流るる谷水の
+傍へに鎬を削りつつ
+妖魅は忽ち驚愕し</p>
+            <p class="ja-classical-line">雲を霞と山の尾を
+指して一先づ逃げて行く
+スマートは足を傷つけて
+チガチガしながら立帰り
+初稚姫の居間に入り
+暫し痛手を舐めながら
+自分療治の巧妙さ
+高姫司は杢助を
+兇暴不敵の曲神と
+知らぬ悲しさ吾夫と
+恋ひ慕ひつつひそびそと
+よからぬ事を計画し
+まづ第一に目上の瘤と
+心にかかる珍彦や
+静子の方を毒殺し
+楓の姫を吾子ぞと
+偽りすまして聖場に
+いや永久に陣を取り
+斎苑の館にましませる
+神素盞嗚大神の</p>
+            <p class="ja-classical-line">世界救治の神策を
+妨害せむと首をば
+鳩めて囁く恐ろしさ。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">楓の姫の枕辺に
+現はれ給ひしエンゼルは
+言霊別の化身なる
+文珠菩薩と厳めしく
+さしも雄々しきスマートを
+伴ひ来り両親の
+危難を救ひ与へよと
+百毒解散の神丹を
+与へて雲に身を隠し
+何処ともなく出でましぬ
+楓はハツと目を醒まし
+吾手の拳を調ぶれば
+夢に受けたる霊薬を
+握り居たるぞ不思議なれ
+妖幻坊の杢助が
+意思に従ひスマートを
+一先づここを追ひ出し
+やつと安心する間なく
+杢助司の瘡傷を
+癒さむために大杉の</p>
+            <p class="ja-classical-line">梢に生えし玉茸を
+密に取らむと高姫は
+人目をしのび梯子を
+大木の幹に立てかけて
+重い体をたわたわと
+さしもに高き一の枝
+やつと手をかけ蜘蛛の巣に
+引つかかりつつ右左
+梢を探し居たりしが
+忽ち梟の両眼を
+認めてこれぞ玉茸と
+喜び勇み手を出せば
+梟は驚き高姫が
+二つの眼を容赦なく
+鈎のやうなる嘴で
+力限りについばめば
+不意を打たれて高姫は
+スツテンドウと高所より
+忽ち地上に顛落し
+眼は眩み腰痛み</p>
+            <p class="ja-classical-line">息絶えだえとなりにける
+受付役に仕へたる
+イルは見るより仰天し
+忽ち館にふれ廻る
+珍彦、静子を初めとし
+イル、イク、サール、ハル、テルの
+若き男は高姫を
+担いで居間に運び入れ
+初稚姫の熱心な
+其介抱に高姫は
+暫し息をばつきながら
+杢助さまを逸早く
+招き来れとせきたつる
+其心根ぞ不愍なれ
+顔面忽ち腫れ上り
+二目と見られぬ醜面と
+変り果てたる恐ろしさ
+祠の森の妖怪と
+怖れて近づくものもなし
+さはさりながら三五の</p>
+            <p class="ja-classical-line">教を守る宣伝使
+初稚姫は懇切に
+高姫司をいたはりて
+介抱なせば七八日
+月日を重ねて両眼は
+忽ちパツと元の如
+開けて痛みも頓にやみ
+顔の腫まで減退し
+悦ぶ間もなく高姫は
+初稚姫の神力を
+怖れて再び奸策を
+企み初めしぞうたてけれ。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takahime, thanks to the kind care of Hatsuwakahime, finally recovered from the pain in her lower back, and the swelling on her face subsided, her eyes beginning to shine again like those of a falcon. It is said that forgetting the heat once the throat is past is the way of the shōjin; possessed by a kiyōrei, Takahime began to spout insults twice as much as before, and even the remarkable Hatsuwakahime and Uzuhiko found her more than a handful to deal with.</p>
+          <p class="en-p">Takahime, taking advantage of her recovery, visited the mansion of Uzuhiko with a jaunty air.</p>
+          <p class="en-p">Takahime: 'Oh, excuse me. Is Uzuhiko-sama in good gokigen? Is Shizuko-sama also doing well? I have been suffering from an injury for a long time, but you, my goshinsetsu anatasama, despite knowing how much I was suffering, did not come to visit me even once. I truly appreciate your goshinsetsu. As expected of a married couple who serve Ōkamisama jikijiki, you are so thoughtful about everything. Since I must repay this goshinsetsu, I may be a bother, or rather, I may be a nuisance for a little while.'</p>
+          <p class="en-p">While speaking from the kadoguchi, she entered the room without even being told to come up, sat down heavily in front of the brazier, leaned against a pillar, and puffed on a cigarette, her arrogant posture truly detestable. Kaedehime gracefully opened the sliding door and appeared before Takahime.</p>
+          <p class="en-p">Kaedehime: 'My, you are Giritenjō-sama, aren't you? That was truly a pity the other day, hee hee hee hee hee. You must have had quite the shugyō with that, didn't you? You served your father and mother such precious poison, it was truly a pity, wasn't it? Ho ho ho ho ho.'</p>
+          <p class="en-p">Takahime, startled and looking askance, replied:</p>
+          <p class="en-p">Takahime: 'Now, Kaede-sama, no matter how young you may be, I cannot let such akugen pass. You said that I, Giritenjō, poisoned my parents. On what evidence do you say such things? This must be a plot to attach a false bad name to me, Giritenjō, and drive me out by pinning an innocent crime on me. Everyone here is nothing but an akunin, not worth a damn. As long as such akuma infest this mansion, no matter how much you say you want to drive me out, I, Takahime, will not budge an inch. And what are Uzuhiko-sama and Shizuko-sama doing? Even though their own daughter is saying such rude things as "you fed us poison," they do not even come to offer an excuse; you are all yotsuashi mitama, every one of you. That is why it is so hard for me, Giritenjō. Because such ignorant akunin are defiling this magnificent mansion, even the shinriki musō Mokusuke-sama became a victim of yours and suffered such deep wounds, and now his figure is nowhere to be seen. It is likely because you are so defiled that the seijō muku Mokusuke-sama disliked you and returned to the Saien mansion. Oh, what a hopeless magatsu has gathered here. Starting with Yashimano-nushi, who is oblivious to the hopeless teachings of the hensei joshi, women like Tamakuniwake and Isokohime do not even consult me, the essential Giritenjō-sama, nor do they seek permission, but on their own whim, they have appointed the Uzuhiko couple—whose spirits are possessed by hawks, kites, tanuki, or weasels, I know not which—to be the great kamitsukasa in the sacred grounds where Ōkamisama resides. On top of that, you have brought in half a dozen pieces of junk laborers, fallen warriors of Brahmanism who are good for nothing, and you defile the sacred grounds day by day. It seems that the sacrifice of Mokusuke-sama was not enough, for even his wife, Giritenjō, has suffered for so long; this, too, is a chiza no okido I have borne for the sake of you and your parents. During that illness, it would have been decent to come at least once and offer a perfunctory greeting, saying, "Giritenjō-sama, how are you feeling? How is the medicine?" Truly, you are ungrateful, worse than dogs or beasts. Where have the Uzuhiko and Shizuko couple hidden themselves, fearing my shintoku? Come now, Kaede-sama, bring them here, for I must give them my opinion once.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高姫は懇切なる初稚姫の介抱に漸く腰の痛みも全快し、顔の腫も引き両眼は元の如く隼の如く光り出した。喉元過ぎて熱さ忘るるは小人の常とかや、兇霊に憑依されたる高姫は、前に倍して悪垂れ口をつき始め、遉の初稚姫、珍彦を手こずらすこと一通りではなかつた。</p>
+            <p class="ja-classical-line">高姫は病気が癒つたのを幸ひ、いそいそとして珍彦の館を訪うた。</p>
+            <p class="ja-classical-line">『ハイ御免なさいませ。珍彦さまは御機嫌宜敷う厶いますかな。静子さまも御無事ですかな。私も長らく怪我を致しまして困つて居りましたが、御親切の貴方様、あれ程私が苦しんで居るのに、只の一度もお訪ね下さいませず、真に御親切な程、有難う存じます。遉は大神様に直々お仕へ遊ばす御夫婦の事とて、何から何迄お気のつく事で厶いますわい。この御親切をお報い申さねば済みませぬから、御迷惑ながらちつとばかり、いなやつとばかりお邪魔になるかも知れませぬよ』</p>
+            <p class="ja-classical-line">と門口から喋りながら「お上りなさいませ」とも云はぬに早くも座敷に上り込み、火鉢の前にどつかと坐り、柱を背に、煙草を燻らしながら、傲然と構へて居るその憎らしさ。楓姫は淑やかに襖を開けて高姫の前に現はれ、</p>
+            <p class="ja-classical-line">『ヤ、お前さまは義理天上さまぢやな。此間は真にお気の毒さま、イヒヒヒヒヒ、貴女もあれでよい修業をなさつたでせうね。お父さまやお母さまに大切な毒散を振れ舞つて下さいまして、真にお気の毒さまで厶いましたなア。ホホホホホ』</p>
+            <p class="ja-classical-line">高姫は、ぎよつとしながら左あらぬ体にて、</p>
+            <p class="ja-classical-line">『これ楓さま、なんぼ年が若いと云つても、その悪言は聞き捨てなりませぬぞや。お前さまは此義理天上が、御両親に毒を盛つたと云ひましたな。何を証拠にそんな事を仰有る。この義理天上に、あらぬ悪名をつけ、無実の咎を負はせて追ひ出さうとの企みであらうがな。何奴も此奴も悪人ばかりで、挺にも棒にもおへた代物ぢやないわい。これ程此お館に悪魔が蔓る以上は、いつかな　いつかな此高姫は、お前達が追ひ出さうと云つたつてびくとも動きはしませぬぞえ。そして珍彦さま、静子さまは何をして厶るのだ。「毒を呑ました」と、こんな失礼な事を現在自分の娘が云つて居るのに断りにも来ず、揃ひも揃つた四つ足身魂ぢやな。これだからこの義理天上が骨が折れるのだ。こんな分らずやの悪人が結構な結構なお館を汚して居るものだから、神力無双の杢助さま迄、お前達の犠牲となつてあんな深傷を負ひ、今ではお姿も見えない。大方お前達が汚れて居るので、清浄無垢の杢助様はお嫌ひ遊ばし、斎苑の館へお帰りなさつたのだらう。エエ仕方のない曲津が寄つたものだなア。変性女子のしようもない教にとぼけて居る八島主を初め、玉国別、五十子姫などと云ふ阿婆摺女が肝腎の義理天上様に相談も致さず、許しもうけず、勝手気儘に大神様のお鎮まり遊ばす御聖場に、鷹か鳶か狸か鼬か分りもしない御霊の宿つた珍彦夫婦を、大それた神司に任じ、其上バラモン教の落武者、箸にも棒にもかからないガラクタ人足を半ダースも引張り込み、聖場を日に月に汚すものだから、杢助様の犠牲ではまだ足らぬと見え、女房の義理天上迄が長らくの苦しみ、是もやつぱりお前達親子の為に千座の置戸を負うたのだ。あの病気中にせめて一度位、「義理天上様、御気分はどうですか、お薬は如何か」と義理一遍の挨拶にでも来たらよささうなものだなア。本当に恩知らずと云つても、犬畜生にも劣つたどたほし者だ。珍彦、静子夫婦は、私の神徳に怖れて何処へ潜伏したのだ。サア楓さま、一遍御意見をして上げねばならぬから、ここへ連れて来なさい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ama: 'I do not like you. Because you are a terrible Daiakuma who conspired with Mokusuke's Eugenbau to feed my father and mother a wicked medicine called Dokusan, no one will ever visit you, thinking it is a fitting punishment, no matter how much you suffer. How pitiful you are. Ho ho ho ho ho.'</p>
+          <p class="en-p">Takahime: 'Now, you little Ama. What are you saying, acting so small, and what evidence do you have to claim I fed them Dokusan? As proof that it is not poison, are your parents not perfectly fine? They have not developed a single fever, nor have they coughed even once; if you speak such unreasonable things, I shall not have you staying in this mansion.'</p>
+          <p class="en-p">Ama: 'Thank you very much for your concern. My father and mother said they did not even want to see the face of a terrifying person like you, so they quietly went to pay their respects at the Iso mansion last night. This place is under the jurisdiction of Uzuhiko, and I do not know if you are Giritenjiyō or Fugiritenjiyō, but just wait for two or three days; there is no doubt that an eviction order will come down from the Iso mansion, he he he he he, how pitiful for you.'</p>
+          <p class="en-p">Takahime: 'Truly, truly, even though you are but a child, Ama, what kind of Muhon are you plotting? You went to slander this Ikimiya all the way to the Iso mansion, claiming I committed Dokugai. Hey, you hateful little Kozura, I will make you regret this soon enough; even if an eviction order comes, as long as the Gomeirei of Hinodenokami does not descend, I will not budge.'</p>
+          <p class="en-p">Ama: 'O ho ho ho ho, Hinodenokami-sama? That is a lie, a lie. Because you were plotting such evil things, my father and mother found it unbearable and were just saying they might go to report it to the Iso mansion. Since they have not gone yet, they must have gone to the shrine to offer prayers. If you repent now and apologize for feeding my father and mother poison, I will intercede for you and stop them from going to the Iso mansion. Tenjiyō-sama, how about it? If this matter is reported, even Hinodenokami-sama would be troubled, would he not?'</p>
+          <p class="en-p">Takahime: 'Where is there anyone who is troubled by being falsely accused? I am a little different from a person like the future Sugawara no Michizane, who was meekly exiled in four directions for a false charge and spent his whole life crying. I will sue you from this side for the crime of false accusation. No matter what you say, I will not accept it. Now, quickly drag your parents here, make them press their heads to the ground before Giritenjiyō-sama, and apologize with their posteriors in the air like a flower vase. If you do that, depending on the circumstances, I might just suppress my anger and spare you.'</p>
+          <p class="en-p">Ama: 'O ho ho ho ho, hey you foolish Tenjiyō-sama, evil Tenjiyō-sama, and stubborn Fugiri-Tenjiyō-sama, it will not go that way. You consulted with Eugenbau and mixed the Dokusan you brought from the land of India into their sake and rice to make them eat it. However, my mother and father are the incarnations, or rather the messengers, of Kototama-wake-no-Mikoto, and they had received a wonderful, wonderful spiritual medicine called Shintan from Monju Bosatsu-sama, so your Dokusan did not work. Now, what do you say? If what Kaede says is wrong, I will pray for Monju Bosatsu-sama to appear here right now, and then you will have to face your end.'</p>
+          <p class="en-p">Takahime: 'I know nothing of such things. Do not go on babbling like a child. Would Takahime, the Zen-Ichijō and the Ikimiya of Hinodenokami, ever do such a thing even in a dream? That is just a dream you saw out of your own prejudice. And what is unforgivable is that you dared to call my husband, Mokusuke-sama, Eugenbau. Now, what evidence do you have for saying such a thing? I will sue you for the crime of slander.'</p>
+          <p class="en-p">Ama: 'Ho ho ho ho ho, the words of a minor or a young girl do not hold up in law. Truly, how pitiful; the efficacy of your Dokusan is absolutely useless before divine power. Now, now, please go home quickly.'</p>
+          <p class="en-p">Takahime was greatly enraged, grabbed Kaede by the chest, clenched her fist, and said,</p>
+          <p class="en-p">'Hey, you swallow that chirps on and on, I shall treat you to this turban shell pot-roast!'</p>
+          <p class="en-p">While saying this, she struck the head of the lovely young girl three or four times in succession.</p>
+          <p class="en-p">'Aree, murder!'</p>
+          <p class="en-p">Hearing Kaede's scream, the five who came running in a flurry were Iru, Iku, Saru, Haru, and Teru.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『イヤですよ。お前さまは杢助の妖幻坊と腹を合せて、毒散と云ふ悪い薬をお父さまやお母さまに呑ました怖ろしい大悪魔だから、何程お前さまが苦しんで居ても、よい罰だと思つて誰も訪ねに往くものがないのよ。気の毒ですねえ。ホホホホホ』</p>
+            <p class="ja-classical-line">『これ阿魔つちよ。何だ小ちつぺの態をして、毒散を呑ましたなぞと、何を証拠にそんな事を云ふのだ。毒でない証拠には、お前の両親達は何の事もないぢやないか。熱が一つ出たと云ふのぢやなし、咳を一つしたと云ふのぢやなし、そんな無体の事を云ふと、此お館には居つて貰ひませぬぞや』</p>
+            <p class="ja-classical-line">『大きに憚りさま。お前さまのやうな怖ろしい人は顔を見るのもいやだと云つて、お父さまやお母さまは、昨夜の中に斎苑の館へ、そつとお参りになりましたよ。ここは珍彦の監督権内、お前さまが義理天上か不義理の天上か知らぬけれど、まア二三日待つて居なされ、きつと立退き命令が、斎苑の館から下つて来るのに違ひありませぬわ、エヘヘヘヘ、お気の毒さまねえ』</p>
+            <p class="ja-classical-line">『ほんにほんに年歯も往かぬ阿魔つちよの癖に、何とした謀叛を企らむのだらう。毒害を致したなぞと、此生宮を大それた斎苑の館迄讒言しに往きよつたのだな。エー、アタ小面の憎い、今に思ひ知らしてやる程に、仮令立退き命令が来たとて、いつかないつかな日出神の御命令の下らぬ以上は動きは致さぬぞや』</p>
+            <p class="ja-classical-line">『オホホホホ、日出神様、嘘だよ嘘だよ、あんまりお前さまが悪い事を企むから、お父さまとお母さまがとてもやり切れないから、斎苑の館へ注進に往かうかと云つて居たのだよ。まだ行つて居ないから、お社へでも御祈念にいらしたのだらう。今の間に改心して、お父さまやお母さまに毒を呑ましたお詫をなされば、私が取り持つて斎苑の館往きを留めて上げませう。天上さま、どうですな。この事を注進されたら、何程日出神様でもちつとは困るでせう』</p>
+            <p class="ja-classical-line">『無実の罪を着せられて困る者が何処にあるか。無実の咎でおめおめと親子が四方に流され、泣いて一生を暮した未来の菅公見たやうな人間とは、ヘンちつと違ひますぞや。誣告の罪で、此方の方から訴へてやるのだ。何と云つても承知はせないぞや。さあ早く両親をここへ引きずり出して、義理天上様に、頭を地に摺りつけ、尻を花瓶にしてあやまりなさい。さうしたら都合によつたら、虫を押へこらへてやらぬものでもない』</p>
+            <p class="ja-classical-line">『オホホホホ、オイ馬鹿の天上さま、悪の天上さま、どつこい不義理の天上さま、さうは往きませぬぞや。お前さまが妖幻坊と相談をして、印度の国から持つて来た毒散をお酒の中や御飯の中にまぜて喰はしたのだ。けれど、家のお母さまやお父さまは言霊別命様の御化身、いやお使ひ、文珠菩薩さまから、結構な結構な神丹と云ふ霊薬を頂いてゐらつしやつたのだから、其毒散が利かなかつたのよ。サアどうですか。若し楓の云ふ事が違ふなら、今文珠菩薩様を念じて此処に現はれて貰ふから、さうしたらお前さまも往生しなくちやなりますまい』</p>
+            <p class="ja-classical-line">『そんな事は知らぬわい。子供だてらツベコベ言ふものぢやない。苟くも日出神の生宮たる善一条の高姫が、夢にもそんな事を致すものか。それはお前達の僻みから、そんな夢を見たのだ。そして許し難い事は、吾夫杢助様を捉まへて妖幻坊だと云つたらう。サア何を証拠にそんな事を云ふのか、誹謗の罪で訴へますぞや』</p>
+            <p class="ja-classical-line">『ホホホホホ、未丁年者や少女の言葉は法律にはかかりませぬぞや。真にお気の毒さま、毒散の効能も、神力の前にはサツパリ駄目ですなア。サアサア早く帰つて頂戴』</p>
+            <p class="ja-classical-line">高姫は大いに怒り、楓の胸倉をグツと取り、拳を固めて、</p>
+            <p class="ja-classical-line">『エエ、ツベコベとよく囀る燕め、この栄螺の壺焼をお見舞ひ申すぞ』</p>
+            <p class="ja-classical-line">と云ひながら、可憐なる少女の頭を三つ四つ続け打ちに打つた。</p>
+            <p class="ja-classical-line">『アレー、人殺ー』</p>
+            <p class="ja-classical-line">と楓が叫ぶ声を耳にし、バラバラと駆けつけて来たのはイル、イク、サール、ハル、テルの五人であつた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: 据置貯金 [1304]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: 敵愾心 [1306]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
