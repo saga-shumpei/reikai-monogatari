@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 20: 背進 [1383] - Volume 53 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 53 Table of Contents</a>
+      <span>Volume 53</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 53 &bull; Chapter 20</span>
+      <h1 class="chapter-title-en">Chapter 20: 背進 [1383]</h1>
+      <p class="chapter-title-ja">背進〔1383〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">It was only for a brief while that the two generals, Oniharuwake and Kumehiko, had the soldiers of the capital of Biku under their command and as their subordinates as a result of their consecutive victories. Through the mediation of Hirunahime and Karunahime, who exhausted their arts of Senpenbankuwa, a portion of the army of the land of Biku was finally subjugated under the rule of the Setsuteiri; Samori was temporarily entrusted by the Setsuteiri with the authority over the military, and came to maintain order within the castle; furthermore, Taruman continued to serve as the propaganda official and concurrently as the Naijitsukasa, while Ekusu was promoted to Umori. Thus, the camp at the foot of the castle was for the time being largely lent to the Brahman army, and here a clear demarcation was established between the Victoria family and the Brahman army.</p>
+          <p class="en-p">The two generals, Oniharuwake and Kumehiko, did not wish to advance to the mansion of the Saien, yet they could not return to Haruna either; whether they should head to the Golden Mountain, or face certain defeat once again. At any rate, they built a temporary camp centered on Mount Victor, where they devoted their full strength to training their troops, oppressing the small neighboring countries, and constructing a barracks with the intention of building a kingdom, holding hope for the future. Hirunahime and Karunahime continued to serve the generals as before. However, the two beauties set up various excuses and did not surrender their bodies to the two generals. They always deceived them with eloquence, expressions, and sake, and the two women helped each other, intermingling to ensure there was almost no time for them to sleep together. Both King Victoria and Haruna understood the hearts of the two women well, and did not harbor the slightest doubt regarding their conduct. They were merely grateful for the pains the two women took, sacrificing their own bodies to protect the peace of their nation.</p>
+          <p class="en-p">The barracks, which had been built in a great hurry, were mostly completed. Oniharuwake built his main camp at the most strategically important point at the foot of Mount Victor, and devoted his efforts solely to training his troops side by side with General Kumehiko; on the other hand, he relied on his beloved Naisu as his sole strength, expecting that in the future they would openly be a perfect married couple.</p>
+          <p class="en-p">Into such a place came three foot soldiers of the river guards, A, B, and C, in a flurry. As Shiyamu was attending to business at the reception desk, the three said, gasping for breath,</p>
+          <p class="en-p">Shiyamu: 'Report. Just now, it appears that a large number of knights are crossing the Lion River and rushing toward us. At any rate, I report this to you.'</p>
+          <p class="en-p">Shiyamu: 'What, a large number of knights are crossing the river? That is incomprehensible. Who could they be?'</p>
+          <p class="en-p">He tilted his head. A said,</p>
+          <p class="en-p">A: 'Well, judging by the banners, since every one of them is dyed with the Mitsuba-aoi crest, I believe they are surely the army of the Brahman religion.'</p>
+          <p class="en-p">Shiyamu: 'That cannot be. It is unlikely that the Brahman army would cross over here in such large numbers. If General Ranchi is holding his ground in the Ukigi Forest, it is impossible for the followers of the Sangokyo to be feigning and raising the Mitsuba-aoi banners to attack us. This is truly incomprehensible. In any case, I shall report this to the General. You return to the riverbank at once, investigate whether they are enemies or allies, and report back.'</p>
+          <p class="en-p">Saying this, he proceeded to the living room of General Oniharuwake. Kumehiko happened to be there. Suparu and Emishi were also attending at his side, talking about something happily. Shiyamu, who appeared there, turned to Oniharuwake and, while bowing slightly, said,</p>
+          <p class="en-p">Shiyamu: 'I report to the General. According to the report from the river guards just now, it appears that hundreds of knights are crossing the Lion River, waving the Mitsuba-aoi banners. How shall we handle this?'</p>
+          <p class="en-p">Oniharuwake: 'What, a banner I do not understand. It cannot be that General Ranchi has fled here, can it? Kumehiko-dono, what is your opinion?'</p>
+          <p class="en-p">Kumehiko: 'Judging by the situation, General Ranchi of the Ukigi Forest must have been defeated by the Kototama battle of Chikunowake and has fled, opening a bloody path. If they were the Sangokyo, they would not be accompanied by such a large force. This is a troublesome matter.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼春別、久米彦両将軍が連戦連勝の結果、ビクの都の兵士迄も従へて、自分の部下としてゐたのはホンの暫くの間であつた。ヒルナ姫、カルナ姫の千変万化の秘術を尽しての斡旋に、漸くビクの国の軍隊の一部分は刹帝利の支配の下に隷属し、左守は兵馬の権を刹帝利より臨時委任され、城内の秩序を保つこととなり、又タルマンは依然として宣伝使兼内事司を勤め、ヱクスは抜擢されて右守となつた。そして城下の陣営は暫時バラモン軍に其大部分を貸し与へ、茲にビクトリア家とバラモン軍とは整然たる区劃がついた。鬼春別、久米彦両将軍は斎苑の館へ進軍するのも好まず、さりとてハルナへ帰ることも出来ず、黄金山へ向はむか、又々敗北せむは必定である。兎も角ビクトル山を中心に仮陣営を築き、此処にて兵力を練り、附近の小国を切なびけ、一王国を建設せむと兵営の増築に全力を尽し、未来に希望を抱いてゐた。そしてヒルナ姫、カルナ姫は元の如く将軍に仕へてゐた。併し乍ら種々の辞柄を設けて、二人の美人は両将軍に身を任せなかつた。何時も弁舌と表情と酒とにて誤魔化し、殆ど同衾の暇をなからしむべく、両女が互に入り乱れて助け合ひつつあつた。ビクトリア王もハルナも両女の心を能く察知し、少しも素行上に付いては疑をさし挟まなかつたのである。只々両女が身を犠牲にして、我国家の安泰を守る其苦心を感謝するのみであつた。</p>
+            <p class="ja-classical-line">大急ぎで作られた兵営は大半落成した。鬼春別はビクトル山の麓の最も要害よき地点に本営を築き、久米彦将軍と軒を並べて兵を練ることにのみ力を尽し、一方には最愛のナイスを唯一の力と頼み、未来には晴れて完全なる夫婦たるべしと期待してゐたのである。</p>
+            <p class="ja-classical-line">斯かる所へ慌ただしく入来るは河守の雑兵甲乙丙の三人である。シヤムは受付に事務を執つてゐると、三人は息を喘ませ乍ら、</p>
+            <p class="ja-classical-line">『申上げます。只今、ライオン河を渡つて、数多の騎士此方に向ひ驀地に駆けつけて参る様子で厶います。兎も角御注進申上げます』</p>
+            <p class="ja-classical-line">シヤム『ナニ、沢山のナイトが川を渡つて来るとは、ハテ心得ぬ　何者であらうかなア』</p>
+            <p class="ja-classical-line">と首を傾ける。甲は、</p>
+            <p class="ja-classical-line">甲『エエ察する所、旗印を見れば、どれもこれも三葉葵の紋所を染めなし居りますれば、正しくバラモン教の軍隊かと存じます』</p>
+            <p class="ja-classical-line">シヤム『ハテ、バラモン教の軍隊が、さう沢山に此方に渡る筈はない。ランチ将軍が浮木の森に控へ居れば、三五教の奴輩が佯つて、三葉葵の旗を立て、攻めよせ来る筈もない、ハテ合点の行かぬことだなア。何は兎もあれ将軍様に申上げむ、汝等は一時も早く川端に立帰り、敵か味方か取調べた上報告せい』</p>
+            <p class="ja-classical-line">といひすて、鬼春別将軍の居間に進んだ。そこには折よく久米彦が来て居つた。スパール、エミシも側に侍して何事か嬉しげに話してゐる。そこへ現はれたシヤムは鬼春別に向ひ、一寸目礼し乍ら、</p>
+            <p class="ja-classical-line">シヤム『将軍様に申上げます。只今川守の報告に依れば、数百のナイトが三葉葵の旗を振り立て振り立てライオン河を渡り来る様子で厶います、如何取計らひませうかな』</p>
+            <p class="ja-classical-line">鬼春別『ハテナ、合点の行かぬ旗印、まさかランチ将軍が逃げて来たのではあるまい。久米彦殿、貴殿の御意見は如何で厶るか』</p>
+            <p class="ja-classical-line">久米彦『察する所、浮木の森のランチ将軍は治国別の言霊戦とやらに敗を取り、血路を開いて逃げて参つたのでせう。三五教ならば、左様に沢山の同勢は伴れては居りますまい。ハテ困つたことだなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Oniharuwake: 'In any case, Suparu, Shayam, you must mount your horses, observe whether they are friend or foe at once, and report back to me.'</p>
+          <p class="en-p">Upon receiving this command, the two replied, 'Yes,' and immediately prepared their horses; with the brave sound of hooves, they rode off at full speed toward the riverbank.</p>
+          <p class="en-p">The two generals folded their arms, bowed their heads, and were lost in thought for a while. Hirunahime and Karunahime, while smiling, feigned an innocent demeanor and toyed with their koto.</p>
+          <p class="en-p">Oniharuwake: 'Hirunahime, stop playing the koto for a moment; a grave matter has occurred. Karunahime-dono, the same applies to you; this is no time for such trivialities.'</p>
+          <p class="en-p">Hirunahime: 'Yes, has some worrying matter suddenly occurred? That is indeed a matter of concern.'</p>
+          <p class="en-p">Oniharuwake: 'Well, it is not exactly something to worry about, but I have received a suspicious report. Depending on the circumstances, we may need to prepare our defenses.'</p>
+          <p class="en-p">Hirunahime: 'Ho ho ho ho, there is no need for such defenses. If you would grant me leave, I shall mount my horse and negotiate with the approaching army.'</p>
+          <p class="en-p">Oniharuwake: 'No, no, I am concerned if I send you to such a place. Besides, I would be troubled if you were to cast amorous glances at the general.'</p>
+          <p class="en-p">Hirunahime: 'O ho ho ho, General-sama, you speak as if I were such a weak woman. Tell me, Karuna-sama, shall we two mount our horses, lead the Red Skirt Troop, and make the swarming enemy cry out in surprise?'</p>
+          <p class="en-p">Karunahime: 'That is truly so. If I only had the permission of the General-sama, I would also like to do my part.'</p>
+          <p class="en-p">The two women skillfully mounted their horses and left the scene... If it were the Brahmin army, they would have no choice but to bring the leader back and have him meet Oniharuwake, but if by any chance it were the propagandists or the army of the 135-Kyo, they would take the opportunity to escape from this place and hide themselves for a while... this thought flashed through both of their minds unexpectedly. However, the two generals were so worried that they might cause injury to the two lovely women that they did not easily permit them to go to the front.</p>
+          <p class="en-p">Just then, the sound of a conch shell was heard blowing. Oniharuwake stood up abruptly and looked down; seeing hundreds of soldiers running toward them in disarray, he realized that they did not look like an enemy army, but rather like defeated soldiers fleeing. Oniharuwake breathed a sigh of relief and said,</p>
+          <p class="en-p">Oniharuwake: 'Ah ha ha ha, General Kumehiko, look at that. Hundreds of soldiers are rushing toward us, but since we make benevolence and righteousness our principle, we must never move even a single soldier. We have only the method of making the enemy submit through the virtue of our love.'</p>
+          <p class="en-p">Kumehiko looked down from the high railing again, and as if relieved, said,</p>
+          <p class="en-p">Kumehiko: 'Ah ha ha ha, there is no need to tell me. No matter how many millions of enemies may press upon us, I am determined to face them with the virtue of love and never resort to slaughter. To make the enemy submit without fighting is what a brave general does. How is that, Karunahime? My non-resistance principle and philanthropy are truly thorough, are they not?'</p>
+          <p class="en-p">He said this with a look of self-satisfaction.</p>
+          <p class="en-p">Karunahime: 'That is so; there is no enemy for an army of benevolence and righteousness. I pray that you will maintain your non-resistance principle to the very end. To meet violence with violence is what the base people do; Karuna is increasingly impressed by the noble aspirations of such a wonderful General-sama.'</p>
+          <p class="en-p">Although she said this on the surface... 'If the enemy should press in and do something to these two generals, that would be convenient. If that happens, the land of Biku will be fundamentally governed in peace,' she thought. Hirunahime also held the same thought as Karuna.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼春別『何は兎もあれ、スパール、シヤム、汝は駒に跨がり、一時も早く敵か味方か様子を窺ひ報告いたせ』</p>
+            <p class="ja-classical-line">と下知すれば、『ハツ』答へて両人は直に駒の用意をなし、蹄の音も勇ましく、川縁さして一目散に走り行く。</p>
+            <p class="ja-classical-line">両将軍は双手を組み、さし俯いて、稍思案にくれてゐた。ヒルナ姫、カルナ姫はニコニコし乍ら、あどけなき態を装ひ、琴などをいぢつてゐる。</p>
+            <p class="ja-classical-line">鬼春別『ヒルナ姫、暫く琴の手を止めてくれ、一大事が起つたからなア、カルナ殿も同様だ、琴所の騒ぎぢやあるまいぞ』</p>
+            <p class="ja-classical-line">ヒルナ姫『ハイ、何か御心配なことが突発致しましたか。それは気の揉めたことで厶いますねえ』</p>
+            <p class="ja-classical-line">鬼春別『ウーン、別に心配致すやうな事ではないが、どうも怪しい報告に接したのだ、都合に仍つては、吾々も防備の用意を致さねばなるまい』</p>
+            <p class="ja-classical-line">ヒルナ姫『ホホホホホ、防備なんか必要はありませぬ。妾にお暇を下さいますれば、駒に跨つて、攻め来る軍隊と折衝致しませう』</p>
+            <p class="ja-classical-line">鬼春別『イヤイヤ、お前を左様な所へ差向けては、案じられる。又将軍に秋波を送られては、聊か気が揉めるからなア』</p>
+            <p class="ja-classical-line">ヒルナ姫『オホホホホ、将軍様の仰有ること、そんな柔弱な女ぢや厶いませぬ。ねえカルナさま、妾と二人駒に跨り、紅裙隊を指揮して、群がる敵をアツと云はせてやりたいものですね』</p>
+            <p class="ja-classical-line">カルナ姫『本当にさうですワ。妾も将軍様のお許しさへあれば、一働き致したいもので厶いますわ』</p>
+            <p class="ja-classical-line">と両女はうまく馬に跨り此場を立出で、……もしバラモン軍なれば是非なく首将を連れ帰り、鬼春別に会はしてやらうが、万々一三五教の宣伝使又は軍隊であつたなれば之幸ひに此場を脱け出し、暫く姿を隠さむ……かと期せずして両人の心に閃いたのである。されど両将軍は、可愛い二人の女に疵をさせては大変だと案じ過ごして容易に出陣を許さなかつた。</p>
+            <p class="ja-classical-line">かかる所へ法螺貝の響ブーブーと聞えくる。鬼春別はつツ立ち上り、眼下を見渡せば、数百の軍隊、列を乱して、一生懸命に此方に向つて走り来る其様子、どうも敵軍とは思はれない、敗兵が逃亡して来たと見て取つた鬼春別はヤツと胸を撫でおろし、</p>
+            <p class="ja-classical-line">鬼春別『アハハハハ、久米彦将軍、あれを見られよ。数百の軍隊が此方に向つて攻め来る様子、併し乍ら吾々は仁義を以て主義と致すもの、決して一兵卒も動かしてはなりませぬぞ。只吾々が愛の徳に仍つて敵を悦服さす方法あるのみですから』</p>
+            <p class="ja-classical-line">久米彦は又高欄より打眺め、ヤツと安心したものの如く、</p>
+            <p class="ja-classical-line">久米彦『アハハハハ、仰せには及ぶべき、如何なる巨万の敵、一斉に押寄せ来る共、愛の善徳を以て之に対し、決して殺伐の行り方は致さぬ覚悟で厶る。戦はずして敵を悦服さすは、勇将の能くなす所、どうだ、カルナ姫、某の無抵抗主義、博愛主義は実に徹底したものだらうがなア』</p>
+            <p class="ja-classical-line">としたり面にいふ。</p>
+            <p class="ja-classical-line">カルナ姫『左様で厶います、仁義の軍に敵は厶いませぬ。何卒、何処迄も無抵抗主義を抱持遊ばすやう御願致します。暴に対するに暴を以てするは、所謂下賤の人民の致す所、実に見上げた立派な将軍様の御志には、カルナも益々感服仕りました』</p>
+            <p class="ja-classical-line">と表には云つたものの、……万一敵が押よせて来て、此両将軍を何とかしてくれれば都合が好いがなア。さうすれば根本的にビクの国が安全に治まるだらう……と考へてゐた。ヒルナ姫も亦カルナと同様の考へを持つてゐた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">To such a place, guided by Supāru and Emishi, Terunsu, who served under Shiyōgun Ranchi, arrived running breathlessly. Leading several hundred knights, Terunsu had fled to this spot.</p>
+          <p class="en-p">Kumehiko: 'Ah, are you not Ranchi-sama's subordinate Terunsu? I surmise there must be some peculiar circumstance. How fares Ranchi-dono?'</p>
+          <p class="en-p">Terunsu: 'Oh, well met! First of all, I offer my hearty congratulations to both Shiyōgun-sama on your good health. Though it be useless to tell you now, Shiyōgun Ranchi and Shiyōgun Katahiko have completely surrendered to Harukuniwake, the Sendenshi of Ananai-kyō, and having now disbanded their army, they themselves have received the magic of Ananai-kyō and turned into Sendenshi. Since such prominent leaders as Ranchi, Katahiko, Gariya, and Kēsu have come to this pass, before long they will surely march upon Mount Bikotoru with Harukuniwake at their head. Even Shiyōgun Ranchi, who led an army of three thousand men, surrendered without the slightest resistance. He is indeed a terrifyingly formidable enemy.'</p>
+          <p class="en-p">Hearing this, Kumehiko's heart leapt into his mouth, his face turned pale, and suddenly trembling with voice,</p>
+          <p class="en-p">Kumehiko: 'Kiharuwake-dono, th-this is terrible. We cannot remain like this. Shall we not devise some plan?'</p>
+          <p class="en-p">Kiharuwake was also startled at this report, but since he could not show such a cowardly and unsightly appearance in front of Hirunahime, he feigned composure on purpose,</p>
+          <p class="en-p">Kiharuwake: 'Ahahaha! What utmost insolence! Even if millions of Sendenshi of Ananai-kyō were to march upon us, if I master the wondrous law bestowed upon me by Daijizaiten-sama, blowing them away in a single breath is right before our eyes. Do not worry! Ahahaha!'</p>
+          <p class="en-p">Saying so, he purposely shook his body, and the comicality of it lay in his trying to cover up the deep-seated tremor rising from the bottom of his stomach.</p>
+          <p class="en-p">The two women, Hiruna and Karuna, quickly discerned that both Shiyōgun were seized with fear, yet they feigned ignorance and concealed their outward expressions.</p>
+          <p class="en-p">Kumehiko: 'Nay, Shiyōgun-dono, we cannot afford such optimism. Let us organize the army as quickly as possible and march upon Mount Ōgon. Our mission is originally not to be besieged in such a place. If Harukuniwake is marching upon us, let us forestall him by capturing Mount Ōgon, relying on the fortress to defend against Harukuniwake's attacking force and annihilate them.'</p>
+          <p class="en-p">Thus he spoke grandly with his mouth, but in his innermost heart, marching upon Mount Ōgon was what both Shiyōgun feared the most. Nevertheless, if they dawdled here, there was no telling when Harukuniwake might march upon them. If they suffered a disgraceful defeat, had their inner helmets seen through by Hiruna and Karuna, were thought to be cowardly men, and were disgusted by them, it would be a disaster; his mind was fretting over that alone.</p>
+          <p class="en-p">Kiharuwake: 'Indeed... so to speak, the camp on Mount Bikotoru is merely a resting place. Since respectable Kshatriyas are present here, there should be no need for us to interfere. Sympathizing with your opinion, then let us lead the whole army and set about preparing for the march.'</p>
+          <p class="en-p">Though he spoke with complete composure, he was on pins and needles, wondering if Harukuniwake had not already crossed the Raion River and come over to this side. However, as the readers know, Harukuniwake, leading his subordinates, was leisurely holding lecture meetings and educating the youth in the Forest of Kurusu and the Tēmusu Pass. Both Shiyōgun were possessed by the exact same psychological state as the weak warriors of the Taira clan who were frightened by the sound of waterfowl beating their wings and fled fragilely. For that reason, an indescribably restless air was visible.</p>
+          <p class="en-p">Hirunahime, behaving with utmost composure,</p>
+          <p class="en-p">Hirunahime: 'My Lord Shiyōgun, after all the trouble of building a barracks up to this point, are not preparations complete enough to defend against any enemy? In a place with such beautiful scenery, I wish to live with you for the rest of my life. How about giving up on marching forth?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">斯かる所へスパール、エミシに導かれ、息せき切つて走り来りしは、ランチ将軍の部下に仕へし、テルンスであつた。テルンスは数百のナイトを引率して、此処に遁走し来たものである。</p>
+            <p class="ja-classical-line">久米彦『ヤ、其方はランチ将軍の部下テルンスではないか、何か様子のあることと察する。ランチ殿は如何で厶るかな』</p>
+            <p class="ja-classical-line">テルンス『これはこれは両将軍様御壮健にて、先づ先づお目出たう存じます。申上ぐるも詮なきこと乍ら、ランチ、片彦両将軍は三五教の宣伝使治国別の為に、スツカリ兜をぬぎ、今は軍隊を解散致し、自らは三五教の魔法を授かり、宣伝使となつて了ひました。ランチ、片彦、ガリヤ、ケースの錚々たる幹部が斯の如く相成りました以上は、やがて治国別を先頭にビクトル山へも押寄せ来るで厶いませう。三千人の軍隊を抱へたランチ将軍でさへも、一たまりもなく降服致したので厶います。実に恐るべき強敵で厶います』</p>
+            <p class="ja-classical-line">久米彦は之を聞いて胸を躍らし、面を蒼白に変へて了つた、忽ち声を慄はせ乍ら、</p>
+            <p class="ja-classical-line">久米彦『鬼春別殿、タタ大変で厶る。コリヤ斯うしては居られますまい。何とか工夫をめぐらさうぢやありませぬか』</p>
+            <p class="ja-classical-line">鬼春別も此報告にハツと驚いたが、ヒルナ姫の手前、余り卑怯な醜態も見せられないので、ワザと平気を装ひ、</p>
+            <p class="ja-classical-line">鬼春別『アハハハハ、猪口才千万な、仮令三五教の宣伝使幾百万押よせ来る共、拙者は大自在天様より授けられたる妙法を心得居れば只一息に吹き飛ばさむは目の当りで厶る、御心配なさるな、アハハハハ』</p>
+            <p class="ja-classical-line">とワザとに身体をゆすり、腹の底より起つて来る小慄ひを紛らさうとする可笑しさ。</p>
+            <p class="ja-classical-line">ヒルナ、カルナ両女は、早くも両将軍の恐怖心にかられてゐることを看破したが、何食はぬ面して、表面を包んでゐた。</p>
+            <p class="ja-classical-line">久米彦『イヤ将軍殿左様な楽観も出来ますまい、一時も早く軍隊を整へ、黄金山に攻め寄せようぢやありませぬか。吾々の使命は、元よりかやうな所に籠城致すべき者では厶らぬ。治国別が押しよせ来るとすれば、彼に先立つて、黄金山を攻落し、砦によつて治国別の寄せ手を防ぎ、殲滅致さうでは厶らぬか』</p>
+            <p class="ja-classical-line">と口では立派に云つてゐるが、其内心は黄金山へ攻めよせるのは、最も両将軍の恐るる所である。さりとて、ここにグヅグヅしてゐては、何時治国別が押寄せ来るかも計り難い、ブザマな敗軍をなし、ヒルナやカルナに内兜を見すかされ、卑怯な男と思はれ、愛想をつかされては大変だと、それ計りに気を揉んでゐる。</p>
+            <p class="ja-classical-line">鬼春別『成程……言はばビクトル山の陣営はホンの休養所で厶る、ここには立派に刹帝利もゐますことなれば、吾々がお節介を致す必要も厶るまい。貴殿の御意見に共鳴致し、然らば軍隊を全部引率れ、進軍の用意にかかりませう』</p>
+            <p class="ja-classical-line">と落ち着き払つて言つてゐるものの、已に治国別はライオン河を渡つて、此方へ来て居るのではあるまいかと気が気でなかつた。併し治国別は部下を引つれ、クルスの森やテームス峠で悠々閑々と講演会を開き子弟を教育してゐたのは読者の知る所である。水鳥の羽音に驚いて、脆くも遁走した平家の弱武者其儘の心理状態に、両将軍は襲はれてゐた。それ故に何となく落つかない風が見える。</p>
+            <p class="ja-classical-line">ヒルナ姫は落着き払つて、</p>
+            <p class="ja-classical-line">ヒルナ姫『モシ将軍様、折角此処まで兵営を築き上げ、如何なる敵も防ぐ丈の準備が整つてるぢやありませぬか。かやうな風景の佳い所で、貴方と一生暮したう厶いますワ。進軍なんかおやめになつたら何うですか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Oniharuwake, in a faltering Kuchō, said,</p>
+          <p class="en-p">Oniharuwake: 'Mm, yes, that is so, but to adapt to circumstances and respond to changes is the path that one who leads the Sangun must follow. Do not be so Shinpai; I shall take you with me wherever I go, so even if I say we have advanced, we are the Shiyōgun. I shall never place you in a position where Yadama might come... Now, you too must have Kakugo and follow me. You certainly do not need to feel Shinpai.'</p>
+          <p class="en-p">Hirunahime: 'Even so, I feel as if I am being assailed by a spirit of Satsubatsu; tell me, Karunahime-sama, what do you think?'</p>
+          <p class="en-p">Karunahime: 'I too would wish to remain in this Jinei forever, but... excuse me, Kumehiko-sama, would you not be so kind as to do that for us?'</p>
+          <p class="en-p">Kumehiko: 'How can you say such Kiraku things? The enemy is pressing in Majika; if we are late, it will be the Hiun of our Mikata. Come, we must withdraw from here and Shingun as quickly as Itsukoku.'</p>
+          <p class="en-p">Karunahime: 'Excuse me, Kumehiko-Shiyōgunsama, is this Shingun not a Matsuka deception, a planned Taikiyaku?'</p>
+          <p class="en-p">Kumehiko: 'Do not talk Baka. The enemy is at Mount Kogane, and since it has come to this, the necessity has arisen to devise divine strategies and demonic schemes as quickly as possible and occupy Mount Kogane; we must prepare for Shingun as quickly as possible.'</p>
+          <p class="en-p">He is fidgeting.</p>
+          <p class="en-p">Karunahime: 'Your Shingun is surely a retreat, is it not? You can always find a justification for anything, can you not?'</p>
+          <p class="en-p">Kumehiko: 'What a sharp-tongued woman you are.'</p>
+          <p class="en-p">Oniharuwake: 'Now, prepare the horses quickly, and for the Hime, prepare mares. Supāru, Emishi, Terunsu, command the entire army and follow from behind! Come, Kumehiko-dono, let us take the vanguard.'</p>
+          <p class="en-p">With this convenient excuse, he is already beginning to prepare for flight.</p>
+          <p class="en-p">Hirunahime: 'Excuse me, Shiyōgunsama, is the vanguard not the role of scouts? You are the commander-in-chief; would it not be safer for you to proceed slowly at the end?'</p>
+          <p class="en-p">Oniharuwake: 'That is true, but there is a saying that he who strikes first controls others; this is the secret of military strategy. It is said that if the head does not turn, the tail cannot turn. Since we are going in a long snake formation, the head goes first and the tail follows, just as a snake moves; that is why it is called a long snake formation.'</p>
+          <p class="en-p">He is making a show of himself before the Hime, striving only to hide his own cowardice.</p>
+          <p class="en-p">Oniharuwake and Kumehiko ride side by side with the two beauties, Hiruna and Karuna, and gallop away toward the west as fast as they can. Supāru and Emishi, who were left behind, were so flustered and panicked that they had no time to organize the troops; shouting 'Retreat! Retreat!', they hoisted their sails, mounted their horses, wore their military caps backward, put on only one shoe, and struck the horses' rumps recklessly, fleeing in a state resembling a defeated army. As the saying goes, if one horse goes mad, a thousand horses go mad; driven by the fear that a powerful enemy was attacking from behind, the three thousand soldiers knocked people down and trampled over them, each trying to be the first to flee toward the west, until not a single one remained.</p>
+          <p class="en-p">Dozens of owls perched in the thicket of the forest on Mount Bikutoru, and began to cry in unison,</p>
+          <p class="en-p">'Utsufū-utsufū-otsohoho, ahō-ahō-ahō.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼春別はシドロモドロの口調にて、</p>
+            <p class="ja-classical-line">鬼春別『ウンウン、それもさうだが、機に臨み変に応ずるは、三軍に将たる者の行ふべき道だ。さう心配は致すな、どこ迄も其方を伴れて行つてやるから、仮令進軍したと云つても、吾々は将軍だ。矢玉の来るやうな所へは決しておかないから……サ、其方も覚悟をして拙者に跟いて来るのだ。キツと心配は要らないよ』</p>
+            <p class="ja-classical-line">ヒルナ姫『それでも何だか、殺伐の気に襲はれるやうでなりませぬワ、ねえカルナさま、貴女どう思ひますか』</p>
+            <p class="ja-classical-line">カルナ姫『妾も何時迄も此陣営において頂きたう厶いますがねえ、モシ久米彦さま、どうかさうして下さいますまいかね』</p>
+            <p class="ja-classical-line">久米彦『左様な気楽なことが言つて居れるか。敵は間近く押よせたり、時遅れては味方の非運、サ、一刻も早くここを引上げ進軍致すで厶らう』</p>
+            <p class="ja-classical-line">カルナ姫『モシ、久米彦将軍様、進軍とは真赤な詐り、予定の退却ぢや厶いませぬか』</p>
+            <p class="ja-classical-line">久米彦『馬鹿を言へ、敵は黄金山に在り、かうなる上は一時も早く神謀鬼策を廻らし、黄金山を占領すべき必要が起つたのだ、一時も早く進軍の用意を致さねばならぬ』</p>
+            <p class="ja-classical-line">とモジモジしてゐる。</p>
+            <p class="ja-classical-line">カルナ姫『貴方の進軍は背進で厶いませうね、どうでも理窟はつくものですね』</p>
+            <p class="ja-classical-line">久米彦『何とまあ口のいい女だなア』</p>
+            <p class="ja-classical-line">鬼春別『サ、早く馬の用意を致せ、そして姫には牝馬の用意だ。スパール、エミシ、テルンスは全軍を指揮して後よりつづけツ、いざ久米彦殿、先鋒隊を仕らう』</p>
+            <p class="ja-classical-line">と態のよい辞令で、早くも逃仕度にかかつてゐる。</p>
+            <p class="ja-classical-line">ヒルナ姫『モシ将軍様、先鋒隊は斥候の役ぢやありませぬか。貴方様は総司令官、最後に御ゆつくりとお進みになつた方が安全で厶いませう』</p>
+            <p class="ja-classical-line">鬼春別『それもさうだが、先んずれば人を制すといふことがある、之が兵法の奥義だ。頭が廻らねば尾が廻らぬといふからな。長蛇の陣を張つて行くのだから、蛇の歩く如く頭を先に尾が後から行くのだ、それで長蛇の陣といふのだ』</p>
+            <p class="ja-classical-line">と姫の前に体裁を作り、自分の卑怯をかくすことにのみ努めてゐる。</p>
+            <p class="ja-classical-line">鬼春別、久米彦はヒルナ、カルナの両美人と駒を並べ、一目散に西へ西へと駆けり行く。後に残つたスパール、エミシは周章狼狽の余り、軍隊を整理する暇もなく『退却々々』と呼ばはり乍ら、尻に帆かけて、駒に跨り、軍帽を後前に被つたり、靴を片足はいたり、無性矢鱈に馬の尻を叩いて、敗軍同様の為体で逃げ出した。一匹の馬が狂へば千匹の馬が狂ふとやら、後から強敵が襲ひ来るやうな恐怖心に駆られて、三千の兵士は人を突倒し踏み越えて、吾れ先にと西方さして、一人も残らず逃げ散つて了つた。</p>
+            <p class="ja-classical-line">ビクトル山の森の繁みに数十羽の梟がとまつて、</p>
+            <p class="ja-classical-line">『ウツフーウツフーオツホホ、アホーアホーアホー』</p>
+            <p class="ja-classical-line">と声を揃へて鳴き出したり。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c19.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 19: 刺客 [1382]</span>
+      </a>
+      <a href="c21.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 21: 軍議 [1384]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

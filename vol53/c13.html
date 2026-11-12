@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: Ugly Storm [1376] - Volume 53 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 53 Table of Contents</a>
+      <span>Volume 53</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 53 &bull; Chapter 13</span>
+      <h1 class="chapter-title-en">Chapter 13: Ugly Storm [1376]</h1>
+      <p class="chapter-title-ja">醜嵐〔1376〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Through the mediation of Supāru and Emishi, the sword fight between the two generals, Oniharuwake and Kumehiko, finally subsided. The two generals sat on chairs, wiping away sweat while their hearts were still pounding.</p>
+          <p class="en-p">Supāru turned to Oniharuwake and said respectfully,</p>
+          <p class="en-p">Supāru: 'Shiyōgunsama, why are you fighting? You possess a noble status, expected to command the three armies and set a model for your subordinates; what is the meaning of this state of affairs? I believe there must be some reason for this, and if you would disclose it to this adjutant without concealment, I intend to devise the best possible solution as your subordinate.'</p>
+          <p class="en-p">Oniharuwake blushed and spoke as if it were difficult to say,</p>
+          <p class="en-p">Oniharuwake: 'No, it is nothing of great importance. Having too much idle time, I was merely practicing Gekiken with Kumehiko-dono. Ahahahaha.'</p>
+          <p class="en-p">Supāru: 'If it were Gekiken practice, why did you not carry Shinai? To draw Shinken against each other and engage in Ōchiahi is Kennonsenban; had my arrival been even a little later, there is no telling what fate might have befallen both generals. Should the army lose its pillars in such a manner, military discipline would instantly collapse, and the soldiers would fall into disarray. Please, I beg you to cease such reckless play.'</p>
+          <p class="en-p">Oniharuwake: 'Ahahahaha, how terrible... I have caused you worry. It was just that the provocation turned into a serious matter, and it was a pointless affair.'</p>
+          <p class="en-p">Emishi turned to Kumehiko and said,</p>
+          <p class="en-p">Emishi: 'Shiyōgunsama, did you truly engage in Gekiken as General Oniharuwake just stated?'</p>
+          <p class="en-p">Kumehiko spoke as if it were difficult to say,</p>
+          <p class="en-p">Kumehiko: 'Hmm, if you call it Gekiken, it is Gekiken, but in truth, because General Oniharuwake intended to disrupt military law, I attempted to cut him down with a single stroke. Just when I was a moment away, you people arrived and caused such a nuisance. Ahahahaha.'</p>
+          <p class="en-p">Emishi: 'I cannot believe these are the words of a general. As your adjutant, I have served you faithfully until now, but even if General Oniharuwake has committed some impropriety, is it right to act so violently as to turn a blade against him? From this moment, I shall leave your service and sympathize with General Oniharuwake. What is that look upon your face? Your entire face is distorted, your eyes are upturned, your complexion has faded, and your lips have turned purple. In contrast, General Oniharuwake has not changed his expression in the slightest, remaining composed and maintaining the attitude of a hero. ...Oniharuwake-sama, I do not mind even if it is as the lowest of soldiers. I wish for you to employ me under your direct command.'</p>
+          <p class="en-p">Oniharuwake: 'Later, I shall consult thoroughly with Kumehiko-dono, and after hearing his opinions, if Kumehiko-dono has no objections, I shall make you my subordinate.'</p>
+          <p class="en-p">Supāru: 'According to my humble opinion, I believe this conflict is a struggle for the possession of Hiruna-hime and Karuna-hime, who are here. Since I rescued Hiruna-hime-sama on the way and presented her to Oniharuwake-sama, there should be no dispute regarding her. Furthermore, as Emishi rescued Karuna-hime and presented her to General Kumehiko, it was a settled matter from the beginning. I do not know what conflict of opinion you two generals have, but since this is a gift from Heaven, why not handle it in such a way?'</p>
+          <p class="en-p">Oniharuwake smiled and said,</p>
+          <p class="en-p">Oniharuwake: 'Indeed, as Supāru says, if we do that, there is no problem. Kumehiko-dono, what do you think? You should have no objection to this, right?'</p>
+          <p class="en-p">Kumehiko: 'Yes, there is no need to argue. In that case, I shall be content with Karuna. Just as a temporary stopgap.'</p>
+          <p class="en-p">Hearing this, Karuna-hime deliberately arched her willow-leaf eyebrows and said,</p>
+          <p class="en-p">Karuna-hime: 'Look here, General Kumehiko, I am a woman of standing; under such conditions as being a temporary stopgap or even just Karuna-hime, I cannot entrust my body to you. It appears you are a person who does not know that love is best. Have you not fully exposed the nature of a wicked man who has many hearts and treats women as playthings? You are a philanderer, like duckweed. I flatly refuse you, and I intend to ask General Oniharuwake, who understands the true essence of love, to employ me, even if it be as a maid. Please, let us end our connection here. Rather than entrust my body to such a heartless person, I would be much happier living a life of celibacy. Your love is what is called a false love.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">スパール、エミシ両人の仲裁によつて鬼春別、久米彦両将軍の斬り合も漸く治まつた。両将軍は椅子にかかつてハートに波を打たせ乍ら汗を拭うてゐる。スパールは鬼春別に向ひ恭しく、</p>
+            <p class="ja-classical-line">スパール『もし将軍様、何故のお争ひで厶いますか。三軍を指揮し部下に模範を示すべき尊き御身を持ち乍ら、此状態は如何ですか。之には何かの様子ある事と思ひますが、此副官に包まず隠さず御打明かし下さらば、拙者は拙者として最善の方法を講ずる考へで厶います』</p>
+            <p class="ja-classical-line">鬼春別は赤面し乍ら言ひ憎さうに、</p>
+            <p class="ja-classical-line">鬼春別『いや、別に大した事はない。あまり無聊の余り久米彦殿と撃剣の稽古を致して居つたのだ。アハハハハ』</p>
+            <p class="ja-classical-line">スパール『撃剣の稽古ならば何故竹刀をお持ちなさらぬ。互に真剣を抜いて御打合とは険難千万、拙者が駆け付けるのが、も少し遅かつたならば両将軍共に如何なる運命に陥り玉ふかも計られますまい。万一之丈の軍隊に重鎮を失へば軍紀は忽ち乱れ、部下の士卒は支離滅裂になつて了ひます。何卒戯れもいい加減にして下さいませ』</p>
+            <p class="ja-classical-line">鬼春別『アハハハハ、えらい……もう気を揉ませました。ツイ煽てが真剣になつて、埒ちもない事だつたよ』</p>
+            <p class="ja-classical-line">エミシは久米彦に向ひ、</p>
+            <p class="ja-classical-line">エミシ『将軍様、今鬼春別将軍の仰有つた通り撃剣をなさいましたのですか』</p>
+            <p class="ja-classical-line">久米彦は言ひ憎さうに、</p>
+            <p class="ja-classical-line">久米彦『ウン、撃剣と云へば撃剣だが、実の所は鬼春別将軍は軍律を乱さむと致した故に一刀の許に斬りつけむとしたのだ。もう一息と云ふ時に其方がたがやつて来て、いかい邪魔を致したな。アハハハハ』</p>
+            <p class="ja-classical-line">エミシ『之は将軍のお言葉とも覚えませぬ。拙者は貴方の副官として只今迄忠実に仕へて参りましたが、仮令鬼春別将軍様に如何なる非違があるとも、刃を以て向ふと云ふ乱暴な事がありますか。拙者は之より貴方の部下を離れ、鬼春別将軍様に同情を致します。その御面相は如何ですか。顔部一面に、眼は釣り、色は褪せ、唇は紫に変つて居りますぞ。それに引替へ鬼春別将軍様は、顔色少しも変らせ玉はず余裕綽々として存し、英雄の態度を崩さずに居られます。……何卒鬼春別様、一兵卒の末輩でも構ひませぬ。何卒貴方の直轄に使つて頂き度いもので厶います』</p>
+            <p class="ja-classical-line">鬼春別『又後ほど久米彦殿とトツクリ協議を致し、その意見を承はつた上、久米彦殿に異議がなければ、拙者の部下と致すであらう』</p>
+            <p class="ja-classical-line">スパール『私が愚考する所によれば、此争ひはここに厶るヒルナ姫、カルナ姫の争奪戦だと考へますが、ヒルナ姫様は拙者が途上にてお助け申し鬼春別様に奉つたもので厶いますれば、別に争ひは厶いますまい。又カルナ姫はエミシがお助け申し、久米彦将軍様に奉つたものなれば、初めからきまりきつた話で厶いまする。どうか両将軍とも如何なる御意見の衝突か知りませぬが、天から与へられた此ナイス、さうなさつたら如何ですか』</p>
+            <p class="ja-classical-line">鬼春別はニコニコとし乍ら、</p>
+            <p class="ja-classical-line">鬼春別『如何にも、スパールの申す通り、さう致せば問題はないのだ。久米彦殿、如何で厶る。之に異存は厶らうまいがな』</p>
+            <p class="ja-classical-line">久米彦『はい、是非に及びませぬ。然らばカルナにて辛抱致しませう。当座の鼻塞ぎに』</p>
+            <p class="ja-classical-line">と云ふのを聞いてカルナ姫は故意とに柳眉を逆立て、</p>
+            <p class="ja-classical-line">カルナ姫『これ、久米彦将軍様、妾は一人前の女、当座の鼻塞ぎだとか、カルナ姫でも……とか、左様な条件のもとには身を任す事は出来ませぬ。貴方はラブ・イズ・ベストと云ふ事を御存じのないお方と見えまする。心の多い、女を玩弄物扱ひになさる悪性男の性質を遺憾なく暴露遊ばしたぢやありませぬか。貴方は萍草の様な、フィランダラーで厶いますな。妾の方からキツパリお断りを申し、フオーム・ウエーゼン・デヤ・リーベを弁へた鬼春別将軍様の仮令下女になりとも使つて頂く考へで厶います。何卒これ迄の御縁と締めて下さいませ。左様な無情なお方に身を任すよりも、妾は寧ろセリバシー生活を営む方が何程楽いか知れませぬ。貴方の恋愛は所謂虚偽の恋愛です』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Being rebuffed so severely, Kumehiko Shiyōgun once again placed his hand upon his hilt and, in a fit of rage, attempted to strike Karunahime down with a single stroke. Seeing this, Emishi gripped Kumehiko's hand firmly.</p>
+          <p class="en-p">Emishi: 'Shiyōgundono, your opponent is a woman. Pray, compose yourself.'</p>
+          <p class="en-p">Kumehiko gave a reluctant 'Hmph' and sat down in his chair.</p>
+          <p class="en-p">Karunahime: 'Ho ho ho ho ho, how unmanly, how utterly contemptible you are, Kumehiko Shiyōgun-sama. To draw your blade against a single, frail woman—such cowardice, such lingering attachment, I have grown truly sick of it. Ho ho ho ho ho. If I said to Oniharuwake Shiyōgun-sama that I wished to serve as a maid, that was merely for appearances; I beseech you, please love me eternally as your wife.'</p>
+          <p class="en-p">Oniharuwake assumed the air of a lady-killer.</p>
+          <p class="en-p">Oniharuwake: 'Ah ha ha ha ha, how very adorable. However, as I have already reserved the treasure that is Hirunahime, I have no choice but to decline your request, despite your earnestness. If Hirunahime were to permit it, I might not object to taking you as a second wife, though.'</p>
+          <p class="en-p">So saying, he cast a glance at Hirunahime. Hirunahime deliberately arched her willow-leaf brows and sharpened her voice.</p>
+          <p class="en-p">Hirunahime: 'Now, Shiyōgunsama, what a heartless person you are. Everything you said to me was a lie, was it not? Your nature is that of an Amanjaku, so you must be laying your hands on every woman you see, whether it be this one or that one. True love is a matter of one against one. Though I may look this way, I am certainly no harlot, so I will not tolerate such cannibalistic misconduct. You have dealt a painful insult to a woman, have you not?'</p>
+          <p class="en-p">Oniharuwake: 'Ah, no, no, I cannot bear it if you get so angry. That was merely a joke. Do you think I could say such a thing in your presence? Think it over well. You are truly a woman, after all.'</p>
+          <p class="en-p">Hirunahime: 'Is it possible for one who commands three armies to speak in jest? If you utter such nonsense, you will not be able to maintain the countenance of your army. How could you possibly control your subordinates? Think carefully. Since I have declared my intention to become your wife, Shiyōgunsama, I possess the authority to offer you sufficient caution.'</p>
+          <p class="en-p">Oniharuwake: 'Ah ha ha ha ha, thanks to the remonstrance of the wise Hirunahime, I, Oniharuwake, seem to have awakened. What a clever woman you are.'</p>
+          <p class="en-p">Hirunahime: 'Do you still intend to make use of Karuna, no matter what?'</p>
+          <p class="en-p">Oniharuwake: 'That is so. Since I have been asked, I cannot simply refuse her outright. I think I shall let her serve as a maid. It would be inconvenient for you, too, if you had no lady-in-waiting.'</p>
+          <p class="en-p">Hirunahime: 'Shiyōgunsama, I have no need for a lady-in-waiting. I shall perform all the duties of a maid myself. If you keep even a female cat by your side, this Hiruna will not stand for it.'</p>
+          <p class="en-p">Oniharuwake: 'Ah ha ha ha ha, what a jealous woman you are. They say that jealousy causes a woman to ruin great things. You would do well to understand that a little. There is nothing that damages a woman's virtue as much as jealousy.'</p>
+          <p class="en-p">Hirunahime: 'A marital relationship without jealousy is not true love. A woman who does not feel jealousy surely has something else going on. It is the behavior of a faithless person living a triangular life. Jealousy is what manifests the sanctity of love.'</p>
+          <p class="en-p">Oniharuwake: 'Ah ha ha ha ha, having been struck so severely with a men, kote, dō, and tsuki, even a hero has no choice but to retreat. How troublesome it is to be born a handsome man. Ehehehehe.'</p>
+          <p class="en-p">Karunahime: 'Oniharuwake Shiyōgun-sama, no matter what you say, I shall follow after you. I beseech you, please make use of me, even if it be only as your mistress.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と手厳しく刎ねつけられ、又もや久米彦将軍は柄に手をかけ憤然として、カルナ姫を一刀の下に斬りつけむとした。此様子を見るよりエミシは久米彦の手をグツと握り、</p>
+            <p class="ja-classical-line">エミシ『将軍殿、相手は女で厶るぞ。チツトおたしなみなさい』</p>
+            <p class="ja-classical-line">久米彦は『ウーン』と気の乗らぬ返事をして椅子に腰をおろした。</p>
+            <p class="ja-classical-line">カルナ姫『ホホホホホ、あのまア男らしうもない、見さげ果てたる久米彦将軍様、繊弱き女一人を相手に刃を抜かうとなさる其卑怯さ、未練さ、妾はゾツコン嫌になつてしまひました。ホホホホホ、もし鬼春別将軍様、下女になつと使つて下さいと申したのは表向き、何卒妾を宿の妻としてイターナルに愛して下さいませ』</p>
+            <p class="ja-classical-line">鬼春別は色男気取になり、</p>
+            <p class="ja-classical-line">鬼春別『アハハハハ、ても扨ても可愛いものだな。然し乍ら拙者にはヒルナ姫と云ふ尤物が已にに予約済なれば、折角の願なれどもお断り申すより道はない。ヒルナ姫の許しさへあれば、其方も第二夫人として連れてやらぬ事もないがな』</p>
+            <p class="ja-classical-line">と云ひ乍ら、ヒルナ姫の顔を一寸覗いた。ヒルナ姫は故意と柳眉を逆立て声を尖らし、</p>
+            <p class="ja-classical-line">ヒルナ姫『これ将軍様、貴方は何とした薄情なお方です。妾に仰有つた事は皆虚偽で厶いましたな。貴方の性質はアマンジヤクだから甲の女にも乙の女にも手をおかけ遊ばすのでせう。真の恋愛は一人対一人のもので厶いますよ。斯う見えても妾は決して娼婦ぢや厶いませぬから、カニパニズムの様な醜行は御免蒙りまする。貴方は婦人に対し沈痛なる侮辱を加へましたね』</p>
+            <p class="ja-classical-line">鬼春別『ア、いやいや、さう怒つて貰つちや堪らない。あれはホンの冗談だよ。お前の側であの様な事が云へるか、よく考へて見よ。流石は女だな』</p>
+            <p class="ja-classical-line">ヒルナ姫『仮にも三軍を指揮する御身を以て冗談を仰有ると云ふ事がありますか。左様な御戯談を仰有ると軍隊のコンテネンスが保たれますまい。どうして部下をコントロールする事が出来ませうか。よくお考へなさいませ。妾は仮にも将軍様と夫婦にならうと言挙げ致しました上は将軍様に対し、十分の御注意を申上げる権能が具備して居りますよ』</p>
+            <p class="ja-classical-line">鬼春別『アハハハハ、賢明なるヒルナ姫の諫言により、いやもう鬼春別、目が覚めた様だ。何と其方は悧巧な女だな』</p>
+            <p class="ja-classical-line">ヒルナ姫『カルナを貴方は如何してもお使ひなさるお考へですか』</p>
+            <p class="ja-classical-line">鬼春別『さうだ。頼まれた以上は無下に断る訳にも行くまい。下女になつと使つてやらうかな。其方も腰元がなければ不便だらうからな』</p>
+            <p class="ja-classical-line">ヒルナ姫『将軍様、腰元なんか要りませぬ。下女の仕事も皆妾が致します。女と云つたら牝猫一匹でもお側へ置きなさつたら此ヒルナが承知致しませぬぞや』</p>
+            <p class="ja-classical-line">鬼春別『アハハハハ、何と嫉妬深い女だな。女は嫉妬に大事を洩らすとやら。チツトは心得たが宜からうぞや。嫉妬程女の徳を傷つけるものはないからのう』</p>
+            <p class="ja-classical-line">ヒルナ姫『嫉妬のない様な夫婦関係ならば真正の愛では厶いませぬ。嫉妬せない女は屹度外に何かがあるのですよ。三角生活を営んでゐる不貞腐れのやる事です。嫉妬は恋愛の神聖を表はすものです』</p>
+            <p class="ja-classical-line">鬼春別『アハハハハ、お面、お小手、お胴、お突、と手厳しく打込まれては如何なる英雄も退却せざるを得ないわ。何と好男子に生れて来ると気の揉めるものだな。エヘヘヘヘ』</p>
+            <p class="ja-classical-line">カルナ姫『鬼春別将軍様、貴方が何と仰有いましても妾はお後を慕ひます。何卒お妾でも宜しいから使つて下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hirunahime: 'Now, Karuna-sama, if you are truly that much in love with Oniharuwake-sama, it would be laughable for me to be told that I, the mistress of the master, have snatched away your love; so, please, do become the legal wife of Oniharuwake-sama. I, for my part, shall have Kumehiko Shiyōgunsama take me as his legal wife.'</p>
+          <p class="en-p">The skill with which both women aligned their intentions to manipulate the two generals was extraordinary. The two generals, completely ensnared by love, had bloodshot eyes and were holding their breath in the midst of a fierce struggle for the prize. Kumehiko Shiyōgun had been rebuffed by the maid Karuna-hime, and feeling dejected and losing his sense of manhood, he felt a strength as if he had gained a million reinforcements upon hearing Hirunahime say that she would have him take her as his legal wife; he immediately let his face brim with pride.</p>
+          <p class="en-p">Kumehiko: 'Heh-heh-heh-heh, Hirunahime-dono, I too am a Shiyōgun, and if it is your desire, I shall grant your request. There is a proverb that says one should try living with a person and try riding a horse; perhaps you might find yourself much happier with me than by entrusting your body to a broom-tree like Shiyōgun Oniharuwake.'</p>
+          <p class="en-p">Hirunahime: 'Yes, thank you very much. If you would wish for that, I would be truly happy. The true essence of Marido-love cannot be called complete unless there is a mutual understanding of spirits between the two, you see.'</p>
+          <p class="en-p">Oniharuwake, sensing that the situation with Hirunahime had turned somewhat strange, began to knit his brows once again. Karuna-hime, feigning anger, spoke.</p>
+          <p class="en-p">Karuna-hime: 'Now, Hiruna-sama, even if you say you are the mistress, you cannot usurp my love. I did not mean what I said to Kumehiko Shiyōgunsama from the bottom of my heart. I was merely acting out of jealousy and being difficult. Now, Shiyōgunsama, since you and I have a prior engagement, please do not let yourself be taken in by someone like Hiruna-sama.'</p>
+          <p class="en-p">Kumehiko, blinded by love, did not notice in the slightest that he was being toyed with by the two women, and in his pride, he said:</p>
+          <p class="en-p">Kumehiko: 'Heh-heh-heh-heh, ah, this is a dilemma. ...If I favor this one, the other is displeased; if I favor the other, this one is displeased; if I favor both, I myself shall not stand. ...It is a difficult thing to be a handsome man. Now, Oniharuwake-dono, though it may be humble, I shall fulfill our promise once; I shall take Karuna as my wife, and then I shall present the used goods to your Excellency, so please accept them with joy as befitting your spiritual status. Heh-heh-heh, this is entirely my kindness toward my superior; surely you cannot have any complaints.'</p>
+          <p class="en-p">Oniharuwake, with a face like that of Enma having swallowed tobacco resin, widened his giant eyes, shuddered, placed his hand on the hilt of his sword, and with his face dyed deep red, let his killing intent swell.</p>
+          <p class="en-p">Hirunahime: 'Kumehiko-sama, have some limit to your conceit. You should be content with the maid Karuna; I only said such things to test the degree of Shiyōgun Oniharuwake-sama's love. Never from the bottom of my heart would I send amorous glances to a person like you. I am sorry, but please consult with your own face. Tell me, Oniharuwake-sama, if one compares you and Kumehiko-sama, it is like the moon and a turtle, or clouds and mud; your characters are entirely different, are they not?'</p>
+          <p class="en-p">Oniharuwake immediately relaxed his expression and turned into a smiling face. The countenances of the two generals were tossed about freely by the two women, changing like the autumn sky—now clearing, now drizzling—and the speed of their transformation was as if one were watching a revolving lantern.</p>
+          <p class="en-p">Oniharuwake: 'Hey, Hirunahime, you are quite a wicked person, aren't you? I had heard that women who have received a modern education are not to be dealt with easily, but this is truly impressive.'</p>
+          <p class="en-p">Hirunahime: 'Ho-ho-ho-ho, for a woman of today, this is merely the beginning of the evening. I am a lady who was praised as the most virtuous at the Takatake-ji Girls' School, you know. If you think I am lying, please go to the school and check my memorial. In the conduct record, it is clearly written: ...Virtuous and graceful, obedient and loving to friends, intimate with others, wisdom shining like the sun and moon, eyes like exquisite jewels, emitting a light from the pupils that overwhelms others, skin white to the utmost, ears normal, nose positioned correctly in the center of the face, crimson lips, agate-like teeth, height neither too tall nor too short, skin soft, and the beauty of the curves of her body is unparalleled in the world... Ho-ho-ho-ho.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ヒルナ姫『これカルナさま、お前さま、それ丈け鬼春別様にラブしてゐるならば主人の妾が貴女の恋を横取りしたと云はれては片腹痛いから、何卒鬼春別様の正妻になつて下さい。妾は寧ろ久米彦将軍様の正妻にして頂きまする』</p>
+            <p class="ja-classical-line">と両人が交互に腹を合せて両将軍を操る腕の凄さ。両将軍は恋の虜となり了り眼を血走らしてナイスの争奪戦に固唾を呑んでゐる。久米彦将軍は侍女のカルナ姫に迄肱鉄を噛まされ、男をさげ自棄気味になつてゐた所へ、ヒルナ姫が久米彦将軍様の正妻にして頂きませうと云つた言葉に、百万の援軍を得た様な強味を感じ、直に得意の色を満面に漲らし、</p>
+            <p class="ja-classical-line">久米彦『エツヘヘヘヘ、ヒルナ姫殿、拙者も将軍の一人、所望とならば御請求に応じませう。人には添うて見よ、馬には乗つて見よと云ふ諺も厶れば、鬼春別将軍の如き箒木さまに身を任すよりも、何程貴方は幸福かも知れませぬぞ』</p>
+            <p class="ja-classical-line">ヒルナ姫『はい、有難う厶います。さう願へれば誠に幸福で厶います。マリド・ラブの真味は、互に意気の疎通した間柄でなくては、完全と云ふ事は出来ませぬからね』</p>
+            <p class="ja-classical-line">鬼春別はヒルナ姫の形勢が何となく変になつたので又もや顔を顰め出した。カルナ姫は故意とに怒つた様な顔をして、</p>
+            <p class="ja-classical-line">カルナ姫『もし、ヒルナ様、貴女は主人だと云つても妾のラブを横領する事は出来ますまい。妾は久米彦将軍様にあの様な事を申しましたのは決して真から云つたのぢや厶いませぬ。一寸悋気をして拗て見たのですよ。もし将軍様、妾と貴方は先約が厶いますから、何卒ヒルナさまの様な方に相手にならない様にして下さいませ』</p>
+            <p class="ja-classical-line">久米彦は二人の女に揶揄れてゐるのを恋に逆上せた目からは少しも気付かず、得意になつて、</p>
+            <p class="ja-classical-line">久米彦『ヘツヘヘヘヘ、アーア、困つた事だ。……此方立てれば彼方が立たぬ、彼方立てれば此方が立たぬ、両方立つれば身が立たぬ。……好男子と云ふものは辛いものだなあ。もし鬼春別殿、お粗末乍ら、一旦約束を覆行し、拙者の妻とカルナをした上、お古を閣下に進上しませうから霊相応と喜んでお受け召され。エヘヘヘヘ、之も全く上官に対する拙者の懇切と申すもの、よもや不足は厶るまいな』</p>
+            <p class="ja-classical-line">鬼春別は閻魔が煙草の脂を飲んだ様な顔して、巨眼を瞠き、身慄ひし乍ら、剣の柄に手をかけ、顔を真赤に染めて殺気を漲らしてゐる。</p>
+            <p class="ja-classical-line">ヒルナ姫『久米彦さま、自惚もいい加減になさいませ。貴方は腰元のカルナで結構ですよ、妾も一寸鬼春別将軍様の恋愛の程度を試す為に斯様の事を申しました。決して心中より、誰が貴方の様なお方に秋波を送りませうか。お生憎様、チツと御面相と御相談なさいませ。ねえ鬼春別様、貴方と久米彦様とを比ぶれば月と鼈、雲と泥と位、其人格が違つてゐますわね』</p>
+            <p class="ja-classical-line">鬼春別は忽ち顔の紐を解き、ニコニコ顔に変つて了つた。両将軍の面相は二人の女に自由自在に翻弄されて秋の空の如く忽ち晴となり、忽ち時雨となり、その変転の速かさ、恰も走馬灯を見る様であつた。</p>
+            <p class="ja-classical-line">鬼春別『おい、ヒルナ姫、随分其方も人が悪いぢやないか。当時の教育を受けた女は到底一筋縄や二筋縄ではおへないと聞いてはゐたが、実に感心なものだな』</p>
+            <p class="ja-classical-line">ヒルナ姫『ホホホホホ、今時の女は、こんな事は宵の口で厶います。妾は高竹寺女学校に於ても最も品行方正と謳はれた淑女で厶いますよ。嘘と思召すならば学校へ行つて妾のメモアルを調べて来て下さいませ。行状録には……品行方正にして優美なり、柔順にして克く友を愛し、人と親しみ、智慧晃々として日月の如く輝き渡り、目は玲瓏玉の如く、瞳孔より一種人を圧するの光を放ち、色飽迄白く、耳尋常に、鼻は顔の中央に正しく位置を保ち、紅の唇、瑪瑙の歯並、背は高からず低からず、皮膚軟らかく肉体の曲線美は天下にその比を見ざるべし……とキツパリ記してありますよ。ホホホホホ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Oniharuwake: 'See, I told you so. The Kyōikushiya is quite something, isn't he? He has investigated this thoroughly. No, no more Benkai is needed; Hiyakubun is not equal to Itsuken. Since I have seen the Jitsubutsu, I have no more Monku. Now, let us discuss our Shiyōrai. Kumehiko-dono, this is my Jimushitsu, so please return to your own room.'</p>
+          <p class="en-p">Karunahime: 'My most beloved General Kumehiko-sama, come, let us return. No matter how much Hiruna-sama may be my Shujin, and no matter how good his Kireu may be, there is no need to envy him so much. Because it is Dame unless it is a Fūfu of true heart to heart, you see.'</p>
+          <p class="en-p">She leans on him affectionately. Kumehiko says,</p>
+          <p class="en-p">Kumehiko: 'Hmm, very well, then let us return.'</p>
+          <p class="en-p">Karunahime: 'Come, let us go.'</p>
+          <p class="en-p">They walk away hand in hand affectionately, returning to their own office. Supāru and Emishi, the Futari, seeing that this Monsaku had reached an Ichidanraku, quickly leave to attend to their duties as Gunmu Kantoku.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">鬼春別『そら、さうだらう。教育者も偉いものだな。よく調べてゐるワイ。いや、もう何も弁解は要らぬ、百聞は一見に如かずだ。実物を見た以上は何にも文句はない。いざ之より其方と将来の相談を致さう。久米彦殿、ここは拙者の事務室、どうか貴方の室へお帰り下さい』</p>
+            <p class="ja-classical-line">カルナ姫『最も愛する久米彦将軍様、さア帰りませう。何程ヒルナ様が妾の主人だつて、容貌が佳いといつても、あまり羨むには及びませぬ。本当の心と心との夫婦でなければ駄目ですからね』</p>
+            <p class="ja-classical-line">としなだれかかる。久米彦は、</p>
+            <p class="ja-classical-line">久米彦『ウン、よし、そんなら帰らう』</p>
+            <p class="ja-classical-line">カルナ姫『さアおじや』</p>
+            <p class="ja-classical-line">と睦じげに手を洩いて吾事務室に帰り行く。スパール、エミシの二人は逸早く軍務監督の為めに、此悶錯の一段落を告げたのを見て出でて行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c12.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 12: Ogre の恋 [1375]</span>
+      </a>
+      <a href="c14.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 14: 女の力 [1377]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

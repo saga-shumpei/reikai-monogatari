@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: 連理 [1371] - Volume 53 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 53 Table of Contents</a>
+      <span>Volume 53</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 53 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: 連理 [1371]</h1>
+      <p class="chapter-title-ja">連理〔1371〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Shinrau, the bridegroom, stood up, held a fan in one hand, and began to sing and dance.</p>
+          <p class="en-p">Haruna: 'In Takaamahara appearing / The Onmegumi of Sumeōkami / Shihonagahiko having appeared / The Keiji of Kefu without incident / How joyful that You have bound us together / For until now, the two of us / Our fathers were Tekidōshi / In various ways and for various reasons / The wretchedness of having clashed / To settle this Sanjiyō / From a young Jibun / I had been worried and troubled / But how fortunate, Karuna-hime / Falling into a love of mutual affection with me / The Inguwa of a body that could not be abandoned / By what kind of Suguse and Innen / Our fathers were Tekidōshi / That the Kohiji would never be fulfilled / Even if we cannot be together in this world / Dying, in the Mirai, affectionately / Dragging our hands to the bottom of Jigoku / Thinking we would fall together / I spent my days in tears of love / But through the Rikairiyoku of father and brother / By good fortune, here and now / We have tied the Oshi bond / How joyful is the outcome of this Koyoi / In the heavens becoming birds of Hiyoku / On earth becoming branches of Renri / Husband and wife living in harmony / Not to mention father and brother / To the awe-inspiring Sovereign, with a sincere heart / Devotedly and purely serve / Ah, Kannagara-kamu-nagara / May Your spirits be blessed / Protect the bond of these two forever / Without ever letting it fray / Circling the Heavenly Pillar / Surrounding the Pillar of the Land / In the Keirin of heaven and earth / Serving, and bearing many children / Pray for the prosperity of the house of Samori / Forever and ever / Ah, Kannagara-kamu-nagara / Before the great presence of Shihonagahiko / With awe and reverence, I pray.'</p>
+          <p class="en-p">He finished singing. Ekkusu, the steward of the house of Samori, danced with joy and sang a celebratory song following his lead.</p>
+          <p class="en-p">Ekkusu: 'Even if the morning sun shines or clouds over / Even if the moon waxes or wanes / Even if the stars fall from the sky / Even if earthquakes, thunder, and fire-carts / Should all come at once / Now that this marriage proposal / Has been settled without incident, this Ekkusu / Even if I die, I do not care / Not to mention the Kshatriya-sama / Now that the two main houses of Samori and Uwamori / Have reconciled / The land of Biku will surely / Be governed and prosper in peace / The relationship between the dog and the monkey / Which had been tangled and tangled until now / How joyful that today they have happily reconciled / And are sitting together at this banquet / Kamunao-bi who created this world / And Ōnao-bi with a broad heart / In all things in the world of men / See straight, hear straight / Correct the errors of the world / Though this is a song of the teachings / Of the San-go / Applying it to such an occasion / I celebrate today's banquet / May you both live long / For the sake of the country above / And to protect the peace of the house below / Live together in harmony, Kannagara / To never forget / The joy of this day, this Ekkusu / Will dance, leap, and sing / Drunk on sake, not knowing / Front from back, I will dance until my life's end / Ah, how grateful, how grateful / Karuna-hime and Haruna-sama / You must be so happy / That your daily thoughts have reached each other / That you, a couple in mutual love, are living in harmony / And enjoying your new life / It is entirely the protection of the gods / If you ever forget / The divine grace even in a dream / This wonderful good match / Might break halfway / So that there is no such sorrow / From today, renew your hearts / Revere Sumeōkami / Keep the pure teachings well / Loyalty to the Sovereign, filial piety to parents / Compassion even to neighbors / The duty of a human being / Who was created in the image of God / Please fulfill it, the steward of the Samori house / Ekkusu, with a sincere heart / Offers this advice / Ah, Kannagara-kamu-nagara / May your spirits be blessed.'</p>
+          <p class="en-p">Shieru sang again.</p>
+          <p class="en-p">Shieru: 'Appearing as the official of Uwamori / The steward of the office of Berutsu / Shieru, with a sincere heart here / Offers this, and celebrates today's wedding / With joy / Holding the power of military horses / The man of power in the land of Biku / The authority of Lord Berutsu / Shining like the morning sun / Enough to bring down even flying birds / Receiving Karuna-hime / The younger sister of the official of Berutsu / As his wife, Haruna-sama / You must be, indeed, indeed, very satisfied / The steward Shieru, seeing the two of you / With such happy faces / Has finally felt at ease / And somehow, it makes me feel / As if I am becoming envious.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">新郎のハルナは立ち上り扇を片手に持ち、歌ひ舞ひ初めたり。</p>
+            <p class="ja-classical-line">『高天原に現れませる
+皇大神の御恵
+塩長彦の現れまして
+今日の慶事を恙なく
+結ばせ給ひし嬉しさよ
+そも今迄は両人が
+父と父とは敵同士
+何彼につけてさまざまと
+衝突したる浅ましさ
+此惨状を治めむと
+年も幼き時分より
+案じ煩ひ居たりしが
+幸なるかなカルナ姫
+吾と相思の恋に陥ち
+思ひ切られぬ身の因果
+如何なる宿世の因縁か
+父と父とは敵同士
+到底も恋路は遂げざらむ
+仮令此世で添へずとも
+死して未来で睦じく</p>
+            <p class="ja-classical-line">地獄の底まで手を曳いて
+落ちなむものと思ひつめ
+恋の涙に暮れけるが
+父と兄との理解力
+幸ひなして今此処に
+鴛鴦の契を結びたる
+今宵の首尾の嬉しさよ
+天には比翼の鳥となり
+地には連理の枝となり
+夫婦互に睦び合ひ
+親と兄とは云ふも更
+畏き君に赤心を
+捧げて清く仕ふべし
+ああ惟神々々
+御霊幸倍ましまして
+二人の縁をどこ迄も
+欠ぐる事なく守りませ
+天の御柱廻り合ひ
+国の御柱取り巻いて
+天と地との経綸に</p>
+            <p class="ja-classical-line">仕へて御子を数多生み
+左守の家の繁栄を
+いや永久に祈るべし
+ああ惟神々々
+塩長彦の大前に
+畏み畏み祈ぎまつる』</p>
+            <p class="ja-classical-line">と歌ひ終る。左守の家令、ヱクスは雀躍りしながら其尾について祝歌を歌ふ。</p>
+            <p class="ja-classical-line">『朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+星は天より落つるとも
+地震雷火の車
+仮令一度に来るとも
+この縁談が恙なく
+調つた上はこのヱクス
+仮令死んでも構やせぬ
+刹帝利様は云ふも更
+左守右守の両宗家
+和合なされた其上は
+ビクの御国は穏かに
+治まり栄え行くだらう
+今迄縺れに縺れたる
+犬と猿との間柄
+今日は目出度和解して
+此宴席に打ち解けて
+並ばせたまふ嬉しさよ
+此世を造りし神直日
+心も広き大直日</p>
+            <p class="ja-classical-line">唯何事も人の世は
+直日に見直せ聞き直せ
+世の過は宣り直せ
+これぞ全く三五の
+教の道の歌なれど
+斯やうな時に応用して
+今日の宴会を祝ぎつ
+幾久しくも御両所よ
+上は御国の御為に
+下はお家の安泰を
+守らむ為に睦じく
+暮らさせたまへ惟神
+今日の喜びいつ迄も
+忘れぬためにこのヱクス
+舞ひつ踊りつ歌歌ひ
+お酒に酔うて後前も
+分ぬばかりに土堤切らし
+命限りに踊りませう
+ああ有難い有難い
+カルナの姫やハルナさま</p>
+            <p class="ja-classical-line">あなたも嘸や嬉しかろ
+日頃の思ひが相達し
+相思の夫婦が睦じく
+新しがつて暮すのも
+全く神の御守護ぞや
+夢にも神の御恩徳
+忘れる事があつたなら
+この結構な良縁も
+中途に破裂するだらう
+そんな憂ひの無いやうに
+今日から心を改めて
+皇大神を敬拝し
+清き教をよく守り
+君には忠義親に孝
+隣人迄も憐みて
+神の形に造られた
+人たるものの本分を
+お尽しなされや左守家の
+家令ヱクスが赤心を
+籠めて注意を致します</p>
+            <p class="ja-classical-line">ああ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">シエールは又歌ふ。</p>
+            <p class="ja-classical-line">『右守の司と現れませる
+ベルツの司の家令職
+シエールが此処に赤心を
+捧げて今日の結婚を
+嬉しく祝し奉る
+兵馬の権を握ります
+ビクの御国の権力者
+ベルツの君の其威勢
+朝日の如く輝きて
+飛ぶ鳥さへも落すよな
+ベルツの司の妹君
+カルナの姫を貰ひうけ
+女房となしたハルナさま
+嘸やさぞさぞ御満足
+なさつた事で厶いませう
+家令のシエールはお二人の
+其嬉しげな顔を見て
+やつと安心致しました
+さうして何だか羨ましう
+なつて来たよに思はれる</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Is this not, after all, what people call Hafukairinki?</p>
+          <p class="en-p">A handsome man and a beautiful woman, famous in the Sekai,</p>
+          <p class="en-p">Is there such a match anywhere else in the Sanzensekai?</p>
+          <p class="en-p">Karunahime, who has been made to resemble the face of Konohanahime,</p>
+          <p class="en-p">My eyes are dazzled even looking at her figure,</p>
+          <p class="en-p">I feel as if a Gokuō is shining upon her.</p>
+          <p class="en-p">If I were a little younger,</p>
+          <p class="en-p">And thought I could receive such a beautiful Niyōbau,</p>
+          <p class="en-p">I feel somehow weary of this Ukiyo.</p>
+          <p class="en-p">Like a Tokage that has let out an Akubi,</p>
+          <p class="en-p">A pockmarked mountain Kami,</p>
+          <p class="en-p">Forced to take on four or five,</p>
+          <p class="en-p">Gaki rolling about, created one after another,</p>
+          <p class="en-p">Chased by Seikuwatsunan,</p>
+          <p class="en-p">In a state of Aoikitoiki, such a Teitaraku,</p>
+          <p class="en-p">Truly, the Unmei of Ningen,</p>
+          <p class="en-p">Is there such a Kenkaku as this?</p>
+          <p class="en-p">Even though we have gone to the trouble of being born as humans,</p>
+          <p class="en-p">And boast of being the flowers of Tenchi and the Reichiyō of Banbutsu,</p>
+          <p class="en-p">Though we spend the same Tsukihi,</p>
+          <p class="en-p">That there is such a division between happiness and unhappiness,</p>
+          <p class="en-p">Is it the retribution of the sins of a previous life?</p>
+          <p class="en-p">In truth, my body is a worthless Shieru,</p>
+          <p class="en-p">Compared to the Tsukasa of Haruna,</p>
+          <p class="en-p">There is a difference between heaven and earth.</p>
+          <p class="en-p">However, even if I complain of such things,</p>
+          <p class="en-p">It is of no use.</p>
+          <p class="en-p">Resigning myself that it is a matter of In-en,</p>
+          <p class="en-p">For today's splendid wedding,</p>
+          <p class="en-p">With a sincere heart, I pray for your happiness forever.</p>
+          <p class="en-p">Ah, Kannagara-kamu-nagara,</p>
+          <p class="en-p">May your spirits be blessed.'</p>
+          <p class="en-p">He finished singing and sat down.</p>
+          <p class="en-p">Samori: 'The dust that has piled up like a mountain since ancient times, I am happy that it has scattered today.'</p>
+          <p class="en-p">Ummori: 'Everything is just Kannagara-kamu-nagara, I leave it only to the heart of Kami.'</p>
+          <p class="en-p">Taruman: 'The intimacy of a pair of mandarin ducks that never separate, how enviable it is to behold.'</p>
+          <p class="en-p">Haruna: 'Bound by the thread of Kannagara-en, I am happy to cross this world.'</p>
+          <p class="en-p">Karunahime: 'When I gaze at the shadow of the moon crossing the heavens, it smiles, looking at my face.'</p>
+          <p class="en-p">Ekusu: 'Haruna-kimi, who has taken Hime-sama as his bride, shall flourish like the flowers blooming in spring.'</p>
+          <p class="en-p">Shieru: 'The intimacy between the peerless pine and pine, today we celebrate a prosperity that shall last for a thousand generations.'</p>
+          <p class="en-p">Having finished singing in this manner, the auspicious wedding ceremony concluded; although the families of Samori and Ummori appeared somewhat reconciled on the surface, the heart of the Tsukasa of Ummori did not easily soften, and he continued to treat the Tsukasa of Samori as an obstacle.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">これもやつぱり人の云ふ
+法界悋気ぢやあるまいか
+世界に名高き美男と美人
+こんな配偶がまたと世に
+三千世界にあるものか
+木の花姫の顔に
+似させたまへるカルナ姫
+お姿見ても目が眩み
+後光がさすよな心地する
+私ももちと若ければ
+こんな美し女房が
+貰へるだらうと思うたら
+何だか浮世が厭になる
+蜥蜴が欠伸をしたやうな
+アバタだらけの山の神
+無理に持たされ四五人の
+餓鬼をゴロゴロ拵へて
+生活難に追はれつつ
+青息吐息の為体
+ほんに人間の運命は</p>
+            <p class="ja-classical-line">これ程懸隔あるものか
+折角人と生れ来て
+天地の花よ万物の
+霊長なりと誇るとも
+同じ月日を送るのに
+これだけ幸と不幸とが
+分ると云ふは先の世の
+宿世の罪が報いしか
+実につまらぬシエールの身
+ハルナの司に比ぶれば
+天と地との相違あり
+さはさりながらこんな事
+愚痴つて見たとて仕様がない
+因縁づくぢやと諦めて
+今日の結構な御結婚
+幾久しくと赤心を
+籠めて祝ぎ奉る
+ああ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">と歌ひ終り座につきぬ。</p>
+            <p class="ja-classical-line">左守『昔より山と積りし塵埃
+散りにし今日の吾ぞ嬉しき』</p>
+            <p class="ja-classical-line">右守『何事も唯惟神々々
+神の心に任すのみなり』</p>
+            <p class="ja-classical-line">タルマン『鴛鴦の番離れぬ睦じさ
+見るにつけても羨ましきかな』</p>
+            <p class="ja-classical-line">ハルナ『惟神縁の糸に結ばれて
+この世を渡る吾ぞ楽しき』</p>
+            <p class="ja-classical-line">カルナ姫『天渡る月の御影を眺むれば
+笑はせたまひぬ吾顔を見て』</p>
+            <p class="ja-classical-line">ヱクス『姫様を娶りたまひしハルナの君
+春咲く花と栄えますらむ』</p>
+            <p class="ja-classical-line">シエール『類なき松と松との睦み合ひ
+千代の栄を祝ふ今日かな』</p>
+            <p class="ja-classical-line">斯く歌ひ終り目出度結婚の式を終へ、左守、右守の両家は表面稍打ち解けたる如く見えしが、右守の司の心中は容易に和らがず、依然として左守の司を邪魔者扱ひ為し居たりけり。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 比翼 [1370]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 蛙の腸 [1372]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
