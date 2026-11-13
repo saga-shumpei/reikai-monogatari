@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 22: 帰国と Ogre 哭 [1828] - Volume 64b | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 64b Table of Contents</a>
+      <span>Volume 64b</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 64b &bull; Chapter 22</span>
+      <h1 class="chapter-title-en">Chapter 22: 帰国と Ogre 哭 [1828]</h1>
+      <p class="chapter-title-ja">帰国と鬼哭〔1828〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">By the courtesy of Spafford, Purabāsa established his base at the American Colony, where he, together with Mariya, engaged in the grand propagation of Ananai-kyō, thundering his name far and near and gathering numerous believers. Meanwhile, the renown of the Savior in Hinodewake Island had become known to every corner of the globe, and with the momentum of the rising sun ascending the heavens, people of various nations who came to Jerusalem all vied with one another to hear Purabāsa's discourses, assembling at this Colony in greater numbers day by day. Spafford also became exceedingly enthusiastic, turning the American Colony into a branch office of Ananai-kyō and personally standing at the head to go out for propagation far and wide. In contrast to this, the day and night activity of Mother Otora bore not a whit of effect, failing to gain even a single believer; her only harvest was merely spreading her reputation as a mad old woman and incurring the laughter of the citizens. To make matters worse, the triangular relationship involving Yamoriwake, Otora, and Ohana took its toll, eventually coming to the ears of the authorities and resulting in their receiving an order of deportation, so that after three days they were to leave the Holy Land behind and return to their homeland; whereupon Purabāsa grew suddenly anxious, thinking that if such mad persons were to return to the country, there was no telling what rumors they might scatter. Furthermore, he himself possessed the flaw of having reluctantly entered into a relationship with Mariya. It was clearer than looking at a fire that if left unattended, even his own credit would be shattered to pieces. Thinking that he could not remain idle like this, and wishing to meet the Master once, as well as to reassure his wife and children, he desired to return to his country in haste ahead of them, and consulted Spafford. Spafford assented to everything, saying:</p>
+          <p class="en-p">Spafford: 'Indeed, it may be better for you to return once. For there is a fear that your essential stronghold might be trampled upon. But what will you do about Mariya-sama?'</p>
+          <p class="en-p">Purabāsa: 'Yes, when I thoroughly disclosed the circumstances to Mariya-sama last night, she willingly gave her consent. As expected of one who lives a life of faith, she is a remarkable person. Look, as you see here, she has written a letter of divorce for my sake, so please be at ease.'</p>
+          <p class="en-p">Spafford: 'May I be permitted to read it for a moment?'</p>
+          <p class="en-p">Purabāsa: 'Yes, certainly. Once you understand Mariya-sama's sincerity, it will be to our mutual convenience.'</p>
+          <p class="en-p">Master Spafford slowly began to read:</p>
+          <p class="en-p">Mariya: 'Item. By the divine bond of the Lord God, I have committed an unintended disrespect, and up to this day I have served as your second wife; however, this too was done in obedience to the command from the Lord God, so that an evil spirit might not possess you. Now that you are about to return to your homeland, I consider that my mission has at last been fulfilled, and therefore I write this document and hand it to you as evidence for later days. When you return to your native land, Otora-sama, Yamoriwake-sama, Magahiko-sama, Ohana-sama, and others may blow about various ill rumors regarding the relationship between me and you. Should there be such an occasion by any chance, please show this writing to the Master; the relationship between you and me is without a speck of cloud or mist, being a pure and immaculate one. Although we loved and were loved by each other, embracing and kissing, we have never yet engaged in carnal intercourse. As the Supreme God knows this well, I believe there is no particular need for excuse.
+
+Year, Month, Day
+
+From Mariya of the American Colony
+
+To the beloved, beloved Purabāsa-sama'</p>
+          <p class="en-p">Spafford: 'Indeed, splendid are the intentions of you both! Ah, I did not know that your relationship was so pure. After all, it must have been my own heart that was unclean, ha-ha-ha-ha! Come, come, let us now have Mariya-sama join us, and the three of us shall hold a farewell party. And let us also treat the believers of the Colony to a cup of sacred sake by way of announcement.'</p>
+          <p class="en-p">Purabāsa: 'That is truly a delightful proposal. Then let us immediately call Mariya-sama. Hey, Mariya-sama!'</p>
+          <p class="en-p">Mariya: 'Yes, what is it? Did you call me?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ブラバーサはスバツフオードの厚意により、アメリカンコロニーを根拠として、マリヤと共に三五教の大宣伝をなし、其名を遠近に轟かし、数多の信者を集めて居た。然るに日の出島における救世主の名声は、地球上隈なく知れ渡り、旭日昇天の勢で、エルサレムに来た各国人は、何れも競ふてブラバーサの話を聞かむと、このコロニーへ日一日と数多く集まつて来た。スバツフオードも非常に乗り気になり、アメリカンコロニーを三五教の出張所となし、自ら陣頭に立つて遠近の布教に出かけて居た。之に反してお寅婆アの日夜の活躍も寸効なく、一人の信者も出来ず、唯徒に狂人婆アの評判を売つたのみ、市民の笑ひを買つたのみが収穫であつた。加ふるに守宮別、お寅、お花との三角関係が祟つて、遂には其筋の耳に入り退去命令を受くる事になり、三日の後には聖地を後に本国へ帰る事になつたので、ブラバーサは俄に気をいらち、あんな狂人が国へ帰らうものなら、どんな噂を撒くかも知れない。自分は止むを得ずマリヤと関係した欠点もある。放つておけば自分の信用迄メチャメチャにせらるるは火を睹るよりも明かだ。これやかうしては居られない。一度聖師にも会つて見たいし、又妻子にも安心させ度いから、彼等に先だち急いで帰国仕度いものだと、スバツフオードに相談して見た。スバツフオードは一々諾づいて、</p>
+            <p class="ja-classical-line">『成程一度お帰りになつた方がよいかも知れませぬな。肝腎の根拠地を蹂躙せらるる恐れが有りますから。併しマリヤさまをどうなされますか』</p>
+            <p class="ja-classical-line">『ハイ、マリヤさまには夜前篤と事情を打ち明けました処、快く承知して下さいました。遉は信仰生活に生きて居らるる丈あつて、変つた方ですわい。これこの通り私の為めに離縁状を書いて下さつたから安心を願ひます』</p>
+            <p class="ja-classical-line">『一寸拝読さして頂いても宜敷う厶いますか』</p>
+            <p class="ja-classical-line">『ハイ、宜敷う厶います。マリヤさまの誠意がお分りになつて、互の便宜で厶いませうから』</p>
+            <p class="ja-classical-line">スバツフオード聖師は徐に読み初めた、</p>
+            <p class="ja-classical-line">一、私事、神様の御縁に依りまして、心にもなき御無礼を致し、今日迄貴方様の第二夫人として仕へて参りましたが、併しこれも貴方様に悪魔の憑依しない様、神様からの御命令を遵奉して来たものです。最早御帰国に際しましては、私の使命もいよいよ果されたと考へますから、後日の証拠として此書を書いて貴方にお渡し致しておきます。本国へお帰りになり、お寅さまや、守宮別さまや、魔我彦さまやお花さまなどが私と貴方の関係について、いろいろと悪く吹聴せらるるかも知れませぬ。万一左様な場合が厶いましたら、この書面を聖師様にお見せなさいませ、貴方と私との間は何の雲霧もなく、清浄潔白の間柄で厶います。互に愛し愛され抱擁キッスなどは致しましたが、未だ肉交を行つた事は厶いませぬ。これは大神様がよく御存じですから、別に弁解する必要もなからうかと存じます。</p>
+            <p class="ja-classical-line">年　月　日</p>
+            <p class="ja-classical-line">アメリカンコロニーのマリヤより</p>
+            <p class="ja-classical-line">恋しき恋しきブラバーサ様</p>
+            <p class="ja-classical-line">『なる程立派な御両人のお志し、ヤ、私もこれ程潔白な間柄とは存じて居りませ何だ。矢張私の心が汚なかつたのでせう、ハヽヽヽ。サアサアこれからマリヤさまに来て貰つて、私と三人送別会を開きませう。さうして、コロニーの信者へもお神酒を一杯披露の為振れ舞ふ事に致しませう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">‘I have been greatly indebted to your long-standing hospitality, and I thank you most sincerely for your kindness in every matter. In any case, I shall ascend here again in the near future. At that time, I believe it will be the very moment when the second coming of Christ shall appear upon Hinode-jima. I pray for your warm favor for a long time to come. Please remain exceedingly mame and continue to serve in the goshingefu.’</p>
+          <p class="en-p">‘As Maria-sama will take charge of the shinjiya of Ananai-kyō, please be at goanshin.’</p>
+          <p class="en-p">‘Yes, thank you very much.’</p>
+          <p class="en-p">Just as he was offering his aisatsu, Maria adjusted her emon, came forth, respectfully placed her riyōte upon the floor, and said,</p>
+          <p class="en-p">Maria: 'Seishisama, owing to no shallow goshinen, I, an unworthy maiden, have been long indebted to your sewa. Even after anata depart for your gokikoku, I shall, in your stead, akumade perform the senden of the mioshihe's goshiyushi. Furthermore, toward the shinjiya, I shall konkon explain and admonish the kyōri learned from anata and strive for the achievement of divine governance; therefore, please depart for home without any anxiety.'</p>
+          <p class="en-p">Seishisama: 'Ah, truly, having come to a land unknown and unseen for so long a time, I have received your sewa. In any case, I shall start afresh and come again; therefore, please take good care of your body and perform your duties. Hearing that O-Tora-sama and her party are to make their gokikoku on the Turkey-maru the day after tomorrow, I intend to board tonight's steamship, the Arabia-maru, and return one step ahead. Please convey my best regards to everyone. Incidentally, there is something I wish to request of Maria-sama; the geisha named Ayako of the Ariake-ya in front of the station is said to have once formed a strange relationship with Imoriwake. Now that Imoriwake is to return to his home country, she will surely sink into the abyss of pessimism and, out of a woman's small heart, might commit an indiscreet act. Should such a thing happen by any chance, the responsibility of us senden-shi who came from Hinode-jima would not be cleared; therefore, I pray that you will visit her once and comfort her. I believe she will surely become your disciple.'</p>
+          <p class="en-p">Maria: 'Yes, I have respectfully understood. Please do not worry.'</p>
+          <p class="en-p">Kamehiko: 'Somehow, there remains less than one hour until the departure time, so I have just hired a motorcar. Please get in quickly; I shall also accompany you to the landing place to see you off.'</p>
+          <p class="en-p">‘Yes, thank you,’ said Burabāsa, and asking that his old clothes, hand tools, and other daily necessaries be distributed to the people of the colony, the three of them boarded the motorcar and hurried toward the ferry landing. Ah, Kannagara Tamachi Haimase.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『長らく御厄介に預かりまして何から何迄御親切に有難う厶います。何れ又近い中に上つて参ります。其時は日の出島の再臨のキリストの現はれたまふ時かと存じます。どこ迄も幾久しく御厚情を願ひませう。随分お壮健で御神業に奉仕して下さいませ』</p>
+            <p class="ja-classical-line">『三五教の信者はマリヤさまが担任致しますから、御安心下さいませ』</p>
+            <p class="ja-classical-line">『ハイ、有難う厶います』</p>
+            <p class="ja-classical-line">と挨拶して居る所へマリヤは衣紋を繕ひ、出で来り、恭しく両手をつき、</p>
+            <p class="ja-classical-line">『聖師様浅からぬ御神縁によりまして、いたらぬ妾、長らくお世話に預かりました。貴方が御帰国遊ばしましても、御教の御趣旨は私が代つて飽迄宣伝致します。又信者に対しても、貴方から教はつた教理を懇々と説き諭し、神政成就の為め尽しますから、どうぞ御心配なくお帰り下さいませ』</p>
+            <p class="ja-classical-line">『ヤ、実に長らく見ず不知の土地へ参りまして、お世話に預かりました。何れ又出直して参りますから、どうぞお身体を大切に御用を勤めて居て下さいませ。明後日のトルコ丸でお寅さま一行は帰国されるさうですから、私は一足先に今晩の汽船アラビヤ丸に乗つて帰らうと存じます。どうか御一同様へ宜しくお伝へ下さいませ。序にマリヤさまにお願ひしておきたいので厶いますが、駅前の有明家の綾子と云ふ芸者は、一旦守宮別と妙な関係が結ばれたと云ふ事で厶います。守宮別が帰国の事となれば、嘸悲観の淵に沈み、女の小さい心から、無分別の事をするかも知れませぬ。万一そんな事があつては、日の出島から参りました、吾々宣伝使の責任が済みませぬから、何卒貴女から一度訪問して慰めて上げて下さい。きつとあの方は貴女のお弟子になるだらうと思ひます』</p>
+            <p class="ja-classical-line">『ハイ、畏まりました。御心配下さいますな』</p>
+            <p class="ja-classical-line">『どうやら出帆時刻迄に、一時間より厶いませぬから、今自動車を雇ふておきました。どうか早く乗つて下さい、私も船場迄送りますから』</p>
+            <p class="ja-classical-line">『ハイ、有難う』とブラバーサは自分の古い着物や手道具其他の日用品を、コロニーの人々に分与すべく頼みおき、三人自動車に乗つて渡船場へと急ぎ行く。あゝ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c21.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 21: 不意の官命 [1827]</span>
+      </a>
+      <a href="../vol65/c01.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Volume 65 Chapter 1: 感謝組 [1657]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
