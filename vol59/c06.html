@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: Cloud 隠 [1506] - Volume 59 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 59 Table of Contents</a>
+      <span>Volume 59</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 59 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: Cloud 隠 [1506]</h1>
+      <p class="chapter-title-ja">雲隠〔1506〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Akisu, brandishing the Ōbishiyaku, ran back and forth through the crowd, exerting all his power to delight the many guests to the fullest, and added to the excitement of the drinking party by singing a song.</p>
+          <p class="en-p">Akisu: 'In the forests of Mount Adsumosu, where the eagles build their nests and the hawks dwell, for this reason the villagers of Suma do not see the faces of sparrows or Mozu, nor have they even heard their voices. The Shiyōjiyō-sama, too, have all slipped away, leaving not a single one behind, and it is now a world of eagles and hawks. Nevertheless, today, sparrows, Mozu, and wrens, along with Senchōmanchō, have all come, and chirping and fluttering, they dance wildly, drunk on sake. Could there be any event more Medeta than this? Everyone, do not stand on Enriyo, but break the embankments and drink. Look, just as you see, the captain of the Kiyo Sekishiyo of the Brahmins has arrived and joined us at the drinking seat.'</p>
+          <p class="en-p">Singing with such joy, his spirit is light with courage. That the mansion of Bāchiru-sama, known as the wealthiest Shiyuda in the village of Suma, has manifested the Zuishiyō of Kuwanminitsuchi is an event without precedent since ancient times. The Sendenshi of Ananai-kyō, the Kamutsukasa of Tamakuniwake, Masumi-no-hiko, Itahiko, and the three-thousand-hiko-shi Debisu-hime, people famous in name, have appeared at this mansion, and by completely removing the barriers between Ananai-kyō and the Brahmins, they have joined the banquet in harmony, manifesting the truth of universal brotherhood, which is the will of the Lord God.</p>
+          <p class="en-p">Everyone, please rejoice. In the village of Suma in the land of Idzumi, although the Shiyōjiyō of Mount Adsumosu are no longer visible, their spirits have somehow possessed our own. Without distinction of age or gender, everyone without exception is drunk on sake; the illness of the non-drinker has gone somewhere, and all have ended up as heavy drinkers, crying, laughing, and getting angry. It is amusing to see the thousand forms and myriad states of that condition manifested in detail. Drink, make noise, dance, and go wild. Dance and sing forever. Drink dry every one of the twenty storehouses of sake, and offer them to the Shiyōjiyō-kami, Shiyōjiyō-hiko, and Shiyōjiyō-hime.</p>
+          <p class="en-p">I, who serve my master, cannot function without drinking sake. Ah, how amusing, how amusing. This is entirely the blessing of the noble God of the Brahmins. Celebrate, celebrate, take courage, take courage. I beg you all to raise your voices together and praise the long life of Bāchiru-sama. Banzai, Banzai, Banzai! The crane dances in the spring of a thousand years, and the turtle sings of the summer of ten thousand years. Spring and summer are the seasons when all things flourish and prosper. Ah, Kannagara-kamu-nagara. Whether it be warm sake or cold, drink plenty as you please and roll, roll, all you people. The way to comfort the heart of the Shiyōjiyō-hime is none other than to drink sake. Ah, Kannagara-kamu-nagara.</p>
+          <p class="en-p">Having received the sacred sake of the Lord God, everyone, from now on, firmly unite your hearts and combine your strengths, making the lord of the village of Bāchiru your parent, and make the village of Suma peaceful, calm, and prosperous. You must build the Heavenly Pure Land, receive the blessings of God, and fulfill your duty as human beings in the village of Suma. When celebrating, celebrate well; when playing, play well; drink, eat, work, and let us all, high and low, live happily and amusingly in this world. This is the first act of filial piety toward the Lord God.</p>
+          <p class="en-p">Come, come, drink, come, drink. Dance, dance, dance, dance. No matter how much you dance and perform, this floor built from the depths of the golden hell will not easily collapse. This garden hardened with earth is like the wish-fulfilling jewel that is indestructible. It is a ship of the Law that requires no worry. Ah, Kannagara-kamu-nagara. I shall rest now. Everyone, please take my place and sing. Drinking and eating is not the only art. Show off your hidden talents here, make everyone laugh until their jaws loosen, and it is good to change the dwelling of your navel. In this banquet permitted by the heavens, who needs etiquette or nonsense?</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">アキスは、大柄杓を振り翳し乍ら群衆の中を前後左右に駆け廻り、数多の来客を十二分に喜ばせむと所在力を尽し、歌を歌つて酒の座の興を添へたり。</p>
+            <p class="ja-classical-line">アキス『アヅモス山の森林に
+鷲が巣を組む鷹が棲む
+それ故スマの里人は
+雀や百舌鳥の顔見ない
+声さへ聞いた事はない
+猩々さまもいつしかに
+一つも残らず逃げ去つて
+鷲と鷹との世の中だ
+さはさり乍ら今日こそは
+百舌鳥も雀もみそさぎも
+千鳥万鳥やつて来て
+チイチイ　パーパー、パタパタと
+お酒に酔ふて舞ひ狂ふ
+こんな目出度い事あろか
+皆さま遠慮は要らないで
+堤を切らして呑みなさい
+あれあの通りバラモンの
+キヨの関所のキャプテンが
+お出なさつて吾々と
+一緒に酒の座について</p>
+            <p class="ja-classical-line">面白さうに歌ひつつ
+勇むで厶る気の軽さ
+スマの里にて随一の
+富豪の首陀と聞えたる
+バーチルさまのお館に
+官民一致の瑞象を
+現はしたるは昔から
+例も知らぬ出来事だ
+三五教の宣伝使
+玉国別の神司
+真純の彦や伊太彦や
+三千彦司デビス姫
+音に名高き人びとが
+これの館に出でまして
+三五教やバラモンの
+隔てを全く取除き
+和気靄々と酒宴の
+席に連なり給ひしは
+四海同胞の真相を
+現はし給ひし神の旨</p>
+            <p class="ja-classical-line">皆様喜びなされませ
+イヅミの国のスマの里
+アヅモス山の猩々は
+今は姿も見えねども
+御魂は吾等の魂に
+いつの間にかは憑りまし
+老若男女の嫌ひなく
+一人も残らず酒に酔ひ
+下戸の病は何処へやら
+上戸許りに成り果てて
+泣くやら笑ふやら怒るやら
+千姿万態八衢の
+其有様を委曲に
+現はしたるぞ面白き
+飲めよ騒げよ踊れよ狂へ
+舞へよ唄へよいつ迄も
+二十戸前の酒の倉
+一つも残らず呑み乾して
+猩々の神へ御奉納
+猩々彦や猩々姫</p>
+            <p class="ja-classical-line">親方さまに持つた私
+お酒を呑まねば努まらぬ
+あゝ面白い面白い
+これも全くバラモンの
+尊き神の御恵
+祝へよ祝へよ勇めよ勇めよ
+バーチルさまの万歳を
+皆さまお声を揃へつつ
+称へて下さい頼みます
+万歳、万歳、万々歳
+鶴は千歳の春を舞ひ
+亀万歳の夏謳ふ
+春と夏とは万物の
+茂り栄ゆるシーズンだ
+あゝ惟神々々
+燗酒なりと冷なりと
+思ひ思ひにドツサリと
+飲んで巻け巻け皆の人
+猩々の姫の御心を
+慰めまする方法は</p>
+            <p class="ja-classical-line">お酒を呑むより外は無い
+あゝ惟神々々
+神のお神酒を頂きて
+皆さまこれから確りと
+心を協せ力をば
+一つになしてバーチルの
+里庄の君を親となし
+スマの里をば平けく
+いと安らけく賑しく
+富みて栄えていつ迄も
+天国浄土を築き上げ
+神の恵を蒙りて
+人の人たる本分を
+尽さにやならぬスマの里
+祝ふ時にはよく祝ひ
+遊ぶ時にはよく遊び
+呑んで食ふて働いて
+面白可笑しく此世をば
+上下揃ふて暮しませう
+これが第一神様に</p>
+            <p class="ja-classical-line">対し奉りて孝行だ
+サアサア飲んだサア飲んだ
+踊れよ踊れよ舞へよ舞へ
+何程踊り舞ふたとて
+金輪奈落の地底より
+築き上げたるこの床は
+滅多に落ちる事はない
+土で固めたこの庭は
+金剛不壊の如意宝珠
+案じも入らぬ法の船
+あゝ惟神々々
+私はこれで休みます
+皆さま代つて歌つてお呉れ
+飲み食ふ許りが芸でない
+こんな所で隠し芸を
+天晴出して皆さまに
+アフンとさして腮を解き
+お臍の宿換さすがよい
+天下御免のこの酒宴
+行儀も糞も要るものか</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Everyone is at liberty to do as they please; this is the true Tengoku.</p>
+          <p class="en-p">Before anyone knew it, Chiruteru had led more than ten of his subordinates to break into the inner chamber, hoisted the sleeping Davis-hime, who had become exhausted from drinking, gagged her, slipped out through the back gate of the mansion, and quietly placed her inside a storehouse at his own residence. Michihiko suddenly awoke and, looking beside him, saw that the figure of Davis-hime was gone. However, thinking that perhaps Davis had merely gone to the Benjiyo, Michihiko did not pay much mind to it and went back to sleep. Itahiko, while enjoying the sight of the crowd in the Hironiha crying, laughing, and engaging in Kozeriahi while bathed in the Yotsuyu, wandered aimlessly toward the back gate.</p>
+          <p class="en-p">Watching more than ten men carrying something that looked like a woman and slipping away—though he could not be certain in the darkness—Itahiko stood with his arms crossed and pondered for a while. 'Could that perhaps be Davis-hime? She looks remarkably like her. However, if I speak carelessly and am proven wrong, it would be a Taihen matter. In any case, I shall check the Nema of Davis-hime,' he thought, nodding to himself as he slipped through several rooms, only to find Michihiko sleeping all alone under the dim light of an Andon. Itahiko rushed into the Zashiki and, shaking Michihiko awake, said:</p>
+          <p class="en-p">Itahiko: 'Oi, oi, Michihiko-sama, what has become of Davis-hime-sama?'</p>
+          <p class="en-p">Michihiko: 'Ah, you startled me. You shook me awake while I was fast asleep, and I nearly lost my soul. I was having a terrible dream.'</p>
+          <p class="en-p">Itahiko: 'Oi, this is no time for dreams. What do you think has happened to Davis-hime-sama? Pull yourself together!'</p>
+          <p class="en-p">Michihiko: 'In truth, I was dreaming that Davis had been taken away somewhere by the Baramon gang. How strange things are. I wonder where the Hime has gone.'</p>
+          <p class="en-p">Itahiko: 'Your dream is surely a true vision. As I was unable to sleep, I was watching the drunken crowd and wandered to the back gate, where I saw fifteen or sixteen rough men carrying a woman and running away. Because it was night, I could not see clearly, so I came here to investigate if it might be Davis-hime-sama. Oh, this is no time to be sitting around. We must devise a plan.'</p>
+          <p class="en-p">Michihiko: 'Oi, Itahiko, please do not make too much of a scene. If the enemy ends up killing the Hime because of it, there will be no remedy, so for now, it is best to remain silent until we know more. However, who do you think it was that snatched the Hime?'</p>
+          <p class="en-p">Itahiko: 'In my estimation, it was the subordinates of Chiruteru of the Baramon army. They had been drinking with all their might until now, but when their shadows suddenly vanished, I went to the back gate and saw them carrying a woman away, so it is surely them. I will support you, so shall we sneak into Chiruteru's mansion now, observe the situation, and bring her back?'</p>
+          <p class="en-p">Michihiko: 'Ya, that is grateful. It is a trouble for you, but I shall accept your help. However, keep this a secret from Tamakuniwake-sama for a little while longer.'</p>
+          <p class="en-p">Itahiko: 'Un, understood. Come, let us slip out from the back gate and go on a reconnaissance.'</p>
+          <p class="en-p">With that, the two of them, still in their sleeping robes, dashed out from the back gate and proceeded toward the mansion of the gatekeeper.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">皆各自に無礼講
+これが誠の天国だ』</p>
+            <p class="ja-classical-line">チルテルは何時の間にか十数人の部下を引き率れ奥の間に闖入し、酒を呑み草臥れて睡つて居るデビス姫を、引つ担たげ、猿轡をはめ館の裏門よりソツと抜け出で、吾館へ帰り倉の中へソツと入れて置いた。三千彦はフト目を醒まし傍を見ればデビス姫の姿が見えなくなつて居る。併し乍ら三千彦はデビスが便所へでも行つたのかと、余り気にも留ず、又眠つて仕舞つた。伊太彦は群衆の広庭で夜露を浴びて泣いたり笑つたり小競合をして居る有様を眺めて興がりながら、ブラリブラリと裏門の方へ廻つて行く。</p>
+            <p class="ja-classical-line">十数人の男が、夜目に確り分らねど、女らしきものを担いでソツと逃げ出すのを眺め乍ら、暫く腕を組んで考へ込んだ。『あれはもしや、デビス姫では無からうかな、何とはなしによく似て居るやうだ。併し乍ら迂つかりした事を云ふてドンをつかれちや大変だ。兎も角もデビス姫の寝室を調べて見む』と一人諾き乍ら幾つかの間を潜つていつて見ると行燈のほの暗きもとに三千彦が唯一人睡つて居る。伊太彦は矢庭に座敷に駆け入り、三千彦を揺り起しながら、</p>
+            <p class="ja-classical-line">伊太『オイオイ三千彦さま、デビス姫さまはどうしたのだ』</p>
+            <p class="ja-classical-line">三千『アー吃驚した。よく睡入つて居る所を揺り起されて魂の入り損いをする所だつた。大変な夢を見て居たのだよ』</p>
+            <p class="ja-classical-line">伊太『オイ夢どころかい。デビス姫さまはどうなつたかと思ふか、確りせぬかい』</p>
+            <p class="ja-classical-line">三千『実は今デビスが、バラモンの連中に何処かへ連れて行かれた夢を見て居たのだ。ハテ不思議な事があるものだ。姫は何処へ行つたのだらうなア』</p>
+            <p class="ja-classical-line">伊太『お前の夢はテツキリ正夢だ。俺は睡れぬままに大勢の酒酔ひを見物しながら裏門へ廻つて見ると、十五六人の荒男が一人の女を担いで逃げて行きよつたが、夜のことで明瞭り分らぬので、若しデビス姫さまぢやないかと此処へ調べに来た所だ。やや、是は斯うしては居られない。何とか工夫をせなくてはならない』</p>
+            <p class="ja-classical-line">三千『オイ伊太彦、余り騒がないやうにして呉れよ。却て敵に姫を殺されるやうな事があつては詮らないから、兎に角分る所迄黙つて居るに限るからなア。併し乍らお前はあの姫を攫つて行つた奴は誰かと思ふ』</p>
+            <p class="ja-classical-line">伊太『俺の考へではバラモン軍のチルテルが部下だと思ふよ。今迄一生懸命に酒を飲つて居たが、俄に影が見えなくなつたので裏門へ廻つた所、女を担いで逃げよつたのだからテツキリあれに定つて居る。俺が応援してやるから今からチルテルの館へ忍び込んで様子を考へ、取り返して来ようぢやないか』</p>
+            <p class="ja-classical-line">三千『ヤアそいつは有難い。御苦労だがお世話にならうかなア。併し玉国別さまには今少時内証だよ』</p>
+            <p class="ja-classical-line">伊太『ウン承知だ。サア裏門からソツと偵察に行かう』</p>
+            <p class="ja-classical-line">と寝衣の儘二人は裏門より飛び出し、関守の館をさして進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 有升 [1505]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: 焚付 [1507]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

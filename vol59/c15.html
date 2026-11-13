@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 和 Song 意 [1515] - Volume 59 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 59 Table of Contents</a>
+      <span>Volume 59</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 59 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 和 Song 意 [1515]</h1>
+      <p class="chapter-title-ja">和歌意〔1515〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Michihiko, Itahiko, and Debisuhime—
+The three of them ran out into the open courtyard of the mansion,
+Taking advantage of the dark.
+At that very moment, into a cavern deep beneath the ground,
+They slipped and fell headlong with a sudden crash.
+Passing the night in this place,
+To console their boredom,
+Commander Itahiko came out to the entryway,
+And while sitting cross-legged on a folding stool,
+Was lost in deep thought.
+Just then, slipping down smoothly and rapidly,
+He saw a single man falling.
+Surprised, he nevertheless composed his mind,
+And with the amusing quick-wittedness
+Of a newly opened innkeeper,
+Commander Hēru, who had been thrown into the pitfall
+While competing in love,
+Was utterly astonished at first sight.
+'Where are you from, and who might you be?
+How suspicious,' he inquired.</p>
+          <p class="en-p">Scratching his head, Itahiko:
+'I am the clerk of the Itaya Inn.
+Please, do stay at our humble home for a night.
+We have first-class, second-class, and third-class rooms,
+Divided accordingly;
+Yet examining your character,
+You are stark naked without any money.
+Therefore, you are restricted to our first-class inn.
+As we have just opened,
+Nothing is properly prepared.
+Whether it be ogre-ferns, iron fists,
+Or plenty of twisted rice-cakes,
+Please partake of them freely.
+As for the tea, it is neither hot nor lukewarm;
+Naturally from a vacuum flask,
+Though it smells a little, I shall pour as much as you wish.
+Come now, quickly,
+Wash your feet and proceed to the inner room.
+Pass right through, come now, quickly.'</p>
+          <p class="en-p">'Today is our auspicious opening day,
+How wonderful that you have stayed with us.'
+As he mocked him with this and that,
+Even the great Hēru was completely dumbfounded:
+'Well then, I shall accept your hospitality;
+I kindly ask for your favor in every way.'
+Promising an lodging fee of ten thousand en per day,
+He passed through into the inner room,
+Where the maid, Debisuhime-sama,
+And Michihiko, disguised as the cook,
+Sat formally and politely,
+Separated by a mere single room.
+Hēru called out to the two of them:
+'A first-class guest has arrived!
+Make haste and draw some tea.
+For a cook and a maid to be sitting idly
+In the inner room in the dead of afternoon,
+Engaging in secret chatter—
+How could such an improper thing be permitted?
+A-ha-ha-ha-ha-ha, a-ha-ha-ha-ha!'</p>
+          <p class="en-p">The three of them raised their voices together,
+And just as they were enjoying their laugh,
+There came entering yet another rough man.
+Looking closely, it was none other than the master of this house,
+Captain Chiruteru,
+Glaring intently with fierce eyes—
+How terrifying was his countenance!</p>
+          <p class="en-p">Hēru: 'Oh, Chiruteru-sama! You have done well to pursue me and come here. If only this were a woman, it would be exceedingly convenient, ehe-he-he-he!'</p>
+          <p class="en-p">Chiruteru: 'Is that woman over there not Debisu? Bound so tightly and tied up inside the storehouse as she was, how on earth did she come out to a place like this?'</p>
+          <p class="en-p">Debisuhime: 'O-ho-ho-ho-ho! Are you not Captain-sama, the barrier keeper? You were of great service to me the other day. Coming all the way to my bedchamber, lifting me up like a portable shrine or something with a "Heave-ho, heave-ho!", and politely putting me inside the storehouse—thank you very much. However, Lieutenant Kanna-sama came along and pressed me, saying, "I wish to make this storehouse my residence, so please vacate it quickly!" Having been evicted by the landlord, I had no choice but to relocate to this Cavern Hotel, where we have only just opened for business.'</p>
+          <p class="en-p">Chiruteru: 'What? Swapped places with Kanna? Hmph, you speak of incomprehensible things. Hey, Michihiko is also right there, isn't he? Snuck into my residence in the middle of the night, plotted some evil deed, and by divine retribution must have slipped down into this pitfall.'</p>
+          <p class="en-p">Michihiko: 'A-ha-ha-ha! Hey, Chiruteru-sama, my wife was under your great care. Thank you very much. But how did you come to be in this place?'</p>
+          <p class="en-p">Chiruteru: 'This area is under my jurisdiction, so I merely came for a brief inspection. What of it?'</p>
+          <p class="en-p">Hēru: 'Ha-ha-ha-ha! You say such sweet things! Look here, Michihiko-sama. The truth is, enchanted by the charms of Hatsuwakahime-sama, the two of us lengthened our upper lips and courted her, whereupon Hatsuwakahime-sama said she would become the wife of whoever won a sumo match. That being the case, by bad luck I misstepped and plunged down headfirst. After that, this general here was supposed to match against Teku, but apparently he lost as well and came tumbling down into this cavern. Once a barrier keeper of Kiyo falls into this cavern even a single time, he is dismissed from office; therefore, today's Chiruteru is no longer a Captain. Throwing away a rank like Junker would be fine enough, but to throw away the title of Captain, which he labored so hard to knead together, is a bit pitiful indeed, ufu-fu-fu! Look here, Michihiko-sama, now that things have come to this, we are no longer Brahman soldiers or anything of the sort; please show us affection with the spirit of universal brotherhood under the four seas. The ones who carried away your wife were not us. It was this Chiruteru who brought his soldiers and stole her away! And then he did all that to make Hatsuwakahime-sama his own wife, and to bestow Debisuhime-sama upon Lieutenant Kanna-sama to keep his mouth shut. I sympathize with your trouble!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三千彦伊太彦デビス姫
+三人は館の広庭を
+暗に紛れて駆け出す
+途端に地底の岩窟に
+スツテンコロリと辷り落ち
+此処に一夜を明かしつつ
+無聊を慰む其為に
+伊太彦司は口の間に
+出でて胡床をかきながら
+思案に暮るる折もあれ
+ツルツルツルと落来る
+一人の男を見るよりも
+驚き乍ら胸を据ゑ
+新規開業の旅人宿
+気転を利かす面白さ
+恋を争い陥穽に
+投げ落されたヘール司
+一目見るより仰天し
+お前はいづくの何者か
+訝かしさよと訊ぬれば</p>
+            <p class="ja-classical-line">伊太彦頭をかき乍ら
+私は伊太屋の番頭です
+何卒一夜を吾宅で
+お泊りなされて下さんせ
+一等二等三等と
+区別がついて居りますが
+貴方の人格調ぶれば
+金も持たない真裸体
+一等旅館に限ります
+開業早々で何事も
+準備が整ひおりませぬ
+鬼の蕨か鉄拳か
+捻り餅など沢山に
+お食りなさつて下されや
+お茶は熱うなし微温うなし
+魔法瓶から天然に
+ちつと臭いが幾何でも
+ついで上げますサア早う
+足を洗つて奥の間へ
+お通りなされサア早う</p>
+            <p class="ja-classical-line">今日は目出度き開業日
+ようまア泊つて下さつた
+何ぢやかんぢやと揶揄へば
+遉のヘールも呆れはて
+そんならお世話になりませう
+何分宜敷く頼むぞや
+始終食円の宿料を
+約束し乍ら奥の間へ
+通れば下女のデビスさま
+料理人擬ひの三千彦が
+一間許り相隔て
+行儀正しく坐り居る
+ヘールは二人に声をかけ
+一等客が参りました
+早くお茶でも汲みなされ
+料理人と下女が奥の間で
+昼の最中にぬつけりと
+内証話をすると云ふ
+不都合な事があるものか
+アハヽヽハツハ、アハヽヽヽ</p>
+            <p class="ja-classical-line">三人一度に声を上げ
+笑ひ興ずる時もあれ
+又もや入り来る荒男
+よくよく見ればチルテルの
+此家の主キャプテンが
+眼怒らし睨み入る
+その面貌の凄じさ。</p>
+            <p class="ja-classical-line">ヘール『ヤア、チルテルさま、私の後を追つかけて、よう来て下さいました。これが女だと、誠に都合がよからうになア、エヘヽヽヽ』</p>
+            <p class="ja-classical-line">チルテル『そこに居る女はデビスぢやないか、あれ程厳しく縛り上げて、土蔵の中に繋いでおいたに、どうして此処へ出て来たのか』</p>
+            <p class="ja-classical-line">デビス『オホヽヽヽヽ。貴方は関守のキャプテンさまぢやありませぬか。此間は甚いお世話になりましたなア。妾の寝床にわざわざお出下さいまして神輿か何かのやうにワツシヨ　ワツシヨと舁つぎ御丁寧にお倉の中にお入れ下さいまして有難う厶います。併しリュウチナントのカンナ様がお出下さいまして、「どうか此倉は私が住宅にしたいから早く退いて下さい」と家主から追つ立てを喰ひましたので止むを得ず、此岩窟ホテルに移転し、やつと開業した所です』</p>
+            <p class="ja-classical-line">チルテル『ナニ、カンナと入れ替はつた。ハテ合点の行かぬ事を云ふものぢやなア。イヤ三千彦もそこに居るぢやないか、此方の家敷へ夜中に忍び込み、何か好からぬ事を企み其天罰でこの陥穽へ辷り落ちたのだらうがな』</p>
+            <p class="ja-classical-line">三千彦『アハヽヽヽ、オイ、チルテルさま、女房が甚いお世話になりました。有難う厶います。併し貴方はどうして此処へお出になりました』</p>
+            <p class="ja-classical-line">チルテル『これは拙者の管轄内だから、一寸巡検に来たのだ。それが何と致した』</p>
+            <p class="ja-classical-line">ヘール『ハヽヽヽヽ。甘い事仰有いますわい、これ三千彦さま、実は初稚姫さまの色香に迷ひ、鼻の下を長うして吾々両人が口説き立てた所、初稚姫さまは、角力をとつて勝た人の女房にならうと云つたのです。さうした所、運悪くも足踏み外し真先に私が落ち込むで仕舞つたのです。後ではテクとこの大将が勝負する事になつて居ましたが矢張負たと見えてこの岩窟に落ちて来たのです。このキヨの関所守はこの岩窟に一度でもおち込むで来たら免職になるのですから今日のチルテルは最早、キャプテンではありませぬ。ユゥンケル位なら棒に振つても宜敷いが、折角茲迄捏ね上げたキャプテンの職名を棒に振るのは聊かお気の毒ですわい、ウフヽヽヽ。もし三千彦さま、もう斯うなれば、吾々はバラモンの軍人でも何でもありませぬ、何卒四海同胞の精神をもつて可愛がつて下さい。貴方の奥さまを担ぎ出したのは吾々ぢやありませぬ。皆このチルテルが兵士を連れて行つて盗み出したのですよ。さうして初稚姫様を自分の妻となし、リュウチナントのカンナさまに口ふさぎのため、デビスさまを宛がうためにあんな事をやつたのですよ。御迷惑はお察し致します』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Debisuhime: 'The person who carried me off, now I sit face to face with him in harmony. Since I have realized that all things are the Shigumi of Kamisama, I hold no grudge at all.'</p>
+          <p class="en-p">Chiruteru: 'Blinded by the ugly Magami called love, I have piled up sins I never intended. From here on, I shall reveal the sins of my heart in Matsubusa before you and apologize.'</p>
+          <p class="en-p">Debisuhime: 'You, whose Magokoro has not yet been lost, are entering the Kado of Kami's salvation.'</p>
+          <p class="en-p">Chiruteru: 'Arigata, your Kotoba makes me tear up, feeling the deep compassion of the Sumekami. You are a Kami, for you do not hate an Adabito but treat me with such kindness.'</p>
+          <p class="en-p">Hēru: 'Do not be taken in by the glib tongue of the captain, for this is but a lament born of suffering. How hateful is this man who has once again brought out his Jifuhachiban trump card. Chiruteru drove away his beloved wife and sought to take a treacherous woman as his bride. I am still a celibate who has not taken a wife; have pity on my Muku body.'</p>
+          <p class="en-p">Chiruteru: 'How amusing it was when you lowered your eyes to the wife of the Yokochiyō Tokoya and were rejected. How funny you are, Hēru, crying and sniveling after being given the Hijitetsubō by the Tafuku woman.'</p>
+          <p class="en-p">Hēru: 'Exposing the faults of others before an Ōzei, you must be a vessel of a Magakami.'</p>
+          <p class="en-p">Chiruteru: 'Whether I am a Magakami or a true Kami, I do not know, but I am speaking the truth as it was.'</p>
+          <p class="en-p">Michihiko: 'Omoshiro, the emotions of people are the same in Kara and Yamato, no matter how far the ends of the earth may be. I wonder what has become of Itahiko; he has not shown his figure yet, and I am anxious.'</p>
+          <p class="en-p">Hēru: 'He has settled in as the head clerk of Itaya, with a ledger in one hand and an abacus in the other. What an interesting man he is; he fell into a rocky cave and is now acting like an innkeeper.'</p>
+          <p class="en-p">Michihiko: 'From here on, let us remove the fences of our hearts and, helping one another, walk the path of Kami.'</p>
+          <p class="en-p">Chiruteru: 'Arigata, your heart is without discrimination as you preach the path of truth.'</p>
+          <p class="en-p">Hēru: 'If this were the office of the Brahmin, it would never go this way.'</p>
+          <p class="en-p">Debisuhime: 'Bound by the thread of fate from ancient times, how delightful it is to be in harmony today.'</p>
+          <p class="en-p">Chiruteru: 'From here on, we must purify our hearts and advance toward the great path of the Kami of three and five.'</p>
+          <p class="en-p">Michihiko: 'Without abandoning the teachings of the Brahmin's god, protect our path of three and five.'</p>
+          <p class="en-p">Thus the four became reconciled, exchanged their opinions, and came to live in harmony like brothers. Ah, Kannagara Tamachi Haema se.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">デビス姫『吾身をば担ぎ出したる其人と
+今打ち解て向い合ふかな。
+何事も皆神様のお仕組と
+悟れる身には恨だになし』</p>
+            <p class="ja-classical-line">チルテル『恋と云ふ醜の魔神に眩まされ
+思はぬ罪を重ねけるかな。
+此上は心の罪を委細に
+君の御前にさらけて詫む』</p>
+            <p class="ja-classical-line">デビス姫『赤心の未だ失せざる君こそは
+神の救ひの門口に入るなり』</p>
+            <p class="ja-classical-line">チルテル『有難し汝が言葉は皇神の
+深き情と涙ぐまるる。
+仇人を憎みたまはず懇に
+いたはりたまふ君は神なり』</p>
+            <p class="ja-classical-line">ヘール『キャプテンの口の車に乗せられな
+苦しさ故の吟みなりせば。
+又しても十八番の奥の手を
+出した男の憎らしきかな。
+チルテルはいとしき妻を追ひ出し
+仇し女を娶らむとせり。
+吾は未だ妻を持たざるセリバシー
+憐れみたまへ無垢の体を』</p>
+            <p class="ja-classical-line">チルテル『横町の床屋の嬶に眦さげ
+はぢかれたりし時のをかしさ。
+お多福に肱鉄砲を食はされて
+めそめそ泣きしヘールぞ可笑しき』</p>
+            <p class="ja-classical-line">ヘール『人の非を大勢の前に素破抜く
+汝は曲神の器なるらむ』</p>
+            <p class="ja-classical-line">チルテル『曲神か誠の神か知らねども
+ありし誠を吾は云ふなり』</p>
+            <p class="ja-classical-line">三千彦『面白し人の情は唐日本
+いづくの果も変らざりけり。
+伊太彦は如何になしけむ姿をも
+今だにみせず心もとなや』</p>
+            <p class="ja-classical-line">ヘール『口の間に伊太屋の番頭と納まりて
+帳面片手に算盤持たせり。
+面白い男もあればあるものよ
+岩窟におちて宿屋気取れる』</p>
+            <p class="ja-classical-line">三千彦『此上は心の垣を取り払ひ
+助け合ひつつ神の道行かむ』</p>
+            <p class="ja-classical-line">チルテル『有難し誠の道を宣り伝ふ
+君の心の分けへだてなき』</p>
+            <p class="ja-classical-line">ヘール『バラモンのこれが司であつたなら
+こんな訳にはとても行くまい』</p>
+            <p class="ja-classical-line">デビス姫『古ゆ縁の糸に繋がれて
+睦び合ふたる今日ぞ床しき』</p>
+            <p class="ja-classical-line">チルテル『此上は心清めて三五の
+神の大道に進み行くべし』</p>
+            <p class="ja-classical-line">三千彦『バラモンの神の教を捨てずして
+我三五の道を守れよ』</p>
+            <p class="ja-classical-line">斯く四人は打ち解け、互に意見を交換して兄弟の如く、睦び合ふ事となつた。あゝ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: 舗照 [1514]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: 開 Cavern [1516]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

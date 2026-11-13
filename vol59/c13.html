@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: 案知 [1513] - Volume 59 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 59 Table of Contents</a>
+      <span>Volume 59</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 59 &bull; Chapter 13</span>
+      <h1 class="chapter-title-en">Chapter 13: 案知 [1513]</h1>
+      <p class="chapter-title-ja">案知〔1513〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">To explore the mansion of the Sekishiyo of Kiyo, Teku walked along, taking leave of Tamakuniwake, and feeling like a member of the Sekikōtai, he went to the Chiruteru mansion; however, when he arrived, the Kanjinkaname Jimushitsu was devoid of even a single cat, and only the sound of mice in the Tenjiyō squeaking and chirping was heard quite noisily.</p>
+          <p class="en-p">Without Enriyo or Eshiyaku, the Araotoko snuck into the Uraniha, and as he headed toward the Ima with Hatsuwakahime as his Meate, he saw the Riyōnin, Chiruteru and Hēru, having cast off their clothes and standing Matsupadaka, flexing their muscles and straining themselves, in the very Matsusaichiu of a Kohakugekijiyō like the Niō guarding the Sanmon; thinking, 'Oh, how Omoshiro, how Omoshiro,' and though he had no Uchiwa, he thought he would act as the Giyōji now, so he stepped forward with courage.</p>
+          <p class="en-p">When he approached, Hatsuwakahime called out, 'Anata is Teku-sama, the Lieutenant; I shall act as the Giyōji. Anata, too, take off your clothes here, and in this Chikarakura, to the one who gains the final Shiyōri, I shall pour my love. I intend to take a man of great strength as my husband,' and moving her lips like plum blossoms most adorably, she declared these words coolly; upon hearing this, Teku danced with joy, forgetting that he had come as a scout for Tamakuniwake, and becoming lost in a trance, he took off his clothes, waiting and saying, 'Come on, let us have a match,' but just then, Chiruteru threw Hēru down brilliantly, and the moment he saw him thrown into the terrifying pit, he clapped his hands saying, 'All right, let us have a match,' and with the Shishi-funjin spirit of a wild boar, he lunged and bit into him.</p>
+          <p class="en-p">Their sweat was slick, and they were like an eel and a catfish grappling and struggling; they joined and separated, and separated and joined again, moving with a thudding sound, denting the small pebbles of the garden, and as they fought as if this were their last stand, Hatsuwakahime raised her hands, laughing 'Ohohohoho,' and while bathing their heads with a gaze filled with charm, she waited to see how the match would turn out; for the two, Chiruteru and Teku, it was a glorious match before the Empress.</p>
+          <p class="en-p">Thinking to make the world's number one handsome man and the world's number one 'nice' person her husband, and to break the hearts of all the men of the world and boast of her success, they challenged each other, staking their lives; the newcomer Teku finally grabbed his opponent's loincloth, and with a 'thud,' he threw him down onto the ground like a falling rock, and with the momentum, he rolled over two or three times, and his sweat-soaked body instantly became a pillar of sand, and having turned into a sand-covered pole, he fell into the deep pit in the blink of an eye; even the redoubtable Teku relaxed, thinking he had won the laurel wreath, and with a heart full of joy, he sat his black buttocks down on the ground with a thud.</p>
+          <p class="en-p">While his heart was pounding, he looked around and, to his surprise, Wax, Ex, Hellman, and El—the four of them—were standing there smiling; Hatsuwakahime, looking happy, called out to Teku, 'Lieutenant Teku-sama, Anata is truly a strong man. Come, come, now I shall become your wife as promised,' and while saying, 'Let us shake hands,' she reached out her gentle white hand, and thinking, 'Forget a handshake, I do not care if it is a kiss or anything else,' he stretched out his monkey-like arms, narrowed his eyes, and just as he was about to grasp her white arm,</p>
+          <p class="en-p">Hatsuwakahime's peerless 'nice' person, faster than he could take Teku's hand, revealed white fur, and Teku, startled and dumbfounded, looked up at her face, and at that moment, oh, how strange; her eyes turned upward and her mouth split to her ears, and seeing that figure, he was surprised and fell backward with a thud, and as he rolled his eyes, Hatsuwakahime instantly reverted to the form of a white fox, and waving her tail like a broom, she began to walk away slowly; Wax and the other three were surprised and panicked, and all four of them fell into the pit with a thud, and their figures were no longer visible on the ground; Teku was astonished again, and while finally standing up, his legs wobbling and stumbling, he snuck out through the kitchen gate, tucked his tail, and ran off at full speed toward the Tadasu forest where Tamakuniwake was hiding; the sun had gradually set, and although the moon shone in the sky, it was blocked by the thicket of treetops, and he could not see even an inch ahead; the curtain of darkness had fallen, and Masumino-hiko was walking along, wandering through the dark forest; at this time, a man running from the front suddenly hit his chest against Masumino-hiko's chest with a thud, and he fell down with a cry, groaning and screaming; Masumino-hiko was puzzled.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">キヨの関所の館をば
+探らむ為にテクテクと
+玉国別に暇告げ
+斥候隊の心地して
+チルテル館に行てみれば
+肝腎要の事務室は
+猫の子一匹居らばこそ
+天井の鼠がチウチウと
+ちちくり合うてゐる声の
+いと騒がしく聞ゆのみ
+遠慮会釈も荒男
+裏庭潜り初稚姫が
+居間を目当に出で行けば
+チルテル、ヘールの両人が
+衣脱ぎすて赤裸体
+節くれだつたり気張つたり
+山門守る仁王さま
+虎搏撃攘の真最中
+コラ面白い面白い
+団扇はなけれど俺が今</p>
+            <p class="ja-classical-line">行司をやつてつかはそと
+勇み進むで近よれば
+初稚姫は声をかけ
+お前はテクさまリュウチナント
+行司は妾が致します
+貴方も此処で衣を脱ぎ
+力比べの消しがかり
+最後の勝利を得た方に
+妾はラブを注ぎます
+力の強い男をば
+妾は夫に持つのだと
+梅花のやうな唇を
+いと愛らしく動かせて
+詞涼しく宣り渡す
+聞くよりテクは雀躍りし
+玉国別の斥候と
+なりて来りし身を忘れ
+うつつになつて衣を脱ぎ
+いざ来い勝負と待ちゐたる
+時しもあれやチルテルは</p>
+            <p class="ja-classical-line">美事にヘールを投げつけて
+見るも恐ろし陥穽に
+放込み了るをみるや否
+よし来た勝負と手を拍つて
+獅子奮迅の猪突主義
+発揮し乍らくらひつく
+体の汗はぬらぬらと
+鰻と鯰が組みついて
+争ふごとき為体
+合うては離れ離れては
+又取組むでドスドスと
+庭の小砂をへこませつ
+茲を先途と戦へば
+初稚姫は手をあげて
+オホヽヽヽヽと笑ひつつ
+愛嬌籠もる視線をば
+二人の頭上に浴せかけ
+勝負如何と待ちゐたる
+チルテル、テクの両人は
+女帝の前の晴勝負</p>
+            <p class="ja-classical-line">世界で一の色男
+世界で一のナイスをば
+女房になして世の中の
+有情男子の肝ひしぎ
+其成功を誇らむと
+命を的に挑み合ふ
+新手のテクは漸くに
+相手の褌をひき握り
+ヅドンと許り地の上に
+岩石落しに投付くる
+勢余つてコロコロと
+再度三度廻転し
+汗のにじゆんだ肉体は
+忽ち砂の祇園棒
+砂巻酢となり了へて
+千尋の深き陥穽へ
+またたく内に落ちにけり
+遉のテクも気をゆるし
+月桂冠を得たりとて
+心ホクホク地の上に</p>
+            <p class="ja-classical-line">黒いお尻をドカとすゑ
+ハートに波を打たせつつ
+四辺を見ればこはいかに
+バラモン教のワックスや
+エキス、ヘルマン、エル四人
+莞爾し乍ら立つてゐる
+初稚姫は嬉しげに
+テクに向つて声をかけ
+リュウチナントのテクさまえ
+お前は本当に強い人
+サアサアこれから約束の
+私は女房になりまする
+握手を一つと言ひ乍ら
+優しき白き手を出せば
+握手所かキッスでも
+何でも構はぬ致します
+エヘヽヽヽヽエヘヽヽヽ
+涎をタラタラ流しつつ
+猿臂を伸ばして目を細め
+白き腕を握らむと</p>
+            <p class="ja-classical-line">なしたる刹那初稚姫の
+無比のナイスはテクの手を
+取るより早く白い毛を
+現はし玉へばテクの奴
+ハツと呆れて其面を
+見上ぐる途端にあら不思議
+目は釣上り口元は
+耳迄さけし其姿
+驚き後辺にドツと伏し
+眼キヨロキヨロ光らせば
+初稚姫は忽ちに
+白狐の姿と還元し
+箒のやうな尾をふつて
+のそりのそりと歩み出す
+ワックス始め三人は
+驚き狼狽逃迷ひ
+四人一度に陥穽に
+バサリと墜ちて其姿
+地上に見えずなりにける
+テクは再仰天し</p>
+            <p class="ja-classical-line">漸く腰を立て乍ら
+足もヒヨロ　ヒヨロ　バタバタと
+勝手門をば潜り脱け
+尻はし折つて一散に
+玉国別の隠れたる
+タダスの森に走り行く
+日は漸くに黄昏て
+月は御空に輝けど
+梢の茂みに遮られ
+一寸先も見え分かぬ
+暗の帳は下りにけり
+真純の彦は闇の森を
+ブラリブラリと進み来る
+此時先方より駆け来る
+一人の男は忽ちに
+真純の彦の胸板に
+ドンと頭を打ちつけて
+アツと許りに打倒れ
+ウンウン　キヤアキヤア唸りゐる
+真純の彦は怪みて</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamakuniwake beckoned him quickly, took out a flint, and struck a light. When he looked closely, what could this be? The scout leader, that fellow Teku, was lying there with his mouth wide open, looking up at the sky. His posture was like that of an Ikefuna intoxicated by mud. He kept his mouth open, crying 'Appa, appa,' and stared with rolling eyes.</p>
+          <p class="en-p">Masumihiko provided various kinds of care, lifted Teku up, and while patting and stroking his back, said:</p>
+          <p class="en-p">Masumihiko: 'Hey, Teku, pull yourself together. What is the situation with the enemy? Have you found the whereabouts of Michihiko? Come, report quickly.'</p>
+          <p class="en-p">Teku rose with difficulty, placed both hands on the ground, and said:</p>
+          <p class="en-p">Teku: 'Heh, it is truly terrible. A grand sumo match, the greatest in the world since the dawn of time, had begun. I also participated in that sumo match and achieved a great victory. And then, I received a wriggling female fox as a reward.'</p>
+          <p class="en-p">Masumihiko: 'Hey, Teku, pull yourself together. What about the reconnaissance? Have we not been waiting for this day for so long? What have you been doing? Come, report in detail.'</p>
+          <p class="en-p">Teku: 'Oh, even the great Teku was stumped by the exploration of the Bakemonoyashiki. Sumo wrestlers fell into pits, foxes appeared, and a Brahmin wax figure came out to watch; it was a huge sensation, indeed. I had struggled for my life to win a great victory, thinking I had taken the peerless beauty Hatsuwakahime as my wife, but she turned into a fox and crawled away sluggishly. Oh, it was so terrifying, words cannot describe it. My drunkenness and everything else vanished in an instant. Ah, ah, it is so painful. I have never experienced anything so terrifying and painful since I was born. Please, Tamakuniwake-sensei, if you go to such a place, you will surely be cast into a pit. And you will be deceived if you think the fellows there are human. They all turn into foxes. Please do not go to such a dangerous place. Your person is precious, after all...'</p>
+          <p class="en-p">Masumihiko: 'Hey Teku, you are not making any sense at all. Can you not report more clearly?'</p>
+          <p class="en-p">Teku: 'Heh, heh, it is natural that I do not make sense. For I myself have lost my sense of it. ...Truly, truly, I have encountered a strange and bizarre experience, unique and unparalleled in history.'</p>
+          <p class="en-p">Masumihiko: 'Have you found the whereabouts of Michihiko?'</p>
+          <p class="en-p">Teku: 'I was so terrified that my eyes were dazzled, and I know nothing of Michihiko or Kawahiko. When it is this dark, I cannot even tell when I bump into a person, so how could I possibly know where Michihiko is? Ah, ah, I have truly, truly had a miserable experience.'</p>
+          <p class="en-p">Masumihiko: 'What a hopeless fellow. What was the purpose of your mission? Can you not be a little more reliable?'</p>
+          <p class="en-p">Tamakuniwake: 'Hey, Teku, calm yourself a little and tell me slowly. I cannot understand the point at all from your words.'</p>
+          <p class="en-p">After resting for a while, Teku advanced from the front of the mansion and reported in detail that when he looked into the backyard, a sumo match was beginning, that he himself had wrestled and won, and that the woman he thought was Hatsuwakahime was actually a large white fox. He then replied with a worried look that he did not know the whereabouts of Michihiko and the other two, but that they had likely fallen into a pit. Tamakuniwake tilted his head for a while, lost in thought.</p>
+          <p class="en-p">Masumihiko: 'Please, sensei, what shall we do? We cannot just leave Michihiko and the other two to their fate, but if we carelessly go in this darkness, it will be terrible if we are also thrown into a pit.'</p>
+          <p class="en-p">Anchi: 'Please, sensei-sama, you need not worry about such things. I will scout the way to repay your kindness, so please follow in my footsteps. If I happen to fall in, you can simply avoid passing through that spot, and you should be safe. Come, let us go. If we dally, we do not know what will become of Michihiko-sama and his wife, or Itahiko-sama. It is said that there are many soldiers in that mansion, after all.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玉国別をソツと招び
+火打を取出し火を点じ
+よくよく見ればこは如何に
+斥候主任のテクの奴
+ポカンと口をあけ乍ら
+空を仰いで倒れゐる
+其スタイルは池鮒の
+泥に酔ひたる如くなり
+アツパ　アツパと口あけて
+目をキヨロつかせ眺めゐる。</p>
+            <p class="ja-classical-line">真純彦はいろいろ介抱をし、テクを抱き起し、背中を打つたり撫でたりし乍ら、</p>
+            <p class="ja-classical-line">真純『オイ、テク、確りせむかい。敵の様子は何うだ。三千彦の所在は分つたか。サア早く報告せよ』</p>
+            <p class="ja-classical-line">テクは息苦しげに起き上り、土の上に両手を付いて、</p>
+            <p class="ja-classical-line">テク『ヘー、どうも大変で厶います。夫れは夫れは日の下開山世界一の大角力が初まつてをりました。私も其角力に参加して大勝利を得ました。そして、キヽキツネのニヨニヨ女ン房を褒美に貰いました』</p>
+            <p class="ja-classical-line">真純『オイ、テク、確りせぬかい。偵察は何うだつたい。此永の日を今迄、俺達は待つてゐたのぢやないか、何をして居つたのだ。サア詳細に注進せい』</p>
+            <p class="ja-classical-line">テク『イヤもう、化物屋敷の探険には、流石のテクもテクずりました。角力取が穴へおちたり、狐が現はれたり、バラモンのワックスが見物に出て来たり、それはそれは大した人気で厶いましたよ。折角、命カラガラ大勝利を得て、初稚姫といふ古今無双のナイスを女房に持つたと思へば、キヽ狐になつて、のそりのそりと這ひ出しました。イヤもう、怖いの怖くないのつて、口でいふやうな事ぢやありませぬワ。酒の酔も何も、一度に何処へか逐転して了ひました。あゝあ、あゝ苦しい。こんな怖ろしい苦しい事は、生れてからまだありませぬワ。モシ玉国別先生、あんな所へ行くが最後、陥穽へ堕されますよ。そして彼処の奴ア、人間と思うてたら騙されますよ。皆狐になりますよ。あんな危険な所へは行て下さりますな。御身が大切で厶いますから……』</p>
+            <p class="ja-classical-line">真純『オイテク、一向要領を得ぬぢやないか、モツと明瞭報告せないか』</p>
+            <p class="ja-classical-line">テク『ヘーヘー、要領を得ないのは当然ですよ。私も要領を得損つたのですからなア。……本当に本当に、古今独歩、珍無類の奇妙奇天烈な、目に会つて来ましたワイ』</p>
+            <p class="ja-classical-line">真純『三千彦の消息は分つたか』</p>
+            <p class="ja-classical-line">テク『余り怖くつて、目が眩み、みち彦も川彦も何も分りませぬ。これ丈暗いと、人に行当つても、知れないのですから、どしてみち彦が分りませうかい。あゝあ　ホンニホンニうすい目に会うたものだ』</p>
+            <p class="ja-classical-line">真純『困つた奴だなア。何の為の使だ。チツと確りせぬかい』</p>
+            <p class="ja-classical-line">玉国『オイ、テク、少し気を落付けて悠りと話してくれ。お前の言葉ではチツとも要領が分らぬからのう』</p>
+            <p class="ja-classical-line">テクは暫く休息した上、館の表より進み入つて、裏庭を見れば角力が始まりかけてゐた事や、自分が角力を取つて勝つた事、初稚姫と思つた女は大きな白狐であつた事などを細々と復命した。そして三千彦外二人の行衛は分らなかつたが、大方陥穽へ落ちてゐるだらう……と心配相に答へた。玉国別は暫く首を傾け思案に暮れてゐた。</p>
+            <p class="ja-classical-line">真純『モシ先生、どう致しませうか、三千彦以下二人を、此儘放任する訳にも行かず、ぢやと云つて、此暗いのにうつかり行かうものなら、又もや陥穽へ突込まれちや大変ですからなア』</p>
+            <p class="ja-classical-line">アンチー『モシ、先生様、そんな御心配は要りませぬ。私が御恩報じに瀬ぶみを致しますから、何卒後から足跡を踏んで来て下さい。若し私が落ち込むだら、そこを通らない様にして下されば、それで安心でせう。サア参りませう。グヅグヅして居つては三千彦様御夫婦を始め伊太彦さまが何うなるか知れませぬ。あの館には沢山の兵士が居るといふ事ですからなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamakuni: 'In any case, we should proceed with Jiubun caution. Hey, Teku, you had better return to the mansion of Bachiru-sama and faithfully perform your duties as Bantō-sama. If I take an Awatemono along, it will only result in Sogo in our Sakusen and Keikuwaku.'</p>
+          <p class="en-p">Teku: 'Metsusau! I shall accompany you to the end; I know the Katsute of most places. I will not do anything as reckless as falling into a trap. No matter how dark it is, as long as I can see the sky, I can tell where I am by the Chōshi of the treetops.'</p>
+          <p class="en-p">Anchī: 'Then I shall take the lead. I have been to that Yashiki a few times, three Sannen Izen. ...Hey, Teku-sama, you follow behind and protect the Sensei, ...'</p>
+          <p class="en-p">The curtain of darkness has fallen,
+Though one cannot see an Itsusunsaki ahead,
+The Jitsugetsu in the sky of the heart,
+Shine like a mirror.
+Following the Kamuzukasa of Tamakuniwake,
+And the Masumi no Hiko,
+We two proceed bravely,
+Pointing toward the mansion of the ugly,
+Of the evil gods of Brahmanism.
+Even if one says it is Nanihodo dark,
+Those who are not blind by nature,
+Will find it bright once accustomed to the dark.
+The only things to fear are at our feet,
+Such as centipedes or vipers.
+To escape such dangers,
+By reciting the number song,
+That the gods of San-iku-kyō have taught,
+One, two, three, four, five, six,
+Seven, eight, nine, ten, hundred, thousand,
+And ten thousand, as we advance,</p>
+          <p class="en-p">No matter what kind of evil may come, it is to be feared,
+Rather, the other side will tremble,
+And flee like clouds and mist.
+Anxious and troubled for the fate,
+Of Michihiko-sama,
+And the sufferings of Debisu-hime and Itahiko,
+As the horse of the heart races,
+Bathed in the light of the gods,
+We advance toward the enemy's mansion.
+Ah, Kannagara-kamu-nagara,
+May the spirits be blessed,
+Starting with Tamakuniwake,
+I pray that our party, without harm,
+May save the party of Michihiko-sama.
+How comical the scene is,
+Of Teku-sama, the temporary Bantō,
+Who went out for reconnaissance in the middle of the day,
+And returned foaming at the mouth,
+Having had his liver stolen by great monsters, day-foxes,
+And creatures of unknown origin.</p>
+          <p class="en-p">This Anchī will never be afraid,
+Of foxes or tanuki.
+Having lived for three years on an uninhabited island,
+Coexisting with great serpents and hawks,
+And having once experienced the life of an oni,
+No matter how much the demons may attack,
+I will never be afraid.
+O teacher, Tamakuniwake,
+O Kamuzukasa, Masumi no Hiko,
+With a calm and peaceful heart,
+Take my back as your guide,
+And proceed, Kannagara.
+I will guide you to a place,
+That is safe under the protection of the gods.'</p>
+          <p class="en-p">Singing this in a low voice, Anchī and Teku proceed into the back gate of the Chiruteru mansion, watching their steps as they go.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玉国『兎も角充分注意をして進む事にせう。オイ、テク、お前はモウ、バーチルさまの館へ帰り、番頭さまの役を忠実に勤めたがよからう。狼狽者を伴れて行くと、却て作戦計画の齟齬を来すからなア』</p>
+            <p class="ja-classical-line">テク『滅相もない、どこ迄もお伴を致します、大抵の所は勝手を知つてゐます。滅多に落ち込む様なこた致しませぬ。何程暗くても、空さへ見れば梢の調子で、此処は何処だ位の事は分つてゐますからなア』</p>
+            <p class="ja-classical-line">アンチー『然らば私が先頭を仕りませう。あの屋敷は私も、三年以前にチヨコ　チヨコいつた事があります。……オイ、テクさま、お前は一番後から先生を守つてついて来い、……</p>
+            <p class="ja-classical-line">暗の帳は下されて
+一寸先は見えず共
+心の空の日月は
+鏡の如く輝けり
+玉国別の神司や
+真純の彦に従ひて
+吾等二人は勇ましく
+バラモン教の悪神の
+醜の館を指して行く
+何程暗いと云つたとて
+元より盲でないものは
+暗になれたら明くなる
+只恐るるは足許の
+百足や蝮の類のみ
+それの危難を遁れるは
+三五教の神様の
+教へ玉ひし数歌を
+一二三四五つ六つ
+七八九つ十百千
+万と称へ進むなら</p>
+            <p class="ja-classical-line">如何なる曲も恐るべき
+却て先方が戦きて
+雲を霞と逃げるだらう
+三千彦さまのお身の上
+デビスの姫や伊太彦の
+悩みを案じ煩ひつ
+心の駒のはやるまに
+神の光を身に浴びて
+敵の館へ進み行く
+あゝ惟神々々
+御霊幸はひましまして
+玉国別を始めとし
+吾等一行恙なく
+三千彦様の一行を
+救はせ玉へと願ぎまつる
+俄番頭のテクさまが
+真昼の内に偵察と
+お出かけなされて泡をふき
+大化物や昼狐
+得体の知れぬ怪物に</p>
+            <p class="ja-classical-line">肝を奪られて帰り来る
+其光景の可笑しさよ
+此アンチーはどこ迄も
+狐や狸にや恐れない
+無人の島に三歳ぶり
+大蛇や鷹と相棲居
+一旦鬼の境遇に
+成さがりたる経験上
+何程悪魔が攻め来共
+決して恐るるものでない
+玉国別の師の君よ
+真純の彦の神司
+心平に安らかに
+アンチーの後を目当とし
+進ませ玉へ惟神
+神の守りで安全な
+場所へ案内致します』</p>
+            <p class="ja-classical-line">かく小声で歌ひ乍ら、チルテル館の裏門から足元に気を付け乍ら、アンチー、テクは後先に立つて進み入る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c12.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 12: Fox 穴 [1512]</span>
+      </a>
+      <a href="c14.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 14: 舗照 [1514]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

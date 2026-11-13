@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 17: 倉 Bright [1517] - Volume 59 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 59 Table of Contents</a>
+      <span>Volume 59</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 59 &bull; Chapter 17</span>
+      <h1 class="chapter-title-en">Chapter 17: 倉 Bright [1517]</h1>
+      <p class="chapter-title-ja">倉明〔1517〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Inside the first Sauko, Kanna and Chiruna, the Riyōnin, are spending their time in tears of Hitan, lamenting the world and singing of their Jiyutsukuwai.</p>
+          <p class="en-p">Chiruna Hime: 'The lord of my heart whom I long for, by the Magakami'</p>
+          <p class="en-p">Kanna: 'The sadness of the things he has suffered.'</p>
+          <p class="en-p">Chiruna Hime: 'Thrown heartlessly into the dark Sauko'</p>
+          <p class="en-p">Kanna: 'My tears that have no way to dry.'</p>
+          <p class="en-p">Chiruna Hime: 'The Magakami who calls herself Hatsuwaka Hime'</p>
+          <p class="en-p">Kanna: 'Must be a Hitōni who disturbs this world.'</p>
+          <p class="en-p">Chiruna Hime: 'When will the Kanado of this place be opened?'</p>
+          <p class="en-p">Kanna: 'Suffering and struggling in my helpless body.'</p>
+          <p class="en-p">Chiruna Hime: 'How shall I bear this suffering of hunger and thirst?'</p>
+          <p class="en-p">Kanna: 'The plight of us two, from whom even saliva does not flow.'</p>
+          <p class="en-p">Chiruna Hime: 'The sadness has become tears and overflowed'</p>
+          <p class="en-p">Kanna: 'For a body tossed by the Aranami of the world.'</p>
+          <p class="en-p">Chiruna Hime: 'Though the Tsukihi shine clearly in the Ōzora'</p>
+          <p class="en-p">Kanna: 'Kurokumo wrap the sky of my heart.'</p>
+          <p class="en-p">Chiruna Hime: 'How shall I open this Kanado?'</p>
+          <p class="en-p">Kanna: 'Though I hasten, Mohaya my strength is exhausted.'</p>
+          <p class="en-p">Chiruna Hime: 'Now I can only pray to the Ōkami'</p>
+          <p class="en-p">Kanna: 'Waiting only for the time to be saved.'</p>
+          <p class="en-p">Chiruna Hime: 'Deeply wrapped in Kohigumo, the light of my body'</p>
+          <p class="en-p">Kanna: 'Hidden, I suffer all alone.'</p>
+          <p class="en-p">Chiruna Hime: 'My lord has had his heart taken by a woman'</p>
+          <p class="en-p">Kanna: 'I too am lost and suffering without change.'</p>
+          <p class="en-p">Kanna: 'Thinking to marry the Hime of Davis, the Murakimo of his'</p>
+          <p class="en-p">Chiruna Hime: 'The pity of the man who broke his heart.'</p>
+          <p class="en-p">Kanna: 'The pain of being bitten on the Futomomo'</p>
+          <p class="en-p">Chiruna Hime: 'Even to think of it brings tears to my eyes.'</p>
+          <p class="en-p">Kanna: 'Chiruna Hime, hidden in the darkness, on my thigh'</p>
+          <p class="en-p">Chiruna Hime: 'The regret of the Shiga that bit into it.'</p>
+          <p class="en-p">Kanna: 'Repenting my sins before the Kamunagara Kami'</p>
+          <p class="en-p">Chiruna Hime: 'Apologizing and resenting, I weep through the days.'</p>
+          <p class="en-p">Kanna: 'The Sumeōkami of the Brahmins, my body'</p>
+          <p class="en-p">Chiruna Hime: 'Does He not save me? How truly sad.'</p>
+          <p class="en-p">Chiruna Hime: 'Clouds over the moon, storms over the flowers,
+In this world where winds blow violently,
+I prayed to hold up the flowers and forever
+Cross this world in peace,
+But those prayers became bubbles on the water.
+A Naitsu called Hatsuwaka Hime
+Appeared and clouded the pure heart
+Of my husband.
+How regrettable that she makes him perform
+Evil deeds against his own heart.
+My lord, guarding the Kiyo barrier
+Of the Brahmins,
+Attacking the capital of Haruna,
+Capturing every single one
+Of the Sango-kyo missionaries,
+Throwing them into the deep cave
+He dug into the earth,
+To clear the calamities of this world,
+He offered his sincere heart,
+And morning and evening to the Ōkami,
+He recited the great Norito of gratitude and prayer.
+Yet, in the night storm that scatters the cherry blossoms,
+Blown about, he and his wife
+Lost their way,
+And he sought to banish me
+From the mansion.
+That evil act is truly sad.
+To awaken my lord from his delusion,
+I feigned a madness
+Contrary to my own heart,
+And breaking and smashing all the doors and household tools,
+I gave him a warning,
+But it became my own undoing.
+Suddenly bound hand and foot,
+Oh, the sadness of being thrown
+Into this dark, heartless Sauko.
+This is entirely the treatment of the Lieutenant
+And the official Kanna.
+I had once resented them
+Because it was not pleasant,
+But seeing the official Kanna now
+Suffering here with us,
+My resentment, moved by tears of sympathy,
+Has melted like the snow of Haruno.
+Ah, Kamunagara, O Kami, O Kami,
+By the grace of the Kami, may you be blessed,
+Save the souls of us two
+As soon as possible, even for a moment,
+I pray to you earnestly.
+Bonten, Taishaku, Jizaiten,
+Great Ōkami of Ōkunihiko,
+Divine Pillar of Ōkunihiko,
+Before your presence, with reverence and humility,
+Bowing my knees, I pray to you.
+Are there Kami in heaven and earth, or are there not?
+Do you not hear this prayer?
+Open the door of the darkness of my Murakimo heart,
+And save me, O Great Kami.'</p>
+          <p class="en-p">Kanna: 'The Divine Pillar of the Brahmin religion,
+Residing in the capital of Haruna,
+By the command of Daikokunushi,
+Appointed as Lieutenant,
+Following the official Chiruteru,
+I, this Kanna, who served my duties faithfully,
+What devil has bewitched me?
+In this unexpected disaster,
+My current state, lamenting my misfortune,
+Is a suffering I cannot bear.
+Asked by Captain Chiruteru,
+Before the presence of Chiruna Hime,
+I lined up lies contrary to my heart,
+Shamelessly,
+Clouding her pure heart,
+And inviting the Hime's disaster.
+Reflecting on that sin,
+It has become truly terrifying.
+Though it is said to be in the darkness,'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">第一倉庫の中にはカンナ、チルナの両人が互に悲歎の涙に暮れ乍ら世を果敢なみて述懐を歌つて居る。</p>
+            <p class="ja-classical-line">チルナ姫『恋ひ慕ふ吾背の君は曲神に</p>
+            <p class="ja-classical-line">カンナ…………『襲はれ玉ひし事の悲しさ。</p>
+            <p class="ja-classical-line">チルナ姫『暗がりの倉に情なく投げ込まれ</p>
+            <p class="ja-classical-line">カンナ…………『乾く由なき吾涙かな。</p>
+            <p class="ja-classical-line">チルナ姫『初稚の姫と称ふる曲神は</p>
+            <p class="ja-classical-line">カンナ…………『此世を乱す人鬼ならめ。</p>
+            <p class="ja-classical-line">チルナ姫『何時の日かこれの鉄門や開かれむ</p>
+            <p class="ja-classical-line">カンナ…………『頼り無き身を悶え苦しむ。</p>
+            <p class="ja-classical-line">チルナ姫『飢ゑ喝く此苦しみを如何にせむ</p>
+            <p class="ja-classical-line">カンナ…………『唾さへ出ぬ二人の身の上。</p>
+            <p class="ja-classical-line">チルナ姫『悲しさは涙となりて溢れけり</p>
+            <p class="ja-classical-line">カンナ…………『世の荒波に揉まれし身には。</p>
+            <p class="ja-classical-line">チルナ姫『大空に月日は清く輝けど</p>
+            <p class="ja-classical-line">カンナ…………『心の空を黒雲包めり。</p>
+            <p class="ja-classical-line">チルナ姫『如何にしてこれの鉄門を開かむと</p>
+            <p class="ja-classical-line">カンナ…………『あせれど最早力尽きぬる。</p>
+            <p class="ja-classical-line">チルナ姫『此上は只大神に願ぎ奉り</p>
+            <p class="ja-classical-line">カンナ…………『救はるる時を待つばかりなり。</p>
+            <p class="ja-classical-line">チルナ姫『恋雲に深く包まれ身の光</p>
+            <p class="ja-classical-line">カンナ…………『隠して一人吾は苦しむ。</p>
+            <p class="ja-classical-line">チルナ姫『背の君は女に心とられましぬ</p>
+            <p class="ja-classical-line">カンナ…………『吾も変らず迷ひ苦しむ。</p>
+            <p class="ja-classical-line">カンナ『デビス姫娶らむものと村肝の</p>
+            <p class="ja-classical-line">チルナ姫………『心砕きし人の憐れさ。</p>
+            <p class="ja-classical-line">カンナ『太腿に噛りつかれた苦しさを</p>
+            <p class="ja-classical-line">チルナ姫………『思ひやるだに涙ぐまるる。</p>
+            <p class="ja-classical-line">カンナ『チルナ姫暗に紛れて吾腿に</p>
+            <p class="ja-classical-line">チルナ姫………『獅噛みついたる事の悔しさ。</p>
+            <p class="ja-classical-line">カンナ『惟神神の御前に罪を悔い</p>
+            <p class="ja-classical-line">チルナ姫………『詫びつ恨みつ泣き渡るかな。</p>
+            <p class="ja-classical-line">カンナ『バラモンの皇大神は吾身をば</p>
+            <p class="ja-classical-line">チルナ姫………『救ひまさずやいとど悲しき。</p>
+            <p class="ja-classical-line">チルナ姫『月に村雲花には嵐
+吹き荒むなる世の中に
+花を翳して永久に
+此世を安く渡らむと
+祈りし事も水の泡
+初稚姫と云ふナイス
+現はれ来りて吾夫の
+清き心を濁らせつ
+心にもなき枉業を
+尽させ玉ふ恨めしさ
+吾背の君はバラモンの
+キヨの関所を預りて
+ハルナの都へ攻め寄する
+三五教の宣伝使
+一人も残さず引捕らへ
+地底に深く穿ちたる
+その岩窟に投げ込みて
+此世の災払はむと
+誠心を捧げつつ
+朝な夕なに大神に</p>
+            <p class="ja-classical-line">感謝祈願の太祝詞
+宣らせ玉ひし折もあれ
+木花散らす夜嵐に
+吹き捲られて妹と背の
+道を誤り玉ひつつ
+妾の身をば館より
+追放せむとなし玉ふ
+その曲業ぞ悲しけれ
+吾背の君の迷ひをば
+覚まし呉れむと心にも
+なき偽りを構へつつ
+半狂乱を装ひて
+戸障子手道具悉く
+打折り砕き警告を
+与へし事の仇となり
+忽ち手足を縛られて
+無慙や暗き倉の中
+投げ入れられし悲しさよ
+これも全くリュウチナント
+カンナの司の待遇しが</p>
+            <p class="ja-classical-line">面白なかりし其為と
+一度は怨み居たりしが
+カンナの司も今ここに
+吾等と共に苦しめる
+姿を見るより同情の
+涙に濡れて吾怨み
+春野の雪と消えにけり
+あゝ惟神々々
+神の恵みの幸はひて
+一日も早く片時も
+吾等二人の身魂をば
+広きに救ひ玉へかし
+偏に願ひ奉る
+梵天帝釈自在天
+大国彦の大御神
+大国彦の神柱
+御前に慎み鹿児自物
+膝折伏せて願ぎ奉る。</p>
+            <p class="ja-classical-line">天地に神は在さずや居まさずや
+この願ぎ事も聞し召さずや。
+村肝の心の暗の戸打開けて
+救はせ玉へ大御神等』</p>
+            <p class="ja-classical-line">カンナ『バラモン教の神柱
+ハルナの都に在れませる
+大黒主の命令もて
+リュウチナントに任ぜられ
+チルテル司に従ひて
+己が務めを忠実に
+仕へまつりし此カンナ
+如何なる悪魔の魅りしか
+思ひも寄らぬ災難に
+不遇を喞つ今日の身は
+あるにあられぬ悩みなり
+チルテルキャプテンに頼まれて
+チルナの姫の御前に
+心にあらぬ偽りを
+図う図うしくも並べ立て
+清き心を曇らせて
+姫の災招きたる
+その罪悪を省みて
+いと恐ろしくなりにけり
+暗の中とは云ひ乍ら</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">I bit my own thigh with such intensity, the pain of which, while grinding my teeth in regret, I swore to clear my grudge. Clenching my fists, I struck my noble face two or three times; a mistake for which I cannot turn back time. The origin of this matter is this Kanna, for not knowing the difference between black and white, and being lost in greed. Please forgive me, Chiruna-hime. Man is the child of Kami, the palace of Kami; not originally a child of an ogre. Born in the belly of the Orochi, I am neither a snake nor a crooked spirit. All are the Wakemitama of Kami, possessors of the Suishiyōdama. Yet, just as the Tsukihi in the Ōzora are momentarily hidden by Kurokumo,</p>
+          <p class="en-p">My soul, too, has before I knew it become a captive of Akuma, and I have committed an unexpected folly. That it has come to this is the retribution for the sins my own body has committed. I no longer hold any grudge against Chiruteru-sama or the Hime-sama. Bonten, Taishiyaku, Jizaiten, I pray with both hands joined and my Magokoro offered, beseeching you to save the two of us from our suffering, Kamunagara, in this darkness where I cannot even discern black from white.</p>
+          <p class="en-p">Just as she sang this, the surroundings suddenly became noisy, and the sound of dozens of footsteps could be heard. The two strained their ears, watching the situation for a while to see who was attacking. Suddenly, with the sound of a door opening with a click, they saw Hatsuwakahime, Chiruteru, and many other propagandists and soldiers standing there. Chiruna-hime immediately flew out of the storehouse and, aiming at Hatsuwakahime, pounced like a yaksha. Hatsuwakahime nimbly dodged her body,</p>
+          <p class="en-p">Hatsuwakahime: 'I am the Kami of Hatsuwakahime, who transmits the path of the true Sango. Chiruna-hime, do you mistake my form and hold a grudge? It is a matter of concern.'</p>
+          <p class="en-p">Chiruna-hime: 'Looking closely, I know not why, but your appearance has changed. Please forgive me.'</p>
+          <p class="en-p">Chiruteru: 'My beloved wife, take heart. I too have been saved by Hatsuwakahime.'</p>
+          <p class="en-p">Chiruna-hime: 'Please forgive my sin of having turned my blade against my husband, with the heart of Kami.'</p>
+          <p class="en-p">Chiruteru: 'Lured by the crookedness nesting in my chest, I have committed an unexpected sin. From today, I shall set my heart's horse aright and love Chiruna-hime deeply.'</p>
+          <p class="en-p">Chiruna-hime: 'I am grateful. Having heard those words of yours, even if I were to die, I would not hold a grudge.'</p>
+          <p class="en-p">Kanna: 'Official of Chiruteru, please forgive my soul that has drowned in sin.'</p>
+          <p class="en-p">Tamakuniwake: 'Drenched in the dew of the Sumeragi-kami's grace, how we all rejoice together.'</p>
+          <p class="en-p">Michihiko: 'Cast into the underground cavern without sunlight, how fleeting was the breaking of our hearts. Hatsuwakahime-kami-no-mikoto has appeared and saved our lives. How could we ever forget this grace, even to the very end of the era of Miroku?'</p>
+          <p class="en-p">Wax: 'I am Wax, who plotted various crooked schemes in the mansion of the Kami of Terumon. Now I have returned to a sincere heart. Please forgive me, Michihiko-no-kimi.'</p>
+          <p class="en-p">Michihiko: 'Now that the flowers of the heart have bloomed, there should be no one in the world to hate.'</p>
+          <p class="en-p">Herman: 'How painful it is to think of apologizing for the sins I have committed. Was I a majin of this world, who clouded the pure spirit of Davis-hime?'</p>
+          <p class="en-p">Ekisu: 'Having received the punishment of five hundred lashes, I have come from afar, and here my dream has awakened.'</p>
+          <p class="en-p">El: 'My lamentation for returning evil for the deep compassion and arrangements of Michihiko. If not for the basin of Michihiko's mercy, how could my body have been preserved? Though I am one who has received the blessings of sea and mountain, how painful it is to have targeted you as an enemy.'</p>
+          <p class="en-p">Iku: 'Following behind Hatsuwakahime-kami-no-mikoto, we have advanced, sometimes in front and sometimes behind.'</p>
+          <p class="en-p">Saru: 'Having searched for the mansion of the barrier guard at Kiyo Port, I have encountered people I did not expect to meet.'</p>
+          <p class="en-p">Teku: 'Come then, let us all hurry to the mansion of the Lord of Bachiru.'</p>
+          <p class="en-p">Chiruteru: 'Tidy up the inside of the mansion for a while longer, and then follow. You go first.'</p>
+          <p class="en-p">Hatsuwakahime: 'Then I shall depart from here, following the decree of the Sumeragi-kami.'</p>
+          <p class="en-p">Tamakuniwake: 'Please wait a while longer, Hatsuwakahime. There is no way to repay your grace.'</p>
+          <p class="en-p">Hatsuwakahime: 'You must advance, making the Magokoro of Tamakuniwake-kami-no-mikoto your strength.'</p>
+          <p class="en-p">While singing thus, they bowed to one another, and as soon as they left the gate of the mansion with Smart in tow and quick footsteps, their figures vanished like mist. Hatsuwakahime had mounted the back of Smart and hurried through the trees toward the capital of Haruna. Iku and Saru, fearing it would be terrible to be abandoned by the Hime-sama they had worked so hard to catch up with, took whatever they could and, while firmly clutching the crystal jewel in one hand, chased after them with a thumping sound of footsteps.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">吾太腿を峻烈に
+噛み切り玉ひし其痛さ
+無念の歯噛みなし乍ら
+怨みを晴らし呉れむずと
+拳を固めて二つ三つ
+尊き面を殴りしは
+悔むで返らぬ過失ぞ
+事の起りは此カンナ
+物の黒白も分らずに
+欲に迷ひし其為ぞ
+許させ玉へチルナ姫
+人は神の子神の宮
+もとより鬼の子でもない
+大蛇の腹に生れたる
+蛇でもなければ曲でない
+何れも神の分霊
+水晶魂の持主よ
+さはさり乍ら大空の
+月日も暫し黒雲に
+包まれ姿を隠す如</p>
+            <p class="ja-classical-line">吾魂も何時しかに
+悪魔の虜となり果てて
+思はぬ不覚をとりました
+かうなり行くも己が身の
+犯せし罪の報ひぞや
+チルテルさまや姫様を
+最早や少しも怨まない
+梵天帝釈自在天
+二人の悩みを逸早く
+救はせ玉へ惟神
+黒白も分かぬ暗の中
+双手を合せ真心を
+捧げて祈り奉る』</p>
+            <p class="ja-classical-line">斯く歌ふ折しも俄に四辺騒がしく、数十人の足音が聞えて来た。二人は耳をすまして何者の襲来なるかと暫し様子を窺つて居た。忽ち、ガチヤリと戸を開く音、見れば初稚姫初めチルテル其外沢山な宣伝使や兵士が立つて居る。チルナ姫は矢庭に倉を飛び出し、初稚姫目蒐けて夜叉の如く飛びついた。初稚姫はヒラリと体を躱し、</p>
+            <p class="ja-classical-line">初稚姫『三五の誠の道を伝へ行く
+吾は初稚姫の神ぞや。
+チルナ姫妾の姿を見誤り
+怨み玉ふか心もとなや』</p>
+            <p class="ja-classical-line">チルナ姫『よく見れば何処とはなしに御姿
+変らせ玉ひぬ許させ玉へ』</p>
+            <p class="ja-classical-line">チルテル『いと恋やの妻の命よ心せよ
+吾も初稚姫に救はれしぞや』</p>
+            <p class="ja-classical-line">チルナ姫『背の君に刃向ひまつりし吾罪を
+赦し玉はれ神の心に』</p>
+            <p class="ja-classical-line">チルテル『吾胸に巣へる曲に誘はれ
+思はぬ罪を犯しけるかな。
+今日よりは心の駒を立て直し
+チルナの姫を厚く愛なむ』</p>
+            <p class="ja-classical-line">チルナ姫『有難し其の宣り言を聞く上は
+仮令死すとも怨まざらまし』</p>
+            <p class="ja-classical-line">カンナ『チルテルの司よ清く許しませ
+罪に溺れし吾魂を』</p>
+            <p class="ja-classical-line">玉国別『皇神の恵みの露に霑ひて
+吾人ともに勇みけるかな』</p>
+            <p class="ja-classical-line">三千彦『日影なき地底の洞に落されて
+心砕きし事の果敢なさ。
+初稚姫神の命があれまして
+吾等が命を救ひ玉ひぬ。
+何時の世か此御恵を忘るべき
+弥勒の御世の末の末まで』</p>
+            <p class="ja-classical-line">ワックス『テルモンの神の館に色々の
+枉企みたる吾はワックス。
+今こそは誠心に帰りけり
+許させ玉へ三千彦の君』</p>
+            <p class="ja-classical-line">三千彦『村肝の心の花の咲きぬれば
+世に憎むべき人はあらまし』</p>
+            <p class="ja-classical-line">ヘルマン『如何にして己が犯せし罪科を
+詫びむと思ふ心苦しさ。
+デビス姫の清き身魂を曇らせし
+吾は此世の魔神なりしか』</p>
+            <p class="ja-classical-line">エキス『五百笞の戒め受けて遙々と
+来りて此処に夢は覚めけり』</p>
+            <p class="ja-classical-line">エル『三千彦の厚き情の御計らひ
+仇に返せし吾身の嘆てさ。
+三千彦の情けの盥なかりせば
+吾身体の如何で保たむ。
+海山の恵みを受けし身ながらに
+仇と狙ひし事の苦しさ』</p>
+            <p class="ja-classical-line">イク『初稚姫神の命の後になり
+前になりつつ進み来にけり』</p>
+            <p class="ja-classical-line">サール『キヨ港関守館に尋ね来て
+思はぬ人に巡り合ひしよ』</p>
+            <p class="ja-classical-line">テク『いざさらばバーチル主の館へと
+急いで行かむ皆の人等』</p>
+            <p class="ja-classical-line">チルテル『今暫し館の中を片づけて
+後に行くべし先に出でませ』</p>
+            <p class="ja-classical-line">初稚姫『いざさらば吾はこれより皇神の
+宣りのまにまに別れ行かなむ』</p>
+            <p class="ja-classical-line">玉国別『今暫し待たせ玉へよ初稚姫
+君の恵みに報ゆ術なき』</p>
+            <p class="ja-classical-line">初稚姫『玉国別神の命の真心を
+力となして進み行くべし』</p>
+            <p class="ja-classical-line">斯く歌ひ乍ら一同に目礼し、スマートを従へ足許早く館の門を出づるや、忽ち姿は霞と消えさせ玉ふた。初稚姫はスマートの背に跨り木の間を潜つてハルナの都へと急がれたのである。イク、サールの両人は折角追つついた姫様に見捨てられては大変と、両人は取る物も取り敢ず、トントントンと地響き打たせ水晶の宝玉を片手に固く握り乍ら追つて行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c16.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 16: 開 Cavern [1516]</span>
+      </a>
+      <a href="c18.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 18: 手苦番 [1518]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

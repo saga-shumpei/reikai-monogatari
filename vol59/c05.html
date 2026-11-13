@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 有升 [1505] - Volume 59 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 59 Table of Contents</a>
+      <span>Volume 59</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 59 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: 有升 [1505]</h1>
+      <p class="chapter-title-ja">有升〔1505〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hatsuwaka: 'If you are indeed Teku-sama, what is the nature of the business you have with me from the Captain-sama? I request that you convey it to me with all speed.'</p>
+          <p class="en-p">Teku: 'I am a little intoxicated, so I may perhaps digress. I shall offer my apologies in advance. Well... it is nothing else but... that... that... if you pursue me with such short-tempered haste, I have no... leeway to counterattack. Let us first await the silence of the beauty-battery, and then proceed to the offensive at our leisure.'</p>
+          <p class="en-p">He is a foolish stray who, having been suddenly deceived and granted the title of lieutenant, is thinking of conducting negotiations using military terminology for everything out of sheer joy.</p>
+          <p class="en-p">Hatsuwaka: 'Batteries, attacks, counterattacks—these are dreadfully bloodthirsty words you use. I would be grateful if you could speak a little more gently.'</p>
+          <p class="en-p">Teku assumed the posture of 'attention,' spread one hand upward near his chest, adopted a style resembling a Shinto priest holding a ritual tablet, and while leaning back slightly,</p>
+          <p class="en-p">Teku: 'I am a lieutenant. I am one who has been specially dispatched to this camp as a messenger and scout by the order of the Captain-dono today. The mission of which I speak is nothing else. At the camp of Birch on the southern foot of Mount Adumos, a victory celebration for the soldiers was held. Regarding that, the Battalion Commander-dono dispatched me to this garrison as a special envoy. Since a banquet with only men is somewhat lacking in interest, the order is to summon the peerless, nice Hatsuwaka-hime-dono. In other words, this Teku is the military envoy of the Captain. I desire that you follow military law, or rather, follow the order of your superior, and depart, or rather, march out to the front.'</p>
+          <p class="en-p">Hatsuwaka: 'Ohohoho, Teku-sama, you speak of such rigid things. I dislike sake, so I cannot possibly go to such a camp. Furthermore, if a woman enters the camp, military discipline will be disturbed, so I must decline this request above all else.'</p>
+          <p class="en-p">Teku: 'This is outrageous. What do you take me for? I am a military police lieutenant. If you do not exercise a little caution when you speak, I shall be truly troubled. If you disobey the order, you shall be judged by military law and sentenced to execution by firing squad. This is a matter you must consider carefully. In truth, the Captain-sama has become infatuated with your beauty, has almost lost his soul, and the current state of the battle is such that he cannot hold back his desire. He has given a strict order to fire mortars or field guns if necessary to capture the castle. Come, I pray that you will quickly present yourself at the military gate.'</p>
+          <p class="en-p">Hatsuwaka: 'This is yet another troublesome matter. I pray you do not speak of such things and return home. You say such things because you have been drinking sake. Is there any reason why a Captain-sama, who should be a leader of men, would invite a woman of my station into the camp?'</p>
+          <p class="en-p">Teku: 'Oh dear, is there such a thing as a woman not being able to go to camp? Did the wife of the soldier named Keimei of Ueno not enter the camp, offer sake to her husband, and help him achieve military merit? You may be the second wife... or perhaps a candidate for the first wife. Come, I pray you give me a good report quickly. Or rather, I hope that you will march out to the front with me.'</p>
+          <p class="en-p">Hatsuwaka: 'No matter what you say, I cannot bring myself to set foot in the camp. I am resolved that no matter what you say, I will not go.'</p>
+          <p class="en-p">Teku: 'Hey, Princess-sama, you must not steal my trademark. "Arimasu" is a term reserved exclusively for soldiers, you see.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">初稚『もしテクさまとやら、キャプテン様から妾に御用とは如何なる事で厶いますか。何卒速にお伝へを願ひます』</p>
+            <p class="ja-classical-line">テク『私はチツと酩酊致して居りますから脱線するかも知れませぬ。前以てお断りして置きます。あの……外でも厶いませぬが……それそれ……さう短兵急に追撃されては応戦の……余裕が厶いませぬ。先づ美人砲台の……沈黙を待つて徐に攻勢に向ひませう』</p>
+            <p class="ja-classical-line">と俄に騙されて中尉の称号を貰つた嬉しさに何でもかでも軍隊の用語を使つて談判をやらうと考へて居る間抜け野良だ。</p>
+            <p class="ja-classical-line">初稚『砲台だの、攻撃だの、応戦だのと、随分殺伐なお言葉ですな。どうか、も少しハンナリと仰有つて頂き度いもので厶います』</p>
+            <p class="ja-classical-line">テクは『気を付け』の姿勢をとり一方の手を乳の辺りに上向けに拡げて弥宜が笏板を持つた様なスタイルになつて、稍反り乍ら、</p>
+            <p class="ja-classical-line">テク『私は中尉であります。今日大尉殿の命により伝令兼斥候として此陣営へ特派せられた者であります。その使命と申すのは外でもありませぬ。アヅモス山の南麓バーチルの陣営に於て兵士の凱旋祝賀会が挙行されました。それに就いて大隊長殿が私を特使として此営所へ御派遣になつたのであります。酒宴の席には男ばかりでは、どうも興味薄きを以て、天下無双のナイス初稚姫殿を召集し来れとの命令であります。言はば此テクはキャプテンの軍使であります。速に軍律に従ひ、否上官の命に従ひ、御出張、否御出陣あり度きものであります』</p>
+            <p class="ja-classical-line">初稚『オホヽヽヽ、テクさま、貴方どうも硬い事を仰有いますな。妾はお酒は嫌ひで厶いますから陣営等には到底参る事は出来ませぬ。又陣中に女が参りますと軍規が乱れますから、之ばかりはお断り申します』</p>
+            <p class="ja-classical-line">テク『これは怪しからぬ。拙者を何と心得て厶る。拙者は憲兵中尉で厶るぞ。チツと注意をして物を云つて頂かないと実に困るのであります。御命令に違背なさると軍律に照し、銃殺の刑に処せらるるのであります。ここは篤と御勘考なさらねばならぬ所であります。実の所はキャプテン様は貴女の容色に属魂打込み、殆ど魂を抜かし、矢も楯も堪らないと云ふ今日の戦況であります。どうしても落城せなければ臼砲なりと野砲なりと発砲して占領して来いとの厳命であります。さア早く軍門に御出頭あらむ事を願ふあります』</p>
+            <p class="ja-classical-line">初稚『これは又迷惑な事で厶いますナ。どうか左様な事を仰有らずにお帰り下さいませ。貴方はお酒を召して居らつしやいますから、左様な事を申されるのです。苟くも人の頭とならるべきキャプテン様が、妾の如き女風情を陣中にお招き遊ばす道理が厶いませうか』</p>
+            <p class="ja-classical-line">テク『これはしたり、女が陣中に行けないと云ふ事がありますか。上野の形名といふ軍人の女房は陣中に入つて夫に酒を勧め、軍功を立てさせたぢやありませぬか。貴女は第二夫人様、……否第一夫人の候補者かも知れませぬ。さア何卒早く私に対し、よき報告を願ひます。否私と共に御出陣あらむ事を希望する次第であります』</p>
+            <p class="ja-classical-line">初稚『妾は何と仰せられましても陣中に足を入れる事は、どうしても心が進まぬのであります。何と仰せられても行かないと云つたら行かない覚悟であります』</p>
+            <p class="ja-classical-line">テク『もし、お姫さま、私のお株をとつちやいけませぬよ。「アリマス」は軍人の専用語ですからな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Chirunahime had been standing in the shade of the trees until now, listening to the dialogue between the two, and upon hearing the report from Teku that her husband was enamored with Hatsuwakahime, she became almost frantic, stamping her feet in the shade. At the sound of her footsteps, both Kanna and Heru were startled, and when they crept closer to look, it appeared to be none other than Chirunahime. Kanna said in a low voice,</p>
+          <p class="en-p">Kanna: 'Is that not you, Okusama?'</p>
+          <p class="en-p">Chiruna: 'You, did you hear what was just said? Since it is the case that Dannasama is infatuated with that woman, why have you not obtained the desired result quickly as I instructed?'</p>
+          <p class="en-p">Kanna: 'Well, we have every desire to obtain the result, but it cannot be done as quickly as eating chiyazuke on an empty stomach.'</p>
+          <p class="en-p">Chiruna: 'Oh, how irritating. Do you not realize what might happen if you keep dawdling? It is pathetic that with two rough men like you present, you cannot do anything about such an Amatsuchiyo. Come, show some courage and do something about it.'</p>
+          <p class="en-p">Heru: 'Okusama, if we fail, will you take responsibility for it, Anata?'</p>
+          <p class="en-p">Chiruna: 'There is no need for such worry. If you only proceed with strength, anything will succeed. If you keep dawdling, they might take that woman away and have her accompany Dannasama. Oh, how frustrating, how regrettable, how vexing. Is it that with two men present, you cannot do anything about a woman of that caliber?'</p>
+          <p class="en-p">Kanna: 'Okusama, if you go that far, let us try one thing. However, if we do something too rough and lose her sympathy, it will be no good, so let us try to move her heart and achieve our goal by singing a song here. If you please, Okusama, you also use a feigned voice and support us.'</p>
+          <p class="en-p">Chiruna: 'Come, try it quickly; if it does not go well, I will support you.'</p>
+          <p class="en-p">Kanna: 'The commander of the Brahman army is here / Let us go and question Hatsuwakahime.'</p>
+          <p class="en-p">Heru: 'Princess, do not abandon the heart of the man / Who comes secretly, lost in love for thee.'</p>
+          <p class="en-p">Chiruna: 'If I surrender my body to the impure warrior of Chiruteru / I shall be laughed at by the world. / The lord of the Chiruteru army is rare in this world / And Chiruna Hime is here to hold him. / My love is a boat crossing the vast ocean / Braving the waves to reach the island of the gods. / O life of Hatsuwakahime, quickly / Leave the mansion and come out to the moon.'</p>
+          <p class="en-p">Hatsuwakahime from within,</p>
+          <p class="en-p">Hatsuwakahime: 'Believing that a god resides in the capital of Haruna in the land of the moon / I have come forward with longing. / Nevertheless, for a while longer in the land of Izumi / I shall rest my body and stay my feet.'</p>
+          <p class="en-p">Chiruna: 'If you are staying your feet in this village / Then surrender your body to Kanna and Heru.'</p>
+          <p class="en-p">Hatsuwakahime: 'How can one body serve two people? / I serve only the gods. / I have heard that the lord of the Chiruteru army is wise / But how could I ever surrender my body to him? / Can I ever endure serving the lord of Chiruteru / Who already has a wife like a young grass? / I am merely resting my breath for a while / Bound by the deep affection of Chiruteru.'</p>
+          <p class="en-p">Teku: 'The life of the goddess Hatsuwakahime is destined / To be the second wife of the captain. / If you say you absolutely refuse, I am prepared / To drag you to the camp. / Come, if we do not go quickly, the sake will grow cold / It is to be used as a side dish for the sake. / If you abandon the pure man of the captain / And side with Kanna, your body shall be carved up. / The fellow called Kanna is a man / Like an ogre who carves and eats people. / Like carving while hanging Kanna over Heru / Each and every piece, Heru's love-garment.'</p>
+          <p class="en-p">Kanna: 'It is already a matter of desperation, so let us display our valor / And try to see if we sink or swim. / Hey, look there, the hatred of that face of Teku who comes / To interfere with love. / From here on, it is direct action and brute force / I shall carry Hatsuwakahime away. / To be deceived by a clever excuse for an elbow-iron / How could a man's face stand anywhere?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">チルナ姫は今迄木蔭に立つて二人の問答を聞き、自分の夫が初稚姫に恋慕してると云ふテクの報告を聞いて殆ど狂乱の如くなり、樹蔭に地団太を踏んで居る。その足音にカンナ、ヘールの両人はハツと気がつき、擦り寄つて見れば、何だかチルナ姫の様である。カンナは小声で、</p>
+            <p class="ja-classical-line">カンナ『もし、奥さまぢや厶いませぬか』</p>
+            <p class="ja-classical-line">チルナ『お前、今の話を聞いたか。旦那様があの女に属魂惚れて厶ると云ふ事だから、私の吩咐けたやうに何故早く要領を得て了はないのか』</p>
+            <p class="ja-classical-line">カンナ『ヘー、要領を得たいのは山々で厶いますが、そうチヤク　チヤクと空腹にお茶漬を食つた様には行きませぬからな』</p>
+            <p class="ja-classical-line">チルナ『エー、ぢれつたい。グヅグヅして居るとどんな事が出来るか知れぬぢやないか。荒男が二人も居つて、あんな阿魔女を、どうする事も出来ぬとは腑甲斐ないものだな。さア早く肝玉を出して何とかなさらぬかいな』</p>
+            <p class="ja-classical-line">ヘール『奥様、もしも、やり損なつたら、貴女後引受けて下さるかな』</p>
+            <p class="ja-classical-line">チルナ『そんな心配は要りませぬ。何でもかでも強く行きさへすれば何んな事でも成功しますよ。グヅグヅしてるとあの女を連れて行つて旦那様につき合すかも知れないわ。エー、悔しや、残念や、口惜しやな。男が二人も居つてあれ位な女を如何する事も出来ぬのかいな』</p>
+            <p class="ja-classical-line">カンナ『奥さま、そこ迄仰有るのなら一つやつて見ませう。然し一寸手荒い事をして同情心を失つては駄目ですから、ここで一つ歌でも歌つて心を動かし目的を達して見ませう。もし奥さま、貴女も一つ作り声をして応援して下さい』</p>
+            <p class="ja-classical-line">チルナ『さア早くやつて御覧、いかなかつたら妾が応援するから』</p>
+            <p class="ja-classical-line">カンナ『バラモンの軍の司ここにあり
+いざ言問はむ初稚姫に』</p>
+            <p class="ja-classical-line">ヘール『姫様よ汝に迷ひて忍び来る
+男心を見捨て玉ふな』</p>
+            <p class="ja-classical-line">チルナ『チルテルの心汚き武士に
+身を任しなば世に笑はれむ。
+チルテルの軍の君は世に稀な
+チルナの姫が控へますぞや。
+吾恋は大海原を渡る舟
+浪を凌ぎて神島へ行く。
+初稚の姫の命よ逸早く
+館を立ちて月へ出でませ』</p>
+            <p class="ja-classical-line">初稚姫は中より、</p>
+            <p class="ja-classical-line">初稚姫『月の国ハルナの都に神在すと
+慕ひて進む吾なりにけり。
+さり乍らイヅミの国に今暫し
+足を留めて身をや休めむ』</p>
+            <p class="ja-classical-line">チルナ『此里に足を留めて居ますなら
+カンナ、ヘールに身を任しませ』</p>
+            <p class="ja-classical-line">初稚姫『身は一つ如何で二人に仕ふべき
+妾は神にのみぞ仕ふる
+チルテルの軍の君は賢しと
+聞けども如何で身を任すべき。
+若草の妻を持たせるチルテルの
+君に仕へて堪るべきかは。
+チルテルの厚き情に絆されて
+暫し息をば休め居るのみ』</p>
+            <p class="ja-classical-line">テク『初稚姫神の命はキャプテンの
+第二夫人と定つてあります。
+どうしても嫌と云ふなら引張つて
+陣屋に進む覚悟あります。
+さア早う行かねば酒が冷めまする
+酒の肴に使ふあります。
+キャプテンの清き男子を振棄てて
+カンナにつけば身を削られむ。
+カンナてふ奴は人をば削り喰ふ
+鬼の様なる男あります。
+ヘールとはカンナをかけて削る様に
+一枚一枚ヘール恋衣』</p>
+            <p class="ja-classical-line">カンナ『もう自暴自棄だ勇猛心を発揮して
+乗るか反るかをやつて見ませう。
+おい、そこだ、テクの奴めがやつて来て
+恋の邪魔する面の憎さよ。
+此上は直接行動腕づくだ
+初稚姫を担げて退かむ。
+肱鉄をうまい辞令で誤魔化され
+男の顔が何処で立たうか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hatsuwaka: 'Teku-sama, dōzo, as everyone outside is saying various things as you see, I am very troubled. Dōzo, please return. And if you have business with the Captain-sama, let us meet again after you have returned. Also, I will serve as your drinking companion, though it may not be much, so dōzo, please speak well of me there.'</p>
+          <p class="en-p">Teku: 'Even so, the Dannasama is very much in love with you, and if I do not have you come, my position as a lieutenant will also become zero. If you will make me a lieutenant, dōzo, please come quickly. This is my lifelong request.'</p>
+          <p class="en-p">Teku became Yakekuso and began to sing in a loud voice.</p>
+          <p class="en-p">Teku: 'It is no use, it is no use, it is all no use. With such a Kirei face, you reject even the words of the Captain of the Brahman army. Do not boast because your Kiriyō is good. Because there are as many Amatsuchiyo like you in the Sekai as there are. There is a limit to your Manshin. With a style as if you had attached eyes and nose to an Aobeutan, you are Chiyokozai Senban, a Bijinzura. Both Aiso and Koso are exhausted. Outside, there is Kanna-sama, and there is Heeru-sama who is mad with love. It would be better to give up. No matter how much one tries to persuade such an uncomprehending Mero, it is absolutely no use. Even though I have received the rank of military lieutenant from the Captain with such difficulty, I am in a situation where I must return it helplessly. I am frustrated and cannot bear it, but even if I say so, there is no way to deal with this witch. That Chilteru-Captain is so infatuated, lowering his eyes, treating the most important, most important Okusama as a nuisance, dragging her to the drinking seat, and trying to boast of his manliness, but it is pitiful. A wife who has such a husband must have a troubled heart. My heart has become sympathetic toward the feelings of Chiruna-hime. I have heard from people before that women are demons. If one glares with the cool, round eyes of a woman, even an iron castle will collapse with a rattle. Mountains, fields, houses, and storehouses will all be made into a mess. If such a woman appears, the Captain of the Brahman religion will also lose his composure and lose his strength, like a loach killed by sake, and while forgetting his essential military duties, he will surely fall into the tragic fate of being dismissed. When I think about it, I feel sorry for him. This Teku-sama has also completely given up on this mission. Taking the opportunity, I will return the position of spy, become the head clerk of Bachiru's house, drink sweet sake to my heart's content from morning till night, and live this short floating world interestingly, drinking and making merry, for the future is dark. More than anything, the taste of sake. For us, things like beauties are never worth counting. Ah, Kannagara-kamigami. The taste of warmed sake. For me, who lives on cold sake and sea bream soup, there is no pleasure that surpasses this in the three thousand worlds. Hatsuwaka-hime-no-Amatsuchiyo-sama, goodbye, I will take my leave, and while adding one excuse after another to the Captain-sama, I will report it badly. It would be good to report in detail that she is a stubborn woman who refuses to come out, saying that she will never go to the Captain's side even if she dies, because she is infatuated with both Kanna and Heeru. You had better think about it very carefully. Now that it has come to this, it is Yakekuso-sake. Come, warmed sake, warmed sake. The drunkenness has begun to wear off. I will return as soon as possible and drink sake. Everyone, goodbye to the sake.'</p>
+          <p class="en-p">With that, he stomped his feet in a fit of anger, rattling the tatami and shoji, and went home, disappearing into the darkness.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">初稚『テクさま、何卒あの通り外に皆様が種々と仰有つて居ますから妾は大変迷惑致します。何卒帰つて下さい。そしてキャプテン様に御用がおありなさるのなら帰つて悠りお会ひしませう。又酒の相手も及ばず乍ら勤めさして頂きますと、何卒そこは宜しく云つて下さいませ』</p>
+            <p class="ja-classical-line">テク『それでも旦那様が大変に惚れて居らつしやるのだもの、私だつて貴女に来て頂かなくては中尉もゼロになりますからな。私を中尉にして下さるのなら何卒早く来て下さい。之が私の一生のお願ひであります』</p>
+            <p class="ja-classical-line">テクは自暴自棄糞になり大きな声で歌ひ出した。</p>
+            <p class="ja-classical-line">テク『駄目だ駄目だ皆駄目だ
+こんな綺麗な面をして
+バラモン軍のキャプテンが
+お言葉さへも刎ねつける
+容色がよいとて自慢すな
+お前の様な阿魔女は
+世界にや沢山ある程に
+慢心するのも程がある
+青瓢箪に目と鼻を
+つけたる様なスタイルで
+猪口才千万美人面
+愛想も欲得もつき果てた
+外に厶るはカンナさま
+恋に狂ふたヘールさま
+思ひ切つたが宜しかろ
+こんな分らぬスベタ女郎
+何程口説いて見た所で
+テツキリ駄目で厶るぞや
+俺も折角キャプテンに
+憲兵中尉の職名を</p>
+            <p class="ja-classical-line">頂き乍らムザムザと
+返さにやならぬ破目となり
+むかついてむかついて堪らぬが
+さうかと云つて此阿魔を
+どうする訳にも行きはせぬ
+あれ程チルテル・キャプテンが
+現を抜かし目尻下げ
+寝ても覚めても姫々と
+大切の大切の奥さまを
+邪魔者扱になし乍ら
+酒の場席へ引張つて
+男前をば誇らむと
+なさつて厶るがお憐しい
+あんな夫を持つ女房
+嘸や心が揉めるだろ
+チルナの姫のお心が
+気の毒さまになつて来た
+女は魔物と云ふ事は
+予て人から聞いて居た
+女の涼しい円い目で</p>
+            <p class="ja-classical-line">一目睨めば鉄城も
+ガタガタガタと覆へし
+山も田地も家倉も
+メチヤ　メチヤ　メチヤにして了ふ
+こんな女が出て来たら
+バラモン教のキャプテンも
+酒で殺した鰌の様に
+グニヤ　グニヤ　グニヤと相好を
+崩して腰を抜かしつつ
+肝腎要の軍務をば
+忘れて遂には免職の
+悲運に落ちねばならうまい
+思へば思へばお気の毒
+此テクさまも此使命
+スツカリ思ひ切つたぞや
+序にスパイの職掌も
+返上致してバーチルの
+家の番頭となり済まし
+朝から晩まで甘酒を
+思ふがままに飲み倒し</p>
+            <p class="ja-classical-line">短い浮世を面白く
+飲めよ騒げよ一寸先や暗と
+踊り狂ふて暮しませう
+何よりかより酒の味
+美人の如きは吾々は
+決して物の数でない
+あゝ惟神々々
+燗して飲んだ酒の味
+冷酒鯛汁の吾身には
+これに勝つた楽みは
+三千世界にありませぬ
+初稚姫の阿魔女さま
+左様なら御免を蒙つて
+キャプテン様に何事も
+笠に笠をばかけ乍ら
+悪く注進仕る
+カンナ、ヘールの両人に
+現をぬかして脂下り
+どうしてもこしてもキャプテンの
+側には死んでも行かないと</p>
+            <p class="ja-classical-line">駄々をば捏ねて出て来ない
+尻太い女と詳細に
+注進するが宜しいか
+よくよく思案するがよい
+もうかうなれば自暴自棄酒だ
+さア燗酒だ燗酒だ
+そろそろ酔が覚めかけた
+一刻も早く帰つて酒を飲もう
+皆さまお酒へ左様なら』</p>
+            <p class="ja-classical-line">と畳障りも荒々しく腹立ち紛れに四股を踏みならし、暗に紛れて帰り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: 陰 Messenger [1504]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: Cloud 隠 [1506]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

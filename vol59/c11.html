@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: 黒白 [1511] - Volume 59 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 59 Table of Contents</a>
+      <span>Volume 59</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 59 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: 黒白 [1511]</h1>
+      <p class="chapter-title-ja">黒白〔1511〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Heru came with great enthusiasm to the front of the mansion where Hatsuwakahime was secluded, but somehow the threshold felt high and his heart began to quail.</p>
+          <p class="en-p">Heru: 'Hey, are you cowardly Fukushiyu fellows trying to prevent the actions of the Seishiyugojin again? I am not a Heru-sama who would hesitate or waver at such a thing, you insolent fools. All units, halt!'</p>
+          <p class="en-p">From within his belly, the Fukushiyu all replied: 'Hai!'</p>
+          <p class="en-p">Heru: 'Good, good, keep silent for a while. No, it is better if you sleep. When the trumpet of the Hijiyōshōshifu sounds, that is when you shall rise all at once. Until then, I order the entire Fukushiyuzentai to rest. In the meantime, go back to your Kiyōri or somewhere and drink your Jijibaba's milk. Ahahaha, at last, the Fukushiyu fellows have fallen silent. However, it seems the cowardice is still clinging to them. Hey, cowardice, you too should hurry back to your Kiyōri, become a Zaigōgunjin, and engage in the Nōkōshiyō. When an emergency arises, exchange your plow for a rifle, your abacus for a sword, and your chisel for a spear to show the reality of your service to the state. Until then, I exempt this Heru's internal national active-duty soldiers. Be grateful. Ahahaha, it seems the cowardice has retreated a little, or rather, has returned home. Hey, I shall sing a song to make the princess's spirit ecstatic. I have been called a man of strong character, but what a soft-boned man I am when it comes to women. This Hill 203 is quite a tough nut to crack. Simply blowing a conch shell with my mouth and a trumpet with my rear will not easily produce results. They say the sages of the future governed the world through rites and music. Archery, horsemanship, and calligraphy are the very end of the end. First, I must enrich the rites, play music, produce subtle sounds, sing a famous song, and move the princess's heart. They say that songs soothe the hearts of the gods and move heaven and earth. How much more so for the human heart. Oh, the song, the song!'</p>
+          <p class="en-p">If one analyzes the character for love (koi), it is the heart that says 'I yearn, I yearn'...</p>
+          <p class="en-p">Hey, this is old. If she has reached the age of Hatsuwakahime, she must have already heard it. I wish she would think it is a song I invented, but if she thinks it is a moldy, second-hand song, my status as a man will fall. Alright, let me try to think of something.</p>
+          <p class="en-p">If I think in my heart that you are dear and lovely, the other party says you are a dear person (Koi).</p>
+          <p class="en-p">With this, it has become completely new. However, since it is just a rehash of the reversal, it seems the original is better after all. Well, this time, shall I analyze the character for love (ai) and sing it?</p>
+          <p class="en-p">If your lovely heart pierces through, you will surely receive it.</p>
+          <p class="en-p">This time, it is the 'supreme' of supremeism, the best. Ehehehe, I hope I can do this well.</p>
+          <p class="en-p">The best of love is but one thing: on this earth, there is only you.</p>
+          <p class="en-p">Hatsuwakahime-sama, you who have floated a boat on the Heavenly River, while wielding a golden oar, crossing over the ocean of Kiyo, and descending to this mansion. Your flower-like face and moon-like eyebrows, wearing robes of stars, in the very form of a heavenly maiden, you shine brilliantly in this mansion. How noble you are! Even if the morning sun shines and glows, even if the moon's form is clear, when compared to Hatsuwakahime, they are miserable and cannot even approach you. Your white face that deceives the snow, your skin smooth and slippery like a crystal ball. After all, the truth of heaven and earth is that white is the beginning of color, and black is the end of color.</p>
+          <p class="en-p">Ushitora is indeed the mature woman; color is what the mature woman of Ushitora points to. White and black come together, the grid of the Go board, the structure of warp and woof, which the Ōmikami has played with. When red overlaps, it becomes black; when black changes, it becomes white. Hatsuwakahime's white skin and Heru no Tsukasa's black face, this is truly the return of the Ushitora, the return of the spirit of rigor. Hatsuwakahime is the Mizumitama, the return of the Kōtaijin, the princess god of Kunishitsuchi. Combining the water and fire of rigor and fluidity, the marriage bond is eternal, circling the heavenly pillar, giving birth to the various precious children of mountains, rivers, grass, and trees.</p>
+          <p class="en-p">Learning from the ancient records of the great god Izanagi, constructing an eternal heavenly pure land upon this earth, to save the hundred gods and men, the Kōjin has auspiciously sent down the black-colored old man and the white-colored old woman here. Hatsuwakahime no Kami-tsukasa, no matter how much you dislike Heru, it is a bond ordained by the gods. Please reflect upon it, Kannagara. Awakened to the teachings of the gods, it is reflected clearly like a mirror in the spirit of Heru. The master of this house, Chiruteru, has abandoned his essential wife elsewhere and is chasing after distant and near seductive women...</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ヘールは勢込んで初稚姫の籠もれる館の前迄やつて来たが、何だか敷居が高くて心が怖ぢつく。</p>
+            <p class="ja-classical-line">ヘール『エー、又副守の卑怯者奴、正守護神の行動を防止せむと致すか。猪口才千万な、左様な事に躊躇逡巡するヘールさまではないぞ。全隊止まれ』</p>
+            <p class="ja-classical-line">腹の中から副守一同に『ハーイ』。</p>
+            <p class="ja-classical-line">ヘール『よしよし、暫らく沈黙を守るのだ。いや寝て居るが宜い。非常召集の喇叭が鳴つたら、その時こそ一度に立上るのだ。それ迄副守全隊に休息を命ずる。今の間に郷里にでも帰つて爺婆の乳でも飲むで来い。アハヽヽヽ、到頭副守の奴沈黙しやがつたな。然しまだ恐怖心の奴、喰付いてゐると見えるわい。これ恐怖心、お前も早く郷里に帰つて在郷軍人となり、農工商の業に従事せよ。一旦緩急あらば鋤を鉄砲に代へ、算盤を剣に代へ、鑿を槍に代へて義勇奉公の実を示すのだ。それ迄此ヘール体内国の現役兵を免ずる。有難く思へ。アハヽヽヽ、どうやらチツト許り恐怖心が退散したさうだ否帰郷したさうだ。エー一つ歌でも歌つて姫の精神を恍惚たらしめるのだな。俺も硬骨男子と云はれて居たが、女にかけたら何と云ふ軟骨だらう。此二〇三高地は一寸骨が折れるわい。口で法螺を吹き、尻で喇叭を吹いた位ぢや容易に効果が上らない。未来の聖人は礼楽を以て世を治めたと云ふ。射御書数は末の末だ。先づ礼を厚くし楽を奏し、微妙なる音声を出して名歌を歌ひ、姫の心を動かすに限る。歌は神明の心を和らげ又天地を動かすと云ふ。況んや、人間の心に於ておやだ。歌なる哉歌なる哉だ。</p>
+            <p class="ja-classical-line">恋といふ字を分析すれば
+糸し糸しと言ふ心……か、</p>
+            <p class="ja-classical-line">やア此奴ア古い。初稚姫位のナイスになつたら已に聞いてるだらう。俺の発明した歌だと思つて呉れれば宜いが黴の生えた様な受売歌だと思はれちや、却て男が下る。よし何とか考へて見よう。</p>
+            <p class="ja-classical-line">糸し可愛と心に思や
+糸しお方と先方が言ふ（恋）</p>
+            <p class="ja-classical-line">これでスツカリ新しくなつた。然し乍ら引繰返しの焼直しだから、矢張もとの方がどうも宜い様だ。はてな、今度は愛と云ふ字を分析して歌つてやらうかな。</p>
+            <p class="ja-classical-line">可愛心が貫くなれば
+君は必ず受けるだらう。</p>
+            <p class="ja-classical-line">今度は至上主義の至上だ、ベストだ。エヘヽヽヽ、どうか巧くやり度いものだナ。</p>
+            <p class="ja-classical-line">ラブのベストは一つで厶る
+土の上には君ばかり。</p>
+            <p class="ja-classical-line">初稚姫のナイスさま
+天の川原に船泛べ
+黄金の棹をさし乍ら
+キヨの海原乗り越えて
+これの館に天降りまし
+花の顔月の眉
+星の衣をつけ玉ひ
+天女の姿その儘に
+これの館にビカビカと
+光らせ玉ふ尊さよ
+朝日は照るとも光るとも
+月の姿は清くとも
+初稚姫に比ぶれば
+側へもよれない惨めさよ
+雪を欺く白い顔
+肌滑らかにツルツルと
+水晶玉の如くなり
+そも天地の真相は
+白きは色の始まりよ
+黒きは色の終なり</p>
+            <p class="ja-classical-line">艮は即ち年増ぞや
+色は年増が艮めさす
+白と黒とが寄り合ふて
+キチンとしたる碁盤の目
+経と緯との仕組をば
+遊ばしました大御神
+赤が重なりや黒うなる
+黒がかへれば白となる
+初稚姫の白い肌
+ヘールの司の黒い顔
+これぞ全く艮の
+厳の御霊の御再来
+初稚姫は瑞御魂
+坤なる姫神の
+皇大神の御再来
+厳と瑞との水火合せ
+夫婦の契永久に
+天の御柱廻り合ひ
+山川草木諸々の
+珍の御子を生みましし</p>
+            <p class="ja-classical-line">神伊邪那岐の大神の
+その古事に神習ひ
+此地の上に永遠の
+天国浄土を建設し
+所在百の神人を
+救はむ為に皇神は
+お色の黒き尉殿と
+お色の白き姥殿を
+目出度くここに下しけり
+初稚姫の神司
+如何にヘールを嫌ふとも
+神のよさしの縁ぞや
+省みたまへ惟神
+神の教に目覚めたる
+ヘールの身魂に明かに
+鏡の如く映りけり
+此家の主チルテルは
+肝腎要の女房を
+他所に見捨て遠近の
+仇し女に現をば</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">They cast aside their souls to rot, with endless marital quarrels, and all their household goods rattling about. From time to time, they make a clamor and dance, as if living in a haunted mansion. Wearing a gourd-mask of blue and white, and donning the guard's hat of Kiyo, they brandish a captain's face. How hateful it is that they have bound the Shinjiyo, the divine Mikoto of Hatsuwakahime who descended from heaven, and confined her mercilessly in a storehouse, intending to make her a bedchamber companion, having leveled false accusations against the Princess Chiruna. To be a demon-beast who feels no shame for such cruelty—do not let them lead you astray, for where there are tears, blood also flows.</p>
+          <p class="en-p">Heeru, a man of single-minded loyalty and courage, received a divine oracle last night: 'You are a Mitama with deep connections from the age of the gods. You are a Tennin who, in days of old, served the way as the husband of Hatsuwakahime. As the age of Miroku approaches, I shall transform you into a woman, and you shall appear as the divine minister of Hatsuwakahime, a transformed man. Build and solidify the divine nation in detail,' the Lord God solemnly proclaimed. 'How precious is this command! As the divine minister of Hatsuwakahime, this is surely no lie, for there are no two words in the speech of God. Place your hand upon your heart, correctly understand this divine decree, and take Hatsuwakahime, whom God has joined, as your wife.</p>
+          <p class="en-p">Live in harmony and intimacy, and participate in the divine work, O Mizumitama. Even if the transformed woman proclaims that the morning sun shines or clouds over, and even if the earth itself sinks, the way of husband and wife shall not change. In any case, this floating world does not go as the human heart desires. Bear each other's faults, compensate for shortcomings, live in harmony, and solidify the fire and water of heaven and earth. If my Kototama enters your ears safely and in detail, then offer a swift reply, O Princess Mikoto.'</p>
+          <p class="en-p">Truly, the deep Heeru, here reverently receives the divine decree and proclaims it before the Mikoto: 'Ah, Kannagara-kamu-kamu, grant me your divine grace.'</p>
+          <p class="en-p">Hatsuwakahime opened the door with a sudden snap from within, and while watching Heeru's figure, she smiled.</p>
+          <p class="en-p">Hatsuwakahime: 'Wondering whose Kototama this might be, I opened the window to find a fascinating lord. Your heart is sad, repeating such various and severe Kototama.'</p>
+          <p class="en-p">Heeru: 'Since I am a man among men, how could I let my heart be disturbed by a woman? Nevertheless, I cannot disobey the words of God, and I convey them to your Mikoto. This love is not a human love, but a divine love; it is the mirror of love is best.'</p>
+          <p class="en-p">Hatsuwakahime: 'It is suspicious; since I hear it is the word of God, it is not that I have no way to disobey.'</p>
+          <p class="en-p">Heeru: 'How can I unravel the ambiguous Kototama of the Princess? My longing has no way to be resolved. The arrow of love, shot by a brave man, will surely pierce even the rock.'</p>
+          <p class="en-p">Hatsuwakahime: 'Even if you say so, I am a divine messenger, and there is a strict prohibition against taking a husband. My body, which advances by firmly keeping the prohibition, has no way to be tempted by the storm of ugliness. If this were a world without deception, I would not have to torment my soul so much. For me, love is the great God of the moon residing in the white clouds of the sky.'</p>
+          <p class="en-p">Heeru: 'I, too, am the god attached to this barrier, the majestic figure of Mount Terumon.'</p>
+          <p class="en-p">Hatsuwakahime: 'Spring has flowers, summer has mandarin oranges, autumn has chrysanthemums, and winter has the lonely flower of the narcissus. I think that a man who cherishes me, who has no one to pluck me, is equal to a god. Although my sincerity reaches my soul, there is no help for it, as I am a Tennin. People of this world are one, but although there are signs that we do not meet, I have none of this. Without knowing my body, which is that of a fickle man, how futile it is for you to be led astray.'</p>
+          <p class="en-p">Heeru: 'No matter what, I shall keep the teachings of the Sumeru-Ōkami and make you my wife. No matter how much you shake, I will follow you without bending, even to the bottom of the sea.'</p>
+          <p class="en-p">Hatsuwakahime: 'Did I ever think that a person I did not expect would have such deep affection? It is sad that I have no way to draw from it.'</p>
+          <p class="en-p">Heeru: 'You, who push the living carriage of soft and precious Kototama, are the Osu-Kami of heaven. The young grass of Love-Best Nasunogahara blooms while being trampled and crushed.'</p>
+          <p class="en-p">Hatsuwakahime: 'Even if trampled or cut, the fig tree, which has no shadow to see, does not bloom. My body, which advances only toward the way of God, has no precedent for blooming even when the spring breeze blows. Give up on my figure, which has no flowers, and seek flowers that bloom and scent the fields. Even if the purple clover blooms brilliantly, I am not one to become an ornament for the bed.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">抜かして魂を腐らせつ
+夫婦喧嘩の絶えまなく
+家財一切ガタガタと
+時々騒ぎ躍り舞ふ
+化物屋敷に居る様だ
+青と白とをつき交ぜた
+干瓢面を下げ乍ら
+キヨの関守笠に着て
+キャプテン面を振廻し
+天から降つた初稚姫の
+神の命の神女をば
+閨のお伽になさむとて
+チルナの姫に難癖を
+うまうまつけて縛り上げ
+倉の中へと無慚にも
+押込めたるぞ憎らしき
+かかる残虐無道をば
+敢て恥ない鬼畜生
+必ず迷はせ玉ふなよ
+涙もあれば血も通ふ</p>
+            <p class="ja-classical-line">義勇一途のこのヘール
+昨晩の神の御告げに
+其方は神世の昔から
+深い因縁ある身魂
+初稚姫と其昔
+夫婦となつて道の為
+尽しまつりし天人ぞ
+弥勒の神代が来るにつけ
+お前を変性女子となし
+初稚姫の神司
+変性男子と現はれて
+神の御国を細に
+造り固めよと厳かに
+宣らせ玉ひし尊さよ
+初稚姫の神司
+必ず嘘ではない程に
+神の言葉に二言ない
+胸に手をあて神勅を
+正しく覚りヘールをば
+神の結びし夫とし</p>
+            <p class="ja-classical-line">睦び親しみ神業に
+参加なされよ瑞御魂
+変性女子が宣り伝ふ
+朝日は照るとも曇るとも
+仮令大地は沈むとも
+夫婦の道は変らない
+兎角浮世は人間の
+心の儘にはなりませぬ
+互に欠点辛抱して
+採長補短睦じく
+天地の水火を固むべし
+吾言霊の御耳に
+安全に委曲に入るならば
+いと速けく返事
+宣らせ玉へよ姫命
+誠に厚きヘール司
+ここに慎み神勅を
+命の前に宣りまつる
+あゝ惟神々々
+恩頼を賜へかし』</p>
+            <p class="ja-classical-line">初稚姫は中よりパツと戸を開いてヘールの姿を打見守り乍ら微笑して、</p>
+            <p class="ja-classical-line">初稚姫『何人の言霊ぞやと怪しみて
+窓を開けば面白の君。
+種々と厳の言霊繰返す
+君の心の悲しくぞある』</p>
+            <p class="ja-classical-line">ヘール『吾とても男の子の中の男の子なれば
+如何で女に心乱さむ。
+さり乍ら神の言葉は背かれず
+汝が命に宣り伝へける。
+此恋は人恋ならず神の恋
+ラブ・イズ・ベストの鑑なりけり』</p>
+            <p class="ja-classical-line">初稚姫『訝かしや神の言葉と聞く上は
+背かむ術もなきにあらねど』</p>
+            <p class="ja-classical-line">ヘール『瞹眛な姫の言霊如何にして
+解く由もなき吾思ひかな。
+益良夫が思ひつめたる恋の矢は
+やがて岩をも射貫くなるらむ』</p>
+            <p class="ja-classical-line">初稚姫『さは云へど妾は神の御使よ
+夫持たすなと厳しき戒め。
+戒めを固く守りて進む身は
+醜の嵐の誘ふ術なし。
+詐りのなき世なりせば斯くばかり
+吾魂を痛めざらまし。
+吾身には恋てふものは白雲の
+空にまします月の大神』</p>
+            <p class="ja-classical-line">ヘール『吾とてもこれの関所につきの神
+テルモン山の雄々しき姿よ』</p>
+            <p class="ja-classical-line">初稚姫『春は花夏は橘秋は菊
+冬水仙の寂しき花よ。
+手折るべき人なき吾を慈しむ
+男の子は神に等しとぞ思ふ。
+真心は吾魂に通へども
+詮術もなし天人の身は。
+現世の人は一所なりあはぬ
+しるし有れども吾はこれなし。
+浮かれ男の吾身体を知らずして
+迷はせ玉ふ事の果敢なさ』</p>
+            <p class="ja-classical-line">ヘール『どうしても皇大神の御教を
+守りて君を吾妻とせむ。
+如何程に振らせ玉ふも撓みなく
+従ひ行かむ海の底まで』</p>
+            <p class="ja-classical-line">初稚姫『思ひきや思はぬ人の深情
+汲む由もなき吾ぞ悲しき』</p>
+            <p class="ja-classical-line">ヘール『柔かに珍の言霊生き車
+押す君こそは天の於須神
+ラブベスト那須野ケ原の若草は
+踏まれ躙られ乍ら花咲く』</p>
+            <p class="ja-classical-line">初稚姫『踏まれても又切られても花咲かず
+見る影もなき無花果の樹は。
+神の道只無花果に進む身は
+春風吹くも咲く例なし。
+花の無き妾の姿を見限りて
+野に咲き匂ふ花を求めよ。
+紫雲英花実に目覚ましく開くとも
+床の飾りにならぬ吾なり』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Heru: 'Upon the field, the Genge flowers bloom, a Hanamushiro spread, I think to sleep at ease. Your words, so vexing, I can no longer bear to hear. Awakening the Yamatogokoro of a man's heart, I shall not stop until I have taken you by force.'</p>
+          <p class="en-p">While saying this, he slid open the Omotedo, strode straight up to Hatsuwakahime, extended his Enpi, and attempted to grasp her hand firmly.</p>
+          <p class="en-p">Hatsuwakahime quickly released her hand, caught him by the Erigami, and tossed him out of the window as if she were carrying a cat, with a light Chōshi.</p>
+          <p class="en-p">Heru rose up, and without any Shiyōko, advanced once more into the Zashiki to approach Hatsuwakahime.</p>
+          <p class="en-p">Heru: 'Once a man has declared the Iji of love, he is not the kind of man to Hekota in the Chiuto. From here on, Heiwa Shiyudan will be Tautei Dame. Prepare yourself, for I shall make you yield beautifully.'</p>
+          <p class="en-p">As he lunged with a Mushiyabu, Hatsuwakahime, without any effort, pressed him down firmly.</p>
+          <p class="en-p">Hatsuwakahime: 'Ho ho ho ho, Heru-sama, please stop this Jiyōdan. You must be drunk on sake. Please rest here until your intoxication has faded a little.'</p>
+          <p class="en-p">Heru: 'I am by no means drunk. If I say I am drunk, it is that I am drunk on your beauty. This too has arisen entirely from you; there is no one but you who can calm my heart. I never intended to love you from the beginning. But as soon as I saw your figure, I was instantly possessed by a spirit, and unable to restrain myself, I approached you in obedience to the command of God. It is by no means Heru's own thought.'</p>
+          <p class="en-p">Hatsuwakahime: 'Ho ho ho ho, at your age, how can you say such things. Unless I administer Bringing-up-father, you will surely be Dame. Even if you think to deceive me by saying it is the command of God, while it might work on other women, it will not have the slightest effect on me, so please refrain from such lies.'</p>
+          <p class="en-p">Heru: 'No matter what you say, I cannot save face as a man. Please, let me go. If I am held down with such great strength, my breath will cease.'</p>
+          <p class="en-p">Hatsuwakahime: 'What does it matter if your breath ceases? You said you would follow me even to the bottom of the sea, did you not, ho ho ho ho.'</p>
+          <p class="en-p">She laughed softly. Just then, the captain of the mansion's gatekeeper, Chiruteru, came running with his feet clattering and his face pale.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ヘール『野辺に咲く紫雲英の花の花莚
+敷きてやすやす寝ねむとぞ思ふ。
+もどかしき君の言葉を早吾は
+聞くも堪え難くなりにけらしな。
+男心の大和心を振り起し
+手籠めにしても手折らで止まじ』</p>
+            <p class="ja-classical-line">と云ひ乍ら表戸をガラリと開け、ツカツカと初稚姫の前に進み猿臂を伸ばして、グツと其手を握らむとした。初稚姫は手早く其手を放し襟髪とつて窓の外に猫を提げた様な調子でフワリと投げ出した。ヘールはムクムクと起き上り再び座敷に性懲りもなく初稚姫の前に進み寄り、</p>
+            <p class="ja-classical-line">ヘール『一旦男が云ひだした恋の意地、中途に屁古垂れる様な男では厶らぬ。もう此上は平和の手段では到底駄目だ。覚悟召され、美事靡かして見せよう』</p>
+            <p class="ja-classical-line">と武者振りつくを初稚姫は手もなく、グツと押へつけ、</p>
+            <p class="ja-classical-line">初稚姫『ホヽヽヽヘールさま、宜い加減に悪戯なさいませ。貴方はお酒に酔つて居らつしやるのでせう。少しく酔の醒めるまで、此処でお休みなさいませ』</p>
+            <p class="ja-classical-line">ヘール『決して酔うては居りませぬ。酔うたと云ふのは貴方の容色に酔つたのです。之も全く貴女より起つた事、吾心を鎮めて下さるのは貴女より外にはありませぬ。決して私は初めから貴女にラブしようとは思つて居なかつたのです。それが俄かに貴女のお姿を見るにつけ、忽ち神懸となり、矢も楯もたまらず、神の命に従つて貴女にかけ合つたのです。決してヘールの考へではありませぬ』</p>
+            <p class="ja-classical-line">初稚『ホヽヽヽよい年をして、ようまアそんな事を仰有いますな。ブリンギング・アップ・ファーザー（老年教育）を施さなくては到底貴方は駄目でせう。神さまの命令だなどと云つて妾を誤魔化さうと思召しても、外の女ならいざ知らず、妾に対しては寸功も現はれませぬから、どうか左様な詐言はお慎み下さいませ』</p>
+            <p class="ja-classical-line">ヘール『何と仰有つても男の顔が立ちませぬ。何卒そこ放して下さい。左様な剛力で押へられましては息が絶れますわい』</p>
+            <p class="ja-classical-line">初稚『息が絶えても構はぬぢやありませぬか。貴方は妾の為には海の底まで跟いて行くと仰有つたでせう、ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">と小さく笑ふ。そこへ足をチガチガさせ乍ら血相変へてやつて来たのは館の関守チルテルのキャプテンであつた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: 変金 [1510]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: Fox 穴 [1512]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

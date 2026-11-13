@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 1: 逆艪 [1501] - Volume 59 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 59 Table of Contents</a>
+      <span>Volume 59</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 59 &bull; Chapter 1</span>
+      <h1 class="chapter-title-en">Chapter 1: 逆艪 [1501]</h1>
+      <p class="chapter-title-ja">逆艪〔1501〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Across the vast expanse of Lake Kiyo, the weather suddenly changed, and the ship was tossed up and down, left and right, by the surging waves.</p>
+          <p class="en-p">Wacks, a man of evil and lawless ways, had his essential helmsman swept away by the raging billows, leaving him unable to advance or retreat in the misery of the sea route.</p>
+          <p class="en-p">Regaining his composure, he stood up and began to row the oars with reckless abandon, anxious to reach some shore, but his inherent nature was that of a bat in a village without birds, one who had strutted and boasted in a corner of Mount Terumon.</p>
+          <p class="en-p">The divine punishment for this immediately came to pass upon the lake; the more he grew anxious, the more the old, decaying ship creaked and groaned.</p>
+          <p class="en-p">Wacks and the other two were blinded by the surface of the waves, losing sight of even the direction as they struggled against the surging billows and left their fate to Heaven.</p>
+          <p class="en-p">Wacks: 'Bonten, Taishiyaku, Jizaiten, and the Great God Ōkunihiko, I pray Thee, protect us. Encountering this storm upon the sea, we tremble in awe of the divine trial and are finally resolved to repent. For the sake of saving all sentient beings, we shall shave our long hair, renounce this world to become monks, and while striving in constant diligence, we shall serve the true teachings of the Great God of supreme benevolence and love. Ah, O Imperial Gods, O Imperial Gods, have mercy upon the repentance of us four and cease this hurricane. I pray to Thee with a sincere heart. No matter how strong the demons may be, no matter how many the possessing spirits, even if Smart should come, the path of the Brahmin's teaching, which is sincerity alone, shall save the world. May the mountain wind of Mount Terumon calm quickly and protect the fortune of our journey. I pray for this earnestly. We, who were expelled from the sacred ground of Mount Terumon after having painful moss added to it, have no choice but to leave for the capital of Haruna in the Moon Country, to reform from the bottom of our hearts, and without sparing our lives, to offer our souls to the Great God Daikoku. It is my resolve to spread the divine will in all directions with a single, undisturbed heart. Please, O Imperial Gods, let us proceed safely to the flower-blooming shore of Kiyo Port. I pray to the Gods with all my heart.'</p>
+          <p class="en-p">He was rowing the oars while singing this with all his might. Whether the Great God of the Brahmins had heard Wacks's prayer, or whether the Great God of the Omoto of the San-Go-Kyo had granted it, the hurricane miraculously ceased instantly. The terrifying, raging waves and billows gradually calmed until they were as still as a mirror, and the waves began to sparkle in the sunlight. Mount Terumon appeared ahead, revealing its majestic figure high above the clouds, with a belt of clouds tied around its mid-slope, looking down upon the lake surface with composure. Wacks, as if having received welcome rain in a parched rice field, suddenly recovered his energy; the fear and trembling of his soul, which had been praying to the Gods in a time of desperation, had vanished somewhere, and he began to talk back with his usual insolence.</p>
+          <p class="en-p">Wacks: 'Hey, Ex, you extortionist teacher Herman, you six-hundred-yen robber, and you, El, the crusher of testicles, what are you dawdling for? Why don't you lift your heads? You are truly hopeless creatures. Look at this, even the hurricane and the raging waves have calmed down instantly at the prayer of Wacks-sama, and now they are looking as if they were just dreaming. Surely, the power of Wacks-sama is truly great, is it not?' Ex: 'Hah, you talk big. When you were attacked by fear, trembling like a general, and started begging with that pitiful voice, your face was something that could not even be painted. At such times, we were composed and immovable like a mountain, and we left our fate to Heaven with that attitude. You are so obsessed with life that you act so disgracefully at such a time. What is this, you are not even manly. Running back and forth on this narrow, limited boat, your wretchedness is truly a disgrace to us men.' Wacks: 'Hey, what are you blathering about? You will be punished again, and this time the boat will surely capsize. If that happens, even if you cry, Wacks's savior will not know you. It is to your advantage to repent quickly. If you do not repent, I will show you something terrible... you know that is what the Great Jizaiten-sama has instructed, don't you?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">広袤千里のキヨの湖
+俄に天候一変し
+逆巻浪に船体を
+上下左右に奔弄され
+悪虐無道のワックスも
+肝腎要の機関手を
+逆巻波に攫はれて
+進みもならず退きも
+ならぬ海路の苦しさに
+気を取直し立上り
+無性矢鱈に櫓を漕いで
+何れの岸にか辿らむと
+心あせれど生れつき
+テルモン山の片隅に
+鳥なき里の蝙蝠を
+気取つて威張りちらしたる
+其天罰は忽ちに
+報ゐ来りて湖の上に
+心焦れば焦る程
+老朽船はキリキリと</p>
+            <p class="ja-classical-line">浪の面で目を眩す
+ワックス初め三人は
+舟諸共に目を眩し
+方角さへも見失ひ
+逆巻波と闘ひて
+運をば天に任しつつ
+ワックス『梵天帝釈自在天
+大国彦の大御神
+守らせ玉へ吾々は
+この海上の暴風に会ひ
+神の試練と畏みて
+いよいよ改心仕り
+サットワ゛（衆生）済度のそのために
+此長髪を剃りおとし
+此世を捨てて比丘となり
+ニテヨーデユクタ（常精進）を励みつつ
+至仁至愛の大神の
+誠の教に仕ふべし
+あゝ皇神よ皇神よ
+吾等四人の改心を</p>
+            <p class="ja-classical-line">憫れみ玉ひて此颶風を
+とめさせ玉へ惟神
+赤心籠めて願ぎ奉る
+悪魔は如何に強く共
+憑き物如何に多くとも
+仮令スマートが来る共
+誠一つのバラモンの
+教の道は世を救ふ
+テルモン山の山颪
+早く治まり吾々の
+行手の幸を守りませ
+偏に願ひ奉る
+テルモン山の聖地をば
+痛い苔を加へられ
+追放された吾々は
+最早詮なし月の国
+ハルナの都に立出でて
+心の底より改良し
+命を惜まず魂を
+大黒主に奉り</p>
+            <p class="ja-classical-line">一心不乱に神の旨を
+四方に開かむ吾が覚悟
+此海無事にキヨ港の
+花咲く岸に安々と
+進ませ玉へ惟神
+神かけ念じ奉る』</p>
+            <p class="ja-classical-line">と一生懸命に歌ひ乍ら櫓を操てゐる。バラモンの大神がワックスの願ひを聴許遊ばしたのか、或は三五教の大本大神がお許し遊ばしたのか、不思議にも颶風はピタリと止まり、見るも恐ろしき激浪怒濤は漸く凪いで鏡面の如く鎮まり、浪キラキラと日光に輝き初めた。テルモン山は前方に当つて、雲表に高く其雄姿を現はし、中腹に雲の帯を締めて、泰然として此湖面を眺めてゐる。ワックスは大旱の水田に喜雨を得たるが如く、俄に元気恢復し、叶はぬ時の神頼み、慄ひ戦いてゐた魂はどこへやら、ソロソロ減らず口を叩き始めたり。</p>
+            <p class="ja-classical-line">『オイ、エキス、ヘルマンの恐喝先生、六百円の強奪者、並びに睾丸潰しのエルの奴、何をグヅグヅしてゐやがるのだい。いいかげんに頭を上げぬかい。仕方のない代物だなア。流石の颶風も怒濤も、此ワックスさまの御祈願に仍つて、之れ見ろ。言下に静まり、ケロリカンとして、夢をみたやうな面をさらしてゐるぢやないか。本当にワックスさまの御威勢といふものは偉大なものだらう』</p>
+            <p class="ja-classical-line">エキス『ヘン、仰有いますわい。恐怖心に襲はれ、ガタガタ慄ひの大将奴、憫れつぽい声を出して、哀求歎願と出かけた時の、汝の御面相つたら、絵にもかけないやうだつたよ。ああ云ふ時に泰然自若、動かざること山岳の如し、態の、吾々は態度を以て、運命を天に任してゐたのだ。汝は生の執着が人一倍濃厚だから、こんな時になつて、醜体を演ずるのだ。何だ、男らしうもない。限ある狭い舟の上を右往左往に転げ廻りよつて、其みつともなさ、本当に吾々男子の面汚しだよ』</p>
+            <p class="ja-classical-line">ワックス『コリヤ、汝何と云ふことをほざくのだ。又罰が当つて、今度こそ舟が転覆して了ふぞ。其時になつて吠面かわいても、ワックスの救主は知らぬぞよ。早く改心したが其方の得だぞよ。改心致さねば、目に物みせてやらうぞよ……と大自在天様の御諭しにあるのを、汝知つてゐるだらうなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ekisu: 'Such a thing is already known to this personage since long ago. Hey, Wakkusu, you have let the Mahafutsukahi of Kanjinkaname escape, what do you intend to do?'</p>
+          <p class="en-p">Wakkusu: 'In any case, we must also cross this Unabara, so we can catch up on the way, squeeze the oil out of them sufficiently, and make them meet their Ōjiyō.'</p>
+          <p class="en-p">Ekisu: 'Hmph, you will be the one made to meet your Ōjiyō, will you not? No matter what you say, you are the former chairman of the Akusuikuwai who crushes the weak and follows the strong.'</p>
+          <p class="en-p">Wakkusu: 'Can you not wake up and steer this oar properly? If you leave it alone, who knows where we might end up drifting?'</p>
+          <p class="en-p">Ekisu: 'I am waiting for us to drift. I do not know how much more at ease I would be if we reached the Rikuchi as soon as possible and traveled on foot from there. After all, there is no fear of drowning in the mountains by accident.'</p>
+          <p class="en-p">Wakkusu: 'The other party is sailing in a straight line, while if we are to cross mountains and valleys and follow a difficult path, who knows when we will reach the port of Kiyo. How about we decide to proceed along this Suiro?'</p>
+          <p class="en-p">Ekisu: 'No matter what, it is impossible, is it not? Because everyone, this one and that one, is nothing but a fool who has no knack for steering a boat.'</p>
+          <p class="en-p">Eru: 'Hey, why not hang that fool on this Kitakaze and sail in a straight line? If you do that, there is no need to break your bones operating the oar, and the God of Wind will naturally carry us to the other party.'</p>
+          <p class="en-p">Wakkusu: 'Indeed, that is a good idea.'</p>
+          <p class="en-p">He pulled the rope with a rattling sound and hoisted the sail, which had turned brown. Immediately, the sail caught the wind like a bow, and while making a sound of 'saa, saa, saa, saa,' the boat slid forward with great force. Eru, holding the oar in his hand with an uncertain air, began to steer the boat while singing a Kōno song.</p>
+          <p class="en-p">Eru: '(Oiwake) Even a tiger crosses a thicket of a thousand ri, why can this lake not be crossed? (Yasugibushi style) There is one who failed to steal the precious jewel of the God's mansion. The moon is in the sky at the Terumon mansion, and the figure of Debisu is like a flower or snow. Is it a butterfly or a maggot that comes yearning for the scent of flowers? The son of the steward Wakkusu, who has accumulated karma, is now crying on the lake. Crying until dawn at the Terumon mansion, is this the awakening from the dream of this world? (Ryukyu style) The wind sends the boat from the north, the wind that sends it is the breath of Kerina. First, a living parting from the Yakkan-jiji, and a tearful parting from Princess Debisu.'</p>
+          <p class="en-p">Wakkusu: 'Hey, hey, Eru, what are you spouting? It is useless. You, it would be better if you rested a little. I will take the oar from now on and sing one for you.'</p>
+          <p class="en-p">Eru: '(Ryukyu style) Wakkusu-sama, who has been exposed, is getting angry, and the waves are rising.'</p>
+          <p class="en-p">While singing this, he let go of the oar suddenly. Wakkusu grasped the oar quickly.</p>
+          <p class="en-p">Wakkusu: 'Hey, that was a close call, I almost had the oar taken by the waves. Can you not be a little more careful? Once this is taken, we cannot steer the boat where we want, can we? You are an Ahau.'</p>
+          <p class="en-p">Eru: 'Hmph, well, let me remain an Ahau. If one becomes a clever person, a wise person, or a skillful person, one is used as a tool by all the fools. If one is even a little bit talented, they pester me, saying, "Eru-sama, please write this signboard," or "Please write the name of this bridge," or "Please write the cover of this ledger," and I am made a plaything for the fools. One should not become a scholar or a wise man. Wakkusu-sama, I leave it to you. You are truly magnificent when you hold the oar. It looks as if you are putting strength even into your toes. Do not let yourself be knocked away by the handle of the oar you are holding, like the boatman before.'</p>
+          <p class="en-p">Scratching the tip of his nose three or four times, he lay down on the bottom of the boat. Wakkusu grasped the oar and gazed out over the wide surface of the lake.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">エキス『そんなことは、とうの昔に御存じの此方さまだ。オイ、ワックス、肝腎要の魔法使を取逃がし、どうする積だい』</p>
+            <p class="ja-classical-line">ワックス『どうせ、俺達も此海原を渡らねばならぬのだから、又途中で追ひついて、十分油を絞り、往生さしてやれば可いのだ』</p>
+            <p class="ja-classical-line">エキス『ヘン、往生させられるのだらう、何と云つても、弱きを挫き、強きに従ふといふ悪酔会前会長だからな』</p>
+            <p class="ja-classical-line">ワックス『汝等可いかげんに起きて此櫓を操縦せないか。放つておいたら、どんな所へ漂着するか知れぬぢやないか』</p>
+            <p class="ja-classical-line">エキス『漂着を待つてゐるのだ。一時も早く陸地へ着いて、そこからテクつた方が何程安心だか分らぬワ。メツタに山で溺死する気遣はないからのう』</p>
+            <p class="ja-classical-line">ワックス『先方は舟で一直線に走つて行きよるなり、こつちや山を越え谷を越え、難路を辿つて居らうものなら、何時キヨの港迄つくか分らないワ。何とかして此水路を進むことにしたら如何だ』</p>
+            <p class="ja-classical-line">エキス『何としても法がつかぬぢやないか、何奴も此奴も舟を操縦する事に妙を得て居ない阿呆人種計りだからのう』</p>
+            <p class="ja-classical-line">エル『オイ、其アホを此北風にかけて、一直線に駆けて進んだら可いぢやないか、さうすりや骨を折つて櫓を操る必要もなし、風の神が自然に先方へ渡してくれるワ』</p>
+            <p class="ja-classical-line">ワックス『成程、よい考へがついた』</p>
+            <p class="ja-classical-line">とガラガラと綱を引張上げ、茶色になつた帆を巻上げた。忽ち帆は弓の如く風を孕むでサア　サア　サア　サアと音を立て乍ら、勢よく辷り出した。エルは櫓を手に握り覚束なげに、舟の舵をとり乍ら、欵乃を唄い出した。</p>
+            <p class="ja-classical-line">エル『（追分）虎は千里の藪さへ越すに
+これの湖水がなぜ越えられぬ。
+（安来節調）神の館の宝珠の玉を
+盗みそこねた人がある。
+月は御空にテルモン館
+デビスの姿は花か雪。
+花の香りを慕うて来たる
+蝶かあらぬか蛆虫か。
+劫をワックス家令の悴
+今は湖上で泣いてゐる。
+泣いて明志のテルモン館
+これが此世の見をさめか。
+（琉球節調）風は北からみ舟を送る
+送る風こそケリナの息よ。
+薬鑵爺に先づ生き別れ
+デビスのお姫さまにや泣き別れ』</p>
+            <p class="ja-classical-line">ワックス『コラコラ　エルの奴、何を吐すのだ、せうもない。汝、チツと休むだらよからう。俺がこれから、櫓を握つて一つ唄つてやるのだ』</p>
+            <p class="ja-classical-line">エル『（琉球節調）素破ぬかれたワックスさまは
+肚が立つなり波が立つ』</p>
+            <p class="ja-classical-line">と唄ひ乍ら櫓をパツと放した。ワックスは手早く櫓を握り、</p>
+            <p class="ja-classical-line">ワックス『コラ、スツテのことで櫓を波に取られるとこだつた。チツと気をつけぬかい。此奴を取られた以上、思ふ所へ舟が向けられぬぢやないか。馬鹿だなア』</p>
+            <p class="ja-classical-line">エル『ヘン、マア馬鹿になつておかうかい、悧口の者や賢い者や器用な者になると、皆阿呆共の道具に使はれるからなア。少し書でも甘いと、あのエルさまに看板を書いて貰はうとか、橋の名を書いて貰はうとか、大福帳の表紙を認めて貰はうとかぬかしよつて、阿呆共の弄物にしられるのだ。学者や智者になるものぢやないワ。ワックスさま、宜しく頼みます。随分お前さまが櫓を握つた時は立派なものだ。足の爪先迄力が入つてるやうだ。最前の船頭のやうに、自分の握つた櫓の柄に撥ね飛ばされぬやうになさいませや』</p>
+            <p class="ja-classical-line">と鼻の頭を三つ四つかき乍ら、船底にゴロリと横はる。ワックスは櫓を握り、広き湖面を眺めて、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Wakkusu: 'Upon the lake of the shining mirror, I carry the mirror of evil. Across the lake where clear Mamizu drifts, Akusui-kai rows the boat. Strong in evil, strong in good, I traverse the sea of good and evil. Though waves may rise, the heart remains still; an Ahaubune with a broken waist. It is a boat, yet a Shirakahayobune, passing through the world in a dream or reality. He who has had his Kintama stepped on by an ox can never board this boat of jewels. He who hurries before his death wanders lost at the Jifujigaitō. Crushing the Kintama of the lost Maujiya, I cross this lake with the sail of Ahau. Wounds throbbing, pus dripping, I shed tears upon the waves. Above, Aogumo; below, Mogusa; in between, the boat of the Ahau rides. Hahaha, Omoshiro, Omoshiro! It is the first time I have boarded a boat since I was born, and what a Yukuwai thing it is. I have always wanted to ride the dark boat of Davis, and I do not know how many masts I have raised or how many Shiraho I have hoisted in my eagerness, but thinking of it now, it seems truly Bakakusa. Yatsupari, a Ningen must go out into the wide world, or it is Dame.'</p>
+          <p class="en-p">Ekisu: 'Oi, Sensei Wakkusu, how about taking an Itsupuku? I, too, must practice rowing on this quiet lake, for if I do not, I shall surely resort to Tochimenbō at a critical moment.'</p>
+          <p class="en-p">Wakkusu: 'Since it is a long Kairo, it would be a waste for me to exhaust my Seiriyoku now, so I shall let you take control of the Roken for a while. Come, take hold, take hold quickly.'</p>
+          <p class="en-p">Ekisu: 'Ya, Arigata! In that case, I am the Prime Minister of the Shinnaikaku. Since I am accustomed to the art of swimming in the sea of officialdom, just watch me; I shall display such magnificent skill for your eyes...'</p>
+          <p class="en-p">Wakkusu: 'Hen, do not mock me with your official seas. You are the champion of the sea of theft. It would suit your nature far better to sing a song of the world of theft to deceive the eyes of your pursuers.'</p>
+          <p class="en-p">Ekisu: 'More than the great power of the world that one holds with dignity, / The joy of gripping the oar. / Carrying the souls of interesting evil and evil, / I go on to pollute the sea of Kiyo. / The Naishu that existed before riding the dog, / Now, where is it upon the waves? / The three hundred gold coins, before I knew it, / Slipped from my bosom onto the sea. / They say the floating world is a debt of gold, / But without gold, one cannot cross. / Yet, to cross the sea, money is not enough; / The boat is the guardian deity of life. / Expelled from the house of God, / A fellow who cannot find a place to rest his hips. / Struck by a golden washbasin on the hips, clanging, / How hot is that summer sun. / Not only is his face thick-skinned, but even his hips / Were praised as being hot. / Wakkusu, separated into the two of color and desire, / Wanders weeping upon the sea. / Ekisu-sama, a sweet Ekisu, a new man, / People call him an octopus monster. / A man who dreamed of clinging and weeping like a mouse, / Was chased by a cat and fled. / By pleasing the kettle-old man who wears a cat's mask, / He was made a fool despite his efforts. / The essential gold was swindled by another, / And he was struck on the hips with money. / The funeral ceremony, weeping, laughing, regretting, and dancing, / The hidden smile of the woman who weeps out of duty.'</p>
+          <p class="en-p">Wakkusu: 'Kora, Ekisu! What are you blathering about, dying or not dying on the lake? You will bring a hurricane upon us again. Will you not be careful with your Kototama?'</p>
+          <p class="en-p">Ekisu: 'My hands are weary, my stomach is angry; as I cross the lake with a wayward son, / Here and there, albatrosses. / The albatross, aiming at Wakkusu to collect a tax, / Is flapping its wings. / Shaken, weeping, I throw out the precious gold, / Tears shed to save my neck.'</p>
+          <p class="en-p">Wakkusu: 'Oi, Heruman, since there is no helping the fellow Ekisu, will you not sing a celebratory song to set things right?'</p>
+          <p class="en-p">Heruman: 'Well, even if you say set things right, there are no other empty boats, so is there any choice but to keep riding? Tamakuniwake-sama set things right smoothly and went on ahead, but as for us, I am worried about our future and cannot help it. From a while ago, I have actually been worried about our future and have been sinking into tears of sorrow. Ah, it cannot be helped... A small boat abandoned on the shore, is there no island to cling to? But to say that and throw myself into the lake to be buried in the belly of a fish does not seem very clever either. Ah, what should I do? I am already tired of this world. Somehow, the Muniya Muniya Muniya of the San-Go-Kyo.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ワックス『旭輝く鏡の湖に
+悪の鏡を乗せて行く。
+清き真水の漂ふ湖を
+悪酔カイが舟を漕ぐ。
+悪に強けりや善にも強い
+善と悪との海を行く。
+波は立つ共心は立たぬ
+腰のぬけたる阿呆舟。
+舟は舟だが白河夜舟
+夢か現で世を送る。
+牛に睾丸踏まれた奴は
+とても乗られぬ玉の舟。
+死なぬ前からあわてた奴が
+十字街頭に踏み迷ふ。
+迷うた亡者の睾丸潰し
+阿呆の帆（呆）かけ此湖渡る。
+傷はヅキヅキ膿ボトボトと
+涙流して波の上。
+上にや青雲下には藻草
+中を乗り行く阿呆のエル。</p>
+            <p class="ja-classical-line">アハヽヽヽ、面白い面白い、生れてから始めて舟に乗つたが、何と愉快なものだな。デビスの暗がり船に乗りたい乗りたいと思つて、今迄どれ丈マストを立てたり、白帆をあげて、きばつたか知れないが、今となつて考へてみると、本当に馬鹿臭い様だ。矢張、人間は広い所へ出て来ねば駄目だな』</p>
+            <p class="ja-classical-line">エキス『オイ、ワックス先生、チツと一服したら何うだ。俺も一つ練習の為に、此静かな湖で、櫓の稽古をやつておかぬと、マサカの時に栃麺棒を振るからのう』</p>
+            <p class="ja-classical-line">ワックス『長い海路だから、俺も今から精力を消耗さしてはつまらぬから、汝に櫓権を暫く掌握させてやらう。サア早く握つたり握つたり』</p>
+            <p class="ja-classical-line">エキス『ヤ、有難い、それなら、新内閣の総理大臣だ。官海游泳術に慣れた此方だから、マア見てゐ玉へ、随分素晴しい技能を発揮してお目にかけるから……』</p>
+            <p class="ja-classical-line">ワックス『ヘン、官海なんて、馬鹿にするない、汝は渡海否盗界の覇者だ。盗界節でも唄うて、追手の目を韜晦する方が余程性に合うてるだらうよ』</p>
+            <p class="ja-classical-line">エキス『どうどうと握る天下の大権よりも
+櫓櫂つかんだ面白さ。
+面白い悪と悪との身魂を乗せて
+キヨの海をば汚し行く。
+犬に乗りたる以前のナイス
+今は何処の波の上。
+三百の金は何時しか吾懐を
+辷り出でたる海の上。
+金が仇の浮世と聞けど
+金が無ければ渡れない。
+さり乍ら海を渡るにや金ではゆかぬ
+舟が命の守神。
+神の館を放逐されて
+尻の据場に困る奴。
+金盥尻に当られカンカンと
+照らす夏日の其暑さ。
+面の皮あつい許りか尻迄が
+あつい男とほめられた。
+ワックスは色と欲との二つに離れ
+泣いて彷徨ふ海の上。</p>
+            <p class="ja-classical-line">エキスさま甘いエキスふ新し男
+蛸のお化けと人が云ふ。
+吸いついて鼠泣きせうと夢みた男
+猫に逐はれて逃げ出した。
+猫かぶり薬鑵爺の機嫌をとりて
+居つた甲斐なく馬鹿にされ。
+肝腎の金は他人にぼつたくられて
+尻にお金の叩き払ひ。
+天葬式泣いて笑うて悔んで踊る
+義理泣き女のホクソ笑』</p>
+            <p class="ja-classical-line">ワックス『コラ、エキス、湖上で死ぬだの死なぬのと、ナニ不吉なことをほざくのだ。又、颶風が襲来するぞ。チツと言霊を慎まぬか』</p>
+            <p class="ja-classical-line">エキス『手がだるい、腹が立つ、極道息子と湖上を越せば
+あちら此方に信天翁。
+信天翁、運上取らうとワックス目がけ
+バタバタ翼を打つてゐる。
+ゆすられて、泣き泣き放り出す惜しい金
+首をつなぐと泣く涙』</p>
+            <p class="ja-classical-line">ワックス『オイ、ヘルマン、エキスの奴、仕方がないから、汝一つ目出度い唄を唄つて宣り直してくれないか』</p>
+            <p class="ja-classical-line">ヘルマン『さうだなア、のり直さうと云つたつて、外に空舟もなし、矢張乗続けるより仕方がないぢやないか。玉国別は甘く乗直して、サツサとお先へやつて行きよつたが、俺達は一体行末が案じられて仕方がないワ。最前から、実は前途を案じ、チツと許り憂愁の涙に沈みてゐた所だ。あーあ。仕方がない、……寄辺渚の捨小舟、どこへ取つく島もなしか……ぢやと云つて、湖水に投身して魚腹に葬られるのも、何だか気が利かないやうだし、あゝ何うしたら可からうかなア。俺やモウ世の中が厭になつたのだ。何とかして三五教のムニヤ　ムニヤ　ムニヤ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Wakkusu: 'Ya, what do you say? You mean to say you wish to become a Deshi of Ananai-kyō, do you?'</p>
+          <p class="en-p">Heruman: 'Naani, it is just that if I do not stand up as a man to rival Ananai-kyō, I shall not be able to show my face in Seken. We had schemed against the Tamakuniwake party to that extent, and just when we had reached the point of nine-tenths of the way to taking our revenge, a Megamisama like Manjushri Bosatsu or Avalokiteshvara came to meet them with a magnificent ship, and they are even capable of such a feat as crossing the Kaijiyō riding on a dog. No matter what one says, they are something impressive, even if they are our enemies.'</p>
+          <p class="en-p">Wakkusu: 'Saa, that is the very Yuen of why a Mahafutsukahi is a Mahafutsukahi. Is it not said that there is no Fushigi in the Shiyōhafu, and that a Kunshi does not speak of Kuwairikiranshin? It is surely Jiyahafu.'</p>
+          <p class="en-p">Heruman: 'Even so, compared to your Biriyokuranshin, is it not much better? Somehow, I am beginning to... like... that Ananai-kyō. I cannot help but feel that there is a tremendous Kejime between the Kamisama of Ananai-kyō and the gods of Brahmanism in terms of Seijiya and Zenaku.'</p>
+          <p class="en-p">Wakkusu: 'Which do you say is the righteous and which is the evil?'</p>
+          <p class="en-p">Heruman: 'As for calling it evil, I cannot judge it suddenly. Well, I will not know until I go as far as I can. However, rest assured, as I am a Brahmanist by nature, I am not a spineless man who would easily drown in the teachings of a heretical sect. But think about it carefully; are we not the Puritans of Brahmanism? Despite that, we were whipped and expelled from the Brahman Hall in front of a crowd, so perhaps we have been abandoned by the gods. If that is so, as they say there is a god who picks up what another god has discarded, if we have indeed been discarded, since a person cannot stand in this world without a religion, we must think of something.'</p>
+          <p class="en-p">Wakkusu: 'Nani, do not worry. Once we arrive at the port of Kiyo, everywhere is within the sphere of influence of Brahmanism, so if we can skillfully capture the Mahafutsukahi of Ananai-kyō, or if we cannot manage by force, we shall report them to the checkpoint and show our merit; then we can once again be magnificent Puritans of Brahmanism, receive our travel permits at the checkpoint safely, and go to the capital of Haruna as we please. My, how fast the boat is! This is entirely thanks to the gods of Brahman. Saa, Eru, move aside, I shall take the oar and handle it for a while.'</p>
+          <p class="en-p">Saying this, they took turns gripping the oar, and aided by a favorable wind, they arrived safely at the port of Kiyo on the evening of the third day.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ワックス『ヤ、何と申す、汝は三五教の弟子になりたいといふのだな』</p>
+            <p class="ja-classical-line">ヘルマン『ナアニ、三五教の向うを張つて一つ男を立てねば世間に顔出しが出来ないといふのだ。玉国別一行には俺達があこ迄仕組みて、既に仇を報ゐむと、九分九厘迄行つた所へ、マンヂューシリ菩薩か、アバローキテー・シュワ゛ラのやうな女神様が立派な船を以て迎へに来たり、自分は犬に乗つて海上を渡つて行くといふ様な離れ業が出来るのだからなア。何と云つても敵乍ら大したものだよ』</p>
+            <p class="ja-classical-line">ワックス『サア、そこが魔法使の魔法使たる所以だ。正法に不思議なし、君子は怪力乱神を語らずといふぢやないか。キツと邪法だよ』</p>
+            <p class="ja-classical-line">ヘルマン『それでもお前の様に微力乱心に比べてみたら、余程マシぢやないか。俺は何だか、あの三五教とやらが、俄に好に……なつて……は来ぬのだ。本当に三五教の神様とバラモン教の神様とは、正邪善悪の差別が非常についてゐる様に思はれてならないのだ』</p>
+            <p class="ja-classical-line">ワックス『どちらが正でどちらが邪といふのだ』</p>
+            <p class="ja-classical-line">ヘルマン『邪と申して、俄に判断がつかないワ。マア行く所迄行かねば分らない。併し乍ら安心してくれ、俺は素よりバラモン教徒だから、メツタに外道の教に溺没するやうな無腸漢ぢやないからのう。併し乍らよく考へてみよ、俺達四人はバラモン教のピュリタンぢやないか。それにも拘らず、バラモン館を大勢の前で笞刑をうけて放逐されたのだから、神様から見放されたのかも知れないよ。さすれば捨てる神もあれば拾ふ神もありといふから、実際捨てられたとすれば、人は無宗教で此世に立つてゆけないから、何とか考へねばなるまい』</p>
+            <p class="ja-classical-line">ワックス『ナニ、心配するな。キヨの港へついたら最後、どこもかも皆バラモン教の勢力範囲だから、三五教の魔法使を巧く捕縛するか、もしも力に及ばねば関所へ密告して手柄を現はしさへすれば、又立派なバラモン教のピュリタンとして、安全無事に関所の切手を貰ひ、ハルナの都へ安全に行かうとままだ。何とマア舟の早いことだのう。これも全くバラモンの神様のお蔭だよ。サア、エル、そこどけ、俺が一つ櫓を操つてやらう』</p>
+            <p class="ja-classical-line">と言ひ乍ら、代る代る櫓を握り、順風に助けられて都合好くキヨの港へ三日目の夕方安着したりける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="preface.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Preface & Introduction</span>
+      </a>
+      <a href="c02.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 2: Song 垣 [1502]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
