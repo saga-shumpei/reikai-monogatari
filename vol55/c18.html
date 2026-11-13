@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 18: Sound 頭 [1426] - Volume 55 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 55 Table of Contents</a>
+      <span>Volume 55</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 55 &bull; Chapter 18</span>
+      <h1 class="chapter-title-en">Chapter 18: Sound 頭 [1426]</h1>
+      <p class="chapter-title-ja">音頭〔1426〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Azumosu, tying a headband with a red handkerchief, mingled with the crowd, clapping his hands, drawing circles in the wide courtyard before the shrine, and began to lead the chant and dance.</p>
+          <p class="en-p">'(Ondō Chanting Style) Hāyā, the evening sun also sinking, (Enyatsutokosē)'</p>
+          <p class="en-p">'Announcing mujiyō, the sound of the bell too, (Korashyo)'</p>
+          <p class="en-p">'At the dawn of the Miroku Sane'</p>
+          <p class="en-p">'It sounds like the voice of meza. (A, yōisē, yatsutokosē)'</p>
+          <p class="en-p">'The light of the ginshiyoku illuminating the front of the shrine'</p>
+          <p class="en-p">'Shining brightly and spreading across. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'Harukuniwake, the kamutsukasa'</p>
+          <p class="en-p">'Appearing as the god of salvation, (Korashyo)'</p>
+          <p class="en-p">'The mioshihe of Ananai-kyō'</p>
+          <p class="en-p">'Preaching completely and tsubara. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'In the house of Rishiyō in the village of Tamaki, (Korashyo)'</p>
+          <p class="en-p">'How precious it is that he stays! (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'In the gankutsu of Inokurayama, (Korashyo)'</p>
+          <p class="en-p">'The Brahmin who has built a nest,'</p>
+          <p class="en-p">'Oniharuwake and Kumehiko too. (A, yōisē, yatsutokosē)'</p>
+          <p class="en-p">'Unable to resist the power of Kami'</p>
+          <p class="en-p">'Taking off their helmets and surrendering, (Korashyo)'</p>
+          <p class="en-p">'Cutting their hair and becoming biku. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'Kongauzue and sumigoromo, (Korashyo)'</p>
+          <p class="en-p">'Wrapped around their bodies as a yoninzu'</p>
+          <p class="en-p">'Leaving this house behind and walking forth. (A, yōisē, yatsutokosē)'</p>
+          <p class="en-p">'Harukuniwake, who remained behind, (Korashyo)'</p>
+          <p class="en-p">'Matsuhiko-sama, the god of mitomo, (Dotsukoi)'</p>
+          <p class="en-p">'Michiharuwake and Tatsuhiko too. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'Together with the chinchukasa'</p>
+          <p class="en-p">'The guardian kami of the village of Tamaki, (Korashyo)'</p>
+          <p class="en-p">'Erecting thick miyabashira in the Teemusu Mansion and the great Kami— (A, yōisē, yatsutokosē)'</p>
+          <p class="en-p">'How precious it is that he pacified him!'</p>
+          <p class="en-p">'Especially auspicious, Mankouwake'</p>
+          <p class="en-p">'Becoming the master of this house, (Korashyo)'</p>
+          <p class="en-p">'Taking Sugaruhime as his bride. (A, yōisē, yatsutokosē)'</p>
+          <p class="en-p">'With the pledge of mandarin ducks for thousands of ages,'</p>
+          <p class="en-p">'Mankou, unchanging through future generations, (Korashyo)'</p>
+          <p class="en-p">'May you live on, Kannagara, (Korashyo)'</p>
+          <p class="en-p">'I pray before the presence of Kami. (A, yōisē, yatsutokosē)'</p>
+          <p class="en-p">'And what is still more auspicious, (Korashyo)'</p>
+          <p class="en-p">'Sumieruhime and Shīna-sama, (Dotsukoi)'</p>
+          <p class="en-p">'Becoming the husband, peerless in the three realms. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'Standing side by side with Mankou-sama, (Korashyo)'</p>
+          <p class="en-p">'Succeeding to the house of Rishiyō. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'The people of this village, forevermore, (Korashyo)'</p>
+          <p class="en-p">'Blessing and helping them, establishing the path of Ananai. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'When auspicious things pile up one upon another, (Korashyo)'</p>
+          <p class="en-p">'Could things possibly pile up to this extent? (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'Āshisu-sama, the head clerk, (Korashyo)'</p>
+          <p class="en-p">'Of a person close to the clouds,'</p>
+          <p class="en-p">'Famed as the imperial seed of chinchu'</p>
+          <p class="en-p">'Taking Lady Omin as his wife. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'Residing in the village of Tamaki, (Korashyo)'</p>
+          <p class="en-p">'Protecting the teachings of the god Harukuniwake,'</p>
+          <p class="en-p">'And becoming the kamutsukasa of this shrine. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'Rejoicing in those auspicious omens,'</p>
+          <p class="en-p">'Without distinction of young and old, men and women,'</p>
+          <p class="en-p">'Gathering together in this mansion,'</p>
+          <p class="en-p">'Choking with tears of joy. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'Ah, Kannagara, oh Kami, oh Kami,'</p>
+          <p class="en-p">'Reverently before the presence of Kami, (Korashyo)'</p>
+          <p class="en-p">'Giving thanks for the deep grace,'</p>
+          <p class="en-p">'Aligning handclaps, aligning footsteps,'</p>
+          <p class="en-p">'Clapping hands and dancing,'</p>
+          <p class="en-p">'Rejoicing and offering celebration. (A, yōisē, yatsutoko)'</p>
+          <p class="en-p">'Though there is still more to come,'</p>
+          <p class="en-p">'Too much length is tedious.'</p>
+          <p class="en-p">'I will rest here for now,'</p>
+          <p class="en-p">'And ask the next teacher to take over. (A, yōisē, yatsutokosē)'</p>
+          <p class="en-p">Michiharuwake cast off his ritual garments, leaped into the midst of the dancers, led the chant, and began to dance.</p>
+          <p class="en-p">'(Aa chiyoi chiyoi chiyoi)'</p>
+          <p class="en-p">'I am Michiharuwake Tsukasa. (A, chiyoitokosē chiyoitokosē)'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">アヅモスは赤手拭ひで鉢巻をし乍ら、群衆に交はつて手を拍ちつつ円を画いて宮の前の広庭に音頭を取り踊り始めたり。</p>
+            <p class="ja-classical-line">（音頭口調）『ハーヤー夕陽も傾きて　　（エンヤツトコセー）</p>
+            <p class="ja-classical-line">無常を告ぐる鐘の音も　　（コラシヨ）</p>
+            <p class="ja-classical-line">みろく三会の暁の</p>
+            <p class="ja-classical-line">目醒めの声と聞ゆなりー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">社前を照らす銀燭の</p>
+            <p class="ja-classical-line">光映ゆき照り渡りー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">治国別の神司</p>
+            <p class="ja-classical-line">救ひの神と現れまして　　（コラシヨ）</p>
+            <p class="ja-classical-line">三五教の御教を</p>
+            <p class="ja-classical-line">完全に委曲に説き玉ひイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">玉木の村の里庄が家に　　（コラシヨ）</p>
+            <p class="ja-classical-line">止まり玉ふ尊さよオー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">猪倉山の巌窟に　　（コラシヨ）</p>
+            <p class="ja-classical-line">巣を構へたるバラモンの</p>
+            <p class="ja-classical-line">鬼春別や久米彦もオー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">神の力に敵し得ず</p>
+            <p class="ja-classical-line">兜を脱いで降参し　　（コラシヨ）</p>
+            <p class="ja-classical-line">髪切り落し比丘となりイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">金剛杖に墨衣　　（コラシヨ）</p>
+            <p class="ja-classical-line">身に纒ひつつ四人連れ</p>
+            <p class="ja-classical-line">此家を後に出でて行くウー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">後に残りし治国別は　　（コラシヨ）</p>
+            <p class="ja-classical-line">御供の神の松彦さま　　（ドツコイ）</p>
+            <p class="ja-classical-line">道晴別や竜彦のオー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">珍の司と諸共に</p>
+            <p class="ja-classical-line">玉置の村の守り神　　（コラシヨ）</p>
+            <p class="ja-classical-line">テームス館に宮柱</p>
+            <p class="ja-classical-line">太しき立てて大神をオー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">鎮め玉ひし尊さよ</p>
+            <p class="ja-classical-line">殊に目出度き万公別</p>
+            <p class="ja-classical-line">此家の主人となり玉ひ　　（コラシヨ）</p>
+            <p class="ja-classical-line">スガール姫を娶らせてエー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">鴛鴦の契の幾千代も</p>
+            <p class="ja-classical-line">万公末代変りなく　　（コラシヨ）</p>
+            <p class="ja-classical-line">暮らさせ玉へ惟神　　（コラシヨ）</p>
+            <p class="ja-classical-line">神の御前に願ぎ奉るウー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">それにまだまだ目出度きは　　（コラシヨ）</p>
+            <p class="ja-classical-line">スミエル姫にシーナさま　　（ドツコイ）</p>
+            <p class="ja-classical-line">三国一の婿となりイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">万公さまと相列び　　（コラシヨ）</p>
+            <p class="ja-classical-line">里庄の家を継ぎ玉ひイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">此村人を何時迄も　　（コラシヨ）</p>
+            <p class="ja-classical-line">恵助けて三五の</p>
+            <p class="ja-classical-line">教の道を立て玉ふオー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">目出度い事が重なれば　　（コラシヨ）</p>
+            <p class="ja-classical-line">これほど重なるものかいなアー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">番頭さまのアーシスさまは　　（コラシヨ）</p>
+            <p class="ja-classical-line">雲井に近き御方の</p>
+            <p class="ja-classical-line">珍の御胤と聞えたる</p>
+            <p class="ja-classical-line">お民の方を妻に持ちイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">玉木の村にましまして　　（コラシヨ）</p>
+            <p class="ja-classical-line">治国別の神様の</p>
+            <p class="ja-classical-line">教を守り此宮の　　（コラシヨ）</p>
+            <p class="ja-classical-line">神の司となり玉ふオー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">其の瑞祥を悦びて</p>
+            <p class="ja-classical-line">老若男女の別ち無く</p>
+            <p class="ja-classical-line">之の館に相集ひ</p>
+            <p class="ja-classical-line">歓喜の涙にむせ返るウー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">ああ惟神々々</p>
+            <p class="ja-classical-line">神の御前に謹みて　　（コラシヨ）</p>
+            <p class="ja-classical-line">深き恵を感謝しつ</p>
+            <p class="ja-classical-line">手拍子揃え足並揃え</p>
+            <p class="ja-classical-line">拍手うちて踊りつつ</p>
+            <p class="ja-classical-line">悦び祝ひ奉るウーウ　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">まだまだ先はあるけれど</p>
+            <p class="ja-classical-line">あまり長いのは御退屈</p>
+            <p class="ja-classical-line">私はこれで休みます</p>
+            <p class="ja-classical-line">次の御先生に御頼み申すヤーア　　（ア、ヨーイセー、ヤツトコセー）』</p>
+            <p class="ja-classical-line">道晴別は祭服を脱ぎ捨て、踊り子の中に飛び込み、音頭をとつて踊り始めける。</p>
+            <p class="ja-classical-line">『（アアチヨイ　チヨイ　チヨイ）</p>
+            <p class="ja-classical-line">私は道晴別司　　（ア、チヨイトコセー　チヨイトコセー）</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">To the God of Ananai-kyō</p>
+          <p class="en-p">Serving for fourteen years (Ah, chiyoitokosē, chiyoitokosē)</p>
+          <p class="en-p">The mansion of Iso and Jerusalem</p>
+          <p class="en-p">Mount Ōgonzan and Mount Riyōshiuzan</p>
+          <p class="en-p">Pilgrimage even to the Caucasus Mountains (Ah, chiyoitokosē, chiyoitokosē)</p>
+          <p class="en-p">Truly venerable Goshintoku</p>
+          <p class="en-p">Receiving it in our bodies, as a Sendenshi</p>
+          <p class="en-p">Of the rare Tsukasa of Harukuniwake</p>
+          <p class="en-p">While respectfully serving in the retinue (Ah, chiyoitokosē, chiyoitokosē)</p>
+          <p class="en-p">Setting forth from the mansion of Iso</p>
+          <p class="en-p">Crossing over Kajikatauge (Ah, chiyoitokosē, chiyoitokosē)</p>
+          <p class="en-p">Stopping by Yamaguchimori,</p>
+          <p class="en-p">Famed as the dwelling place of tunes</p>
+          <p class="en-p">Just as we spent a single night there (Ah, chiyoitokosē, chiyoitokosē)</p>
+          <p class="en-p">Gazing upon the suddenly shining Onibi</p>
+          <p class="en-p">At the moment our hearts were pounding (Ah, chiyoitokosē, chiyoitokosē)</p>
+          <p class="en-p">Bearing the Santoku upon our heads</p>
+          <p class="en-p">Setting up three rausoku in a row</p>
+          <p class="en-p">Suspending a mirror and shears at our breasts</p>
+          <p class="en-p">Chiyan chiyan chiyan chiyan, flashing brightly</p>
+          <p class="en-p">A mysterious figure comes along (Ah, chiyoitokosē, chiyoitokosē, ah, yoytosā yoytosā)</p>
+          <p class="en-p">Wondering at it as a strange fellow,</p>
+          <p class="en-p">Right at the height of our pounding hearts</p>
+          <p class="en-p">Ah, from here on it gets interesting (Ah, chiyoitokosē, chiyoitokosē, yoytosā yoytosā)</p>
+          <p class="en-p">There are still more parts to come, but</p>
+          <p class="en-p">Out of consideration for the performers to follow</p>
+          <p class="en-p">We shall ask your pardon here (Ah, chiyoitokosē, chiyoitokosē, yoytosā yoytosā, hāreyāre korewano-sa yōi-yōi yōitosa)</p>
+          <p class="en-p">Handing it over to the next master (Ah, chiyoitokose chiyoitokose, yoytosā yoytosā)</p>
+          <p class="en-p">Lead-in: ' Iya, yattokoshiyo '</p>
+          <p class="en-p">Dance: ' Koriya doshitaiyai '</p>
+          <p class="en-p">Lead-in: ' Iya, ma hitotsu jiya '</p>
+          <p class="en-p">Dance: ' Iya, mada kaiyai '</p>
+          <p class="en-p">Tatsuhiko: ' Seeing off the Sendenshi from behind (enyattokosē)</p>
+          <p class="en-p">For a while there were no words, ah-ah (Ah, yoytosē, yattokosē)</p>
+          <p class="en-p">Giving his wife Matsuhime a sidelong glance (korashiyo)</p>
+          <p class="en-p">Hey now, wife (dotsukoi)</p>
+          <p class="en-p">Though you call yourself a messenger of the gods,</p>
+          <p class="en-p">Have you forgotten your heavenly office, ah-ah (Ah, yōisē, yattokosē)</p>
+          <p class="en-p">This Matsuhiko has received (korashiyo)</p>
+          <p class="en-p">The venerable mission of the Kamisama (korashiyo)</p>
+          <p class="en-p">And become a disciple of Harukuniwake, ee (Ah, yōisē, yattokosē)</p>
+          <p class="en-p">Ascending to subjugate the demons (korashiyo)</p>
+          <p class="en-p">Even as you watch his very departure (korashiyo)</p>
+          <p class="en-p">What do you mean by telling me to wait, oh (Ah, yōisē, yattokose)</p>
+          <p class="en-p">Rejecting her by saying she lacks understanding</p>
+          <p class="en-p">Matsuhime flushes her face, ē (Ah, yōisē, yattokose)</p>
+          <p class="en-p">Nay now, mōshi Matsuhiko-sama (dotsukoi)</p>
+          <p class="en-p">Though I am a woman, I too am a Sendenshi</p>
+          <p class="en-p">Chasing after the footsteps of my lord</p>
+          <p class="en-p">How could any business fail to be accomplished, ah-ah (Ah, yōisē, yattokosē)</p>
+          <p class="en-p">Do try to discern your wife's heart as well (dotsukoi)</p>
+          <p class="en-p">Crying and falling prostrate, saying how sorrowful it is, ē (Ah, yōisē, yattokosē)</p>
+          <p class="en-p">The wretchedness of getting lost in samsara</p>
+          <p class="en-p">Matsuhiko brushes away his tears, ee (Ah, yōisē, yattokose)</p>
+          <p class="en-p">Though today's parting is painful (korashiyo)</p>
+          <p class="en-p">Endure it for a while, for there are times</p>
+          <p class="en-p">When even the dew on the roadside grass dries up, ee-ee (Ah, yōisē, yattokosē)</p>
+          <p class="en-p">Following after the lord and master Harukuniwake (korashiyo)</p>
+          <p class="en-p">Advancing in yearning after his tracks (korashiyo)</p>
+          <p class="en-p">Catching up with him in Ukigibara, ee-ee (Ah, yōisē, yattokose)</p>
+          <p class="en-p">Illuminating the world with feats of martial glory (dotsukoi)</p>
+          <p class="en-p">Advancing still further toward the realm of the moon</p>
+          <p class="en-p">Heading toward the capital of Haruna, ee-ee (Ah, yōisē, yattokose)</p>
+          <p class="en-p">Declaring that he will surely return to the mansion of Iso</p>
+          <p class="en-p">And stepping forth without fail (korashiyo)</p>
+          <p class="en-p">Matsuhime, seeing him off from behind, ah-ah (Ah, yōisē, yattokose)</p>
+          <p class="en-p">Leaning against the shade</p>
+          <p class="en-p">Beneath the ever-green pine, raising her voice, ee-ee (Ah, yōisē, yattokose)</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三五教の神様に</p>
+            <p class="ja-classical-line">御仕へ申して十四年　　（ア、チヨイトコセー　チヨイトコセー）</p>
+            <p class="ja-classical-line">斎苑の館やエルサレム</p>
+            <p class="ja-classical-line">黄金山や霊鷲山</p>
+            <p class="ja-classical-line">コーカス山へも参拝し　　（ア、チヨイトコセー　チヨイトコセー）</p>
+            <p class="ja-classical-line">誠に尊い御神徳</p>
+            <p class="ja-classical-line">身に稟けまして治国別の</p>
+            <p class="ja-classical-line">珍の司の宣伝使</p>
+            <p class="ja-classical-line">御供に仕へ奉りつつ　　（ア、チヨイトコセー　チヨイトコセー）</p>
+            <p class="ja-classical-line">斎苑の館を立出でて</p>
+            <p class="ja-classical-line">河鹿峠を打渉り　　（ア、チヨイトコセー　チヨイトコセー）</p>
+            <p class="ja-classical-line">曲の棲処と聞えたる</p>
+            <p class="ja-classical-line">山口森に立寄つて</p>
+            <p class="ja-classical-line">一夜を明す折もあれ　　（ア、チヨイトコセー　チヨイトコセー）</p>
+            <p class="ja-classical-line">忽ち光る鬼火を眺め</p>
+            <p class="ja-classical-line">胸轟かし居たる折　　（ア、チヨイトコセー　チヨイトコセー）</p>
+            <p class="ja-classical-line">頭に三徳頂いて</p>
+            <p class="ja-classical-line">蝋燭三本立列べ</p>
+            <p class="ja-classical-line">鏡や鋏を胸に吊り</p>
+            <p class="ja-classical-line">チヤン　チヤン　チヤン　チヤン　ビカビカと</p>
+            <p class="ja-classical-line">怪しの姿がやつて来る　　（ア、チヨイトコセー　チヨイトコセー、ア、ヨイトサー　ヨイトサー）</p>
+            <p class="ja-classical-line">不思議な奴だと怪しんで</p>
+            <p class="ja-classical-line">胸轟かす真最中</p>
+            <p class="ja-classical-line">アこれから先が面白い　　（ア、チヨイトコセー　チヨイトコセー、ヨイトサー　ヨイトサー）</p>
+            <p class="ja-classical-line">まだまだ先はあるけれど</p>
+            <p class="ja-classical-line">後の御方に御気の毒</p>
+            <p class="ja-classical-line">これにて御免を蒙りませう　　（ア、チヨイトコセー　チヨイトコセー、ヨイトサー　ヨイトサー、ハーレヤーレ　コレワノサ　ヨーイヨーイ　ヨーイトサ）</p>
+            <p class="ja-classical-line">次の御先生に御渡し申す　　（ア、チヨイトコセ　チヨイトコセ、ヨーイトサー　ヨーイトサー）』</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">音頭『イヤ、ヤツトコシヨ</p>
+            <p class="ja-classical-line">踊『コリヤ　ドシタイヤイ</p>
+            <p class="ja-classical-line">音頭『イヤ　ま一つヂヤ</p>
+            <p class="ja-classical-line">踊『イヤ　まだかいヤイ</p>
+            <p class="ja-classical-line">竜彦『後見送りて宣伝使　　（エンヤツトコセー）</p>
+            <p class="ja-classical-line">暫し言葉も無かりしがアーアー　　（ア、ヨイトセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">女房松姫尻目にかけ　　（コラシヨ）</p>
+            <p class="ja-classical-line">コリヤ女房　　（ドツコイ）</p>
+            <p class="ja-classical-line">其方は神の使と云ひ乍ら</p>
+            <p class="ja-classical-line">其天職を忘れたかアーアー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">此松彦は神様の　　（コラシヨ）</p>
+            <p class="ja-classical-line">尊き使命を蒙りて　　（コラシヨ）</p>
+            <p class="ja-classical-line">治国別の弟子となりイー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">悪魔の征討に上り行く　　（コラシヨ）</p>
+            <p class="ja-classical-line">其首途を見ながらに　　（コラシヨ）</p>
+            <p class="ja-classical-line">待てと申すは何の事オー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">聞きわけないと突放す</p>
+            <p class="ja-classical-line">松姫顔を赤らめてエー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">イヤのう、モーシ松彦さま　　（ドツコイ）</p>
+            <p class="ja-classical-line">女乍らも宣伝使</p>
+            <p class="ja-classical-line">夫の後を追つかけて</p>
+            <p class="ja-classical-line">どうして御用が出来ませうかアーアー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">女房の心も察してたべ　　（ドツコイ）</p>
+            <p class="ja-classical-line">悲しいわいなと泣き、伏してエー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">輪廻に迷ふ浅間しさ</p>
+            <p class="ja-classical-line">松彦涙を打払ひイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">今の別れは辛けれど　　（コラシヨ）</p>
+            <p class="ja-classical-line">暫く忍べ道芝の</p>
+            <p class="ja-classical-line">露さへ乾く例ありイーイー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">治国別の師の君が　　（コラシヨ）</p>
+            <p class="ja-classical-line">後を慕うて進み行き　　（コラシヨ）</p>
+            <p class="ja-classical-line">浮木の森で追ついてエーエー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">功名手柄を世に照らし　　（ドツコイ）</p>
+            <p class="ja-classical-line">尚も進んで月の国</p>
+            <p class="ja-classical-line">ハルナの都に立向ひイーイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">斎苑の館へ復り言</p>
+            <p class="ja-classical-line">申さにや置かぬと出でて行く　　（コラシヨ）</p>
+            <p class="ja-classical-line">後見送りて松姫はアーアー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">常磐の松の下かげに　　（コラシヨ）</p>
+            <p class="ja-classical-line">いよりかかつて声を上げエーエー　　（ア、ヨーイセー、ヤツトコセ）</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mōshi-mōshi, my dear husband, (Dotsukoi)</p>
+          <p class="en-p">Completing the divine work of Shinkai</p>
+          <p class="en-p">Even one single day sooner, (Korashiyo)</p>
+          <p class="en-p">Show me your safe face, I beg you, ē-ē, (A, yōisē, yattokose)</p>
+          <p class="en-p">Crying out, I implore you, with all my voice,</p>
+          <p class="en-p">Matsuhime and Sayohime sending tidings, ā, (A, yōisē, yattokose)</p>
+          <p class="en-p">From Hirefuruyama, ō-ō, the sorrow too---</p>
+          <p class="en-p">Lamenting over our own lot in life,</p>
+          <p class="en-p">The pitifulness of parting with regret, ā-ā, (A, yōisē, yattokose)</p>
+          <p class="en-p">Even Matsuhiko of peerless courage, (Korashiyo)</p>
+          <p class="en-p">Weighed down by his wife's deep attachment and the gloom of love for his child, (Dotsukoi)</p>
+          <p class="en-p">Unable to hold back, harahara hara, (Dotsukoi)</p>
+          <p class="en-p">His tears falling, ē-ē-ē, into the Kajikagaha---</p>
+          <p class="en-p">So much that even the riverbanks seemed about to collapse, ī-ī, (A, yōisē, yattokose)</p>
+          <p class="en-p">That Matsuhiko, advancing rapidly,</p>
+          <p class="en-p">To his master, the teacher Harukuniwake, (Korashiyo)</p>
+          <p class="en-p">Meeting by chance in the forest of Ukiki, ī, (A, yōisē, yattokose)</p>
+          <p class="en-p">Here master and disciple, holding hands,</p>
+          <p class="en-p">Crossed over the Lion River, ī-ī, (A, yōisē, yattokose)</p>
+          <p class="en-p">At the foot of Mount Victor, (Korashiyo)</p>
+          <p class="en-p">The Setsuteiri of the capital of Jin</p>
+          <p class="en-p">And the peril of the official Samori, (Korashiyo)</p>
+          <p class="en-p">How brave to rescue and save them, ō-ō, (A, yōisē, yattokose)</p>
+          <p class="en-p">The great divine power of his master,</p>
+          <p class="en-p">Harukuniwake, goes without saying,</p>
+          <p class="en-p">By the deep protection of the Lord God Kuniharutachi, (Korashiyo)</p>
+          <p class="en-p">And the Lord God Kamususanō, (Korashiyo)</p>
+          <p class="en-p">It is what came to pass, ō-ō, (A, yōisē, yattokose)</p>
+          <p class="en-p">This Tatsuhiko too, together with him, (Korashiyo)</p>
+          <p class="en-p">Walking upon the divine path,</p>
+          <p class="en-p">Departed from the land of Biku, ē-ē, (A, yōisē, yattokose)</p>
+          <p class="en-p">When we finally came here and looked,</p>
+          <p class="en-p">The two daughters of Thames in the village of Tamaki</p>
+          <p class="en-p">Had been captured by evil demons,</p>
+          <p class="en-p">And ever since we heard their whereabouts were unknown, ī-ī, (A, yōisē, yattokose)</p>
+          <p class="en-p">The propagators of Izumo Shinshōkyō,</p>
+          <p class="en-p">Matsuhiko, Tatsuhiko, and Mankō-sama, (Korashiyo)</p>
+          <p class="en-p">Leading three companions along, (Korashiyo)</p>
+          <p class="en-p">How valiant they were as they ascended the night road</p>
+          <p class="en-p">According to the will of Kami, ā-ā, (A, yōisē, yattokose)</p>
+          <p class="en-p">The divine virtue instantly manifested,</p>
+          <p class="en-p">The generals and colonels of Brahmanism,</p>
+          <p class="en-p">Beginning with the colonels, a hundred hosts, (Korashiyo)</p>
+          <p class="en-p">Bringing every single one of them to submission, ē-ē, (A, yōisē, yattokose)</p>
+          <p class="en-p">They returned to the village of Tamaki, (Korashiyo)</p>
+          <p class="en-p">Teaching the myriad pure teachings</p>
+          <p class="en-p">To the husband and wife of Satoshō,</p>
+          <p class="en-p">While building the Heavenly Pure Land upon the earth, (Korashiyo)</p>
+          <p class="en-p">How venerable that they made them construct it, ō-ō, (A, yōisē, yattokose)</p>
+          <p class="en-p">The blessing of Kami, brilliantly radiant,</p>
+          <p class="en-p">Manifesting now right here, (Korashiyo)</p>
+          <p class="en-p">They built the sacred shrine of Mizu,</p>
+          <p class="en-p">And forever serving the Great Imperial Deity,</p>
+          <p class="en-p">Korashiyo, (Dotsukoishiyo)</p>
+          <p class="en-p">How joyous it was to revere and worship them, ō-ō, (A, yōisē, yattokose)</p>
+          <p class="en-p">Ah, villagers, villagers, (Korashiyo)</p>
+          <p class="en-p">Before the venerable presence of Kami,</p>
+          <p class="en-p">Purify your hearts and cleanse your bodies, (Korashiyo)</p>
+          <p class="en-p">Worship morning and evening,</p>
+          <p class="en-p">And receive the divine grace of the spirit, ō-ō, (A, yōisē, yattokose)</p>
+          <p class="en-p">This Tatsuhiko, following his master, (Korashiyo)</p>
+          <p class="en-p">Reverently attending upon him, from tomorrow onwards, (Korashiyo)</p>
+          <p class="en-p">Setting forth toward the capital of Haruna, ī-ī, (A, yōisē, yattokose)</p>
+          <p class="en-p">To serve in the divine work of the divine dwelling place, (Korashiyo)</p>
+          <p class="en-p">And make a formal report of completion before the presence</p>
+          <p class="en-p">Of the Great Deity who dwells upon the mountain</p>
+          <p class="en-p">Of Ubusuna, ī-ī, (A, yōisē, yattokose)</p>
+          <p class="en-p">Now from this time forth, to everyone present, (Korashiyo)</p>
+          <p class="en-p">Offering our gratitude for the trouble you have taken, (Korashiyo)</p>
+          <p class="en-p">We take our leave of you beforehand, ū-ū, (A, yōisē, yattokose)</p>
+          <p class="en-p">We hand this over to the next teacher, yā-yā, (A, yōisē, yattokoseē)'</p>
+          <p class="en-p">So singing, the lead singer and the dancers became intoxicated with the sacred sake of the enshrinement ceremony, floated on joy, formed a circle, danced wildly until the dead of night, and grandly concluded the rites of the festival. From this time forth, the four persons Harukuniwake, Michiharuwake, Matsuhiko, and Tatsuhiko bade farewell to the Thames family, and once again hurried their steps toward Jerusalem. Ah, Kannagara Tamashii Sakiyabaese.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">モーシモーシ吾夫さま　　（ドツコイ）</p>
+            <p class="ja-classical-line">一日も早く神界の</p>
+            <p class="ja-classical-line">御用をすませ玉はりて　　（コラシヨ）</p>
+            <p class="ja-classical-line">無事なお顔を見せてたべエーエー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">頼むワイなと声限り</p>
+            <p class="ja-classical-line">便りを松姫小夜姫がアー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">領巾振山のオーオー悲しみもーーー</p>
+            <p class="ja-classical-line">わが身の上を歎きつつ</p>
+            <p class="ja-classical-line">別れを惜む可憐さアーアー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">流石勇気の松彦も　　（コラシヨ）</p>
+            <p class="ja-classical-line">妻の愛惜子故の暗　　（ドツコイ）</p>
+            <p class="ja-classical-line">怺へかねてかハラハラハラ　　（ドツコイ）</p>
+            <p class="ja-classical-line">涙は落ちてエーエーエー河鹿川ーーー</p>
+            <p class="ja-classical-line">堤も崩るるばかりなりイーイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">其松彦は長駆して</p>
+            <p class="ja-classical-line">治国別の師の君に　　（コラシヨ）</p>
+            <p class="ja-classical-line">浮木の森に巡り会ひイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">茲に師弟は手を曳いて</p>
+            <p class="ja-classical-line">ライオン河を打渡りイーイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">ビクトル山の麓なる　　（コラシヨ）</p>
+            <p class="ja-classical-line">珍の都の刹帝利</p>
+            <p class="ja-classical-line">左守の司の危難をば　　（コラシヨ）</p>
+            <p class="ja-classical-line">救ひ助けし健気さよオーオー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">治国別の師の君の</p>
+            <p class="ja-classical-line">大神力は云ふも更</p>
+            <p class="ja-classical-line">国治立の大神様　　（コラシヨ）</p>
+            <p class="ja-classical-line">神素盞嗚の神様の　　（コラシヨ）</p>
+            <p class="ja-classical-line">深き守りによるものぞオーオー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">此竜彦も相共に　　（コラシヨ）</p>
+            <p class="ja-classical-line">神の御道を歩みつつ</p>
+            <p class="ja-classical-line">ビクの国をば立出でてエーエー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">漸く此処に来て見れば</p>
+            <p class="ja-classical-line">玉置の村のテームスがア娘</p>
+            <p class="ja-classical-line">二人は魔神に捕らへられ</p>
+            <p class="ja-classical-line">行方、知れぬと聞きしよりイーイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">三五教の宣伝使</p>
+            <p class="ja-classical-line">松彦、竜彦、万公さま　　（コラシヨ）</p>
+            <p class="ja-classical-line">三人の伴を引連れて　　（コラシヨ）</p>
+            <p class="ja-classical-line">神のまにまに夜の道</p>
+            <p class="ja-classical-line">上らせ玉ひし勇ましさアーアー　　（ア、ヨーイセー、ヤツトコセー）</p>
+            <p class="ja-classical-line">神徳忽ち現はれて</p>
+            <p class="ja-classical-line">バラモン教のゼネラルや</p>
+            <p class="ja-classical-line">カーネル始め百軍　　（コラシヨ）</p>
+            <p class="ja-classical-line">一人も残らず言向けてエーエー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">玉置の村に帰りまし　　（コラシヨ）</p>
+            <p class="ja-classical-line">清き教の数々を</p>
+            <p class="ja-classical-line">里庄の夫婦に教へつつ</p>
+            <p class="ja-classical-line">天国浄土を地の上に　　（コラシヨ）</p>
+            <p class="ja-classical-line">築かせ玉ひし尊さよオーオー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">神の恵みも赫灼に</p>
+            <p class="ja-classical-line">現はれ玉ひ今此処に　　（コラシヨ）</p>
+            <p class="ja-classical-line">瑞の御舎建て玉ひ</p>
+            <p class="ja-classical-line">皇大神を永久に</p>
+            <p class="ja-classical-line">コラシヨー　　（ドツコイシヨ）</p>
+            <p class="ja-classical-line">斎き奉りし嬉しさよオーオー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">ああ村人よ村人よ　　（コラシヨ）</p>
+            <p class="ja-classical-line">尊き神の御前に</p>
+            <p class="ja-classical-line">心を清め身を浄め　　（コラシヨ）</p>
+            <p class="ja-classical-line">朝な夕なに参詣で</p>
+            <p class="ja-classical-line">霊の恩頼を頂けよオーオー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">此竜彦は師の君に　　（コラシヨ）</p>
+            <p class="ja-classical-line">従ひ奉り明日よりは　　（コラシヨ）</p>
+            <p class="ja-classical-line">ハルナの都へ立向ひイーイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">神の依さしの神業を　　（コラシヨ）</p>
+            <p class="ja-classical-line">仕へ奉りてウブスナの</p>
+            <p class="ja-classical-line">山にまします大神の</p>
+            <p class="ja-classical-line">御前に復命致すべしイーイー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">いざこれよりは皆様に　　（コラシヨ）</p>
+            <p class="ja-classical-line">御苦労になりし御礼を　　（コラシヨ）</p>
+            <p class="ja-classical-line">かねて御暇仕まつるウーウー　　（ア、ヨーイセー、ヤツトコセ）</p>
+            <p class="ja-classical-line">次の先生にお渡し申すヤーヤー　　（ア、ヨーイセー、ヤツトコセー）』</p>
+            <p class="ja-classical-line">と音頭取りと踊り子が遷座式の神酒に酔ひ、歓喜に浮かされて円を造り、夜の更くる迄踊り狂ひ賑々しく祭典の式を納めた。是より治国別、道晴別、松彦、竜彦の四人は、テームス一家に暇を告げ、一先づエルサレムを指して足を速めて出でて行く。ああ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c17.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 17: 万巌 [1425]</span>
+      </a>
+      <a href="c19.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 19: Pure 滝 [1427]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

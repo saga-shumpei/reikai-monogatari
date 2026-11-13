@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 10: Ogre 涙 [1418] - Volume 55 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 55 Table of Contents</a>
+      <span>Volume 55</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 55 &bull; Chapter 10</span>
+      <h1 class="chapter-title-en">Chapter 10: Ogre 涙 [1418]</h1>
+      <p class="chapter-title-ja">鬼涙〔1418〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In response to Harukuniwake's poem, Āshisu replied with a poem conveying his intention to consent to marriage between himself and Omin. That poem,</p>
+          <p class="en-p">'The wind of Shinado too in the land of Fusa</p>
+          <p class="en-p">At the foot of Mount Inokurayama</p>
+          <p class="en-p">Gathering and standing, Tamakikiyō</p>
+          <p class="en-p">Employed at the Thames Mansion</p>
+          <p class="en-p">Morning and evening managing the household affairs</p>
+          <p class="en-p">Āshisu, who has overseen them</p>
+          <p class="en-p">Is not of the seed of the lowly Shiyuda</p>
+          <p class="en-p">Of deep pedigree as well, the land of Biku</p>
+          <p class="en-p">The Kiyūbitto of the office of Samori</p>
+          <p class="en-p">Heard to be its fallen scion</p>
+          <p class="en-p">A bachelor enduring this world</p>
+          <p class="en-p">Sendenshi of Harukuniwake</p>
+          <p class="en-p">Receiving the august word of Kami</p>
+          <p class="en-p">Ruling over the land of Biku</p>
+          <p class="en-p">Setsuteirisama or the Samorinokami</p>
+          <p class="en-p">Having saved the peril of his father</p>
+          <p class="en-p">Building the august shrine of Kami</p>
+          <p class="en-p">Once more appearing right here</p>
+          <p class="en-p">Lady Sumieru or Lady Sugāru</p>
+          <p class="en-p">Michiharuwake or even Shīna</p>
+          <p class="en-p">The gratitude of having had them saved</p>
+          <p class="en-p">Whether the morning sun shines or clouds over</p>
+          <p class="en-p">Whether the moon fills or wanes</p>
+          <p class="en-p">Even if the stars fall from the sky</p>
+          <p class="en-p">Having saved the Thames household</p>
+          <p class="en-p">When shall this lofty grace</p>
+          <p class="en-p">Ever be a thing to forget?</p>
+          <p class="en-p">Living together with a lowly gejiyo</p>
+          <p class="en-p">The lineage of Omin's side as well</p>
+          <p class="en-p">As expected, born in the land of Biku</p>
+          <p class="en-p">From the family lineage of Samorinokami</p>
+          <p class="en-p">Surpassing and as a child of a lofty person</p>
+          <p class="en-p">A rare august child born forth</p>
+          <p class="en-p">Takusuke of the village of Chinu</p>
+          <p class="en-p">Becoming a foster child and passing the days</p>
+          <p class="en-p">Even in a fleeting body, the raging wind</p>
+          <p class="en-p">Blustering forth, the parents</p>
+          <p class="en-p">Already became people of the other world</p>
+          <p class="en-p">A discarded small boat on a drifting shore</p>
+          <p class="en-p">Wandering hither and thither</p>
+          <p class="en-p">The end of hardship now here</p>
+          <p class="en-p">To even become a gejiyo of the Thames Mansion</p>
+          <p class="en-p">The pitifulness of having sunk down</p>
+          <p class="en-p">Those who knew Omin's true nature</p>
+          <p class="en-p">Except for Āshisu alone</p>
+          <p class="en-p">Until now, there was no one</p>
+          <p class="en-p">As a child of such a noble person</p>
+          <p class="en-p">Omin-sama, who was born</p>
+          <p class="en-p">By what kind of Kami's arrangement</p>
+          <p class="en-p">The pledge of husband and wife for myself and her</p>
+          <p class="en-p">Has come to be caused to be bound</p>
+          <p class="en-p">At the Shiyuda mansion, the ceremony of union</p>
+          <p class="en-p">To finally hold it</p>
+          <p class="en-p">A relationship between the two one could never think of</p>
+          <p class="en-p">Ah, Kaminagara-kamigami</p>
+          <p class="en-p">The Kami of Idomu appeared</p>
+          <p class="en-p">Possessed Harukuniwake</p>
+          <p class="en-p">Our true nature in minute detail</p>
+          <p class="en-p">The loftiness of having caused it to be revealed!</p>
+          <p class="en-p">Even so, we are</p>
+          <p class="en-p">Persons in the shade abandoned by the world</p>
+          <p class="en-p">Though our two fathers sit</p>
+          <p class="en-p">Without even a way to state our names</p>
+          <p class="en-p">The misery of spending time lamenting</p>
+          <p class="en-p">Has now gradually grown faint</p>
+          <p class="en-p">The voice of the bird announcing the dawn</p>
+          <p class="en-p">It feels as though the morning sun is near</p>
+          <p class="en-p">Ah, Kaminagara-kamigami</p>
+          <p class="en-p">Before the august presence of Sumerookami and</p>
+          <p class="en-p">The waké official of Haruku</p>
+          <p class="en-p">Awe-struck and trembling with awe, the true heart</p>
+          <p class="en-p">We offer up and humbly give thanks.'</p>
+          <p class="en-p">Omin sings.</p>
+          <p class="en-p">Omin: 'Though there are a father and mother like the nourishing roots of Kami's grace,</p>
+          <p class="en-p">Separated by the clouds of the floating world,</p>
+          <p class="en-p">The karma of a body that cannot even state its name</p>
+          <p class="en-p">A Setsuteiri high in the clouds</p>
+          <p class="en-p">Though I was a rare child born to Queen Victoria,</p>
+          <p class="en-p">The august wrath of the Queen's palace</p>
+          <p class="en-p">Was exceedingly fierce,</p>
+          <p class="en-p">So together with my mother Satsuki,</p>
+          <p class="en-p">In the mountain and field village of the land of Fusa,</p>
+          <p class="en-p">Takusuke of the village of Chinu,</p>
+          <p class="en-p">Mother and child were entrusted to the mansion,</p>
+          <p class="en-p">And spending a sad floating world,</p>
+          <p class="en-p">Like the village clouds on the moon and storms on flowers,</p>
+          <p class="en-p">Without leaking out of the precedents of a blustering world,</p>
+          <p class="en-p">My foster father left this life early,</p>
+          <p class="en-p">Just when my mother and I were spending dreary days</p>
+          <p class="en-p">By the edge of the mountain,</p>
+          <p class="en-p">A soldier of Brahmanism</p>
+          <p class="en-p">Taking advantage of the gloom of night, entered in,</p>
+          <p class="en-p">Kicking open the sliding doors and dancing in,</p>
+          <p class="en-p">Mistaking me and my mother,</p>
+          <p class="en-p">Raising a victory cry and dragging us back, but</p>
+          <p class="en-p">Rather than knowing the aged mother,</p>
+          <p class="en-p">The evil kami who knows no human feeling,</p>
+          <p class="en-p">Regrettable and how I yearn for her, the mother,</p>
+          <p class="en-p">Kicking her down into the well in the midst of the field,</p>
+          <p class="en-p">The vexation of having stolen the life of a thread of jewels</p>
+          <p class="en-p">I was left behind afterwards,</p>
+          <p class="en-p">In that house for three or four days,</p>
+          <p class="en-p">Wandering for five days at the longest,</p>
+          <p class="en-p">Driven out of any house whatsoever,</p>
+          <p class="en-p">Gradually here at the Thames,</p>
+          <p class="en-p">Helped by the master lord,</p>
+          <p class="en-p">Just as I was exerting myself in menial chores,</p>
+          <p class="en-p">Parting the eightfold clouds of heaven,</p>
+          <p class="en-p">The officials of Kami's teachings who descended,</p>
+          <p class="en-p">The beloved daughters of the master's house,</p>
+          <p class="en-p">Princess Sumieru and Princess Sugāru,</p>
+          <p class="en-p">Running bravely up Mount Inokurayama where the blustering demon kami</p>
+          <p class="en-p">Had gone forth to save them, after that,</p>
+          <p class="en-p">I, folding both hands together,</p>
+          <p class="en-p">Return raising a victory cry</p>
+          <p class="en-p">Just as I am waiting for the auspicious day of birth,</p>
+          <p class="en-p">Leading the lord of the army,</p>
+          <p class="en-p">The joy of having returned</p>
+          <p class="en-p">While saving four people!</p>
+          <p class="en-p">Among the officials of Kami,</p>
+          <p class="en-p">The kami official Mankohowake</p>
+          <p class="en-p">Whose heart was scorched with love,</p>
+          <p class="en-p">Whether it is Kami's contrivance or not,</p>
+          <p class="en-p">Suddenly impersonating the master,</p>
+          <p class="en-p">Taking care from top to bottom,</p>
+          <p class="en-p">Under the hearth and the lid of the pot,</p>
+          <p class="en-p">Wiping and cleaning hither and thither,</p>
+          <p class="en-p">Even the work of burning fire, earnestly.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">アーシスは治国別の歌に対し、自分とお民との結婚を承諾したりとの意を歌を以て答へたりける。其歌、</p>
+            <p class="ja-classical-line">『科戸の風もフサの国
+猪倉山の山麓に
+群がり立てる玉置郷
+テームス館に使はれて
+朝な夕なに家政をば
+統轄したるアーシスは
+賤しき首陀の胤ならず
+由緒も深きビクの国
+左守の司のキユービツトが
+其落胤と聞えたる
+此世を忍ぶ独身者
+治国別の宣伝使
+神の御言を蒙りて
+ビクの国をば知召す
+刹帝利様や左守司
+父の危難を救ひまし
+神の宮居を建て玉ひ
+又もや此処に現はれて
+スミエル嬢やスガール嬢
+道晴別やシーナ迄</p>
+            <p class="ja-classical-line">救はせ玉ひし有難さ
+旭は照る共曇る共
+月は盈つ共虧くる共
+星は空より墜つるとも
+テームス一家を救はれし
+此高恩は何時の世か
+忘るる事のあるべきぞ
+賤しき下女と住み込みし
+お民の方の系統も
+矢張りビクの国生れ
+左守司の家系より
+秀れて高き人の子と
+生れ出でたる珍の御子
+チヌの里なる卓助が
+里子となりて世を送る
+果敢なき身にも荒風の
+吹き荒び来て両親は
+最早あの世の人となり
+よるべ渚の捨小舟
+彼方此方と彷徨ひて</p>
+            <p class="ja-classical-line">艱みの果ては今茲に
+テームス館の下女と迄
+なり下りたる痛ましさ
+お民の素性を知るものは
+アーシス一人を除いては
+今迄誰もあらざりし
+かくも尊き人の子と
+生れましたるお民さま
+如何なる神の取持か
+吾れと妹背の契をば
+結ばせ玉ふ事となり
+首陀の館で合衾の
+いよいよ式を挙げむとは
+思ひもよらぬ二人仲
+ああ惟神々々
+イドムの神が現はれて
+治国別に懸りまし
+吾等が素性を委曲に
+明かさせ玉ひし尊さよ
+さはさり乍ら吾々は</p>
+            <p class="ja-classical-line">世に捨てられし日蔭者
+二人の父は坐しませど
+名乗らむ術もなくばかり
+歎ち暮した苦しさも
+今は漸く薄らぎて
+暁告ぐる鳥の声
+旭間近き心地せり
+ああ惟神々々
+皇大神や治国の
+別の司の御前に
+畏み畏み真心を
+捧げて感謝し奉る』</p>
+            <p class="ja-classical-line">お民は歌ふ。</p>
+            <p class="ja-classical-line">お民『神の恵も足乳根の
+父と母とはあり乍ら
+浮き世の雲に隔てられ
+名乗もならぬ身の因果
+雲井に高き刹帝利
+ビクトリア王の珍の子と
+生れ出でたる吾身なれ共
+后の宮の御憤り
+いと烈しくましましければ
+母の皐月と諸共に
+フサの御国の山野里
+チヌの村なる卓助が
+館に母子預けられ
+悲しき浮世を送りしも
+月に村雲花には嵐
+吹き荒ぶなる世の中の
+ためしに漏れず養ひの
+父は此世を早く去り
+母と妾は味気なき月日を
+山の畔に送る折しも</p>
+            <p class="ja-classical-line">バラモン教の軍人
+夜陰に乗じて入り来り
+雨戸を蹴立てて踊り入り
+妾と母を取り違へ
+凱あげて連れ帰りしが
+老いさらばひし母上と
+知るよりも
+情を知らぬ悪神は
+悔しや恋しき母上を
+野中の井戸へ蹴落として
+玉の緒の命を奪ひし恨めしさ
+妾は後に残されて
+彼方の家に三日四日
+永きは五日と彷徨ひつ
+どこの家でも追ひ出され
+漸々ここにテームスの
+主人の君に助けられ
+水仕奉公を励む折
+天の八重雲かき分けて
+降りましたる神の教の司たち</p>
+            <p class="ja-classical-line">主人の家の愛娘
+スミエル姫やスガール姫を
+救ひやらむと雄健びし
+魔神のたけぶ猪倉山を駆け登り
+出で行きませし其後に
+妾は両手を合しつつ
+凱あげて帰ります
+生日の吉き日を待つ折もあれ
+軍の君を引率れて
+四人の人を助けつつ
+帰らせ玉ひし嬉しさよ
+神の司の其中で
+恋に心を焦したる
+万公別の神司
+神の仕組か知らね共
+忽ち主人となりすまし
+上から下まで気を付けて
+竃の下や鍋の蓋
+彼方此方の拭掃除
+火を焚くわざ迄懇に</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">O, the gratitude of being taught by thee! Though there are no vexatious matters, yet, not knowing why, with a confused hubbub, every time it is said, my spirit rises in wrath, and at length results in unexpected ash-scattering. Everywhere is a muddy sea, so that there is not even a place to set one's foot; that it is defiled is truly inevitable. With pains and utmost exertions of heart and body, even the rice that at last has boiled down cannot pass through the throat, being covered over with ashes. With a start, blushing in the face, there are times when my bosom is pained. The Minister of Azumos appeared, and once more gave various teachings. Was his resting-place of the spirits evil? Colluding with the fellow Fueru, clenching fists like turban-shells, beating and thrashing me regardless of the place, and upbraiding me—there were times even thus.</p>
+          <p class="en-p">The Minister of Ashis suddenly appeared and came to this place, seized and held down with effortless ease the two persons who had been raging wildly, and saved them—oh, the gratitude of it! The worldly proverb that 'kindness is not for the sake of others' is verified before my eyes. From that time onward, I revered and respected the Minister of Ashis, and thinking that if this were the world for it, I would serve him as my husband, there were times when my murakimo bosom was scorched. Today, the sacred and solemn imperial command of Harukuniwake, the Minister of the Three-Five Gods, that we should pledge the path of imose—the words of teaching he graciously gave, I received and obeyed with awe, reverence, and trembling; and I faithfully accept that I shall solemnly conclude the ritual of marriage here with my beloved Minister, Ashis! Ah, Kamunagara Kamunagara! Beginning with the Great Deity Ōkuniharutachi, the divine pillars of binding ties, the Great Deity Kinkatsukane, and the Great Deity Kamususanō who appeared as the god Idomu, I revere your noble grace and offer words of thanksgiving! Ah, Kamunagara Kamunagara! Grant us the blessing of your mitama!</p>
+          <p class="en-p">Kishunwake became pleasantly intoxicated, and appearing to have grown somewhat bolder in heart than the restraint he had felt hitherto, raised his bronze voice and began to sing:</p>
+          <p class="en-p">'I am the deity Ōkunihiko, serving Ōkuniwake, the great chief of the Brahman teachings, becoming a subordinate of Ōguronushi, and as the head-quarters of the Three-Five teachings renowned in the world, to slaughter them in a single battle, leading numerous troops, crossing mountains and fields, passing valley streams, and at last, in the village of floating trees where withered silver-grass grew thick and intertwined, building a spacious encampment, placing Generals Kumehiko and Katahiko as the vanguard, and while watching the battle situation—'</p>
+          <p class="en-p">The divine minister Harukuniwake struck hard with his stern water and fire; smitten at heart by those Kototama, easily defeated, I fled back. Seeing that pitiful state—</p>
+          <p class="en-p">'This battle being altogether hopeless, neither advancing nor retreating, becoming a distressing plight, following with over three thousand horsemen, leaving the encampment of floating trees, crossing across the Lion River, at the foot of Mount Victor in the old and venerable country of Biku, while once more setting up an encampment and advancing the troops—'</p>
+          <p class="en-p">'Deceived by a demonic woman, fleeing far away to the great moorland, riding across Shimeji Pass, building a castle in the rock-cave of Ikurayama, making the countries far and near obey and submit, establishing the Brahman country, and thinking to raise a single banner—'</p>
+          <p class="en-p">'Tempted by the crookedness of my heart, telling the people of my house to seize and bring back the two daughters of the Thames Mansion, and negotiating by turns with threats and coaxing, yet Kumehiko, while reeling in tongue at the resolute woman's spirit of never staining her chastity to the very end, being impatient to make her his own with deep-seated obsession, and having shut her up in a single room—'</p>
+          <p class="en-p">'The divine minister Michiharuwake came forth, following Shiina, and when he pushed out the Kototama carriage, even those stout warriors were astounded, scattered in all directions, in utter dismay and panic, and at the end of it, throwing the four persons down into the bottom of a thousand-fathom rock-cave for the first time, and adding unspeakable rudeness—how shameful that was!'</p>
+          <p class="en-p">'Attacked once more by the retinue of Harukuniwake, the dream of our clinging attachment also awoke, dispersing the soldiers of three thousand and odd men in the twinkling of an eye, sending off the four true persons, and coming at last to arrive here—who could have expected that the two persons, Fueru and Betto, would be shoved inside the august storehouse and suffering in distress? How wondrous! Even the tyrannical general, illuminated by the light of the gods, has now become a true person, and although being one who has borne malice toward this house, to rank in today's joyous banquet by the august shadow of Harukuniwake, enduring shame—that too must be because the thread of fate is tangled together to the very end!'</p>
+          <p class="en-p">'Ah, Kamunagara Kamunagara! Thames, look at me anew, hear me anew, and be pronounced anew! Lady Berishina, you two royal princesses, pray forgive the crimes of upbraiding inflicted upon you! Whether the morning sun shines brightly or clouds over, whether the moon waxes or wanes, Kishunwake, once awakened to the gods, shall to the very end spend his body for the sake of sincerity, return to the true heart of saving worldly people, and pray morning and evening for the happiness of the bodies of Thames and his wife! Forgive us, Kamunagara! I swear to the gods and offer my apologies!'</p>
+          <p class="en-p">So saying, he finished singing, and bowing with deep reverence toward everyone, offered his thanks. Yet the suspicious Thames couple could not believe Kishunwake's remorse and apology from the bottom of his heart. Therefore, the couple did not utter even a single word in reply to this song. Although there are many songs by Kumehiko, Spar, Emishi, and others besides, since it is too long, the Kototama carriage is stopped here. Ah, Kamunagara Tamafuru-mawase.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">教へ玉ひし有難さ
+うるさい事はなけれ共
+何だか知らぬがゴテゴテと
+言はるる度に気が立ちて
+遂には思はぬ灰神楽
+どこも彼処も泥の海
+足踏む場所もなき迄に
+汚れたるこそ是非なけれ
+折角心を尽し身を尽し
+漸く煮えた飯さへも
+喉を通らぬ灰まぶれ
+ハツと顔をば赤らめて
+胸を痛むる折もあれ
+アヅモス司現はれて
+又いろいろと御教訓
+虫の居所悪かりしか
+フエル奴と謀らひて
+栄螺の如き拳を固め
+所かまはず打ち据ゑ
+嘖み居たる折もあれ</p>
+            <p class="ja-classical-line">アーシス司は忽ちに
+此場に現はれ来りまし
+荒れ狂ひゐたる両人を
+手もなくグツと押へつけ
+救ひ玉ひし有難さ
+情は人の為ならずと
+世の諺も目のあたり
+夫れより妾はアーシスの
+司を尊み敬ひて
+世が世であらば吾夫と
+仕へむものと村肝の
+胸をば焦がす折もあれ
+今日は嬉しき三五の
+神の司の治国別が
+尊き聖き勅り
+妹背の道を契れよと
+教へ玉ひし言の葉を
+慎み畏み諾ひて
+いとしき司のアーシスと
+茲に目出たく婚姻の</p>
+            <p class="ja-classical-line">儀式を結ぶ事の由
+確に諾ひ奉る
+ああ惟神々々
+上は大国治立の大神を始めとし
+縁を結びの神柱
+金勝要の大御神
+イドムの神と現れませる
+神素盞嗚の大神の
+貴の恵を慎みて
+感謝の詞奉る
+ああ惟神々々
+御霊の恩頼を賜へかし』</p>
+            <p class="ja-classical-line">鬼春別は一杯機嫌になつて、今迄遠慮してゐた心が稍太くなつたと見え、銅羅声を張上げて歌ひ始めたり。</p>
+            <p class="ja-classical-line">『吾れは大国彦の神
+大国別に仕へたる
+バラモン教の大棟梁
+大黒主の部下となり
+三五教の本陣と
+世に聞えたる斎苑館
+只一戦に屠らむと
+数多の軍兵引率し
+山野を渡り谷川を
+越えて漸く枯尾花
+茂り合ひたる浮木の里に
+広き陣屋を造りつつ
+久米彦片彦将軍を
+先鋒に立てて戦況を
+窺ひゐたる折もあれ
+治国別の神司
+厳の御水火に打出す
+其言霊に肝打たれ
+脆くも破れ逃げ帰る
+其浅ましき態を見て</p>
+            <p class="ja-classical-line">とても叶はぬ此戦
+進みもならず退きも
+ならぬ苦しき破目となり
+三千余騎を従へて
+浮木の陣屋を立ち別れ
+ライオン河を横切りて
+古き尊きビクの国
+ビクトル山の麓にて
+又も陣屋を構へつつ
+軍を進むる折もあれ
+魔性の女に欺かれ
+遠く逃げ行く大原野
+シメジ峠を乗越えて
+猪倉山の岩窟に
+城を構へて遠近の
+国を従へ靡かせつ
+バラモン国を建設し
+一旗挙げむと思ふ折
+心の曲に誘はれて
+テームス館の二人の娘を</p>
+            <p class="ja-classical-line">家来の者に言ひつけて
+攫ひ帰らせいろいろと
+脅しつすかしつ掛合へど
+気丈の女どこ迄も
+操汚さぬけなげさに
+舌を巻きつつ久米彦は
+執念深くも吾物と
+なさむとあせり一室に
+しまひおきたる時もあれ
+道晴別の神司
+シーナを従へ出で来り
+言霊車押出せば
+流石の勇士も驚いて
+右往左往に散乱し
+周章狼狽其果ては
+一先づ四人を岩窟の
+千尋の底に投げ堕し
+言ふにいはれぬ無礼をば
+加へし事の恥かしさ
+治国別の一行に</p>
+            <p class="ja-classical-line">またも攻められ吾々は
+執着心の夢も醒め
+三千余騎の兵士を
+瞬く内に解散し
+四人の真人を送りつつ
+漸く此処に来て見れば
+豈計らむやフエル、ベツトの両人が
+御庫の中に押込まれ
+苦みゐたるぞ不思議なれ
+悪虐無道の将軍も
+神の光に照されて
+今は誠の人となり
+此家に仇せし身乍らも
+治国別の御影にて
+目出たき今日の宴席に
+恥を忍びて列るも
+縁の糸のどこ迄も
+結ぼれゐたる為ならむ
+ああ惟神々々
+直日に見直し聞直し</p>
+            <p class="ja-classical-line">宣り直されてテームスよ
+ベリシナ姫よ二人の姫御子
+汝に加へし嘖みの
+罪を赦させ玉へかし
+旭はてる共曇るとも
+月は盈つとも虧くる共
+一旦神に目醒めたる
+鬼春別はどこ迄も
+誠の為に身を尽し
+世人を救ふ真心に
+復りてテームス夫婦が身の幸を
+朝な夕なに祈るべし
+赦させ玉へ惟神
+神に誓ひて詫びまつる』</p>
+            <p class="ja-classical-line">と歌ひ了り、一同に向つて恭しく感謝した。されど疑深きテームス夫婦は、鬼春別が心の底よりの悔悟も謝罪も信ずる事が出来なかつた。それ故夫婦は此歌に対しても、一言の答さへせなかつた。此外久米彦、スパール、エミシなどの歌も沢山あれ共、余り長ければ是れにて言霊車を停止する。ああ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c09.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 9: 三婚 [1417]</span>
+      </a>
+      <a href="c11.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 11: 経愕 [1419]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
