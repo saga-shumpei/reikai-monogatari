@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 猫背 [1445] - Volume 56 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 56 Table of Contents</a>
+      <span>Volume 56</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 56 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 猫背 [1445]</h1>
+      <p class="chapter-title-ja">猫背〔1445〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Michihiko: 'Manifesting as the august spirit of rigor,
+O Great Deity of Takamimusubi,
+Manifesting as the august spirit of harmony,
+O Great Deity of Kamumimusubi,
+Manifesting in the wondrous water and fire,
+The Great Deity of Ananai-kyō,
+Decreeing the divine life of Haniyasuhiko and Haniyasuhime into the world,
+Purifying the souls of a hundred deities of heaven and earth,
+And wishing to save them in the pure sacred place of Tengoku,
+Keeping this deep in mind,
+Entrusted that divine work to the Great Deity Kamusanō,
+Thereupon the Great Deity of Harmony,
+As the two pillars of Kamurogi and Kamuromi,
+Offered the divine decrees of Kami to heaven and earth as an Ananahi pillar,
+Ruling the world of Tokoyami peacefully and placidly,
+To make it an august age of pine,
+
+Wishing to return to the protection of Hinode,
+Trained a hundred officials,
+Traversed the Toyoashihara Nakatsukuni,
+Through eighty countries and eighty islands of the land,
+Visiting every remaining nook and corner,
+And caused the gospel of the heavenly pure land to spread.
+Preying upon the wild play of Ametasuhiko and Habahime,
+The Magatsuhi gods who disturb this world,
+Yamata no Orochi, ugly foxes,
+And wicked fiends, throughout the realm,
+Possessed the officials who govern the land
+And a hundred other people,
+Boldly and unrestrictedly committing all manner of evil deeds,
+Soiling the world day and night,
+Fierce and outrageous are these ugly sports!
+Becoming disciples of the propaganda officials of the Saien Mansion and Tamakunibake,
+
+With the sincere thought in their hearts
+To transmit the teachings of Kami to the countries of the four quarters,
+Michihiko crossed the Lion River,
+Spending the days amidst the vast wilderness,
+An unavoidable lodging of dew where he sleeps,
+At the very moment when he follows a dark path,
+Innumerable defeated warriors of the Brahman religion,
+Carrying weapons in their hands,
+Enraged to slaughter the propaganda officials of Ananai-kyō,
+Surrounded our party's surroundings ten and twenty fold,
+Brandishing swords and throwing stones,
+Attacking with fierce momentum.
+At the very moment when our master teacher Tamakunibake
+And Masumihiko struck forth the Kototama with all their might
+And fought defensively,
+
+Itahiko's thigh was pierced by the tip of a charging spear of the enemy,
+And he fell heavily to the ground upon that spot.
+Seeing this with shock, Masumihiko
+Clasped Itahiko under his arm,
+Cut his way through the enemy's heavy encirclement,
+And fled away to parts unknown.
+Our master teacher too, by the multitude,
+Was surrounded and concealed his figure somewhere.
+Michihiko, who remained behind,
+Suddenly found his Kototama choking up,
+With no strategy left, in his sorrow,
+Risking his life to break through the encirclement,
+Little by little searching for the traces of our master,
+Has advanced and come as far as this.
+Ah, O Kami, O Kami,
+How venerable is the divine protection,
+Manifesting above our master,
+
+That the mission received from Kami
+May be completely and thoroughly fulfilled,
+Grant us the dew of grace.
+Where is Masumihiko now?
+Has the spear wound of official Itahiko
+Healed already, or else,
+Troubled by a deep wound, is he hiding in the deep mountains
+Nurturing his illness?
+Though he longs to hear of it,
+We whose spirits are clouded
+Have no way to inquire of Kami,
+Anxious about the progress of the way,
+We have unknowingly arrived
+Near Mount Terumon, where the Brahman religion is entrenched.
+Before the untrustworthy enemy,
+Numerous traps of scheming pits
+Have been prepared, and we hear
+That they wait with bated breath for the officials of Ananai-kyō to come.
+
+Ah, O Kami, O Kami,
+Before the venerable presence of Kami,
+Beginning with our master teacher,
+We respectfully and reverently pray for the good fortune of our party.'</p>
+          <p class="en-p">Chanting this secretly, he arrived at the riverbank of the An Black River flowing down from Mount Terumon. It was the middle of summer, and a semicircular moon hung in the western sky, casting a sharp light like a reaping hook. Taking advantage of the sunset, Michihiko sat down on the river lebank, lowered his voice to intone the Amatsu Norito, and upon finishing, spoke to himself in a soliloquy,</p>
+          <p class="en-p">Michi: 'Ah, the flow of water and the destiny of man, how things change when they change. Since I became the companion of our master teacher Tamakunibake, leaving the Saien Mansion in the winter of last year, we have known ups and downs, various and sundry hardships and labors. Among them, our master teacher had his eye torn out by a monkey in Huai Gu, was forced to hole up in a shrine grove, and in accordance with the divine decree, constructed the shrine palace. Together with us three disciples, we bravely advanced to fulfill the divine message to the capital of the moon world, Haruna. At that very moment of sudden rain, the great torrent of the Lion River, crossing the river of a width where the eye could hardly reach astride a water horse, risking our lives to cross over to this side, when we let the sun set and slept for a night in the vast wilderness, numerous remnants of the Brahman religion attacked us. My friend Itahiko was stabbed by the enemy's sharp hand-spear, and whether he lives or dies is uncertain. Where have our master teacher and Masumihiko gone now? With no tidings whatsoever in this summer night, my tears turn toward the moon, the dew on my sleeves has no way to dry—have pity, O God Tsukiteruhiko.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三千彦『厳の御霊と現れませる
+高皇産霊の大御神
+瑞の御霊と現れませる
+神皇産霊の大御神
+珍の御水火に現れませる
+三五教の大神は
+埴安彦や埴安姫の
+神の命を世に降し
+天地百の神人の
+霊を浄め天国の
+清き聖場に救はむと
+心を配らせ玉ひつつ
+神素盞嗚の大神に
+其神業を任け玉ひ
+茲に瑞の大神は
+神漏岐神漏美二柱
+神の御言を天地に
+麻柱奉り常暗の
+世を平けく安らけく
+治めて松の御世となし</p>
+            <p class="ja-classical-line">日出の守護に復さむと
+百の司を養成し
+豊葦原の中津国
+国の八十国八十の島
+残る隈なく巡らせて
+天国浄土の福音を
+拡充せしめ玉ひけり
+天足の彦や胞場姫の
+曲のすさびにつけ入りて
+此世を紊す曲津神
+八岐大蛇や醜狐
+曲鬼共は天の下
+治むる国の司人
+其外百の人々に
+憑りて所在曲わざを
+縦横無尽に敢行し
+日に夜に世界を汚し行く
+醜のすさびぞうたてけれ
+斎苑の館の宣伝使
+玉国別の弟子となり</p>
+            <p class="ja-classical-line">神の教を四方の国
+伝へむものと真心の
+思ひは胸に三千彦が
+ライオン河を渡りてゆ
+広野の中に日をくらし
+やむなく眠る露の宿
+暗路を辿る折柄に
+バラモン教の落武者が
+幾百人とも限りなく
+手に手に兇器を携へて
+三五教の宣伝使
+鏖殺せむといきり立ち
+吾一行の身辺を
+十重や二十重に取囲み
+剣をかざし石を投げ
+勢猛く攻め来る
+玉国別の師の君や
+真純の彦は言霊を
+力限りに打出して
+防戦したる折もあれ</p>
+            <p class="ja-classical-line">敵の突出す槍先に
+股をさされて伊太彦が
+其場にドツと倒れ伏す
+見るより驚き真純彦
+伊太彦小脇にかい込んで
+敵の重囲を切りぬけつ
+何処ともなく逃げ行きぬ
+吾師の君も大勢に
+取囲まれて何処となく
+姿を隠し玉ひける
+後に残りし三千彦は
+俄に言霊渋りきて
+詮術もなき悲しさに
+命カラガラ囲をば
+突破し乍ら漸くに
+吾師の跡を尋ねつつ
+此処迄進み来りけり
+ああ惟神々々
+尊き神の御守
+吾師の上に顕れまして</p>
+            <p class="ja-classical-line">神に受けたる使命をば
+完全に委曲に果すべく
+恵の露を賜へかし
+真純の彦は今何処
+伊太彦司の槍創は
+最早癒えしか或は又
+深手に悩み山奥に
+隠れて病を養ふか
+聞かまほしやと思へども
+曇りし霊の吾々は
+神に伺ふ由もなく
+道の行手を気遣ひつ
+バラモン教の籠もりたる
+テルモン山の近く迄
+知らず知らずに着きにけり
+油断のならぬ敵の前
+企みの穴の陥穽
+数多拵へ三五の
+教司の来るをば
+手具脛ひいて待つと聞く</p>
+            <p class="ja-classical-line">ああ惟神々々
+尊き神の御前に
+吾師の君を始めとし
+吾等一行の幸運を
+謹み敬ひ願ぎまつる』</p>
+            <p class="ja-classical-line">と密々唄ひ乍ら、テルモン山より流れ落つるアン・ブラツク河の川辺に着いた。頃しも夏の半にて半円の月は西天にかかり、利鎌のやうな鋭い光を投げてゐる。三千彦は日の暮れたのを幸、川堤に腰をおろし、小声になつて天津祝詞を奏上し、終つて独り言、</p>
+            <p class="ja-classical-line">三千『ああ、水の流れと人の行末、変れば変るものだなア。玉国別の師の君のお伴をなし、去年の冬斎苑の館を立出でてより、浮つ沈みつ、種々雑多の艱難苦労、其中にも吾師の君は、懐谷に於て猿に眼を破られ玉ひ、止むを得ず祠の森に立て籠り、御神勅のまにまに、祠の宮を建設遊ばし、吾等三人の弟子と共に潔く月の国ハルナの都へ、神の依さしのメツセージを果たさむと、勇み進んで来る折しも俄の雨にライオン河の大激流、目も届かぬ許りの川巾を水馬に跨り、命カラガラ此方へ渡り、日を暮らして、広野の中に一夜を眠る時しも、バラモン教の残党数多襲ひ来り、吾友の伊太彦は敵の鋭き手槍に刺され、生死の程もさだかならず、師の君を初め真純彦は今何処へ行かれたか、何の便りも夏の夜の、月に向つてなく涙、乾く由なき袖の露、憐れみ給へ月照彦の神』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Expressing his jiyutsukuwai, he is praying itsushiyōkenmei.</p>
+          <p class="en-p">Michihiko finally fell asleep upon the aogusa on the riverbank. Takusan mosquitoes, catching the scent of a human, gathered around with a curious air, raised a buzzing and unpleasant sound, and piled heavily all over Michihiko's body, biting into him. At this moment, a sudden, record-breaking river wind blew up, rolled Michihiko's body, which had been sleeping upon the bank, like a ball, and blew him straight into the surrounding dorota. Michihiko tried to start up in alarm, but the mud was deep and his body sank in up to the waist; unable to do anything whatsoever, his body sank into the dorota with a stinging sensation, and before long he had sunk up to his neck. If he were left as he was, his whole body would sink into the mud, and Michihiko's seimei had already fallen into a unmei like a lamp before a storm. Michihiko prayed at the top of his voice, offering up the amatsunorito itsushiyōkenmei, earnestly pleading that even if his nikutai were buried and perished within the dorota, his seirei might be saved in tengoku. To such a place, the shadow of a black four-legged beast appeared from izuku no tomo shirezu, brushed away the doro surrounding Michihiko's body, bit hold of his mud-stained kimono, and—while even itself sinking more than hanbun of its body into the doro—finally rescued him up onto the bank. Michihiko knew not what kind of beast it might be, but thinking that the one who had saved him could surely be none other than a messenger of the kamisama, he pressed his palms together, worshipped the black beast itsushiyōkenmei, leapt into the shallow waters of the river with his mud-covered kimono still on, and slowly began to wash it. The beast of the black shadow plunged into the midst of the river with a splashing sound once more and was washing its own body.</p>
+          <p class="en-p">Michihiko finished washing his clothing hastily, and since it was summer, he dried his kimono upon the white, sun-baked gravel of the riverbed; as for himself, in order to ward off the mosquitoes, he resolved to spend the night with his entire body immersed in the water. The shadow of the beast had disappeared before he knew it. Having barely seen out the summer night and looking closely at his clothing, he saw that disgusting leeches were biting all over the kimono as if hair were growing upon it. They were leeches of strong adhesive power that would not easily come off; when he tried to remove them with his hands, they bit into his hands and would not let go no matter what. Turning over in his mind whether to think, 'Ah, come what may, shall I throw this kimono away into the river and set off on a barefoot journey, going as far as I can?' or 'No, no, wait, wait; when evening comes again, I shall be unable to ward off the attacks of the mosquitoes, yet if I put on a kimono with this many leeches all over it, my blood will be sucked once more—alas, what had I better do?', he lamented his misfortune in life, climbed back up to the bank, and was drowning in tears.</p>
+          <p class="en-p">From far away in the direction of Mukōgata, the black beast seen the previous night came running toward this place as if shooting an arrow. This was because First Princess had foreknown Michihiko's distress, instructed Smart smoothly, and sent him forth on a rescue mission. Smart had brought in his jaws a splendid robe of a Brahman missionary. And before Michihiko, barking 'wan, wan' two or three times, he wagged his tail and showed a demeanor as if urging him to wear it. Choking back tears of emotion, Michihiko muttered to himself:</p>
+          <p class="en-p">Michihiko: 'Ah, you are cleverer than even a brute beast, what a fine dog, you have rescued me well. Surely you must be a messenger of the kamisama without a doubt. That being the case, I will gladly accept this robe. However, it is the missionary robe of Brahmanism. Surely there must be some profound divine will in this as well. Taking advantage of this, shall I disguise myself as a Brahman missionary and cross this Mount Telumon toward Mukōgata?'</p>
+          <p class="en-p">muttering thus, he swiftly wrapped the robe around his body. When he cast a glance down at his feet with a sudden start, the shadow of the dog was already gone. The shadow of the dog running up the bald mountain in the distant Mukōgata could be seen looking no larger than a cat. Michihiko crossed the shallows to reach the western shore, and deliberately assuming the air of a Brahman missionary, he proceeded onward while chanting sutras.</p>
+          <p class="en-p">An old crone of about sixty with grey-flecked hair, accompanied by two maidservants and leaning upon a staff, advanced toward this place. Just as Michihiko stopped in his tracks at the side of the road, muttering to himself, 'Well now, what a mysterious crone she is. Unlike the Vaishyas or Shudras, she possesses a noble air from no one knows where. Could this most likely be the mistress of Okunowake?', the three of them quickly approached him,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と述懐を述べ、一生懸命に祈つて居る。</p>
+            <p class="ja-classical-line">三千彦は漸くにして、川の堤の青草の上に眠に就いた。沢山の蚊が人間の匂ひを嗅ぎつけて、珍らしげに集まり来り、ワンワンワンと厭らしい声を立て、三千彦の体一面に折重なつて喰ひついてゐる。此時俄にレコード破りの川風吹き来り、堤上に眠つてゐた三千彦の体を鞠の如く転がして、あたりの泥田の中へ吹き込んで了つた。三千彦は驚いて立ち上らうとすれ共、泥深くして腰のあたりまで体がにえこみ、何うする事も出来ず、チクチクと身は泥田に没し、最早首丈になつて了つた。此儘にしておけば全身泥に没し、三千彦の生命は既に嵐の前に灯火の如き運命に陥つて了つた。三千彦は一生懸命に天津祝詞を奏上し、せめて肉体は泥田の中に埋めて死す共、吾精霊を天国に救はせ玉へと、声を限りに祈つてゐる。斯かる所へ黒い四つ足の影、何処ともなく現はれ来り、三千彦の体の囲の泥土をかきのけ、泥のついた着物を喰わへて、自分も亦体を半分以上泥土に没し乍ら、漸く堤の上に救ひ上げた。三千彦は如何なる獣か知らね共、自分を助けてくれたのは、全く神様の使に違ひあるまいと、双手を合せて、黒い獣を一生懸命に拝み、泥だらけの着物を着けたまま川の浅瀬に飛入り、ソロソロ洗濯を始め出した。黒い影の獣は復川中にバサバサと飛込み、自分の体を洗つてゐる。</p>
+            <p class="ja-classical-line">三千彦はザツと衣類の洗濯をなし、夏の事とて、白く焼けた河原の砂利の上に着物を干し、自分は蚊を防ぐ為に、全身を水に浸けて夜を明かすこととなつた。獣の影は何時しか見えなくなつてゐる。夏の一夜を漸く明かし、能く能く自分の衣類を見れば、着物一面に毛の生えた如く、厭らしい蛭が喰付いて居る。粘着性の強い蛭で容易におちない、手を以て落とさうとすれば手に喰付き、どこ迄も離れてくれぬ。『エー一層の事、此着物は川へ棄て、裸の道中で、行く所迄行つてやらうか』と思案を定めてみたり、『いやいや待て待て、夜分になれば、又蚊の襲撃を防ぐ事は出来ぬ、ぢやと云つてこれ丈沢山の蛭のついた着物を身につけば又血を吸はれる、ハテどうしたらよからうか』と身の不遇を嘆き、再び堤に上つて、涙にくれてゐた。</p>
+            <p class="ja-classical-line">遙向方の方より夜前見た黒い獣が矢を射る如く此方に向つて走つてくる。これは初稚姫が三千彦の難儀を前知して、スマートに言ひ含め、救援に向はしめ玉うたのである。スマートは、立派なバラモン教宣伝使の服を喰わへて来た。そして三千彦の前に二声三声、ワンワンと吠乍ら、尾を振つて、之を着よとすすむる如き形容を示した。三千彦は感涙に咽び乍ら、</p>
+            <p class="ja-classical-line">三千『ああお前は畜生にも似ず、賢い犬だなア、よう助けてくれた。キツと神様のお使に違ひなからう。ついては此服は私が頂戴する。併し乍らバラモン教の宣伝使服だ。之も何か神様の深い思召があるだらう。之を幸、バラモン教の宣伝使と化け込んで、此テルモン山を向方へ渉つてみようかなア』</p>
+            <p class="ja-classical-line">と独ごちつつ、手早く服を身に纒うた。フツと足許を見れば、最早犬の影はなくなつてゐた。遙向方の禿山を駆け登る犬の影、猫ほどに見えてゐる。三千彦は浅瀬を渡つて西岸へ着き、ワザとバラモンの宣伝使気取になつて、経文を唱へ乍ら進んで行く。</p>
+            <p class="ja-classical-line">六十許りの白髪交りの婆々アが二人の侍女を伴ひ、杖をつき乍ら此方に向つて進み来る。三千彦は道の片方に立止まり、『ハテ不思議な婆々アだ。毘舎や首陀とは違つて、どこ共なしに気高い所がある。之は大方小国別の奥方ではあるまいか』と独ごちつつゐる所へ早くも三人は近づき来り、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Oba: 'You appear to be a missionary of Brahmanism, but I am Okunihime, the wife of Okuniwake who guards the mansion of Mount Terumon. Please forgive us, for this is a wretched place, but won't you drop by for a moment, and what is your name may I ask?'</p>
+          <p class="en-p">Being asked in rapid succession, Michihiko could not suddenly think of a false name to use,</p>
+          <p class="en-p">Michihiko: 'Yes, as you might guess, I am a missionary of Brahmanism. This time, having joined the battle camp of General Oniharuwake and served exclusively in the role of a missionary, as you may have heard, General Oniharuwake suffered a bitter defeat at the hands of the enemy, and inevitably I came all the way here quite alone. Wishing to worship the historic sites of Mount Terumon, I have crossed rivers and mountains day and night, and thus I have set foot upon this sacred ground.'</p>
+          <p class="en-p">So he spoke at great length, while attempting to think up his own name in the meantime. Worried that if he blurted out something matching the name of a Brahman missionary or a prominent figure he would be instantly exposed, and after pondering how best to speak without trouble, he remembered the name of the river he had just crossed, and suddenly with vigor,</p>
+          <p class="en-p">Michihiko: 'Even though I call myself a missionary, I am completely fresh and green, so I am nobody of any renown; I am a clumsy missionary named An-Burakku, and I would be most desirous to pay a visit to your mansion once, if you please.'</p>
+          <p class="en-p">Hime: 'Ah, is that so? Your name was An-Burakku-sama? What an auspicious name it is! This An-Burakku River has been a clear stream that has never grown muddy since ancient times, but to encounter a missionary who bears that name—how fortunate it is! With this, the foundation of the Mount Terumon mansion for ages unmoving will surely be secured. The truth of the matter is, a divine dream-revelation told me, "Go to the banks of the An-Burakku River, and a true person who will save you will appear," so I came relying on an uncertain dream, but as it proved to be a revelation from the gods, I have been able to meet a missionary of a noble name. Ah, how grateful, how grateful.'</p>
+          <p class="en-p">So saying, she shed tears of joy and joined her palms in prayer. Michihiko with a serious face,</p>
+          <p class="en-p">Michihiko: 'Yes, understood. Then I shall accept your hospitality.'</p>
+          <p class="en-p">Hime: 'I am most satisfied with your prompt consent. ...Hey, Kēya, Semisuya, make sure to let someone carry the missionary's luggage.'</p>
+          <p class="en-p">Kē: 'Yes, I am quite willing to carry anything, but aren't you really carrying nothing at all?'</p>
+          <p class="en-p">Hime: 'Still, aren't you bearing a large amount of luggage upon your back?'</p>
+          <p class="en-p">Kē: 'My lady, that is not luggage; the missionary-sama is carrying a cat on his back, you see. Isn't that so, Semisu-san?'</p>
+          <p class="en-p">Before he knew when, a bloated lump had formed on Michihiko's back, but since it was upon his back, he had not been aware of it in the slightest.</p>
+          <p class="en-p">Michihiko: 'Ahahaha, does it look like a cat? If anything, like a dog...'y</p>
+          <p class="en-p">He started to say and suddenly shut his mouth,</p>
+          <p class="en-p">Michihiko: 'Since it is a spirit like a dog or a cat, it cannot be helped. Now, please don't say such things and cherish it.'</p>
+          <p class="en-p">Okunihime says, 'Now let us go,' and walks on ahead. With a half-reassuring and half-fearful expression, Michihiko proceeded deep into the gates, and together with Okunihime immediately reached the sanctuary to recite the Buddhist scriptures of Brahmanism. Michihiko knew only the rough outlines of the scriptures from what he had merely overheard, and fearing that if he raised his voice too much and spoke incorrectly he would be instantly exposed, he purposely lowered his voice and recited with all his might while clicking the prayer beads attached to his clerical robe. Before he knew when, Michihiko's hunchback had straightened out without a trace just as it was originally. This was so that the spirit of Sumāto could safely escort Michihiko into the mansion and protect his person. Sumāto was hiding beneath the floorboards of the mansion and guarding him.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">婆『お前さまはバラモン教の宣伝使と見えるが、私はテルモン山の館を守る小国別の妻小国姫で厶います。何卒むさ苦しい所で厶いますが、一寸立よつて下さいますまいか、そしてお名は何と申しますか』</p>
+            <p class="ja-classical-line">と矢つぎ早に尋ねられ、三千彦は俄に仮の名を思ひ出す訳には行かず、</p>
+            <p class="ja-classical-line">三千『ハイ私はお察しの通り、バラモン教の宣伝使で厶います。此度、鬼春別将軍様の陣中に交はり、宣伝使専門の役を勤めて参りました所、お聞及びも厶いませうが、鬼春別様は敵の為に手いたく敗北遊ばし、やむを得ず私は只一人で此処まで参つたので厶います。テルモン山の御旧蹟を拝したいと存じ、ヤツとのことで夜を日についで、霊地へ足を踏み入れたとこで厶います』</p>
+            <p class="ja-classical-line">と長い口上を云つて、其間に自分の名を考へ出さうとしてゐる。もしもバラモン教の宣伝使や錚々たる人物の名に匹敵した事を喋つては直に看破さるる虞があると気遣ひ、どう云つたら無難であらうかと考へた末、今渡つて来た川の名を思ひ出し、俄に元気よく、</p>
+            <p class="ja-classical-line">『私は宣伝使と云つても、ホンのホヤホヤで厶いますから、名のあるやうな者では厶いませぬ、アン・ブラツクと申すヘボ宣伝使で厶いますが、何卒一度お館に参拝をさして頂きたいもので厶います』</p>
+            <p class="ja-classical-line">姫『あ、左様で厶いますか、貴方のお名はアン・ブラツク様でしたか、何と目出たいお名で厶いますなア、此アン・ブラツク川は昔から濁つた事のない清川で厶いますが、其名を負はせ玉ふ宣伝使に出会うとは、何といふ結構な事でせう。之でテルモン山の館も、万世不動の基礎が固まるでせう。実の所は夢のお告に「アン・ブラツク川の岸辺に行け、さうすればお前を助ける真人が現はれる」との事で厶いましたので、信頼ない夢を力として参りましたが、矢張り神様のお告げと見えて、尊い名の宣伝使に会ふ事が出来ました。ああ有難い有難い』</p>
+            <p class="ja-classical-line">と嬉し涙をたらし乍ら合掌する。三千彦は真面目な顔して、</p>
+            <p class="ja-classical-line">三千『ハイ承知致しました。然らばお世話に与りませう』</p>
+            <p class="ja-classical-line">姫『早速の御承知、満足に存じます。……コレ、ケーや、セミスや、宣伝使のお荷物を持たして頂きなさい』</p>
+            <p class="ja-classical-line">ケー『ハイ何でも持たして頂きますが、別に何もお持になつてはゐないぢや厶いませぬか』</p>
+            <p class="ja-classical-line">姫『それでもお背に沢山の荷物を負うてゐらつしやるぢやないか』</p>
+            <p class="ja-classical-line">ケー『奥様、あれは荷物ぢや厶いませぬ、宣伝使様が猫を負うてゐらつしやるのですよ。なア、セミスさま、さうぢや厶いませぬか』</p>
+            <p class="ja-classical-line">三千彦は何時の間にやら背中にブクブクとした瘤が出来てゐたが、背中の事とて少しも気がつかなかつた。</p>
+            <p class="ja-classical-line">三千『アハハハハ、猫に見えますかな、どうで犬に……』</p>
+            <p class="ja-classical-line">と云ひかけて俄に口をつぐみ、</p>
+            <p class="ja-classical-line">三千『犬か猫のやうな霊ですから、仕方がありませぬ。まアさう仰有らずに可愛がつて下さいませ』</p>
+            <p class="ja-classical-line">小国姫は『サア参りませう』と先に立つて行く。三千彦は半安半危の面持にて門内深く進み入り、小国姫と共に直ちに神殿に至つてバラモン教の経文を称へた。三千彦は只聞き覚へに経文のそしり走りを知つてゐる許りで、余り大きな声を出し、間違つた事を言つては、忽ち看破さるる事を恐れ、ワザと小声になり、教服に添へてあつた数珠を爪繰り乍ら、一生懸命に念じてゐる。何時の間にやら三千彦の猫背は元の通りに痕跡もなく直つてゐた。これはスマートの霊が三千彦を無事に館内に送り且つ其身辺を守らむが為であつた。スマートは館の床下に隠れて守つてゐる。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: 方 Rock [1444]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: 不臣 [1446]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

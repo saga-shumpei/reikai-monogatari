@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 鷹魅 [1435] - Volume 56 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 56 Table of Contents</a>
+      <span>Volume 56</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 56 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: 鷹魅 [1435]</h1>
+      <p class="chapter-title-ja">鷹魅〔1435〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The primeval ancestor who created this world, the deity Miroku, masquerading as the sun deity possessing the physical shrine of Takahime, clung fiercely with diamond-indestructible wish-granting jewels and a hundred other divine treasures to the four quarters of the land. Crossing the waves of ten thousand ri of ocean, she roamed in turmoil, the result of which was that, through the seamless and compassionate mediation of the divine spirit of the great deity Kamususanō from the depths of her heart, she felt deep repentance, returned to live in the true path, and for a while appeared in the sacred ground to transmit the teachings. However, upon hearing that Tōsuke of the village of Ahaji was an old acquaintance, her monkey-like mind and horse-like will, going mad once again, surged with unstoppable pulsation.</p>
+          <p class="en-p">Leaving the forest of Ikuta behind, she crossed over long expanses of sea and mountain, and with an eager heart hurried to the sacred place of Isoyakata on Mount Ubusuna to meet Tōsuke. Wrapping herself in the clouds of romance, seeking to renew old acquaintance by making a smooth show of things, her very core became shrouded in darkness. Tōsuke, firm in his faith, gave not a single glance to Takahime, who was maddened by love, and coldly and unceremoniously rebuffed her. Her heart clouded, Takahime became increasingly desperate, and once again her original wicked spiritual body had a relapse. Exposing her face to the storms of Mount Kajika, she cared nothing for shame or honor.</p>
+          <p class="en-p">Stopping by the grove of the shrine built by Tamakuniwake, and posing there as the master of the teachings, just as she was looking down disdainfully upon Tatsuhiko, the master of the estate, she was manipulated by Yōgenbō—noted even among the villainous factions as the right arm of the eight-forked serpent lurking in Mount Daigumo. Mistaking him for Mokusuke, the general affairs manager and time-keeper of the estate of Isoya, she skillfully coaxed him, and raising a banner, sought to hole up in the sacred ground to spite Hinodewake's provocation and settle her scores of love. Just as she was plotting this, Hatsuyahime appeared. Unable to endure her kaleidoscopic activities, Yōgenbō, along with Takahime, sneaked through the forest.</p>
+          <p class="en-p">Slipped away swiftly, and advanced like a married couple into the temple of Mount Konishi. Illuminated by the divine light, dropping the jewel of her boundary, Yōgenbō and Mokusuke, who fled together with the priestess Takahime, appeared in the forest of Ukiki where the Brahman army was stationed, and while performing all manner of magic, tormented the people. Just at that moment, startled by the voice of Hatsuyahime—a divine priestess equal to a heavenly maiden, renowned even in Miroku Teachings—Yōgenbō raised black clouds and, holding Takahime under his arm, fled through the empty air, just as in the midst of the vast plateau of Dekatan,</p>
+          <p class="en-p">He dropped the priestess Takahime, and fled away like clouds and mist. Takahime fell headlong from the sky, fell unconscious, and having barely crossed the barrier of the separation of soul and body, came journeying far to the barrier of Yachimata, only to find her path blocked by fierce red and white guards. She became one whose soul is polished and purified while dwelling for three years in the world of Chūu. Even so, Takahime's spirit registered her name in hell, fearing, trembling at, and abhorring the spiritual light of Takamanohara. Even today, a full year later, she wanders aimlessly about the Chūu realm, confronting a hundred straying and bewildered spirits,</p>
+          <p class="en-p">Continuing her propaganda full of deropments as if she were still in the physical world—how foolish indeed! Catching sight of the four individuals—Kerina's hime hiding in the valley of Erishina, along with the Brahman soldiers Hel and Shar, and Rokuzō—concealing themselves among the grass by the roadside, she raised her withered voice and shouted out: 'I am the loyal heavenly envoy of the sun deity, the vanguard of the deity Miroku, the living shrine of the priestess Takahime! I am paying attention to you four! Quickly leap out of the grass and step forth before my living shrine!' How comical indeed was her style as she called out incessantly, asking 'Why and wherefore?' Ah, truly divine are the kami; souls that have wandered to the very end can find no power in the kami, nor any means to save them.</p>
+          <p class="en-p">Takahime, facing the four men and women hiding in the tall grass by the roadside, with a sharp voice and the tips of her words lifted sharply, her mouth corners sending spiva flying, thrusting her Atlas-like face forward with sudden jerks, twitching her chin two or three times, shaking her shoulders, and making beckoning-cat-like gestures while clawing at the empty air two or three times,</p>
+          <p class="en-p">Takahime: 'Hey there, whoever you may be, this wilderness is the jurisdiction of this Takahime. Why have you come silently to such a place? Come on, come over this way. I will tell you a marvelous story. Oh dear, how gloomy. Will you not come out quickly? No matter how long you stay cooped up in the grass like crickets or grasshoppers, nothing will be settled.'</p>
+          <p class="en-p">{"english_paras": ["..."], "error": "Invalid format requested by user constraint, returning single parseable JSON array."}</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">此世を造りし元津祖
+弥勒の神は高姫が
+肉のお宮に憑りたる
+日の出神とこじつけて
+金剛不壊の如意宝珠
+其外百の神宝に
+執着強く四方の国
+海洋万里の波渡り
+騒ぎまはりし其結果
+仁慈無限の瑞御霊
+神素盞嗚の大神の
+水も洩らさぬ執成に
+心の底から悔悟して
+誠の道に生き復り
+暫らく聖地に現はれて
+教を伝へ居たりしが
+淡路の里の東助が
+昔馴染と聞きしより
+再び狂ふ心猿意馬の
+止め度もなしに躍動し</p>
+            <p class="ja-classical-line">生田の森を後にして
+長の海山打渡り
+心いそいそ斎苑館
+ウブスナ山の聖場に
+詣で来りて東助に
+過ぎし昔の物語
+シツポリなして旧交を
+回復せむと恋愛の
+雲に包まれ村肝の
+心は暗となりにけり
+信心堅固の東助は
+恋に狂へる高姫に
+只一瞥もくれずして
+いと素気なくも刎ねつける
+心曇りし高姫も
+愈自暴自棄となり
+又もやもとの悪身魂
+再発なして河鹿山
+嵐に面を曝しつつ
+恥も名誉も知らばこそ</p>
+            <p class="ja-classical-line">玉国別の築きたる
+祠の森に立寄りて
+ここに教主となりすまし
+館の主人珍彦を
+眼下に見下し居たる折
+大雲山に蟠まる
+八岐大蛇の片腕と
+兇党界にて名も高き
+妖幻坊に操られ
+斎苑の館の時置師
+杢助総務と誤解して
+うまく抱き込み一旗を
+挙げて聖地に立籠もる
+東野別の向ふ張り
+恋の意趣を晴らさむと
+企み居たりし折もあれ
+初稚姫が現はれて
+千変万化の活動に
+居堪りかねて妖幻坊
+高姫諸共森林を</p>
+            <p class="ja-classical-line">潜つてスタスタ逃げ出し
+小北の山の神殿に
+夫婦気取で進み入り
+神の光に照らされて
+曲輪の玉を落しつつ
+高姫諸共逃げ出す
+妖幻坊の杢助は
+高姫司と諸共に
+バラモン軍の屯せし
+浮木の森に現はれて
+あらゆる魔法を行ひつ
+世人を悩め居たる折
+三五教に名も高き
+天女に等しき神司
+初稚姫やスマートの
+声に驚き妖幻坊
+黒雲起し高姫を
+小脇に抱へ空中を
+逃げ行く折しもデカタンの
+大高原の中央に</p>
+            <p class="ja-classical-line">高姫司を遺失して
+雲を霞と逃げて行く
+高姫空より墜落し
+人事不省に陥りて
+霊肉脱離の関門を
+漸く越えて遥々と
+八衢関所に来て見れば
+さも勇ましき赤白の
+守衛に行途を遮られ
+三歳の間中有の
+世界に有りて精霊を
+研き清むる身となりぬ
+さは去り乍ら高姫の
+身魂は地獄に籍を置き
+高天原の霊光を
+畏れ戦き忌み嫌ひ
+一歳経ちし今日の日も
+中有界をブラブラと
+彷徨ひ巡り迷ひ来る
+百の精霊に相対し</p>
+            <p class="ja-classical-line">現実界にありし如
+脱線だらけの宣伝を
+つづけ居たるぞ愚なれ
+エリシナ谷に隠れたる
+ケリナの姫やバラモンの
+軍人なるヘル、シャルや
+六造の四人が道の辺の
+草に隠るる姿をば
+目敏く眺め立止まり
+皺枯声を張上げて
+日出神の義理天上
+弥勒の神の御先達
+高姫司の生宮が
+汝等四人に気をつける
+早く草原飛び出して
+吾生宮の前に出よ
+如何に如何にと呼び立てる
+其スタイルぞ可笑しけれ
+ああ惟神々々
+迷ひ切つたる霊魂は</p>
+            <p class="ja-classical-line">神の力も如何とも
+救はむ手段もなかりけり。</p>
+            <p class="ja-classical-line">高姫は道の辺の長い草の中に隠れてゐる四人の男女に向ひ声を尖らし乍ら、言葉の尻口をピンとあげて口角泡を飛ばし、アトラスの様な顔を前にニユツと出し二つ三ツつ腮をしやくり肩を揺り、招き猫の様な手つきをして二つ三ツつ空を掻き乍ら、</p>
+            <p class="ja-classical-line">高姫『これこれ、何処の方か知らぬが此原野は此高姫の管轄区域だ。何故こんな処まで黙つて来たのだい。まア、ちつと此方へ来なさい。結構な話をしてやらう。エーエー、辛気臭い。早う出なさらんかいな。蟋蟀か螽斯の様に草の中に何時迄すつこんで居つても埒は明きませぬぞや』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yonin kohagoha kusa o wake gasagasato Takahime no nisangen temahe made nihorarete kita. Sau shite fushigi-sō ni sukoshi utsumuki-kimi ni natte Takahime no kao o chirachira to nusumu yō ni mite ita.</p>
+          <p class="en-p">Takahime: 'Kore minasama, omae ga koko e kuru tochiu ni hitotsu no ie ga attadarou. Naze soko o damatte tōtte kita no dai. Kono Takahime wa moto wa Ananai-kyō no sendenshi, ima wa Uranai-kyō no enzeru dazo e. Ten no Mirokusama no kotsupon no kotsupon no ōhashira no ōmirokusama de, Giritenjiyō Hinodenokami no ikimiya de maru zo ya. Ammari Genkai no ningen ga mitama ga kumotte iru node, dōzo tasukete Tengoku e yatte yaritai to omotte keshin no hō o tsukai, Takahime no nikumiya o tsukaitte kono Ōnogahara o yukiki suru jinmin o katatsupashi o toritsukamaete, makoto no oshihe o kikashite iru noda. Sa a hayaku dete ki nasai.'</p>
+          <p class="en-p">Rokuzō: 'Omaesama wa oto ni takai Takahime-sama de maru imashita ka. Ona wa tsukawahatte imashita ga, om ni kakaru no wa hajimete desu.'</p>
+          <p class="en-p">Takahime: 'Un, sō kana. Warawa no na wa nanto yutte mo uchū kotsupon no Ōkamisama no ikimiya dakara tsutsūraura made hibiite iru hazuda. San-nin no okata, omae-ra mo warawa no na o kiite iru darou na.'</p>
+          <p class="en-p">Heru: 'Hai, netsu kara kiita koto wa maru imasenu. Watashi wa Hatsuyakuhime-sama dato ka, Seishōhime to yū rippa na kata no na wa kiite imasu ga, Takahime-sama to yū na wa kyō ga hajimete desu.'</p>
+          <p class="en-p">Takahime: 'Sō kai na. Nanto ma a okure-mimi dakoto. Tenchi no aida ni Giritenjiyō Hinodenokami no ikimiya no na o shiranu mono wa hitori mo nai hazuda ga, yahari mitama no innen ga nai to, kaminari no yō na koe de yobattsu te mo mimi ni hairanu to mieru wai. Sa a koko de atta o saiwai, Takahime no sugata o haiken shi okoe o yoku kiite oki nasai. Kesshite Takahime ga yū no jiya arimasenu zo ya. Sokotsubane no kotsupon no ōmirokusama ga ōseru nodakara adani kiite wa bachi ga atarimasu zo e.'</p>
+          <p class="en-p">Heru: 'Nandaka shirimasenu ga, anata no okoe o kiku to atama ga itaku narimasu wa. Oka o mite mo kibun ga yoku maru imasenu wai.'</p>
+          <p class="en-p">Takahime: 'Sora, sō darou. Rekoku Tengoku o kaneta tenjin no mitama dakara, mitama no kumotta aku no mamorishami wa Takahime no kōmyō ni terasarete, me ga kurami zengen bishi no kototama ni aterarete, mimi ga nari atama ga itamunoda yo. Chitsu to shikkari shinasaran ka. Ima koko de torichigai shitara, mankō maida ukibaramasenu zo ya.'</p>
+          <p class="en-p">Heru: 'Hei hei, wakamarimashita. Mata goen ga maru imashita ra osewa ni nariyaseu.'</p>
+          <p class="en-p">Takahime: 'Hohohohoro wake no wakaranu tenkyō chihō dakoto. Ā ā ā daijidihi no kotsupon no ōmirokusama mo, kono yō na mothubunkyōkan o saido nasaranu naranu no hon ni oitoshii wainou, ōn ōn ōn, shikashinagara kono otoko wa Heru to kiita ga, yohodo baka na yatsu to mieru. Oi, soko ni iru, mo hitori no otoko, omae wa Takahime no nai-i wa kiite iru darou na.'</p>
+          <p class="en-p">Sharu: 'Hai, kiite orimasu ga, watashi no kiiteru Takahime wa anata de wa maru imasumai. Sekai ni onaji na wa takusan maru imasu kara na.'</p>
+          <p class="en-p">Takahime: 'Omae no kiiteru Takahime to yū no wa ikaga na seishitsu no hito da. Itsu tte goran nasai.'</p>
+          <p class="en-p">Sharu: 'Hei, wareware no oya-kata ni shite yoi yō na okata desu wa. Nandemo Ananai-kyō to yara ni haitte kongō fukai no nyoi hōju ni utsutsu o nuki ōzei no mono ni kiraware, he no de no kami to ka kuso de no kami to ka yutte mizura fure-aruki, shimai no hate ni oba no kuse ni koi ni ochi, yōgenbō to yū furudanuki ni tsumamarete dokoka e sarawarete ittato yū koto desu. Sono Takahime nara kiite imasu ga zumai watashi no mura de wa warui oba dato yū hyōban ga tatsu te orimasu yo.'</p>
+          <p class="en-p">Takahime: 'Sō kana. Yahari warawa no na ni nita oba ga aru to mieru wai. Ammari warawa no na ga takai monokara akujin ga arawarete Takahime no na o katari, Ananai-kyō e haitte, mata mo ya Hinodenokami no na o katari, iroiro no koto o oshitano darou. Dōmo aburanu no shijitsu da. Shikashi warawa wa onaji Takahime demo, sono yō na mono to wa chigaimasu zo ya. Tsuki to suppon, yuki to sumi, onaji mono to mirarimashite wa... hen... kono Takahime mo netsu kara hikiaimasen wai. Ohōhōhōhō.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">四人は怖々草を分けガサガサと高姫の二三間手前まで現はれて来た。さうして不思議相に稍俯向気味になつて高姫の顔をチラチラと偸む様に見てゐた。</p>
+            <p class="ja-classical-line">高姫『これ皆さま、お前がここへ来る途中に一つの家があつただらう。何故そこを黙つて通つて来たのだい。此高姫はもとは三五教の宣伝使、今はウラナイ教のエンゼルだぞえ。天の弥勒様の根本の根本の大柱の大弥勒様で、義理天上日出神の生宮で厶るぞや。あんまり現界の人間が身魂が曇つてゐるので、どうぞ助けて天国へやつてやり度いと思つて化身の法を使ひ、高姫の肉宮を使つて此大野ケ原を往来する人民を片端から取ツ捉まへて、誠の教を聞かしてゐるのだ。さア早く出て来なさい』</p>
+            <p class="ja-classical-line">六造『お前さまは音に名高い高姫さまで厶いましたか。お名は承はつてゐましたが、お目にかかるのは初めてです』</p>
+            <p class="ja-classical-line">高姫『うん、さうかな。妾の名は何と云つても宇宙根本の大神様の生宮だから津々浦々迄響いてゐる筈だ。三人のお方、お前等も妾の名を聞いて居つただらうな』</p>
+            <p class="ja-classical-line">ヘル『ハイ、根つから聞いた事は厶いませぬ。私は初稚姫さまだとか、清照姫とか云ふ立派な方の名は聞いて居ますが、高姫さまと云ふ名は今日が初めてです』</p>
+            <p class="ja-classical-line">高姫『さうかいな。何とまア遅れ耳だこと。天地の間に義理天上日出神の生宮の名を知らぬものは一人も無い筈だが、矢張身魂の因縁がないと、雷の様な声で呼ばつても耳に這入らぬと見えるわい。さア此処で会ふたを幸ひ、高姫の姿を拝見しお声をよく聞いておきなさい。決して高姫が云ふのぢやありませぬぞや。底津磐根の根本の大弥勒様が仰有るのだから仇に聞いては罰が当りますぞえ』</p>
+            <p class="ja-classical-line">ヘル『何だか知りませぬが、貴方のお声を聞くと頭が痛くなりますわ。お顔を見ても気分がよく厶いませぬわい』</p>
+            <p class="ja-classical-line">高姫『そら、さうだらう。霊国天国を兼ねた天人の身魂だから、身魂の曇つた悪の守護神は高姫の光明に照らされて、目が眩み善言美詞の言霊にあてられて、耳が鳴り頭が痛むのだよ。チツと確りしなさらんか。今ここで取違ひしたら、万劫末代浮ばれませぬぞや』</p>
+            <p class="ja-classical-line">ヘル『ヘイヘイ、畏まりました。又御縁が厶いましたらお世話になりやせう』</p>
+            <p class="ja-classical-line">高姫『ホホホホホ訳の分らぬ癲狂痴呆だこと。あああ大慈大悲の根本の大弥勒さまも、こんな没分暁漢を済度なさらなならぬのか、ホンにおいとしいわいのう、オーンオーンオーン、然し乍ら此男はヘルとか聞いたが、余程馬鹿な奴と見える。おい、そこに居る、も一人の男、お前は高姫の名位は聞いてゐるだらうな』</p>
+            <p class="ja-classical-line">シャル『ハイ、聞いて居りますが、私の聞いてる高姫は貴女では厶いますまい。世界に同じ名は沢山厶いますからな』</p>
+            <p class="ja-classical-line">高姫『お前の聞いてる高姫と云ふのは如何な性質の人だ。一寸云つて御覧なさい』</p>
+            <p class="ja-classical-line">シャル『ヘイ、吾々の親方にして宜い様なお方ですわ。何でも三五教とやらに這入つて金剛不壊の如意宝珠に現を抜かし大勢の者に嫌はれ、屁の出の神とか糞出の神とか云つて自ら触れ歩き、終ひの果には婆の癖に恋に落ち、妖幻坊と云ふ古狸につままれて何処かへ攫はれて行つたと云ふ事です。その高姫なら聞いてゐますが随分私の村では悪い婆だと云ふ評判が立つて居りますよ』</p>
+            <p class="ja-classical-line">高姫『さうかな。矢張妾の名に似た婆があると見えるワイ。余り妾の名が高いものだから悪神が現はれて高姫の名を騙り、三五教へ這入つて、又もや日出神の名を騙り、色々の事を致したのだらう。どうも油断のならぬ時節だ。然し妾は同じ高姫でも、そんな者とは違ひますぞや。月と鼈、雪と墨、同じものと見られましては……ヘン……此高姫も根つから引合ひませんわい。オホホホホホ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sharu: 'I am now living by the trade of a thief like this, but until now I served as a soldier of Brahmanism under the subordinate of Oniharuwake. At that time, facial portraits and likenesses of the executive members of Ananai-kyō were circulated, but you look exactly like that Takahime who is said to have been deceived by Eugenbau. You could surely not be that Takahime, could you? Not only Brahmanism but even the Puritans of Ananai-kyō say that since the words and heart of that wretch are two-faced, you must never listen to her.'</p>
+          <p class="en-p">Takahime: 'Ho ho ho ho, how could a person of your station as a thief understand the truth or falsehood of Takahime? That wretch called Takahime is actually called Mukadehime who was in Brahmanism. She deceived my name and did such things. Because the fellows of Ananai-kyō are fools, the divine light was too strong so they could not distinguish and grasped a fake. Be that as it may, come to this hiding place of Takahime. I will not say anything that is certainly not for your benefit. Since I am going to save you all to Tengoku.'</p>
+          <p class="en-p">Sharu: 'Oi, Heru, Kerina, Rokukō, what shall we do? Shall we listen to what this old hag has to say?'</p>
+          <p class="en-p">Rokuzō: 'Yeah.'</p>
+          <p class="en-p">Takahime: 'Eh, what are you saying? Listen to this old woman's words, or shit—there is nothing of the sort. This is the living shrine of Mirokusama of Sokotsuihane. No matter what, I will not leave you without saving you, so come, come along now. Hey, you young lady over there, you look rather clever at a single glance. Depending on the matter and quality, it is not impossible that I might use you as my associate. Anyway, for a cloudy spirit to go straight to Tengoku feels far too good. You must not do something like falling halfway through, because it is a world where the flowers of hardship bloom... I have descended from the Shibi Palace of Tengoku taking on the human form. And my role is to show the model of hardship and make everyone reform. You too, come out and undergo hardships.'</p>
+          <p class="en-p">Kerina: 'Yes, thank you very much. The truth of the matter is that when I went as far as the barrier of Yachimata, you said that life still remains in this present world, so go back, and therefore I came back. Is this place already the phenomenal world?'</p>
+          <p class="en-p">Takahime: 'It is a settled matter. This place is the phenomenal world indeed, the great phenomenal world. Since I am the savior of the three realms of phenomenal, hidden, and divine, I will save the human beings of the phenomenal world first.'</p>
+          <p class="en-p">Heru: 'Ahhh, I have come to not understand the reason for anything at all. Still, hearing it that way, it seems like the phenomenal world, but one more doubt remains at the bottom of my heart. There is no use standing by the roadside like this. First of all, let us follow behind the old woman and have her let us investigate whatever it may be. Right, you company of two men and one woman?'</p>
+          <p class="en-p">Takahime: 'What do you mean by having her let you investigate? The teachings of God are purely true on one side. They are transparent like crystal, you see. Saying things like investigating as if you were a spy or something, do not utter such foul-hearted things. Come, come along.'</p>
+          <p class="en-p">So flapping her wings, feeling overjoyed, she pointed to the east and began walking along the narrow path. The four of them, leaving aside everything else, dragged their heavy feet along behind her, intending to go to the old hag's mansion and rest.</p>
+          <p class="en-p">Near the mountain stream stood a small house of two rooms thatched with miscanthus. This was Takahime's dwelling in the intermediate realm. Cautiously crossing a flimsy single-board bridge, the four of them finally and barely arrived at Takahime's mansion.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">シャル『私は今は斯うして泥坊商売に変りましたが、今迄はバラモン教の軍人で鬼春別の部下に仕へたものです。その時に三五教の幹部連の人相書や絵姿が廻つて来ましたが、妖幻坊に騙されたと云ふ高姫に、お前さまそつくりですよ。よもや其高姫では厶いますまいな。彼奴の云ふ事なら口と心が裏表だから決して聞いてはならないと、バラモン教は云ふに及ばず三五教のピユリタンでさへも云つて居ますよ』</p>
+            <p class="ja-classical-line">高姫『ホホホホホ、盗人の分際として高姫の真偽が判つて堪らうか。あの高姫と云ふ奴は実の所はバラモン教に居つた蜈蚣姫と云ふのだよ。それが妾の名を騙つて、あんな事をやつたのだ。三五教の奴は馬鹿だから、あまり御光が強いので見分けがつかず贋者を掴んで居つたのだ。何は兎もあれ、この高姫の隠れ家迄いらつしやい。決して利益にならぬ事は云はぬ。皆天国へ助けてやるのだからな』</p>
+            <p class="ja-classical-line">シャル『オイ、ヘルにケリナに、六公、如何しようかな。一つ此婆アの話を聞いてやらうか』</p>
+            <p class="ja-classical-line">六造『うん』</p>
+            <p class="ja-classical-line">高姫『エー、そりや何を云ふのだ。此婆の話を聞いてやらうも、糞もあつたものかい。底津磐根の弥勒様の生宮だ。何と云つても助けにや措かぬ、さア来なされ来なされ。これ、其処な若いお女中、お前は一寸見た所で仲々気が利いて居る。事と品とによつたら妾の脇立に使つてやらうまいものでもない。何せよ、曇りきつた霊が直に天国に行くと云ふのは余り気が良すぎる。中途で墜落る様な事をしてはならず、苦労の花が咲く世の中だから……天国紫微宮から人間の姿となつて降つて来たのだ。そして苦労の手本を見せて皆に改心させる役だぞえ。お前も出て来て苦労をしなさい』</p>
+            <p class="ja-classical-line">ケリナ『ハイ、有難う厶います。実の所は八衢の関所迄参りました所、まだ生命が現世に残つて居るから帰れ、と仰有つたから帰つて来たのです。最早此処は現界で厶いますか』</p>
+            <p class="ja-classical-line">高姫『きまつた事だよ。此処は現界も現界、大現界だ。現幽神三界の救ひ主だから先づ現界の人間から助けてやるのだよ』</p>
+            <p class="ja-classical-line">ヘル『あああ、何が何だか訳が分らなくなつて来た。然しさう聞くと現界の様にもあるし、も一つ心の底に疑念も残つて居る。こんな道端に立つて居た所が仕方が無い。先づお婆アの後に跟いて何でも可いから探らして貰ふ事にしようかい。のう二男一女の御連中』</p>
+            <p class="ja-classical-line">高姫『探らして貰ふなんて、そりや何を云ふのだい。神の教は正真一方だ。水晶の様につきぬけて居るのだぞえ。スパイか何ぞの様に探るなんて、心の穢い事を云ふのぢやありませぬわい。さアさア来なさい』</p>
+            <p class="ja-classical-line">と羽ばたきし乍ら欣々と東を指して小径を歩み出した。四人は兎も角、婆さまの館に行つて休息せむと重い足を引摺り乍ら跟いて行く。</p>
+            <p class="ja-classical-line">谷川の辺に萱で葺いた二間作りの小かな家が建つて居た。これが高姫の中有界に於ける住家である。ヒヨヒヨした板の一枚橋を危く渡り乍ら漸くにして四人は高姫の館にやつと着いた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: 盗 Song [1434]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: High 圧 [1436]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

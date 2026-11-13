@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9: 我執 [1439] - Volume 56 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 56 Table of Contents</a>
+      <span>Volume 56</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 56 &bull; Chapter 9</span>
+      <h1 class="chapter-title-en">Chapter 9: 我執 [1439]</h1>
+      <p class="chapter-title-ja">我執〔1439〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">With the sound of the conch shell blown with all his might by Kiudaukoji, Beru, Heru, and Kerina vanished from this place like smoke. The figure of Kiudaukoji also disappeared before one knew it, and the faint sound of the conch could be heard in the distance. Takahime turned toward the two, Sharu and Rokuzau,</p>
+          <p class="en-p">Takahime: 'Hey, you two, Sharu and Rokuzau, isn't Takahime's divine power truly magnificent? Because you were too headstrong, Giritenjiyōsama lost his patience and gave just a single glance, and at that very moment, that conch blower, both Beru and Heru, and the high-collar woman as well, all vanished into thin air like smoke without a trace... such is the tragic state of affairs. Seeing this, repent. And why has Roku-san stayed silent like a mute or something, and where on earth have you been hiding until now?'</p>
+          <p class="en-p">Rokuzau: 'Heh, the conch shell was so terrifying that I hid away inside the privy for a short while. Quite a formidable fellow came along, indeed. Even so, as for that fellow Beru, it is truly gratifying that he vanished like smoke as divine punishment for tossing me into the Lion River. I am profoundly grateful, thinking that this too is entirely the result of Takahime's divine power.'</p>
+          <p class="en-p">Takahime: 'That is why I say that if you simply rely upon the Kami, the Kami will avenge you. You must completely reform your past mischief and do whatever this Ikunomiya tells you to do.'</p>
+          <p class="en-p">Rokuzau: 'Yes, I will do anything, but somehow I am starting to feel unwell. Unless you treat me to a drink, I cannot summon up my energy, wah.'</p>
+          <p class="en-p">Takahime: 'Eh-eh, you are getting too big for your boots, you are hopeless precisely because of that. Even though I have made your enemies vanish just like that and am letting you hear wonderful teachings, what an impudent thing to say about wanting me to let you drink!'</p>
+          <p class="en-p">Rokuzau: 'No, I did not say to let me drink sake. I said I wanted you to let me swallow the deba knife you are holding down into my belly. Is there truly no way I could be given just one mouthful?'</p>
+          <p class="en-p">Takahime: 'That will never do. What do you intend to do carrying a deadly weapon like a deba knife? Do you intend to become a deba-kame or something?'</p>
+          <p class="en-p">Rokuzau: 'No, I am not a deba-kame, I am thinking of becoming a deba-roku. With this, I intend to cut the sliding paper doors of the bathhouse into squares and peep at the activities of the bath attendants and maids. If you put bath attendants and maids together, you get six, don't you? When Roku-san enters into that, six times six is thirty-six, so it should become the full moon of the fifteenth night, right? You were softly chanting just a little while ago, too... As if there could be a half-moon on the fifteenth night, hiding in the clouds, half of it is here... so I heard. Since a half-moon on the fifteenth night is not very auspicious, I shall henceforth become deba-roku, turn into the moon of three and five, ascend to the First Spirit Realm, and report your present state to the Great Deity of the Moon. How is that, a brilliant idea, isn't it?'</p>
+          <p class="en-p">Takahime: 'Brilliant ideas or manifest and hidden, there is no such thing; your spirit is the darkness of darkness. That is why people call you a dark-hontann. Since you are a good-for-nothing, even your name is Rokuzau. You are by no means the sort of creature that can go to the land of the moon. You are a commodity for the crossroads of the six paths. Hee-hee-hee-hee.'</p>
+          <p class="en-p">Rokuzau: 'Hey, Taka, who do you think you are treating me as, eh-en. Up until now, that conch-blowing teacher came along, so I too was somewhat taken aback and kept quiet, but now that it has come to this, it is settled. There is no one to fear, an old hag or two is within my absolute freedom. Come, will you hand over all your money, or else, lay out all your clothes here and apologize, which is it? As for your spear, to tell the truth, I broke it to pieces. If you keep grumbling, you won't have your life!'</p>
+          <p class="en-p">Takahime: 'Hey, Sharu, aren't you my retainer? What on earth are you dawdling for? Come, I will lend you this deba knife, so, not to be outdone, stand up to this fellow and press him hard. To help the good and punish the wicked is the way of the Kami. If such fellows swagger about in this world, there is no telling how much harm will be unleashed upon the world. Come, grasp this firmly and press upon him with overwhelming force!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">求道居士が息をこめて吹き立てた法螺貝の音にベル、ヘル、ケリナの三人は此場より煙の如く姿を消した。求道居士の影もいつしか消えて幽かに法螺の音が遠く聞えてゐる。高姫はシャル、六造の二人に向ひ、</p>
+            <p class="ja-classical-line">高姫『コレ、シャル、六造の両人、何と高姫の神力は偉いものだらうがなア。余り我が強いに仍つて、義理天上様が勘忍袋をお切らし遊ばし、ホンの一寸お睨み遊ばすと共に、あの法螺吹もベル、ヘルの両人もハイカラ女も、皆一度に煙散霧消跡型もなくなりにけり……といふ悲惨な有様だ。之を見て改心をしなされ。六さんは又唖か何かのやうに一言もいはずに、今迄どこに居つたのだえ』</p>
+            <p class="ja-classical-line">六造『ヘー、余り法螺の貝が恐ろしいので、一寸厠の中へ隠居して居りました。随分強い奴がやつて来た者ですな。それにしてもベルの奴、私をライオン川に放り込みやがつた天罰で煙の如く消えて了つたのは小気味のよいこつて厶います。之も全く高姫様の御神力の致す所と、有難く感謝を致して居ります』</p>
+            <p class="ja-classical-line">高姫『それだから神に凭れてさへ居りたら神が仇を討つてやらうと仰有るのだ。今迄のヤンチヤをスツカリ改良して、何事も此生宮の申す通りにするが可いぞや』</p>
+            <p class="ja-classical-line">六造『ハイ、何でも致しますが、併し何だか気分が悪くなつて来ました。一杯おごつて貰いませぬと、元気が付きませぬワ』</p>
+            <p class="ja-classical-line">高姫『エーエ付け上りのした、お前はそれだから可かぬのだ。お前の仇をあの通り消滅さしてやり、結構な教を聞かして居るのに、一杯呑ませなんて、何と云ふ厚かましい事を云ふのだいなア』</p>
+            <p class="ja-classical-line">六造『イエ私は酒を呑ましてくれと云つたのぢや厶いませぬ。お前さまの持つて居る出刃を懐に呑まして欲しいと云つたのです。どうか一口頂く訳には行きませぬかな』</p>
+            <p class="ja-classical-line">高姫『ならんならん、出刃のやうな兇器を持つて、何うする積だい、又出刃亀にでもなる積だらう』</p>
+            <p class="ja-classical-line">六造『イエ、出刃亀ぢやありませぬ、出刃六になる考へです。之を以て風呂屋の障子を四角に切り、三助やおさんの活動を覗く考へです。三助とおさんと寄れば六でせう。そこへ六さんが這入ると六六三で十五夜の満月になりませうがな。お前さまは最前も小声で唄つてゐたでせう……十五夜に片割月があるものか、雲に隠れてここに半分……と聞きましたよ。十五夜の片割月は余り目出度くありませぬから、私が之から出刃六となり、三五の月となりて第一霊国へ上り、月の大神様に、お前さまの今の有様を報告せうと思つてゐるのだ。どうです、名案でせう』</p>
+            <p class="ja-classical-line">高姫『明暗も顕幽もあるものか、お前の霊は暗の暗だ。それだから暗本丹と人に云はれるのだよ。六でなしだから、名迄六造だ。どうで月の国へ行けるやうな代物ぢやない。六道の辻代物だ。イヒヒヒヒ』</p>
+            <p class="ja-classical-line">六造『コリヤ高、俺を何方と心得てるンでえ、エエン。今迄は法螺つ吹先生が来よつたので、俺も聊か面喰つてすつ込んでゐたのだが、モウ斯うなりや〆たものだ。誰憚る者もなし、婆の一匹や二匹は俺の自由自在だ。サア有金をスツパリ渡すか、さなくば、衣類一切をここへつん出して、あやまるか、どうだ。汝の槍は俺が、実の所はボキボキに折つといたのだ。ゴテゴテ申すと命がないぞ』</p>
+            <p class="ja-classical-line">高姫『コレ、シャル、お前は私の家来ぢやないか、何をグヅグヅしてゐるのだい。サ、此出刃を貸すから、負ず劣らず、此奴に対抗して取つつめてやりなさい。善を助け悪を懲すは神の道だ。こんな者が世の中にウヨウヨしてゐると、世界にどれ丈害を流すか分らない。サア、之を確り握つて強圧的に出るのだよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sharu: 'Takahime-sama, is that not simply self-love? Somehow it feels to me like the way of Jigoku, and are not things like Ikatsu, Funnu, and Fukushiu entirely absent even in the shadow of the realm of Kami?'</p>
+          <p class="en-p">Takahime: 'Hey now, what a dull-witted man you are. Do you know what self-defense means? No matter how much one speaks of the true path, if one merely sits still, there is no telling what sort of plight this Ikimiya of Takahime might be made to suffer. Since this Ikimiya is the precious daugu of Ōkamisama, it is your yakume to shiyugo it. Come, now is the time to reveal your tegara. As for someone like this Takahime, even if thousands or myriads of fellows like Roku were to come bundled together, she would not think of them as even a fart; but since this is to put this fellow through his paces for the sake of the glory of your very first military deployment on your deshii, it is a glory before the horse of Ikimiyasama. Come, the present is the very time to receive such splendid Goshintoku. Hey now, are you trembling? What a faint-hearted fellow you are. With an attitude like that, to think you have managed to act as a Nusubito up until now.'</p>
+          <p class="en-p">Rokuzau: 'Wahahaha! Oi, Sharu, what is that pose of yours? Is not your body trembling all over in a tiny wavering shiver? Ehehehehe.'</p>
+          <p class="en-p">Oi, Roku, I have no intention whatsoever of resisting you, so please see to it that you do not inflict any harm upon me. And since Takahime is an Ikimiya whose transparency extends from this to that, for us to do anything that would injure her for the sake of the world would be a catastrophic loss; therefore, please, without speaking of such unreasonable matters, just hurry back and leave. I beg of you.'</p>
+          <p class="en-p">Rokuzau: 'Oi Taka, spitting out one person's secondhand opinions with your back-and-forth chatter, you boast yourself to be the Ikimiya of Hinodegami; but hand that deba knife over here this instant. The truth of the matter is that I intend to cut open your belly and pray for the manifestation of Hinodegami. For it would be a pity indeed if Hinodegami were to enter such a physical body and become stifled, you see.'</p>
+          <p class="en-p">While trembling slightly and putting on a bold front on purpose, Takahime said,</p>
+          <p class="en-p">Takahime: 'What do you take this Ikimiya to be, you coward of cowards, you coward warrior! At times she becomes a dragon coiled in the heavens, at times she conceals her form as a salamander, performing transformations through a thousand changes and ten thousand transformations, she is the grand pillar of Miroku-sama who shiyugoes this world. If you utter such things, divine punishment will strike you, and you shall straightway have to make your journey to Jigoku.'</p>
+          <p class="en-p">Rokuzau: 'Somehow, whenever I look at your face, a feeling of revulsion rises up within me and I cannot help it. Whether I am cast into Jigoku or not, such a thing I care nothing about! To say that being cast into Jigoku is distasteful and therefore to use flattery that goes against one's own heart is something I cannot allow as my own standard of rectitude. Once one falls into such a state of mind, it turns into a spirit of self-love just as you said a moment ago, so leave me be. Rather than that, once I have spoken a word, Rokuzau is a man who never draws back. Come, cleanly and neatly, let us have you hand over everything.'</p>
+          <p class="en-p">With all his might, Sharu prayed in a low voice,</p>
+          <p class="en-p">Sharu: 'Righteous Heavenly Hinodegami-sama, please reform this Rokuzau even a single moment sooner. It is a divine crisis for Ikimiyasama. Aonami no Ohochiwaki.'</p>
+          <p class="en-p">It appeared as though Takahime stood up abruptly and was about to flee from this house. Roku grabbed her fiercely by the back of the neck from behind, and using all his strength, he pulled her down. Seeing this, Sharu perceived it to be a momentous crisis for his master, and instantly seizing Roku's collar, he squeezed with all his might. Strangely enough, Roku slipped right out, stood firmly about three paces away, and with a wide-open mouth,</p>
+          <p class="en-p">Rokuzau: 'Atsuhahaha!'</p>
+          <p class="en-p">he laughed. Just then, the voice of a propaganda song was heard from nowhere. Upon hearing this voice, Roku vanished away like smoke through the ceiling window. Takahime finally breathed a sigh of relief and once again began to blow her horn of boasting.</p>
+          <p class="en-p">Takahime: 'Ohohohoho! Hey, Sharu, the Goshintoku of the Ikimiya of Hinodegami must be truly magnificent, wouldn't you say? Just as you see, since they are terrified of the Goshintoku, they vanish completely away.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">シャル『高姫さま、チツト夫れは自愛ぢやありませぬか、私は何だか地獄の行り方のやうに思へてなりませぬがな、威喝や憤怒や復讐などは、神の国には影さへもないぢやありませぬか』</p>
+            <p class="ja-classical-line">高姫『エーエ、気の利かぬ男だな、正当防衛といふ事を知つてゐるかい。何程誠の道だと云つても、ジツとして居つたら、此高姫の生宮がどんな目に合はされまいものでもない。此生宮は大神様の大切なお道具だから、それを守護するのはお前の役目だ。サアお前の手柄を現はす時だ。かういふものの此高姫は、六のやうな者が千匹万匹束になつて来たとて屁とも思うて居ないが、お前の弟子入りした初陣の功名に、此奴をとつつめさしてなるのだから、生宮様のお馬の前の功名だ。サア、結構な御神徳を頂くのは今だぞえ。エーエ、慄つてゐるのかいな、何だ気のチヨろい。そんな事で、よう今迄盗人が出来たものだなア』</p>
+            <p class="ja-classical-line">六造『ワツハハハハ、オイ、シャル、其ザマは何だ。随分体が微細にワク……ワクと動いてゐるぢやないか、エヘヘヘヘ』</p>
+            <p class="ja-classical-line">シャル『オイ六、俺は決してお前に抵抗する意志はないのだから、俺には決して危害を加へないやうにしてくれ、そして高姫は何から何まで見えすく生宮だから、天下の為に之を傷付けるやうな事があつては大変な損害だよつて、何卒、そんな無理な事を言はずに、トツトと帰つてくれ、頼みだからなア』</p>
+            <p class="ja-classical-line">六造『オイ高、ツベコベと人の受売許りしやがつて、日出神の生宮を標榜してゐるが、一遍其出刃を此方へ渡せ、実の所はお前の肚を断ち割つて、日出神の出現を願ふ積だ。日出神もこんな肉体に這入つて厶つてはお気の毒だからなア』</p>
+            <p class="ja-classical-line">高姫は稍慄ひ乍ら、ワザと空元気を出し、</p>
+            <p class="ja-classical-line">『此生宮を何とお前は心得てるのか、ヘグレのヘグレのヘグレ武者、或時は天に蟠まる竜ともなり、或時は蠑螈となつて身を潜め、千変万化の活動をいたして、此世を守護致す弥勒様の太柱だ。左様な事を申すと神罰が当つて、忽ち地獄行を致さねばならぬぞや』</p>
+            <p class="ja-classical-line">六造『何だか俺はお前の面を見るとムカついて仕方がないのだ。地獄へ堕されうが、そんなこたア、構ふものかい。地獄へ堕ちるのが厭だと云つて、心にもないおベツカを使ふのは、自分の潔しとせざる所だ。そんな心になれば、お前の最前言はれたやうに自愛心になるのだから、放つといて呉れ。それよりも一旦言ひ出したらば後へは引かぬ六造だ。サア、キレーサツパリと、何もかも渡して貰ひませう』</p>
+            <p class="ja-classical-line">シャルは一生懸命に、</p>
+            <p class="ja-classical-line">『義理天上日出神様、一時も早く此六造を改心さして下さいませ。生宮様の御難儀で厶います。惟神霊幸はひませ』</p>
+            <p class="ja-classical-line">と小声で祈つてゐる。高姫はツト立つて此家を逃げ出し相な様子が見えた。六は背後からグツと首筋を引掴み、力に任して引倒した。シャルは之を見て、吾師の一大事と、矢庭に六の胸倉を取り、力限りに締めつけた。不思議や六はスボツと脱けて三間許り後につつ立ち、大口をあけて、</p>
+            <p class="ja-classical-line">六造『アツハハハ』</p>
+            <p class="ja-classical-line">と笑つてゐる。そこへ何処ともなしに宣伝歌の声が聞えて来た。此声を聞くより六は、天井の窓から煙の如く逃出して了つた。高姫はヤツと安心し、又もや法螺を吹出した。</p>
+            <p class="ja-classical-line">高姫『オホホホホ、コレ、シャル、日出神の生宮の御神徳は偉いものだらう。あの通り御神徳に恐れて消えて了ふのだからな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sharu: 'Still, Anata, was your body not fluttering around greatly? This Sharu thought that Takahime-sama was frightened and made a Seishindōeu, and worried quite a bit, you know.'</p>
+          <p class="en-p">Takahime: 'Ho ho ho ho, that I fluttered around was to manifest the Shigumi of Ichirin. Since that fellow is a thing of the shadow, it becomes just as Kochira says. Shadows follow forms. Come out to a place where the sun shines and try moving your body, and surely the shadow figure will move. That being the case, what Takahime showed as swaying was the Goshinpafu of Kami scattering about Rokukō the shadow worker. Oh, how splendid a thing Goshinriki must be, ah.'</p>
+          <p class="en-p">Takahime: 'Ho ho ho ho, that I fluttered around was to manifest the Shigumi of Ichirin. Since that fellow is a thing of the shadow, it becomes just as Kochira says. Shadows follow forms. Come out to a place where the sun shines and try moving your body, and surely the shadow figure will move. That being the case, what Takahime showed as swaying was the Goshinpafu of Kami scattering about Rokukō the shadow worker. Oh, how splendid a thing Goshinriki must be, ah.'</p>
+          <p class="en-p">Takahime: 'Hey, what do you mean by calling it Sankiu? Thinking that Roku had returned, it is again Sankiu and such, and is not the number of Sankiu twelve, what kind of Imi is it? Let me hear it clearly. Making sounds like a crying bird, talking of Chengeburu, of Sankiu... Kami will not understand, you know.'</p>
+          <p class="en-p">Sharu: 'It is not that there is some deep meaning such as you would Okanga, Anata; what I said as Sankiu was that I expressed gratitude by saying Arigata. What I said as Chengeburu was that I admired you as a precious Kami who transforms well into anything.'</p>
+          <p class="en-p">Takahime: 'Un, naruhodo, if so then from now on put forth your zeal and call me the Great Kami of Chengeburu. Since I will also forgive Sankiu, put forth your zeal and say Sankiu, Sankiu.'</p>
+          <p class="en-p">Sharu: 'Great Kami of Chengeburu, Sankiu, Sankiu, Sankiu, Sankiu, Sankiu, one more Sankiu, still Sankiu, ...Sankiu, Sankiu, Sankiu, mosimosi, does this please you?'</p>
+          <p class="en-p">Takahime: 'Ehe, is it not said that excess is as bad as deficiency, keep Sankiu too to a moderate extent, what an inflexible man you are, ah.'</p>
+          <p class="en-p">Sharu: 'Korubusu korubusu, sākui sākui.'</p>
+          <p class="en-p">Takahime: 'Are you not saying things that are not understood again? What is the matter called korubusu?'</p>
+          <p class="en-p">Sharu: 'Hai, what is called korubusu is a dead body, and what is called sākui is that it stinks.'</p>
+          <p class="en-p">Takahime: 'Eh, there is a limit even to becoming arrogant. No matter how much you may talk of a dead body, ahem, I am not a living shrine that will become a match for fellows like you. And to say it stinks, what rude thing are you blathering? If it stinks that much, do not stay there.'</p>
+          <p class="en-p">Sharu: 'The truth of the matter is that it smelled with a foul odor like a corpse. That is about Roku who escaped from the high window and went back, you know. He really was a stinky fellow, ah.'</p>
+          <p class="en-p">Takahime: 'Just as you said, it was an intolerable shiromono. Well, well, it is ketsukō that the evil spirit has been driven away. Now from here on, you are to do everything just as I say.'</p>
+          <p class="en-p">Sharu: 'Once I have entrusted my body to Anata, I will listen to anything, but still, while a man and a woman live together in a single house like this, is it not wasteful that both are playing at a celibacy life? There seems to be some room for compromise there, ah.'</p>
+          <p class="en-p">Takahime: 'Ho ho ho ho, take a look after consulting your own style. That is not the sort of thing you have the right to say. Even speaking from your age, do they not differ by some thirty years, you must not say useless things and flatter a living shrine, you know.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">シャル『それでも、貴方、大変に体がフラックツァールしてゐたぢやありませぬか。此シャルは高姫さまが恐れて精神動揺を遊ばしたのだと思ひ、随分心配致しましたよ』</p>
+            <p class="ja-classical-line">高姫『ホホホホ、私がフラックツァールしたのは一厘のお仕組を現はしてみたのだよ。彼奴は影の代物だから、此方の言ふ通りになるのだ。影は形に従ふものだ。日の照る所へ出て、体を動かして見なさい、キツと影法師が動くだらう。さうだから高姫が動揺して見せたのは、影人足の六公をゆり散らす神の御神法だ。何と御神力といふものは結構なものだらうがなア』</p>
+            <p class="ja-classical-line">シャル『成程矢張貴女は、チェンジェーブルの術に長けてゐられますな。それでヘグレのヘグレのヘグレ武者といふ事が合点が参りました。イヤもう大変な御神徳を戴きました。サンキューサンキュー』</p>
+            <p class="ja-classical-line">高姫『コレ、サンキューとは何を云ふのだい。六が帰んだと思へば、又三九だのと、三九の数は十二ぢやないか、何と云ふ意味だい。ハツキリと聞かして貰ひませう。チェンジェーブルだの、三九だのと、鳥のなくやうな声を出して……神には分りませぬぞや』</p>
+            <p class="ja-classical-line">シャル『別にお前さまの御考へ遊ばすやうな深い意味があるのぢや厶いませぬ、サンキューと云つたのは有難うと感謝したので厶います。チェンジェーブルと云つたのは、何にもよく変げ遊ばす尊い神様だと感心したので厶います』</p>
+            <p class="ja-classical-line">高姫『ウン成程、そんなら之から精出して、私をチェンジェーブルの大神様といふのだよ。サンキューも許しますから、精出してサンキュー　サンキューと云ひなさい』</p>
+            <p class="ja-classical-line">シャル『チェンジェーブル大神様、サンキュー　サンキュー、サンキュー　サンキュー　サンキュー、モ一つサンキューまだサンキュー、……サンキュー　サンキュー　サンキュー、モシモシ之でお気に入りますかな』</p>
+            <p class="ja-classical-line">高姫『エーエ、過ぎたるは及ばざるが如しといふぢやないか、サンキューも可いかげんにしときなさい、融通の利かぬ男だなア』</p>
+            <p class="ja-classical-line">シャル『コルブス　コルブス、サークイ　サークイ』</p>
+            <p class="ja-classical-line">高姫『又分らぬことを言ふぢやないか、コルブスとは何の事だい』</p>
+            <p class="ja-classical-line">シャル『ハイ、コルブスといふ事は、死体といふ事です、サークイといふ事は臭いといふ事です』</p>
+            <p class="ja-classical-line">高姫『エー、増長するも程がある。何程したいと云つても、ヘン、お前等に相手になる生宮ぢやありませぬぞや。そして臭いとは、何といふ無礼な事をほざくのだい。夫れほど臭ければ、そこに居つて下さるな』</p>
+            <p class="ja-classical-line">シャル『実の所は死体のやうな臭い匂ひがしたといふのです。それは高……オツトドツコイ高い窓から脱けて帰にやがつた六の事ですよ。本当に臭い奴でしたなア』</p>
+            <p class="ja-classical-line">高姫『お前の云ふ通り鼻持のならぬ代物だつた。マアマア悪魔が払へて結構だ。サア之からお前は何事も私の云ふ通りに致すのだよ』</p>
+            <p class="ja-classical-line">シャル『一旦貴女に体を任した以上は何でも聞きますが、併し乍らかうして男女が二人一つ家に住居をし乍ら、両方がセリバシー生活をやつてゐるのも無駄ぢやありませぬか。何とかそこは妥協の余地がありさうなものですなア』</p>
+            <p class="ja-classical-line">高姫『ホホホホ、チツトお前のスタイルと相談して御覧。そんな事云へた義理ぢやありますまい。年から云つても三十計りも違ふぢやないか、せうもない事を云つて生宮をおだてるものぢやありませぬぞや』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sharu: 'Since you are an apostle of Kamisama, your Shinkaku would surely be defiled if you were to approach a Zokujin like me. I do not say it is Muri, but from the perspective of the Nikutaijiyō, the Ursprung of both you and me originates from Kami; therefore, setting aside the spirit, it is not something to be treated with such Keibetsu.'</p>
+          <p class="en-p">Takahime: 'Ursprung, you say? Are you not saying something Ketai again? I wonder how long you intend to be so annoying with your Kudo. You had better stop such Yashin. Is it not a bit Burei to speak so to the Ikimiya of your Shishiyōsama?'</p>
+          <p class="en-p">Sharu: 'Do you intend to continue this celibacy Seikuwatsu forever? Is it not said that even if a Shijifugoke stands, a Gojifugoke does not? No matter how much a woman may outwardly profess to be an Otokogirahi, her instinct will eventually appear, and it is an unavoidable Kiyōgū for a woman to eventually break her chastity. That is why I have Rokotsu and Sunaho opened these Chiyokusetsu negotiations. Even though all my friends around me oppose your teachings, the reason I have expressed sympathy and become your ally is that there must be some reason and connection behind it.'</p>
+          <p class="en-p">Takahime: 'Oh, how filthy! Saying things like "instinct" and the like—will you not stop saying such improper things? If you say such things, it will lead to the corruption of public morals. Do be a little more modest.'</p>
+          <p class="en-p">Sharu: 'Ah, I am completely, completely finished. To be born a man and yet be made a fool of by an old woman like this, how can a man hold his head high? Ah, it is a man's duty to carry out his original intention to the end. Look here, Takahime-sama, no matter what you say, it is useless. No matter how strong you claim your divine power to be, if we were to struggle body against body, you would surely be no match for a man.'</p>
+          <p class="en-p">Takahime straightened her posture with solemnity and dignity,</p>
+          <p class="en-p">Takahime: 'Listen, Sharu, what do you think you are doing? This body is, most respectfully, that of the wife of Mokusuke-dono, who serves as the general manager of the Tokiokishikami and the mansion of the Saien. What do you think you are doing?'</p>
+          <p class="en-p">Sharu: 'Oh, is that so? I had heard that the propagandist called Mokusuke-dono was endowed with great divine power, but where is that Mokusuke-dono now?'</p>
+          <p class="en-p">Takahime: 'What is your intention in asking that again?'</p>
+          <p class="en-p">Sharu: 'I have no particular intention, but I would like to meet him once.'</p>
+          <p class="en-p">Takahime: 'Ohohohoho, if you wish to meet him, polish your spirit more. Mokusuke-dono used the art of divine transformation and mystery to ride the clouds and ascend to heaven. In heaven, Tokiokishikami-sama protects the spirits of the heavenly beings, and here on earth, Takahime is washing the defiled spirits. He will surely descend eventually, so at that time, so that you are not dazzled, do as Takahime says in all things and serve your duty with reverence. From now on, you must not talk back at all, and you must not set your heart on women. Once you have become a proper propagandist, I will choose a suitable wife for you, so be patient until then.'</p>
+          <p class="en-p">At that moment, beautiful music was heard, and a beautiful heavenly being of about thirty years of age appeared. Upon seeing this, Takahime was astonished and fell to the ground in shock. Sharu closed his eyes, prostrated himself on the floor, and trembled. The heavenly being spoke quietly into Takahime's ear,</p>
+          <p class="en-p">Heavenly Being: 'I am the angel Bunjiwake-no-Mikoto of the Middle Heaven. Are you not Takahime?'</p>
+          <p class="en-p">At this voice, Takahime felt a sense of strength, opened her eyes, and while looking dazzled, said,</p>
+          <p class="en-p">Takahime: 'You seem to be a rather clever angel, but did you come as a messenger for Mokusuke-dono? You have come to this Takahime, the Ikimiya of Miroku at the root of the Sokotsu-iwane, for some business, have you not? Ohohohoho, what a young man you are. Surely in heaven, you must be popular with women for being so handsome.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">シャル『お前さまは神様のアボッスルだから、到底私のやうな俗人の側へおよりになつても神格が汚れるでせう。無理とは申しませぬ、併し乍ら肉体上から言へば、貴女も私もウルスヴルングは皆神から発してゐるのですから、霊は兎も角として、さう軽蔑するものぢやありませぬワイ』</p>
+            <p class="ja-classical-line">高姫『ウルスヴルングなんて、又怪体な事を言ふぢやないか、どこ迄もうるさく口説くといふのかなア。そんな野心はやめたがよからう。お師匠様の生宮に向つて、チと無礼ぢやないか』</p>
+            <p class="ja-classical-line">シャル『貴女は何処までもセリバシー生活を続けて行く考へですか、四十後家立つても五十後家立たぬといふぢやありませぬか。何程表面で立派に男嫌を標榜してる女でも、何時とはなしに其インスチンクトが現はれて、遂には操を破るのが避く可らざる女の境遇ですよ。さうだから露骨に素直に此シャルが直接交渉を開いたのです。私だつてハタの友達が皆お前さまの説に反抗するにも関らず同情を表し、お味方になつたのも、そこにはそれ、一つ曰く因縁がなくちや叶ひますまい』</p>
+            <p class="ja-classical-line">高姫『エー、汚い、インスだとか、チンクトだとか、碌なこた言はせぬのぢやないか、そんな事を申すと、風俗壊乱になりますぞや、チツとたしなみなされ』</p>
+            <p class="ja-classical-line">シャル『あああ、サツパリ　サツパリだ。男と生れて而もこんなお婆さまに、エッパッパをくはされちや、どうして男の顔が立つものか。エー飽く迄も初志を貫徹するのが男だ。コレ高姫さま、何と云つても駄目ですよ。何程お前さまが神力が強いと云つても、肉体と肉体と争へば、到底男には叶ひますまい』</p>
+            <p class="ja-classical-line">高姫は厳然として威儀を正し、</p>
+            <p class="ja-classical-line">『コリヤ、シャル、何と心得てゐる。此肉体は勿体なくも、時置師神、斎苑の館の総務をして厶つた杢助様の奥方だぞえ、何と心得てゐるか』</p>
+            <p class="ja-classical-line">シャル『ヘー、さうで厶いましたか、何でも杢助さまといふ宣伝使は偉い神力が備はつてゐると聞いて居りましたが、その杢助様は今何処にゐられますか』</p>
+            <p class="ja-classical-line">高姫『お前は又それを尋ねてどうする考へだ』</p>
+            <p class="ja-classical-line">シャル『別に何うせうと云ふ考へも厶いませぬが、一遍お目にかかつてみたいのです』</p>
+            <p class="ja-classical-line">高姫『オホホホホ、お目にかかりたければ、モツと霊を研きなされ、杢助様は神変不思議の術を使つて、雲に乗り、天へ上られたのだ。天では時置師神様が天人の霊を守護遊ばされ、地では高姫が汚れた霊の洗濯をしてゐるのだ。何れ下つて厶るに違ひないから、其時に目の眩まぬやうに、何事も高姫の申す通り、神妙に御用を致すのだ。今後は一切口答へなどしてはなりませぬぞや、そして女などには心を寄せることは出来ませぬぞ。お前も立派な宣伝使になつた以上は、私が相当の女房を選んで与へてやるから、それ迄辛抱なさい』</p>
+            <p class="ja-classical-line">かかる所へ美妙の音楽聞え、美はしき三十前後の天人が現はれ来りぬ。高姫は見るより仰天し、アツと計りに其場に倒れたり。シャルは目を閉ぎ、床上に喰付いて慄うてゐる。天人は言葉静かに高姫の耳許にて、</p>
+            <p class="ja-classical-line">天人『吾こそは中間天国のエンゼル文治別命で厶る。其方は高姫では厶らぬか』</p>
+            <p class="ja-classical-line">此声に高姫は何となく力を得て、目を開き、目映ゆ相な顔をし乍ら、</p>
+            <p class="ja-classical-line">高姫『お前さまは一寸気の利いたエンゼルとみえるが、杢助さまのお使で来たのかい。底津岩根の根本の弥勒の生宮、此高姫にお前は何か御用があつて来たのだなア。オホホホホ、何とまア若い男だこと、随分天国では、それ丈美しいと、女にもてるだらうな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ayaharu: 'Takahime-dono, have you forgotten Setsushiya? It is Bunsuke, who used to serve at the reception desk in Kogitayama.'</p>
+          <p class="en-p">Takahime: 'What, you are that blind Bunsuke! Ho ho ho ho, do not tell such lies. Even if you come disguised in such a splendid appearance, if I glare with these two eyes of Hinodenokami, there is no mistaking it! You must be a Magami of Chiukai. Even now you say such a useless thing, and even if a Magami of Chiukai comes falling in love with Takahime's form, no matter when, no matter when, I will not budge! I am slightly different from a weak Takahime who falls in love with looks or a young age, hen! I am not such a naive Ikimiya who will fall for a trick, coming to deceive me with a face that looks neither like a man nor a woman. Come, come, give up and go home quickly!'</p>
+          <p class="en-p">Ayaharu: 'Takahime-dono, there is no mistake that I am Bunsuke. I too practiced for a while in Chiūkai, finally listened to the teachings of Shiyotennin, polished my heart, and now in this way I have become an angel of Dainireigoku, going around propagating in Jigokukai and Chiūkai. You too, repent quickly, escape from this Chiūkai, and quickly ascend to Tengoku. If you leave things as they are, you, Anata, have no other path than to fall into Jigoku. Because of our friendship in Seizen, I have appeared here for a brief moment out of warning.'</p>
+          <p class="en-p">Takahime: 'Ho ho ho ho, how well you say that, wai! Can you not see the brilliance of Takahime, the spirit of a celestial being of Dainireigoku? Because Kami is supremely benevolent and loving, He appears in the phenomenal world to save sentient beings, lowering His body into filth and mire. It is no use telling such falsehoods as being Bunsuke. I will soon make your true form appear, so stay prepared for that, ohohohoho, you can never be too off your guard.'</p>
+          <p class="en-p">So saying, she put her palms together,</p>
+          <p class="en-p">Takahime: 'Great Deity of Miroku of Sotsutsu Iwane, Righteous Heavenly Hinodenokami, Great Deity of the Emperor of the Sun of the Last Age.'</p>
+          <p class="en-p">Thus she began to pray. The angel Ayaharu, unable to find a foothold in the face of Takahime's excessive derailment, shook and woke Sharu, who had collapsed nearby,</p>
+          <p class="en-p">Ayaharu: 'Are you not the man called Sharu the Brahmin? It is no use staying in such a place until when. Since life still remains in the phenomenal world, while it is still now, come, you had better return quickly. If you hesitate, your physical body will rot and you will not be able to return.'</p>
+          <p class="en-p">Sharu: 'Hai, I possess a physical body just like this. Besides this, I cannot understand how there is still another physical body. Even if you say such things and try to deceive me, this Sharu, who has become the right arm of Takahime-sama, will never, ever be deceived. Without saying such things, please go home somehow. Because I will be troubled later if Takahime-sama's mood is bad....'</p>
+          <p class="en-p">Ayaharu: 'Can you people not wake up no matter what? Moreover, Takahime-sama is truly Takahime-sama. Wandering about in Chiūkai, she seems to think this is the phenomenal world, and seeing my form, she appears to suspect me of being a monster. Ah, I would like to show her by becoming my original body, but if I do that, my divine status will suddenly drop, and it is no easy matter to return to my present position once again; how ever can I manage to save them?'</p>
+          <p class="en-p">With folded hands, he was lost in thought. Fragrance perfumed the surroundings, the sound of clear and resonant music was heard incessantly, and around this deserted house, a hundred celestial beings formed ranks and surrounded it. Takahime began to suffer and agonize almost to the point of losing her mind. The angel, earnestly wishing to save Takahime, chanted the Tianjin Norito and sang sacred numbers. Takahime detested it all the more, and thrashing her limbs about, the moment she opened the back door, slipping through the midst of the angels, pointing toward the barren hill at the back, she fled on all fours like a wild boar. Seeing this condition, Sharu once again pursued Takahime's tracks, slipped through the multitude of angels, and ran away.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">文治『高姫殿、拙者をお忘れになりましたか。小北山の受付を致して居つた文助で厶るぞや』</p>
+            <p class="ja-classical-line">高姫『ナニ、お前があの盲の文助かい、ホホホホホ、そんな嘘を云ふものでない。そんな立派な風をして化けて来ても、此日出神の二つの目で睨んだら、違ひは致しませぬぞや。お前は大方中界の魔神だらう、今も今とて此シャル奴、せうもない事を言ひよる也、又中界の魔神迄が高姫の姿にラブして下つて来ても、いつかな　いつかな、動きませぬぞや。容貌や若い年に惚るやうな柔弱な高姫とは、ヘン、チツと違ひますぞや。男とも女とも分らぬやうな面をして騙しに来つて、そんな事に乗るやうな生宮ぢや厶いませぬぞえ。サアサア諦めて、トツトと帰つて下さい』</p>
+            <p class="ja-classical-line">文治『高姫殿、文助に間違は厶らぬ、拙者も暫く中有界に於て修行を致し漸く諸天人の教を聞いて心を研き、今は此通り第二霊国のエンゼルとなり、中有界地獄界を宣伝に廻つて居ります。お前さまも早く悔い改めて、この中有界を脱出し、早く天国へ昇つて下さい。此儘にしておけば、貴女は地獄へ堕ちるより道は厶いませぬぞ。生前の交誼に仍つて、一応御注意の為に現はれて来たのです』</p>
+            <p class="ja-classical-line">高姫『ホホホホ、ようまア仰有いますワイ。第一霊国の天人の霊の高姫の光明がお前さまには見えませぬかな。神は至仁至愛だから現界へ現はれて衆生済度を、糞糟に身をおとしてやつてゐるのだ。文助なぞと、そんな詐りを言つてもあきませぬぞや。今に正体を現はしてやるから、其積でゐなさい、オホホホホ、油断も隙もあつたものぢやない』</p>
+            <p class="ja-classical-line">と云ひ乍ら両手を合せ、</p>
+            <p class="ja-classical-line">高姫『底津岩根の弥勒の大神様、義理天上日出神様、末代日の王天の大神様』</p>
+            <p class="ja-classical-line">と祈り出した。文治別のエンゼルは高姫の余りの脱線振りに取付く島もなく、傍に倒れてゐるシャルを揺り起し、</p>
+            <p class="ja-classical-line">文治『お前はバラモンのシャルといふ男ぢやないか。こんな所に何時迄居つても仕方がない。まだ現界に生命が残つてゐるから、今の中に、サア早く帰つたがよからう。グヅグヅしてゐると肉体が腐敗して帰ることが出来なくなりますぞ』</p>
+            <p class="ja-classical-line">シャル『ハイ、私は此通り肉体を持つてをります。此外にまだ肉体があるとは合点が参りませぬ。そんな事を云つて、騙さうとなさつても、高姫さまの片腕となつた此シャルは、いつかな　いつかな騙されませぬ。そんな事を言はずに、何卒帰つて下さいませ。あとで高姫様の御機嫌が悪いと困りますから……』</p>
+            <p class="ja-classical-line">文治『お前達は何うしても目が醒めないのかな。又高姫さまも高姫さまだ。中有界に彷徨ひ乍ら、ヤツパリここを現界と思つてゐると見えて、私の姿を見て化物と疑つてゐるらしい。ああ元の肉体になつてみせてやりたいが、さうすれば忽ち神格が下つて、再び今の地位になるのは容易な事ではなし、どうしたら助けることが出来やうかなア』</p>
+            <p class="ja-classical-line">と手を組んで思案にくれてゐる。四辺に芳香薫じ、嚠喨たる音楽の音は切りに聞え、此伏家の周囲には百の天人が隊を成して取巻いてゐる。高姫は殆んど気も狂はむ許りに悶え苦しみ出した。エンゼルはいかにもして高姫を救はむと、天津祝詞を奏上し、数歌を歌つた。高姫は益々忌み嫌ひ、手足をヂタバタさせ乍ら、裏口を開けるや否や、エンゼルの間を潜つて裏の禿山を指して、野猪の如く四這ひになつて逃げゆく。シャルは此体を見るなり、又もや高姫の跡を逐ひ、数多のエンゼルの間を潜り脱け、駆けり行く。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec06">
+        <div class="sec-header">
+          <span class="para-num">&sect; 6</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">From this point, Takahime crossed two or three bald mountains and arrived at the bank of a considerably wide, muddy-red marsh surrounded by the mountains of Shimen. There, scooping up the water of the marsh in her hands, she quenched her thirst with itsushiyōkenmei.</p>
+          <p class="en-p">Raising her shiwagaregoe and calling out, 'O-i, o-i,' it was Sharu who came tumbling down from atop the bald mountain.</p>
+          <p class="en-p">Sharu: 'Ah, Sensei, I am so glad you were here! It was a taihen matter, indeed. What on earth could those things possibly be? Oni with terrifying faces, numbering who knows how many tens of thousands, surrounded the house with kanabō in hand, sounding unpleasant narimono, and launched an attack emitting a stench that stuffed our noses. The fear and misery of that moment—even Ikimiya-sama fled, so thinking tautei I had no chance of surviving, I followed your footsteps and fled all the way here. Do you suppose there is still any kizuka of them chasing after us?'</p>
+          <p class="en-p">Takahime: 'Ho ho ho ho! Tatohe ikuman oni may come, Takahime is not one to flinch at such things. According to the secret law of Kami, I lured those akuma all the way here with the sandan of throwing them all into this blood pond, and I fled here purposely. To think of Takahime as running away from a thousand or ten thousand oni is kataharaita indeed—o ho ho ho ho!'</p>
+          <p class="en-p">Thus, concealing the terror in her breast, she purposely feigned a nanige attitude and laughed.</p>
+          <p class="en-p">Sharu: 'Takahime-sama, you say such a brave thing, but at that time anata's style showed quite a bit of raubai; is that not being a fumeriguchi?'</p>
+          <p class="en-p">Takahime: 'Are you still doubting me, even you? What a troublesome fellow you are. Since I possess the goshinryoku just to see through how you transformed and came here pretending to be Bunsuke's spirit, tautei you will never understand the true value of this Takahime; just keep quiet for a while. If you observe what Takahime does, you will surely understand within two or three days. O ho ho ho ho, what a frightened face you have there! This is why having a coward in tow becomes an ashitematohi, making it impossible to unleash true shinryoku. If only you had not been there, I would have turned every single one of those wretches into smoke as I did before, but because your clouded spirit stood in the way, the troublesome necessity finally arose to change our position and devise a second strategic plan. However, even those bold oni surely will not dare to pursue us fearing Takahime's shinryoku all the way out here. Now, calm down a little.'</p>
+          <p class="en-p">Just as this was happening, the sound of music arose once again, and from the top of the mountain Bunjiwake, leading the vanguard and followed by several hundred heavenly beings, descended.</p>
+          <p class="en-p">Sharu: 'Moshi moshi Takahime-sama, they have come! Now, right here, brilliantly destroy those wretches. To my eyes, those fellows sometimes look like oni and sometimes like beautiful heavenly beings, I cannot help it... Look, look, they are coming down this way with great speed, please make your preparations quickly.'</p>
+          <p class="en-p">Sharu: 'Moshi moshi Takahime-sama, they have come! Now, right here, brilliantly destroy those wretches. To my eyes, those fellows sometimes look like oni and sometimes like beautiful heavenly beings, I cannot help it... Look, look, they are coming down this way with great speed, please make your preparations quickly.'</p>
+          <p class="en-p">Takahime: 'Eh, I had intended to make preparations, but you came out and chattered about useless things, wasting the crucial time, so the akuma arrived sooner. Ah, things are bad here too; let us move to the third plan.'</p>
+          <p class="en-p">So saying, turning her face pale blue, she once again scrambled and tumbled up the next mountain. Sharu, left with no other choice and letting his black fundoshi dangle, searched for Takahime's footprints and followed pantingly, short of breath.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">之より高姫は禿山を二つ三つ越え、四面山に包まれた赤濁の可なり広い沼の畔に着いた。而して沼の水を手に掬うて一生懸命に渇をいやしてゐる。皺枯声を張り上げ、</p>
+            <p class="ja-classical-line">『オーイオイ』</p>
+            <p class="ja-classical-line">と呼ばはり乍ら、禿山の上から、転げる様にやつて来たのはシャルであつた。</p>
+            <p class="ja-classical-line">シャル『ああ、先生、能うマア此処に居つて下さいました、大変な事で厶いましたなア。ありや一体何で厶いませう。何万とも知れぬ怖い顔した鬼奴が鉄棒を持つて家のぐるりを取巻き、厭らしい鳴物を鳴らし、鼻の塞がるやうな匂ひをさして攻めかけた時の怖さ、辛さ、生宮さまでさへもお逃げ遊ばす位だから、到底自分は助かりつこはないと、お後を慕うて此処迄逃げて参りました。モウ追つかけて来る気遣ひは厶いますまいかなア』</p>
+            <p class="ja-classical-line">高姫『ホホホホ仮令幾万鬼が来ようとも、そんな事にビクともする高姫ぢや厶いませぬぞや。之は神の秘密の法に仍つて、あの悪魔をここ迄誘ひ出し、此血の池へ皆放りこむ算段で、ワザとに逃げて来たのだよ。千や万の鬼に逃げ出すやうな高姫と思つて貰つちや片腹痛いわいの、オホホホホ』</p>
+            <p class="ja-classical-line">と胸の驚きを隠して、ワザと何気なき態を装ひ笑つて居る。</p>
+            <p class="ja-classical-line">シャル『高姫さま、そんな強相な事を仰有いますけれど、あの時の貴女のスタイルには随分狼狽のサマがみえて居りました、不減口ぢや厶いますまいかな』</p>
+            <p class="ja-classical-line">高姫『まだお前迄が私を疑うてをるのかい、困つた男だなア。文助の霊だなどと云ひやがつて、化けて来よつたのを看破する丈の御神力があるのだから、到底お前では、此高姫の真価は分りますまい、マア黙つてゐなさい。而して高姫のする事を考へてをれば、成程と、二三日の内には合点がゆくだらう。オホホホホ、あのまア怖相な顔はいの。これだから弱虫を伴れてゐると、足手まとひになつて、本当の神力を出すことが出来ないのだ。お前さへゐなかつたら、あんな奴ア、一人も残さず、最前のやうに烟にして了ふのだけれど、お前の曇つた霊が邪魔をするものだから、とうとう位置を転じて第二の作戦計画をせなけりやならぬ面倒が起つたのだよ。併し流石の鬼も此処迄、ヨモヤ高姫の神力を恐れて追掛ては来ますまい。まア些と落着きなさい』</p>
+            <p class="ja-classical-line">斯かる所へ又もや音楽の声、山の頂より文治別は先頭に立ち、数百人の天人を従へて降つて来る。</p>
+            <p class="ja-classical-line">シャル『モシモシ高姫さま、やつて来ました、サア、此処で見事、彼奴を亡ぼして下さいませ。私の目では彼奴が鬼に見えたり、又綺麗な天人に見えたりして仕方がありませぬワ……それそれ、大速力で此方へ下つて来ませうがな、早く準備をして下され』</p>
+            <p class="ja-classical-line">高姫『エー、準備をせうと思ふておつたのに、お前が出て来て、せうもない事を喋り、肝腎の時間を潰さして了つたものだから、悪魔の方が早く来よつたのだ。ああ此処でも具合が悪い、第三の計画に移らう』</p>
+            <p class="ja-classical-line">と言ひ乍ら、顔を真青になし、又もや次の山を転けつ輾びつ駆け上る。シャルも是非なく黒い褌をたらし乍ら、高姫の足型を尋ねて、息も苦しげに跟いて行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c08.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 8: Love 米 [1438]</span>
+      </a>
+      <a href="c10.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 10: 十字 [1440]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
