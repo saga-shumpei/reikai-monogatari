@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4: Tree 遣 [1529] - Volume 60 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 60 Table of Contents</a>
+      <span>Volume 60</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 60 &bull; Chapter 4</span>
+      <h1 class="chapter-title-en">Chapter 4: Tree 遣 [1529]</h1>
+      <p class="chapter-title-ja">木遣〔1529〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mount Sumeru of the Reizanejiyō, where old trees stand thick and dense, sealing the heavens; seeking them out in the great and small gorges, the Sendenshi of Tamakuniwake, with many Mamehito in tow, strive and exert themselves in felling them day and night without rest, a truly valiant sight.</p>
+          <p class="en-p">Anchi waved his baton and sang the Kiyariuta, and from the gorges here and there, they began the transport toward the Sakujiba.</p>
+          <p class="en-p">Antchi: 'Heaven is Shiyōjiyō, the earth is Shiyōjiyō, and the hearts of men shall also be Shiyōjiyō. To build the palace of the Shiyōjiyō, the villagers of Suma gather together, their hearts lifted by Miki, sweating as they carry the timber. Yōi yōi, yōitose. This place is the renowned Lake Kiyo, and from ages past, it has been known to the world as the sacred Reijiyō where the gods gather, the Shiyōjiyōmuku Chinjiyu of Sumeru, which connects to the south of Adumos. The morning sun shines Kirakira in the sky, traversing across to set in the west. In this forest of the gods where the morning sun shines directly, this mountain of wonders illuminated by the winter sun, upon this summit stands a camphor tree rare in the world, its circumference three hundred and thirty jō.'</p>
+          <p class="en-p">Antchi: 'The height of the trunk is five hundred jō, and its branches spread in four directions, serving as the residence for three hundred and thirty-three Kenzoku-sama. Yōitose, yōitose. Hawks, owls, and wild eagles, along with a hundred other winged birds, dwell here in eternal stability, living in harmony and affection, never harming one another; a tranquility that has demonstrated the auspicious proof of peace since ancient times. Yōitose, yōitose.'</p>
+          <p class="en-p">Antchi: 'The palace of the Shiyōjiyō, where the Brahman heaven was enshrined, has been exposed to rain and wind for many years; the ridgepole leaks, the beams are warped, and the pillars are eaten by insects, a truly miserable sight to behold. Whether it be the power of time or not, I lament its devastation. Baruchiru-sama has renewed his adherence to the teachings of the gods, and in this sacred place, he has auspiciously built anew the palace of wonders of the Sangokyō and the palace of the Brahman teachings, serving as the foundation for the three thousand worlds; how grateful we are to have it enshrined. Yōitose, yōitose.'</p>
+          <p class="en-p">Antchi: 'Whether the morning sun shines or clouds gather, whether the moon waxes or wanes, even if the great earth should sink, the Reijiyō of Mount Adumos shall remain eternal and unchanging. From the distant age of the gods, this is the birthplace of the Takushaka Dragon King, who appeared as the spiritual descendant of Amatsuhiko and Hōjōhime.'</p>
+          <p class="en-p">Antchi: 'The fierce power of the nine-headed dragon, harsh to behold, would blind the eyes of those who saw it, spitting poison and devouring the lives of men. To punish such evil deeds, the Angel of Tsukiteruhiko appeared in Takamagahara, struck forth the Kototama of rigor, and it is said he sealed it at the rocky roots of this Reijiyō. It is a spot famous throughout the world. During those hundred thousand years, having tempered the heart and refined the soul, at the dawn of returning to a Shiyōjiyōmuku spiritual body, the Angel shall appear once more to save the Takushaka Dragon King, and he has vowed to protect the regulation of the five winds and ten rains. As long as this Dragon King remains hidden in the depths of the earth forever...'</p>
+          <p class="en-p">Antchi: '...wild winds rage and heavy rains fall for ten or twenty days, and the people and livestock living on the earth, even down to the single leaf of grass or tree, will not be healed of this suffering. Yōitose, yōitose. Now that the Sendenshi of the Sangokyō, the Angel of the earth who has inherited the lineage of Tsukiteruhiko, has appeared here, we shall take this opportunity to offer the Amatsu-norito and the Kamigoto, which purify and clarify heaven and earth, to the spirits of the universe. If you would quickly save this Dragon King who has been sealed for a thousand and eight thousand generations, how the people of the land would rejoice. The five grains will ripen, the colors and scents of the flowers of grass and trees will be beautiful, and the harvest will be especially abundant. All living things on earth will enjoy the auspicious signs of truth, goodness, beauty, and love of the divine nation, beating their bellies and stamping the ground in joy, eternal and unchanging. Ah, Kannagara-kamu-nagara, I pray for the grace of the divine spirits. Yōitose, yōitose. The plum blossoms of the three thousand worlds, the lotus flowers blooming all at once, the highland of the self-rotating inverted island known as Mount Sumeru, the protection of Konohana-hime who appeared on Mount Tenkyō, all shall manifest here at last. The village of Suma, once wrapped in darkness, shall auspiciously become the era of the rising sun, a world where we enjoy and rejoice in the light of the gods morning and evening. Take courage, take courage, villagers!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">霊山会場のスメール山
+天を封じて鬱蒼と
+立ち並びたる老木を
+大峡小峡に求めつつ
+宮の柱を造らむと
+玉国別の宣伝使
+数多の信徒伴ひて
+昼夜を分たず伐採に
+いそしみ励むぞ勇ましき。</p>
+            <p class="ja-classical-line">アンチーは采配を振つて木遣歌を唄ひ、彼方此方の谷間より、作事場に向つて運搬を始めかけたり。</p>
+            <p class="ja-classical-line">『天は清浄地清浄
+人の心も清浄に
+猩々の宮を造らむと
+スマの村人打揃ひ
+御酒に心を浮かませつ
+汗を絞りて木を運ぶ
+ヨーイヨーイ　ヨーイトセ
+此処は名に負ふキヨの湖
+南に連なるアヅモスの
+神の集ひの霊場と
+数千年の昔より
+世に響きたるスメールの
+清浄無垢の鎮守なり
+旭は空に煌々と
+輝き亘り西に入る
+旭の直射す神の森
+冬日の日照らす珍の山
+此頂に一本の
+世界に稀な樟の木は
+囲は三百三十丈</p>
+            <p class="ja-classical-line">幹の高さは五百丈
+梢は四方に拡がりて
+三百三十三体の
+眷族様の御住所
+ヨーイトセー　ヨーイトセー
+鷹も梟も荒鷲も
+其外百の鳥翼
+常磐堅磐に棲み乍ら
+互に睦び親しみて
+他をば犯さず太平の
+目出度き証を昔より
+示し来たりし長閑けさよ
+ヨーイトセー　ヨーイトセー
+バラモン天を斎りたる
+猩々の宮も永年の
+雨と風とに曝されて
+棟は雨もり梁は
+歪みて柱は虫がくひ
+見るも無残な有様と
+時の力か知らね共</p>
+            <p class="ja-classical-line">荒廃したるぞ歎てけれ
+バーチルさまが改めて
+神の教を遵奉し
+此聖場に目出度くも
+三五教の珍の宮
+バラモン教の宮殿を
+新に建造ましまして
+三千世界の鎮台と
+まつらせ玉ふぞ有難き
+ヨーイトセー　ヨーイトセー
+旭は照る共曇る共
+月は盈つとも虧くる共
+仮令大地は沈むとも
+アヅモス山の霊場は
+常磐堅磐に変らまじ
+遠き神代の昔より
+天足の彦や胞場姫が
+霊の御末裔と現れませる
+タクシャカ竜王の出生地
+見るも厳し九頭竜の</p>
+            <p class="ja-classical-line">其猛勢は見る人の
+眼を潰し毒を吐き
+人の命を取り喰ふ
+其悪業を懲めむと
+高天原に現れませる
+月照彦のエンゼルが
+厳の言霊打出し
+此霊場の岩が根に
+封じおきしと伝へたる
+世界に名高き地点なり
+十万年の其間
+心を鍛へ魂を錬り
+清浄無垢の霊身に
+立直りたる暁は
+又もエンゼル現はれて
+タクシャカ竜王を救ひ出し
+五風十雨の調節を
+守らせ玉ふ御誓ひ
+此竜王の永久に
+地底に潜み在す限り</p>
+            <p class="ja-classical-line">荒風すさび大雨は
+十日二十日と降しきり
+地上に住める人畜や
+草木の片葉に至る迄
+此苦みは癒えざらむ
+ヨーイトセー　ヨーイトセ
+三五教の宣伝使
+月照彦の流れをば
+汲ませ玉へる玉国別の
+地上のエンゼル今此処に
+現はれませしを幸に
+天地を浄め澄ますてふ
+天津祝詞や神言を
+宇宙の神霊に奏上し
+千代に八千代に封じたる
+これの竜王を速に
+救はせ玉へば国人は
+いかに喜ぶ事ならむ
+五穀は稔り草や木の
+花の色香も麗しく</p>
+            <p class="ja-classical-line">実りも殊に豊やかに
+地上の生物一切は
+鼓腹撃壌神国の
+真善美愛の祥徴を
+堅磐常磐に楽しまむ
+あゝ惟神々々
+御霊の恩頼を願ぎ奉る
+ヨーイトセー　ヨーイトセ
+三千世界の梅の花
+一度に開く蓮華花
+スメール山と聞えたる
+自転倒島の高原地
+天教山に現れませる
+木花姫の御守護
+いよいよ茲に現はれて
+暗に包みしスマの里
+芽出度く日出の御代となり
+神の光を朝夕に
+歓ぎ楽しむ世とならむ
+勇めよ勇め里人よ</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yoito-se, yoito-se. For thousands of years, this fine timber of the camphor tree, buried in the rough metal-bearing earth and turned to stone, is offered as a symbol of the Lord God's reign, eternal and unchanging. Is this not a sign of the grace of the Strict God? The weight of this camphor tree, surpassing all others in its majesty, is yet another rare sign of the eternal and unchanging Age of the Gods. When I think of it, when I think of it, how grateful I am. Villagers, pull with courage. Yoito-se, yoito-se. Those who serve the task of pulling out this great tree, because the grace of the Gods is deep, suffer not even a single injury to their bodies, and wonder of wonders, they do not even grow weary. The protection of the Gods is right before our eyes.</p>
+          <p class="en-p">Pull with joy and courage. Yoito-se, yoito-se. If these palace pillars are made thick and stand piercing the clouds, the chigi and katsuogi will glitter, and the golden light will shine. The Land of the Moon, the Land of Fusa, Kara, and Yamato will all shine at once, like the sun and moon. Ah, how brave, how brave. Grandfathers and grandmothers, bringing their grandchildren, offer their labor by day, following the night, and offer their labor by night, never resting. In the hearts of the people, it is like the blooming spring of the Heavenly World, where there is no distinction between day and night. Yoito-se, yoito-se.</p>
+          <p class="en-p">Itahiko: 'In the heavenly sky, a mysterious and subtle music comes to be heard. From the spirit land of Takamagahara, the angels and heavenly beings of the deep-joy paradise appear. To build the Takamagahara upon the earth, they flutter their feathered robes in the breeze to assist in this divine work, rejoicing and celebrating. The people living on the earth, saved by the Kototama of good words and beautiful language, without a shadow of evil, with one heart and one body, simply devote themselves to everything according to the heart of the Imperial Gods. Serving in the construction of the divine palace that shines in the world, the Jyōgyō-bisha, the Shuda, and the other twelve humble lineages, casting aside all various discriminations, stand together on the horizon. For the sake of the Gods and the sake of the world, in the San-go-kyō and the Brahman, how auspicious it is to devote one's sincere heart.'</p>
+          <p class="en-p">Itahiko: 'Such an example is a peace unprecedented, not even heard of in dreams since ancient times. It goes without saying for the common people, but the Shōjōhime who had long lived in this sacred ground, and the hundred other children, met the spring of the heavenly paradise and returned safely to their original dwelling; this joy is a matter without precedent since the beginning of heaven and earth. Leaving the Ubusuna mountain, following the rare officials of the pure-hearted Tamakuniwake, I have finally come to this sacred ground of Adumos, famous in the Land of the Moon, and serve in this unprecedented divine work. The joy of my soul is like a sudden evening shower pouring down upon a drought-stricken rice field. Yoi-yoi, yoito-se. Align your strength, match your voices, pull with a yoi-yoi-yoi. Those who serve with sincere hearts in this divine work, unprecedented in all ages, are blessed by the grace of the Gods; their bodies are healthy, their homes prosper month by month, and their children and grandchildren, generation after generation, rejoice in the divine work of their ancestors, and will surely honor the divine virtue forever, making it a story for the ages to come.'</p>
+          <p class="en-p">Itahiko: 'Take courage, all of you, take courage. Standing together in equality to achieve merit that replaces heaven and earth, let us build the sacred ground of Mount Adumos as the foundation of truth, goodness, beauty, and love. Kannagara. Swearing to the Gods, I, Itahiko, pray on behalf of all these Suma people. Yoito-se, yoito-se.'</p>
+          <p class="en-p">Countless camphor, cypress, zelkova, pine, cedar, and oak trees, both large and small, were safely transported to the construction site in less than a month. That not a single person suffered even a scratch was entirely due to the deep protection of the Gods, and all were moved by a sense of gratitude; everyone, young and old, forgot to eat and sleep, and in a frenzy, poured their heart and strength solely into the palace construction. Through the devotion of the people, the magnificent palace was built with the chigi standing high, facing south, lined up from east to west. Ah, Kannagara, may the spirits be blessed.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ヨーイトセー　ヨーイトセ
+幾千年も荒金の
+土に埋もれ石となる
+此楠の良材は
+神の御代をば永久に
+不変不動と献る
+厳の恵の祥徴か
+此楠の重量の
+外に秀れて雄々しきは
+万古不動の神の代の
+これ又珍の祥徴ぞ
+思へば思へば有難や
+村人勇みて曳いてくれ
+ヨーイトセー　ヨーイトセ
+此大木を引出す
+御用に仕ふる人びとは
+神の恵の深くして
+身体一所怪我もせず
+又草臥れぬ不思議さよ
+神の守りは目のあたり</p>
+            <p class="ja-classical-line">喜び勇みて曳いてくれ
+ヨーイトセー　ヨーイトセ
+此宮柱いや太く
+雲をつき出て立つならば
+千木勝男木はキラキラと
+黄金の光輝きて
+月の御国やフサの国
+カラもヤマトも一時に
+月日の如くに輝かむ
+あゝ勇ましや勇ましや
+爺々も婆々も孫伴れて
+夜を日についで日の寄進
+夜も休まぬ夜の寄進
+人の心に昼夜の
+区別も知らぬ天界の
+花咲く春の如くなり
+ヨーイトセー　ヨーイトセ』
+伊太彦『天津御空に摩訶不思議
+微妙の音楽聞え来る
+高天原の霊国と</p>
+            <p class="ja-classical-line">楽み深き天国の
+エンゼル天人現はれて
+高天原を地の上に
+築き仕ふる此神業
+助けむ為に羽衣の
+袖をば微風に翻し
+寿ぎ祝ひ玉ふなり
+地上に住める人々は
+善言美詞の言霊に
+救はれ曲の影もなく
+心も一つ身も一つ
+只何事も皇神の
+心のままに勤勉みて
+世界に輝く神の宮
+其御普請に仕へゆく
+浄行毘舎や首陀其他
+賤しき十二の姓族も
+種々差別を撤廃し
+水平線上に相立つて
+三五教やバラモンの</p>
+            <p class="ja-classical-line">神の御為世の為に
+赤心尽す目出度さよ
+かかる例は昔より
+夢にも聞かぬ太平の
+なみなみならぬ慶事なり
+青人草は云ふも更
+此霊場に永久に
+住みなれたりし猩々姫
+其外百の御子達も
+天国浄土の春に会ひ
+目出度く元の棲処へと
+無事に帰りし喜びは
+天地開けし初めより
+例も知らぬ次第なり
+産土山を立出でて
+清き心の玉国別の
+珍の司に従ひて
+漸く此処に月の国
+音に名高きアヅモスの
+聖地に来り未曾有の</p>
+            <p class="ja-classical-line">大神業に奉仕する
+吾魂の歓びは
+旱の稲田に夕立の
+降注ぎたる如くなり
+ヨーイヨーイ　ヨーイトセ
+力を揃へ声合せ
+ヨイヨイヨイと曳いとくれ
+古今未曾有の神業に
+誠心を現はして
+仕へまつれる人々は
+神の恵の幸ひて
+身も壮健に其家は
+月を重ねてよく栄え
+御子孫曾孫つぎつぎに
+父祖の神業を喜びて
+いや永久に神徳を
+尊みまつり末の世の
+語り草にとなすならむ
+勇めよ勇め皆勇め
+天地に代る功績を</p>
+            <p class="ja-classical-line">皆平等に立比べ
+アヅモス山の聖場を
+真善美愛の根本と
+造らせ玉へ惟神
+神に誓ひて伊太彦が
+此スマ人の諸々に
+代りて願ひ奉る
+ヨーイトセー　ヨーイトセ』</p>
+            <p class="ja-classical-line">大小無数の樟、桧、欅、松、杉、楢等の良材は一ケ月ならずして作事場に無事持運ばれた。而して只一人のカスリ傷を負うた者も現はれなかつたのは全く神の深き御守りと一同感謝の念に駆られ、猫も杓子も脛腰の立つ者は、寝食を忘れ、熱狂して、宮普請にのみ心力を傾注した。諸人の丹精によつて、荘厳なる宮殿は東西に並んで南向に千木高く建ち上つた。あゝ惟神霊幸はへませ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c03.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 3: 瑞祥 [1528]</span>
+      </a>
+      <a href="c05.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 5: 鎮 Festival [1530]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

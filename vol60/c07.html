@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: 方便 [1532] - Volume 60 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 60 Table of Contents</a>
+      <span>Volume 60</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 60 &bull; Chapter 7</span>
+      <h1 class="chapter-title-en">Chapter 7: 方便 [1532]</h1>
+      <p class="chapter-title-ja">方便〔1532〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Before the newly constructed shrine on Mount Adumos, Akisu and Karu were ordered to take the role of wardens, and Bachiru, together with Tamakuniwake and his party, decided to return to the mansion with joy and courage. The villagers of Suma left the old men and young girls at the sacred site, saw off the party of Tamakuniwake, and followed Bachiru to the mansion.</p>
+          <p class="en-p">Originally, all the mountains, fields, and rice paddies of the village of Suma had been swallowed up by the wealth of Bachiru, and the villagers were all resigned to the circumstances of tenant farmers. However, as days passed, months advanced, and stars shifted, voices of discontent and dissatisfaction began to arise here and there, and socialists and communists began to appear. Among them, there were even extreme mammonists, and tenant farmers appeared who buried their meager assets in the depths of the earth and exhausted themselves in stinginess. Yet, this time, with the completion of the construction of Mount Adumos, all assets were to be released and distributed evenly among the villagers, and the villagers, all rejoicing, came to praise the couple Bachiru to the skies as the builders of the republic. Suddenly, the village of Suma was free of voices of resentment and jealousy, and with each face filled with a warm glow, it became a peaceful dwelling for optimists.</p>
+          <p class="en-p">Princess Saberu gathered more than a dozen representatives of the villagers at her feet, took out all the account books, handed them over to them willingly, and pledged to serve the Great God of Mount Adumos forever with her husband. Here again, a grand celebration was held by the villagers, and they toasted to the long life of the couple.</p>
+          <p class="en-p">Now, the party of Tamakuniwake was invited into the living room of Bachiru, where they enjoyed themselves to the fullest, and while talking to each other about the precious teachings of the God, they spent the day happily.</p>
+          <p class="en-p">Chiruteru: 'I have a request for you, Tamakuniwake-sama. That I have awakened the Bodhi mind, cast aside all worldly defilements, and become a happy person who follows the Great Way of Kannagara is entirely due to your grace, my teacher. Therefore, I would like to hear your profound and subtle teachings, and since I wish to share my joy with all living beings and serve a part of the divine work, I would like you to teach me the method of propagation of the San-Iku-Kyo style.'</p>
+          <p class="en-p">Tamakuniwake: 'That is truly a wonderful intention, and I, Tamakuniwake, cannot contain my feelings of joy. If that is the case, I shall tell you a little about the method of propagation directly received from our Great God.'</p>
+          <p class="en-p">To receive the divine grace in one's body,
+And to save and help the people of the world,
+To open the teachings in all directions,
+If you wish to be a divine minister
+Of supreme benevolence and supreme love,
+At any time,
+Keep your heart calm and peaceful,
+While filling yourself with the feeling of joy,
+Face the living beings,
+And preach the profound and subtle Way.
+In a pure and immaculate sacred place,
+Build a seat and purify your body,
+Exclude dust and dirt,
+Wear clothes unstained by filth,
+Purify both your heart and body,
+And only then take your seat on the throne,
+Following the inquiries of the people,
+Preach the Way in the simplest terms.
+Whether they be monks, nuns, believers,
+Or kings, nobles, or various others,
+Without fearing their presence, with a sincere heart,
+Exhaust yourself and explain the subtle meaning,
+Softening your facial expression and tone of voice,
+Examine the spirits of the people well,
+Expand upon karmic connections and metaphors,
+And preach and teach the principles of heaven and earth.
+People are children of God, palaces of God,
+There is not a single person who dislikes
+The Kototama of good words and beautiful phrases.
+If among the audience,
+There is someone who attacks your preaching,
+Or criticizes you,
+Reflect deeply upon yourself.
+That the Kototama which does not accord with God,
+From the defilement of the crookedness of the heart,
+Has been uttered unknowingly and unconsciously,
+If you can surely realize this,
+Even if there are hundreds of thousands of enemies,
+With just a single word of good speech,
+They will be moved and suddenly become
+Powerful allies of God.</p>
+          <p class="en-p">Even if you boast of having tens of thousands of my subordinates
+As your allies,
+With just a single word of evil speech,
+They will be moved and suddenly become
+Enemies of resentment,
+Like turning over one's palm.
+Reflect on this ultimate truth,
+And never make a mistake.
+In all things in this world,
+Everything should be rectified into good deeds,
+Well maintain the good of love,
+Well realize the truth of faith,
+And only after that, if you preach the true Way to the people of the world,
+No matter what kind of heretical and crooked person they may be,
+They will never oppose you.
+Sincerity alone saves the world,
+The teachings of God are before your eyes,
+Manifesting as a great miracle,
+Everything in heaven and earth is created
+By the water and fire of the Kototama.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">新に建てられたアヅモス山の社の前には、アキス、カールにワードの役を命じおき、バーチルは玉国別一行其他と共に喜び勇んで、一先づ館へ帰る事となつた。スマの里人は老人少女を聖地に残し、玉国別一行を見送つて、バーチル館に従ひ行く。</p>
+            <p class="ja-classical-line">元来スマの里は何れも山野田畠一切、バーチルの富豪に併呑され、里人は何れも小作人の境遇に甘んじてゐた。併し乍ら日歩み月進み星移るに従ひて、彼方此方に不平不満の声が起り出し、ソシァリストやコンミュニスト等が現はれて来た。中には極端なるマンモニストもあつて、僅かの財産を地底に埋匿し、吝嗇の限りを尽す小作人も現はれてゐた。然るに此度、アヅモス山の御造営完了と共に、一切の資産を開放して郷民に万遍なく分与する事となり、郷民は何れも歓喜して、リパブリックの建設者として、バーチル夫婦を、口を極めて賞揚する事となつた。俄にスマの里は憤嫉の声なく、各和煦の色を顔面に湛へて、オブチーミストの安住所となつた。</p>
+            <p class="ja-classical-line">サーベル姫は村人の代表者を十数人膝元に集めて、一切の帳簿を取出し、快く之を手に渡し、自分は夫と共に永遠に、アヅモス山の大神に仕ふる事を約した。ここに又もや郷民の祝宴は盛大に開かれ、夫婦の万歳を祝し合うた。</p>
+            <p class="ja-classical-line">さて玉国別一行はバーチルの居間に請ぜられ、各歓を尽して、尊き神の御教を互に語り合ひつつ、嬉しく其日を過ごした。</p>
+            <p class="ja-classical-line">チルテル『玉国別様にお願ひが厶います。私も此通り菩提心を起し、一切の世染を捨て、惟神の大道を遵奉し奉る嬉しき身の上となりましたのも、全く貴師の御余光で厶います。就ては宏遠微妙なる御教理も承はりたく、且又自分の歓びを衆生に分ち、神業の一端に奉仕したく存じて居りますから、三五教式の宣伝方法を御教示願ひたいもので厶います』</p>
+            <p class="ja-classical-line">玉国別『それは誠に結構な思召、玉国別も歓喜の情に堪へませぬ。左様ならば吾々の大神様より直授された宣伝方法に就て、少し許り御伝へを致しませう。</p>
+            <p class="ja-classical-line">神の恵を身に禀けて
+世人を救ひ助けむと
+四方に教を開くなる
+至仁至愛の神司
+たらむとすれば何時とても
+心を安く穏かに
+歓喜の情を湛へつつ
+蒼生に打向ひ
+幽玄微妙の道を説け
+清浄無垢の霊地にて
+座床を造り身を浄め
+塵や芥を排除して
+汚れに染まぬ衣をつけ
+心も身をも清くして
+始めて宝座に着席し
+人の尋ねに従ひて
+極めて平易に道を説け
+比丘や比丘尼や信徒や
+王侯貴人さまざまの
+前をも怖ぢず赤心を</p>
+            <p class="ja-classical-line">尽して微妙の意義を説き
+面貌声色和らげて
+人の身魂をよく査べ
+因縁比喩を敷衍して
+天地の道理を説きさとせ
+人は神の子神の宮
+善言美詞の言霊を
+一人も嫌ふ者はない
+もし聴衆の其中に
+汝が説を攻撃し
+或は非難するあれば
+吾身を深く省みよ
+神にかなはぬ言霊を
+心の曲の汚れより
+不知不識に発せるを
+必ず覚悟し得るならむ
+百千万の敵とても
+只一言の善言に
+感じて忽ち強力の
+神の味方となりぬべし</p>
+            <p class="ja-classical-line">仮令数万の吾部下を
+味方となして誇るとも
+只一言の悪言に
+感じて忽ち怨敵と
+掌覆す如くなる
+此真諦を省みて
+必ず過つ事勿れ
+只何事も世の中は
+すべて善事に宣り直し
+愛の善をば能く保ち
+信の真をば能く悟り
+而して後に世の人に
+真の道を説くならば
+如何なる外道の曲人も
+決して反くものでない
+誠一つは世を救ふ
+神の教は目のあたり
+現はれ来る摩訶不思議
+すべて天地は言霊の
+御水火に仍りて創造され</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Also, by the Miiki of Kototama, / Orderly and lively, / It is that which governs and prospers. / Ah, Kamunagara, Kamunagara, / The way of the Kami of Shinzenbiai, / Learn it, O ye people who served in the army of Brahman. / O Kamuzukasa of Tamakuniwake, / Open wide the Ihato of your heart, / And here I declare a Hitokoto. / Ah, Kamunagara, Kamunagara, / The Izutsu of Kototama bestowed by the Kami, / How noble is its Ibuki of rigor. / Whether the morning sun shines or clouds over, / Whether the moon waxes or wanes, / Even if the Daisansai should come, / If you recite the Kototama received from the Kami, / Purely and coolly, / All calamities shall instantly, / Vanish like clouds and mist.</p>
+          <p class="en-p">May you protect the Kototama, / The Futonorito of Zengenbishi, / Purify your heart, cleanse your body, / Make your conduct pure, / And if you recite the Kototama of rigor, / The Sumeōkami of the high Tenkai in the Kumoi, / And the angels, / And the Kamigami who appear on the Chijiyō, / And the Aohitogusa, and the grasses and trees, / Shall yearn for that Shintoku, / And observe this Oshihe. / How great is the Kototama, / The Ohataraki of the Sumeōkami, / Worship and revere it, / Worship and revere it.'</p>
+          <p class="en-p">Chiruteru: 'Following the Kamubashira of the Brahman religion, / Ōkuronushi, / While holding the Koran in my Yunde, / And gripping a sword in my Mete, / As a sword of Shakubuku and Sesshu, / I have lived until now, / Following the path of the Gedō. / But by the teacher-lord of Tamakuniwake, / I was taught the path of truth, / And the Hōben of propagation and missionary work, / Was most clearly bestowed upon me, / The darkness of my heart has cleared away, / Like the rising of the morning sun in its glory, / And my body has become healthy. / Now, beyond this, with all my sincerity, / I shall exhaust my utmost to cultivate the virtue of Aizen, / And open the Satori of true faith, / And in detail, / Save all sentient beings, / And fulfill the duty of one born as a child of heaven and earth. / Ah, Kamunagara, Kamunagara, / Protecting the San-go-kyō, / The Izutsu no Mitama and the Mizu-mitama, / Following the noble and holy Kamubashira of Tamateruhiko and Tamateruhime, / I shall serve as the administrator of the Kami's teachings, / Throughout the eighty countries, / And the eighty islands, without a corner left, / Without tiring of the rain and the wind, / For the sake of the Kami and for the sake of the world, / I shall do my best in every place. / Protect me, Kamunagara, / With a sincere heart before the Kami, / I pray and offer this. / From now on, the chief priest of Mount Adsumos, / And the couple Bachiru, / Shall also protect the holy and noble teachings of the San-go, / And without separating the East Palace and the West Palace in their hearts, / Serve most faithfully morning and evening, / Kamunagara. / Illuminated by the light of the Kami, / Chiruteru-tsukasa, who served in the Brahman army, / Prays. / Ah, Kamunagara, Kamunagara, / May the Mitama be blessed.'</p>
+          <p class="en-p">Kanna: 'Following the teacher-lord, the captain, / I too shall advance toward the great path of the Kami.'</p>
+          <p class="en-p">Heeru: 'To hear the message of the heavenly Kami of the vast heavens, / Now before my very eyes, is truly noble.'</p>
+          <p class="en-p">Chiruna-hime: 'My husband has truly become a human being, / Freed from the crookedness that dwelt in his heart.'</p>
+          <p class="en-p">Chiruteru: 'My soul did not think so wickedly, / But I could not prevent the crookedness that approached. / My powerless soul, too, has now become, / Like the immovable Chibiki-no-iwa.'</p>
+          <p class="en-p">Chiruna-hime: 'Since hearing the precious Kototama of my husband, / The crookedness of your heart has also vanished.'</p>
+          <p class="en-p">Mashumihiko: 'I am truly happy, / To have heard the Kototama that the teacher-lord has proclaimed for the first time.'</p>
+          <p class="en-p">Michihiko: 'Leaving the Saien-kan and passing many days, / These are the words of my teacher that I have heard for the first time.'</p>
+          <p class="en-p">Itahiko: 'It is said that if one hears a word, one understands ten, a hundred, or a thousand, / There is no other way but through the Mitama. / Having heard one thing, I immediately crossed over to the island, / And achieved merit, O Shōjō-bune.'</p>
+          <p class="en-p">Michihiko: 'Do not raise your nose immediately, / And do not stumble by losing sight of your own feet.'</p>
+          <p class="en-p">Itahiko: 'My soul, which the Sumegami has chosen above all others, / How could it be compared to yours?'</p>
+          <p class="en-p">Mashumihiko: 'Do not fall into the Fukaya River out of conceit, / If you are arrogant, you will stumble at once.'</p>
+          <p class="en-p">Itahiko: 'I do not have a heart that boasts, / But my soul has come to smile and flourish eagerly.'</p>
+          <p class="en-p">Debisu-hime: 'Itahiko, who is ahead of others in everything, / Is all the more awe-inspiring as a messenger of the Kami.'</p>
+          <p class="en-p">Chiruteru: 'Itahiko's triumph is indeed something to be thought of, / Having welcomed a person wearing the skin of a beast.'</p>
+          <p class="en-p">Kanna: 'Though you call him a beast, / How noble he is to possess a spirit that surpasses the people of this world.'</p>
+          <p class="en-p">Heeru: 'When I think that the hearts of men were so clouded, / I become all the more sorrowful.'</p>
+          <p class="en-p">Anchii: 'The bird-wings that dwell on Mount Adsumos, / Are not human, yet they look down upon men. / I resent the hawks that fly and play, / Leisurely above the heads of the people.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">又言霊の御水火にて
+規則正しく賑しく
+治まり栄ゆるものぞかし
+あゝ惟神々々
+真善美愛の神の道
+学ばせ玉へバラモンの
+軍に仕へし諸人よ
+玉国別の神司
+心の岩戸を押開き
+茲に一言宣り申す
+あゝ惟神々々
+神の授けし言霊の
+厳の伊吹ぞ尊けれ
+旭は照る共曇る共
+月は盈つ共虧くる共
+大三災の来る共
+神に受けたる言霊を
+清く涼しく宣るならば
+すべての災忽ちに
+雲を霞と消え失せむ</p>
+            <p class="ja-classical-line">守らせ玉へ言霊の
+善言美詞の太祝詞
+心を清め身を浄め
+其行ひを清くして
+厳の言霊宣るなれば
+雲井に高き天界の
+皇大神もエンゼルも
+地上に現れます神々も
+蒼生も草や木も
+其神徳を慕ひつつ
+これの教を守るべし
+偉大なる哉言霊の
+皇大神の御活動
+仰ぎ敬まひ奉れ
+仰ぎ敬ひ奉れ』
+チルテル『バラモン教の神柱
+大黒主に従ひて
+左手にコーラン捧げつつ
+右手に剣を握りしめ
+折伏摂受の剣として</p>
+            <p class="ja-classical-line">外道の道を辿りつつ
+今迄暮し来りしが
+玉国別の師の君に
+誠の道を教へられ
+布教伝道の方便を
+いと明かに授けられ
+心の暗も晴れ渡り
+旭の豊栄昇る如
+身も健かになりにけり
+いざ此上は真心の
+限りを尽して愛善の
+徳を養ひ信真の
+覚りを開き詳細に
+一切衆生を救済し
+天地の御子と生れたる
+其本分を尽すべし
+あゝ惟神々々
+三五教を守ります
+厳の御霊や瑞御霊
+玉照彦や玉照姫の</p>
+            <p class="ja-classical-line">雄々しき聖き御柱に
+従ひ奉り八十の国
+八十の島々隈もなく
+神の教の司とし
+沐雨櫛風厭ひなく
+神の御為世の為に
+所在ベストを尽すべし
+守らせ玉へ惟神
+神の御前に赤心を
+捧げて祈り奉る
+アヅモス山の宮司
+バーチル夫婦も今よりは
+聖き尊き三五の
+教を守り玉ひつつ
+東の宮と西の宮
+心に隔つる事もなく
+いと忠実に朝夕に
+仕へ玉はれ惟神
+神の光に照されて
+バラモン軍に仕へたる</p>
+            <p class="ja-classical-line">チルテル司が願ぎ奉る
+あゝ惟神々々
+御霊幸ひましませよ』</p>
+            <p class="ja-classical-line">カンナ『キャプテンの司の君に従ひて
+吾も進まむ神の大道へ』</p>
+            <p class="ja-classical-line">ヘール『久方の天津御神の音信を
+今目のあたり聞くぞ尊き』</p>
+            <p class="ja-classical-line">チルナ姫『背の君は全く人となりましぬ
+心に棲める曲のはなれて』</p>
+            <p class="ja-classical-line">チルテル『わが魂はさまで悪しくは思はねど
+寄りくる曲を防ぎかねつつ。
+力なき吾魂も今は早や
+千引の岩の動かずなりぬ』</p>
+            <p class="ja-classical-line">チルナ姫『背の君の珍の言霊聞こしより
+心の曲も消え失せにけり』</p>
+            <p class="ja-classical-line">真純彦『師の君の初めて宣らす言霊を
+聞きし吾こそ嬉しかりけり』</p>
+            <p class="ja-classical-line">三千彦『斎苑館立出で月日数重ね
+初めて聞きし吾師の言葉』</p>
+            <p class="ja-classical-line">伊太彦『一と言へば十百千を悟るてふ
+身魂ならでは詮すべもなし。
+一聞いて直ちに島に打渡り
+功績を立てし猩々舟哉』</p>
+            <p class="ja-classical-line">三千彦『すぐに又鼻をば高め足許に
+眼失ひ躓くなゆめ』</p>
+            <p class="ja-classical-line">伊太彦『皇神の選りに選りたる吾魂は
+いかでか汝に比ぶべきやは』</p>
+            <p class="ja-classical-line">真純彦『うぬぼれて深谷川に落ち込むな
+慢心すればすぐに躓く』</p>
+            <p class="ja-classical-line">伊太彦『吾とても誇る心はなけれ共
+魂はいそいそ笑み栄え来て』</p>
+            <p class="ja-classical-line">デビス姫『何事も人に先立つ伊太彦の
+神の使のいとど畏き』</p>
+            <p class="ja-classical-line">チルテル『伊太彦の得意や実にも思ふべし
+獣の皮着し人を迎へて』</p>
+            <p class="ja-classical-line">カンナ『獣とは云へど此世の人草に
+優る霊を持てる尊さ』</p>
+            <p class="ja-classical-line">ヘール『かく迄も人の心の曇りしかと
+思へばいとど悲しくなりぬ』</p>
+            <p class="ja-classical-line">アンチー『アヅモスの山に棲まへる鳥翼
+人にあらねど人を見下す。
+人々の頭の上を悠々と
+舞ひて遊べる鷹ぞ恨めし』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Bachiru: 'Nanigoto mo Ametsuchi no Kami no Mikokoro ni makasu wa hito no tsutome naruramu'</p>
+          <p class="en-p">Saberuhime: 'Ametsuchi no Kami mo unagahitamafuramu kokoro kiyoke ki kono hitobito wo'</p>
+          <p class="en-p">Teku: 'Asayufu ni yoranu koto nomi asaritsutsu kurashikitarishi ware zoutateki. Sari nagara megumi mo fukaki Ōkami no Mite ni sukuware isamu kefu kana'</p>
+          <p class="en-p">Wakkusu: 'Terumon no yama wo tachiide ima koko ni ada to omoishi hito to narabinu. Ada to nomi omoishi koto wa yume to nari ima wa sukuhi no Kami to miru kana'</p>
+          <p class="en-p">Ekisu: 'Ahitomo ni ashiki koto nomi hakarai-ai Kami wo kegaseshi koto no kuyashisa. Machibito no mae ni haji wo ba sarasarete shiri tatakareshi koto zo hazukashi. Kefu yori wa kokoro no koma wo tatenaho susumite yukamu Kami no Ōji ni'</p>
+          <p class="en-p">Heruman: 'Ware mo mata yokaranu tomo ni sasoware Wakkusu wo semeshi koto no orokasa. Ananahi no Kami no tsukasa wo korosamu to Ōunabara ni machishi orokasa. Sumekami no ikao no chikara ni odiosore ima wa mattaku neko to narikeru'</p>
+          <p class="en-p">Eru: 'Kamuyakata Okuniwake no miuse shi to omoite yobito azamukishi ware. Kusagusa no tsumi wo kasaneshi ware naredo sukuhitamahinishi makoto no Kami wa. Sumēru no Miyama ni kiyoku arawaremaseru Kami no Miizu wo aogu toutosa. Ikanaramu Magami no osoi kurutomo kefu no kokoro wa chiyo ni kahenamu'</p>
+          <p class="en-p">Saberuhime: 'Ware koso wa Shiyōjiyōhime no tama nari Tamakuniwake ni negigoto ya semu. Tennō no miya no miato no ishibuta wo akete Ryūō sukuhitamahare'</p>
+          <p class="en-p">Tamakuniwake: 'Nanji ga negai unagahimatsuri kore yori wa Azumosu-yama no Kami wo sukuhamu'</p>
+          <p class="en-p">Thus, they exchanged songs with one another, exhausting their utmost joy, and Tamakuniwake, with the group following him, decided to wait for the dawn to proceed to investigate beneath the floor of the ancient palace of Tennō.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">バーチル『何事も天地の神の御心に
+任すは人の務めなるらむ』</p>
+            <p class="ja-classical-line">サーベル姫『天地の神も諾ひ玉ふらむ
+心清けき此人々を』</p>
+            <p class="ja-classical-line">テク『朝夕によからぬ事のみ漁りつつ
+暮し来りし吾ぞうたてき。
+さり乍ら恵も深き大神の
+御手に救はれ勇む今日かな』</p>
+            <p class="ja-classical-line">ワックス『テルモンの山を立出で今此処に
+仇と思ひし人と並びぬ。
+仇とのみ思ひし事は夢となり
+今は救ひの神と見る哉』</p>
+            <p class="ja-classical-line">エキス『相共に悪しき事のみ謀り合ひ
+神を汚せし事の悔しさ。
+町人の前に恥をば曝されて
+尻叩かれし事ぞ恥かし。
+今日よりは心の駒を立直し
+進みて行かむ神の大道に』</p>
+            <p class="ja-classical-line">ヘルマン『吾も亦善からぬ友に誘はれ
+ワックスを責めし事の愚かさ。
+三五の神の司を殺さむと
+大海原に待ちし愚かさ。
+皇神の厳の力におぢ恐れ
+今は全く猫となりけり』</p>
+            <p class="ja-classical-line">エル『神館小国別の身失せしと
+思ひて世人欺きし吾。
+くさぐさの罪を重ねし吾なれど
+救ひ玉ひぬ誠の神は。
+スメールの御山に清く現れませる
+神の御稜威を仰ぐ尊さ。
+いかならむ魔神の襲ひ来るとも
+今日の心は千代に変へなむ』</p>
+            <p class="ja-classical-line">サーベル姫『吾こそは猩々姫の霊なり
+玉国別に願言やせむ。
+天王の宮の御跡の石蓋を
+開けて竜王救ひ玉はれ』</p>
+            <p class="ja-classical-line">玉国別『汝が願諾ひまつり之よりは
+アヅモス山の神を救はむ』</p>
+            <p class="ja-classical-line">かく互に歌を取かはし、十二分の歓喜を尽し、玉国別は一同を従へ再び天王の古宮の床下を調査すべく、夜の明くるを待つて進み行く事となつた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c06.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 6: 満悦 [1531]</span>
+      </a>
+      <a href="c08.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 8: 土蜘蛛 [1533]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

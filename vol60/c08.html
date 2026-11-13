@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: 土蜘蛛 [1533] - Volume 60 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 60 Table of Contents</a>
+      <span>Volume 60</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 60 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: 土蜘蛛 [1533]</h1>
+      <p class="chapter-title-ja">土蜘蛛〔1533〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tamakuniwake and his party left the mansion of Bachiru and, approaching the site of the old shrine at the foot of Mount Adsumosu once again, found that it was just as Shiyōjiyōhime had said; when they cleared away about five sun of surface soil, a rectangular stone lid appeared.</p>
+          <p class="en-p">Tamakuniwake first offered a prayer for the removal of the stone lid.</p>
+          <p class="en-p">‘In this precious sacred site of Sumēru, where the palace pillars were built thick and firm to endure for eternity, at the ancient site where we served the shrine of Ōkunihiko, the ancestor of the teachings of the Brahman who dwells in eternal peace, I now, by the wish of Shiyōjiyōhime, purify my heart and cleanse my body, and chanting the precious Kototama, open the Tamatebako that has been sealed since three thousand years ago, receiving the grace of Kami. I humbly pray that those who serve in this Kamuwaza, being pure, upright, and sincere in heart, and having returned to the spirit of Kami, may open this Ihato with great ease, without any blame or punishment, regardless of what Kami may dwell within, as this is a precious treasure. Furthermore, grant us leave to steal into this Gankutsu and swiftly search out the secrets that have remained since the age of the gods. Before the presence of Kannagara Sumeru Ōkami, I humbly and reverently pray. One, two, three, four, five, six, seven, eight, nine, ten, hundred, thousand, ah, Kannagara Reikō Haisase, Kannagara Reikō Haisase.’</p>
+          <p class="en-p">Having chanted this precious prayer, he used the sacred spade and hoe to push aside the earth, inserted a washed and purified iron bar into the gap in the rock, and at last succeeded in removing the wide and thick stone lid. Black smoke rose up in thick clouds, and for a time it was a dismal scene where one could not even distinguish things close at hand. Just then, the wind of Shinato blew, scattering the black smoke until it vanished, and the entrance to the Ihato, including the stairs, became clearly visible.</p>
+          <p class="en-p">Tamakuniwake: 'How auspicious this morning is, as we begin to open the secrets that have existed since the age of the gods.'</p>
+          <p class="en-p">Bachiru: 'How auspicious this day is, as the Ihato that has sealed the Nine-Headed Dragon for all eternity is finally opened.'</p>
+          <p class="en-p">Saberuhime: 'This is the day we shall meet the Takushaka Dragon King, of whom we have heard stories passed down since the age of the gods.'</p>
+          <p class="en-p">Itahiko: 'I intend to explore the depths of this Gankutsu now; pray, grant me leave.'</p>
+          <p class="en-p">Tamakuniwake: 'The inclination of Itahiko, who seeks to be first in all things, has truly manifested.'</p>
+          <p class="en-p">Itahiko: 'To always be the first to advance ahead of others is the very taste of my being.'</p>
+          <p class="en-p">Sanzenhiko: 'The nature of Itahiko has manifested, and he seeks to advance into a dangerous hole.'</p>
+          <p class="en-p">Itahiko: 'Exploring a Gankutsu such as this should not be difficult; it is a mediocre task, no more than a pre-breakfast affair.'</p>
+          <p class="en-p">Tamakuniwake appointed Itahiko as the chief supervisor, had him take Wax and Elle as companions, and left the rest of the party waiting at the entrance of the Gankutsu. He hung a bell at the end of a long rope at the entrance of the hole, instructing them that if an emergency arose, they should pull the rope so that reinforcements would come, and then, brushing away spider webs one after another, he descended the stairs with a heavy tread to search for the key to the secret of several thousand years.</p>
+          <p class="en-p">Strangely, the long and deep tunnel was brilliant with phosphorescent light, and it was so bright that they did not even have to complain about the difficulty of seeing their footing.</p>
+          <p class="en-p">The three of them, while singing the song of the heavenly numbers, explored the Gankutsu, which was said to be the place where the Takushaka Dragon King was imprisoned, sometimes descending, sometimes ascending, and turning left and right as their feet led them. Suddenly, there was a bright spot. When they approached and looked, a mysterious, round, brownish object about three shaku in diameter was lying in the middle of the tunnel, radiating a dim light. When they strained their ears to listen, they heard a mysterious buzzing sound. For a moment, the three stood there, dumbfounded, gazing at this strange object. Suddenly, a sound like porridge boiling, bub-bub-bub, was heard loudly.</p>
+          <p class="en-p">Elle: 'Hey Wax, this thing must be a monster. How about we give it a good whack with this staff?'</p>
+          <p class="en-p">Wax: 'Wait, wait. We don't know what might come out. If we carelessly make an enemy of it, that would be a disaster.'</p>
+          <p class="en-p">Itahiko: 'Hahaha, it looks just like the thing Elle-sama was trampled by a cow. It seems to be steaming, too. Perhaps this is what Tano Kiuhei dropped, his eight-mat-sized sheet.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玉国別の一行はバーチルの館を立出で、再びアヅモス山のもとの古社の趾に近寄り見れば猩々姫の言葉に違はず、五寸許り上土をめくつて見ると、長方形の石蓋が現はれて来た。</p>
+            <p class="ja-classical-line">玉国別は先づ石蓋取り除きの祈願を奏上したり。</p>
+            <p class="ja-classical-line">『スメールの珍の聖地に、宮柱太しく建てて常久に、鎮まり居ますバラモンの、教の御祖大国彦の御舎を、仕へまつりし古き趾の石蓋を、猩々姫の願ひによりて、心を清め身を浄め、珍の言霊宣り上げて、三千年の昔より、封じ置きたる玉手箱、神の恵みを蒙りて、愈開き奉る。仰ぎ願はくは此神業に仕へまつる人々は、心正しく清く直くして、神の霊に帰りし珍の御宝なれば、如何なる神の在すかは知らねども必ず咎め罰め玉ふ事なく、いと安々と之の岩戸を開かせ玉へ。又これの岩窟に忍び入りて神代ながらの秘事を疾く速かに探らせ玉へ。惟神皇大神の御前に慎み敬ひ願ぎ奉る。</p>
+            <p class="ja-classical-line">一二三四五六七八九十百千万、あゝ惟神霊幸倍坐世惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">と珍の宣り言唱へ上げ、忌鋤忌鍬を以て土をかき分け、洗ひ清めし金梃を岩の隙間に押し込み、漸くにして広き厚き岩蓋を取除いた。黒煙濛々として立昇り、少時は咫尺も弁ぜざる如き惨澹たる光景であつた。折から吹き来る科戸の風に黒き煙は何処ともなく散り失せて岩戸の入口は階段まで明かに見えて来た。</p>
+            <p class="ja-classical-line">玉国別『千早振る昔ながらの秘事を
+開き初めたる今朝ぞ目出度き』</p>
+            <p class="ja-classical-line">バーチル『九頭竜を弥常久に封じたる
+岩戸も開く今日の目出度さ』</p>
+            <p class="ja-classical-line">サーベル姫『神代より云ひつぎ語りつぎ来る
+タクシャカ竜王に会はむ今日かな』</p>
+            <p class="ja-classical-line">伊太彦『吾は今此岩窟の奥底を
+探り見むとす許させ玉へ』</p>
+            <p class="ja-classical-line">玉国別『何事も先立たむとする伊太彦の
+インクリネーション現はれにけり』</p>
+            <p class="ja-classical-line">伊太彦『何事も人に先立ち進まむと
+するは吾身のテーストなりけり』</p>
+            <p class="ja-classical-line">三千彦『伊太彦の其ネーチュア現はれて
+危き穴に進まむとぞする』</p>
+            <p class="ja-classical-line">伊太彦『これしきの岩窟探るは難からじ
+朝飯前のメデオーカ事ぞや』</p>
+            <p class="ja-classical-line">玉国別は伊太彦を総取締となし、ワックス、エル二人を伴はしめ、一同を岩窟の入口に待たせ置き、長き綱の先に鈴をつけて穴の入口に掛けおき、危急の場合は此綱を引けば援兵に何人か来て呉れる様と頼み置き、数千年の秘密の鍵を探るべく蜘蛛の巣を払ひ払ひ階段をドンドンと下つて行く。不思議にも長き深き隧道は燐光燦爛として輝き、あまり足許の悩みを訴へない迄に明かつた。</p>
+            <p class="ja-classical-line">三人はタクシャカ竜王の幽閉所と聞えたる岩窟を天の数歌を歌ひ乍ら、或は下り或は上り、右に左に折り廻り乍ら足に任せて探り行く。俄にクワツと明るい処がある。近づき見れば直径三尺許りの丸い茶褐色の不思議な物が隧道の真中に横たはり、薄明い燈火を放射して居る。耳をすまして聞き居ればブーンブーンと不思議な声が聞える。三人は少時茫然として此怪しき物体を眺めて居た。俄にブツブツブツと粥の煮える様な音が高く聞えて来た。</p>
+            <p class="ja-classical-line">エル『おいワックス、此奴ア何でもモンスターに違ひない。此杖で一つポカンと一撃を加へたら如何だらうかな』</p>
+            <p class="ja-classical-line">ワックス『待て待て、何が出よるか知れぬ。うつかり相手にならうものなら、それこそ大変だ』</p>
+            <p class="ja-classical-line">伊太彦『アハヽヽヽ、丁度エルさまが牛に踏み潰された代物の様だな。ポツポツと湯気が立つて居る様だ。此奴ア大方田野危平が八畳敷を落して置いたのかも知れないぞ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Eru: 'That Magatsu fellow, Ichihaya, has rushed ahead to a place like this, plotting to crush our Kintama—oops, I mean our Kimotama—and is blocking our Kauro with such Shitsurei Senban behavior. As an Eiyū and Gauketsu who would slay a man if he touches a man, and slay a horse if he touches a horse, I, Eru-sama, cannot possibly Tautei Sashiyuru this. Besides, if I do not do something about this fellow, we cannot cross to the Mukau side, can we? Say, Wakkusu, you were quite an Ōchiyakumono yourself, but it seems you are Heikō at this fellow and are keeping Chinmoku, are you not? How can you hope to perform a Tanken of an Ihaya if you are afraid of a monster? If Itahiko-sama would permit, would you not let me Shiyobun this monster?'</p>
+          <p class="en-p">Itahiko: 'Very well, it might be good to see you Taisan it with your own power.'</p>
+          <p class="en-p">Eru: 'In that case, I shall show you how I Taisan it. It may turn out to be nothing more than a mountain groaning and bringing forth a single mouse.'</p>
+          <p class="en-p">While saying this, he brandished his staff overhead, took a firm stance, let out a shout of 'Eiya!', and struck with a 'Un!'. Instantly, dozens of long, thin black legs sprouted from the monster, and it floated its round body about seven or eight shaku into the air and scurried away with a rustling sound. When one looked closely, it was a cave spider that had lived for several thousand kalpas, sleeping there with its legs tucked in.</p>
+          <p class="en-p">Eru: 'Atsuhahaha! What is this? The boss of the spiders, terrified by the majesty of Eru-sama, has set its long compasses in motion, floated its body into the void, and vanished like clouds and mist. Ihihihi! Thanks to the divine power of Eru-sama, it has Taisan-ed without any trouble... and has gone without even looking back... indeed. Hey Wakkusu, I do not care what comes out next, so it is your turn; do it properly.'</p>
+          <p class="en-p">Wakkusu: 'It seems this spider breathes phosphorus, as even its body is glowing. Truly, strange things do happen. Come, let us proceed while paying attention to our surroundings and exercising twelve times the caution. Itahiko-sama, did Tamakuniwake-sama not say that you are also quite a flustered person—no, no, that you are a person who always takes the lead? I would like you to take the initiative in exterminating the monster this time.'</p>
+          <p class="en-p">Itahiko: 'When I am accompanying Tamakuniwake-sama, I must indeed serve as the vanguard. However, since there are three leaders today, I am maintaining a slightly cautious attitude. Well, Eru-sama, please go ahead and make some noise. If the worst comes to the worst, I, this Itahiko the propagandist, will come to your aid.'</p>
+          <p class="en-p">Eru: 'Hehehehe, you say such clever things. What is that at your feet? Are your knees not shaking quite vigorously? You must have come down with a case of acute fear-sickness.'</p>
+          <p class="en-p">Itahiko: 'What? An outbreak of acute composure-sickness has occurred. There is absolutely no need to worry. Come, let us advance, let us advance.'</p>
+          <p class="en-p">Eru: 'I have begun to feel a slight sense of loneliness. I shall sing a song to cheer myself up, so please accompany me; I beg of you.'</p>
+          <p class="en-p">Wakkusu: 'Ahahaha, Eru has finally revealed his true colors. The great general of empty bravado and Kintama-crushing, ufu-fufu.'</p>
+          <p class="en-p">Eru: 'Listen here, you foolish son Wakkusu,
+Oops, that is not it at all.
+This teaching of good words and beautiful phrases,
+I forgot and let my tongue slip.
+Wakkusu-sama, I do not know,
+If you are angry or not,
+But as you know, I am a flustered person,
+And my mouth slipped unexpectedly.
+Looking back at the heart of the God,
+You must never be angry.
+From the mouth of the Iwato, thump, thump,
+Down the endless stairs,
+Descending and then climbing up again,
+Turning right and left,
+And when I finally arrived here,
+What shines brightly is a great mystery,
+A monster I cannot comprehend,
+Thinking I shall examine it,
+I brandished my Kongo-staff,
+And struck it with a single Un.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">エル『曲津の奴、逸早くこんな処へ先走りをしやがつて、俺等の睾丸、オツトドツコイ肝玉を潰さうと企んで、失礼千万な、吾々の行路を遮つてゐやがるのだらう。人触るれば人を斬り、馬触るれば馬を斬る程の英雄豪傑、エルさまは到底此儘差許す事は出来ぬ。又飽迄此奴を如何とかせなくては向側へ渡る事が出来ぬぢやないか。のうワックス、貴様も随分横着者だつたが、此奴には閉口したと見え沈黙を守つてるぢやないか。モンスターが恐ろしい様な事で岩窟の探険がどうして出来るものか。もし伊太彦さま、此モンスターを私に処分さして下さいませぬか』</p>
+            <p class="ja-classical-line">伊太彦『宜しい、お前の力で一つ退散さして見るのもよからう』</p>
+            <p class="ja-classical-line">エル『そんなら退散さして御覧に入れませう。大山鳴動して鼠一匹かも知れませぬぞ』</p>
+            <p class="ja-classical-line">と云ひ乍ら杖を真向に振り翳し構へ腰になつて、エイヤと一声、ウンと打つた。忽ち怪物は黒い細長い足が数十本ニユーツと生え出し、丸い体を七八尺許りの中空に浮かしてガサリガサリと逃げ出した。よくよく見れば数千年劫を経たる穴蜘蛛が足を縮めてここに眠つて居たのであつた。</p>
+            <p class="ja-classical-line">エル『アツハヽヽヽ何だ、蜘蛛の親方奴、エルさまの御威勢に恐れ、長いコンパスを運転させ、体を宙に浮べて雲を霞と逃げ失せやがつた。イヒヽヽヽヽエルさまの神力によつてくもなく退散仕り……後をも見ずになりにける……だ。おいワックス、今度は何が出ても俺はもう構はぬから、お前の番だ、確りやり玉へ』</p>
+            <p class="ja-classical-line">ワックス『ここの蜘蛛は燐の息を吸うて居ると見えて体迄が光つて居やがる。本当に妙な事があるものだ。サア之から四辺に心を配り十二分の注意を払つて進む事にしよう。伊太彦様、貴方も随分狼狽者、否々何でも先鞭をつけるお方だと玉国別さまが云つて居られたぢやありませぬか。今度は貴方が率先して怪物退治をやつて頂き度いものですな』</p>
+            <p class="ja-classical-line">伊太彦『玉国別様のお伴をして居る時は、どうしても俺が先駆を勤めねばならない。併し乍ら今日は三人の総統者だから、チツト許り慎重の態度を守つてるのだ。まあエルさま、先走りとなつて噪いで下さい。まさかとなれば此伊太彦宣伝使がお助け申すから』</p>
+            <p class="ja-classical-line">エル『ヘヽヽヽヽうまい事仰有いますワイ。何ですか、その足許は、膝坊主が大変活動してるぢやありませぬか。急性恐怖病が起つたのでせう』</p>
+            <p class="ja-classical-line">伊太彦『何、急性沈着病が勃発したのだ。決して心配は要らぬ。サア進んだり進んだり』</p>
+            <p class="ja-classical-line">エル『何だかチツと許り寂寥の感に打たれて来ました。一つ歌を歌つて元気をつけますから囃して下さい、頼みますよ』</p>
+            <p class="ja-classical-line">ワックス『アハヽヽヽ、到頭エルの奴、生地を現はしやがつたな。空威張りの睾丸潰しの大将奴、ウツフヽヽヽ』</p>
+            <p class="ja-classical-line">エル『こりやこりやワックス馬鹿息子
+オツトドツコイこりや違うた
+善言美詞の此教
+忘れて口を滑らせた
+ワックスさまよチツト許り
+お腹が立つかは知らねども
+知つてる通りの狼狽者
+思はぬ口が滑りました
+神の心に見直して
+決して怒つちやなりませぬ
+岩戸の口からドンドンと
+限り知られぬ階段を
+下りて又も上りつめ
+右や左と屈曲し
+漸くここに来て見れば
+パツと光るは摩訶不思議
+合点の行かぬモンスター
+一つ調べて見むものと
+金剛杖をば振り翳し
+ウンと許りに打据うる</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">With a popping sound, a black smoke, like an Ika spitting ink, enveloped the Atari in Matsukurokurosuke; how comical it was. While I gazed at it for a while, numerous compasses adhered to it, and it shook with a 'hiyori, hiyori' motion in the Chiukū, its Ketai body fleeing toward the Zenpau. This fellow is surely a spirit of a Kumo; I will not leave it until I have pursued it to the Doko and forced it to Ōjiyō. Whether my own Inochi is taken, or I force the other to Ōjiyō, this is the Hame of the moment where I must choose one of the two. Bonten, Taishiyaku, Jizaiten, O-tsutodotsukoi, Ancestor of the land, Kuniharutachi no Ōmikami, Nanitozo, grant Shinriki to Eru.</p>
+          <p class="en-p">Grant me strength in my arms, I pray to you earnestly. We two, who set out on the exploration of the Ihaya following the guidance of Itahiko-dono, have no idea of the situation at all. I am worried from now on about what kind of trap of evil we might fall into and lose our Inochi. Ah, Kannagara-kamukami, may your spirits be blessed.'</p>
+          <p class="en-p">While singing this, they arrived at another corner. No sooner had they turned the corner than Princess Debisu, whom Wax had been longing for, having lost his heart to her, stood straight with a slightly downcast look, her posture and demeanor elegant, hiding her red mouth with her sleeve. As Eru advanced with vigor, he collided with this woman.</p>
+          <p class="en-p">Eru: 'Aita! You Amatsume, standing silently in the middle of the thoroughfare, you have finally struck my protruding teeth with a harsh blow. Look at this, black blood is dripping from between my teeth just like this. Won't you apologize with a single word, saying "I have done a bad thing"? You are a fool.'</p>
+          <p class="en-p">Woman: 'Ho, ho, ho, ho, are you not Eru-sama, the flustered one? Walking on the main road in the middle of the day, you collide with the hindquarters of a cow, and here you collide with my hindquarters and strike your protruding teeth; you are truly a Chiyokasuke of the highest order.'</p>
+          <p class="en-p">Eru: 'Ya, was it Princess Debisu-sama? You have a bad disposition, thinking to surprise us by quietly coming down the stairs and taking a shortcut from that four-way intersection to here. Truly, Princess-sama, you have become quite a tomboy since you became the wife of Mitsuhiko-dono. Hey Wax, you too, since you likely have some lingering attachment despite saying you have repented, why don't you list your grievances and let them reach the ears of the Princess? There will never be another chance as good as this in your life. If I am in the way, I will be considerate for the sake of our friendship. Tell me, Itahiko-sama, shall we step back for a little while?'</p>
+          <p class="en-p">Itahiko: '......'</p>
+          <p class="en-p">Wax: 'This is, this is, Princess Debisu-sama, I am truly impressed that you are exploring this terrifying Ihaya alone as a woman. No, I am truly moved. Seeing that brave will of yours, this Wax has always been troubled in his heart. Because you are always sticking close to the side of Mitsuhiko-sama like glue and looking happy, I could not have my way while looking at your face, and it was as if I were looking at a photograph, but today you will surely speak a word or two to me, will you not?'</p>
+          <p class="en-p">Woman: 'Ho, ho, this Wax-sama, do you really think of me that much? If it is true, I am happy.'</p>
+          <p class="en-p">Wax: 'Without even drinking sake, how could a man catch a woman and tell a lie? Because I am truly smitten with you from the bottom of my heart, I have followed you this far. It would not be too much of a sin to have some sympathy for a man's heart, would it?'</p>
+          <p class="en-p">Eru: 'Aha, aha, aha, aha, hey, Wax, that is it, that is it, this is the crucial moment, do it firmly, washio, washio!'</p>
+          <p class="en-p">Woman: 'Ho, ho, ho, ho, you testicular-crushing Eru-sama, you do not need to incite him like a dog or something, do you?'</p>
+          <p class="en-p">Eru: 'Now, Princess-sama, he is in earnest. I am only going to such lengths because I want to see my friend's love fulfilled, so you should not hate me too much. Since you are waiting here alone, I am a hundred percent sure and a thousand percent convinced that you do not dislike Wax, so I will be very considerate for you. However, Itahiko-sama has become a little bit annoyed. Tell me, Itahiko-sama, the front is the front, the back is the back; it is not as if Wax is going to take the wife of Mitsuhiko-sama, so you will surely overlook a handshake or so, will you not?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ポンと音して黒煙
+鳥賊が墨をば吐く様に
+四辺を真黒々助に
+包んで了つた可笑しさよ
+暫く眺め居る間に
+数多のコンパス附着して
+怪体な体を中空に
+ヒヨロリ　ヒヨロリと揺りつつ
+前方さして逃げて行く
+此奴あテツキリ蜘蛛の精
+何処どこ迄もおつついて
+往生させねば措かないぞ
+此方が命をとらるるか
+むかうを往生さしてやるか
+二つの中の一つをば
+選まにやならぬ今の破目
+梵天帝釈自在天
+オツトドツコイ国の祖
+国治立の大御神
+何卒エルに神力を</p>
+            <p class="ja-classical-line">腕も撓に与へませ
+偏に願ひ奉る
+伊太彦司に従ひて
+初めて岩窟の探険と
+出掛けた吾々両人は
+到底様子が分らない
+如何なる枉の陥穽に
+陥ちて命を落すやら
+今から案じ過ごされる
+あゝ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">斯く歌ひ乍ら又もや曲り角に着いた。角を曲るや否やワックスの現を抜かして恋慕して居たデビス姫が起居物腰淑かに、袖にて赤い口を隠し乍ら、稍伏目勝ちにスツクと立つて居る。エルは勢よく進む途端に、此女に衝突し、</p>
+            <p class="ja-classical-line">エル『アイタヽヽヽヽこりや阿魔ツ女、往来の真中に黙つて立てつて居やがるものだから、到頭俺の出歯をきつい目に打つて了つたぢやないか。これ見よ、此通り歯の間から黒い血がポトポトと流れてゐる。「悪い事致しました」と一言謝らぬかい。馬鹿だな』</p>
+            <p class="ja-classical-line">女『ホヽヽヽヽ、貴方は狼狽者のエルさまぢやありませぬか。昼の最中に大道を歩いては牛の尻に衝突し、又斯んな処で妾のお尻に衝突し、出歯を打つとは天下一品のチヨカ助だな』</p>
+            <p class="ja-classical-line">エル『ヤア、デビス姫様で厶いましたか。腹の悪い、吾々を吃驚さそうと思つて、ソツと階段を下り、あの四辻から、ここへ先廻りして吃驚さす考へですな。本当に姫様も三千彦司の奥さまになつてから大変なお転婆になりましたな。おいワックス、貴様もこんな処で、改心したと云ふものの幾分か未練が残つて居るだらうから、一言怨みの数を陳列して姫様のお聞きに達したらどうだ。こんな好い機会は一生の間に又とは無いぞよ。俺が邪魔になるなら友達の誼で気を利かしてやる。モシ伊太彦さま、少しの間、控へて居りませうかな』</p>
+            <p class="ja-classical-line">伊太彦『………………』</p>
+            <p class="ja-classical-line">ワックス『これは　これは、デビス姫様、この恐ろしい岩窟内を女一人で探険とは実に恐れ入りました。いや感心致しました。その健気なお志を看破して此ワックスは何時も心を悩めたので厶いますよ。三千彦様のお側近く膠の様に引ついて喜んで居らつしやるものだからお顔を見乍ら儘ならず、丸で写真を見て居る様だつたが、今日は一言位は言葉をかけて下さるでせうね』</p>
+            <p class="ja-classical-line">女『ホヽヽこれワックスさま、貴方はそこ迄妾を本当に思つて下さるのですか。本当ならば嬉しいワ』</p>
+            <p class="ja-classical-line">ワックス『酒も飲まずに、どうして男が女を捉まへて嘘が云へませう。心底からホの字とレの字だから、ここ迄実の所は跟いて来たのですよ。チツトは男の心にも同情を寄せて貰つても余り罰が当りますまいがな』</p>
+            <p class="ja-classical-line">エル『アハヽヽヽヽおい、ワックス、そこだ　そこだ、正念場だ、確りやれ、ワツシヨ　ワツシヨ』</p>
+            <p class="ja-classical-line">女『ホヽヽヽヽあのエルさまの睾丸潰しさま、犬か何ぞの様に嗾をかけなくても宜いぢやありませぬか』</p>
+            <p class="ja-classical-line">エル『コレ、姫さま、一生懸命ですよ。友人の恋を叶へてやり度いばつかりに骨を折つて居るのですから、余り憎うはありますまい。貴女だつてこんな処に一人待つてる位だから万更ワックスがお嫌ひでない事は百も承知、千も合点の私、随分気を利かして上げますよ。併し乍ら伊太彦さまがチツト許り煙たうなつて来た。モシ伊太彦さま、表は表、裏は裏、滅多に三千彦さまの奥さまをワックスが取らうと云ふのぢやないから、握手位は大目に見てやつて下さるでせうな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Itahiko: 'Hey, you two, you must not touch this woman even with a single finger. A terrible thing will come of it.'</p>
+          <p class="en-p">Eru: 'Well, well, what a stubborn Tauhenboku you are. Hey, Wakkusu, I will make an excuse for you to Michihiko-sama, so how about you just go through the formality of shaking hands?'</p>
+          <p class="en-p">Woman: 'If you please, Eru-sama, shall I shake hands with you as a proxy for Wakkusu-sama? Even if I shake hands, I will never give my heart to you.'</p>
+          <p class="en-p">Eru: 'Hey, Wakkusu, you would not go and file a lawsuit for adultery just because I exercise my proxy rights, would you?'</p>
+          <p class="en-p">Wakkusu: 'Yeah.'</p>
+          <p class="en-p">Eru: 'Haha, this guy is actually a timid fellow. He seems embarrassed. Well then, I, Eru, shall serve as the minister plenipotentiary for a while. Come, Debisu-sama, hold out your hand and let me see.'</p>
+          <p class="en-p">Woman: 'Yes, thank you very much. Now, please stretch out your hand, you.'</p>
+          <p class="en-p">Eru: 'Even if it is by proxy, having my hand held by such a nice person is a little... no, it is not bad at all. Ehehehe, hey, Wakkusu, I am sorry. Please do not take offense. Itahiko-sama, please, in the compassion of a Sendenshi, overlook this. Ehehehehe!'</p>
+          <p class="en-p">While laughing happily, he thrust his hand out firmly. The moment the woman grasped Eru's hand and pressed it against her red lips, Eru let out a shriek and collapsed on the spot.</p>
+          <p class="en-p">The woman instantly turned into a face like a Hannya, and the woman said: 'Kera kera kera kera kera, you struck my head with a Kongō-zue while I was resting, so this is my revenge, itsuhihi!'</p>
+          <p class="en-p">As she jerked her chin, she turned back into a giant spider, thrust out countless compass-like legs, floated her body seven or eight feet into the air, and crawled slowly toward the back. Itahiko immediately approached, breathed upon Eru's wound, and sang the Heavenly Number Song. After about an hour, Eru finally regained consciousness, and while enduring the pain, he followed the two in a dejected state, proceeding with trepidation.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">伊太彦『オイ、両人、此女に指一本でも触へる事はならぬぞ。大変な事が出来するからの』</p>
+            <p class="ja-classical-line">エル『扨ても扨ても融通の利かぬ唐変木だな。おいワックス、俺が三千彦さまに弁解をしてやるから一寸形式だけ握手やつたら如何だ』</p>
+            <p class="ja-classical-line">女『もし、エルさま、ワックスさまの代理として貴方と握手しようぢやありませぬか、握手したと云つても決して心は貴方に移しませぬよ』</p>
+            <p class="ja-classical-line">エル『おいワックス、俺が代理権を執行しても滅多に姦通の訴訟は起さないだらうな』</p>
+            <p class="ja-classical-line">ワックス『うん』</p>
+            <p class="ja-classical-line">エル『ハヽア、此奴、割とは気の弱い奴だ。恥かしいと見えるな。それでは此エルが暫く弁理公使を勤めてやらう。サア、デビスさま、お手を出して御覧』</p>
+            <p class="ja-classical-line">女『はい、有難う厶います。サア貴方のお手をズツと伸ばして下さい』</p>
+            <p class="ja-classical-line">エル『仮令代理権にもせよ、こんなナイスに手を握られるのはチツト気分が悪い……事はないワイ。エヘヽヽヽおい、ワックス、すみませぬな。必ず気を悪うして下さるな、伊太彦さま、何卒ここは宣伝使のお情を以て大目に見て下さい。エツヘヽヽヽヽ』</p>
+            <p class="ja-classical-line">と嬉し相に笑ひ乍らグツと手をつき出した。女はエルの手を握るや否や赤い唇へペタリと当てたと思ふ途端、エルはキヤツと悲鳴を上げ其場に倒れて了つた。女は忽ち般若の様な面になり、</p>
+            <p class="ja-classical-line">女『ケラケラケラケラケラ、俺が折角休んでる処を金剛杖で頭を殴りやがつたから其敵討だ、イツヒヽヽヽ』</p>
+            <p class="ja-classical-line">と腮をしやくる途端に又もとの大蜘蛛となり数限りもなきコンパスをニユツと現はし七八尺上の方に体を浮してノソリノソリと奥を目蒐けて這うて行く。伊太彦は直に近寄つてエルの傷所に息を吹きかけ天の数歌を歌ひ上げた。半時許り経つてエルは漸く正気づき、痛さを堪へ乍ら意気消沈の態で二人の後に従ひおづおづし乍ら進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 方便 [1532]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: Night Light Jewel [1534]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
