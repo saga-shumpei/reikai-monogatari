@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 2: 多数尻 [1477] - Volume 58 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 58 Table of Contents</a>
+      <span>Volume 58</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 58 &bull; Chapter 2</span>
+      <h1 class="chapter-title-en">Chapter 2: 多数尻 [1477]</h1>
+      <p class="chapter-title-ja">多数尻〔1477〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In the innermost room, Okunihime, Nicholas, Michihiko, and the others were relaxing, absorbed in talking about divine virtues, sipping tea, and deepening their friendship.</p>
+          <p class="en-p">At this moment, the area before the gate suddenly became noisy with the barking of a fierce dog; everyone pricked up their ears, finding it incomprehensible, and Michihiko turned to the group.</p>
+          <p class="en-p">Michihiko: 'Everyone, it appears to be a riot by the Akusuikuwaiin. I will go and investigate for a moment, so please continue to rest.'</p>
+          <p class="en-p">He said this and ran out to the front.</p>
+          <p class="en-p">Nicholas ordered Hannah to accompany Michihiko and head toward the front gate. Upon arriving at the front gate, they encountered Michihiko's beloved master Tamakuniwake, whom he had never ceased to think of day and night, along with his good friends Masumihiko and Itahiko, who were sneaking into the gate with smiles on their faces. Michihiko was so surprised and overjoyed that he nearly collapsed, and after saying 'Ah!', he could not utter another word for a while.</p>
+          <p class="en-p">Itahiko: 'Oh, aren't you Michihiko? We have been searching for you everywhere together with Shishiyōsama. I cannot understand why you have settled down in the sacred grounds of the Brahman religion of all places. There must be some reason for this. Come, why don't you report this to Shishiyōsama quickly?'</p>
+          <p class="en-p">Michihiko felt relieved and, while shedding tears, said:</p>
+          <p class="en-p">Michihiko: 'Shishiyōsama, I am so glad you are safe. I entered the sacred grounds of the Brahman religion in search of your whereabouts and endured all sorts of hardships. Meeting you in such a place is truly a divine arrangement. Please, come inside.'</p>
+          <p class="en-p">Tamakuniwake: 'Ah, Michihiko-dono, how wonderful this is. The three of us were very worried about your well-being. There is nothing happier than seeing you safe and sound right now. However, as you can see, a fight between the Brahman army and the ruffians has begun; it was originally a challenge against our group, but before we knew it, the opponents changed and it became a fight among allies. It is truly regrettable, so we must pacify this first. We cannot just rest inside at leisure, can we?'</p>
+          <p class="en-p">Michihiko: 'Please do not worry at all. If we leave it to Smart-sama, it will be fine. Hahahaha.'</p>
+          <p class="en-p">Masumihiko: 'Yes, that is true. Since he is endowed with more divine power than the four of us missionaries, one cannot underestimate even a four-legged creature, can one? We were saved thanks to Smart-daimyōjin. Hahahahaha.'</p>
+          <p class="en-p">Laughing, they were guided by Michihiko and proceeded toward the inner room.</p>
+          <p class="en-p">Hannah could not overlook the fact that his subordinate soldiers were intermingled in battle with the ruffians, so he immediately mounted his donkey, rode into the midst of the chaotic fighting, and shouted until his voice grew hoarse, 'Cease, cease!' conveying his strict command.</p>
+          <p class="en-p">Upon hearing this voice, both friend and foe stopped fighting instantly, as if water had been poured over them. Smart immediately ran over, searched for and knocked down the four men—Wax, Exis, Herman, and El—dragged them one by one before Hannah, and barked, indicating that they should be bound. Hannah quickly tied the four men up and bound them firmly to a large stake in front of the riding ground. The Akusuikuwaiin, who crush the weak and follow the strong, observed their rules and returned to their homes, leaving no one behind. Tonk, still mounted on his donkey, appeared at the crossroads of the bell tower, gathered the many old and young who had been lured by cowardice, and began a lecture.</p>
+          <p class="en-p">Tonk: 'Among you all, there are Akusuikuwaiin, Suiheikuwaiin, and other local volunteers, but you have done well to observe the rules and retreat without a single person remaining. We, as the executives, are unable to express our joy enough regarding your actions. Until today, there was only one great master, the magician Michihiko, at the Shinkan, along with two magicians who are seekers of the way; therefore, compared to us, the other side was the weaker party. However, as of today, three new great magician masters have appeared, and Captain Nicholas, carrying weapons, has led fifty soldiers to firmly guard the hall, and having allied with the magicians of the Sangokyo, the situation has suddenly reversed, making the other side the stronger party, and we must now stand in the position of the weak. Furthermore, that fierce dog Daimyōjin called Smart is quite a powerful one. However, the weak cannot simply remain independent as the weak. As stated in our rules, it is our fundamental principle to crush the weak and follow the strong. Therefore, we shall all go to the Shinkan, surrender from our hearts, inflict a great beating upon Wax and the others tied in the riding ground, show our sincerity in surrendering to the Sangokyo and the Brahman army, and consider ensuring our own safety as the first priority. What is everyone's opinion?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">奥の一間には小国姫、ニコラス、三千彦、其外一同が打解けて神徳話に余念なく、茶を啜り乍ら懇親を結んでゐる。</p>
+            <p class="ja-classical-line">かかる処へ門前俄に騒がしく猛犬の叫び声、合点行かぬと何れも耳を欹てたが、三千彦は一同に向ひ、</p>
+            <p class="ja-classical-line">三千『皆さま、どうやら悪酔怪員の暴動と見えます。私が一寸調べて参りますから御休息して居て下さいませ』</p>
+            <p class="ja-classical-line">といひ捨てて表に駆け出す。</p>
+            <p class="ja-classical-line">ニコラスはハンナに命じ三千彦と共に表門に向はしめた。表門に行つて見れば三千彦が昼夜念頭を離れざりし恋しき師の君玉国別、良友の真純彦、伊太彦が莞爾として門内に潜り来るにパツと出会した。三千彦は倒れぬばかりに且つ驚きかつ喜び、アツと云つたきり暫らくは言葉も出なかつた。</p>
+            <p class="ja-classical-line">伊太『やア、お前は三千彦ぢやないか。俺等はお師匠様と共に、どれ丈けお前を探して居つたか知れないのだ。処もあらうにバラモン教の聖場に納まりかへつて居るとは合点が行かぬ。これは何か様子があるのだらう。さア早くお師匠様に申上げぬか』</p>
+            <p class="ja-classical-line">三千彦は胸撫で下し、涙を流し乍ら、</p>
+            <p class="ja-classical-line">三千『御師匠様、よう無事で居て下さいました。貴方の所在を尋ねむものと、バラモン教の聖場に入り込み、種々雑多と苦労を致しました。斯様な所でお目にかかるとは全く神様の御引合せで厶います。さア奥へお通り下さいませ』</p>
+            <p class="ja-classical-line">玉国『あ、三千彦殿、まア結構だつたな。随分吾々三人はお前の身の上を案じて居たのだ。只今無事な顔を見て、こんな嬉しい事はない。然し此通りバラモン軍と無頼漢との同士打ちが初まつてるが、もとは吾々一行に対しての挑戦であつたが、何時の間にか相手が変つて味方の同士打ちとなつた。実に気の毒だから之を一先づ鎮撫せなくてはなるまい。緩り奥で休息する訳にも行かぬぢやないか』</p>
+            <p class="ja-classical-line">三千『決して御心配なさいますな。スマートさまに一任して置けば大丈夫ですよ。アハハハハ』</p>
+            <p class="ja-classical-line">真純『うん、そらさうだ。吾々四人の宣伝使よりも余程神力が備はつて居るのだからな、四足だつて余り馬鹿に出来ぬぢやないか。吾々はスマート大明神のお蔭で命が助かつたのだ。アハハハハハ』</p>
+            <p class="ja-classical-line">と笑ひ乍ら三千彦に案内されて奥の間を指して進み入る。</p>
+            <p class="ja-classical-line">ハンナは部下の兵士が無頼漢と入り乱れて戦つて居るのを見逃す訳にも行かず、直ちに驢馬に跨り両方混戦の中に駆け入つて声を嗄らし『鎮まれ鎮まれ』と厳しき下知を伝へた。</p>
+            <p class="ja-classical-line">此声を聞くより敵味方ともに水を打つたる如くピタンと戦闘は停止された。スマートは忽ち駆け来り、ワックス、エキス、ヘルマン、エルの四人を探し索めて引倒し、ハンナの前に一々引き来りワンワンと叫んで、之を縛れよとの意を示した。ハンナは四人を手早く縛し上げ、馬場の前の大杭にシカと縛りつけた。弱きを挫き強きに従ふ悪酔怪員は、会則を遵守して一人も残さず、コソコソと己が家路に帰り行く。トンクは驢馬に跨つた儘、十字街頭の鐘路に現はれ、臆病風に誘はれた数多の老若男女を集めて一場の訓戒演説をはじめて居る。</p>
+            <p class="ja-classical-line">トンク『御一同様の中には悪酔怪員も水平怪員も、其他町内有志諸君も居られますが、よくまア会則を遵守し、一人も残らず退却して下さいました。実に幹部たる吾々は、諸君の行動に対し、欣幸措く能はざる所で厶います。今日迄は神館には只一人の魔法使三千彦と云ふ大先生、並びに求道居士の二人の魔法使、それ故吾々一同に比較すれば先方は弱者で厶いました。併し乍らもはや今日は新に三人の魔法使の大先生が御出現遊ばされ、又武器を携へたニコラスキャプテンが五十の兵士を引率して館を固くお守りになり、三五教の魔法使と同盟遊ばした上は、忽ち地位転倒して先方は強者となり、吾々は弱者の地位に立たねばならなくなりました。加ふるにスマートと云ふ、あの猛犬大明神は中々の強者で厶います。併し乍ら弱者は弱者として独立する訳にはゆきませぬ。会則にある通り、弱きを挫き、強きに従ふのが吾々の本領で厶います。それ故吾々一同は神館に至り心から帰順致し、馬場に繋ぎあるワックス等に大痛棒を加へ天晴融通を利かし、三五教及びバラモン軍に帰順の誠を現はし、身の安全を図るを以て第一と心得ます。皆さまの御意見は如何で厶いますか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He called out. The Akusuikuwaiin and the rest of the Renchiu, all impressed by Tonku's Kiben, clapped their hands without a second thought to express their Sani.</p>
+          <p class="en-p">Seeing this, Tonku became Itakedaka and said,</p>
+          <p class="en-p">Tonku: 'Minasama, I am satisfied with your Satsusoku Goshiyōchi. Therefore, I wish for you to dismiss the current chairman of the Wax, and appoint a new, stronger person as chairman. It goes without saying that the strong person I refer to is myself, Tonku. Those who are in Gosansei to Tonku, please clap your hands. Those who are in Fusansei, please turn your backs and bare your buttocks. Since everything is decided by Tasūketsu.'</p>
+          <p class="en-p">Half clapped their hands, and half turned their backs and bared their buttocks; Tonku, looking down at this from his horse, said,</p>
+          <p class="en-p">Tonku: 'Minasama, it appears that half of you are clapping your hands, and half are baring your buttocks to express Hantai. With this, there is no Hanbun. I would like you to reconsider once more.'</p>
+          <p class="en-p">With this voice, this time, everyone without exception bared their black buttocks and turned them toward Tonku. Then, someone from the Gunshifu shouted, 'Immediate buttocks, rejection of buttocks.' While grinding his teeth from atop his horse, Tonku said,</p>
+          <p class="en-p">Tonku: 'Eh, what a Ketsutai affair.'</p>
+          <p class="en-p">It was Tanku who appeared on the scene, straddling a Roba and trotting along. Tanku opened his trunk, grabbed Kingin Kodama and threw them, grabbed and threw them, and said,</p>
+          <p class="en-p">Tanku: 'Minasama, I am a candidate for the Kaichō of the Akusuikuwai. I am scattering this gold and silver as you see, so please compete thoroughly to pick them up. Those who pick them up may keep them as your own. In exchange, I hope you will grant your sacred vote to this Tanku.'</p>
+          <p class="en-p">He grabbed and threw, grabbed and threw, moving his horse forward, backward, left, and right, until he had scattered them evenly everywhere. Tonku also quickly dismounted, immediately picked up the Kingin Kodama and stuffed them into his pockets, then stood on his horse again to watch the progress of the election. Tanku had scattered all the gold and silver, and there were no more Kantsu left. Tanku raised his voice like thunder from atop his horse and said,</p>
+          <p class="en-p">Tanku: 'Minasama, will you not elect me as Kaichō? Those who are in Sani, please clap your hands. Should there be anyone in Fusansei, I would like you to bare your buttocks and let out a fart toward me. Even if you bare your buttocks, I shall recognize those who do not produce a fart as being in Sani.'</p>
+          <p class="en-p">He had skillfully set up a defensive line using the fart-method of Sun-Wu. Here, half clapped their hands, and half neither bared their buttocks nor clapped, but stood by in a daze. Tanku looked on from his horse with a puzzled expression. At this moment, Tonku, while showing off the gold and silver he had scattered from atop his horse, said,</p>
+          <p class="en-p">Tonku: 'Minasama, I recognize those who clapped earlier as my supporters. Those who do not clap for Tanku-sama now, and do not turn their buttocks toward him, I recognize as neutrals. I intend to scatter this gold and silver to those people, so if you are in Sani, please clap your hands. If I scatter them here now, they will be taken twice and will not reach my true supporters, so I shall hand them out at my house. There is at least a thousand ryo of gold, so even if distributed among a hundred people, ten ryo each is certain. Now, I ask you on the count of one, two, three.'</p>
+          <p class="en-p">This time, for some reason, everyone without exception bared their buttocks and made farting sounds with their mouths. Among them, there were a few who emitted black, damp, and imperfectly outlined smoke from their buttocks.</p>
+          <p class="en-p">Tonku: 'In that case, please elect me as vice-kaichō and Tanku-sama as kaichō. That way, both sides will save face.'</p>
+          <p class="en-p">From among the crowd, someone said,</p>
+          <p class="en-p">'Oi, Tonku, the gold you are holding now is all gold that Tanku-sama scattered. If you want to be appointed vice-kaichō, scatter it all. If you do that, we will make you vice-kaichō.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と呼はつた。悪酔怪員を初め、その他の連中はトンクの詭弁に何れも感心し、一も二もなく手を拍つて賛意を表した。トンクは此態を見て威猛高になり、</p>
+            <p class="ja-classical-line">トンク『皆さま、早速の御承知、トンク身にとり満足に存じます。就てはワックスの会長を皆様より免じ、新に強者を会長に任命されむ事を希望致します。その強者とは申す迄もなく私はトンクだと思ひます。トンクに御賛成の方は手を拍つて下さい。不賛成の方は背を向けて尻を捲つて下さい。何事も多数決で厶いますから』</p>
+            <p class="ja-classical-line">手を拍つもの半分、尻を捲つて背をそむけるもの半分、トンクは馬上より之を眺めて、</p>
+            <p class="ja-classical-line">トンク『皆さま、手を拍つて下さる方が半分、尻を捲つて反対を表する方が半分と見えます。これではハンケツがつきませぬ。何とか、も一度考へ直して頂き度う厶います』</p>
+            <p class="ja-classical-line">此声と共に今度は一人も残らず黒い尻を捲つてトンクの方に向けた。さうして群集の中より『即ケツ否ケツ』と叫ぶものがある。トンクは馬上より歯ぎしりをし乍ら、</p>
+            <p class="ja-classical-line">トンク『エー、尻太異な事だな』</p>
+            <p class="ja-classical-line">斯かる所へ驢馬に跨りチヨク　チヨクと此場に現はれ来たのはタンクであつた。タンクはトランクの口を開き、金銀の小玉を掴んでは投げ、掴んでは投げ、</p>
+            <p class="ja-classical-line">タンク『皆さま、私が悪酔怪の怪長の候補者で厶います。今黄白を斯くの通り撒き散らしますから十分拾得競争をやつて下さい。拾得された方は其方の所有で厶います。其代り神聖なる一票を此タンクにお与へ下されむ事を希望致します』</p>
+            <p class="ja-classical-line">と掴んでは投げ、掴んでは投げ、前後左右に駒を進めて残らず万遍なく撒き散らして了つた。トンクも手早く馬から下り、矢庭に金銀の小玉をを拾つては懐中につつ込み、再び馬上につつ立ち選挙の様子を観望して居る。タンクは全部黄白を撒き散らし、もはや欠けたカンツも無くなつて居た。タンクは馬上より雷声を張り上げ、</p>
+            <p class="ja-classical-line">タンク『皆さま、私を怪長に選挙して下さいますまいか。賛成の方は手を拍つて下さい。万一不賛成のお方は尻を捲つて屁を一発手向けて頂き度い。何程お尻を捲られても、屁の出ない方は賛成と認めます』</p>
+            <p class="ja-classical-line">とうまく孫呉の屁法で予防線を張つて了つた。ここに半分は手を拍ち半分は尻を捲らず、手も拍たず、茫然として控へて居る。タンクは怪訝な顔して馬上より様子を窺つて居た。此時トンクはタンクの撒いた金銀を馬上より見せびらかし乍ら、</p>
+            <p class="ja-classical-line">トンク『皆さま、最前手を拍つて下さつたお方は私の賛成者と認めます。今タンクさまに対して手を拍たず、尻を向けない方は中立者と認めます。その方に対して此黄白を撒ずる考へですから賛成の方は手を拍つて下さい。今ここで撒き散らしますと、二重取りされると折角の賛成者の手に入りませぬから、私の宅でお渡ししませう。少くとも千両の金はありますから百人に分配しても十両づつは確で厶います。さア一、二、三で願ひます』</p>
+            <p class="ja-classical-line">今度は如何したものか、一人も残らず尻を捲つて口屁をプウプウと鳴らして居る。中には尻から黒い湿つぽい輪廓の不完全な煙を吐き出す奴も少しはあつた。</p>
+            <p class="ja-classical-line">トンク『然らば拙者が副怪長となり、タンクさまを怪長に選んで下さい。さうすれば双方共顔が立ちますから』</p>
+            <p class="ja-classical-line">大勢の中から、</p>
+            <p class="ja-classical-line">『オーイ、トンク、貴様の今持つてる金は皆タンクさまの撒いた金だ。副怪長に任じて欲しけりや皆バラ撒くのだ。そしたら副怪長にしてやろう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tonku: 'Naruhodo, if that is the case, I will scatter them among all of you, so those who fail to pick them up properly can just conclude it is their unmei. Anyway, if we have the sansei of more than a hansūshiya, it will do.'</p>
+          <p class="en-p">Taking them out without leaving a single one from his bosom, he scattered them in the zengosaiu and finished. Perceiving this shihodoki, Tanku cried out in a daionjiyō:</p>
+          <p class="en-p">Tanku: 'Everyone, I arigata-ly express my kanshiya to you for choosing me as the kuwaichiyō. No matter what anyone says, without undōhi, today's world is dame. Even if you intend to become boheugiin, jikogiin, or dakefugiin, since it is a jisetsu when fifty thousand or one hundred thousand pieces of gold come in, trying to become a giin with muichimon is asking for far too much. I think that a fukukuwaichiyō is hitsueu. Rather than choosing officials for the sake of the people, making officials for the sake of the people is most furieki and fukeizai, and something that opens the tanchiyo of chitsujiyobunran; I think a fukukuwaichiyō is fuhitsueu. Everyone who recognizes it as hitsueu, please clap your hands; those who recognize it as fuhitsueu, once more roll up your rumps and show them toward Tonku-sama. By that means I will make your will clear.'</p>
+          <p class="en-p">Not a single person among the assembly failed to roll up their pitch-black rumps and turn them toward Tonku, politely slapping their black buttocks with a smack and a slap to show him. Tonku miserably beat his donkey's rump recklessly, boiled with anger, and hid his figure somewhere or other.</p>
+          <p class="en-p">From this point on, Tanku stood before the multitude and, singing a victory song, marched straight toward the divine hall. The multitude beat the surigane, kept time to the song, and followed after.</p>
+          <p class="en-p">'Now then, the drunken assembly members</p>
+          <p class="en-p">Crush the weak and before the strong</p>
+          <p class="en-p">Tremble and obey, cowards are they</p>
+          <p class="en-p">Peace and safety are the top priority</p>
+          <p class="en-p">To the strong guys, run away with a thud</p>
+          <p class="en-p">To the weak guys, march up with a thud</p>
+          <p class="en-p">This is the strategy of war</p>
+          <p class="en-p">Chiyanchiki, chiyanchiki, chiyanchikitin</p>
+          <p class="en-p">No, no, not only war</p>
+          <p class="en-p">Everything is just like that</p>
+          <p class="en-p">No matter what kind of business you run</p>
+          <p class="en-p">Trample down the small shops</p>
+          <p class="en-p">And crush the companies with small capital</p>
+          <p class="en-p">One after another</p>
+          <p class="en-p">Roll up your tail before the big fellows</p>
+          <p class="en-p">Wait for the time, hiding for a while</p>
+          <p class="en-p">Before you know it, you become strong</p>
+          <p class="en-p">At that time when you have grown big</p>
+          <p class="en-p">Carry out your own convictions</p>
+          <p class="en-p">And be revered as the strong ones of the world</p>
+          <p class="en-p">Survival of the fittest as the warp</p>
+          <p class="en-p">The law of the jungle as the woof</p>
+          <p class="en-p">Making your way through this world is the smart person</p>
+          <p class="en-p">Chiyanchiki, chiyanchiki, chiyanchikitin</p>
+          <p class="en-p">Manifested in the divine hall</p>
+          <p class="en-p">The magician of Aosagigusa</p>
+          <p class="en-p">Though Sanzenhiko-sama is said to be weak</p>
+          <p class="en-p">In truth he is a strong person</p>
+          <p class="en-p">Using magic of divine transformation and mystery</p>
+          <p class="en-p">He torments us</p>
+          <p class="en-p">Carrying it through no matter where</p>
+          <p class="en-p">Opposing such a person</p>
+          <p class="en-p">How could our bodies stand?</p>
+          <p class="en-p">Chiyanchiki, chiyanchiki, chiyanchikitin</p>
+          <p class="en-p">Crushing the weak and the strong</p>
+          <p class="en-p">We, the assisting assembly members,</p>
+          <p class="en-p">Persecuting Wakkusu, Ekisu, Heruman,</p>
+          <p class="en-p">And the officials of El,</p>
+          <p class="en-p">Expressing the sincerity of the drunken assembly,</p>
+          <p class="en-p">Face the hall</p>
+          <p class="en-p">There, conveniently,</p>
+          <p class="en-p">Bow your heads and fawn</p>
+          <p class="en-p">To secure your own safety</p>
+          <p class="en-p">Such divine and devilish strategies</p>
+          <p class="en-p">If Tonku were the kuwaichiyō,</p>
+          <p class="en-p">How could they ever be wrung out?</p>
+          <p class="en-p">Tanku-sama, the bag of wisdom,</p>
+          <p class="en-p">Wonderful plans of divine and devilish strategy</p>
+          <p class="en-p">Are stored in the bag of his chest, a mountain of tanks,</p>
+          <p class="en-p">So listen, everyone,</p>
+          <p class="en-p">Hold your hearts strong</p>
+          <p class="en-p">Chiyanchiki, chiyanchiki, chiyanchikitin</p>
+          <p class="en-p">Already we have approached the riding ground</p>
+          <p class="en-p">Everyone, raise your voices together</p>
+          <p class="en-p">Let us chant from here</p>
+          <p class="en-p">Banzai for the divine officials</p>
+          <p class="en-p">Of Aosagigusa and Brahman</p>
+          <p class="en-p">Following that, let us advance</p>
+          <p class="en-p">While shouting three banzai</p>
+          <p class="en-p">For the Great Dog Deity of Smart</p>
+          <p class="en-p">Chiyanchiki, chiyanchiki, chiyanchikitin</p>
+          <p class="en-p">Ah, Tamagashira-kamigami</p>
+          <p class="en-p">Since it cannot be attained, since it cannot be attained,</p>
+          <p class="en-p">Your eyeballs will pop right out!</p>
+          <p class="en-p">Whether the morning sun shines or clouds over,</p>
+          <p class="en-p">Whether the moon waxes or wanes,</p>
+          <p class="en-p">Even if the great earth should sink,</p>
+          <p class="en-p">To help the strong and crush</p>
+          <p class="en-p">The weak is the reason of heaven and earth!</p>
+          <p class="en-p">Large fish swallow small fish,</p>
+          <p class="en-p">Large beasts bite and eat small beasts,</p>
+          <p class="en-p">The strong oppress the weak,</p>
+          <p class="en-p">The rich work the poor to the bone,</p>
+          <p class="en-p">Government officials treat commoners</p>
+          <p class="en-p">Underfoot like slaves,</p>
+          <p class="en-p">And wag their chins as they use them.</p>
+          <p class="en-p">This is the reason of heaven and earth!</p>
+          <p class="en-p">You must never be misled!</p>
+          <p class="en-p">Chiyanchiki, chiyanchiki, chiyanchikitin'</p>
+          <p class="en-p">Blowing his own arbitrary heat, he calmly straddled his donkey, took the lead, and quickly advanced into the gates.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">トンク『成程然らば皆さまに撒き散らしますから、よう拾はない人は運命だと締めて下さい。兎も角半数者以上の賛成があれば可いのです』</p>
+            <p class="ja-classical-line">と懐より一つも残らず取り出し、前後左右にまき散らして了つた。此潮時を見済まし、タンクは大音声、</p>
+            <p class="ja-classical-line">タンク『皆さま、私を怪長に選んで下さつた事を有難く感謝します。何と云つても運動費が無くては今日の世の中は駄目です。墓標議員の事故議員、妥協議員にならうと思つても、五万や十万の金が入る時節ですから、無一文で議員にならう等とは余り虫が良すぎます。私は副怪長なんかは必要はないと思ひます。官の為人を選むのではなく、人の為に官を作ると云ふ事は最も不利益且つ不経済、秩序紊乱の端緒を開くもの私は副怪長の必要はないと思ひます。皆さま、必要と認めた方は手を拍つて下さい、不必要と認めた方は、も一度尻を捲つてトンクさまの方へ見せて下さい。それを以て貴方等の意志を明かに致します』</p>
+            <p class="ja-classical-line">一同は一人も残らず真黒の尻を捲つてトンクの方へ尻をさし向け、御叮嚀にピシヤ　ピシヤと黒い臀肉を叩いて見せた。トンクはスゴスゴと驢馬の尻を無性矢鱈に叩き、業腹煮やして何処ともなく姿を隠した。</p>
+            <p class="ja-classical-line">これよりタンクは大勢の前に立ち凱旋歌を歌ひ乍ら神館をさして練り込んで行く。大勢は擦鉦を叩き、歌に合せて拍子をとり跟いて行く。</p>
+            <p class="ja-classical-line">『扨ても悪酔怪員は
+弱きを挫き強者には
+恐れて従ふ卑怯者
+平安無事が第一だ
+強い奴にはドツと逃げ
+弱い奴にはドツと行け
+これが軍の駆引だ
+チヤンチキ　チヤンチキ　チヤンチキチン
+いやいや軍のみでない
+万事万端その通り
+どんな商売致しても
+小さい店を踏み倒し
+小さい資本の会社をば
+片ツ端から押し倒し
+大きな奴には尾を巻いて
+暫らく忍び時を待ち
+いつとはなしに強くなり
+大きくなつたその時に
+己が所信を貫徹し
+世界の強者と崇められ</p>
+            <p class="ja-classical-line">優勝劣敗経となし
+弱肉強食緯として
+此世を渡るが利口者
+チヤンチキ　チヤンチキ　チヤンチキチン
+神の館に現ませる
+三五教の魔法使
+三千彦さまは弱いとは
+云へど其実強い人
+神変不思議の魔法をば
+使つて吾等を苦しめつ
+何処々々迄もやり通す
+こんなお方に逆らうて
+どうして吾身が立つものか
+チヤンチキ　チヤンチキ　チヤンチキチン
+弱きを挫き強きをば
+助ける吾々怪員は
+ワックス、エキス、ヘルマンや
+エルの司を虐げて
+悪酔怪の至誠をば
+現はし館に立向ひ</p>
+            <p class="ja-classical-line">そこはそれそれ都合よく
+頭を下げて胡麻を摺り
+身の安全を図るのだ
+こんな神謀鬼策をば
+もしもトンクが怪長なら
+どうして捻り出されよか
+智慧の袋のタンクさま
+神謀鬼策の妙案は
+胸の袋にタンク山に
+蔵つて厶るぞ皆さまよ
+心を丈夫に持つが良い
+チヤンチキ　チヤンチキ　チヤンチキチン
+早くも馬場に近づいた
+皆さま声を打揃へ
+三五教やバラモンの
+神の司の万歳を
+ここから唱へ上げませう
+それに続いてスマートの
+犬大明神の万歳を
+三唱し乍ら進みませう</p>
+            <p class="ja-classical-line">チヤンチキ　チヤンチキ　チヤンチキチン
+ああ惟神々々
+叶はぬから叶はぬから
+目玉飛び出しましませよ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+強きを助け弱きをば
+挫くが天地の道理ぞや
+大魚は小魚を呑み喰ひ
+大獣は小獣を噛み喰ひ
+強者は弱者を虐げる
+富者は貧者をこき使ひ
+役人さまは平民を
+奴隷の如く足にかけ
+腮をしやくつて使ふのだ
+これが天地の道理ぞや
+必ず迷ふちやならないぞ
+チヤンチキ　チヤンチキ　チヤンチキチン』</p>
+            <p class="ja-classical-line">と勝手な熱を吹き悠々として驢馬に跨り、先頭に立ち早くも門内に進み入る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c01.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 1: Kami Wind [1476]</span>
+      </a>
+      <a href="c03.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 3: Monster 散 [1478]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: 茶袋 [1481] - Volume 58 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 58 Table of Contents</a>
+      <span>Volume 58</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 58 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: 茶袋 [1481]</h1>
+      <p class="chapter-title-ja">茶袋〔1481〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Michihiko takes the lead, descending the mountainside of Mount Terumon toward the south. It is a relatively steep slope, and he cannot take his eyes off his footing for even a moment. Relying on his Kongauzue, he concentrates the weight of his entire body onto the tips of his fingers, descending while keeping a steady rhythm.</p>
+          <p class="en-p">Michihiko: 'As a Sendenshi of Ananai-kyō, I fear no enemy, yet this slope, steep as a standing board, is slippery and sliding, which is truly vexing. Tamakuniwake-sama, my teacher, and you, Princess Debisu, please take care and do not fall. I am a Sendenshi of peerless divine power, heading toward the Moon Capital, but if I were to slip and fall at the very start of this journey, it would weigh heavily upon our future. Though I do not carry a Gohei, today is a vital departure, a journey that feels no different from a battlefield. Without looking up at the Amatsumisora, I fix my eyes upon my toes for a while, keeping my focus—Untokodotsukoi, zūzūzū.'</p>
+          <p class="en-p">No sooner had he spoken than his feet slipped, and he landed with a thud on his backside. This fall, as if to celebrate our future, was protected by the Mizu-no-Mitama of the full moon shining in the sky. Believing our future to be auspicious, I see it anew and declare it anew with Naohi. My legs tremble as I descend the slope, laughing at my own shins in a comical way. The bravery of today's departure—whether the morning sun shines or clouds over, whether the moon waxes or wanes, whether the cicadas cry in the treetops, or however much sweat may pour down, even if the Lord Sun shines down with scorching heat from above, this body is entrusted to the Gods. My soul, harder than rock, is like the lush growth upon the rock of the Tokiwa pine.</p>
+          <p class="en-p">Untokodotsukoi, dotsukoishiyo. What a slippery slope this is. The red clay is polished and gleaming, and because it is damp, it is all the more slippery. I do not know who passed this way before, but it has been polished to a remarkable degree. Even with such grace, looking at how they descend while keeping their bodies tilted and moving with a clatter, as if on four legs, it is a truly difficult slope. Beyond this lies the lake, famous in the legends of Terumon. We, the party of Sendenshi, must cross this lake, or we shall never reach the Moon Kingdom. Untokodotsukoi, zūzūzū. Truly, a dangerous, slippery slope.</p>
+          <p class="en-p">It is a footing like rubbing a bald head with a gourd. It is a terrifying path where one careless step leads to a fall, leaving the divine boat of the Tengu mask or Otafuku exposed to the elements. Everyone, please take care. Untokodotsukoi, dotsukoishiyo. It seems the slope has become gentler. We must not let our guard down here. This is a place where the evil spirits of Brahmanism seem to be lying in wait, threatening the future of our party. No matter how many enemies may come, now that I have confidence in my own strength, my Yamato-damashii shall never falter. Ah, Kannagara-kamu-nagara, I descend according to the will of the Gods.'</p>
+          <p class="en-p">Masumihiko also sings.</p>
+          <p class="en-p">'The southern slope of Mount Terumon, a path as slippery as an eel. Michihiko-sama takes the lead, calling out the names of our teacher and the young grass, Princess Debisu, the wife of the Mikoto. Why is it that he does not call out the names of Masumihiko or Itakō? You are truly distant. Calling the name of our teacher, Tamakuniwake-sama, and offering kind warnings was but a facade; in the depths of your heart, you are surely worried about the well-being of Princess Debisu, who is on her honeymoon, and you called out our teacher's name out of duty or perhaps jealousy. Ahahahaha-tsuha, ahahahaha. You are a man of extreme pragmatism.</p>
+          <p class="en-p">Because of this, if a young man takes a wife while on a mission of propagation, his soul becomes scattered and he cannot fulfill his true purpose. He becomes distracted by a woman and may neglect his vital, essential mission. However, Michihiko, as a messenger of the Gods, is an exception. Though there is no need to worry, he was distracted by a woman first, his soul scattered into the Chūu, and he failed to keep his eyes on his essential footing, slipping and sliding two or three times. If Michihiko, our guide who stands at the very front, slips and falls, there must be some reason why we are able to descend this slope safely.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三千彦は先に立ちテルモン山の中腹を南へ南へと下り行く。比較的嶮峻な坂道で足許に少しも目放しが出来ぬ。金剛杖を力に指の先に全身の重味を集中し乍ら拍子をとつて下り行く。</p>
+            <p class="ja-classical-line">三千彦『三五教の宣伝使
+如何なる敵も恐れねど
+板を立てたる坂道の
+ヌルリヌルリと辷るのは
+誠に閉口仕る
+玉国別の師の君よ
+デビスの姫よ気をつけて
+転倒せぬ様になされませ
+月の都に立向ふ
+神力無双の宣伝使
+其首途に過つて
+もしも転倒したならば
+それこそ前途が気にかかる
+御幣を担ぐぢやなけれども
+今日は大切の出陣も
+変らぬ様な旅の空
+天津御空に目をやらず
+暫らく足の爪先に
+眼を注ぎ気を配り
+ウントコドツコイ、ズウズウズウ</p>
+            <p class="ja-classical-line">云ふより早く足滑り
+ドスンと搗いた尻餅は
+吾等が前途を祝すべく
+空に輝く望月の
+瑞の御霊の御守り
+前途必ず吉祥と
+直日に見直し宣り直し
+足もワナワナ下り坂
+面白をかしく脛笑ふ
+今日の旅出の勇ましさ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+梢に蝉は吠るとも
+汗は何程出るとても
+頭の上からカンカンと
+日の大神が照らすとも
+神に任せし此体
+岩より固い魂は
+常磐の松の岩の上に
+生茂りたる如くなり</p>
+            <p class="ja-classical-line">ウントコドツコイ　ドツコイシヨ
+よくまあ辷る坂だなア
+赭土許りがピカピカと
+光つた上に湿りをば
+帯て居るのでよく辷る
+誰が通つたか知らないが
+こりや又えらい磨けよう
+流石のスマートさまでさへ
+四つの足を持ち乍ら
+あれ、あの通りチガチガと
+体を斜に構へつつ
+下つて行くのを眺むれば
+余程きつい坂道だ
+これから先はテルモンの
+音に名高き湖だ
+吾等一行宣伝使
+この湖を渡らねば
+月の御国にや行かれない
+ウントコドツコイ、ズウズウズウ
+ほんに危険な辷り坂</p>
+            <p class="ja-classical-line">坊主頭を瓢箪で
+撫でてる様な足具合
+うつかりすると転倒し
+天狗の面やお多福の
+玉の御舟を雨曝し
+せなくちやならぬ恐い道
+気をつけなされ皆さまよ
+ウントコドツコイ　ドツコイシヨ
+どうやら坂が緩うなつた
+ここで油断をしちやならぬ
+バラモン教の悪神が
+吾等一行の前途をば
+擁して待ちさうな処だぞ
+何程敵が来るとも
+腕に覚えのある上は
+決して怯まぬ大和魂
+ああ惟神々々
+神のまにまに下り行く』</p>
+            <p class="ja-classical-line">真純彦は亦歌ふ。</p>
+            <p class="ja-classical-line">『テルモン山の南坂
+鰻の様に辷る道
+三千彦さまが先に立ち
+吾師の君と若草の
+妻の命のデビス姫
+二人の名をば呼び乍ら
+真純彦とも伊太公とも
+仰有らないのは何事だ
+ほんにお前は水臭い
+玉国別の師の君の
+御名を呼んで親切に
+注意をしたのは表向き
+実地誠の腹の中
+新婚旅行のデビス姫
+その身の上が気にかかり
+義理か妬くかで師の君の
+お名を呼んだに違ひない
+アハハハハツハ、アハハハハ
+現銀至極の男だな
+それだによつて宣伝の</p>
+            <p class="ja-classical-line">途中に於て若者に
+女房を持たすと魂が
+砕けて誠の間に合はぬ
+女に心引かされて
+大切の大切の使命をば
+怠る事があるものだ
+さはさり乍ら三千彦の
+神の使は格別だ
+案ずる事はなけれども
+第一女に気をとられ
+魂は中有に飛び散りて
+肝腎要の足許が
+目につかないか二度三度
+スウ　スウ　スウと辷りよつた
+肝腎要の先に立つ
+道案内の三千彦が
+辷つて転けて吾々が
+無事に此坂下るのは
+何か一つの原因が
+なければならぬ道理ぞや</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Reflect upon this, Michihiko.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara.</p>
+          <p class="en-p">I shall take care in place of Kami.</p>
+          <p class="en-p">Itahiko sings again.</p>
+          <p class="en-p">Itahiko: 'Untokodotsukoi, dotsukoishiyo. Even if Akuma appear or flee, and even if Tsukimono all run out, once one is on this Sakamichi, the body inevitably grows weary. Nevertheless, Michihiko, who is accompanied by his beloved Niyōbau, must be having a truly joyful time. His Genki is a hundred times greater than usual, and with high spirits, he squares his shoulders. He treads the Rokupau and walks the Sakamichi just like a Yatsukosu. Enyara, enyara, enyara. Is that style a Kamakiri? Or perhaps the Teodori of a frog? If that is wrong, it is like the Steteko dance of a Yamazaru. It is a truly strange style. Ahahahaha, zuuzuu zuuzuu. Oops, dotsukoi, I slipped my foot.'</p>
+          <p class="en-p">He struck his buttocks with a thud. Thanks to the Okage of Kami, the Tengu mask and the Chiyabukuro are safe. The two balls flew up completely into the stomach and went on a Daikifukau to Yōkau. Ah, Kamunagara, Kamunagara. It is a steep slope where one's Medama might pop out. Though I am not a Zugani, I walk sideways; I cannot walk straight forward. Michihiko-sama and his wife may not care if they stumble or fall, but my teacher, Masumihiko-dono, please take care and descend this slope safely. The voice of the cicadas chirping in the summer trees sounds sleepy, singing as if in their sleep. Is it really such a cheerful matter? This Sakamichi is a matter of life and death.</p>
+          <p class="en-p">How could one sleep through this? The calves of my legs have become swollen like sake bottles. Zuuzuu zuuzuu, ouch, ouch. I have learned for the first time that descending a slope requires one to keep one's mouth shut and look downward. Because Michihiko-tsukasa took the lead and spoke such trivial songs, both Masumi-no-hiko and Itahiko were lured into speaking carelessly to pass the time, but that became the cause of my own misfortune, and I struck my big buttocks. Ah, Kamunagara, Kamunagara. If I had known it would come to this, I should have attached a copper washbasin to my rear, just as when Wax-sama received a flogging at the riding ground. It is no wonder people say that the knowledge of a low-ranking person comes after the fact. Ah, Kamunagara, Kamunagara. Now then, Davis-no-hime-sama, you too should join us. While descending this slope, sing a song of the downward slope. Do not just cater to the mood of Michihiko-sama; comfort the hearts of our party a little. Display the true nature of the Goddess of Peace, Kamunagara. Itahiko-tsukasa, the messenger of Kami, requests it. Ah, Kamunagara, Kamunagara. May the spirits be blessed.'</p>
+          <p class="en-p">Davis-hime: 'I am Davis-hime, who has Michihiko-sendenshi as a husband. I have heard that for one who serves the path of Kami, having a spouse makes it impossible to perform the essential duties. Although it is said so, I am a person who has had my life-thread saved by a divine official of great benevolence. Remembering that bravery as he advanced into the midst of an enemy army like clouds and mist, crossing the wilderness where Akuma rages, how could I, though a woman, remain still and stay in the mansion? A wife should follow her husband, exert her strength, and protect his body. When a crisis arises, I am prepared to stake my life to ensure my husband fully accomplishes his mission.'</p>
+          <p class="en-p">'I have resolved that I must fulfill the way of a woman. Looking back at my comfortable mansion from afar, I set out on a journey with a pillow I am not accustomed to, prepared for hardship. How could such a thing be possible for a delicate woman, as if it were a lighthearted whim? There is a limit to your teasing. My heart is serious. Whether people laugh or ridicule, once I have entrusted both my soul and body to my husband, I will never falter halfway. Though I am a woman, I will achieve merits not inferior to yours and show them to you, so that you may call it magnificent. Masumi-no-hiko-no-kami-tsukasa, teacher of Tamakuniwake.'</p>
+          <p class="en-p">'Itahiko-tsukasa, and all of you, please realize the purity of my heart with sincerity. It is never for the sake of passion or love that I, a sendenshi who has formed a chrysanthemum stone, would fall for Michihiko-sama. No matter how ugly his face may be, his essential soul is a hundred times more beautiful than the figure of the three-five moon. It is reflected in the mirror of the heart. My sincere heart, which has solidified into the journey of today, thinking only of serving the world and serving Kami by joining forces with such a brave warrior, is not something to be laughed at. Even though I am a delicate woman, please forgive me to the end.'</p>
+          <p class="en-p">'Please lead us, our couple, and let us advance, Kamunagara. I swear my sincerity before Kami and make this confession. Ah, Kamunagara, Kamunagara. May the spirits be blessed.'</p>
+          <p class="en-p">Having finished singing, they descended the slope, which was surprisingly lively, laughing and enjoying themselves, half in jest. At last, they crossed the steep three-ri slope and arrived at the shore of Lake Telmon. The sweat wrung out on the slope was blown away by the cool breeze blowing over the lake surface, and they drifted into a feeling of indescribable refreshment. The great lake, one hundred ri from east to west and two hundred ri from north to south, was filled with waves like the scales of gold and silver fish, lying quietly and vast.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">省み玉へ三千彦よ
+ああ惟神々々
+神に代りて気をつける』</p>
+            <p class="ja-classical-line">伊太彦は亦歌ふ。</p>
+            <p class="ja-classical-line">伊太彦『ウントコドツコイ　ドツコイシヨ
+悪魔は出るとも逃ぐるとも
+憑物皆駆け出すも
+此坂道になつたなら
+どうしても体が草臥る
+さはさり乍ら最愛の
+女房を連れた三千彦は
+嘸や楽しい事だらう
+元気日頃に百倍し
+意気揚々と肱を張り
+六方を踏んで坂道を
+八王神歩みそのままに
+エンヤラ　エンヤラ　エンヤラと
+そのスタイルは蟷螂か
+但は蛙の手踊か
+又も違ふたら山猿の
+ステテコ踊りと云ふ様な
+さても怪しきスタイルだ
+アハハハハツハ、ズウズウズウ
+オツトドツコイ足辷り</p>
+            <p class="ja-classical-line">お尻をドンと打ちました
+天狗の面も茶袋も
+神の御蔭で御安全
+二つの玉は完全に
+お腹の中へ舞ひ上り
+大急行で洋行した
+ああ惟神々々
+目玉のとび出るきつい坂
+土蟹ぢやないが横歩き
+正面に足が運べない
+三千彦さまの御夫婦は
+転けよと倒れよと構はぬが
+吾師の君よ真純彦よ
+何卒用心遊ばして
+此坂無事に下りませ
+夏の木立に鳴く蝉の
+声はミンミン眠たげに
+寝言交りに歌ふて居る
+そんな陽気な事かいな
+此坂道は命懸け</p>
+            <p class="ja-classical-line">どうして之が眠られよか
+足のこぶらがブクブクと
+酒徳利の様になつた
+ズウズウズウズウ　アイタタツタ
+ヤツパリ坂を下るのは
+口を噤へて俯向いて
+下らにやならぬと云ふ事を
+初めて体得致しました
+三千彦司が先に立ち
+くだらぬ歌を喋る故
+真純の彦も伊太彦も
+つひ釣り出されウツカリと
+退屈紛れに喋つたが
+それが吾身の仇となり
+デツカイお尻を打ちました
+ああ惟神々々
+こんな事だと知つたなら
+ワックスさまが馬場にて
+笞刑を受けた時のやうに
+銅盥を尻につけ</p>
+            <p class="ja-classical-line">下つて来れば宜かつたに
+下司の知識は後からと
+人が云ふのも無理は無い
+ああ惟神々々
+これこれデビスのお姫さま
+お前も一つ附合ひに
+此坂道を下りつつ
+下坂の歌を歌ひませ
+三千彦さまの機嫌のみ
+とらず吾々一行の
+チツとは心を慰めて
+平和の女神の本領を
+発揮し玉へ惟神
+神の使の宣伝使
+伊太彦さまが頼みます
+ああ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">デビス姫『妾は三千彦宣伝使
+夫に持つたデビス姫
+神のお道に仕ふ身は
+夫婦ありては肝腎の
+御用が出来ぬと聞きました
+兎は云ふものの玉の緒の
+命を助け下さつた
+大恩深き神司
+悪魔の猛り狂ふなる
+荒野ケ原を打渉り
+雲霞の如き敵軍の
+中に向つて進み行く
+その雄々しさを思ひ出し
+女乍らもジツとして
+どうして館に居られませう
+婦は夫に従ひて
+力を尽し身を庇ひ
+マサカの時が出て来たら
+命を的に吾夫の
+使命を全く遂げさせて</p>
+            <p class="ja-classical-line">女の道を尽さねば
+済まぬ事だと覚悟して
+住み心地よき吾館
+後に眺めて遥々と
+踏みも習はぬ旅枕
+苦労を覚悟で行きまする
+陽気浮気で斯んな事
+どうして繊弱き女の身
+出来そな事がありませうか
+揶揄ひなさるも程がある
+妾の心は真剣だ
+人が笑ふが譏らうが
+一旦夫に魂も
+体も共に任したら
+決して中途に怯まない
+女乍らも天晴と
+貴方に劣らぬ功績を
+立てて御目にかけまする
+玉国別の師の君よ
+真純の彦の神司</p>
+            <p class="ja-classical-line">伊太彦司も諸共に
+妾の心の清きをば
+真面目に覚らせ玉へかし
+決して色や恋のため
+菊石の出来た宣伝使
+三千彦さまに惚れませう
+何程顔は醜ても
+肝腎要の魂は
+三五の月の姿より
+百倍増して美しく
+心の鏡に映りしゆ
+神の御為世の為に
+かかる健気な武士と
+一度腕に撚かけて
+世界の為に尽さむと
+思ふばかりの真心が
+凝り固まりし今日の旅
+笑はせ玉ふ事もなく
+繊弱き女の身なれども
+許させ玉へ何処迄も</p>
+            <p class="ja-classical-line">吾等夫婦を従へて
+進ませ玉へ惟神
+神の御前に誠心を
+誓ひて告白仕る
+ああ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">と歌ひ了り流石の坂道も賑々しく笑ひ興じ乍ら、揶揄ひ半分に下り行く。漸くにして下り三里の急坂を越えテルモン湖の辺に着いた。坂道で絞つた汗は湖面を吹く涼風に吹き払はれ、得も云はれぬ爽快の気分に漂ふた。東西百里南北二百里の大湖水は金銀色の魚鱗の波を湛へ、洋々として静かに横たはつて居る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 潔別 [1480]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: Kami Ship [1482]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
