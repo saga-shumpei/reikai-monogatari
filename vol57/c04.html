@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4: Phantom 子 [1454] - Volume 57 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 57 Table of Contents</a>
+      <span>Volume 57</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 57 &bull; Chapter 4</span>
+      <h1 class="chapter-title-en">Chapter 4: Phantom 子 [1454]</h1>
+      <p class="chapter-title-ja">妖子〔1454〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The majordomo of the mansion, Ōrusuchin, whose aged and frail body had been trampled indiscriminately by a throng of rough men, had his breath restored once more thanks to the care of Wakkusu; yet, unable to bear the agony, he was carried back to his own mansion, running a high fever, and continued to suffer in torment day and night.</p>
+          <p class="en-p">Meanwhile, within the mansion, Okuninowake had fallen into a state of suspended animation, speaking only in delirium. Furthermore, the whereabouts of the two daughters, Debisu and Kerina, remained easily unknown; the whereabouts of Michihiko, upon whom they relied as their strength, also became unknown, and Okunihime sank into an abyss of heartbreaking grief, trembling her body all over while lamenting the world, feeling as though she were scarcely alive. Yet, desiring in every way to prolong her husband's illness even for a fleeting moment and to let him meet his two daughters, she passed her days relying solely upon her husband. Inside the mansion, the two individuals, Ōkusu and Biruma, managed everything. Eru, the receptionist, with his testicles crushed by an ox, was suffering on a high pillow in the inner room of the cotton shop. Okunihime invited Ōkusu and Biruma into the living room and consulted with them in various ways. The two men, leaping in their hearts with the thought that the time had come to fulfill Wakkusu's ambition and to suck the sweet nectar, hung their heads with a feigned air of ignorance and worry.</p>
+          <p class="en-p">Okunihime: 'Ōkusu, there is something I would earnestly like to consult with you about. My husband's physical condition is such that we know not when he might pass away, and besides, the majordomo Ōrusuchin is suffering from a severe illness; Wakkusu went out saying he was going on ascetic training for the healing of my husband's and Ōrusuchin's illnesses, and has not shown his face since, while my two daughters have not yet returned. If something should happen, what had best be done? I would like you, too, to think about it for a moment, you know.'</p>
+          <p class="en-p">Ōkusu: 'It is truly a lamentable thing that has come to pass, indeed. It is not merely a calamity for the master's house, but a calamity for the entire town of Miyamachi. Although you are in the role of protecting the mansion of the Brahman religion, because you secretly brought in among the townspeople a magician of the Izumo religion whose origins are unknown, you have been made to suffer such a cruel fate. From now on, you must also listen a little to what we have to say. According to the rumors throughout the town, that fellow called Michihiko is a magician of the very first rank in the Izumo religion; by means of ninjutsu, he stole away the wish-granting jewel, which is of the utmost importance to the master's house, leaving the master's house with worries that beggar description. Having thoroughly thought out a situation where advancement and retreat are both blocked, he came crawling in disguised as a missionary of the Brahman religion. Therefore, even Princess Debisu, who had remained in the house until now, has become untraceable; all the precious sacred ritual implements in this town have been stolen, and there is a tremendous uproar. If the townspeople were to find out about such a thing, that would indeed be a matter of life and death for you, and you certainly could not remain in this mansion with such a bold front. If someone were to secretly send a swift horse to report this to the capital of Haruna, even supposing the master had passed away from illness, you would surely be subjected to reverse crucifixion. You have done a terrible thing. While I sympathize with your circumstances, I at the same time resent your handling of this matter. If such a thing should reach the ears of Lord Ōkuninushi, we ourselves know not what kind of punishments we might be subjected to. From now on, I would like you to listen a little to what Ōkusu says, too.'</p>
+          <p class="en-p">Okunihime: 'That Michihiko-sama alone is not such a villainous person, you see; that must be some kind of mistake. It is certainly not Michihiko-sama who hid the diamond-indestructible wish-granting jewel; there is no doubt it was Wakkusu, the majordomo's son. It is clearly and distinctly known that he attempted various schemes using Ekisu, Heruman, and others in order to forcibly marry my daughter, Princess Debisu. How shameful, to cast such a crime upon a true missionary!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">館の家令オールスチンは、老齢衰弱の身を大勢の荒男に所構はず踏み倒され、ワックスの介抱に依りて再び息は吹き返したものの、苦しみに堪えず、吾館に舁つぎ込まれ、発熱甚だしく、日夜苦悶を続けて居た。</p>
+            <p class="ja-classical-line">一方館に於ては小国別は仮死状態に陥り、囈言計り云うて居る。さうしてデビス、ケリナの両女は行衛は容易に分らず、又力と頼む三千彦の行衛も分らなくなり、小国姫は悲痛の淵に沈み、身をワナワナと慄はせ乍ら、世を果敢なみ、生たる心地はせなかつた。されど如何にもして一時なりとも夫の病を長引せ二人の娘に会はせたきものと、夫のみ力に日を送つて居た。館の中はオークス、ビルマの両人が万事切り廻して居る。受付のエルは牛に睾丸を潰されたきり、綿屋の奥の間で高枕をして苦しんで居る。小国姫はオークス、ビルマを居間に招き、種々と相談をかけた。二人は時節到来、ワックスの思惑を成就させ、甘い汁を吸はむものと胸を躍らせながら、素知らぬ顔して心配気に俯向いて居る。</p>
+            <p class="ja-classical-line">小国姫『オークス、お前に折り入つて相談したい事がある。旦那様はあの通り何時お帰幽なさるか知れぬ御容態、又家令のオールスチンは重病で苦しんで居るなり、ワックスは旦那様や、オールスチンの病気平癒のために荒行に行くと云つて出たきり顔を見せないし、二人の娘は未だ帰つて来ず、若もの事があつたら、如何したら好からうか、お前も一つ考へて貰ひ度いものだがなア』</p>
+            <p class="ja-classical-line">オークス『実にお気の毒な事が出来したもので厶いますワイ。お館計の難儀ではなく宮町一統の難儀で厶います。貴女はバラモン教の館を守護する役であり乍ら、素性の分らぬ三五教の魔法使を町民に内証で引き入れなさつたものですから、此様な惨い目に会はされたのです。これからは些と吾々の云ふ事も聞いて貰はなくてはなりませぬ。町中の噂によれば、あの三千彦と云ふ奴は、三五教きつての魔法使で、お館に最も大切な如意宝珠の玉を忍術をもつて奪ひ取り、お館に有るにあられぬ心配をかけて置き、進退維谷まる場合を考へ澄まし、バラモン教の宣伝使に化けて這入つて来よつたので厶います。夫故今迄家に厶つたデビス姫様迄お行方は分らぬ様になり、此町中は大切な御神具を残らず盗まれ、大変な大騒動で厶います。こんな事が町民に分らうものなら、夫こそ貴女の御身の大事、大きな顔して此お館には居られますまい。そつと早馬でハルナの都に報告でもしようものなら、旦那様は病気で亡くなられたとした所で、お前さまは逆磔刑にあはされるでせう。大変な事をして下さつた。私は貴女の境遇に御同情をすると共に、貴女の御処置を恨んで居ます。もし斯んな事が大黒主様のお耳に入らうものなら、吾々もどんな刑罰に会はされるかも知れませぬ。今後はちつとオークスの云ふ事も聞いて貰ひ度いものです』</p>
+            <p class="ja-classical-line">小国姫『あの三千彦さまに限つてそんな悪党な方では有りませぬぞや、夫は何かの間違ひでせう。金剛不壊の如意宝珠を隠したのは決して三千彦さまぢやない、家令の悴のワックスに間違ひないのだ。あれが吾娘デビス姫を無理往生に娶らむとして種々とエキス、ヘルマンなどを使ひ企んだと云ふ事は明瞭り分つて居るのだよ。勿体ない、誠の宣伝使にそんな罪を被せるものぢやありませぬ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Oaks: 'Okusama, husband is the first, but you are mistaken in your thinking. Whatever Wax-sama may say, he is the son of the karei; if this mansion cannot go on, his own house cannot go on either, so please think carefully and look, would you do such a disadvantageous thing? That is where the mahafutsukahi of Ananai-kyō are naive... Wax-sama is good-natured, so he was smeared. You must make them consider the innermost depths, for it is truly pitiful for Wax-sama. Please think about it carefully. A mahafutsukahi named Michihiko, startled by the war cries of the chiyōmin, fled like clouds and mist, and no matter how favorably one looks upon it, the dannasama will hardly be able to recover his health. And in this case, where even the karei, Ōrusuchin-sama, finds recovery difficult, who do you suppose is the one to become the strength of this mansion? Is it not other than Wax-sama? If you doubt Wax-sama, the chiyōmin will not forgive you for the sake of such a popular Wax-sama. If you do not lay your hand upon your chest and think well, it will be a matter of ichidaiji for the mansion.'</p>
+          <p class="en-p">Okunihime: 'My, that is something I cannot comprehend; Burma, what do you think?'</p>
+          <p class="en-p">Burma: 'Well, I investigated the rumors in the chiyōnai, and Wax-sama is truly a great person. Even the niyoihotsushiyu hidden by the mahafutsukahi of Ananai-kyō, he made them spit out by innocently saying he would bear the sin himself. Those who are truly chiushin and gishi are the likes of Wax-sama. Because he saved us from a situation where, if that treasure had not existed, not only the mansion but all the Miyamachi together would have had to suffer punishment from Ōkamisama, they are calling him the savior of the Terumon country. No matter what, they say we must make him the adopted son of Davis-hime-sama and govern this country, or the chiyōmin will not forgive us. Since I have no special interest in whether Wax-sama becomes the successor or not, I will not defend him for his own sake. Placing myself in a neutral zone, I will state my convictions without concealment or reservation.'</p>
+          <p class="en-p">Okunihime: 'Since even the chiyōmin believe so, there is nothing that can be done. At any rate, in today's case, leaving aside whether to make him an adopted son or not for later, I would like to have Wax-sama come once.'</p>
+          <p class="en-p">Oaks: 'That would be splendid, but since Wax-sama set out saying he would perform a life-or-risking task for the sake of the gods, for the mansion, and for the chiyōmin, his whereabouts are unknown, and there is no telling when he will return. Therefore, it would be inconvenient if there were no official to handle all domestic affairs. The karei has his chest trampled as you know, and there is no prospect of recovery; the two hime's whereabouts are unknown, and the dannasama is gravely ill; if someone is not newly appointed as karei, the administration of the mansion cannot be conducted for even a single day. As for myself, if I serve only as a gatekeeper, I cannot attend to the affairs of the Ōoku, you see.'</p>
+          <p class="en-p">Okunihime: 'Oh, if that is so, I shall promote people in turn and ask for their help. Receptionist Eru shall be made temporary karei, and you shall become the receptionist; if we do so, everything will proceed conveniently.'</p>
+          <p class="en-p">Oaks: 'Indeed, that is logical and extremely convenient. However, Eru-sama is such a flusterer, going around the town proclaiming that the dannasama passed away even while he still had life in him, causing a great commotion among the crowd, and on top of that, bumping into a cow's rear, having his testicles trampled flat, and suffering all the limits of agony in the detached room of the cotton shop. And because he is such a person that he does not notice a cow as huge as that tied by the roadside, they say he cannot even be a gatekeeper, and he has become the laughingstock of the whole town. If such a flusterer were to become karei, needless to say the prestige of the mansion, but even the divine majesty of the gods would fall, and there is strong opposition throughout the town. It would probably be for your own good to give up on that.'</p>
+          <p class="en-p">Okunihime: 'Well then, how should we handle it?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">オークス『奥様、夫が第一貴女のお考へ違ひです。ワックスさまは何を云うても家令の悴、このお館が立ち行かねば自分の家も立ち行かないのですから、よう考へて御覧なさい、そんな不利益の事をなさいますか。そこが三五教の魔法使の甘い所で……ワックスさまは人がよいから、塗りつけられたのですよ。奥の奥を考へて貰はねば実にワックスさまに気の毒で厶いますワ。よく考へて御覧なさいませ。三千彦と云ふ魔法使は、町民の鬨の声に驚かされて雲を霞と逃げ失せ、旦那様はどう贔屓目に見ても御養生は叶ひますまい。そして家令のオールスチンさまも御本復は難いこの場合、此お館のお力になる者は誰だと思召す。ワックスさまより外無いぢやありませぬか。貴女はワックスさまをお疑ひなさると、これ程人気の有るワックスさまの為に町民が承知致しませぬぞや。よく胸に手を当ててお考へにならないと、お館の一大事で厶います』</p>
+            <p class="ja-classical-line">小国姫『ハテ合点のゆかぬ事だなア、ビルマ其方は何と思ふか』</p>
+            <p class="ja-classical-line">ビルマ『ハイ私は町内の噂を調べて見ましたが、ワックスさまは本当に偉い人ですよ。三五教の魔法使が隠して置いた如意宝珠をも、甘く自分が罪を負ふと云うて吐き出させなさつたので厶います。真実の忠臣義士と云ふのは、あのワックスさまで厶います。あの宝が無かつたらお館は勿論、宮町一同が大黒主様から所刑に遇はねばならぬ所を助けて下さつたのだから、テルモン国の救世主だと云つて居ます。どうしてもデビス姫様の御養子になさつて此国を治めねば町民が承知しませぬ。私は別にワックスさまがお世継にならうとなるまいと利害関係はないのですから、ワックスさまの為に弁護は致しませぬ。中立地帯に身を置いて、自分の所信を包まず隠さず申上げます』</p>
+            <p class="ja-classical-line">小国姫『町民迄がさう信じて居る以上は、どうも仕方がない。兎も角今日の場合、養子にするせぬは後の事として、一度ワックスさまに来て貰ひ度いものだなア』</p>
+            <p class="ja-classical-line">オークス『それは結構で厶いますが、ワックスさまは神様の為め、お館の為、町民の為め、命がけの業をすると云うて出かけられましたから、お行衛が分らず、何時帰らるるとも見当が付きませぬ。就ては家事万端を処理する役員が無ければ不都合で厶いませう。家令はあの通り胸板を踏まれ、恢復の見込みは立ちませぬ、二人の姫様は行方が分らず、旦那様は御重病、誰か家令を新にお命じなさらなくては、一日も館の事務が執れますまい。私も門番位勤めて居つては大奥の御用は出来ませぬしなア』</p>
+            <p class="ja-classical-line">小国姫『アアそんなら、順々に抜擢してお世話にならう。受付のエルを臨時家令となし、お前は受付になつて貰はう、さうすれば万事万端都合よく運ぶであらう』</p>
+            <p class="ja-classical-line">オークス『成程それは順当で至極結構でせう。併し乍ら、エルさまの慌者、旦那様が、まだ命のある中から御帰幽になつたと云うて町中を触れ歩き、大勢を騒がし、お負に牛の尻に突き当り睾丸を踏み潰され、綿屋の離室に有らむ限りの苦しみをして居ります。さうして道端に繋いであるあれ程大きな牛が目に付かないやうな事では門番も出来ないと云うて、町中の笑はれ者になつて居りますよ。あんな慌者が家令にでもならうものなら、お館の威勢は申すに及ばず、神様の御威勢迄も落ちると云つて、町中の大反対で厶います。夫はおよしになつた方がお為で厶いませう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Okunihime: 'My, what a trouble this is. If that is so, once Wakkusu returns, I shall have him temporarily act as my substitute, until then I would like you to take on the role of temporary karei.'</p>
+          <p class="en-p">Ōkusu: 'A troublesome person like myself can by no means do something like a temporary karei. I flatly refuse, for it would not do to instead bring about troublesome matters for the master. In general, anything called temporary is a cold expression, and the feeling of earnestly devoting oneself for the master's sake simply does not well up, you see.'</p>
+          <p class="en-p">Biruma: 'Rather than that, why don't you dive right in and appoint Ōkusu-sama as karei? He certainly has just the skill for it. Since you remain only in the inner chambers, you likely do not know outside affairs, but I will vouch for it. The hope of all the townsfolk is to make Wakkusu-san our adopted son, have Ōkusu-sama serve as karei, and then if you appoint ○○ as kafu, there is a rumor that the young lady will return and the younger sister Kerina-sama will also return safely. What they call public rumors are things you should not underestimate too much, you know. For the sake of the gods and for the sake of the master, I consider that the best method.'</p>
+          <p class="en-p">Okunihime: 'Whose business is it to say make ○○ the kafu? If you do not state it more clearly, will I not fail to understand?'</p>
+          <p class="en-p">Biruma: 'Hey, even if I were to explain it thoroughly, a mere gatekeeper could hardly become kafu. Better unsaid than said, I suppose.'</p>
+          <p class="en-p">Okunihime: 'Ho ho ho ho, Biruma, you are recommending yourself, are you not? You too are a man without any oversight.'</p>
+          <p class="en-p">Biruma: 'The world these days consists entirely of blind men, so if I do not announce my own skills from myself, no matter when it gets to be, it will be like a hammer washed down a river, and the path to prosperity will not open up. If you have the capacity to throw out the genuine net price skills and recognize them, fine; if not, you have no choice other than to resign yourself that the time has not arrived. If you do not employ me, Ōkusu will certainly not be placed in the post of karei either. As for this man, regarding this recent incident, he has a slight weakness... No, he has no weakness. Since your secretly bringing in the magician was the weakness, the two of us carried out a smoothing-over movement, and that is why the commotion within the town finally settled down, you see.'</p>
+          <p class="en-p">Okunihime: 'If that is so, it cannot be helped. I shall appoint you as temporary kafu.'</p>
+          <p class="en-p">Biruma: 'Moshi okusama, a temporary kafu is not the same as a furnace stoker, you know. It is the post next to karei, an important post, you see. Just to be sure, I will mention this for a moment.'</p>
+          <p class="en-p">Okunihime: 'Would it not be splendid if a gatekeeper rose to the position of kafu? This mansion is stipulated by the order of Daikokunushi-no-Ōkami to have only one karei, and since we cannot place a kafu, I am sorry, but please bear with being the head gatekeeper.'</p>
+          <p class="en-p">At a place like this, a nurse hurriedly enters, and says with a worried air,</p>
+          <p class="en-p">'Okusama, please come quickly; the master appears to be at his final moments, and his condition has greatly changed.'</p>
+          <p class="en-p">Okunihime strokes her chest and hurriedly rushes away to the master's sickroom. Ōkusu, together with Biruma, follows behind Okunihime and enters the sickroom. Okunowake suddenly sits straight up, letting his sunken eyes in his emaciated face gleam as he speaks,</p>
+          <p class="en-p">Okunowake: 'Wife, where have you been going? From a while ago I have been waiting for you with great anticipation, and have those two daughters still not returned yet?'</p>
+          <p class="en-p">Okunihime: 'Yes, they will likely return shortly. There is still no news of any kind.'</p>
+          <p class="en-p">Okunowake: 'My, what a troubling matter, will I no longer be able to meet my daughters in this world? Ah, what a regret.'</p>
+          <p class="en-p">Okunihime: 'Master, please somehow try not to lose heart; the gods will surely grant you a meeting with them by their grace.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">小国姫『ハテ困つた事だなア。そんならワックスが帰つて来たら、暫し親父の代理を勤めさす事に致しませう。夫迄お前は臨時家令の役をやつて貰ひ度い』</p>
+            <p class="ja-classical-line">オークス『私のやうな不都合な者は、到底臨時家令のやうな事は出来ませぬ。平にお断り申します、却てお館の不都合な事を仕出かすといけませぬから。総て臨時と云ふものは水臭い文字で、本気にお館の為に尽すと云ふ気が出て来ませぬワ』</p>
+            <p class="ja-classical-line">ビルマ『一層の事、ドツと張り込んで、オークスさまを家令に任命なさつたらどうでせう、屹度それ丈の腕前は厶いますよ。貴女は奥にばかり厶るから外の事情は分りますまいが、私が証明致します。町民一同の希望はワックス様を御養子となし、オークスさまを家令と遊ばし、さうして○○を家扶にお命じになれば、お嬢様も帰られ、お妹御のケリナさまも無事帰られると云ふ噂で厶います。世間の噂と云ふものは余り馬鹿にはならぬもので厶いますよ。神様の為め、お館の為め、それが最善の方法と私は考へます』</p>
+            <p class="ja-classical-line">小国姫『○○を家扶にせいとは誰の事だい、もつと明瞭りと云うて貰はなくては分らぬぢやないか』</p>
+            <p class="ja-classical-line">ビルマ『ヘイ、到底申し上げた所で門番位が家扶には成れますまい。云はぬが花で厶いませう』</p>
+            <p class="ja-classical-line">小国姫『ホホホホホ、ビルマ、自分を推薦して居るのだらう。お前も抜目の無い男だなア』</p>
+            <p class="ja-classical-line">ビルマ『此頃の世の中は盲人計りで厶いますから、自分から自分の技能を発表しなくては、何時になつても金槌の川流れ、栄達の道はつきませぬ。正真正銘のネットプライスの技量を放り出して、それをお認めになる御器量があればよし、無ければ時節到らぬと覚悟するより外は厶いませぬ。私を御採用なければオークスだつて決して家令の職に置きませぬ。此男も今度の事件については、チと弱点……いや弱点は無いのです。貴女がそつと魔法使を引き入れなさつたのが弱点ですから、吾々二人が揉み消し運動をやつたので、町内の騒ぎがやつと治まつたので厶いますからなア』</p>
+            <p class="ja-classical-line">小国姫『そんなら仕方がありませぬ。お前を臨時家扶に命じませう』</p>
+            <p class="ja-classical-line">ビルマ『モシ奥様、臨時家扶と云ふのは釜焚きとは違ひますよ。家令の次の職、重職で厶いますよ。念の為め一寸申上げて置きます』</p>
+            <p class="ja-classical-line">小国姫『門番が家扶に出世したら結構ぢやないか。此館は大黒主様の命令で家令一人と定つて居るが、家扶を置く事は出来ないのだから、気の毒乍らお前は門番頭で辛抱して下さい』</p>
+            <p class="ja-classical-line">かかる所へ一人の看護婦が慌しく入り来り、</p>
+            <p class="ja-classical-line">『奥様早く来て下さいませ、旦那様は御臨終と見えまして、大変御様子が変つて参りました』</p>
+            <p class="ja-classical-line">と心配さうに云ふ。小国姫は胸を撫でながら慌しく主人の病室に駆けり行く。オークスはビルマと共に小国姫の後に従ひ病室に入る。小国別は俄にムクムクと起き上り、痩こけた顔の窪んだ目を光らせ乍ら、</p>
+            <p class="ja-classical-line">小国別『女房お前は何処に行つて居た。最前から大変待ち兼ねて居たぞよ、さうして二人の娘はまだ帰つて来ぬかノウ』</p>
+            <p class="ja-classical-line">小国姫『ハイもう軈て帰るで厶いませう。まだ何とも便りが厶いませぬ』</p>
+            <p class="ja-classical-line">小国別『ハテ困つた事だなア、此世ではもう娘に遇ふ事が出来んのかなア。エエ残念ぢや』</p>
+            <p class="ja-classical-line">小国姫『旦那様、何卒気を落さないやうにして下さい、屹度神様のお蔭で会はして下さるでせう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Okuniwake: 'I wonder where Michihiko-san's Sendenshi-sama and the Karei have gone; I would love to meet them soon.'</p>
+          <p class="en-p">Okunihime: 'Michihiko-sama's whereabouts have suddenly become unknown. He must have surely gone to welcome the two daughters.'</p>
+          <p class="en-p">Okuniwake: 'Hmm, that is much trouble for him. I am sure he will let me meet them. Has the Karei, Aulstin, not come yet? What can he be doing?'</p>
+          <p class="en-p">Okunihime: 'Yes, he has a little business, so he has fallen somewhat behind; he will be coming shortly.'</p>
+          <p class="en-p">Oaks: 'I say, Dannasama, the Karei Aulstin had his chest broken by the chiyōmin, suffered near-death agony, and has returned to the yakata. And the machijiu is in a boiling-cauldron-like uproar, saying that you have let the sorcerer of Ananai-kyō into the okata. The two of us suppressed that matter, and now, upon consultation with the Okusama, I have just this moment become the Karei; therefore, I humbly ask for your kind favor. From now on, I will devote body and soul and achieve twelve-part results to show you, so please be at ease.'</p>
+          <p class="en-p">Okuniwake: 'Aren't you Oaks, the monban? No matter how much popularity you claim to have, it won't do for a monban to become a Karei in such a single leap. Oku, did you permit such a thing?'</p>
+          <p class="en-p">Okunihime: 'Yes... No.'</p>
+          <p class="en-p">She fidgeted.</p>
+          <p class="en-p">Okuniwake: 'To appoint a Karei, no matter what, one must obtain Aulstin's consent, and after he submits his resignation, inquire at the capital of Haruna, and not otherwise. It will not do to decide things so arbitrarily. Because this yakata is special, we must consult the Lord Daikokunushi about everything. Surely this cannot be the truth. Oku, you must have been telling a temporary joke.'</p>
+          <p class="en-p">Fidgeting, Okunihime answered with a faint 'Yes' in a single word, casting her eyes downward.</p>
+          <p class="en-p">Oaks: 'Even though you are the Okusama of the master of the yakata, there is no reason you should utter a joke. I believe that the words of the Okusama are heavier than gold and iron. No matter what you say, Oaks is the Karei of this house. I must investigate all affairs of the yakata and report to the capital of Haruna. If you reject this Oaks anywhere and everywhere, shall I report to the Lord Daikokunushi that you let the sorcerer of Ananai-kyō into the okata? Is that still not troublesome for you?'</p>
+          <p class="en-p">Pressing her as life and death approached, he forced himself to persist as a wicked and lawless villain.</p>
+          <p class="en-p">Okuniwake: 'Look here, Oku, as you see, this time I somehow do not seem to be recovering at all. Somehow, seek out Michihiko-sama as quickly as possible and have him become the strength of this yakata. If you have him protect us with that divine power, even if the God Daikokunushi should attack with tens of thousands of troops, there is no need to fear; never use such a wicked person after my death. Dismiss the monban from today. Ee, filthy!'</p>
+          <p class="en-p">Containing wrath within his weakened body and mind, he shouted out. With that, he grew limp and weak once more, and suddenly fell into a comatose state.</p>
+          <p class="en-p">Okunihime, while immersed in a grief too great for body or world, purposely hid her tears, changed her expression, and turning toward the two persons,</p>
+          <p class="en-p">'Oaks and Biruma, both of you, since it is the master's command, I am sorry, but please leave this yakata as of this very moment. No matter what may happen, I have no intention of troubling myself with arrogant and impudent servants like you... I say, Dannasama, please be truly at ease.'</p>
+          <p class="en-p">Drawing her mouth close to his ear, she declared it at the top of her voice amidst her tears. Okuniwake seemed to have faintly caught these words in his ear, and smiled powerlessly and wryly.</p>
+          <p class="en-p">Oaks, exposing his arrogant face and growing fiercely haughty,</p>
+          <p class="en-p">'I say, Okusama, Dannasama is suffering from a grave illness and has become senile. What he says is certainly not the truth. Words stirred by fever—if you take such things seriously, a great riot will break out in this yakata. Who else is there to shoulder this yakata on both shoulders today besides Wacks and the two of us? Think carefully. You said a monban cannot become a Karei, but what kind of class-conscious thinking are you trapped by? Long ago, didn't the monban of Tokoyo Castle get directly promoted to the office of Deputy Guard? That, too, must have been the result of failure. We are the men of distinguished service who saved the yakata from crisis. If it does not please you, it cannot be helped; we too have a certain thought of our own, so do not regret it later. The fact that the general machijiu had their precious treasure stolen is also because many people are suffering through Michihiko's sorcerer. If I may say so, Michihiko is the enemy of the machijiu. If you keep harboring that enemy until whensoever, then you two husband and wife will likewise be recognized as enemies of the country. To have this sacred ground opened by Daikokunushi trampled away plain as day by Ananai-kyō's lackey is something the general machijiu can hardly endure. If you will not use me as Karei, I will not beg further. I will report this state of affairs to the machijiu. Then the machijiu will come storming upon you as foes of Brahmanism and enemies of the gods. Be prepared.'</p>
+          <p class="en-p">So he spat out, and dashed out to the front with fierce momentum.</p>
+          <p class="en-p">El, whose testicles had been trampled flat by an ox and who had been recuperating in the cotton merchant's back room, had at last returned to the entrance, escorted by two or three children. Oaks and Biruma suddenly encountered each other at the entrance. El, feeling suspicious at the unusual looks of the two,</p>
+          <p class="en-p">El: 'Hey, you two, changing your complexions, where are you going? There must be something behind this; first let me hear it. I will mediate somehow or other.'</p>
+          <p class="en-p">Oaks and Biruma had come this far threateningly, but thinking it would not do to carelessly blurt out odd things to the machijiu and be troubled with the cleanup afterward, and just when they had been stopped by El, treating this as good fortune, the two sat down heavily at the reception desk and indulged in secret talk.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">小国別『三千彦の宣伝使様や家令は何処へ行つたかなア、早く会ひたいものだ』</p>
+            <p class="ja-classical-line">小国姫『三千彦様は俄にお行衛が分らぬやうになりました。屹度娘二人を迎ひに行つて下さつたのでせう』</p>
+            <p class="ja-classical-line">小国別『ウン夫れは御苦労だなア。屹度会はして下さるだらう。家令のオールスチンはまだ来ぬか、何をして居るのだらう』</p>
+            <p class="ja-classical-line">小国姫『ハイ、一寸用が厶いますので、つひ遅れて居ます、やがて参るで厶いませう』</p>
+            <p class="ja-classical-line">オークス『モシ旦那様、家令のオールスチンは町民に胸板を踏み折られ、九死一生の苦しみを受け自館に帰つて居られます。そして町中は三五教の魔法使をお館へお入れなさつたと云うて、鼎の沸くやうな騒ぎで厶います。そこを私等二人が鎮定致し、今奥様と御相談の上、私がたつた今家令となりましたから、何分宜敷くお願ひ申します。今後は粉骨砕身、十二分の成績を挙げてお目にかけますから御安心下さいませ』</p>
+            <p class="ja-classical-line">小国別『お前は門番のオークスぢやないか。何程人望があると云つても、さう一足飛びに門番が家令になると云ふ訳にはゆくまい。奥、お前はそんな事を許したのか』</p>
+            <p class="ja-classical-line">小国姫『ハイ、……イイエ』</p>
+            <p class="ja-classical-line">とモジモジして居る。</p>
+            <p class="ja-classical-line">小国別『家令を任命するには何うしてもオールスチンの承諾を得、彼が辞表を出した上でハルナの都に伺ひを立て、其上でなくてはならぬ。さう勝手に定める訳にはいけぬ。この館は特別だから何事も大黒主様に伺はねばならぬ。よもや真実ではあるまい。奥、お前は当座の冗談を云ふたのであらう』</p>
+            <p class="ja-classical-line">小国姫はモジモジしながら幽かな声で『ハイ』と一言、俯向いて居る。</p>
+            <p class="ja-classical-line">オークス『苟くも館の主人の奥様とも在らう方が、冗談を仰有らう筈はありますまい。奥様のお言葉は金鉄よりも重いものと信じて居ります。何と仰有つてもオークスは当家の家令で厶います。万事万端館の事務を取調べ、ハルナの都に報告を致さねばなりませぬ。何処迄も此オークスを排斥なさるならば、三五教の魔法使をお館へお入れなさつた事を大黒主様に注進致しませうか、それでも苦しうは厶いませぬか』</p>
+            <p class="ja-classical-line">と命旦夕に迫つて居るのにつけ込んで無理やりに頑張つて居る極悪無道の曲者である。</p>
+            <p class="ja-classical-line">小国別『これ奥、私はお前の見る通り、今度はどうも本復せないやうだ。何うか一時も早く三千彦さまを尋ね出し、此館のお力となつて頂け。あの御神力をもつて守つて頂けば、如何に大黒主の神、数万の軍勢をもつて攻め寄せ来るとも恐るる事は要らぬ、かやうな悪人を決して吾死後用ひてはならぬ。今日から門番を免職して呉れ。エエ穢らはしい』</p>
+            <p class="ja-classical-line">と衰弱の身心に怒気を含み、呶鳴り立てた。それつきり又もやグタリと弱り、忽ち昏睡状態に陥つた。</p>
+            <p class="ja-classical-line">小国姫は、身も世もあらぬ悲しみに浸されながら、故意とに涙を隠し容を改め、両人に向ひ、</p>
+            <p class="ja-classical-line">『オークス、ビルマの両人、其方は御主人様の命令だから、気の毒乍ら只今限り此館を帰つて下さい。仮令どうならうとも其方のやうな傲慢無礼な僕に厄介にならうとは思はないから、……モシ旦那様何卒御安心下さいませ』</p>
+            <p class="ja-classical-line">と耳に口を寄せて声を限りに涙交りに述べ立てた。小国別は幽かにこの声が耳に入つたと見え、力無げにニタリと笑ふ。オークスは横柄面を曝し乍ら威猛高になり、</p>
+            <p class="ja-classical-line">『モシ奥様、旦那様は大病に悩み耄けて居らつしやいます。決して仰有る事は真ぢやありませぬ。熱に浮されたお言葉、左様な事を本当になさるやうでは此お館は大騒動が起りますよ。今日此お館を双肩に担うて立つものは、ワックスや吾々二人の外に誰がありませうか。克くお考へなされませ。門番は家令になれないと仰有いましたが、何と云ふ階級的の考へに捉はれて居らつしやるのですか。昔常世城の門番は、直に抜擢されて右守の司になつたぢやありませぬか。それも失敗の結果でせう。吾々はお館の危急を救つた殊勲者です。若しお気に入らねば仕方はありませぬ、吾々は吾々としての一つの考へが厶います、後で後悔なさいますなよ。町民一般が大切な宝を盗まれたのも、みんな三千彦の魔法使によつて大勢の者が難儀をして居るので厶います。云はば三千彦は町民の敵で厶います。其敵を何時迄もお構ひなさるのならば、矢張貴方方御夫婦は国敵と認めます。大黒主のお開きなされた此霊場を、みすみす三五教の奴に蹂躙せられるとは、町民一般の忍び難い所でせう。私を家令にお使ひなさらぬなら、たつては頼みませぬ。此始末を町民に報告致します。さうすれば町民は、貴方方をバラモン教の仇、神様の敵として押し寄せて参ります。お覚悟なさいませ』</p>
+            <p class="ja-classical-line">と云ひ放ち、勢鋭く表へ駆け出す。睾丸を牛に踏み潰され、綿屋の離室に養生して居たエルは漸う二三人の子供に送られて玄関に帰つて来た。オークス、ビルマの二人は玄関にてふと出会うた。エルは二人の相好の唯事ならぬに不審を起し、</p>
+            <p class="ja-classical-line">エル『オイ、両人、血相変へて何処へ行くのだ。是には何か様子があるであらう、まづ俺に聞かして呉れ。何とか仲裁してやるから』</p>
+            <p class="ja-classical-line">オークス、ビルマの両人は脅迫的に此処迄来たのだが、うつかり町民に妙な事を喋つて、後の取纒めに困つてはならぬと思つて居た矢先、エルに止められたので、これ幸と二人は受付にドツカと坐し、密々話に耽つて居る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c03.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 3: Field 探 [1453]</span>
+      </a>
+      <a href="c05.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 5: 糞闘 [1455]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

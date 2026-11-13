@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 18: 翼琴 [1468] - Volume 57 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 57 Table of Contents</a>
+      <span>Volume 57</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 57 &bull; Chapter 18</span>
+      <h1 class="chapter-title-en">Chapter 18: 翼琴 [1468]</h1>
+      <p class="chapter-title-ja">翼琴〔1468〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Okuniwake's severe illness seemed to be encouraged by the safe return of the two sisters, increasing in vigor moment by moment, and had now come to a condition no longer requiring anxiety. The joy of Okuniwake's family, beginning with Okunihime, was beyond comparison. Moreover, since Hel's injuries were relatively light, thanks to the meticulous nursing and care of Princess Kelina, he headed toward recovery day by day, and reached the point where, led by Princess Kelina, he could walk in the rear garden.</p>
+          <p class="en-p">Now Princess Devis entered the detached room together with Michihiko, meditated upon the Ōkami, finished praying for the safety of the mansion, and intimately indulged in talk of all directions. Devis took out the clavichord (yokukin) after a long time, and in order to reward Michihiko for his labors, while raising a subtle and delicate voice and skillfully playing the cords with her fingertips, she entrusted the depth of her heart to the strings and began to recite.</p>
+          <p class="en-p">Devisheime: 'Of the Imperial Gods of the Heavenly august country,
+Pure, noble, and lovely,
+Exalted beyond all compare,
+Opening the precious divine teachings for the lands in all directions,
+Among heaven and earth,
+The living creatures and common people, not to mention further,
+Down to birds, beasts, insects,
+And even the single leaves of grass,
+Wishing to bestow the dew of grace,
+Kuninotokotachi no Ōkami,
+Toyokunihime no Ōkami,
+Awing the precious divine words of Haniyasuhiko and Haniyasuhime,
+Manifesting at Jerusalem, the city of gods,
+At the foot of Mount Golden,
+Opening the teachings and making the eighty islands and eighty countries of the lands in all directions
+Into a golden world,
+To transfer the heavenly paradise upon the earth,
+The Minutama, the great god Susanoo no Ōkami,
+While rousing majestic bravery and forceful stamping,
+And stirring up majestic censure and rebukes,
+Sending forth the Mukatsugami, Eight-Forked Yamata no Orochi, ugly foxes,
+And warped demons who disturb this world,
+To illuminate the entire world widely with the mind of boundless benevolence and compassion,
+On mornings of snow or evenings of frost,
+Combing his hair amidst the storms,
+And exposing his august body to the rains,
+Continuing the long journey of wandering hither and thither,
+Beginning with Mount Golden,
+Descending to the mansion of Saien, the Caucasus Mountains,
+Vulture Peak, and Mount Manju,
+The central region of the rotating-inverting island,
+To the peaks of Shibi,
+Distributing his august heart in various and miscellaneous ways,
+Wishing to cleanse the universal sins of the world,
+Bearing the thousand seats of atonement,
+Righteous in heart and exceedingly pure,
+Sending gentle and numerous divine officials
+To use them in all directions,
+The propaganda envoys saving the people of the world,
+Especially among them, the majesty of Michihiko as a divine official,
+Into the enemy castle of Brahmanism,
+Without flinching, without fearing, all alone,
+Making the teachings of the gods his strength,
+Descending with brilliant light,
+How grateful it is that you saved the worries of us, mother and child,
+Even if heaven and earth should overturn,
+Even if the moon should fall and the stars be lost,
+Even if the great ocean should dry up,
+When, in what age, shall I forget this august grace? Kanagara.</p>
+          <p class="en-p">For the sake of the gods, for the sake of the Way,
+Offering my humble body,
+Together with the official Michihiko,
+To the teachings of Brahmanism whose souls were extracted by the Yamata no Orochi,
+Offering sincere devotion to the lord official of the pillar of Brahmanism, Daikokunushi,
+And saving him,
+Removing without exception the divisions of the ways of Brahmanism and the Three-Five teachings, together
+Combining our strengths with the august teachings of our ancestral gods who created this world,
+Binding our hearts together as one liver of the village,
+Making the clouded present world into the world of Bravasa,
+Before the gods of heaven and earth,
+We shall establish merits and recompense the grace of mountains and seas.</p>
+          <p class="en-p">Michihiko-sama, official of the Way where the spirits of the divine teachings prosper and bless,
+Pouring the Mizutama into the burning flame
+Within my small breast,
+Let me rest as early as possible!
+However vast the world may be,
+Gazing up and calling you my lord husband,
+There is no warrior whom I shall serve other than you,
+Yet, official Michihiko,
+Since you are wise in knowledge,
+In the fore-fronts of islands we look upon, in the corners of rocky shores we gaze upon without missing,
+You might take a young-grass wife,
+Since I am a woman,
+There is no man other than you,
+There is no husband outside of you,
+Under the fluttering of the patterned fence, upon the steaming bedding,
+Embracing your youthful budding breast like rustling light snow,
+Intertwining our white arms,
+Striking and caressing, true jade hands and jade hands,
+Wrap around and around, for a hundred lengths,
+Lie down to sleep and partake of the rich divine sake!
+My dear lord, my beloved man,
+When the sun hides in the green mountains,
+The night of crow-feather darkness will surely come forth!
+Hearing the smile of the morning sun flourish,
+Listen completely and minutely to my thick prayer,
+Vowing to the gods and supplicating,
+Kinkatsu Yō no Ōkami,
+Intercession of the god of Edom,
+Earnestly praying for happiness,
+Ah, Kanagara, gods, gods,
+May your august spirits prosper and bless!'
+</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">小国別の重病は、二人の姉妹の無事に帰り来りしに力づきしものと見え、時々刻々に元気を増し、最早憂慮を要せざる容態となつて来た。小国姫初め家族一同の喜びは譬ふるに物なき程であつた。又求道居士、ヘルの負傷も比較的浅かりしため、ケリナ姫の注意周到なる看護によつて日に日に快方に向ひ、ケリナ姫に手を引かれ、裏の庭園を散歩し得る迄に到つた。</p>
+            <p class="ja-classical-line">扨てデビス姫は三千彦と共に離れの間に入つて、大神を念じ、館の無事を祈願し終り、睦じく四方八方の話に耽つた。デビスは久し振りにクラヴィコード（翼琴）を取り出し、三千彦の労を犒はむため、微妙なる声音を張り上げて指先巧にコードを弾じながら、心の丈を糸に托して述べ初めた。</p>
+            <p class="ja-classical-line">デビス姫『久方の天津御国の皇神の
+清き尊き麗しき
+外に例もあら尊
+珍の御教を四方の国
+開かせ給ひて天地の
+中に生とし生ける者
+蒼生は云ふも更
+鳥獣や虫けらや
+草の片葉に至る迄
+恵の露を与へむと
+国治立の大御神
+豊国姫の大御神
+埴安彦や埴安姫の
+珍の御言を畏みて
+神の都のエルサレム
+黄金山下に現まして
+教を開き四方の国
+島の八十島八十国を
+黄金世界に作り上げ
+天国浄土を地の上に</p>
+            <p class="ja-classical-line">移さむものと瑞御霊
+神素盞嗚の大神は
+厳の雄健び踏み健び
+厳の嘖譲を起しつつ
+此世を乱す曲津神
+八岐大蛇や醜狐
+曲鬼共を言向けて
+仁慈無限の御心を
+普く天下に照らさむと
+雪の晨や霜の宵
+嵐に髪を梳づり
+雨に御身をば曝しつつ
+彼方此方と漂浪の
+長き旅路を続けまし
+黄金山を初めとし
+斎苑の館やコーカス山
+霊鷲山や万寿山
+自転倒島の中心地
+四尾の峰に下りまし
+種々雑多と御心を</p>
+            <p class="ja-classical-line">配らせ給ひ世の中の
+遍く罪を清めむと
+千座の置戸を負ひ給ひ
+心正しくいと清く
+優しき数多の神司
+四方に使はし給ひつつ
+世人を救ふ宣伝使
+中にも別けて三千彦の
+神の司の雄々しさよ
+バラモン教の敵城に
+怯めず恐れず唯一人
+神の教を力とし
+光輝き下りまし
+妾等親子の悩みをば
+救はせ給ひし有難さ
+仮令天地はかへるとも
+月落ち星は失するとも
+大海原は涸るるとも
+此御恵はいつの世か
+忘れまつらむ惟神</p>
+            <p class="ja-classical-line">神の御為め道の為め
+賤しき吾身を奉り
+三千彦司と諸共に
+八岐大蛇に魂を
+抜かれ給ひしバラモンの
+教の柱大黒主の
+司の君に赤心を
+捧げて救ひ奉り
+バラモン教や三五の
+教の道の隔てをば
+隈なく取りて相共に
+此世を造り給ひたる
+祖神様の御教に
+力を合せ村肝の
+心を一つに結びつつ
+曇りきつたる現世を
+ブラバーサの世界とし
+天地の神の御前に
+功を立てて山海の
+恵に酬い奉るべし</p>
+            <p class="ja-classical-line">神の教の霊幸はふ
+道の司の三千彦さまよ
+妾が小さき胸の中
+燃ゆる炎を瑞霊
+注がせ給ひて片時も
+早く休ませ給へかし
+如何に世界は広くとも
+吾背の君と打ち仰ぎ
+仕へまつらむ武士は
+汝が身をおきて外になし
+さはさりながら三千彦司
+汝は彦知にましませば
+打ち見る島の先々や
+かき見る磯の隈々おちず
+若草の妻持たせらめ
+吾こそは女にしあれば
+汝をおきては男子なし
+汝の外には夫はなし
+綾垣の浮はやが下に蒸衾
+さやぐが下に淡雪の</p>
+            <p class="ja-classical-line">若やる胸を素抱きて
+白き腕取り交し
+たたきまながり真玉手玉手
+いやさしまきてもも長に
+寝をしなせませ豊神酒きこしめせ
+なつかしの君よ恋しき男子よ
+青山に日が隠くらば
+烏羽玉の夜は出でなむ
+旭の笑み栄えまして
+妾が厚き願ひをば
+完全に委曲にきこし召せ
+神に誓ひて願ぎ奉る
+金勝要の大御神
+イドムの神のおとりなし
+偏に幸を願ぎ奉る
+アア惟神々々
+御霊幸倍ましませよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Having finished singing, she set the clavichord aside, and while blushing, she bashfully offered the jade cup to Michihiko. Michihiko, feeling somewhat troubled by the kindness, with his heart pounding, silently took the cup offered by Hime, received the Daigomi poured to the brim, held it up, drank it down in one gulp with gratitude, and having steeled his resolve, sang a Kaheshiuta in a clear voice.</p>
+          <p class="en-p">Michihiko: 'Looking up at the high, eternal / Amatsusora, descending / To save and protect the various things / Beneath the Ame, the Ubusuna / Kami, in the Kamuyakata, eternally / Residing, the Mizumitama / Kamususanō no Ōkami / Who governs the Oshihe no Yakata / By the Mikoto of the Lord of Yashima / As the teacher, Tamakuniwake / Accompanied by Masumi no Hiko and Itahiko / We worship the Medeta Kamuyakata / While on a Tabimakura / In light Minari and Idetachi / Climbing and descending the steep slopes of Kajika Pass / Encountering various hardships, at last / Crossing the wilderness where wolves howl / The four of us together, intending to advance to the capital of Haruna.'</p>
+          <p class="en-p">Michihiko: 'Just as we were coming, attacked / By the ugly officials of the Brahman / The four teacher and disciples were scattered / Separated, not knowing where each had gone / Where is my teacher now / How are my companions of the Oshihe / The summer sky weighs on my heart / The mountains and fields laugh, the fresh green / Buds blowing, even more joyfully / The branches fluttering in the wind / Performing a dance, bravely / Laughing and flourishing, yet Michihiko's / Heart is dark as the fifth month / Hiding his form in the green leaves / The cuckoo singing is also unusual / Eight thousand and eight times, his voice hoarse / Seeking a way, weeping and sobbing / Continuing the lonely journey / Trudging through Aonogahara / Driven by the fierce wind.'</p>
+          <p class="en-p">Michihiko: 'Saved by the smart incarnation of Kami / From a dangerous life / Crossing the Anburakku River / Just as we were advancing / Toward the sacred ground of Mount Terumon / I happened to meet the figure of Oguni-hime / By the side of the road / As requested, I stole deep into the Kamuyakata / And proclaimed the Oshihe of the three-five / The eight-fold black clouds wrapping this mansion / Were blown away by the breath of the Kami / Of the Shinatobe / The sun and moon in the sky, Terumon / Became a Medeta mansion / Just then, the Magatsukami / Raged and went mad, terribly / Bearing a grudge against this mansion / It is wretched to see it rampaging / Due to my own lack of vigilance, Michihiko.'</p>
+          <p class="en-p">Michihiko: 'Caught by the Magatsukami / With no mercy, bound / With rough ropes, to escape / Both way and means were thrown / Into the Arakawa, and the dew-like life / Of the Tama no O was lost / Just as I was wandering / At the crossroads of the Kamireikai / The grace of Kami was very deep / Sending the fierce dog Smart / To welcome and return my soul to the Genze / Call, call, Kannagara, Kami, Kami / How precious is the grace of Kami / Whether the morning sun shines or clouds over / Whether the moon waxes or wanes / Whether the stars fall from the sky / Whether the great ocean dries up / Would I, Michihiko, who dedicated my life to the path / Regret this dew-like life?'</p>
+          <p class="en-p">Michihiko: 'Seeing the hardships of the mansion / Unable to abandon it, as Michihiko's / Heart-horse advances / Risking my life, I sought / The rock cave in the depths of the deep mountains of Terumon / Hiding from human eyes / I rescued the two Hime / Whose hearts and forms are beautiful / And finally returned here / The illness of my father, which weighed on my heart / Has also gradually healed / The Kyūdō-koji and the Hel-tsukasa / The souls of the two are also at peace / Returned to the original state, bravely / Guided by Kerina-hime / Wandering through the flower-blooming Kami-en / With a joyful heart / Rejoicing in the dew of grace / I have become one who enjoys it / Ah, Kannagara, Kami, Kami.'</p>
+          <p class="en-p">Michihiko: 'How precious is the grace of Kami / Nevertheless, Debisu-hime / The heart of your life / Though it reaches my sincere heart / I am one who bears the great mission / Of the precious Ōkami / In the midst of that Kami-waza / How could Kami permit / An unexpected marriage / Please give up on this matter alone / And let me fulfill the mission / That I bear, Kannagara / Swearing to Kami, before you / I clarify my sincerity and proclaim it / Ah, Kannagara, Kami, Kami / May your spirit be blessed.'</p>
+          <p class="en-p">Having finished singing, he had explained in great detail that although he was truly grateful for the kind intentions of Debisu-hime, he could not accept them because he was in the midst of serving the Kami-waza with his teacher, bearing the mission of Kami. Ah, how will the love affair between these two be resolved?</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と歌ひ終り、クラヴィコードを傍に直し、顔を赤らめ乍ら、いと恥づかしげに三千彦に向つて玉の盃をさし出した。三千彦は聊か有難迷惑の体にて、胸を轟かせながら黙つて姫のさし出す盃を取り醍醐味を浪々と注がれて押し頂き、感謝と共にグツと飲み乾し、決心の臍を固めて声も涼しく返歌を歌ふ。</p>
+            <p class="ja-classical-line">三千彦『仰げば高し久方の
+天津空より下りまし
+天の下なる諸々を
+救ひ守らす産土の
+神の館に永久に
+鎮まり居ます瑞霊
+神素盞嗚の大神の
+教の館を統べたまふ
+八島の主の御言もて
+玉国別の師の君と
+真純の彦や伊太彦を
+伴ひ目出度神館
+伏し拝みつつ旅枕
+軽き身装の扮装に
+河鹿峠の急坂を
+登りつ下りつ種々の
+難みに遇ひて漸くに
+虎狼の吠猛る
+荒野を渉り四人連れ
+ハルナの都に進まむと</p>
+            <p class="ja-classical-line">来る折しもバラモンの
+醜の司に襲はれて
+師弟四人は散々に
+行方も知れず分れけり
+吾師の君は今何処
+教の友は如何にせしと
+心にかかる夏の空
+山野は笑ひ新緑の
+芽を吹きいとど嬉しげに
+風に梢を翻し
+舞踏を演じ勇ましく
+笑ひ栄ゆれど三千彦の
+心の空は五月暗
+青葉に姿隠しつつ
+鳴く時鳥も只ならず
+八千八度の声涸れて
+尋ぬるよしも泣逆吃
+淋しき旅を続けつつ
+青野ケ原をトボトボと
+烈しき風に煽られて</p>
+            <p class="ja-classical-line">神の化身のスマートに
+危ふき命を救けられ
+アンブラック川を打ち渡り
+テルモン山の聖場に
+向つて進む折りもあれ
+小国姫の御姿
+道の傍に廻り会ひ
+請はるるままに神館
+深く忍びて三五の
+教の道を宣べ伝へ
+これの館を包みたる
+八重黒雲を科戸辺の
+神の御息に吹き払ひ
+月日も空にテルモンの
+目出度き館となりにける
+時しもあれや曲津神
+伊猛り狂ひて凄じく
+此の館に仇をなし
+狂ひ廻るぞうたてけれ
+身の不覚より三千彦は</p>
+            <p class="ja-classical-line">曲神共に捉へられ
+情け容赦も荒縄に
+縛りつけられ免れむ
+道も手段も荒川に
+投げ捨てられて玉の緒の
+露の命を失ひつ
+神霊界の八衢に
+彷徨ひ進む折もあれ
+神の恵の弥深く
+猛犬スマート遣はして
+吾の霊魂を現世に
+迎へ還させ給ひけり
+呼々惟神々々
+神の恵の尊さよ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+星は空より落つるとも
+大海原は涸るるとも
+道に捧げし三千彦の
+露の命を惜まむや</p>
+            <p class="ja-classical-line">館の難みを見るにつけ
+見捨て兼ねてぞ三千彦が
+心の駒の進むまに
+命を的にテルモンの
+深山の奥の岩窟に
+人目を忍び尋ねより
+心も姿も麗しき
+二人の姫を救ひ出し
+ようよう此処に帰りける
+心にかかりし父君の
+病もおひおひ癒え給ひ
+求道居士やヘル司
+二人の身魂も安らかに
+元に復りて勇ましく
+ケリナの姫に導かれ
+花咲き匂ふ神苑を
+心楽しげに逍遥し
+恵の露を嬉しみて
+楽しむ身とはなりにけり
+アア惟神々々</p>
+            <p class="ja-classical-line">神の恵の尊さよ
+さはさりながらデビス姫
+汝が命の御心は
+吾赤心に通へども
+吾は尊き大神の
+一大使命を帯ぶる身よ
+其神業の半途にて
+思ひも寄らぬ妻定め
+如何でか神の許さむや
+此事許りは諦めて
+吾の負ひたる使命をば
+果させ給へ惟神
+神に誓ひて汝が前に
+誠を明し宣り奉る
+アア惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">と歌ひ終り、デビス姫の御親切なる御志は、実に感謝に堪へないが、神の使命を帯び、吾師の君と共に神業に仕ふる中途なれば折角のお志なれどお断わり致すとの意味を、いと細やかに述べ終つたのである。アア此両人の恋愛関係は如何にして落着するであらうか。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c17.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 17: 涼窓 [1467]</span>
+      </a>
+      <a href="c19.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 19: 抱 Moon [1469]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

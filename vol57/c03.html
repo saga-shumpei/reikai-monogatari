@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3: Field 探 [1453] - Volume 57 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 57 Table of Contents</a>
+      <span>Volume 57</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 57 &bull; Chapter 3</span>
+      <h1 class="chapter-title-en">Chapter 3: Field 探 [1453]</h1>
+      <p class="chapter-title-ja">野探〔1453〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kiudaukoji escorted Davis and Kelina as far as the pine forest, and was resting there for a shibashi with Heru. Suddenly, amidst the war cries of rauniyakunanniyo and the beating of taiko and gongs,</p>
+          <p class="en-p">Gunshiu: 'Give her back, restore her, O evil gods of Ananai-kyō!
+Dontokodontoko dokodokodon
+Chiyanchikichiyanchikichiyanchikichin!
+The most precious of the precious princesses,
+The princess of the Terumon Mansion,
+Dontokodontoko dokodokodon
+Chiyanchikichiyanchikichiyanchikichin!
+Dragging her off to the Fudō Waterfall,
+Sneaking the villainous and lawless Michihiko
+Ahead into the mansion,
+Hiding the adamantine and indestructible Kongaufue Niyoihotsushiyu,
+The greatest treasure of treasures,
+The one who hid it is none other than Michihiko!
+Give her back, restore her, the Niyoi hotsushiyu!
+Dontokodontoko dokodokodon
+Chiyanchikichiyanchikichiyanchikichin!
+The Niyoi hotsushiyu was returned
+Thanks to the grace of the gods of Brahmin,
+But the princess who is kanjinkaname,
+Give her back, restore her, come on, hurry up!
+
+Envoys of Ananai-kyō,
+Use whatever mahafu you will,
+We too have our own mahafu!
+Give her back, restore her, come on, hurry up,
+The most precious of the precious princesses,
+And another precious Princess Kelina,
+Ever since she graced the mansion with her presence
+Three years ago,
+She has never once returned home at all!
+Dontokodontoko dokodokodon
+Chiyanchikichiyanchikichiyanchikichin!
+This too is surely the handiwork
+Of the evil gods of Ananahi,
+As declared in the divine oracle of Lord Wax;
+Surely there can be no mistake about it!
+Dontokodontoko dokodokodon
+Chiyanchikichiyanchikichiyanchikichin!
+Eee, eee, eh!
+Now, this time evil demons have suddenly arrived
+At the Terumon Mansion,
+
+Plotting to steal the vital Niyoi hotsushiyu first,
+And then to carry off the princess in their jaws,
+And as a very first step, by using strange mahafu,
+To take the life of our Lord
+Okunowake no Mikoto,
+The Kyōshu-sama himself!
+If things come to this, it is not just a loss for the mansion,
+It is a massive loss for the whole town of Miyamachi!
+Basking in the dream of peace
+On the mountainside of Mount Terumon,
+A paradise unique under heaven,
+The demons of Ananai-kyō came,
+And their airtight evil plotting
+Has been thoroughly seen through!
+Lord Wax is truly a remarkable being,
+The savior of the Terumon Mansion,
+And the saving deity of all Miyamachi!
+Though we had heard he was an evil person,
+He has manifested divine power
+Unrivaled since ancient times!
+Praise him, laud him, revere him, worship him!
+Praise him, laud him, revere him, worship him!
+Dontokodontoko dokodokodon
+Chiyanchikichiyanchikichiyanchikichin!
+In the pine forest, there is somehow
+The shadow of a suspicious person.
+Is this too the raid
+Of the evil gods of Ananahi?
+Though we, all the townsfolk, have never once
+Beheld the face of Princess Davis and Kelina,
+We hear she is a person of surpassing beauty.
+Everyone, please brace yourselves!
+The stern divine oracle of the great god Ōkunihiko
+That the Takakura and Asahi Myōjin
+Who protect Ananai-kyō
+Would disguise themselves as women and invade
+The Terumon Mansion,
+
+Having descended upon Lord Wax,
+Hearing this, could we ever foolishly
+Dream dreams of safety and peace
+And continue living as we do?
+No matter how much she looks like a princess,
+you must never believe it!
+Just as Lord Wax has said,
+Once you find a woman,
+Unless you seize her firmly and present her
+Before the eyes of Wax,
+Never send her into the mansion!
+Dontokodontoko dokodokodon
+Chiyanchikichiyanchikichiyanchikichin!'</p>
+          <p class="en-p">Thus shouting, wearing red sashes and red headbands, and carrying white flags with scrawled, messy characters, old and young with darkened faces came streaming down the slope. That the townsfolk as a whole had begun such erratic agitation was the doing of an evil fox constantly employed by Wax. This evil fox was a subordinate of Yōgenbō, a millennia-old ancient fox called Sankūbō, who from time to time lit thousands of fires at midnight on Mount Terumon, or caused huge characters to appear through letters, thereby deceiving the townspeople. This Sankūbō went in and out of Wax's body, always plotting ill deeds. When Michihiko of Ananai-kyō suddenly arrived there, fearing the exposure of its own true identity, and thinking that now was the very time to banish Michihiko and ensure that not a single envoy of Ananai-kyō could pry, it exerted its utmost strength, and first of all, to disrupt the minds of the townsfolk, it borrowed the mouth of Wax and began a street speech.</p>
+          <p class="en-p">The townspeople, numbering around a hundred households, swallowed Wax's delusive words without a single doubt, and leaving their houses empty, set out to search for the princess. Every single house emptied itself, rushing outside, leaving not even a single cat behind to mind the home.</p>
+          <p class="en-p">Meanwhile, Oksu and Biruma, under the secret orders of Wax, searched the deserted homes, stole every single article of value, and had them carried off to a certain cave on Mount Terumon.</p>
+          <p class="en-p">Among all hundred households, there was not a single house whose most precious possessions were left un-stolen.</p>
+          <p class="en-p">Wax, leading a multitude of people, pushed forward into the pine forest where the four were resting, and with a great voice,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">求道居士はデビス、ケリナをパインの森迄送り来り、ヘルと共に少時息を休めて居た。忽ち老若男女の鬨の声、鉦や太鼓を鳴らしながら、</p>
+            <p class="ja-classical-line">群衆『返せ戻せ、三五教の悪神よ
+ドンドコドンドコ　ドコドコドン
+チヤンチキチヤンチキ　チヤンチキチン
+大事の大事のお姫さま
+テルモン館のお姫さま
+ドンドコドンドコ　ドコドコドン
+チヤンチキチヤンチキ　チヤンチキチン
+不動の滝へ引き込んで
+悪逆無道の三千彦を
+お先へ館へ忍ばせつ
+金剛不壊の如意宝珠
+大事の大事のお宝を
+隠した奴は三千彦だ
+返せ　戻せ　如意宝珠
+ドンドコドンドコ　ドコドコドン
+チヤンチキチヤンチキ　チヤンチキチン
+如意の宝珠はバラモンの
+神のお蔭で返つたが
+肝腎要のお姫さま
+返せ戻せやサア早う</p>
+            <p class="ja-classical-line">三五教の宣伝使
+如何なる魔法を使ふとも
+此方にや此方の魔法がある
+返せ戻せサア早く
+大事の大事のお姫さま
+も一つ大事なケリナ姫
+三年前に館をば
+お出ましなさつたそれ限り
+根つから帰つて厶らない
+ドンドコドンドコ　ドコドコドン
+チヤンチキチヤンチキ　チヤンチキチン
+これも矢張三五の
+悪神共のなす業と
+ワックス司の御託宣
+よもや間違ひ厶るまい
+ドンドコドンドコ　ドコドコドン
+チヤンチキチヤンチキ　チヤンチキチン
+エーエーエ
+さても此度テルモン館
+俄に悪魔が到来し</p>
+            <p class="ja-classical-line">肝腎要の如意宝珠
+盗んで次にお姫さま
+銜へて帰なうと企みつつ
+まづ手初めに教主さま
+小国別の命をば
+所在魔法を使ひつつ
+命を取らうと企み居る
+斯うなりや館の損でない
+宮町中の大損だ
+テルモン山の中腹に
+泰平の夢を貪りし
+天下唯一のパラダイス
+三五教の鬼が来て
+水も漏らさぬ悪企み
+根本的に看破した
+ワックスさまは偉いもの
+テルモン館の救世主
+宮町中の救け神
+悪いお方と聞いてたに
+古今無双の神力を</p>
+            <p class="ja-classical-line">現はしなさつた偉い人
+讃めよ称へよ崇めよ拝め
+讃めよ称へよ崇めよ拝め
+ドンドコドンドコ　ドコドコドン
+チヤンチキチヤンチキ　チヤンチキチン
+パインの森には何となく
+怪しい人の影がある
+これも矢張三五の
+悪神共の襲来か
+デビス、ケリナの姫さまの
+吾々町人一同は
+一度もお顔は拝まねど
+御容色の勝れた人ぢやげな
+皆さま確りなされませ
+三五教を守護する
+高倉、旭の明神が
+女に化けてテルモンの
+館へ侵入すると云ふ
+大国彦の神様の
+さしも厳しき御託宣</p>
+            <p class="ja-classical-line">ワックスさまに降りしと
+聞いて吾等はうかうかと
+無事泰平の夢を見て
+これが暮して居られうか
+何程姫に見えたとて
+決して信じちやなりませぬ
+ワックスさまの云ふ通り
+一旦女を見つけたら
+とつ捉まへてワックスの
+お目にかけた上でなくば
+決して館に送るなよ
+ドンドコドンドコ　ドコドコドン
+チヤンチキチヤンチキ　チヤンチキチン』</p>
+            <p class="ja-classical-line">と、赤襷赤鉢巻に白い旗に文字をムシヤムシヤと書いたのを立て乍ら、黒い顔した老若男女が坂道を下つて来る。斯の如く町民一同が脱線的蠢動を初めたのは、ワックスがいつも使役して居る悪狐の所為である。この悪狐は妖幻坊の部下であつて三九坊と称ふる数千年の劫を経た古狐で、時々テルモン山に夜中数千の火を点し、或は文字をもつて大の字を現はしなどして、町民を誤魔化して居たのである。此三九坊はワックスの体内に出入して何時も好からぬ事を計劃して居た。其処へ三五教の三千彦が突然やつて来たので、自分の正体の現はれむ事を恐れ、三千彦を排斥し、三五教の宣伝使を一人も窺はしめざるやう為すは今此時と、有らむ限りの力を尽し、先づ第一に町民の精心を攪乱すべく、ワックスの口を藉つて辻演説を初めたものである。百戸許りの町民は、ワックスの妖言を一も二もなく信じて仕舞ひ、家を空にして姫の捜索に出掛けたのである。どの家もどの家も家を空にして外に飛び出し、猫の子一匹留守をして居なかつた。其間にオークス、ビルマの両人はワックスの内命により、留守の家々を探つて目ぼしい物品を残らず盗み出し、テルモン山の或る岩窟へ運ばせて置いた。百戸が百戸とも最も大切なる物品を一つも盗まれない家は無かつた。ワックスは数多の人々を引き連れ乍ら、四人の休息せるパインの森に押し寄せ来り大音声、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Wakkusu: 'Hey there, you shaven-headed Buddhist monks, you use the magic of Ananai-kyō, you have kidnapped and hidden the two young ladies somewhere, you used the white foxes of Asahi and Takakura to make them impersonate Princess Debisu and Princess Kerina, and you are atrocious villains who advanced to get your hands on the treasure of the Niyoihotsushiyu once again; moreover, the other one is the ringleader of the major thieves who ravaged Miyamachi with drawn swords by threes a month ago, and even if you try to hide it, it will not be hidden. Now how is it, submit peacefully to your bonds!'</p>
+          <p class="en-p">He shouted angrily. Kyudaukoji said in a gentle tone,</p>
+          <p class="en-p">Kyudaukoji: 'I am by no means an evil god; originally I am one called Kernel, an Emishi of Brahminism. Following the command of Lord Ōkuronushi, obeying the two generals Oniharuwake and Kumehiko, on the way of marching to the mansion of Iso, I met the propaganda envoy of Ananai-kyō, Kāshyapa the Honored One, and Jikokuwake, who preached and explained the true way to me, and thus I became a monk. And these two honorable persons are Princess Debisu and Princess Kerina of the Terumon mansion. I have helped them in their hour of emergency and escorted them this far. Now dispel your doubts and guide us all.'</p>
+          <p class="en-p">Wakkusu: 'Ha ha ha ha ha, what disgusting spewing, you shit-priest fellow! Even if you try to fool me, who possess peerless divine power, with deceptive eloquence, I am not the sort of person to be taken in by such things. Princess Debisu certainly does not have ears like those. It must be a malicious fox called Takakura; isn't blood still dripping as proof that its transformation failed and its ears were bitten by a dog? And isn't that other wretch-fox disguised as Princess Kerina also bearing a wound on the back of her neck? You too have traces of a wound around your ears. You must have certainly been bitten by a dog and come all the way here in disguise. Now everyone, there is no need for hesitation, by the command of Wakkusu, it would be best to bind them up and send them to the cave of Mount Terumon in order to make them confess the whereabouts of the princesses.'</p>
+          <p class="en-p">Debisu: 'Hey, aren't you Norosaku's son Wakkusu, the steward? What a rude thing you are saying. Have you no sense to treat me, your benefactor who saved my life, with such discourtesy?'</p>
+          <p class="en-p">Kerina: 'Oh, how rare, Lord Wakkusu, you are a man who continues to derail as usual. My younger sister and I are beyond doubt the daughters of Ogunowake, so hurry and get out of the way, for I am worried about our father's personal safety and we must return as quickly as possible.'</p>
+          <p class="en-p">Wakkusu: 'Even if you try to chatter and deceive us, we will not fall for that trick. Now everyone, the fact that those ears are bitten is the proof of four-legged beasts. Bind them up quickly!'</p>
+          <p class="en-p">When he gave the order, dozens of rough men bound the four tightly and boundlessly. Although Kyudaukoji and the other three were not persons to be easily bound by nameless urchins, they deliberately submitted to being bound so that they could return to the mansion bound, astonish Wakkusu and the others, and thus let them be. However, because Wakkusu had a scheme in his heart, by the command of the vice-guard of Sangubō, he divided them one by one into the rock caves in the ravine on the opposite side where Mikahiko had been thrown, sent them in together with the crowd, and firmly locked the bolts.</p>
+          <p class="en-p">When the townspeople gave victory cheers and returned to their respective homes, they saw that the necessary gold and silver censers and water pots for worshipping the Brahmin god had vanished without a single one remaining. All of them, flustered and alarmed, came out to the street and recounted the circumstances of the robbery to one another. Those who came riding proudly on donkeys to that place were Wakkusu, Oukusu, and Biruma. The crowd gathered around the three and complained about the circumstances of the robbery.</p>
+          <p class="en-p">Oukusu spoke in a loud voice from his horse:</p>
+          <p class="en-p">Oukusu: 'The wicked propaganda envoys of Ananai-kyō sneaked into the mansion of Mount Terumon, swindled Princess Debisu, hid the Niyoihotsushiyu, cursed Ogunowake to take his life, and not being satisfied even with this, they snatched away the heirlooms of the houses in Miyamachi and every single essential utensil for worshipping the Brahmin god without leaving one. This is entirely the work of their magic, so do not be careless at all. If you dawdle, your precious daughters will be taken, your property plundered, and in the end even the lives of all of you will be taken. By now, at the divine mansion of Terumon, Lord Ogunowake is in a situation of nine deaths and one life, and his life is hardly likely to be saved. In addition, the whereabouts of the two young ladies are unknown because of the magicians, and you can hardly live in peace. Moreover, now that we have lost the most vital Niyoihotsushiyu, we are either to incur the wrath of Lord Ōkuronushi residing in the capital of Haruna and be banished from the village, or suffer extermination; yet because this Lord Wakkusu managed to get his hands on the Niyoihotsushiyu through his divine power, the crime of the hundred households of Miyamachi has been escaped. Therefore, from now on, let us revere Lord Wakkusu as the master of the mansion, and let the whole village recommend to both of them that they become husband and wife after the real Princess Debisu is found, and thus protect the house passed down from our ancestors, shall we not? Until today, Lord Wakkusu deliberately played the fool and showed himself as a prodigal son, and he is the true savior who has saved this national crisis.'</p>
+          <p class="en-p">Thus he spun sweet lies and persuaded them. The assembled men and women, young and old, all resented suffering from the magic of the evil gods of Ananai-kyō, praised Wakkusu's divine power, and hurried back to their respective homes while chanting 'Long live Wakkusu!' three times. When they returned, since the ritual utensils and property passed down from their ancestors for generations were gone, they sank into sorrow once again, hated the propaganda envoys of Ananai-kyō all the more, and conversely came to respect Wakkusu like a god.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ワックス『ヤアヤアそれなる、円頂緇衣の比丘共、汝は三五教の魔法を使ひ、二人の姫様をいづくにか、奪い取り隠し置き、旭、高倉の白狐を使ひ、デビス姫、ケリナ姫に化けさせ、再び如意宝珠の宝を手に入れむとして進み来りし大悪人奴、又一人は一ケ月以前三人抜刀をもつて宮町を荒した大泥坊の中の片割、隠しても隠されまい。サアどうぢや、尋常に縛につけ』</p>
+            <p class="ja-classical-line">と呶鳴り立てた。求道居士は言葉柔しく、</p>
+            <p class="ja-classical-line">『拙者は決して悪神では厶らぬ、元はバラモン教のカーネル、エミシと申すもの、大黒主様の命を奉じ、鬼春別、久米彦両将軍に従ひ、斎苑の館へ進軍の途中、三五教の宣伝使迦葉尊者、治国別に出遇ひ誠の道を説き示され、比丘となつたもので厶る。さうして此御両人はテルモン館のデビス姫様、ケリナ姫様で厶るぞ。危急の場合をお助け申し、此処迄お送り申たもので厶る。サア疑を晴らして吾々一同を御案内召され』</p>
+            <p class="ja-classical-line">ワックス『アハハハハハ、吐したりな糞坊主奴、怪弁をもつて神力無双の某を誤魔化さむと致すとも、左様な事に誑らるる如き某では厶らぬぞ。デビス姫様は決してそのやうなお耳はして厶らぬ。全く高倉と申す悪狐で厶らう、化損ねて犬に耳を噛まれた証拠にはまだ血が滴つて居るぢやないか。もう一人のケリナ姫に化けた奴狐も首筋に創を致して居るぢやないか、其方も亦耳の辺りに創の跡がある。きつと犬に噛まれて、化けて此処まで来よつたに違ひない。サア皆の者猶予はいらぬ、ワックスの命だ、縛りあげて姫の住所を白状させる為め、テルモン山の岩窟に送つたがよからう』</p>
+            <p class="ja-classical-line">デビス『これお前は家令の悴、野呂作のワックスぢやないか、何と云ふ失礼な事を云ふのだ。妾の命を助けて下さつた御恩人、無礼の事を致すと量見は致しませぬぞ』</p>
+            <p class="ja-classical-line">ケリナ『ヤア珍しやワックス殿、其方は相変らず脱線を続ける男だな。吾等妹姉は小国別の娘に間違ひない程に、サア早く其処を退いてお呉れ、お父上の御身の上が気にかかるから一時も早く帰らねばなりませぬ』</p>
+            <p class="ja-classical-line">ワックス『ツベコベと吾々を誤魔化さむと致しても其手に乗るものではない。サア皆さま、あの耳を噛まれて居るのが四足の証拠だ。早く縛りなさい』</p>
+            <p class="ja-classical-line">と下知すれば、数十人の荒男は有無を言はせず四人を雁字搦に縛り上げた。求道居士初め其外三人は名もなき小童共にムザムザ縛られるやうな者ではなかつたが、一層の事縛られて館へ帰り、ワックス其外を驚かしてやらうと、態とに縛に就いたのである。然るにワックスは胸に一物ある事とて、三九坊の副守の命ずる儘に三千彦を放り込んだ向かひ側の谷間の岩窟に一人宛分けて、大勢と共に送り込み錠を固く鎖して仕舞つたのである。</p>
+            <p class="ja-classical-line">町民は勝鬨をあげて各家路に帰り見れば、バラモン神を祭る最も必要な金銀製の香炉や水壺が、一個も残らず紛失して居た。何れも周章狼狽街路に出て、互に盗難の次第を物語つて居る。其処へ意気揚々として驢馬に跨りやつて来たのは、ワックス、オークス、ビルマの三人であつた。一同は三人の周囲に群がり来り、盗難の次第を訴へた。オークスは馬上より大音声を発して云ふ。</p>
+            <p class="ja-classical-line">『三五教の悪宣伝使、テルモン山の館へ忍び込み、デビス姫をチヨロまかし、如意宝珠を隠し、小国別を呪咀して命を取り尚是にては飽き足らず、宮町の家々の重宝、バラモン神を祭る重要の器具を一つも残さず奪ひ取りしは、全く彼等の魔法の致す所、決して油断をするな。グヅグヅして居ると大切な娘を取られ、財産を奪はれ、遂には皆さまの命迄取られますよ。最早テルモンの神館は小国別様は九死一生の場合、とてもお命は難しい。加ふるに二人のお娘子は魔法使の為に行方は分らず、到底安心して暮す事は出来ますまい。又肝腎要の如意宝珠を失うた上はハルナの都に坐ます大黒主様の怒に触れ村中追放に遇ふか、或は鏖殺に遇はねばならぬ所を此ワックス様が、御神力によつて如意宝珠を手に入れて下さつた為め、宮町百戸の罪は逃れたと申すもの、されば今後はワックス様を館の主と崇め奉り、本当のデビス姫が見つかつた上で御夫婦にお成り下さるやう、御両人に村中がお勧め申し、そして祖先より伝はつた家を守らうでは厶いませぬか。ワックス様は今日迄は故意とに馬鹿になり、放蕩息子と見せかけて、此国難をお救ひ下さつた誠の救世主で厶いますぞや』</p>
+            <p class="ja-classical-line">と嘘を甘く並べ立て、説きつけた。集まり来りし老若男女は、何れも三五教の悪神の魔法にかかつて苦しむ事を恨み、且つワックスの神力を賞揚し、『ワックス万歳』を三唱し乍ら各家路に急ぎ帰る。帰つて見れば先祖代々から伝はつた財物の祭具が無いので又もや憂に沈み、益々三五教の宣伝使を憎み、その反対にワックスを神の如くに尊敬するに至りぬ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c02.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 2: 煽動 [1452]</span>
+      </a>
+      <a href="c04.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 4: Phantom 子 [1454]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

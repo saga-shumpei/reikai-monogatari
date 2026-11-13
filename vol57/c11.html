@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: Bird 逃し [1461] - Volume 57 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 57 Table of Contents</a>
+      <span>Volume 57</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 57 &bull; Chapter 11</span>
+      <h1 class="chapter-title-en">Chapter 11: Bird 逃し [1461]</h1>
+      <p class="chapter-title-ja">鳥逃し〔1461〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">With her hair, resembling a straw broom mixed with white, streaming wildly in the withered wind, she came running like a yasha, slapping the earth loudly with her feet until she reached the crossroads.</p>
+          <p class="en-p">Looking, she saw that Magafuyu of Tenkaukyō, who had come just before, was running with his loincloth trailing black like a falling star, hitching up his shirihitsu and marching heavily with great strides.</p>
+          <p class="en-p">No matter how much Takahime called and shouted, he would not even look back; unable to keep up with his darting momentum, Takahime gnashed her teeth at the crossroads and stamped the ground in frustration,</p>
+          <p class="en-p">Takahime: 'Oh, what a shame! Sharu, because you are such a tonma, you let the bird that we went to all the trouble of bringing out escape. Why didn't you tie a rope around it while you had the chance? It is written in the Ofude, "If even the Kami ties a rope around it, no matter how much it wriggles and writhes in agony, it will never let it go."'</p>
+          <p class="en-p">Sharu: 'I am a ningen, and you are a kamisama, aren't you? What good would it do for a ningen to tie a rope? Instead of complaining to me, why didn't the Hinode kamisama tie the rope? I will not listen to such complaints.'</p>
+          <p class="en-p">Takahime: 'My, what a man who loves to quibble! Why won't you show zetsutaifukujiyū? Just who do you think you are treating me as?'</p>
+          <p class="en-p">Sharu: 'Well, when I wondered who on earth you might be, lo and behold, you were right here. When I thought you were right here, lo and behold, you were Takahime-sama; when I thought you were Takahime-sama, you were the Ikumiya of Giritenjo Hinode no Kami; when I thought that, you were the Great Miroku of Sokotsu Iwane; when I thought that, you were the Heavenly Being of the First Spirit Realm; when I thought that, you were the Savior of the Manifest, Hidden, and Divine Worlds; when I thought that, you were the wife of Mokusuke; when I thought that, you were the august spirit of Tokoyohime; when I thought that, you were the august spirit of Tokoyohime, you were Takamiyahime-sama; and when I thought you were Takamiyahime-sama, you were Sadakohime-sama. Who is who, I haven't the slightest clue at all. Shall I just treat you as being right here?'</p>
+          <p class="en-p">Takahime: 'Oh, what a useless thing to say, what kind of talk is that! Listing so many names, wouldn't it be fine to just say one? Verbose and tedious etiquette is not in fashion, you know. Without saying such complex names, why not simply say Ikumiya-sama? Won't the priest of Hōshōji come to collect the taxes?'</p>
+          <p class="en-p">Sharu: 'Even so, with a simple title, it probably wouldn't please you. The longer you can make it, the better your mood is, after all. Saying it long and trailingly, like the drooping tail of the mountain bird trailing the foot of the mountain, seems to have some sort of value out of nowhere. Above all, it has an elegant taste, you see.'</p>
+          <p class="en-p">Takahime: 'Good grief, what are you grumbling on about—simple, complex, elegant taste, and what not? Words like those of foreign barbarians are not used in the high Plain of High Heaven down here!'</p>
+          <p class="en-p">Sharu: 'And yet, do you not occasionally use English, Anata?'</p>
+          <p class="en-p">Takahime: 'That is not English; those are the pure and genuine words of the Age of the Gods! When you drone on with names for so long when I am this busy, it is not a very pleasant feeling. Shall I recite one for you, too? Then you will understand the flavor. When I wonder who on earth you are, you are the fellow right here. When I think you are a flag-bearing laborer of Brahmanism, you are a petty thief. When I think you are a petty thief, you are a river thief. When I think you are a river thief, you are a botched-suicide Yachimata laborer. When I think you are a Yachimata laborer, you are the soul of a damned ghost registered in hell. When I think you are a ghost's soul, you are an incorrigible scoundrel. When I think you are an incorrigible scoundrel, you are a spineless coward. You are a good-for-nothing, toothless, soul-vacant rascal! When I think you are a soul-vacant rascal, you are Takahime's arse-wiper. When I think you are an arse-wiper, you are Sharu after all! Ho, ho, ho, ho!'</p>
+          <p class="en-p">Sharu: 'That is rather brutal, isn't it? To think you could manage to line up so many insults. After all, your claim of Giritenjo is a lie—you must be the vessel of the Golden-Haired Nine-Tailed Fox.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">白髪交りの藁箒のやうな髪をサンバラに凩に靡かせ乍ら夜叉のやうにペタペタと大地を鳴らせつつ四辻までやつて来た。見れば、最前きた天香教の曲冬は尻引からげトントンと大股に夜這星のやうに黒い褌を引きずり乍ら走つて居る。何程高姫が呼んでも叫んでも振り向かばこそ、駆け出す其勢に高姫も追つく事を得ず四辻に歯噛みをなし地団駄を踏んで、</p>
+            <p class="ja-classical-line">高姫『エイ残念やなア、これシャルお前が鈍馬だから折角出てきた鳥を逃がして仕舞つたのだ。なぜ知らぬ間に綱でも掛けて置かなんだのかい。「神が綱さへかけて置けば何程ヂリヂリ悶へをしても離さんぞよ」とお筆に出て居るぢやないか』</p>
+            <p class="ja-classical-line">シャル『私は人間、貴女は神様でせう。人間が綱かけたつて何になりませう。私に不足を云ふより、なぜ日の出神様が綱かけなかつたのですか。その不足は聞きませぬ』</p>
+            <p class="ja-classical-line">高姫『エ、よう小理窟を云ふ男だなア。なぜ絶対服従をせないのだ。一体妾を誰人と心得て居るのだい』</p>
+            <p class="ja-classical-line">シャル『ハイ、誰人さまかと思へば矢張此方さまで厶いました。此方さまかと思へば矢張高姫さま、高姫さまかと思へば義理天上日の出神の生宮、さうかと思へば底津岩根の大弥勒さま、大弥勒様かと思へば第一霊国の天人様、天人様かと思へば現界、幽界、神界の救主さま、救主さまかと思へば杢助さまの奥様、杢助さまの奥様かと思へば常世姫の御霊様、常世姫のお霊様かと思へば高宮姫様、高宮姫様かと思へば定子姫様、誰人が誰人やら、薩張見当がつきませぬワイ。矢張此方さまにして置きませうかい』</p>
+            <p class="ja-classical-line">高姫『エ、仕様もない、何と云ふ事を云ふのだい。沢山の名を並べて、一つ云つたらよいぢやないか。繁文褥礼は流行りませぬぞや。そんな複雑な名を云はいでも、もちつと単純に生宮さまとなぜ云はんのかい。法性寺の入道が運上取りに来るぢやないか』</p>
+            <p class="ja-classical-line">シャル『それでもシンプルな名称では、お前様のお気に入りますまい。些とでも長く云ふ程、貴女の御機嫌がよいのですからなア。足曳の山鳥の尾のしだり尾の長々しう云ふのが、どこともなしに価値があるやうですよ。第一雅味がありますからなア』</p>
+            <p class="ja-classical-line">高姫『エエ、シンプルだの、複雑だの雅味だのと何をガミガミ云ふのだい。そんな毛唐のやうな言葉は地の高天原では用ひませぬぞや』</p>
+            <p class="ja-classical-line">シャル『それでも貴女時々英語を使ふぢやありませぬか』</p>
+            <p class="ja-classical-line">高姫『あれや英語ぢやない神世の生粋のお言葉ぢや、此忙しいのにさう長く名を云はれると余り気分のよいものぢやない。お前も一つ云うて上げようか、さうしたら味が分るだらう。何処の奴かと思へば此処の奴だ。バラモン教の旗持人足かと思へば小盗人だ。小盗人かと思へば川陥だ。川陥かと思へば、死損ひの八衢人足だ。八衢人足かと思へば、地獄に籍をおいた亡者の魂だ。亡者の魂かと思へば極道息子だ。極道息子かと思へば腰抜けだ。間抜けに歯抜け、魂抜け野郎だ。魂抜け野郎かと思へば高姫の尻拭きだ。尻拭きかと思へば矢張シャルだ。オツホホホホ』</p>
+            <p class="ja-classical-line">シャル『どうも甚いですな、それ丈よう悪口が陳列出来たものですワイ。矢張お前さまは義理天上は嘘だ、金毛九尾の容器でせう』</p>
+            <p class="ja-classical-line">高姫『定つた事だよ。金毛九尾と云ふ守護神は初めは悪だつたけれど、今度、高姫の悪が善に改心して、善に立ち帰つたのだから、三千世界の事は何でも彼でも皆知つて居るのだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sharu: 'Naruhodo, you are acting like a Kiyubi everywhere. However, since you are a woman, you surely would not have golden fur, would you?'</p>
+          <p class="en-p">Takahime: 'Hey, you, stay hidden here; it seems like someone is coming from over there. I will catch him and preach to him, so you must never interfere. Hide your body in this Karekusa and listen. If you do not study a little, it will be for nothing if we let the bird we went to such trouble to find escape, just like today. Now, hurry and hide, hurry and hide.'</p>
+          <p class="en-p">Sharu: 'Then, although I am not a Kirigirisu, I will hide in the grass for a while. Please do not talk for too long, as my legs will go numb.'</p>
+          <p class="en-p">Saying this, he crawled into the Kayakusa with a rustling sound. A man came along, singing a Sendenka in a faint voice.</p>
+          <p class="en-p">Michihiko: 'The Kami appears in the world / To distinguish between Zenshin and Jiyashin / The Ōnahohi who created this world / And the Kamunahohi with a heart so vast / In truth, whatever happens in the world of men / Is seen and heard again by Nahohi / Serving as the official of the Sōmu / At the Kamuyakata of the Ananai-kyō / Longing for Hinodewake / Leaving the island of Jitentō / Takahime, who has gone mad with love / If she knew of shame or human feelings / Her eyes would not be darkened, her ears not deafened / Captured by the demon of love / In a sacred place of all places / She has exposed / All the ugliness she possesses / How pathetic it is / Takahime, with her heart in disarray / Deceived by the golden-furred Kiyubi / Weeping, she left the mansion / Descending the steep slope of Kajika Pass / Her skirt blown by the wind / Exposing even her thighs / The style in which she walks briskly / Looks like a Yasha / Passing through the town of hell / Stopping by the forest of the shrine / Having her spirit extracted by the villain Yōgenbō / Returning to foolishness / Performing an unsightly spectacle / Together with Mokusuke of Yōgenbō / Hand in hand to Kohokuzan / With an arrogant face at the sacred place / She visited the Palace of the Moon / Startled by the divine light / Bursting forth from the doors / She fled for her life / Stopping by the forest of Uki / Deceived by foxes and tanuki / By the living Kototama / Of Hatsuwakahime and Sumāto / Filled with fear and dread / Together with Yōgenbō / Riding on a dark cloud / With a darkened heart / At the very moment of fleeing / From the mid-air, for some reason / She fell headlong / And became missing / By now, Takahime / Must be following the path / Of the arrogance and derailment / That she exhausted in this world / And is lurking somewhere / In the fields of the Chūyūkai / Facing the spirits passing by / Spouting incoherent doctrines / I am the Senden-shi Michihiko / Separated from my master, Tamakuniwake / I have come alone to face / The Kamuyakata of Terumon / To expose the schemes / Of the evil ones / And to help the mansion in its distress / Where is this? It is the land of Fusa / By the side of the Anburakku River / Where the grass grows thick / I believe it is Aonogahara / The small birds sing and the flowers are fragrant / The heavenly paradise is right before my eyes / It truly feels pleasant / Ah, Kannagara-kamu-nagara / Blessed by the spirit of the Kami / Please return me quickly / To the Kamuyakata of Mount Terumon / I pray before the Kami.'</p>
+          <p class="en-p">While singing this, he came along. Takahime was too far away to realize that he was singing about her, but upon hearing the line about the small birds singing and the flowers being fragrant in Aonogahara, she thought:</p>
+          <p class="en-p">Takahime: 'To say that birds are singing and flowers are blooming in this withered field damaged by frost, could he be a madman? If I carelessly engage with him and the other party turns out to be a madman, it will be troublesome. I shall step out and observe the situation.'</p>
+          <p class="en-p">She stood at the crossroads. Michihiko finally advanced to this point and saw Takahime; while he thought her face looked familiar, he did not realize that he himself had arrived at the Yatsumado.</p>
+          <p class="en-p">Michihiko: 'Excuse me, I would like to ask, in which direction is Mount Terumon in the country of Hashi?'</p>
+          <p class="en-p">Takahime: 'Hey, are you talking about that Mount Terumon? This is the forest of Uki, and it is still quite far away. And you, for what business are you going to Mount Terumon?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">シャル『成程、どこともなしに九尾九尾して居ますワイ。併し貴女は女だからよもやキン毛は厶いますまい』</p>
+            <p class="ja-classical-line">高姫『コレお前は此処にすつこんで居なさい、彼方から何だか出て来るやうだ。妾が一つ説教を、捉まへてするから、お前は決して口出しをしてはならぬぞや。此枯草の中に身を隠して聞いて居なさい。少し勉強せねば今日のやうに折角出て来た鳥を逃がしては何にもならぬからなア。サア早く引込んだり引込んだり』</p>
+            <p class="ja-classical-line">シャル『それでは暫く螽斯ぢやないが草の中に引込みます。長話はおいて下さい、足が痺れますからなア』</p>
+            <p class="ja-classical-line">と云ひ乍ら、ガサガサと萱草の中に潜り込んだ。幽かな声で宣伝歌を歌ひ乍ら一人の男がやつて来る。</p>
+            <p class="ja-classical-line">三千彦『神が表に現はれて
+善神邪神を立て別ける
+此世を造りし神直日
+心も広き大直日
+唯何事も人の世は
+直日に見直し聞き直す
+三五教の神館
+総務の司と仕へたる
+東野別を慕ひつつ
+自転倒島を立ち出でて
+恋に狂うた高姫が
+恥も人情も知らばこそ
+眼は暗み耳は聾え
+恋の悪魔に囚はれて
+所もあらうに聖場で
+あらむ限りの醜態を
+暴露せしこそ果敢なけれ
+心乱れし高姫は
+金毛九尾に誑られ
+泣く泣く館を立ち出でて</p>
+            <p class="ja-classical-line">河鹿峠の急坂を
+風に裾をば煽られつ
+太股迄も放り出して
+スタスタ下るスタイルは
+地獄の町を通ひ居る
+夜叉の如くに見えにける
+祠の森に立ち寄りて
+妖幻坊の曲者に
+霊をぬかれて愚にかへり
+所在醜態演出し
+妖幻坊の杢助と
+手に手をとつて小北山
+聖場に横柄面さげて
+詣でたところ月の宮
+扉の中より迸る
+その霊光に肝つぶし
+命辛々逃げて行く
+浮木の森に立ち寄りて
+狐狸に誑られ
+初稚姫やスマートの</p>
+            <p class="ja-classical-line">生言霊に怖ぢ恐れ
+妖幻坊と諸共に
+心も暗き黒雲に
+乗りて逃げ出すその途端
+如何はしけむ中空より
+真逆様に顛落し
+行方不明となりにけり
+嘸今頃は高姫は
+此世にありて尽したる
+驕傲尊大脱線の
+道を辿りて中有界
+どこかの野辺に潜伏し
+道行く精霊に相対し
+支離滅裂の教理をば
+吹き立て居るに違ひない
+吾は三千彦宣伝使
+玉国別の師の君と
+別れて一人テルモンの
+神の館に立ち向ひ
+悪人輩の企みをば</p>
+            <p class="ja-classical-line">暴露し館の難儀をば
+助けむために来りけり
+此処はいづくぞフサの国
+アンブラック川の片傍
+草茫々と生え茂る
+青野ケ原と覚えたり
+小鳥は唄ひ花匂ひ
+天国浄土も目の当り
+実にも愉快の心地する
+ああ惟神々々
+神の御霊の幸はひて
+テルモン山の神館
+一時も早く帰しませ
+神のみ前に願ぎまつる』</p>
+            <p class="ja-classical-line">と歌ひ乍らやつて来る。高姫は余り遠くて自分の事を歌つて居るのは気がつかなかつたが、小鳥は唄ひ花匂ひ、青野ケ原で云々と云ふ一句を聞いて、</p>
+            <p class="ja-classical-line">高姫『これだけ霜に痛んだ枯野ケ原を、鳥が唄ふの花が咲くのと云ふのは狂人ではあるまいかな、うつかり相手になつて先方が狂人だつたら仕末がつかない。茲は一つ柔り出て様子を考へて見よう』</p>
+            <p class="ja-classical-line">と四辻に立つて居る。三千彦は漸く此処に進み来り高姫を見て、よう似た顔だとは思ひ乍ら、自分も八衢に来て居るとは気がつかず、</p>
+            <p class="ja-classical-line">三千彦『モシ一寸お尋ね致しますが、波斯の国のテルモン山は、何方の方面に当りますかな』</p>
+            <p class="ja-classical-line">高姫『ヘイ、あのテルモン山で厶いますか、此処は浮木の森で厶いますが、まだ随分遠いと云ふ事で厶います。そして貴方、テルモン山へ何御用があつてお出になりますか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Michihiko: 'Yes, I am a Sendenshi of the Ananai-kyō, and as a great Ōsaudō has occurred at the Kamuyakata on Mount Terumon, I am concerned and wish to offer my assistance. However, I know not how I lost my way, but I have arrived at such a place as this.'</p>
+          <p class="en-p">Takahime: 'Are you of the Ananai-kyō? That is indeed Ketsukō. But is it not the case that the deity of the Brahmanism is enshrined on Mount Terumon?'</p>
+          <p class="en-p">Michihiko: 'Yes, that is so.'</p>
+          <p class="en-p">Takahime: 'Mount Terumon... is that not the Kamuyakata of the Brahmanism? And is there not a Kamutsukasa stationed there called Okuniwake, who is neither vinegar nor Konniyaku, who will not yield for lever, stick, spear, or Tetsupō, and who is truly Kiyōbau and Burai? Why, you, why do you go to help such a person?'</p>
+          <p class="en-p">Michihiko: 'Yes, it happened by chance, and I have reached a point where I cannot turn back. If I may be so bold, are you not Takahime-sama? I had heard that you had undergone Kunigahe, but are you still Gosauken and opening the Uranai-kyō?'</p>
+          <p class="en-p">Takahime: 'Yes, is that the rumor? Takahime is Jiyōbu and full of life, so please have Goanshin. Since the Giritenjiyō Hinodewake is about to preach, would you not like to Tachiyo for a moment?'</p>
+          <p class="en-p">Char sticks his face out from the grass,</p>
+          <p class="en-p">Char: 'Dame, dame.'</p>
+          <p class="en-p">saying this, he hides his face.</p>
+          <p class="en-p">Michihiko: 'Excuse me, Takahime-sama, a creature like a wooden puppet is appearing and disappearing behind you; what is that?'</p>
+          <p class="en-p">From the grass,</p>
+          <p class="en-p">Char: 'Michihiko-sama, please take me with you too.'</p>
+          <p class="en-p">he says.</p>
+          <p class="en-p">Michihiko: 'Strange, it seems as if some odd thing is calling my name from the grass.'</p>
+          <p class="en-p">Takahime: 'No, that is a hill myna. Parrots and hill mynas live in this wilderness, so they often say such things.'</p>
+          <p class="en-p">Michihiko: 'My, that is strange. Does this hill myna not have the form of a human?'</p>
+          <p class="en-p">Takahime: 'That must be so, for it is a world of monsters. It is a world where even the rocks, roots, and blades of grass speak, so they must change and appear. That is why Hinodewake, wishing to restore the world to a crystal state, borrows the fleshly palace of Takahime and goes to such trouble.'</p>
+          <p class="en-p">Michihiko: 'Indeed, there are strange things in this world.'</p>
+          <p class="en-p">From the grass,</p>
+          <p class="en-p">Char: 'Henge no Henge no Henge-musha, Henge-jinja no Takahime-sama, Henge no Henge no Henge-musha, Henge-jinja no Char-sama, Utsupotsupō, Hōtsuku, Hōtsuku-hōhō, Hohohohō, Hōhokekiyo Hōhokekiyo, Kekiyo Kekiyo, Niyān, Mō, Hin-hin-hin, Wan-wan-wan, Ū-ū-ū, Kiyatsu Kiyatsu Kiyatsu, Chiu-chiu-chiu, Kiyutsu Kiyutsu Kiyutsu, Utsupotsupo, Ahahahaha.'</p>
+          <p class="en-p">Michihiko: 'How it changes, indeed. One never knows what might appear if one stays in such a place. Farewell, I must take my leave.'</p>
+          <p class="en-p">He starts to walk away briskly. Takahime spreads her arms wide,</p>
+          <p class="en-p">Takahime: 'Wait, wait. You cannot pass this checkpoint so easily. If you wish to pass, you must firmly take what Takahime says to heart before you go; you will be able to regret it later.'</p>
+          <p class="en-p">Michihiko: 'Ah, thank you. However, I am in a bit of a hurry, so I shall listen to you at leisure another time.'</p>
+          <p class="en-p">Char: 'Excuse me, Sendenshi-sama, do not bother with such an old hag, just go quickly. And please, by all means, take me with you. She is a stubborn old hag who cannot be helped.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三千彦『ハイ、私は三五教の宣伝使で厶いますが、テルモン山の館には大騒動が起つて居りますので、お助け申度いと思つて心を配つて居ます。併し乍ら、どう道を踏み迷うたか知らないが、こんな所へ来たのですよ』</p>
+            <p class="ja-classical-line">高姫『貴方は三五教で厶いますか、それはそれは結構で厶いますな。併しテルモン山にはバラモン教の神様が祭つてあるでは厶いませぬか』</p>
+            <p class="ja-classical-line">三千彦『ハイ、さうです』</p>
+            <p class="ja-classical-line">高姫『テルモン山、……テルモン山はバラモン教の、それバラモン教の神館でせう。そして小国別と云ふ、酢でも蒟蒻でもいかぬ、梃でも棒でも槍でも鉄砲でもいかぬと云ふ、誠に早狂暴無頼な、狂暴無頼な、神司が控へて居るぢやありませぬか。そんな者をお前、そんな者をお前はどうしてお前は助けに又、どうして助けに行くのですかい』</p>
+            <p class="ja-classical-line">三千彦『ハイ、つひ行がかりで後へ引くにも引かれぬ事が出来たのです。貴女は失礼ですが、高姫さまぢや厶いませぬか。お帰幽になつたと云ふ事を聞いて居ましたが、矢張御壮健でウラナイ教をお開きで厶いますか』</p>
+            <p class="ja-classical-line">高姫『ハイ、そんな噂が厶いますかな、高姫はこんなに丈夫でビチビチして居ますから御安心下さい。これから義理天上日の出神が説教を致しますから、一寸立寄つて下さいますまいか』</p>
+            <p class="ja-classical-line">草の中からシャルは顔を出し、</p>
+            <p class="ja-classical-line">シャル『駄目だ駄目だ』</p>
+            <p class="ja-classical-line">と云つては顔を隠す。</p>
+            <p class="ja-classical-line">三千彦『モシ高姫さま、貴方の後からデクの坊のやうな者が変現出没して居ますが、あれは何ですか』</p>
+            <p class="ja-classical-line">草の中から、</p>
+            <p class="ja-classical-line">シャル『三千彦さま私も連れて行つて下さい』</p>
+            <p class="ja-classical-line">と云ふ。</p>
+            <p class="ja-classical-line">三千彦『ハテナ、何だか妙なものが草の中から私の名を呼んで居るやうです』</p>
+            <p class="ja-classical-line">高姫『イエ、あれは九官鳥ですよ。此の原野には鸚鵡や九官鳥が棲んで居ますからチヨコチヨコああ云ふ事を云ふのです』</p>
+            <p class="ja-classical-line">三千彦『ヘエ妙ですなア。此九官鳥は人間の姿をして居るぢやありませぬか』</p>
+            <p class="ja-classical-line">高姫『そりやさうでせうとも、化物の世の中ですもの。岩根木根立草の片葉迄も言問ふ世の中ですから、些とは変化て出るのでせう。それだから日の出神が水晶の世に立直さうと思うて、高姫の肉宮を借り、御苦労遊ばすのです』</p>
+            <p class="ja-classical-line">三千彦『成程妙な事もあるものです』</p>
+            <p class="ja-classical-line">草の中から、</p>
+            <p class="ja-classical-line">シャル『変化の変化の変化武者、変化神社の高姫さま、変化の変化の変化武者、変化神社のシャルさま、ウツポツポー、ホーツク、ホーツクホーホー、ホホホホー、ホーホケキヨ　ホーホケキヨ、ケキヨ　ケキヨ、ニヤーン、モウー、ヒンヒンヒン、ワンワンワン、ウーウーウー、キヤツ　キヤツ　キヤツ、チウチウチウ、キユツ　キユツ　キユツ、ウツポツポ、アハハハハハ』</p>
+            <p class="ja-classical-line">三千彦『何とマア変化れるものですなア、こんな所に居ると何が出て来るか知れませぬ。左様なら御免を蒙ります』</p>
+            <p class="ja-classical-line">とスタスタ立つて行かうとする。高姫は大手を拡げて、</p>
+            <p class="ja-classical-line">高姫『待つた待つた、此関所は容易に潜る事は出来ませぬぞや、潜り度くば高姫の云ふ事を一応腹へ確りと締めこんで行きなさい、後で後悔する事が出来ますぞや』</p>
+            <p class="ja-classical-line">三千彦『ヤ有難う。併し私は少し急ぎますから今度又悠くり聞かして頂きませう』</p>
+            <p class="ja-classical-line">シャル『モシモシ宣伝使様、こんな婆に相手にならず、トツトと行きなさいませ。さうして私も何卒連れて行つて下さい。我の強い仕方のない婆さまですよ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Michihiko: 'Ah, so you were the mynah bird; what are you doing in a place like that?'</p>
+          <p class="en-p">Sharu: 'Yes, by order of the hawk, this mynah bird was suspending publication here.'</p>
+          <p class="en-p">Takahime: 'Hey, Sharu, what kind of thing are you saying? I won't forgive you anymore.'</p>
+          <p class="en-p">With that, she grips his lapel hard and presses and strangles his throat. Sharu rolls his white eyes and struggles, flailing his limbs in agony. Finding it unbearable to watch, Michihiko seized Takahime's hair tightly and pulled her down. At the same time, Sharu gets up and</p>
+          <p class="en-p">Sharu: 'Moshi, Sendenshi-sama, come quickly now. I will guide you anywhere. It's unbearable to stay and deal with an old hag like this, you know.'</p>
+          <p class="en-p">So saying, he dashes off briskly. Michihiko,</p>
+          <p class="en-p">Michihiko: 'Goodbye, Takahime-sama, please take a leisurely rest on a bed of grass.'</p>
+          <p class="en-p">proceeds briskly down the paddy path where green grasses lushly grow. Gritting her teeth, Takahime resentfully watched the figures of the two depart.</p>
+          <p class="en-p">To Sharu's eyes, it had hitherto looked like a withered moor swept by freezing winds, but ever since meeting Michihiko, that whole area had turned as if into a spring field, and scenery where birds sing and flowers fragrant came to be seen by his eyes. Joyfully, now behind and now ahead of Michihiko, Sharu proceeds northward, ever northward.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三千彦『アアお前が九官鳥だつたか、そんな所に何をして居るのだ』</p>
+            <p class="ja-classical-line">シャル『ハイ、鷹の命令によつて九官鳥此処に新聞のきうかん（休刊）して居ました』</p>
+            <p class="ja-classical-line">高姫『こりやシャル、何と云ふ事を申すか。もう了見せぬぞや』</p>
+            <p class="ja-classical-line">とグツと胸倉を取り、喉元をグウグウ押へつける。シャルは目を白黒させながら苦しさに手足をバタバタと藻掻いて居る。三千彦は見るに見兼ね、高姫の頭髪をグツと握つて引き倒した。同時にシャルは起き上り、</p>
+            <p class="ja-classical-line">シャル『モシ宣伝使様、サ早く参りませう。私が何処へでも案内致します。こんな婆に相手になつて居ては耐りませぬからなア』</p>
+            <p class="ja-classical-line">と云ひ乍ら、スタスタと駆け出す。三千彦は、</p>
+            <p class="ja-classical-line">『高姫様左様なら、悠くり草の褥で一休みなさいませ』</p>
+            <p class="ja-classical-line">と青草茂る田圃道をスタスタと進み行く。高姫は歯ぎしりし乍ら恨めし気に二人の姿を見送つて居た。</p>
+            <p class="ja-classical-line">シャルの目には今迄寒風吹き荒む枯野ケ原と見えて居たのに、三千彦に遇うてから其処等一面が春野のやうになり、鳥唄ひ、花匂ふ光景が目に入るやうになつた。シャルは嬉々として三千彦の後になり先になり、北へ北へと進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c10.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 10: 転香 [1460]</span>
+      </a>
+      <a href="c12.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 12: 三狂 [1462]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

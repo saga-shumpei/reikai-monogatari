@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: 強印 [1456] - Volume 57 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 57 Table of Contents</a>
+      <span>Volume 57</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 57 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: 強印 [1456]</h1>
+      <p class="chapter-title-ja">強印〔1456〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">About seventeen or eighteen chō deep in the valley from the mansion of Mount Terumon, there is a deep cavern called the Serpent's Cavern. Inside it, Michihiko had been forcefully pushed and confined, and two guards were keeping strict watch over him by the orders of Wax.</p>
+          <p class="en-p">Kō: 'Hey, no matter what, the sorcerer who was shoved in here seems to have done an outrageous thing. They say he's an outrageous villain who stole the jewel of the wish-granting niyoihotsushiyu, slandered that it was hidden by Lord Wax, tried to become the husband of Princess Davis, and intended to occupy this mansion, but since he's a sorcerer, who knows when he might break this iron gate and come out? If he comes out, I don't know what kind of treatment we'll be subjected to. No matter how much daily pay we receive, I'd rather be excused from such a perilous business.'</p>
+          <p class="en-p">Otsu: 'What, don't worry. A sorcerer's spells might work to a certain extent, but now his tricks have run out, he's been caught by everyone, and he's been shoved into a place like this, so he's already safe. There's little chance of him coming out. If we stand guard like this for ten or twenty days, he'll starve and die; if so, that's safe. We only need to receive our daily wages, you see.'</p>
+          <p class="en-p">Kō: 'However, if this fellow dies and turns into a vengeful ghost, that really would be a catastrophe. Wouldn't there be some way to decline this assignment?'</p>
+          <p class="en-p">Otsu: 'How could there be such a way? Since we always ask Wax-danna for favors in times of trouble and are helped by him, we are returning his favor at a time like this. Thanks to Lord Wax, at a time when the whole town of Miya was facing hardship, the wish-granting niyoihotsushiyu jewel that this fellow stole was discovered, and even our lives were saved, so we must engage in a battle of endurance with him until this fellow drops dead. Don't worry too much. If you worry, the hair on your head will turn white.'</p>
+          <p class="en-p">While they were thus talking, a propaganda song that seemed to split the head was heard coming from the forest far above.</p>
+          <p class="en-p">Michihiko:
+'The gods appear in the outer world,
+To clearly separate good and evil.
+The propaganda emissary of Izumimare,
+Michihiko-tsukasa appears.
+The steward's son Wax,
+Who was bewitched by Sanjūbō,
+Hid the sacred treasures of the divine mansion in secret,
+Yet was seen through by Michihiko-tsukasa,
+And since his own person became endangered,
+He spread rumors throughout the town of Miya in the exact opposite way,
+Claiming that Michihiko was the one who hid the wish-granting niyoihotsushiyu,
+How hateful that he deceived people who knew nothing at all!
+However much Wax may wield his crafty wisdom
+And deceive the world for a time,
+The Lord of this world who created heaven and earth
+Has manifested Himself.
+
+How could the true God
+Forever tolerate the rampancy of crookedness?
+I am Michihiko-kamitsukasa,
+Thrust into the depths of the cavern,
+At a moment when I was lost in thought for a while,
+The angel sent by the Great Deity Tsukushiteruhiko
+ Appeared instantly,
+Swung and brandished the hammer of true steel,
+Bore a hole into this cavern,
+And easily saved me.
+The divine transformation of Smart sent by Hatsuwakihime
+Now clings closely to my person,
+And from the time she grants her protection,
+Even if Wax leads tens of thousands of soldiers
+And comes to attack,
+How could I possibly fear? Kannagara.
+With the kototama of the breath of the gods,
+Blowing them away without leaving a single soul,
+
+The sacred virtue of love and good
+Shall shine upon this earth,
+While illuminating the light of faith and truth
+Between heaven and earth,
+The path of the gods demands that we sweep away
+ The misfortune of this mansion!
+Oh, how marvelous, how marvelous!
+The power of the gods is manifested
+Right before our eyes in the divine mansion!
+You two guards,
+If you repent and come before me
+To confess your sins,
+I shall pray to the gods to save you from the bitterness of the nethermost land,
+And guide you to the heavenly kingdom
+Where you shall taste and spend eternal and boundless joy, Kannagara.
+Swearing to the gods, I proclaim and transmit this.'</p>
+          <p class="en-p">Singing thus, leading fierce dogs, he leisurely descended from the upper side of the cavern. Upon seeing this figure, the two guards pressed their heads to the earth, stuck their rear ends up, and unable to utter a single word, trembled while expressing their intent of apology.</p>
+          <p class="en-p">The sun gradually sank into the western mountains, and the surroundings grew darker by the moment.</p>
+          <p class="en-p">Guided by the two, Michihiko secretly escaped through a side path and returned toward the mansion.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">テルモン山の館より十七八丁奥の谷間に大蛇の岩窟と云ふ深い穴がある。そこには三千彦を無理無体に押し込め、二人の門番が厳重にワックスの命令によつて守つて居た。</p>
+            <p class="ja-classical-line">甲『オイ、何でも此中に突込んである魔法使は大それた事をしやがつたさうだな。如意宝珠の玉を盗み出し、そしてワックス様が匿して居つた等と讒言をし、デビス姫様の夫となり、此館を占領しようとしたドテライ悪人だと云ふ事だが魔法使だから何時此鉄の門を破つて出るか分らぬ。出たが最後、どんな目に会はすか知れないぞ。何程日当を沢山貰つても斯んな剣呑な商売は御免被りたいものだな』</p>
+            <p class="ja-classical-line">乙『何、心配するな。魔法使と云ふものは或程度迄は法が利くだらうが、もう種が無くなつて皆に捉まへられ、斯んな処へ突込まれよつたのだから、もう大丈夫だ。滅多に出る気遣ひはないわ。斯うして十日も二十日も番して居れば饑ゑて死んで了ふ、さうすりや大丈夫だよ。俺等は日給さへ貰へば宜いのだからな』</p>
+            <p class="ja-classical-line">甲『然し、此奴が死んで化けて出やがつたら、それこそ大変だぞ。何とかして断り云ふ訳には行くまいかな』</p>
+            <p class="ja-classical-line">乙『そんな事、いくものかい。何時もワックスの旦那に難儀な時に無心を云つて助けて貰つてるのだから、斯んな時に御恩報じをするのだ。宮町中の難儀になる処を、ワックスさまのお蔭で此奴の盗んで居つた如意宝珠の玉も分り、俺等の生命まで助けて貰つたのだから、此奴が斃る所迄俺等は根比べをやらねばならぬのだ。余り心配するな。心配すると頭の毛が白うなるぞ』</p>
+            <p class="ja-classical-line">斯く話して居る処へ遥か上の方の森林から頭の割れるやうな宣伝歌が聞えて来た。</p>
+            <p class="ja-classical-line">三千彦『神が表に現はれて
+善と悪とを立別ける
+三五教の宣伝使
+三千彦司が現はれて
+三九坊に魅せられし
+家令の悴ワックスが
+神の館の重宝を
+密かに匿し置き乍ら
+三千彦司に看破され
+吾身危くなりしより
+正反対に如意宝珠
+匿せしものは三千彦と
+宮町一般触れ歩き
+何にも知らぬ人々を
+誑りおほせし憎らしさ
+如何にワックス奸智をば
+振ひて一時は世の中を
+欺き渡る事あるも
+天地を造り玉ひたる
+此世の主と現ませる</p>
+            <p class="ja-classical-line">誠の神は何時迄も
+曲の猛びを許さむや
+吾は三千彦神司
+岩窟の中に押込まれ
+暫し思案に暮るる折
+月照彦の大神の
+遣はし玉ふエンゼルが
+現はれ玉ひ忽ちに
+真鋼の鎚を打揮ひ
+此岩窟に穴穿ち
+容易く救ひ玉ひけり
+初稚姫の遣はせし
+神の変化のスマートが
+今や吾身に附添ひて
+守らせ給ふ上からは
+仮令ワックス幾万の
+軍を率ゐ攻め来とも
+如何でか恐れむ惟神
+神の息吹の言霊に
+一人残さず吹き散らし</p>
+            <p class="ja-classical-line">愛と善との聖徳を
+此土の上に輝かし
+信と真との光明を
+天地の間に照らしつつ
+これの館の禍を
+払はにやおかぬ神の道
+アア面白や面白や
+神の力は目のあたり
+現はれ来る神館
+汝等二人の番卒よ
+悔い改めて吾前に
+来りて罪を謝すならば
+根底の国の苦みを
+神に祈りて救ひやり
+永遠無窮の楽みを
+味はひ暮す天国へ
+導きやらむ惟神
+神に誓ひて宣り伝ふ』</p>
+            <p class="ja-classical-line">と歌ひ乍ら猛犬を引連れ悠々と岩窟の上面を下り来る。二人の番卒は此姿を見るより大地に頭をすりつけ、尻をつつ立てて一言も発し得ず、謝罪の意を表し乍ら慄うてゐる。太陽は漸く西山に没し、四辺はおひおひと暗くなつて来た。三千彦は二人に案内させ密かに抜け道より館を指して帰り行く。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Waxes, Oaks, Burma, and El, these four washed their bodies with water, entered the meeting room, and whispering together, without realizing the day turning into dusk from daytime, were carrying on the arrangements for the ambitious faction.</p>
+          <p class="en-p">Smart twitched his nose at the suspicious odor inside the room, and while groaning 'Oo-oo' in a low voice, let Michihiko know that four wicked men were absorbed in a secret conference.</p>
+          <p class="en-p">Michihiko, leaving the two guards bound by spiritual binding as they were, slipped through the back door and proceeded quietly into Okunihime's living room.</p>
+          <p class="en-p">Okunihime was drowning in tears of grief, letting out deep sighs as she wondered what would become of her from now on.</p>
+          <p class="en-p">Okunihime: 'How shall I get through today's troubles,
+Ah, Michihiko the Tsukasa, how he is yearned for.
+Michihiko's path-guiding Tsukasa
+Must be the messenger of the true gods of Ananahi.
+Though I have male servants and attendants in abundance,
+They are all of impure hearts.
+People who love only themselves gather together,
+And there is none who thinks of their master.
+Weeping them dry, the seeds of tears have run out;
+Save us, O gods of Ananahi.
+Meeting with whatever manner of sorrow, it is the sacred mansion;
+For the sake of protecting it, I will not begrudge my own body.
+The precious treasure of the Niyoihotsushiyu has returned,
+Yet what has become of my child treasure?
+My husband's illness grows ever more heavy,
+And soon the Kotoito threads are about to snap.
+People suffering from grief in the world,
+Though I hear they exist, how could they compare to me?
+Some sort of past sins coming around,
+Sending days of such suffering.
+Wait a while, for the grace of the gods is deep,
+And soon Michihiko will return.
+Serving as the teacher of Ananahi,
+The lord of pure truth is a brave warrior.'</p>
+          <p class="en-p">Thus she expressed her innermost feelings with a sorrowful air.</p>
+          <p class="en-p">Just then, Michihiko came back on stealthy feet.</p>
+          <p class="en-p">Michihiko: 'Mistress, Mistress.'</p>
+          <p class="en-p">He called out in a low voice.</p>
+          <p class="en-p">Hearing this voice faintly, Okunihime wondered if it was a dream and was startled, yet when she peered through the dim light of the lantern, it was unmistakably Michihiko the Tsukasa.</p>
+          <p class="en-p">Okunihime: 'Ah, you are Michihiko-sama, oh, my, you have returned to us. Where have you been staying?'</p>
+          <p class="en-p">Michihiko: 'Yes, there is a long story to this. However, since these two people are listening, I will leave spiritual bonds placed on them for a while.'</p>
+          <p class="en-p">So saying, he applied spiritual binding to their ears and mouths, made them lurk in the next room, and had Smart stand guard.</p>
+          <p class="en-p">Smart kept his eyes even on the slightest movement of the two guards, and when the two tried to move even a hair's breadth, he glared fiercely, and trembling with fear at the threat of biting them down, he kept watch in the next room.</p>
+          <p class="en-p">Michihiko: 'Now then, with this it is safe. However, how is the master?'</p>
+          <p class="en-p">Okunihime: 'Yes, thanks to your grace, he still lingers on. He says he wants to meet his daughter even for a moment before he dies, but since the daughter's whereabouts are still unknown, even now I was just remembering you and weeping.'</p>
+          <p class="en-p">Michihiko: 'No matter what, both young ladies should have been sent back by the Shugenja and already returned to this mansion. In this, there must be some scheming by the wicked scoundrels. Right now in that meeting room, the four fellows led by Waxes are holding a secret consultation, and if they realize I have returned to this mansion, there is no telling what kind of things they might do. I earnestly wish to be guided to a living room where no one can come. There I shall speak with you in detail.'</p>
+          <p class="en-p">Okunihime: 'It is a bit cramped, but above my husband's sickroom there is a dark living room. No one is able to go up there, so I beg you to come up there, and I wish to hear of various matters.'</p>
+          <p class="en-p">Michihiko: 'That is convenient. Come, let us go quickly. We never know when the wicked ones might come.'</p>
+          <p class="en-p">So saying, guided by Okunihime, he lit a faint flame in a dark room on the second floor, hid his body, and indulged in secret talk.</p>
+          <p class="en-p">Michihiko: 'The truth of the matter is, as I surmise, I think the two young ladies are hidden in the cave of Mount Terumon. That fellow called Waxes fell in love with Princess Davis, and having been given the cold shoulder, without learning his lesson, tried to the very end to fulfill his desire of love, hid the Niyoihotsushiyu to trouble the mansion, and schemed to force his way in as a forced son-in-law, when I arrived; fearing the exposure of his conspiracy, on the contrary he went about spreading rumors that I am a magician, insisted that it was also I who hid the Niyoihotsushiyu, and the townspeople knowing nothing took his words for truth, moreover trumpeted that the two lords sent by the Shugenja were monsters, hid them in a cave, and after making the princess yield by force, intended to step in grandly after the master's passing—such must be his evil plot. However, since the young lady is a resolute and strong woman, you need have no anxiety that she will ever fall into his poisoned hands. Furthermore, since she will never surrender her body to them nor have her chastity broken, please be at ease. Nevertheless, we cannot do anything right this moment. After the minds of the people in the town have calmed down, upon the occasion when Waxes's conspiracy is revealed, I will show my face and rescue the princess. We must remain settled for the next two or three days. Also, regarding the master's illness, even if there are fluctuations, these four or five days nothing will happen, so please be at ease.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ワックス、オークス、ビルマ、エルの四人は体を水にて洗ひ、会議室に入つてコソコソと、昼の間から日の暮れるのも知らず野心会の打合せをやつて居た。スマートは室内の怪しき臭に鼻をぴこつかせ、小声で『ウーウー』と唸り乍ら、三千彦に四人の悪者が密談に耽つてゐる事を知らした。三千彦は二人の番卒を霊縛したまま裏口よりソツと小国姫の居間に進み入つた。小国姫は悲痛の涙にくれ、今後如何になり行くならむと青息吐息をつきゐたり。</p>
+            <p class="ja-classical-line">小国姫『如何にせむ今日の悩みを切り抜けむ
+三千彦司の偲ばるるかな。
+三千彦の道の司は三五の
+誠の神の使なるらむ。
+下男僕は数多あり乍ら
+心汚きものばかりなり。
+吾身のみ愛する輩集まりて
+主人を思ふ人ぞなきかな。
+泣き干して涙の種もつきにけり
+救はせ玉へ三五の神。
+如何ならむ悩みに会ふも神館
+守らむ為めには吾身を惜しまじ。
+如意宝珠貴の宝は帰りぬれど
+吾子宝は如何になりしぞ。
+背の君の病益々重なりて
+早縡糸の断れむとぞする。
+世の中に憂に悩める人々は
+ありとし聞けど吾に如かめや。
+如何ならむ昔の罪の廻り来て
+かかる苦しき日を送るらむ。</p>
+            <p class="ja-classical-line">待て暫し神の恵みの深ければ
+やがて三千彦帰り玉はむ。
+三五の教司と仕へます
+誠一つの君は益良夫』</p>
+            <p class="ja-classical-line">と悲しげに述懐を宣べて居る。そこへ三千彦は忍び足にて帰り来たり。</p>
+            <p class="ja-classical-line">『奥様奥様』</p>
+            <p class="ja-classical-line">と小声に呼ぶ。小国姫は此声を微に聞いて夢かと許り打驚き乍ら、微暗き行燈の光に透かして見れば擬ふ方なき三千彦司であつた。</p>
+            <p class="ja-classical-line">小国姫『ア、貴方は三千彦様、よう、マア帰つて来て下さいました。何処へお出でになつて居りましたか』</p>
+            <p class="ja-classical-line">三千彦『ハイ、これには長いお話が厶います。然しこれ等両人が聞いて居りますれば、暫く霊縛を加へて置きます』</p>
+            <p class="ja-classical-line">と云ひ乍ら耳と口とに霊縛を加へ、次の間に忍ばせ置きスマートをして警護せしめた。スマートは二人の番卒の一挙一動にも眼を配り、二人が一寸でも動かうとすれば目を怒らし、噛みつかむとする勢に恐れをなして、慄ひ慄ひ次の間に控へて居た。</p>
+            <p class="ja-classical-line">三千彦『サアもう、これで大丈夫、然し乍ら旦那様は如何で厶いますか』</p>
+            <p class="ja-classical-line">小国姫『ハイ、お蔭様で、まだ続いて居ります。一時も早く娘に会うて死にたいと申して居りますが、まだ娘の行衛は分りませぬので、今も今とて貴方の事を思ひ出し、泣いて居つた処で厶います』</p>
+            <p class="ja-classical-line">三千彦『どうしてもお嬢さま二人とも、修験者に送られ、已に此館へお帰りになつて居らねばならぬ筈で厶います。之には何か悪人輩の企みがあるので厶いませう。今あの会議室でワックス以下四人の連中が密々と相談を致して居りますれば、私が此館へ帰つた事を覚れば彼等は如何なる事を致すか分りませぬ。何卒誰も来る事の出来ない居間へ案内して頂き度いもので厶います。そこでトツクリとお話を申上げませう』</p>
+            <p class="ja-classical-line">小国姫『チツト窮屈で厶いますが吾夫の病室の上に暗い居間が厶います。そこは誰も上る事は出来ませぬから、そこへお越しを願うて、何かの事を承はり度う厶います』</p>
+            <p class="ja-classical-line">三千彦『それは好都合です。サア早く参りませう。何時悪者がやつて来るか知れませぬから』</p>
+            <p class="ja-classical-line">と云ひ乍ら小国姫に導かれて二階の暗き一間に微な火を点じ、身を隠し密々話に耽つた。</p>
+            <p class="ja-classical-line">三千彦『実の所は二人のお嬢様は私の察する所、テルモン山の岩窟に隠して居るやうに考へます。ワックスと云ふ奴、デビス姫様に恋着し、肱鉄砲を喰はされたのを、性懲りもなく、飽迄恋の欲望を遂げむとし、如意宝珠を隠してお館を困らせた上、往生づくめで押掛け婿にならうと企んで居た所へ、拙者が参つたものですから陰謀露顕を恐れ、反対に拙者を魔法使と触れ廻り、如意宝珠を隠したのも拙者だと主張致し何も知らぬ町民は彼が言葉を真に受け、又修験者が送つて来た御両人様を化物だと吹聴し、岩窟に匿しおき、往生づくめに姫様に得心させた上、御主人の御死去後正々堂々と乗り込まうと云ふ悪い企みで厶いませう。併し乍らお嬢様は確りした女丈夫ですから、決して彼が毒手におかかり遊ばす案じは要りませぬ。又決して彼等に身を任せ、操を破らるる事はありませぬから御安心下さいませ。併し乍ら今直に如何すると云ふ事も出来ませぬ。町内の人の心が鎮まつた上、徐にワックスの陰謀が現はれた処へ拙者が首を出し、姫様をお助けする事に致しませう。ここ二三日は落着いて居らねばなりませぬ。又御主人の御病気に、さしひきがあつても此四五日は何ともありませぬから御安心下さいませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Okunihime: 'I am somewhat relieved to hear that. I wonder if our daughter is safe. How overjoyed my husband will be to hear of this! Taking this as a parting gift for the netherworld, I shall cheerfully return to the spirit realm. Ah, Kamunagara mi-tamahiko chihahe mase. However, that fellow Waxes is an evil scoundrel unlike any parent. And when luck is bad, misfortunes tend to pile up; our steward Allstin has been gravely injured and is in such a critical condition that he might die even before my husband. Is there no way we can save him?'</p>
+          <p class="en-p">Michihiko: 'He will hardly be saved. He has broken as many as two ribs.'</p>
+          <p class="en-p">Okunihime: 'Oh, how distressing this is. This too must be some karmic connection. Since my son behaves so much like a villain, could it be that the child's sins are visiting retribution upon the parent?'</p>
+          <p class="en-p">Michihiko: 'By no means, by no means; there is no reason whatsoever that a child's sins should requite a parent. Since the Kamisama exist in impartiality and selflessness, they can never act to punish or afflict people. Much less would there be any unreasonable circumstance where they would visit the sins of a child upon an innocent person. Truly, beyond this there is no other course than to pray for the peace of Allstin's soul in the afterlife. And besides praying that you may change your province as quickly as possible and be relieved of the suffering of your illness, there is no other path.'</p>
+          <p class="en-p">While they were whispering thus, Waxes, Oaks, Bilma, and El, all four of them guzzling liquor recklessly, came stomping noisily into the sickroom.</p>
+          <p class="en-p">Waxes: 'Well, well, honored master Okuniwake-sama, how is your illness? I felt it would not do unless I came to inquire after you, but as my own father has sustained a severe injury, and he is my only parent whom I cannot simply abandon, I have been nursing him without closing my eyes at night, putting filial piety first. That being said, not to visit my precious master felt like the height of disloyalty, and I have been beside myself with worry; even while staying at home, my heart has remained connected to my master's condition. Ah, if I wish to be loyal I cannot be filial, and if I wish to be filial I cannot be loyal; somehow the world does not go as one desires. Either... no, either way, since my old man has had his ribs broken, it is his fate that he must die. Therefore, if he would only die soon, I could attend to you, master—though my heart is impatient, since illness alone is something no human can do anything about, I have been terribly rude. Please forgive me for my discourtesy. Listen, master, even if my father the steward should pass away, since this Waxes is full of vigor and waiting behind the scenes, please do not worry in the least. And since Princess Davis and Princess Kelina will be returning before long, though inadequate as I am, I shall take care of them. Please be at ease about this too. If beforehand you will utter just a single word asking Waxes to look after your two daughters kindly, I shall exert myself with the vigor of a raging lion and present the princesses to your sight. Since I have brought a proxy-written copy of your last will and testament here, would you not press your thumbprint upon it for a moment? It is not merely for the sake of Waxes alone; needless to say, it is for the sake of the master and everyone in the town, and furthermore for the sake of the entire nation of Telmon.'</p>
+          <p class="en-p">Okuniwake barely raised himself up upon the sofa, his sunken eyes staring wide, and in a feeble voice said,</p>
+          <p class="en-p">Okuniwake: 'Are you Waxes? You seem to be saying something or other, but perhaps because of my illness, my ears are ringing and I cannot hear a thing. My wife should be somewhere around there, so if you have matters to discuss, please talk things over thoroughly with my wife. My body is already weakened and even my ears can no longer hear.'</p>
+          <p class="en-p">Thus Okuniwake intentionally feigned deafness to cast off the annoyance and refused to engage with him.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">小国姫『それを承はりまして一寸安心致しました。娘は無事で居りませうかな。主人が聞きましたら何程喜ぶ事でせう。これを冥土の土産として潔く帰幽する事で厶いませう。アア惟神霊幸倍坐世。然しワックスと云ふ奴は親にも似ぬ悪党で厶いますな。さうしてマンの悪い時には悪い事が重なるもので、家令のオールスチンは大怪我を致し吾主人よりも先に死ぬかも知れぬ様な重態で厶います。あれを助けてやる訳には行きますまいかな』</p>
+            <p class="ja-classical-line">三千彦『とても助かりますまい。肋骨を二本迄折つて居ますから』</p>
+            <p class="ja-classical-line">小国姫『さても困つた事で厶います。これも何かの因縁で厶いませう。あまり悴が悪党を致しますので子の罪が親に酬うたのでは厶いますまいか』</p>
+            <p class="ja-classical-line">三千彦『決して決して、子の罪が親に酬ふ等といふ道理が厶いませぬ。神様は公平無私にゐらつしやいますから決して人を罰め、苦める様な事をなさる筈が厶いませぬ。况して罪なき本人に子の罪迄おきせ遊ばす不合理な事がありませうか。只此上はオールスチン様の冥福を祈つてやるより外に道はありますまい。そして一時も早く国替をなさつて病気のお苦みをお助かり遊ばす様、祈るより外に道は厶いませぬ』</p>
+            <p class="ja-classical-line">斯く密々話をして居る処へ、ワックス、オークス、ビルマ、エルの四人は酒を矢鱈にあふり乍ら、ドヤドヤと病室に入り来り、</p>
+            <p class="ja-classical-line">ワックス『これはこれは、小国別の御主人様、御病気は如何で厶います。お訪ね致さねば済まないのですが、何分私の父が大怪我を致しましたので、一人よりない親、見逃す訳にもゆかず、夜の目も寝ず、孝行第一に看病致して居りました。だと申して大切な御主人様お訪ね致さぬも不忠の至りと、気が気でならず、宅に居つても心は御主人様の身の上に通つて居ります。アア忠ならむと欲すれば孝ならず、孝ならむと欲すれば忠ならず、どうも世の中は思ふやうには行きませぬ。どつちや……いえ、どつち道、私の爺は肋骨を折られて居ますから、死なねばならぬ運命で厶います。それで早く死んで呉れますれば、御主人様のお世話が出来ます事と、心は焦りますれど、病気計りは人間がどうする事も出来ませぬので、ツヒ失礼を致して居りました。何卒御無礼の罪お赦し下さいませ。モシ御主人様、家令の父が亡くなりましても此ワックスがビチビチして後に控へて居りますれば、決して御心配下さいますな。そしてデビス姫様とケリナ姫様とは間近い内にお帰りになりませうから、及ばず乍ら私がお世話をさして頂きます。これも御安心下さいませ。予めワックスに娘二人を宜しく頼むと只一言仰有つて下さいますれば、獅子奮迅の活動を致し、姫様を御目にかけるで厶いませう。ここに貴方の遺言状を代書して来ましたから、一寸拇印を捺して下さいますまいか。何もワックス一人の為では厶いませぬ。お館、町内一同の為は申す迄もなく、テルモン国一国の為で厶いますから』</p>
+            <p class="ja-classical-line">小国別はソファーの上にヤツと起き上り凹んだ目をクワツと瞠き、力なき声にて、</p>
+            <p class="ja-classical-line">『お前はワックスだつたか、何とか云つてる様だが病気のせいか、耳がワンワンして何も聞えない。女房が其処辺に居るだらうから話があるならトツクリと女房として呉れ。私はもう体が弱つて耳さえ聞えなくなつたから』</p>
+            <p class="ja-classical-line">と故意と小国別は煩さを排除せむと耳に事寄せて取り合はぬ。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Wakkusu: 'Moshi, Goshiyujinsama, chito kokari shite kudasaimase. Kono yakata ni wa Michihiko to iu mahafutsukahi ga kimashite kara kuwaijihiyakushiyutsu, anata no gobiyōki mo kiyatsu no mahafu no tame de mousuimayo. Sono Michihiko o Terumon-san no raugoku e oshikome, oyakata no waza o nozoku no wa kono Wakkusu de mousuimasu kara, goanshin kudasaimase.'</p>
+          <p class="en-p">Okuniwake: 'Nani, ano Michihiko-sama o ihaya e uchikonda to wa, soriya taihen na koto o shite kureta. Ano okata wa ikigamisama da. Sayō na koto o shitara omaetachi ni shinbatsu ga ataru zo. Hayaku otasuke mōshite wagamae ni okutte maire. Ayashikaranu koto o suru denai ka.'</p>
+          <p class="en-p">So saying, with rising anger and in a feeble voice, he shouted fiercely.</p>
+          <p class="en-p">Wakkusu: 'Hahahahaha, anata no rō wa uso de mousuimashita ka. Nani to tsugafu no ii mimi de mousuimasu na. Goshiyujinsama, yoku kangaete goran nasaimase. Kefu ka asu ka shirenu mi o motte, sō ganbaru mono jiya arimasenu. Kono yakata wa kono Wakkusu ga inareneba dame de mousuimasu. Baramon-kyō no seijiyō e Ananai-kyō no sendenshi o hitsupakomu nado to wa jūdai na tsumi de mousuimaseu. Konna koto ga Daikokunushi no mimi ni haittara ikaga itashimasu. O-michi no tame ni wa kono Wakkusu wa Goshiyujinsama demo, nani demo mousuimasenu.'</p>
+          <p class="en-p">He roared out defiantly.</p>
+          <p class="en-p">Okuniwakehime and Michihiko had heard Wakkusu's voice from the second floor above, but they could not find a way to go down... What a bad fellow to appear at such an unfortunate time... frowning, praying fervently to the Great Deity so that he might return as soon as possible, Michihiko concentrated his prayers.</p>
+          <p class="en-p">Wakkusu, with an increasingly loud voice, pressed upon the master to obtain his thumbprint.</p>
+          <p class="en-p">The nurse, Sēru, finding it unbearable to watch, spoke up.</p>
+          <p class="en-p">Sēru: 'Moshi, Wakkusu-sama, dannasama wa gobyōki no ominoue, o-karada ni sawarimasu kara nanitozo okohae kudasaimase. Okusama ga o-kaeri ni natta ue, totsukkuri to gosōdan asobashita yoroshikarau.'</p>
+          <p class="en-p">Wakkusu: 'Ē, kangofu no bunzai to shite, kakei no kasegi Wakkusu ni mukai, burei no mōshiyō, sutsukonde ore. Naetachi noki hinnyo no yōkai suru toko de nai. Moshi Goshiyujinsama, zehi tomo kore ni boin o negaimasu.'</p>
+          <p class="en-p">So saying, he thrust the document before him. Okuniwake, having no alternative,</p>
+          <p class="en-p">'Aa, watashi wa me mo kurumi, mimi mo tōku natte nani mo wakaranai ga, donna koto ga kaite aru no ka ōkii koe de yonde kure. Soshite Wakkusu ga yonda no de wa ate ni naranu. Sēru, watashi ni kawatte, sono yuigonjō o yonde kure.'</p>
+          <p class="en-p">Sēru: 'Hai, shōchi itashimashita. Wakkusu-sama, sā kochira e o-watashi kudasai. Mesu ga dannasama no kawari ni yomasete moraimasu kara.'</p>
+          <p class="en-p">Wakkusu: 'Moshi, Goshiyujinsama, yonda ijō wa boin o nashite kudasaimasu ka. Nashite morawanakute wa yonde morattemo nani mo narimasenu kara na. Sorekara mae ni sadamete okanakeba yomu wake ni wa ikimasenu.'</p>
+          <p class="en-p">Okuniwake: 'Yonda ue de boin o nashite yarau.'</p>
+          <p class="en-p">Wakkusu: 'Iya arigatai. Oi, Sēru, soko wa... sore... hara de yomu noda. Myō na yomiyō o itsusuto kakei no kasegi Wakkusu ga shōchi itasanu zo.'</p>
+          <p class="en-p">He glared at her. Without showing the slightest concern, Sēru brought her mouth close to the sick man's ear and began to read in a clear, high voice.</p>
+          <p class="en-p">Concerning the Last Will and Testament:</p>
+          <p class="en-p">1. After my return to the unseen world, all affairs of the mansion on Mount Terumon shall be entrusted entirely to Wakkusu, the son of the steward.</p>
+          <p class="en-p">2. Okuniwakehime shall have a separate mansion built and live out her life in peace as a nun.</p>
+          <p class="en-p">3. Debisuhime and Kerinahime shall entrust their persons entirely to Wakkusu.</p>
+          <p class="en-p">4. Wakkusu shall be made the adopted son of this house, and Debisuhime shall be made his wife.</p>
+          <p class="en-p">5. Kerinahime may be made a secondary wife according to Wakkusu's will, or if convenient, married off to another family, which shall be entirely at Wakkusu's discretion.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ワックス『モシ、御主人様、チト確りして下さいませ。此館には三千彦と云ふ魔法使が来ましてから怪事百出、貴方の御病気も彼奴の魔法の為で厶いますよ。その三千彦をテルモン山の牢獄へ押込め、お館の禍を除いたのは此ワックスで厶いますから、御安心下さいませ』</p>
+            <p class="ja-classical-line">小国別『何、あの三千彦様を岩窟へ打ち込んだとは、そりや大変な事をして呉れた。あのお方は生神様だ。左様な事を致したらお前等に神罰が当るぞ。早くお助け申して吾前に送つて参れ。怪しからぬ事を致すでないか』</p>
+            <p class="ja-classical-line">と怒気を帯びて力無き声に呶鳴りつけた。</p>
+            <p class="ja-classical-line">ワックス『ハハハハハ、貴方の聾は嘘で厶いましたか。何と都合の好い耳で厶いますな。御主人様、よく考へて御覧なさいませ。今日か明日か知れぬ身を以て、さう頑張るものぢやありませぬ。此お館は此ワックスが居らねば駄目で厶います。バラモン教の聖場へ三五教の宣伝使を引張込む等とは重大なる罪で厶いませう。こんな事が大黒主の耳に這入つたら如何致します。お道の為には此ワックスは御主人様でも、何でも厶いませぬ』</p>
+            <p class="ja-classical-line">と呶鳴り立てた。</p>
+            <p class="ja-classical-line">小国姫、三千彦は頭の上の二階にワックスの声を聞いて居たが下りる訳にもゆかず、……マンの悪い処へ悪い奴が出て来たものだ……と顔を顰め、一時も早く帰りますやうにと、一生懸命に三千彦は大神に祈願を凝らして居た。</p>
+            <p class="ja-classical-line">ワックスは益々大きな声で主人より拇印をとらむと迫つて居る。看護婦のセールは見るに見かねて、</p>
+            <p class="ja-classical-line">セール『もし、ワックス様、旦那様は御大病のお身の上、お体に障りますから何卒お控へ下さいませ。奥様がお帰りになつた上、とつくりと御相談遊ばしたが宜しからう』</p>
+            <p class="ja-classical-line">ワックス『エー、看護婦の分際として、家令の悴ワックスに向ひ、無礼の申し様、すつ込んで居れ。汝等如き卑女の容喙する処でない。モシ御主人様、是非ともこれに拇印を願ひます』</p>
+            <p class="ja-classical-line">とつきつける。小国別は止むを得ず、</p>
+            <p class="ja-classical-line">『アア私は目も眩み、耳も遠くなつて何にも分らないが、どんな事が書いてあるのか大きな声で読んで呉れ。そしてワックスが読んだのでは当にならぬ。セール、私に代つて、その遺言状を読んで呉れ』</p>
+            <p class="ja-classical-line">セール『ハイ、承知致しました。ワックス様、サア此方へお渡し下さい。妾が旦那様の代りに読まして貰ひますから』</p>
+            <p class="ja-classical-line">ワックス『モシ、御主人様、読んだ以上は拇印を捺して下さいますか。捺して貰はなくては読んで貰つても何にもなりませぬからな。それから前に定めて置かねば読む訳には行きませぬ』</p>
+            <p class="ja-classical-line">小国別『読んだ上で拇印を捺してやらう』</p>
+            <p class="ja-classical-line">ワックス『イヤ有難い。おい、セール、そこは……それ……腹で読むのだ。妙な読みやうを致すと家令の悴ワックスが承知致さぬぞ』</p>
+            <p class="ja-classical-line">と睨みつける。セールは委細頓着なく病人の耳許に口を寄せて声高らかに読み初めた。</p>
+            <p class="ja-classical-line">遺言状の事</p>
+            <p class="ja-classical-line">一、吾れ帰幽せし後はテルモン山の館の事務一切を家令の悴ワックスに一任すること。</p>
+            <p class="ja-classical-line">一、小国姫は別に館を建て、比丘尼として一生を安楽に送らすこと。</p>
+            <p class="ja-classical-line">一、デビス姫、ケリナ姫はワックスに一切身を任すこと。</p>
+            <p class="ja-classical-line">一、ワックスを当館の養子となし、デビス姫を女房とすること。</p>
+            <p class="ja-classical-line">一、ケリナ姫はワックスの意志により第二夫人となすもよし、都合によれば他家へ縁づかすもワックスの自由たるべきこと。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The above Yuigonjiyō, owing to Okuniwake's Jiyūbiyō making him unable to Hitsushiya, is caused to be Daihitsu by Wakkusu, and for Gojitsu Boin is Afunatsu-ed.</p>
+          <p class="en-p">Nenguwatsupi Okuniwake Kamuzukasa</p>
+          <p class="en-p">Seeru: 'Hohohohoho, what a remarkably self-serving Yuigonjiyō it is, moshi, Dannasama, do you deign to Goshiyōchi such a thing?'</p>
+          <p class="en-p">Okuniwake: 'This is an outrageous matter. I shall never affix a Boin to such a Yuigonjiyō. Tear it to pieces.'</p>
+          <p class="en-p">With a voice full of anger, he glared at Wakkusu. Wakkusu quickly snatched the Yuigonjiyō from Seeru's hand, applied Inniku to his master's fingers, and tried to force him to press it. Okuniwake, weakened by Rausui, had no strength to Teikau and found his Shintai at an absolute impasse, when leaping through the air and running swiftly came a fierce Itsutō, a Mauken, howling "U-u-u, watsu-watsu!" as it sprang upon Wakkusu, seized the belt of his waist firmly in its teeth, and carried him out of the mansion with the Chōshi of a cat carrying a rat. Oukusu, Biruma, and Eru, all Sannin of them, changed their Kahoiro in a flash, dashed back crestfallen into the reception room, and trembled with pale faces. Okunihime finally breathed a sigh of relief, peered around her surroundings, and stepped down to the sickbed.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">右の遺言状は小国別重病のため筆写する事能はざるを以て、ワックスに代筆せしめ後日のため拇印押捺するもの也。</p>
+            <p class="ja-classical-line">年月日　　　小国別神司</p>
+            <p class="ja-classical-line">セール『ホホホホホ何とマア虫のよい遺言状で厶いますこと、モシ、旦那様、こんな事御承知遊ばしますか』</p>
+            <p class="ja-classical-line">小国別『以ての外の事だ。左様な遺言状には拇印は決して捺さない。引裂いて了へ』</p>
+            <p class="ja-classical-line">と怒りの声諸共にワックスを睨めつけた。ワックスは手早くセールの手より遺言状を奪ひ取り、主人の指に印肉をつけ、無理に捺させ様とした。老衰の小国別は抵抗する力もなく進退維谷まつた処へ、宙を飛んで馳来る一頭の猛犬、ウーウーウー、ワツワツと叫び乍らワックスに跳びかかり腰の帯をグツと銜へて、猫が鼠を銜へた様な調子で館の外へ運び行く。オークス、ビルマ、エルの三人は顔色をサツと変へ、スゴスゴと受付の間に走り込み、青い顔して慄うて居る。小国姫はヤツと胸撫で下し四辺を窺ひ乍ら病床に下つて来た。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 糞闘 [1455]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: Darkness Gloom [1457]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
