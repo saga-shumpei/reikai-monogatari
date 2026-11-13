@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 19: 流調 [1405] - Volume 54 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 54 Table of Contents</a>
+      <span>Volume 54</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 54 &bull; Chapter 19</span>
+      <h1 class="chapter-title-en">Chapter 19: 流調 [1405]</h1>
+      <p class="chapter-title-ja">流調〔1405〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Harukuniwake chants.</p>
+          <p class="en-p">Harukuniwake (in the style of a Noh chant): 'Pushing aside the eightfold clouds of the distant Hisakata sky,
+To the province of Fusa whose very name is auspicious,
+Upon the summit of Mount Viktor,
+Ramming down the upper bedrock,
+Tamping it firm against the lower bedrock,
+Laying and arranging the foundations securely,
+Gold, silver, agate, ruri, shiyako,
+To be likened to amber or glass,
+The pure sands of the Lion River
+Spread thickly over the upper bedrock,
+Cutting the trunks of the great and small ravines,
+Root and tip alike offered up to the Sumeōkami
+Of Yamaguchi,
+With the divine miizu, like a three-part chestnut,
+The middle trunk carved with devout heart
+Using the sacred axe and sacred hoe,
+With the skill of the Hida artisans brilliantly displayed,
+The true pillars revealing the light of the imperial reign,
+Erected straight,
+With the framework joined in exquisite detail,
+As the heavenly shade and the solar shade,
+The great roof is set up,
+Thickly thatched with hinoki bark,
+This shrine thus humbly thatched and raised,
+Of Takamanohara, the heavenly realm,
+The sacred dwelling of the Sumeōkami,
+As the heavenly winds and timely gales blow and swirl,
+Here established as the guardian of this phenomenal world,
+Manifesting as the Moon Great Deity in the spiritual realm,
+Manifesting as the Sun Great Deity in the heavenly realm,
+Serving the wondrous shrine
+Of the Great Kuninotokotachi no Ōkami,
+Beginning with the sovereign king, the palace of the queen, the heir apparent,
+Starting with the chief priests of the Left and Right Guardians,
+All the hundred officials rejoice,
+Celebrating today's grand festival,
+Without end in the heavenly august sky,
+Without limit at the bottom bedrock,
+
+Like the vast sea where the clear and boundless great sky
+And purple waves drift, ever higher,
+Rejoicing in the ever-deeper great divine grace,
+Beginning with Harukuniwake,
+May the divine priests of Izutsu-no-miya,
+Today's joy enduring forever,
+Engraved upon the heart's core given by the kami,
+Never to be forgotten.
+Ah, in such an auspicious sacred age,
+Extending far and wide to the end of the fan's reign,
+Appearing as the pivot of the nation,
+Equal to the kami, the sage sovereign,
+With the sequence of five winds and ten rains favorable,
+Mountains and rivers pure and clear,
+All kinds of crops bearing rich fruit,
+The state of supreme happiness and ultimate bliss
+Where the myriad people beat their bellies and stamp the earth,
+All as the august virtue of the kami and the sovereign king,
+Oh, the sublimity of today's grand rite as we look up in awe!
+Though the morning sun shines or clouds over,
+
+Though the moonlight crossing the vast sky
+Either waxes or wanes,
+Like the number of stars in the heavenly riverbed
+Spread with golden and silver sands,
+Or the countless grains of sand on the beach,
+Bestow your grace upon the lives of the multitude, Sumeōkami.
+To bring forth the age of Miroku,
+Serving morning and evening,
+Even in the dark night clear, Harukuniwake's
+Divine messenger,
+Matsuhiko of the ever-verdant pine,
+Not to mention the joy of official Tatsuhiko for all eternity,
+With the crane's longevity, Mankō-san
+From the bottom of his heart
+Rejoices, celebrates, and venerates today's solemn festival.
+Ah, profoundly revering the kami,
+Praying for the blessings of the august spirits,
+Praying for the blessings of the august spirits.'</p>
+          <p class="en-p">So chanting to the end, he returned to his original seat. Taruman had been a propagandist of the Former Ural Religion, but now having become a disciple of Harukuniwake, instructed in the teachings and rituals of Izutsu-no-miya, and having become a chief priest to serve for a long time, he came to hold the official duty of praying for the peace and security of the royal family and the nation. Taruman stood up to express his celebratory sentiments as chief priest and began to chant.</p>
+          <p class="en-p">Taruman (in the style of a Noh chant): 'Though the red jewel shines with brilliant threads, how precious indeed
+Is the attire of you, the white jewel!
+Now then, from the very beginning of the creation of heaven and earth,
+The remote ancestors of the Victoria family
+Appeared as the sovereigns of the nation,
+Above, revering the kami,
+Below, showing compassion to the myriad people,
+Granting winds every five days and rain every ten days
+In due measure,
+With the nation flourishing and the people prosperous,
+That state of the heavenly paradise and pure land,
+Transmitted ever onward eternally,
+This wondrous country too, having its times,
+When the ugly winds of deviation blew violently,
+And the Castle of Victoria, fixed as a dwelling for a thousand ages,
+Was already on the verge of leaning to its fall,
+Pushing aside the eightfold clouds of heaven,
+A divine priest descended descending,
+
+To rescue the darkness of this world straight away,
+Harikuniwake the divine person,
+And the three divine priests at the beginning,
+Oh, the sublimity of their descent!
+Not to mention Taruman the priest,
+The sovereign king and the queen's palace,
+The chief priests of the Left and Right Guardians as well,
+Blow away the clouds of bewilderment,
+Illuminated by the light of the sun and moon shining in the sky,
+Like unto the teachings of Izutsu,
+Illuminated upon the path of the teachings,
+Deeply comprehending the path of truth,
+Dwelling in the virtue of love and goodness,
+Bathing in the light of faith and truth,
+Erecting stout great shrine pillars upon the lower bedrock of Mount Viktor,
+Worshipping and serving the Sumeōkami,
+Concentrating earnest prayers for universal peace, the accomplishment of the realm, and the peace of the myriad people,
+Without regard for his own lowly person,'</p>
+          <p class="en-p"></p>
+          <p class="en-p"></p>
+          <p class="en-p"></p>
+          <p class="en-p"></p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">治国別は謡ふ。</p>
+            <p class="ja-classical-line">治国別（謡曲調）『久方の天の八重雲掻きわけて
+名さへ目出度きフサの国
+ビクトル山の頂上の
+上つ岩根を搗きこらし
+下つ岩根に搗固め
+礎固く敷き並べ
+金銀瑪瑙瑠璃硨磲
+琥珀や玻璃に擬ふべき
+ライオン川の清き真砂を
+上つ岩根に敷き詰めて
+大峡小峡の幹を切り
+本と末とは山口の
+皇大神に献り置きて
+神の御稜威も三つ栗の
+中つ幹を忌斧忌鋤もて
+心を籠めて削りたて
+飛弾の工の業もあざやかに
+御代の光を現はす真木柱
+つきたて
+木組も細やかに</p>
+            <p class="ja-classical-line">天の御蔭日の御蔭と
+大屋根をしつらへ
+桧の皮のいと厚く
+葺きつめ給ひしこの社
+高天原の天国の
+皇大神の御舎を
+天津風時津風吹き捲るまにまに
+茲に現世の
+国の守りと定めつつ
+霊国にありては月の大神と現はれまし
+天国にありては日の大神と現れませる
+大国常立の大神の
+珍の御舎つかへまつり
+国王の君を初めとし后の宮や
+世継の御子
+左守右守の宮司をはじめ
+百の司も悦びて
+今日の御祭祝ぎ奉り
+天津御空の極みなく
+底つ岩根の果てもなく</p>
+            <p class="ja-classical-line">澄み渡りたる大空や
+紫の浪漂ふ大海原の如くいや高く
+いや深き大御恵を喜びて
+治国別を初めとし
+三五教の神司
+今日の喜び永久に
+神の賜ひし村肝の
+心に銘じ忘れまじ
+ああ斯る目出度き聖代に
+扇の御代の末広く
+国の要と現れませる
+神に等しき聖の君
+五風十雨の序よく
+山河は清くさやけく
+百の種物はよく実り
+万民鼓腹撃壤の
+至幸至楽の境涯を
+全く神と国王の御徳と
+仰ぎ奉らむ今日の御典の尊さよ
+朝日は照るとも曇るとも</p>
+            <p class="ja-classical-line">大空渡る月影は
+或は盈ち或は虧くるとも
+金砂銀砂を布きつめし
+天の河原の星の数
+浜の真砂の数多き
+蒼生の身の上を
+恵ませ給へ皇大神
+ミロクの御代を来たさむと
+朝な夕なに仕へたる
+闇夜も清く治国別の
+神の使
+常磐の松の松彦や
+世は永久に竜彦の
+司の悦びは云ふも更
+亀の齢の万公が
+今日の盛典を心より
+歓ぎ喜び祝ぎ奉る
+ああ惟神々々
+御霊の恩頼を祈り奉る
+御霊の恩頼を祈り奉る』</p>
+            <p class="ja-classical-line">と謡ひ終り元の座についた。タルマンは前ウラル教の宣伝使たりしが、此度治国別の弟子となり、三五教の御教や儀式を教へられ、宮司となつて長く仕へ、王家を初め国家の安泰を祈るべき職掌となつた。タルマンは宮司として祝意を表すべく立ち上り謡ひ始めた。</p>
+            <p class="ja-classical-line">タルマン（謡曲調）『赤玉は緒冴へ光れど白玉の
+君がよそひし尊くもあるかな
+抑もビクの国は
+天地開闢の初めより
+ビクトリア家の遠つ御祖
+国の国王と現はれまして
+上は神を崇め奉り
+下万民を慈み
+五日の風や十日の雨も
+ほどほどに与へられ
+御国は栄え民はとみ
+天国浄土の有様を
+いや永久に伝へたる
+珍の御国も時ありて
+曲の醜風吹き荒び
+千代の住所と定めたる
+ビクトリアの城も
+既に傾かむとする所へ
+天の八重雲掻きわけて
+天降りましたる神司</p>
+            <p class="ja-classical-line">此世の闇をすくすくに
+治国別の神人を
+初め三人の神司
+下り給ひし尊さよ
+タルマン司は云ふも更
+国王の君も后の宮も
+左守右守の宮司も
+迷ひの雲を吹き払ひ
+御空に輝く日月の
+光に擬ふ三五の
+教の道に照らされて
+誠の道をよく悟り
+愛善の徳に住し
+信真の光を浴び
+ビクトル山の下つ岩根に
+大宮柱太しき建てて
+皇大神を斎ひまつり
+天下泰平国土成就
+万民安堵の祈願を凝らし
+賤しき身をも顧みず</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As entrusted by our master and the king, though presumptuous it is, serving as the kamuzukasa of this palace of jewels, purifying my body morning and evening, avoiding defilement, and solely devoting my sincerity, O Taruman, please grant and accept my heart.</p>
+          <p class="en-p">Though the light of Amatsumisora may sometimes shine and sometimes cloud, though there be nights when the moon waxes or wanes, making the teaching of the single, sincere Ananahi God our strength, as long as there remains a sincerity wherein the waters of the Lion River never cease nor run dry, crushing our bones and grinding our bodies to dust, we shall devote ourselves for the sake of the Gods, for the sake of the Sovereign, and for the sake of the Mikuni.</p>
+          <p class="en-p">Ah, awe-inspiringly, beginning with the Great Deity Ōkunitokotachi who rules and guards this world, before the august presences of the eight million deities of heaven and earth and the myriad deities who follow them, with reverence and awe we pray.</p>
+          <p class="en-p">Ah, Kamunagara, kamunagara,
+May your mitama flourish and bless us!
+May your mitama flourish and bless us!</p>
+          <p class="en-p">Matsuhiko sings again.</p>
+          <p class="en-p">Matsuhiko: 'Prostrate before the august presence of the Ōkami, praying morning and evening with sincerity poured forth, wishing that Matsuhiko of the ever-verdant pines—whose colors change not even through a thousand and myriads of reigns—may flourish forever and ever in the eternal land of Biku, how great is our joy that the Sumeōkami quickly heard the prayers of us all, and within a hundred days and a hundred nights caused such a magnificent august sanctuary to be built!'</p>
+          <p class="en-p">Verily, the divine land of Biku, being a land where the divine protection is ever profound and favored, like the boulders of Mount Victor, shall never be moved for all eternity.</p>
+          <p class="en-p">The king of such a felicitous divine land, having comprehended the teaching of Ananahi,</p>
+          <p class="en-p">More and more the foundation of the country shall be purified and solidified like bedrock, and like the lush green of the pine trees, it shall flourish unto the unknown bounds of the end.</p>
+          <p class="en-p">Verily, as for this country, the mountains of the four quarters, as far as the eye can see, are pine forests; what may be seen flickering between the branches of the trees—might it be the great oaks, or might it be the sacred camphor trees?</p>
+          <p class="en-p">Throughout a thousand and eight thousand reigns, steadfastly, with lives long and never rotting, never showing a sign of withering, those sacred trees—drawing upon this, the land of Biku as a portent of unshakeable peace—gazing far out over the four quarters, whatever floated into his heart, transcribing it here, in accordance with Kamunagara, we celebrate and serve the august rituals of the divine shrine.</p>
+          <p class="en-p">Ah, Kamunagara, kamunagara,</p>
+          <p class="en-p">May your mitama flourish and bless us!'</p>
+          <p class="en-p">Samori raises his aged body and sings with joy.</p>
+          <p class="en-p">Samori: 'Ah, how wondrous, how wondrous! The blessing of the Gods is right before our eyes.</p>
+          <p class="en-p">The breath of the Gods sets right the castle of Biku, which had been leaning toward ruin.</p>
+          <p class="en-p">Protecting the Ananahi teachings, the rigorous mitama and the auspicious mitama—to say nothing of the Sumeōkami—leaving the hall of the saien, the kamuzukasa and the retinue of Chikokuwake descended like doves.</p>
+          <p class="en-p">The great blessings bestowed to save the sufferings of our great sovereign first of all, as well as the hundred officials and the people of the land—in what age could we ever forget them?</p>
+          <p class="en-p">Even if the countless starlight of the boundless firmament should suddenly fall, or the sands of the beach should be exhausted, the blessings of the true God</p>
+          <p class="en-p">We shall never forget throughout all eternity.</p>
+          <p class="en-p">Verily, to govern a country, first and foremost, is to praise and serve the revered Gods of heaven and earth, to follow the teachings of the Gods, to approach the lower subjects, and to manifest oneself as an official of the land, showing a model in detail, softening the hearts of the people, and governing the world eternally.</p>
+          <p class="en-p">I have comprehended the path of sincerity.</p>
+          <p class="en-p">Until now, the office of Samori also had its spiritual light darkened, scorching its heart in politics, leaning its heart toward the manifest world, and placing the God of our ancestral origins second—how foolish it was!</p>
+          <p class="en-p">Without knowing it, before the presence of the Gods, accumulating countless sins,</p>
+          <p class="en-p">not even punishing me, but looking upon me anew with a vast heart, not only forgiving me, but also commanding me to hold the official duties of Samori as before, and entrusting me with so grave a mission—how wondrous it is!</p>
+          <p class="en-p">Words of gratitude cannot be exhausted.</p>
+          <p class="en-p">Now from this time forth, Kyūbitto also shall polish his heart and purify his body, first of all praying to the Ōkami, and for the sake of the Sovereign, assisting in the exceedingly magnificent government—such is my heart.</p>
+          <p class="en-p">Please grant it, Kamunagara.</p>
+          <p class="en-p">Before your august presence, with reverence, we pray.'</p>
+          <p class="en-p">So singing, he took his seat. Ekusu, the Yoshu, sings again.</p>
+          <p class="en-p">Ekusu: 'The Kshatriya of the divine land of Biku, serving as a chief retainer of Queen Victoria,</p>
+          <p class="en-p">the Yoshu official Ekusu here reverently offers up and expresses gratitude with a sincere heart, holding in awe the lofty grace of the Sumeōkami and the blessings of Chikokuwake.</p>
+          <p class="en-p">Kami Naobi who created this world, O Naobi of vast heart,</p>
+          <p class="en-p">truly, in human life whatever may be, look straight, listen straight, and rectify your transgressions.</p>
+          <p class="en-p">Now that we have been bestowed with such revered divine teachings,</p>
+          <p class="en-p">down to the generations of our descendants, with awe and caution, obeying the sincere teachings of Ananahi,</p>
+          <p class="en-p">guarding the official duties of the Yoshu official with a single mind and undisturbed spirit,</p>
+          <p class="en-p">we shall devote the utmost of our hearts for the sake of the Gods and the Sovereign.</p>
+          <p class="en-p">Ah, Kamunagara, kamunagara,</p>
+          <p class="en-p">Once surrounded by the ugly demon army of the Brahmin forces,</p>
+          <p class="en-p">the altars of the state appeared endangered, but the Ōkami of infinite benevolence and compassion, pitying the critical situation of our sovereign of lofty virtue,</p>
+          <p class="en-p">saved us—how wondrous it is!</p>
+          <p class="en-p">Truly, in this world, whatever may be, following the divine will, no matter how small a matter it may be, never asserting our own ego, acting according to the Gods, we shall go securely as if sliding a box into place—this is the path of the Gods which I have understood for the first time.</p>
+          <p class="en-p">Ah, Kamunagara, kamunagara,</p>
+          <p class="en-p">O Sumeōkami, eternally</p>
+          <p class="en-p">guard this sacred era,</p>
+          <p class="en-p">and cause our mikuni to flourish!</p>
+          <p class="en-p">Ah, Kamunagara, kamunagara,</p>
+          <p class="en-p">Before the presence of the Gods, we pray.'</p>
+          <p class="en-p">So singing to a close, he calmly took his seat.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">吾師の君や国王の君の
+任けのまにまに
+おほけなくも此玉の宮の
+神司と仕へ奉り
+朝な夕なに身を清め
+汚れを避けて只管に
+誠を尽すタルマンが
+心を諾ひ給へかし
+天津御空の日影は
+或は照り或は雲り
+月は盈ち或は虧くる夜ありとも
+誠一つの三五の
+神の教を力とし
+ライオン川の水永久に
+絶ゆる事なく涸るる事なき
+赤心のあらむ限りは
+骨を砕き身を粉にし
+神の御為君の為め
+御国の為に尽すべし
+ああ畏くも此世をば</p>
+            <p class="ja-classical-line">統べ守り給ふ
+大国常立の大神を初め奉り
+天地八百万の大神
+従ひ給ふ百神達の御前に
+謹み敬ひ願ぎ奉る
+ああ惟神々々
+御霊幸倍ましませよ
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">松彦は又歌ふ。</p>
+            <p class="ja-classical-line">松彦『千代万代も色かへぬ
+常磐の松の松彦が
+いや永久のビクの国
+いや永久にいつ迄も
+栄えませよと大神の
+御前にひれ伏し朝夕に
+赤心籠めて祈りしが
+皇大神は速に
+吾等が願を聞召し
+百日百夜の其中に
+かく麗しき御舎を
+造らせ給ひし嬉しさよ
+抑ビクの神国は
+神の守りのいや厚く
+恵み給ひし国なれば
+ビクトル山の岩のごと
+いや永久に動くまじ
+斯かる目出度き神国の
+国王の君は三五の
+教を悟り給ひてゆ</p>
+            <p class="ja-classical-line">いよいよ国は盤石の
+礎清く固まりて
+松の緑の青々と
+果てしも知らず栄ゆべし
+抑此国は四方の山
+見渡す限り松林
+木々の木の間にちらちらと
+見ゆるは樫の大木か
+但しは樟の霊木か
+千代に八千代にかたらかに
+命も長く朽もせず
+枯るるためしもなき霊樹
+これに因みてビクの国
+ビクとも動かぬ瑞祥と
+遥に四方を打ちながめ
+心に浮かみし其儘を
+茲に写して惟神
+神の宮居の御祭りを
+祝ぎつかへ奉る
+ああ惟神々々</p>
+            <p class="ja-classical-line">御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">左守は老躯を起して嬉しげに歌ふ。</p>
+            <p class="ja-classical-line">左守『ああ有難し有難し
+神の恵は目の当り
+傾きかけしビクの城
+立直します神の息
+三五教を守ります
+厳の御霊や瑞御霊
+皇大神は云ふも更
+斎苑の館を後にして
+天降りましたる神司
+治国別の一行が
+鳩の如くに下りまし
+吾大君を初めとし
+百の司や国人の
+難みを救ひ給ひたる
+大御恵はいつの世か
+いかで忘れむ大空の
+限りも知らぬ星のかげ
+忽ちおつる事あるも
+浜の真砂の尽くるとも
+誠の神の御恵は</p>
+            <p class="ja-classical-line">いや永久に忘れまじ
+抑国を治むるは
+まづ第一に天地の
+尊き神を寿ぎ奉り
+神の教に従ひて
+下国民に相臨み
+国の司と現れませる
+模範を示し詳細に
+民の心をやはらげて
+世を永久に治むべき
+誠の道を悟りけり
+左守の司も今迄は
+霊の光暗くして
+心を政治に焦ちつつ
+現世に心傾けて
+元つ御祖の神様を
+次になしたる愚さよ
+知らず知らずに神の前
+幾多の罪を重ねたる
+吾をも懲めたまはずに</p>
+            <p class="ja-classical-line">広き心に見直して
+許させ給ふのみならず
+左守の司の職掌を
+元の如くにおほせられ
+いと重大な任務をば
+任けさせ給ひし有難さ
+お礼の言葉は尽されず
+いざこれよりはキユービツトも
+心を研き身を清め
+先づ第一に大神を
+祈り奉りて君の為め
+いと麗しき政治
+助けまつらむ吾心
+諾ひ給へ惟神
+御前に謹み願ぎまつる』</p>
+            <p class="ja-classical-line">と歌ひ座についた。右守のエクスは又歌ふ。</p>
+            <p class="ja-classical-line">『ビクの御国の刹帝利
+ビクトリア王の重臣と
+仕へまつりし右守司
+エクスは茲に謹みて
+皇大神の御高恩
+治国別の御恵
+畏み畏み赤心を
+捧げて感謝し奉る
+此世を造りし神直日
+心も広き大直日
+ただ何事も人の世は
+直日に見直せ聞直せ
+身の過ちは宣り直せ
+かくも尊き御教を
+授けられたる上からは
+孫子の代に至るまで
+畏れ慎み三五の
+誠の教を遵奉し
+右守の司の職掌を
+一心不乱に相守り</p>
+            <p class="ja-classical-line">神と君との御為に
+心の限り尽すべし
+ああ惟神々々
+一度は醜の魔軍の
+バラモン軍に囲まれて
+社稷危く見えけるが
+仁慈無限の大神は
+仁徳高き吾君の
+其窮状を憐みて
+救はせ給ひし有難さ
+唯何事も世の中は
+神の御旨に従ひて
+如何なる小さき事とても
+決して我意を主張せず
+神のまにまに行へば
+キタリキタリと恙なく
+箱さすやうに行くものと
+初めて覚りし神の道
+ああ惟神々々
+皇大神よ永久に</p>
+            <p class="ja-classical-line">此聖代を守りまし
+御国を栄え給へかし
+ああ惟神々々
+神の御前に願ぎまつる』</p>
+            <p class="ja-classical-line">と歌ひ終り悠然として座についた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c18.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 18: Truth 信 [1404]</span>
+      </a>
+      <a href="c20.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 20: 建替 [1406]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

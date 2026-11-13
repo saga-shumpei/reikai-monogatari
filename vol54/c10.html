@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 10: 万 Turtle 柱 [1396] - Volume 54 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 54 Table of Contents</a>
+      <span>Volume 54</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 54 &bull; Chapter 10</span>
+      <h1 class="chapter-title-en">Chapter 10: 万 Turtle 柱 [1396]</h1>
+      <p class="chapter-title-ja">万亀柱〔1396〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Karunahime sings again.</p>
+          <p class="en-p">Karuna: 'Though the morning sun shines or clouds obscure it, though the moon waxes or wanes, even if the great earth were to sink, truth alone saves the world. The sacred teachings of the true God, sent forth to the four quarters as a missionary, from the sacred land of the birth-soil mountain, following behind rare attendants, descending to proclaim the pure teachings of heaven and earth, arranging the sacred marriage of the young lord—oh, how grateful it is! The breathing together of heaven and earth, the people who are born, being the so-called children of God and palaces of God, living to become the gods of this world, dying to become the gods of national protection, the people growing and flourishing in the fruitful reed-plain of the land of ears of rice, protecting them warmly and exhausting their sincere hearts according to the guidance of the imperial gods—oh, how grateful it is that you taught us this! We husband and wife, respectfully, for the sake of God, for the sake of the country, and to protect the common people, purifying our bodies morning and evening before the precious divine presence, guard the realm beneath heaven peacefully and most securely—we humbly pray. The Kototama thus uttered is not in vain. The marriage of the young lord is successfully arranged at last, and the prosperity of the imperial land is like pine flowers whose green color grows ever deeper, flourishing and flourishing forever without end, a joy whose limits are completely unknown—this is entirely the divine blessing.</p>
+          <p class="en-p">With awe and gratitude, ah, Kannagara Kamugami, may your august spirits be blessed and prosperous!'</p>
+          <p class="en-p">Matsuhiko sings again.</p>
+          <p class="en-p">Matsuhiko: 'This place is the renowned land of Biku, surrounded by strong walls and iron ramparts, a citadel overlooking the four quarters, casting light like the moon and sun shining high in the august sky, causing the rain of blessings to fall, and warmly protecting the people of the land—the renowned Kshatriya, the house of King Victoria, eternal for ten thousand ages, may it be long enduring forever together with heaven and earth, we pray before the presence of God. Once enveloped in black clouds, even this renowned famous castle at last appeared perilous, but by the divine protection of the precious God, the ugly crooked deities perished and vanished, and now how felicitous is this reign, leaving no trace of dust! In this felicity, adding yet another joy, the marriage of the Lord of Earl has been brought about so brightly, and the sound of the jade-stringed koto is clear, spreading far with bravery. This boundless joy—keeping it deep in our hearts so as not to let it go outside—Matsuhiko Tsukasa, as Kannagara, lifting up prayers to God, serves and celebrates before the august presence of the lord. When the temple of Victoria is built up, oh Lord of Earl and Lady Hannah, taking each other by the hand morning and evening, never failing to worship, may the people of the four quarters beneath heaven, without illness, rejoice in your governance and serve you accordingly.</p>
+          <p class="en-p">Pray to the master lord of Harukuniwake! I, following him, in close proximity, leaving behind the beloved capital, for the sake of God and for the sake of the Way, must advance toward the sacred land. Ah, Kannagara Kamugami, may your august spirits be blessed and prosperous!'</p>
+          <p class="en-p">So he finished singing and took his seat. Tatsuhiko sings again.</p>
+          <p class="en-p">Tatsuhiko: 'Following my master lord, leaving the forest of the shrine, crossing the forest dark even at day in the mountain pass where the crooked deity rages, viewing the forest in the field and the small northern mountain behind us step by step, and coming to the forest of floating wood—if we look, there was the deep and unexpected plot and trap of the crooked deity, falling down with the master lord into the bottomless abyss, the spirit suddenly leaving the body and wandering in the spiritual world, and by the august direction of God, making a tour of the spiritual and heavenly realms, and descending once more, being the god of the crossroads, Ibukido-nushi, having been taught various precious ways, and living again in this world.</p>
+          <p class="en-p">Appearing as the general of Brahmanism, Katahiko, sending forth the Lord of Launch, making manifest the divine power of Ananai-kyo, we, together with our master lord, crossed over the wilderness, traversed across the Lion River, and when we advanced as far as the foot of Mount Victor, at the moment when the battle cry was suddenly heard, thinking this could not be ordinary and advancing closely, when we looked well, it was the very height of a simultaneous shooting by the Brahman Oni-Harukawake and Kumehiko. Though thinking how it might be as us, who are the divine officials of Ananai, even if we were to let it pass by unheeded, together with our master lord, if we strike forth the Kototama of rigor—'</p>
+          <p class="en-p"></p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">カルナ姫は又歌ふ。</p>
+            <p class="ja-classical-line">カルナ『朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+誠一つは世を救ふ
+誠の神の御教を
+四方に伝ふる宣伝使
+治国別の神司
+産土山の聖地より
+珍の御伴を従へて
+下らせ給ひ天地の
+清き教を宣らせつつ
+若君様の御結婚
+とりなし給ひし有難さ
+天と地との息合せ
+生れ出でたる人々は
+所謂神の子神の宮
+生きては此世の神となり
+死しては護国の神となり
+豊葦原の瑞穂国
+生ひ立ち栄ゆる人草を</p>
+            <p class="ja-classical-line">あつく守りて皇神の
+依さしのままに赤心を
+尽すは人の務めぞと
+教へ給ひし有難さ
+妾夫婦は謹みて
+神の御為国の為め
+蒼生を守るため
+尊き神の御前に
+朝な夕なに身を清め
+天の下をば平けく
+いと安らけく守りませ
+偏に願ひ奉ると
+宣る言霊も空しからず
+若君様の御結婚
+いよいよ無事に調ひて
+御国の栄えを松の花
+緑の色もいや濃ゆく
+栄え栄えていつ迄も
+果しも知らぬ喜びは
+全く神の御恵み</p>
+            <p class="ja-classical-line">謹み感謝し奉る
+ああ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">松彦は又歌ふ。</p>
+            <p class="ja-classical-line">松彦『此処は名に負ふビクの国
+堅城鉄壁を繞らし
+四方を見晴らす宮城
+百の国民見おろして
+御空に高く輝ける
+月日の如く光をなげ
+恵の雨を降らし
+国人を厚く守らせたまふ
+音に名高き刹帝利
+万代不易のビクトリア王が家
+いや益々も天地と
+むた永久に長からむ事を
+神の御前に祈り奉る
+一度は黒雲に包まれて
+音に名高き名城も
+遂に危く見えけるが
+尊き神の御守りに
+醜の曲津は滅び失せ
+今は全く風塵も
+留めぬ御代の目出度さよ</p>
+            <p class="ja-classical-line">其目出度さにまた一つ
+喜びを重ね給ひたる
+アールの君の御結婚
+いとさやさやに運びまし
+玉の緒琴の音も清く
+響き渡れる勇ましさ
+此極みなき喜びは
+外へはやらじと心をこめて
+松彦司が惟神
+神に祈りをかけまくも
+畏き君の御前に
+祝ぎ仕へ奉る
+ビクトリアの神殿が
+築き上りし暁は
+アールの君よハンナ姫
+手に手を取つて朝夕に
+かかさず詣で天が下
+四方の国民恙なく
+君が政治を喜びて
+仕へまつるべく</p>
+            <p class="ja-classical-line">祈らせたまへ
+治国別の師の君に
+吾は従ひ近き中
+恋しき都を後にして
+神の御為道のため
+聖地をさして進むべし
+ああ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">と歌ひ終り座についた。竜彦は又歌ふ。</p>
+            <p class="ja-classical-line">竜彦『吾師の君に従ひて
+祠の森を離れつつ
+曲神の猛ぶ山口の
+昼さへ暗き森を越え
+野中の森や小北山
+後に眺めてすたすたと
+浮木の森に来て見れば
+思ひも寄らぬ曲神の
+深く企みし陥穽
+師の君様と諸共に
+千尋の底へ転落し
+霊は忽ち身を脱けて
+精霊界に彷徨ひつ
+尊き神の御指図に
+霊国天国巡覧し
+又もや下りて八衢の
+司の神とあれませる
+伊吹戸主にいろいろと
+尊き道を教へられ
+再び此世に生き還り</p>
+            <p class="ja-classical-line">バラモン教のゼネラルと
+現はれ給ふ片彦や
+ランチの君を言向けて
+三五教の神力を
+現はせまつり吾々は
+吾師の君と諸共に
+荒野ケ原を打ち渡り
+ライオン河を横ぎりて
+ビクトル山の麓まで
+進みて来る折もあれ
+俄に聞ゆる鬨の声
+只事ならじと進みより
+よくよく見ればバラモンの
+鬼春別や久米彦が
+一斉射撃の真最中
+見逃し往くも三五の
+神の司の吾として
+如何ならむと思ひつつ
+吾師の君と諸共に
+厳の言霊打ち出せば</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">How could we have foreseen that it was not the army led by the Brahmans, but the rebellion of the Umori no Tsukasa; and how hateful it felt when we realized it! We disciples, all at once, with aligned hearts and synchronized mouths, straightforwardly and clearly recited the Futonorito, and continuously unleashed the Kototama. Then, the great army, like clouds and mist, fled away like clouds turning to haze. To such a place came Hirunahime, the female warrior and princess of Karna, protected by the Kami, stepping firmly as she straddled a chestnut horse, binding the rebel Umori and bringing him back. There was no one who did not praise and extol such an act of loyal bravery and righteous zeal as a model unto the latest generations.</p>
+          <p class="en-p">We disciples were led before the presence of Setsuteirisama, and receiving various and sundry treatments, we humbly expressed our gratitude for their profound kindness. We thoroughly and minutely transmitted the teachings of Ananai-kyō, and upon the summit of Mount Viktor, we shattered the rocks, dug into the earth, pounded it firmly into the upper bedrock, tamped it solidly into the lower bedrock, and raised the great pillar of the shrine. Now, it has finally reached ninety percent completion, which is a great joy. Prior to this, Setsuteiri, who is the august child of Queen Victoria, received divine revelations concerning the whereabouts of the five princes and one princess, and advanced into the valley of Mount Terukuni to welcome and escort them.</p>
+          <p class="en-p">Prince Aru, who was born as the eldest son and is a kind-hearted soul, is holding his auspicious wedding ceremony today. Needless to say, the hundred officials were invited, and we disciples as well were summoned to take our seats at the auspicious banquet. Oh, the joy of being granted the great sacred sake of the Kami's grace! Originally, Tatsuhiko, a heavy drinker, loves sake above all else; yet, as one who serves the path of the Ananai teachings, first and foremost, I must refrain from heavy drinking. Nevertheless, today, for some reason, joys upon joys overlapped, and I piled cup upon cup of circulating sake, unwittingly and unknowingly getting dead drunk. I must have been terribly rude.</p>
+          <p class="en-p">Simply viewing everything as a true direct manifestation and great direct manifestation of the Kami, I humbly beg your forgiveness, Setsuteiri, and you, the hundred officials. Before your august presence, I reverently offer my apologies. Ah, Kannagara kamugami kamugami, may your august spirits prosper and bless us! »</p>
+          <p class="en-p">Tatsuhiko, following in his master's footsteps and dead drunk, dances and chants with staggering steps.</p>
+          <p class="en-p">Tatsuhiko (in the style of a Noh chant): « Ah, how auspicious, how auspicious, how very auspicious! Though the morning sun shines or is clouded, this marriage is free from ill; for ten thousand autumns and myriads of years it shall be celebrated and concluded, and thereafter, even if heaven and earth should change, what is there to fear before the grace of the Kami! The might of the ruler of the country of Biku is such that even the birds flying through the sky loosen their wings and fall to the earth, the trees and plants feel it and play natural music, the flow of the river beats a hand-drum, and how we shall celebrate your reign of many ages! Furthermore, starting with my master who serves the Sumeōkami of Ananai, among the three companions, there is one known as a man of note—I, Tatsuhiko of the turtle's age, who celebrate this myriad of ages, rise up boldly to transmit this joy through all eternity, and waking my heavy body that can no longer manage its hands and feet due to being dead drunk, I celebrate and revere you to the limit of my life! The crane preserves the age of a thousand years, and the turtle continues the lifespan of ten thousand years; the lives of the crane and the turtle are trifling compared to the end of countless myriads of years—may the august country of Biku flourish forever, and may the royal house of Victoria flourish without knowing any limit, as long as heaven and earth endure! Concerning this as well, Prince Aru, and your newly welcomed consort, Princess Hanna, may you be deeply affectionate and harmonious to the very end, blending the breaths of Yin and Yang, and showing a pure model of younger sister and elder brother beneath the sun! The sun shines brightly, the moon glows, the stars shine forever in the open sky without losing their radiance, deep beneath the vast ocean of the realm of the moon, may you plight your troth, O Kannagara, before the august presence of the Kami with reverence, I, Tatsuhiko of the turtle's age, celebrate and revere this longevity of today through thousands of ages to come! »</p>
+          <p class="en-p">So saying, unlike a drunken man, he solemnly concluded his celebration and returned to his original seat. Besides this, although there were many celebratory songs by numerous officials, they were too lengthy and are therefore omitted.</p>
+          <p class="en-p">From the time Prince Aru took Hanna, the ideal wife, as his bride, the governance of the country flourished day by day, and the citizens submitted with joy. The citizens in general offered faith morning and evening to Kuninotachitotsu no Mikoto, Hinotsukami, Tsukinotsukami, and Kamisusanoo no Mikoto enshrined in the shrine of Mount Viktor, and each enjoyed their occupation, leading to the manifestation of the sacred era of Miroku upon the earth. Ah, Kannagara tamashii sakihai masaseyo.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">豈図らむやバラモンの
+率ゆる軍に非ずして
+右守の司の反逆と
+覚りし時の憎らしさ
+吾等師弟は一斉に
+心を揃へ口揃へ
+一目散に太祝詞
+涼しく宣りて言霊を
+連続的に打ち出せば
+雲霞の如き大軍も
+雲を霞と逃げ去りぬ
+斯かる所へヒルナ姫
+カルナの姫の女武者
+神に守られかつかつと
+栗毛の駒に跨りて
+反逆人の右守をば
+縛して帰り給ひたる
+忠勇義烈の働きは
+末代迄の鑑ぞと
+褒めそやさぬは無かりけり</p>
+            <p class="ja-classical-line">刹帝利様の御前に
+吾等師弟は導かれ
+いろいろ雑多の待遇しに
+厚意を感謝し奉り
+三五教の御教を
+完全に委曲に相伝へ
+皇大神の御舎を
+ビクトル山の頂上に
+岩切り砕き土を掘り
+上つ岩根に搗きこらし
+底つ岩根に搗き固め
+大宮柱太知りて
+今は漸く九分通り
+竣工したるぞ嬉しけれ
+これに先立ち刹帝利
+ビクトリア王の御子とます
+五男一女の行衛をば
+神の御告を蒙りて
+照国岳の谷間に
+進みて迎へ奉り</p>
+            <p class="ja-classical-line">長子の君と生れませる
+心やさしきアールさま
+今日は目出たき結婚の
+式を挙げさせ給ひつつ
+百の司は云ふも更
+吾々師弟も招かれて
+目出度き席に列ねられ
+神の恵の大神酒を
+与へられたる嬉しさよ
+元より酒豪の竜彦は
+何より彼より酒が好き
+とは云ふものの三五の
+教の道に仕ふ身は
+先づ第一に大酒を
+謹まなくてはなりませぬ
+然るに今日は何となく
+嬉し嬉しが重なりて
+廻る盃数重ね
+思はず知らず酔ひつぶれ
+いかい失礼したでせう</p>
+            <p class="ja-classical-line">唯何事も神直日
+大直日にと見直して
+許させたまへ刹帝利
+其外百の司達
+御前に慎み詫びまつる
+ああ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">万公は其尾についてヘベレケに酔うた儘、足もよろよろ謡ひ舞ふ。</p>
+            <p class="ja-classical-line">万公（謡曲調）『ああ目出度し目出度しお目出たし、朝日は照るとも曇るとも、此結婚が恙なく、千秋万歳楽と、祝ひ納むる其上は、仮令天地は変るとも、何か恐れむ神の御恵み、ビクの国主の御威勢、空飛つ鳥も羽翼をゆるめて地に墜ち、草木も感じて自然の音楽を奏し、河の流れは鼓を打ち、君が幾世を祝すらむ。又三五の皇大神に仕へたる、吾師の君を初めとし、三人の伴人の中に於て、さる者ありと聞えたる、万世祝ふ亀の齢の万公が、此喜びを万世に、伝へむものと勇み立ち、手足も儘ならぬ程、酔ひつぶれたる重たき身を起し、命限りに祝ぎ奉る。鶴は千年の齢を保ち、亀は万年の寿命をつづく、鶴と亀との命は愚か、幾億万年の末迄も、ビクの御国は永久に、ビクトリア王家は、天地の続かむ限り、限りも知らず栄えませ。それにつけてもアールの君、新に迎へ給ひし后の宮のハンナ姫、いと睦まじくどこ迄も、陰と陽との息を合せ、天が下に妹と背の、清き鑑を示させ給へ。日は照る照る月は輝く、星は御空に永久に、光も褪せず月の国の大海原の底深く、契らせ給へ惟神、神の御前に謹みて、亀の齢の万公が、今日の寿末長ふ、幾千代迄も、祝ひ奉る』</p>
+            <p class="ja-classical-line">と泥酔者に似ず、いと真面目に祝ひ納め元の座に着きぬ。此外、数多の司人の祝の歌はあれど、あまり管々しければ省略するなり。</p>
+            <p class="ja-classical-line">アールの王子は理想の妻、ハンナを娶りしより、国の政治日に月に開けて国民悦服し、ビクトル山の神殿に祭りたる国治立尊、日の大神、月の大神、神素盞嗚大神を朝な夕なに国民一般が信仰をなし、各其業を楽しみ、ミロクの聖代を地上に現出する事となりぬ。ああ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c09.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 9: Flower 祝 [1395]</span>
+      </a>
+      <a href="c11.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 11: Way 晴別 [1397]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 20: 建替 [1406] - Volume 54 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 54 Table of Contents</a>
+      <span>Volume 54</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 54 &bull; Chapter 20</span>
+      <h1 class="chapter-title-en">Chapter 20: 建替 [1406]</h1>
+      <p class="chapter-title-ja">建替〔1406〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Samori no Tsukasa no Chiyōshi: 'The song of Haruna.'</p>
+          <p class="en-p">Haruna: 'As a replica of Takaamahara, in the sacred precinct of Mount Viktor, knowing well the great pillar of the palace, you dwell in peace, O Great Kami. Before your august presence we offer our reverent prayers. The presiding deity of Takaamahara, manifesting as the majestic spirit, one, two, three, four, five, six, seven, eight, nine, ten, a hundred, a thousand, ten thousand things' primal parent, Great Ōkunitokotachi Ōmikami, Great Takamimusubi Ōmikami, and the Great Kami Kamumimusubi, with your awe-inspiring power, creating endlessly myriad things, intending that the divine people beneath the heavens shall dwell forever peacefully and serenely in a blessed august realm, you created the sun, moon, and earth, and granted unto each pure spirits, bringing forth eight hundred myriads of noble kami, protecting all creation in heaven and earth, with boundless and vast grace, which we revere and worship. In the luxuriant reed-field land of Mizuhokuni, where the living kototama prospers, you bestowed a hundred treasures. The sovereign's throne—ah, for a thousand and eight thousand reigns—shall never move nor change, across the eighty islands and eighty countries, to the very limits where the heavenly walls stand erect, to the uttermost bounds where the lands soar up, to the very ends of the trailing clouds, your resplendent and penetrating great divine majesty—this truly is the day's protection, the kami's protection! Rejoicing thus, morning and evening we shall serve. The moon-reading kami's light, which illuminates the everlasting night, is the night's protection.'</p>
+          <p class="en-p">Haruna: 'Cherishing the mortals, the ancestor of Ame-katsukuni and Kuni-katsukuni, the Great Kami Kuninotokotachi, from the very time heaven and earth were formed, remained hidden and dwelt there. By the spiritual virtue of Tamadomaru no Mitama, he created and solidified the drifting land which was like a jellyfish, and separated the earth's seas and lands. The Great Kami Toyokuninushi, by the spiritual virtue of Ashitamaru no Mitama, brought forth and protected plants. The Great Kami Ashimehikochi, by the spiritual virtue of Ikudamaru no Mitama, cherished and nurtured all animals. The moving power is Ōtoji, the calming power is Ōtobe, the dissolving power is Uhijineshinokami, the coagulating power is Suhijineshinokami, the power protecting attraction is Ikuchihikiakami.'</p>
+          <p class="en-p">Haruna: 'The power protecting laxity is Tsunuchihikakami, the power protecting union is Omodashinokami, and the dividing power, through the majestic authority of Umakashinokami, is bestowed upon all things in the world. Making the spirits of heaven and earth accord with the great path of the kami, the divine Izanagi no Ōmikami, who rules the sun's divine land, and the divine Izanami no Ōmikami, who rules the moon's divine land, by the divine decree of the heavenly august kami, taking and holding the heavenly jeweled spear, completely and thoroughly created the thousand-five-hundred autumns' Mizuhokuni as a land of a thousand riches and a land of peaceful shores. In the lands far and near, they brought forth the land-spirit kami, appointed the tutelary local kami, and made the common folk their ujiko.'</p>
+          <p class="en-p">Haruna: 'Distributing them each and every one, they caused them to be guarded intimately. We humbly revere and joyfully praise this great grace. Ah, Kami-nagara, O august spirits, prosper! Though it is said that man is the child of kami and the palace of kami, yet unawares, mixing with the crooked deeds of the crooked-spirit kami, day and night sinking into sins and defilements, sinking into the sorrowful rapids, you pity this wretchedness, O stern spirit, O Great Kami of the august spirit of Mizu! In the Aya sacred land, to say nothing of Mount Koganeyama and the precious Mahuraba of Ubusuna, in this mountain surrounded by green fences at the roots of the lower rocks, manifesting yourself, to teach and guide the people of the world, ruling the countries of the four quarters beneath the heaven peacefully and ever so serenely—though we have no means to recompense even one ten-thousandth part of that grace, we shall devote our utmost sincere heart to the utmost, for the sake of the kami and the sovereign, and serve as long as our lives shall last. Have mercy, Kami-nagara!'</p>
+          <p class="en-p">Haruna: 'Prostrating ourselves before the august presence of the kami, reverently and respectfully we pray. From the very time when heaven and earth first opened, the ancestor of the land who remained hidden, the Great Kami Ōkunitokotachi, before your august presence Haruna reverently, with awe and trembling, makes this prayer. Upon the spirits of the common folk born into the pure and noble lands beneath the heaven in the countries of the four quarters, grant your august divided spirits.'</p>
+          <p class="en-p">Haruna: 'Illuminating the spirit of Naohi, make it shine ever more brightly and beautifully as the spirit of Izunome. May it never happen that we mistakenly stain or shatter our pure spirits against the ugly crookedness of Magatsuhi. Through the perfection of the four souls and five emotions, enable us to serve the heavenly enterprise of the Imperial Great Kami with utmost peace and tranquility. Come what calamities may, may we endure them well, maintaining the noble dignity of being human, and may the thread-like life bestowed by the kami be long, our family occupations grow ever more prosperous, and may we manifest as the flowers and lights of the beautiful heaven and earth, fulfilling the innate essence of our being as the august children of heaven...'</p>
+          <p class="en-p">Haruna: '...' </p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">左守の司の長子ハルナの歌。</p>
+            <p class="ja-classical-line">ハルナ『高天原の移写として
+ビクトル山の聖場に
+大宮柱太知りて
+鎮まり居ます大神の
+御前に祝ぎ奉る
+高天原の司神
+厳の御霊と現れまして
+一二三つ四つ五つ六つ
+七八つ九つ十百千
+万のものの元津祖
+大国常立大御神
+高皇産霊の大御神
+神皇産霊の大神の
+稜威を以て限り無く
+万のものを造りまし
+天が下なる神人を
+うまし御国に永久に
+いと安らけく住ませむと
+日月大地を造りまし
+各清き霊をば</p>
+            <p class="ja-classical-line">授け玉ひて八百万
+尊き神を生み玉ひ
+天地万有守ります
+広大無辺の御恵を
+尊み敬ひ奉る
+豊葦原の瑞穂国
+生言霊の幸はひて
+百の宝を下しまし
+君の位＠は千代八千代
+動きもやらず変る無く
+島の八十島八十の国
+天の壁立つ其極み
+国の聳立つ其限り
+棚引く雲の果てまでも
+伊照り透らす大御稜威
+これぞ全く日の守り
+神の守りと悦びて
+朝な夕なに仕へなむ
+常夜を照らす月読の
+神の光は夜の守り</p>
+            <p class="ja-classical-line">蒼生を撫で玉ひ
+天勝国勝国の祖
+国治立の大神は
+天地成出し其時ゆ
+隠身ましてすみ玉ひ
+玉留魂の霊徳以て
+海月の如く漂へる
+国土をば造り固めなし
+大地の海陸別ちまし
+豊国主の大神は
+足玉魂の御霊徳もて
+植物を生み出し守りまし
+葦芽彦遅の大神は
+生玉魂の霊徳もて
+あらゆる動物愛で育て
+動く力は大戸地
+静まる力は大戸辺
+解ける力は宇比地根神
+凝まる力は須比地根の神
+引力守る生杙神</p>
+            <p class="ja-classical-line">弛力を守る角杙神
+合力守る面足神
+分ける力は惶根の
+御稜威を以て世の中の
+すべての物に与へまし
+天と地との霊をば
+神の大道に依らしめ玉ひ
+日の神国を治し召す
+神伊邪那岐の大御神
+月の神国を治し召す
+神伊邪那美の大神は
+天津御神の神勅もて
+天の瓊矛をとりもたせ
+千五百の秋の瑞穂国
+千足の国や浦安国と
+完全に委曲につくりなし
+遠き近きの国々に
+国魂神を生み玉ひ
+産土神を任けまして
+青人草を氏子とし</p>
+            <p class="ja-classical-line">各も各もに持ち分けて
+親しく守らせ給ひける
+大御恵を謹みて
+仰ぎ喜び奉る
+ああ惟神々々
+御霊幸はひましませよ
+人は神の子神の宮
+とは云ふものの何時となく
+曲津の神の曲事に
+相交こりて日に夜に
+罪や穢に沈みつつ
+憂瀬に沈む憐れさを
+愍み玉ひ厳御霊
+瑞の御霊の大神は
+綾の聖地は云ふも更
+黄金山やウブスナの
+珍の真秀良場云ふも更
+青垣山を周らせる
+下津岩根の此山に
+現はれまして世の人を</p>
+            <p class="ja-classical-line">教へ導き天の下
+四方の国々平けく
+いと安らけく治めます
+其御恵の万分一
+報いむ由もなけれども
+能ふ限りの赤心を
+尽して神と君の為
+生命の限り仕へなむ
+愍れみ給へ惟神
+神の御前に平伏して
+謹み敬ひ願ぎ奉る
+天地初発の其時ゆ
+隠身玉ひし国の祖
+大国常立大神の
+御前にハルナ謹みて
+畏み畏み願ぎ申す
+清き尊き天が下
+四方の御国に生り出でし
+青人草の霊等に
+授け玉ひし御分霊</p>
+            <p class="ja-classical-line">直日の霊を照らしつつ
+ますます光り美はしき
+伊都能売魂となさしめよ
+もしたまさかに過ちて
+醜の曲津に精霊を
+汚し破らる事も無く
+四魂五情の全けき
+其働きによりまして
+皇大神の天業をば
+いと安らけく平らけく
+仕へ奉らせ玉へかし
+如何なる災禍来るとも
+よく耐え忍び人たるの
+尊き品位を保たせて
+神の玉ひし玉の緒の
+生命も長く家の業
+いやますますに富み栄え
+いと美はしき天地の
+花と現はれ光となり
+天地の御子たる身の本能を</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">May Thou deign to purify and lift us up. With reverence and awe, I pray that we may fulfill the Mikokoro of Sumeōkami, that in this Utsushiyo, our spirits may be free of sin and defilement, and that we may be spared from grievous errors. May Thou protect the Seirei bestowed by Kami, and may we live in Kamunagara. In all the Narihai we conduct, may we be blessed with Mitamanofuyu, and may our Masawaza be truly virtuous. May we rouse the courage of Hachiku, and may we advance ever forward until we reach the realm of Umara. Morning and evening, may we revere the Kami, honor our Lord, and without deviating from the Mikoto, may we fully perform the duties of the Kunitami and the Yobito, and may we live in harmony with all people of the world.</p>
+          <p class="en-p">May we never engage in strife or madness, but correct the errors of our bodies, and with Miyabinoyogoto as our shield, may we reconcile Kami and humanity. May we establish Isao that replaces Tenchi, and may it stand as Kakiha and Tokiha. May the Sachimitama of deep love protect all Banbutsu that live and breathe, without harming or destroying them. May we revere and serve the Daidau of Seiseikuwaiku, and through the light of Kushitama, may we fully and thoroughly comprehend the truth of the Oshihe of Magakami that leads to madness. May we be blessed with the spirit of Naohi, and reflecting upon right and wrong, may we strive for a faith of pure sincerity. May Thou deign to help us realize the Mikokoro of Kami through the aid of Kototama, and may we refine and temper our hearts.</p>
+          <p class="en-p">May Thou deign to purify and cast away the myriad sins and defilements that touch my body, and the delusions that dwell within my heart. Just as the eternal Mount Victor never wavers, and just as the flow of the Lion River remains forever pure, may Thou deign to make us steadfast, unchanging, and long-lived, and may Thou make us truly magnificent. As long-lived people of the world, may we preserve our lives in health, and while observing the Five Constant Virtues, may we fulfill our duties as children of Tenchi, passing on our beautiful achievements for all generations to come. Ah, Kamunagara, Kamunagara! All my gratitude and my prayers, from the ancient days of the age of Kami in Takama.</p>
+          <p class="en-p">Thou who didst bear the thousand offerings, who didst retreat to the single island of Ōwadahara, and who didst purify the myriad sins and transgressions of the Amatsutsumi and Kunitsutsumi; Thou, the guardian Kami of Utsushiyo and Yūshiyo, Kuninotokotachi no Ōmikami, Toyokuninu no Ōmikami, Iwa no Mitama no Ōmikami, and Mizu no Mitama no Ōkami. I pray that Thou wilt hear these words blessed by Thy name, that Thou wilt grant Thy consent, and that Thou wilt bless us with the protection of the night and the protection of the shining sun. Prostrating myself before the presence of Kami, I bow my head and pray. Ah, Kamunagara, Kamunagara! May Thy Mitama be blessed.</p>
+          <p class="en-p">Karunahime sings again: 'Born as the younger sister of the Migimoritsukasa, I, Karunahime, on this auspicious day and at this auspicious hour, revere and celebrate the festival Thou hast conducted. The land of Biku, protected by Kami, is suddenly attacked by the unexpected forces of the Brahmin Oniharawake and Kumehiko, who lead a great army and strike with sudden ferocity. My elder brother, the Migimoritsukasa, in his cowardice and lack of resolve, has lost his composure, and it is a source of deep regret that the main castle has been trampled by the enemy before our very eyes. Together with my lord, I followed Hirunahime and faced the approaching enemy, attempting to fight with the strength of a lion, but what could we do against an enemy as vast as clouds and mist?'</p>
+          <p class="en-p">'With no way to hold them back, I suddenly devised a plan. Disguised as a pilgrim, I intentionally allowed myself to be captured by the enemy and was sent to the camp of the two generals. When I reflect upon the feelings of that moment, it feels as if I were crossing a sword. Ah, Kamunagara, Kamunagara! That Thou didst protect me in such a dangerous feat and allow me to achieve such outstanding Isao, Sumeōkami, how noble Thou art! Though the enemy retreated for a time, before we could even rejoice, the rebel army of Migimori, leading over three thousand horsemen, raised the banner of rebellion once again and attacked with great pomp and ceremony.'</p>
+          <p class="en-p">'One danger passed, only for another to arise. The commanders in the castle worried and fretted over what to do. My lord commanded the entire army and fought in defense, but the rebels, emboldened by their victory, showed no sign of retreating. At such a moment, parting the distant clouds of heaven, the three-five messengers of Kami, the Senden-shi, descended. Through the blessing of the living Kototama, the impure-hearted Migimoritsukasa, starting with Bertz and ending with Ciel, were struck by the power and collapsed, unable to move in their wretched state. Following Hirunahime, we mounted our horses and left the mountain pass of Ikura behind, the sound of our hooves echoing in haste.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">発き上げしめ玉へかし
+仰ぎ謹み願はくば
+皇大神の御心に
+叶ひ奉りて現世の
+霊に罪も穢なく
+いみじき過ちあらしめず
+神の賜ひし精霊を
+守らせ玉へ惟神
+すべての事業を営むも
+恩頼を幸はひて
+いと善き事や正行は
+破竹の勇みを振り起し
+益々進み全きの
+域に到達せしめまし
+朝な夕なに神たちを
+敬ひ奉りわが君を
+尊み御言に違ふなく
+国の司や国民の
+務めを全く遂げ完ふせ
+普く世人と親しみて</p>
+            <p class="ja-classical-line">争ひ狂ふ事もなく
+身の過ちは詔直し
+善言美詞を楯として
+神と人とを和めつつ
+天地に代る勲功を
+堅磐に常磐に立てさせよ
+愛も深き幸魂
+生とし生ける万物を
+損ひ破る事も無く
+生成化育の大道を
+畏み仕へ奇魂の
+光りによつて曲神の
+教の真理に狂へるを
+完全に委曲に悟るべく
+直日の霊幸はひて
+理非曲直を省みつ
+誠一つの信仰を
+励ませ玉へ言霊の
+助けに神の御心を
+覚りて心を練り鍛へ</p>
+            <p class="ja-classical-line">吾が身に触るる許々多久の
+罪や穢も村肝の
+心に思ふ迷ひをも
+祓ひ退はせ玉へかし
+ビクトル山の永久に
+ビクとも動かぬ其如く
+ライオン河の其流れ
+いや永久に清き如
+動かず変らず息長く
+いと偉大しくあらしめ給へ
+世の長人よ遠人と
+生命を保ち健全に
+五倫五常を守りつつ
+公共のために美はしき
+功績を万世に相伝へ
+天地の御子と生れたる
+務めを尽させ玉へかし
+ああ惟神々々
+すべての感謝とわが祈り
+神世の昔高天にて</p>
+            <p class="ja-classical-line">千座の置戸を負ひ玉ひ
+大和田原の一つ島
+退はれ玉ひて天津罪
+国津罪咎許々多久の
+穢を祓ひ玉ひたる
+現世幽世の守り神
+国常立の大御神
+豊国主の大御神
+厳の御霊の大御神
+瑞の御霊の大神の
+御名に幸はひ聞し召し
+諾ひ玉ひ夜の守り
+照る日の守りに幸はへませと
+神の御前に平伏して
+頸ね突抜き願ぎ奉る
+ああ惟神々々
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">カルナ姫は又歌ふ。</p>
+            <p class="ja-classical-line">『右守司の妹と
+なりて生れしカルナ姫
+今日のよき日のよき時に
+いとなみ玉ひし御祭り
+謹み敬ひ祝ぎ奉る
+神の守りしビクの国
+思ひがけなきバラモンの
+鬼春別や久米彦が
+数多の軍勢引率れて
+短兵急に攻めよする
+右守の司の吾が兄は
+卑怯未練に腰ぬかし
+見す見す敵に本城を
+蹂躙されし悔しさよ
+吾が背の君と諸共に
+ヒルナの姫に従ひて
+寄せ来る敵に打向かひ
+獅子奮迅の活動を
+試みたれど如何にせむ
+雲霞の如き敵兵を</p>
+            <p class="ja-classical-line">支ふる由も無きままに
+忽ち一計案出し
+巡礼姿となり代り
+わざとに敵に担がれて
+両将軍の陣営に
+送られたりし其時の
+心を思ひ廻らせば
+剣を渡りし心地なり
+ああ惟神々々
+かかる危き離れ業
+守らせ玉ひ抜群の
+勲功を立てさせ玉ひたる
+皇大神ぞ尊けれ
+一旦敵は退却し
+ヤレ嬉しやと思ふ間も
+あらせず右守の叛軍は
+三千余騎を従へて
+再び謀叛の旗を挙げ
+旗鼓堂々と攻め来る
+一つ免れて又一つ</p>
+            <p class="ja-classical-line">如何はせむと城内の
+守将は案じ煩ひつ
+わが背の君は全軍を
+指揮して防ぎ戦へど
+勝に乗つたる叛軍は
+退く由さへも見えざりき
+かかる処へ久方の
+天の八重雲かきわけて
+下らせ玉ふ三五の
+神の使の宣伝使
+治国別の一行が
+生言霊の幸ひに
+心汚き右守司
+ベルツを始めシエールまで
+威勢に打たれて顛倒し
+身動きならぬあさましさ
+ヒルナの姫に従ひて
+駒に跨り猪倉の
+峠を後にカツカツと
+蹄の音も急がしく</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Returning and looking, the interior of the castle has completely become a lane of Shiyura. At the Omotemon are the Sendenshi, and from the Uramon, Hirunahime together with me pressed forward to attack, chasing and scattering the enemy without leaving one. Oh, the gratitude of looking up once more at the Shiyokuō of Tenkataihei! Even if the morning sun shines or clouds over, even if the moon waxes or wanes, and even if Ametsuchi were to overturn, the divine grace of the true Kami—we shall not forget it until thousands of generations. By the prayer of Hirunahime, thick Miyabashira were erected in this Seijiyō, and the joy of reverently worshiping the Ōkami is the feeling of Tengoku and Jiyōdo opening before one's very eyes right now. Ah, Sumekami! Oh, Sumekami!</p>
+          <p class="en-p">Hanging down thy Mitamanofuyu, the setsuteiri of the land of Biku, not to mention the hundreds of officials, may you protect the myriad people peacefully and exceedingly tranquilly unto Tokoshihe, Kamunagara. Before your presence, with reverence, we humbly pray.'</p>
+          <p class="en-p">Tatsuhiko: 'The thick Miyabashira of the Ōkami of Ametsuchi standing firmly—today indeed is joyful. The Kami of Ametsuchi too surely grant the sincere hearts of the hundreds of officials. As in the ancient age of the Kami, the land of Biku restored straight—today indeed is joyful.'</p>
+          <p class="en-p">Yorogimi: 'I pray for a thousand, eight thousand, and ten thousand generations that the land of Biku may prosper more and more. Following the command of the Mikoto of Kuninokuniwakeshinokami, meeting in today's festival is joyful. You who govern the land of Biku, the setsuteiri, the ruler's sincerity the Kami too must admire. Although you now cross the slope of the seventies, I, Yorogimi, pray unto ten thousand generations. Preserving a ten-thousand-year life, may you reign over the land of Biku, O ruler of the setsuteiri.'</p>
+          <p class="en-p">Kuninokuniwake: 'With the lofty divine majesty of the chihayaburu Kami, we have served and completed the jeweled palace dwelling. The land of Biku, which Hirunahime has aided, shall surely prosper as a land without night. Even in the dark night, the divine official Kuninokuniwake prays for the myriad generations of the land of Biku.'</p>
+          <p class="en-p">Thus each offered congratulatory poems, successfully concluding the rite of transfer, and thereupon it was decided that a great banquet of Naorai would be held in Hofusu.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">帰りて見れば城内は
+修羅の巷と成り果てぬ
+表門には宣伝使
+裏門よりはヒルナ姫
+妾と共に攻めよせて
+敵を残らず追ひ散らし
+再び天下太平の
+曙光を仰ぎし有難さ
+旭は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令天地は覆るとも
+誠の神の御恵み
+幾千代迄も忘るまじ
+ヒルナの姫の願ひにて
+此聖場に宮柱
+太しき立てて大神を
+斎き奉りし嬉しさは
+天国浄土が目の当り
+開き初めたる心地なり
+ああ皇神よ皇神よ</p>
+            <p class="ja-classical-line">恩頼を垂れ玉ひ
+ビクの御国の刹帝利
+百の司は云ふも更
+万の民を平けく
+いと安らけく永久に
+守らせ玉へ惟神
+御前に謹み願ぎ奉る』</p>
+            <p class="ja-classical-line">竜彦『天地の皇大神の宮柱
+太しく立ちし今日ぞ嬉しき。
+天地の神も諾ひ玉ふらむ
+百の司の誠心を。
+古の神代の儘のビクの国
+立直したる今日ぞ嬉しき』</p>
+            <p class="ja-classical-line">万公『千代八千代万代迄と祈るかな
+ビクの御国の栄えまさむを。
+治国別神の命に従ひて
+今日の祭に会ふぞ嬉しき。
+ビクの国治め玉へる刹帝利
+君の誠は神もめでなむ。
+君は今七十路の坂を越えませど
+万代までと祈る万公。
+万年の生命を保ちビクの国に
+臨ませ玉へ刹帝利の君』</p>
+            <p class="ja-classical-line">治国別『千早振る神の御稜威の高くして
+仕へ奉りぬ玉の宮居を。
+ヒルナ姫助け玉へるビクの国は
+夜なき国と栄えますらむ。
+暗の夜も治国別の神司
+ビクの御国の万代祈る』</p>
+            <p class="ja-classical-line">斯く各祝歌を奉り目出度く遷座の式を終り、次いでホーフスに於て大直会の宴を開かるる事となつた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c19.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 19: 流調 [1405]</span>
+      </a>
+      <a href="c21.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 21: 鼻向 [1407]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

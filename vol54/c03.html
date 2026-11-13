@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3: 懸引 [1389] - Volume 54 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 54 Table of Contents</a>
+      <span>Volume 54</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 54 &bull; Chapter 3</span>
+      <h1 class="chapter-title-en">Chapter 3: 懸引 [1389]</h1>
+      <p class="chapter-title-ja">懸引〔1389〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The dawn sky is tinged with madder, and the voices of the Momodori bird sing 'Chiyochiyo', as if celebrating the prosperity of the Kokuka of Biku, and congratulating King Victoria upon the joyous event of the Oyako Taimen; thus, this morning even the chirping of the birds sounds somehow brave and inspiring.</p>
+          <p class="en-p">In accordance with a Shinji, Harukuniwake realized before Mimei this morning that Matsuhiko and his group would return; he threw open the doors at the Kadoguchi, boiled hot water, arranged the Zabuton, and waited for them. Thereupon, the eight sons and one daughter returned in high spirits. The faces of the five Otokokiyōdai were covered all over with thick, bushy beards like bears. At first glance, they did not look like Ningen at all. Moreover, having lived in the mountains for a long time, grime had accumulated upon them to such a degree that one might suspect moss had grown all over their bodies.</p>
+          <p class="en-p">Matsuhiko: 'Senseisama, thanks to your grace, we have at last brought back the six Gokiyōdai to welcome them.'</p>
+          <p class="en-p">Harukuni: 'Ah, all three of you have worked hard. Now, now, Rokuninsama, please step up this way. I have boiled hot water, so please take a hot bath in order, starting from the eldest brother.'</p>
+          <p class="en-p">Earl: 'No, I have no words to express my gratitude. I hear that my father was immensely indebted to you. On top of that, to rescue us brothers and sister as well—we regard you as if you were gods.'</p>
+          <p class="en-p">Thus speaking, unlike a rough man, he shed tears of joy in quick succession.</p>
+          <p class="en-p">Harukuni: 'I am humbled that you should express your thanks. In all things, I have merely been permitted to perform service for the sake of the Lord; therefore, please do not worry and enjoy the hot bath. Hey, Manko, guide them to the bathplace. And scrub off their grime.'</p>
+          <p class="en-p">Manko: 'Yes, I understand. Come, Earl-sama, please enter first. I shall wash your back.'</p>
+          <p class="en-p">So saying, he guided him to the bathroom. Matsuhiko and Tatsuhiko took turns letting the six brothers and sister bathe, kindly washing them; then they shaved off their beards entirely and had them change into the clothing for six people entrusted to them by Hōfusu. When they were transformed like this, every one of them appeared as noble as a refined young aristocrat. As for Daiyahime, being a woman, a man could not wash her back, so she bathed all by herself, carefully removing the grime from her body, tidied her lovelocks, wrapped herself in a beautiful Kosode, and with a smile, placed both hands on the floor before Harukuniwake, expressing her gratitude for her salvation.</p>
+          <p class="en-p">Manko, seeing Daiyahime's appearance, was utterly astonished:</p>
+          <p class="en-p">Manko: 'My, oh my, this is like Yoshinoyama in full bloom! I heard that women are like monsters, but hey, what on earth has happened? Compared to Okiku of Komokitayama, the difference is as night and day. What a grand and stylish beauty she is, ehehehe.'</p>
+          <p class="en-p">Matsuhiko: 'Hey, Manko, are you still longing for Okiku? What a troublesome fellow you are. In that case, even if you become a monk, it will be no use.'</p>
+          <p class="en-p">Manko: 'No, I have no complaints or anything anymore. I have fallen utterly and tremendously in love; ah, I am in love, I am in love. Even I am surprised at how deeply I have fallen in love.'</p>
+          <p class="en-p">Matsuhiko: 'Ahahaha, you speak like a sculptor or a inspector of well-digging. What a troublesome fellow you are. In that case, you will have to remain as Manko forever.'</p>
+          <p class="en-p">Manko: 'Because I brought back this Himesama by extending Manko's sympathy, well, since she has elder brothers, she won't succeed the Kshatriya house, and she is of a status where she will be sent off to marry somewhere, isn't she? Hey, Matsuhiko-sama, I'm giving up on Okiku now, ehehehehe.'</p>
+          <p class="en-p">Matsuhiko: 'Ahahaha, do you know what it means to be beyond your social standing? You really are a troublesome fellow.'</p>
+          <p class="en-p">Manko: 'Family lineage, wealth, status, fame—what do such things matter? I cannot bear to have sacred love restrained by such things! She shall surely be mine. Even for you, it might be a waste to give her to Manko, but with a divine heart that loves subordinates, you will act as a mediator for me, won't you? No, I firmly believe that out of a compassionate heart that loves disciples, you will surely make the arrangements for me. Even for the Kshatriya-sama, since she was once considered no longer among the living, in short, she is a windfall. That being so, as a reward for our having gone to fetch her, depending on your mediation, he will surely say he grants her to Manko. Please make no mistake, Sensei, I'm counting on you...'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">暁の空は茜さし、百鳥の声は千代千代とビクの国家の繁栄を祝し、又ビクトリア王が親子対面の慶事を寿ぐ如く、今朝は何となく勇ましく鳥の声さへ聞えて来る。</p>
+            <p class="ja-classical-line">治国別は神示に仍つて、今朝未明に松彦一行の帰つて来る事を悟り、門口の戸を開け放ち、湯などを沸かし、座蒲団を並べて待つてゐた。そこへ八男一女はイソイソとして帰つて来た。五人の男兄弟は熊のやうに顔一面に鬚ムシヤムシヤと生やしてゐる。一見した所では、どうしても人間らしく見えなかつた。而して永らく山住居をしてゐたので、体中苔が生えたと疑はるる許りに垢がたまつてゐる。</p>
+            <p class="ja-classical-line">松彦『先生様、お蔭に依りまして、漸く六人の御兄妹をお迎へして帰りました』</p>
+            <p class="ja-classical-line">治国『ああ三人共御苦労であつた。サアサア六人様、こちらへお上り下さい。そして湯を沸しておきましたから、お兄さまから順々に湯浴みをして下さい』</p>
+            <p class="ja-classical-line">アール『イヤ、何共御礼の申上やうが厶いませぬ。父が大変御厄介に預かつたさうで厶います。其上又吾々兄妹をお救ひ下さるとは、貴方方は神様のやうに存じます』</p>
+            <p class="ja-classical-line">と荒くれ男に似ず、嬉し涙をハラハラと流してゐる。</p>
+            <p class="ja-classical-line">治国『御礼を云はれては恐れ入ります。何事も神様の為に御用をさして頂いたので厶いますから、御心配なく御湯をお召し下さいませ。オイ万公、御湯場へ御案内を致せ。そして垢をおとして上げるのだよ』</p>
+            <p class="ja-classical-line">万公『ハイ承知致しました。サ、アールさま、貴方からお入りなさい。背中を流しませう』</p>
+            <p class="ja-classical-line">と云ひ乍ら湯殿へ案内した。松彦、竜彦は代る代る六人の兄妹を湯浴みさせ、親切に洗うてやり、それからスツカリと鬚を剃りおとし、ホーフスから預つた六人分の衣類を着替へさせた。何れも斯うなつてみると、気品の高い貴公子然たる男計りである。ダイヤ姫は女の事とて、男が背を流す訳にもゆかず、只一人湯浴をなし、念入りに身体の垢をおとし、ラブロックを整理し、美はしき小袖に身を纒ひ、ニコニコし乍ら治国別の前に両手をついて、再生の恩を感謝した。</p>
+            <p class="ja-classical-line">万公はダイヤ姫の姿を見て、肝を潰し、</p>
+            <p class="ja-classical-line">万公『ヤア、これはこれはと許り花の吉野山、女は化物だと聞いてゐたが、コラまアどうした事だ。小北山のお菊から比べてみると雲泥の相違だ。何とマア立派なシヤンだなア、エヘヘヘ』</p>
+            <p class="ja-classical-line">松彦『オイ万公、ヤツパリお菊が恋しいか、困つた男だなア。それではモンクになつても駄目だぞ』</p>
+            <p class="ja-classical-line">万公『イヤ、もう文句も何もありませぬ。素的滅法界惚ました、ああ惚た惚た。われ乍らよう惚たものだ』</p>
+            <p class="ja-classical-line">松彦『アハハハハ、彫刻師か井戸掘の検査のやうに言つてゐやがるな。困つた男だなア。それぢや何時迄も万公で行かねばなるまい』</p>
+            <p class="ja-classical-line">万公『万公の同情を寄せて、此姫様をお迎へして来たのだから、何れ此……何でせう、お兄さまがあるのだから、刹帝利家を継がれる筈はなし、どこかへ○○をなさるお身分だから、ねえ松彦さま、モウお菊は思ひ切りますワ、エヘヘヘヘ』</p>
+            <p class="ja-classical-line">松彦『アハハハハ、身分不相応と云ふ事を知つてゐるか、本当に困つた奴だなア』</p>
+            <p class="ja-classical-line">万公『門閥や、財産や、地位や、名望や、そんな物が何になりますか。そんな物を以て神聖なる恋愛を制肘せられちや堪りませぬワ、キツと私のものですよ。貴方だつて、万公にやるのは惜しいでせうが、そこは部下を愛するといふ神心を以て、私に媒介して下さるでせうなア。否キツと子弟を愛する慈悲深いお心から、周旋をして下さるだらうと固く信じて居ります。刹帝利様だつて、一旦ない者と定めて厶つたから、つまり云へば拾ひ者ですワ。さうだから、キツと吾々がお迎へにいつた御褒美として、貴方方の周旋の如何に仍つて、万公に与へると仰有るでせう。キツと抜目なく、先生、頼みますで……』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Daiya: 'Hohakaha, that Mankō-sama is indeed pleased to speak with such great kindness. However, I already possess a husband. Though I am but jifuitsusai in years, I hold the kokoroe of a full-fledged woman.'</p>
+          <p class="en-p">Mankō: 'Well now, who might this husband of anata be? Surely you would not commit such a baka thing as between kiyōdai...'</p>
+          <p class="en-p">Daiya: 'Yes, I intend to ask Senseisama to negotiate with my father, that he might request my ketsukon with Haruna-sama, the musuko of Samorinokami, after nisannen. For Haruna-sama is the one I like ichiban.'</p>
+          <p class="en-p">Mankō shook his head repeatedly,</p>
+          <p class="en-p">Mankō: 'Despite your setsukaku efforts, Haruna-sama is dame. Already he has acquired a ritsupa dekidai wife named Karunahime. Furthermore, as your age differs from his, it were best that you give up such thoughts.'</p>
+          <p class="en-p">Daiya: 'Oh dear me! That Haruna-sama should have taken a wife within a single ichinen! Whatever shall I do?'</p>
+          <p class="en-p">Mankō: 'Hahaha, that is precisely why I say it is dame to love a man of such a different age.'</p>
+          <p class="en-p">Daiya: 'Though you say Haruna-sama and my age differ, it is merely ten jifunen or so. Do you not differ by as much as sanjifunen? If I were to become fūfu with such a person, the people of the seken would laugh, calling us Hanchiyōuemon and O-Han. Hohakaha, oh dear, what an thoroughly unpleasant face!'</p>
+          <p class="en-p">With that, she pertly turned her senaka.</p>
+          <p class="en-p">Mankō: 'Ah, I have failed at this. How might I become younger in age? Why was I not born twenty years later?'</p>
+          <p class="en-p">Matsuhiko: 'Ahahaha!'</p>
+          <p class="en-p">Tatsuhiko: 'Hey, Mankō, speak no such baka things, but prepare the guests' meal at once. From now on, I command you to act as boy. Go to the kitchen quickly, gird up your sleeves, and get to work!'</p>
+          <p class="en-p">Mankō: 'Yes, I have understood. However, with so very many guests, Mankō alone cannot manage it all. Since a woman is indispensable for cooking, shall we have Daiya-sama lend a hand? If that be disagreeable, then let Tatsuhiko-sama also draw water or the like.'</p>
+          <p class="en-p">Harukuni: 'Nay, Matsuhiko and Tatsuhiko have important duties. Henceforth they must make various preparations, proceed to Hōfusu, and go to consult with Ksatriya-sama on various matters. Regrettable though it is, Mankō, pray manage by yourself for today alone. As Daiya-sama is a woman, if she were to assist for a short while it would suit us well, and you too would be pleased; yet as it is perilous with Mankō, we cannot do so, which leaves us in quite a plight.'</p>
+          <p class="en-p">Mankō: 'Sensei, no such anxiety is needed; I too am a man. I shall rarely commit any clumsy blunder, so I pray you, even if only for half an hour, let us work together. After pushing through thorns up and down steep mountain slopes, and just when I thought I had returned here at last, I am made to act as a bath-house attendant, and now even commanded to cook... Thus, it seems you might show a little consideration for me.'</p>
+          <p class="en-p">Daiya: 'While living an inconvenient life in the mountains, I have gained experience in cooking for six persons. Then I alone shall take charge of the kitchen. Mankō-sama, pray take your rest.'</p>
+          <p class="en-p">Mankō: 'Heaven forbid! If we let a young hime of tender years act as cooker master, it would ill become a man. Nor would it be excusable should it reach the ears of Ksatriya-sama; therefore, let us serve as cooker master through fūfu... oops, I mean a man and woman working together. Well, Sensei, there can be no hindrance in that, can there?'</p>
+          <p class="en-p">Harukuni: 'If even Daiya-sama consenteth, it shall be well. However, thou shalt be the rice cooker, and we shall have Daiya-sama become the butler.'</p>
+          <p class="en-p">Mankō: 'Ah, it cannot be helped. I shall obey the command of my lord.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ダイヤ『ホホホホ、あのマア万公さまとやら、御親切に能う云つて下さいます。併し私には既に業に夫が厶います。年は十一才でも女として一人前の心得は持つて居りますからねえ』</p>
+            <p class="ja-classical-line">万公『これはしたり、貴方の夫といふのは何方ですか。まさか兄妹同士、そんな馬鹿な事はなさいますまいし……』</p>
+            <p class="ja-classical-line">ダイヤ『ハイ、先生様にお願ひ申し、父に掛合つて頂いて、左守司の息子ハルナさまと、二三年したら結婚するやうに願つて頂きたいもので厶います。私はハルナさまが一番好きなので厶いますからねえ』</p>
+            <p class="ja-classical-line">万公は首を頻りにふり、</p>
+            <p class="ja-classical-line">万公『折角乍ら、ハルナさまは駄目ですよ。既に業にカルナ姫といふ立派な奥さまが出来ました。そして貴女とは年が違ふのですからそんな事は思ひ切つたが宜しからう』</p>
+            <p class="ja-classical-line">ダイヤ『あれマア、ハルナさまとした事が、一年の間にチヤンと奥さまを持たれたのですか。私、どうしませう』</p>
+            <p class="ja-classical-line">万公『ハハハ、さうだから、それ丈年の違ふ男にラブしても駄目だと云ふのですよ』</p>
+            <p class="ja-classical-line">ダイヤ『ハルナさまと私と年が違うといつても、僅か十年許りですよ。貴方は三十年も違ふぢやありませぬか。そんな方と夫婦になつたら、世間の人がお半長右衛門だと云つて笑ひますがな。ホホホホ、あのマアいけ好かないお顔』</p>
+            <p class="ja-classical-line">とプリンと背中を向ける。</p>
+            <p class="ja-classical-line">万公『ヤア此奴ア失敗つた。どうしたら年が若くなるだらうかなア。なぜ二十年も後から生れて来なかつただらう』</p>
+            <p class="ja-classical-line">松彦『アハハハハ』</p>
+            <p class="ja-classical-line">竜彦『オイ万公、馬鹿な事を云はずに、早くお客さまの御飯の用意をするのだ。貴様は之からボーイを命ずる。早く台所へ行つて襷がけになつて活動せぬかい』</p>
+            <p class="ja-classical-line">万公『ヘー、承知しました。併し、これ丈沢山のお客さまだから、万公一人では手が廻りませぬ。炊事に女がなくてはなりませぬから、一つダイヤさまに手伝つて貰ひませうかい。それが厭なら、竜彦さまも水汲みなつとして貰ひませう』</p>
+            <p class="ja-classical-line">治国『イヤ、松彦、竜彦は大変な御用がある。之から種々の準備を整へホーフスへ参り、刹帝利様にいろいろと御相談に行かねばならぬ。御苦労乍ら万公、お前今日丈一人でやつてくれ。ダイヤ様は女の事でもあり、暫く手伝つて頂けば此方も都合が好し、お前も喜ぶだらうが、どうも万公では険難で、さうする訳にも行かず困つた者だ』</p>
+            <p class="ja-classical-line">万公『先生、そんな御心配はいりませぬ、私も男です。滅多に不調法はしませぬから、何卒、仮令半時でも一緒に仕事をさして下さい。きつい山坂を荊を分けて往来し、ヤツと此処迄帰つたと思へば、三助をやらされる、又炊事まで命ぜられる……といふのだから、チツと御推量下さつてもよささうなものですな』</p>
+            <p class="ja-classical-line">ダイヤ『妾は山中に於て不便な生活をし乍ら、六人分の炊事をやつて来ました経験が厶います。妾一人が、そんなら炊事場を預りませう。万公さまはお休み下さいませ』</p>
+            <p class="ja-classical-line">万公『滅相もない、お年のいかぬ若い姫様に、コーカー・マスターをさせては、男が立ちませぬ。又刹帝利様に聞えてもすみませぬから、夫婦……オツトドツコイ男女共稼で、コーカー・マスターを勤めませう。ねえ先生、それで差支ありますまい』</p>
+            <p class="ja-classical-line">治国『ダイヤ様さへ御承知なればよからう。併しお前は飯炊役、ダイヤ様はバトラーになつて貰はう』</p>
+            <p class="ja-classical-line">万公『エエ仕方がない。君命に従ふ事に致しませう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">And so Mankō gathered various Shiyokureuhin and, tucking up his sleeves with a cord for Suiji, set to work. Daiya kindled the fire and boiled the tea; once the Jiyunbi was perfectly complete, he carried in the Zenbu, and after performing Dokumi for each and every dish, he arranged them in the Zashiki. From this point, the entire group partook of Asahan, leisurely exchanging stories of Sanchiuseikuwatsu, the Kuraubanashi of the Sendenshi, and other Yukuwai tales; they then began Sensōdan regarding the interior of Victoria Castle, passing about Itsutoki in an Omoshirōka manner.</p>
+          <p class="en-p">In accordance with the Naimei of Harukuniwake, both Matsuhiko and Tatsuhiko adjusted their Emon and made their Sannifu to the Hofus. Talman, the Naijitsukasa, received the Riyōnin with Teinei, showed them into the inner room, and while entertaining them with tea and sweets, began to inquire after the news of the six children as if he could no longer wait.</p>
+          <p class="en-p">Talman: 'I have been waiting for you most anxiously; what was the news regarding the children?'</p>
+          <p class="en-p">Tatsuhiko thought it would not be very interesting to say immediately that he had brought the six back safely; intending to tease the Naijitsukasa for a moment, the mischief-loving Tatsuhiko intentionally assumed a worried expression. While wiping the saliva from his lips with a napkin, he let out seven or eight successive coughs, and acting as if it were difficult to speak, he fidgeted and rubbed his hands together.</p>
+          <p class="en-p">Tatsuhiko: 'Eh, though we went to great lengths, it was by no means an easy matter. It was, indeed, an unexpectedly remote place of deep mountains and dark valleys, overgrown with brambles, a difficult spot where even birds do not pass.'</p>
+          <p class="en-p">Talman: 'Heh, indeed, you must have been greatly troubled. And did the children return safely?'</p>
+          <p class="en-p">Tatsuhiko: 'Well, that is, yes, what shall I say. Truly, I have already broken my bones with effort.</p>
+          <p class="en-p">The companions of moon and flowers gradually vanish like snow,</p>
+          <p class="en-p">The light shines after the three-day moon,</p>
+          <p class="en-p">The quack doctor shows a change rather than a cure.'</p>
+          <p class="en-p">Talman: 'Eh, what are you saying? Were the children not there?'</p>
+          <p class="en-p">Tatsuhiko: 'Heh, as for being there, they were there. But you see, they would not easily say "Yes," and with charging spears they surrounded the three of us in ten and twenty folds; they attacked with such ferocity that there was not even a gap for an ant to crawl out. We barely managed to cut a path through and fled back like clouds and mist... such was the state of affairs. Ah, ah, it could not be helped.'</p>
+          <p class="en-p">Talman: 'The other side was six people, yet you say ten or twenty folds, or no gap for an ant to crawl out... please do not tell such jokes, but let me hear the good news quickly.'</p>
+          <p class="en-p">Matsuhiko was smiling, silently listening to the dialogue between the two. And from time to time, he let out a "pu-pu" burst of laughter. Talman grew impatient and, sliding his knees closer, said:</p>
+          <p class="en-p">Talman: 'Eh, do not tease me, tell me quickly. Surely you have gained the victory.'</p>
+          <p class="en-p">Tatsuhiko: 'As a result of the struggle by the three of us, it was simply impossible to bring them back alive, so we chopped off their heads and have finally made our triumphal return. Presently we shall submit them for the inspection of the heads. Since hair grows all over their faces like bears, I pray you inspect them carefully so there is no mistake. Right now at Harukuniwake-sama's residence, as we cannot treat even just the heads neglectfully, we are making a palanquin to carry them here, so please inspect them well.'</p>
+          <p class="en-p">Talman: 'Who requested such a thing? This is outrageous violence! What use is it to bring back only the heads? You are a great criminal of murder; from now on, no matter how high a Monkū of divine virtue you may be called, I cannot forgive you. Prepare yourself!'</p>
+          <p class="en-p">So he spoke, his complexion changing as he flew into a rage. Tatsuhiko remained composed.</p>
+          <p class="en-p">Tatsuhiko: 'Ahahaha! Since it was impossible to return lugging such large bodies, I thought it would be very convenient to bring back only the heads. In accordance with the will of the Kshatriya-sama, we have destroyed the rebellious children who sought to disturb the nation of Biku and have returned; what is it that dissatisfies you? You said that you only wanted the six children to show their faces, did you not? You did not specifically say to show the torsos, nor did you say to show the limbs. We have no ears to listen to such complaints, ahahahaha!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と万公はいろいろの食料品を集め、炊事に襷がけで取掛つた。ダイヤは火を焚き、茶を沸し、チヤンと準備が整うて、膳部を運び、一々毒味を了り座敷に並べた。之より一同は朝飯を喫し、ゆるゆると山中生活の話や、又は宣伝使の苦労話や、愉快な話を交換し、ビクトリア城内の戦争談などを始めて、一時許り面白可笑しく時をうつした。</p>
+            <p class="ja-classical-line">治国別の内命に仍つて、松彦、竜彦両人は、衣紋を繕ろひ、ホーフスに参入した。内事司のタルマンは二人を叮嚀に向へ、奥の間に通し、茶菓を饗応し乍ら、六人の子女の消息を待ち兼た様に尋ね出した。</p>
+            <p class="ja-classical-line">タルマン『大変にお待ち申して居りましたが、お子様の消息は如何で厶いましたか』</p>
+            <p class="ja-classical-line">竜彦は早速六人を無事に連れ帰つたと云つては、余り興味がない、ここは一つ内事司をぢらしてやらうと、徒好の竜彦はワザと心配相な顔をして、ナフキンで唇の唾をふき乍ら、咳払を七つも八つもつづけ、言ひにくさうにモヂモヂして揉手をし乍ら、</p>
+            <p class="ja-classical-line">竜彦『エー、折角、参りましたが、中々以て、容易の事ではありませぬ。夫れは夫れは、意外にも深山幽谷で荊蕀茂り、鳥も通はないやうな難所で厶いましたよ』</p>
+            <p class="ja-classical-line">タルマン『ヘー、成程、大変お困りで厶いましただらうな。そして御子女は無事に御帰りになりましたか』</p>
+            <p class="ja-classical-line">竜彦『サ、そこが、ウン、何です。誠に早、骨を折りましたよ。</p>
+            <p class="ja-classical-line">月花の友は次第に雪と消え</p>
+            <p class="ja-classical-line">光明は三日の月のあとへさし</p>
+            <p class="ja-classical-line">藪医者は験より変を見せるなり』</p>
+            <p class="ja-classical-line">タルマン『エ、何と仰せられます。御子女はゐられなかつたので厶いますか』</p>
+            <p class="ja-classical-line">竜彦『ヘー、居られるはゐられました。それがサ、中々容易に、ウンと仰有らぬので、猪突槍を以て吾々三人を十重二十重に取囲み、蟻の這ひ出る隙間のなき迄に、攻め来る其猛烈さ。僅に血路を開いて雲を霞と逃げ帰り候……といふやうな為体で厶いましたよ。あああ、是非も厶いませぬ』</p>
+            <p class="ja-classical-line">タルマン『向ふは六人さま、十重二十重だとか、蟻も這ひ出る隙間もない……とか、そんな御冗談仰有らずに、早く吉報を御聞かし頂きたいもので厶います』</p>
+            <p class="ja-classical-line">松彦はニコニコし乍ら、黙つて二人の問答を聞いてゐる。そして時々「プープー」と噴き出してゐた。タルマンは気を焦ち、膝をすりよせ乍ら、</p>
+            <p class="ja-classical-line">タルマン『エ、焦らさずに早く言つて下さい。キツと勝利を得られたのでせう』</p>
+            <p class="ja-classical-line">竜彦『吾々三人がヤツと格闘の結果、到底生捕にして帰る訳にも行かず、首をチヨン切つて、漸く凱旋致しました。やがて首実検に供へませう。毛は熊の如くに顔一面に生えて居りますから、御見違ひのない様にお検めを願ひます。今治国別さまの館で仮令首丈でも疎には出来ませぬから、輿を作つて舁いで参りますからよくお検め下さいませ』</p>
+            <p class="ja-classical-line">タルマン『左様な事を誰が御願申しましたか、以ての外の乱暴、首計り持つて帰つて何になりますか。貴方は人殺の大罪人、これから、何程神徳の高きモンクだと云つても、許す訳には参りませぬ、覚悟をなされ』</p>
+            <p class="ja-classical-line">と顔色を変へて怒り出した。竜彦は平然として、</p>
+            <p class="ja-classical-line">竜彦『アハハハ、大きな体を引抱へて帰る訳にも行かず、首丈持つて帰れば大変軽便だと思ひ、刹帝利様の意志に従つて、ビクの国家を乱さむとする、悪逆無道の御子女を亡ぼし帰つたのが、何がお不足で厶るか。六人の子供が顔さへ見せてくれさへすれやよいと仰有つたでせう。別に胴体を見せいとも、手足を見せいとも仰有らなかつたでせう。さやうな不足は、吾々は聞く耳は持ちませぬ、アハハハハ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Taruman was utterly dumbfounded by the excessiveness of the situation; his face turned Matsusao, and while his lips trembled, he glared resentfully at the face of Tatsuhiko. At this moment, Samori and Umori, who had been at Rēbu-an-Rūmu waiting for Harukuniwake's Henji, thought they heard the voice of Tatsuhiko; they pushed open the door, followed the Rauka, and appeared at this spot. Seeing Taruman, his Kahoiro was like earth and he was shivering. The Futari were smiling cheerfully. Samori's Kyūbitto, seeing this state, thought to himself, 'Haha, that fellow Taruman, because he struts about acting like a Yogenshiya and a Sendenshi, he is being taken to task as a Miseshime; this is Omoshiro...' and thus thinking, he appeared before the Sannin.</p>
+          <p class="en-p">Samori: 'Hearing of the Yōsu just now in the Kitsuenshitsu, it seems that things have ended in Fuseikō, but no, anything is Ketsukō. As long as you bring Āru-sama back with you, the Jiyōchiu of Biku will be as firm as a Banjiyaku. Ya, you have truly exerted yourself; Dōzo, please convey my regards and thanks to Harukuniwake-sama.'</p>
+          <p class="en-p">Matsuhiko: 'At long last, after explaining various Jijiyō, I have arranged to bring back Hitori only. Presently Harukuniwake-sama shall place him in a Kago and send him; Dōzo, please perform the Ōketo.'</p>
+          <p class="en-p">Samori: 'Thank you. Surely Satteri-sama will be satisfied. And who might that Hitori be?'</p>
+          <p class="en-p">Before Matsuhiko could give a Henji,</p>
+          <p class="en-p">Tatsuhiko: 'Aiya, because hair grows all over the face, I cannot tell if it is a man or a woman, an elder brother or a younger brother. I do not know what it is, but eh, I have finally managed to pull Hitori back. Dōzo, please examine him well.'</p>
+          <p class="en-p">As they were speaking, led by Mankō and carried in a Kago, the one who arrived was the eldest son, Āru. Matsuhiko said,</p>
+          <p class="en-p">Matsuhiko: 'Ya, he has returned just now. Come, let us all welcome him.'</p>
+          <p class="en-p">And they went to the entrance to meet him. The Kago was brought alongside the entrance. Emerging abruptly from within, a noble youth with his beard shaven off and wearing splendid clothes was the eldest son, Āru. Taruman, as well as Samori and Umori, were so astonished they could only utter a cry, and for a while, no words would come.</p>
+          <p class="en-p">Harukuni: 'Everyone, this is the eldest son, Āru-sama.'</p>
+          <p class="en-p">Samori and Umori were suddenly overcome by tears of joy and could not utter a single word; taking his left and right hands, they guided him to Satteri's living room. Taruman also finally stroked his chest in relief,</p>
+          <p class="en-p">Taruman: 'Tatsuhiko-sama, remember this. I shall surely return the favor...'</p>
+          <p class="en-p">While saying this, he followed behind Āru and disappeared into the inner room. Harukuniwake, accompanied by Mankō, quickly departed without meeting Satteri, as he was concerned about the five people he had left at his own dwelling.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">タルマンは余りの事に呆れ果て、真青な顔をして唇を慄はせ乍ら、恨めしげに竜彦の顔を睨んでゐる。ここへ、レーブ・アン・ルームにあつて、治国別の返辞を待つてゐた、左守右守はどうやら竜彦の声がする様だと、ドアを排し、廊下を伝うて此場に現はれ、見ればタルマンは顔色土の如くなつて慄うてゐる。二人はニコニコとして笑うてゐた。左守のキユービツトは此体をみて、……ハハア、タルマンの奴、予言者だ、宣伝使だと威張つてゐるから、懲戒の為に油を取られてゐるのだ、此奴ア面白い……と思ひ乍ら、三人の前に現はれ来り、</p>
+            <p class="ja-classical-line">左守『今喫煙室に於て様子を聞けば、どうやら、不成功に終つた様子で厶いますが、イヤもう何でも結構で厶います。アールさまさへ連れて帰つて下さらば、ビクの城中は磐石の如くで厶います。ヤ、誠にお骨を折らせました、何卒治国別様へ宜しくお礼を申して下さい』</p>
+            <p class="ja-classical-line">松彦『漸くの事で、いろいろと事情を申上げ、お一人丈お連れ申すことに致しました。やがて治国別様が駕籠にお乗せ申して御送りになるでせう、何卒御受取り下さいませ』</p>
+            <p class="ja-classical-line">左守『有難う厶います。さぞ刹帝利様も満足遊ばす事でせう。そして其お一人と申すのは何方で厶いますか』</p>
+            <p class="ja-classical-line">竜彦は松彦の返答せぬ内に、</p>
+            <p class="ja-classical-line">竜彦『アイヤ、余り顔一面に毛が生えてゐるので、男とも女とも兄とも弟共見当がつきませぬ。何だか知りませぬが、エ、一人丈やうやうと引張て帰りました。何卒、よくお調べ下さいませ』</p>
+            <p class="ja-classical-line">かく話す所へ駕籠に舁がれて万公が先に立ち、やつて来たのは総領息子のアールであつた。松彦は、</p>
+            <p class="ja-classical-line">松彦『ヤ、今お帰りになりました。サ、皆さまお迎へ致しませう』</p>
+            <p class="ja-classical-line">と玄関口に出迎へた。駕籠は玄関口に横づけとなつた。中からヌツと現はれた、髭をそりおとし、立派な衣装をつけた貴公子は総領息子のアールであつた。タルマン始め左守右守はアツと許りに驚いて、暫し言葉も出なかつた。</p>
+            <p class="ja-classical-line">治国『皆さま、此方が御総領のアールさまで厶います』</p>
+            <p class="ja-classical-line">左守右守は俄に嬉し涙がこみ上げて来て、只一言も発し得ず、左右の手を取つて、刹帝利の居間へ案内して行く。タルマンもヤツと胸を撫でおろし、</p>
+            <p class="ja-classical-line">タルマン『竜彦さま覚えてゐなさい。キツと御礼を申しますから……』</p>
+            <p class="ja-classical-line">と云ひ乍ら、アールの後に従ひ、奥の間に姿を隠した。治国別は万公を伴ひ逸早く刹帝利にもあはず、吾住家に残した五人が気にかかるので帰つて行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c02.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 2: Day 出前 [1388]</span>
+      </a>
+      <a href="c04.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 4: 理妻 [1390]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
