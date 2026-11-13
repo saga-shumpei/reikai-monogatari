@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9: 超死線 [1616] - Volume 63 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 63 Table of Contents</a>
+      <span>Volume 63</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 63 &bull; Chapter 9</span>
+      <h1 class="chapter-title-en">Chapter 9: 超死線 [1616]</h1>
+      <p class="chapter-title-ja">超死線〔1616〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The party of five finally climbed up to the middle of Mount Suraya, having ascended seven thousand three hundred shaku from the water's surface. Beyond this point lay the death-line zone of which the Eukuwai had spoken the night before. A Jiyakitai surrounded the mountainside in all directions, and all who had attempted to break through this death-line had been struck by the evil spirits, afflicted with Shintaisuishiyōbiyō, and fallen here one after another, with not a single person having climbed higher than this. No matter how brilliantly the Yakuō jewels shone or how precious the treasures hung before one's eyes, crossing this death-line was a feat that could never be accomplished by human effort. This zone was approximately seventy to eighty ken in width. Upon reaching the vicinity of the death-line, one could see white bones lying in heaps. Seeing this sight, Itahiko realized that it could not be broken through by ordinary means. Deciding that it was better to ascend by obtaining divine power, he acted as the guide, recited the Amatsu-Norito, and while finishing the chanting of the Ama-no-Kazauta, he rushed upward, entrusting himself to the momentum. At last, the party of five was able to break through the death-line.</p>
+          <p class="en-p">Itahiko: 'Ah, Kannagara Tamachi Haemaese. That we have safely crossed this dangerous zone, which even a Ryūō cannot break through and descend since the dawn of creation, is entirely due to the divine virtue of the Lord God.'</p>
+          <p class="en-p">Wrapped in the robes of the Imperial God's grace,
+I have crossed the perilous death-line.
+If one entrusts oneself to the God of Kannagara,
+I believe there is nothing in this world to fear.</p>
+          <p class="en-p">Bravada: 'Noble is the person who has safely crossed
+The gate of death, unheard of even in the age of the gods.
+Were it not for the protection of the God who grants spiritual happiness,
+How could one have crossed this hideous death-line?'</p>
+          <p class="en-p">Asumagarda: 'The achievement of Itahiko, the divine official,
+Is a precedent unheard of even in the age of the gods.
+Even Ubananda-Nāgarashā must be astonished
+To see the martial spirit of Itahiko.
+How joyful it is to climb for the first time
+This mountain floating in the sea of Suraya.'</p>
+          <p class="en-p">Karks: 'Having broken through the terrifying and hideous death-line,
+We have climbed up to the ridge of the mountain.
+This is Mount Suraya, where the believers who serve the Uraruhiko God
+Left their corpses to bleach.'</p>
+          <p class="en-p">Base: 'Protected by the power of the 35 God,
+We have climbed easily up this mountain of treasure.
+Yet, my chest has become heavy and painful;
+Perhaps it is because I touched the hideous death-line.'</p>
+          <p class="en-p">Karks: 'I, too, have become uneasy in my chest;
+Protect us, O 35 God.'</p>
+          <p class="en-p">Bravada: 'My physical body has suddenly become heavy,
+And I struggle to walk this mountain path.'</p>
+          <p class="en-p">Itahiko: 'If you brace your heart and rely on the God,
+There is a path to climb, no matter how steep.'</p>
+          <p class="en-p">Asumagarda: 'My chest is somehow restless, and my hands and feet
+Will not move as my heart desires.'</p>
+          <p class="en-p">Itahiko: 'For one who has broken through the famous death-line,
+a little suffering is unavoidable.
+Come then, let us whip the horses of our hearts,
+And proceed to the cavern of the Ryūō.'</p>
+          <p class="en-p">Itahiko stood at the front, encouraging the hearts of the party while dragging his own heavy feet, and as he was blown by the wind on the mountain ridge, he sang a song and proceeded forward with vigor. The four followed behind with the slow pace of an ox, sweating profusely and panting as they trailed him.</p>
+          <p class="en-p">Itahiko: 'The God appears on the surface
+To distinguish between good and evil.
+I, the propagandist of the 35-Kyo,
+And the official Itahiko, am here now.
+Having received the divine words of the God,
+I have come to the great front of the capital of Jerusalem,
+To offer the precious jewel
+That the Nāgarashā has protected for eternity,
+For the sake of the realization of the divine government.
+I speak to Ubananda, who guards this mountain:
+Your life, since the distant past of the age of the gods,
+Has been one of suffering, having been confined
+To the cavern of Mount Suraya
+Under the wrath of the God.
+The plum blossoms of the three thousand worlds
+Are now ready to bloom all at once.
+All the Eight Great Ryūō, through the grace and forgiveness of the God,
+Have been saved in the Amatsu-Mikuni,
+And the time has come for them to serve
+As the noble pillars of the God.
+Rejoice, Ubananda.
+I speak before the Ryūō:
+Whether the morning sun shines or clouds over,
+Whether the moon waxes or wanes,
+Even if the earth itself should sink,
+There are no two words in the one truth of the 35 God's words.
+With a calm and peaceful heart,
+Accept the mission of this Itahiko,
+And quickly hand over the Yakuō jewel.
+From this moment on, manifest your spirit
+To the wide world,
+And become a pillar of the 567 divine government.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">水面を抜く事、七千三百尺のスーラヤ山の中腹迄一行五人は漸く登りつめた。これより上は夜前妖怪の云つた死線地帯である。山の中腹に邪気帯があつて四方を取囲み、何れもこの死線を突破せむとして、邪気にうたれ、身体水症病を起し、ここにパタリパタリと倒れて一人もこれより上に登つたものはない。何程夜光の玉が燦爛と輝き渡り高価な宝が目の前にブラ下つて居つても此死線を越へる事は到底人間業では出来ぬ事であつた。此地帯は殆んど七八十間ばかりの幅であつた。死線の近辺迄来て見ると白骨累々として横たはつて居る。伊太彦は此光景を見て、これは到底一通りでは突破する事は出来ない。神力を得て登るに如かずと、ここに伊太彦を導師として天津祝詞を奏上し、天の数歌を歌ひ終へ乍ら勢に任せて駆け上つた。漸くにして一行五人は死線を突破する事を得た。</p>
+            <p class="ja-classical-line">伊太『あゝ惟神霊幸倍坐世。開闢以来竜王と雖も此死線を突破して下る事を得ない危険帯を無事に越へられたのも全く神様の御神徳だ。</p>
+            <p class="ja-classical-line">皇神の恵みの衣に包まれて
+危き死線を渡りけるかな。
+惟神神に任せば世の中に
+恐るべきものはあらじとぞ思ふ』</p>
+            <p class="ja-classical-line">ブラワ゛ーダ『千早振る神世も聞かぬ死の関を
+無事に越へたる人ぞ尊き。
+霊幸はふ神の守りのなかりせば
+如何で渡れむ醜の死線を』</p>
+            <p class="ja-classical-line">アスマガルダ『伊太彦の神の司の功績は
+神代にも聞かぬためしなりけり。
+ウバナンダ・ナーガラシャーも伊太彦の
+武者振り見れば驚くなるらむ。
+スーラヤの海に浮びし此山に
+初めて登る今日の嬉しさ』</p>
+            <p class="ja-classical-line">カークス『恐ろしき醜の死線を突破して
+登り来りぬ山の尾の上に。
+ウラル彦神に仕ふる信徒が
+屍さらせしスーラヤの山』</p>
+            <p class="ja-classical-line">ベース『三五の神の力に守られて
+安く登りぬ宝の山に。
+さり乍ら胸苦しくもなりにけり
+醜の死線に触れたる為か』</p>
+            <p class="ja-classical-line">カークス『吾も亦胸騒がしくなりにけり
+守らせ玉へ三五の神』</p>
+            <p class="ja-classical-line">ブラワ゛ーダ『肉体は俄に重くなり行きて
+行きなやみけり此山道を』</p>
+            <p class="ja-classical-line">伊太彦『村肝の心ひきたて神に拠り
+登れば登る道もありけり』</p>
+            <p class="ja-classical-line">アスマガルダ『何となく胸は騒ぎぬ手も足も
+心の儘に動かずなりぬ』</p>
+            <p class="ja-classical-line">伊太彦『名にし負ふ死線を突破したる身は
+少しの悩みは免かれざらまし。
+いざさらば心の駒に鞭ちて
+進み行かなむ竜王の岩窟に』</p>
+            <p class="ja-classical-line">伊太彦は先に立つて一行の心を励ませ乍ら自分も重たい足を引摺りつつ峰の尾の上の風に吹かれ、歌を謡つて元気よく進み行く。四人は後に牛の歩みの捗々しからず、汗をタラタラ流し乍ら喘ぎ喘ぎ従ひ行く。</p>
+            <p class="ja-classical-line">伊太彦『神が表に現はれて
+善と悪とを立別ける
+三五教の宣伝使
+伊太彦司が今ここに
+神の御言を蒙りて
+ナーガラシャーの永久に
+守らせ玉ふ瑞の玉
+神政成就のその為に
+吾手に受けてエルサレム
+貴の都の大前に
+献らむと登り来ぬ
+此山守るウバナンダ
+ナーガラシャーに物申す
+汝が命は千早振る
+神代の遠き昔より
+神の怒りを蒙りて
+スーラヤ山の岩窟に
+閉ぢ込められて千万の
+悩みを受けしいたはしさ
+三千世界の梅の花</p>
+            <p class="ja-classical-line">一度に開く時は充ち
+八大竜王悉く
+神の恵の御許しに
+天津御国に救はれて
+尊き神の御柱と
+仕へまつらむ世となりぬ
+喜び給へウバナンダ
+竜王の前に告げまつる
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+誠一つの三五の
+神の言葉に二言ない
+心を平に安らかに
+此伊太彦が使命をば
+諾ひまして逸早く
+夜光の玉を渡せかし
+汝の身霊を之よりは
+広き世界に現はして
+五六七神政の柱とし</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tenchi and Jitsugetsu stand together, / Without separation between Kami and man, / Illuminating the world in great peace, / Subduing all the Magahi of ugliness, / Opening the era as a Medeta Miyo, / Where the flowers of the eternal spring of Shinkoku bloom, / Accept this Shingefu and, / Submit as quickly as a Hitohi. / Ah, Kamunagara, Kamunagara, / O Tsuhamono who follow Kami, / Do not falter at the slightest distress, / Lift up your hearts and advance. / Kami is with you, / Man is the child of Kami, the palace of Kami, / Even if you cross the Shisen, / There is no reason for there to be any Sahari. / It is all a matter of how you hold your heart, / Come, come, come quickly, / As the Gankutsu of the Riuō draws near.</p>
+          <p class="en-p">The Kuōmiyō illuminating the Misora, / Though it is day, shines clearly, / Reflecting into my eyes. / The capital of Shiyōri draws near, / Be brave, be brave, O Miikusa, / Of the messenger of the Kototama of Kami.</p>
+          <p class="en-p">Kākusu, lagging behind by about an Itsuchiyō, began to chant while dragging his feet.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara, / Under the protection of Kami, we, / Have climbed over the Shisen of the truly terrifying Sūraya. / Yet, somehow, / My feet are heavy and my heart is pounding, / The agony of being weary of walking. / Itahiko-dono, please wait, / No matter how much my heart burns, / My body is not my own. / Please have mercy, just once more, / Please purify the Magatsumi in the mist of Ibuki, / Kamunagara, / I pray to Kami.</p>
+          <p class="en-p">Burawāda: 'My dear brother, please wait. / Having climbed the high mountain we are not used to treading, / In a single sweep, / My body is exhausted, / And my hands and feet have become heavy. / Your life is that of a messenger of propaganda, / And you do not fear the dwelling of any evil, yet, / My brother Asumagaruda, / And the two other companions, / Have been struck by the evil spirits of the Shisen, / And have become bodies of sorrow, / With hands, feet, and hearts beyond our control. / The Gankutsu of Nāgarashā, / Lies before my eyes, / And though the light of the glowing jewel, / Shines all around, / Our hearts are somehow, / Clouded, and we feel as if we are, / Following the path of Yomi. / Please let us rest, my brother, / I beg of you.'</p>
+          <p class="en-p">Itahiko, hearing this song of Burawāda and pitying the four who were struggling in their walk, sat down on a rock resting on the mountain peak and decided to wait for a while for the stragglers to catch up.</p>
+          <p class="en-p">Kākusu, breathless and crawling as if his life were fading, caught up.</p>
+          <p class="en-p">Kākusu: 'Excuse me, Sensei, though you say this is the work of Kami, it is truly painful and I cannot bear it; please, pray to Kami for us.'</p>
+          <p class="en-p">Itahiko: 'As for praying to Kami, it is better for you to pray with your own heart. Even I am bearing full responsibility, so I have endured the pain in my legs and the suffering of my body to come this far. Since we are doing the work of the spirit world, it is not something that can be done so easily. If you have the virtue of Kami, it is nothing, but even Nāgarashā could not escape by crossing the Shisen, and since we have come through a place of extreme danger where it has been in seclusion since the age of the gods, it is natural to be a little pained. If you rest here for a while and catch the mountain breeze, your energy will likely recover.'</p>
+          <p class="en-p">Kākusu: 'Yes, thank you very much. If I think of everything as Shingefu, I will not hold any grudge even if I die.'</p>
+          <p class="en-p">Itahiko: 'Do not say such weak-hearted things. As long as the Mizu-no-Mitama-sama, the source of eternal life, protects us, it is fine. In any case, there is nothing to do but believe in Kami and pray to Kami. Ah, Kamunagara, Reikō-haise.'</p>
+          <p class="en-p">Bēsu: 'Sensei, I may be sounding weak, but I feel as if I am running out of breath.'</p>
+          <p class="en-p">Itahiko: 'Eh, what a weak-hearted man you are. Just one more push. You must rely on the divine power of Kami and achieve your goal. What will you do if you fail when you have gone ninety-nine percent of the way? If you are such a coward, you will not be able to report back before the Kami who protect the unity of the manifest and the hidden worlds.'</p>
+          <p class="en-p">Bēsu: 'Yes, as you say, but it is so painful that I can no longer think of greed or virtue.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">天地日月相並び
+神と人との隔てなく
+いと安らかに世を照らし
+醜の曲霊を悉く
+言向和し神国の
+常世の春の花匂ふ
+目出度き御代と開き行く
+此神業を諾ひて
+一日も早く帰順せよ
+あゝ惟神々々
+神に従ふ武士よ
+少しの悩みに撓まずに
+心を引立て進めかし
+神は汝と倶にあり
+人は神の子神の宮
+如何に死線を越ゆるとも
+障害のあるべき道理なし
+心一つの持ちやうぞ
+来れよ来れ早や来れ
+竜王の岩窟近づきて</p>
+            <p class="ja-classical-line">御空を照す光明は
+昼とは云へど明かに
+吾目に映り来りけり
+勝利の都は近づきぬ
+勇めよ勇め言霊の
+神の使の御軍よ』</p>
+            <p class="ja-classical-line">カークスは一丁ばかり遅れ乍ら足を引摺りもつて謡ひ初めた。</p>
+            <p class="ja-classical-line">『あゝ惟神々々
+神の守りに吾々は
+さも恐ろしきスーラヤの
+死線を越へて登りけり
+さはさり乍ら何となく
+足許重く胸騒ぎ
+歩み倦みし苦しさよ
+伊太彦司待ち玉へ
+如何に心を焦つとも
+自由にならぬ吾体
+憐れみ玉へ今一度
+伊吹の狭霧に曲津身を
+祓はせ玉へ惟神
+神かけ念じ奉る』</p>
+            <p class="ja-classical-line">ブラワ゛ーダ『吾背の君よ待ち玉へ
+踏みも習はぬ高山を
+一瀉千里に登りつめ
+吾肉体も疲れ果て
+手足も重くなりにけり
+汝が命は宣伝使
+如何なる枉の棲処をも
+恐れ玉はずさり乍ら
+兄の命のアスマガルダ
+その外二人の伴人が
+死線の邪気に襲はれて
+手足も心もままならぬ
+悲しき身とはなりましぬ
+ナーガラシャーの岩窟は
+吾目の前に横はり
+夜光の玉の御光は
+四辺に輝き玉へども
+吾等の心は何となく
+曇りて黄泉の道芝を
+辿るが如く覚ゆなり</p>
+            <p class="ja-classical-line">休ませ玉へ背の君よ
+偏に願ひ奉る』</p>
+            <p class="ja-classical-line">伊太彦はブラワ゛ーダの此歌を聞いて四人の者の行歩に悩んで居る事を憐れみ、山頂に碁布せる岩石に腰かけて、暫らく落伍者の追付くを待つ事とした。</p>
+            <p class="ja-classical-line">カークスは気息奄々として息も絶え絶えに這ふやうにして追付き来り、</p>
+            <p class="ja-classical-line">カークス『もし先生、神様の御用とは申し乍らどうにも斯うにも苦しくて堪りませぬわ、一つ神様に願つて下さいな』</p>
+            <p class="ja-classical-line">伊太『神様に願ふのは、お前の心で念じた方が宜い。俺だとて全責任を負ふてゐるのだから足の痛いのも、体の苦しいのも辛抱してここ迄やつて来たのだよ。何れ神界の御用をするのだから、さう楽々に勤まるものではない。神徳さへあれば何でもないのだがナーガラシャーでさへも死線を越へて逃げ出す訳にもゆかず、神代から此処に蟄伏して居る様な険難千万の処を越へて来たのだから、少し位苦しいのは当然だよ。暫らくここの山風に当つて休んで居つたら又元気恢復するだらうよ』</p>
+            <p class="ja-classical-line">カークス『はい、有難う厶います。何事も神業だと思へば、仮令死んでも怨みとは思ひませぬ』</p>
+            <p class="ja-classical-line">伊太『そんな気の弱い事を云ふものぢやない。永遠の命の源泉たる瑞の御魂さまがお守り下さる以上は大丈夫だよ。兎に角神を信じ神に祈るより外にないのだ。あゝ惟神霊幸倍坐世』</p>
+            <p class="ja-classical-line">ベース『先生、私も何だか弱音を吹くやうですが、息がきれさうになつて来ました』</p>
+            <p class="ja-classical-line">伊太『エー、気の弱い事を云ふ男だな。もう一息だ。神様の御神力に頼つて目的を達せねばなるまい。九分九厘行つた処で成就せない事があるとどうするか。そんな弱虫では現幽一致を守らせ玉ふ神様の御前に、復命する事が出来ぬぢやないか』</p>
+            <p class="ja-classical-line">ベース『ハイ、お言葉の通りで厶いますが、どうも苦しくて欲にも徳にも換られなくなりました』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ita: 'This is troublesome. In any case, Inori is Kanjin.'</p>
+          <p class="en-p">Asumagaruda: 'When I gaze beyond the Kosui of Sūraya, I yearn for my Chichihaha.'</p>
+          <p class="en-p">Itahiko: 'For one who advances upon the Ōji of the Chihaya Kami, it is best to forget the things of this world. No matter how high the blessings of Chichihaha may be, can they compare to the blessings of Kami?'</p>
+          <p class="en-p">Burawāda: 'Embraced by the true parents of Ametsuchi, I feel as though I am ascending to the Mikuni.'</p>
+          <p class="en-p">Bēsu: 'Thinking that Nanigoto is according to the Mikokoro of the Sumeōkami, what is there to resent? Remembering the strict Oshihe that joy comes after suffering, I Hohoe.'</p>
+          <p class="en-p">Itahiko: 'Come then, let us advance toward the Arika of the Yakuō jewels; Morobito, stand up.'</p>
+          <p class="en-p">Having thus finished expressing their Jiyutsukuwai to one another, Itahiko stood at the Sentō again and approached close to the side of the Gankutsu where the Riuō was said to be lurking.</p>
+          <p class="en-p">This Gankutsu had a Tateana open like a deep Ido, and at the bottom of the Gankutsu, which seemed to be Ikujiyō deep, Yakuō jewels were shining in countless numbers, so brightly as to dazzle the eyes. Itahiko searched above the Te-no-o, cut some Fujitsuru, twisted them into a thick rope, tied one end to the Gankutsu at the entrance, and sliding down the rope, he reached the bottom. The others also drummed up their courage, followed after Itahiko, and while carving steps with their feet into the Fujitsuru rope ladder, they finally arrived safely at the bottom of the Gankutsu. Looking, they saw that another horizontal hole opened from there, and countless jewels were shining. In the depths, the Ubananda Riuō was coiled at full length with many of his kin; such was the terror of it. Itahiko put his hands together, clapped, and attempted to recite the Amatsu Norito, but for some reason, his tongue suddenly stiffened, he could not utter a single word, and he collapsed on the spot. Asumagaruda and all the others also collapsed on the spot, lying side by side. Ah, what will become of the fate of the five?</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">伊太『困つたな。兎も角祈祷が肝腎だ』</p>
+            <p class="ja-classical-line">アスマガルダ『スーラヤの湖水の彼方を眺むれば
+父と母との恋しくなりぬ』</p>
+            <p class="ja-classical-line">伊太彦『千早振る神の大道に進む身は
+此世のものを忘るるに如かず。
+父母の恵は如何に高くとも
+神の恵に比ぶべきやは』</p>
+            <p class="ja-classical-line">ブラワ゛ーダ『天地の誠の親に抱かれて
+神国に登る心地しにけり』</p>
+            <p class="ja-classical-line">ベース『何事も皇大神の御心の
+ままと思へば何をか怨みむ。
+苦しさの後に楽しみ来るてふ
+厳の教を思ひて微笑む』</p>
+            <p class="ja-classical-line">伊太彦『いざさらば夜光の玉の所在へと
+進み行かなむ諸人立てよ』</p>
+            <p class="ja-classical-line">斯く互に述懐をのべ終り伊太彦は又先頭に立ち竜王の潜むてふ岩窟の側近く立寄つた。</p>
+            <p class="ja-classical-line">此岩窟は深き井戸の如く縦穴が開いてゐる、そして幾丈とも知れぬ岩窟の底には夜光の玉が目も眩きばかり幾つともなく光つて居る。伊太彦は手の尾の上を捜つて藤蔓を切り之にて太き縄を綯ひ、入口の岩窟に一端を括りつけ綱を伝ふてスルスルスルと底深く下り着いた。一同も勇気を鼓して伊太彦の後に従ひ藤の縄梯子を足にて刻み乍ら、漸くに岩窟の底に安着した。見れば其処から又横穴が開いてゐて無数の玉が光つて居る。奥の方にはウバナンダ竜王が沢山な眷族をつれて蜒々と蟠まつて居るその恐ろしさ、伊太彦は双手を合せ拍手をうち、天津祝詞を奏上せむとしたが、どうしたものか俄に舌硬ばり一言も発し得なくなつて其場に昏倒して了つた。アスマガルダを初め外一同も枕を並べて其場に昏倒した。あゝ五人の運命は如何になり行くであらうか。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c08.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 8: Monster 物 [1615]</span>
+      </a>
+      <a href="c10.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 10: 鷺と鴉 [1617]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
