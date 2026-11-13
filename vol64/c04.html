@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4: The Visiting Guest [4] - Volume 64 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 64 Table of Contents</a>
+      <span>Volume 64</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 64 &bull; Chapter 4</span>
+      <h1 class="chapter-title-en">Chapter 4: The Visiting Guest [4]</h1>
+      <p class="chapter-title-ja">訪問客〔4〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Since Burabāsa had lost sight of Mariya, he had no choice but to return to the Catholic monastery alone; the surroundings were silent and still, and the only things reaching his ears were his own weary, labored breathing and his own footsteps.</p>
+          <p class="en-p">Fortunately, as the front gate had been left open, he returned to the guest room on the second floor that had been assigned to him, lay down upon the sofa, and without knowing what was happening around him, plunged into a dreamlike world.</p>
+          <p class="en-p">Awakened from his dream by the tolling of the monastery's bronze bell, he sat up abruptly to find that the surroundings were completely bright, and the clock striking eight in the morning was echoing from downstairs.</p>
+          <p class="en-p">Counting the chimes of the clock on his fingers, Burabāsa muttered to himself:</p>
+          <p class="en-p">Burabāsa: 'Ah, it is already eight o'clock. I certainly did fall into a deep sleep. Even so, I wonder if Mariya-sama did not come to this hotel last night. She was a nervous and sentimental woman, but as is often the case with women who experience Kamugakari, perhaps she suddenly spoke of the will of Kami and, having had a change of heart, returned to the American Colony. She was not a very pleasant woman, but I am truly grateful for her fervent faith and kind attitude.'</p>
+          <p class="en-p">He then entered the washroom to attend to his needs and returned once more to his own room.</p>
+          <p class="en-p">Upon looking, he saw that two servings of a meal were laid out on the dining table, yet there was no sign of a boy.</p>
+          <p class="en-p">Seeing this state of affairs, Burabāsa thought:</p>
+          <p class="en-p">Burabāsa: 'The boy is nowhere to be seen, but considering that two servings of a meal have been brought to my room, it may be that Mariya-sama was sleeping in the other room as well. How strange this is.'</p>
+          <p class="en-p">He kept shaking his head repeatedly.</p>
+          <p class="en-p">It was a young and handsome boy who entered slowly.</p>
+          <p class="en-p">Burabāsa: 'Boy-sama, where is the woman who was my companion last night?'</p>
+          <p class="en-p">Boy: 'Yes, I brought the meals for two, thinking that you had rested in this room together with her last night. She is not anywhere else.'</p>
+          <p class="en-p">Burabāsa: 'How strange, this does not make sense. However, be that as it may, I shall finish my breakfast.'</p>
+          <p class="en-p">He sat at the table and finished his morning meal in about half an hour as if shoveling it down. The boy, having no choice, cleared away Mariya's meal while grumbling to himself, accepted a suitable tip from Burabāsa's hand, and happily hid his figure in the next room.</p>
+          <p class="en-p">Burabāsa leaned back in his chair, looked down from the second-floor window at the streets of Jerusalem with a longing heart, and was filled with infinite thoughts.</p>
+          <p class="en-p">It was a dignified and amiable-looking old gentleman, who appeared to be a Jew, who knocked on the door, quietly calling out, 'Excuse me.'</p>
+          <p class="en-p">Burabāsa: 'I do not know who you are, but please, come in.'</p>
+          <p class="en-p">He stood up himself and pleasantly opened the door to welcome him into his room.</p>
+          <p class="en-p">The old gentleman grasped Burabāsa's hand as if very satisfied, gazed intently at his face, and was already shedding tears from both eyes.</p>
+          <p class="en-p">Burabāsa: 'Who are you, sir? I have somehow begun to feel a sense of nostalgia.'</p>
+          <p class="en-p">Old Gentleman: 'Yes, I am Subatsufuōdo, a lean wanderer who serves as a deacon at the American Colony. Last night, Mariya-sama was very rude, and because she felt she could not face you again, she was very worried and asked if I would go to apologize, as she knew you were staying in room number nine on the second floor of this monastery. Therefore, I wished to have the honor of seeing you, sir, to offer an apology for her rudeness, and I have troubled you by coming early in the morning.'</p>
+          <p class="en-p">Burabāsa: 'Ah, so you are Subatsufuōdo-sama, who manages the Colony together with Mariya-sama? Thank you so much for coming to find me. Now, please, come this way.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ブラバーサは、マリヤの姿を見失ひしより止むを得ず、只一人にてカトリックの僧院に帰つて見れば、四辺は寂として静まりかへり、只耳に入るものは自分の行歩に疲れた苦しげな鼻息と、その足音のみなりき。幸ひ表の門が開け放しになつて居たので、与へられた二階の居間に帰り、ソフアの上に横たはりて前後も知らず夢幻の国へと突進したりける。</p>
+            <p class="ja-classical-line">ガンガンと響く僧院の梵鐘の声に夢を破られ、ツト身を起して見れば四辺はカラリと明け放れ、午前八時の時計が階下に響いて居た。ブラバーサは時計の音を指を折つて数へつつ、</p>
+            <p class="ja-classical-line">『アヽもう八時だ。克くもマア寝込んだものだ。それにしても昨夜のマリヤさまは此ホテルには来て居ないだらうか。何処とはなしに神経質な感傷的な婦女だつたが、帰神の婦女によく在る習ひ、俄に神の命とか言つて心機一転してアメリカンコロニーへ還つて了つたのだらうか。余り気持の良い婦女では無かつたが、その熱烈な信念と親切な態度には実に感謝の至りだ』</p>
+            <p class="ja-classical-line">と独語つつ洗面所に入り用を足して再び自分の居間に帰り来たり。</p>
+            <p class="ja-classical-line">見れば食卓の上には二人前の膳部が並んで居て、ボーイらしき者も居ない。ブラバーサは此態を見て、</p>
+            <p class="ja-classical-line">『ボーイは其処等に見当らないが、二人前の膳部が吾居間に運ばれて在ることを思へば、どうやらマリヤさまも外の居間に寝て居たのかも知れない。ハテ不思議だなア』</p>
+            <p class="ja-classical-line">と首を頻りに振つて居る。</p>
+            <p class="ja-classical-line">そこへ徐々として這入つて来たのは年の若い美しいボーイであつた。ブラバーサは、</p>
+            <p class="ja-classical-line">『ボーイさま、夜前の相客たる一人の婦人は何処に居られますかな』</p>
+            <p class="ja-classical-line">『ハイ、昨夜は貴下と御一緒に此の室で御休みになつた事だと思つてお二人の膳部を運んで来たので御座います。別に外には居られませぬ』</p>
+            <p class="ja-classical-line">『ハテナ、合点の行かぬ事だ。併し何は兎もあれ朝飯を済まさむ』</p>
+            <p class="ja-classical-line">と食卓に就いて、半時ばかりの間に掻き込む様にして朝の食事を済ませて了つた。ボーイは是非なくマリヤの膳部をブツブツ小言を云ひながら片付けて了ひ、ブラバーサの手から応分のポチを受取り、嬉々として次の室に姿を隠した。</p>
+            <p class="ja-classical-line">ブラバーサは椅子に依りかかつて、二階の窓からエルサレムの市街を心床しげに瞰下し無限の情想を漲らし居たり。</p>
+            <p class="ja-classical-line">そこへ『御免下さい』と静に声をかけて扉をたたいたのは、猶太人らしき品格の高い人好きのしさうな老紳士なりける。</p>
+            <p class="ja-classical-line">『何れの方かは存じませぬが、先づ御這入下さいませ』</p>
+            <p class="ja-classical-line">と自ら立つて快く扉を開いて吾室へと迎へ入れる。</p>
+            <p class="ja-classical-line">老紳士はさも満足気にブラバーサの手を握つて、その顔を熟々ながめ、早くも両眼から涙さへ流し居たり。</p>
+            <p class="ja-classical-line">『貴師は何れの方で御座いますか。何となく懐かしくなつて参りました』</p>
+            <p class="ja-classical-line">『ハイ、私はアメリカンコロニーの執事でスバツフオードと申す瘠浪人で御座います。昨夜はマリヤさまが、大変な失礼をしたので再び御顔を拝する訳には行かないから、私に一度この僧院の二階の第九番に御逗留だから謝罪に行つて下さるまいかと大変に心配して居られますので、私はその御無礼の御詫を兼ねて尊い貴師に拝顔の栄を得たいと存じ、朝早くから御邪魔を致しました』</p>
+            <p class="ja-classical-line">『アヽ貴師がマリヤ様と御一緒にコロニーを司宰遊ばすスバツフオード様で御座いましたか。良くマア御尋ね下さいました。サア何うか此方へ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">He offers a chair.</p>
+          <p class="en-p">Raushinshi: 'Hai, arigata.'</p>
+          <p class="en-p">He sits on the offered chair and begins to smoke a cigarette with a strong aroma.</p>
+          <p class="en-p">Raushinshi: 'Mariya-sama kindly guided me through the Seichi, so I received great Bengi. I should have come to offer my Orei, but as I suddenly Miushina her Osugata Yazen, I have been Shitsurei. However, I heard that she has returned to the colony, and with that, my heart has finally Ochitsu.'</p>
+          <p class="en-p">Raushinshi: 'Nanibun, Mariya-sama is a Reikanshiya, so she begins Datsusenteki Kaudō from time to time, and afterwards, she worries about it herself Itsu. This kind of thing did not start today. I am always used as her Benkai and Wabiyaku. Aha-ha-ha-ha.'</p>
+          <p class="en-p">Raushinshi: 'Did Mariya-sama Reishi something on the Tochiu?'</p>
+          <p class="en-p">Raushinshi: 'According to her story, a most intense radiance was emitted from your brow, and being struck by your divine power, she could no longer accompany you. She said that she was unintentionally chased by fear, abandoned you, and fled back. I thought this must surely be the possession of an evil spirit, so I performed Saniwa, and as I suspected, the evil spirit of Yamada-oroshi was possessing her, and it greatly fears and hates that you have come to the Seichi. After the evil spirit departs, Mariya-sama is a splendid person, but she was pained, saying she felt too sorry for you, and it was her request that I go to offer an apology.'</p>
+          <p class="en-p">Raushinshi: 'Haa, such worry is absolutely unnecessary, so please tell her that.'</p>
+          <p class="en-p">Raushinshi: 'Hai, if I convey those words, Mariya-sama will also be greatly delighted. Last night, she left the colony to guide you, also according to a Shinji. Would you, Seishi-sama, please bend your steps to the colony once?'</p>
+          <p class="en-p">Raushinshi: 'Hai, thank you very much. I would certainly like to receive your favor. By the way, Subatsufo-do-sama, the Jews, who are the Israelite people, have finally regained their homeland after enduring three thousand years of hardship, have they not? The power of the times is truly a fearful thing.'</p>
+          <p class="en-p">Raushinshi: 'Hai, arigata. We are still the Israelite people, but we have finally managed to establish our own public nation, however small it may be. The three great powers of the world were all trying to obtain this Palestine with desperate force, and in the end, they even started the world war you know of. That it has returned to us, the wandering people, is nothing but a blessing from Heaven. In short, I believe that God has allowed us to have a nation as a preparation for the second coming of the Messiah.'</p>
+          <p class="en-p">Raushinshi: 'Since it is the center of the Earth, the land of Zion, it is no wonder that great powers like Germany, England, and America would want it.'</p>
+          <p class="en-p">Raushinshi: 'The Baghdad Railway built by Germany, the African Railway made by England, and the great railway via Siberia that America is building all have this Palestine as their goal, but since it has come to this, these great railways have also ended up being used for us, the Israelite people. It is a clear fact that if only this railway is utilized, the Jewish people can unify the world. However, many of today's Jews are troubled because they have strong material desires and have forgotten the essential God. With human wisdom and power, one can succeed in almost everything up to ninety-nine percent, but the final touch can never be done without the power of God. Therefore, we are waiting for the second coming of the Messiah, who is the manifestation of the Lord God. When Palestine was given into the hands of the Israelites, who were called the chosen people of God in the past, it was a beautiful place with good scenery, sung by poets as a holy place where saffron scented and olives smelled, a land of Canaan said to flow with milk and honey. Today, that shadow is gone and it has become desolate, but that Palestine has returned to the hands of the Jews, and the beautiful scenery of the Mount of Olives of the past is gradually appearing. God, who sits in Heaven, in order to entrust Palestine to the Jews whom He chose prior to the second coming of the Messiah, gave them this beautiful mission from several thousand years ago and made them suffer for forty years, three million people, to prepare them with the qualifications of the chosen people. That He made three million people taste ascetic practices for forty years, where there was no water to drink and no food to eat, where parents died and children died, and it continued for many generations, is considered to be a divine plan to cultivate the national character of the Israelite Empire.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と椅子を進める。老紳士は、</p>
+            <p class="ja-classical-line">『ハイ有難う』</p>
+            <p class="ja-classical-line">と与へられた椅子に腰打かけ、香りの強い煙草を燻らし初めたり。</p>
+            <p class="ja-classical-line">『マリヤ様は親切に聖地の案内をして下さいましたので、大変な便宜を得ましたのです。私の方から御礼に参らねばならないのですが、夜前突然御姿を見失つたものですから、ツイ失礼を致して居りましたが、コロニーへ御帰りに成つて居らるると承はり、それで私もヤツと胸が落着きました』</p>
+            <p class="ja-classical-line">『何分マリヤさまは霊感者ですから、時々脱線的行動を初められ、後になつて毎時も自分で心配をされるのです。コンナ事は今日に初まつた事ではありませぬ。私はマリヤさまの弁解と詫役とにいつも使はれて居るのです。アハヽヽヽ』</p>
+            <p class="ja-classical-line">『マリヤ様は途中に於て何物かを霊視されたのでせうか』</p>
+            <p class="ja-classical-line">『話によれば、貴師の眉間より最も強烈なる光輝が放出し、神威に打たれて同行する事が出来なくなり、思はず知らず恐怖心に追はれて尊き貴師を見捨て逃げ帰つたと申して居られました。私はコリヤきつと邪神の憑依だらうと思つて審神を行つて見た所、案に違はず山田颪の悪霊が憑依して居りまして、貴師の聖地へ来られた事を大層恐れ且つ嫌つて居るのです。悪霊の退散した後のマリヤ様は立派な方ですが、余り貴師にすまないからと言つて心を痛め、私に謝罪に行つて来よとの事で御座いました』</p>
+            <p class="ja-classical-line">『ハア決して左様な御心配は要りませぬから何うか宜敷く仰有つて下さいませ』</p>
+            <p class="ja-classical-line">『ハイそのお言葉を伝へますれば、マリヤさまも大に喜ばれませう。昨夜貴師の御案内を為すべく夫れも神示によつてコロニーを立つて行かれたのです。どうか聖師様、一度コロニーまで玉歩を枉げて戴けますまいか』</p>
+            <p class="ja-classical-line">『ハイ有難う御座います。是非是非御世話にあづかりたう御座います。時にスバツフオード様、イスラエル民族たる猶太人も三千年の艱苦を忍びて漸く故国を取り還しましたねー。時節の力と云ふものは実に恐ろしいものですなア』</p>
+            <p class="ja-classical-line">『ハイ有難う。私等も依然イスラエル民族で御座いますが、漸くにして自分の公然たる国が小さいながら立つ様になりました。世界の三大強国が何れも必死の勢ひでこのパレスチナを手に入れやうとして、終には御承知の世界戦争までおつ初めたのですもの。夫れが放浪の民たる吾々民族のものに還つて来たと云ふのは全く天祐と申すより外はありませぬ。要するにメシヤ再臨の準備として、神様が吾々に国を持たして下さつたのだと思ひます』</p>
+            <p class="ja-classical-line">『地球の中心即ちシオンの国ですから、独英米なぞの強国は欲しがるのも無理はありますまい』</p>
+            <p class="ja-classical-line">『独逸の造つたバクダツト鉄道や、英国の拵へたアフリカ鉄道、アメリカが拵へかけて居るサイベリヤ経由の大鉄道も皆このパレスチナを目標として居るのですが、斯うなる以上は是等の大鉄道も又イスラエル民族たる吾々の為に利用さるることと成つて了ひました。此の鉄道さへ利用すればユダヤ民族が世界を統一し得ることは明白な事実であります。然し今日の猶太人は物質欲が強きため、肝心の神様を忘れて居る者が多いので困ります。人間の智慧や力量では九分九厘までは何事でも成功いたしますが、最後の艮めは何うしても神様の力でなくては成りませぬ、夫れ故吾々は大神の表現神たるメシヤの再臨を待つて居るので御座います。昔パレスチナが神の選民と称へられたイスラエル人の手に与へられた当時は、蜜滴り乳流るると言はるるカナンの国でサフラン薫じ橄欖匂ふ聖場と詩人に謳はれた麗しい景色の好い所でありましたが、今日となつては其面影も無く荒れ果てて了つたのですが、其パレスチナが再びユダヤ人の手に戻つて昔の橄欖山の美しい景色が段々と出て来るやうになつて来ました。天に坐します神様はメシヤの再臨に先だち、パレスチナを御自分の選みたまひました所のユダヤ人に御任せにならむが為に、数千年前から此美はしい使命を与へて選民たるの資格を備へしめむとして四十年間三百万の人間を苦しめ給ふたのです。三百万の者が飲むに水無く、食ふに食物の出来ない所で、或は親が死に子が死に、何代も続いて四十年間苦行を嘗めさせ玉ふたのも、イスラエル帝国の国民性を養はむが為の御経綸であつたのだと考へらるるのです』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'Is it not the case that the Yudayajin have been haiseki by other Taminzoku and have tasted shiyujiyu of konnan because they killed Christ? If so, when a powerful Yudayajin appears and unifies the Sekai, is there not a possibility that they will adopt a fukukiuteki taido toward the Jinmin of all Ikyōkoku?'</p>
+          <p class="en-p">Speaker: 'Among many Dōhau, there may be some who hold such thoughts, but since the Israelites are a relatively zenriyō Minzoku, even if they might ichiji resort to kuwageki kaudō, they possess a deep heart to follow Kami; therefore, we judge from the perspective of their Kokuminsei that once they understand the true Messiah, they will kitsuto follow His Mei, and we are waiting for the Sairin of the Messiah. Furthermore, even if the Yudayajin unify the Sekai and construct the Zion Teikoku, they do not even dream of becoming the emperor themselves. We merely believe in the prophecies of the Bible, and are convinced that the Messiah shall descend from the eastern sky riding upon the clouds, and that the Emperor whom we must serve for eternity shall appear from the Hinode no Shima. It is because the Israelite Minzoku have endured thousands of years of hardship and persecution under this faith.'</p>
+          <p class="en-p">Speaker: 'I believe that both that Messiah and the Emperor are already prepared in Takasago-jima, and have been preserved for the sake of today's world since thousands of years ago. I feel that the age of the gods of benevolence, where one heaven, one earth, and one sovereign shall rule, is already drawing near. However, I think that before then, a great mountain pass will inevitably appear in the world.'</p>
+          <p class="en-p">Speaker: 'Indeed, we are of the same opinion as you, sir. That the Kami of heaven will finally appear on earth to distinguish and reconstruct good and evil, right and wrong, is what the sacred words indicate. We must polish our mitama as soon as possible to become of one heart with Kami and begin preparations for the end of the world. And I do not doubt your theory in the slightest that the Messiah and the Emperor will appear from Takasago-jima. Now, I apologize for keeping you occupied for so long. How about it, would you be willing to trouble yourself to visit the American Colony once?'</p>
+          <p class="en-p">Speaker: 'Yes, thank you very much. In that case, I shall follow your words and accompany you.'</p>
+          <p class="en-p">Having clarified this intention to the director of the monastery, he followed in the footsteps of the old gentleman and proceeded toward the colony.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『猶太人はキリストを殺した為に、他民族から排斥され、種々の困難を嘗めて来たのでは在りますまいか。さうすれば若しも有力なる猶太人が現はれて世界を統一した時に於て、凡ての異教国の人民に対して復仇的態度に出づる様なことは有りますまいかなア』</p>
+            <p class="ja-classical-line">『多くの同胞の中には左様な考へを持つて居る者があるかも知れませぬが、イスラエル人は比較的善良な民族ですから、一時は仮令過激な行動に出づるやも知れませぬが、何と言つても神に従ふ心が深いのですから、誠のメシヤが判りて来ましたら、屹度其命に従ふものだと吾々は国民性の上から判断を致しまして、メシヤの再臨を待ち望んで居るので御座います。そして猶太人は世界を統一してシオン帝国を建設する事があつても、自ら帝王に成らうなぞとは夢想だも為て居りませぬ。只聖書の予言を確信し、メシヤは東の空より雲に乗りて降臨すべきもの、又吾等の永遠に奉仕すべき帝王は日出の嶋より現はれ玉ふべきものたる事を確信して居りますよ。イスラエル民族は此信仰の下に数千年間の艱苦や迫害を忍んで来たのですからなア』</p>
+            <p class="ja-classical-line">『私はそのメシヤも帝王も皆高砂島にチヤンと準備され、数千年の昔から今日の世のために保存されて在るといふことを信じて居ります。一天一地一君の治め玉ふ仁慈の神代は既に已に近づきつつあるやうに思ひます。併しそれ迄には如何しても一つの大峠が世界に出現するだらうと思ひます』</p>
+            <p class="ja-classical-line">『なる程、吾々も貴師と同意見です、天の神様がいよいよ地上に現はれて善悪正邪を立別け立直し玉ふは聖言の示したまふ所です。一日も早く身魂を研いて神心になり世の終りの準備にかからねば成りませぬ。そして高砂島からメシヤと帝王が現はれたまふと云ふ貴師の御説には私は少しも疑ませぬ。サア長らくお手を止めまして済みませなんだ。如何です、一度アメリカンコロニーまで御足労を願はれますまいか』</p>
+            <p class="ja-classical-line">『ハイ有難う御座います。然らば御言葉に従ひ御供を致しませう』</p>
+            <p class="ja-classical-line">と僧院の監督に其旨を明かし置き、老紳士の跡に従つてコロニーへと進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c03.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 3: Night at the Sacred Ground [3]</span>
+      </a>
+      <a href="c05.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 5: The Order of the Most Holy [5]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

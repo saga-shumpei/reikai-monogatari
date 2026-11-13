@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: The Pilgrim [7] - Volume 64 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 64 Table of Contents</a>
+      <span>Volume 64</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 64 &bull; Chapter 7</span>
+      <h1 class="chapter-title-en">Chapter 7: The Pilgrim [7]</h1>
+      <p class="chapter-title-ja">巡礼者〔7〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Mariya left the Jiin again and looked back at Barabasa, asking if they should not go to see the so-called Jewish 'Wailing Wall' at the Seitan of the Jewish quarter. Although Barabasa was not very Kino, he thought that since it was a kind Annai and he wanted to investigate it for reference at least Ichido, he left it to Mariya and followed her.</p>
+          <p class="en-p">As they wound through the maze-like space between walls built of rough, large stones, they came upon a high wall at the foot of the 'Shinden Hiroba'. The Ishidatami path ran along the wall for about Sanjitsuken, and beyond that, it came to a dead Yukitsuma. The Shiui gave a Kimi that felt somehow terrifying and eerie. Here, the Jews weep at the top of their voices for the destroyed Jerusalem.</p>
+          <p class="en-p">Always, some number of Jews come out here to offer prayers earnestly or recite the Seishiyo, weeping as they recall the past Kuōei of the Jewish Minzoku. And on the evenings of Friday and Saturday, the largest number of people gather. Also, on Jewish festival days such as the Pesach, people of all classes, both old and young, men and women, gather, and when one who appears to be an elder among them sings,</p>
+          <p class="en-p">For the sake of the destroyed palace,</p>
+          <p class="en-p">the crowd answers and sings in one voice,</p>
+          <p class="en-p">We sit alone and weep,</p>
+          <p class="en-p">and the sight of it gave a truly overwhelming feeling to the hearts of both of them. Also, when they chant in the manner of,</p>
+          <p class="en-p">For the sake of the destroyed palace,
+For the sake of the ruined city walls,
+For the sake of the glory that has passed,
+For the sake of the dead great men,
+For the sake of the burned jewels,</p>
+          <p class="en-p">the crowd answers in the same way,</p>
+          <p class="en-p">We sit alone and weep,</p>
+          <p class="en-p">and they are wringing out tears.</p>
+          <p class="en-p">On the wall, the parts built during the Jewish era, the Roman era, and the Arab era can be clearly distinguished, and it is said that the large stones in the lowest layer belong to the Jewish era. Due to the relationship between those ages and the contact with people, they have become extremely blackened and dirty, and countless Hebrew characters are inscribed on their surfaces. Also, many nails are driven into those large stones here and there; these are nails driven in by faithful Jews scattered across various countries when they visited the land of their ancestors and came all the way here, and this is based on the belief that the more firmly they are stuck in the stone, the more certain it is that the Lord God is holding onto them.</p>
+          <p class="en-p">The two stood still here, lost in the reminiscence of the past. Twelve or thirteen people gathered there, pressed their heads against the wall, and began to kiss it. Seeing this behavior, Barabasa was struck by a kind of indescribable feeling. It was, of course, not religious, nor did it stem from pity or sympathy, and it was certainly not a retaliatory feeling arising from the antipathy that ordinary Christians have toward Jews. It was something instinctive, so deep-rooted that it was eerie, something that might well be called a fear of persistent fate. Seeing this scene, the two were overcome by a sorrow that made it impossible for them to continue watching their actions calmly while smiling like other English or American people, or to photograph the scene. They could not bear to stand there and watch even for a minute, and without the leisure to pay attention to the details of the scene or the historical structure of the wall, they turned their faces away and left the place quickly with Mariya.</p>
+          <p class="en-p">This is truly the place in Jerusalem where the most profound feeling wells up. The voice of the 'Eternal Jew' echoes in the ears from somewhere. These withered old men are all representatives of the Israelite Minzoku, chosen by the Lord God, who are descendants of Abraham and David; from among them, Jesus Christ, the Savior of all mankind, was born. For two thousand six hundred years, in direct opposition to the glory of their ancestors, they have been the most rejected and despised people in the world, wandering the earth without a homeland to settle in. After the Great War in Europe, this homeland of Palestine finally became the possession of the Jews, but the situation is such that the majority of them are still wandering the world. Should this also be called the retribution for the sins of their ancestors who nailed Christ to the cross? If so, I think it is too cruel. It was not only they who nailed Christ to the cross, but all of mankind. Those who did not look up to Christ as the Savior were not only the Jews, but the majority of the world's humanity. Even if it is to fulfill the prophecies of the Seishiyo, it is too pitiful. Without returning to the bosom of Christ and begging for the forgiveness of their sins, how long will they continue to wander the world waiting for the Messiah? Even so, the people of the American Colony have already awakened, and Barabasa's heart immediately raced to the Colony, moved to the extreme by the strength of their faith, as they wait for the second coming of Christ, unlike the Jews, by piously dedicating their lives, property, and everything else.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">マリヤは再び寺院を辞して、ユダヤ人クオーターの西端なる所謂ユダヤ人『慟哭の壁』を見に行かうでは有りますまいかとブラバーサを顧みた。ブラバーサは余り気乗りがせなかつたけれども、折角の案内でもあり又一度は参考のために是非調べて置きたいと思つたのでマリヤに一任して従いて行く。荒い大きい石で築き上げた壁の間を迷宮の様に廻つて行くと、『神殿の広場』のふもとの丈の高い壁に突き当つた。石畳になつた路は壁に引添ふて三十間ばかり走つて居て、其先はピタツと行詰りになつて居る。其周囲は何となく恐ろしい様な気味の悪い感じを与へる。茲でユダヤ人は滅亡したエルサレムの為に声を限りに号泣するのである。何時も幾何かのユダヤ人が爰に出て来て、頻りに祈祷を捧げたり聖書を拝誦してユダヤ民族の過去の光栄を思ひ浮かべて泣くのである。そして金曜日と土曜日との夕刻には、最も多人数が集まつて来るのである。又ベツスオーウー（渝越節）の様なユダヤ人の祭典日には、老若男女凡ての階級の人々が集まつてその中の長老らしきものが、</p>
+            <p class="ja-classical-line">壊たれたる宮のために</p>
+            <p class="ja-classical-line">と歌ふと群集は異口同音に、</p>
+            <p class="ja-classical-line">吾等はひとり坐して泣く</p>
+            <p class="ja-classical-line">と答へて歌ふ其有様は、実に物凄い感じを両人の心に与へた。また、</p>
+            <p class="ja-classical-line">毀たれたる宮のために
+潰えたる城壁のために
+過ぎ去りし偉大のために
+われ等は死せる偉人のために
+焼かれたる宝玉のために</p>
+            <p class="ja-classical-line">と云ふ風に謡ふと群衆は同じ様に、</p>
+            <p class="ja-classical-line">われ等はひとり坐して泣く</p>
+            <p class="ja-classical-line">と答へて涙をしぼつて居る。</p>
+            <p class="ja-classical-line">壁にはユダヤ時代、ローマ時代、アラブ時代に築き上げられた部分が明瞭に見分けられて、一番下層の大石はユダヤ時代の物だと伝へられて居る。それ等の年代と人々の触接との関係とに由つて非常に黒ずんで汚なくなり、その表面にヘブリユーの文字が無数に書き録されてある。またその大石には方々に沢山の釘が打込んであるが、是等は諸国に散在して居る信仰強きユダヤ人が祖先の地を訪れて遥々と爰に来た時に打込んだ釘で、それが石に確りと刺つて居れば居るほど、神様が彼等を捕へて居らるることが確だとの信仰に基づくものである。</p>
+            <p class="ja-classical-line">両人は爰に停立して往時の追懐に耽つて居た。そこへ十二三人の人が集まつて来て、其壁に頭をつけて接吻し初め出した。ブラバーサは此態を見て一種名状すべからざる感じに襲はれた。それは勿論宗教的のものでも無く、また憐愍や同情に由来するものでも無く、また普通のキリスト教徒のユダヤ人に対して有つて居る反感から来る応報的感じでは勿論ない。それは気味悪い程根深いもので、たとへば執拗な運命に対する恐れとでも言つたら良ささうな本能的のものである。この光景を見た両人は、他の英米人のやうに微笑しながら平気で彼等の動作を見つづけたり、其光景を撮影したりする様な事は到底出来ない悲哀に閉ざされて了つた。一分間と雖もそこに立止まつて傍観するに堪へずなり、仔細に其有様や壁などの歴史的構造にも注目してゐる暇なく、顔を背けてマリヤと共にその場を逸早く立去つた。</p>
+            <p class="ja-classical-line">爰は実にエルサレムに於ける最も深刻味の湧いて来る場所である。『永劫のユダヤ人』と云ふ声が何処からともなく耳に響いて来る。是等の干涸びた老人等は、何れもアブラハムの裔ダビデの裔である神より選ばれたるイスラエル民族の代表者である彼等の中から全人類の救ひ主イエス・キリストが生れたまうたのだ。彼等は二千六百年の間、祖先の光栄と正反対に人の世の中の一番擯斥せられ、軽蔑せらるるものとして、その落着くべき祖国を有たずして世界を漂浪して居たのである。欧洲大戦後このパレスチナの故国は漸くユダヤ人のものと成つたが、未だ世界に漂浪して居るものがその大部分を占めて居るといふ有様である。是もキリストを十字架に付けた彼等の祖先の罪業の報いとも言ふべきものだらうか。夫れにしては余り残酷過ぎると思ふ。キリストを釘付けにしたのは彼等ばかりで無く、人類全体なのである。キリストを救世主と仰がなかつたものは彼ユダヤ人ばかりで無く、世界人類の大多数である。聖書の予言にかなはせむが為とは云へ、余りに可哀相だ。彼等はキリストの懐に帰つて罪の赦しを乞ふこと無しに、何時までメシヤを待望して世界を放浪するのであらうか。それにしてもアメリカンコロニーの人達は、早くも目を醒ましてユダヤ人にも似ずキリストの再臨を神妙に生命、財産その他一切を捧げて待つて居る信念の力の強いのには、感激の至りだとブラバーサの心は忽ちコロニーへと走つて了つた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Guided by Mariya, I exited the Obutsu Gate and began to walk along the Jiyōheki, looking down upon the valley of Siloam. While being guided to the locations of the pool of Siloam where Christ healed the eyes of the Maujiya, the spring where the Virgin drew water, the 'Field of Blood' which Judas purchased with the money for which he sold Christ, and the withered tree, I entered the Zion Gate from the place where the tomb of King David lies, passed beneath the Tower of David, and at last returned with Mariya to the Catholic monastery hotel to rest and finish my Yufuge.</p>
+          <p class="en-p">At the hotel Shiyokutaku, I had to be seated with four or five Eibeijin. Unable to endure the long silence maintained with the dignity of those feigning to be gentlemen, nor the meaningless and harmless Kuwaiwa, I thought of the contrast with the Jewish Fujin Mariya, who had kindly guided me twice, and I perceived that there is a difference as great as clouds and mud between the degree of Onjiyō in a religious Shinjiya and a Hishinjiya.</p>
+          <p class="en-p">Looking at any of the dozens of faces in the dining hall, I could not see a single person who appeared to have come to this holy land driven by the heart of a pilgrim burning with true faith. They all seemed to have come with the heart of sightseers, exhausting luxury in all things, eating meals with as many as six courses twice a day, and without ever harboring doubts about it or feeling a humble heart, they appeared as nothing more than followers of Suiseimushi, living blindly and fully satisfied.</p>
+          <p class="en-p">Burabāsa recalled the children's story by Tolstoy titled 'Two Pilgrims' which he had once read with absorption, and he could not help but feel a sense of nostalgia. Two pious Russian peasants set out on a pilgrimage to the holy land with money they had saved by working their entire lives for that purpose, but one of them, due to an unforeseen event on the way, found his entire family suffering from an epidemic. The other, because he began to care for the unfortunate entire family who had been struck by the epidemic on the way, became separated from his friend, used up all the money he had brought for travel expenses for that cause, and in the end returned to his hometown without having accomplished the intended pilgrimage. Repeating in his heart the passage where the first pilgrim meets his friend and acknowledges that his friend, who did not complete the pilgrimage, was actually more of a true pilgrim than himself, he left the Shiyokutaku, returned to his room, and lay down upon the long chair. Mariya, entering her customary state of Kishin once again, exchanged a light greeting with Burabāsa, and while hurriedly promising to meet again, departed toward the American Colony.</p>
+          <p class="en-p">Burabāsa chanted the Shingō of the Ōkami and finished reciting the Amatsu Norito, and while looking down at the dimly lit lamps of the houses outside the window, he became exhausted and began to drift into a deep sleep upon the sofa.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">マリヤに導かれて『汚物の門』を出で、シロアムの谷を見下ろしながら城壁に添ふて歩み出した。キリストが盲者の目を癒されたシロアムの池や、バアージンが水を汲んだ泉や、ユダがキリストを売つた金で買ひ求めた『血の畑』や、そのくびれた木なぞの所在を案内されつつダビデ王の墓の在る所からシオンの門を入り、ダビデ塔の下を通つて漸くマリヤと共に一先づカトリックの僧院ホテルに帰つて息を休め、夕餉を済ませることとした。</p>
+            <p class="ja-classical-line">ホテルの食卓では英米人四五人と同席せなければ成らなかつた。紳士を装つて威厳を持した長い沈黙と、無意味なあたり障の無い会話とには流石のブラバーサも堪へ得られなくなり、今親切に二度までも案内して呉れたユダヤの婦人マリヤとの対照を思つて、宗教信者と非信者との温情の程度に雲泥の相違あることを感得したのである。</p>
+            <p class="ja-classical-line">食堂の何十と云ふ顔の何れを見ても、本当の信仰に燃え立つた巡礼の心に駆られてこの聖地に参つて居ると思ふやうな人は一人も見る事が出来なかつた。彼等は何れも物見遊山的の心でやつて来て、万事に贅沢を尽し、六コースもある様な食事を一日に二度もしながら、それに自ら疑問を抱き謙遜な心持になる事なしに、満足し切つて盲滅法的に暮して居る酔生夢死の徒とよりは見えなかつた。</p>
+            <p class="ja-classical-line">ブラバーサは曾て耽読した『二人の巡礼者』と云ふトルストイの童話を思ひ出して、なつかしまずには居られなかつた。二人の敬虔なロシアの百姓は、一生かかつて其目的のために働いて貯へた金で聖地の巡礼に出かけたが、其中の一人は途中で不図したことから一家全体が疫病になやんだ。他の一人は途すがら全家挙つて疫病にかかつて居た不幸な全員を介抱し初めた為に、友とはぐれて旅費に持つて来た金はその為に残らず使つて了ひ、結局目的の巡礼を為し遂げずして故郷に帰つた。第一の巡礼者は彼の友に逢つて巡礼をしなかつた彼の友の方が、自分よりも却つて本当の巡礼者であつたことを認めたと云ふ文句を心中に繰返しつつ、食卓を離れて吾居間に帰り、長椅子の上に横たはつた。マリヤは又もや例の帰神気分になり、ブラバーサに軽く挨拶を交はし、周章て再会を約し乍らアメリカンコロニーをさして帰り行く。</p>
+            <p class="ja-classical-line">ブラバーサは大神の神号を唱へ天津祝詞を奏上し終り、窓外の家々の薄明かるい灯火を見下ろしながら、草臥れてソフアの上に白川夜舟を漕ぐこととなりぬ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c06.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 6: The City of Idols [6]</span>
+      </a>
+      <a href="c08.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 8: The Motor Carriage [8]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

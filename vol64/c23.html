@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 23: The Hidden Scheme [23] - Volume 64 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 64 Table of Contents</a>
+      <span>Volume 64</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 64 &bull; Chapter 23</span>
+      <h1 class="chapter-title-en">Chapter 23: The Hidden Scheme [23]</h1>
+      <p class="chapter-title-ja">暗着〔23〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Captured by the desire for fame and profit, the four ugly souls of men and women, flustered and clamoring, left Kogitayama behind and boarded the Kishiya with great vigor; as the sound of the wheels roared and shook the Daichi, they headed toward Atedo, passing Arashiyama, Hanazono, Nideu, Kiyōtoeki, Mukafumachi, Yamazaki, Takatsuki, and even Ōsakaeki, until they reached Hiroshima, faced the barrier of Bakuwan, boarded the Tenpukumaru, and finally landed at Fuzan, crossing the bridges of Keijiyō, Heizeu, and Afuriyoku, and proceeding steadily along the Kuōki railway of Manshiu, advancing day and night.</p>
+          <p class="en-p">After more than twenty days on the Kishiya, they finally arrived safely at the sacred site, the world-renowned Jerusalem, and wandered about the city; they rushed headlong to climb the Mount of Olives, looked out over the scenery of the four directions, and stood there, their hearts leaping and their minds astonished.</p>
+          <p class="en-p">Otora sighed with relief,</p>
+          <p class="en-p">Otora: 'Ah, good heavens, at long last, having crossed eight thousand miles of land and sea, we have reached our destination. What a place, it looks so much like Okebuseyama. However, both in the state of the mountains and the condition of the trees, does it not feel somewhat lonely, unlike the Okebuseyama of Hinodedeshima? And are they not building a large school, intending to educate the foreign spirits extensively? I wonder what kind of four-legged race it is that would ruin this magnificent sacred site by piling up bricks and stones.'</p>
+          <p class="en-p">Morimiyawake-sama looked troubled and said,</p>
+          <p class="en-p">Morimiyawake-sama: 'Now, now, Otora-sama, you must not speak so loudly. That is called Zion University, a place where scholars of the world are gathered to improve the world's ideological sphere. In short, it is being managed by Jewish scholars and doctors of the world, claiming they will protect Hinode. If it were Hinodedeshima, no one would laugh no matter what you said, but we have come to such a place where the language is not understood, so it is troublesome if you say such useless things. Since you do not understand foreign languages, please do as I say in all matters.'</p>
+          <p class="en-p">Otora: 'Hmph, are foreign languages really that precious? Did not the Hensei-danshi-sama say that he would govern this world with everything using the forty-eight characters of the Iroha? Would it not be fine to make the foreigners repent from now on and have them learn the language of the Iroha forty-eight characters of Hinodedeshima? Without that much authority, how can you become the Hinode-gami of the three thousand worlds? You, too, are saying things that are quite incomprehensible. Ohohohoho.'</p>
+          <p class="en-p">Morimiyawake-sama: 'Are you going to act up again? But no matter how much you act up, it is fine, as there are few foreigners who understand Japanese. Now, shall we go and see the construction work of Zion University?'</p>
+          <p class="en-p">Otora: 'Now, Morimiyawake-sama, this is no time to be saying such carefree things. We must quickly search for the whereabouts of Burabāsa, who is said to have secretly hidden away from Okebuseyama, and negotiate, or else our plans will not stand.'</p>
+          <p class="en-p">As they were talking, Dr. Subāru, the founder of Zion University, came along leaning on a cane. Morimiyawake-sama spoke to him fluently in his specialty, English. The doctor also shook hands with Morimiyawake-sama quite pleasantly and talked for about half an hour. The main point was... the general story that Morimiyawake-sama had sent the savior Hinode-gami from Hinodedeshima. Dr. Subāru listened seriously, but in the end, he burst out laughing, grinned, and parted ways with them. Morimiyawake-sama thought that if he were not recognized by this doctor, the Hinode-gami would be finished, but he pretended to be calm, feigning ignorance. Otora, taking advantage of the fact that Dr. Subāru's figure was no longer visible, began to chatter again.</p>
+          <p class="en-p">Otora: 'Now, Morimiyawake-sama, you were chirping like a sparrow, but what on earth were you saying? Did you not tell him that the savior Hinode-gami has descended?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">名利の欲に捉はれし
+男女四人の醜魂は
+うろたへ騒ぎ小北山
+後に見すてて汽車の窓
+勢ひ込んで乗込めば
+轍の音も轟々と
+大地をビリビリふるはせて
+何の当途も嵐山
+花園二条京都駅
+西へ西へと向日町
+上る山崎高槻や
+大阪駅も乗越えて
+出でゆく先は広島や
+馬関の関に立向ひ
+転覆丸に身を乗せて
+漸く釜山に上陸し
+京城平壌鴨緑の
+橋を渡つて満洲の
+広軌鉄道スクスクと
+夜を日についで進み行く</p>
+            <p class="ja-classical-line">二十余日の汽車の上
+漸く聖地に安着し
+音に名高きエルサレム
+市中をウロウロ迂路付きつ
+一目散に橄欖の
+山を目がけて駆上り
+四辺の景色を見まはして
+胸を躍らせ呆れゐる。</p>
+            <p class="ja-classical-line">お寅はほつと息をつぎ、</p>
+            <p class="ja-classical-line">『アヽヤレヤレ、ヤツトの事で、八千哩の水陸を渡り、目的地点へ達しました。何とマア桶伏山によく似た所ですな。併し乍ら山の具合と云ひ木の具合と云ひ、どうも日の出島の桶伏山とはどこ共なしに物淋しいやうな気がするではありませぬか。又外国身魂を盛んに教育せうと思つて、大きな学校を建ててゐるだありませぬか。練瓦や石をたたんで、此結構な霊場をワヤにする奴は、何処の四つ足人種だらうかなア』</p>
+            <p class="ja-classical-line">守宮別は迷惑顔にて、</p>
+            <p class="ja-classical-line">『コレコレお寅さま、さう大きな声で云ふものぢやありませぬよ。あれはシオン大学と云つて、世界の学者を集めて、世界の思想界を改良しやうといふ所ですよ。つまり日の出守護にせうと云つて、ユダヤの学者や世界の博士等が寄つて経営してるのですよ。日の出島なら何を云つて居つても笑ひませぬが、言葉の通じない斯様な所へ来て仕様もない事を云つては困りますからな。あなたは外国語が分らぬのだから、何事も私の言ふやうにして下さい』</p>
+            <p class="ja-classical-line">『ヘン、外国語が、何夫程有難いのだい。変性男子さまは此世の中をイロハ四十八文字で何もかも治めると仰有つたのぢやありませぬか。之から外国人に改心さしてイロハ四十八文字の日の出島の言葉を覚えさしたら可いだありませぬか。それ丈の権威がなくて何うして三千世界の日の出神となれますか。お前さまも余程分らぬことを云ふぢやありませぬか。オホヽヽヽ』</p>
+            <p class="ja-classical-line">『又はしやがれるのかなア。併し何ぼはしやいでも、外国人に日本語の分る人が少いからマア結構だ。サア是からシオン大学の建築工事でも見せて貰ひませうかい』</p>
+            <p class="ja-classical-line">『コレ守宮別さま、そんな気楽なことをいつてる時だありますまい。早く、桶伏山からソツと隠れて来てゐるといふブラバーサの所在を捜し、談判せねば思惑が立ちませぬぞや』</p>
+            <p class="ja-classical-line">かく話す所へシオン大学の創立者たるスバール博士が、ステツキをつき乍らやつて来た。守宮別は得意の英語で何だかペラペラと話しかけた。博士も極めて愉快気に守宮別と握手し乍ら半時ばかり話してゐた。其要点は……守宮別が日の出島から救世主日の出神を送つて来たといふ大体の話であつた。スバール博士は真面目に聞いてゐたが、しまひには吹出してニタツと笑ひ袂を別つたのである。守宮別は此博士に認められなければ日の出神もダメだと思つたが、そ知らぬ面して平気を装ふてゐた。お寅はスバール博士の姿が見えなくなつたのを幸ひ、又もや喋り出したり。</p>
+            <p class="ja-classical-line">『コレ、守宮別さま、チーチク、パーパーと雀のよなことをいつてゐたが、一体何をいつてゐたのだい。日の出神の救世主が御降臨だといふことをお前さまは言はなかつたのかい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'Are you so lacking in Jiyosai? Is that not why we have come all this way? I said it clearly. That person is a scholar famous throughout the Sekai known as Hakase Subaru. If only that person understands, all the Ningen in the Sekaijiu will recognize you as the Kiuseishiyu.'</p>
+          <p class="en-p">Speaker: 'How truly magnificent are the Shigumi of the Kamisama. To arrive here and immediately meet Hakase Subaru and have him recognize Hinodewake is truly a feat of the Kamisama. Hmph, as for Burabasa, it seems he thought to steal the Kōmiyō and came ahead, but since there is no word of which corner he is hiding in, he is not even showing his face on Kanranzan. It appears he has Shōmetsu somewhere. Ho ho ho, what a pleasant Kimi, that is why I say follow Hinodewake. Now, Magahiko-sama, Ohana-sama, have you understood the Goshinriki?'</p>
+          <p class="en-p">Speaker: 'We have only just arrived, so we do not understand anything at all.'</p>
+          <p class="en-p">Speaker: 'Eh, what a pair of fools. Ohana-sama, you must have understood, right?'</p>
+          <p class="en-p">Speaker: 'It is Fuben because I do not know Eigo, no matter what is said.'</p>
+          <p class="en-p">Speaker: 'That is where the Goshinriki comes into play. If you use the Shijifuhachimoji, it will be Tsūyō throughout the Sanzensekai.'</p>
+          <p class="en-p">Speaker: 'When Magahiko thinks about it, the Kotoba of Hinodejima is not even Tsūyō here, is it? The Shijifuhachimoji is also a rather vague thing.'</p>
+          <p class="en-p">Speaker: 'Hey, Moriyawake-sama, please explain the matter of the Hakase to these two who do not understand, so that they may be fully convinced. If you do that, their eyes might open a little; since that Hakase has left now, he will surely come to welcome us with a large crowd and flags soon. Ehe he he.'</p>
+          <p class="en-p">Speaker: 'Hey, Otora-sama, that will not do. It is troublesome if you get happy from now.'</p>
+          <p class="en-p">Speaker: 'Eh? What is it that will not do? The Kiuseishiyu of the Sanzensekai has appeared, has he not? Being a scholar of the Sekai, is it possible that he does not understand such a thing? You are just saying that to tease me, please tell me the Hontau.'</p>
+          <p class="en-p">Speaker: 'If I tell you the Hontau, you will be surprised. Come, let us descend this mountain and enter some hotel.'</p>
+          <p class="en-p">Speaker: 'And what did the Hakase say?'</p>
+          <p class="en-p">Speaker: 'I will not say it anymore. He said that since we live in an age where many false prophets and false Kiuseishiyu appear, you should also wake up and come to your senses. Somehow, there seems to be truth in what that Hakase says. I have come all this way only to be put to shame. After all, Hinodewake is a false Kiuseishiyu.'</p>
+          <p class="en-p">Speaker: 'Eh, do not make a fool of me. It is because your way of speaking is poor. You say things like chirping birds, how could anyone understand that? Why did you not speak so that it could be understood better? You are truly a hopeless person.'</p>
+          <p class="en-p">Speaker: 'I have no energy unless I have a glass of whiskey or something. Let us go to the town of Jerusalem once, and talk slowly there.'</p>
+          <p class="en-p">Speaker: 'Wait a moment, we do not know if Burabasa is lurking somewhere around here, so there is no choice but to meet that wretch once and peel the skin off his face. He must be meeting the scholars of Zion University and causing trouble. Come, come, Magahiko-sama, Ohana-sama, search this mountain from the entrance.'</p>
+          <p class="en-p">Speaker: 'Otora-sama, even if it is Burabasa, it is unlikely he is staying only on a mountain like this. He probably only visits once in the morning or evening. He must surely be staying at some inn.'</p>
+          <p class="en-p">Speaker: 'Since we have come all this way, let us offer our prayers to Hinodewake-sama here, compose a poem, and then head to Jerusalem for the time being.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『ソンナことに如才がありますか。その為にはるばる来たのではありませぬか。確に云ひましたよ。あの方はスバール博士といふて世界で有名な学者ですよ。あの人さへ分れば世界中の人間があなたを救世主と認めてくれますよ』</p>
+            <p class="ja-classical-line">『何とマア神様のお仕組と云ふものは偉いものだなア。ここへ着くが早いか、スバール博士に会ふて日の出神を認めて貰ふとは本当に神さまも偉いワイ。ヘン、ブラバーサなんて、抜がけの功名をせうと思つて先へ来乍ら、何処の隅に居るかとも云はれてゐないとみえて、橄欖山に姿も見えぬぢやないか。どつかへ消滅したと見える。オホヽヽヽあた気味の可い、だから日の出神に従へ……といふのだ。コレ曲彦さま、お花さま、御神力が分りましたかな』</p>
+            <p class="ja-classical-line">『今来たばかりで根つから何も分りませぬ』</p>
+            <p class="ja-classical-line">『エヽ、何といふ盲だいな。お花さま、お前は分つただらうな』</p>
+            <p class="ja-classical-line">『何を云ふても英語を知らないものだから不便で御座いますワイ』</p>
+            <p class="ja-classical-line">『そこが御神力でいくのだよ。イロハ四十八文字さへ使へば三千世界に通用するのだからな』</p>
+            <p class="ja-classical-line">『曲彦が考へると、現に此処では日の出島の言葉が通用せぬぢやありませぬか。イロハ四十八文字も可い加減なものですな』</p>
+            <p class="ja-classical-line">『コレ、守宮別さま、二人の分らずやに、今の博士のことをトツクリと合点の行くやうに言ふて上げて下さい。さうするとチツとは、目がさめるでせうから、今あの博士が去んだから、やがて旗を立てて大勢で迎へに来るだらう。エヘヽヽヽ』</p>
+            <p class="ja-classical-line">『コレお寅さま、ダメですよ。さう今から喜んで貰ふと困りますがな』</p>
+            <p class="ja-classical-line">『エヽ？何がダメだい。三千世界の救世主が現はれて来てるだないか。世界の学者ともあるものが、ソンナことが分らぬと云ふことがあるものか。お前はそんなこと云つていちやつかすのだらう、本当のこと云つて下さいな』</p>
+            <p class="ja-classical-line">『本当の事云つたら、あなたビツクリしますよ。サア当山を下つて、どつかのホテルへ這入りませう』</p>
+            <p class="ja-classical-line">『そして博士は何と云つたのだい』</p>
+            <p class="ja-classical-line">『モウ云ひますまい。偽予言者、偽救世主が沢山に来る世の中だから、お前さまも可い加減に目を醒ませと云ひました。何うもあの博士の云ふことには真理があるやうです。こんな所迄来て恥を掻きました。何しろ日の出神は偽救世主ですからなア』</p>
+            <p class="ja-classical-line">『エヽ馬鹿にしなさるな。お前さまの云ひ様が悪いからだ。チーパーチーパーと小鳥の鳴く様なこと云つて、何分るものか。なぜモツと分る様に仰有らぬのだい。本当に仕方のない人だなア』</p>
+            <p class="ja-classical-line">『何つかでウヰスキーでも一杯やらぬと元気が出ませぬワ。一遍エルサレムの町迄行きませう、そこでゆつくり話しませう』</p>
+            <p class="ja-classical-line">『一寸待つて下さい、何処ぞ此処らにブラバーサが潜伏して居るか知れぬから、一遍彼奴に会うて面の皮をヒンむいてやらむことにや仕方がない。何でも彼奴がシオン大学の博士等に会うて邪魔をして居るに違ない。サアサア曲彦さま、お花さま、此山を小口から捜すのだよ』</p>
+            <p class="ja-classical-line">『お寅さま、ブラバーサだつて、コンナ山ばかりに居り相なことはない。朝とか晩とかに一遍づつ参る位でせう。キツと何つかの宿に居るに違ありませぬワ』</p>
+            <p class="ja-classical-line">『折角此処迄来たのだから、ソンナラ此処で一つ日の出神さまを御祈願して、歌でも詠んで、それからエルサレム迄一先づ行くことにしませう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'Moshi, Otora-sama, you say to worship the Hinode-gami, but is the Hinode-gami not different from you?'</p>
+          <p class="en-p">Speaker: 'Eh, you are slow to understand. To speak of the Hinode-gami is to say one must worship the Ōmiroku-sama of Sokotsuihane. To understand ten things from hearing one is the Yamatodamashihi. It is a troublesome man I have brought along, having to teach you everything from start to finish.'</p>
+          <p class="en-p">Speaker: 'Even so, it was the Suishiyōmitama chosen by Otora-sama that came, so could you please not complain so much? Ah, how foolish. I never dreamed that after following you to such a distant place, I would be listening to complaints. Is that not so, Ohana-sama? Is it not truly ridiculous? I do not even feel like composing a poem properly.'</p>
+          <p class="en-p">Speaker: 'Now, Magahiko-sama, since you have come here, there is no other way; you must do as Yamoriwake-sama and Otora-sama say. Those who do not understand the Kotoba and lack Shintoku will be useless no matter what they say... There is no other way but to offer absolute obedience to Otora-sama, who possesses high Shinriki, and Yamoriwake-sama, who understands Guwaikokugo.'</p>
+          <p class="en-p">Speaker: 'No matter what you say, once you come here, it is the realm of this Yamoriwake-sama. Otora-sama, you too should yield a little and listen to what I say. The Shijifuhachimoji may not have much Keni once you come here. Aha-ha-ha-ha.'</p>
+          <p class="en-p">Speaker: 'Even though such a magnificent Hinode-gami has made a Gokaurin from Hinodejima, it seems everyone is a fool, for not a single person has come to welcome him. Now, Yamori-sama, it is because your negotiations are poor. Go and declare it again. If you dislike that, it would be best to find Burabāsa and make that fellow apologize before the doctor. If you do that, your credibility will be restored at once.'</p>
+          <p class="en-p">Otora: 'Having traveled far across sea and mountain to see, / It is the Mount of Olives, different from what I heard.'</p>
+          <p class="en-p">Ohana: 'Little did I think, after crossing the long railway, / That I would be listening to complaints upon the mountain.'</p>
+          <p class="en-p">Speaker: 'Now, Ohana-sama, what kind of dissatisfied poem is that? Declare it again.'</p>
+          <p class="en-p">Speaker: 'Yes, yes, even if you say to declare it again, I have no train ticket; what am I to do?'</p>
+          <p class="en-p">Speaker: 'Eh, you are slow to understand; I am telling you to recite the poem again.'</p>
+          <p class="en-p">Ohana: 'Crossing the endless sea and mountains, I yearned for it, / And at last, I have reached the sacred land under the sky.'</p>
+          <p class="en-p">Speaker: 'You say such things again. As for the sky, I have always said that I dislike the moon. Do not speak to me of the moon, which is like a fickle woman, waxing and waning, becoming thin, appearing and disappearing. Why do you not sing of the Hinode-gami? Now, Magahiko-sama, you try singing one...'</p>
+          <p class="en-p">Magahiko: 'Leaving Hinodejima behind, I rode the fire-cart, / And came to the Mount of Olives.'</p>
+          <p class="en-p">Speaker: 'What is that? Is there such a spineless poem?'</p>
+          <p class="en-p">Speaker: 'Even so, I sang it with all my might and by racking my brains, so could you please not laugh at me too much?'</p>
+          <p class="en-p">Speaker: 'Eh, whether it is poor or good, it does not matter. Sing about the Hinode-gami.'</p>
+          <p class="en-p">Magahiko: 'Having departed from the sky of the Land of the Rising Sun, / Grandmother Otora becomes the god of sunrise from her very eyes.'</p>
+          <p class="en-p">Speaker: 'What a fool you are. Eh, eh, it cannot be helped. The gods said that in all things, one should not rely on others, nor lean on a staff. Let me compose one myself... / Illuminating the darkness of the pitch-black night, rising up, / The light of the Hinode-gami is noble.'</p>
+          <p class="en-p">Speaker: 'Is the Hinode-gami-sama you speak of not the Nitten-sama? Is that not a little funny?'</p>
+          <p class="en-p">Otora: 'Hey, Magahiko, listen well. This world was originally created by the Itten-sama. And among the children of Itten-sama are Nitten and Getten. These are called the Ōkami of the Three Bodies. However, the Getten-sama is the moon that waxes and wanes. Did Getten go? Next is the spirit of Shōki-sama, and next is the soul of Tōhōsaku; combining these five is what is called the five pleasures and pains of this world. Try putting circles on the ends of the character for "large" (dai), and you will see, it will become five, will it not?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『モシお寅さま、日の出神を拝めと云ひなさるが、日の出神は貴女とは違ひましたかいな』</p>
+            <p class="ja-classical-line">『エー合点の悪い、日の出神と云へば底津岩根の大弥勒さまを拝めと云ふことだがな。一を聞いたら十を悟るのが大和魂ですよ。何から何迄教へてやらねばならぬといふのは、困つた男を連れて来たものだなア』</p>
+            <p class="ja-classical-line">『それでもお寅さまの選によつた水晶魂が来たのだもの、さう小言を云つて貰ひますまいか。アタ阿呆らしい、こんな遠い所迄ついて来て、いきなり小言を聞かうとは夢にも思ひませぬワイ、なアお花さま、本当にバカらしいぢやありませぬか。歌もロクによむ気になりませぬがな』</p>
+            <p class="ja-classical-line">『コレ曲彦さま、ここへ来た上はモウ仕方がない、守宮別さまとお寅さまの仰有る通りにするのだよ。言葉も分らず、神徳の足らぬ者は何と云つたつてダメだらう……神力の高いお寅さまと外国語の分つた守宮別さまに絶対服従するより途がありませぬワイ』</p>
+            <p class="ja-classical-line">『何と云つても此処へ来れば此守宮別さまの天下だ。お寅さまもチツと我を折つて私の云ふことを聞きなされ。イロハ四十八文字も此処へ来ては余り権威がありますまいがな。アハヽヽヽ』</p>
+            <p class="ja-classical-line">『これ丈立派な日の出神が日の出島から御降臨になつてゐるのに、分らぬ奴ばかりとみえて、一人も歓迎に来ぬぢやないか。コレ守宮さま、お前さまの談判が悪いからだ。モ一遍宣直して来なさい。それが厭ならブラバーサを捜して、彼奴を博士の前であやまらすが宜しい。さうすりや一遍に信用が回復しますぞや』</p>
+            <p class="ja-classical-line">お寅『海山をはるばる越えて来て見れば
+聞きしに違ふ橄欖の山』</p>
+            <p class="ja-classical-line">お花『思ひきや長い鉄路を渡り来て
+山の上にて小言聞くとは』</p>
+            <p class="ja-classical-line">『コレお花さま、何といふ不足らしい歌をいふのだい。宣り直しなさい』</p>
+            <p class="ja-classical-line">『ハイハイ、宣直さうと云つたつて、乗車切符もなし、何うするのですかい』</p>
+            <p class="ja-classical-line">『エー合点の悪い、歌を言ひ直しなさいと云ふのだがなア』</p>
+            <p class="ja-classical-line">お花『果てしなき海山越えてこがれたる
+聖地にやうやうつきの空かな』</p>
+            <p class="ja-classical-line">『又ソンナことを言ひなさる、つきの空なぞと私は月は嫌ひだと何時も云ふぢやないか。丸くなつたり虧けたり、細くなつたり、出たり出なかつたりするやうな、変性女子的の月のことをいつて下さるな。何で日の出神を歌ひなさらぬか。コレ曲彦さま、お前一つ歌つて御覧……』</p>
+            <p class="ja-classical-line">曲彦『日の出島あとに見すてて火の車
+乗りて来たのは橄欖の山』</p>
+            <p class="ja-classical-line">『ソリヤ何ぢやいなア。ソンナ腰抜歌がありますか』</p>
+            <p class="ja-classical-line">『それでも私は力一パイ、知恵を絞り出してよんだのだから、余り笑ふて貰ひますまいかい』</p>
+            <p class="ja-classical-line">『エー、下手でも上手でもよい。日の出神のことを歌ふのだよ』</p>
+            <p class="ja-classical-line">曲彦は、</p>
+            <p class="ja-classical-line">『日出づる国の御空を立出たる
+お寅婆さまは目から日の出の神となる』</p>
+            <p class="ja-classical-line">『何といふバカだらうかな。エーエー仕方がない、何事も人を力にするな、杖につくなと神様が仰有つた筈だ。ドレ私が自ら詠んでみませう……</p>
+            <p class="ja-classical-line">烏羽玉の暗をてらしてさし上る
+日の出神の光尊し</p>
+            <p class="ja-classical-line">と、かういふのだよ』</p>
+            <p class="ja-classical-line">『あなたのいふ日の出神さまは日天さまのこつちや御座いませぬか、チツと可笑しいぢや御座いませぬかい』</p>
+            <p class="ja-classical-line">お寅『コラ曲彦、よく聞きなさい。此世界は元は一天さまがお造り遊ばしたのだ。そして一天様のお子様に日天月天とあるのだ。それを御三体の大神といふのだ。併し月天さまといふのは盈虧のあるお月様だないよ。月天が行きましたかな。次が鍾馗さまの霊、其次が東方朔の身魂、此五つを合せて此世を五苦楽といふのだ。大の字の端々に○をつけて御覧なさい、ヤツパリ五つになりませうがな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'Matsudai-hi no Ōten no Ōkami-sama and Yurarihiko-sama, what has become of the Miroku Jiyōjiyu no Ōkami-sama? Do not say such Tōhausaku things. Are you saying that in your right mind? Nitsuten and Guwatsuten are not going, you know. Otsuhohohoho.'</p>
+          <p class="en-p">Speaker: 'The language of Hinodejima is different from the language here, so I changed the names. When you come to a country that uses Eigo, you must speak in Eigo, you see.'</p>
+          <p class="en-p">Speaker: 'Hee, so that is Eigo, is it? Magahiko cannot grasp or accept that.'</p>
+          <p class="en-p">Speaker: 'Aee, do not go on and on. Come, Yamoriwake-sama, you sing one too.'</p>
+          <p class="en-p">Speaker: 'I shall try singing one in Eigo. I will say it very simply so that it is easy to understand, so please listen carefully... Japanese, Seihokuzan no, Yanchaa-baasan, Oo, Torawaa, Kinmookiubinii, Daa, Masarete, Umiyama o koe, Kokomade yattekita no waa, Kawai, Soo, dazoyoo, Ore mo, Subāru-hakase ni aute, Nisemono to iu koto ga wakarita no da zo yo, Sore de aisoga tsuukita dakara, Haraise ni sake demo nonde yarooto, Omotte iru no daa, Aata, Ahorashi, Baka ni, Shirare, tazoyo, Ihi, Ihihihihi, ah, Eigo no uta mo chiyotsuto muzukashii wai.'</p>
+          <p class="en-p">Speaker: 'Hey, Yamori-sama, what kind of Warukuchi are you saying, thinking that no one would understand? Hen, I understand that much Eigo. Even I can use that much Eigo quite Ritsupa-ly. You said you would drink sake out of desperation, did you not? Even if you say you will drink, you cannot drink if you have no money. Since I have it tucked away in my pocket, I shall let you drink one Ichigafu at a time. If I let you drink sake, you become like a mud-drunk crucian carp and are of no use at all... Aee, I am starting to feel Fukigen. In any case, shall we find lodging somewhere in Jerusalem... Everyone, follow me.'</p>
+          <p class="en-p">With that, shaking their shoulders and hips with a wiggle, they descend the mountain with a look of displeasure.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『末代日の王天の大神さまやユラリ彦さま、ミロク成就の大神さまは何うなつたのですか。東方朔なことを仰有いますな。それでも正気で仰有るのですか。日天月天が行きませぬワイ。オツホヽヽヽ』</p>
+            <p class="ja-classical-line">『日の出島の言葉とは此処の言葉は違ふから名を変へたのだよ。英語を使ふ国へ来たら英語で言はなならぬからなア』</p>
+            <p class="ja-classical-line">『ヘーエ、それでも英語ですかいな、曲彦には合点が承知しませぬワ』</p>
+            <p class="ja-classical-line">『エーエ、ゴテゴテいひなさるな、サア一つ守宮別さまも歌ひなさい』</p>
+            <p class="ja-classical-line">『私は英語で一つ歌つてみませう。極簡単によく分るやうにいひますから、気をつけて聞いて下さいや……</p>
+            <p class="ja-classical-line">ヂヤパニース、セウホクザンノ、ヤンチヤアバーサン、オー、トラワー、キンモーキウビニー、ダー、マサレテー、ウミヤマヲコエ、ココマデヤツテキタノワー、カワイ、ソー、ダゾヨー、オレモ、スバールハカセニアウテ、ニセモノトイフコトガワカリタノダゾヨ、ソレデアイソガツーキターダカラ、ハライセニサケデモノンデヤロート、オモツテイルノダー、アータ、アホラシ、バカニ、シラレ、タゾヨ、イヒ、イヒヽヽヽヽ、あゝ英語の歌も一寸六つかしいワイ』</p>
+            <p class="ja-classical-line">『コレ、守宮さま、人が知らぬかと思ふて何といふ悪口をいふのだい。ヘン、そんな英語位分つて居りますぞや。私だつてその位の英語は立派に使つてみせますぞや。お前さまはヤケになつて酒を呑むと云つただらう。呑むと云つたつて、お金がなければ呑めますまい。チヤンと私が懐にしめこみてゐるのだから、一合づつ呑まして上げやう。お前さまに酒を呑ますと、泥に酔ふた鮒の様になつてチツとも間に合はぬからなア…………エー気分が悪うなつて来た。兎も角エルサレムの何つかで宿をとることにせうかい………皆さま、ついて来なされや』</p>
+            <p class="ja-classical-line">と肩や尻をプリンプリンとふり乍ら不機嫌な面して山を降り行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c22.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 22: The Demonic Conduct [22]</span>
+      </a>
+      <a href="c24.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 24: The Demonic Erosion [24]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

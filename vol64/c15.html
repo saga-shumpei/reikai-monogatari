@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: The Grand Sumo [15] - Volume 64 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 64 Table of Contents</a>
+      <span>Volume 64</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 64 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: The Grand Sumo [15]</h1>
+      <p class="chapter-title-ja">大相撲〔15〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">An elderly gentleman came to visit the living room of Burabasa, who was staying at a Catholic Sōin hotel. This was Bahā'u'llāh, a missionary of the Bahá'í faith. He was led by a boy to Burabasa's living room, and</p>
+          <p class="en-p">Bahā'u'llāh: 'Gomen-nasaimase.'</p>
+          <p class="en-p">saying this, he offered a slight bow. Burabasa pulled up a chair with his own hands and</p>
+          <p class="en-p">Burabasa: 'Ah, were you Bahā'u'llāh-sama, whom I met on the train? I had intended to visit you once, but as I am not yet accustomed to the place, I have been visiting here and there. Thank you for coming to visit me.'</p>
+          <p class="en-p">as he greeted him, Bahā'u'llāh placed the table between them, and they sat facing each other from both sides.</p>
+          <p class="en-p">Bahā'u'llāh: 'Yes, I too had been thinking of visiting you once, but somehow, what with one thing and another, it has finally become today. How are your impressions of the Seichi since you arrived?'</p>
+          <p class="en-p">Burabasa: 'Yes, what I see and what I hear are different from Hinodewake, so I was bewildered. It seems I have finally come to understand the Chiri and have grown accustomed to the air, so I have begun to settle down a little.'</p>
+          <p class="en-p">Bahā'u'llāh: 'Indeed, I feel the same. I came here all the way from the land of Tokoyo, but oh, everything I see and hear is strange; when I think that the Savior might descend to such a place, I am struck by a sense of wonder. When I was in my country, I spoke of the Seichi, Jerusalem, Jerusalem, and longed for it day and night, but the ruins of the ancient and desolate holy city are nothing but seeds of tears. My expectation that golden flowers would be blooming and fragrant has been completely betrayed. Aha-ha-ha-ha.'</p>
+          <p class="en-p">Burabasa: 'They say that cities are made by men and the countryside by God, and surely the Lord would not descend unless it were in such a rustic place. There is no reason for the Savior to descend to a place where people are gathered, defiling both spirit and flesh in the streets of red dust ten thousand jō high.'</p>
+          <p class="en-p">Bahā'u'llāh: 'Indeed, if you put it that way, it may be so. A few years ago, a wisp of black smoke that appeared on the Balkan Peninsula spread throughout all of Europe with the force of a prairie fire, wrapping the earth of the whole world in the clouds of war; because of this, the hearts of men have worsened ever since, and have they not reached a state where they can neither advance nor retreat? Even if the Savior were to descend to such a place, there would likely be no place for Him to set a single foot. We must polish our hearts and polish our souls, one person more than another, to become of the heart of God and await the descent of the Savior. It has truly become a world of eternal darkness.'</p>
+          <p class="en-p">Burabasa: 'In the teachings of John, the founder of the sect of Rūtobahā, it was said from thirty years ago that the great war of the three thousand worlds would begin, and at last, the great world war occurred. And the founder John ascended to heaven on the morning the peace treaty was concluded, which ended the 1,567 days of the duration of the previous world war—that is, on the morning of the third day of the tenth month of the seventh year of Taishō (old calendar) in terms of the Jitentō Island. Since then, the state of the world has been truly miserable, such that one cannot even bear to open one's eyes.'</p>
+          <p class="en-p">Bahā'u'llāh: 'If one examines the total area of the belligerent nations regarding the previous war, it amounted to 43,402,762 square miles, which is more than 75.8 percent of the world's area, and the number of personnel who participated in that war reached no less than 1,611,920,000, which was an unprecedented great war equivalent to 92.5 percent of the world's population. It showed the great power of autumn frost and fierce sun, causing all the grasses and trees under heaven to wither in a single night. Only the evergreens stand towering, and apart from that, there are only a few kinds of red, yellow, purple, and blue flowers competing for brilliance, boasting for a short while of the beauty of the end of the world. Ah, has the fearsome great world war been eradicated by this? Looking at the ends of the earth after the great war, can we not see that there is no symbol of peace to be found? Are not small wars being fought everywhere, exposing the miserable state of hungry ghosts, beasts, and asuras without reservation? Is the war of Armageddon not referring to the previous war? The Bible teaches that when the war of Armageddon is over, the end of the world draws near; things have become quite ominous. Cold winds blow when it is hot, crops do not develop as expected, volcanoes erupt everywhere, and there is the suffering of earthquakes and floods, robbery, murder, and various unpleasant movements; there is no way for humans to do anything about this world. At this point, there is no path left but to look forward to the descent of the Savior, is there?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">カトリックの僧院ホテルに滞在してゐるブラバーサの居間を訪ねて来た一人の老紳士があつた。之はバハイ教の宣伝使バハーウラーである。ボーイの案内につれてブラバーサの居間に通り、</p>
+            <p class="ja-classical-line">『御免なさいませ』</p>
+            <p class="ja-classical-line">と言ひ乍ら、軽く一礼を施した。ブラバーサは手づから椅子をとりよせて、</p>
+            <p class="ja-classical-line">『やあ、貴方は汽車中でお目にかかつたバハーウラー様で御座いましたか。一度お訪ねしたいと存じて居りましたが、何分処慣れないものですから彼方此方と見学して居りました。よう御訪ね下さいました』</p>
+            <p class="ja-classical-line">と挨拶すればバハーウラーはテーブルを中におき、両方から向ひ合ひとなり、</p>
+            <p class="ja-classical-line">『ハイ、私も一度お訪ねしたいと思つてゐましたが、何だか彼是ととり紛れ漸く今日となりました。どうです聖地においでになつてからの貴方の御感想は？』</p>
+            <p class="ja-classical-line">『ハイ、見るもの、聞くものが日の出島と違つて居りますので面喰ひましたよ。漸く地理も分り空気にも慣ましたと見え、少し計り落付いて参りました』</p>
+            <p class="ja-classical-line">『成程、私も同感ですよ。常世の国から此処までやつて来ましたが、いやもう見るもの聞くもの変つた事ばかり、かやうな処へ救世主がお降りになるかと思へば何だか奇異の感にうたれます。国に居ります時は聖地エルサレムエルサレムと云つて日夜憧憬して居ましたが、古く荒びた神都の跡、何れも涙の種ならぬはありませぬ。黄金の花が咲き匂ふてゐると思つた私の期待はスツカリ裏切られて了ひましたよ。アハヽヽヽヽ』</p>
+            <p class="ja-classical-line">『都会は人が作り、田舎は神が作るとか申しまして、かやうな田舎びた処でないと到底神様はお降りになりますまい。紅塵万丈の巷に、霊肉ともに穢してゐる人の集まつてる処へは救世主はお降りになる筈はありませぬ』</p>
+            <p class="ja-classical-line">『成程、さう承はればさうかも知れませぬな。数年以前、バルカン半島に現はれた一朶の黒煙は燎原を焼く勢ひで全欧羅巴に蔓延し全世界の地をして戦雲に包んで了ひましたが、為に其後の人心は益々悪化し、二進も三進も行かなくなつて来たぢやありませぬか。かやうな処へ救世主が御降臨になつた処で足一つ踏み込まれる処はありますまいな。一人でも多く心を研き魂を研いて神心となつて救世主の降臨を待たねばなりませぬ。実に常暗の世の中となつたもので御座いますわい』</p>
+            <p class="ja-classical-line">『ルートバハーの教祖ヨハネの教にも三千世界の大戦ひが初まるぞよと三十年以前から仰せられましたが、到頭世界の大戦争が起りました。さうしてヨハネの教祖は先達の世界戦争の開戦期間の日数一千五百六十七日を終り平和条約が締結された其朝、即ち自転倒島で云へば大正七年（旧）十月三日の朝昇天されました。その後と云ふものは実に世の中は目もあけて居られないやうな惨怛たる現状で御座ります』</p>
+            <p class="ja-classical-line">『先達の戦争について交戦国の総面積を調ぶれば、四千三百四十万二千七百六十二平方哩即ち世界面積の七割五分八厘にあまり、又其戦争に参加した人員の数は無慮十六億一千百九十二万人に達し世界人口の九割二分五厘に相当する空前の大戦争で御座りました。恰も秋霜烈日の大威力を示して満天下の草木を一夜の中に凋落せしめて了ひました。只常磐木のみ巍然として聳え、又、別に数種の紅黄紫青等の僅かに艶を競ふて世の終末の美を暫時誇つてゐる位であります。あゝ恐るべき世界の大戦争はもはや之で根絶したで御座いませうか。大戦後の世界は何処の果てを見ましても平和の象徴を見る事は出来ぬぢやありませぬか。到る処小戦争は行はれ、餓鬼畜生修羅の惨状を遺憾なく曝露してるぢやありませぬか。ハルマゲドンの戦争とは、先達ての戦争を云つてるのぢやありますまいか。ハルマゲドンの戦争が済めば世の終りが近づくとの聖書の教、どうも物騒になつて来ました。暑い時に寒い風が吹き作物は思ふやうに発達せず、到る処火山は爆発し、地震洪水の悩み、強盗殺人に諸種の面白からぬ運動、到底人間として此世を如何する事も出来ますまい。もうこの上は救世主の降臨を仰ぐより外に道は御座いますまいなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'I am convinced that the Kiuseishiyu will surely make his Gokaurin and govern the Sekai in Buji and Taihei. However, before that, a great Ōtauge will surely emerge. I believe the Sensō of Armageddon will break out in the Kongo. Since there are currently two great powers in the Sekai, Koshitantan and watching each other, the Genjiyō will surely not be settled as it is. The Tatekahe and Tatenaho of the world will not begin until the strength of the Ningen of Konnichi is exhausted, their Hanabashira is broken, and there is no Yochi left for any remedy. I believe it is the Keirin of the Kamisama that the Kiuseishiyu will make his Kaurin when it becomes Kubukurin and Senkiitsuki.'</p>
+          <p class="en-p">Speaker: 'Indeed, I am in Godōkan. And what are you referring to when you speak of your two great powers?'</p>
+          <p class="en-p">Speaker: 'I believe you are generally aware that two great powers are currently competing in secret upon this earth. On one side, there is a powerful nation that exerts a formidable new force, attempts to leap and act throughout the Sekai, behaves in an arrogant and lawless manner, expands through unnatural and artificial violence, and makes the law of the jungle its sole national policy; on the other side, there is a nation that broke the dream of national isolation and exclusion, appeared suddenly on the stage of the Sekai, stood shoulder to shoulder with the great powers, and leaped again to become one of the great powers of the Sekai. All the people of the Sekai look upon these two great powers with eyes of wonder and are in a state of bewilderment. Their development is an unprecedented fact in history, yet that development is claimed to be extremely fair and just. One is like a pyramid, an extremely spectacular but lifeless structure, while the other is like a tall tree, full of life; although it cannot match the pyramid in terms of mere spectacle, it is truly undergoing a living growth. And these two great powers are, one a small isolated island in the Far East, and the other a vast continent in the Far West. One is the oldest nation in the present day, and the other is the newest among the great powers; one is a kingdom since its founding, and the other is a republic since its founding; one boasts an imperial line of unbroken succession, and the other boasts a sovereignty that changes every four years; one is based on the majesty of the Tenson, and the other is based on the civil rights of the masses. And as for their national character, one values righteousness while the other values profit; one calls itself a divine nation while claiming to be a great power, and the other calls itself a republic while claiming to be a Christian nation; one makes the vertical relationship between parent and child the basis of the family, and the other makes the horizontal relationship between husband and wife the basis of the family; one makes the relationship of male superiority and female inferiority the basis of human ethics, and the other makes the relationship of female superiority and male inferiority the basis of human ethics; one uses the sun as its national emblem, and the other uses stars as its national emblem. Therefore, is it not natural that they are incompatible in their national conditions and missions?'</p>
+          <p class="en-p">Speaker: 'Indeed, what you have just said is truly a declaration that has grasped the era. You have shown the Genjiyō where one side stands as the land of the sunrise and the other as the land of Tokoyo, confronting each other in the Sekai. As the proverb says, when two heroes fight, the situation cannot remain whole, so it must be unified by one side or the other. It has truly become a troubled world. Whether it be politics, economy, thought, or religion, there is surely no time like Konnichi when the world is so deadlocked. There is no doubt that this distress must burst somewhere.'</p>
+          <p class="en-p">Speaker: 'That is so. Since the great champions of the East and West are now presenting the strange spectacle of facing each other on the great sumo ring of the Sekai, tightening their loincloths, flexing their arms, and making their muscles leap, it is clearer than seeing fire that the curtain will sooner or later rise on the battle of the tigers. Armageddon, that is, the final Sensō of the Sekai, has become unavoidable. Therefore, in order to let the earth dwell in peace in the paradise of the heavenly kingdom, the Ōkamisama is causing the spirits of John and Christ to descend to the world, and is having the gospel of the heavenly kingdom spread to all people. Nevertheless, the humanity of the earth, accustomed to the world of eternal darkness, has not a single person who can understand the true intent of this Ōkamisama, and only the faithful servants of God are exhausting their sincerity and waiting while praying to God; truly, the Sekai is in a miserable state. Is not the divine work of the Kamisama to perform the Tatekahe and Tatenaho of the three thousand worlds filled with such evil truly a grand plan?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『救世主は屹度御降臨になつて世界を無事太平に治めて下さる事を私は確信してゐます。然しそれ迄に一つ大峠が出て来るでせう。ハルマゲドンの戦争は私は今後に勃発するものと思ひます。今日は世界に二大勢力があつて虎視眈々として互に狙ひつつある現状ですから、到底此儘では治まりますまい。世の立替立直しは今日の人間の力つき鼻柱が折れ、手の施す余地がなくなつてからでなくては開始致しますまい。九分九厘、千騎一騎になつて救世主が降臨なされるのが神様の経綸と存じます』</p>
+            <p class="ja-classical-line">『成程御同感です。そして貴方の二大勢力とは何を指して仰せらるるのですか』</p>
+            <p class="ja-classical-line">『今日此地球上に於て二つの大勢力が互に暗々裡に争つてゐますのは貴方も大抵御承知の事だと思ひます。一方には強大なる一新勢力を発揮し、全世界に活動飛躍を試み傍若無人的の振舞をなし、不自然極まる人為的暴圧力によつて膨脹拡大し、弱肉強食を以て唯一の国是となせる強大なる国家があり、一方には鎖国攘夷の夢を破り一躍して全世界の舞台に現はれ、列強と相伍し、再躍して世界の一大強国となつた国家が御座います。世界万民は此二大勢力に対して驚異の眼を以てのぞみ、茫然自失の体で御座います。その発展振りたるや前古未聞の大事実で御座いますけれども、而もその発展は頗る公明正大と唱へられて居るので御座います。一方はピラミツドの如く極めて壮観なれども真の生命なき建築物であり、一方は喬木の如く生々としその壮観の度に於ては到底彼のピラミツドの建築には及びませぬけれども、真に生命ある成長を遂げつつあるのであります。そして此二大勢力は一つは極東の一小孤島、一つは極西の一大大陸です。一つは現今に於ける最古の国、一つは列強中の最も新しき国、一は建国以来の王国、一は建国以来の民国、一は万世一系の皇統を誇り、一は四年交代の主権を誇り、一は天孫の稜威を本位とし、一は億兆烏合の民権を本位としてゐます。そして其国民性たるや、一は義につき一は利につき一は強国と云ひ乍ら神国と自称し、一は基督教国と云ひ乍ら民国と自称し、一は親子の経的関係を以て家庭の本位となし、一は夫婦の緯的関係を以て家庭の本位とし、一は男尊女卑の関係を以て人倫の本位とし、一は女尊男卑の関係を以て人倫の本位とし、一は太陽を以て国章となし、一は星を以て国章となしてゐる。故に自らその国情と使命に於て相容れないのは当然ではありませぬか』</p>
+            <p class="ja-classical-line">『成程今貴方の仰有つたのは実に時代を達観した宣言だと思ひます。一方は日出国一方は常世の国と世界に相対立してゐる現状をお示しになつたのでせうな。諺にも両雄相戦はば勢ひ共に全からずとか申しまして、どちらか一方に統一されねばなりますまい。実に困つた世の中になつたもので御座いますな。政治と云ひ経済と云ひ思想と云ひ、宗教と云ひ何も彼も一切今日程行つまりの世の中は御座りますまい。どうしても此悩みは何処かで破裂せなくてはおかない道理で御座いますな』</p>
+            <p class="ja-classical-line">『さうです。斯くの如く今や東西の大関が世界の大土俵上に、褌を〆めて腕を鳴らせ肉を躍らせて相対するの奇観を呈してる以上は、一方が屈服するか、但しは引込まない以上は、早晩虎搏撃壤の幕が切つて落されるは火を睹るより明かでせう。ハルマゲドン、即ち世界最後の戦争は到底免れなくなつてゐます。それで大神様は地上をして天国の讃美郷に安住せしめむが為めに、ヨハネ、キリストの身魂を世に降して、天国の福音を普く万民に伝へしめられつつあるのです。さり乍ら常暗の世になれきつた地上の人類は一人として此大神様の御真意を悟り得る者なく、只僅かに忠実なる神の僕が誠を尽し、神を念じて待つてゐるばかり、実に世界は惨めな有様で御座います。かやうな邪悪に満ちた三千世界を立替立直し遊ばす神様の御神業も実に大謨では御座いますまいか』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Speaker: 'Since all humanity in this Sekai are precious Miko born from the same Miiki of Kamisama, we humans are all Kiyōdai. However, in the current Jiyōtai, no matter how much we religious figures may rush, it will be Dame. Unless a great Kiuseishiyu appears to organize it, a Sekai like tangled hemp can hardly be brought to Shiushifu. Yet, regarding these Nidaiseiriyoku, which one do you think will eventually unify the Tenka? Is it the Tokoyo no Kuni, or is it Hinodejima? I would like to hear your thoughts.'</p>
+          <p class="en-p">Speaker: 'It is Tautei impossible for a person of Ningen status to understand the Gokeirin of Kamisama, but what I have received as a blessing through the teachings of Lūtobahā is that the race which should eternally govern the future state will by no means be the people of Tokoyo no Kuni. The people of Sanbikyō, who had been a stateless people for two thousand six hundred years, have recovered the Palestine granted by Kamisama through the great war of the past, and are now in the vigor of the rising sun. And their power of faith, patience, and spiritual perception are things that can never be compared to anything else in the Sekai. Through Shintō, I am convinced that there is a great power lurking even deeper than the Nidaiseiriyoku I mentioned earlier, which will unify the final Sekai. The Jews have seven mysteries; they are as follows: First, that they have lost their own country while bearing the unbroken imperial line of the ages; Second, that despite two thousand six hundred years having passed since the loss of their country, they still recognize themselves as the chosen people of Kamisama even today; Third, that they have restored their lost country of two thousand six hundred years and built a state in Palestine, however small it may be; Fourth, that even though they have forgotten their own language and have reached the point where those who speak the national language are called great scholars, they have not forgotten their country nor bent their faith; Fifth, that they never assimilate with other nations under any circumstances; Sixth, that while holding the status of a stateless people, they are constantly planning the unification of the Sekai; Seventh, that the entire Sekai today is unfolding freely according to the will of the Jews in terms of politics, economy, and academics.'</p>
+          <p class="en-p">Speaker: 'Indeed, that is truly astonishing. It is truly great, worthy of being called the chosen people of Kamisama. And then, what is the other power in the depths?'</p>
+          <p class="en-p">Speaker: 'That is the seven mysteries of Hinodejima. First, that they bear the unbroken imperial line of the ages and stand consistently with righteousness, never having been invaded by others, and the state is heading toward increasing prosperity; Second, that while calling themselves the land of Kamisama, there are few who call themselves the chosen people of Kamisama or the people of Kamisama; Third, that although they have a history of the restoration of imperial rule, they have never once had to rebuild the nation; Fourth, that although they have evolved their national language, they have never made it a dead language, and therefore have never had to revive the national language; Fifth, that although they appear to be a people difficult to assimilate, in reality, they are easily assimilated into the customs of any country, and they embrace and return to any ideology or religion, and there are people who are prone to forgetting their own motherland; Sixth, that while Tokoyo no Kuni chooses any means for the sake of Sekai unification, Hinodejima always seeks to soar through justice and public morality, that is, Kannagara; Seventh, that while the Sekai is planning to isolate Hinodejima by gathering together, Hinodejima does not yet have a Sekai-wide plan, which is where it differs in nature from the Jews. When one thinks about this, it seems that there is some connection between this Hinodejima and Palestine that has been tied from the Kamikai. One makes the pacification of words the spirit of the country, and is a land of Kamisama that does not even dream of conquest or aggression, and the foundation of its nation-building was established two thousand six hundred years ago, while the Jews, as I mentioned before, lost their country two thousand six hundred years ago, and now that lost country has finally seen the dawn of nation-building, has it not? I firmly believe that this Jerusalem is the holy land where the Kiuseishiyu will appear, and I have crossed the ten thousand miles of sea and ridden the clouds to come here for the sake of the divine work.'</p>
+          <p class="en-p">Speaker: 'You said just now that you came riding on clouds, but is that not an airplane?'</p>
+          <p class="en-p">Speaker: 'No, what I call clouds is an ancient word from Jitentōtō for a boat. Since clouds and boats are related, it is written in the Bible that coming on a boat is coming on a cloud.'</p>
+          <p class="en-p">Speaker: 'I see, I have understood that the Kiuseishiyu will descend riding on a cloud. Well, thank you very much. Sorry to have disturbed you... Let us meet again. Please visit me when you have a moment of leisure. I have built a modest hall on the banks of the Jordan River where our believers are gathered...'</p>
+          <p class="en-p">Speaker: 'Yes, thank you very much. I will visit you in the near future. If so, let us part here.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『此世界の人類は、皆神様の同じ御水火より生れたる尊い御子で御座いますから、吾々人類は皆兄弟で御座ります。然し乍ら今日の状態では到底吾々宗教家が何程あせつた所で駄目で御座いませう。偉大なる救世主が現はれて整理して下さらねば乱麻の如き世界は到底収拾する事は出来ますまい。然し此二大勢力は一旦、どちらが天下を統一するとお考へになりますか。常世の国でせうか、日出島で御座いませうか。貴方のお考へを承はり度いもので御座いますが』</p>
+            <p class="ja-classical-line">『到底人間の分際として神様の御経綸は分りませぬが、私がルートバハーの教示により、おかげを頂いて居りますのは、将来の国家を永遠に統御すべき人種は決して常世の国人ではなからうと思ひます。二千六百年、亡国の民となつて居つた讃美郷の人々は先達の大戦争によつて神から賜はつたパレスチナを回復し、今や旭日昇天の勢で御座います。そしてその人種の信仰力、忍耐力並に霊覚力と云ふものは、到底世界に比ぶべきものが御座いませぬ。私は先申しました二大勢力よりも、も一つ奥に大勢力が潜み最後の世界を統一するものと神示によつて確信して居ります。ユダヤ人は七つの不思議があります、それは、</p>
+            <p class="ja-classical-line">第一、万世一系の皇統を戴きつつ自ら其国を亡ぼした事、</p>
+            <p class="ja-classical-line">第二は亡国以来二千六百年なるにも拘らず、今日も尚依然として吾等は神の選民也と自認してゐる事、</p>
+            <p class="ja-classical-line">第三は二千六百年来の亡国を復興して、仮令小なりと雖もパレスチナに国家を建設した事、</p>
+            <p class="ja-classical-line">第四は自国の言語を忘却し、国語を語るものを大学者と呼びなす迄になつて居つてもその国を忘れず、信仰をまげない事、</p>
+            <p class="ja-classical-line">第五は如何なる場合にも決して他の国民と同化せない事、</p>
+            <p class="ja-classical-line">第六には亡国人の身を持ち乍ら不断的に世界の統一を計画してゐる事、</p>
+            <p class="ja-classical-line">第七は今日の世界全体は政治上、経済上、学術上、ユダヤ人の意のままに自由自在に展開しつつある事です』</p>
+            <p class="ja-classical-line">『成程それは実に驚くべきもので御座いますわ。如何にも神の選民と称へられる丈ありて偉いもので御座いますわい。それから、一方の奥の勢力とは何で御座いますか』</p>
+            <p class="ja-classical-line">『それは日出島の七不思議で御座います。</p>
+            <p class="ja-classical-line">先づ第一に万世一系の皇統を戴き終始一貫義を以て立ち、一度も他の侵略を受けず、国家益々隆昌に赴きつつある事、</p>
+            <p class="ja-classical-line">第二は自ら神洲と唱へ乍ら自ら神の選民又は神民と称ふるものの尠い事、</p>
+            <p class="ja-classical-line">第三は王政復古の経歴を有するも未だ一度も国を再興したる事なき事、</p>
+            <p class="ja-classical-line">第四は国語を進化せしめたるも之を死語とせし事もなく、従つて国語を復活せしめた事のなき事、</p>
+            <p class="ja-classical-line">第五は同化し難い国民のやうに見ゆれどもその実、何れの国の風俗にも同化し易く、且何れの思想も宗教も抱擁帰一し、ややもすれば我生国を忘れむとする国民の出づる事、</p>
+            <p class="ja-classical-line">第六は一方常世の国は世界統一の為には手段を選ばざるも、日出島は常に正義公道即ち惟神によつて雄飛せむとする事、</p>
+            <p class="ja-classical-line">第七は世界は寄つてかかつて日出島を孤立せしめむと計画しつつあれども日出島は未だ世界的の計画を持たず、ユダヤとは趣を異にしてゐる事であります。</p>
+            <p class="ja-classical-line">之を考へて見ればどうしても、此日出島とパレスチナとは何か一つの脈絡が神界から結ばれてあるやうに思はれます。一方は言向和すを以て国の精神となし、征伐侵略等は夢想だもせざる神国であり、二千六百年前に建国の基礎が確立し、ユダヤは又前に述べた通り二千六百年前に国を亡ぼし、そして今やその亡国は漸く建国の曙光を認めたぢやありませぬか。私は屹度此エルサレムが救世主の現はれ給ふ聖地と固く信じ万里の海を渡り雲に乗つて神業のために参つたので御座います』</p>
+            <p class="ja-classical-line">『今貴方は雲に乗つて来たと仰せられましたが飛行機の事ぢやありませぬか』</p>
+            <p class="ja-classical-line">『いえ雲と申しますのは自転倒島の古言で舟の事で御座いますよ。雲も凹に通ひますから舟に乗つて来るのを雲に乗つて来ると聖書に現はれてるのですよ』</p>
+            <p class="ja-classical-line">『成程、それで救世主の雲に乗つてお降りになると云ふ事も諒解致しました。いや有難う御座いました。お邪魔を致しまして……又お目にかかりませう。ちつと御寸暇にお訪ね下さいませ。ヨルダン川の辺に形ばかりの館を作つて吾々の信者が集まつて居りますから……』</p>
+            <p class="ja-classical-line">『ハイ、有難う御座います。何れ近い中にお邪魔を致します。左様ならば之にてお別れ致しませう』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: The Way of the Fierce Warrior [14]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: The Vanishing of Heaven and Earth [16]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
