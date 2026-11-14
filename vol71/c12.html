@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: Mud 壁 [1801] - Volume 71 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 71 Table of Contents</a>
+      <span>Volume 71</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 71 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: Mud 壁 [1801]</h1>
+      <p class="chapter-title-ja">泥壁〔1801〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The internal affairs of the Tarahan nation, which had been in a state of chaotic disorder, underwent a complete transformation following the accession of Prince Sudarman. With the Left Guardian and Right Guardian cultivating and nurturing the governance of the state, the peace of the people, and the wealth of the nation from morning until night, the domestic situation finally escaped the suffering of the depths of misery. As all matters were set on the right path, it was hailed as the Miyo of Miroku, and the common people, one and all, respected and adored the new Shinōdenka as if he were their parent, their master, or their teacher.</p>
+          <p class="en-p">Yet, as the long spring days waned and the flowers in the fields and mountains scattered, the light of the fields dripped with fresh greenery. While the Hototogisu sang of the peace of the world here and there, the proverb that good deeds have many demons proved true. In the main thoroughfare of the Tarahan castle town, even the road one walked upon was a wide avenue, yet grand buildings and high towers were suddenly engulfed by tongues of flame. Before one's eyes, they collapsed, and dozens of wealthy merchants fell like a row of dominoes.</p>
+          <p class="en-p">Taking advantage of this chaos, Genshinbō, along with the two men Koburai and Kōro, conspired to sneak into the Shiyakanna mansion of the Left Guardian. They intended to steal gold, silver, and treasures to fulfill their long-held ambitions. In the sadness of a body that was not divine, unaware that danger was approaching him, he slipped through the white smoke and pushed open the wicket gate of the back entrance of the Left Guardian's mansion. Looking out into the city from afar,</p>
+          <p class="en-p">the moonlight, which had been shining just moments before, was now like ink, engulfed by the flames, losing its light and trembling. The spectacle was truly dreadful. Taking advantage of this opportunity, the three men crept deep into the inner chambers, and just as they were about to break the lock of the treasure house and leap inside, they were discovered by the guards. The three were rounded up, bound hand and foot, and thrown into the prison within the main castle; it was a miserable fate.</p>
+          <p class="en-p">Genshinbō and the other two, taking advantage of the commotion of the fire, snuck into the Left Guardian's mansion, but just as they were working to break open the treasure house and steal a mountain of treasures, they were easily captured by a dozen guards who had been hiding in the shadows. They were escorted to the guardhouse within Tarahan Castle and thrown into individual solitary cells.</p>
+          <p class="en-p">The fire finally subsided, and with the donations and sympathy money gathered from all directions, plans were made to manage the great shops as they had been before. As the atmosphere of reconstruction began to drift in, they began to investigate the three thieves. First, Genshinbō was brought out, and Arina, of the Right Guardian's office, was assigned to examine him.</p>
+          <p class="en-p">Arina sat solemnly on the high seat. Genshinbō was brought out to the white gravel courtyard with his hands tied behind his back, yet he sat down on a chair with a haughty air. Leaning back slightly, he glared at the Right Guardian, thinking to himself, 'This greenhorn, how insolent. He still has milk on his lips. What is he capable of?' He pursed his lips into the shape of the character 'he' and waited for Arina's interrogation.</p>
+          <p class="en-p">Arina: 'What is your name?'</p>
+          <p class="en-p">Genshinbō: '....'</p>
+          <p class="en-p">Arina: 'State your address and name clearly.'</p>
+          <p class="en-p">Genshinbō: 'My current address is the first prison within Tarahan Castle.'</p>
+          <p class="en-p">Arina: 'What do you say your name is?'</p>
+          <p class="en-p">Genshinbō: 'What will you do if you hear my name? If you insist that I give my name, I do not mind telling you. Do not be surprised when you hear it. To begin with, I am the celestial being of the First Spirit Kingdom, the incarnation of the Heavenly Emperor, the savior sent from heaven, Tenshinbō-sama, and I am a sworn brother of Shiyakanna, the Left Guardian. I rode into Shiyakanna's mansion to offer my condolences for the fire, fearing the danger of the spreading flames, and just as I was about to break the lock to move the treasures of the storehouse to a safe zone, those ignorant foot soldiers jumped out from the side, treated the savior sent from heaven like a criminal without rhyme or reason, and shoved me into a place like this. A greenhorn like you is not even a match for me, even if you are an official of the Right Guardian. If you have any doubts, call Shiyakanna here; I will explain the principles of heaven and earth to him thoroughly, ah... Hey, you greenhorn, will you not untie my bonds? Will you not let me have a smoke? Is there anyone who treats the sworn brother of the Left Guardian with such abuse? This is the height of thoughtlessness. How do you think you can serve as the Right Guardian of a nation if you cannot distinguish between a guest offering condolences for a fire and a thief? You had better pull yourself together.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">乱麻の如く乱れたる
+タラハン国の内政も
+スダルマン太子の即位より
+施政方針一変し
+左守右守が朝夕に
+治国安民国富を
+培ひ養ひ民心を
+得たれば茲に国内は
+漸く塗炭の苦を逃れ
+万事万端緒について
+みろくの御世と称へられ
+下国民は一様に
+新王殿下を親の如
+主人の如く師の如く
+尊敬愛慕しながらも
+長き春日は闌けて行く
+山野の花は散り果てて
+新緑滴る野の光
+彼方此方に時鳥
+世の太平を謡ふ折り</p>
+            <p class="ja-classical-line">好事魔多しの世の譬
+タラハン城市の目貫の場
+行く道さへも広小路
+大廈高楼忽ちに
+火焔の舌に包まれて
+見る見る内に倒壊し
+数十軒の豪商は
+将棋倒しとなりにける
+この虚に乗じて玄真坊
+コブライ、コオロの両人と
+牒し合せて左守司
+シヤカンナ館に忍び入り
+金銀財宝を奪ひとり
+日頃の大望達せむと
+神ならぬ身の悲しさに
+吾身に危難のかかるをば
+つゆ白煙くぐりつつ
+左守が館の裏門の
+くぐりを押開け忍び入る
+遠く市中を見渡せば</p>
+            <p class="ja-classical-line">折から輝く月光は
+火焔に包まれ墨の如
+光を失ひ慄ひゐる
+その光景ぞ凄じき
+この機に乗じて三人は
+奥の間深く忍び入り
+宝庫の錠前捻ぢ切つて
+躍り込まむとする時しも
+衛兵共に見付けられ
+一網打尽に三人は
+高手や小手に縛られて
+本城内の牢獄へ
+投げ込まれたるぞ浅間しき。</p>
+            <p class="ja-classical-line">玄真坊外二人は火事の騒ぎを幸ひに左守の館へ忍び込み、宝庫を押破つてシコタマ財宝を奪はむと働く折しも、物蔭に隠れてゐた十数の衛兵に苦もなく取押へられ、タラハン城内の営倉に護送されて一人々々独房に投げ込まれて了つた。</p>
+            <p class="ja-classical-line">火事は漸くにして鎮まり、四方より集まる義捐金や同情金によつて再び元の大商店を経営するの運びが纏まり、復興気分が漂ふて来たので、そろそろ三人の泥棒を調べに取りかかつた。先づ第一に玄真坊を引き出し、右守の司のアリナが調ぶる事となつた。</p>
+            <p class="ja-classical-line">アリナは厳然として高座に控へてゐる。玄真坊は後手に括られた儘白洲に引出され豪然と椅子に腰打ちかけ、やや反り身となつて右守を睨みつけ、心の中で「この青二才奴、何を猪口才な、まだ口の辺りに乳がついてゐる。何程の事があらう」と口をへの字に結んでアリナの訊問を待つてゐる。</p>
+            <p class="ja-classical-line">アリナ『その方の姓名は何と申すか』</p>
+            <p class="ja-classical-line">玄『ヽヽヽヽヽ』</p>
+            <p class="ja-classical-line">アリ『その方の住所姓名を明かに申せ』</p>
+            <p class="ja-classical-line">玄『拙者の現住所はタラハン城内の第一牢獄だ』</p>
+            <p class="ja-classical-line">アリ『姓名は何と云ふか』</p>
+            <p class="ja-classical-line">玄『此方の姓名を聞いて何と致す。たつて名を名乗れとならば云はぬ事もない、吾名を聞いて驚くな。抑も吾こそは第一霊国の天人、天帝の化身、天来の救世主、天真坊様と云つて左守のシヤカンナが兄弟分だ。火事見舞の為にシヤカンナの館へ乗り込み類焼の難を怖れ、宝庫の宝物を安全地帯へ運びやらむと、取るものも取敢ず錠を捻ぢ切らむとする折しも、訳も分らぬ木端武者共横合より飛び出し、盲滅法界に天来の救世主を科人扱をなし、斯様な所へ押込みよつたのだ。その方の如き青二才には、仮令右守司でも相手にはならない。不審があればシヤカンナを呼んで来い、トツクリと天地の道理を説いて聞かせる程に、アーン……。こりや青二才、俺の縛を解かぬか、煙草を一服呑ませ、左守司の兄弟分を斯様に虐待致すものがあるものか、不心得千万にも程がある。火事見舞の客か泥棒か分らぬ位の事でどうして一国の右守が勤まると思ふか、チト確り致したがよからうぞ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ari: 'If that is the case, I ask you, why did you come to offer condolences for the fire wearing a mask and a hood, and why did you come rushing in carrying a weapon?'</p>
+          <p class="en-p">Gen: 'Ha-ha-ha-ha, what a dense Umori you are. With a rain of sparks falling from the sky like a sheet, a mask and hood are only natural if one intends to go out to the scene of the fire and work. Look at those Shōbautai; are they not all wearing masks and hoods without a single exception?'</p>
+          <p class="en-p">Ari: 'Then why did you enter flashing a three-shaku Shiusui? You cannot explain the reason for that, can you? It is surely for the purpose of thievery, is it not?'</p>
+          <p class="en-p">Gen: 'A-ha-ha-ha, there is a limit to how unreasonable you can be. As this is an emergency firefighting effort, I have neither a kite nor a matoi. I had no choice but to put on the fire-haori of the Marutariyokuwan and carry a sword, the soul of a Bushi, to prepare for any eventuality. In the mansion of that Samori, are there not dozens of Eihei carrying various weapons, standing guard strictly with their three-shaku Shiusui drawn? Due to the chaos of the fire, the Eihei have gone out to support the firefighting efforts to the extent of seventy or eighty percent, and the mansion of Samori is in a state of defenselessness, which is extremely unsettling. Out of friendship as a brother-in-arms, I led two of my subordinates and headed there to provide support. To interrogate us, who have acted with such kindness, as if we were mere greenhorns, is laughable. Even if I were to explain it to a small-fry warrior like you, you would not understand the reason. Call Samori to this place as soon as possible; the truth will surely be made clear.'</p>
+          <p class="en-p">Ari: 'When I examined the two men you brought with you, did they not both testify that they entered for the purpose of thievery? No matter how cleverly you argue, it is a clear fact that they snuck in as robbers, based on the confessions of both men. Even if you claim to be a brother-in-arms to Samori-dono, the law of the land cannot be bent. What say you? Do you have the courage to refute the confessions of those two?'</p>
+          <p class="en-p">Gen: 'A-ha-ha-ha, is there anyone who would ask such a foolish question? It would be better to settle such matters in a moderate fashion. Think carefully; the two men, Koburai and Kōro, are they not originally subordinates of the Shiyakanna thief boss? They are remnants of the demonic beasts who holed up in the caves of Mount Taniguku, tormenting the common people and stealing their wealth. Since those two are originally subordinates of the Shiyakanna thief, it is a transparent logic to jump to the conclusion that they entered as thieves when they snuck into someone's house. I am a savior sent from heaven, an incarnation of the Lord of Heaven. Why would I bother to covet filthy money and sneak into the mansion of Samori? There is a limit to how blind you can be.'</p>
+          <p class="en-p">With this, he remained unyielding to the end, and even the formidable Umori was at a loss, and he said, 'For now, I shall leave the investigation of today at this, and tomorrow I shall examine it thoroughly,' and he hid his figure into the depths of the shirasu.</p>
+          <p class="en-p">Genshinbō was led away by two minor officials and returned to the original prison.</p>
+          <p class="en-p">While being thrown into the prison, Genshinbō was singing a humming tune with complete composure.</p>
+          <p class="en-p">'To this face of mine that looks like Raku-yaki,
+The Daliya-sama who falls in love is a tea master... and so on.
+No matter how much Samori acts haughty,
+If you wash the origins, he is a thief-sama... is he not?
+Do not speak so grandly of thieves and more thieves,
+Is Samori not the ringleader of the thieves?
+Even though Samori is a Shiyakanna thief,
+Thanks to his daughter, he shines in the world... and so on.
+If you are to have children, have a daughter,
+Parents and all, a ride on the carriage of jewels... and so on.
+The thief-sama of the Taniguku valley,
+Has now become the Samori of Tarahan.
+Do not speak so grandly of Samori and more Samori,
+There is a newt even at the bottom of a well.
+Whether it is Umori or Samori, I do not know,
+But they resemble the newt in the well.
+The newt in the well does not know the great ocean,
+How could he understand the heart of the Lord of Heaven?'</p>
+          <p class="en-p">To such a place, a guard came with loud footsteps and said, 'Hey, hey, monk, will you not be quiet? What are you saying?'</p>
+          <p class="en-p">Gen: 'Speaking so grandly of guards and more guards,
+Are you not the brother of a beggar?
+Beggar, watchman, monk, and soldier,
+What is even worse is the geta-repairer.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">アリ『然らばその方に尋ねるが、何故火事見舞に出て来るのに覆面頭巾で来たのか、何故兇器を持つて飛び込んで来たのか』</p>
+            <p class="ja-classical-line">玄『ハツハヽヽヽ、扨も扨も分らぬ右守だな、空からは一面火の粉の雨、火事場へ出て働かうと思へば覆面頭巾は当然の事だ。かの消防隊を見よ、一人も残らず覆面頭巾の装束ぢやないか』</p>
+            <p class="ja-classical-line">アリ『然らば何故三尺の秋水を閃かして這入つたか、其の理由が分らぬぢやないか、てつきり泥棒が目的ぢやらう』</p>
+            <p class="ja-classical-line">玄『アツハヽヽヽ、訳の分らぬにも程があるわい。俄火消の事とて鳶もなし、纏もなし、止むを得ず丸太旅館の火事羽織を身につけ、武士の魂たる刀を提げ万一の警戒に備ふる為だ。彼の左守の屋敷には数十人の衛兵が各武器を携帯し、三尺の秋水を抜いて警固厳しく控へてゐるぢやないか。火事の混雑によつて衛兵は七八分迄消防の応援に出掛け、左守の館は実に不安極まる無防備も同様、兄弟分の誼を以て二人の部下を引率れ応援に向つたのだ。かかる親切なる吾々の行動に対し、青二才の分際として訊問するとは片腹痛いわい。汝如き木端武者に話した所で訳が分らうまい、一刻も早く左守を此場に呼んで来い、キツト黒白が分るだらう』</p>
+            <p class="ja-classical-line">アリ『その方の伴ふてゐた両人を調べて見れば何れも泥棒の目的で這入つたと申し立ててゐるぢやないか。何程汝が小利口に抗弁するとも、已に已に両人の自白によつて強盗に忍び入つたのは明白の事実だ。仮令左守司の兄弟分だと云つても国法は枉げる訳には行かぬ、どうぢや両人の自白を打消す勇気があるか』</p>
+            <p class="ja-classical-line">玄『アツハヽヽヽ、左様な愚問を発する奴があるか、斯様な事はいい加減に片付けたがよからう。よく考へて見よ、コブライ、コオロの両人は、もとよりシヤカンナ泥棒親分の輩下ぢやないか。タニグク山の岩窟に立籠り、民家を苦め財物を奪ひ取つた鬼畜生の片割だ。彼等二人は元よりシヤカンナ泥棒の輩下だから、人の家へ忍び込めば泥棒に入つたと早合点するのは見えすいた道理だ、吾は天来の救世主だ、天帝の化身だ。何を苦んで目腐れ金に目をくれ、左守の屋敷へ忍びこむ道理があらうぞ。目が見えぬにも程があるわい』</p>
+            <p class="ja-classical-line">と何処までも押強く、流石の右守も困り果て、</p>
+            <p class="ja-classical-line">『先づ今日の調べは、之で惜いておく、又明日トツクリと調べるであらう』</p>
+            <p class="ja-classical-line">と云ひ乍ら白洲の奥へと姿をかくした。</p>
+            <p class="ja-classical-line">玄真坊は二人の小役人に引立てられ、もとの牢獄へと帰り行く。</p>
+            <p class="ja-classical-line">玄真坊は牢獄に打ち込まれ乍ら、平気の平左で鼻唄を歌つてゐる。</p>
+            <p class="ja-classical-line">『楽焼見たやうな此方の顔に
+惚れるダリヤさまは茶人さま……と。
+何程左守が威張つて見ても
+もとを洗へば泥棒さま……か。
+泥棒々々と偉さうに云ふな
+左守が泥棒の張本ぢやないか。
+左守シヤカンナの泥棒でさへも
+娘のおかげで世に光る……と。
+子供持つなら娘を持ちやれ
+親も諸共玉の輿……と。
+タニグク谷間の泥棒さまも
+今はタラハンの左守となつた。
+左守々々と偉相に云ふな
+井戸の底にも居る蠑螈。
+右守か左守か俺や知らねども
+井中の蠑螈によく似てる。
+井中の蠑螈は大海知らぬ
+どうして天帝の心が分らう』</p>
+            <p class="ja-classical-line">かかる所へ守衛が靴音高くやつて来て、</p>
+            <p class="ja-classical-line">『こりやこりや坊主、静にせぬかい何を云つてゐるのだ』</p>
+            <p class="ja-classical-line">玄『守衛々々と偉相にさらす
+貴様は乞食の兄ぢやないか。
+乞食番太に坊主に兵士
+まだも悪いのは下駄直し』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Guard: 'Hey Bauzu, are you not talking about yourself?'</p>
+          <p class="en-p">Genshinbau: 'I am the Mitama of the Keshin of Tentei. My head is disguised as a Bauzu. Even if my head is that of a Bauzu-sama, my spirit is Tentei-sama.'</p>
+          <p class="en-p">Guard: 'Eh, what a hopeless Bauzu you are. Be quiet, or I shall report this to Umori-sama.'</p>
+          <p class="en-p">Genshinbau: 'Oi, Shiyuei, tell Samori and Umori that I have left a message... tell them that if I am a dorobau, then you are all dorobau too... just say that, and nothing more. Do not say anything else, for it would be the ruin of your own self.'</p>
+          <p class="en-p">The Shiyuei puffed up his body, puffed out his face, and without answering a single word, kicked the door of the raugoku two or three times with the tips of his boots and walked away ashiba to somewhere.</p>
+          <p class="en-p">Genshinbau, unable to bear the taikutsu, began to chant a makeshift kiyōmon while still bound within the gokuchiu.</p>
+          <p class="en-p">Maka Hanniyaharamitashingiyō. The Gokeshin of Tentei, who is gubi with the keni of mugenmuriyō zetsutairiyoku, the celestial being of the highest first heaven and the celestial being of the deepest spiritual realm, the heaven-sent savior, Tenshinbau-sama, has been sent by an unforeseen disaster to spend his days and nights in the narrow raugoku within Tarahan Castle. Although man is the spiritual leader of all things, the flower of heaven and earth, and the dwelling place of celestial beings, the current violent behavior of Shiyakanna, who has disguised himself as the boss of the most evil and lawless dorobau and as the Samori-shi, will surely anger the gods of heaven and earth. It is clear that not only will earthquakes, thunder, and fire rain down, but a great disaster will erupt, to say nothing of the great assault of a tsunami, which will affect not only Samori and Umori. Ah, how pitiful is this blind world. Even if the sun and moon shine in the heavens, if black clouds block the mid-air, the sun cannot reach the earth. Ah, Brahman Taishaku Jizaiten Daikokuhiko-no-Mikoto, show the miraculous signs of celestial changes and earthly monsters as soon as possible, and open the eyes of the people of this nation, starting with this castle. I am by no means a dorobau, nor am I an ambitious person like Samori or Umori; I only carry out the will of heaven as heaven commands. I take refuge and bow down with reverence, Namu Brahman Tenno Jizaiten, please accept my wishes.'</p>
+          <p class="en-p">Umori-shi came alone to see how Genshinbau was doing, but upon hearing this kiyōmon, he burst out laughing.</p>
+          <p class="en-p">Ari: 'Oi, Keshin-dono of Tentei, that is a mighty roar you have there. I would certainly like to see those miraculous signs of celestial changes and earthly monsters as soon as possible.'</p>
+          <p class="en-p">Genshinbau: 'Ya, you have come to a good place. You are Arina, the Umori, are you not? How is it, did you come after consulting with Samori?'</p>
+          <p class="en-p">Umori: 'Silence! How dare you, a mere criminal, spit out such nonsense. No matter what you say, you snuck in with the intent of a dorobau, and no amount of excuses, even if you spend a thousand words, can cover our intelligence. Your life is but a matter of two or three days; if there is anything you wish to eat, say whatever it is. Since you are a person who will soon vanish like dew at the execution ground, you had best spit out whatever you wish as a keepsake of this world. Your crime has already been determined as a death penalty.'</p>
+          <p class="en-p">Genshinbau: 'Hatsuhahahaha, no matter how much you decide it is a death penalty, from the side of the gods, from this side, it is innocent. In any case, if I think about why Samori has not come here, it is because he is afraid of me after all. That is right, he is trembling like a ghost of konnyaku because he is afraid of having his face peeled off. What a pitiful old man he is, itsuhuhuhuhu. No matter how beautiful your own daughter is and even if she has become an Ohi-dono, if you, her father, are the boss of a dorobau, you will never be able to govern a country. Becoming the boss of a dorobau is like showing the people a model of national education that you can surely conquer the world. Do you think the nation of Tarahan will last with such things? Oi Umori, if you think of the nation of Tarahan, tell Samori that I said so. I am already prepared, but I must meet Samori once. You may do as you please, whether it is a death penalty or a five-fold penalty. Until then, there is something I must tell Samori. Surely Samori would not say he will not meet me as a keepsake of this world.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">守『こりや坊主、貴様は自分の事を云つてるぢやないか』</p>
+            <p class="ja-classical-line">玄『俺は天帝の化身の身魂
+頭は坊主に化けてゐる
+仮令頭は坊さまぢやとて
+俺の霊は天帝さまだ』</p>
+            <p class="ja-classical-line">守『エー、仕方のない坊主だな、静にしろ、右守さまに報告するぞ』</p>
+            <p class="ja-classical-line">玄『オイ、守衛、左守、右守に俺がことづけしたと云つてくれ、……俺が泥棒なら貴様等もヤツパリ泥棒だ……と云つて居つたと、之丈でいい、其の外の事は云ふな　貴様の身の破滅になるといけぬからのう』</p>
+            <p class="ja-classical-line">守衛はプリンと体をふり、面をふくらし一言も答へず、靴の先で牢獄の戸を二つ三つ蹴り乍ら足早やに何処へ行つて了つた。</p>
+            <p class="ja-classical-line">玄真坊は退屈で堪らず獄中に縛られた儘俄作りの経文を読出した。</p>
+            <p class="ja-classical-line">『摩訶般若波羅蜜多心経</p>
+            <p class="ja-classical-line">無限無量絶対力の権威を具備する天帝の御化身、最高第一天国の天人並びに最奥霊国の天人、天来の救世主、天真坊様は不慮の災難によつて、今やタラハン城内の狭隘なる牢獄に日夜を送る身となりぬ。抑も人は万物の霊長、天地の花、天人の住所なるにも拘らず極悪無道の泥棒が親分、左守司と化けすましたるシヤカンナが今日の暴状、必ずや天地の神は怒らせ玉ひ、地震雷火の雨はまだ愚か、大海嘯の大襲来によつて左守右守は云ふに及ばず、大災害の突発せむは明瞭なり。あゝ憐むべし盲滅法の世の中、天に日月輝く共　中空に黒雲塞がりあれば、天日も地に達せざる道理也。あゝバラモン帝釈自在天大国彦命、一時も早く、天変地妖の奇瑞を示し、此城内を初めとし全国の民衆に目をさまさせ玉へ。吾はもとより泥棒にも非ず、又左守右守が如き野心家にも非ず、只天が命ずるままに天意を行ふのみ、帰命頂礼謹請再拝、南無バラモン天王自在天、吾願望を納受ましませ』</p>
+            <p class="ja-classical-line">かかる所へ右守司は玄真坊の様子如何にと只一人、偵察がてらやつて来たが此経文を聞いて吹き出し、</p>
+            <p class="ja-classical-line">アリ『オイ、天帝の化身殿、大変な雄猛びで御座るな、一時も早く天変地妖の奇瑞が見せて貰ひたいものだなア』</p>
+            <p class="ja-classical-line">玄『ヤア、よい所へやつて来た、その方は右守のアリナじやないか、どうだ、左守と相談して来たか』</p>
+            <p class="ja-classical-line">右『黙れ、罪人の分際として何業託を吐くのだ。何と云つても泥棒の目的で忍び込み乍ら、千言万語を費しての弁解も、吾々の聰明を蔽ふ事は出来ないぞ。ここ二三日の間の命だ、喰ひ度いものがあるなら何なりと云へ。今に刑場の露と消ゆる身の上だから、此世の名残に何なりと吐いておくがよからう。その方の罪は已に死罪と定つて居るのだ』</p>
+            <p class="ja-classical-line">玄『ハツハヽヽヽ、その方が何程死罪ときめても神の方、此方さまから見れば無罪で御座いだ。兎も角左守が此処へようやつて来ん事を思へば、ヤツパリ俺が恐いのだ。そらさうだ、面の皮引むかれるのが嫌さに菎蒻の幽霊のやうに慄ふてゐるのだらう。憐れな老骨だな、イツヒヽヽヽ。何程自身の娘が別嬪で、王妃殿下になつたと云つても、その父親たる自分が泥棒の親方では、到底一国の政治は行はれまい。泥棒の親分になればキツト天下は取れると国民に国民教育の手本を見せるやうなものだ。そんな事でタラハンの国家が続くと思ふか。オイ右守、タラハン国の事を思へば、さう俺が云つたと左守に云つてくれ。俺は已に已に覚悟はしてゐる、然し左守に一度会はねばならぬ。死罪なつと五罪なつと勝手にしたがよいわ。それ迄に是非とも左守に云つておく事がある。左守だつて此世の名残に会はぬと云ふ事もあるまい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ari: 'I have no ears to listen to such Yomaigoto. I shall examine you once more at the Shirasu, for the Tekikaku Shiyōko has already been brought forth.'</p>
+          <p class="en-p">Saying this, he left the place with loud Kutsuoto. Genshinbau opened his large mouth once again, gathered his Bukatsukau Mehana together, and in desperation began to perform a Dodoitsu.</p>
+          <p class="en-p">'Fled, fled, fled away again,
+Fearing the Goikuō of Genshin-sama,
+Umori-no-Ari-na has hoisted sails on his backside,
+And fled away with a Stakora-yoiyasa.
+What a pitiful Shiromono it is indeed.
+Samori-Shyakanna must be at this moment,
+Sighing deeply at his desk,
+Recalling the Furukizu of the past,
+With a Zutsū-Hachimaki and sweat dripping down,
+Likely leaking from his Yakan.
+Ah, Korashiyo, Korashiyo,
+It is the Daiku-sama who builds the house,
+And Shyakanna who plasters the walls.
+With the old Furukizu all plastered over,
+Shyakanna hides them with mud.
+Shining brightly with his daughter's light,
+Like a firefly he emits a glow.
+He himself is a thief who torments others,
+While accusing me of being a thief and tormenting me.
+If you are going to be a thief, do it properly.
+
+Over the moon country of Shichisenyokoku,
+As if holding the Riyōbun of Ōkuronushi,
+In the palm of one hand,
+For a Bantō-sama of a mere Tarahan-Itsukoku,
+You lack wit.
+Whether you are Samori or Imori, I know not,
+But you are a narrow-minded Oyaji-dono,
+Ah, Korasa, Korasa.'</p>
+          <p class="en-p">Thus he chattered on like a mentally deranged person. From between the lattice windows, a swarm of mosquitoes attacked without any reserve or hesitation.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">アリ『左様な世迷言は聞く耳は持たない。ま一度白洲で調べてやらう、適確な証拠が上つてゐるのだから』</p>
+            <p class="ja-classical-line">と云ひ乍ら靴音高く此場を去つた。玄真坊は又もや大きな口をあけ無恰好の目鼻を一緒によせ、やけ糞になつて都々逸をやり初めた。</p>
+            <p class="ja-classical-line">『逃げた逃げたよ又逃げた
+玄真さまの御威光に恐れ
+右守のアリナが尻に帆かけて
+スタコラヨイヤサと逃げ失せた
+扨ても憐れな代物だ
+左守シヤカンナはさぞ今ごろは
+吐息つくづく机に向ひ
+昔の疵を思ひ出し
+頭痛鉢巻汗タラタラと
+薬鑵もらしてゐるだらう
+ア、コラシヨ　コラシヨと
+家を建てるのは大工さま
+壁を塗るのはシヤカンナだ
+昔の古疵ゴテゴテゴテと
+泥塗り隠すシヤカンナだ
+娘の光でピカピカピカと
+螢のやうな光出す
+自分は泥棒して人苦めて
+俺を泥棒と苦める
+泥棒するならしつかりやれよ</p>
+            <p class="ja-classical-line">七千余国の月の国
+大黒主の領分を
+片手に握つて立つやうな
+僅かタラハン一国の
+番頭さまでは気が利かぬ
+左守かいもりか知らねども
+世間の狭い親爺どの
+ア、コラサ　コラサ』</p>
+            <p class="ja-classical-line">と、精神錯乱者のやうに喋り立ててゐる。格子窓の間から遠慮会釈もなく蚊軍が襲撃する。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: 異志仏 [1800]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: 詰腹 [1802]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

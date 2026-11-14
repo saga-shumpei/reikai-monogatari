@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 1: 追劇 [1790] - Volume 71 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 71 Table of Contents</a>
+      <span>Volume 71</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 71 &bull; Chapter 1</span>
+      <h1 class="chapter-title-en">Chapter 1: 追劇 [1790]</h1>
+      <p class="chapter-title-ja">追劇〔1790〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Rich in the blessings of Kami, the Tenonkiyō that opens the Kototama. The great Itefu tree towering at its Chiyōjiyō brushes the Ten, holding aloft a fan of Kogane. This Seijiyō is the Manjiyuen, the Zuishiyōkaku that shall remain unchanged even until the end of the Miyo of Miroku. The Shihau are a Yamabiyōbu of brocade, and the loom of Aya, woven with warp and woof, is the Hikita. Not to mention our Hinomoto, even to the ends of the Daichi, the Kuōshōden is illuminated by the Shinkuō. On the Kikuzuki Kamiyōka, when the completion of this was finally announced, the Eugaichi, which overlooks the Heigen of Minamikuhada at a glance, was the place where, in the old days of Tenshiyō Ninen, Mitsuhide of the Toki clan, who served the Lord of Oda, reminisced about the traces of his great achievements.</p>
+          <p class="en-p">In the inner room of the Shoimeikan, Matsumura-san, who is associated with a thousand years, received the words of Kami, wishing to illuminate this dark world with the Zuigetsu of the light of San-go. As always, he lay on his side, entrusting his body to the ship of his bedding, and while floating on the waves of the tatami, he crossed the Pacific Ocean and climbed over the seas of India. Tenshinbō, who had been possessed by Akki-rasetsu, had cleverly deceived and lured out Dariya-hime, who served in the hidden retreat of the Left-Guard official in the Moon Country of over seven thousand nations, which was known as an ancient civilization, and who was at the port of Suga.</p>
+          <p class="en-p">The story of the comical and tragic situation in which he exposed his ugly figure in the deep mountains of the Taniguku valley is recorded in detail at the beginning of the volume of the Child (Dog) of Senzan-bansui (mountains, rivers, grasses, and trees). Ah, Kannagara-kamu-nagamise, may the spirits be blessed.</p>
+          <p class="en-p">Although he was a rare corrupt monk and a villain of cunning and evil wisdom, he had a vacant-looking face. His head was shaved in a way that looked serious, but by nature, he had thin hair, so he was the owner of a shiny, convenient head that could have done without the meddling of a razor. The tip of his nose was strangely pointed, his eyes were slightly upturned, and two front teeth protruded from his thick lips. No matter how much he tried to make a small, puckered mouth, these two front teeth remained outside the atmosphere, in a state of extraterritoriality. Baring teeth that looked like the teeth of a saw, covered in tartar like boiled pond snails, he searched for Dariya-hime with bloodshot eyes. Breathing heavily and spitting foam, he deployed his many small thieves in all directions, while he himself chose the mountain path where it seemed Dariya-hime had fled. Bringing along Koburai, who seemed a bit sharper than the other thieves, he arrived at the foot of the famous Tateiwa in these mountains, in a manner like a hound sniffing out the tracks of a wild boar.</p>
+          <p class="en-p">Sometimes startled by poisonous insects and having his liver chilled by wild beasts, as the sun began to set, he muttered that his legs had become like sticks. Exhausted, he dropped his thin buttocks with protruding ischial bones onto the grass by the roadside.</p>
+          <p class="en-p">Tenshinbō: 'Hey, Koburai, how about it? Shall we take a break for a moment? If I don't oil the transportation equipment, it seems it will become inoperable. I have been walking this steep slope day and night, so my knees have filed a protest, and I have no choice but to order a rest. Hey, can you scout around here for a while? Even if that Dariya is fast on her feet, she is a woman, so she won't go too far.'
+
+Koburai: 'Indeed, that may be so. However, we have already passed the hour of the sunset, so the cornea-in of my eyes has blown the trumpet for bedtime. Since I am not paid for night work, shall I also take a rest with you, incarnation-sama? No matter what, you are just a human. In this case, where a saint who is supposed to be an incarnation of the Heavenly Emperor is exhausted and collapses on the road, how could the compass work? Please let me rest properly without saying such things. No matter how long you search for one woman in such a vast mountain field, you will not find her so easily. If we rest here like this, Dariya-sama might pass by later with Balky, flirting. If that happens, it is the same as obtaining the desired treasure without moving a finger.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">神の恵の豊かなる
+言霊開く天恩郷
+其頂上に聳え立つ
+銀杏の大木は天を摩し
+黄金の扇子をかざしつつ
+これの聖場は万寿苑
+五六七の御代の果迄も
+変る事なき瑞祥閣
+四方は錦の山屏風
+引立てまはし綾の機
+経と緯とに織なして
+我日の本は云ふも更
+大地のあらむ果までも
+神光照らす光照殿
+いよいよ茲に落成を
+告げし菊月上八日
+南桑田の平原を
+一目に瞰下す要害地
+天正二年の其昔
+織田の右府に仕へたる</p>
+            <p class="ja-classical-line">土岐の一族光秀が
+偉業の跡を偲びつつ
+祥明館の奥の間で
+千年を因む松村氏
+三五の光の瑞月が
+暗き此世を照さむと
+神の御言を蒙りて
+何時もの通り横に臥し
+褥の船に身を任せ
+畳の波に浮びつつ
+太平洋を横断し
+印度の海を乗越えて
+往古文明と聞えたる
+七千余国の月の国
+タラハン城に仕へたる
+左守の司の隠れ処に
+スガの港のダリヤ姫
+言葉巧にそそのかし
+をびき出したる天真坊
+悪鬼羅刹に憑依され</p>
+            <p class="ja-classical-line">タニグク谷の山奥に
+其醜態をさらしたる
+滑稽悲惨の物語
+千山万水（山河草木）子（戌）の巻の
+初頭にこまごま記しゆく
+あゝ惟神々々
+御霊幸ひましませよ。</p>
+            <p class="ja-classical-line">稀代の売僧坊主奸侫邪智の曲者乍ら、どこともなく間のぬけた面構、頭は仔細らしく丸めてゐるが、元来毛のうすい性で、別にかみそりの御節介に預らなくとも済む筈のピカピカ光つた調法な頭の持主、鼻の先が妙に尖り、目は少し許り釣上り、前歯が二本厚い唇からニユツとはみ出し、何程オチヨボ口をしようとしても、此二枚の前歯丈は雰囲気外に突出して、治外法権の状態である。川瀬の乱杭宜しくといふ歯並に、茹損ひの田螺の如うな歯くそだらけの歯をむき出し、ダリヤ姫の捜索に両眼を血走らせ、谷間の坂道を息使ひ荒く、泡を吹き飛ばし乍ら、数多の小盗児連を四方八方に間配り、自分はダリヤ姫が逃げたらしいと思はるる山路を選んで、泥棒の中でもチツと許り気の利いたらしいコブライを引き具し、猪の通つた跡を洋犬が嗅ぎつけるやうな調子で、此山中に名高い立岩の麓迄やつて来た。時々毒虫に驚かされ、猛獣に肝をひしがれつつ、夕陽のおつる頃、足が棒になつたと呟き乍ら、根気尽きて路傍の草の上に、座骨の突出した貧弱な尻をドスンと卸した。</p>
+            <p class="ja-classical-line">天真坊『オイ、コブライ、どうだ、一寸一服やらうぢやないか、交通機関にチツト許り油をささなくちや運転不能となりさうだ。どうも此急坂を夜昼なしに踏破したものだから、膝坊主がチツと許り抗議を申出でて、止むを得ず休養を命ずる事にしたのだ。エヽ汝は此間にそこら中を、一寸、偵察して来てくれないか、あのダリヤだつて、何程足が速いと云つても女だ、余り遠くは行くまいからのう』</p>
+            <p class="ja-classical-line">コブライ『成程、そりやさうかも知れませぬな、併し乍ら吾々はもう暮六つ下つてをりますから、目の角膜院が就寝の喇叭を吹きかけました。夜分迄日当は貰つて居りませぬから、コブライも化身さまと一所に休養さして貰ひませうかい、何と云つてもタカが人間です、天帝の化身ともあらう聖者が、根気尽きて行倒れを遊ばすといふ此場合、どうしてコンパスが働きませう。そんな事いはずに休む時にや気良う休まして下はいな、こん丈広い山野を一人の女を何時迄捜したつて、さう易々と見付かるものぢやありませぬワ。斯うして一服して居ると、ダリヤさまが後からバルキーと一緒に意茶つきもつて通るかも知れませぬ。さうすりや、居乍らにして、目的の瑞宝を手に入れるも同然ですからなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ten: 'Eh, you are a fellow who whimpers despite being a thief. Eh, however, as they say that for all things in human life, the fortune of the old man at the frontier is like the tail of an ox, one cannot tell what will turn out to be convenient. I shall grant you a special favor and overlook this today, Utsufufufu.'</p>
+          <p class="en-p">Kobu: 'Tenshinbau-sama, this is no laughing matter. I, I am truly in a difficult spot. Eh, but you said that for all things in human life, the fortune of the old man at the frontier is like the tail of an ox; is that different from the dung of the old man's horse?'</p>
+          <p class="en-p">Ten: 'Whether it is a horse or an ox, does it matter? When I said the tail of an ox, I meant that I am a man of knowledge.'</p>
+          <p class="en-p">Kobu: 'Indeed, as one would expect of an incarnation of the Tentei, it is a mystery that you know everything so well.'</p>
+          <p class="en-p">Ten: 'It is a settled matter. If it concerns the Sanzensekai, from the beginning of Uchiukaibiyaku down to the smallest Mijin, I am a famous monk of knowledge who knows everything thoroughly and without omission, as if reflected in a mirror, Otsuhon.'</p>
+          <p class="en-p">Kobu: 'Etsuhehehe, if you are such an ox-tail Sensei who understands everything so well, is it not a bit of a contradiction that you must borrow two hundred of Shiyakanna Tōmoku's Buka to search for the whereabouts of the great Dariya-hime?'</p>
+          <p class="en-p">Ten: 'Do not talk like a fool. Love is a strange and peculiar thing; oh, hold on, they say love is a tricky thing, do they not? There is a story that even Kume no Sennin fell from the sky upon seeing a woman's white shin. No matter how much I am an incarnation of the Tentei, once I am infatuated with a woman, it is a natural principle that my surroundings become dark and completely pitch black.'</p>
+          <p class="en-p">Kobu: 'Heen, is that so? That is strange, you say such bizarre things. It is mysterious beyond measure, strange and astonishing, unique in all ages, and unparalleled; it is a situation where stones might flow and leaves might sink, where heaven might become earth and earth might become heaven. A woman, when one hears this, is truly a terrifying thing. In that case, Tenshinbau-sama, Dariya-hime, who possesses the capacity to make you blind, must be a very great person. I have heard the idiom that women are the weaker sex, but does it not make one want to say that women are the strongest sex?'</p>
+          <p class="en-p">Ten: 'Unlike the women who are scattered about like pebbles and are less than a comma, she is, after all, the incarnation of Tanabatahime who floated a boat of jewels on the Amanogawara and descended from heaven; so that is only natural.'</p>
+          <p class="en-p">Kobu: 'Indeed, then shall we not pray to Tanabata-sama and have her clearly reveal the whereabouts of Dariya-hime? I remember you saying that you are an incarnation of the Tentei and are a married couple with Tanabata-hime, but no matter how you look at it, it seems a bit illogical that an incarnation of the Tentei would not know the whereabouts of his own empress.'</p>
+          <p class="en-p">Ten: 'It is a settled matter. Since it is a rule that Tanabata-hime and I, Hikoboshi, have not been able to meet more than once a year since ancient times, it is no wonder that I do not know. Because I am saying that I want to meet and enjoy her company every single day, it is a matter of saying that there is a bit of unreasonableness on my part as well. However, once I have set my mind on something, I must see it through, or a man's pride will not stand; nay, it is a matter concerning the dignity of Tenshinbau.'</p>
+          <p class="en-p">Kobu: 'Indeed, truly, most reasonable, eh, in the ten-thousandth chance, what do you intend to do if Dariya-hime gives you the cold shoulder?'</p>
+          <p class="en-p">Ten: 'Hen, do not talk like a fool. How could such a thing happen? Dariya is deeply in love with me.'</p>
+          <p class="en-p">Kobu: 'Utsufufu, if she is so in love with you, why did she consider the time you were sleeping, scribble on your face, and run away?'</p>
+          <p class="en-p">Ten: 'That is where your interpretation is wrong. Dariya had walked such a long mountain path that she was extremely exhausted. Because I made her drink sake recklessly, she fell into a deep sleep, and her eyes were clouded, causing her to mistake me for someone else. That fellow Barugii is a villain who is good for nothing, so while Dariya and I were asleep, he secretly scribbled on my face so that it would not look like my face at first glance, and in the meantime, he shook Dariya awake, used my voice, and lured her away under the cover of the night. By this morning, when Dariya could see people's faces clearly, she must have looked at Barugii's face and been quite surprised and astonished that it was not what she expected. As for Dariya, there is no way she could have even a Mijin of a heart to abandon me; surely Barugii disguised himself as me and took advantage of her sleepy eyes to deceive her. No matter what, once the women of the world have seen my face, they never forget it. Much less a woman to whom I have spoken even a single sweet word; no matter how much she tries to brush me off like a bee, she cannot escape me, Ehehehe.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">天『エー、泥棒の癖に弱音をふく奴だな。エ、併し乍ら人間万事塞翁の牛の尻といふから、何が都合になるとも分らない。今日は特別の恩典を以て黙許しておかうかい、ウツフヽヽヽ』</p>
+            <p class="ja-classical-line">コブ『天真坊さま、笑ひごつちやありませぬよ。僕は、私は真剣に弱つてるのですからな。エ、併し人間万事塞翁の牛の尻と仰有いましたね、塞翁の馬の糞とは違ひますか』</p>
+            <p class="ja-classical-line">天『馬でも牛でも可いぢやないか、俺が牛の尻といふたのは、物識といふ意味だ』</p>
+            <p class="ja-classical-line">コ『成程、天帝の化身さま丈あつて、何でも能く物を知つて御座るといふ謎ですな』</p>
+            <p class="ja-classical-line">天『きまつた事だ、三千世界の事なら、宇宙開闢の初めから、小は微塵に至る迄、漏れなく落なく、鏡にかけたる如く知りぬいてゐる名僧知識だ、オツホン』</p>
+            <p class="ja-classical-line">コ『エツヘヽヽ、それ程何もかも能く分る牛のケツ先生が、あれ程大きいダリヤ姫の行方を捜すのに、シヤカンナ頭目の部下二百人迄借用して、捜索せにやならぬとはチツと矛盾ぢやありませぬか』</p>
+            <p class="ja-classical-line">天『馬鹿をいふな、恋は異なもの乙なもの、オツとどつこい、恋は曲者といふぢやないか、久米の仙人でさへも、女の白い脛をみて空中から墜落したといふ話がある。何程天帝の化身でも、女に迷ふた以上は咫尺暗澹、全く常暗となるのは当然の理だ』</p>
+            <p class="ja-classical-line">コ『ヘーン、さうですかいな、妙ですな、怪体な事をいひますな、不可思議千万、奇妙頂礼、古今独歩、珍々無類、石が流れて木の葉が沈んで、天が地となり、地が天となりさうな塩梅式だ。女といふ奴ア、之を聞くと実に恐ろしい代物だワイ。さうすると天真坊さま、お前さまを盲にする丈の器量を持つてゐるダリヤ姫は、余つ程偉い者ですなア。婦人は孱弱き男子なりといふ熟語は聞いてをりますが、婦人は最強き男子なりと云ひたくなるぢやありませぬか』</p>
+            <p class="ja-classical-line">天『そこらにゴロゴロしてゐる、コンマ以下の女と違ひ、何といつても天の河原に玉の舟を浮べ、天降り遊ばした棚機姫の化身だもの、そりや当然だよ』</p>
+            <p class="ja-classical-line">コ『成程、それぢや一つ七夕さまをお祈りしてダリヤ姫の在処を判然と知らして頂かうぢやありませぬか。お前さまも天帝の化身で、七夕姫と夫婦ぢやと仰有つた事を覚えてゐますが、なんぼ何でも天帝の化身様が女帝の行方が分らないとは、チツと理窟に合はないやうに思ひますがな』</p>
+            <p class="ja-classical-line">天『きまつた事だい、七夕姫と彦星の俺とは昔から年に一度より会はれない規則だから、分らぬのも無理はない。それを毎日日日会ふて楽まふといふのだから、チツとはこちにも無理があると云ふものだ。併し乍ら一旦思ひ込んだ事はやり通さなくちや、男子の意地が立たない、否天真坊の威厳に関する問題だ』</p>
+            <p class="ja-classical-line">コ『成程、いかにも、御尤も千万、エ、万々一、ダリヤ姫が肱鉄をかました時は貴方如何するお考へですか』</p>
+            <p class="ja-classical-line">天『ヘン、馬鹿いふな、そんな事があつて堪らうかい、ダリヤはぞつこん俺にラブしてゐるよ』</p>
+            <p class="ja-classical-line">コ『ウツフヽヽ、それ程ラブしてゐる者が、なぜお前さまの寝てゐる間を考へ、顔に落書までして遁亡したのですか』</p>
+            <p class="ja-classical-line">天『そりやお前の解釈が違ふ。ダリヤも余り長い山道を歩いて来たものだから大変にくたぶれてゐよつた。そこへメツタ矢鱈に酒を呑ましたものだから、グツタリと寝込んで了ひ、目がくらんで人間違をしよつたのだ。バルギーの奴、酢でも菎蒻でもゆかぬ悪党だから、ダリヤや俺達の寝た間に、そつと面に落書を致し、一見俺の面とみえないやうにしておき、其間にダリヤをゆすり起し、俺の声色を使ひ、甘く夜陰に紛れ、をびき出しよつたものと察する。ダリヤは今朝あたり、ハツキリ人の面がみえるやうになつてから、バルキーのしやつ面を眺めて、さぞ案に相違しびつくり仰天した事だらうよ。ダリヤに限つて、俺を見すてるやうな心は、微塵毛頭も持つてゐやう筈がない、屹度バルギーが俺に化けて、寝とぼけ眼を幸、ゴマかしよつたのだ。何と云つても、世界の女は、一度俺の面を拝んだが最後、決して忘れるものぢやない。況や甘つたるい言を一口でもかけて貰つた女は、何程蜂を払ふやうにしたつて、俺にや能う放れないのだ、エヘヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">From the Kōkaku, a sticky, thread-like substance was trailing down, which he was reeling in with the back of his hand.</p>
+          <p class="en-p">Kō: 'Hehehe, this is interesting, strange and bizarre, truly incomparable.'</p>
+          <p class="en-p">The sun sank behind the Seizan, and darkness fell from the Ten as if it had shattered. The gloom expanded in all directions as if a rubber ball were being inflated. The voices of the Hototogisu could be heard from here and there in a competitive manner. The two, having no other choice, leaned their bodies against the hollow of the Tateiha and the curtain of snoring had already fallen.</p>
+          <p class="en-p">The four or five Shōtoruren who had been serving as subordinates to Shiyakanna, having also been entrusted with the search for Hime Dariya, had come pushing through the dense forests here and there, covered in spider webs. However, with the roadside grass grown to their height and not a single star visible in the deep shade of the trees, they were at a loss for what to do and lay down to rest their heads together there. Though it was dark and unclear, there was a sound as if Zafusui were being cooked, bubbling away.</p>
+          <p class="en-p">Kō: 'Hey, isn't there a strange sound? This place is called Tateiha, and it is a place where Bakeshiu have appeared since long ago; we must be careful.'</p>
+          <p class="en-p">Otsu: 'Indeed, this is unpleasant. However, since the Hototogisu are singing so much, why don't you just tilt your ears toward them and try not to hear the bubbling? I am already feeling cold around here, and my body has begun to tremble minutely. I cannot stay lying down or standing up. Ah, I wish the Hototogisu would sing even more.'</p>
+          <p class="en-p">Kō: 'If it happens to be, I wonder if Tenshinbō-sama is sleeping nearby, snoring away. If not, perhaps the old Hototogisu has lost his teeth and is singing in that manner.'</p>
+          <p class="en-p">Otsu: 'Ah, at times like this, there is nothing like singing a song. Why don't we pluck up our courage and try singing a dote-kiri song?'</p>
+          <p class="en-p">Kō: 'That would be good, that is the best. Hey, you all, won't you sing too?'</p>
+          <p class="en-p">Hei: 'If you try singing a song in a place like this, the monsters will realize that there are humans in front of the Tateiha, and if one-eyed monks and three-eyed monks come rushing from all directions, what do you intend to do? Just sleep in silence; isn't that right, Tei and Bo?'</p>
+          <p class="en-p">Tei and Bo did not say a word, but shrank and trembled. Otsu, while letting out a pitiful, shaky voice, mustered up some false courage and began to sing.</p>
+          <p class="en-p">'Though the evening sun has set and from the sky / The darkness breaks and falls upon us / Even if tigers, wolves, lions, or bears / Or any kind of demon attacks us / Why should we fear, for we are the followers / Of the great leader Shiyakanna / And the elder brother who appeared as his protégé / Whether you are a ghost or whatever you may be / If you are there, come out, Tenshinbō / By the command of the incarnation of the Lord God / I have come out on official business / No matter how great a demon you are / You cannot surpass the Lord God / Who created this world / We, the first of the followers / Are nothing less than one of the eight million / Gods among the gods / If there are any Magatsu here / Fly away to a distance of ten ri / If you linger and hesitate / I shall tear off your limbs and crush your bones / And roll your flesh into dumplings / To feed the hawks / Among the five of us, there is one / Who is a peerless hero of the world / Fear, oh fear, you Magatsu / Ah, Kannagara-kamu-nagara / The true pillar of the gods / There is no demon in the world / Who would dare oppose the retainer of Tenshinbō / Retreat, retreat, retreat at once / Darkness, go away, go away, as quickly as possible / Moon, come out, and stars, appear / This world is the land where God resides / It is not a place for demons to dwell / Ah, Kannagara-kamu-nagara / May your spirits be blessed.'</p>
+          <p class="en-p">He was chirping in a voice like a mosquito. Kō, raising his gravelly voice, became desperate and began to sing.</p>
+          <p class="en-p">'Do-koi-shiyo, do-koi-shiyo / Where does the incarnation of the Lord God / Dwell at this moment? / This is the famous Tateiha / The number one monster spot in the mountains / I have come to exterminate the monsters / I am the hero Sukanna / If what I say is true / You had better run away somewhere quickly / The living god Tenshinbō / Will surely pass through here before long / And then the tribe of demons / Like dew vanishing in the morning sun / Will surely expose their miserable state / I do not know why, but this place / Makes my body tremble naturally / A path of eerie darkness / Ah, Kannagara-kamu-nagara / May your spirits be blessed / The incarnation of the Lord God /'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">と口角よりツーツーとさがる糸のやうな、ねんばりしたものを、手の甲で手繰つてゐる。</p>
+            <p class="ja-classical-line">コ『イツヒヽヽヽ、此奴ア面白い、奇妙奇天烈、珍々無類だ』</p>
+            <p class="ja-classical-line">日は西山に沈んで天から暗が砕けた如うにおちて来た。闇がりはゴムをふくらしたやうに四方八方へ拡がつてゆく。時鳥の声は彼方此方より競争的に聞えて来る。二人は止むを得ず、立岩の凹みに体をもたせかけ早くも鼾の幕がおりた。</p>
+            <p class="ja-classical-line">シヤカンナの部下と仕へてゐた四五人の小盗児連は、之もヤツパリ、ダリヤ姫の捜索を頼まれて、彼方此方の密林をかきわけ、蜘蛛の巣だらけになつてやつて来たが、背丈にのびた道傍の草や、深い木かげに星一つ見えず、進退谷まつて、一同茲に枕を並べようと横になつた。何だか暗がりで分らないがグヅグヅグヅと雑炊でもたいてゐる如うな声がする。</p>
+            <p class="ja-classical-line">甲『オイ何だか妙な音がするぢやないか。ここは立岩といつて、昔から化州の出る所だ、チツと用心せななるまいよ』</p>
+            <p class="ja-classical-line">乙『成程、此奴ア厭らしい。併し時鳥があれ丈ないてゐるから、マア一寸其方へ耳を傾けてグツグツを聞かないやうにすりや可いぢやないか、俺やモウ、そこらが寒くなつて、体が細かく活動し出した。寝ても立つても居られない様だ、エーエーモツと時鳥が啼いてくれると可いのだけれどなア』</p>
+            <p class="ja-classical-line">甲『ヒヨツとしたら、天真坊さまが此辺に鼾をかいて寝てゐるのぢやあるまいかな。さうでなけりや、時鳥の爺イが歯がぬけて、あんな啼様をしてゐやがるのだらう』</p>
+            <p class="ja-classical-line">乙『エー、かふいふ時にや歌を唄ふに限る。一つ肝をほり出して、土手切り唄つてみようぢやないか』</p>
+            <p class="ja-classical-line">甲『よからう、それが一番だ、オイ皆の奴、汝も唄はないかい』</p>
+            <p class="ja-classical-line">丙『こんな所で歌でも唄ふてみよ、立岩の前に人間ありと化物が悟り、四方八方から一つ目小僧や三つ目小僧が押よせ来らば、汝どうする積だ。黙つて寝ろよ、のう丁、戊、さうぢやないか』</p>
+            <p class="ja-classical-line">丁と戊とはウンともスンとも言はず、小さくなつて慄うてゐる。乙は憐れつぽいふるい声を出し乍ら、カラ元気をおつぽり出し唄ひ出した。</p>
+            <p class="ja-classical-line">『夕日はおちて御空から
+暗はくだけておつるとも
+虎狼や獅子熊や
+如何なる悪魔が襲ふ共
+いかでか恐れむ泥棒の
+大頭目のシヤカンナが
+乾児と現れし哥兄さまだ
+幽霊なりと何なりと
+居るなら出て来い天真坊
+天帝の化身の命令で
+御用に出て来た俺だぞよ
+何程偉い悪魔でも
+此世をお造り遊ばした
+天帝さまには叶ふまい
+一の乾児の俺達は
+取も直さず八百万
+神の中なる一柱
+もしも曲津が居るならば
+十里四方へ飛のけよ
+マゴマゴ致してゐよつたら</p>
+            <p class="ja-classical-line">手足をもぎ取り骨くだき
+肉をだんごにつき丸め
+禿わし共に喰はすぞや
+天下無双の豪傑が
+五人の中に一人をる
+恐れよおそれ曲津共
+あゝ惟神々々
+神の真の太柱
+天真坊の御家来に
+楯つく悪魔は世にあらじ
+さがれよさがれトツトとさがれ
+暗よ去れ去れ、一時も早く
+月は出て来い星も出よ
+此世は神のゐます国
+悪魔の住むべき場所でない
+あゝ惟神々々
+御霊幸ひましませよ』</p>
+            <p class="ja-classical-line">と蚊のなくやうな声で囀つてゐる。甲はドラ声を張上げ乍ら、焼糞になり唄ひ出した。</p>
+            <p class="ja-classical-line">『どつこいしようどつこいしよう
+天帝さまの御化身は
+今や何処にましますか
+ここは名に負ふ立岩の
+山中一の化物場
+化物退治にやつて来た
+俺は英雄スカンナだ
+俺の云ふ事スカンなら
+早く何処なと逃げなされ
+天真坊の生神が
+やがて此処をば通るだろ
+そしたら悪魔の一族は
+旭に露の消ゆる如
+浅ましザマをさらすだろ
+何だか知らぬが此場所は
+自然に体が慄ひ出し
+小気味の悪い暗の路
+あゝ惟神々々
+御霊幸ひましまして
+天帝様の御化身が</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">May you deign to arrive, even a moment sooner.</p>
+          <p class="en-p">I pray for your arrival.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara.</p>
+          <p class="en-p">A prayer to the gods when all else fails.'</p>
+          <p class="en-p">Tenshinbau awoke suddenly at this voice,</p>
+          <p class="en-p">Tenshinbau: 'Haha, it seems that little thief has come this far and lost heart. Both this one and that one are hopeless fellows, but I wonder if they have managed to capture Dariya safely.'</p>
+          <p class="en-p">He held his breath and pondered. Koburai also awoke, and seeing Tenshinbau rise and ponder something, he took advantage of the darkness, moved about three ken behind the standing rock, and using a gentle woman's voice, said,</p>
+          <p class="en-p">Koburai: 'Tenshinbau-sama, I have waited for you. Deceived by the villain of Balgie, mistaking him for you, I came along the night road, only to find a frog-faced man contrary to my expectations. At a loss as to what to do, I squeezed the testicles of the Balgie villain, knocked him down on the way, and have been waiting here behind this standing rock, intending to spend the night. My beloved teacher, Kimisama, please come here and pull my hand. I am surrounded by thorny bushes, and I cannot move.'</p>
+          <p class="en-p">Tenshinbau heard this voice and, while dancing with joy, pondered for a short while. Skanna and the other four also held their breath and watched the situation, but they jumped to the conclusion that it was a monster, wrapped their faces thoroughly with towels, and crouched down trembling.</p>
+          <p class="en-p">Koburai: 'Excuse me, Tenshinbau-sama, it is Dariya. Please, come quickly. Oh, how hateful, are you not Koburai-sama? I have no use for you. I am not asking for your help; it is Tenshinbau-sama whom I want to help me.'</p>
+          <p class="en-p">Koburai then used his own natural voice,</p>
+          <p class="en-p">Koburai: 'Now, Dariya-hime-sama, I harbor no ambition toward you. It is a sacrilege for the incarnation of the Heavenly Emperor to come to such a thorny room himself, so I have come as a sacrifice to save you, even if I have to clear the thorns a little. Oh, oh, if you push yourself in like that, will the thorns not catch you even more... (In a woman's voice) No, no, no matter what you say, I want Tenshinbau-sama to come. What does it matter if you get a little hurt? You once said that if you truly loved me, you would not care if it were in the fire, at the bottom of the water, or in a thorny room. Now is the time to test your sincerity. If you are a Tenshinbau-sama without the sincerity to jump into this dark thorny room to save me, I shall firmly refuse you from my side. Come now, Tenshinbau-sama, you will surely love me, will you not? Ouch, ouch, ouch, my face, hands, and feet are all covered in thorns; I want you to save me quickly, come now... (This time in Koburai's natural voice) My, what a difficult princess to satisfy. Then I cannot be of service to you. Excuse me, Tenshinbau-sama, please do the kindness yourself.'</p>
+          <p class="en-p">Tenshinbau: 'It certainly sounds like Dariya-hime's voice, but there is something suspicious about it. Could this be a monster?'</p>
+          <p class="en-p">Koburai (In a woman's voice): 'Oh, oh, how tiresome. For a Tenshinbau-sama, I have run around distant mountains and slopes, I am hungry, my voice is hoarse, and I am exhausted, so I cannot produce the true voice of Dariya. Please, use your judgment; I am certainly not a monster.'</p>
+          <p class="en-p">Tenshinbau headed toward the direction of the voice, but just as he took two or three steps, he missed his footing on the rock and fell into a pitch-black hole about three ken deep, where the grass grew thick and wild, with a cry of 'Kya!' Skanna and the other four, now convinced it was a monster, crawled on all fours and rolled down the slope for their lives. Koburai was also startled by Tenshinbau's voice and, just as he started to walk toward the source of the sound, he too missed his footing and fell into the same hole as Tenshinbau, sharing the same fate. The moment he slid in, he felt something soft and warm touch his body, and in a state of shock,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">一時も早く御光来
+遊ばす様に願ひます
+あゝ惟神々々
+叶はぬ時の神頼み』</p>
+            <p class="ja-classical-line">天真坊は此声にふつと目をさまし、</p>
+            <p class="ja-classical-line">『ハハア小泥棒の奴、ここ迄やつて来てヘコ垂れよつたとみえるワイ。何奴も此奴も仕方のない奴だな、併し乍らダリヤを甘く掴へてくれよつたかな』</p>
+            <p class="ja-classical-line">と息をこらして考へてゐる。コブライも亦目をさまし、天真坊が身を起して何事か考へてゐる様子なので、暗を幸ひ、自分は三間許り立岩のうしろへ廻り、優しい女の声色を使ひ、</p>
+            <p class="ja-classical-line">『天真坊さま、待兼ねました。バルギーの悪人にたばかられ、貴方と間違ひ、夜の路、来てみれば、案に相違の蛙面、こら如何せうかと思案の余り、バルギーの睾丸をしめつけ、途中に倒し、此立岩のうしろに隠れて一夜を明さむと待つて居りました。恋しい師の君様、どうぞ此処までお出で遊ばし、妾の手を引張つて下さいな。ジヤツケツいばらに体を取りまかれ、身動きが出来ませぬワ』</p>
+            <p class="ja-classical-line">天真坊は此声を聞いて小躍りし乍ら、稍少時考へ込んでゐる。スカンナ外四人も亦息をこらして様子を考へてゐたが、此連中はテツキリ化物と早合点し、面をグツスリとタオルで包んで了ひ、俯いて慄ふてゐる。</p>
+            <p class="ja-classical-line">コブライ『モシ天真坊さま、ダリヤで御座います、どうぞ早く来て下さいな。エー好かぬたらしい、お前さまはコブライさまぢやないか、貴方に用はありませぬよ、お前さまに助けてくれとはいひませぬ、天真坊さまに助けて欲しいのだもの』</p>
+            <p class="ja-classical-line">コブライは今度は自分の地声を出し、</p>
+            <p class="ja-classical-line">『コレ、ダリヤ姫様、私は決してお前さまに野心を有つては居りませぬ。天帝の化身さまは、勿体ない、自ら、かやうな茨室へお越しになる訳に行きませぬから、私がチツとは茨掻をしても構はぬ、犠牲となつてお救ひに来たのだ。エーエーさうすつ込んでは、余計に茨が引かかるぢやありませぬか……、（女声で）イエイエ何と仰有つても私は天真坊さまに来てほしいのですワ、チツと許り、怪我をなさつたつて何ですか。真に妾を愛して下さるなら、仮令火の中水の底、茨室、どこだつてかまはないと、仰有つた事があるのですもの、今こそ誠意のためし時、此茨室へ暗がりに飛込んで救ふてくれないやうな誠意のない天真坊様なら、妾の方からキツパリとお断り申しますわ。ねえ天真坊さま、キツと妾を愛して下さるでせう。アイタヽヽ、面も手も足も茨がきだらけよ、早く助けて欲しいものだワ、ねえ……。（今度はコブライの地声で）さてさて合点の悪い姫さまだ。では僕は貴方のお世話は能う致しませぬ。モシモシ天真坊さま、お手づから親切を尽して上げて下さいな』</p>
+            <p class="ja-classical-line">天『いかにもダリヤ姫の声には似てゐるが、どこともなしに怪しい点がある。コリヤ化物ではあるまいかのう』</p>
+            <p class="ja-classical-line">コ（女声で）『エーエー辛気臭い、天真坊さまとした事が、妾は遠い山坂をかけ巡りお腹がすき、声はかれ、疲れはててをりますから、本当のダリヤの声は出ませぬよ。どうか御推量して下さいませ、決して化物ぢや御座いませぬから』</p>
+            <p class="ja-classical-line">天真坊は声のする方に向つて、二足三足進む折しも岩をふみ外し、三間許りの草茫々と生え茂る真黒の穴へ、キヤツと云つたぎり落ち込んで了つた。スカンナ外四人はいよいよ化物と早合点し、四這となつて坂路をのたりのたりと命からがらころげゆく。コブライも天真坊の声に驚いて声する方を目当に歩み出す途端、又もや踏み外し、天真坊の落ち込んだ穴へと一蓮托生、辷りこんだ途端に柔らかいぬくい物が体にさはつたので、ギヨツとし乍ら、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Help me, help me!'</p>
+          <p class="en-p">He shouted in a loud voice. Tenshinbau had fainted the moment he fell, so he did not know in the slightest that Koburai had also fallen in. After a short while, Tenshinbau regained his breath.</p>
+          <p class="en-p">Tenshinbau: 'Who is it, who is it, who pushed me into a place like this?'</p>
+          <p class="en-p">Koburai: 'Please, Tenshinbau-sama, pull yourself together. You and I have both fallen into a dark pit. Now that it has come to this, there is no other way but to stay here until the dawn breaks.'</p>
+          <p class="en-p">Tenshinbau: 'Indeed, now that you mention it, I certainly have that feeling. However, at that time, I am certain I heard the voice of Dariyahime, but what a pity it was.'</p>
+          <p class="en-p">Koburai: 'It was truly a pity, was it not? I am certain there was no mistake that it was Dariyahime-sama. She is a person of very firm chastity. Even when I tried to help her, she would not let me touch even a single finger of hers.'</p>
+          <p class="en-p">Tenshinbau: 'Hehe, that must be so. However, Dariya must be worried. For now, there is nothing we can do until the night breaks. Since she is such a kind woman, she must surely be waiting by the side of the standing rock, thinking of our safety until the dawn comes. Ah, Kamunagara tamachi haemae.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『イヤア助けてくれ助けてくれ』</p>
+            <p class="ja-classical-line">と大声に叫ぶ。天真坊は落ちた途端に気絶してゐたので、コブライの落ち込んだのは少しも知らなかつた。少時あつて天真坊は息ふき返した。</p>
+            <p class="ja-classical-line">天真坊『誰だ誰だ、俺をこんな所へつきはめやがつて』</p>
+            <p class="ja-classical-line">コブライ『モシ天真坊さま、しつかりして下さい。暗の陥穽へ、貴方も私も落ち込んだのですよ、モウ斯うなりや夜の明ける迄、ここに逗留するより途がありませぬワ』</p>
+            <p class="ja-classical-line">天『いかにも、さう聞けば確にそんな感じもする、併しあの時、確にダリヤ姫の声がしてゐたやうだが、惜い事をしたでないか』</p>
+            <p class="ja-classical-line">コ『本当に惜い事をしましたね、確にダリヤさまに間違ありませなんだ。大変にあの方は貞操の固い方ですなア、私が助けようとしても、指一本さえさせないんですもの』</p>
+            <p class="ja-classical-line">天『エヘヽヽ、そらさうだらうよ、併しダリヤは心配してゐるだらうよ。先づ先づ夜が明ける迄仕方がないな、あれ位親切な女だから、夜が明ける迄、俺達の安否を考へ乍ら、立岩のはたに待つてるに違ひないワ、あゝ惟神霊幸ひませ』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="preface.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Preface & Introduction</span>
+      </a>
+      <a href="c02.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 2: 生臭坊 [1791]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

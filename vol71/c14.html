@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 14: 障路 [1803] - Volume 71 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 71 Table of Contents</a>
+      <span>Volume 71</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 71 &bull; Chapter 14</span>
+      <h1 class="chapter-title-en">Chapter 14: 障路 [1803]</h1>
+      <p class="chapter-title-ja">障路〔1803〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Genshinbau, Koburai, and Kōro, the three of them, thanks to the mercy of Samori, barely escaped the death penalty. They stuffed all the gold they possessed into their waistbands, and while shaking their heavy hips, they searched through the forest where human footprints were rare, and began to run westward, ever westward, for a day and a night. The three of them were exhausted, their bodies as limp as ropes, and they could no longer walk even a single step.</p>
+          <p class="en-p">Koburai: 'Listen, Genshin-sama, no matter how much gold we receive, it does not make our bodies healthy, nor does it fill our stomachs. Now that it has come to this, gold and everything else are of no use. If we continue this for three days with nothing but this heavy burden, we will surely lose our lives.'</p>
+          <p class="en-p">Genshinbau: 'Do not talk like a fool. If you have money, you can eat any sweet thing you desire, and you can buy any beauty you wish. Since this is an age where gold is almighty, even if you want to become a Chiyakutan-giin, you need fifty or a hundred thousand in gold. Even if you think of becoming the Prime Minister of a Tanmeinaikaku, you need twenty or thirty million ryō of gold.'</p>
+          <p class="en-p">Koburai: 'That may be so, but wandering through these mountains and forests, we cannot find any beauties, and whether we want to eat sweet things or tasteless things, there are no shops at all, are there? I think a measure of rice is more precious than a bag of ten million yen. Ah, I wish I could somehow get my hands on some food.'</p>
+          <p class="en-p">Genshinbau: 'Do not whine like that. If we run for just one more day, there is a safe zone. If we go there, there are women, and they sell all kinds of beautiful clothes. A hundred kinds of food and drink are also waiting. Well, you should be patient until then; if you are so hungry that you cannot help it, just lick your own thumbnails. If you do that, you might be able to endure the hunger a little. Look at that octopus; when an octopus has nothing to eat, it eats all of its own legs.'</p>
+          <p class="en-p">Koburai: 'It is unbearable to be compared to an octopus, you know. You are the one who is an octopus-priest, so you should lick your own legs. Koburai is a full-fledged human being, even if I am thin and withered. I cannot imitate an octopus. Hey, Kōro, you cannot walk even one more step, can you?'</p>
+          <p class="en-p">Kōro: 'I am also suffering and cannot bear it, but when I think that I can use this money to buy sweet things and sleep while holding a beauty, my energy returns, and I am able to walk a little more. No matter what anyone says, humans depend on their hearts. It is only for a little while longer, so why don't we be patient and follow Genshinbau-sama as he says? It is no use dying in a field in a place like this.'</p>
+          <p class="en-p">Koburai: 'Well, it cannot be helped. I suppose I will have to trouble my compass again.'</p>
+          <p class="en-p">As they advanced reluctantly for only a block or two, more than ten pursuers with ten fingers and toes appeared from within the tall grass that was enough to bury a person, and surrounded the three of them. To their right was a valley a thousand fathoms deep, and on the three other sides, they were surrounded by pursuers. With no way to advance or retreat and believing this was the end, the three of them threw themselves toward the blue abyss all at once, hoping to survive by a miracle, and threw away their lives cheaply. The pursuers watched them, saying 'Oh, oh,' but they could not approach the famous sheer cliffs, and they went back while grumbling and leaving their enemies to their fate.</p>
+          <p class="en-p">○</p>
+          <p class="en-p">In the middle of a vast and boundless wilderness, a single old man is walking along, singing a song in a voice as faint as the buzzing of a mosquito.</p>
+          <p class="en-p">'The flow of the river and the life of a man,
+How mysterious is the path that lies ahead.
+Serving at Tarahan Castle,
+I am a retainer of Samori.
+I know not when it happened,
+In this vast field with no known limits,
+I wander in bewilderment.
+With no one else traveling the road,
+I have no one to ask for the way.
+Ah, what shall I do, leaving behind
+My thousand-year grudge upon the field,
+Must I meet my end so helplessly?
+Ah, how miserable, how miserable.
+In which part of the sky
+Does the direction of Tarahan Castle lie?
+I have wandered in a dream for a hundred leagues,
+How sad is my own fate.
+Though a thousand grasses grow in the wilderness,
+It is a withered field with neither flowers nor fruit.
+Even the wind that blows has no sound.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玄真坊、コブライ、コオロの三人は左守の情けに仍つて、漸くに死罪を免れ、持てる丈の黄金を胴巻に押し込み、重たい腰をゆすり乍ら、人跡稀なる森林を探りて、一日一夜西へ西へと駆け出して行く。三人共身体縄の如くに疲れ果て、最早一歩も歩めなくなつて了つた。</p>
+            <p class="ja-classical-line">コブライ『モシ玄真さま、何程黄金を沢山貰つても体が達者になるといふでもなし、腹が膨れると云ふでもなし、斯うなつて見ると黄金も何も役に立たないものですな。重たい許りでこんな事三日も続けやうものなら、到底命はありませぬワ』</p>
+            <p class="ja-classical-line">玄真坊『馬鹿を云ふな、金さへ有れば、どんな甘い物でも食られるし、どんな別嬪でも買はふと儘だ。今日は黄金万能の世の中だからのう、着炭議員に成らうとしても五万や十万の金は要る。短命内閣の総理大臣に成らうて思つても、二千万両や三千万両の金が要るのだ』</p>
+            <p class="ja-classical-line">コ『さうかも知れませぬが、斯う山林許し跋渉してゐては、別嬪も見付からず、甘いもの食はうにも、味無いもの食はうにも、テンで店屋も無いぢやありませぬか。一千万円の包より一升米が貴いやうに私は思ひますわ。アーア何とかして食料に有付き度いものだなア』</p>
+            <p class="ja-classical-line">玄『そんな弱音を吹くな。もう一日許り走れば安全地帯がある。其処へ行けば女郎も居るし、どんな綺麗な着物でも売つてゐる。百味の飲食も待つてゐる。マ、其処迄辛抱したが可からう、腹が空つて仕方なければ拇指の爪なつと甜つて居れ。さうすりや些と許り飢を凌ぐ事が出来やうも知れぬ。彼の章魚を見い、章魚は食ふ物が無くなると、自分の足を皆食つて了ふものだ』</p>
+            <p class="ja-classical-line">コ『人間を章魚に譬られちや堪りませぬがな。お前様こそタコ坊主だから足なつと甜つて居りなさい。コブライは痩ても枯れても一人前の人間様だ。タコの真似は出来ませぬ哩、喃うコオロ。最う一足も歩けぬぢやないか』</p>
+            <p class="ja-classical-line">コオ『俺も苦しうて堪らぬが、何処で此お金を以て甘いものを買ひ、別嬪を抱いて寝ようと思へば、又元気が出て来て、些と許り歩ける様になるのだ。何と云つても人間は心次第だ。最う暫時だから玄真坊様の仰有る通り、辛抱して跟いて行かうぢやないか。こんな所で野垂死しても約らぬからの』</p>
+            <p class="ja-classical-line">コ『エー、仕方がない。又コンパスに御苦労をかけやうかな』</p>
+            <p class="ja-classical-line">と渋々乍ら一二丁許り進んで行くと、十手指叉を持つた十数人の捕手が身を没する許りの萱草の中から現はれ出で、三人を取まいて了つた。右の方は千仭の谷間、三方は捕手に囲まれ進退これ谷まり最早これ迄と、三人一度に青淵めがけて、九死に一生を僥倖せむものと、命の安売をやつてみた。捕手はアレヨアレヨと眺めて居れど、名に負ふ断岩絶壁近よることも出来ず、みすみす敵を見捨ててブツブツ小言を云ひ乍ら帰り行く。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">渺茫として際限もなき大原野の真中を只一人の老人が蚊の鳴くやうな声で歌を唄ひ乍ら通つてゐる。</p>
+            <p class="ja-classical-line">『川の流れと人の身の
+行末こそは不思議なれ
+タラハン城に仕へたる
+吾は左守の司なるぞ
+いつの間にかは知らね共
+限も知らぬ大野原
+さまよひ来る訝かしさ
+道ゆく人も無きままに
+言問ふ由もなく許り
+あゝいかにせむ千秋の
+恨を野辺に残しつつ
+あへなき最後を遂ぐるのか
+あゝ浅ましや浅ましや
+タラハン城の方面は
+何処の空に当るやら
+百里夢中にさまよひし
+吾身の上こそ悲しけれ
+原野に千草は生えぬれど
+花も実もなき枯野原
+吹き来る風さへ音もなく</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Not even the voice of a crow can be heard. Whether it be the Jiyakukuōjiyōdo or not, the scene of this place, as if the Tenchi had fallen asleep all at once, has nothing to compare to its loneliness. Ah, Kamunagara, Kamunagara. O Ōmikami of the Ananai-kyō, lead us to the Sumika determined for eternity, to the Samorike built in the Jiyōka of Tarahan. When I think of it, when I think of it, the Yukusue of a human life is indeed Haka. The Kamunahohi who created this world, and the Ōnahohi of vast heart; in the world of men, whatever happens, one must look back, listen back, and correct back with Nahohi, and the Mioshihe of the Ananai-kyō, as taught by the master Umekōwake, I have heard in Umara and Tsubara, yet—</p>
+          <p class="en-p">Without the means to look back, in this Arenohara where even the names are unknown, for what sins have Warera fallen to such a place? It is a world that defies Gaten. Have mercy, Ōmikami. Lead us to our home. Ah, Kamunagara, Kamunagara. May the Mitama be blessed. Whether the morning sun shines or clouds over, whether the moon waxes or wanes, Tatohe the earth may sink, the power of truth saves the world. When God appears on the surface and distinguishes between good and evil, the Kamunahohi who created this world, and the Ōnahohi of vast heart; in the world of men, whatever happens, it is said to be the path of looking back with Nahohi. The thing called the power of truth—</p>
+          <p class="en-p">It must be the power of the true God who created this world. Placed in the human realm, how could the truth emerge? O God of the power of truth, I pray to you earnestly, please save our lonely circumstances. The plum blossoms of the three thousand worlds, the land of God that opens all at once; know the grace of the sun, moon, and earth as they open, scatter, and bear fruit. The living God who saves this world, the gods gathering in Takamagahara—though I engrave such noble propaganda songs upon my heart and do not forget, this field where not even a single plum blossom has opened is the eighth street of the path to hell, surely a continuation of the Yatsumata highway.</p>
+          <p class="en-p">I, who wander into such a lonely wilderness, must be polishing my Mitama while receiving the punishment of God, having piled up infinite sins in both the previous life and the present world. Not having the sense of having died, I cannot even think of this as the Yūmeikai. Ah, Kamunagara, Kamunagara. If God is in this world, I pray to you earnestly, please guide my body and return me to my beloved home.</p>
+          <p class="en-p">While singing thus, as he followed the narrow path that clung to the great wilderness like a crawling earthworm, something was moving in the soil, its head rising up. Shiyakanna could not understand why a head like a truffle was moving in the center of this lonely wilderness, so when he poked it two or three times with the staff he held in his hand, saying 'Ouch, ouch,' it emerged from the soil bit by bit, like the moon rising over the edge of a mountain, until it had revealed itself up to its shoulders. When he looked closely, it was the exact figure of Genshinbō. Shiyakanna was surprised and said:</p>
+          <p class="en-p">Shiyakanna: 'Hey, you, aren't you Genshinbō? What are you doing in a place like this?'</p>
+          <p class="en-p">Genshinbō: 'Ah, I have something I must apologize to you for. I do not remember it clearly, but as divine punishment for going to your mansion, forcing unreasonable demands upon you, and returning after snatching up a great deal of money, the God who governs the Yūmeikai has bound a vast amount of gold to my body as a penalty. Because of its weight, my body has sunk into the earth, and now, as you see, I have only managed to reveal my head above ground. Please, say the word "forgive" just once. If you do that, my sins will likely become lighter...'</p>
+          <p class="en-p">Shiyakanna: 'My legs feel wobbly, but my body is so light that I feel in danger of my feet leaving the ground, yet it is a strange thing that your body is heavy. In that case, how about I chop off your head and leave your torso in the soil? After all, it is a body that will enter the soil sooner or later anyway.'</p>
+          <p class="en-p">Genshinbō: 'Hey, brother, don't say such unreasonable things. If you were a magician like Ten-ichi, you might be able to reattach a head even if you chopped it off, but mine won't work like that. Please, brother, can't you exert your diamond-like strength and pull my body up with a tug?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">烏の声さへ聞え来ず
+寂光浄土か知らね共
+天地一度に眠りたる
+如き此場の光景は
+淋しさたとふる物もなし
+あゝ惟神々々
+三五教の大御神
+導き玉へ永久の
+棲処と定めしタラハンの
+城下に建ちし左守家へ
+思へば思へば人の身の
+行末こそは果敢なけれ
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直し聞直し
+身の過は宣直す
+三五教の御教は
+梅公別の師の君ゆ
+完全に詳細に聞きつれど</p>
+            <p class="ja-classical-line">見直す術も無きままに
+名さへ分らぬ荒野原
+吾等は何の罪あつて
+かかる処へ落ちたのか
+合点のゆかぬ世の中ぞ
+憐み玉へ大御神
+導き玉へ吾宿へ
+あゝ惟神々々
+御霊幸ひましませよ
+旭は照る共曇る共
+月は盈つ共虧くる共
+仮令大地は沈む共
+誠の力は世を救ふ
+神が表に現はれて
+善と悪とを立別ける
+此世を造りし神直日
+心も広き大直日
+只何事も人の世は
+直日に見直す道ぢやげな
+誠の力といふ事は</p>
+            <p class="ja-classical-line">此世を造り玉ひたる
+真の神の力だろ
+人間界に身をおいて
+どうして真が出るものか
+真の力の神さまよ
+吾等の淋しき境遇を
+何卒救ひ玉へかし
+偏に願ひ奉る
+三千世界の梅の花
+一度に開く神の国
+開いて散りて実を結ぶ
+月日と土の恩を知れ
+此世を救ふ活神は
+高天原に神集ふ
+などと尊き宣伝歌
+肝に銘じて忘れねど
+只一輪の梅さへも
+開いて居らぬ此野辺は
+地獄の道の八丁目
+八衢街道の続だろ</p>
+            <p class="ja-classical-line">かかる淋しき大野原
+さまよひ来る吾身こそ
+前世現界相共に
+無限の罪を重ね来て
+神の懲戒うけ乍ら
+身魂を研いて居るのだろ
+死んだ覚のない吾れは
+幽冥界とも思へない
+あゝ惟神々々
+神が此世にあるならば
+何卒吾身を導いて
+恋しき吾家にかやせかし
+偏に願ひ奉る』</p>
+            <p class="ja-classical-line">斯く歌ひ乍ら、大野原に蚯蚓の這ふたやうについた細路を辿り行くと、土の中からムクムクと頭丈が動いてゐる。シヤカンナは此淋しい原野の正中に松露のやうな頭が動いてゐるのは合点が行かぬと、手に持つた杖で二つ三つこついてみると「アイタタ　アイタタ」と云ひ乍ら、月が山の端を昇るやうに、チクリ　チクリと土から抜け出で、肩まで現はして来た。よくよく見れば玄真坊の姿そつくりである。シヤカンナは驚いて、</p>
+            <p class="ja-classical-line">『オイ、コラ、汝は玄真坊ぢやないか。こんな所に何をしてゐるのだ』</p>
+            <p class="ja-classical-line">玄『ヤ、私はお前にお詫をせにやならぬ事があるのだ、確には覚えてをらぬが、お前の館へ行つて無理難題を吹きかけ、ドツサリ金をぼつたくつて帰つた天罰で、幽冥主宰の神から沢山な黄金を罰則として体に縛りつけられ、其重みで体が地の中へにえ込んで了ひ、今ヤツとの事で首丈地上へ現はした所だ。どうか「許す」と一言云つてくれ。さうすりや俺の罪も軽うなるだらうから……』</p>
+            <p class="ja-classical-line">シヤ『何だか俺は足がヒヨロヒヨロするけれど、体が軽くて足が地上を離れ相で危険で堪らないが、お前は又体が重いとは不思議な事だのう。それぢやお前の首を千切つてやるから胴柄位土に托しておいたらどうだ。何れ遅かれ早かれ土の中へ這入る体だからのう』</p>
+            <p class="ja-classical-line">玄『オイ兄貴、そんな無茶な事云ふてくれない。天一の手品師なら、首をチヨン切つても又つげるだらうが、俺のはさうはいけないよ。どうか兄貴、金剛力を出して俺の体をグツと引き上げて貰へまいかの』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Shiyakanna: 'Even if you tell me to pull your body up, your body is buried from the neck down, so there is nowhere to even get a grip, is there? Still, if you insist that I pull you up, I suppose I shall try grabbing both your ears and see if that works.'</p>
+          <p class="en-p">Genshin: 'I do not care how you do it, but at least get my body out onto the ground somehow. It is so painful I cannot bear it; it feels as if I am about to be dragged down into the hell at the bottom of the earth.'</p>
+          <p class="en-p">Saying 'Very well,' Shiyakanna tried with all his might to grab the cold ears with his cold hands, but they did not budge an inch, as if they were solid rock. While this was going on, two more men came trudging along powerlessly, wrapped in wet garments. Shiyakanna looked back and said,</p>
+          <p class="en-p">Shiyakanna: 'Hey, are you two, Koburai and Kōro? Why have you come to such a desolate place?'</p>
+          <p class="en-p">Koburai: 'Oh, is that you, Oyakata? First of all, congratulations on your good health. I do not remember clearly, but I recall that while I was on my way home after receiving money at your place, I encountered pursuers and jumped into a mountain stream; before I knew it, I had arrived at this place. However, when I jumped in, I threw away all the gold coins I had worked so hard to receive at the bottom of the valley, and now I do not even have a single coin. Could you please, Oyakata, spare me a little money?'</p>
+          <p class="en-p">Shiyakanna: 'It is the same for me. I do not have a single coin on me. When traveling through a place like this, there are no houses and no shops, so why would I need money? If you are hungry, you have no choice but to pluck some grass and eat it as you go, do you not?'</p>
+          <p class="en-p">Koburai: 'Oh, is that not Genshin-sama over there? What is this, you have only your head sticking out... Come now, get up, get up!'</p>
+          <p class="en-p">Genshin began to rotate his eyes wildly and excessively like a gyrocompass, and he began to move his facial muscles frequently, concentrating his mouth, eyes, and nose all in one place.</p>
+          <p class="en-p">Shiyakanna: 'Hey, this fellow seems to have fallen into hell. He still seems to have an attachment to gold. Hey, Genshin, give up on that money once and for all. If you do that, you might be saved.'</p>
+          <p class="en-p">Genshin: 'Hey, no matter how much I want money, I cannot trade it for my life when I am suffering like this. I have had enough of money. I do not need a single coin. Hey, you gold, I am giving you your leave starting today, so go wherever you like.'</p>
+          <p class="en-p">No sooner had he said this than he flew up about three ken from the ground with a pop, as if a child's toy monkey had been flicked by a bowstring, and fell back down to the same spot with a thud.</p>
+          <p class="en-p">Shiyakanna: 'Hey, Genshin-bō, that thing called greed is a terrifying thing, is it not?'</p>
+          <p class="en-p">Genshin: 'It truly is. I have had enough of money now. But you, you abandoned the magnificent mansion of Tarahan Castle; why have you come to a place like this again? It does not quite make sense to me... Ha-ha, you must have regretted losing my money and came chasing after me. That is why you were dragging me into the earth with some kind of mechanical device, perhaps using electricity, were you not?'</p>
+          <p class="en-p">Shiyakanna: 'Do not talk nonsense. I am tired of even looking at money. However, I just remembered now that after I let you escape, I certainly intended to commit seppuku before the gods and die, so why have I come to a place like this and am still alive? It is as if I have been bewitched by a fox; I do not understand at all whether this is the manifest world or the spirit world. Where do you think this place is, anyway?'</p>
+          <p class="en-p">Genshin: 'Well, it is truly mysterious and I cannot bear it. If I listen to your story, assuming you died before me, you should have arrived here first. I have a feeling that the three of us ran through mountains and valleys for a day and a night and jumped into a mountain stream. It is impossible that we should have arrived here first. It is truly something I cannot comprehend.'</p>
+          <p class="en-p">Koburai: 'This must be it, Genshin-sama; there is no doubt that we are on a journey through the spirit world. We think we are alive like this, but our physical bodies have long since died, and only our spirit bodies have wandered here. It is said that in the spirit world there is no distinction between time and space, and there is no far or near, so I do not know if those who died earlier come later, or if those who died later come earlier. Well, let us just assume we are dead; it will be better not to be surprised later.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">シヤ『体を引き上げと云つたつて、首から下が埋つてゐるのだから、手をかける所もないぢやないか、それでも強つて引き上げと云ふのなら、両方の耳を掴んで試にやつてみようかな』</p>
+            <p class="ja-classical-line">玄『どうでも可いから、兎も角一寸でも体を地上へ出してくれ、苦しくて堪らぬ、どうやら地の底の地獄へ引ぱり込まれ相だ』</p>
+            <p class="ja-classical-line">「ヨーシ」と云ひ乍らシヤカンナは一生懸命に冷たい手で冷たい耳を掴んでみたが、磐石の如くビクとも動かない。さう斯うしてる所へ、又もや二人の男が、濡衣を纏ひ乍ら、力なげにトボトボとやつて来る。シヤカンナは後ふり向いて、</p>
+            <p class="ja-classical-line">『ヤ、お前はコブライにコオロの両人、どして又こんな淋しい所へやつて来たのだい』</p>
+            <p class="ja-classical-line">コブ『ヤ、親方で御座いますか、まづ御壮健でお芽出度う。実アはつきり覚えませぬが、お前さま所で金を貰つて帰る途中追手に出会ひ、谷川へ飛び込んだと思や、何時の間にか斯んな所へ来てゐます。併し飛び込んだ際に折角貰つた山吹色は皆谷底へ捨てて了ひ、今ぢや欠けたかんつも御座いませぬが、どうか親方、チツと許りお金を恵んで貰へますまいかな』</p>
+            <p class="ja-classical-line">シヤ『俺だとて其通りだ。一文生中も身につけてゐないのだ。こんな所を旅行するのに家もなし店もなし、金が要るものかい。腹が減つたら草でも千切つて食つて行くより仕様がないぢやないか』</p>
+            <p class="ja-classical-line">コブ『ヤ、其処にゐるのは玄真さまぢやないか、何ぢやい、首許り出しやがつて、……サ、起きたり起きたり』</p>
+            <p class="ja-classical-line">玄真は目を無性矢鱈にジヤイロコンパスのやうに廻転し始め、口も目も鼻も一所に集中し顔面筋肉を頻に活動させ出した。</p>
+            <p class="ja-classical-line">シヤ『ヤ、此奴アどうやら地獄落ちらしいぞ。まだ黄金に執着心を持つてるらしいぞ、オイ、玄真、すつぱりその金を思ひ切つて了へ。そすりや助かるだらう』</p>
+            <p class="ja-classical-line">玄真『ヤア、何程金が欲しうても、かう苦しうては欲にも得にもかへられないワ、モウ金はコリコリだ。一文も要らない。オイ黄金の奴、今日から暇をやるから勝手に何処へ行つてくれ』</p>
+            <p class="ja-classical-line">と云ふが否や、子供の玩具の猿が弓弾きに弾かれたやうな勢で、ポンと地上三間許りも飛び上り、ドスンと又元の所へ落ちて来た。</p>
+            <p class="ja-classical-line">シヤ『オイ、玄真坊、欲といふ奴ア怖いものぢやのう』</p>
+            <p class="ja-classical-line">玄『本当にさうだ、おらモウ金にはコリコリしたよ。併しお前は結構なタラハン城の館を捨てて、何故又こんな所へ来たのだ。チツと合点が行かぬぢやないか、……ハハー、大方俺の金が惜しうなつて、追駆て来たのだな。それで俺を器械仕掛で地の中へ電気ででも引張つてゐやがつたのだなア』</p>
+            <p class="ja-classical-line">シヤ『馬鹿を云ふない。俺はモウ金なんか見るのも厭だ。併し俺は、今フツと思ひ出したがお前を逃がした跡で、確に神様の前で切腹をして果てた積だが、何故又こんな所へやつて来て生きてゐるのだろ。丸で狐につままれたやうで、現界か幽界かチツとも訳が分らないのだ。一体此処は何処だと思つてゐるか』</p>
+            <p class="ja-classical-line">玄『サ、どうも不思議で堪らぬのだ。お前の話を聞くと、お前が俺より先死んだ者とすれば、先に此所へ来て居らにやならぬ筈だ。俺等三人は一日一夜山や谷を走つて谷川へ飛び込んだやうな気がする。それが先づ此処へ来てる筈がない。てもさても合点の行かぬ事だのう』</p>
+            <p class="ja-classical-line">コブ『コリヤ何うしても、玄真さま、幽界旅行をやつてゐるのに違ありませぬよ。吾々はかうして生きてると思つてるが肉体はとうに死んで了ひ、精霊体許りが此所へ迷ふて来たのでせう。霊界には時間空間の区別も無く、遠い近いもない相だから、先へ死んだ者が後へなる共、後から死んだ者が先へなる共、そんなこた分りませぬワイ。マア死んだ者としておけや、後で驚かいで宜しかろ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Koo: 'Hey, Koburai, it seems this is the eighth block of the Jigokukaidau. Has this not become a troublesome affair?'</p>
+          <p class="en-p">Gen: 'Indeed, I am a bit taken aback, but since we have managed to find four companions to travel with, the loneliness has thinned out somewhat. In any case, I do not care if it is Jigoku or anywhere else; shall we not go as far as we can? For we would rather go to Jigoku and engage in the activity of the wheel than suffer from boredom in Gokuraku, would we not?'</p>
+          <p class="en-p">Kobu: 'I heard that opinion of yours on the rocks of the Haru Yamatauge; come, let us go. Since it is quite lonely, shall we not sing a Kaushinka?'</p>
+          <p class="en-p">Gen: 'That sounds amusing; I shall sing first.</p>
+          <p class="en-p">The vast Ōnohara with no known limit,</p>
+          <p class="en-p">This place is the eighth block of Jigoku.</p>
+          <p class="en-p">Whether it is the Yachimatakaidau or not,</p>
+          <p class="en-p">Leading three Kerai along,</p>
+          <p class="en-p">In this Aranohara of unknown name,</p>
+          <p class="en-p">How brave it is to march forward.</p>
+          <p class="en-p">If there be a Tengoku in this world,</p>
+          <p class="en-p">I shall try to go there.</p>
+          <p class="en-p">If not, then it must be the Jigokudau,</p>
+          <p class="en-p">Shall we advance with shoulders and elbows squared?</p>
+          <p class="en-p">Yet, are there really such things as Jigoku,</p>
+          <p class="en-p">Or Gokuraku in this world?</p>
+          <p class="en-p">No matter how far one goes, it is the same,</p>
+          <p class="en-p">A cold wind blows with a whistling sound,</p>
+          <p class="en-p">While stroking the Hazue of the grass,</p>
+          <p class="en-p">Passing through without any Enriyo.</p>
+          <p class="en-p">This must surely be Jigoku.</p>
+          <p class="en-p">No matter how frightening Jigoku may be,</p>
+          <p class="en-p">If it is like this, it is as easy as a fart.</p>
+          <p class="en-p">Dokkoi, dokkoi, dokkoishiyo.</p>
+          <p class="en-p">Hey, hey, you three Kerai,</p>
+          <p class="en-p">Follow me closely from behind.</p>
+          <p class="en-p">I shall not be responsible if you fall behind.</p>
+          <p class="en-p">Oh, how strange, oh, how strange,</p>
+          <p class="en-p">A mysterious building in the distance,</p>
+          <p class="en-p">Has begun to flicker before my eyes.</p>
+          <p class="en-p">Is this, after all, the Genkai?</p>
+          <p class="en-p">If it is the Genkai, then all the more,</p>
+          <p class="en-p">I shall frolic with all my might,</p>
+          <p class="en-p">And proceed with vigor.</p>
+          <p class="en-p">I thought to occupy the Tarahan Castle,</p>
+          <p class="en-p">And become a magnificent king,</p>
+          <p class="en-p">To wield my influence,</p>
+          <p class="en-p">But I know not when it happened,</p>
+          <p class="en-p">That I wandered into such a place,</p>
+          <p class="en-p">Where even the cardinal directions,</p>
+          <p class="en-p">Are unknown in this strange day.</p>
+          <p class="en-p">The building seen in the distance,</p>
+          <p class="en-p">Must be the dwelling of an Oni or a demon.</p>
+          <p class="en-p">Come, let us go, come, let us go.</p>
+          <p class="en-p">Why are you trembling?</p>
+          <p class="en-p">If there is a Jigoku,</p>
+          <p class="en-p">I shall capture the Oni of Jigoku,</p>
+          <p class="en-p">Line them up on bamboo skewers like locusts,</p>
+          <p class="en-p">Roast them over a fire,</p>
+          <p class="en-p">And eat them one by one.</p>
+          <p class="en-p">Ah, how amusing, how amusing,</p>
+          <p class="en-p">The departure of the King of Jigoku,</p>
+          <p class="en-p">Let Oni or snakes come forth.</p>
+          <p class="en-p">Dokkoi, dokkoi, dokkoishiyo.'</p>
+          <p class="en-p">Singing with all his might in such a manner, he thrust his head forward and advanced with a trotting gait. The three were left behind by about four or five chō, following along while singing the Kaushinka in weak, trembling voices.</p>
+          <p class="en-p">The moment Genshinbō, staring only at his feet, rushed forward, he struck his head against a standing stone at the crossroads, and with a cry of 'Kyaa, uun,' he collapsed on the spot, stretched out like a frog that had been slammed down.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">コオ『オイ、コブライ、どうやらこりや地獄街道の八丁目らしいぞ。困つた事になつたものぢやないか』</p>
+            <p class="ja-classical-line">玄『さうだ、一寸面食つたな、然し乍らかうして四人の道伴れが出来た以上は、淋しさも稍薄らいで来たやうだ。兎も角、地獄でも何処でもかまはぬ、行ける所迄行かうぢやないか。俺達や元より極楽に行つて無聊に苦むよりも、地獄へ行つて車輪の活動をやるが望だからのう』</p>
+            <p class="ja-classical-line">コブ『其お説はハル山峠の岩上で承はりましたね、サ、行きませう。余り淋しいから一つ行進歌でも唄はふぢやありませぬか』</p>
+            <p class="ja-classical-line">玄『そら面白からう、先づ俺から歌ふてやる。</p>
+            <p class="ja-classical-line">限も知らぬ大野原
+此所は地獄の八丁目
+八衢街道か知らね共
+三人の家来を引きつれて
+名さへ分らぬ荒野原
+進みゆくこそ勇ましき
+もしも此世に天国が
+あるものとすりや行つてみよう
+無ければ是非なく地獄道
+肩肱いからし進まうか
+併し此世に地獄とか
+極楽などがあるものか
+どこ迄行つても此通り
+冷い風がピユーピユーと
+草の葉末をなで乍ら
+遠慮もなしに通つてゐる
+これがヤツパリ地獄だろ
+何程地獄が怖く共
+こんな事なら屁のお茶だ
+ドツコイ　ドツコイ　ドツコイシヨ</p>
+            <p class="ja-classical-line">コラコラ三人の家来共
+しつかり後からついて来よ
+落伍をしても知らないぞ
+アレアレ不思議アレ不思議
+向方に妙な建物が
+チラチラ吾目につき出した
+此奴ヤツパリ現界か
+現界ならば尚の事
+一生懸命にはしやいで
+元気をつけて行かうかい
+タラハン城を占領し
+天晴国王と成すまし
+羽振を利かそと思ふたに
+いつの間にかは知らね共
+こんな所へ彷徨ふて
+東西南北方位さへ
+分らぬ今日の不思議さよ
+向方に見ゆる建物は
+鬼か悪魔の住処だろ
+サアサア行かうサア行かう</p>
+            <p class="ja-classical-line">何をビリビリしとるのだ
+もしも地獄があるならば
+地獄の鬼を引捉へ
+蝗のやうに竹串に
+並べて刺して火に炙り
+片つ端から食てやろか
+あゝ面白い面白い
+地獄の王の御出立
+鬼でも蛇でもやつて来い
+ドツコイ　ドツコイ　ドツコイシヨ』</p>
+            <p class="ja-classical-line">などと一生懸命に歌ひ乍ら、頭を前方に突出し、チヨコチヨコ走りに進んでゆく。三人は四五丁許り取り残され、ヨボヨボと細い声で行進歌を歌ひ乍らついて行く。</p>
+            <p class="ja-classical-line">玄真坊は足許ばかり見詰めて突進した途端に四辻の立石に頭をぶつつけ、キヤア、ウーンと云つたきり、其場に蛙をぶつつけたやうにふん伸びて了つた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c13.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 13: 詰腹 [1802]</span>
+      </a>
+      <a href="c15.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 15: 紺 Spirit [1804]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

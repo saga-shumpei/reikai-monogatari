@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 20: 困客 [1809] - Volume 71 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 71 Table of Contents</a>
+      <span>Volume 71</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 71 &bull; Chapter 20</span>
+      <h1 class="chapter-title-en">Chapter 20: 困客 [1809]</h1>
+      <p class="chapter-title-ja">困客〔1809〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The Great God of Mizumitama, revering the Mikoto, from the sacred Reijiyō of Mount Ubusuna, to save and assist in the divine Misono of Tengoku, by Kotomukeyaha, the evil Mitama of Ōkuronushi who dwells in the lunar Mikuni, the Sendenshi party of four, led by Terukuniwake, while being blown by the fierce winds of Kajikayama, crossed over the forest of the shrine, the Yamaguchi, and the mysterious forest, running about here and there, preaching and transmitting the true Mioshihe of Kami to the Kunibitotachi, healing the sick, saving and assisting the poor, and now here, while performing a hundred Kamuwaza, they have saved the Kinan of the Turman country and arrived at this place.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara, may the Mitama of Kami be blessed, and I humbly pray that Thou grant us to fulfill our Shimei in Matsubusa. Even if the Great Sun shines or clouds over, even if the Moon waxes or wanes, even if the earth should sink, even if the Akumitama should rage, once I have bathed in the power of the true Kami, what manner of evil should I fear? Advance, advance, now advance! We are the children of Kami, the palace of Kami; even if the evil Kami, such as tigers, wolves, lions, bears, demons, or great serpents, should rage and run wild, what is there to fear? Until the Sendenshi of the Yamato men, of Shikishima, reach the capital of victory, their brave hearts shall never falter.</p>
+          <p class="en-p">Awakening the Yamato-gokoro, let us advance through the great plains. I shall re-proclaim the hells as Tengoku instantly through my Kototama. From the kings, nobles, and aristocrats above, to the Chandala below, I shall extend the hand of Kami's salvation, saving all in one lotus-born destiny, and manifest the divine power of the Mizu-no-Mitama; I humbly pray that Thou grant me to fulfill my Shimei, Kamunagara, before the Great Ōkami, I humbly and reverently pray. The plum blossoms of the three thousand worlds, the Mikuni of Kami that opens all at once, opening, scattering, and bearing fruit. The Great Sun God, the Moon God, and Mizumitama, who dwells as the administrator of the Arakane that protects the earth.</p>
+          <p class="en-p">I shall never forget the deep grace of the Great God Kami-Susanō, nor shall I forget His noble merits. Advance, advance, now advance! Facing the fortress of the devil, drawing the sword of Shōju, to bring about Kotomukeyaha is within our plan. Ah, how brave, how brave! The Sendenshi, whose very name is noble, having received the Shimei of Kami in their bodies, have no enemies wherever they arrive. Even if the Brahmanism or Ural religion should turn their blades against us, with the light of the strict Kototama granted by the Great Ōkami, I shall illuminate the dark night, make the divine virtue shine in the lunar Mikuni, and I humbly pray that Thou grant me to fulfill my Shimei, which I must illuminate. Ah, Kamunagara, Kamunagara, may the spirit be blessed.</p>
+          <p class="en-p">While singing thus, it was Terukuniwake, Terukō, and Umekōwake, these three, who had come as far as the rice field path near the village of Irie.</p>
+          <p class="en-p">Terukō: 'Excuse me, Sensei, the sun is already setting, but shall we not take lodging in the village of Irie tonight, rest at our leisure, and go to the port of Suga by boat tomorrow?'</p>
+          <p class="en-p">Terukuniwake: 'Indeed, you seem quite tired; let us first take a rest here. It should not be far to that village now.'</p>
+          <p class="en-p">Umekōwake: 'Sensei, let us by all means stay in Irie village tonight. There is an inn with a fine view called Hamaya, so let us stay there and decide to arrive at the port of Suga tomorrow. At the port of Suga, there is a wealthy man who is a medicine merchant named Alice, and his son, Irku, and daughter, Princess Dariya, are enthusiastic believers of San-go-kyō. They are surely waiting for us, without a doubt.'</p>
+          <p class="en-p">Terukuni: 'That is right, since Umekōwake-sama has stayed there once before, it should be familiar and comfortable.'</p>
+          <p class="en-p">Teru: 'Looking far out at the scenery in all directions, the distant mountains are veiled in cobalt blue.'</p>
+          <p class="en-p">Terukuni: 'The mountain shadows, as if blurred in light ink, must be the high mountains of the village of Suga.'</p>
+          <p class="en-p">Ume: 'The vast plains where summer grasses grow thick, how joyful it is for one who advances. The day is already coming to an end, and with a grass pillow, I shall heal the fatigue of the journey at an inn.'</p>
+          <p class="en-p">From the grass behind where the three were resting, a groaning sound of 'un, un' could be heard. Umekōwake, with sharp ears, heard this, and walking briskly, approached the groaning in the thicket to find a monk with an ugly, base face collapsed in a state of being half-dead. As soon as Umekōwake recited the heavenly number song, the collapsed man stood up, rising with a start.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『瑞魂の大神が
+勅命を畏みフサの国
+ウブスナ山の霊場ゆ
+月の神国に蟠まる
+大黒主の悪身魂
+言向和し天国の
+神園に救ひ助けむと
+照国別の宣伝使
+一行四人は河鹿山
+烈しき風に吹かれつつ
+祠の森や山口や
+怪しの森を乗り越えて
+彼方此方と駆けめぐり
+神の誠の御教を
+国人達に宣り伝へ
+病めるを癒し貧しきを
+救ひ助けて今此所に
+百の神業仕へつつ
+トルマン国の危難をば
+救ひて此所迄来りけり</p>
+            <p class="ja-classical-line">あゝ惟神々々
+神の身魂の幸ひて
+吾等が使命を詳細に
+遂げさせ玉へと願ぎ奉る
+大日は照るとも曇るとも
+月は盈つとも虧くる共
+仮令大地は沈むとも
+曲津の神は猛ぶとも
+誠の神の御力
+吾身に浴びし其上は
+如何なる曲も恐れむや
+進めや進めいざ進め
+吾等は神の子神の宮
+虎狼や獅子熊や
+鬼や大蛇の曲神が
+如何程猛り狂ふとも
+何か恐れむ敷島の
+大和男子の宣伝使
+勝利の都に至る迄
+いつかな怯ぬ雄心の</p>
+            <p class="ja-classical-line">大和心を振り起し
+進みて行かむ大野原
+地獄は忽ち天国と
+吾言霊に宣り直し
+上は王侯貴人より
+下旃陀羅に至るまで
+神の救ひの手を伸べて
+一蓮托生救ひ上げ
+瑞の霊の神力を
+現はしまつる吾使命
+遂げさせ玉へ惟神
+皇大神の御前に
+畏み畏み願ぎ奉る
+三千世界の梅の花
+一度に開く神の国
+開いて散りて実を結ぶ
+日の大神や月の神
+大地を守らす荒金の
+司とゐます瑞魂
+神素盞嗚の大神の</p>
+            <p class="ja-classical-line">深き恵は忘れまじ
+尊き勲功は忘れまじ
+進めよ進めいざ進め
+悪魔の砦に立向ひ
+摂受の剣を抜き持ちて
+言向和すは案の内
+アヽ勇ましや勇ましや
+神の使命を身に受けし
+名さへ尊き宣伝使
+到る所に敵はなし
+バラモン教やウラル教
+如何程刃向ひ来るとも
+皇大神の賜ひてし
+厳言霊の光にて
+暗夜を照らし神徳を
+月の御国に輝かし
+照らさにやおかぬ吾使命
+守らせ玉へと願ぎ奉る
+アヽ惟神々々
+霊幸ひましませよ』</p>
+            <p class="ja-classical-line">斯く歌ひ乍ら入江の村近き田圃道まで、やつて来たのは照国別、照公、梅公別の三人であつた。</p>
+            <p class="ja-classical-line">照公『モシ、先生、モウ日も暮れ近くなりましたが今晩は入江の村で宿をとり、緩り休息を致しまして、明日は船でスガの港へ行かうぢやありませぬか』</p>
+            <p class="ja-classical-line">照国別『成程、大分に疲れたやうだ、先づ此所で一服しよう。モウあの村へは遠くはあるまいから』</p>
+            <p class="ja-classical-line">梅公別『先生、今晩は是非入江村で泊りませう。浜屋と云ふ景色よい宿屋が御座いますから是非そこへ泊つて、明日スガの港に着く事に致しませう。スガの港にはアリスと云ふ薬屋の長者がありまして、その息子には、イルク、娘にはダリヤ姫と云ふ熱心な三五教の信者が居ります。キツト待つて居るに違ひありませぬから』</p>
+            <p class="ja-classical-line">照国『さうだ、梅公別さまは一度お泊りになつた事があるさうだから、心安くてよからう』</p>
+            <p class="ja-classical-line">照『四方八方の景色を遠く見渡せば
+コバルト色に遠山かすめり』</p>
+            <p class="ja-classical-line">照国『薄墨にぼかしたやうな山影は
+スガの里なる高山ならむ』</p>
+            <p class="ja-classical-line">梅『夏草の生ひ茂りたる広野原
+進み行く身の楽しくもある哉。
+今日の日も早や暮れむとす草枕
+旅の疲れを宿に癒さむ』</p>
+            <p class="ja-classical-line">三人が休んでゐる後の草の中から何だか、ウンウンと呻り声が聞えて来る。梅公別は耳敏くも之を聞き、ツカツカと叢の中の呻き声を尋ねて近づき見れば、醜い賤しい面をした坊主が一人半死半生の態で倒れて居る。梅公別は直様天の数歌を奏上するや、倒れ人はムクムクと起き上り、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Tenshinbau: 'I do not know who you are, but thank you so much for saving me. I am a Shiyugenjiya of the Brahman Kyō, and my name is Tenshinbau.'</p>
+          <p class="en-p">Umekōwake thought that the face looked familiar somewhere, and when he examined him carefully, he realized that it was Genshinbau, the Eusō who had been Tatekomo in Mount Ōra and planning a Taimau.</p>
+          <p class="en-p">Umekōwake: 'Hey, are you not Genshinbau? There were rumors that while you claimed to be undergoing Kaishin on Mount Ōra, you had returned to evil, leading three hundred Teshita and committing Oshiirigautau in Kakuchi. Tenbatsu is a terrifying thing. By Nanibito were you oppressed, and why were you lying here fallen? I suspect that you let your Mochimahe Konjiyō get the better of you, had your Ichimotsu squeezed by a woman, and were abandoned in such a lonely Genya, taking advantage of the fact that your breath had stopped. What a pitiful Shiromono you are, indeed.'</p>
+          <p class="en-p">Genshinbau: 'Oh, I am truly humbled. As you have guessed, I had my Kintama squeezed by a woman, was swindled out of Sanmanriyō in gold, and was cast away in a place like this. From this moment on, I will stop my evil deeds. And since I will never look at women again, I beg you, even if you treat me as mere baggage, will you not take me along with you?'</p>
+          <p class="en-p">Umekōwake: 'Hey, I have a teacher. I cannot decide anything on my own judgment. Let us first hear the opinion of my teacher before we decide.'</p>
+          <p class="en-p">Terukuniwake had been listening to the dialogue between the two from the beginning and knew the situation, so without waiting for Umekōwake's words, he said:</p>
+          <p class="en-p">Terukuniwake: 'Hey, you called Genshinbau, it is already close to sunset, so let us go slowly to an inn and hear your story. We intend to stay one night at the Hamaya Inn in Irie Village. Why don't you come with us?'</p>
+          <p class="en-p">Genshinbau: 'Eh, what are you saying? Are you staying at the Hamaya Inn? That place is very crowded with guests and is in chaos, so the scenery is a bit bad, but there is a splendid inn called the Tamaya, so how about staying there? I will accompany you as well.'</p>
+          <p class="en-p">Umekōwake: 'Hey, once the consultation to go to the Hamaya Inn is settled, we shall go to Hamaya by all means. Our spirits have already settled in Hamaya.'</p>
+          <p class="en-p">Genshinbau: 'Well, that may be so, but if possible, the service is good, the bedding is high-class, and the building is new, so why not choose the Tamaya?'</p>
+          <p class="en-p">Umekōwake: 'Ha ha ha, this man must have been staying at the Hamaya Inn for about ten days. You were probably beaten up by the Echigo-jishi and cornered by the authorities, so you must dislike Hamaya. Hey, that is understandable. However, as long as we are with you, it is safe. Follow us quietly from behind. I will take responsibility for your person, but in return, you cannot live your life in peace for even a day with the heart you have had until now. Will you repent from the bottom of your heart, or what?'</p>
+          <p class="en-p">Genshinbau: 'Yes, I will serve you as a newborn baby. Please, I beg you to save me.'</p>
+          <p class="en-p">Umekōwake: 'Hmm, very well. Teacher, he is saying this now, but this fellow is a man who will not change unless he is forced to, but I would like to find a way to make him undergo Kaishin, so please let him accompany us. I, Umekōwake, will take responsibility so that there is no impropriety.'</p>
+          <p class="en-p">Terukuniwake: 'In any case, let us take him with us for two or three days. If it does not work out no matter what, we can just cast him away then. Now, the sun has set, let us hurry.'</p>
+          <p class="en-p">And once again, singing a Sendenka with a clear voice, they proceed toward the Hamaya in Irie Village.</p>
+          <p class="en-p">As they approached the front entrance of the Hamaya, two or three women who were soliciting guests stood at the gate.</p>
+          <p class="en-p">Woman: 'Excuse me, guests, where are you headed? The schedule for tomorrow's boat is also convenient, so please stay here. We will serve you with great care. And, we have a comfortable salt bath prepared, so please, we beg you to stay at our house.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『何方か知りませぬが、よくまア助けて下さいました。拙僧はバラモン教の修験者で天真坊と申します』</p>
+            <p class="ja-classical-line">梅公別は、どこか見覚えのある顔だなア……とよくよく念入りに調べて見ると、オーラ山に立籠つて大望を企んでゐた妖僧の玄真坊なる事を知り、</p>
+            <p class="ja-classical-line">『やアお前は玄真坊ぢやないか、オーラ山で改心をすると云ひ乍ら、再び悪に復つて三百の手下を引率れ、各地に押入強盗をやつて居ると云ふ噂であつたが、天罰は恐ろしいものだ。何人に、お前は虐げられて、こんな所へ倒れて居たのだ。察する処持前のデレ根性を起し、女に一物を締つけられ、息の根の止まつたのを幸ひ、かやうな淋しき原野に遺棄されたのだらう、扨も扨も憐れな代物だな』</p>
+            <p class="ja-classical-line">玄『これはこれは恐れ入りました。私はお察しの通り、女に睾丸を締めつけられ、三万両の金をぼつたくられ、かやうな所へ、ほかされたもので御座います。只今限り悪事は止めまする。さうして女等には、キツト今後目をくれませぬから、何卒私をお荷物持にでも構ひませぬ、お伴に連れて行つて下さいませぬか』</p>
+            <p class="ja-classical-line">梅『やア、俺にはお師匠様がある。俺一人の一量見では如何する事も出来ぬ。先づお師匠様の御意見を聞いた上の事にしよう』</p>
+            <p class="ja-classical-line">照国別は最前から二人の問答を聞き終り様子を知つて居るので、梅公別の言葉も待たず、</p>
+            <p class="ja-classical-line">『ヤ、玄真坊とやら、最早や日の暮にも近いから、緩りと宿屋にでも行つて話を承はらう。之から吾々は入江村の浜屋旅館に一泊するつもりだ。お前も一緒に行かうぢやないか』</p>
+            <p class="ja-classical-line">玄『へ、何と仰有います、浜屋旅館にお泊りで御座いますか。あの家はお客があまり沢山で、どさくつてゐますから、少し景色は悪う御座いますが、玉屋と云ふ立派な宿屋がありますから、其処へお泊りになつては如何で御座いませう。私もお伴をさせて頂きますから』</p>
+            <p class="ja-classical-line">梅『ヤ、一旦浜屋旅館と相談が定つた上は是非とも浜屋へ行かう。吾々の精霊は已に浜屋に納まつて居るのだから』</p>
+            <p class="ja-classical-line">玄『そら、さうで御座いませうが、ならう事なら待遇も良し、夜具も上等なり、家も新しう御座いますから、玉屋になさつたら如何で御座いませうかな』</p>
+            <p class="ja-classical-line">梅『ハヽヽヽヽ、此男は十日許り浜屋旅館に泊つてゐたのだらう。越後獅子に小ぴどくこみ割られ、捕手にフン込まれた鬼門の場所だから、浜屋は厭だらう。ヤ、それは無理もない。然し吾々がついてゐる以上は大丈夫だ。ソツと後から跟いて来い。お前の身柄は引受けてやるから、その代り今迄のやうな心では一日だつて安心に世を暮す事は出来ぬぞ。心の底から悔い改めるか、どうぢや』</p>
+            <p class="ja-classical-line">玄『ハイ、生れ赤子になつてお仕へ致します。何卒お助け下さいませ』</p>
+            <p class="ja-classical-line">梅『ウン、ヨシ、先生、今斯様に申してゐますが、然し乍ら此奴の悪事は芝を被らねば直らない奴で御座いますが、私も何とかして、改心をさして遣り度う御座いますから、お伴をさせて下さいませ。梅公別が無調法のないやうに引き受けますから』</p>
+            <p class="ja-classical-line">照国『兎も角、二三日間連れて見よう。如何してもいかなけりや、突放す迄の事だ。さア日も暮れかかつた、急いで行かう』</p>
+            <p class="ja-classical-line">と又もや声も涼しく宣伝歌を歌ひ乍ら入江村の浜屋をさして進み行く。</p>
+            <p class="ja-classical-line">浜屋の表口にさしかかると客引の女が、二三人門口に立つて、</p>
+            <p class="ja-classical-line">女『もしお客さま、どちらにお出で御座います。明日の船の都合も宜しう御座いますから此方にお泊り下さいませ。十分丁寧に、待遇も致しますから。さうして、加減のいい潮湯も沸いてゐますから、何卒当家でお泊りを願ひます』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Umekōwake: 'Hey, even if you do not say so, we have come here thinking we would like to receive your service. We are a party of four; do you have a good room?'</p>
+          <p class="en-p">Gejiyo: 'Yes, there is a detached building in the back, and from that room, you can see the mirror of the Haru Sea while sitting. If you stay for two or three days, the scenery of ships with full sails and half sails coming and going is just like butterflies fluttering in the spring fields.'</p>
+          <p class="en-p">Umekōwake: 'Well, Sensei, come on in.'</p>
+          <p class="en-p">Terukuniwake: 'Then, I shall accept your offer.'</p>
+          <p class="en-p">He leads the way and passes through the rope curtain. Genshinbau follows behind Terukuniwake, trembling and shrinking in size. Next, Terukō and Umekōwake proceed to the detached building in the back while showering the host and the maid with charm.</p>
+          <p class="en-p">First, they finish their baths and dinner, and the four of them, dressed in yukata and holding fans in their hands, are indulging in innocent conversation when a bewitching voice is heard from the room on the second floor of the front building. Umekōwake tilts his head in wonder as he listens.</p>
+          <p class="en-p">Terukō: 'Hey, Umekōwake-sama, what are you pondering about? Which woman is fooling around with a guest there?'</p>
+          <p class="en-p">Umekōwake: 'No, it is a voice I cannot quite understand. Could it be Chigusa no Takahime?'</p>
+          <p class="en-p">Terukō: 'Ha, do not talk nonsense. Would Chigusa no Takahime stay in a place like this? She must have snuck into some royal castle and is likely disguised as a queen of the Kshatriya again.'</p>
+          <p class="en-p">Umekōwake: 'Hey, it is truly suspicious. Terukō, will you go and investigate for me?'</p>
+          <p class="en-p">Genshinbau says in a small voice,</p>
+          <p class="en-p">Genshinbau: 'Oh, you three-sama, that voice is undoubtedly Chigusa no Takahime. She is a great villain who squeezed my testicles and swindled me out of thirty thousand ryō. Please, catch her and get my thirty thousand ryō back. If you do that, I will present ten thousand ryō to each of you.'</p>
+          <p class="en-p">Umekōwake: 'Do not talk nonsense. We have no need for money. Besides, is that not the money you swindled at the mansion of Samori?'</p>
+          <p class="en-p">Genshinbau: 'Yes, as you have guessed.'</p>
+          <p class="en-p">Umekōwake: 'It seems the companion of Chigusa no Takahime is not a human. Sensei, I will go and verify their true identity now. Please wait here for a while.'</p>
+          <p class="en-p">Terukuniwake: 'Is it not rude to jump into someone else's room to investigate? Even without doing such a thing, it will naturally become clear.'</p>
+          <p class="en-p">Just as they were speaking, it was Chigusa no Takahime who quickly opened the shoji of the second floor and peered into the detached room; the face of Umekōwake and the face of Takahime met perfectly. The moment Chigusa no Takahime saw Umekōwake's face, she turned pale and trembled violently, whether out of longing or fear.</p>
+          <p class="en-p">The Yōgenbau Mokusuke, feeling suspicious of Takahime's unusual state, said,</p>
+          <p class="en-p">Mokusuke: 'Hey, Taka-chan, aren't you acting strange? Why are you trembling?'</p>
+          <p class="en-p">Chigusa no Takahime: 'Mokusuke-sama, look over there. The three propagandists of the Sangokyō, Terukuniwake, Terukō, and Umekōwake, are staying in the room of the detached building. And seeing that Genshinbau is beside them, it is thought that they have come back to life to take back the thirty thousand ryō.'</p>
+          <p class="en-p">Mokusuke: 'Oh, that is terrible. Hearing the name of the Sangokyō, I do not like them either. Shall we find a way for the two of us to escape from here?'</p>
+          <p class="en-p">Chigusa no Takahime: 'Mokusuke-sama, do not say such weak-hearted things. Were you not treating them like servants at the mansion of Saien? If you shout with your loud voice, wouldn't those clumsy propagandists like Terukuniwake and the others run away without being able to withstand it?'</p>
+          <p class="en-p">Mokusuke: 'Hmm, that is true, but if I cause a scene now, things will become troublesome. I have an idea as well.'</p>
+          <p class="en-p">Chigusa no Takahime: 'Since you are known for your peerless wisdom, there should be no oversight. I will leave everything to you.'</p>
+          <p class="en-p">Mokusuke: 'Hmm, leave tonight's handling to me. I have a strategy, so come here, Chigusa no Takahime.'</p>
+          <p class="en-p">Saying this, he goes down the stairs of the second floor with a thud-thud-thud, goes out to the front, and slips a gold coin into the hand of the manager,</p>
+          <p class="en-p">Mokusuke: 'I will be back in about half an hour after enjoying the moon, so please leave the front door open.'</p>
+          <p class="en-p">He deceives him skillfully and runs out to the beach with Takahime, steals a boat, and with all his might, rows toward the port of Suga, parting the waves of Lake Haru.</p>
+          <p class="en-p">The party of Terukuniwake spent the night there, and early the next morning, they ordered a boat and set off toward the port of Suga as well. Ah, Kannagara Tamachi Hae Mase.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">梅『ヤ、お前がさう云はなくても、此方の方からお世話になりたいと思つて来たのだ。一行四人だ、よい居間があるかな』</p>
+            <p class="ja-classical-line">女『ハイ、裏に離棟が御座いまして、そのお座敷からはハルの海の鏡が居乍らに見えまする。何なら二三日御逗留下さいますれば、真帆片帆の行き交ふ景色は、まるで胡蝶が春の野辺に飛び交ふやうで御座います』</p>
+            <p class="ja-classical-line">梅『もし先生、さアお這入り下さい』</p>
+            <p class="ja-classical-line">照国『そんなら御免蒙らうか』</p>
+            <p class="ja-classical-line">と先に立つて縄暖簾をくぐる。玄真坊はビクビク慄ひ乍ら、照国別の後になり小さくなつて跟いて行く。次に照公、梅公別は亭主や下女に愛嬌を振り撒き乍ら、奥の離棟に進み行く。</p>
+            <p class="ja-classical-line">先づ入浴を済ませ夕食を終り、四人は浴衣がけになつて、団扇片手に罪のない話に耽つて居ると、表の二階の間に、なまめかしい声が聞えて来る。梅公別は不思議さうに首を傾け聞いてゐる。</p>
+            <p class="ja-classical-line">照『これ梅公別さま、何思案をして居るのだい。ありや何処の女が客とふざけて居るのだい』</p>
+            <p class="ja-classical-line">梅『いや、どうも合点の行かぬ声だ。千草の高姫ぢやあるまいかな』</p>
+            <p class="ja-classical-line">照『ヘン、馬鹿を云ふない、千草の高姫が、こんな所へ泊るものか。彼奴は屹度何処かの王城へ忍び入り、又もや刹帝利の后に化け込んでゐやがるだらう』</p>
+            <p class="ja-classical-line">梅『ヤ、どうも怪しいぞ。一つ照公、お前調べて見てくれぬか』</p>
+            <p class="ja-classical-line">玄真坊は小さい声で、</p>
+            <p class="ja-classical-line">玄『モシお三人さま、あの声は千草の高姫に間違ひ御座いませぬ。私の睾丸を締めつけ、三万両の金をぼつたくつた大悪人で御座います。何卒彼奴をとつちめ、三万両を取り返して下さい。さうすりや一万両宛、お前さま等に進上致しまする』</p>
+            <p class="ja-classical-line">梅『馬鹿を云ふな、吾々は金なんか必要はない。況して左守の館でぼつたくつた金ぢやないか』</p>
+            <p class="ja-classical-line">玄『ハイ、お察しの通りで御座います』</p>
+            <p class="ja-classical-line">梅『どうやら千草の高姫の相客は人間ぢやないらしいぞ。先生、之から私が正体を見届けて来ます。何卒暫く此処に待つて居て下さいや』</p>
+            <p class="ja-classical-line">照国『人さまの居間へ飛び込んで調べると云ふ失礼な事はないぢやないか、そんな事せずとも自然に分つて来るよ』</p>
+            <p class="ja-classical-line">斯く話す時しも二階の障子をサツと開けて離れ座敷を覗いたのは千草の高姫であつた、梅公の顔と高姫の顔はピツタリと合つた。千草の高姫は梅公の顔をパツと見るより、恋しいやら怖ろしいやら、顔を真蒼にしてピリピリと慄ふた。妖幻坊の杢助は高姫の様子の只ならぬに不審を起し、</p>
+            <p class="ja-classical-line">『オイ、高チヤン、お前は様子が変ぢやないか、何をオヂオヂして居るのだ』</p>
+            <p class="ja-classical-line">千『杢助さま、あれ御覧なさいませ、三五教の照国別、照公、梅公別の三宣伝使が離棟の居間に泊つて居ます。そして玄真坊が横にゐますのを見れば、三万両の金を取り返す為に、息をふきかへして来たものと思はれます』</p>
+            <p class="ja-classical-line">杢『やアそりや大変だ、三五教の奴と聞けば俺もチツト虫が好かない、何とかしてお前と二人、此所を逃げ出さうぢやないか』</p>
+            <p class="ja-classical-line">千『杢助さま、貴方も気の弱い事を仰有いますな、斎苑の館で彼奴等を家来扱をして居つたぢやありませぬか。一つ貴方の大きな声で、呶鳴つて下されば照国別等と云ふへぼ宣伝使は、一たまりもなく逃げ出すぢやありませぬか』</p>
+            <p class="ja-classical-line">杢『ウン、それもさうだが、今荒立てては事が面倒になる。俺にも一つの考へがあるからのう』</p>
+            <p class="ja-classical-line">千『智謀絶倫と聞えた貴方の事ですから、滅多に如才はありますまい。それで何も彼も貴方にお任せ致して置きます』</p>
+            <p class="ja-classical-line">杢『ウン、今夜の処置は俺に任しておけ。俺に計略があるから、さア千草の高姫、此方へおじや』</p>
+            <p class="ja-classical-line">と云ひ乍ら二階の段梯子をトントントンと下り、表へ出て番頭に小判を一枚握らせ、</p>
+            <p class="ja-classical-line">杢『一寸月を賞して半時ばかり経てば帰つて来るから、表戸開けて置いてくれよ』</p>
+            <p class="ja-classical-line">と、巧く誤魔化し高姫と共に浜辺に駆け出し、一艘の舟を盗んで一生懸命にハルの湖の波を分けてスガの港へ向け漕いで行く。</p>
+            <p class="ja-classical-line">照国別の一行は一夜を此所に明かし、あくる日の朝早くより一艘の船を誂へ、之亦スガの港をさして進み行く事となつた。あゝ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c19.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 19: 角兵衛 Lion [1808]</span>
+      </a>
+      <a href="../vol72/index.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Volume 72</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

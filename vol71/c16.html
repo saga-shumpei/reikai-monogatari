@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 16: Phantom 魅返 [1805] - Volume 71 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 71 Table of Contents</a>
+      <span>Volume 71</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 71 &bull; Chapter 16</span>
+      <h1 class="chapter-title-en">Chapter 16: Phantom 魅返 [1805]</h1>
+      <p class="chapter-title-ja">妖魅返〔1805〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">About thirty ri away to the west of the Jiyōshi of Tarahan, there is a small village called Ihatakimura. In this place, there is a fairly wide, deep-blue pool called Uogafuchi, where a great number of fish gather throughout the four seasons. As it is the custom of the land of Indo not to kill living things wantonly, the fish merely multiplied day by day. There were Shiyuda who would occasionally go fishing at this Uogafuchi, which was said to be as full of fish as it was of water. While the Jiyōgiyō, Setsuteiri, and Bishiya would never fish or commit the act of killing, it was generally believed that since the Shiyuda were of low status and hardly treated as human beings, they would incur no blame from the Shinbutsu no matter how much they killed. However, even the Jiyōgiyō, Setsuteiri, and Bishiya did not feel that it was killing to purchase fish sold at shops and serve them at their meals, provided they were not eating living creatures.</p>
+          <p class="en-p">As four or five Shiyuda were preparing to fish while sitting in the shade of trees along the riverbank where the summer trees grew thick and indulging in idle chatter, three corvus came drifting into the pool. The Shiyuda first cast their nets from the rocks toward these corvus, and when they finally managed to retrieve them to the roadside, they found that one appeared to be a mountain ascetic, while the other two had the faces of thieves from goodness knows where, so it was decided to call a priest from an old temple to hold a funeral. While they would leave the corpses of thieves to be prey for wolves and tigers without a second thought, they felt they could not simply abandon a mountain ascetic, so they consulted the passages of a scripture called Jurokai, which records fortune and misfortune, divination, and the like, to determine which of the five-element funerals should be performed. The divination indicated that this ascetic must be buried in the earth, so the villagers gathered together, buried the body in the ground just as it was, and instead of erecting a marker, left the top of the head exposed from the ears up. Among the five-element funerals, there are five methods: field burial, tree burial, cremation, earth burial, and water burial. Tree burial is a method of funeral where the corvus is hung upon a tree and exposed to the wind. Those who did not fall under the divination of this Jurokai were to be left as corpses on the roadside as people without the divine protection of the Lord God.</p>
+          <p class="en-p">To such a place, a beautiful woman of about forty approached while singing a promotional song, and as she gazed at the two corpses abandoned on the roadside, Woman: 'Ah, I know not who you are or where you are from, but you poor souls. Oh, you must have been pulled up by someone after becoming drowned corpses; your clothes are still soaking wet. If left in a place like this, you will surely become food for dogs and crows. I must do something to save these people and make them my followers. May the Lord God of the Uranai faith protect and bless you.'</p>
+          <p class="en-p">Saying this, she placed her white, slender hands, which looked like tortoiseshell work, upon the foreheads of the two and began to pray with all her might. However, no matter how much she prayed to the Lord God of the Uranai faith, there was no effect, so this time, as a trial, she changed the divine name to the Lord God of the San-Go faith and prayed with single-minded devotion. Gradually, warmth returned to the bodies of the two, and after about half an hour, they finally breathed again, rose up with a start, thanked the Lord God for the great grace of saving their lives, and expressed their gratitude with tears. This woman is Chigusa no Takahime, who escaped from Turman Castle. Since fleeing the castle, Chigusa had chosen to travel through mountains and fields where there were few people until she reached this place, and having revived two dead people for the first time, she reached the pinnacle of her triumph, Takahime: 'Now, now, I know not what kind of thieves you are, but had this Chigusa no Takahime not passed this way, your precious lives would have already gone to the place called the ten million billion lands, and you would never have been able to return to this world again. Tell me, what are your names? I must hear them, for otherwise, I cannot offer my thanks to the great Miroku-sama of the living palace of the Hinodewake.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">タラハン城市を西へ距る三十里許りの所に岩滝村と云ふ小部落がある。此所には魚ケ淵と云つて、蒼み立つた可なり広い水溜があり、沢山な魚が四季共に集中してゐる。印度の国の風習として妄に生物を食はないので、魚類は日に日に繁殖する許りであつた。水一升魚一升と称へらるる此魚ケ淵へ時々漁に行く首陀があつた。浄行や刹帝利や毘舎等は決して魚を漁つたり、殺生等はやらないが、首陀となると、身分が低い為殆んど人間扱をされてゐないので、何程殺生をしても神仏の咎は無いといふ信念が一般に伝はつてゐた。然し乍ら浄行、刹帝利、毘舎と雖、生きた者を食はない許りで店舗に売つてゐる魚ならば代価を払つて買求め、之を食膳にのぼす事は別に殺生とも感じてゐないのである。夏木茂れる川縁の木蔭に腰打かけ雑談に耽り乍ら、四五人の首陀が魚漁の用意をやつてゐると、淵へ舞込んで来た三つのコルブスがあつた。首陀は先づ岩上から此コルブスに向つて網を打ちかけ、漸くにして道傍に拾ひ上げてみた処、一人はどうしても修験者の果らしく、二人の奴は何処共なしに泥棒らしい面相をしてゐるので、古寺の坊主を呼び葬式をすることとなつた。泥棒なんかは其死骸を虎狼の餌食に任して省みないが修験者となれば何うしても捨てて置く訳には行かぬと云ふので、珠露海といふ吉凶禍福や卜筮等を記した経文の記事を案じて、五行葬の何れに為さむかとやつてみた処此修験者は何うしても土葬にせにやならぬと云ふ占が出たので、村人が寄つて掛つて、体を其儘土の中へ埋け、印を立てる代りに耳から上面を出して置いたのである。五行葬の中には野葬、木葬、火葬、土葬、水葬と云ふ五つの葬式法がある。そして木葬と云ふのは、コルブスを木の上に掛けて置き、風に晒す葬式法である。此珠露海の卜筮にかからない者は神の冥護のない者として死屍を路傍に捨てて置く事になつてゐた。斯かる所へ四十前後の美人が宣伝歌を歌ひ乍ら近より来り、路傍に遺棄してある二つの死骸を眺め乍ら、</p>
+            <p class="ja-classical-line">女『あ、何処の何人か知らぬが可哀相に、コラ、土佐衛門になつた処を誰かに引き上げられたのだらう、まだ着物はズクズクになつてゐる。かふいふ所に放つて置けば、犬や烏の餌食になるだらう。何とかして此奴を助け自分の従者にしてやりたいものだなア、ウラナイ教の大神守り玉へ幸ひ玉へ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、白い細い鼈甲細工の如うな手を両人の額にあて、一生懸命に祈願し始めた。然し乍ら何程ウラナイ教の大神を念じても効験が無いので、今度は試みに、三五教の大神と神名を変へて一心不乱に念願すると、両人の体に追々と温みが廻り、半時許りの後にやうやう息を吹き返し、ムクムクと起き上つて、救命主の大恩を謝し、涙乍らに感謝した。此女はトルマン城を脱出した千草の高姫である。千草は城内を逃げ出してから、人通の少な相な山野を選んで此所迄やつて来たが、初めて二人の死者を甦らせ、得意の頂点に達し、</p>
+            <p class="ja-classical-line">『コレコレお前達は何処の泥棒かは知らね共、此千草の高姫が此処を通らなかつたならば、玉の緒の命は既に已に十万億土と云ふ所へ行つて了つて、二度と再此世へ帰る事は出来ないのだよ。一体お前の名は何と云ふ名だい、それを聞いて置かねば、日出神の生宮が大ミロク様へお礼を申上げることが出来ないからなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Koburai: 'Yes, I am called Koburai. The other one is called Kōro, and we were actually subordinates of the Samori-no-tsukasa at Tarahan Castle, but due to a sudden turn of events, we were disowned and, having nowhere to place our bodies, we threw ourselves into the Tarahan River. Having been saved by you there, there is nothing more joyful than this.'</p>
+          <p class="en-p">Chigusahime: 'Ah, is that so? Well, that is a good find for your lives. This Chigusahime is no human of the earth. I am a Tennin of the Daiichireigoku, the Ikimiya of Hinodenokami, the Futobashira of the Great Miroku, and one called the Takahime of Chigusa. Since I intend to travel through the seven thousand and more countries of the Moon for the sake of Shiyujiyōsaido, would you two not like to become the two arms of this Chigusa, perform great activities for the sake of the Tenka and Kokuka, and make a name for yourselves in the world? And what kind of bad things did you two do? Being disowned by one's Shiyujin should not happen unless there is a very deep reason.'</p>
+          <p class="en-p">Koburai: 'Yes, it is embarrassing to say, but together with a thief of a Shugenja who calls himself an incarnation of the Heavenly Emperor named Genshinbō, we snuck into the mansion of the Samori-no-tsukasa, were caught in the act of prying open the safe, and were thrown into prison.'</p>
+          <p class="en-p">Chigusahime: 'My, my, you are quite the villain, not matching your face at all, ha ha ha. There is a proverb that says if one is strong in good, one is also strong in evil; that is rather reliable. And what has become of that Shugenja called Genshinbō?'</p>
+          <p class="en-p">Koburai: 'Yes, the three of us threw ourselves in together, but since I fainted afterwards, I do not know in the slightest what happened or how things turned out.'</p>
+          <p class="en-p">Chigusahime: 'Indeed, that must be so. However, there is a Corvus buried here with only his head sticking out, but do you have any memory of this face?'</p>
+          <p class="en-p">Both: 'Ah, it is Genshin-sama... My, what a terrible thing has happened. Would you please save this fellow as well? We two have heard that we were saved by you, but as we were dead, we know nothing. To tell the truth, I do not know if we were saved by your divine power or if we were saved by someone else, but if you save this Genshin-sama before our eyes, it will be proof that you have indeed saved us two.'</p>
+          <p class="en-p">Chigusahime: 'Hey, you, what kind of insolent things are you saying? While your lives were saved by the divine power of this Takahime of Chigusa, is that the way to greet me? However, since you are ignorant and foolish human-outsiders, you probably do not understand anything; practice is better than argument. Then, to clear your doubts, this Chigusahime shall now show you my divine power. Once this Shugenja is saved, you will surely obey this Chigusa absolutely to the end, will you not?'</p>
+          <p class="en-p">Koburai: 'Yes, that is so. Even if it were not so, I have promised to follow you to the end, so if you show me the present-life benefits, I will have no complaints.'</p>
+          <p class="en-p">Chigusahime: 'From now on, I will revive this Shugenja, so you must firmly remember the name of the God and ensure you do not forget that divine virtue.'</p>
+          <p class="en-p">Chigusahime placed her white, soft hand on the forehead of Corvus, who was exposed from the neck up, and while sweating profusely, prayed with all her might, 'O Great God of the Uranai faith, save me, help me, Kannagara Tamachi Hae Mase.' Though she prayed and prayed, he did not budge, and there was no sign of him reviving. Having boasted grandly before the two, the Takahime of Chigusa felt she must revive this fellow no matter what, and became even more desperate. Though she prayed and wished for nearly half an hour, Corvus remained as cold as ice. Even Chigusa, as she was, broke her ego and proclaimed, 'O Great God of the Sango faith, protect me, forgive me.' Suddenly, warmth returned to his forehead, and his blue-black face took on a bright red hue. As Chigusa seized the moment and prayed with all her might, 'O Great God of the Sango, protect me, bless me,' the earth began to tremble violently, and the ground cracked in all directions with Corvus at the center. The moment she let out a cry of 'Un,' the corpse of Genshinbō flew about three ken into the mid-air, and at the moment it fell back to its original place with a thud, he suddenly regained consciousness, pulled his eyes and nose together, and while looking around the four sides two or three times,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">男『ハイ、私はコブライと申します。モ一人はコオロと申まして、実はタラハン城の左守の司の幕下で御座いましたが、フトした事から勘当を受けまして身の置き所なく、タラハン河へ身を投げましたので御座います。其所を貴女様にお助を願ひ、斯様な嬉しい事は御座いませぬ』</p>
+            <p class="ja-classical-line">千草『ア、さうかいナ、そりやお前、命のよい拾物だよ。此千草姫は地上の人間ぢやありませぬぞえ。第一霊国の天人、日出神の生宮、大ミロクの太柱、千草の高姫と申す者だが、衆生済度の為之から月の国七千余国を巡歴する積だから、お前等二人は此千草の両腕となつて、天下国家の為に大々的活動を為し、天下に名を挙げる気はないかい。そしてお前等二人はどんな悪い事をしたのだい。主人から勘当を受けるといふ事は、よくよくの事でなければ無い筈だが』</p>
+            <p class="ja-classical-line">コ『ハイ、お恥しう御座いますが、玄真坊と云ふ天帝の化身と称する修験者の泥棒様と一緒に、左守の司の館へ忍込み、金庫の錠を捩折つてる所を捉へられ、牢獄へ打込まれたので御座います』</p>
+            <p class="ja-classical-line">千『何とまア、お前も、面にも似合ぬ悪党だな、アハヽヽヽ。善に強ければ悪にも強いと云ふ諺もある、その方が却て頼もしい。そして其玄真坊と云ふ修験者は如何なつたのかい』</p>
+            <p class="ja-classical-line">コ『ハイ、三人一緒に身投をしましたが、其後気絶をしたものですから、如何なつた事か斯うなつた事か、チツとも存じませぬ』</p>
+            <p class="ja-classical-line">千『如何にも、そらさうだろ。然し乍ら此所に首丈出して埋けられて居るコルブスがあるが、此面にお前覚えはないかの』</p>
+            <p class="ja-classical-line">と三間許りの傍の新墓を指し示す。コブライ、コオロの両人は一目見るより、</p>
+            <p class="ja-classical-line">両人『ア、玄真さま……で御座います。何とマア偉い事になつたものですな、何卒此奴も助けてやつて下さいますまいか。私等二人は貴女に助けられたとは聞きますが、死んでゐたので何も分りませぬ。本当のこた、お前さまの神力で助かつたか、又はハタの人に助けられたか分りませぬが、目の前で此玄真さまを助けて下さつたら弥々吾々二人をお前さまが助けて下さつたといふ証拠になりますからなア』</p>
+            <p class="ja-classical-line">千『コーラ、奴、何といふ口巾つたい事を申すのだい。此千草の高姫の神力によつて命を助けられ乍ら、左様な挨拶があるものか。然し乍ら無智蒙昧な人外人足だから何も分ろまい、議論よりも実地だ。それではお前の疑を晴らす為に、千草姫が今神力を見せてやらうぞや。此修験者が助かつたが最後、どこ迄も此千草に絶対服従をするだらうナ』</p>
+            <p class="ja-classical-line">コブ『そら、さうですとも。さうでなくても、貴方にどこ迄も従ひますと約束をしたのですもの、現当利益を見せて貰へば文句はありませぬワ』</p>
+            <p class="ja-classical-line">千『之から私が此修験者を甦らして見せるから、キツと神様のお名を覚えて居つて、其御神徳を忘れないやうにするのだよ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、首から上へ出てゐるコルブスの額に白い柔かい手をあて、「ウラナイ教の大神救ひ玉へ助け玉へ、惟神霊幸倍坐世」と一生懸命に汗をタラタラ流し、祈れど祈れどビクともせぬ、甦り相な気配もない。千草の高姫は二人の前で大法螺を吹いた手前、如何しても此奴を生かさねばおかぬと益々一生懸命になる。殆んど半時許り祈れど願へど、矢張コルブスは氷の如く冷たい。流石の千草も我を折り「三五教の大御神守り玉へ許し玉へ」と宣直した。忽ち額に温みが廻り、青黒い面は鮮紅色を帯びて来た。千草は此処ぞと一生懸命に「三五の大神守り玉へ幸ひ玉へ」と祈るにつれ、大地はビリビリと震ひ出し、コルブスを中心として四方八方に地割がなし、「ウン」と一声霊をかけるや否や、玄真坊の死体は三間許り中天に飛び上り、ドスンと元の所へ落ちた拍子にパツと気がつき、目鼻を一所へよせて、四辺を二三回見廻し乍ら、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Genshinbau: 'Oh, are you two, Koburai and Kōro, there? Ah, what a terrifying dream I have had.'</p>
+          <p class="en-p">Koburai: 'Well, Genshinbau-sama, this is no dream-world disturbance. We three met with pursuers and were driven to a dead end, so we threw ourselves into the mountain stream and had already become Dozaemon; then, the villagers picked up our corpses, and since you are a Shiyugenjiya, you were buried with great care with only your head sticking out, while we two were left abandoned on the ground. Then this Hime-sama happened to pass by and saved us by casting some sort of spirit spell or other. In fact, it was this Koburai and Kōro who witnessed with our own eyes that she saved you; come now, offer your thanks. It is this Hime-sama here.'</p>
+          <p class="en-p">Genshinbau: 'Ah, this is, this is, thank you so much for saving me. But still, what a beautiful Hime-sama you are, ehehehe. This must surely be entirely the Shigumi of the Kamisama. I feel as if I have been reborn from the land of total darkness into the Hinodenokuni. My life-saving Hime-sama, from now on I shall serve you in any task you require, so please, I beg you, treat me with affection and make use of me.'</p>
+          <p class="en-p">Chigusa no Takahime: 'Hohoho, my, I have never seen a face so thoroughly and intricately crafted to be ugly. However, there is something about you that resembles Kyūbā-sama. From now on, if this Chigusa no Takahime tells you to wipe her bottom, you shall wipe it. Think of it as repaying the debt of having your life saved, and you must not utter a single word of backtalk.'</p>
+          <p class="en-p">Genshinbau: 'Well, I shall obey you in any matter, but I would like you to excuse me from wiping your bottom, for the sake of my dignity. If I am to wipe your bottom, I do not know how much happier I would be if I had not been saved at all.'</p>
+          <p class="en-p">Chigusa no Takahime: 'Hoho, you lie, you lie. Your face is a bit unusually strange compared to others, but there is something about the depths of your eyes that is filled with talent. It might be interesting to use you as some kind of jewel and set you to work.'</p>
+          <p class="en-p">Genshinbau: 'Well, I am satisfied that you have recognized my capacity to that extent. Though I am in such a shabby state now, I am a magnificent hero who once holed up in Mount Ōra, used great warriors like Shīgō and Yorikohime as my subordinates, commanded three thousand troops, and planned to hold the seven thousand and more countries of India in my own hands.'</p>
+          <p class="en-p">Chigusa no Takahime: 'Ah, so you were that famous mountain priest of Mount Ōra. Well, I have met you at a good time; I have found a good person, a good find. Come, let us become husband and wife from now on and set to work.'</p>
+          <p class="en-p">Genshinbau: 'Indeed, that would be interesting. You said we shall become husband and wife, so I shall call you my wife before the roots of your tongue have dried. Hey, wife, Chigusa-hime, the celestial being of the First Spirit Kingdom, the heaven-sent savior, the incarnation of the Heavenly Emperor, the wife of the home of Tenshinbau, you surely have no objections, do you?'</p>
+          <p class="en-p">Chigusa no Takahime: 'I have no objections to becoming husband and wife with you. However, I am the celestial being of the First Spirit Kingdom, the living shrine of the Hinode-gami, the great Miroku pillar of the foundation of the deep rocks, and the savior of the three thousand worlds, Chigusa no Takahime; therefore, from the standpoint of divinity, this Chigusa no Takahime is the master, and you must become my servant by the connection of spirits. Let us establish that from the physical standpoint, you are the husband and Chigusa is the wife. You must have fabricated your own incarnation of the Heavenly Emperor. Such a mountain priest will be no good from now on. Unless you are a genuine celestial being of the First Spirit Kingdom, you cannot perform activities that match your name and reality when it matters most. With no more divine power than being buried with only your head sticking out in a place like this, you could hardly be called an incarnation of the Heavenly Emperor.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玄『ヤ、其処に居るのは、コブライにコオロぢやないか。あーア、怖い夢を見たものだのう』</p>
+            <p class="ja-classical-line">コブ『若し、玄真坊さま、夢所の騒ぢやありませぬよ。吾々三人は追手に出会つて進退谷まり、谷川へ投身して已に土佐衛門となつて居つた所、村人に死体を拾ひ上げられ、お前さまは修験者の事とて、首丈出して、鄭重に葬られてあつたが、吾々二人は地上に遺棄されてゐたのだ。そこへ此お姫さまが通りかかつて、霊とか何とかをかけて助けて下さつたのですよ。現にお前さまを助けて下さつたのを実地目撃したのは此コブライ、コオロ、サアサア御礼を申しなさい。此お姫さまで御座いますワイ』</p>
+            <p class="ja-classical-line">玄『あ、これはこれは、能くまアお助け下さいました。ても偖も御容貌のよいお姫さまで御座いますこと、エヘヽヽヽ。之といふのも全く神様のお仕組で御座いませう。丸切暗の国から日出国へ生れ変つたやうな気分が致します。命の親のお姫さま、之から如何な事でも貴女の御用なら勤めますから、何卒可愛がつて使つて下さいませや』</p>
+            <p class="ja-classical-line">千『ホヽヽヽ、何とまア、之丈念入りに不細工に出来上つた面は見た事はありませぬワ。然し乍らどこ共なしにキユーバーさまに似た所がある様だ、之からお前さまも、此千草の高姫がおイドを拭けと云ふたら、おイドでも拭くのですよ。命を助けて貰ふた御恩返しと思ふて、口答一つしちや可けませぬぜ』</p>
+            <p class="ja-classical-line">玄『ヤ、如何な事でも承はりませうが、お尻を拭く事丈は、私の人格に免じて許して頂きたいものです。貴女の尻拭きする位なら、助けて貰はぬ方が何程幸福か知れませぬからなア』</p>
+            <p class="ja-classical-line">千『ホヽヽ、嘘だよ嘘だよ、お前さまの面は一寸人並優れて変つてゐるが、どこ共なしに目の奥に才気が満ちてゐるやうだ。お前さまを何かの玉に使つて、一つ仕事をやつたら面白からう』</p>
+            <p class="ja-classical-line">玄『ヤ、そこ迄私の器量を認めて頂けば満足です。私も今は斯うなつて、みすぼらしい風を致して居りますが、オーラ山に立籠り、シーゴー、依子姫などの豪傑を幕下に使ひ、三千の部下を従へ、印度七千余国を吾手に握らむと計画してゐた天晴な大丈夫ですよ』</p>
+            <p class="ja-classical-line">千『あ、お前さまが、彼の名高いオーラ山の山子坊主だつたのか。ヤ、そら可い所で会ふた、佳い者が見付かつた、可い拾物をした。さア、之からお前さまと夫婦と化込んで、一つ仕事をやらうぢやないか』</p>
+            <p class="ja-classical-line">玄『成程、面白からう、夫婦にならうと云ふたな、其舌の根の乾かぬ内に女房と呼んで置く。コラ女房、千草姫、第一霊国の天人、天来の救世主、天帝の化身、天真坊の宿の妻、ヨモヤ不服はあるまいなア』</p>
+            <p class="ja-classical-line">千『お前さまと夫婦になる事丈は異議ありませぬ。然し乍ら妾こそ、第一霊国の天人、日出神の生宮、底津岩根の大ミロクの太柱、三千世界の救世主、千草の高姫だから、神格の上から、此千草の高姫が主であり、お前さまは従僕となつて貰はねばならぬ霊の因縁だよ。肉体上からはお前さまが夫で千草が妻と定めて置きませう。お前さまの天帝の化身は自分が拵へたのだらう。そんな山子は之からは駄目ですよ。正真正銘の第一霊国の天人でなけら、肝腎の場合に於て、名実ともなふ活動が出来ませぬからな。こんな所へ首丈出して埋けられてるやうな神力の無い事で、天帝の化身なんて言つて貰へますまい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Gen: 'Nay, well, I shall yield my position as the Keshin of Tentei and the Tennin of the Daiichireigoku to you, my Niyōbau; if I can but have you as my Niyōbau, I am already satisfied, you see.'</p>
+          <p class="en-p">Chi: 'I refuse; even without your yielding, I am from the beginning the Tennin of the Daiichireigoku, the Ikimiya of Hinodenokami, the Futobashira of the Great Miroku, and the Kiuseishiyu of the Sanzensekai, the Chigusa no Takahime.'</p>
+          <p class="en-p">Gen: 'Ah, how there is always someone above another. If one were to be struck by this much Bibau and Benzetsu, most men would surely surrender, would they not?'</p>
+          <p class="en-p">Chi: 'Well, that is indeed so; I am a woman of such mettle that I cast aside the Ōhi of the Turman country and came alone through a Genya where Maujiu run wild; to speak of such things is merely Yabo, ho ho ho.'</p>
+          <p class="en-p">Kōro: 'My, what grand persons have gathered here. Tell me, Koburai, is it not as if we have been bewitched by a fox?'</p>
+          <p class="en-p">Ko: 'My mouth, once opened, will not close, I tell you.'</p>
+          <p class="en-p">Chi: 'Hey, you there, what rude things are you saying? Even though the Futobashira of Miroku is appearing before you, to say it is as if bewitched by a fox—what is the meaning of this? From now on, you must not even utter the sound of the word fox.'</p>
+          <p class="en-p">Kōro: 'Yes, I am truly terrified; it is because you resemble so closely the Gomensau of the Kinmaukiubi who appears in the Shibai of Tamamonomahe, that I inadvertently spoke of a fox and offended your Gokigen; I offer my humble Owabi.'</p>
+          <p class="en-p">Gen: 'Ah, it seems the day is drawing to a close. Shall we not seek lodging somewhere and spend the night talking until dawn? ...Wait, that is wrong, that is wrong. Hey, my Niyōbau Chigusa, shall we seek lodging somewhere and rest at our leisure? You surely would not say no, would you?'</p>
+          <p class="en-p">Chi: 'Ho ho ho, what a fine master I have acquired; even so, when one is hungry, nothing tastes bad... ho ho ho ho.'</p>
+          <p class="en-p">Genshinbō, having heard only half of this, says:</p>
+          <p class="en-p">Gen: 'Hey, Niyōbau, do not worry so; I shall never let you eat anything unpalatable. You shall not suffer hunger, so leave it to me. My money is filled to the brim in my money belt, just like this, you see.'</p>
+          <p class="en-p">Saying this, he puts his hand to his waist and is startled:</p>
+          <p class="en-p">Gen: 'Hey, when did my money disappear? Hey, Koburai, was it not you who stole it?'</p>
+          <p class="en-p">Ko: 'Do not say such cruel things; no matter how much of a thief I may be, I would not steal your money. When we jumped into the river, we dropped everything to the riverbed. I am penniless, just like this. Kōro is the same; he does not have even a single mon.'</p>
+          <p class="en-p">Gen: 'Ah, this is a troublesome matter; in that case, we cannot stay at an inn tonight, is there not some way to manage?'</p>
+          <p class="en-p">Chi: 'Ho ho ho, what a gathering of the destitute; thinking you might have money, I cast amorous glances at this tea-kettle-headed lizard-face, but hearing you are penniless, all my affection and interest have vanished. Ugh, how filthy. Go wherever you like on your own; even without a single mon, I shall use this Bibau as my capital to stay at any inn and indulge in luxury. However, if a piece of junk like you follows me, I shall be mistaken for a female bandit, so I must decline. Farewell.'</p>
+          <p class="en-p">She attempts to stand up. Genshinbō clings to her legs with all his might:</p>
+          <p class="en-p">Gen: 'Hey, Niyōbau, is there such a thing as running away from home without even sharing a pillow for a single night? At least wait for this one night.'</p>
+          <p class="en-p">Chi: 'In the middle of a wilderness, what talk is there of running away from home or not? You homeless wretch, you failed-suicide octopus-priest, you make me so disgusted that even the outhouse would start dancing!'</p>
+          <p class="en-p">She struggles, trying to shake him off and escape.</p>
+          <p class="en-p">Gen: 'Hey, Koburai, Kōro, both of you, grab my Niyōbau firmly. I cannot seem to hold her back by myself.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玄『イヤ、モウ、天帝の化身も、第一霊国の天人もお株を、女房のお前に譲らう、お前を女房にさへすりや、俺やモウ満足だからのう』</p>
+            <p class="ja-classical-line">千『厭ですよ、譲つて貰はなくても、元から第一霊国の天人、日出神の生宮、大ミロクの太柱、三千世界の救世主、千草の高姫ですもの』</p>
+            <p class="ja-classical-line">玄『あ、何と上には上のあるものだな。これ丈の美貌と弁舌とでやられたら、大抵の男は参つて了ふだろ』</p>
+            <p class="ja-classical-line">千『そら、さうです共、トルマン国の王妃を棒に振つて、只一人猛獣の猛り狂ふ原野をやつて来るといふ豪の女ですもの、そんなこた、云ふ丈野暮ですワ、ホヽヽヽ』</p>
+            <p class="ja-classical-line">コオ『何とマア、偉い方許り寄られたものですな。のうコブライ、丸切り狐に魅まれたやうぢやないか』</p>
+            <p class="ja-classical-line">コ『俺ヤ、モウ開いた口がすぼまらぬワイ』</p>
+            <p class="ja-classical-line">千『コレコレ其処の奴さま、何と云ふ無礼の事を云ふのだ。ミロクの太柱が現はれてゐるのに、狐に魅まれたやうだとは何ぢやいな。之から狐のキの字も云つては可けませぬよ』</p>
+            <p class="ja-classical-line">コオ『ハイ恐れ入りまして御座います、玉藻前の芝居に出る金毛九尾さまの御面相に余りによく似てるものだから、つい狐のやうだと申して、御機嫌を損ねましたのは平に御託を致します』</p>
+            <p class="ja-classical-line">玄『あ、何うやら日が暮れ相だ。どつかへ宿を求めて、今晩はゆつくりと語り明さうぢやありませぬか、………ナニ違ふ違ふ。オイ女房千草、どつかで、宿を求めて緩くり休まうかい、ヨモヤ厭とは申すまいのう』</p>
+            <p class="ja-classical-line">千『ホツホヽヽ、立派な御主人が出来たものだ、之でもひだるい時に不味ものなしだから……ホヽヽヽヽ』</p>
+            <p class="ja-classical-line">と小声で笑ふ。玄真坊は半分許り聞かじり、</p>
+            <p class="ja-classical-line">『コラ女房、さう心配するものぢやない、決して不味物は食はさないよ。ひだるい目もささないから、俺に任しておけ。お金は此通り、胴巻に一杯つめてあるからのう』</p>
+            <p class="ja-classical-line">といひ乍ら、腰の辺に手をやつてみてビツクリ、</p>
+            <p class="ja-classical-line">『ヤ、何時の間にか所持金が無くなつてゐる。コラ、コブライ、汝が奪つたのぢやないか』</p>
+            <p class="ja-classical-line">コ『そんな殺生な事云ひなさるな、何程泥棒でもお前さまの金まで奪りませぬよ。私共も川へ飛び込んだ時、皆川底へ落して了つたのです。此通無一文です。コオロだつて其通り、一文だつて持つてゐやしませぬで』</p>
+            <p class="ja-classical-line">玄『あゝ、困つた事だの、それぢや、今晩宿屋に泊る訳にはゆかず、何とか工夫はあるまいかのう』</p>
+            <p class="ja-classical-line">千『ホヽヽヽ、何とまア、スカン貧の寄合だこと、金でも持つて居り相なと思ひ、こんな茶瓶頭の蜥蜴面に秋波を送つて見たのだけれど、文無しと聞いちや、愛想もコソも尽き果てて了つた。エーエ穢らはしい、何所なつとお前さま勝手に行きなさい、此千草は一文の金は無くても此美貌を種に、如何な宿屋にでも贅沢三昧をして泊つて見せませう。然し乍らお前さまのやうなガラクタが従いてると、女盗賊と間違へられるから御免蒙りませう、左様なら』</p>
+            <p class="ja-classical-line">と立上らうとする。玄真坊は一生懸命に足にくらひつき、</p>
+            <p class="ja-classical-line">『コラ女房、一夜の枕もかはさずに、家を飛び出すと云ふ事があるか、せめて今宵一夜は待つてくれ』</p>
+            <p class="ja-classical-line">千『野つ原の中で、家を飛び出す飛び出さぬもあるかい、宿無し者奴、死損ひの蛸坊主、おイドが呆れて雪隠が踊り出すワイ』</p>
+            <p class="ja-classical-line">とふり切り逃げ様ともがく。</p>
+            <p class="ja-classical-line">玄『オイ、コブライ、コオロの両人、女房を確り掴へてくれ。俺一人ではどうやら取放しさうだ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec05">
+        <div class="sec-header">
+          <span class="para-num">&sect; 5</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Koburai and Kōro spread their Riyōte, stood Tsutsuta in front, and said, 'Now, now, Okusama, you must not get so Tanki; is this not too Mizukusa? Since we three rolled the Koban around our waists until we could hardly move and dropped them into the abyss, if you have need of them, we will risk our Inochi to retrieve them from the Kahasoko; please, do not be so Tanki.'</p>
+          <p class="en-p">Chigusa: 'Ho ho ho ho, Chiyotsuto, because you are such a dear Genshin-sama, I was just Karaka-ing you to test the degree of your love. That Genshin-sama would love this Chigusahime to the end has been proven by your Kaudō just now. It is not that I have any need for a large amount of Ōgon all at once, but every time this Chigusa gives a Meirei, you will jump into this abyss and retrieve that gold for me, will you not?'</p>
+          <p class="en-p">Koburai: 'Heh, there is no need for you to even say so; it would be Motsutai for me to leave such Atara treasure at the Minasoko. Isn't that right, Kōro?'</p>
+          <p class="en-p">Kōro: 'Un, that is right, that is right. The treasure of you and me must surely be resting in that abyss where we jumped in. However, there is no Riiu for Genshin-sama's treasure to leave his body even if he jumps into the river recklessly. It was tied so firmly to his stomach band, after all. If by any chance it is here, let us dig up this grave. It might be at the bottom of this. Moshi, Genshinbō-sama, please ask the Tentei-sama for a moment.'</p>
+          <p class="en-p">Genshin: 'Un, it is certainly here; dig it up for me.'</p>
+          <p class="en-p">Kōro: 'Ya, if it is your word, there can be no mistake. Sa, let us dig.'</p>
+          <p class="en-p">The two of them scraped away the soil until their nails were worn down to the quick, digging deeper and deeper. About five shaku down, the Ōgon, wrapped in a stomach band, lay there with its heavy weight staring back at them. Koburai was so happy he could almost fly, and said, 'Moshi moshi, Genshin-sama, we found it, we found it! Please be happy.'</p>
+          <p class="en-p">Genshin: 'Well, that is to be expected. The Ōgon of you two was not attached to your bodies, but since mine was attached to my body, it remains just like this. Sa, both of you, lift it up quickly. Kore kore, wife, how is it? Look at this gold for a moment. This is all my gold. With this much, even if you and I continue to drink for three or five years, it will be fine.'</p>
+          <p class="en-p">Chigusa: 'What a great person you are; you are a man of character who is not shameful as my husband, ho ho ho ho. Kore kore, Koburai and Kōro, you have worked hard, but please dig another two or three shaku deeper at this bottom; there are diamonds there. Because I have learned through my Shinchoku that there is something even more valuable than Ōgon...'</p>
+          <p class="en-p">Kōro: 'Eh, I understand. If it is your command, I will dig even to the bottom of the earth.'</p>
+          <p class="en-p">With that, Kōro and the other were covered in sweat, digging up the soil. Genshinbō and Chigusa stuck out their tongues, and in order to bury the two alive quickly, they threw soil in from above with all their might, placed a standing stone that was nearby with a thud, and while sitting on the standing stone, with faces that seemed to say that everything was now fine, they puffed away on Chigusahime's tobacco.</p>
+          <p class="en-p">Chigusa: 'What a nuisance those two were; I was worried about what to do, but it seems that, as the saying goes, heart speaks to heart, and your heart and my heart were perfectly in tune, for we performed such a feat without saying a single word; it is truly mysterious.'</p>
+          <p class="en-p">Genshin: 'It is truly so. In truth, I was thinking of burying these fellows, and you were the same? If such fellows are wandering about, they will be a hindrance to our love and a burden to our hands and feet in the future. Shall we go somewhere to stay at an inn, or climb a mountain with a good view to open the door of mystery, or perhaps perform a Kagura dance to celebrate our wedding today?'</p>
+          <p class="en-p">Chigusa: 'That would be interesting. It would be a bit awkward if we were suspected while staying at an inn, so let us take advantage of the moonlit night and go to that dense forest. There must surely be at least an old hall built in that forest.'</p>
+          <p class="en-p">Genshin: 'Oi, if we do not hold our ground here for a little longer, it will be a disaster if those fellows come back to life and chase after us.'</p>
+          <p class="en-p">Chigusa: 'Nani, why would you need to worry about such a thing? I have cast a Reibaku with the Shinriki of this Chigusahime, so they are frozen like stones at the bottom of the hole. Sa, let us go. Kore, Genshin-sama, it is unsightly; wipe your drool.'</p>
+          <p class="en-p">Genshin hurriedly wiped his drool with both Riyōte and rubbed them against his knees.</p>
+          <p class="en-p">Chigusa: 'Ma ma, how disgusting. Genshin-sama, wiping your drool-covered hands on your knees—it is as if your kimono and a rag are one and the same, ho ho.'</p>
+          <p class="en-p">From here, the two took the moonlit path to the south and ran toward the dense mountain as their goal.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">コブライ、コオロ両手を拡げて、前に突立ち、</p>
+            <p class="ja-classical-line">『コレコレ奥さま、さう短気を起しちや可けませぬ、余り水臭いぢやありませぬか。小判は吾々三人が動けぬ程腰へ捲いて来て、淵へ落したのですから、御入用とあれば命を的に川底から拾うて見せます、どうか短気を起さぬ様にして下さいませ』</p>
+            <p class="ja-classical-line">千『ホヽヽヽ、一寸、余り好な玄真さまだから、愛の程度を試す為に嘲弄つてみたのですよ。どこ迄も玄真さまは此千草姫を愛して下さると云ふ事が、只今の行動に仍つて証明されました。一遍に沢山の黄金の必用も無いけれど、此千草が命令する毎に、お前さまは此淵へ飛び込んで、其金を拾つて来るでせうなア』</p>
+            <p class="ja-classical-line">コブ『ヘー、仰せ迄も御座いませぬ、私だつて可惜宝を水底に捨てて置くのは勿体なう御座います。のうコオロさうぢやないか』</p>
+            <p class="ja-classical-line">コオ『ウンさう共さう共、俺と汝の宝はキーツと飛び込んだあの淵に納まつてるに違ない。併し玄真さまのお宝は、滅多に川へ飛び込んでも体を離れる理由がない。あれ丈しつかりと胴巻に括りつけてあつたのだもの。ヒヨツとしたら、此墓を掘つて見よ。此底にあるかも知れぬ。モシ玄真坊さま、一寸天帝さまに伺つて下さいな』</p>
+            <p class="ja-classical-line">玄『ウン、確にある、掘つてみてくれ』</p>
+            <p class="ja-classical-line">コ『ヤ、貴方のお言葉とあらア間違御座いますまい、サ掘らう』</p>
+            <p class="ja-classical-line">と二人は爪が坊主になる所迄土を掻き分けて底へ底へと掘り込んだ。五尺許り掘つた所に胴巻ぐるめ、ドスンと重たい程黄金が目をむいてゐた。コブライは飛び立つ許り喜んで、</p>
+            <p class="ja-classical-line">『モシモシ玄真さま、有りました有りました、喜んで下さい』</p>
+            <p class="ja-classical-line">玄『そらさうだろ、汝等二人の黄金は身についてゐないのだ、俺は身についた金だから此通残つてるのだ。サ、両人早く持ち上げてくれ。コレコレ女房、どうだ、一寸此金を見ろ、之は皆俺の金だ。これ丈ありやお前と俺とが三年や五年呑つづけても大丈夫だよ』</p>
+            <p class="ja-classical-line">千『何と貴方は偉いお方ですな、私の夫として恥しからぬ人格者ですワ、ホヽヽヽヽ。コレコレ　コブライ、コオロの両人、御苦労だつたが、まだ此底を三尺か二尺掘つて下さい、ダイヤモンドがありますよ。私の神勅によつて黄金以上の物があるといふ事が分つたから……』</p>
+            <p class="ja-classical-line">コ『エ、承知しました、貴女の仰せなら地の底迄も掘りますよ』</p>
+            <p class="ja-classical-line">とコオロと両人が汗みどろになつて、土を掘り上げてゐる。玄真坊千草の二人は舌をペロリと出し、手早く二人を生埋めにせむと、一生懸命に土を上から投り込み、側にあつた立石をドスンと載せ、立石の上に腰うちかけ乍ら、モウ之で大丈夫と云ふやうな面構で、スパリスパリと千草姫の煙草を引たくつて吸うてゐる。</p>
+            <p class="ja-classical-line">千『何とマア厄介者が二人ゐやがる、如何したら可からうと心配でならなかつたが、矢張以心伝心、お前さまの心と私の心はピツタリ合ふてゐたとみえて、一言も云はずにこんな放れ業をやつたのだから妙ですなア』</p>
+            <p class="ja-classical-line">玄『本当にさうだ、実ア俺は此奴を埋込んでやろと思つたが、お前もさうだつたか、こんな奴がウロツキやがると二人の恋の邪魔になるし将来の手足纏になるが、之から二人でどつか宿へ泊るか、見晴のよい山へ上つて神秘の扉を開くか、或は神楽舞でもやつて、今日の結婚の内祝でもせうぢやないか』</p>
+            <p class="ja-classical-line">千『そら面白いでせう。宿屋に居つても怪しまれると一寸具合が悪いから、そんなら今夜は月夜を幸、あのコンモリした森迄行きませう。あの森にはキツと古堂位は建つてゐるでせうからね』</p>
+            <p class="ja-classical-line">玄『オイ、モウ少時此上で頑張つて居らねば、彼奴が生返つて後追かけて来ら大変だぞ』</p>
+            <p class="ja-classical-line">千『ナーニそんな心配が要りますものか、此千草姫の神力で霊縛をかけておきましたから、穴の底で石の如うに固まつてゐますよ。サ、参りませう、コレ玄真さま、みつともない、涎を拭きなさいナ』</p>
+            <p class="ja-classical-line">玄真は慌て両の手で涎を手繰り、膝のあたりに両手をこすりつけてゐる。</p>
+            <p class="ja-classical-line">千『マアマア厭なこと、玄真さま涎の手を膝で拭いたり、丸で着物と雑巾と一つだワ、ホヽヽ』</p>
+            <p class="ja-classical-line">之より両人は月夜の路を南へ取り、コンモリとした山を目当に走りゆく。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c15.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 15: 紺 Spirit [1804]</span>
+      </a>
+      <a href="c17.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 17: Dream 現 Kami [1806]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

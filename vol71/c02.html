@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 2: 生臭坊 [1791] - Volume 71 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 71 Table of Contents</a>
+      <span>Volume 71</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 71 &bull; Chapter 2</span>
+      <h1 class="chapter-title-en">Chapter 2: 生臭坊 [1791]</h1>
+      <p class="chapter-title-ja">生臭坊〔1791〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Stationed upon the mountain of Aura, the Tenrai Yuiitsu Kiuseishiyu, proclaiming himself the Keshin of Tentei, the Onnatauzoku Yorikohime, conspiring with the two of Shīgō, and distributing three thousand Zokuto in all directions, plotted a Daiinbō to occupy the moon-country of Shichisenyokoku.</p>
+          <p class="en-p">Just as they were planning this, they were raided by Umekō-sama, whose name is renowned in the Ananai-kyō, and having their Tokihakakiha Ihayado broken through, they surrendered.</p>
+          <p class="en-p">Yorikohime and Shīgō submitted to the path of truth, and in exchange for pledging to dedicate their remaining lives to the Tenkakōkiyō, they feigned submission for a time.</p>
+          <p class="en-p">The Maisubauzu Genshin, having crossed the lake of Haru, became enamored with Dariya, the daughter of a medicine merchant known in the world as a wealthy man of the port of Suga, and seduced her with clever words.</p>
+          <p class="en-p">Upon hearing that Shiyakanna, the official of the left guard, was hiding in the deep mountains of the Taniguku valley with many subordinates, he thought to raise a banner once again.</p>
+          <p class="en-p">With a haughty air, he took Dariya by the hand, and after spending the night, he slurred his tongue with the sake of the banquet.</p>
+          <p class="en-p">While he was fast asleep, Dariya-hime disappeared with the thief Barugī, which was a ridiculous turn of events.</p>
+          <p class="en-p">Genshinbō, who had deceived others as the Keshin of Tentei, could not bear it, and borrowing two hundred of Shiyakanna's subordinates, he took the clever Koburai with him to search for the Hime.</p>
+          <p class="en-p">They trudged along the valley path, and as the sun set completely at the foot of Tateiwa, they fell into a dark pit.</p>
+          <p class="en-p">Spending a lonely night, then following the wisteria vines, they finally escaped the jaws of death, and while following a winding path where the grass grew thick, they wandered like dogs and cats in heat sniffing the hips of a female, a pitiful sight.</p>
+          <p class="en-p">The door of darkness was lifted, the eastern sky was stained with madder, and the dew on the grass leaves glittered.</p>
+          <p class="en-p">Shining with the brilliance of seven treasures, the two walked in the midst of it, treading and breaking the roots of rocks and trees while calling 'Dariya, Dariya' in a single-minded pursuit, sweating profusely, and climbing the bitter slope without complaint, their hearts ascending ahead.</p>
+          <p class="en-p">Tenshinbō: 'Oi, we have walked quite a distance now, so why don't we rest for a while in this place with a good view? The scenery overlooking the mountain ranges in all directions from this summit is as if one were wandering through a dreamland.'</p>
+          <p class="en-p">Koburai: 'It truly is like a dream; even last night, when I fell into a deep pit while dreaming of Dariya-sama, I truly felt as if I were not alive, and I thought to myself, if only this were a dream. At that time, I was truly worried about what would happen, just a little bit.'</p>
+          <p class="en-p">Tenshinbō: 'The architects of dreams are all human, so life would be lonely without dreams. The rainbow of life is a dream, and humans are at their peak while playing in this dreamland. The appearance of Dariya-hime, like a silver wind blowing through the young leaves of spring, is a refreshing sight, is it not? While you are longing for that charming figure, that is the flower of life, the architecture of dreams, the rainbow of life.'</p>
+          <p class="en-p">Koburai: 'Indeed, if that is the case, should we understand everything in this world as a fleeting dream?'</p>
+          <p class="en-p">Tenshinbō: 'That is correct, they do call it a floating world of dreams, but what one cannot forget even in a dream is, after all, Dariya-hime. Even in a dream, I wish to meet, a thousand ryo of gold and Dariya-hime. Ha ha ha ha ha.'</p>
+          <p class="en-p">Koburai: 'We who are listening to such a full serving of love talk on a mountain that is open in all directions are truly honored, or rather, not at all. I will not say it is disgusting or anything, but surely the gods of the mountain and others must be drooling while looking at your noble figure.'</p>
+          <p class="en-p">Tenshinbō: 'Ufufu, gathering the happiness of the world into one body, I am the Keshin of Tentei, the Tenrai Kiuseishiyu, and the other name of Genshinbō is Tenshinbō-sama, so my class is just a little different from you, a member of the thieves' guild.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">オーラの山に立籠り
+天来唯一の救世主
+天帝の化身と触れこみて
+女盗賊ヨリコ姫
+シーゴーの二人と共謀し
+三千人の賊徒等を
+四方八方に間配りて
+七千余国の月の国
+占領せむと大陰謀
+企らみゐたる折もあれ
+三五教に名も高き
+梅公さまに踏み込まれ
+常磐堅磐の岩窟を
+打破られて降伏し
+ヨリコの姫やシーゴーは
+誠の道に帰順して
+天下公共の其為に
+余生を捧げ奉らむと
+真心尽すに引き換へて
+一旦帰順を粧ひし</p>
+            <p class="ja-classical-line">売僧坊主の玄真は
+ハルの湖横断し
+スガの港の富豪と
+世に聞えたる薬屋の
+娘ダリヤに恋着し
+言葉たくみに誘惑し
+タニグク谷の山奥に
+左守の司のシヤカンナが
+数多の手下を従へて
+籠りゐるよと聞くよりも
+又も一旗あげむとて
+さも鷹揚な面付で
+ダリヤの手をば携へつ
+一夜を明かし振舞の
+酒に舌をばもつらせつ
+グツと寝入つた其隙に
+ダリヤの姫は泥棒の
+バルギーと共に踪跡を
+晦ましたるぞ可笑しけれ
+天帝の化身と誤魔化せる</p>
+            <p class="ja-classical-line">玄真坊は矢も楯も
+堪りかねてかシヤカンナの
+二百の部下を借用し
+姫の後をば尋ねむと
+小才の利いたコブライを
+引具し谷道トントンと
+喘ぎ喘ぎて立岩の
+麓にズツポリ日は暮れぬ
+闇の陥穽におち入りて
+淋しき一夜を送りつつ
+藤の蔓をば辿りつつ
+漸く虎口を免れて
+草茫々と生え茂る
+羊腸の小径を辿りつつ
+交尾期の出て来た犬猫が
+牝のお尻を嗅ぐやうに
+夢路を辿る憐れさよ
+暗の扉は上げられて
+東の空は茜刺し
+草葉の露はキラキラと</p>
+            <p class="ja-classical-line">七宝の光輝ける
+その真中を二人連れ
+ダリヤダリヤと一筋に
+岩の根木の根踏みさくみ
+汗をタラタラ流しつつ
+苦き坂を苦にもせず
+心を先に上り行く。</p>
+            <p class="ja-classical-line">天真坊『オイ、もう余程テクツて来たやうだから、一つ此見晴らしのよい処で暫時休養しようぢやないか。この山頂から四方の連山を見渡す景色と云つたら、まるで夢の国を辿つてゐるやうだのう』</p>
+            <p class="ja-classical-line">コブライ『本当に夢見たやうですな、昨夜だつて、ダリヤさまの夢を見て深い陥穽へなだれ込んだ時なんざ、ホントに生きた心地もなく、これが夢だつたらなアと、このやうに思ひましたよ。あの時ア、ホントに、どうなる事やらと、チツト許り心配致しましたワイ』</p>
+            <p class="ja-classical-line">天『夢の建築者は皆人間だからな、夢がなければ人生は淋しいものだ。人生の虹は夢だからな、かうして夢想郷に遊んでゐる間が人間は花だ。春の若葉に銀風のそよぐ如きダリヤ姫の風情、見るもスガスガしい思ひがするぢやないか。その艶な姿にあこがれてゐる間が、人生の花だ、夢の建築だ、人生の虹だ』</p>
+            <p class="ja-classical-line">コ『成程、さうすると、此世の中は何も彼もサツパリ夢と解すれば可いのですか』</p>
+            <p class="ja-classical-line">天『尤もだ、夢の浮世と云ふぢやないか、併し乍ら夢にも忘れられないのは、ヤツパリ、ダリヤ姫だ。</p>
+            <p class="ja-classical-line">夢になりとも会ひ度いものは
+小判千両とダリヤ姫</p>
+            <p class="ja-classical-line">だ、アツハヽヽヽヽ』</p>
+            <p class="ja-classical-line">コ『これ丈け四方開展した山の上で、それ丈けタツプリお惚気を拝聴する吾等は、実に光栄でも何でも、ありませぬわい。アツタケツタ糞の悪いとも何とも申しませぬ、さぞ山の神さま等は涎をくつて貴方の清いお姿を拝顔してる事でせう』</p>
+            <p class="ja-classical-line">天『ウツフヽヽヽ天下の幸福を一身に集めて天帝の化身、天来の救世主、玄真坊の又の御名天真坊様だもの、泥棒仲間の貴様とは、チツト許りクラスが違ふのだからなア』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ko: 'Hen, hi, heeeen!'</p>
+          <p class="en-p">Ten: 'What is this "hi, heeen"? Are you not speaking just like a horse?'</p>
+          <p class="en-p">Ko: 'Hi, heeen, plop, plop, horse dung. You are a fine partner for Tenshinbau-sama of the cow's hole, are you not? Itsui-hi-hi-hi-hi!'</p>
+          <p class="en-p">Ten: 'It does not matter. It seems as though dahlia flowers might be blooming somewhere around here; the scent of dahlias brought by the wind strikes my nose, and I feel an indescribable sense of yearning. From here on is the Kudariya Slope; your feet should feel light, Utsu-fu-fu-fu-fu.'</p>
+          <p class="en-p">Ko: 'Excuse me, Denshinbō-sama, this mountain path has been famous since long ago for its Namagusa, and when autumn comes, one can have a very enjoyable journey. We of the same kind, who used to make a living as thieves, would look at the beautifully delicate, fragrant flowers blooming along this path when passing through, and feel as though we, the wicked, had fallen into becoming good people.'</p>
+          <p class="en-p">Gen: 'What kind of derailment is that? My name is not Denshinbō; I am called Genshinbau, the Tenrai Savior and incarnation of Tentei. We take the character "Ten" from Tentei and the character "Shin" from Genshinbau to call it Tenshinbau. And you just said that this is a mountain path where Namakusa blooms and smells; that is also a derailment. They are called Nanakusa, and they are precious grasses and flowers that add to the scenery of autumn days and serve as various medicines.'</p>
+          <p class="en-p">Ko: 'Tenshinbau-sama, you said that the grasses and flowers growing on such a mountain path become medicine, but for what kind of illness are they effective, after all? Could they not even serve as a love potion?'</p>
+          <p class="en-p">Gen: 'Speaking of Nanakusa, there are Hagi, Kuzu, Obana, Nadeshiko, Ominaeshi, Kikyo, and Fujibakama; there are seven kinds, which is why they are called Nanakusa. The autumn mountains and fields are extremely poetic, and one feels a sense of melancholy in one's heart. The roadside flowers bathed in the setting sun, which disappears like a bucket dropped into a well, are the remnants of a lonely autumn that wound and yet comfort the human heart. They also have considerable efficacy as medicinal plants.'</p>
+          <p class="en-p">Ko: 'What kind of medicine does Hagi become?'</p>
+          <p class="en-p">Gen: 'Hagi is the opening of the autumn Nanakusa, belonging to the subgenus of leguminous plants, the butterfly flower family, also known as a type of bean family plant. One picks these leaves, dries them in the sun, and uses them as a substitute for tea. It is not too stimulating, so it is extremely ideal as a beverage for children and the elderly. A wicked man like you, burning with the blood of youth, should take it daily as a regular aphrodisiac suppressant, aha-ha-ha-ha.'</p>
+          <p class="en-p">Ko: 'Tenshin-sama, why do not you take some yourself? Your eyes are bloodshot, ihi-hi-hi. Now, please teach me the efficacy of Kuzu.'</p>
+          <p class="en-p">Ten: 'You are a fellow who asks questions without reason, Kuzu-kuzu again. Ah, how troublesome. However, if it is thought that Tenshinbau-sama, who should be called the incarnation of Tentei, cannot even explain the Nanakusa, it would be a major problem concerning the dignity of the gods, so shall I take the trouble to clarify it for you? Aaan.'</p>
+          <p class="en-p">Ko: 'To have so many prepositions just for an interpretation of Kuzu is truly exasperating. However, I shall lend you my precious ears for a while for the sake of future learning.'</p>
+          <p class="en-p">Ten: 'Aha-ha-ha-ha, you are a fellow who hates to lose, are you not? Now, Kuzu, like Hagi, is a type of bean family plant, and it has been used extensively by Chinese medicine doctors like Yamai Yōsen since long ago, known as Kakkon. It is used as a diaphoretic, an antipyretic, a lubricant for the stomach and intestines, or as a convenient ingredient in the compounding of various medicines. Kuzu is extracted from Kakkon and is the highest quality starch. It becomes a material for various dishes and as a powder for sweat in the summer. That is why it is an indispensable good plant for beautiful women.'</p>
+          <p class="en-p">Ko: 'You have brought up beautiful women again. Why not manufacture Kuzu into starch, make it a souvenir for Empress Dahiyahime, and try to win her favor? This would surely be the one and only secret strategy to move the heart of the Empress, ehe-hi-hi.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">コ『ヘン、ヒ、ヒーンだ』</p>
+            <p class="ja-classical-line">天『ヒ、ヒーンとは何だ、まるで馬のやうな事を云ふぢやないか』</p>
+            <p class="ja-classical-line">コ『ヒ、ヒーン、ボトボト馬の糞だ、牛の穴の天真坊さまとは、いい相棒でせう、イツヒヽヽヽヒ』</p>
+            <p class="ja-classical-line">天『何でもいいわ、何処かここらにダリヤの花が咲いてゐさうなものだなア、風が持てくるダリヤの香気が鼻について、何とも知れぬ床しみを感ずるやうだ。これから先は、クダリヤ阪だ、足も軽いだらうよ、ウツフヽヽヽフ』</p>
+            <p class="ja-classical-line">コ『モシモシ電信棒さま、この山道は昔から有名な腥草の名所で秋になると随分楽い旅が出来ますよ。泥棒稼ぎを行つて居た吾々同類も、此辺を通過する時には優美なデリケートななま臭の咲き匂ふ花を見て悪徒が善人に墜落した様な心持ちに成りましたよ』</p>
+            <p class="ja-classical-line">玄『そりや何ンと云ふ脱線振だ。俺の名は電信棒ぢや無い、天帝の化身天来の救世主玄真坊と申すのだ。天帝の天の一字と玄真坊の真の一字を取つて天真坊と云ふのだ。そして今お前は腥臭が咲き匂ふ山道だと云つたが夫れも又脱線だよ。七草と云ふて秋の日の景色を添へたり種々の薬品になる重宝な草花だ』</p>
+            <p class="ja-classical-line">コ『天真坊さまコンナ山道に生へる草花が薬になると仰有つたが、一体全体何の病に利きますかい。惚薬にでもなりませぬかな』</p>
+            <p class="ja-classical-line">玄『七草と云へば萩に葛に尾花に撫子に女郎花に桔梗に藤袴、これで七種ある、それ故七草と云ふのだ。秋の山野と云ふものは極めて詩的なもので、懐ろに哀愁の念を感ずるものだ。釣瓶落しに暮れて行く夕日を浴びた路傍の草花は淋しき秋の名残りとし人の心を傷ましめ且つ慰むるものだ。薬用植物としても仲々の効力があるものだ』</p>
+            <p class="ja-classical-line">コ『萩は何の薬になりますか』</p>
+            <p class="ja-classical-line">玄『萩は秋の七草の書出しで、莢果植物亜属の胡蝶花科で、一名荳科植物の一種だ。この葉を摘んで日光で乾かし茶の代用品とするのだ。余り興奮もせないので小供や老人の飲料には極めて理想的だ。お前の様な青春の血に燃えて居る性悪男子は、平素情欲鎮圧薬として、毎日服用したが可からうよ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">コ『天真さま、貴方チツト服用されたら如何ですか。眼の色が血走つて居ますよ、イヒヽヽヽ。それから葛の効能を教へて下さいな』</p>
+            <p class="ja-classical-line">天『又しても葛々と訳もない質問を発する奴ぢやなア。アタ邪魔臭い、然し乍ら天帝の化身とも云ふべき天真坊さまが、七草位の説明が出来ぬと思はれちや、神の威厳にも関する大問題だから、チツト許り解明の労を採つてやらうかい、アーン』</p>
+            <p class="ja-classical-line">コ『葛の解釈ぐらゐにサウ前置詞が多いのでは実に閉口ですワイ。併し乍ら後学の為に大切な耳を暫時貸しませうかい』</p>
+            <p class="ja-classical-line">天『アハヽヽヽ随分負惜みの強い野郎だなア。抑葛は萩と同じく荳科植物の一種で、昔から葛根と云つて盛んに漢方医の山井養仙などに使用されて来たものだ。発汗剤、下熱剤として使用したり、胃腸の粘滑剤として使用し、又は諸薬の配剤として調法なものだ。葛は葛根より搾取したもので最上等の澱粉だ。色々の料理や、夏季に於ける汗打粉としての材料となる。それだから美人には無くてならない好植物だ』</p>
+            <p class="ja-classical-line">コ『又しても美人が曳き合ひに出ましたな。一層のこと葛を澱粉に製造して、ダリヤ姫女帝の土産物となし、その歓心を買つたら如何でせう。これが女帝の心を動かす唯一無二の秘策でせう、エヘヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Ten: 'Do not go chatter-chattering on. Now, let me explain one disgusting item to you. It is the Obana, which is deeply bound by Innen to Iurei. People say, "I saw the true identity of a Iurei, and it was just a Kareobana," making it a Shiromono that truly sends a chill down one's spine. It is a thing that immediately reminds one of the back of a Sekitafu, ahahaha!'</p>
+          <p class="en-p">Ko: 'Eee, Tenshin-sama, please stop this already. Is it not sickening to talk of such things on a Yamamichi like this? I could not bear it if something were to transform and appear with a hyū-dorodoro! Please speak more Majime-ly.'</p>
+          <p class="en-p">Ten: 'All right, all right, I myself do not feel very good about it either. The Obana is a Kuwahonkuwashiyokubutsu; when you gather its ears and dry them in the Nitsukuō, a fine cotton-like substance is produced. When this cotton is sprinkled over light Satsukuwashiyō or the opening of a Kirikizu, it becomes a Chido medicine. If you use it even for Yagu, it is light, warm, and extremely good in Guahi.'</p>
+          <p class="en-p">Ko: 'Are you thinking of Goshiyō-ing it at your Ketsukonshiki with Dariyahime-sama, ehehehe?'</p>
+          <p class="en-p">Ten: 'Eee, you try to latch onto Dariyahime by saying this or that about every single thing, do you not?'</p>
+          <p class="en-p">Ko: 'Hen, does it not suit your fancy? Rather than that, please give a Setsumei of the far, far more elegant Nadeshiko. Is not Nadeshiko quite a refined name?'</p>
+          <p class="en-p">Ten: 'Ehen, the Nadeshiko is a kind of pink family; when the whole herb is dried in the Nitsukuō and four to five monme of it is decocted per day to make a diuretic, its special effect manifests when used for first-class kidney disease, beriberi, edema, and other serious illnesses.'</p>
+          <p class="en-p">Ko: 'Iyahaya, I am impressed, highly impressed! Next, I request a Setsumei of the efficacy of the Ominaveshi, which bears the most stylish name.'</p>
+          <p class="en-p">Ten: 'The Ominaveshi is a kind of valerian family, a subgenus of madder plants; if you harvest its roots in the autumn season, wash them well in water, dry them in the Nitsukuō, and store them away, then when needed, decocting and taking about four to five monme per day is said to have a special effect as a blood-regulating medicine for women's ailments. A man who holds an interest in women ought by all means to pay attention to the Ominaveshi alone and prepare it from ordinary times, ahahaha!'</p>
+          <p class="en-p">Ko: 'Ehehehe, as expected of Tenshinbō-sama, the woman-killer and widow-deceiver, you are without oversight in all matters. I, this Koburai fellow, have become all the more impressed. Come, now let us have you explain the efficacy of the Kikyō.'</p>
+          <p class="en-p">Ten: 'The Kikyō is a plant of the bellflower family; its root dug up in the autumn season and dried in the Nitsukuō is called Kikyō root. When used as a cough suppressant and expectorant during a cold, it has efficacy. It is good to decoct four to five monme per day in water and drink it, ehen. It contains saponin, which dissolves the blood. Recently, new medicines called Fustol and Ebanin are manufactured from its root. By the way, I shall also explain the Fujibakama; this is a kind of composite plant, and if you dry its leaves in the Nitsukuō, decoct them, and drink it, it has efficacy as a diuretic just like the Nadeshiko. A wholesaler of gonorrhea like you had better not forget to harvest it when autumn comes, ahahaha!'</p>
+          <p class="en-p">Ko: 'Ufufu, my urine tank is about to burst! Tenshin-sama, please excuse me.'</p>
+          <p class="en-p">While saying this, he raised his Ochiko and began to let it flow with a splash-splash.</p>
+          <p class="en-p">As it finally became a downhill slope, the two walked with quickened steps and emerged into a somewhat open rural village. Here stood twenty to thirty peasant houses loneliness-fully. Two or three mischievous boys were singing while dangling rods in a small stream and fishing for small fish.</p>
+          <p class="en-p">'The water flows clear and clear, the field is blue,
+In the shadow of the trees by the long embankment, today from morning we fish for small fish.
+In the clear sky, somewhere, it seems a skylark is singing,
+The sleepy mooing of a cow, heard now and then, is also afternoon.
+
+
+
+The stream flows clear and clear, the field is blue,
+Casting out the unfeeling rod,
+As I look out, the water striders, making the water clear, only dance.'</p>
+          <p class="en-p">Just as Tenshinbō came walking along with his head glistening brightly in the Nitsukuō, accompanied by Koburai, the mischievous boys, without any hesitation or reserve, began to sing while marveling at his shiny head.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">天『クヅクヅ云ふな。サア是から一ツいやらしい奴を説明してやらう。幽霊に因縁の深い尾花だ。……幽霊の正体見たり枯尾花……と云つて随分ゾツとする代物だ。直ちに石塔の裏を思ひ出す奴だ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">コ『エヽ天真さま、モウ止めて下さい。こんな山道で気分が悪いぢやありませぬか。ヒユードロドロと化けて出られちや堪りませぬわ。モツト真面目に云つて下さいな』</p>
+            <p class="ja-classical-line">天『ヨシヨシ俺も余り心持が良くないのだ。尾花は禾本科植物で、こいつの穂を集め、日光で乾燥すると立派な綿の様なものが出来る。この綿は軽い擦過傷や、切傷の口にふりかけると血止め薬になる。夜具にでも使用すると軽くて暖かくて大変に工合の良いものだ』</p>
+            <p class="ja-classical-line">コ『ダリヤ姫さまとの結婚式に御使用になるお考へですか、エヘヽヽヽ』</p>
+            <p class="ja-classical-line">天『エヽ一ツ一ツ何とか彼とか云つてダリヤ姫に喰付けようと致すのだなア』</p>
+            <p class="ja-classical-line">コ『ヘンお気に入りませぬかな、夫れよりもモツトモツト優美な撫子の説明をして下はいな、一寸撫子なんて乙な名前でせう』</p>
+            <p class="ja-classical-line">天『エヘン、撫子は石竹科の一種で、日光に全草を乾燥させ、一日に四五匁ばかりを煎じて利尿剤となし、第一腎臓病、脚気、水腫なぞの他の難病に用ゆると特効が顕はれるものだ』</p>
+            <p class="ja-classical-line">コ『いやはや感心々々大に感心致しました。今度は最も粋な名の付いた女郎花の効能の説明を願ひます』</p>
+            <p class="ja-classical-line">天『女郎花は茜草植物亜属の敗醤科の一種で、其根を秋季に採取し水に能く洗ひ、日光に乾かして貯へておき、用に臨んで一日に四五匁許りを煎じて服用と、婦人の血の道の順血薬として特効ありと云ふことだ。婦人に趣味を持つ男子は如何しても女郎花許りは気をつけて平素から用意しておく可きものだ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">コ『エヘヽヽヽ流石は女殺しの後家欺しの天真坊さま、何事にも抜目はありませぬな。益々このコブライ奴感珍致しましたわい。サア是から桔梗の効能を説明して頂きませう』</p>
+            <p class="ja-classical-line">天『桔梗は桔梗科の植物で、その根を秋季に掘り日光に乾燥したものを桔梗根と云ふ。風邪の時、鎮咳去痰薬として用ゆると効がある。一日に四五匁を水に煎じて飲むと良い、エヘン。血液を溶解するサボニンが含まれて居るのだ。その根から近時フストールやヱバニンと云ふ新薬が製造されるのだ。序に藤袴も説明しておくが、是は菊科植物の一種で、この葉を日光に乾燥して煎じて飲めば、撫子と同じく利尿剤として効能があるのだ。貴様の如うな痳病の問屋さまは秋が来ら忘れずに採取しておくが可からうよ、アハヽヽヽ』</p>
+            <p class="ja-classical-line">コ『ウフヽヽヽ、小便のタンク奴破裂しさうだ。天真さま、御免下さい』</p>
+            <p class="ja-classical-line">と云ひ乍ら、オチコを立ててジヤアジヤアと行り出した。</p>
+            <p class="ja-classical-line">二人は漸く下り阪となつたので足許も速く、やや展開した野村へ出た。此処には二三十戸の百姓家が淋しげに立つてゐる。二三人の腕白小僧が小川に竿を垂れ小魚を釣り乍ら歌つてゐる。</p>
+            <p class="ja-classical-line">『水はサラサラ　　野は青い</p>
+            <p class="ja-classical-line">長い堤の木の影で　　今日は朝から小魚釣り</p>
+            <p class="ja-classical-line">晴れた空には何処やらで　　雲雀でも鳴いてゐるやうな</p>
+            <p class="ja-classical-line">時折聞える眠さうな　　牛の呻きも午后</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">流れサラサラ　　野は青い</p>
+            <p class="ja-classical-line">つれない竿を　　投げ出して</p>
+            <p class="ja-classical-line">眺めてゐれば水すまし　　水をすまして舞ふばかり』</p>
+            <p class="ja-classical-line">そこへ天真坊が頭をテカテカ日光に輝かし乍らコブライを従へやつて来ると、腕白小僧は遠慮会釈もなく、頭の光つてるのを怪しみ乍ら歌ひ出した。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">"Moshi moshi bald head, O bald head, / In all the Sekai there is nothing / Whose light is as faint as yours. / Why are you so dark?</p>
+          <p class="en-p">○</p>
+          <p class="en-p">What is it that you say, O Denki-san? / Well then, let us match our light against yours. / When the Hi rises upon the Koyama over there, / Which of us shall shine more brightly?</p>
+          <p class="en-p">○</p>
+          <p class="en-p">No matter how much you polish your bald head, / Surely you must be darker than I. / Let us take a Hitoyasu around here— / Burabura burabura, būrabura.</p>
+          <p class="en-p">○</p>
+          <p class="en-p">Oh dear, dawn has broken! / Pikapika pikapika, pīkapika. / How exceedingly dark you are, O Denki-san! / What has become of your Jiman from a moment ago?"</p>
+          <p class="en-p">Tenshinbau, hearing this song, became somewhat Shiyogegimi, and while deliberately shaking his Shiyakujiyō harshly, making a gachan-gachan sound:</p>
+          <p class="en-p">Tenshinbau: 'Hey, Gatarau, say what you just said Ichido more! Depending on the Baahi, I shall not be accepting of it! You Gakidaishiyō brat!'</p>
+          <p class="en-p">Kodomo: 'Ahahaha! Hey, Bauzu, this village, you see, has been the Seniuchi of Ananai-kyō since ancient times! A Bakemono of such Ketsutai appearance cannot enter even a Chiyotsuto! If you do not hide your figure somewhere quickly, I shall set up Senkau for you!'</p>
+          <p class="en-p">Tenshinbau: 'Tch! You spout talk as if an Aodaishiyō had Hai into the Zashiki! Even a Kodomo is not a thing about which one can exercise Yudan. Kodomo, hey, Bauzu, did a beautiful woman not pass by here?'</p>
+          <p class="en-p">Kodomo: 'She passed by! Leading one servant, striking each other's backs, pinching each other's cheeks, flirting together, she must have passed by here just a moment ago! You called me Bauzu just now, but I am no Bauzu! You yourself are the Bauzu, are you not? I am the son of the Shōya of Kamiya Village, a divine child called a child of the gods! If it be matters of the Sekai, ask me anything! I shall inform you of anything and everything as plainly as pointing to my palm! You must be the degraded remnant of Genshinbau, who shut himself up in Mount Ōra and played the grand fraudster! You were infatuated with Dariya-hime of Suga Port, deceitfully led her into the cavern of Mount Taniguku, had your face turned into a paper notebook while sleeping, were left foaming at the mouth when she fled together with a lizard-faced man, were duped by an artificial Bakemono beside the Standing Rock last night, fell into a deep pitfall, scraped your shins, reached the mountain top weeping and crying, grandly began the lecture on the seven herbs, and from there came pursuing Dariya all the way here, did you not? How is it, am I wrong?'</p>
+          <p class="en-p">Tenshinbau: 'N-n-no, indeed, just as you say, just as I hear, just as the crow crows in the forest, the receipt is as stated above, it is just as you say! Ahahaha!'</p>
+          <p class="en-p">Kami no Ko: 'Hey, Baldie-chan, it would be better if you called it quits already! A person like Dariya-hime does not suit your nature! Repent while there is yet time and become my rear-wiper! If you do so, there may yet be a chance of salvation! If you continue your evil deeds forever, you shall be dropped into the roasting scum of the kettles of the eighty thousand hells!'</p>
+          <p class="en-p">Tenshinbau: 'Hey Kodomo, is that Dariya-hime not hidden in your house?'</p>
+          <p class="en-p">Kami no Ko: 'Yeah, she is hidden! She is certainly sheltered!'</p>
+          <p class="en-p">Tenshinbau: 'Then where is she hidden? Could you tell me just a Chiyotsuto?'</p>
+          <p class="en-p">Kami no Ko: 'Do not speak nonsense! Is there any fool who reveals what he has hidden? Once hidden, it is proper to keep it hidden to the very end!'</p>
+          <p class="en-p">Koburai: 'Moshi moshi Tenshinbau-sama, this child is truly a child just like a god, is he not? Why do you not surrender already? How about giving up on Dariya-sama? An evil appearance has manifested upon your forehead, you know; now is the time to repent! I have followed you all the way here, but regardless of whether you repent or not, I shall now take my leave of you right here and have myself used as a rear-wiper by this child who is like a god!'</p>
+          <p class="en-p">Kami no Ko: 'The child of the gods is a pure being serving God; / Who would let a thief wipe his rear?'</p>
+          <p class="en-p">Koburai: 'This is a mistake, I have spoken an impolite thing, / Without even recognizing my status as a thief.'</p>
+          <p class="en-p">Tenshinbau: 'Though you speak cleverly like a child of the gods, / You can by no means be a match for Tenshinbau! / Rather than that, the whereabouts of Dariya-hime / Let me know quickly, for I shall give you money.'</p>
+          <p class="en-p">Kami no Ko: 'He is an incarnation of the Rear-Eating Kannon! / Tell no lies, O crooked Genshin!'</p>
+          <p class="en-p">So saying, with a sound like an elephant farting pusu, he turned into white smoke. The accompanying children also disappeared without a trace or shadow.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『モシモシ禿よ禿さんよ　　世界の中でお前ほど</p>
+            <p class="ja-classical-line">光の薄いものはない　　どうしてそんなに暗いのか</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">ナーンと仰有る電気さん　　そんならお前と光りつこ</p>
+            <p class="ja-classical-line">向ふの小山に太陽が出たら　　どちらがよけいにピカつくか</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">どんなに禿をみがいても　　どうで僕より暗いだろ</p>
+            <p class="ja-classical-line">ここらで一寸一休み　　ブラブラブラブラ　ブーラブラ</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">これはしまつた夜が明けた　　ピカピカピカピカ　ピーカピカ</p>
+            <p class="ja-classical-line">あんまり暗い電気さん　　サツキの自慢はどうしたね』</p>
+            <p class="ja-classical-line">天真坊は此歌を聞いて、ヤヤ悄気気味になり、錫杖をガチヤン　ガチヤンと、ワザとに手荒くゆり乍ら、</p>
+            <p class="ja-classical-line">『コーラ、我太郎、今云つたこと、ま一度云つて見い、場合によつては承知せないぞ。餓鬼大将奴が』</p>
+            <p class="ja-classical-line">小供『アツハヽヽヽ、オイ坊主、此村はなア、昔から三五教の占有地だ、そんな怪体な風をした化物は一寸も入れる事は出来ないのだよ。どつかへ早く姿をかくさないと線香を立てるぞ』</p>
+            <p class="ja-classical-line">天『チエ、青大将が座敷へ這入り込んだやうな事ぬかしやがる、小供だつて油断のならぬものだ。小供、オイ、坊主、ここを美しい女が、通らなかつたかのう』</p>
+            <p class="ja-classical-line">子供『通つたよ。一人の奴さんを連れて、互に背中を叩いたり、頬辺をつめつたり、イチヤつきもつて、ツイ今先き、ここを通りよつた筈だ。俺を今、坊主と云つたが俺ヤ坊主ぢやないよ、お前こそ坊主ぢやないか。俺はなア神谷村の庄屋の息子で、神の子と云ふ神童だ。世界の事なら何でも俺に聞いて見よ。何でも彼でも掌を指す如くに知らしてやるよ。お前はオーラ山に立籠つて大山子をやつてゐた玄真坊のなれの果だらうがな。スガの港のダリヤ姫に恋着し、うまく誤魔化してタニグク山の岩窟につれ込み、寝てゐる間に顔を草紙にされ、トカゲ面の男と一緒に逃げられて泡を吹き、昨夜は立岩の側で人造化物に誑され、深い陥穽へおち込んで向脛をすりむき泣き泣き山上迄辿りつき、七草の講釈を豪相におつ初め、それから、ここ迄ダリヤの後をおつてやつて来たのだらう。どうだ違ふかな』</p>
+            <p class="ja-classical-line">天『ウンー、いかにも、お前の云ふ通り、俺の聞く通り、森で烏の鳴く通り、受取は右の通り、その通りだ、アツハヽヽヽ』</p>
+            <p class="ja-classical-line">神の子『オイ、禿チヤン、もう締めたがよからうぞ。ダリヤ姫なんて、お前の性に適はないや。今の間に改心して俺の尻拭になれ、さうすりや又浮ぶ瀬もあらうぞ。いつ迄も悪業をつづけてゐると八万地獄の釜の焦おこしに落されて了ふぞ』</p>
+            <p class="ja-classical-line">天『オイ子供、そのダリヤ姫は、お前の家にかくしてあるのと違ふか』</p>
+            <p class="ja-classical-line">神の子『ウン、隠してある、確に、かくまつてあるのだ』</p>
+            <p class="ja-classical-line">天『そりや、どこに隠してあるのだ。一寸云つて貰へまいかな』</p>
+            <p class="ja-classical-line">神の子『バカを云ふない、かくしたものを云ふ阿呆があるかい。隠した以上は、どこ迄もかくすのが本当だ』</p>
+            <p class="ja-classical-line">コブライ『もしもし天真坊さま、この子供は本当に神様見たやうな子供ですな。貴方ももういい加減に兜を脱いだらどうですか。ダリヤさまを諦めては如何ですか。貴方の額には悪相が現はれてゐますがな、改心するのは今の時ですよ。私はここ迄ついて来ましたが、貴方が改心するとせないとに拘らず、もう此処でお暇を貰つて此の神さまのやうな子供にお尻拭にでも使つて貰ひますよ』</p>
+            <p class="ja-classical-line">神の子『神の子は神に仕ふる清きもの
+誰が泥棒に尻を拭かすか』</p>
+            <p class="ja-classical-line">コブライ『これはしたり失礼な事を云ひました
+泥棒の身をも弁へずして』</p>
+            <p class="ja-classical-line">天『小賢しく神の子らしく申すとも
+天真坊にはトテも敵ふまい。
+それよりもダリヤの姫の在所をば
+早く知らせよお銭やるから』</p>
+            <p class="ja-classical-line">神の子『尻喰へ観音さまの化身ぞや
+嘘をこくなよ玄真の枉』</p>
+            <p class="ja-classical-line">と云ひ乍らプスツと象が屁をこいたやうな音を立て白い煙となつて了つた。つれの子供も影も形もなくなつて了つた。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c01.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 1: 追劇 [1790]</span>
+      </a>
+      <a href="c03.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 3: Gate 外漢 [1792]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
