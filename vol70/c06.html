@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: Ogre 遊婆 [1773] - Volume 70 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 70 Table of Contents</a>
+      <span>Volume 70</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 70 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: Ogre 遊婆 [1773]</h1>
+      <p class="chapter-title-ja">鬼遊婆〔1773〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">At the hour of twilight, the color of the sky is as if covered by a pot from above, and there is an indescribable stench of blood, with a wind blowing with a whistling sound as if it were tearing the bowels. Two or three emaciated crows are shivering, holding their hunger together with the treetops of a persimmon tree that has shed its hagoromo.</p>
+          <p class="en-p">On the ground, withered grass grows in patches, revealing the red kiji here and there. Indescribable, disgusting insects surround the withered grass on all sides, and as soon as they smell the scent of a person, they gather all at once, lying in wait to suck the bodies of humans. Appearing there was Takahime of the Uranai sect, who had been detained in the Chiūkai for three years and ordered to undergo training.</p>
+          <p class="en-p">While accompanying one new maujiya, Takahime, intending to work in the Genkai as before, was buffeted by the nowake, wearing tattered clothes like the Gojifusantsugi, and was lying in wait with her new disciple Tonbo to pull in passersby.</p>
+          <p class="en-p">Tonbo: 'Excuse me, Ikumiya-sama, shall we not return now that it is enough? This road is somehow so lonely, so lonely, that not even a single dog passes by, is it not? No matter how long you wait like a spider spinning a web for a cicada to land, it will be useless if the cicada does not come.'</p>
+          <p class="en-p">Takahime: 'Hey, Tonbo, what a faint-hearted thing you are saying. Even if no humans pass by, if this Ikumiya is stationed here, many spirits will pass by, touch the divine virtue of the great Miroku Ikumiya, be illuminated by the light, and all one hundred out of one hundred will receive blessings and ascend to heaven. That is why, even if physical humans do not come, it is fine as long as spirits come. To your vulgar eyes, it may look as if not a single human is coming, but to the eyes of this Ikumiya, about eighty thousand have come since this morning. It is busy, truly busy. Because your body is clouded, it is no wonder that you cannot see even one of those maujiya. However, the eighty thousand maujiya who have passed by since this morning were looking at your face with envy.'</p>
+          <p class="en-p">Tonbo: 'Why would people as unfortunate as me pass by looking at me with envy? I cannot understand it at all.'</p>
+          <p class="en-p">Takahime: 'That is why you are called blind. Even if you are sitting on a golden pedestal, if you cannot see, you feel as if you are being thrust into the mud. While being allowed to serve the direct mission of the savior of the three thousand worlds, the great Miroku of the bottom-most rock roots, the Hinodewake, what a wasteful way of thinking you have. Where else is there someone who is allowed to perform such a magnificent mission as you? That is why eighty thousand spirits passed by looking at you with envy.'</p>
+          <p class="en-p">Tonbo: 'Hmph, that is strange.'</p>
+          <p class="en-p">Takahime: 'Hey, Tonbo, do not say such absurd things. What do you mean by "Hmph, that is strange"? You are making a fool of this Ikumiya-sama, are you not? If you serve the mission of Ikumiya with such a mindset, divine punishment will strike you instantly, and you will have to turn a somersault with your head down and your feet up. Be careful.'</p>
+          <p class="en-p">Tonbo: 'I have been finding it so painful and ridiculous lately that I was actually thinking of watching for a gap in Ikumiya-sama's attention and successfully escaping, but if eighty thousand people who envy me pass by in a single day, it is the same wherever I go. I shall serve you for a while longer by your side, Ikumiya-sama.'</p>
+          <p class="en-p">Takahime: 'Hey, Tonbo, what are you saying? To say you will serve for a while, you cursed fellow, if you are such junk with that kind of mindset, I will dismiss you from today. Come, go home quickly. Even if you are not here, since my physical body is a woman, all cooking and chores are easy for me. You are a useless thing, a big tree of wood, a foolish fellow who is just a waste of space. From now on, I will change your name from Tonbo to Tonma-yaro. That should suit your nature.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">黄昏時に頭から壺をかぶつたやうな空の色、何とも知れぬ血腥さい、腸の抉れる如うな風がピユーピユーと吹いてゐる。痩こけた烏が二三羽、羽衣を脱いだ柿の木の枝に梢諸共空腹を抱へて慄ふてゐる。</p>
+            <p class="ja-classical-line">地上は枯草が一面に生ひ立ち、処まんだら赤い生地を現はしてゐる。何とも知れぬ、いやらしい虫が枯草を一面に取りかこみ、人の香がすると一斉に集まり来り、人間の体を吸はうとして待ちかまへてゐる。そこへ現はれて来たのは、三年間中有界にとめおかれ、修業を命ぜられたウラナイ教の高姫であつた。</p>
+            <p class="ja-classical-line">高姫は新規の亡者を一人伴ひ乍ら、自分はヤツパリ現界に立働いてゐるつもりで、野分に吹かれ乍ら、東海道五十三次のやうな弊衣を身に纒ひ、新弟子のトンボと一緒に道行く人を引張込まむと待構へて居た。</p>
+            <p class="ja-classical-line">トンボ『もし生宮様、もういい加減に帰らうぢやありませぬか。何だか此街道は淋しくて淋しくて犬の子一匹通らぬぢやありませぬか。何時まで蜘蛛が巣をかけて蝉がとまるのを待つやうにして居つても、蝉が来なくちや駄目でせう』</p>
+            <p class="ja-classical-line">高姫『これ、トンボ、お前は何と云ふ気の弱い事を云ふのだい。仮令人間が通らなくても、此生宮が此処に出張して居れば、沢山の霊が通つて大弥勒の生宮の御神徳に触れ、御光に照され、百人が百人乍ら、お蔭を頂いて天国へ上るのだぞえ。それだから肉体人が来なくても、霊界人が来さへすればいいのだ。お前の俗眼では一人も人間が来ないやうに見えるだらうが、此生宮の目には、今朝から八万人許り来たのだよ。それはそれは忙しい事だよ。お前も肉体が曇つてゐるので、あれ丈けの亡者が一人も目につかぬのは無理もない。然し乍ら今朝から通つた八万人の亡者が、お前の顔を見て羨ましさうにしてゐたよ』</p>
+            <p class="ja-classical-line">ト『何故又私のやうな不幸者を羨ましさうにして通るのでせうか。サツパリ合点が行きませぬがな』</p>
+            <p class="ja-classical-line">高『それだからお前は盲と云ふのだ。目が見えぬと黄金の台に坐つて居つても、泥の中に突込まれて居るやうな気がするものだよ。結構な結構な三千世界の救世主、底津岩根の大弥勒、日の出神の直々の御用をさして頂き乍ら、何と云ふ勿体ないお前は量見だえ。お前のやうな結構な御用をさして貰ふものは、何処にあるものか。それだから八万人の精霊が羨ましさうにして通つたのだよ』</p>
+            <p class="ja-classical-line">ト『ヘーン、妙ですな』</p>
+            <p class="ja-classical-line">高『これ、トンボ、トンボーもない事を云ひなさるな。「ヘーン、妙ですな」とは何だい。この生宮さまをお前さまは馬鹿にして居るのだな。そんな量見で生宮の御用をして居ると神罰が立所に当つて、頭を下にし、足を上にしてトンボ返りをせねばならぬぞや。チツト心得なされ』</p>
+            <p class="ja-classical-line">ト『私やこの間から、余り辛いのと馬鹿らしいので実の所は生宮様の隙を窺ひ、うまくトンボ（遁亡）しようかと考へて居りましたが、私を羨むやうな人物が八万人も一日に通るかと思へば、何処に行つても同じ事だ。生宮様のお側にマアしばらく御用をさして頂きませう』</p>
+            <p class="ja-classical-line">高『これ、トンボ、そら何を云ふぢやいな。暫く御用をさして頂くとは罰当り奴、そんな量見で居るやうなガラクタなら、今日から暇をやる。サア、トツトと帰つておくれ。お前が居らなくても肉体は女だから炊事万端お手のものだよ。無用の長物、ウドの大木、体見倒しの頓馬野郎だな。之からトンボと云ふ名を改名して、トンマ野郎と云ふてやらう。それがお前の性に合うてるだろ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">To: 'Ikimiyasama, is calling me a fool not a bit too much?'</p>
+          <p class="en-p">Taka: 'Hmph, I am the Savior of the Sanzensekai, the Ōmiroku of the Sokotsuihane, the Tennin of the Daiichireigoku, and the Ikimiya of the Hinodewake, and you are serving by my side; even if one were a wise and distinguished Ningen, from the eyes of this Ikimiya, everyone is a fool. Even university Hakase are fools. Those who become Sōridaijin or members of the Shiugiin are even more so, they are spineless fools. Since you have been given the same title as a Sōridaijin or a Hakase by Ikimiya, you should be grateful and thankful.'</p>
+          <p class="en-p">To: 'Ikimiya-sama, is that not still too much? Please, call me Tonbo as you did before.'</p>
+          <p class="en-p">Taka: 'Very well. Then, since you are a dull man, I shall call you Donbo. That is slightly better than being a fool, is it not? I am the Ōmiroku of the Sokotsuihane, the Tennin of the Daiichireigoku, and the Ikimiya of the Hinodewake.'</p>
+          <p class="en-p">To: 'Excuse me, Ikimiya-sama, I have heard enough of that long name. Please, say it simply. I might mistake you for the Hosshōji Nyūdō.'</p>
+          <p class="en-p">Taka: 'Hey, you fool, what kind of nonsense are you spitting out? If you dislike being a fool, I shall make you a dunce. Ah, there is not a single decent one among you all. Ah, I am appalled. My mouth, once opened, will not close immediately. I, no matter how much time passes, no matter how much time passes, you do not understand what Ikimiya says, you cannot repent, you are a disgusting fellow. U, even though I preach until my mouth grows sour, even if there were a day when the crows do not caw, or a morning when the cock does not crow, I preach without rest or surrender, E, that you cannot grasp this, what a terrifyingly great fool you are. Ka, even though I preach day and night as if chewing and feeding you, it is like wind blowing into a horse's ear, Ki, you do not listen, you put on a sullen face, Ku, you only have eyes for food, and you only cause trouble for others, Ke, you are a disgraceful and monstrous beast. Ko, do you think this Hōjō can be maintained with such things? Sa, this is truly troublesome, you are a stubborn thing. You are the one who is a spineless failure. Su, why don't you try to fathom Ikimiya's heart a little, and advance to work for the achievement of the Shinkoku? Se, you bite the shins of this Ikimiya with a face like someone who ate a manju in a privy, and what is this about you not liking being called a fool? So, for this Ikimiya to feed and raise such a crude thing that harbors such a base nature, it is no ordinary task. Ta, who else would take care of such a fool, even for three days?'</p>
+          <p class="en-p">To: 'Chi, is that not a bit unreasonable? To call me a fool or a dunce as if I were a beast or something, it is too cruel. Tsu, how can the body of a rough man be maintained by eating only a frog's charred remains once a month? Te, my hands and feet have become sinewy like this. Have they not become like the back of a hand with wet paper pasted on a fan's ribs? To, how can Tonbo work together with you? Please, pity my situation a little. You eat only delicious things, and you always assign me only potato skins, radish whiskers, and red watercress leaves, do you not?'</p>
+          <p class="en-p">Taka: 'Na, what are you saying? How wasteful, you will be punished for that heart. Ni, in this world where the west, east, south, and north are all clouded over like this, no matter what one sows on the soil, it is a dark world where not even a single leaf of greens can be grown properly, is it not? You should be happy and think it is a blessing to receive even one red leaf. In a world where such cold winds blow, you can drink warm tea at night and crawl into a quilt, can you not? Ne, you do not do any work worth mentioning all year round, No, you just stand around like a scarecrow even when doing field work, Ra, you sing songs that make one's head ache with a raspy voice, and Ri, to say things like "do not call me a fool" as if you were clever, it makes me sick. Ru, did you not cry and beg me to use you because you were wandering and had nowhere to go? Re, to forget to say thanks and only complain, you are truly a great sinner. You are confined in a prison by the warning of the gods. However, while this Ikimiya takes care of your physical body, your soul is trapped in a great prison, saying "I want to eat, I want to eat, I want to play, I want to play." Fu, tsu, fu.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ト『生宮様トンマ野郎とは、ひどいぢや御座いませぬか』</p>
+            <p class="ja-classical-line">高『ヘン、三千世界の救世主、底津岩根の大弥勒、第一霊国の天人、日の出神の生宮のお側に御用さして頂いて居るのぢやないか、何程賢い立派な人間でも、此生宮の目から見れば、何奴も此奴も皆トンマ野郎だよ。大学の博士だつてトンマ野郎だ。総理大臣や衆議院議員になるやうな奴は尚々トンマ野郎の腰抜野郎だ。お前も総理大臣や博士と同じ称号を生宮から与へられたのだから、有難く感謝しなさい』</p>
+            <p class="ja-classical-line">ト『生宮さま、それでもあまりぢや御座りませぬか。どうか元の通りトンボと仰有つて下さいな』</p>
+            <p class="ja-classical-line">高『さうだ。そんならお前はドン臭い男だから、ドンボと呼んで上げよう。トンマ野郎とは少しマシだからな。底津岩根の大弥勒様、第一霊国の天人、日の出神の生宮ぢやぞえ』</p>
+            <p class="ja-classical-line">ト『もしもし生宮さま、もうその長たらしいお名前は聞きたんのう致しました。どうぞ簡単に云つて下さいな。法性寺入道と間違ひますがな』</p>
+            <p class="ja-classical-line">高『こりや、トンマ野郎、そらナーン吐かしてけつかるのだ。トンマ野郎が嫌なら、ドンマ野郎にして上げよう。ああア、何奴も此奴も碌な奴は一匹も居やアしないわ。アゝゝゝゝ呆れた。開いた口が早速には塞がりませぬわい、イヽヽヽヽ何時迄経つても何時迄経つても生宮の申すことが分らず、改心が出来ず、イケ好かない野郎だな。ウヽヽヽヽ煩さい程、口が酸くなる程、毎日日々烏の啼かぬ日があつてもコケコーが歌はぬ朝があるとも、撓まず屈せず御説教してやるのに、エヽヽヽヽ会得が行かぬとは何と云ふオヽヽヽヽおそろしう大馬鹿だろ。カヽヽヽヽ噛んでくくめるやうに、日夜の生宮の説教も、馬の耳に風吹く如く、キヽヽヽヽ聞いては呉れず、キマリの悪い面付をして、クヽヽヽヽ喰ひ物許り目をつけ、苦労許り人にかけやがつて、ケヽヽヽヽ怪しからぬ怪体な獣だよ。コヽヽヽヽこんな事でどうして此法城が保てると思ふかい。サヽヽヽヽ扨も扨も困つた、シヽヽヽヽしぶとい代物だな。死損ひの腰抜けと云ふのはお前の事だぞえ。スヽヽヽヽ少しは生宮の心も推量し、進んで神国成就の為に大活動をしたらどうだい。セヽヽヽヽ雪隠で饅頭喰たやうな面して此生宮の脛を噛り、トンマ野郎が気に喰はぬなどと何を云ふのだ。ソヽヽヽヽそんな奴根性を持つてゐる粗末の代物を、高い米を喰はして養ふてゐる此生宮も、並大抵の事ぢやないぞえ。タヽヽヽヽ誰がこんなトンマ野郎を、仮令三日でも世話するものが御座りませうかい』</p>
+            <p class="ja-classical-line">ト『チヽヽヽヽチツト無理ぢや御座りませぬか、畜生か何ぞのやうに、トンマ野郎だのドンマだのと、あまりひどいです。ツヽヽヽヽ月に一ぺん位、蛙の附焼位頂いて、どうして荒男の体が保てませう。テヽヽヽヽ手も足も此通り筋張つて来ました。丸ツきり扇の骨に濡れ紙を張つたやうな手の甲になつて了つたぢや御座りませぬか。トヽヽヽヽトンボだつて、どうして貴女と共に、活動が出来ませうぞ。チツとは私の身の上も憐れんで下さい。貴女計り美味い物を喰て、いつも私には芋の皮や大根の鬚や水菜の赤葉許り、当てがつて居るぢやありませぬか』</p>
+            <p class="ja-classical-line">高『ナヽヽヽヽ何を云ふのぢやいな。勿体ない、その心では罰が当るぞや、ニヽヽヽヽ西も東も南も北も此通り曇り切つた世の中、お土の上に、何を蒔いても此通り、菜葉一つ満足に出来ない暗がりの世ぢやないか。赤ツ葉の一つも頂いたら結構ぢやと思つて喜びなさい。こんな寒い風の吹く世の中に、夜分はヌヽヽヽヽぬつくりと温い茶を呑んで、煎餅布団の中へ、潜り込んで居れるぢやないか。ネヽヽヽヽ年が年中何一つ、これと云ふ働きもせず、ノヽヽヽヽノラクラと野良仕事さしても烏の威しのやうに、立つて許り居るなり、ラヽヽヽヽ埒もない皺枯声を出して頭の痛むやうな歌を唄ひ、リヽヽヽヽ悧巧さうにトンマ野郎と云うて呉れな等とはお尻が呆れますぞや。ルヽヽヽヽ流浪して行く処がないから使つて下さい、と泣いて頼んだぢやないか、レヽヽヽヽ礼を云ふ事を忘れて、不足許り申すとはホントにホントによい罰当りだよ。お前は神様の警めで、ロヽヽヽヽ牢獄へ突込まれてゐるのだ。然し乍らお前の肉体は此生宮が構ふてゐるが、その魂は、喰ひ度い喰ひ度い遊び度い遊び度いと云ふ、大牢に這入つてゐるのだよ、フツフヽヽヽヽ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">To: 'Wa-wa-wa-wa, do not laugh at me. I am not a Ningen of such poor intuition as you say. Even I am a Mononofu who has served as a lieutenant in the Brahman army. Wi-wi-wi-wi, I do not intend to stay by your side forever, so U-u-u-u, even if it is annoying, I am enduring it until I find a Urekuchi. E-e-e-e, being made to listen to such disgusting things from morning till night, even a Gunjin gets tired of it. I am finished with being your attendant, this is the end.'</p>
+          <p class="en-p">He tries to run away. Takahime thrusts out her emaciated hand from behind, grabs him by the Erikubi, and while pulling him back two or three Futaashi, says:</p>
+          <p class="en-p">Takahime: 'Hey, you Yaitobashi, Ogaraninsoku, if you are going to run, then run. With arms that look like the Iurei of a Tōshin, legs like Senkau, and a body as flat as a flounder, to talk back to Ikimiyasama is beyond the pale. Come, if you are going to move, then move.'</p>
+          <p class="en-p">To: 'Oh, I have been given a terrible moxa treatment. Please, without saying anything more, forgive me. If you do not forgive me, there is no other Shikata. I will go to that Tanigaha and commit Tōshin.'</p>
+          <p class="en-p">Takahime: 'Eh, are you trying to be funny?'</p>
+          <p class="en-p">The moment she let go of her hand, he staggered like a Gaki, swaying to and fro, and collapsed into the withered Kayagusa.</p>
+          <p class="en-p">Takahime: 'Ho-ho-ho-ho, when it comes to Ikimiyasama, even a Brahman lieutenant is fragile. Come, come, let us return to the mansion and prepare the Yufugohan.'</p>
+          <p class="en-p">She says this while swaying her hips in the Chiukū, intending to return. Just then, a song was heard, which was rare. As soon as Takahime heard this voice, she twisted her body like a marionette and said:</p>
+          <p class="en-p">Takahime: 'Ya, it has come, it has come; from now on is my crucial moment.'</p>
+          <p class="en-p">She began to stomp on the ground two or three times, feeling spirited.</p>
+          <p class="en-p">Takahime: 'Bonten Taishaku Jizaiten / Ōkuni-hiko no Ōkami is / The savior of the three thousand worlds / Not to mention the gods and Buddhas / Even to the Aohitogusa and the plants / He lets fall the dew of grace / How noble is His salvation / The great leader Ōkuninushi / Receiving the pure teachings / The Moon Country of over seven thousand nations / Wishing to unite and govern them all / Though He opened the Brahman teachings / Near and far, what shall be done / The Sangokyo and Ural teachings / Are quite strong in their influence / And it is truly regrettable / That they trample upon / The teachings of the true God / Is the time not yet ripe / Even such noble teachings / Are not revered by many people / Becoming the target of slander and libel / The teachings fade day by day / Under the power of Ōkuninushi / Though they appear to be / Believers of Brahmanism / In their hearts they are Ural / And Sangokyo fellows / This will not do / Such is the concern of Ōkuninushi / Using the army coercively / He gathers the believers / To make them bow to the teachings / Of Brahmanism, whether they like it or not / He has the general Ōashiwake / Lead three thousand soldiers / And advance to the great plateau of Dekatan / To slaughter the Turman country / And though He has me open / The Sukobutsuen sect / In truth / It is but a different name for the same sect / Not at all different from Brahmanism / The only point of difference / Is that it forces the believers / To undergo more intense training than Brahmanism / If we do not do things like this / It is not easy to soothe / The human heart which is like wolves / And protect the country / Furthermore, these days / Thoughts are in confusion day and night / Anarchism and Socialism / Appear and disappear everywhere / This world of Ōkuninushi / Has become increasingly dangerous / In the meantime, I will expand / The teaching line to over seven thousand nations / And after seeing the downfall of Ōkuninushi / I will rule the Moon Country / Nay, I shall rule eternally / How interesting it will be / To be praised in the world / As a hero of unparalleled divine power / The gods are with us / I am the incarnation of God / Those who oppose the gods / I will destroy them all / Without mercy, my sect / Ah, how interesting, how interesting / Any teaching of the gods / I will harmonize and / Like the plants swaying in the wind / I will make them behave, by my power / We are the incarnations of God / We are the root of power / Come, nations of the four directions / Without distinction of bird or beast / I shall make you my subordinates / Itsuhi, itsuhi / It has truly become interesting / The sky is clouded and without light.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ト『ワヽヽヽヽ笑うて下さるな。私はお前さまの云ふやうな勘の悪い人間ぢや御座りませぬぞや。これでも一時はバラモン軍のリユーチナント迄勤めて来た武士ですよ。ヰヽヽヽヽ何時までもお前さまの側へ居らうとは思ひませぬから、ウヽヽヽヽ煩さうても、売口がある迄辛抱してやつてゐるのですよ。ヱヽヽヽヽえぐたらしい事を朝から晩まで聞かされて、なんぼ軍人だつてお尻が呆れますよ。私はもう貴女のお供は之でヲヽヽヽヽをしまひですよ』</p>
+            <p class="ja-classical-line">と逃げ出さうとする。高姫は後から痩こけた手をグツと出し、襟首を掴み二足三足後に引き乍ら、</p>
+            <p class="ja-classical-line">高『こりや灸箸、麻幹人足、逃げるなら逃げて見い。燈心の幽霊見たやうな腕をしやがつて、線香の様な足をして、かれいのやうな薄つぺたい体をして、生宮様に口答へするとは以ての外だ。サア動くなら動いて見よれ』</p>
+            <p class="ja-classical-line">ト『イヤもう、えらい灸を据ゑられました。どうぞかれいこれ云はずに許して下さい。許して下さらなもう仕方が無い。あの谷川へとうしん（投身）と出掛けます』</p>
+            <p class="ja-classical-line">高『エーしやれ処かい』</p>
+            <p class="ja-classical-line">とパツと手を放した途端にヒヨロ　ヒヨロ　ヒヨロと餓鬼の如くヒヨロつき、枯れた萱草の中にパタリと倒けて了つた。</p>
+            <p class="ja-classical-line">高『ホヽヽヽヽ生宮様にかかつたら、バラモンのリユーチナントも脆いものだな。サアサア之から館へ帰り、夕御飯の用意でも致しませう』</p>
+            <p class="ja-classical-line">とダン尻を中空にたわつかせ乍ら帰らむとする。時しもあれ、珍らしくも歌の声が聞えて来た。高姫は此声を聞くや否や、操り人形の如くクレリと体を交し、</p>
+            <p class="ja-classical-line">『ヤア来た来た、これから私の正念場だ』</p>
+            <p class="ja-classical-line">と大地に二三回も石搗きを始めて勇んでゐる。</p>
+            <p class="ja-classical-line">『梵天帝釈自在天
+大国彦の大神は
+三千世界の救世主
+神や仏は云ふも更
+青人草や草木まで
+恵の露を垂れ給ひ
+救はせ給ふ尊さよ
+大黒主の大棟梁
+清き教を受け給ひ
+七千余国の月の国
+一つに丸めて治めむと
+バラモン教を遠近に
+開き給へど如何にせむ
+三五教やウラル教
+勢ひ仲々強くして
+誠の神の御教を
+蹂躙するこそ是非なけれ
+未だ時節の到らぬか
+これ程尊い御教も
+数多の人に仰がれず</p>
+            <p class="ja-classical-line">誹毀讒謗の的となり
+日に夜に教は淋れ行く
+大黒主の権力に
+押されて表面バラモンの
+信者に化けて居るなれど
+心の中はウラル教
+三五教の奴許り
+こんな事ではならないと
+大黒主の御心配
+強圧的に軍隊を
+用ゐて信徒を召集し
+否が応でもバラモンの
+教に靡かせくれんづと
+大足別の将軍に
+三千余騎の兵士を
+引率させてデカタンの
+大高原に進軍し
+トルマン国を屠らむと
+吾にスコブツエン宗を
+開かせ給へどその実は</p>
+            <p class="ja-classical-line">異名同宗バラモンの
+教に少しも変らない
+只々相違の一点は
+バラモン教より劇烈な
+信徒に修行を強ゆるのみ
+こんな事でもしておかにや
+虎狼に等しい人心を
+緩和し御国を保つこと
+容易に出来るものでない
+かてて加へて此頃は
+思想日に夜に混乱し
+アナアキズムやソシヤリズムが
+到る処に出没し
+大黒主の此天下
+愈危くなつて来た
+吾は此間に教線を
+七千余国に拡張し
+大黒主の失脚を
+見届け済まして月の国
+いや永遠に統治なし</p>
+            <p class="ja-classical-line">神力無双の英雄と
+世に謳はれむ面白や
+神は吾等と共にあり
+吾こそ神の化身ぞや
+神に刃向かふ奴輩は
+何奴も此奴も容赦なく
+亡ぼし呉れむ吾宗旨
+アヽ面白や面白や
+いかなる神の教をも
+言向和し大野原
+風に草木の靡く如
+振舞ひ呉れむ吾力
+吾等は神の化身なり
+吾等は力の根元ぞ
+来れよ来れ四方の国
+鳥獣の分ちなく
+キユーバーが配下としてやらう
+イツヒヽヽヽイツヒヽヽヽ
+実に面白くなつて来た
+天は曇りて光なく</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The Chijiyō is cold, and even the Kusaki are all withered and drooping in this world; yet the Sukobutsuen sect alone, as if ascending to the Asahi of Ten, prospers day by day, Hinichi by Hinichi. Utsufu-fu-fu-fu, utsufu-fu-fu-fu.</p>
+          <p class="en-p">He came as far as the Yotsutsuji, blowing such an Ōbora. Upon seeing the figure of Kyūbā, Takahime spoke in a shrill voice:</p>
+          <p class="en-p">Takahime: 'Hey there, Henro-sama, please wait a moment. Even at a glance, you seem to be a fine man who understands things. I am the savior of the Sanzensekai, the Futobashira of the great Miroku, the Tennin of the Daiichireigoku, and the Ikimiyasama of the Hinodewake. Come, come, please come to my mansion for a moment. I shall let you hear some wonderful, truly wonderful stories.'</p>
+          <p class="en-p">Kyūbā: 'What, you say you are the savior? Fu-fu-fu-fūn, how strange.'</p>
+          <p class="en-p">Takahime: 'Hey, Henro-sama, what is this "fu-fu-fu-fūn"? Strange... this is the beginning of the world, the Mirokushiyutsugen, the Jiyuritsu of the Kamiyo, the beginning of the world at the end of the world.'</p>
+          <p class="en-p">Kyūbā: 'Ha-ha-ha-ha-ha, what an Omoshiro old woman you are. Fortunately, it is dusk, and there is no lodging around here; perhaps I shall have you put me up.'</p>
+          <p class="en-p">Takahime: 'Come, come, please stay. I will tell you wonderful, truly wonderful stories, ho-ho-ho-ho-ho. That fellow Tombo has finally buried himself in the grass. There is no need to care what happens to a fellow like that. He only spits out Rikutsu toward Ikimiyasama. How strange the world is. Just when I thought one fellow had become disgusted and run away, the Kamisama has properly prepared a replacement for me. This Henro might just become the right arm of Ikimiya. Ho-ho-ho-ho-ho.'</p>
+          <p class="en-p">Tombo had been hiding himself in the grass from the beginning, observing the behavior of Takahime, but... if such a fellow comes, I am finished. However, I do not know what kind of consultation that fellow Takahime is having after pulling such a man in. At any rate, tonight I must listen to the conversation between the two from outside the mansion... Having made this decision, he followed the two as they returned to the dilapidated house at the foot of the rocky mountain, hiding his footsteps in the darkness.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">地上は冷えて草木さへ
+皆枯れ萎む世の中に
+スコブツエン宗只独り
+旭日の天に昇るごと
+日々毎日栄え行く
+ウツフヽヽヽヽウツフヽヽヽヽ』</p>
+            <p class="ja-classical-line">と大法螺を吹き立て乍ら四辻迄やつて来た。高姫はキユーバーの姿を見るより、カン走つた声にて、</p>
+            <p class="ja-classical-line">『これこれ遍路さま、一寸待つて下さい。お前は一寸見ても、物の分りさうな立派な男らしい。私は三千世界の救世主、大みろくの太柱、第一霊国の天人、日の出神の生宮ぢやぞえ。サア一寸、私の館迄来て下さい。結構な結構なお話を聞かして上げませうぞや』</p>
+            <p class="ja-classical-line">キユーバー『何、お前が救世主と云ふのか、フヽヽヽフーン、はてな』</p>
+            <p class="ja-classical-line">高『これ、遍路さま、何がフヽヽヽフンだい。はてな……処か、これから世の初まり、弥勒出現、神代の樹立、世の終ひの世の始まりぢやぞえ』</p>
+            <p class="ja-classical-line">キユ『ハヽヽヽヽヽ何と面白い婆さまだな。幸ひ日の暮の事でもあり、そこらに宿もなし、一つ宿めて頂かうかな』</p>
+            <p class="ja-classical-line">高『サアサア宿つて下さい。結構な結構なお話をして上げますぞや、ホヽヽヽヽヽ。トンボの奴到頭草の中へ埋もつて了ひよつた。あんな奴アどうならふと構ふ事はない。生宮様に対して理窟許り吐くのだもの。何と世の中は妙なものだな。一人の奴が愛想づかして逃げたと思へば、チヤーンと神様は代りを拵へて下さる。この遍路は、どうやら生宮の片腕になるかも知れぬぞ。ホヽヽヽヽヽ』</p>
+            <p class="ja-classical-line">トンボは最前から草の中に身を隠して高姫の様子を考へてゐたが、……こんな奴に来られちや自分はもう足上りだ。然し乍ら高姫の奴、あんな男を引張り込んで、どんな相談をしとるか知れぬ。今晩は兎も角、館の外から二人の話を聞いてやらねばなるまい…………と思案を定め、両人が岩山の麓の破れ家へ帰つて行く後から、闇を幸ひ足音を忍ばせついて行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: Flower Bird Mountain [1772]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: 妻生 [1774]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

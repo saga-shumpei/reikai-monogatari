@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 17: Spring の Light [1784] - Volume 70 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 70 Table of Contents</a>
+      <span>Volume 70</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 70 &bull; Chapter 17</span>
+      <h1 class="chapter-title-en">Chapter 17: Spring の Light [1784]</h1>
+      <p class="chapter-title-ja">春の光〔1784〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Chigusahime, unable to know the whereabouts of Kiūbā whom she could not forget even in her dreams, felt her Seishin grow increasingly confused; she claimed that the Kamuzukasa of Terukuniwake and Terukō were divine Shinchiyoku, and using the King's Meirei as a pretext, she forcibly threw them into Raugoku to vent her Munen, and gave Gokusotsu Genmei to inflict cruel treatment upon them. Furthermore, she banished Taishi Chiwin and Chinrei from the castle under the pretense of Shiugiyō, gave Genmei to Teira to seek the whereabouts of Kiūbā, caused Harisu to commit errors through Kauji, and planned to annihilate the lineage of the old Kiushin, thus truly becoming an Akugiyakubudau Maō.</p>
+          <p class="en-p">Chigusahime's Seirei was suddenly occupied by the Kinmaukiubi no Akuko, while King Gāden had his heart and soul occupied by a fragment of the Yamata no Orochi; he submitted to the commands of Chigusahime, and set his hands in all directions to rescue Kiūbā, pouring his full strength into the search. However, even the Nikumiya of the Hinodewake could not perceive that Taishi Chiwin had confined him in the rocky cave of Araikegoku. Chigusahime, in order to pray for the earliest possible return of Kiūbā to the forest of Harima, began to make pilgrimages twice a day, morning and evening, riding in a palanquin with strict vigilance, followed by many retainers.</p>
+          <p class="en-p">Māku and Rēru were earnestly persuaded by Taishi Chiwin that Chigusahime's physical body had already passed away and had been replaced by the evil spirit of the Kinmaukiubi no Akuko; furthermore, learning from a newspaper extra that Terukuniwake and Terukō had been thrown into Raugoku, were suffering from cruel treatment day and night, and were in danger of their lives, they could no longer stand still. They whispered to each other, and resolved to lie in wait during Chigusahime's pilgrimage and kill her with stones.</p>
+          <p class="en-p">The two men, filled with joy and courage, thinking that now was the time to sacrifice their lives for the nation, hid stones in their clothes and waited impatiently for Chigusahime's palanquin to pass. Chigusahime successfully finished her pilgrimage and was returning, guarded by many temple guards and foot soldiers, when two assassins leaped out from the corner of an alley and immediately threw two stones at the palanquin. For some reason, their aim was off and the stones did not hit, and the palanquin continued on its way back to the castle with composure.</p>
+          <p class="en-p">The two men were immediately captured on the spot by the temple guards, and after a preliminary investigation at the Komonzan, they were thrown into a Raugoku outside the castle as major criminals. The Raugoku, which was reasonably spacious, was full to capacity, and they were thrown into a cell meant for two. In this cell, Terukuniwake and Terukō were being held with their hands still bound. Rēru looked at Terukuniwake and said,</p>
+          <p class="en-p">Rēru: 'Are you not the messenger of Terukuniwake-sama? Why have you been put in a place like this?'
+Terukuniwake: 'I do not recall having done anything particularly wrong, but they said it was the Genmei of the King, and we were both bound tightly hand and foot and thrown in here since last night. I believe that once the suspicion is cleared and I am proven innocent, I will be able to leave this prison in the near future.'
+Rēru: 'Well, that is an outrageous thing to do. I have heard from Taishi-sama that you are the person of the greatest merit who supported the recent war, so that wicked woman Chigusahime must have done something truly outrageous.'
+Terukuniwake: 'What, are you someone connected to Taishi Chiwin?'
+Rēru: 'Yes, in fact, the Taishi and the Princess, as well as the young ladies of the Left and Right Guards, are hiding in my house. Recently, the Kinmaukiubi no Akuko has possessed Chigusahime, and she is trying to drive away meritorious retainers and inflict cruel treatment upon them, so the popularity of the castle town is boiling like a cauldron, and no one knows when a great disturbance will break out. Taishi Chiwin-sama is very worried about this, and is currently gathering representatives of the masses to carry out a reform of the religious government. You will surely be able to leave this prison safely before long.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">千草姫は、恋しさ懐しさ、夢寐にも忘れぬキユーバーの所在が分らぬので、精神益々混乱し、照国別、照公の神司を神勅と称して無念晴らしの為め無理やりに牢獄に王の命令を藉りて投ぜしめ、所在残虐の手を加ふべく獄卒に厳命を下した。又チウイン太子、チンレイを修行の為めと称して城内より放逐し、テイラには、キユーバーの所在を求むべく厳命し、ハリスを好餌をもつて過たしめ、今迄の旧臣系統を殲滅せむ事を計るなぞ、実に悪逆無道の魔王となつて了つた。千草姫は忽ち金毛九尾の悪狐に精霊を占領され、ガーデン王は八岐大蛇の片割に其心魂を占領され、千草姫の頤使に甘んじ、キユーバーを救ひ出さむと八方に手を廻し、極力捜索に全力を注ぐ事となつた。されどもチウイン太子が、荒井ケ獄の岩窟に閉ぢ込めておいた事は、遉の日の出神の肉宮も悟る事を得なかつた。千草姫はハリマの森に、キユーバーの一日も早く帰り来らむ事を祈願する為め、数多の従臣を従へ警戒厳しく輿に乗つて、朝夕二回参拝を励む事となつた。マーク、レールの両人はチウイン太子から、千草姫の肉体は既に他界し、金毛九尾の悪霊と入り代つて居る事を懇々と説き聞かされ、且つ又新聞の号外によつて、照国別、照公が牢獄に投げ込まれ、日夜残虐の手に見舞はれ、生命の危険を感じ、もはや立つても居ても居られなくなつたので、レール、マークの両人に耳打ちし、千草姫が参拝の途中を待ち伏せ、石礫をもつて彼を亡ぼさむ事を命じた。両人は喜び勇み、一身を国家の為めに捨つるは今此時と石礫を懐にし、千草姫の輿の通過を今や遅しと待つて居た。千草姫は首尾よく参拝を終り、七八町許り、数多の番僧や徒士に守られ帰つて来ると、路地口より躍り出でたる二人の兇漢、忽ち輿を目がけて石礫を二個迄投げつけた。石礫はどうしたものか手が狂つて命中せず、輿は其儘城内さして悠然と帰りゆく。二人は忽ち其場で番僧に捕縛され、一応小本山で取調べの上、重大犯人として城外の牢獄に投げ込まるる事となつた。相当に広い牢獄も満員売切れの盛況で、定員二人の牢獄へ投ぜらるる事となつた。この監房には照国別、照公の両人が手を縛られた儘収容されて居る。レールは照国別を見て、</p>
+            <p class="ja-classical-line">『ヤ貴方は照国別の宣伝使様ぢや御座いませぬか。どうして又この様な所へ入れられなさつたのです』</p>
+            <p class="ja-classical-line">照国別『別にこれと云ふ悪い事はした覚えがありませぬが、国王の厳命だと云つて、吾々両人は厳しく手足を縛られた上、昨夜から投り込まれて居ります。何れ嫌疑が晴れ、晴天白日の身となつて近い中に出獄し得るだらうと思つて居ます』</p>
+            <p class="ja-classical-line">レ『ハテ、怪しからぬ事をやるものだ。太子様に承はれば、貴方様は今度の軍を応援下さつた殊勲の第一人者と聞いて居りますのに、姐己の千草姫、いよいよもつて怪しからぬ事をやりよつたのでせう』</p>
+            <p class="ja-classical-line">照国『何、チウイン太子に縁故のある方ですか』</p>
+            <p class="ja-classical-line">レ『ハイ、実は私の宅に太子、王女様を初め左守、右守のお嬢さま迄忍んでおられます。此頃は千草姫に金毛九尾の悪狐が憑依し、功臣を退け所在暴虐の手を加へむと致しますので、城下の人気は鼎の湧くが如く、いつ大騒動が勃発するか分らぬやうになつて来ました。チウイン太子様は非常に此事を御心配遊ばし、教政の改革を断行すべく、今や大衆の代表者を集め御計画中で御座います。やがて貴方も無事出獄が出来るでせう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Terukuni: 'Naruhodo, if I hear you correctly, Taishisama Chūin is wise and will surely carry out a reform of the religious administration. That Chigusahime is by no means the real one. The soul of the person herself has already become a nukegara, and a kinmaukiubi akuko is nesting within her; if things are left as they are, the Toruman nation will become a street of konran, and the destruction of the Setsuteirike will surely not be avoided. What a troublesome situation has come to pass. By the way, for what kengi were you put into a place like this?'</p>
+          <p class="en-p">Re: 'We two are advocates of the kaujiyōundō and representatives of the shiukyōkaikakūndō, but under the naimei of Taishi Chūin, in order to betsu Chigusahime, who is Datsuki, we waited in the roji at the crossroads with ishitsubute, and when we threw two ishitsubute at the palanquin, unfortunately, they did not hit the mark. Regrettably, not only was our objective not achieved, but we were easily bound by the temple guards and sent here as serious criminals. In any case, we will likely not be saved, but we entrust our fate to Heaven and are enjoying this moment. Since humans must die once, I am satisfied to be killed as a patriot and a representative of the masses.'</p>
+          <p class="en-p">Terukuni: 'Ya, having heard your spirit, I am deeply impressed. How about it, shall we spend this uninteresting time singing songs or something?'</p>
+          <p class="en-p">Re: 'Ya, that is a good point you have noticed. Let the four of us sing in turns. Shall we ask the propagandist to start first?'</p>
+          <p class="en-p">Terukuni: 'In that case, excuse me for going first.'</p>
+          <p class="en-p">Saying this, he looked around in all directions, and seeing that the prison guards were not nearby, he began:</p>
+          <p class="en-p">Terukuni: 'Where is this, the land of the moon? / Outside the castle of the Toruman nation / It is a prison standing lonely / Many prisoners are crowded together / Every prison is filled to capacity / That they are crying out / For the destruction of the Toruman nation is truly lamentable / Now, this Toruman / Is the first divine nation of the moon / Opened by the God of Ural / Driven by the demonic wind of material civilization / The divine pillars who stand at the head of the masses / And propagate the divine teachings / And the monks who follow them / Have forgotten the true path of respecting the gods, ancestors, and the nation / And are only indulging in self-love / Threatening the peace of the masses below / Without leaving a single corner untouched.'</p>
+          <p class="en-p">Terukuni: 'Shaving the flesh and scraping the bones / The power of the nation, day by day / Melts away like ice in the sun / To such a place, the army of the Great Ashiwake of the Brahman / With the evil monk Kyūbā at the head / Intending to seize this divine nation / Followed by over three thousand cavalry / They attack with fierce momentum / Seeing this national crisis / Taishi Chūin quickly / Summoned all the soldiers in the country at once / Organized a punitive force / Selected and promoted the hero of the field, Janku / And adding the divine army of Terukuniwake / They grandly / Attacked the enemy from behind / The Great Ashiwake was caught between the front and back.'</p>
+          <p class="en-p">Terukuni: 'While being showered with the enemy's gunfire / Abandoning their military horses and weapons / They set fire to the houses of the residents / And scattered like clouds and mist / In this battle, the left guard and the right guard / Both died on the battlefield / The Toruman castle has now completely lost its pillars / The operation of religious affairs has ceased / Struck by the anxiety of the people / At the time when the hearts of the people were in turmoil / Chigusahime suddenly / Reached the end of her heavenly fate and passed away / And the akuko that was born in the Tokoyonokuni / Nestled in her body and deluded the king / Expelling every wise man and loyal subject / Without leaving a single one / Planning to turn this divine nation into a demon's land.'</p>
+          <p class="en-p">Terukuni: 'This is truly an abominable state of affairs / We have received the command of God / To save the nations of the world / From their difficulties / We left the sacred site of Ubusunayama / And having finally come here / We find this unexpected difficulty / It is truly a regrettable matter / Nevertheless, we / Have the protection of the noble God / Even if the moon of hope, which shines in the vast sky / Is once wrapped in black clouds / If the wind of Shinato blows suddenly / The clouds will easily scatter / And like the full moon as it was before / It will shine again and illuminate the lower world / Without leaving a single corner, my spirit / Do not worry at all / For the sake of saving / The crisis of the nation and the masses, thou...'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">照国『成程承はればチウイン太子様の聰明なる、きつと教政の改革を遊ばすでせう。あの千草姫は、決して本ものぢや御座いませぬ。御本人の霊は既に既に脱殻となり、金毛九尾の悪狐が巣食つて居るのですから、此儘にしておかうものならトルマン国は混乱の巷となり、刹帝利家の滅亡は免れますまい。てもさても困つた事が出来たものですなあ。時に貴方は何の嫌疑によつてかやうな処へ入れられたのですか』</p>
+            <p class="ja-classical-line">レ『吾々両人は向上運動の主張者兼宗教改革運動の代表者で御座いますが、チウイン太子の内命により、姐己の千草姫をベツトすべく、石礫をもつて車の辻の路地にまちうけ、輿を目がけて石礫を二個迄投げつけた処、不幸にして命中せず、残念乍ら、目的が達成せないのみか、脆くも番僧にふん縛られ、重大犯人として、此所へ送られたのです。何れ吾々は助かりますまいが、運を天に委して刹那心を楽しんで居ります。何れ人間は一度は死なねばならぬものですから、国士として大衆の代表として殺されるのは満足です』</p>
+            <p class="ja-classical-line">照国『ヤア、御精神を承はり、感服致しました。どうです、これから歌でも謡つて、面白くもない時間を費さうぢやありませぬか』</p>
+            <p class="ja-classical-line">レ『ヤ、それはいい所へ気がつきました。四人がかはるがはる歌ひませう。先づ宣伝使から口切をお願ひ致しませうかな』</p>
+            <p class="ja-classical-line">照国『然らばお先へ失礼』</p>
+            <p class="ja-classical-line">と言ひ乍ら四辺に目を配り、獄卒の近くに居ないのを見て、</p>
+            <p class="ja-classical-line">照国『ここはいづこぞ月の国
+トルマン国の城外に
+淋しく立てる牢獄ぞ
+数多の罪人ひしひしと
+いづれの牢獄も充満し
+トルマン国の滅亡を
+叫び居るこそ歎けれ
+抑々これのトルマンは
+ウラルの神の開きたる
+月第一の神国ぞ
+物質文明の魔の風に
+吹き立てられて大衆の
+頭に立ちて御教を
+布く神柱初めとし
+それに随ふ従僧は
+敬神尊祖愛国の
+誠の道を忘却し
+唯自己愛に耽溺し
+下大衆の平安を
+残る隈なく脅かし</p>
+            <p class="ja-classical-line">肉をばけずり骨をそぎ
+国の力は日に月に
+日向に氷と消えてゆく
+かかる所へバラモンの
+大足別の軍勢は
+妖僧キユーバーを先頭に
+此神国を奪はむと
+三千余騎を従へて
+勢猛く攻め来る
+此国難を見るよりも
+チウイン太子は逸早く
+全国内の兵員を
+一度に召集遊ばして
+討伐軍を組織なし
+在野の英雄ジヤンクをば
+抜擢なして重用し
+照国別の神軍を
+加へてここに堂々と
+敵の後をつきければ
+大足別は前後</p>
+            <p class="ja-classical-line">敵の砲火をあびながら
+軍馬や武器を遺棄しつつ
+所在民家に火を放ち
+雲を霞と逃げ散りぬ
+この戦ひに左守司
+右守も共に陣没し
+トルマン城は柱石を
+今や全く失ひて
+教務の運用中絶し
+国民不安の気に打たれ
+人心恟々たりし折
+千草の姫は忽ちに
+天命尽きて他界され
+其肉体に常世国
+生れ出でたる悪狐奴が
+巣喰ひて王を誑惑し
+総ての智者や忠義もの
+一人も残らず排斥し
+この神国を魔の国と
+乱さむものと企むこそ</p>
+            <p class="ja-classical-line">実にも忌々しき次第なり
+吾等は神の命をうけ
+世界の所在国々の
+難を救ひ助けむと
+産土山の聖場を
+立ちて漸く来て見れば
+思ひもよらぬ此難み
+実に口惜き次第なり
+左はさりながら吾々は
+尊き神の守りあり
+大空つとふ望の月
+一たん黒雲包むとも
+忽ち科戸の風吹かば
+もろくも雲は散りはてて
+再びもとの満月と
+輝き渡り下界をば
+隈なく照さむ吾御霊
+必ず案じたまふまじ
+汝も国家大衆の
+危急を救ふ其為めに</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">If you have taken actions equal to those of Kami, why would the Kami of Ametsuchi abandon you two? Though clouds may gather for a time, soon the Jitsugetsu of a clear Ametsuchi will shine upon the Gekai, and as the hardships clear, you shall be revered as the masters of salvation for all Banmin, and your glory shall be before your eyes. Take courage, Kamunagara. Swearing to Kami, the Kamuzukasa here offers this Kotoa: Even if the Asahi shines or clouds over, even if the moon waxes or wanes, even if the seas of Indo dry up, even if the Hime of Chigusa perishes, you two, who possess only sincerity, shall surely receive the Mimegumi of Kami and shine as the Mihashira of the Toruman nation; that day shall not be far off. Though we two also spend painful days and nights in this Raugoku, the merciful Kami will not take many days to appear and will swiftly and peacefully save us. Ah, Kamunagara, Kamunagara, I pray for the Fuyu of the Mitama.</p>
+          <p class="en-p">Terukō also sings:</p>
+          <p class="en-p">I am Terukōkamuzukasa. Following my teacher, when I came to the Toruman nation, I found an unexpected Ōsaudō. Wishing to save the nation from this Kokunan, I stirred up the Yamato spirit, and the Kamuzukasa instantly transformed into a commander of the army. Fighting with the life as a stake alongside Prince Chiuin, the protection of Kami was manifest; the black clouds of ugliness that covered the Toruman nation cleared away instantly, and the light of the Jitsugetsu shone clearly. Yet, who could have foreseen this? The two of us, who performed deeds equal to Kami, have been deceived by the evil spirits of the golden-furred nine-tailed fox, and the Mitama of the King of the Garden and the Hime of Chigusa have been deluded, and we are shut away in this filthy Raugoku, suffering such disgrace. Though Terukō would not mind even if I were to die, for I am one who devotes myself to the path of sincerity, I cannot bear the regret of not being able to clear away the suffering of my teacher, who bears a great mission. With all my heart, I pray for the salvation of the Ōkami and raise my voice; I pray that you, the two of you, will understand my heart, which feels as if it is vomiting blood. I pray that the salvation of Kami may come even one day sooner. I pray that the Kami of salvation may appear even one day sooner. I pray with awe and reverence.</p>
+          <p class="en-p">Ah, Kamunagara, Kamunagara, may the Mitama be blessed.</p>
+          <p class="en-p">Reiru: 'Though I am now within this Raugoku, I have not forgotten the future of the nation.'</p>
+          <p class="en-p">Māku: 'Even if I must cast away my life, which is as fleeting as a thread of jewels, how could I begrudge it for the sake of the nation?'</p>
+          <p class="en-p">Terukunawake: 'Your sincerity, Reiru and Māku, is noble; hearing it makes my tears fall.'</p>
+          <p class="en-p">Terukō: 'Where is the precious Kamuzukasa of Umekō now? I pray morning and evening, wishing to hear of him.'</p>
+          <p class="en-p">Terukunawake: 'The precious Kamuzukasa of Umekō will surely come near to save us.'</p>
+          <p class="en-p">To such a place, a prison guard enters with loud footsteps, looks around, and as if relieved to see no one else there,</p>
+          <p class="en-p">Harukō: 'If I may, Teacher-sama, I am Harukō. Having lost sight of you at Aoi no Numa, I came to this Toruman castle town, but I had no leads and could not find the whereabouts of your party, so I applied to be a guard and finally passed ten days ago, and I am now serving as such a lowly jailer. Please do not worry. I will surely save you when the time is right. It seems an order came to the little Lama from the King, saying, "Give them neither hot water nor cold water, let them eat only once a day, and leave them until they starve to death naturally." However, as long as I am on duty, please never worry.'</p>
+          <p class="en-p">Terukuni: 'Oh, so you are Harukō. This must be because Kami foresaw that such a thing would happen and arranged for you to become a prison guard. Harukō, be careful not to be discovered.'</p>
+          <p class="en-p">Harukō: 'Yes, I understand. Please, everyone, be at ease.'</p>
+          <p class="en-p">It seems the Lama has come for an inspection, as the sound of footsteps is heard loudly and creakingly. Harukō says,</p>
+          <p class="en-p">Harukō: 'Hey, you prisoners, if you do not keep quiet, I will impose severe punishment!'</p>
+          <p class="en-p">So saying, he gives a deep bow to the Lama. Outside the high walls, the bell of the newspaper extra delivery rings noisily. The famous great storm of the Dekatan Plateau shakes the beams of the Raugoku with a creaking sound as it passes.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">神に等しき行動を
+取らせたまひしものならば
+天地の神は何として
+汝等二人を見捨てむや
+一旦雲はかかれども
+やがては天地晴明の
+日月下界を照らす如
+難みは晴れて万民の
+救ひの主と仰がれて
+時めきたまふは目の前り
+勇ませ玉へ惟神
+神に誓ひて神司
+茲に言挙げ奉る
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+印度の海はあするとも
+千草の姫は滅ぶとも
+誠一つの汝等は
+必ず神の御恵に
+トルマン国の御柱と</p>
+            <p class="ja-classical-line">輝きたまふも近からむ
+吾等二人も牢獄に
+苦しき日夜を送れども
+恵の神は日ならずに
+現れたまひて速かに
+安く救はせたまふべし
+あゝ惟神々々
+御霊の恩頼を願ぎまつる』</p>
+            <p class="ja-classical-line">照公は又歌ふ。</p>
+            <p class="ja-classical-line">『吾は照公神司
+吾師の君に従ひて
+トルマン国に来て見れば
+思ひもよらぬ大騒動
+此国難を救はむと
+大和心をふり起し
+神の司は忽ちに
+軍の司と早がはり
+チウイン太子と諸共に
+命を的に戦へば
+神の守りは著く
+トルマン国を覆ひたる
+醜の黒雲忽ちに
+隈なく晴れて日月の
+光も清く照りにけり
+然るに何ぞ計らむや
+神に等しき勲功を
+樹てし吾々両人を
+金毛九尾の悪魔等の
+千草の姫やガーデンの</p>
+            <p class="ja-classical-line">王の御霊を誑惑し
+かかる汚き牢獄に
+所在恥辱を与へつつ
+閉ぢ込めおくぞ歎てけれ
+照公は仮令死する共
+誠の道に尽すもの
+些しも厭ひはせぬけれど
+一大使命を帯たまふ
+吾師の君を苦します
+此残念を如何にして
+晴らさむよしもなきままに
+心をこめて大神の
+御救ひ祈り声あげて
+血をはく思ひの吾の胸
+推量あれよ御両人
+神の救ひの一日も
+早くあれよと願ぎまつる
+救ひの神の一日も
+早く現はれ玉へよと
+畏み畏み願ぎまつる</p>
+            <p class="ja-classical-line">あゝ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">レール『吾は今牢獄の内にありながら
+忘れざりけり国の行末』</p>
+            <p class="ja-classical-line">マーク『玉の緒のよしや命は捨つるとも
+如何で惜まむ国の為めには』</p>
+            <p class="ja-classical-line">照国別『いさぎよしレール、マークの赤心を
+聞くにつけても涙こぼるる』</p>
+            <p class="ja-classical-line">照公『梅公の珍の司は今いづこ
+聞かま欲しやと朝夕祈るも』</p>
+            <p class="ja-classical-line">照国別『梅公の珍の司は吾々を
+救はむ為めに近く来らむ』</p>
+            <p class="ja-classical-line">かかる所へ一人の牢番、靴音高く入り来り、四辺を見廻し、人無きを見て安心せしものの如く、</p>
+            <p class="ja-classical-line">『もし師の君様、私は春公で御座います。葵の沼に於てお姿を見失ひ、このトルマン城下へ参りました処、何の手掛りもなく、師の君一行の所在が分りませぬので、看守を出願し、やつと十日以前に合格し、かかる卑しき獄卒を勤めて居ります。どうか御心配下さいますな。時期を考へて屹度お助け致します。王様からの厳命で、「湯も水も与へな、食料は日に一回に致せ、彼等が自然に餓死する迄捨ておけ」との小ラマへの達しが参つたさうで御座います。併し乍ら私が当番に当つて居ります以上、決して御心配下さいますな』</p>
+            <p class="ja-classical-line">照国『ヤ、お前は春公だつたか、これも全く神様が、かかる事の出で来るべきを前知したまひ、お前を牢番にするやう取計らつて下さつたのだらう。春公覚られないやうに気をつけよ』</p>
+            <p class="ja-classical-line">春『ハイ、心得まして御座います。どうか御一同様御安心下さいませ』</p>
+            <p class="ja-classical-line">ラマが巡視に来たと見え、靴音がギウギウと高く聞えて来る。春公は、</p>
+            <p class="ja-classical-line">『オイ、未決囚共、静に致さねば厳しき懲戒を加へるぞ』</p>
+            <p class="ja-classical-line">と云ひ乍ら、ラマに最敬礼をやつて居る。高壁の外には新聞号外の配達のリンが耳騒がしく響いて居る。デカタン高原の名物、大暴風は牢獄の桁をギクギク揺つて通る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c16.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 16: 天降里 [1783]</span>
+      </a>
+      <a href="c18.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 18: 鳳恋 [1785]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
