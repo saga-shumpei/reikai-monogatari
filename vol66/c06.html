@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: Kami 軍義兵 [1688] - Volume 66 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 66 Table of Contents</a>
+      <span>Volume 66</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 66 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: Kami 軍義兵 [1688]</h1>
+      <p class="chapter-title-ja">神軍義兵〔1688〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Standing and blocking the Genkuwanguchi, shouting out, 'Tamanou, tamanou,' the old man of hakuhatsu and iyō appearance turned towards the gejiyo of this tauke, acting most ōhei.</p>
+          <p class="en-p">Raujin: 'Oi, gejiyo-dono, how is the shiyujin of the tauke faring? I am the shiyugenjiya of Mount Ora, a person called Shīgō. Since I have matters to state to the shiyujin of the tauke, mendau though it may be, kindly annai me.'</p>
+          <p class="en-p">Gejiyo: 'Hai, donata you might be, but due to the sudden goshiyutsujin of the dannasama, it is an ōsaudō from top to bottom, so please denaho once again. Nanibun you see that he is gotabau.'</p>
+          <p class="en-p">Raujin: 'Ahahahahaha. In order to save the dainan involving the tauke, I am a shiyugenjiya who has appeared and come from afar as the messenger of the kiuseishiyu from Mount Ora. Be that as it may, I desire to menkuwai the shiyujin.'</p>
+          <p class="en-p">Just as this was being said, the shiyujin Zhank, wearing busau, appeared and came, and turning towards the rauō,</p>
+          <p class="en-p">Zhank: 'Donata you may be, I know not, but now is an ichidaiji of the kokuka, and the mansion must be left to the bantō, and we must shiyutsujin from this konsōchō. Goyō it may be, I know not, but this is no longer the case of dealing with the affairs of one's own body and household. Please return home.'</p>
+          <p class="en-p">Shīgō: 'Ahahahahaha. That I, zessō, set out from Mount Ora, and while getting drenched in the dew on the yato overgrown with grass, searched while the night had not even broken, was by the command of the Ōkami; whether to save the kokuka or to save the household, it is a matter that cannot be accomplished unless by Kami. If you too are shiyutsujining in the army of giyū in order to save the kokuka, listen to these few words of mine. Even if you lend your ear just a single time, it will hardly result in much loss.'</p>
+          <p class="en-p">Zhank: 'If there is a method to save the kokuka, nothing could be more splendid; although it is the brink of shiyutsujin, we cannot afford to let this pass unheard. This place is the Genkuwanguchi, come, come, please proceed within. I shall humbly listen to your tale in detail.'</p>
+          <p class="en-p">Shīgō: 'If so, excuse me, I shall pass right through.'</p>
+          <p class="en-p">So saying, striking his shakujō, with an ōhei face he was accompanied to the detached betsu-den, and placing a round desk in the middle, host and guest faced each other and conversation began.</p>
+          <p class="en-p">Zhank: 'I have heard that you are the messenger of Kami and a shiyugenjiya, and that you will show me the essential path to save the kokuka; for this I am truly filled with gratitude. I humbly beg for your guidance.'</p>
+          <p class="en-p">Shīgō: 'Zessō is the ikigami of Mount Ora, a person called Shīgōbō, a senior disciple of Genshinbō. On this occasion, as for Genshinbō my master, desiring to save the crisis of the country of Torman, to deliver the people from suffering, and in the small scale to deliver the peril of a single household and individual, he practices spiritual discipline day and night, and saves all sufferings and hardships. The conspicuousness of that reikō is unprecedented from ancient times to the present. The shinmei of heaven and earth also admire the high virtue of my master and desire to receive his teachings, and every night, upon the great cedar tree of Mount Ora, he causes the starry body of Tanabatahime to descend from heaven, letting them hear deep and subtle doctrines—such is his majestic power. Even if the Brahman army acts in bakkotoryō, by the prayers of Genshinbō my master, that it will melt away like smoke and vanish is clearer than seeing fire. In connection with this, it is said that the daughter of your house's whereabouts are unknown; she must undoubtedly have been captured by the spies of the Brahman army. Do you not have the spirit to request Genshinbō my master to save your most beloved daughter?'</p>
+          <p class="en-p">Zhank, while looking suspicious, lowered his head, and for a short while was lost in thought.</p>
+          <p class="en-p">Zhank: 'Shīgō-sama or whatever you are called, thank you very much for your kindness in coming from a distant road. Nevertheless, in today's situation, this is no time to let our hearts be troubled by matters such as a daughter. If you have the path to save the ichidaiji of the kokuka, I would like to be shown it.'</p>
+          <p class="en-p">Shīgō: 'Ahahahahaha, you too are one of the hypocrites, are you not? No matter how much you speak of the sake of the kokuka, you must surely possess fully the spirit that you desire the peril of your daughter, who has no substitute either in heaven or on earth, to be saved. A parent who cannot love his own child cannot possibly possess the qualifications of a ruler of men or of a village head.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">玄関口に立ちはだかり『頼まう、頼まう』と呼ばはつて居る白髪異様の老人は、さも横柄に、此家の下女に向ひ、</p>
+            <p class="ja-classical-line">老人『オイ、お下女どの、当家の主人はどう致して居るか。吾はオーラ山の修験者、シーゴーと申す者だ。当家の主人に申上げたい事あれば、面倒乍ら案内をして呉れやれ』</p>
+            <p class="ja-classical-line">下女『ハイ、何方か知りませぬが、旦那様は俄の御出陣で上を下への大騒動、どうか又出直して来て下さい。何分御多忙でいらつしやいますから』</p>
+            <p class="ja-classical-line">老人『アハヽヽヽヽ当家に係はる大難を救はむが為、遙々オーラ山より救世主の使として現はれ来りし修験者だ。何は兎もあれ、主人に面会致したい』</p>
+            <p class="ja-classical-line">斯くいふ所へ、武装をつけた主人のジャンクは現はれ来り、老翁に向ひ、</p>
+            <p class="ja-classical-line">ジャンク『いづれの方かは知りませぬが、今は国家の一大事、館は番頭共に任せおき、今早朝より出陣せなくてはなりませぬ。何御用か存じませぬが、もはや一身一家の事にかかはる場合ではありませぬ。どうかお帰り下さいませ』</p>
+            <p class="ja-classical-line">シーゴー『アハヽヽヽヽ。拙僧がオーラ山を立ち出で、草茫々たる夜途を露に濡れ乍ら夜も明けぬ中尋ねて来たのは、大神の御命令、国家を救ふも一家を救ふも、神ならでは叶はぬ事、其方も国家を救はむとして、義勇の軍に出陣なさるならば、拙者の一言をお聞きなされ。唯一回位耳を借した所で、余り損にはなりますまい』</p>
+            <p class="ja-classical-line">ジャンク『国家を救ふ方法がありとすれば何より結構、既に出陣の間際なれども、聞き逃す訳にはゆきますまい。此処は玄関口、サアサア奥へお進み下さい。篤とお話を承はりませう』</p>
+            <p class="ja-classical-line">シーゴー『然らば御免、まかり通るであらう』</p>
+            <p class="ja-classical-line">と錫杖をつき乍ら、横柄な面をして離れの別殿に伴はれ往き、丸き机を中に置き、主客向ひ合せとなつて談話が初まつた。</p>
+            <p class="ja-classical-line">ジャンク『貴方は神のお使、修験者と承はりましたが、国家を救ふ要道をお示し下さるとの事、実に感謝に堪へませぬ。何卒御指導を願ひます』</p>
+            <p class="ja-classical-line">シーゴー『拙僧はオーラ山の生神、玄真坊の高弟シーゴー坊と申すもの、此度吾師の君玄真坊におかせられては、トルマン国の危急を救ひ、民の苦を免れしめ、且小にしては一家一人の危難を免れしめむと、連日連夜の修業を遊ばし、一切の苦難を救ひたまふ、其霊験の著しき事、古今絶無で厶る。天地の神明も吾師の高徳を慕ひ、教を受けむとし、毎夜オーラ山の大杉の樹に、天より棚機姫の星体下らせたまひ、深遠微妙なる教理を聞かせたまふと云ふ御威勢、如何にバラモン軍が跋扈跳梁するとも、吾師の君の祈祷によりて、煙散霧消するは火を睹るよりも明かである。就いては当家の娘御は行衛不明との事、必ずやバラモン軍の間諜者に捉へられ給ひしに相違なし、貴方は吾師の君に依頼して、最愛の娘御を、救つて貰ふ御精神は厶らぬか』</p>
+            <p class="ja-classical-line">ジャンクは怪しみ乍ら、頭を垂れ、稍思案に暮れて居た。</p>
+            <p class="ja-classical-line">ジャンク『シーゴー様とやら、遠路の所御親切に有難う厶います。然し乍ら今日の場合、娘の事などに心を悩ます場合では厶いませぬ。国家の一大事を救ふ御道あらばお示しに預かりたい』</p>
+            <p class="ja-classical-line">シーゴー『アハヽヽヽ、貴方も偽善者の一人で厶るな。何程国家の為だと云つても、天にも地にも掛け替のない娘が危難を救はれたいと云ふ精神は、十分にお持ちでせう。吾子を愛せない親は、人君として、或は里庄としての資格は厶いますまい』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Junk: 'Ah, I am much obliged by your astute discernment. Where beneath the heavens is there a parent who does not think of their child? Nevertheless, in today's situation, it is fitting to cast aside lesser love and pour forth a greater love toward that which is called the state and the sovereign. Since both the state and the person of His Majesty are already facing a crisis akin to burning at the stake, even if I must make my most beloved daughter a sacrifice, my thought is to devote my full mental and physical strength for the sake of that greater love.'</p>
+          <p class="en-p">Seigō: 'I truly admire your resolve to save the state even by sacrificing your precious daughter. If the state, the sovereign, and your beloved child are saved, you surely harbor no attachment to your family's property, do you?'</p>
+          <p class="en-p">Junk: 'Of course not. My daughter's whereabouts are unknown, and her life or death is uncertain; furthermore, leading forth my aged body to advance to the battlefield where sword blades flash, I am prepared for death from the very beginning. After my death, what need will there be for my myriad riches?'</p>
+          <p class="en-p">Seigō: 'I quite understand and deeply sympathize with your noble spirit. If so, I would like to offer a consultation: to save the sovereign, the state, and your daughter, would you not be inclined to present this wealth to my master, the Lord Genshinbō of Mount Aura? If you bestow it upon that peerless living god, whose virtue causes even mountains, rivers, plants, and trees, and the stars of heaven to yearn and draw near, I consider it the finest act of merit, first for the sake of your ancestors, and then for the state.'</p>
+          <p class="en-p">At that moment, the receptionist Seiru entered in a hurried manner,</p>
+          <p class="en-p">Seiru: 'Master, the preparations throughout the village are complete. The villagers have come to beg us to set out to the battle lines as soon as possible, armed and ready. The horses are also prepared, so...'</p>
+          <p class="en-p">Junk: 'Ah, is that so? Tell them I am coming at once.'</p>
+          <p class="en-p">Seiru: 'Very well, understood.'</p>
+          <p class="en-p">With that, he hurriedly departed.</p>
+          <p class="en-p">Seigō: 'How is it? Your decision is...'</p>
+          <p class="en-p">Junk: 'For the sake of the state, for the sake of His Majesty, I shall hand over all my property to Genshinbō-sama.'</p>
+          <p class="en-p">Seigō: 'Ah, as expected of the perceptive Village Chief Satosho, splendid indeed! Then, for the sake of the future, please write out a certificate stating that you, with your own hand, are giving away all your property.'</p>
+          <p class="en-p">Junk: 'A man's word is as firm as iron and stone; there is no need for troublesome certificates or the like. If this were a transaction between ordinary people, that would be one thing, but since I am giving it to a living god of holy wisdom, would it not rather be disrespectful to present a certificate?'</p>
+          <p class="en-p">Seigō: 'Indeed, that is a reasonable argument. In truth, I myself am a living witness. Let Brahma, Shakra, and the Lord of Free Heaven also bear witness; you will surely never speak double words, will you?'</p>
+          <p class="en-p">Junk: 'What, you are persistent. Even if I am merely the commander-in-chief of the volunteer army, a warrior's word has no second tongue.'</p>
+          <p class="en-p">Seigō: 'If so, from this very day and hour, this property has reverted to the possession of my master Genshinbō. You are aware of this, are you not?'</p>
+          <p class="en-p">Junk: 'Please make good use of my property, and for the sake of the state, for the sake of His Majesty, and for the sake of my daughter, enshrine the deities with utmost reverence and enfold our prayers within it. As the hour is pressing, I take my leave of you from here.'</p>
+          <p class="en-p">Seigō: 'Ah, this monk too shall report this joyful news to my master, and promptly set about our prayers.'</p>
+          <p class="en-p">So saying, he went away in high spirits. Uaikō had been secretly eavesdropping while wondering about the two men's exchange.</p>
+          <p class="en-p">Junk entered the living room of Terukuniwake,</p>
+          <p class="en-p">Junk: 'Ah, apologies for keeping you waiting. Come, let us set forth to battle from here.'</p>
+          <p class="en-p">Uaikō hurriedly entered from the adjacent room,</p>
+          <p class="en-p">Uaikō: 'Pardon me, Junk-sama, please be on your guard. That old man called a shugensha is a scoundrel. The sign of sword-calamity floats upon his physiognomy, and an evil countenance fills his face. You seem to have provided all your property to this so-called Genshinbō, but you would do well to cancel it right now; I offer you a brief warning.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ジャンク『いや、貴方の御明察、恐れ入りました。天が下に子を思はぬ親が何処に厶いませう。併し乍ら今日の場合は、小なる愛を捨て、国家国王と云ふものに向つて、大なる愛を注ぐべきで厶います。国家も国王様のお身の上も、既に焦頭爛額の危機に瀕して居りますれば、仮令最愛の娘を犠牲と致しても、大なる愛の為に心力を傾注したい考へで厶います』</p>
+            <p class="ja-classical-line">シーゴー『貴方は大切な娘御を犠牲としてでも、国家を助けたいと云ふ思召、実に感心致しました。もし国家、国王、並に貴方の愛児がお助かりになるのなら、当家の財産に執着は厶いますまいなア』</p>
+            <p class="ja-classical-line">ジャンク『勿論の事です。吾娘は行方知れず、生死もさだかならず、加ふるに老躯を引提げて、剣光閃く戦場に進む此身、元より死は覚悟して居ます。吾死したる後は、巨万の財産も何の必要が厶いませう』</p>
+            <p class="ja-classical-line">シーゴー『成る程立派なお志感じ入りました。然らば一つ御相談を申上たいが、国王、国家、及びお娘御を救ふ為め、此財産をオーラ山の師の君玄真坊に奉るお気は厶いませぬか。山も川も、草木も天の星迄其徳を慕ひ寄り来ると言ふ古今無双の生神様に、お上げなさつたならば、第一は祖先の為め、国家の為最善の功徳と考へますがな』</p>
+            <p class="ja-classical-line">斯かる所へ受付のセールは慌ただしく入り来り、</p>
+            <p class="ja-classical-line">セール『旦那様、村中の用意が調ひました。早く御出陣をと、村人が武装の儘お願に参りました。お馬の用意も出来ましたから……』</p>
+            <p class="ja-classical-line">ジャンク『アヽさうか、直に往くからと申て呉れ』</p>
+            <p class="ja-classical-line">セール『ハイ畏まりました』</p>
+            <p class="ja-classical-line">と、慌ただしく立ち去つた。</p>
+            <p class="ja-classical-line">シーゴー『如何で厶いますか、御決心は……』</p>
+            <p class="ja-classical-line">ジャンク『国家の為め、国王様の為めならば、吾財産を全部玄真坊様に差上げませう』</p>
+            <p class="ja-classical-line">シーゴー『いや流石は明察の里庄殿、天晴天晴、然らば後日の為め、貴方のお手より、一切の財産を差上るとの証文を認めて下さい』</p>
+            <p class="ja-classical-line">ジャンク『男子の一言は鉄石の如し、面倒臭い証文などは要りますまい。これが人と人との交渉なら兎も角も、善知識の活神様に差上るのだから、却つて証文など差上るのは失礼で厶いませう』</p>
+            <p class="ja-classical-line">シーゴー『成る程、御尤もの話だ。現に拙者が生証文で厶る。梵天帝釈自在天様も御照覧あれ、決して二言は厶いますまいなア』</p>
+            <p class="ja-classical-line">ジャンク『エ、執拗厶る。苟くも義勇軍の総司令、武士の言葉に二言は厶らぬ』</p>
+            <p class="ja-classical-line">シーゴー『然らば今日只今より、此財産は吾師玄真坊の所有に帰しました。御承知であらうなア』</p>
+            <p class="ja-classical-line">ジャンク『吾財産を善用し、国家の為め、国王様の為め、娘の為め、神様を鄭重に祭り、祈願を籠めて下さい。時刻も切迫致しますれば拙者はこれよりお別れ申す』</p>
+            <p class="ja-classical-line">シーゴー『ヤ拙僧も此吉報を吾師の君に申上げ、早速祈願に取りかかりませう』</p>
+            <p class="ja-classical-line">と云ひ乍ら、揚々として帰り往く。梅公は二人の問答を訝かり乍ら、密に立聞して居た。</p>
+            <p class="ja-classical-line">ジャンクは照国別の居間に入り来り、</p>
+            <p class="ja-classical-line">ジャンク『いやどうもお待たせ致しました、サア是から出陣を致しませう』</p>
+            <p class="ja-classical-line">梅公は次の間より慌ただしく入り来り、</p>
+            <p class="ja-classical-line">梅公『もしもしジャンク様、御用心なさいませ、彼の修験者と云ふ老人は曲者で厶います。彼の人相には剣難の相が漂ひ、悪相が顔面に満ちて居ます。貴方は此財産を玄真坊とやらに全部提供なさつたやうですが、今の中にお取消しなさつたがよからう、一寸御忠告申上ます』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Janku: 'Ah, arigata. I also thought it was a suspicious matter, but no matter what anyone says, since they claim they will save kokuōsama and kokuka, I provided all my zaisan while thinking it suspicious, excused by these kotoba. Now that it has left a danshi's mouth, it can no longer be tetsukuwai. If this could be tetsukuwai, it would be like swallowing again tantsuba spat upon chijiyō. I have already fixed my kakugo. Come, come, gokurau though it is, let us shiyutsujin.'</p>
+          <p class="en-p">Umekō: 'Tchi, that Magatsukami has done a grand thing. There is no saui that this definitely has some himitsu. Uttering such a thing, he must be hiding our family's daughter somewhere in doko. Hearing such a thing, minoga is not possible. No matter what my master says, stepping into what is called Mount Aura, I will investigate his shiyōtai, oh, that's it, that's it.'</p>
+          <p class="en-p">So dokugoing, following Terukuniwake together with Janku, fluttering sankakuki in the wind, with hundreds of giyūgun with banners and drums in full pomp heading toward Barugan Castle, purifying the surrounding evil qi with brave conch sounds saying 'buu buu', they regulated their ranks and marched on.</p>
+          <p class="en-p">The hundreds of cavalrymen, carrying spears and naginatas in hand each, advanced across the endless plain. The wind was fortunately a tailwind and most convenient for the march. Janku chanted a march song while on horseback.</p>
+          <p class="en-p">Janku: 'In the age of the gods, the ruling deities
+Opened and made the divine land,
+Young men of the Tolman country,
+You should devote yourselves to the land and the lord,
+The good day has now come,
+Be courageous, be courageous, divine army,
+Advance, advance, hundreds of armies,
+No matter how many tens of thousands of enemies there are,
+How could we fear them, the spirit of the Tolman danshi
+Of Shikishima is firmer than gold and iron,
+Magatsukami who bears enmity against the country,
+Sweep them away, sweep them away, completely sweep them away,
+Piling up bones to make mountains,
+Blood flowing to become rivers,
+Though we expose our corpses on the wild fields,
+For the sake of the gods, for the sake of the lord,
+We advance for the sake of the imperial land,
+We are the noble divine army,
+Unflinching, unyielding, march on!'</p>
+          <p class="en-p">Janku: 'The volunteer army led by Janku,
+Do not fall behind, do not flinch,
+Since there is the protection of the gods,
+Your future is smooth and level,
+Like the opening of the lotus flower,
+Shinrakuen will be opened,
+Advance, advance, brave danshi,
+Advance, advance, divine army,
+The gods are with you,
+We are the divine army chosen by the gods
+To protect the imperial land,
+In the path where our divine army goes,
+Can there be any obstacles to block us?
+Ah, how brave, how brave,
+This army that saves the country,
+The divine army that protects the people,
+Ah, kannagara-kamigami,
+Bonten, Taishaku, Jizaiten,
+Great majesty of Ōkunihiko,
+Shining upon our bodies,
+
+Gathered solely in loyalty,
+Pray protect this army,
+The capital of victory draws near,
+Be courageous, be courageous, brave danshi,
+Advance, advance, divine army.'</p>
+          <p class="en-p">Terukuniwake also chanted.</p>
+          <p class="en-p">Terukuniwake: 'I am the propagandist
+Of the command of Terukuni of the divine army,
+To transmit the teachings of Izanagi, Izanami, and Amaterasu
+To the countries in the four directions,
+Just at the time when I came advancing,
+Ever since Janku-san of the village of Tarai
+Entered the mansion and heard the talk
+Of this military campaign,
+I too joined the righteous army,
+Until the kototama of izu is exhausted,
+Or defending and fighting on,
+The divine land established by the gods,
+Black clouds blocking the sky,
+We must blow them away and clear them up,
+Be courageous, be courageous, divine army,
+The gods are with you,
+Man is the child of the gods, the palace of the gods,
+There is no evil that opposes the gods,
+Bonten, Taishaku, Jizaiten,
+Reverently worshiping the holy deity
+Of Ōkunihiko,
+And upholding the teachings of Izanagi, Izanami, and Amaterasu,
+Depending on the great majesty
+Of the great deity Kami Susanō as our strength,
+Transcending the boundary of life and death,
+For the sake of the gods, for the sake of the country,
+To save the king and the people,
+We must advance even if our bodies perish,
+Ah, kannagara-kamigami,
+How reverend is the great majesty of the gods,
+Advance, advance, divine soldiers,
+Be courageous, be courageous, military men,
+Ah, kannagara-kamigami,
+May the spirits be blessed and prosper,
+May the spirits be blessed and prosper.'</p>
+          <p class="en-p">Umekō also chanted.</p>
+          <p class="en-p">Umekō: 'Following my master,
+Mount Kajika where the wind blows wildly,
+Crossing it at last and clearing away thousands
+Of difficulties of evil,
+When I come and look at the marsh of Aoi,
+The surface of the water shining with the moon,
+The princess mikoto of Kiyoteru shining in the sky
+Or the propagandist mikoto
+Of the golden princess,
+Dividing her sleeves to the right and left,
+Just at the time when she came advancing
+to the entrance of the village of Tarai,
+Ever since I heard of the atrocious acts
+Of the Brahman army, my arms tingled,
+My blood danced, and to save the sufferings
+of worldly people anywhere,
+Having no outlet for the great Yamato spirit
+of heroic determination that I had resolved to the utmost,
+Thinking what I should do,
+The volunteer army led by Janku'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ジャンク『イヤ、有難う。私も怪しい事だとは思つたが、何と云うても国王様や国家を助けると云ふのだから、此言葉に免じ怪しいとは思ひ乍ら財産全部を提供しました。最早男子の口に出した以上は撤回は出来ませぬ。是が撤回出来るやうなら地上に吐いた痰唾を再び呑むやうなものです。もう私も覚悟を定めました。サアサア御苦労乍ら出陣致しませう』</p>
+            <p class="ja-classical-line">梅公『チヨツ、曲津神の奴、偉い事をしやがつたな。こいつは屹度何かの秘密があるに相違ない。あんな事を吐して、自分が当家の娘を何処かに隠して居るのだらう。こんな事を聞いては見逃す事は出来ない。吾師の君が何と云はれても、オーラ山とやらに踏み込んで正体を調べてやらう、オウ、さうぢや　さうぢや』</p>
+            <p class="ja-classical-line">と独語し乍ら、照国別に従ひジャンクと共に三角旗を風に翻し、数百の義勇軍と共に旗鼓堂々とバルガン城を指して、法螺の声も勇ましく『ブウブウ』と四辺の邪気を清めながら隊伍を調へ進み行く。</p>
+            <p class="ja-classical-line">数百人の騎兵隊は、手に手に槍長刀などを携へ、果しもなき広原を進み行く。風は幸ひ追風にて進軍に最も便利であつた。ジャンクは馬上乍ら進軍歌を謡ふ。</p>
+            <p class="ja-classical-line">ジャンク『神代の昔皇神の
+開きたまひし神の国
+トルマン国の若者よ
+国と君とに尽すべき
+よき日は今や来りけり
+勇めよ勇めよ神軍よ
+進めよ進め百軍
+敵は幾万ありとても
+如何でか恐れむ敷島の
+トルマン男子の魂は
+金鉄よりも猶堅し
+国に仇なす曲津神
+払へよ払へよおつ払へ
+骨身は積みて山をなし
+血潮は流れて河となり
+屍を野辺に曝すとも
+神の御為め君の為め
+御国の為に進むなる
+吾等は貴の神軍ぞ
+撓まず屈せず進み行け</p>
+            <p class="ja-classical-line">ジャンクの率ゆる義勇軍
+後れを取るなひるむなよ
+神の守りのある上は
+汝の前途は坦々と
+蓮華の華の開くごと
+真楽園が開かれむ
+進めよ進めよ快男子
+進めよ進めよ神軍よ
+神は汝と倶にあり
+吾等は神の選みたる
+御国を守る神軍ぞ
+吾神軍の往く道に
+塞らむ曲のあるべきぞ
+あゝ勇ましし勇ましし
+国を救ひの此軍
+民の守りの神軍ぞ
+あゝ惟神々々
+梵天帝釈自在天
+大国彦の大稜威
+吾身の上に輝きて</p>
+            <p class="ja-classical-line">忠義一途に固まりし
+軍を守りたまへかし
+勝利の都は近づきぬ
+勇めよ勇めよ快男子
+進めよ進めよ神軍よ』</p>
+            <p class="ja-classical-line">照国別は又謡ふ。</p>
+            <p class="ja-classical-line">照国別『吾は神軍照国の
+別の命の宣伝使
+三五教の御教を
+四方の国々伝へむと
+進み来れる折もあれ
+タライの村のジャンクさまが
+館に立ち入り此度の
+軍の話を聞きしより
+吾も義軍に加はりて
+厳の言霊尽くる迄
+或は防ぎ戦ひつ
+神の建てたる神の国
+御空に塞る黒雲を
+伊吹払ひに払ふべし
+勇めよ勇めよ神軍よ
+神は汝と倶にあり
+人は神の子神の宮
+神に敵する曲はなし
+梵天帝釈自在天
+大国彦の神様を</p>
+            <p class="ja-classical-line">敬ひまつり三五の
+教を守りたまふなる
+神素盞嗚の大神の
+御稜威を力と頼みつつ
+生死の境に超越し
+神の御為国の為
+国王と民を救ふため
+身もたなしらに進むべし
+あゝ惟神々々
+神の御稜威の尊さよ
+進めよ進めよ神軍士
+勇めよ勇めよ軍人
+あゝ惟神々々
+御霊幸はひましませよ
+御霊幸はひましませよ』</p>
+            <p class="ja-classical-line">梅公は又謡ふ。</p>
+            <p class="ja-classical-line">梅公『吾師の君に従ひて
+風吹き荒ぶ河鹿山
+やうやく越えて千万の
+曲の難を払ひつつ
+葵の沼に来て見れば
+月照り渡る水の面
+空に輝く清照の
+姫の命や黄金の
+姫の命の宣伝使
+右と左に袂をば
+別ちてタライの村の口
+進み来れる折もあれ
+バラモン軍の暴状を
+耳にせしより腕は鳴り
+血は躍りつつどこ迄も
+世人の難を救はむと
+思ひきはめし雄心の
+大和心のやりばなく
+如何はせむと思ふ折
+ジャンクの率ゆる義勇軍</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Jiyūgun se yo to no shi no kimi no
+Kotoba ni inami kanetsutsu mo
+Sumeōkami no mikokoro to
+Aogimatsurite susumi yuku</p>
+          <p class="en-p">Sawasarinagara Sugakohime
+Nan ni ūshi to kiku yori mo
+Kore ga misute te okareyō ka
+Ikusa no ba ni tachinagara</p>
+          <p class="en-p">Kokoro ni kakaru wa hime no koto
+Itsutan sukuhi tasukemu to
+Omoisadameshi wagamune wa
+Itsuka harenamu ōzora o
+Tsutsumishi kumo no gotoku nari</p>
+          <p class="en-p">Ā kamunagara-kamunagara
+Mitama sakihamashimase yo
+Fuki kuru kaze wa tsuyoku tomo
+Teki no ikioi takaku tomo
+Kami ni aru mi wa doko made mo
+Ika de ka osore tamerahamu
+Ā omoshiroshi omoshiroshi</p>
+          <p class="en-p">Teki o senri ni shirizokete
+Toruman-koku o tokoshihe ni
+Kami no oshihe ni mamoru beku
+Susuman mi koso tanoshikere
+Susume yo susume yo shingun yo
+Isame yo isame yo morobito yo
+Ā kamunagara-kamunagara
+Mitama no fuyu o negimatsuru
+Mitama no fuyu o negimatsuru</p>
+          <p class="en-p">Terukō: 'Kaze yo fuke fuke shinado no kaze yo
+Suna yo tate tate amane tate yo
+Ware wa shingun Terukō no
+Kami no tsukasa yo noru koma no
+Zumete no oto mo katsukatsu to
+Ikanaru yamaji mo osore naku
+Kami no mani mani susumu beshi
+Dekatan-koku no kaugen ni
+Koma ni muchutsu wareware wa
+Sanzensekai no kiuseishiyu
+Chōjū ya kusaki made
+Sukuhi tasukemu shokushō zo
+Ōtachiwake no magun
+Barugan-jō o tōtoyae
+Tori kakumu tomo nani ka aramu
+Kami no yosashi no kototama o
+Chikara kagiri ni ihanachite
+Teki to mikata no hedate naku
+Kotomuke nagasu wa an no uchi
+Yaiba ni chi o ba nurazu shite'</p>
+          <p class="en-p">Ikusa o osamuru kami no toku
+Ā isamashishi isamashishi
+Zento ni kōmyō kagayakinu
+Osoruru nakare shingunshi
+Susume yo susume yo mina tomo ni
+Tenkoku jōdo o chi no ue ni
+Kanzen muketsu ni aku made
+Ā kamunagara-kamunagara
+Mitama sakihamashimase yo'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">従軍せよとの師の君の
+言葉に否み兼ねつつも
+皇大神の御心と
+仰ぎまつりて進み往く
+さはさりながらスガコ姫
+難に遇ひしと聞くよりも
+是が見捨てて置かれようか
+戦の場に立ちながら
+心にかかるは姫の事
+一旦救ひ助けむと
+思ひ定めし吾胸は
+いつか晴れなむ大空を
+包みし雲の如くなり
+あゝ惟神々々
+御霊幸倍ましませよ
+吹き来る風は強くとも
+敵の勢猛くとも
+神にある身はどこ迄も
+如何でか恐れためらはむ
+あゝ面白し面白し</p>
+            <p class="ja-classical-line">敵を千里に退けて
+トルマン国を永久に
+神の教に守るべく
+進まむ身こそ楽しけれ
+進めよ進めよ神軍よ
+勇めよ勇めよ諸人よ
+あゝ惟神々々
+御霊の恩頼を願ぎまつる
+御霊の恩頼を願ぎまつる』</p>
+            <p class="ja-classical-line">照公は又謡ふ。</p>
+            <p class="ja-classical-line">照公『風よ吹け吹け科戸の風よ
+砂よ立て立て天迄立てよ
+吾は神軍照公の
+神の司よ乗る駒の
+蹄の音も戛々と
+如何なる山路も恐れなく
+神のまにまに進むべし
+デカタン国の高原に
+駒に鞭つ吾々は
+三千世界の救世主
+鳥獣や草木迄
+救ひ助けむ職掌ぞ
+大足別の曲軍
+バルガン城を十重廿重
+取り囲むとも何かあらむ
+神のよさしの言霊を
+力限りに射放ちて
+敵と味方の隔てなく
+言向け和すは案の中
+刃に血をば塗らずして</p>
+            <p class="ja-classical-line">軍をおさむる神の徳
+あゝ勇ましし勇ましし
+前途に光明輝きぬ
+恐るる勿れ神軍士
+進めよ進めよ皆共に
+天国浄土を地の上に
+完全無欠に開く迄
+あゝ惟神々々
+御霊幸倍ましませよ』</p>
+            <p class="ja-classical-line">と声勇ましく謡ひながら、千里の広野を駒の蹄に砂塵を捲き上げながら、途々参加する兵士を合し、数千人の団隊となつてバルガン城を目がけ、勢猛く進み行く。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 愁 Cloud 退散 [1687]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: 女白浪 [1689]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
