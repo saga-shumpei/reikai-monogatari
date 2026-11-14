@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: 反鱗 [1663] - Volume 65 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 65 Table of Contents</a>
+      <span>Volume 65</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 65 &bull; Chapter 7</span>
+      <h1 class="chapter-title-en">Chapter 7: 反鱗 [1663]</h1>
+      <p class="chapter-title-ja">反鱗〔1663〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As the Sannin ascended the Kifuhan, a sound of groaning, 'un-un', was heard from within the Mitsurin. Itahiko, startled, parted the grass and entered the forest to find a man lying stretched out, gasping for breath, still wrapped in a Hautai. Immediately, he opened the mouth of his Suitō and gave him water to drink, chanted the Kazūta of Ama, and provided him with compassionate Kaihau. The fallen man gradually regained his Shiyōki, looked around the Atari restlessly, and was startled to see Sendenshi Itahiko before him; he attempted to flee at once, but as the strength in his Teashi had not yet undergone Kuwaifuku, he merely stomped his feet in frustration like an Ishigame.</p>
+          <p class="en-p">Ita: 'Ya, traveler, have you regained your senses? First of all, Ketsukō-Eitau. You seem to have sustained a Taihen Kega; I suppose you were likely attacked by the Dorobau of Torakumayama.'</p>
+          <p class="en-p">Man: 'Yes, thank you. I am a person from this vicinity, but while on my way to visit a Shinseki on a Chiyotsuto sudden errand, I encountered an evil man named Sēru, the boss of the Dorobau; he took all my money, split my head open, and I was in a state of unconsciousness. Oh, how you have saved me. I shall never forget this favor.'</p>
+          <p class="en-p">Emu stepped forward and gazed intently at his face.</p>
+          <p class="en-p">Emu: 'Ya, are you not the vice-boss of the Dorobau of Torakumayama? It is no use telling such lies. If I may, Sendenshi-sama, this man is called Hāru, and he is a very, very wicked fellow. He is the one who gagged the young Hime-sama you are searching for and had her carried into a rocky cavern by numerous henchmen; do not let your guard down.'</p>
+          <p class="en-p">Hāru: 'Oi, Emu, ...no, I do not know who this fellow is, but it is troubling to be so mistaken. I am no Dorobau or anything of the sort; I am a farmer from this neighborhood. I will not have you saying such reckless things.'</p>
+          <p class="en-p">Emu smiled with a grin.</p>
+          <p class="en-p">Emu: 'He-he-he-he, you speak well. Even if you say such things, here stand two former Dorobau who were once your henchmen and are now true human beings. Confess like a man.'</p>
+          <p class="en-p">Ita: 'Oi, Emu and Tatsu, there is no mistake that this fellow is a Dorobau, is there?'</p>
+          <p class="en-p">Emu: 'Yes, yes, he is a first-rate Dorobau. This fellow is called Second Lieutenant Hāru of the Brahman Army, an officer who made a name for himself as a handsome man; but after General Kishun-betsu-sama disbanded the army, he had no choice but to start a Dorobau business with Captain Sēru, and he is a most wicked man who holds great influence in the caverns of Torakumayama as a leader of a hundred men, so you must not let your guard down.'</p>
+          <p class="en-p">Ita: 'What you say must be true. Your conversion has also been proven by this. From now on I will look after you, so be at ease.'</p>
+          <p class="en-p">Emu: 'Oh, thank you. I humbly request your patronage Eitau-Eitau.'</p>
+          <p class="en-p">Tatsu: 'I shall study hard and make things cheaper than at other shops. I humbly request your patronage for a long time to come.'</p>
+          <p class="en-p">Ita: 'Ha-ha-ha. What interesting men. Ya, I like you greatly. From now on I shall keep you busy with errands, so you should study hard.'</p>
+          <p class="en-p">Both: 'Fu-fu-fu-fu.'</p>
+          <p class="en-p">Ita: 'Oi, as these two are now testifying, there is no doubt you are a Dorobau leader. If you do not confess the truth, it will not be to your benefit.'</p>
+          <p class="en-p">Hāru: 'No, I am filled with awe; please forgive my manifold sins. It is true that I took the two Hime-sama back and threw them into prison. However, there is a great boss who employs me, so the sin is not mine alone. Please, I beg you to investigate him.'</p>
+          <p class="en-p">Ita: 'To pin your own sins upon your boss is an act of extreme insolence. Even if it was something the boss did, do you not have the sincerity to take the responsibility upon yourself? Surely even among the Dorobau circles, a code of morality must be practiced.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">三人は急坂を上つて往くと、密林の中に、「ウンウン」と呻声が聞えて来た。伊太彦は驚いて草をわけ、林の中に入つて見れば、一人の男が繃帯をした儘、虫の息になつてフン伸びて居る。忽ち水筒の口を開いて水を飲ませ、天の数歌を謡ひ、労はつて介抱をしてやつた。倒れた男は漸く正気に復し、四辺をキヨロキヨロ見廻し、伊太彦宣伝使の吾前にあるに驚き、早くも逃げむとすれど、未だ手足の力が回復しないので、石亀のやうに地団駄を踏んで居る。</p>
+            <p class="ja-classical-line">伊太『ヤア旅のお方気がつきましたか、先づ先づ結構々々、お前は大変怪我をして居るやうだが、大方虎熊山の泥棒にでもやられたのぢやないかな』</p>
+            <p class="ja-classical-line">男『ハイ有難う厶います。私は此近くの者で厶いますが、一寸俄の用で親威へ参る途中、泥棒の親分、セールと云ふ悪人に出会ひ、有金をすつかり取られ、頭をかち割られ人事不省になつて居た所です。ようまアお助け下さいました。此御恩は決して忘れませぬ』</p>
+            <p class="ja-classical-line">エムはツカツカと傍により、顔をつくづく眺めて、</p>
+            <p class="ja-classical-line">エム『ヤア、お前は虎熊山の泥棒の副親分ぢやないか、そんな嘘を云つたつて駄目だよ。もし宣伝使様、此男はハールと申まして、それはそれは悪い奴で厶います。貴方のお尋ねになつた若い娘さまを、口に猿轡を箝めて、数多の乾児に岩窟の中に担ぎ込ました奴ですから、油断をなされますなよ』</p>
+            <p class="ja-classical-line">ハール『オイ、エム、……いや、ど此奴か知らないが、さう見違をして貰つては困るぢやないか。私は泥棒でも何でもない、此近傍の百姓だ。滅多な事を云ふて貰ふまい』</p>
+            <p class="ja-classical-line">エムはニタリと笑ひ、</p>
+            <p class="ja-classical-line">エム『ヘヽヽヽ、よう仰有いますわい。そんな事を云つたつて、此処にお前様の乾児になつて居た二人の前の泥棒、今の真人間が控へて居ますよ。男らしく白状しなさい』</p>
+            <p class="ja-classical-line">伊太『オイ、エム、タツの両人、此奴は泥棒に間違ひないなア』</p>
+            <p class="ja-classical-line">エム『ヘエヘエ、チヤキチヤキの泥棒ですよ。此奴はバラモン軍のハール少尉と云つて、美男子の名を売つた士官ですが、鬼春別将軍様が軍隊を解散せられてから、仕方なしにセール大尉と泥棒を開業し、虎熊山の岩窟で羽振を利かし、百人頭になつて居る極悪人ですから、油断をなさつてはいけませぬよ』</p>
+            <p class="ja-classical-line">伊太『お前の云ふ事は本当だらう。お前の改心もそれで証明された。これから可愛がつてやるから安心せい』</p>
+            <p class="ja-classical-line">エム『いやもう有難う厶います。どうぞ永当々々御贔屓の程をお願ひ申ます』</p>
+            <p class="ja-classical-line">タツ『充分勉強をいたしまして、他店とはお安く致します。どうぞ末永う御贔屓に願ひます』</p>
+            <p class="ja-classical-line">伊太『ハヽヽ。面白い男だな。ヤ大に気に入つた。是から精出して御用を仰せつけてやるから、充分勉強するがいいぞ』</p>
+            <p class="ja-classical-line">両人『フヽヽヽ』</p>
+            <p class="ja-classical-line">伊太『オイ、お前は今此両人が証明して居るが、泥棒頭に相違あるまい。有体に白状せないと、お前のためにならないぞ』</p>
+            <p class="ja-classical-line">ハール『いや、恐れ入りまして厶います、何卒重々の罪をお赦し下さいませ、二人の姫様を連れ帰り、牢獄に打ち込みましたのは私に相違厶いませぬ。併し私を使ふ大親分が厶いますから、私許りの罪では厶いませぬ。どうぞ彼をお調べ下さいませ』</p>
+            <p class="ja-classical-line">伊太『自分の罪を親分に塗り付けるとは不届き千万の奴だ。たとへ親分がやつた事でも何故私がやりましたと引受けるだけの赤心が無いか、泥棒仲間にも道徳律が行はれて居るだらう』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hāru: 'Yes, that is certainly so, but no matter what is said, the Oyabun is the Oyabun. Finally, that wretch of an Oyabun, out of resentment from a Kiyōsō of love, tried to subject me to a Yamiuchi, and so I have met with such a fate and have actually just run away. If the Oyabun has his Hanrin, I have my Hanrin too. That is why it is so Ahau-like that a Giseiteki Seishin simply will not arise, will it?'</p>
+          <p class="en-p">Ita: 'What has become of those Futari women?'</p>
+          <p class="en-p">Hāru: 'Yes, surely... since Taishiyō Sēru is infatuated with them, he will not do anything so Teara. Well, as far as their Migara are concerned, they are Daijiyōbu, so please be at Goanshin. And please forgive my sins. I too, as of Kefu, shall Haigefu my life as a Dorobau.'</p>
+          <p class="en-p">Ita: 'That is Kanshin. If that is so, from now on, will you not follow me and go to the Ihaya Ichido more? It would be convenient for Nanika Bengi.'</p>
+          <p class="en-p">Hāru: 'Yes, oh—my desire to accompany you is Yamayama, but as you see, my head aches, and a Kifusei Okubiyōen has suddenly made a Totsupatsu, so to my Ikan, I am unable to make the Deki of coming. Please forgive me this time.'</p>
+          <p class="en-p">Ita: 'You are a Hontau-ly troublesome fellow. Since I have just performed Chinkon on you, the pain should have stopped by now. Without saying such spineless things—since I am not saying I will boil and eat you or roast and eat you—why not guide me as proof of your submission?'</p>
+          <p class="en-p">Hāru: 'If that is the case, it cannot be helped. Following your words, I shall guide you to the Hime-sama's room. By the way, is that person a member of your family, or perhaps your brother?'</p>
+          <p class="en-p">Ita: 'The older one is the wife of my friend. The younger one is my wife. I suppose they have been quite a burden to you.'</p>
+          <p class="en-p">Hāru: 'Ya! Hearing that, I have no face to show them, so please, I beg you, forgive me.'</p>
+          <p class="en-p">Emu: 'If I may, Propagator-sama, this Hāru fell in love with the younger one, and after wooing and wooing her to the limit, he was given the cold shoulder; then, exploding in a fit of passion, he threw her into a dark, dark rock cave and has been mistreating her. That is why he just confessed he has no face to show. Right there, please give him a taste of something truly painful. It is for the sake of the future.'</p>
+          <p class="en-p">Ita: 'What a helpless man you are. However, you say you have reformed, but aren't you quite ill-natured? To report the faults of the person you looked up to as your superior until now to me—you are a Hontau-ly fellow who does not understand duty and humanity.'</p>
+          <p class="en-p">Emu: 'Can one enter a band of Dorobau while knowing duty and humanity? It is the height of the survival of the fittest and the victory of the superior over the inferior; how could there be such leeway? If one were concerned with such things, one's own self would perish. Even Takeo Arishima went to what he called the height of love and finally destroyed himself, did he not? Takeo Arishima emphasized that "Love is Best" and said that love is not something that should continue forever. And he said that even if it is a married couple, if someone more beloved than the spouse appears, it is the truth to part and lean toward the one with deeper love. Therefore, this Taishiyō no longer has any prospects; I thought you were far more splendid, a savior who would rescue us, and so I have discarded my former Oyabun like a worn-out sandal. Is that bad of me?'</p>
+          <p class="en-p">Ita: 'Ahahaha, how cold-hearted. With that, you have not yet reached the point of reformation. I shall have to squeeze the fat out of you once.'</p>
+          <p class="en-p">Hāru: 'Please, overlook it now. My speaking ill of Sēru was, in short, because he is a rival in love; my heart felt so bad that it just spilled out of my mouth. Henceforth, I shall be careful. If that is so, following your command, I shall reorganize our ranks and gallantly take the lead. Now, Emu and Tatsu, you two follow behind the Propagator.'</p>
+          <p class="en-p">Ita: 'Yaa, you three should all go ahead. I have no eyes in the back of my head, after all. Haha!'</p>
+          <p class="en-p">Emu: 'It is like traveling with a "sending-off wolf." It is dangerous for you to go first. If you stumble and fall, we don't know when he might bite into you.'</p>
+          <p class="en-p">Hāru: 'Here now, Emu. Do not say unnecessary things.'</p>
+          <p class="en-p">Scolding her thus, he takes the lead and climbs up with quick steps.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ハール『ハイそれは確に厶いますが、何と云つても親分が親分で厶います。たうとう親分奴、恋の競争から私を恨んで暗打に遇はさうと致しましたので、斯んな目に遇はされ、実は逃げ出して来た所で厶います。親分に反鱗あれば、私にも反鱗があります。さうだから阿呆らしくてどうしても犠牲的精神が起らぬぢやありませぬか』</p>
+            <p class="ja-classical-line">伊太『其二人の女は何うして居るか』</p>
+            <p class="ja-classical-line">ハール『ハイ、きつと……セール大将が惚れて居ますから、さう手荒い事は致しますまい。まアお身柄だけは大丈夫ですから御安心なさいませ。そして私の罪をお許し下さい。私も今日限り泥棒は廃業致します』</p>
+            <p class="ja-classical-line">伊太『それや感心だ。そんならこれから私について、も一度岩窟へ往つて呉れないか、何彼に便宜がいいからなア』</p>
+            <p class="ja-classical-line">ハール『ハイ、エーお伴致し度いは山々で厶いますが、此通り頭は痛み、俄に急性臆病災が突発致しましたので、遺憾ながら参る事が出来ませぬ。此度はお許し下さいませ』</p>
+            <p class="ja-classical-line">伊太『本当に困つた奴だなア、今私が鎮魂してやつたからもう痛は止まつた筈だ。そんななまくらを云はずに、お前を煮て食はうとも焼いて喰はうとも云はぬのだから帰順した証拠に案内をしたらどうだ』</p>
+            <p class="ja-classical-line">ハール『左様ならば、止むを得ませぬ。お言葉に従ひ、姫様のお居間迄御案内を致しませう。さうしてあのお方は、貴方様のお身内の方ですか、但は御兄弟ですか』</p>
+            <p class="ja-classical-line">伊太『年の経た方は俺の友達の女房だ。若い方は俺の女房だ。随分お世話になつたらうなア』</p>
+            <p class="ja-classical-line">ハール『ヤそれを承はりますと、私は合はす顔が厶いませぬから、どうぞ許して下さいな』</p>
+            <p class="ja-classical-line">エム『若し宣伝使様、このハールは若い方の方に惚れましてな、口説て口説て口説ぬいた上句、肱鉄を喰され、肝癪玉を破裂させ、暗い暗い岩穴に放り込み、虐待をして居るのですよ。それだから合す顔がないと今白状したのです。そこらで一つ、ウンと云ふ目に遇はしてお遣りなさい。後日の為めですからな』</p>
+            <p class="ja-classical-line">伊太『仕方が無い男だな。併しお前も改心したと云ふが、随分人が悪いぢやないか。今迄長上と仰いで居た人の悪口を俺に告げるとは、本当に義理人情をわきまへぬ奴だな』</p>
+            <p class="ja-classical-line">エム『義理人情を知つて居つて泥棒仲間に入いれますか、弱肉強食、優勝劣敗の極致ですもの、そんな余裕がありますものか、そんな事構ふて居つたら、自分の身が亡んで仕舞ひますわ、有島武郎だつて、愛の極致とやら迄行つて、たうとう自滅したぢやありませぬか。有島武郎はラブ　イズ　ベストを高調し、愛はどこ迄も継続すべきものでないと云つたでせう。さうして仮令夫婦でも夫以上の愛する者が出来たら、別れて愛の深い方へ靡くのが真理だと云つたでせう。それだから、この大将はも早見込がない、あなた様の方が余程立派だ、吾々を救つて下さる救ひ主だと思つたから、弊履の如く今迄の親分を捨てて仕舞つたのですよ。悪う厶いますかな』</p>
+            <p class="ja-classical-line">伊太『アハヽヽヽ、何と水臭いものだな。夫ではまだ改心と云ふ所へは往かぬわい。一つこれから膏を取つてやらねばなるまい』</p>
+            <p class="ja-classical-line">ハール『どうぞもう見逃して下さい。セールの悪口申したのは、つまり恋の仇で厶いますから、あんまり胸が悪いので、つい口から迸つたので厶います。今後は慎みます。そんなら仰せに従ひ、陣容を立て直し、堂々と先陣を仕りませう。さア、エム、タツの両人、宣伝使のお後から従いて来い』</p>
+            <p class="ja-classical-line">伊太『ヤアお前達は三人とも先へ往くがよい。俺も後に目が無いからなア、ハヽヽヽ』</p>
+            <p class="ja-classical-line">エム『送り狼と同道して居るやうなものですからなア。先にお出になるのは険呑です。躓いて倒けたら何時噛ぶり付くかも知れませぬからなア』</p>
+            <p class="ja-classical-line">ハール『これエム。いらぬ事を云ふな』</p>
+            <p class="ja-classical-line">と叱りつけ乍ら、先頭に立つて、足早に登りゆく。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c06.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 6: 噴 Fire 口 [1662]</span>
+      </a>
+      <a href="c08.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 8: 異心 Mud 信 [1664]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 饅頭塚 [1671] - Volume 65 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 65 Table of Contents</a>
+      <span>Volume 65</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 65 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 饅頭塚 [1671]</h1>
+      <p class="chapter-title-ja">饅頭塚〔1671〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Bravāda: 'Following after my dear lord and husband,
+Parted in life from mother and father,
+Crossing over Sūraya Kosui,
+Arriving safely at the port of Eru,
+Admonished by the shinjin of Hatsuwakahime,
+Alone by myself,
+Parted in life from my beloved husband,
+Walking on unfamiliar skyways of travel,
+My feet being bitten by waraji,
+Day and night crossing over mountains,
+Crossing across ikuta of valleys,
+Untill reaching the shores of Lake Harusei,
+At the very moment of arriving,
+Captured effortlessly by a crowd of nusubito,
+Led away to the wicked gankutsu of Torakuma,
+Whose name is terrifying,
+Imprisoned inside the hitoya
+Of the gankutsu dark even in daytime,
+At the time of lamenting my own fūn,
+Realizing that Debisu Hime is imprisoned
+In the neighboring hitoya,
+Thinking how pitiable it is,
+Yet somehow my spirit also emboldened,
+As if meeting the Buddha in jigoku,
+My heart suddenly gleamed,
+To such a place Chidaukoji,
+Itahiko, unforgettable even in mubi,
+My dear lord and husband appeared,
+Subjugating every single one of my ugly mitama
+Unto the living ikukototama,
+Saving the lives of us futari,
+Without even casting a single word
+Of affectionate kotoba,
+Advancing us once again
+Onto the divine Ōmichi,
+Oh, the boldness of it!
+Once more I am all alone,
+To convey the divine oshi
+Beyond the clouds of Shirakumo's land,
+An extensive ōnohara where ennetsu is fierce,
+Bitten by horseflies, threatened by hornets,
+Coming at last to the mountain edges of Seru,
+Suddenly all around became gloomy,
+Wrapped in an unpleasant atmosphere,
+Praying with a single mind
+That this must be no ordinary matter,
+Chanting the sacred name of Kami
+At the very moment of advancing
+Along the mountain path fragrant with a thousand flowers,
+The great earth suddenly trembled,
+The roaring sound heard afterwards,
+Is it a lion-wolf or a Torakuma?
+Or perhaps the invasion of a giant serpent?
+Resembling millions of thunderclaps
+Falling all at once,
+Looking back at that sound,
+Raising my eyes to gaze at the sky,
+Who could ever have expected that until yesterday
+Captured by the ugly Magatsuhi,
+That mountain of clouds deeply impressive
+With the memory of suffering,
+As the explosion of Mount Torakuma,
+The terror of the moment I realized it,
+My hair standing on end, my legs growing weak,
+With the womanly weakness unable to advance,
+What could I do but shed tears,
+Nothing more than unable to stop them?
+At last my heart grew calm,
+My chest palpitations also subsided,
+And my feet at last becoming vigorous,
+Oh, the joy of my own body!
+If Kami did not exist in this world,
+In this terrifying roar,
+My life of the pure jewel string
+Would have vanished and disappeared,
+The benevolent grace of revered Kami
+Is something to look up to with awe,
+Ah, Kamnagara Kami Kami,
+May your mitama be prosperous and blessed!
+Whether the morning sun shines or clouds over,
+Whether the moon fills or wanes,
+Even if separated from my husband,
+The true oshi of Kami
+Shall never be parted from even for thousands of ages,
+Nevertheless, Ōkamigami,
+Safely protecting the future course of my dear lord and husband,
+High in the sky of the capital of Haruna,
+With the face of the moon and the color of flowers,
+Grant us a safe reunion as husband and wife, Ōoomigami,
+I earnestly pray to you alone,
+Ah, Kamnagara Kami Kami,
+How revered is the oshi of Kami!
+How wondrous is the grace of Kami!'</p>
+          <p class="en-p">To such a place appeared a wild fox with its feet staggering, catching hold of the hem of Bravāda's robe and attempting to pull her by force into the grassy field. Bravāda is startled and tries to escape, but the wild fox tenaciously bites her hem and no matter how much she struggles will not let go, so Bravāda, having no other choice and led along by the wild fox, follows into the grassy field that swallows up her stature. The wild fox dragged her into a considerably large hole near a mound shaped like a steamed bun situated within the wilderness.</p>
+          <p class="en-p">After a while, a great roaring sound as if even the mountains were crumbling was heard. This was Manasuinnersarashiya, one of the Eight Great Dragon Kings who, having lurked since ancient times as the master of the mountain due to the explosion of Mount Torakuma, was continuously sending evil ki into the world. This Dragon King exceeds five million jo in body length, with a thickness appropriate to that, and is a terrifying dragon god of three million jo.</p>
+          <p class="en-p">It is said that his physical body is gigantic, ascending above the nine heavens, or circling Mount Sumeru seven times, and he is a terrifying wicked dragon capable of stopping the waters of the great ocean, making mountains well up within the sea, or causing islands to submerge. Even now, a part of the Dragon King's body is passing right over the hole of the wild fox where Bravāda is hiding.</p>
+          <p class="en-p">Thinking that suddenly the inside of the hole became pitch dark, a foul-smelling breath impossible to describe attacked her nose. The wild fox was crouching at the mouth of the hole, protecting the hime's safety. Thinking that suddenly the inside of the hole brightened again, the wild fox suddenly bit Bravāda's hem once more, attempting to pull her outside.</p>
+          <p class="en-p">When Bravāda, as she is being pulled along, comes outside to look, the plants and trees on all sides have all fallen over, and a wide ditch of grass has been carved out to the extent that the eye cannot reach. Bravāda turns toward the wild fox and expresses her gratitude,</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ブラワ゛ーダ姫『吾背の君に従ひて
+父と母とに生別れ
+スーラヤ湖水を打ち渡り
+エルの港に安着し
+初稚姫の神人に
+誡められて唯一人
+恋しき夫に生別れ
+歩みもなれぬ旅の空
+草鞋に足を喰はれつつ
+夜を日についで山を越え
+幾多の谷をうち渡り
+ハルセイ湖の畔まで
+来かかる折しも盗人の
+群になんなく捉へられ
+名もおそろしき虎熊の
+曲の岩窟に連れ往かれ
+昼尚ほ暗き岩窟の
+牢獄の中に囚はれて
+吾身の不運をかこつ折
+隣の牢獄にデビス姫</p>
+            <p class="ja-classical-line">囚はれ居ますと悟りしゆ
+気の毒なりと思へども
+何とはなしに気も勇み
+地獄で仏にあひしごと
+心は俄に輝きぬ
+かかる所へ治道居士
+夢寐にも忘れぬ伊太彦の
+吾背の君が現はれて
+醜の身魂をことごとく
+生言霊にまつろはし
+妾二人の命をば
+救ひたまひて一言の
+情の言葉もかけずして
+再び神の大道に
+進ませたまひし雄々しさよ
+又もや妾は唯一人
+神の教を白雲の
+国のあなたに伝へむと
+炎熱はげしき大野原
+虻には刺され土蜂に</p>
+            <p class="ja-classical-line">脅かされて漸うに
+セルの山辺に来て見れば
+俄に四辺暗澹と
+不快の空気に包まれぬ
+唯事ならじと神の御名
+ただ一心に唱へつつ
+千花の香る山路を
+進み来れる折柄に
+大地は俄に震動し
+後に聞ゆる爆音は
+獅子狼か虎熊か
+但しは大蛇の襲来か
+百千万の雷の
+一度に落ちし如くなる
+其音響に振りかへり
+空を仰いで眺むれば
+豈計らむや昨日まで
+醜の曲津に捉はれて
+苦しみ居たる思出の
+印象深き雲の山</p>
+            <p class="ja-classical-line">虎熊岳の爆発と
+悟りし時の恐ろしさ
+身の毛はよだち足はなへ
+進み兼ねたる女気の
+何と詮方泣く涙
+止めかねたる許りなり
+漸く心も安らぎて
+胸の動悸も鎮静し
+足も漸くすこやかに
+なりし吾身の嬉しさよ
+此世に神の居まさずば
+此恐ろしき爆音に
+妾は清き玉の緒の
+命も消えて失せましを
+尊き神の御恵
+仰ぐも畏き次第なり
+あゝ惟神々々
+御霊幸倍ましませよ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも</p>
+            <p class="ja-classical-line">仮令夫に離るとも
+真と神の御教は
+幾千代迄も離れまじ
+さはさりながら皇神よ
+吾背の君の行末を
+やすく守らせたまひつつ
+ハルナの都の空高く
+月の顔花の色
+夫婦の再会恙なく
+許させたまへ大御神
+一重に願ひ奉る
+あゝ惟神々々
+神の教へぞ尊けれ
+神の恵ぞ有難き』</p>
+            <p class="ja-classical-line">斯かる所へ足をチガチガさせた一匹の野狐現はれ来り、ブラワ゛ーダの裾を喰はへて無理無体に草野の中に引張らうとする。ブラワ゛ーダは驚いて逃げむとすれど、野狐は執念深く裾を喰へ如何に藻掻いても放さないので、ブラワ゛ーダは止むを得ず、野狐に引かるるまま、身の丈を没する草野の中へ従いて往く。野狐は原野の中に饅頭形になつて居る丘の傍の、可なり大きな穴に引張り込んで了つた。暫くすると山岳も崩るる許りの大音響が聞えた。これは、虎熊山の爆発によつて、山の神として古くより身を潜めて、世界に邪気を送りつつあつた八大竜王の一、マナスインナーガラシヤーであつた。此竜王は身の長さ五百万丈に余り、其太さもそれに適当し、三百万丈の恐ろしき竜神である。身体長大にして、九天の上に昇り、或は須弥仙を廻ること七廻りと称せられ、よく大海の水を止めて、海中に山を湧出させ、或は島を沈没させると云ふ恐ろしき悪竜である。今や竜神は、ブラワ゛ーダが隠れて居る野狐の穴の上を、身体の一部が通つて居るのである。俄に穴の中がパツと暗くなつたと思へば、何とも云へぬ腥臭い息が鼻を襲ふて来た。野狐は穴の口にうづくまつて姫の安全を守つて居た。俄に再び穴の中が明くなつたと思へば、野狐は忽ち又ブラワ゛ーダの裾を喰へて外へ引き出さうとした。ブラワ゛ーダは引かるるままに外に出て見れば、四辺の草木は皆倒れ目も届かぬ許りの広い草の溝が穿たれたやうになつて居る。ブラワ゛ーダは野狐に向ひ感謝の意を表して、</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Buravu: 'Thy life that saved my life,
+When shall I ever forget thy grace?
+Hadst thou not been, I would have miserably perished,
+O parent of my life, the living god of the fox.'</p>
+          <p class="en-p">As it sang thus, the fox wagged its tail, shook its head, showed a look of joy, and once again escorted her back to the original mountain path.</p>
+          <p class="en-p">Burāvūdahime: 'Now farewell, I must part from my beloved lord,
+Rest peacefully through a thousand and eight thousand generations.'</p>
+          <p class="en-p">The fox concealed its form once more in the grassy field. Burāvūda looked back over her shoulder, gazed at the smoke of Torakumayama soaring up to the heavens,</p>
+          <p class="en-p">Buravu: 'When I look up, high in the sky of Torakumayama,
+How it is covered, the foul black cloud.
+In a world where even the heavenly sun is hidden and unseen,
+The foul evil spirit alone runs riot.
+The crookedness that wrings the lifeblood of the people of the world
+Must dwell in Torakumayama.
+Having incurred the wrath of the imperial deities, the high mountain
+Has erupted, how terrifying indeed.
+Gathering the resentment of the people, the volcanic crater
+Spits forth smoke that covers the sky.
+West, east, south, and north alike in black clouds
+Have been enveloped, today's great sky.
+If there were not the Mizu no Mitama of Izunitama,
+How could we clear away these black clouds?
+A flood overflows upon the land of rough iron,
+And black clouds block up the sky.
+Blowing away the black clouds, the majestic Ōkami
+Shows a crimson light.
+Flowing and purifying the muddy torrent, the auspicious Ōkami
+Restores the divine country to its antiquity.
+
+Through the grace of fire and water, even upon the surface of the earth
+It will likely open up in utter peace.
+The sun is hidden and the moon trembles at the mountain edge,
+A miserable reign where not even the stars can be seen.
+The great sky and the depths of the valley alike, all over
+Clouds and fog block the present world.
+If there were not the Izu no Mitama and the Mizu no Mitama,
+How could we solidify a shattered world?
+Though I, Burāvūda, am a frail body,
+I shall follow the Mizu no Mitama.
+Various trees growing on the high mountain, by the rough wind
+Tossed about, none become pillars.
+Deep in the foot-dragging deep mountains, at the bottom of the valley
+The giant trees that grow are the pillars of the world.
+The world created by the imperial deities
+Has none to rely upon other than the gods.
+Well, well, even if a person climbs to the heights,
+Sometime they will fall, like a monkey climbing a tree.
+The sound of water falling from a thousand-chō waterfall
+Just rumbles and echoes at the bottom.
+
+Even flying birds, as Torakumayama quakes,
+Fell to the earth like arrowheads.'</p>
+          <p class="en-p">Singing thus, Princess Burāvūda once again softly chanted a propaganda song while, using her staff for strength, trudging step by step, parting the path overgrown with weeds, and proceeded ever westward.</p>
+          <p class="en-p">Beyond the haze, on the other side of the clouds, the joy of seeing the golden palace of the imperial deities.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ブラワ゛『吾命助けたまひし汝が命
+其御恵をいつか忘れむ。
+汝なくば吾はあへなく身失せなむ
+命の親の野狐の生神』</p>
+            <p class="ja-classical-line">と歌ふや、野狐は尾を振り、首を振り、喜びの色を現はし、再び元の山道へと送つて来た。</p>
+            <p class="ja-classical-line">ブラワ゛ーダ姫『いざさらば恋しき君に別れなむ
+やすくましませ千代に八千代に』</p>
+            <p class="ja-classical-line">野狐は再び草原に姿を隠した。ブラワ゛ーダは後振りかへり、天に冲する虎熊山の噴煙を眺めて、</p>
+            <p class="ja-classical-line">ブラワ゛『仰ぎ見れば虎熊山の空高く
+おほひけるかな醜の黒雲。
+天津日もかくれて見えぬ世の中に
+醜のまがみの独り荒べる。
+世の人の生血を絞る曲こそは
+虎熊山に住みしなるらむ。
+皇神の怒りに触れて高山は
+爆発しけむさても恐ろし。
+人々の恨を集めて噴火口
+吐き出す煙は空を覆へる。
+西東南も北も黒雲に
+包まれてけり今日の大空。
+いづみたま瑞の御霊のなかりせば
+此黒雲を如何に払はむ。
+荒鉄の地に洪水氾濫し
+空に黒雲立ちふさぎける。
+黒雲を伊吹払ひて紅の
+光をみする厳の大神。
+濁流をながし清めて神国の
+昔にかへす瑞の大神。</p>
+            <p class="ja-classical-line">火と水の恵によりて地の上も
+いと安らけく開けゆくらむ。
+日はかくれ月は山辺に戦きて
+星さへ見えぬ御世ぞうたてき。
+大空も谷の底ひもおしなべて
+雲霧ふさぐ今の世の中。
+厳御霊瑞の御霊のなかりせば
+砕けたる世を如何に固めむ。
+ブラワ゛ーダ吾はかよわき身なれども
+瑞の御霊に従ひゆかむ。
+高山に生ふる諸木は荒風に
+揉まれて柱になるものはなし。
+足曳の深山の奥の谷底に
+生ふる大木ぞ世の柱なる。
+皇神の作りたまひし世の中は
+神より外に頼るべきなし。
+よしやよし人は高きに登るとも
+いつかはおちむ猿の木登り。
+千丈の滝よりおつる水音は
+ただ轟々と底にとどろく。</p>
+            <p class="ja-classical-line">飛ぶ鳥も虎熊山の震ひてゆ
+征矢の如くに地におちにけり』</p>
+            <p class="ja-classical-line">かく歌ひてブラワ゛ーダ姫は又もや小声に宣伝歌を謡ひ乍ら、杖を力に、トボトボと雑草茂る小径をわけて、西へ西へと進み行く。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">霞の奥雲のあなたに皇神の
+黄金の宮の見ゆる嬉しさ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: Mountain River 動 Turmoil [1670]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: Mud 足坊 [1672]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

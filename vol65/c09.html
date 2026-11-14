@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9: 劇流 [1665] - Volume 65 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 65 Table of Contents</a>
+      <span>Volume 65</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 65 &bull; Chapter 9</span>
+      <h1 class="chapter-title-en">Chapter 9: 劇流 [1665]</h1>
+      <p class="chapter-title-ja">劇流〔1665〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Selle was in his ima, feeling that the time for the fulfillment of his desire had finally arrived, and in the mood of a celebratory prelude, he tilted the wine that his kobun had stolen from here and there inside, became drunkenly intoxicated, and that night fell asleep oblivious to zengo.</p>
+          <p class="en-p">Yale, thinking to bind Selle during this present time and strike him down into the raugoku, crept up to look, but the cautious Selle had firmly lowered the jiyōmahe and was sleeping all hitori, so there was nothing he could do, and that night he spent waiting out the dawn before the raugoku of Chidaukoji.</p>
+          <p class="en-p">Prior to this, Yale turned toward Chidaukoji, and speaking in a kogoe:</p>
+          <p class="en-p">Yale: 'I say, Chidaukoji-sama, when I went bringing your tegami, a tall man was standing in front of the door of the raugoku, so thinking this was a shima, when I looked and considered very well, it was the boss Selle. Without sleeping a wink through the night, it looks as though he was uttering some kind of guchi in front of a woman and kudoing. Truly, he is a troubled fellow.'</p>
+          <p class="en-p">Chidau: 'Ahahahaha, that soitsu is interesting. And did the tegami reach the mukafu successfully?'</p>
+          <p class="en-p">Yale: 'Yes, I certainly threw it in. However, those futari of women were saying strange things. Because the oyabun said to go over there at itsutoki, I left the spot, and when I listened to the state of affairs in the darkness, the futari of princesses, Bravāda and Davis, were holding extreme grudges against you.'</p>
+          <p class="en-p">Chidau: 'Ah, is that so, is that so. For I too have tormented them quite a bit.'</p>
+          <p class="en-p">Yale: 'Eh, is that true? You too are quite a villain... This time they were petitioning, begging the great general Selle to let futari come together and torture you to death, you know. They were saying that if they put the futari who were put separately into the raugoku into one place, tied Chidau-sama up and shoved him in there, and tortured him to death, they would listen to what Selle says. What on earth should be done, I wonder?'</p>
+          <p class="en-p">Chidau: 'My, that is interesting. As expected of Princess Bravāda and Princess Davis. Oh satisfaction, satisfaction, ahahahaha, it is delightfully unbearable.'</p>
+          <p class="en-p">Yale: 'I say, Chidau-sama, you are acting somewhat strangely.'</p>
+          <p class="en-p">Chidau: 'Un, I am acting strangely.'</p>
+          <p class="en-p">Bat: 'I say, I say Chidau-sama, are you not uttering strange things? If you are tortured to death, what do you intend to do with us?'</p>
+          <p class="en-p">As they spoke thus, Yaku came slinking up.</p>
+          <p class="en-p">Yaku: 'Ya, Yale, were you here? If you speak with too loud a voice, it will be terrible if the petty thieves outside hear.'</p>
+          <p class="en-p">Yale: 'Chidau-sama is uttering things that I simply cannot comprehend, so I find it wondrous beyond endurance.'</p>
+          <p class="en-p">Yaku: 'Ahahahaha, he is Chidau-sama possessed of both wisdom and valor. There must be some good clever plan. Well, do not worry. You guys should plan leisurely. I am going to make the rounds, so while I am gone, you had better consult together thoroughly.'</p>
+          <p class="en-p">So saying, he went out on patrol.</p>
+          <p class="en-p">Chidaukoji lowered his voice and turned toward Bat, Kārkus, Bēsu, and Yale the jailer,</p>
+          <p class="en-p">Chidau: 'There is a deep reason why the futari of princesses are saying they wish to torture this Chidaukoji to death. Tonight is late, but in any case it is tomorrow night's work. Bat will become my substitute, and both Kārkus and Bēsu will transform into the futari of women, use women's voices, and taking advantage of the darkness, enter the raugoku to perform a single play. And they will bring this Chidau and the futari of princesses outside. Then, using Kototama, it is a plan to bring Selle first and the other fellows into allegiance all at once. It seems the futari of princesses are about to execute that plan. How about it, Bat, are you able to use my voice?'</p>
+          <p class="en-p">Bat: 'As for that, it is not that I cannot use it, but I cannot bear being tortured to death, you see.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">セールは吾居間にゐて、愈願望成就の時至れりと、前祝の心持にて、乾児共がそこら内より盗み来れる葡萄酒を傾け、グタグタに酔つて了ひ、その夜は前後を忘れて眠つて了つた。エールは今の間にセールを引括り、牢獄へ打ち込んでやらうと、窺ひ寄つて見れば、用心深いセールは、錠前を固く下ろして、唯一人眠つて居るので、どうする事も出来ず、その夜は治道居士の牢獄の前で明して了つた。これより先エールは、治道居士に向ひ、小声になつて、</p>
+            <p class="ja-classical-line">エール『もし、治道居士様、貴方のお手紙を持つて参りました所、牢獄の扉の前に一人の大男が立つて居りますので、此奴ア失敗つたと、よくよく考へて見れば、セールの親方でした。夜の目も碌に寝ず、女の前で何だか愚痴な事を云つて、口説いて居つた所と見えますわい。本当に困つた奴ですな』</p>
+            <p class="ja-classical-line">治道『アハヽヽヽヽ、其奴は面白い。そして手紙はうまく先方へ届いたかな』</p>
+            <p class="ja-classical-line">エール『はい、確に放り込んでおきました。然し乍らあの二人の女は妙な事を云つてゐましたぜ。私は親分が一時も早く、あちらへ行けと云ふのでその場を立去り、暗がりで様子を聞いてゐますと、ブラワ゛ーダ、デビスの二人の姫が貴方を非常に恨んで居りました』</p>
+            <p class="ja-classical-line">治道『あ、さうだらう　さうだらう。俺もズイ分いぢめたからのう』</p>
+            <p class="ja-classical-line">エール『エー、本当ですか。随分貴方も悪党ですな……今度はセールの大将に願つて、二人寄つてお前さまを嬲殺にさして呉れと云つて願つて居ましたよ。二人別々に牢獄に入れてあるのを一所に入れ、治道さまをそこへフン縛つて突込み、嬲殺にさしたら、セールの云ふ事を聞くと云つてゐましたが。一体どうしたら宜しう厶いませうか』</p>
+            <p class="ja-classical-line">治道『ヤ、それは面白い。流石はブラワ゛ーダ姫、デビス姫だ。いや満足々々、アハヽヽヽ愉快で堪らないわ』</p>
+            <p class="ja-classical-line">エール『もし、治道さま、貴方どうかしてゐますな』</p>
+            <p class="ja-classical-line">治道『ウン、どうかしてゐるよ』</p>
+            <p class="ja-classical-line">バット『もしもし治道様、妙な事を仰有るぢやありませぬか。貴方が嬲殺にあつて、吾々をどうして下さる積りですか』</p>
+            <p class="ja-classical-line">かく話す所へヤクがコソコソとやつて来た。</p>
+            <p class="ja-classical-line">ヤク『ヤ、エール、お前ここに居つたのか。あまり大きな声で云ふと、外の小盗人が聞くと大変だぞ』</p>
+            <p class="ja-classical-line">エール『どうも合点の行かぬ事を治道さまが仰有るので、不思議で堪らないのだ』</p>
+            <p class="ja-classical-line">ヤク『アハヽヽヽ、智勇兼備の治道様だ。何かよい妙案があるのだらう。マア心配するな。お前等はユツクリ計画するがよい。俺はそこらを廻つて来るから、その間トツクリ相談しとくがいいわ』</p>
+            <p class="ja-classical-line">と云ひすて、見廻りに出て行つた。</p>
+            <p class="ja-classical-line">治道居士は声をひそめて、バット、カークス、ベース、及牢番のエールに向ひ、</p>
+            <p class="ja-classical-line">治道『二人の姫様は、此治道居士を嬲殺にし度いと云つてゐるのは深い訳があるのだ。今晩は遅いが、いづれ明日の晩の仕事だ。バットが俺の身代りとなり、カークス、ベースの両人が、二人の女と化り、女の声色を使つて暗がりを幸ひ、牢獄に入つて一芝居やるのだな。そして此治道と二人の姫を外へ出すのだ。そしたら言霊を以て、セールを初めその他の奴を一度に帰順させる計画だ。二人の姫はその計画をやらうとしてゐるのらしい。どうだ、バット、お前は俺の声色が使へるのかな』</p>
+            <p class="ja-classical-line">バット『そりや使へぬ事は厶いませぬが、私が嬲殺にされちや堪りませぬな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Chidau: 'That is the play. It is fine as long as you just cry kyakya. Do you think we will really poke or slash each other? And the two women's parts are played by Kāku and Bēsu, but can you do women's kowairo? You should be able to use it a little.'</p>
+          <p class="en-p">Kāku: 'That is interesting. I have liked shibai since I was young, so I can do a woman's kowairo for an old woman, a girl, an old furukakaa, or anything.'</p>
+          <p class="en-p">Chidau: 'Then please become Debisu. Debisu is twenty-two or three, so please keep that in mind. Anyway, since it is dark, it is fine just to raise your voice.'</p>
+          <p class="en-p">Kāku: (Kowairo) "You must be Chidaukoji, who holds heavy grudges. How dare you, how dare you heap bujiyoku upon me. Realize it now—..." How is this?</p>
+          <p class="en-p">Chidau: 'Ahahahahaha, excellent, excellent, then that is shiiuitsu. Now with this, the hime Debisu is done. Hey, Bēsu, you are going to be Burawāda. You are still sixteen. Can you use a girl's voice?'</p>
+          <p class="en-p">Bēsu: 'I certainly can. Shall I try it? ... (Kowairo) "Are you not Chidaukoji? How well, how well you have tormented me. Ten will not forgive a zainin to the end. Now become the rust of the swords of us riyōnin. Grudges pile up, the mountain of Torakuma." Hehehehe. How is this?'</p>
+          <p class="en-p">Chidau: 'Ahahahahaha, jiyōtō, jiyōtō. First, with this, the hime Burawāda is done. Hey, Batto, you are to use my kowairo. How is it, won't you try one here?'</p>
+          <p class="en-p">Batto: (Kowairo) "This is kokoroe, hime Debisu, hime Burawāda, or whatever you are, setsushiya has never added bujiyoku toward you. There are takusan dōmeiijin in the world. You are misunderstanding because it is dark. Still, meiwakusenban, no matter if it is dark, you should be able to tell by the color of the voice. I am in trouble if you misunderstand me..." Well, Lord Chidau, how is it like this?</p>
+          <p class="en-p">Chidau: 'Well, it is acceptable. However, since the two hime take up their kuwaiken and stab firmly, at that time you must make a painful-sounding voice.'</p>
+          <p class="en-p">Batto: 'Yes, since I have done Kanpei's harakiri, making a painful-sounding voice is nothing at all. Please be at ease.'</p>
+          <p class="en-p">Chidau: 'Hey, with Kanpei there is no composure. Try doing it around the place of En'ya Hangan.'</p>
+          <p class="en-p">Batto: 'Yes, I shall try it... "Rikiya, Rikiya, has Yuranosuke not come yet? ... Hahaa, he has not yet appeared... Eh, chiehe, e, it cannot be helped..." Making up his mind, sooner than drawing his kuwaiken, he stabs it firmly into his left flank... "Aa, it is regrettable not to meet Yuranosuke... Yuranosuke, just now, appear... Ya, I have waited for you. Come near, come near..." Hahahahaah.'</p>
+          <p class="en-p">Chidau: 'Hey, at that part, do not say come near, come near, but say Chidau, Chidau. However, if it turns into a shibai, the enemy will figure it out, so it has to be Chidaukoji after all.'</p>
+          <p class="en-p">Batto: 'Is there any oversight in such a matter? Please be at ease.'</p>
+          <p class="en-p">Ēru: 'Ah, this fellow is interesting, ahahahahaha. Taking advantage of being a prison guard, I will successfully slip them through. I can hardly wait for tomorrow night.'</p>
+          <p class="en-p">Yaku enters hurriedly,</p>
+          <p class="en-p">Yaku: 'Hey hey, if you raise your voice so loudly, it will be exposed. The shibai you were doing just now was heard about a chō away. Fortunately, no one was outside, so it is fine, but if someone heard you, it would be a disaster.'</p>
+          <p class="en-p">Chidau: 'Hum, are you Yaku? Good work, Yaku-me, it was hard. Pay full attention and take care of us, Yaku. In return, once your yaku is finished, as yakusoku, I will make you a splendid propagandist.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">治道『そこが芝居だよ。キヤツキヤツと泣きさへすれば宜いのだ。本当に突いたり、斬つたりするものかい。そして二人の女はカークス、ベースがするのだが、女の声色は出来るかな。些とは使へるだらう』</p>
+            <p class="ja-classical-line">カークス『そいつア面白い。私は若い時から芝居が好きでしたから、女の声色は婆アでも、娘でも、古嬶でも、何でもやりますわ』</p>
+            <p class="ja-classical-line">治道『そんならお前はデビスになつて呉れ。デビスは二十二三だから、そのつもりでゐてくれ。何せよ暗がりだから、声丈け出せばいいのだ』</p>
+            <p class="ja-classical-line">カークス『（声色）「汝は恨み重なる治道居士であらうがな。よくもよくも妾に侮辱を加へよつたな。思ひしれやー……」と之ではどうですか』</p>
+            <p class="ja-classical-line">治道『アハヽヽヽうまいうまい、それなら秀逸だ。サア之でデビス姫は出来た。オイ、ベース、お前はブラワ゛ーダになるのだ。まだ十六だ。娘の声が使へるかな』</p>
+            <p class="ja-classical-line">ベース『使へますとも。やつて見ませうか……（声色）「汝は治道居士ではないか。ようもようも妾をさいなみよつたな。天は飽迄も罪人をお許しなさらぬぞや。サア妾両人が刃の錆となれ。恨はつもる、虎熊の山」ヘヽヽヽ。この位でどうですかな』</p>
+            <p class="ja-classical-line">治道『アハヽヽヽ、上等上等。先づ之でブラワ゛ーダ姫が出来た。オイ、バット、お前は俺の声色を使ふのだ。どうだ、一つここでやつて見ないか』</p>
+            <p class="ja-classical-line">バット『（声色）「之は心得ぬ、デビス姫、ブラワ゛ーダ姫とやら、拙者はそなたに向つて侮辱を加へた事は厶らぬ。世の中には同名異人が沢山厶るぞ。そなたは暗がりの事とて間違つて思ひひがめて居るのだらう。ても扨ても迷惑千万、如何に暗がりとは云へ、声の色でも分るであらう。誤解せられちや困りますよ……」もし治道様この位で如何ですか』</p>
+            <p class="ja-classical-line">治道『マア可＠なりだ。然し乍ら二人の姫が懐剣を以て、グツと、突くによつて、その時は痛さうな声を出さねばならぬぞ』</p>
+            <p class="ja-classical-line">バット『ハイ、私は勘平の腹切をやつた事が厶いますから、痛さうな声を出すのは何でもありませぬ。安心して下さいませ』</p>
+            <p class="ja-classical-line">治道『オイ、勘平では落付がない。塩谷判官位の所でやつて見よ』</p>
+            <p class="ja-classical-line">バット『ハイ、やつて見ませう……。「力弥々々、由良之助はまだ来ぬか。……ハハア未だ参上仕りませぬ……。エー、チエヘー、エ、是非もない……」と覚悟を定め懐剣抜くより早く、左手の脇腹へグツとつき立て……「アー、由良之助に会はぬのが残念だわいイ……由良之助、只今、参上……ヤ待ち兼ねたぞや。近う近う……」ハツハヽヽヽヽ』</p>
+            <p class="ja-classical-line">治道『オイ、そこは、近う近うと云はずに治道治道と云ふのだよ。然し、芝居になつちや敵に悟られるから、ヤツパリ治道居士でなくちやいかぬぞ』</p>
+            <p class="ja-classical-line">バット『そんな事に抜目がありますか。マア安心して下さい』</p>
+            <p class="ja-classical-line">エール『ア、此奴は面白いアツハヽヽヽヽ。私が牢番を幸ひ、うまくすりかへて見ませう。明日の晩が待ち遠しいわい』</p>
+            <p class="ja-classical-line">ヤクは慌ただしく入り来り、</p>
+            <p class="ja-classical-line">ヤク『オイオイ、さう大きな声を出しちや、露見するぞ。今お前のやつてゐた芝居は一丁程向ふへ聞えたよ。幸ひ誰も外に居なかつたから宜いが、もしも人に聞えたら大変だ』</p>
+            <p class="ja-classical-line">治道『フン、お前はヤクか、ヤク目御苦労、大儀だ。充分心を配つて俺達の世話をヤクのだよ。その代りおヤクが済んだら、ヤク束通り、立派な宣伝使にしてやるからな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yaku: 'Hai, arigato.'</p>
+          <p class="en-p">Even as they spoke thus, footsteps resounded loudly, and a rauban came over. Chidaukoji, wishing to gloss over this place, began to chatter things that were neither kiyōmon nor gāthā.</p>
+          <p class="en-p">Chidau: 'Miroku shin miroku. Suiginmuka. Bunshinsenhiyakuoku. Agimushin. Chiyōteishiraiya. Eyes engender a sankaku, the head steepens the gogaku. Good is not yet necessarily good. Evil is not yet necessarily evil. When Hotei's head opens, it is waiwai, it is kotsukotsu, it is tōtō. Lightness is like a gaumau, heaviness is like a kiusan. Nentoku and straightway cast it away, dotoku and straightway use it. He raises the hotsusu and says, still this is tosotsudatentei. How is one to bauro just like the time izen to Miroku's not yet being born? He strikes the bed and says, collecting usei to return to the old trees. Letting autumn colors reach the wu-tong tree. Inscribing upon the images of the fifth and sixth patriarchs, he says, 'Hensatsusu this zuda. Though mountains grind, this hate is unground. My eaves are heavy now, and for your sake, I plant many pines.' For over thirty years at Seigan, what was attained at the place of Bukan, when taken out and shown to people, has not a drop of leakage. For the subsequent thirty years, it is medicine for dotting the eyes.'</p>
+          <p class="en-p">The night was quiet and deep as it grew late, and only the sound of a faint wind occasionally rattling the rain shutters was heard in broken snatches.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ヤク『はい、有難う』</p>
+            <p class="ja-classical-line">かく話す所へ足音高く、一人の牢番がやつて来た。治道居士は此場を誤魔化さむとて経文とも偈ともつかぬ事を喋り出した。</p>
+            <p class="ja-classical-line">治道『弥勒真弥勒。水銀無仮。分身千百億。阿魏無真。長汀子来也。眼に三角を生じ、頭に五嶽を峭す。好は未だ必ず好ならず。悪は未だ必ず悪ならず。布袋頭開くや、隈々〓__GT_56186__々たり、骨々董々たり。軽きことは毫毛の如く、重きことは丘山の如し。拈得して便ち擲ち、拏得して便ち用ふ。払子を竪て、云く猶是れ兜率陀天底。只弥勒未生以前の如きは如何か剖露せむ。床を撃つて云く、雨声を収拾して旧樹に帰す。放教秋色の梧桐に到るを。五祖六祖の像に題して云はく、「恨殺す此の頭陀。山は磨すとも恨磨せず。吾今檐頭重く、汝が為に、松を種うる多し」西巌三十余年、仏鑑の処に所得する底、拈出して人に示す、涓滴の滲漏なし。後の三十年、点眼の薬なり』</p>
+            <p class="ja-classical-line">夜は深閑として更渡り、時々かすかな風が、雨戸をゴトゴトと揺する声のみ、ちぎれちぎれに聞えてゐる。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c08.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 8: 異心 Mud 信 [1664]</span>
+      </a>
+      <a href="c10.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 10: 赤酒の Voice [1666]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
