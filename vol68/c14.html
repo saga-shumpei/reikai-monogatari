@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 14: 会者 Clean 離 [1738] - Volume 68 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 68 Table of Contents</a>
+      <span>Volume 68</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 68 &bull; Chapter 14</span>
+      <h1 class="chapter-title-en">Chapter 14: 会者 Clean 離 [1738]</h1>
+      <p class="chapter-title-ja">会者浄離〔1738〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">To young men and women burning with the blood of youth, renai is truly the gensen of seimei. When renainetsu reaches a kauchō, it casts off the bonds of rinri and dautoku, discards richi, and casts aside fūki and meiyo. Advancing still further, it forgets parents and kiyōdai, and comes to forget hōiu and chiki. Nevertheless, viewed from renai itself, it cannot enter within the scope of richi and dautoku. It everywhere bears kuwakudaisei and is equipped with riutsūsei. If it is renai flavored with richi, the seimei of renai itself has already perished. Verily, Prince Sudarman of the Tarahan country, though born of a sonki house and in a station that should ascend to the kiugo throne, pours his whole heart and blood into an otome brought up deep in the mountains who has welcomed her jifugo spring, and attempting to taste love to the fullesttwelfth, forgets the crisis of the state, abandons the fact that his father is falling into a moribund state, slips away to a ruined temple that has stood from of old in the valley of Mount Ōhara, and secretly tastes love.arina, the son of Samori, as a supreme criminal who disordered the conduct of the prince, was a person in the shade upon whom an arrest warrant had been issued, and indeed unable to dwell even in the bustling capital avenues, lowered his body into the guise of a bhikkhu, lying low in the mountain forests by day, and threading his way along field paths step by step by night, wandering about with not a single resting place for his own body in the wide world, yet having stopped by to spend a night's lodging in the aged, ruined temple in the valley of Mount Ōhara, when he looked and listened, behind the shumidan in the main hall came the whispering voices of a young man and woman; Arina, with his wounded foot, paused for a moment, held his breath, and considered the situation within. Incidentally, when that Arina escaped from the inner palace, he whispered to dearest Shinobu and said,</p>
+          <p class="en-p">Asama shall from here for a short time lurk within the shrine of thebanko shinnō of Mount Ōmiya, and waiting for the world to somewhat settle, I shall return, so do thou anywhere depart from this inner palace.</p>
+          <p class="en-p">Thus he had told her. Shinobu therefore believed that Arina still remained within the shrine of Mount Ōmiya. That which he whispered into the ears of Samori was also precisely this.</p>
+          <p class="en-p">Subaru: 'Prince-sama, you will surely never abandon me and will love me, won't you?'</p>
+          <p class="en-p">Taishi: 'Ha-ha-ha-ha. Do not worry about such a thing. Is it not in order to accomplish renai with you that I have discarded even the rank of prince and hidden myself in such a place? My father-sama is gravely ill, and when he might ascend to the heavens no one knows; even in this case, it cannot be exchanged for love, and people who do not know the refinement of the world must surely be laughing at me as "a hallowed thing of unfilial, a fool, a spineless man." No matter how much I am laughed at, it cannot be exchanged for your love.'</p>
+          <p class="en-p">Subaru: 'If the Prince has that intent, then I shall dedicate my chastity to you anywhere. Even at the far end of the fields or in the depths of deep mountains, the dwelling place of fierce beasts and poisonous snakes, if I endure hardship together with the Prince, I shall not be reluctant in the least. Since I am an otome accustomed to life deep in the mountains, I shall gather nuts and dig up potatoes, and I will surely support the Prince. Please be completely at ease.'</p>
+          <p class="en-p">The Prince, touched by the gentle words of Subaru, unconsciously shed tears.</p>
+          <p class="en-p">Subaru: 'Oh, is the Prince weeping? Did the words I spoke offend your ears? If they offended you, please forgive me somehow.'</p>
+          <p class="en-p">Taishi: 'No, no, far from offending my ears, your heart was so joyful that tears of gratitude burst forth before I knew it.'</p>
+          <p class="en-p">Subaru: 'Oh, do not utter such unworthy things. If it is for the sake of the Prince, I would be content even to dedicate my life. Speaking of that, I wonder how my father-sama, whom I left behind in the valley of Mount Asakura, is doing. Hearing the turmoil of the capital, he must surely be worrying what has become of his own child, wondering. Somehow I would like once to meet my father again and show him that the two of us are safe.'</p>
+          <p class="en-p">Taishi: 'It is only natural that you should think so. I am exactly the same. Especially to leave a sick father behind in that chaotic and dangerous state, and to hide here with you—how agonizing my heart is. Subaru, please surmise my heart as well.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">青春の血に燃ゆる若き男女に取つては恋愛なるものは実に生命の源泉である。恋愛熱の高潮した時は、倫理道徳の覊絆を脱し理智を捨て、富貴何物ぞ、名誉何物ぞ、尚も進んでは親兄弟を忘れ、朋友知己を忘るるに至る。然し乍ら恋愛其ものより見る時は、理智や道徳の範囲内に入る事は出来ぬ。どこ迄も拡大性を帯び、且つ流通性を備へて居る。もし理智を加味した恋愛ならば、恋愛其者の生命は既に已に滅亡して居るのである。実にやタラハン国のスダルマン太子は、尊貴の家に生れ九五の位＠に上るべき身でありながら、今年十五の春を迎へた山奥育ちの乙女に満身の心血を注ぎ、十二分に恋を味ははむとして国家の危急を忘れ、父が瀕死の状態に陥りつつ有る事も見捨てて、大原山の谷間に古くより立てる破れ寺に落ち延び、密かに恋を味はつて居る。左守の悴アリナは太子の品行を乱したる大罪人として、逮捕命令を出されたる蔭裡の身、遉に繁華な都大路にも住み兼ね比丘の姿に身を窶し、昼は山林に伏し、夜はトボトボと野路を伝うて、広い世界に吾身一つの置き所もなく彷徨ひ廻りしが、辛うじて大原山の谷間の古ぼけた破れ寺に一夜の宿を過さむと立ち寄り見れば、本堂の須弥壇の後に若き男女の囁き声、傷もつ足のアリナは暫し佇み息を凝らして内の様子を考へてゐた。因に云ふ、彼アリナは殿中を逃出す時、最愛のシノブに囁いて云ふ、</p>
+            <p class="ja-classical-line">『余は是より少時の間大宮山の盤古神王の社の中に潜伏し、世の中の稍治まるをまつて帰り来るべければ、汝はどこ迄もこの殿中を離れな』</p>
+            <p class="ja-classical-line">と告げておいた。シノブはそれ故アリナは依然として、大宮山の社殿の中に居るものとのみ信じて居たのである。彼が右守の耳に囁いたのも矢張これである。</p>
+            <p class="ja-classical-line">○</p>
+            <p class="ja-classical-line">スバール『太子様、貴方どこ迄も妾を見捨てず愛して下さるでせうなア』</p>
+            <p class="ja-classical-line">太子『ハヽヽヽ。そんな心配はして呉れな。お前との恋愛を遂げむが為めに、太子の位＠迄捨ててこんな所へ匿れてゐるのぢやないか。お父様は御大病、何時御昇天遊ばすかも知れない、此場合にも恋にはかへられず、世の中の粋を知らぬ人間は定めて余を「不孝ものだ、馬鹿者だ、腰抜け男だ」と笑つて居るだらう。何程笑はれてもお前の愛には換へられないのだ』</p>
+            <p class="ja-classical-line">ス『殿下が其お心なら妾はどこ迄も貴方に貞操を捧げます。仮令野の末深山の奥、猛獣毒蛇の棲処でも殿下と共に苦労をするのなら些しも厭ひませぬ。山奥の生活に慣れた妾で厶いますれば、木の実を漁り芋を掘つてでもきつと殿下を養ひまする。どうぞ御安心して下さいませ』</p>
+            <p class="ja-classical-line">太子はスバールの優しき言葉に絆されて思はず知らず落涙した。</p>
+            <p class="ja-classical-line">ス『いや殿下は泣いていらつしやいますの。妾が云つた言葉がお気に障りましたか。もし障りましたらどうか御容赦下さいませ』</p>
+            <p class="ja-classical-line">太『いやいや、気に障る所かお前の心が嬉しうて思はず知らず感謝の涙が迸つたのだよ』</p>
+            <p class="ja-classical-line">ス『エヽ勿体ない事を仰られますな。殿下の為めならば命を捧げても満足で厶います。それにつけても浅倉山の谷間に残しておいた父上はどうしていらつしやるでせうか。定めて都の大変を聞き、吾子はどうして居るかと、御心配を遊ばして厶るでせう。どうか一度父に廻り会うて二人が無事な所を見せたいもので厶いますわ』</p>
+            <p class="ja-classical-line">太『お前がさう思ふのも無理もない。余だつて其通りだ。殊に病気の父を、あの混乱状態の危い中に残して、お前と此処に忍んで居る心はどれだけ苦しいか。スバール、私の心も推量して呉れ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Suwaru: 'Parents are precious, and love too is yet more precious; this world is indeed a place that does not go as one desires.'</p>
+          <p class="en-p">Taishi: 'Though mountains should cleave and seas run dry, yet shall my heart that yearns for your body never be scattered.'</p>
+          <p class="en-p">Suwaru: 'How grateful is the proclamation of Prince Taishi, as though it pierced my very breast.'</p>
+          <p class="en-p">Taishi: 'Though the person of my lord and father is not one unthought of, yet do I live drawn by the bonds of love.'</p>
+          <p class="en-p">Suwaru: 'Love's garment, though there be an age when it is torn, how could I ever forget your sincere heart?'</p>
+          <p class="en-p">Taishi: 'Be it so, be it so; though my body rot upon the wild moor, yet will I shine forth upon the dark path of love.'</p>
+          <p class="en-p">Suwaru: 'Moistened by the dew of my lord's affection, the early plum blossoms have begun to unfold.'</p>
+          <p class="en-p">Taishi: 'Plucking the blossoms of the white plum that bloom in the fields, today I place them in a vase deep in the mountains to gaze upon them.'</p>
+          <p class="en-p">Suwaru: 'The flowers plucked and placed in a vase—when is the age that they will not fade? To have such an example is a sorrow.'</p>
+          <p class="en-p">Taishi: 'Uprooting the fragrant plum of the deep mountains, I would plant them along the capital's great avenue to see.'</p>
+          <p class="en-p">Suwaru: 'Along the capital's road where dust rises, the plum blossoms too must have an example where their fragrance is put to shame. I would wish to meet a spring where they are ever planted deep in these mountains and bear fruit.'</p>
+          <p class="en-p">Taishi: 'Now for the first time do I know the bitterness of what is called love, separated between joy and sorrow.'</p>
+          <p class="en-p">Suwaru: 'Lamenting yet rejoicing, rejoicing yet sorrowing, floating and sinking in the rapids of love.'</p>
+          <p class="en-p">Taishi: 'If there were no tears in what is called love, how lonely it would be, like a withered tree.'</p>
+          <p class="en-p">Suwaru: 'The heart after having met and gazed is yet more than before, an attire of love indeed.'</p>
+          <p class="en-p">Taishi: 'The people of the world, whatever they may say, let them say; the path-grass of love is wondrous beyond measure.'</p>
+          <p class="en-p">Suwaru: 'The end of the bodies of the two who walk through the darkness of love must be a dwelling in the heavenly August Land.'</p>
+          <p class="en-p">Taishi: 'I am one who advances upon the broad path of love, sporting manifestly in the heavenly August Land.'</p>
+          <p class="en-p">Alina, coming from without:</p>
+          <p class="en-p">Alina: 'The Prince whom I yearn for is surely in this temple, I have come seeking him. You are a Prince who dwells deep in the mountains, leaving the hundred tumults of the capital's roads as a thing apart. Do you dwell together with the Princess of Suwaru? A gentle voice enters my ears.'</p>
+          <p class="en-p">Taishi: 'Your voice, which had been lingering as in a dream or trance, entering my ears is indeed a joy. My heart within my breast is joyously filled, and there is no way to stop how my breast beats high.'</p>
+          <p class="en-p">Taishi, together with Suwaru, emerges from behind the sacred altar and stands upright. Seeing Alina in the guise of a bikku, he forgets himself, rushes up to him, grasps his hand firmly, and letting tears stream down his cheeks,</p>
+          <p class="en-p">Taishi: 'Ah, Alina, you have done well to seek me out and come. I longed to meet you, I longed to see you.'</p>
+          <p class="en-p">Alina: 'Ah, Your Highness, how well you have remained safe. Seeing your secure and peaceful appearance now, I have no longer any lingering attachments left in this world. As you see, I have become an ascetic practitioner, cutting myself off from everything in the world, lying down on the wild mountains and sleeping on the moors, with the thought of spending my whole life in the profound contemplation of the Nembutsu. Being a wandering monk with a single seden hat, a single straw raincoat, and a single staff, whose roadside tree manure I shall become, or whether I shall be able to see Your Highness's robust and healthy face once more—since this is a tasteless floating world, I resign myself to everything being a matter of karmic ties, and I beg you to grant me my leave. And I earnestly desire that Your Highness may taste of love enduringly together with Princess Suwaru.'</p>
+          <p class="en-p">Taishi, letting out a sigh of relief, with a pale face and in a listless manner, shaking Alina's hand,</p>
+          <p class="en-p">Taishi: 'Hey, Alina, can you not think it over once more and return to the capital? I am already resolved to cast aside the throne and lead a beggar's life together with my wife, but you are a promising young man who understands the times; from now on to become an ascetic and rot away is a regrettable thing for the sake of the country. Will you not please help your father and become once more the pillar and foundation of the Talahan Castle, and inherit my will?'</p>
+          <p class="en-p">Alina, letting his voice grow moist, with tears dropping from both eyes,</p>
+          <p class="en-p">Alina: 'I truly appreciate Your Highness's gracious intentions. However, today I am already a person bearing the status of a criminal. Even though I should receive a grand amnesty and safely return to the soil of the capital once more, since I am the son of Lord Sasumori who has lost the hearts of the people, how could the citizenry ever acknowledge my sincere heart? I have already cast away political ambition. And I have severed my carnal desires as well. Thinking to spend my whole life making the wandering clouds and waters my companions and inspecting the sentiments of the people throughout the realm, I earnestly beg you not to speak of this matter alone.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ス『親も大切なり又恋愛も猶大切なり、此世の中は思ふやうには行かないもので厶いますなア』</p>
+            <p class="ja-classical-line">太『山はさけ海はあせなむ世ありとも
+汝が身を恋ふる心は散らじ』</p>
+            <p class="ja-classical-line">ス『有難し太子の君のみことのり
+わが胸板を射抜くやうなる』</p>
+            <p class="ja-classical-line">太『父君の身は思はぬに有らねども
+恋の覊絆に引かれてぞ住む』</p>
+            <p class="ja-classical-line">ス『恋衣よしや破るる世ありとも
+君が赤心如何で忘れむ』</p>
+            <p class="ja-classical-line">太『よしやよし吾身は野辺に朽つるとも
+照らして行かむ恋の暗路は』</p>
+            <p class="ja-classical-line">ス『吾君の情の露に霑ひて
+開き初めけり梅の初花』</p>
+            <p class="ja-classical-line">太『野に咲ける白梅の花手折りつつ
+今日山奥に生けて見るかな』</p>
+            <p class="ja-classical-line">ス『手折られて生けたる花はいつの世か
+萎れむためしあるぞ悲しき』</p>
+            <p class="ja-classical-line">太『山奥の匂へる梅を根こぎして
+都大路に植つけて見む』</p>
+            <p class="ja-classical-line">ス『土埃り立つ都路は梅の花も
+匂ひのあするためしあるべし。
+いつまでも此山奥に植られて
+実を結ぶなる春に遇ひたし』</p>
+            <p class="ja-classical-line">太『恋と云ふものの辛きを今ぞ知る
+嬉し悲しの中を隔てて』</p>
+            <p class="ja-classical-line">ス『嘆きつつ又楽しみつ喜びつ
+恋の淵瀬に浮きつ沈みつ』</p>
+            <p class="ja-classical-line">太『恋と云ふものに涙のなかりせば
+枯木の如く淋しかるらむ』</p>
+            <p class="ja-classical-line">ス『遇ひ見ての後の心は猶更に
+昔にまさる恋衣かな』</p>
+            <p class="ja-classical-line">太『世の中の人は何とも云はば云へ
+不思議極まる恋の路芝』</p>
+            <p class="ja-classical-line">ス『恋の暗わけ行く二人の身の果は
+天津御国の住ゐなるらむ』</p>
+            <p class="ja-classical-line">太『目の当り天津御国に遊ぶなる
+恋の広道進む吾なり』</p>
+            <p class="ja-classical-line">アリナは外より、</p>
+            <p class="ja-classical-line">『吾が慕ふ太子の君はこの寺に
+たしかありなと尋ね来しかな。
+都路の百の騒ぎを余所にして
+深山の奥に居ます君かな。
+スバールの姫と諸共ましますか
+優しき声の吾耳に入る』</p>
+            <p class="ja-classical-line">太『夢現あこがれ居たりし汝の声
+耳に入るこそ嬉しかりけり。
+村肝の心嬉しく吾胸の
+高鳴り如何に止むるよしなし』</p>
+            <p class="ja-classical-line">太子はスバールと共に須弥壇の裏より表に出で、すつくと立てる比丘姿のアリナを見るより、吾を忘れて駆けより、堅く其手を握り涙を腮辺に垂らし乍ら、</p>
+            <p class="ja-classical-line">太子『ヤア、アリナ、よく尋ねて来て呉れた。遇ひたかつた、見たかつたぞや』</p>
+            <p class="ja-classical-line">アリナ『ヤ殿下、好くまア無事で居て下さいました。今の殿下の安全なる御様子を見て、私は最早此の世に思ひの残る事は厶いませぬ。御覧の如く私は修験者となり、世の中の一切と断ち、山に伏し野に寝ね、一生を念仏三昧に送る考へで厶います。一笠一蓑一杖の雲水の身の上、何処の並木の肥にならうやら、再び殿下の御壮健のお顔を見る事が出来ますやら、味気なき浮世で厶いますれば、何事も因縁づくだと諦めどうか私にお暇を下さいませ。そして殿下はスバール姫様と末永く恋を味はつて頂きたう厶います』</p>
+            <p class="ja-classical-line">太子はほつと一息吐き乍ら、青醒めたる顔にて力なげにアリナの手を揺すり乍ら、</p>
+            <p class="ja-classical-line">太『オイ、アリナ、も一度思ひ直して都に帰つて呉れる事は出来ないか。余は最早王位を捨てて妻と共に乞食生活を送る決心ではあるが、其方は時勢を解した前途有望の青年、今から修験者となつて朽ち果つるは国家の為め惜しい事だ。どうか父を助けて再びタラハン城の柱石となり、余が意志を継いでは呉れまいか』</p>
+            <p class="ja-classical-line">アリナは声を湿ませ乍ら、涙を両眼にしたたらして、</p>
+            <p class="ja-classical-line">『殿下の思召は実に有難う存じます。併し乍ら最早今日の私は刑状持で厶います。仮令大赦を蒙つて再び都の地へ無事に帰りませうとも、民心を失つた父左守の悴で厶いますれば、どうして国民が私の赤心を認めて呉れませう。最早私は政治欲に放れました。そして情欲も断ちました。雲水を友として天下の民情を視察し一生を送る考へで厶いますから、どうか此事許りは仰せられないやうにお願ひ致します』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yotsugi sighed a deep sigh, and</p>
+          <p class="en-p">'Ah, it cannot be helped. Has the nation of Tarahan already perished, I wonder?'</p>
+          <p class="en-p">Subaru stepped out before Alina, and drowning in tears of grief,</p>
+          <p class="en-p">'Alina-sama, how wretched indeed is the appearance you have assumed! It is so pitiable.'</p>
+          <p class="en-p">Alina: 'Nay, this is—this is it, Hime-sama. Do not worry yourselves by any means. It is from my own heart that I have thus fallen. My present situation is ultimately a happiness for my person. A single bamboo basket of food, a single gourd of drink, to wander the realm making the mountains and waters one's friends—this too is a rare diversion. Pray, do not concern yourselves regarding my person.'</p>
+          <p class="en-p">Subaru: 'Meeting again with a dear friend I awaited in vain,
+Will you sow the seeds of sorrow once more?
+How shall I deal with the impulsive man's eager mind?
+I am one whose power to stop him is lacking.'</p>
+          <p class="en-p">Alina: 'In a world where even all things are guarded by Kami,
+Could the thoughts of men ever prevail?
+Gazing out at the sky of passing clouds from time to time,
+I have come to muse upon the end of my own path.'</p>
+          <p class="en-p">Yotsugi: 'Though left and right we part our sleeves from each other,
+Our souls surely remain united together.'</p>
+          <p class="en-p">Alina: 'Rather than bowing in gratitude and reverence,
+There is no other art for me today, alas.
+The precious heart of my lord, as always,
+Soaks deep into my body, and tears overflow.'</p>
+          <p class="en-p">Yotsugi: 'With you and Subaru Hime left behind in the world,
+There is none other I can rely upon as strength.
+Feeling as though one of my arms has been torn away,
+The pain in my chest as I now part and go.'</p>
+          <p class="en-p">Subaru: 'How am I to turn aside
+The heart of Alina no kimi in this ruthless world?'</p>
+          <p class="en-p">Alina: 'Himegimi, compose your mind and take peace,
+If for you there is the protection of Kami.
+Both you and my lord and my own person are children of Kami;
+Could Kami ever bring themselves to cast us aside?
+Come now, away, to the prince and himegimi
+Let us part with our reluctant sleeves and go.
+May you remain peaceful and robust for all time,
+While drenched in the dew of Kami's grace.'</p>
+          <p class="en-p">Leaving such parting songs behind, Alina once more blew her conch shell, purifying the evil qi of the mountains and fields, and without any certain destination, advanced into the depths of the mountains. Seeing her off from behind, Yotsugi and Subaru tumbled prostrate upon the earth,</p>
+          <p class="en-p">'Oi, oi, Alina, Alina, show me your face once more!'</p>
+          <p class="en-p">though they called and shouted, blocked by the echo of the conch's sound, as if her ears could not catch the voices of the two, without even looking back, she plunged her figure swiftly into the shade of the dense trees. Alina sang along the way,</p>
+          <p class="en-p">'Clouds and mists choke the four directions,
+Into a perpetual dark
+Where neither black nor white can be told,
+The world of beasts has truly turned.
+Though the morning sun rises in the sky,
+There is no way it can illuminate the nether world;
+Though the moon hides deep within the earth,
+There is no art to bring day to the world.
+In the skies of Kumoi, day by day,
+Strange stars appear and vanish;
+Spreading the air of demons and fiends
+Upon the above of the earth,
+It blows down rain of fire,
+Rain of swords.
+The echo of the wind somehow
+Sounds like the voice of ruin.
+Advancing through the fields
+Where tigers, wolves, lions, and bears howl fiercely,
+My person is protected by Kami,
+Seeking ever the bedchamber of eternity
+As a wandering shugenja.
+If Kami dwells in this world,
+
+Once and for all, He should let it shine
+Upon the world wrapped in utter gloom.
+However great one's authority may be,
+Being but common folk and not Kami,
+How could this world ever be governed?
+Though men proudly boast
+That they are children of Kami, in reality
+They are but dew-drops before the morning sun
+Lodging on summer grass blades.
+How could they ever truly serve
+In the eternal and infinite work of Kami?
+Ah, Kaminagara, Kami, Kami,
+Reign in spiritual bliss and abundance!
+Protect the land of Tarahan
+Created by Kami in the places I go after,
+Safely and peacefully indeed, and aiding
+The myriad affairs of state of the Great King,
+Forgive the deep sins
+Of my father whose heart is foul!
+
+Repressing the treasonous mind
+Of the Minister of the Right, for the sake of the imperial reign,
+Pity and help the common folk beneath the skies,
+So that you may be praised as the minister of the land of Tarahan
+And leave your name down through ten thousand ages,
+Punish them, Great Deities!
+I pray with my whole heart.
+First and foremost, the person of the young lord
+Who is the prince of the lord of Tarahan,
+Protect his august person for eternity,
+Standing as the pillar of the land,
+Make him an illustrious ruler
+Who brings the happiness of our people,
+Great Deities!
+The love-clouds deeply enshrouded
+Blow away in the winds of Shinato,
+And into the august heart
+Where heaven and earth have cleared away brightly,
+
+Return them, O Kaminagara!
+I pray with my whole heart,
+I wish with my whole heart.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">太子は太き吐息をつき乍ら、</p>
+            <p class="ja-classical-line">『あゝ是非もない。タラハンの国家は最早滅亡したのかなア』</p>
+            <p class="ja-classical-line">スバールはアリナの前に進み出で、悲嘆の涙にくれながら、</p>
+            <p class="ja-classical-line">『アリナ様、貴方はまア何と見すぼらしいお姿におなり遊ばしたのですか、おいとしう厶います』</p>
+            <p class="ja-classical-line">アリナ『いや、是は是は姫様必ず必ず御心配下さいますな。私の心から斯様に零落たので厶います。今の境遇は私の身にとつて結局幸福で厶います。一箪の食一瓢の飲、山水を友として天下を遍歴するのも亦一興で厶います。どうぞ私の身については御懸念下さいますな』</p>
+            <p class="ja-classical-line">ス『待ち詫し親しき友と廻り会ひ
+またも嘆きの種をまくかな。
+如何にせむ逸り男の敏心を
+止めむ力の欠けし吾身は』</p>
+            <p class="ja-classical-line">ア『何事も神の守らす世の中に
+人の思ひの通るべしやは。
+行く雲の空を眺めて折々に
+吾身の末を偲び来にけり』</p>
+            <p class="ja-classical-line">太『右左互に袂を別つとも
+魂は互に添ひてありけむ』</p>
+            <p class="ja-classical-line">ア『有難し忝なしと拝むより
+外に術なき今日の吾かな。
+吾君の貴の御心いつもながら
+身に染み渡り涙こぼるる』</p>
+            <p class="ja-classical-line">太『世の中に汝とスバール姫おきて
+外に力と頼むものなし。
+片腕をもがれし如き心地して
+今別れ行く胸の苦しさ』</p>
+            <p class="ja-classical-line">ス『如何にしてアリナの君の御心を
+翻さむか果敢なきの世や』</p>
+            <p class="ja-classical-line">ア『姫君よ心やすけく思召せ
+汝には神の守りありせば。
+吾君も汝も吾身も神の御子
+神の捨てさせたまふべしやは。
+いざさらば太子の御子と姫君に
+惜しき袂を別ち行かなむ。
+いつ迄も安く健在おはしませ
+神の恵の露に濡れつつ』</p>
+            <p class="ja-classical-line">斯く別れの歌を残してアリナは又もや法螺貝を吹き、山野の邪気を清め乍ら、何処を当ともなく山奥さして進み入る。後見送つて太子、スバールは大地に転び伏し、</p>
+            <p class="ja-classical-line">『オーイオーイ、アリナよアリナよ、も一度顔を見せてたべ』</p>
+            <p class="ja-classical-line">と呼べど叫べど法螺の音の響に遮られて、二人の声は彼の耳に入らぬものの如く、後をも振り返らず、足早に密樹の蔭に姿を没した。アリナは道々歌ふ、</p>
+            <p class="ja-classical-line">『雲霧四方にふさがりて
+黒白も分かぬ常暗の
+獣の世とはなりにけり
+朝日は空に昇れども
+下界を照らすよしもなく
+月は地中に潜めども
+世をあかすべき術もなし
+雲井の空は日に月に
+怪しき星の出没し
+妖邪の空気を地の上に
+散布しながら火の雨や
+剣の雨を吹きおろす
+風の響きも何となく
+滅びの声と聞ゆなり
+虎狼や獅子熊の
+吠猛る野を進み往く
+吾身は神に守られて
+いや永久の臥床をば
+求めて進む修験者
+神が此世にましまさば</p>
+            <p class="ja-classical-line">曇り果てたる世の中を
+一度は照らさせたまふべし
+如何に権威があればとて
+神ならぬ身の人草の
+如何でか此世が治まらむ
+抑人間は神の子と
+誇りまつれど実際は
+夏の草葉に宿りたる
+旭の前の露の身ぞ
+永遠無窮の神業に
+如何でか仕へまつるべき
+あゝ惟神々々
+霊幸倍ましませよ
+吾行く後のタラハンの
+神の造りし御国を
+いとも平に安らかに
+守らせたまひて大王の
+万機の政を助けませ
+心汚き吾父の
+深き罪をば赦しませ</p>
+            <p class="ja-classical-line">右守の司の逆心を
+戒めたまひて御代の為め
+天が下なる人草を
+労り助けタラハンの
+国の司と歌はれて
+名を万世に残すべく
+鞭ちたまへ大御神
+偏に祈り奉る
+先づ第一にタラハンの
+君の太子とましませる
+若君様の御身の上
+守らせたまひて永久に
+国の柱と立ちたまひ
+吾国民の幸福を
+来させたまふ名君と
+ならしめたまへ大御神
+深く包みし恋雲を
+科戸の風に吹き払ひ
+天と地とは清らけく
+明け渡りたる御心に</p>
+            <p class="ja-classical-line">かへし玉へよ惟神
+偏に祈り奉る
+偏に願ひ奉る』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c13.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 13: 蛙の口 [1737]</span>
+      </a>
+      <a href="c15.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 15: 破粋者 [1739]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

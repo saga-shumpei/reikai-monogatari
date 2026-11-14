@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9: 衡平運動 [1733] - Volume 68 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 68 Table of Contents</a>
+      <span>Volume 68</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 68 &bull; Chapter 9</span>
+      <h1 class="chapter-title-en">Chapter 9: 衡平運動 [1733]</h1>
+      <p class="chapter-title-ja">衡平運動〔1733〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Though there were Daimiyō above, there was no Shōmiyō who understood the Jidai and served as a Hohitsu and Tōriyō capable of discerning the Eien Shinsaku of the Kokuka; everywhere, Kiyogi, Zaiaku, and Kenbōjiyutsusū were made the foundation of Shisei, heavy taxes were levied to squeeze Kōketsu, and those belonging to the bourgeois class standing above exhausted every conceivable luxury with Hibakeikiu, unconcerned with the Meiwaku of pedestrians, making automobiles fly with a buzzing roar, and going their way unconcernedly while bathing others in Shiuki funpun farts and Tsuchibokori. Even if the child of a hinmin was run over and crushed to death by an automobile, there was no way to bring a lawsuit concerning it; the kiyōshiya acted in a manner tantamount to gautō in broad daylight, striding about horizontally and vertically with kōkōzen, while the weak were trampled underfoot by the carriages and horses of the thoroughfares, raising piteous cries and groaning at the borders of the ninefold depths of death. Although the transportation facilities of civilization and its utilitarian instruments advanced and were completed to a considerable extent, the poor were unable to utilize them. Even though educational institutions were splendidly established, the poor were unable to enter them. Although yose theaters and the like were constructed on the four sides of the city, bringing forth a paradise on earth, the poor were once again unable to seek a single moment of solace in them. Although hospitals stood in rows with ridge-ends pointing to the sky in every place, the poor were unable to enter them to receive medical treatment. Even though delicious delicacies and fine dishes were lined up at the storefronts of restaurants, the poor were once again unable to bathe in this blessing. Although large draper's shops displaying brocades and damasks in their storefronts were densely crowded in the most prominent locations of the city, the poor were unable to purchase even a single piece of cloth. Day and night weeping from hunger, freezing from the cold, embracing hollow bellies, they only panted along the sides of the roads like half-patients, looking desolate. The rich united with the Dai-Shōmiyō to gorge themselves on exorbitant profits, prices soared day by day, the voices of hardship in survival grew clamorous day by day, those who cast themselves into abysses and rivers, those who committed disembowelment, those who performed the swing-deliverance, those who threw away their lives with railway tracks as pillows—day and night without limit, the curtain of pitch-black darkness was lowered day by day more thickly upon the lower-class society. The voices of indignation and bitter lamentation of the common people and the cries of loud weeping came to form a state resembling the Avīci hell. The voices calling for the eradication of the Dai-Shōmiyō arose in every part of the country, and citizen assemblies, popular assemblies, and other gatherings of the property-owning masses were opened in various places; the conflicts between the censors and the masses, and the blood-stained winds blew wildly on all sides without interruption, and even the Talahan country, which had hitherto been at ease, had now gradually become an alley of Asura. The reckless fringe groups, theatrical troupes, and various other organizations gathered without prior arrangement on the grand thoroughfares of the capital, and taking the fifth day of the fifth month—the anniversary of the founding of the Talahan country—as their term, they began setting fires simultaneously at locations within the castle town, and taking advantage of that emptiness, the masses starving for blood indulged their wicked deeds to the utmost, and for a time it became a state of almost no control, but gradually they were able to suppress the extraordinary disturbance by borrowing the strength of the samurai factions. Due to the outbreak of this commotion, those who caught the ricochet of the wealthy factions and had their meager properties burned down, those who lost parents, those who lost wives, those who parted from husbands, or those whose whole families were utterly destroyed were without number; the grand thoroughfares of the capital were transformed into alleys of spilled blood, and with corpses piled high, it became a tragic scene difficult to even look upon. Children wept from hunger upon their mothers' backs, old men lost the use of their loins and fell by the roadside, or half-dead and suffering from severe wounds, those who struggled were so numerous as to be beyond counting by the thousands. The various voluntary organizations ran about in the four directions of east, west, south, and north to rescue the disaster-stricken people, scrambling for rice, barley, vegetables, and the like in order to save the immediate emergency, but this was ultimately far from sufficient to satisfy even a part of their demands. Rumors and unfounded gossip arose flourishingly, the minds of the people were agitated and uneasy, and it was noised abroad by the mouths of people that the Talahan country would presently head toward the tragic fate of destruction. To such a place appeared a single woman of oversized, fat build who exceeded physical beauty, and while scattering bills upon the road and singing of something in a loud voice, she ran back and forth hither and thither through the checkerboard streets.</p>
+          <p class="en-p">Woman: 'The gods appear outwardly,
+And strictly separate men and demons.
+In the heavens black clouds block the way,
+And the light of moon and sun does not shine upon the earth.
+The common people under the heavens,
+Layer days upon days of survival of the fittest;
+The strong climb high and reach the ultimate peak,
+While exhausting every extent of glory and splendor,
+They treat the distress of those below
+As wind blowing past deaf ears,
+Oppressing the impoverished folk,
+Squeezing their raw blood and fats,
+And sucking them up to the utmost of their strength,
+Until they waste away and wither like hungry demons,
+Reduced utterly to skin and bones.
+Since the gods exist in this world,
+How long will they forgive them?
+In this world the Lord God,
+So that all the myriad people equally,
+May pass their days joyously and happily'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">上に大名あれ共、時代を解し国家永遠の神策を弁へたる輔弼棟梁たるべき小名なく、所在虚偽と罪悪と権謀術数を以て施政の大本となし、重税を課して膏血を絞り、上に立てるブルジョア階級なる者は、肥馬軽裘、有らむ限りの贅を尽し、行人の迷惑を顧みずブウブウと自動車を飛ばして、臭気紛々たる屁と土埃を浴びせて平気に行く。貧民の子は自動車に轢き殺されても、之を訴へ出づる術も無く、強者は白昼強盗に等しき行ひを為して、公々然縦横に濶歩し、弱者は往来の車馬に踏み躙られ悲鳴を上げ、九死の境に呻吟す。文明利器の交通機関は可なりに進歩し完備すれども、貧者は之を利用する事を得ず。教育機関は立派に設けられたりと雖も、貧者は是に入学するを得ず。寄席劇場などは市の四方に建設され地上の楽園を現出すれども、貧者は又之に一回の慰安を求むる事を得ず。病院は各所に甍を列ねて樹立すれども、貧者は是に入つて治療を受くる事を得ず。美味佳肴は料理屋の店頭に並べられたりと雖も、貧者又此恩恵に浴するを得ず。錦繍綾羅を店頭に陳列せる大呉服店は市中目抜の場処に櫛比すれども貧者は一片の布も購求する事を得ず。日夜飢に泣き寒さに凍え、空虚腹を抱えて半病人の如く路の傍を悄々と喘ぎ行くのみ。富者は大小名と結托して暴利を貪り、物価は日を逐うて暴騰し、生存難の声は日を逐うて喧すしく、淵川に身を投ぐるもの、鉄砲腹を為すもの、ブランコ往生を演ずるもの、線路を枕に命を捨つるもの、日に夜に数限りも無く、暗黒の幕は下層社会に日に日に濃厚に下されて来た。民衆の憤怒怨嗟の声、号泣の叫び、恰も阿鼻叫喚地獄の状態と成つて来た。大小名撲滅の声は国内各処に起り、市民大会、民衆大会其他所有民衆の会合は、各処に開かれ、目付役と民衆の争闘、絶間なく血腥き風は四方に吹き荒び、流石安逸なりしタラハン国も、今は漸く修羅の巷と成つて了つた。不逞団歌劇団其他の各種の団体は期せずして都大路に集り、タラハン国の創立記念日なる五月五日を期して、城下の場所に一斉に放火を始め、其虚に乗じて血に飢ゑたる民衆は所有悪業を恣にし、一時は殆んど無取締の状態になりしが、漸くにして侍連の力を借つて稀有の騒乱を鎮圧する事を得たので有る。此騒擾勃発の為に、富有連の傍杖を食つて僅かの財産を焼失したるもの、親を失ひ、妻を失ひ、夫に別れ、或は一家全滅したる者数限りもなく、都大路は流血の巷と化し、死屍累々として目も当てられぬ惨状と成つた。子は母の背にあつて飢に泣き、老人は腰を抜かして路傍に倒れ、或は半死半生、重傷を負うて苦む者幾千人とも数へ切れぬ程であつた。有志の各団体は罹災民救護の為、東西南北に駆まはり、米麦野菜などをあさつて、一時の急を救はむとすれ共、到底其一部の要求を充すにも足らなかつた。流言蜚語盛ンに起り、人心恟々として安からず、今にタラハン国は滅亡の悲運に向ふべしなどと人々の口に依つて喧伝された。斯かる所へ肉体美に過ぎた大兵肥満の女一人現はれ来り、札ビラを路上に撒き散らし乍ら声高々と何事か唄ひ乍ら、碁盤の目の街を彼方此方と駆けめぐつてゐる。</p>
+            <p class="ja-classical-line">女『神が表に現はれて
+人と鬼とを立別ける
+天には黒雲塞がりて
+月日の影も地に照らず
+天が下なる人草は
+優勝劣敗日をかさね
+強きは高く登りつめ
+栄耀栄華の有丈を
+尽して下の難儀をば
+空吹く風と聞き流し
+貧しき民を虐げて
+生血を絞り脂をば
+力限りに吸取れば
+痩せ衰へて餓鬼の如
+骨と皮とに成り果てぬ
+神が此世に在す上は
+何時迄許し玉はむや
+此世の中は神様が
+万の民を平等に
+楽く嬉しく暮させて</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">To spread the divine rule of Tengoku and Jiyōdo is the divine will of the Kami.
+Yet how can one ever measure it?
+With Samori at the top above,
+and the Fuiuren and the wealthy elders
+behaving as they please and selfishly,
+the retribution for oppressing the lower Kunitami
+is now instantly before our eyes.
+Have you realized it yet, Samorikami,
+and you other hundred officials?
+If you do not reform your hearts right now,
+the Minshiu will raise a battle cry and press forward, shouting, 'Strike and punish them!'
+That ominous sign is vividly
+and clearly perceived from this moment on.
+Ah, Minshiu, O Minshiu,
+do not sorrow in the least.
+The Kami of supreme benevolence and supreme love
+will surely abandon your state of distress
+until when, pray tell?</p>
+          <p class="en-p">Welcoming the spring of Ichiyōraifuku,
+eternally establishing the peaceful and joyful land of the Kami
+within this mortal world,
+He shall surely lift up you pure and righteous ones,
+who have suffered below until now,
+to the exalted heights.
+The heavens shall descend and become the earth,
+and the earth shall rise and become the heavens.
+In this world of Uitenpen,
+how long shall we permit the unbridled actions
+of Daimiyō and Shōmiyō?
+Ah, Kamunagara, Kamunagara,
+the Kami is with you.
+We are the children of the Kami, the palaces of the Kami.
+When the season finally arrives,
+a hundred righteous Kami who until now have fallen and dwelled in this world
+shall lead countless divine armies,
+annihilating evil and flattening wickedness
+completely.</p>
+          <p class="en-p">Be bold, be brave, O Minshiu!
+The time has come, the time is now;
+this is the dawn of Shinseifukuko.
+A sudden, unexpected great conflagration
+is not at all a feat achievable by human power.
+Every bit of it is the warning of the precious Kami
+against evil.
+No matter how the Daimiyō, Shōmiyō,
+and Fuiuren may wield their tyranny,
+the world in which they wield it
+has already reached its end.
+Be bold, be brave, let everyone be brave!
+Trample underfoot every single wicked person who oppresses the Minshiu,
+without shrinking, without cowardice, and with supreme dignity,
+administer the baptism of fire.
+Wash the world with bloodshed!</p>
+          <p class="en-p">The tea-master of the Mukō no Mori
+had disguised himself as a second wife in the mansion,
+lurking in stealth for the past three years,
+and while frequenting the Fuiuren,
+had attended upon them and investigated their affairs.
+Now that the time was fully ripe, however,
+she commanded her numerous subordinates
+and carried out the baptism of fire—
+this woman of massive and sturdy physique.
+What is there to fear of the Fuiuren crew?
+Daimiyō and Shōmiyō can go eat dirt.
+How could one possibly live in this world
+in fear of directors and inspectors?
+Be bold, be brave, O Minshiu!
+Though she is a woman, my subordinates
+in the mountains and fields of the Tarahan country
+are hundreds of thousands of living spirits,
+flexing their arms and waiting.
+once the order is given at last,
+from every nook and cranny of the eight directions,</p>
+          <p class="en-p">signal fires will rise one after another!
+Without letting slip the present opportune moment,
+believing your transformation of the world
+to be the lifeline of your existence,
+shake yourselves, stand up, and rise on your feet!
+That Balance, famed throughout the world
+as the chieftain of the Minshiu league,
+is none other than myself.
+Ah, how valiant, how valiant!
+Whenever I look upon this tragic scene,
+the collateral suffering of the lower people
+is truly a seed of tears,
+yet when I gaze upon the state
+of the Daimiyō and Shōmiyō in their panic,
+my pent-up spleen is somewhat eased.
+What good is the Kōseiin?
+That too is merely another trick of the Fuiuren and the like
+to squeeze the lifeblood
+from you general Minshiu.
+Do not waver, do not be deceived.</p>
+          <p class="en-p">When I think upon it, when I think upon it, the core of my heart
+causes the Kami of my soul to leap in dance.
+Ah, Kamunagara, Kamunagara,
+may your august spirits be blessed and tranquil!
+May the eyeballs of those sly and crafty villains
+pop right out!'</p>
+          <p class="en-p">Several hundred inspection officers lying in wait at the crossroads rushed forward without a word, seizing them by hand and foot, binding them tightly hand and foot with ropes, and hauled Balance off in a handcart to the inspection station at Yokoōji. The subordinates, disguised as common folk, surged forward like a tidal wave to reclaim Balance, staging a fierce struggle between the inspectors and league members. Just as the inspection squad appeared to be in grave danger, the sound of bugles blew valiantly as two thousand samurai charged to the scene, leveling their rifles to intimidate them. Possessing no complete weapons to begin with, the common folk could only gnash their teeth as they watched their grand leader snatched away before their very eyes, forced at last into retreat.</p>
+          <p class="en-p">Balance was led out before the chief inspector and subjected to a rigorous interrogation. Without the slightest sign of intimidation, Balance launched fluently into a fiery retort against the chief inspector.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">天国浄土の神政を
+布かむが為の思召
+然るに何ぞ計らむや
+上は左守を始めとし
+富有連や長者等が
+勝手気儘に振れ舞ひて
+下国民を苦しめし
+報いは忽ち目の当り
+思ひ知つたか左守司
+其他百の司達
+今に心を直さねば
+打てや懲らせと民衆が
+鬨を作つて攻寄せる
+其凶兆はありありと
+今より伺ひ知られたり
+あゝ民衆よ民衆よ
+必ず憂ふる事なかれ
+至仁至愛の神さまは
+必ず汝が窮状を
+何時まで見捨て給はむや</p>
+            <p class="ja-classical-line">必ず一陽来復の
+春を迎へて永久に
+安き楽き神の国
+此世の中に樹て玉ひ
+今迄下に苦しみし
+清き正しき汝等を
+高きに救ひ給ふべし
+天は降つて地と成り
+地は上つて天と成る
+有為天変の世の中は
+何時まで大名小名の
+自由の振舞許さむや
+あゝ惟神々々
+神は汝と倶にあり
+吾等は神の子神の宮
+愈々時節が参りなば
+今迄此世に落ち居たる
+百の正しき神さまは
+数多の神軍引率し
+悪を亡しよこしまを</p>
+            <p class="ja-classical-line">平らげ尽し給ふべし
+勇めよ勇め民衆よ
+時は来れり時は今
+神政復古の暁ぞ
+不意に起つた大火災
+是ぞ全く人間の
+力に及ぶ術でない
+何れも貴き神様の
+悪に対する警戒ぞ
+如何に大名小名や
+富有連が覇張るとも
+彼等が覇張る世の中は
+最早末期と成りにけり
+勇めよ勇め皆勇め
+民衆を苦しむ悪人を
+片つ端から踏み躙り
+怯めず臆せず堂々と
+火の洗礼を施せよ
+血汐を以て世を洗へ
+向日の森の茶坊主が</p>
+            <p class="ja-classical-line">館に後妻と化けすまし
+三年以来身を潜み
+富有連に出入する
+彼に付き添ひ富有連の
+事情を査べ居たりしが
+最早時節も充ちぬれば
+数多の部下に命令し
+火の洗礼を為せたのは
+大兵肥満の此女
+富有連中が何恐い
+大名小名糞喰へ
+取締役や目付役が
+怖くて此世に居られうか
+勇めよ勇め民衆よ
+女乍らも吾部下は
+タラハン国の山に野に
+幾十万の生身魂
+腕を撫して待つて居る
+愈々命令一下すりや
+四方八方の隅々ゆ</p>
+            <p class="ja-classical-line">ドンドン狼火が上るだろ
+今の好機を逸せずに
+汝等世界の改造を
+命の綱と信じつつ
+振へよ立てよ立上れ
+民衆団の頭目と
+世に聞えたるバランスは
+即ち吾身の事なるぞ
+あゝ勇ましや勇ましや
+此惨状を見るに付け
+下人民の傍杖は
+実に涙の種なれど
+大小名の狼狽の
+其状態を眺めては
+少しは虫も治まらむ
+更生院が何に成る
+之も矢つ張り富有等の
+汝等民衆一般の
+生血を絞る手品ぞや
+必ず迷ふな迷はされな</p>
+            <p class="ja-classical-line">思へば思へば村肝の
+心の神が踊り出す
+あゝ惟神々々
+御霊幸へましませよ
+奸侫邪智の輩の
+目玉飛出しましませよ』</p>
+            <p class="ja-classical-line">十字街道に待ち構へて居た数百の目付隊は有無を言はせずバラバラと駆け寄つて手取り足取り、取縄を以て雁字搦みに縛り付け、バランスを荷車に乗せて横大路の取締所へと運び込むで了つた。民衆に化けて居た彼の子分はバランスを取返さむと潮の如く押寄せ、目付と団員との闘争が演出された。目付隊は既に危く見えた時、喇叭の声も勇ましく二千人の侍は押寄せ来り銃を擬して威喝を試みたり。素より完全な武器を有つて居ない民衆は歯がみを為し乍ら見す見す大棟梁を奪はれしまま、退却するの止むを得ざるに立至りける。</p>
+            <p class="ja-classical-line">バランスは目付頭の前に引出され、厳重なる訊問を受けた。バランスは少しも怯む色無く滔々として目付頭に食つて掛かつた。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Metsukegashira: 'What is your name?'</p>
+          <p class="en-p">Balance: 'My name is called Balance. I am the supreme leader of the Minshiukiugodan. Do you think you can serve as the Ōmetsukegashira when you are so dim-witted that you have not known the famous face of Balance until now? Since it is a Gendai of weak-eating and strong-eating that severely lacks Beudō, I was named Balance in order to restore balance.'</p>
+          <p class="en-p">Metsukegashira: 'What do you mean by instigating the Minshiu, gathering Futei elements, setting fires in the Shigai, daring to commit Akugefu Arayuru, and not yet satisfied, further agitating the Minshiu? Such an extremely heavy criminal like you needs no trial; for the sake of Kokuka, although it is Fubin, you are sentenced to execution by Jiusatsu, so it would be better for you to chant some Nenbutsu as a parting memory of this world.'</p>
+          <p class="en-p">Balance is a daring and fearless hero unbecoming a woman. Bound tightly to the point where he could not even move his body, without the slightest sign of fear, he opened his wide mouth and laughed aloud,</p>
+          <p class="en-p">Balance: 'Aha-ha-ha-ha! Blind men who cannot see ahead! Jiusatsu, strangulation, or whatever, if you can do it, try it and see. The life of this Balance is a life of counterweight to the entire Tarahan country. If my tens of thousands of subordinates hear everywhere in the country that Balance has been killed, they will rise in rebellion all at once. Evil Metsuke like you should consider the future course of events well before laying hands on me. First of all, what is the conduct of those who should be models for the nation? Do you not smuggle a young woman into the thatched hut of the tea-master Taruchin who lives near the forest the other day, visit her night after night wearing the clothes of a laborer, and become a slave of love with a greasy face? With such behavior, how can you make your administration complete? You are afraid of fish that swallow boats and dare not approach them, while you fish for mere minnows and crucian carps like trash, and feeling mighty pleased with yourselves while you do not know the ruin of the country, you are fools!'</p>
+          <p class="en-p">Metsukegashira: 'Balance, what a dreadful thing are you saying! As the status of the people, is there such a daring thing as criticizing their conduct?'</p>
+          <p class="en-p">Balance: 'Ha-ha-ha-ha, does it bother you that much? If so, I shall leave this matter to your own conjecture. Call forth the tea-master and interrogate him well. Regarding that as well, what is unforgivable is that the son of Samori Gandhi, a fellow named Arina, has unpardonably won over the tea-master, not only acting as an intermediary with a country girl, but himself wearing brocade garments within the palace, impersonating a false grand general, and dazzling the eyes of the left and right guardians, is he not? While His Highness the Great King is seriously ill and lords and commoners alike are sinking in melancholy, his son is madly obsessed with women, and the son of the left guardian is a daring and villainous scoundrel attempting to usurp the throne; the rest of the Daimyo can be inferred from seeing this. This Balance is the representative of all the people of Tarahan; I never tell a lie, so you had better investigate immediately.'</p>
+          <p class="en-p">At these words, both the Metsukegashira and the surrounding Metsuke lost their color, letting out heavy sighs and only looking at each other's faces. Once again, the voices of the Minshiu and the Metsuke officers fighting began to echo noisily near the garden.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">目付頭『其方の姓名は何といふか』</p>
+            <p class="ja-classical-line">バランス『俺の名はバランスと云ふ者だ。民衆救護団の大頭目だ。有名なバランスの面を今迄知らぬようなウツソリした事で、何うして大目付頭が勤まると思ふか、余り平等を欠いだ強食弱肉の現代だから、バランスを取る為にバランスと命名したのだ』</p>
+            <p class="ja-classical-line">目付頭『其の方は民衆を煽て上げ、不逞の徒を鳩集し、市街に火を放ち、剰さへ所在悪業を敢てし、尚飽き足らず民衆を煽動するとは何の事だ。汝の如き極重悪人は裁判の必要も無い、国家の為不愍ながら銃殺の刑に処するに仍つて、此世の名残に念仏でも唱へて置くが可からうぞ』</p>
+            <p class="ja-classical-line">バランスは女に似合はぬ大胆不敵の英雄で有る。身動きも成らぬ所迄縛られ乍ら、少しも恐るる色なく大口開けて高笑ひ、</p>
+            <p class="ja-classical-line">バランス『アハヽヽヽ、向ふの見えぬ盲ども、銃殺なつと絞殺なつと、出来るなら遣つて見よ。此バランスの命はタラハン国全体とつり代の命だ。数十万の吾部下は国内の各所にバランスが殺されたと聞くならば、一時に蜂起するだらう。汝等如き悪目付共は能く後前の成行を考へて手を下したが可からうぞ。第一国民の模範たるべきものの行状は何だ。向日の森の畔に住む茶坊主タルチンの茅屋に年若き女を忍ばせ、夜な夜な労働者の服を着けて通ひつめ、恋の奴と成つて脂下つて居るで無いか、斯様な事で、如何して世話が完全に出来るか、其方共は呑舟の魚には恐れて近寄らず、鮒やモロコの如きウロクヅを漁つて目付力が何うの、政治が如何のと、好え気に成つて国の滅亡を知らない馬鹿者だ』</p>
+            <p class="ja-classical-line">目付頭『バランス、何と云ふ畏れ多い事を言ふのか、人民の分際として、その行動を云々すると云ふ不敵な事が有るか』</p>
+            <p class="ja-classical-line">バランス『ハツハヽヽ、それほどお邪魔に成りますかな。然らば此問題は御推量を願つて置きませう。能く茶坊主を呼出してお査べなさい。夫に付ても許し難きは左守ガンヂーが悴アリナと云ふ奴、不届至極にも茶坊主を取込み、山出し女との媒介を致して居るのみならず、自分は殿中に錦衣を着け、偽太将と成り代り、左守右守の目を眩まして居るでは無いか。大王殿下は御重病にて上下憂鬱に沈む折柄、悴たるものは女に狂ひ、又左守の悴は王位を奪はむとして居る大胆不敵の曲者、其他の大名共は之を見ても推して知るべしで有る。此バランスはタラハン国民衆全部の代表者だ、決して嘘は言はないぞ、早速調べて見るが宜からう』</p>
+            <p class="ja-classical-line">此言葉に目付頭も並み居る目付等も色を失ひ、太き息を漏らして互に面を見合すのみで有つた。又もや民衆と目付役と闘ふ声、庭の近辺に喧しく響いて来た。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c08.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 8: 帰 Ogre 逸迫 [1732]</span>
+      </a>
+      <a href="c10.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 10: 宗匠財 [1734]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
