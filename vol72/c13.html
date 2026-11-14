@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: 捨台演 [1822] - Volume 72 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 72 Table of Contents</a>
+      <span>Volume 72</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 72 &bull; Chapter 13</span>
+      <h1 class="chapter-title-en">Chapter 13: 捨台演 [1822]</h1>
+      <p class="chapter-title-ja">捨台演〔1822〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kyūbā, who had undertaken the Setsuchinsauji, was a Nisekaishin. Seeing the Kamutsukasa of Tamakiyowake, Dariya-hime, standing side by side and reciting the Norito, his Shineniba began to run wild. Observing their intimate Yōsu, he could not bear the jealousy and stomped his feet in Jidanda. Yet, after Shibaraku, he considered the Yōsu of the mansion and thought of what else he might do. He was truly attentive to every Zatsuta detail, for within the mansion of the Suga-no-Miyai, there were items of Kennonshigoku. As five or six days passed, Kyūbā burned with the flames of love in his heart, thinking of how he might make Dariya-hime his own.</p>
+          <p class="en-p">During the Habakarisauji, Dariya-hime entered the privy. Thinking this was a fortunate and Kutsukiyō Baahi, he stood before the Tearahibachi. While drawing water with a Hishiyaku and pouring it over Dariya's Riyōte, he watched for an opening and firmly grasped her Shirauo-like Senshiyu. Kyūbā: 'Listen here, Dariya-sama. I am Shinken about you. If you do not listen to my request once more, I shall die. A man with Kintama, a brave fellow, joins his hands before a delicate woman; this request is purely because of love. There is no distinction of high or low in love. Though names may change, such as master or servant, all humans are the divided spirits of the Tentei. Is there really such a distinction as noble or lowly?'</p>
+          <p class="en-p">Kyūbā: 'Is there such a distinction? If you despise me because of the Setsuchinsauji and will not listen to what I say, I shall also consider a plan. So that you do not bite your navel in regret later, settle your mind and give me an answer. Be brave and do it, Kyūbā is at the crossroads of life or death. Whether to let one man live or to kill him depends entirely on your heart. Even if you say I am an ugly man, I am not a tiger or a bear; I am a man with eyes, nose, mouth, ears, and eyebrows properly attached. I have five fingers on my hands and feet. Even if you are called a beauty, your tools are surely no different. Settle your mind quickly. It is a man's pride, and I will not pull back once I have said it. Come, come, your answer!' As he pressed her, Dariya-hime laughed.</p>
+          <p class="en-p">Dariya-hime: 'Listen here, Grandpa Kyūbā. Are you saying this in earnest? You must be saying this because you are drunk on sake. No wonder your face is a little red. If you have time to say such nonsense, you had better clean the mansion quickly. If Yoriko-hime-sama hears of this, she will surely give you a terrible scolding. I will never say anything bad. Please let go of that hand.' When she said this, Kyūbā's eyes bulged.</p>
+          <p class="en-p">Kyūbā: 'Why, why should I let go? If I let go of this hand, you will immediately fly out before the Empress Yoriko-hime and tell her what I have done, will you not? If that happens, I will not be able to keep my seat in this mansion. Once an arrow has left the bow, it does not return to its origin. A good answer!' As he pressed her, Dariya screamed in a high-pitched voice.</p>
+          <p class="en-p">Dariya-hime: 'Oh, oh, help me, I am scared!' As she called out with all her breath, Hanaka was surprised and came running. Seeing this state of affairs, she looked on. Hanaka: 'If it is not Kyūbā-dono. Do not do such foolish things. This is a noble divine mansion. It would be wise for you to understand that. With a face like wrinkled paper, you grasp the hand of a beauty of the world and talk of love and nonsense. Consult with your own face, and then let go of that hand. You are truly an astonishing fake monk. Pretending to have reformed, you snuck into the mansion for a while, and while appearing diligent, you are a wolf in sheep's clothing plotting to satisfy your lust for love. A villain like you should leave as quickly as possible. If you do not let go of that hand immediately, I will tell the Empress Yoriko.'</p>
+          <p class="en-p">When she said this, Kyūbā steadied his torso, opened his mouth wide, and laughed loudly. Kyūbā: 'Atsuhahaha! Hatsu! Hey, hey, you little octopus-woman. Who do you think I am? I am the Kyūbā-no-Kimi, the great founder of the Sukobutsuen sect, the savior most trusted by Daikoku-nushi-no-Ōkami. With the body of the only daughter of a mere medicine seller or the daughter of a Mokubei, you dare to slap my cheek? What is there to fear from Yoriko-hime? If I hole up in the mountains of Aura and act as a mountain bandit, or if I present myself to the Brahmin station and say, "I beg your pardon," you too will be regarded as my accomplices and cohorts. You will be thrown into a dark prison, groaning without seeing the light of day, and though you may lament, it will be of no use. You will become criminals in the shadows before your very eyes. Even so, do you refuse the demands of Kyūbā, Hanaka-hime? And you too, Dariya-hime? If it comes to this, I am desperate. I will turn the Suga-no-Goten upside down from its foundations, and the priest, that old fool Tamakiyowake...'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">雪隠掃除を引受けた
+偽改心のキユーバーは
+玉清別の神司
+ダリヤの姫と相並び
+祝詞をあげる姿見て
+心猿意馬が狂ひ出し
+睦じさうな様子見て
+やけて堪らず地団太を
+踏んでは見たが今少時
+館の様子を考へて
+その上何とかせむものと
+いろいろ雑多とすみずみに
+心を配り居たるこそ
+スガの宮居の館には
+剣呑至極の代物ぞ
+五日六日と経つ中に
+キユーバーは恋の焔をば
+胸に燃やしてダリヤ姫
+何とか物にせむものと
+考へすます折もあれ</p>
+            <p class="ja-classical-line">便所掃除の其際に
+厠に入りしダリヤ姫
+これ幸ひ屈強の場合ぞと
+手洗鉢の前に立ち
+柄杓に水を汲み乍ら
+ダリヤの両手に注ぎつつ
+隙を覗ひ白魚の
+繊手をグツト握りしめ
+『これこれもうしダリヤさま
+私は貴女に真剣だ
+私の願を今一度
+聞いて貰はにや死にまする
+睾丸さげた大丈夫
+繊弱き女に手を合し
+頼むは畢竟恋故ぞ
+恋に上下の隔てない
+主人僕といろいろに
+名は変れども人間は
+何れも天帝の分霊
+尊い卑しい等と云ふ</p>
+            <p class="ja-classical-line">そんな区別があるものか
+雪隠掃除と侮つて
+私の言ふ事聞かぬなら
+此方も一つ思案する
+後日に臍をかまぬやう
+性念をすゑて御返答
+天晴なされよキユーバーが
+乗るか反るかの境目だ
+一人の男を生かさうと
+殺さうとお前の胸次第
+醜い男と云つたとて
+虎や熊ではあるまいし
+目鼻口耳眉毛まで
+立派について居る男
+手足の指も五本ある
+お前も美人と云つたとて
+道具に変りはあらうまい
+早く思案を定めて呉れ
+私も男の意地だもの
+云ひ出した事ア後に引かぬ</p>
+            <p class="ja-classical-line">サアサア返答』と、詰寄れば
+ダリヤの姫は打笑ひ
+『これこれキユーバーのお爺さま
+お前は本気で云ふのかい
+お酒に酔うて云ふのだろ
+道理で顔がチト赤い
+そんな下らぬ囈言を
+云ふ間があつたら逸早く
+屋敷の掃除をするがよい
+ヨリコの姫さまが聞いたなら
+甚いお目玉喰ふだらう
+決して悪い事言ひませぬ
+その手を放して下さんせ』
+云へばキユーバーは目を剥いて
+『どうしてどうして放さうか
+この手を放した事ならば
+お前は直様ヨリコ姫
+女帝の前に飛び出して
+俺のした事告げるだらう
+さうなりや俺もこの館に</p>
+            <p class="ja-classical-line">お尻を据ゑて居られない
+一旦弓を放れたる
+征矢は元へは帰らない
+善き返答』と詰寄れば
+ダリヤ金切声を出し
+『あれあれ怖い助けて』と
+息を限りに呼はれば
+花香は驚き馳せ来り
+此有様を打眺め
+『誰かと思へばキユーバーどん
+ふざけた事をするでない
+此処は尊き神館
+心得なさるが宜しからう
+渋紙見たやうな面をして
+天下の美人の手を握り
+恋の鮒のと何のこと
+お前の面と御相談
+した上その手を放さんせ
+本当に呆れた売僧だな
+改心すると詐つて</p>
+            <p class="ja-classical-line">少時館に忍び込み
+まめまめしくも見せかけて
+恋の欲望を達せむと
+企らみ居たる猫かぶり
+お前のやうな悪党は
+一時も早く去犬がよい
+しつこうその手を放さねば
+ヨリコの女帝に告げるぞや』
+云へばキユーバーは胴を据ゑ
+大口開けて高笑ひ
+『アツハヽヽヽハツヽヽヽ
+こらこら小女章魚バイタ
+俺を何方と心得る
+大黒主の御信任
+最も厚き救世主
+スコブッツエン宗の大教祖
+キユーバーの君で御座るぞや
+高が知れたる薬屋の
+一人娘や杢兵衛の
+はした娘の身を以て</p>
+            <p class="ja-classical-line">頬げたたたくおとましや
+ヨリコの姫が何怖い
+オーラの山に立籠り
+山賊稼いだ兇状持ち
+バラモン署に出頭して
+恐れ乍らと出かけたら
+一網打尽貴様等も
+同類仲間と見做されて
+暗い牢獄に打込まれ
+日の目も見ずに呻吟し
+喞ち嘆けど是非もなく
+忽ち日陰の罪人と
+なつて行くのは目のあたり
+それでもキユーバーの要求を
+拒絶するのか花香姫
+ダリヤの姫のあまつちよよ
+俺も斯うなりや自暴自棄だ
+スガの御殿を根底から
+でんぐり返し宮司
+玉清別のデレ親爺</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'I shall show you a Hoezura (a face of defeat)!' With such Baujiyakubujin (arrogant) words from Kyūbā, Hanaka was left dumbfounded. She immediately rushed into the inner chamber and appeared before Yoriko, reporting the Baujiyō (outrageous behavior) of Kyūbā in Chikuichi (every detail). Hearing this, Yoriko smiled, adjusted her Emon (garments), and with an Iuiu (leisurely) air, approached the vicinity of the Benjiyo (latrine).</p>
+          <p class="en-p">Yoriko: 'Hotsu-ho-ho-ho, Kyūbā-sama. Thank you for your truly Goshinsetsu (kindness). Not only did you clean my bottom, but you even took my hand to wash it. My, what a thorough effort; I am deeply moved by your Goshinsetsu. Now, now, Dariyahime-dono over there, please listen kindly to what Kyūbā-sama has to say.'</p>
+          <p class="en-p">Upon her words, Dariyahime spoke in a Namidagoe (tearful voice): 'No matter how much of a Subeta (lowly woman) I may be, or how humble my Mibun (status) might be, I feel as though I am being defiled even by speaking to an old man who performs Habakarisauji (latrine cleaning). Much less, to ask me to become your Niyōbau (wife) is simply too much. My Harada (anger) and tears have dried up, and I am so stunned that I cannot find words. Nanitozo (please), I beg you to forgive me.'</p>
+          <p class="en-p">As she burst into tears, even the persistent Kyūbā let go of her hand, turned toward Yoriko, and said: 'Now, now, Yoriko-niyotei-sama. I had been wearing a cat's mask, but now that I have revealed myself, it is a matter of breaking the pot. Shall I take your Kubitama (head) as a prize? If that is not to your liking, I shall Sugusama (immediately) rush to the Brahman station, Sutsupanu (expose) your Sujiyō (true identity), and make you suffer the shame of the Nahame (bonds). Ika (how) is that?' As he sniffled and approached with his Katahiji (shoulders and elbows) raised in a Tsumeyo (threatening) manner, Yoriko-hime smiled.</p>
+          <p class="en-p">Yoriko: 'Where is the proof that I have committed evil deeds until now? Since you speak of things I do not understand, shall I, on the contrary, report you to the Brahman office, Kyūbā-sama? Ika, ika (how, how)?' When she countered him with this, Kyūbā hesitated for a moment, held his breath, and sank into silence.</p>
+          <p class="en-p">Ah, Imikami-kami-kami. How this situation will be resolved and what the future holds is truly interesting.</p>
+          <p class="en-p">Kyūbā, enveloped in the flames of love and unable to endure, had grabbed the hand of Dariyahime and tried to woo her with threats and deceits. However, frustrated by Dariyahime’s stubbornness, which would not budge even for a lever or a club, he grew desperate and attempted to intimidate her by threatening to report her to the Brahman station. Nevertheless, for a corrupt monk like Kyūbā, who was also a meticulously crafted ugly man, his appearance was such that even a stray dog in an alley would not jump at him even if provoked. Much less was there any reason for a peerless beauty to cast amorous glances at him. Humiliated by the three beauties who had gathered together, his resentment pierced to the marrow. '...Now, it is a matter of breaking the pot. I shall Sutsupanu the Sujiyō of Yoriko, report her to the Brahman station, and I will not rest until I have cleared this grudge...' Saying this, he glared at the signboard of the consultation office, spat upon it, kicked sand with his hind legs, and revealed a countenance like a Yaksha. Intending to meet Ilk, the brother of Dariyahime, to achieve his purpose, he left the place, leaving behind a nasty parting remark without a single word of greeting.</p>
+          <p class="en-p">Kyūbā immediately slipped through the front gate of the medicine shop, blocked the entrance, and shouted in a booming voice: 'I am the Lord Kyūbā, founder of the Sukobutsuen sect, who has been favored by the guidance of the God of Daikokunushi, who governs the Moon Kingdom of over seven thousand nations. I wish to have an audience with the master without fail.' At the voice calling out, Aru, the head clerk, came out politely to welcome him.</p>
+          <p class="en-p">Aru: 'Ya, who could it be? Why, you are the cleaning attendant of the mansion, are you not? My, you startled me. Since you were blowing such a great horn about being Daikokunushi or the founder of the Sukobutsuen sect, I thought some great noble gentleman had arrived. What is this nonsense? Please stop your joking at a reasonable point. Come, go back to the mansion quickly, go back.'</p>
+          <p class="en-p">Kyūbā: 'Silence, clerk! I am the great savior known as Kyūbā, the right arm of Daikokunushi, the Tennenbō. I had entered as a cleaning attendant to spy on the state of the Suga mansion. Just you wait and see. I will tie up your master, the old hag, and you as well, and throw you all into a dark, dark prison. Lead me to a splendid parlor immediately; I have things to tell the old hag and the master.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">吠面かわかし見せてやらう』
+等と傍若無人なる
+キユーバーの言葉に呆れ果て
+花香は直ちに奥の間に
+駆け込みヨリコの前に出で
+キユーバーの暴状逐一に
+話せばヨリコは打笑ひ
+衣紋繕ひ悠々と
+便所の近くに寄り来り
+『ホツホヽヽキユーバーさま
+誠に親切有難う
+お尻の掃除をした上に
+お手迄握つて洗うとは
+ようマア念の入つた事
+御親切感じ入りました
+これこれそこなダリヤさま
+キユーバーさまの云ふ事を
+心よく聞いて上げなされ』
+云へばダリヤは涙声
+『何程私がスベタでも</p>
+            <p class="ja-classical-line">卑しい身分であらうとも
+便所掃除をするやうな
+爺さまに言葉をかけるさへ
+汚れるやうな気がします
+況して妾を女房に
+なつて呉れとはあんまりだ
+腹立ち涙が乾き果て
+呆れて物が言へませぬ
+何卒許して下さんせ』
+ワツと許りに泣き入れば
+流石のキユーバーも手を放し
+ヨリコの方に打向ひ
+『これこれヨリコの女帝さま
+猫を被つて居た私
+かく現はれし上からは
+破れかぶれだお前さまの
+首玉一つを貰はうか
+それが嫌なら直様に
+バラモン署へと駆け込んで
+お前の素性を素破抜き</p>
+            <p class="ja-classical-line">縄目の恥をかかさうか
+如何で御座る』と洟すすり
+肩肱怒らし詰寄れば
+ヨリコの姫は打笑ひ
+『妾が今迄悪行を
+稼いだ証拠が何処にある
+分らぬ事を仰有ると
+正反対に此方から
+お前をバラモンのお役所へ
+訴へませうかキユーバーさま
+如何に如何に』と、反対に
+逆捻喰はせばキユーバーは
+少時躊躇ひ息こらし
+黙然として打沈む
+あゝ惟神々々
+この顛末は如何にして
+落着するか此先の
+成行こそは面白き。</p>
+            <p class="ja-classical-line">キユーバーは恋の情火に包まれ耐へきれずなり、ダリヤ姫の手を握つて、威しつ瞞しつ口説いて見たが、挺子でも棒でも動かないダリヤの強情にヤケを起し、バラモン署に訴へる等と脅喝を試みた。然れどもキユーバーの如き売僧、而も念入りに出来た醜男には横丁の牝犬にケシかけても飛びつかない面構へ、況して絶世の美人が秋波を送る道理なく、三人の美人に寄つて集つて恥しめられ、無念骨髄に徹し、……もう此上は破れかぶれだ、ヨリコの素性を素破抜き、バラモン署に訴へ、此怨を晴らさにやおかぬ……と言ひ乍ら問答所の看板を睨めつけ、それに啖唾をはきかけ、後足で砂をひつかけ夜叉の如き相好を現はし、ダリヤ姫の兄イルクに会つて目的を達せむものと、一言の挨拶もなく、厭らしい捨台詞を残して此場を立去つた。</p>
+            <p class="ja-classical-line">キユーバーは直に薬屋の表門を潜り玄関に立塞り銅羅声を出して、</p>
+            <p class="ja-classical-line">『七千余国の月の国を御支配遊ばす大黒主の神司のお見出しに預つたるスコブッツエン宗の教祖キユーバーの君で御座る、是非主人に面会な致し度い』</p>
+            <p class="ja-classical-line">と呼ばはる声に番頭のアルは慇懃に出で迎へ、</p>
+            <p class="ja-classical-line">『ヤア何方かと思へばお前さまは、お館の掃除番ぢやないか、ナーンぢや吃驚した。大黒主だの、スコブッツエン宗の教祖だ等と大変な大法螺を吹くものだから、如何なる貴顕紳士がお出でかと思つたのに、何の事だ、よい加減に御冗談をしておかつしやい、サア早くお館へ帰つたり帰つたり』</p>
+            <p class="ja-classical-line">キユ『黙れ番頭、此方は大黒主の片腕天然坊のキユーバーと云ふ大救世主だぞ、スガの館の様子を覗ふべく掃除番となつて入込んで居つたのだ。今に見ておれ、貴様の主人も老耄も貴様も共にフン縛つて、暗い暗い牢獄へブチ込んでやるぞ。早く此方を立派な座敷へ導け、老耄や主人へ云ひ聞かす事がある』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Aru: 'I do not know if it is a lie or Honma, but I shall convey this matter to the Shiyujin, so please wait.'</p>
+          <p class="en-p">Kiyū: 'If you dawdle, I will not Shiyōchi, so go to the inner room quickly.'</p>
+          <p class="en-p">He scolds him. While clicking his tongue, Aru mutters a Kogoto:</p>
+          <p class="en-p">Aru: 'Che, that Maisubauzu.'</p>
+          <p class="en-p">He runs into the Shiyujin's Ima. After a Shibaraku, Iruku enters briskly:</p>
+          <p class="en-p">Iruku: 'Ya, if it is not the Saujiban Kiyūbā, what is your business? I am busy, so long-winded talk is a Mendau, tell me quickly.'</p>
+          <p class="en-p">Kiyū: 'Listen here Iruku, is it not a Shitsurei to stand in the way and speak to me, the favorite Chiyōshin of Lord Ōkuronushi, Kiyūbā-kun? Stay back.'</p>
+          <p class="en-p">Iru: 'What are you talking about? I do not understand at all. Oi Aru, go to the Yokochiyō Seishinbiyōin and ask the Inchiyō-sama to come.'</p>
+          <p class="en-p">Kiyū: 'Do not speak such Baka. If you dawdle, this Tauke will meet the Ukime of Danzetsu. Until now, by the Mei of Lord Ōkuronushi, I have been sneaking in to investigate the Uchimaku of the Ananai-kyō. The more I investigate, the more suspicious things they are doing. They do not pay the slightest Keii toward Lord Ōkuronushi. If I were to Gonjiyō these Shidai in detail, it would be a Taihen.'</p>
+          <p class="en-p">I: 'Hai, there may be all sorts of bad things, but faith is naturally free. Even if it is Kiyūbā-sama or Lord Ōkuronushi, as long as there is nothing bad, I do not fear them even a little, so please do not concern yourself with us.'</p>
+          <p class="en-p">Kiyū: 'Very well, you said do not concern myself, do not cry later.'</p>
+          <p class="en-p">Saying this, with a rough gait, he smashes the surroundings with his Kongō-zue, swings his arms wide, passes through the front gate, and hides his figure somewhere.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">アル『嘘か本真か知りませぬが、一寸此由を主人に伝へて来ますから、待つて居て下さい』</p>
+            <p class="ja-classical-line">キユ『グヅグヅして居ると承知ならぬぞ、早く奥に行け』</p>
+            <p class="ja-classical-line">と叱りつける。アルは舌打ちし乍ら、</p>
+            <p class="ja-classical-line">『チエツ、売僧坊主奴が』</p>
+            <p class="ja-classical-line">と小言呟きつつ主人の居間に駆け込んだ。少時するとイルクはスタスタ入り来り、</p>
+            <p class="ja-classical-line">『ヤア誰かと思へば掃除番のキユーバーだな、何の用だ。俺も忙しいから長つたらしい話は面倒だ、手取早く云つて呉れ』</p>
+            <p class="ja-classical-line">キユ『こりやイルク、勿体なくも大黒主様の寵臣キユーバーの君に向つて、立ちはだかつて物申すと云ふ失礼な事があるか、控へ居らうぞ』</p>
+            <p class="ja-classical-line">イル『何の事ぢやテント訳が分らぬ。オイ　アル、横町の精神病院へ行つて院長さまを頼んで来い』</p>
+            <p class="ja-classical-line">キユ『馬鹿を申せ、グヅグヅ致すと当家は断絶の憂目に会ふぞ、今迄大黒主の命によつて三五教の内幕を探るべく忍び込んで居たのだ。探れば探る程愈怪しからぬ事を致して居る。大黒主様に対して少しも敬意を払つて居ない、此方が此次第を詳さに言上しようものなら、大変なことになるぞよ』</p>
+            <p class="ja-classical-line">イ『ハイ、如何なる悪い事があるかも知れませぬが、信仰はもとより自由で御座います。キユーバーさまでも大黒主さまでも、悪い事さへなけりやチツトも恐れませぬ、何卒お構ひ下さいますな』</p>
+            <p class="ja-classical-line">キユ『よし、構うて呉れなと申したな、後で吠面かわくな』</p>
+            <p class="ja-classical-line">と云ひ乍ら足の運びも荒々しく、其処辺り金剛杖にて打壊し乍ら、大手を振つて表門をくぐり何処ともなく姿を隠した。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c12.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 12: 懺悔の生活 [1821]</span>
+      </a>
+      <a href="c14.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 14: New 宅入 [1823]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3: 厳の欵乃 [1812] - Volume 72 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 72 Table of Contents</a>
+      <span>Volume 72</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 72 &bull; Chapter 3</span>
+      <h1 class="chapter-title-en">Chapter 3: 厳の欵乃 [1812]</h1>
+      <p class="chapter-title-ja">厳の欵乃〔1812〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Toyosaka rises the morning sun, and the light of rigor also illuminates the path of Terukuniwake. The party of the ministry, while it is still early morning, awakens and sets sail from the port of Irie, on the shore of the clear Lake Haru where the waters are calm. The teachings of the rare, Terukō-sama, and Umekōwake, who opens them all at once, together with Genshinbau, board the Tokihamaru, a name that is itself auspicious.</p>
+          <p class="en-p">The party of the teachings of the pine manipulates the oars and moves leisurely, sliding through the port of Haru. The sea of Haru, filled with waves like fish scales, reflects the shadows clearly, and here and there, albatrosses and seagulls fly about in a beautiful manner. Terukuniwake stands up, bows down to worship the Amatsuhikage, and with a clear voice, chants the Futonorito.</p>
+          <p class="en-p">The chanting voice startles Kaijiyaku, and while striking the waves like drums at the side of the ship and shouting of the coming of the divine nation, their progress is truly valiant. Terukuniwake: 'The Mototsukami who appears on the mountain of Tenkyō in the days of Kamiyo, by the divine decree of Konohanahime, with the spirit of rigor and the spirit of the divine, intends to open the teachings to the four quarters. Entrusting many angels, to the limit where white clouds trail and blue clouds descend, I convey the noble teachings of the Imperial God, the limit of which is unknown. Following those divine instructions, the divine pillar of the spirit of the divine, the Great God Lord Susanoo, who appeared in the hall of the Saien, while bearing a thousand offering shelves, his body is soaked and wet in the rain, his hair is combed by the wind, and his hands and feet are chapped by the frost.'</p>
+          <p class="en-p">'Lacking food and clothing, even on cold evenings that cut the body, or on summer days that seem to burn, he does not falter or yield for the sake of the Way. To save the troubles of the people of the world, he strives, and how noble he is. Building the hall of the Saien in the sacred ground of Mount Ubusuna, while purifying the hearts of people who have been defiled by the souls of evil, he causes them to be reborn as true humans. To us who are deep in sin and guilt, he has even bestowed the title of missionary, a name that is itself auspicious. To save the people of the world who have fallen into the floating rapids and are suffering, he is planning to subdue the Magatsunokami who dwell in the capital of Haruna and build the divine nation forever.'</p>
+          <p class="en-p">'While he is planning this, he sends divine ministers to the four quarters. It is grateful that he causes the spirits of the heavenly men and heavenly women, who descend from the high Takamagahara where the blue clouds are high, to descend into our souls and protect us. Ah, Kannagara-tamachi-hae-mase. When the message entrusted by the God is fulfilled, I wait with joy for the dawn when I shall again worship the most beautiful noble countenance of the Great God at the divine hall of the Saien in the sacred ground of Mount Ubusuna, and receive the voice of the God. It is joyful to tread the path of the God.'</p>
+          <p class="en-p">'The path I walk is protected thickly by the Imperial God, so even if any evil should attack, how could I fear? The brave men of the divine nation of Shikishima, even if heaven and earth were to overturn, even if the moon were to fall and the stars were to sink, how could they falter? Like the catalpa bow that does not shake, my true heart is unwavering. May there be good fortune for our party crossing the sea of Haru. Ah, Kannagara-tamachi-hae-mase. The grace of the God is to be feared. The grace of the God is to be feared.'</p>
+          <p class="en-p">Terukō: 'Having received one character of the name of my teacher, Terukuniwake, I, who bear the name Terukōwake, am noble, for the divine majesty of the God also shines upon me. Since leaving Mount Ubusuna, together with my teacher, while overcoming all kinds of troubles, subduing and harmonizing the evil gods here and there, and saving the hardships of all people, the journey of the mission that has come this far is truly joyful. This is the famous Lake Haru; the waves are fine and the wind is clear. The Tokihamaru, which advances with its true sails filled, is a divine ship. It is a divine ship that leads and carries all the people of the world to the heavenly kingdom. It is a divine ship that takes on all sins and defilements and lets them wander and disappear into the sea of a thousand leagues. Ah, how valiant, how valiant. Let the waves rise, let the wind blow. With the momentum of a thousand leagues in a single rush, may the ship I ride run swiftly to the port of Suga. Ah, Kannagara-tamachi-hae-mase. The journey of the teachings of the God has joys that the people of the world do not even know in their dreams. Bowing down, I pray for happiness on the earth, and looking up at the heavens, I pray for the peace of the people of the nations. With grass for a mat and a stone for a pillow, with the branches of trees as a roof, and gazing at the moonlit sky, how many nights of sleeping in the fields, it is truly a joyful journey. Ah, Kannagara-tamachi-hae-mase. May the spirits be blessed.' Umekō: 'Following my teacher, and according to the instructions of the Great God Lord Susanoo, I leave, looking back at the hall of the Saien. Our party is without incident.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">豊栄昇る旭影
+厳の光も照国別の
+司の一行朝まだき
+眼を醒し凪ぎ渡る
+清けきハルの湖の岸
+入江の港を舟出して
+珍の教も照公や
+一度に開く梅公別
+玄真坊と諸共に
+名さへ芽出度き常磐丸
+松の教の一行は
+艪櫂を操り悠々と
+ハルの港を辷り行く
+魚鱗の波を湛へたる
+ハルの海原影清く
+彼方此方にアンボイナ
+信天翁や鴎鳥
+飛び交ふ様の美はしさ
+照国別は立ち上り
+天津日影を伏し拝み</p>
+            <p class="ja-classical-line">声朗かに太祝詞
+唱ふる声は海若を
+驚かしつつ船端に
+波の皷を打ちそへて
+神国来を叫びつつ
+進み行くこそ勇ましき。
+照国別『神代の昔天教の
+山に現れます元津神
+木花姫の神勅もて
+厳の御霊や瑞御霊
+教を四方に開かむと
+数多のエンゼル任け玉ひ
+白雲棚引く其極み
+青雲堕居向伏せる
+極みも知らず皇神の
+尊き教を伝へ行く
+その御諭に従ひて
+斎苑の館に現れませる
+瑞の御霊の神柱
+神素盞嗚の大神は</p>
+            <p class="ja-classical-line">千座の置戸を負ひ乍ら
+雨に体はそぼち濡れ
+御髪は風に梳り
+手足は霜にやけただれ
+食物着物乏しくて
+身をきる寒き夕の夜も
+やけるが如き夏の日も
+撓まず屈せず道のため
+世人の悩みを救はむと
+いそしみ玉ふぞ尊けれ
+ウブスナ山の聖場に
+斎苑の館を建て玉ひ
+曲の霊魂に犯されし
+人の心を清めつつ
+真人と生れ代らしめ
+罪科深き吾々に
+名さへ目出度き宣伝使
+称号さへも賜りて
+浮瀬に落ちて苦める
+世の諸人を救ふべく</p>
+            <p class="ja-classical-line">ハルナの都に蟠まる
+曲津の神を言向けて
+神の御国を永久に
+建てむと図り玉ひつつ
+四方に遣はす神司
+青雲高し久方の
+高天原より降ります
+天人天女の精霊を
+吾等の身魂に下しまし
+守らせ玉ふぞ有難き
+あゝ惟神々々
+神の任さしのメツセージ
+仕遂げおほせし暁は
+再び斎苑の神館
+ウブスナ山の聖場に
+復命なして大神の
+いと美しき尊顔を
+拝し奉りて玉の声
+かからせ玉ふ暁を
+待つも嬉しき神の道</p>
+            <p class="ja-classical-line">踏みて行く身ぞ楽しけれ
+吾行く道は皇神の
+御守り厚く坐せば
+如何なる枉の襲うとも
+如何で恐れむ敷島の
+神国魂の丈夫は
+たとへ天地は覆るとも
+月落ち星は沈むとも
+如何で撓まむ真心の
+心揺がぬ梓弓
+ハルの海原渡り行く
+吾一行に幸あれや
+あゝ惟神々々
+神の恵ぞ畏けれ
+神の恵ぞ畏けれ』
+照公『照国別の師の君の
+御名の一字を賜りて
+神の御稜威も照公別
+名を負ふ吾ぞ尊けれ
+ウブスナ山を立ちしより</p>
+            <p class="ja-classical-line">吾師の君と諸共に
+あらゆる悩みを凌ぎつつ
+彼方此方の曲神を
+言向和し諸人の
+艱難を救ひ恙なく
+此処迄来りし宣伝の
+旅の空こそ楽しけれ
+此処は名に負ふハルの湖
+波こまやかに風清く
+真帆を孕ませ進み行く
+常磐の丸は神の船
+あまねく世人を天国に
+導き渡す神の船
+あらゆる罪や穢をば
+乗せて千里の海原に
+彷徨ひ失ふ神の船
+あゝ勇ましや勇ましや
+波よ立て立て風も吹け
+一瀉千里の勢で
+吾乗る舟は逸早く</p>
+            <p class="ja-classical-line">スガの港へ走れかし
+あゝ惟神々々
+神の教の旅立ちは
+世の人々の夢にだに
+知らぬ楽しき節ぞある
+伏しては地に幸祈り
+天を仰いで国々の
+民安かれと祈りつつ
+草の褥に石枕
+木々の梢を屋根として
+月照る空を眺めつつ
+幾夜の野辺の仮枕
+実にも楽しき旅出かな
+あゝ惟神々々
+御霊幸ひ坐せよ』
+梅公『吾師の君に従ひて
+神素盞嗚の大神の
+任さしのまにまに斎苑館
+後に眺めて出でて行く
+吾一行は恙なく</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Having crossed the difficult pass of Kajika, / Through the forest of the shrine and Kogitayama, / Without even casting a glance at the forest of Ukiki, / Crossing over the Thames Pass, / Arriving at the Aoi Marsh, / Where even the moonlight is of Ōgon, / The Sendenshi of the Hime-no-Inochi, / With the Kiyoteru of the marsh, / Parting the sleeves of the Hime-no-Inochi, / To the right and to the left, / Saving the crisis of the Tolman country, / Through the grace of Kami, / Reunited with my teacher, / At last I have come to this place. / Ah, Kamunagara Kamunagara, / The grace of Kami is awe-inspiring, / The grace of Kami is awe-inspiring.</p>
+          <p class="en-p">Genshinbau sings:</p>
+          <p class="en-p">Entrenched in the mountain of Aura, / The one who carried out, / The plot of Akugiyakubudau, / Am I not the Kataude of Yamataorochi? / A Ninpinin beyond compare, / Deceiving the Hime of Yoriko, / Making the mountain of Aura my base, / Regarding the Dorobōgashira Seego, / As my Bōshiyu, I set up on the branches, / Of the great Ōsugi towering high on Aura Mountain, / A Hoshikuda, / Kidnapping the Fujiyo of Riyōka, / Bewildering the good men and women, / Plundering gold, grain, and goods, / Plotting to usurp, / The Moon Country of over seven thousand nations. / Just as the time arrived, / The Kamisukasa of the path of the teachings of the Three-Five, / Was intruded upon by Umekōwake, / And my plan became a painted cake.</p>
+          <p class="en-p">Without a place to turn, I selected three hundred, / Bad elements, / Crossed the lake plain of Haru, / Slipped into Tarahan Castle, / And hearing the situation, the Sahamori, / Shiyakanna, who possesses both wisdom and courage, / Was banished ten years ago, / And hiding his form deep in the mountains, / Was planning a comeback. / Hearing this rumor, I leaped for joy, / Disguising myself as an incarnation of the Tentei, / To make Dariya, whom I never forget even in dreams, / My companion for the night, / I stepped deep into the mountains, / Risking the two paths of lust and desire. / In a rock cave of Mount Taniguku, / Guided by petty thieves, / Just as I was about to spend the night, / Dariya-hime, whom I rely on as my life, / Watched for my moment of drunkenness,</p>
+          <p class="en-p">And from the moment she vanished like sea foam, / What cared I for Shiyakanna or anything else? / Borrowing two hundred subordinates, / While searching for the whereabouts of Dariya, / I pinned down that she was hiding, / In the house of the village head of Kamiyamura. / The joy of that dawn, / Felt as if I were ascending to heaven. / Clouds gather in the sky, wind blows on the flowers, / The world is such that there is no help for it. / Like the moon on the water that cannot be grasped, / I left my heart behind and proceeded reluctantly, / Following the dark path. / Sitting on the rock of the pass of Tarahan, / Which is high when climbed, / Looking out far ahead, / The castle built in the field, / Is suitable for my dwelling, / I thought, and while roaring with bravado, I, a petty thief, / Proceeded with two others.</p>
+          <p class="en-p">The path ahead was various, / Wrapped in the clouds of love's journey. / In the futility of never finishing, / My heart grew impatient, and while I waited, / Sneaking into the castle town of Tarahan, / A great fire broke out in Tarahan Castle. / Thinking the time of heaven had arrived, / I broke into Tarahan Castle, / Slipped into the treasure warehouse, / And just as I was rushing to seize the military funds, / I was captured. / Though I was imprisoned for a time, / And saw a moment of misery, / As soon as I heard that the Dorobōgashira Shiyakanna, / Had usurped the position of Sahamori, / And was seizing the reins of government, / I spewed forth slander and hatred, / And finally made the Sahamori commit suicide, / Forced him to tribute tens of thousands of Ōgon, / And on a narrow path along a mountain stream, / Which I was not used to treading,</p>
+          <p class="en-p">I was chased by pursuers and had no choice, / But to leave my fate to heaven, / And with a splash, I leaped, / Into the mountain stream. / Having become unconscious, / I suddenly found a pillow on a journey in the Yūkai. / While meeting with a hundred torments, / I was saved by human compassion, / And plotted evil once again. / Staying at an inn on the beach of the inlet, / Just as I was in a tipsy mood, / The beauty Chigusa no Takahime, who lies to flowers, / I was bewitched by her charms and drooled, / Even my purse was tightened, / And all my money was stolen. / Just as my life was in danger, / By the teacher Terukuniwake, / I was finally saved and am now here.</p>
+          <p class="en-p">The Dharma's friend-ship, the Tokiwamaru, / Restored with the heart of a pine, / Umekōwake, who scents the heart, / Together with the Kamisukasa, / Of Terukuni, who shines brightly, / While bathing in the cool breeze, / We advance on the great lake plain, / Where the ripples of crepe-like waves drift. / How happy is my own fortune. / Whether the morning sun shines or clouds over, / Whether the moon waxes or wanes, / Even if heaven and earth should overturn, / The sincerity I have sworn to Kami, / Shall not falter even through thousands of generations. / Until the end of the Miroku of the pine, / Please protect me, Kamunagara. / Reverently before the presence of Kami, / I pray for the future of my own life.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">河鹿の難所を乗り越えて
+祠の森や小北山
+浮木の森には目も呉れず
+テームス峠を打渡り
+葵の沼に辿り着き
+月の光も黄金の
+姫の命の宣伝使
+沼に輝く清照の
+姫の命と袂をば
+右と左に別ちつつ
+トルマン国の危急をば
+神の恵みに救ひつつ
+吾師の君に再会し
+漸く此処に来りけり
+あゝ惟神々々
+神の恵ぞ畏けれ
+神の恵ぞ畏けれ』</p>
+            <p class="ja-classical-line">玄真坊は歌ふ。</p>
+            <p class="ja-classical-line">『オーラの山に立籠り
+悪逆無道の企みをば
+敢行したる吾こそは
+八岐大蛇の片腕か
+たとへ方なき人非人
+ヨリコの姫を唆かし
+オーラの山を根拠とし
+泥棒頭のシーゴーを
+謀主と仰ぎオーラ山
+高く聳ゆる大杉の
+梢に仕掛けた星下し
+良家の婦女を拐かし
+善男善女を迷はして
+金穀物品奪ひとり
+七千余国の月の国
+横領せむと企める
+時しもあれや三五の
+教の道の神司
+梅公別に踏み込まれ
+吾計画も画餅となり</p>
+            <p class="ja-classical-line">よるべなくなく三百の
+不良分子を選抜し
+ハルの湖原打渡り
+タラハン城に忍び込み
+様子を聞けば左守なる
+智勇兼備のシヤカンナは
+十年の昔追放され
+山林深く姿をば
+隠して再挙を図るてふ
+噂を聞いて雀躍し
+天帝の化身と化け込んで
+夢寐にも忘れぬダリヤをば
+吾が夜の伽にせむものと
+色と欲との二道を
+かけて踏み込む山の奥
+タニグク山の岩窟に
+小盗人共に導かれ
+一夜を明かす折もあれ
+命と頼むダリヤ姫
+吾が酔ふ隙を窺ひて</p>
+            <p class="ja-classical-line">忽ち水沫と消えしより
+シヤカンナも糞もあるものか
+二百の手下を借り受けて
+ダリヤの行衛を探しつつ
+神谷村の村長の
+家に潜むをつきとめし
+その暁の嬉しさは
+天にも上る心地しぬ
+天に叢雲花に風
+吹く世の中は是非もなし
+掴むに由なき水の月
+心残して渋々に
+暗路を辿り進み行く
+上れば高きタラハンの
+峠の岩に腰かけて
+前方遥かに見渡せば
+野中に建てる城廓は
+吾の住居に適へりと
+雄猛びし乍ら小泥棒
+二人と共に進み行く</p>
+            <p class="ja-classical-line">道の行く手もいろいろに
+恋路の雲に包まれつ
+果し終せぬ果無さに
+心を苛ちてタラハンの
+城下に忍び待つ程に
+タラハン城下の大火災
+天の時こそ到れりと
+タラハン城に乗り込んで
+宝の倉に忍び入り
+軍用金をせしめむと
+逸る折しも捕へられ
+一度獄に繋がれて
+少時憂目は見たれども
+泥棒頭のシヤカンナが
+左守の司となりすまし
+国政を握ると聞くよりも
+悪口憎言並べ立て
+遂には左守に腹切らせ
+黄金数万貢がせて
+踏みも習はぬ谷川に</p>
+            <p class="ja-classical-line">沿へる細路走る折
+追手に追はれ是非もなく
+運命を天に任しつつ
+ザンブとばかり谷川に
+身を躍らして飛び込めば
+人事不省となり果てて
+忽ち幽界の旅枕
+百の責苦に遇ひ乍ら
+人の情に救けられ
+再び悪を企みつ
+入江の浜屋に泊り込み
+ホロ酔ひ機嫌の折もあれ
+花に嘘つく絶世の
+美人千草の高姫が
+色香に迷ひ涎くり
+巾着迄も締められて
+所持金スツカリ奪ひ取られ
+命危くなりし折
+照国別の師の君に
+ヤツト救はれ今此処に</p>
+            <p class="ja-classical-line">法の友船常磐丸
+松の心に立直し
+心に匂ふ梅公別
+日も麗かに照公の
+神の司と諸共に
+涼しき風を浴び乍ら
+縮緬皺の漂へる
+大湖原を進み行く
+吾身の幸ぞ楽しけれ
+朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令天地は覆るとも
+神に誓ひし真心は
+幾千代かけても違ふまじ
+松のミロクの末迄も
+守らせ玉へ惟神
+神の御前に謹みて
+吾身の行末祈ぎ奉る』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Terukuniwake: 'As I sail upon the spring Unabara of Azusayumi, the Momodori and Chidori fly in the Ōzora. How fortunate am I to sail upon the spring lake, which resembles the spring of Tengoku.'</p>
+          <p class="en-p">Terukōwake: 'The sun shines brightly in the Ōzora, and the joy of advancing quietly along the Unaji of Terukō. The wind is clear and the waves are calm; the Funabata of the ship I ride upon beats like a drum against the waves.'</p>
+          <p class="en-p">Umekōwake: 'The plum blossoms, which open at once by the Mioshihe, must be fragrant throughout the Sanzensekai. While intoxicated by the Keshiki of spring where the plum blossoms scent the air, I cross the spring lake.'</p>
+          <p class="en-p">Genshinbau: 'Recalling the wrongs I committed in the past, even the Kami-no-mifune feels all the more painful. From now on, I shall advance upon the Ōmichi of the true Kami, even if I should die.'</p>
+          <p class="en-p">While each was reciting their poems in this manner, they proceeded across the calm Komen of the spring lake. Just then, the Itsuten suddenly clouded over, a Baufū blew violently, and the Gekirau and Dotau surged forth like Sangaku; the Tokihamaru became in a truly perilous Kuōkei, as if it were a leaf scattered by the wind. Looking far out across the distant sea surface, the hull of the Takasagamaru, famous upon the spring lake, was smashed to pieces, and all the passengers were tossed about by the Gekirau and Dotau, their voices crying out for rescue with their last breath, as if the state of the Kyōkan Jigoku had manifested. Forgetting the peril of his own body, Terukuniwake encouraged the boatman to save the distressed Takasagamaru, and while rowing with eight oars, he rowed with all his might toward the site of the Takasagamaru's shipwreck. Ah, Kannagara Tamachi Haemase.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">照国別『梓弓ハルの湖原乗り行けば
+百鳥千鳥大空に飛ぶ。
+天国の春にも擬ふハルの湖
+乗り行く吾の幸多きかな』</p>
+            <p class="ja-classical-line">照公別『大空に日は麗かに照公の
+湖路静に進む楽しさ。
+風清く波穏かに吾乗れる
+船端波の皷打ち行く』</p>
+            <p class="ja-classical-line">梅公別『御教の一度に開く梅の花
+三千世界に匂ふなるらむ。
+梅薫る春の景色に酔ひ乍ら
+ハルの湖渡り行くかな』</p>
+            <p class="ja-classical-line">玄真坊『吾為せし昔の枉を思ひ出でて
+神の御船もいとど苦しき。
+今よりは誠の神の大道に
+進み行かなむ仮令死すとも』</p>
+            <p class="ja-classical-line">斯く各自に歌を詠み乍ら波静かなるハルの湖面を進み行く。時しもあれや、一天俄に掻き曇り、暴風吹き荒び、激浪怒濤は山岳の如く押し寄せ来り、常磐丸は木の葉の風に散る如く実に危き光景となつた。彼方の海面を遠く見渡せばハルの湖面にて名も高き高砂丸の船体は木端微塵に打砕け、乗客の一同は激浪怒濤に翻弄され、命限りに救ひを叫ぶ声、恰も叫喚地獄の状態を現出したるが如くであつた。照国別は吾身の危難を忘れ高砂丸の遭難を救はむと船頭を励まし八梃艪を漕ぎ乍ら、高砂丸の難船場目蒐けて力限りに漕ぎつける。あゝ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c02.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 2: 時化の Lake [1811]</span>
+      </a>
+      <a href="c04.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 4: 銀杏姫 [1813]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

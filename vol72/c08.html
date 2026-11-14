@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: 街宣 [1817] - Volume 72 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 72 Table of Contents</a>
+      <span>Volume 72</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 72 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: 街宣 [1817]</h1>
+      <p class="chapter-title-ja">街宣〔1817〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In the port of Suga, famed for its name, lived Arisu, the master of a medicinal herb wholesale house, known far and wide as a millionaire. Abandoning himself to greed and hot-bloodedness, he exhausted every means of avarice and injustice, committing such wicked acts that he would squeeze the very lifeblood from the people. Regardless of distance, near or far, young or old, men and women alike, all cried out in one voice, calling him an ogre, a great serpent, and a demon; there was not a soul who did not revile him. As the proverb goes that gold and dust, when piled up, become filthy, he would not even move a hand or tongue for free, such was his greed. If it meant profit, he would not even hesitate to take the bones of a cow or a dog. Mountains of dust, formed by the gold of people's resentment, piled up high. The sins of the father visited the child.</p>
+          <p class="en-p">In the end, the whereabouts of Dariya became unknown, and even he, in his heart, could not forget the deep affection of parent and child. Overcome with agony, he spent his days on his sickbed, a body writhing in groans and sighs. Just as his second son, Iruku, was searching far and near for his sister, he encountered the Kamuzukasa of the Ananai-kyō, Umekōwake, on a ship. Assisted by him, he heard the way of Kami for the first time. Leading his sister, he returned home, eagerly pointing the way, accompanied by the Sendenshi. Arisu, the father who had waited and waited, upon hearing of his daughter's safety, was not merely joyful but danced and raved in a frenzy, his hands dancing and his feet stamping.</p>
+          <p class="en-p">Unaware of his white hair, he shook his head, his demeanor a mixture of sorrow and joy. Through the earnest propagation of the way of teachings by Umekōwake, the ogre Arisu also repented. He offered all his wealth to the Ōkami and, at the sacred site where old trees grew thick on Mount Suga, he built a great shrine pillar where the Kami of Heaven and Earth reside. He made this an atonement for the sins he had committed until now. Furthermore, he became determined to save the people of the world who were suffering, lost in the misery of being deceived by the teachings of Akuma. How admirable his resolve was. Just as Umekōwake was finishing his evening meal, intending to take temporary lodging for the night,</p>
+          <p class="en-p">Seeing the pattern of a great fire burning high in the sky above Tarahan Castle, scorching the clouds, he left the rest to Yoriko and Hanakahime. While leaving the two in charge, he saddled his chestnut horse. With majestic air, he rode across the great field. The neighing of the horse and the sound of bells, 'Hin-hin, shyan-shyan, dō-dō,' rang out as he galloped through the clouds and mist. Ah, Kannagara-kamunagara. May the spirits be blessed. Yoriko-hime, following the teachings of Kami, and Hanakahime, whose flowers scent with the spirit of Mizu, the two companions, acting upon the instructions of Umekōwake, wrapped themselves in white garments and rode upon their dappled horses, blowing conch shells to gather the people in the streets and corners of Suga.</p>
+          <p class="en-p">Opening their gentle, flower-like lips quietly, they raised their hands and stood upright upon their saddles. Yoriko: 'All you young and old, men and women, who dwell in the port of Suga! I, though a woman, am here to convey the teachings of the spirit of Mizu of the great Ōkami, the Savior of the three thousand worlds, the great Kami Susanoo. Please listen with a calm heart, you who are the marrow of the village.'</p>
+          <p class="en-p">Yoriko: 'In the first place, this world is where the living Kami, the original ancestor of Heaven and Earth, exists as the one and only pillar. He created the sun, moon, fire, water, wood, metal, and earth, and all things in the universe. Furthermore, He created human beings in the same form as Kami, and He has bestowed the spirits of Gen and Mizu upon each one.'</p>
+          <p class="en-p">Yoriko: 'He has made us serve in the governance of Heaven and Earth. The human body is truly a noble thing. Yet, humans do not know this. Once born into this world, they think there is no purpose to life other than to drink, sing, sleep, and wake; if they have money, they drink sake and play with music and dance. How pathetic it is to misunderstand that this is all there is to life. If one says that the duty of life is fulfilled by this, then humans are the same as beasts. How could they be called the primates of all things? Since humans are children of Kami and temples of Kami, created as dwellings for the noble Kami, there must be noble duties beyond just food, clothing, and shelter. If you ask what those noble divine works are, it is for humans to exhaust their utmost sincerity for the sake of the Kami of Heaven and Earth, to polish and open their souls to plan for the perfection of the Heavenly Pure Land, and to serve as Sendenshi, guiding their fellow brothers and sisters living in this world out of the circumstances of the eight-forked hell and leading them to the eternal, unchanging flower garden of Heaven. To serve in a part of that divine work while attending to the mission is the greatest duty as a human. Ah, Kannagara-kamunagara.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">スガの港に名も高く
+百万長者と聞えたる
+薬種問屋の主人のアリス
+金と血気に任せつつ
+強欲非道のありたけを
+尽して人の生血をば
+絞らむ許りの悪逆に
+遠き近きの隔てなく
+老若男女は声々に
+鬼よ大蛇よ悪魔よと
+譏らぬ者こそなかりけり
+金と塵とは沢山に
+積れば汚くなる譬へ
+出すことなれば手も舌も
+只では出さぬ強欲さ
+取込む事なら牛の骨
+犬のそれでもかまやせぬ
+人の恨みの金ばかり
+積んで山なす塵の峰
+親爺の罪が子に報い</p>
+            <p class="ja-classical-line">終にはダリヤの行衛さへ
+分らずなりて遉にも
+親子の情のいや深く
+忘れ兼ねてか煩悶の
+吐息つくづく病床に
+呻吟する身となりにけり
+二男のイルクは妹の
+所在を求めて遠方近方と
+探ね廻りし折もあれ
+船の中にて出会し
+三五教の神司
+梅公別に助けられ
+初めて神の道を聞き
+妹引きつれ宣伝使
+一行と共に吾家路
+いそいそ指して帰り来る
+待ちに待ちたる父アリス
+娘の無事を聞くよりも
+喜び勇み狂ひ立ち
+手の舞ひ足の踏む処</p>
+            <p class="ja-classical-line">知らず白髪の首ふりて
+悲喜交々の為態
+梅公別の懇篤な
+教の道の宣伝に
+鬼のアリスも改心し
+財産全部を大神に
+捧げ奉りてスガ山の
+老木茂れる聖場に
+天地の神の鎮座ます
+大宮柱太知りて
+今迄犯せし罪科の
+贖ひとなし一つには
+所在世界の民草が
+悪魔の教に惑され
+憂瀬に落ちて苦しめる
+その惨状を救はむと
+決心したるぞ殊勝なれ
+梅公別は一夜の
+仮の宿りをなさむとて
+夕飯を終りし折もあれ</p>
+            <p class="ja-classical-line">タラハン城の空高く
+雲を焦して燃え上る
+大火の模様を見るよりも
+後をヨリコや花香姫
+二人に任せおきながら
+栗毛の駒に鞍おいて
+威風凛々大野原
+駒の嘶き鈴の音
+ヒンヒンシヤンシヤンドウドウと
+雲を霞と駆けて行く
+あゝ惟神々々
+御霊幸倍ましませよ
+神の教にヨリコ姫
+瑞の霊の花香る
+月と花との二人連れ
+梅公別の旨を受け
+スガの町々辻々を
+白妙の衣纒ひつつ
+連銭葦毛の駒に乗り
+法螺貝吹き立て人集め</p>
+            <p class="ja-classical-line">やさしき花の唇を
+静に開き手をあげて
+鞍上にすつくと立上り
+ヨリコ『スガの港に住みたまふ
+老若男女の皆様よ
+三千世界の救世主
+神素盞嗚の大神の
+瑞の霊の御教を
+女ながらもお取次
+致しますれば村肝の
+心静に聞し召せ
+抑も此世は天地の
+元津祖なる生神が
+唯一柱坐し在して
+日月火水木金土
+森羅万象創造し
+かつ人間を神様と
+同じ形に造りまし
+厳と瑞との精霊を
+各自に宿しまし</p>
+            <p class="ja-classical-line">天と地との経綸に
+仕へしめむとなし給ふ
+人の体は斯の如
+実にも尊きものですよ
+それをも知らず人間は
+此世に生れ来た上は
+飲めよ歌へよ寝よ起きよ
+お金があれば酒飲んで
+歌舞音曲に戯れる
+これより外に人生の
+目的更にないものと
+誤解して居る哀れさよ
+これで人生の本分が
+尽しをへたと云ふならば
+人は獣類と同じこと
+万の物の霊長と
+どうして名附けられませうか
+人は神の子神の宮
+尊き神の宿として
+造らせ玉ひしものなれば</p>
+            <p class="ja-classical-line">衣食住居其外に
+尊き務がなけれやならぬ
+その又尊き神業は
+如何と云はば人間は
+天地の神の御為に
+有らむ限りの赤心を
+尽し奉りて道の為め
+天国浄土の円満を
+はからむ為めに霊魂の
+魂をば研き開かせつ
+此世に住める同胞を
+八衢地獄の境遇より
+救ひ出して天国の
+常磐堅磐の花園に
+導き渡す宣伝使
+御伴に仕へ奉りつつ
+其神業の一端に
+仕へ奉るぞ人として
+最大一の務なり
+あゝ惟神々々</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">May the Mitama be blessed and prosper. The Kami has appeared on the surface, to distinguish between good and evil. The Kamunahohi who created this world, and the Ōnahohi of vast heart. In this human world, whatever may occur, look back and listen back to the Nahohi. Correct the transgressions of the world. This is truly the Mikotoba of the Ananahi Oshihe of Kami. Revere it, O hundred people. Submit yourselves, O Kamunagara. There is no falsehood in the Oshihe of Kami. One, two, three, four, five, six, seven, eight, nine, ten, hundred, thousand. Leading the Tamigusa of ten thousand lands, without leaving even one person behind, to the Ananahi Oshihe of Kami, the Miko of Kami who shall not cease from fulfilling the Taigefu that changes the Tenchi.</p>
+          <p class="en-p">Yoriko-hime and Hanakahime. As a part of the atonement for the Tsumitoga committed until now, this Sendenka is for the sake of serving. Listen with a peaceful and calm heart, O Hitobito. I pray for this earnestly.</p>
+          <p class="en-p">Shyanko, shyanko, shyanshyan. Shyanko, shyanko, shyanshyan. The horse's hooves are katsukatsu, pulling the Tazuna tight and applying the whip, they head toward the neighboring town. The Sendenshi of the plum blossom fragrance, saved by Umekōwake. Although there is no Shiyōgau yet, the heart that thinks to guide and save the people of the world is like the glowing of red autumn leaves. Following her elder sister Yoriko, they ride through the town of Suga in abundance.</p>
+          <p class="en-p">Wearing beautiful Senden-fuku of watae from top to bottom, at the crossroads of the main street, they stop their horses. Standing straight upon the saddle, the style is the living figure of the Holy Kannon, endowed with the thirty-two marks. Unknowingly, the townspeople press their palms together and bow down, rejoicing at the appearance of a living Kami and the descent of a Nyorai. Gathering before the two, so close that not even an ant could crawl between them, they build a mountain of people with great spirit. Hanakahime raises her gentle voice, and lifting her delicate right hand, white as a whitebait, she speaks.</p>
+          <p class="en-p">Hanakahime: 'Ah, Kamunagara, Kamunagara. The Kami has appeared on the surface, and preaches the path of sincerity. Whether the morning sun shines or clouds over, whether the moon waxes or wanes, even if the great earth sinks, even if the Magatsu-kami rages, the power of sincerity saves the world. Ah, Kamunagara, Kamunagara. May the Mitama be blessed and prosper. We are the Sendenshi of the Ananahi Oshihe, the Kamitsukasa of Umekōwake. Descending like clouds, you have transmitted the most precious gospel to us two sisters. In that joy, our clouded spirits have cleared, and our souls, which had lost their center, have been revived in Takamagahara. Today's journey feels as if we have met the spring where flowers bloom once again. There are no words to express this joy.'</p>
+          <p class="en-p">Hanakahime: 'Not making such a precious teaching a thing for one person alone, I distribute it to the many gathered here, and I pray that we may share in that joy and pleasure, and I humbly declare that you should listen with peace and tranquility. While the army of Ōtatewake, famous in the Brahmin army, is pressing upon the castle town of Toruman and attempting to cast the people into the suffering of fire and water, unable to watch it any longer, the Sendenshi of Umekōwake, the lord of my back, whipped his horse and headed for the great plains. In his absence, though I am unworthy, I have borrowed a woman's body, and without minding the rain or wind, for the sake of the people, I have entered the path of Senden. If you wish to hear the details, come to the house of Alice, the pharmacy in the center of Suga. Ah, Kamunagara, Kamunagara. May you bestow your divine favor.'</p>
+          <p class="en-p">Hai-hai, dōdō, hin-hin, shyanko, shyanko. The neighing of the horses and the sound of bells, very bravely, they walk slowly through the main street, through the town of Suga. Pointing toward the front of the pharmacy of the millionaire, which is known as the center of the town, they return. Ah, Kamunagara, Kamunagara. May the Mitama be blessed and prosper.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">御霊幸倍ましませよ
+神が表に現はれて
+善と悪とを立別ける
+此世を造りし神直日
+心も広き大直日
+唯何事も人の世は
+直日に見直せ聞き直せ
+世の過は宣り直せ
+これぞ全く三五の
+神の教の御言葉ぞ
+敬ひ奉れ百の人
+諾ひ奉れよ惟神
+神の教に嘘は無い
+一二三つ四つ五つ六つ
+七八九つ十百千
+万の国の民草を
+一人も残らず三五の
+神の教に導きて
+天地にかはる大業を
+尽さにやおかぬ神の御子</p>
+            <p class="ja-classical-line">ヨリコの姫や花香姫
+今迄犯せし罪科の
+その贖の一端に
+仕へむ為の宣伝歌
+心平らに安らかに
+聞かせたまへよ人々よ
+偏に祈りおきまする』
+シヤンコ　シヤンコ　シヤンシヤン
+シヤンコ　シヤンコ　シヤンシヤン
+馬の蹄も戞々と
+手綱引き締め鞭をあて
+隣の町を指して行く
+梅公別に救はれし
+梅の花香の宣伝使
+未だ称号は無けれども
+世人を導き救はむと
+思ふ心は紅の
+紅葉の照れる如くなり
+ヨリコの姉に従ひて
+馬上豊かにスガの町</p>
+            <p class="ja-classical-line">上から下迄和妙の
+美々しき宣伝服着けて
+本町通りの十字街
+駒を留めて鞍上に
+スツクと立ちしスタイルは
+三十二相を具備したる
+聖観音の生姿
+知らず識らずに町人は
+両手を合せ伏し拝み
+生神様の御出現
+如来の来降と喜びて
+二人の前に寄り集ひ
+蟻の這ひ出る隙もなく
+人山築きし勇ましさ
+花香は優しき声を上げ
+飽迄白き白魚の
+優しき右手をさし上げて
+花香『あゝ惟神々々
+神が表に現はれて
+誠の道を説き諭す</p>
+            <p class="ja-classical-line">朝日は照るとも曇るとも
+月は盈つとも虧くるとも
+仮令大地は沈むとも
+曲津は如何に荒ぶとも
+誠の力は世を救ふ
+あゝ惟神々々
+御霊幸倍ましませよ
+三五教の宣伝使
+梅公別の神司
+雲の如くに降りまし
+吾等二人の姉妹に
+いとも尊き福音を
+伝へ玉ひし嬉しさに
+曇りし霊も澄み渡り
+央身失せし魂は
+高天原に甦り
+再び花の咲く春に
+遇へる心地の今日の旅
+此嬉しさは言の葉に
+かけて語らむ術もなし</p>
+            <p class="ja-classical-line">かくも尊き御教を
+一人の物となさずして
+数多集へる皆様に
+千別に千別き奉り
+其喜びと楽しみを
+共にせむとの吾願ひ
+いと平らけく安らけく
+聞し召さへと宣り奉る
+バラモン軍に名も高き
+大足別の軍勢が
+トルマン城下に押し寄せて
+民を塗炭の苦しみに
+おとし入れむとする最中
+見るに見兼ねて背の君の
+梅公別の宣伝使
+駒に鞭ち大野原
+進ませ玉ひし留守の中
+不束ながら女身を
+かりて雨風苦にもせず
+世人の為めに宣伝の</p>
+            <p class="ja-classical-line">道に上つた次第です
+詳き事が聞き度ば
+スガの目抜の薬屋の
+アリスの宅にお出でなさい
+あゝ惟神々々
+恩頼を賜へかし』
+ハイハイドウドウ、ヒンヒン　シヤンコ　シヤンコ
+駒の嘶き鈴の音
+いと勇ましく大道を
+緩歩し乍らスガの町
+目抜の場所と聞えたる
+百万長者の薬屋の
+表を指して帰り行く
+あゝ惟神々々
+御霊幸倍まし坐世よ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 鰹の網引 [1816]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 欠恋坊 [1818]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
