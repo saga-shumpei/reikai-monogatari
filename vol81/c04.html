@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4: 遷座式 [2031] - Volume 81 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 81 Table of Contents</a>
+      <span>Volume 81</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 81 &bull; Chapter 4</span>
+      <h1 class="chapter-title-en">Chapter 4: 遷座式 [2031]</h1>
+      <p class="chapter-title-ja">遷座式〔2031〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As a result of the Hotsuki of Azumi-ō and the devoted efforts of the Gunshinra for one hundred days and one hundred nights, a most Saugon and auspicious Miaraka was built upon the summit of Tsukimitsuyama.</p>
+          <p class="en-p">Thereupon, Azumi-ō completed the Shiubatsu of seven days and seven nights, ascended to the Shinden with reverence to perform the rites of purification, and offered the Norito of the Sengūshiki.</p>
+          <p class="en-p">The Kamigamitachi straightened their collars in this Seijiyō, waiting in Kiyōku. The text of the Harahi Norito says:</p>
+          <p class="en-p">‘With awe and trembling, in the Mahoraba of the Shibitenkai, the Takahi no Miya, where the Ōmiyahashirafutoshi is firmly established and the Chigitakashi is raised high in Takaamahara, the Lord God who dwells eternally and Ushiha the Daiuchiu, the Lord God of the High Spear and the Lord God of the Divine Spear, before Your noble presence, I, Azumi-ō, the Lord of the Idomu Castle and the chief priest, speak with reverence, respect, and profound awe. The land of Azumi has been deeply blessed by the Lord God; the fields are lush and the fruits of the trees are abundant. While the Kunitsukami were spending their days in joy under the thick blessings of every morning and evening, the governor of the land of Saru, Eersu, led a multitude of soldiers across the peaks of Ōe-yama, occupied the Pearl Lake, and advanced to surround the Idomu Castle—which we have protected from our ancestors, generation after generation, and which is known as a paradise of peace—attacking with bows and arrows. When I stood to face and shoot back at this fierce enemy, alas, the greater part of my allies were destroyed by the enemy, and my daughter has gone missing. That such a calamity has befallen me is entirely due to the sin of slighting the will of my ancestors, forgetting the blessings of the Lord God, and governing with selfishness; thus, I repent of my past errors and, from the sincerity of my heart, have realized that I am a child of the Lord God. As a sign, even if only one in a thousand, of my heart of repentance, I have firmly established the Ōmiyahashirafutoshi on the Upper Iwane where the evergreen trees grow, the most pure and cool place on the summit of Tsukimitsuyama, and I invite the divine spirit of the Lord God to descend. I have placed various delicious foods of the sea, rivers, mountains, and fields upon the eight-legged tables, and I offer sacred sake, sacred food, and sacred water. I pray that You will listen peacefully and calmly, and grant my request: that this sacred place of Tsukimitsuyama may prosper more and more as a land of eternal summer, and that, receiving the blessings of the Lord God, You may allow me to recapture the Idomu Castle. Once the Idomu Castle has returned to my hands, I vow to teach and admonish both high and low to guard against hearts of arrogance, to realize the blessings of fire, water, and earth, and to fulfill the divine will of the Lord God. I look up and pray that the Lord God will descend to this great hall, dwell with Your noble spirit eternally, and cause not only the land of Idomu but also the entire land of Saru to be moistened by the dew of the Lord God’s blessings, and to possess straight and righteous hearts. With awe and trembling, I offer this prayer.’</p>
+          <p class="en-p">One, two, three, four, five, six, seven, eight, nine, ten, hundred, thousand, ten thousand.</p>
+          <p class="en-p">May there be ten thousand years of prosperity.</p>
+          <p class="en-p">May there be eighty million blessings.</p>
+          <p class="en-p">Having finished singing thus, he bowed again before the divine presence, and:</p>
+          <p class="en-p">‘The divine shadow of the heavenly God of the distant heavens,
+I have surely worshipped.
+Through the grateful descent of the God, our land,
+Shall surely prosper more and more.
+From this day when the spirit of the Lord God descends,
+Our land shall be at peace.
+Looking up to the heavens and bowing to the earth, morning and evening,
+I shall serve the Lord God.
+Tsukimitsuyama is pure, and because the spirit of the Lord God,
+Shall dwell here eternally,
+The grasses and trees have become vibrant in color.
+In this moment of the God’s descent,
+My mistaken heart is suddenly purified.
+I am a child of God, a palace of God.
+Dwelling eternally in this palace,
+May You illuminate the islands of Isako.’</p>
+          <p class="en-p">So saying, he clapped his hands and returned to his original seat.</p>
+          <p class="en-p">Muraji-hime bowed before the divine presence and sang quietly:</p>
+          <p class="en-p">‘Though there are eighty days, this day is truly a lucky day,
+I know the resurrection of my soul.
+The Lord God has descended to this sacred place,
+And my soul does not cease to be courageous.
+Having piled up the days of lamentation, happily,
+I have met this lucky day.
+Regarding the future of my beloved daughter Chinriu-hime,
+Protect her, O Lord God.
+As long as my daughter has life, even for one day,
+Let me see her with my own eyes soon.
+Somehow my heart is happy and courageous,
+My hands and feet are dancing wildly.
+Return to the castle protected by our ancestors,
+And let us perform the divine rites.’</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">アヅミ王が発起のもとに、軍神等が百日百夜丹精を凝らしたる結果、月光山の頂上にさも荘厳なる瑞の御舎は建てられにけり。</p>
+            <p class="ja-classical-line">茲にアヅミ王は、七日七夜の修祓を終り、恭しく神殿に昇り祓ひの式を修し、且つ遷宮式の祝詞を奏上しける。</p>
+            <p class="ja-classical-line">神々等は此の聖場に襟を正し、恐懼して控へ居る。禊祓の祝詞の文に曰ふ。</p>
+            <p class="ja-classical-line">『掛巻くも畏き、紫微天界の真秀良場高日の宮に、大宮柱太敷きたて、高天原に千木高知りて、永久に鎮まりいまし、大宇宙を領有ぎ給ふ主の大御神、高鉾の神、神鉾の神の貴の大前に斎主元イドム城の主アヅミ王、謹み敬ひ畏み畏みも白さく。</p>
+            <p class="ja-classical-line">アヅミの国は大御神の恵弥深く、田畑繁り木の実豊かに、国津神は朝な夕なの厚き恵に、楽しく世を送りける折もあれ、サールの国の国司エールスは、数多の兵士を率ゐて大栄山の峰を渡り、真珠の湖を占領し、進んで平和の楽土と聞えたる、吾祖先より弥次々に守りたる、イドム城を取り囲み、弓矢をもちて攻め寄せ来りけるにぞ、吾も此猛き仇を防がむとして射向ひたりけるに、果敢なくも味方の大方は敵に滅ぼされ、吾娘は行方分かずなりにける。かかる禍の吾に迫り来るは、全く祖々の志を軽んずるの余り、主の大神の御恵を忘れ、恣なる政治を為せし罪故と、ここに前非を悔い真心より改めて、大神の御子たる事を悟らひにける。吾ここをもて悔い改めの心の千重の一重のしるしにもと、月光山の頂の最も清く最も涼しき、常磐木茂る上津岩根に、大宮柱太敷きたてて、主の大神の大御霊を招ぎ奉るとして、海川山野の種々の美味物を、八足の机代に置き足はし、御酒御饌御水献りて願ぎ奉るさまを、安らけく平らけく聞食し、相諾ひ給ひて、月光山のこれの聖所は、弥益々も常夏の国と栄え、神の恵を戴きて再びイドムの城を奪ひ返さしめ給へ。イドムの城の再び吾手に返りし上は、上下共に驕りの心を戒め、火、水、土の恵を悟らしめ、大御神の大御心に叶ひ奉るべく教へ諭すべきを誓ひ奉る。仰ぎ願はくは主の大御神、これの大殿に天降りましまして、貴の御霊を永久に止めさせ給ひ、イドムの国は言ふも更なり、サールの国も悉く、大御神の恵の露に潤はしめ、直く正しき心を持たしめ給へと、畏み畏みも祈願奉らくと白す。</p>
+            <p class="ja-classical-line">一二三四五六七八九十百千万</p>
+            <p class="ja-classical-line">千万の栄えあれ</p>
+            <p class="ja-classical-line">八千万の恵あれ』</p>
+            <p class="ja-classical-line">かく歌ひ終り、再び神前に敬礼しながら、</p>
+            <p class="ja-classical-line">『久方の天津御神の大御かげを
+吾はたしかに拝みまつりぬ
+ありがたき神の天降りに我国は
+弥ますますも栄え行くらむ
+主の神の御霊天降らす今日よりは
+我国原は安けかるべし
+天を仰ぎ地に額づき朝夕を
+主の大神に仕へ奉らむ
+月光の山は清しも主の神の
+御霊の永久に止まり給へば
+草も木も色艶やかになりにけり
+神の天降りし此のたまゆらに
+過ちし心をとみに清めたる
+吾は神の子神の宮なり
+永久にこれの宮居に止まりて
+伊佐子の島根を照らさせ給へ』</p>
+            <p class="ja-classical-line">と拍手して元の座に直りける。</p>
+            <p class="ja-classical-line">ムラジ姫は神前に拝礼し静かに歌ふ。</p>
+            <p class="ja-classical-line">『八十日日はあれども今日の吉き日こそ
+わがたましひの蘇り知る
+主の神はこれの聖所に天降りまして
+わがたましひの勇みやまずも
+嘆かひの日数重ねて嬉しくも
+今日の吉き日にあひにけらしな
+愛娘チンリウ姫の行く先を
+守らせ給へ主の大御神
+わが娘齢しあれば一日だも
+早く吾目にうつさせ給へ
+何となく心嬉しく勇みたちて
+吾手吾足舞ひ狂ふなり
+祖々の守りし城に立ち帰り
+神のまつりを行はせませ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Shiuran sings:</p>
+          <p class="en-p">'Hisakata no nushi no Ōkami no Ontama o / Itsukishi kefu wa yorokobi afuru / Ogosoka na ō no Norito no Kototama ni / Nushi no Ōmikami amomashikemu / Kototama no tasukuru kuni to shirinagara / Okonai ezarishi koto o kuyuru mo / Kototama o asayufu noritsutsu arishi naraba / Idomu no shiro wa horobizarikemu / Kototama no itsu no chikara o wasuretaru / Mukui wa horobi no hoka nakarikeru / Mononofu o amata hikitsure yaburetaru / Ware mo Kototama wasure itariki'</p>
+          <p class="en-p">As he sings thus, the interior of the palace suddenly trembles, the ground shakes violently, and it seems as if the newly built shrine will be overturned.</p>
+          <p class="en-p">Azumi-ō, in fear and trembling, prostrates himself before the shrine once more and sings quietly:</p>
+          <p class="en-p">'Ōkami no mimune ni somukishi tame naru ka / Tenchi ichido ni yurigometaru / Tsumi areba ware o kitameyo Amatsukami / Ware ni narawishi mono ni ariseba / Waga oshihe kumoritaru yori Kunitsukami / Kami o wasurete midaretarikeru / Ware inochi mesu mo itowaji Kunitsukami no / Tsumi o hen ni yurusare tamahe'</p>
+          <p class="en-p">While he is singing this, three pillars of Ōkami suddenly appear before the shrine.</p>
+          <p class="en-p">One pillar of Kami appears to be the Nushi no Ōkami, and as His figure shines so brilliantly, it is impossible to worship Him directly, and one can only faintly imagine His divine shadow; meanwhile, the Kami who stand clad in white robes, each holding a spear in their right hand, are truly Takahoko no Kami and Kamihoko no Kami.</p>
+          <p class="en-p">Takahoko no Kami declares solemnly:</p>
+          <p class="en-p">'Ware koso wa Takahi no miya yu amodete shi / Takahoko no Kami zo kokoro yasukare / Kono kuni wa ikikototama no shiseru kuni / Kami no tasuke no aranu kuni zo ya / Azumi-ō mototsugokoro ni tachikaheri / Miyaitsukurishi waza o kagasu mo / Tenchi no ichido ni yurishi wa Nushi no Kami no / Amodetamaishi shirushi naru zo ya / Azumi-ō yo osoruru nakare Nushi no Kami no / Mikuni tasuku to amodetamaishi zo ya'</p>
+          <p class="en-p">Kamihoko no Kami sings a divine song:</p>
+          <p class="en-p">'Nushi no Kami no omotomo ni tsukahe yaekumo o / Kakiwake koko ni amodetashi Kami zo ya / Kamihoko no Kami wa ware zo ya murakamo no / Kokoro kiyomete waga men o miyo'</p>
+          <p class="en-p">At this descent, Azumi-ō, along with the Left Guardian, Right Guardian, the strategist, and other Kami, prostrate themselves in the wide courtyard, trembling with gratitude and joy.</p>
+          <p class="en-p">Azumi-ō, with fear and trembling, sings respectfully:</p>
+          <p class="en-p">'Tsumibukaki waremi no negai kikimeshi / Amodetamaishi Kami zo kashikoshi / Kefu yori wa kokoro o kiyome mi o kiyome / Kami no mimune ni kanai tatematsuramu / Chikara yowaki ware ni chikara sohetamahe / Idomu no kuni wa minikuhabikereba'</p>
+          <p class="en-p">Takahoko no Kami sings a divine song:</p>
+          <p class="en-p">'Minikukami wa nanji ga kokoro ni hisomu nari / Mitama kiyomete oidasubeshi / Karikomo to midarehatetaru kono kuni mo / Nanji ga kokoro no yogoreshi yue zo ya / Kefu yori wa mototsugokoro ni tachikaheri / Makoto no ue ni mo makoto o tsukuseyo'</p>
+          <p class="en-p">Azumi-ō sings:</p>
+          <p class="en-p">'Arigataki ōse naru kamo shirazu shirazu / Waga tamashii ni magatsu no hisomeru ka / Nushi no Kami no itsu no chikara ni waga tamashii no / Miniku no kijin oitamahe'</p>
+          <p class="en-p">Kamihoko no Kami sings a divine song:</p>
+          <p class="en-p">'Iyanaki wa nanji ga kotoba yo tamashii no / Oni wa mizukara tsukurishi mono o / Kimimukau kokoro no oni o ou beki / Makoto no chikara wa magoto naru zo ya'</p>
+          <p class="en-p">As they sing thus, the three pillars of Kami hide their figures as if vanishing. The earth trembles again, the clouds in the vast sky part to the left and right, and while it is seen that the floating bridge of heaven, like a rainbow, is hung, the three pillars of Kami appear in their majestic forms, which can be faintly worshipped from the lower world.</p>
+          <p class="en-p">Azumi-ō, looking up at the heavens and clapping his hands, sings with a face filled with reverence:</p>
+          <p class="en-p">'Nushi no Kami wa zengen bishi no Kototama o / Ware ni sazukete kaerimashikeri / Mioshihe kuikyoku ni kikite waga tamashii no / Yogorehatetaru koto o satorinu / Ōmiya wa arata ni tsukahetatematsuredomo / Shizumarimasazute kaerasetamohinu / Magokoro no aramu kagiri o tsukushitsutsu / Ware wa makoto o mochite tsukahemu / Nushi no Kami no ikari ni fureshika watamashii wa / Odoyaka narazu furuiwononoku / Eerusu ni shiro ubawareshi mo watamashii ni / Hisomu magatsu no waza narishi kana / Jōge no jo o midashi hokoritaru / Kunitsukami-ra no tsumi mata fukakemu / Sarinagara watamashii no kumoriite / Yo no midare o ba satorazu itaru yo / Midareshi to satorishi koro wa hayaya sude ni / Ware sumu shiro wa ochinikerashina / Kake maku mo aya ni kashikoki Ōkami no / Megumi tamahare kore no mikuni ni'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">シウランは歌ふ。</p>
+            <p class="ja-classical-line">『久方の主の大神の御霊を
+斎きし今日は喜びあふる
+厳かな王の祝詞の言霊に
+主の大御神天降りましけむ
+言霊の助くる国と知りながら
+行ひ得ざりし事を悔ゆるも
+言霊を朝夕宣りつつありしならば
+イドムの城は滅びざりけむ
+言霊の厳の力を忘れたる
+報いは滅びの他なかりけり
+武士を数多引き連れ敗れたる
+われも言霊忘れ居たりき』</p>
+            <p class="ja-classical-line">斯く歌ふ折しも、殿内忽ち鳴動して地鳴震動烈しく、新築の社殿も殆ど覆へらむばかり思はれにける。</p>
+            <p class="ja-classical-line">アヅミ王は恐れ畏み、再び神前にひれ伏して静かに歌ふ。</p>
+            <p class="ja-classical-line">『大神の御旨にそむきし為なるか
+天地一度に揺ぎそめたる
+罪あれば吾を譴責めよ天津神
+われに倣ひしものにありせば
+わが教曇りたるより国津神
+神を忘れて乱れたりける
+吾生命召すも厭はじ国津神の
+罪を偏に許させ給へ』</p>
+            <p class="ja-classical-line">かく歌ふ折もあれ、突然として神前に現はれ給ひし三柱の大神あり。</p>
+            <p class="ja-classical-line">一柱の神は主の大神と見えて御姿いたく光らせ給へば、拝み奉るよしもなく、わづかにその御影を想像するばかりなりけるが、白衣を纒ひ右手に各自鉾を持たして立ち給ふ神は、正しく高鉾の神、神鉾の神にましましける。</p>
+            <p class="ja-classical-line">高鉾の神は厳かに宣らせ給ふ。</p>
+            <p class="ja-classical-line">『吾こそは高日の宮ゆ天降りてし
+高鉾の神ぞ心安かれ
+この国は生言霊の死せる国
+神の助けのあらぬ国ぞや
+アヅミ王元津心に立ちかへり
+宮居造りしわざを嘉すも
+天地の一度に揺りしは主の神の
+天降り給ひししるしなるぞや
+アヅミ王よ恐るるなかれ主の神の
+御国助くと天降りませしぞや』</p>
+            <p class="ja-classical-line">神鉾の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『主の神の御供に仕へ八重雲を
+かき分け此処に天降りし神ぞや
+神鉾の神はわれぞや村肝の
+心清めてわが面を見よ』</p>
+            <p class="ja-classical-line">この降臨にアヅミ王をはじめ左守、右守、軍師其他の神々は広庭にひれ伏し、感謝と喜びに身をふるはして蹲り居る。</p>
+            <p class="ja-classical-line">アヅミ王は恐る恐る謹み歌ふ。</p>
+            <p class="ja-classical-line">『罪深き吾身の願ひ聞召し
+天降り給ひし神ぞ畏し
+今日よりは心を清め身を浄め
+神の御旨に叶ひ奉らむ
+力弱き吾に力を添へ給へ
+イドムの国は醜はびこれば』</p>
+            <p class="ja-classical-line">高鉾の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『醜神は汝が心に潜むなり
+みたま清めて追ひ出すべし
+刈菰と乱れはてたる此の国も
+汝が心の汚れし故ぞや
+今日よりは元津心にたちかへり
+誠の上にも誠を尽せよ』</p>
+            <p class="ja-classical-line">アヅミ王は歌ふ。</p>
+            <p class="ja-classical-line">『ありがたき仰せなるかも知らず知らず
+わが魂に曲津の潜めるか
+主の神の厳の力にわが魂の
+醜の鬼神退ひ給はれ』</p>
+            <p class="ja-classical-line">神鉾の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『ゐやなきは汝が言葉よ魂の
+鬼は自らつくりしものを
+肝向ふ心の鬼を退ふべき
+誠の力は真言なるぞや』</p>
+            <p class="ja-classical-line">斯く歌ひ給ふや、三柱の神は消ゆるが如く御姿を隠させ給ひける。再び天地震動して大空の雲は左右に分れ、虹の如き天の浮橋かかるよと見る間に、三柱の神は荘厳なる雄姿を現はし給ふ御姿、ほのかに下界より拝むを得たりける。</p>
+            <p class="ja-classical-line">アヅミ王は天を仰ぎ拍手しながら、謹みの色を面に漲らして歌ふ。</p>
+            <p class="ja-classical-line">『主の神は善言美詞の言霊を
+われに授けて帰りましけり
+御教委曲に聞きてわが魂の
+汚れはてたる事を悟りぬ
+大宮は新たに仕へ奉れども
+鎮まりまさずて帰らせ給ひぬ
+真心のあらむ限りを尽しつつ
+われは誠をもちて仕へむ
+主の神の怒りに触れしか吾魂は
+穏かならず震ひをののく
+エールスに城奪はれしも吾魂に
+潜む曲津のわざなりしかな
+上下の序を乱し誇りたる
+国津神らの罪また深けむ
+さりながら吾魂の曇りゐて
+世の乱れをば悟らず居たるよ
+乱れしと悟りし頃は早や既に
+吾住む城は落ちにけらしな
+掛け巻くも綾に畏き大神の
+恵賜はれこれの御国に』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Muraji-hime sings:</p>
+          <p class="en-p">‘Gazing upon the Misugata of the Mihashiragami, I could not lift my head. Feeling as if crushed from the Zujiyō, I trembled in awe of the Miizu. That I knew not that a noble Kami dwells in the Ametsuchi, the retribution for this sin has come. It is fitting that the Eerusu should attack. The castle of Idumu, which defied the Kami, knew not that the Ametsuchi is the Sumika of the Kami. The sin of living in pride is fearful. Not only the Nanukananayo of purification, but even for Momokahi, I shall cleanse and clarify my Karatama and Mitama. The sin of attempting to welcome the Mitama of the Lord God into this Nihidono is fearful. If the clouding of our Mitama is not cleared, how shall the Mihashiragami Amo? We have done a fearful thing, to serve the Kami while harboring a clouded Mitama. Though the Shinden is solemn, the Lord God does not settle therein; how anxious I feel. Upon the already polished, I shall polish my Mitama further, and serve before the Mimahe of the Kami.’</p>
+          <p class="en-p">Shiuran sings:</p>
+          <p class="en-p">‘We have done a fearful thing, to invite the Kami without reflecting upon our own defiled bodies. The groaning and shaking of the Shinden, as if it would collapse, must be the Shinbatsu. From Kefu, I shall reform the way of the Yumiya and become an officer of the Kototamaikusa.’</p>
+          <p class="en-p">Naaman sings:</p>
+          <p class="en-p">‘Serving as a Kami of Samori for many years, I did not realize this error. While fulfilling the role of Hohitsu to my King, it was I who led the King astray. Lord God, pray forgive my Inochi; if Thou shouldst summon it, I would not loathe it. That Chinriu-hime was snatched away by the enemy, I feel sorrow, thinking it is our own sin.’</p>
+          <p class="en-p">Taaman sings:</p>
+          <p class="en-p">‘Serving the King for long Tsukihi, I came without realizing the blessings of the Kami. All sins that can be called sins have gathered, and it must be that the castle of Idumu has perished. Thinking that this, too, is the sin of us having forgotten the Kami, there is no Okiba for my body.’</p>
+          <p class="en-p">Azumi-ō sings:</p>
+          <p class="en-p">‘Do not lament, you all; it was all my sin of slighting the Kami. From Kefu, let us reform our hearts and advance, embraced by the heart of the Kami of Aizen. No matter what Tsumikagoto there may be, the Lord God of Aizen shall surely save us.’</p>
+          <p class="en-p">Shiuran sings:</p>
+          <p class="en-p">‘Hearing the gentle heart of my King, tears fall from me of their own accord. Now that it has come to this, there is no use in lamenting; I shall only purify my heart and serve. Detached from the desires of the earth, I shall follow the Kannagara and the sincerity of the Kami.’</p>
+          <p class="en-p">Muraji-hime sings:</p>
+          <p class="en-p">‘I shall cast aside treasures that have form, and polish my heart to seek the treasure that has no form. My soul was clouded, and I did not realize it until I heard the noble teachings of the Lord God.’</p>
+          <p class="en-p">Thus, each sang their reflections, offered Norito of gratitude before the Kami, and while retreating, descended from the Shinden at the summit of Mount Gekkō, and returned to the hastily built castle.</p>
+          <p class="en-p">The moon in the vast sky shone brightly, and the chirping of a hundred birds and the fragrance of a hundred flowers, which were not of the season, and music in the air resounded clearly; the short spring night finally dawned. Ah, Kannagara Tamachi Haese.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ムラジの姫は歌ふ。</p>
+            <p class="ja-classical-line">『三柱の神の御姿拝みてゆ
+われは頭をもたげ得ざりき
+頭上より押しつぶさるる心地して
+御稜威畏みふるへ居たるも
+天地にかかる尊き神坐すと
+知らざる罪の報い来しよな
+エールスの襲ひ来るも宜ようべ
+神に背きしイドムの城は
+天地は神の住処と知らずして
+驕り暮せし罪恐ろしも
+七日七夜の禊はおろか百日日も
+身体みたま清め澄まさむ
+主の神の御霊をこれの新殿に
+迎へむとせし罪恐ろしも
+吾々がみたまの曇り晴れざれば
+如何で天降らむ三柱神は
+恐れ多き事をなしけり曇りたる
+みたまかかへて神祀るとは
+新殿は厳かなれど主の神は
+鎮まりまさず心もとなや</p>
+            <p class="ja-classical-line">磨きたる上にもみたまみがきあげ
+神の御前に仕へ奉らな』</p>
+            <p class="ja-classical-line">シウランは歌ふ。</p>
+            <p class="ja-classical-line">『恐れ多き事をなしけり汚れたる
+身を省みず神を招ぎしは
+神殿も毀れむばかり唸りつつ
+動き揺れしは神罰なるべし
+今日よりは弓矢の道を改めて
+言霊軍の司とならむ』</p>
+            <p class="ja-classical-line">ナーマンは歌ふ。</p>
+            <p class="ja-classical-line">『年古く左守の神と仕へつつ
+この過ちを悟らざりしよ
+吾王の輔弼の役を勤めつつ
+王を誤らしめし吾なり
+主の神よ許し給はれわが生命
+よしや召すとも厭はざりせば
+チンリウ姫敵に奪はれ給ひしも
+われらが罪と思へば悲しき』</p>
+            <p class="ja-classical-line">ターマンは歌ふ。</p>
+            <p class="ja-classical-line">『長からむ月日を王に仕へつつ
+神の恵を悟らずに来し
+罪といふ罪のことごと集まりて
+イドムの城は滅びしなるらむ
+かくなるも吾等が神を忘れたる
+罪と思へば身の置場もなし』</p>
+            <p class="ja-classical-line">アヅミ王は歌ふ。</p>
+            <p class="ja-classical-line">『汝たちは嘆かふなかれ皆われが
+神をなみせし罪なりにける
+今日よりは心あらため愛善の
+神の心に抱かれ進まむ
+如何ならむ罪科あるも愛善の
+主の大神は救ひ給はむ』</p>
+            <p class="ja-classical-line">シウランは歌ふ。</p>
+            <p class="ja-classical-line">『吾王の優しき心聞くにつけ
+われ自ら涙こぼるる
+今となり歎くも詮なし村肝の
+心清めて仕ふるのみなる
+地の上の欲に離れて惟神
+神の誠に従はむかな』</p>
+            <p class="ja-classical-line">ムラジ姫は歌ふ。</p>
+            <p class="ja-classical-line">『形ある宝を捨てて形なき
+宝求むと心を磨かむ
+吾魂は曇りて居たり主の神の
+貴の教を聞くまで悟らず』</p>
+            <p class="ja-classical-line">かく各自述懐を歌ひ、神前に感謝の祝詞を奏上し後しざりしながら、月光山の頂上なる神殿を降り、俄造りの城内に帰り行く。</p>
+            <p class="ja-classical-line">大空の月は皎々として輝き渡り、時ならぬ百鳥の囀り百花の香り、空中の音楽嚠喨として響き渡り、短き春の夜は遂に明け放れたり。ああ惟神霊幸倍坐世。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c03.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 3: Moon 見の Pond [2030]</span>
+      </a>
+      <a href="c05.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 5: 心の禊 [2032]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

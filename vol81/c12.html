@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: Tree 田 Mountain 颪 [2039] - Volume 81 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 81 Table of Contents</a>
+      <span>Volume 81</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 81 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: Tree 田 Mountain 颪 [2039]</h1>
+      <p class="chapter-title-ja">木田山颪〔2039〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Chinriuhime, the daughter of King Azumi, was captured by the enemy castle along with her Uba, Araragi, and Araragi's daughter, Senriu. While enduring the shame of the ropes in the first Raugoku, they lamented the Ukiyo and sang of their Jiyutsukuwai to one another.</p>
+          <p class="en-p">Chinriuhime's song: 'How wretched this Ukiyo has become, as I now suffer the shame of the ropes. What has become of my Tarachine? I am Kokoromoto, wondering where the Idomu Castle has gone. Attacked by an unexpected enemy army, has my Tarachine vanished like dew? Though there were Moromoro Ihenoko and Ikusabito, they must have perished without even a Gahi to show for it. The land bestowed by my Oyaoya must have been seized by the Bōgiyaku hands of Eales. My strength exhausted, I was captured by the enemy, and now I drift in a deep pool of tears. It is a sad state for me to be in, thinking that my Inochi, like a jewel-string, may be measured at any time. Wondering how I might escape this suffering, I live for a moment with the Kami as my strength. I have become a person without hope, for I have no way to enjoy the moon over the Minanogaha. It is in retribution for capturing the innocent Ningiyo that my Tarachine's country has met its Kunihoro.</p>
+          <p class="en-p">Sent by a knight over a distance of Suhiyakuri, I lament my life in this cold Raugoku. If the Kami of Ametsuchi exist in this world, show me the moon of the Minanogaha once more. If my Tarachine still has Inochi in this world, I pray you let it reach me, even if only in a dream. It is sad to think of myself as one without hope, and I weep in loneliness Asayufu.'</p>
+          <p class="en-p">Araragi sings: 'Hearing the Kotoba of the Himegimi's lament, it is sad that I have no place to be. For twenty years I have served as Mitomo to the Himegimi, and I have never left her side. Sent far away to the enemy's land, it is sad to see the Himegimi suffer such Uime. Separated from the compassionate King of Idomu, it is painful to see such Uime in the enemy castle.</p>
+          <p class="en-p">Praying to the Kami of Ametsuchi, I shall clear the distress of my Himegimi this day. How foolish I am to have allowed such Uime to befall her while I was the one guarding the Himegimi. Himegimi, please forgive me; there is no way to resist the power of time in any matter. Nevertheless, please be at peace, for I possess a certain strategy.</p>
+          <p class="en-p">It is also sad to think that my daughter Senriu is also a captive in this painful state. How I rack my heart wondering how I shall apologize to the King of Azumi. The water of the Minanogaha must be flowing clearly, reflecting the moon without a mind. Eales must be drinking sake while admiring the moon at the high palace of Idomu Castle.</p>
+          <p class="en-p">Thinking of Eales's conduct, I feel hatred; he seized the land of Idomu without effort. Eales must be sitting in Idomu Castle in arrogance, with a look of triumph. There is no path where evil triumphs over righteousness; it shall surely perish by the wrath of the Kami. For a little while longer, endure the shame of the ropes and wait for the spring when the flowers bloom. King Eales shall surely perish, for his deeds are contrary to the Way.</p>
+          <p class="en-p">Imprisoned in the Raugoku with the Himegimi, I resent King Eales Asayufu. Where is my King, and is the Queen safe? I wish to hear news of them, but it is of no use; the cuckoo cries. In the sky where the Satsuki rain falls softly, the cuckoo cries as it passes, leaving behind a single note. When I gaze at the sky where the cuckoo has cried, it is a Satsuki darkness where I cannot distinguish even an iris.</p>
+          <p class="en-p">It goes without saying for the Himegimi, but my daughter and I are also cuckoos in the dark night. If I had the strength, I would break this Raugoku, but it is of no use for a woman's arms. Is it an Oni or an Orochi that binds my innocent Himegimi in such a Raugoku? In a world where Oni and Orochi run wild, the Kami is the only true strength. Separated by the Kidagawa, we who are bound in this Raugoku are like rats in a bag. Our Inochi, like a jewel-string, is held by the enemy, and I hear the sound of rain in my lonely state.'</p>
+          <p class="en-p">Senriu sings: 'The Himegimi's lament is justified, and I too weep, finding my mother's resentment to be right. By slaughtering the castle of peace, Eales has revealed his demonic nature. Is it not sad that we live in a world where evil Kami run wild? Though I think of how to clear today's resentment, my heart only grows cloudy. My heart, facing the void, wanders in darkness, and Asayufu I sadly hear the cuckoo. If there were a way to save the Himegimi's Inochi, I would not spare my own. I shall offer my Inochi in place of the Himegimi and my mother; I pray to the Kami. My Inochi is light, but the Himegimi's Inochi is heavier than the great mountains. It is sad to think of the distress of the Himegimi, who is the successor to the Idomu country. I rack my heart Asayufu wondering how I might save my Himegimi.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">アヅミ王の娘チンリウ姫は、乳母のアララギ及びアララギの娘センリウ女とともに敵城に虜はれ、第一の牢獄に縄目の恥を忍びながら、世をはかなみつつ互に述懐を歌ふ。</p>
+            <p class="ja-classical-line">チンリウ姫の歌。</p>
+            <p class="ja-classical-line">『あぢきなき浮世なるかなわれは今
+縄目の恥にあひて苦しむ
+垂乳根は如何なりけむイドム城は
+いづらに行きしか心許なや
+思はざる敵の軍に攻められて
+わが垂乳根は露と消えしか
+諸々の家臣軍人あれど
+いひ甲斐もなく滅び失せけむ
+祖々の賜ひし国はエールスの
+暴虐の手に奪はれにけむ
+わが力尽きて敵にとらへられ
+今は涙の淵にただよふ
+玉の緒の生命もいつか量られずと
+思へば悲しき吾身なりけり
+如何にしてこの苦しみを逃れむと
+神を力に時の間を生くる
+望みなき吾身となりぬ水乃川の
+月に親しむ術もなければ
+罪もなき人魚を捕りし酬いにて
+わが垂乳根の国亡びしか</p>
+            <p class="ja-classical-line">数百里の道をナイトに送られて
+寒き牢獄に世を歎くなり
+天地の神の此世にいますならば
+再び見せよ水乃川の月を
+垂乳根の此世に生命在すならば
+夢になりとも通はせ給へ
+望みなきわが身と思へば悲しけれ
+朝夕われは淋しさに泣く』</p>
+            <p class="ja-classical-line">アララギは歌ふ。</p>
+            <p class="ja-classical-line">『姫君の歎き言葉を聞くにつけ
+わが身の置場無きが悲しき
+姫君の御供に仕へて二十年
+われは御側を離れざりける
+はるばると敵の国まで送られて
+姫の憂目を見るが悲しき
+情深きイドムの王に生き別れ
+苦しき憂目を敵城に見るも
+天地の神を祈りて今日の日の
+わが姫君のなやみを晴らさむ
+姫君を守る身ながらかくの如
+憂目を見せしわが愚さよ
+姫君よ許させ給へ何事も
+時の力に刃向ふ術無き
+さりながら心安けくおはしませ
+われには一つの計略持ちぬ
+吾娘センリウも亦虜はれの
+苦しき身ぞと思へば悲しも
+如何にしてアヅミの王に詫びむかと
+心を砕く吾身の悲しさ</p>
+            <p class="ja-classical-line">水乃川の水は無心の月光を
+浮べて清く流れゆくらむ
+エールスはイドムの城の高殿に
+月を賞めつつ酒を酌むらむ
+エールスのふるまひ思へば憎らしし
+イドムの国を手もなく奪ひて
+エールスは勝ち誇りたる面もちに
+イドムの城に横暴り居るらむ
+邪は正しきに勝つ道はなし
+必ず滅びむ神の怒りに
+今しばし縄目の恥を忍びつつ
+花咲く春を待たせ給はれ
+必ずやエールス王は滅ぶべし
+道に反ける曲業なれば
+姫君とともに牢獄に繋がれて
+朝夕怨むはエールス王なり
+わが王はいづらなるらむ妃の君は
+御無事にますか便り聞きたし
+雁の便りもがもと願へども
+今は詮なし時鳥鳴く</p>
+            <p class="ja-classical-line">しとしとと五月雨るる空に時鳥
+鳴き渡るなり一声落して
+時鳥鳴きつる空を眺むれば
+あやめもわかぬ五月闇なり
+姫君はいふも更なりわが娘も
+われも闇夜の時鳥なり
+力あらばこれの牢獄を破らむと
+思へば詮なし女の腕には
+罪も無きわが姫君をかくの如き
+牢獄に繋ぐは鬼か大蛇か
+鬼大蛇伊猛り狂ふ世の中は
+神ぞ誠の力なりける
+木田川を隔てしこれの牢獄に
+繋がれし吾等は袋の鼠よ
+玉の緒の生命は敵に握られて
+淋しき吾身に雨の音聞く』</p>
+            <p class="ja-classical-line">センリウは歌ふ。</p>
+            <p class="ja-classical-line">『姫君の歎き宜なりわが母の
+怨みもうべよとわれも泣くなり
+平安の城を屠りてエールスは
+悪魔の性を現はしにけり
+悪神の伊猛り狂ふ世の中と
+思へど悲しき吾等ならずや
+如何にして今日の怨みを晴さむと
+思へど心曇るのみなる
+肝向ふ心は闇にさまよひつ
+朝夕悲しく時鳥聞く
+姫君の生命助くるよしあらば
+われは生命を惜しまざるべし
+姫君と母に代りてわが生命
+捧げむわれは神に祈りて
+わが生命は軽し姫君の御生命
+大山よりも重くいませり
+イドム国の世継といます姫君の
+今日のなやみを思へば悲しき
+如何にして吾姫君を救はむと
+朝夕べを心砕きつ</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Satsukiyami approaches this Hitoya, / And even Ayame is indistinguishable, as my heart goes mad.</p>
+          <p class="en-p">Chinriu-hime sings:</p>
+          <p class="en-p">Does the Kami not exist, or is He not present in Tenchi? / Does He not look down upon such lamentations? / Since my father is Ō, surely he will preserve his Inochi and stand again. / I think that my father will shine, and Kotomu and harmonize this land. / If my father's army wins, the Satsukiyami will clear, and I shall worship the Tsukihi again. / Though it is a hopeless wish, somehow I see a light in my soul. / To destroy the land of my innocent father, / And the Yuyu of the Magatsu who revels in it. / The Magatsu King of Eales shall perish, touching the light of the Kami of Tenchi. / If the true Kami exists in Tenchi, He will surely help my father. / Thinking of the Yukusue of Eales, which holds the fate to perish, it is pitiful. / Though I now expose the shame of the Nahame, / Soon I shall appear in the world as light.</p>
+          <p class="en-p">In the depths of my Murakimo heart, I know not what, / But there is one light within me. / Enjoying the world that is to come, I must endure the shame and suffering of Kefu.</p>
+          <p class="en-p">Araragi sings:</p>
+          <p class="en-p">As I hear the Ō Mikokoro of Himegimi, / My soul has begun to shine. / My soul, which has suffered and struggled Asayufu, / Has begun to take courage at the Kotoba of Hime. / Knowing that if there is darkness, there is a world of light, / I have suffered Asayufu with an Orokagokoro.</p>
+          <p class="en-p">Senriu sings:</p>
+          <p class="en-p">Hearing the Mikokoro of Himegimi, I too / Have felt my heart's steed take courage. / I too, mounting the steed of Tsukihi, / Think to advance to the Toha Yasudo. / Even in this sad body of a captive, I hear the tidings of Tenchi, / Following the wind. / Even if my Karatama is bound, my soul / Runs through Tenchi in Jiiujizai. / Even in this body without Jiiu as a captive, my soul / Runs through Tenchi freely.</p>
+          <p class="en-p">At this point, the Riyōnin, Asazuki and Yufuzuki, approach quietly, hiding their footsteps, and Asazuki sings first:</p>
+          <p class="en-p">I am Asazuki, and Yufuzuki, who serve / Close to the side of King Eames. / Is the Himegimi who hides in this house / Not Chinriu-hime? / I have guessed that the Himegimi, whose attire is noble and pure, / Is Chinriu-hime. / I have come, pitying the Hime who suffers / Within the dim Hitoya. / If there is a heart for fish, there must be a heart for water; / Think so of my Kotoba. / If you follow the Kotoba that I shall speak, / I will not let you suffer the sorrows of Kefu. / Rather than suffering endlessly in the Hitoya, / Will you not wish for a Yasudo quickly? / The young King has set his heart upon you, Hime. / Please be swayed, Chinriu-hime-dono.</p>
+          <p class="en-p">Chinriu-hime, while feeling indignant at Asazuki's song, sings solemnly:</p>
+          <p class="en-p">Should I follow the Kotoba of the Magatsu, / Who has stolen the land of a people without resentment? / Even if my Tama-no-o, my Inochi, is taken, / How could I be swayed by the Kotoba of the Magatsu? / In Eales, where the resentment of a thousand autumns is heavy, / Even if I die, I shall not submit. / Do not speak such useless repetitions, however lowly; / I am the child of the King of Azumi. / I think it is filthy even to hear / The Kotoba of a lowly official like you. / I am now prepared to throw away my Inochi; / Should I submit to the enemy King?</p>
+          <p class="en-p">Yufuzuki sings:</p>
+          <p class="en-p">Though I think your Kotoba is right, Himegimi, / Please reconsider this place for once. / Even if your Tama-no-o Inochi dies, it will not reach him; / Please reconsider it for your own sake. / Since you are the child of the King of Azumi, / I will serve you with sincerity. / Become the consort of my young King and flourish; / The suffering of Kefu will soon melt away.</p>
+          <p class="en-p">Chinriu-hime sings:</p>
+          <p class="en-p">No matter how much you exhaust your Kotoba to entice me, / I will not consent to the Kotoba of the Magatsu. / Rather than becoming the consort of the King of Eames and flourishing, / I shall become a demon of the Hitoya. / I will throw away my Tama-no-o Inochi, become a demon, / And think to clear my father's resentment. / Thinking of my father's suffering, how could I / Become the consort of the enemy King? / Restore the land of Idomu to my father, / And only then approach me. / Until the castle of Idomu returns to my father's hands, / I will not listen to your Kotoba. / Before you speak words to me who has no hope, / Return the country to my father. / If I have my father's permission, I / Would not refuse to become the consort.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">五月闇この牢獄に迫り来て
+黒白もわかず心狂ふも』</p>
+            <p class="ja-classical-line">チンリウ姫は歌ふ。</p>
+            <p class="ja-classical-line">『天地に神はまさずや在さずや
+かかる歎きをみそなはさずや
+わが父は雄々しくませば必ずや
+生命保ちて再び立たさむ
+わが父の輝きましてこの国を
+言向け和せ給はむと思ふ
+わが父の軍勝ちなば五月闇
+晴れて再び月日を拝まむ
+あてもなき望みながらも何となく
+わが魂に光り見るなり
+罪も無き父の国をば亡ぼして
+時めき渡る曲の忌々しさ
+エールスの曲津の王は天地の
+神の光にふれて滅びむ
+天地に誠の神のいますならば
+必ず父を助け給はむ
+滅ぶべき運命を持つエールスの
+行末思へば憐れなりけり
+今われは縄目の恥を曝せども
+やがて光と世に現はれむ</p>
+            <p class="ja-classical-line">村肝の心の奥に何か知らず
+われには一つの光ありけり
+来るべき世を楽しみて今日の日の
+恥となやみを忍びまつべし』</p>
+            <p class="ja-classical-line">アララギは歌ふ。</p>
+            <p class="ja-classical-line">『姫君の雄々しき御心聞くにつけ
+わが魂は輝き初めたり
+朝夕をなやみもだえしわが魂も
+姫の言葉に勇み初めたり
+闇あれば光ある世と知りながら
+愚心に朝夕なやみし』</p>
+            <p class="ja-classical-line">センリウは歌ふ。</p>
+            <p class="ja-classical-line">『姫君の御心聞きてわれも亦
+心の駒は勇みたちけり
+われも亦月日の駒に跨りて
+永久の安所に進まむと思ふ
+虜はれの悲しき身にも天地の
+便り聞くかな風のまにまに
+身体はよし縛るとも魂は
+自由自在に天地を駆けるも
+虜はれの自由無き身も魂は
+自由に天地を駆けめぐるなり』</p>
+            <p class="ja-classical-line">かかるところへ、朝月、夕月の両人は足音を忍ばせながら静かに寄り来り、朝月は先づ歌ふ。</p>
+            <p class="ja-classical-line">『われこそはエームス王の御側近く
+仕ふる朝月、夕月なるぞや
+これの家に忍ばせ給ふ姫君は
+チンリウ姫におはしまさずや
+品高く装ひ清しき姫君は
+チンリウ姫と察しまつりぬ
+ほの暗き牢獄のうちになやみ給ふ
+姫をあはれみわれは来つるも
+魚心あれば必ず水心
+ありと思せよわが言の葉に
+わが宣らむ言葉に従ひ給ひなば
+今日の憂目はさせまじものを
+果しなく牢獄に苦しみ給ふよりも
+早く安所を望み給はずや
+若王は姫に心を寄せ給ふ
+なびかせ給へチンリウ姫の君』</p>
+            <p class="ja-classical-line">チンリウ姫は、朝月の歌に憤慨しながら、儼然として歌ふ。</p>
+            <p class="ja-classical-line">『怨みなき人の国をば奪ひてし
+曲の言葉に従ふべしやは
+玉の緒のよしや生命はとらるとも
+如何で靡かむ曲の言葉に
+千秋の恨重なるエールスに
+たとへ死すともまつろはざるべし
+いらざらむ繰り言宣るないやしくも
+われはアヅミの王の御子ぞや
+汝が如き賤しき司の言の葉は
+耳にするさへけがらはしと思ふ
+われは今生命を捨つる覚悟なり
+仇の王にまつろふべしやは』</p>
+            <p class="ja-classical-line">夕月は歌ふ。</p>
+            <p class="ja-classical-line">『姫君の言葉うべよと思へども
+此処は一先づ見直し給へ
+玉の緒の生命死すとも及ぶまじ
+御身の為と聞き直しませ
+アヅミ王の御子とあれます君なれば
+われは真心捧げて仕へむ
+わが若王の妃となりて栄えませよ
+今日のなやみは直にとけなむ』</p>
+            <p class="ja-classical-line">チンリウ姫は歌ふ。</p>
+            <p class="ja-classical-line">『如何ほどに言葉尽して誘ふも
+われ承知はじ曲の言葉に
+エームスの王妃となりて栄ゆより
+われは牢獄の鬼となるべし
+玉の緒の生命を捨てて鬼となり
+父のうらみを晴らさむと思ふ
+わが父のなやみ思へば如何にして
+敵の王妃となるべきものかは
+わが父にイドムの国を奉還し
+而して後にわれに当れよ
+イドム城父の御手に帰るまでは
+汝が言葉をわれ耳にせじ
+望みなきわれに言葉をかくる前に
+父に御国を返しまつれよ
+わが父の御許しあればわれとても
+王妃となるを拒まざるべし』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Asazuki sings:</p>
+          <p class="en-p">Asazuki: 'Though the words of Himegimi are awe-inspiring, I pray you wait for a short while. If Himegimi would become the consort of King Aems, you might devise a path toward peace. For if Himegimi were to become the Queen, both lands would surely be governed in peace.'</p>
+          <p class="en-p">Chinriu-hime sings:</p>
+          <p class="en-p">Chinriu-hime: 'In a world filled with falsehoods, how could I possibly follow your words? Only with the permission of my father would I ever respond to your entreaties. As the whereabouts of my father remain unknown to me even now, I harbor only resentment toward King Aers. Tell King Aers to come before me and speak in detail of my father's whereabouts. Should I surrender my body to the enemy of my parents? I am a child of man, not a beast. Since I am one who does not cling to the life of my precious soul, I shall not desire the dreams of glory. At the very least, return my Tarachine to the main castle, and only after that may you proceed. I, too, shall not dwell in the land of Saru; send me back to the land of Idumu. Ever since I heard that King Aems loves me, my soul has been on the verge of shattering. Swallowing a myriad of tears, I now pine for my parents in this prison.'</p>
+          <p class="en-p">Yufuzuki sings:</p>
+          <p class="en-p">Yufuzuki: 'Hearing the steadfast heart of Himegimi, my tears flow without end. How sad it is for me that I have no way to hear the righteous words of Himegimi. I am moved by the firm heart of Himegimi, who does not cling to the life of her precious soul. Yet, I have come here seeking to clear the distress of King Aems. Enduring the resentment of a thousand autumns, I pray you yield to King Aems for a little while. It is not that I do not know the heart of Himegimi, but I urge you for the sake of the nation. How pitiful is King Aems, who loves Himegimi with the limit of his precious soul. If one lacks a heart of compassion, one is no different from wood or stone; I pray you think on this and yield.'</p>
+          <p class="en-p">Chinriu-hime sings:</p>
+          <p class="en-p">Chinriu-hime: 'O spineless young King, who forces me into a dark prison and speaks of love! If Aems possesses a heart of compassion, why does he make me suffer in this prison? Unless this matter is resolved first, I shall give no answer of yes or no. My ears are utterly defiled by hearing that the enemy king of Aems is impatient.'</p>
+          <p class="en-p">Asazuki sings:</p>
+          <p class="en-p">Asazuki: 'Though I perceive the sincerity of Himegimi's heart, I have no path forward. Until I hear the gentle words of Himegimi, I think I shall not leave this place. Himegimi, I pray you endure this frustration for a while and consent to the light of the future.'</p>
+          <p class="en-p">Chinriu-hime sings:</p>
+          <p class="en-p">Chinriu-hime: 'I shall not accept any sweet words, no matter what they may be. If my life is one that must end, then hearing the words of the King of Aems only makes me want to die all the more.'</p>
+          <p class="en-p">Asazuki and Yufuzuki, having no words to return to the strong heart of Chinriu-hime, who would not budge an inch, left the place dejectedly. As a result of various consultations, they began to devise shallow plans, such as using water torture, starvation, and fire torture, to see if they could make her yield to the love of King Aems.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">朝月は歌ふ。</p>
+            <p class="ja-classical-line">『姫君の御言畏しさりながら
+今暫時を待たせ給はれ
+姫君はエームス王の妃となりて
+和睦の道を計らせ給へ
+姫君が王妃とならせ給ひなば
+両国平和に治まるべきを』</p>
+            <p class="ja-classical-line">チンリウ姫は歌ふ。</p>
+            <p class="ja-classical-line">『偽りの多き世なれば如何にしても
+汝が言葉に従ふべしやは
+わが父の御許しあれば何時とても
+汝が勧めに応へまつらむ
+わが父の消息今にわからねば
+エールス王を怨みこそすれ
+エールス王わが前に来て詳細に
+父の消息語れと伝へよ
+父母の仇にわが身を任すべき
+われは人の子獣にあらず
+玉の緒の生命惜しまぬわれなれば
+栄華の夢は望まざるべし
+ともかくもわが垂乳根を本城へ
+返しまつりし其の上にせよ
+われも亦サールの国には住まはまじ
+イドムの国に送りとどけよ
+エームス王われに恋すと聞きしより
+わが魂は砕けむとせり
+万斛の涙をのみてわれは今
+これの牢獄に父母をしのぶも』</p>
+            <p class="ja-classical-line">夕月は歌ふ。</p>
+            <p class="ja-classical-line">『姫君の堅き心を聞くにつけ
+われは涙のとめどなきかな
+姫君の正しき言葉聞くよしも
+なきわれこそは悲しかりけり
+玉の緒の生命惜しまぬ姫君の
+堅き心に動かされたり
+さりながらエームス王の御なやみ
+晴らさむとしてわれは来つるも
+千秋の恨しのびて今暫し
+エームス王になびかせ給へ
+姫君の御心知らぬにあらねども
+御国を思ひてわれは勧むる
+玉の緒の生命限りに姫君を
+恋はすエームス王の憐れさ
+情心あらねば人も木石に
+変らず思ひて靡かせ給へ』</p>
+            <p class="ja-classical-line">チンリウ姫は歌ふ。</p>
+            <p class="ja-classical-line">『無理遣に小暗き牢獄に押し込めて
+恋を語らふ不甲斐なき若王よ
+エームスに情心のあるならば
+なぜに吾身を牢獄に苦しむる
+第一にこの解決をつけざれば
+われは否やの応へなすまじ
+わが耳は汚れ果てたりエームスの
+敵の王の焦るると聞きて』</p>
+            <p class="ja-classical-line">朝月は歌ふ。</p>
+            <p class="ja-classical-line">『姫君の心の誠察すれど
+われは進まむ道さへもなし
+姫君のやさしき言葉聞くまでは
+われは此の場を去らずと思ふ
+くやしさをしばし忍びて姫君よ
+末の光りと諾ひ給はれ』</p>
+            <p class="ja-classical-line">チンリウ姫は歌ふ。</p>
+            <p class="ja-classical-line">『如何ならむ甘き言葉も承知はじ
+われは死すべき生命なりせば
+エームスの王の言葉を聞くにつけ
+われは一入死にたくなりぬ』</p>
+            <p class="ja-classical-line">朝月、夕月は、梃でも棒でも動かぬチンリウ姫の強き心に返す言葉も無く、すごすごとして此の場を立ち去り、いろいろと相談の結果、水責め、食責め、火責めをもつて、エームス王の恋心に靡かせむかと、種々浅はかなる計画をめぐらしつつありける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: 五 Moon Gloom [2038]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: 思ひの掛 River [2040]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
