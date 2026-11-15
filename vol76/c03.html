@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3: 行進 Song [1920] - Volume 76 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 76 Table of Contents</a>
+      <span>Volume 76</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 76 &bull; Chapter 3</span>
+      <h1 class="chapter-title-en">Chapter 3: 行進 Song [1920]</h1>
+      <p class="chapter-title-ja">行進歌〔1920〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The god Yasomagatsumi attempted to obstruct the path of the party of the deity Takanohime by transforming himself into a bottomless deep ravine and barring the way, but he was seen through by the sharp eyes of Takanohime no Kami, smitten by the living Kototama of Unarizu no Kami, and instantly reduced to a state of utter vaporisation, fleeing away high into the eastern sky at the whim of the wind; whereupon the ten deities of the party whipped their swift horses and, chanting a sacred Miuta, advanced toward the east across the plain of Ōnohara.</p>
+          <p class="en-p">The sacred Miuta of Takanohime no Kami:</p>
+          <p class="en-p">Dancing up into Takaamahara,
+Visiting Amatsutakamiya,
+Reverently receiving the divine edict
+Of the Lord Ōkami, all together
+Straighten the steeds of their hearts,
+And the previously afflicted, core-deep
+Tamashihi of ours grows clear at last;
+With Unarizu no Kami at the lead,
+Accompanied by Amatsumeo no Kami,
+Returning to the eastern Miya;
+The vast plain of Shibitenkai
+Is pure, clear, and serene to the utmost,
+And the voices of Momodori twittering in the woods
+Resound with pristine clarity,
+Momogusachigusa bloom and scatter their fragrance,
+While the sound of insects gathering at the roots
+Sings of the spring of the heavenly realm;
+The wind blowing forth also gently
+Caresses our faces;
+Ah, what a manifestation of Kami!</p>
+          <p class="en-p">How joyous is today's journey!
+In contrast to this, Mizu-no-Mimisuchira,
+The god upon our backs, like Magatsumi,
+Advances day and night through the wild plain
+Where fierceness rages,
+Bathing in a hundred afflictions,
+That He may serve in the divine work
+Of the Lord Ōkami's entrustment;
+Oh, the supreme valor with which He proceeds!
+Were we ourselves goddesses in form,
+Serving in the tranquil sacred place
+Of Takayamahiko where the four-season flowers bloom,
+How could we pass the days in vain?
+Receiving once again the divine command
+Of the Lord Ōkami of Amatsutakamiya,
+The sky of our hearts, deep within, clears completely,
+And determined ever more to guard the sacred ground,
+Straddling the steed of ten thousand leagues,
+Ah, how wondrous is the road of our return!</p>
+          <p class="en-p">Yasomagatsumi transformed his body
+Into a deep ravine a thousand fathoms deep,
+Barring our way and lying across it—
+How hateful it is!
+Here, arising from the Kototama of the U sound,
+The brave Kototama of Unarizu no Kami
+Was struck forth, whereupon the crooked god
+Transformed his body into strange clouds,
+Tossed about by the west-blowing wind,
+And vanished fleetingly into the eastern sky—
+How delightful!
+Ah, what a manifestation of Kami!
+Purifying our hearts and purifying our bodies
+In the sacred sanctuary of the eastern Miya,
+Performing misogi morning and evening,
+Praying for the imperial progress of Kimi,
+How joyous it is to serve Him!</p>
+          <p class="en-p">Unarizu no Kami chants the Miuta:</p>
+          <p class="en-p">With the divine edict of the Lord Ōkami,
+Reverently, respectfully, and with awe before the great sanctuary of Amatsutakamiya,
+Guarding the Mitoshiro-no-Kami,
+Crossing over the wild plains of ten thousand leagues,
+And coming here at last to look,
+Evil qi had gathered to become Magatsumi,
+Raising clouds and mist,
+Transforming his body into a deep ravine
+And obstructing our way;
+Takanohime no Kami magnificently
+Saw through the true nature of Magatsumi,
+And when she proclaimed the living Kototama,
+Truly, even I was startled,
+And to the extent that the Kototama of U existed,
+Exerting my golden-wheel power,
+When I proclaimed the Kototama of Taka,
+Magatsumi, as expected, was struck with fear and terror,
+And fled away, turning cloud into mist;
+In that very flash, the ravine</p>
+          <p class="en-p">Vanished without a trace,
+With grass growing luxuriantly and thickly,
+A hundred flowers blooming in full array,
+And the sound of insects singing so softly,
+It had become the spring of the heavenly realm;
+Ah, what a manifestation of Kami!
+By the blessing of the living Kototama,
+The path we tread is smooth,
+Opened up in supreme peace,
+And the steeds we straddle are brave,
+Their hooves striking together as they neigh,
+Advancing across the endless fields;
+Whatever Magatsumi of the pathway
+May bar our way and bring disaster,
+By the blessing of the living Kototama
+Bestowed by the Lord Ōkami,
+We shall easily send you, the deities,
+Safely to the eastern Miya;
+Ah, what a manifestation of Kami!</p>
+          <p class="en-p">Since the divine protection is strong,
+Do set your hearts at ease, O Mitoshiro-no-Kami;
+Unarizu no Kami, illuminating the true heart,
+Here proclaims his innermost convictions;
+Ah, what a manifestation of Kami!
+May the divine spirits flourish and prosper!</p>
+          <p class="en-p">Asakohime no Kami chants abundantly upon her horse:</p>
+          <p class="en-p">Though we were chosen by Kami
+And became Mitoshiro-no-Kami,
+Our hearts were clouded and our tamashihi twisted,
+And because the living Kototama grew muddy,
+How shameful it was that we resented
+The sneers of the myriad deities,
+Thinking ourselves unfit for the divine work of child-bearing!
+The deity Motomoto-Atsutsumu-no-Kami
+Did not possess a weak heart,
+Yet, thinking the sneers of the myriad deities
+To be an annoying nuisance,
+And hesitating for a while,
+Having perceived and known the state
+In which the tamashihi of the Mitoshiro-no-Kami
+Were heavily clouded,
+He set out swiftly from the eastern Miya,
+Met with the eighty Himegami distributed hither and thither,
+And in order to give birth to the Kunitokotachi-no-Kami,
+Whipped the steed of his heart...</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">八十曲津見の神は、高野比女の神一行が行手を妨げむとして、底ひも知れぬ深溪川と身を変じさやり居たりけるが、高野比女の神の烱眼に看破され、鋭敏鳴出の神の生言霊に打たれて、忽ち煙散霧消の体たらくとなり、風のまにまに東の空高く逃げ去りければ、一行十柱の神は駿馬に鞭うち、大野ケ原を御歌うたひつつ東をさして進ませ給ふ。</p>
+            <p class="ja-classical-line">高野比女の神の御歌。</p>
+            <p class="ja-classical-line">『高天原に舞ひ上り
+天津高宮に詣でつつ
+主の大神の大神言
+かかぶりまつりて一同は
+心の駒を立て直し
+今迄なやみし村肝の
+わが魂線は晴れにつつ
+鋭敏鳴出の神を先頭に
+天津女雄の神伴ひて
+東の宮居に帰りゆく
+紫微天界の大野原
+清くさやけく澄みきらひ
+林に囀る百鳥の
+声も清しく響きつつ
+百草千草は咲き匂ひ
+根本にすだく虫の音は
+天界の春をうたふなり
+吹き来る風も爽かに
+吾等が面を撫ででゆく
+ああ惟神々々</p>
+            <p class="ja-classical-line">今日の旅路の楽しけれ
+これに引き替へ瑞御霊
+わが背の神は曲津見の
+伊猛りくるふ荒野原
+夜を日についで進みつつ
+百の悩みを浴びながら
+主の大神の御依さしの
+神業に仕へ給ふべく
+進ませ給ふ雄々しさよ
+吾等は女神の身なりせば
+四季の花咲く高地秀の
+安き聖所に仕へつつ
+月日を仇におくらむや
+再び天津高宮の
+主の大神のみことのり
+承はりて村肝の
+心の空は晴れ渡り
+いよいよ聖地を守らむと
+万里の駒に跨がりて
+帰らむ路をあら不思議</p>
+            <p class="ja-classical-line">八十曲津見は千丈の
+深溪川と身を変じ
+吾等が行手をさへぎりつ
+横はれるぞいまはしき
+ここにウ声の言霊ゆ
+なり出で給ひし鋭敏鳴出の
+神の言霊勇ましく
+打ち出で給へば曲神は
+怪しき雲と身を変じ
+西吹く風にまくられて
+東の空にはかなくも
+消え失せたるぞ面白き
+ああ惟神々々
+東の宮居の聖所に
+心を清め身を清め
+朝な夕なを禊して
+岐美の御幸を祈りつつ
+仕へまつらむ楽しさよ』</p>
+            <p class="ja-classical-line">鋭敏鳴出の神は御歌うたひ給ふ。</p>
+            <p class="ja-classical-line">『主の大神の神言もて
+天津高宮大前を
+謹み敬ひ畏みて
+御樋代神を守りつつ
+万里の荒野を打ちわたり
+いよいよ此処に来て見れば
+邪気かたまりて曲津見と
+なり出で雲霧わかしつつ
+深溪川と身を変じ
+吾等が行手をさへぎりぬ
+高野の比女はすばしくも
+曲津の正体看破らし
+生言霊を宣りませば
+実にもとわれは驚きて
+ウの言霊のある限り
+金剛力を発揮して
+貴の言霊宣りつれば
+流石の曲津見怖ぢ恐れ
+雲を霞と逃げ去りぬ
+そのたまゆらに溪川は</p>
+            <p class="ja-classical-line">跡かたもなく消え失せて
+草莽々と生えにつつ
+百花千花咲き満ちて
+虫のなく音もさやさやに
+天界の春となりにけり
+ああ惟神々々
+生言霊の幸ひに
+わが行く道は平けく
+いと安らけく開かれて
+跨る駒も勇ましく
+蹄を揃へて嘶きつ
+果てなき野辺を進むなり
+行手に如何なる曲津見の
+さやりて災なすとても
+主の大神の賜ひてし
+生言霊の幸ひに
+汝が神等をやすやすと
+東の宮居におくるべし
+ああ惟神々々
+神の守りの強ければ</p>
+            <p class="ja-classical-line">御樋代神等心安く
+思召しませ鋭敏鳴出の
+神は真心照らしつつ
+ここに所信を宣べまつる
+ああ惟神々々
+御霊幸はへましませよ』</p>
+            <p class="ja-classical-line">朝香比女の神は馬上豊に歌はせ給ふ。</p>
+            <p class="ja-classical-line">『われ等は神に選まれて
+御樋代神となりながら
+心は曇り魂ねぢけ
+生言霊の濁らへば
+御子産む神業にふさはずと
+百神達の嘲りを
+怨みし事の恥かしき
+太元顕津男の神は
+弱き心は持たさねど
+百神等の嘲りを
+五月蠅く思し召しまして
+しばしためらひ給ひつつ
+御樋代神の魂線の
+ひたに曇れる有様を
+窺ひ知りていち早く
+東の宮居を出で立たし
+彼方此方に間配れる
+八十比女神に見合ひして
+国魂神を生まさむと
+心の駒に鞭うちて</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">How awe-inspiring it is to have set forth! We, the Mihishirogami deities, while lamenting the ruthlessness of Kimi, passed the moon and days vainly in sorrow and resentment. Ah, Kamunagara, Kamunagara! The mind of the gods is like white clouds wandering in the sky. Illuminated by the divine radiance of the Lord Ōkami, from today onwards my soul shines like the moon and the sun, and I have intuitively perceived every nook and cranny of the lurking place of the crooked kami hidden within my heart. Now, what is called the essential divine work of Mikuni is nothing other than purifying the water and fire of Kototama to make them crystal clear, performing misogi morning and evening, guarding the path of love and faith, and serving Ōkami with a sincere heart rather than anything else.</p>
+          <p class="en-p">Now that I have attained this realization, I shall not resent the Lord Ōkami, nor shall I murmur at the ruthlessness of Kimi. With my mind peaceful, calm, and clear like the Yata mirror, I have finally firmed up today my sincere resolve to eternally serve in this Mikuni. Ah, Kamunagara, Kamunagara! May the divine protection be profound, and may the blessings of Mitamanofuyu prevail.'</p>
+          <p class="en-p">Amatsumeo no Kami, rich upon horseback, chants a miuta.</p>
+          <p class="en-p">'Leaving the palace of Tsukushi behind, setting out on the journey of Shibitenkai, guarding and serving in the vanguard of Mihishirogami, and now advancing eagerly to see this place: the defilements of Kototama have solidified, eighty Magatsumi have been born, transforming their bodies into deep valleys and rivers, and with the grimness of blocking the path where we travel, the divine pillar born from the U-sound, Toshinaronude no Kami, springs forth with courage and proclaims the Kototama with all his might, shouting as if even heaven and earth were to shatter. Quailing before his mighty divine majesty, the eighty Magatsumi instantly turned into clouds and scattered high into the sky at the will of the wind. Ah, Kamunagara, how venerable is the power of water and fire in Kototama!</p>
+          <p class="en-p">Since our minds have not yet cleared away the cloudy depths of our innermost souls, no matter how we proclaimed the Kototama, it had no effect other than making the treetops of the grass and trees tremble. Yet the Kototama chanted with such valor by Toshinaronude no Kami, whose water and fire of binding were purified, permeated even to the depths of our soul-lines, and leaving not a shadow of the crookedness lurking in heaven and earth, they fled away like clouds and mist. Ah, Kamunagara, Kamunagara! From today, reform your hearts, sharpen the living Kototama, serve morning and evening at the eastern palace, serve in the divine work of Mikuni, and pray for the daily blessings of the hundred deities. How joyous it is to advance while our horses are spiritedly shaking their manes to the front, back, left, and right, stepping shanyanshan across the flower-blooming fields!</p>
+          <p class="en-p">Our destination is far ahead. Even if there were an instance of some crooked kami blocking our path ahead, if Toshinaronude no Kami, pure in Kototama, stands at the vanguard, how awe-inspiring it is for us to follow without any fear! Ah, Kamunagara, Kamunagara! May there be blessings on the journey of Mikuni, may there be blessings on the journey of Mikuni.'</p>
+          <p class="en-p">Here, Kaguhime no Kami chants a miuta.</p>
+          <p class="en-p">'Looking out, clouds gather deep in the great field, and the moon in the august sky has become hidden. The dark clouds that wrapped the radiance of the daytime moon must be the congealed water and fire of Magatsumi. Though our horses are spiritedly advanced, the light of the moon and sun in the vast sky grows faint; the crooked kami must be blocking our way ahead, and heaven and earth have suddenly grown cloudy. Following in the rear of Takayamahime, am I now continuing the journey of the great field? Magatsumi, transforming into deep valleys and rivers, have blocked the path where we walk. The Kototama of Toshinaronude no Kami brought blessing, and turning into clouds, the Magatsuki have vanished. How hateful is the Magatsumi that blocked the way on our return journey, receiving the divine words of the Lord Kami.'</p>
+          <p class="en-p">Umesakihime no Kami chants a miuta.</p>
+          <p class="en-p">'How valiant is the sound of the hooves of the white horses ridden by the ten deities! The hoofprints of the horses journeying across the young and rugged wilderness remain deep. Pushing our horses side by side, we pray that our journey back to the eastern palace will be blessed. The Magatsumi that blocked the path we are to walk had become deep valleys and rivers; driven away by the living Kototama of Toshinaronude no Kami, alas, the Magatsumi have vanished away! Both mountains and fields have grown dark all at once. In the ugly dark clouds that enshrouded the moon and the sun, the crooked kami around here must be causing distress by stretching out webs of dark clouds. Be that as it may, let us continue the water and fire of Kototama and return to the sacred place.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">出で立ち給ひし畏さよ
+吾等御樋代神等は
+岐美の無情を怨みつつ
+ただ徒に月と日を
+疎みかこちて過ぎにけり
+ああ惟神々々
+神の心も白雲の
+空にさまよふ如くなり
+主の大神の御光に
+照らされ今日よりわが魂は
+月日の如く輝きて
+心にひそむ曲神の
+在処を隈なく悟りたり
+そも天界の要なる
+神業といふは言霊の
+水火を清めて澄みきらし
+朝な夕なに禊して
+愛と信との道守り
+真心こめて大神に
+仕ふるよりは外になし</p>
+            <p class="ja-classical-line">かくも悟りし上からは
+主の大神も怨むまじ
+岐美の無情もかこつまじ
+心平に安らかに
+八咫の鏡と澄みきりて
+この天界に永久に
+仕へまつらむ真心を
+いよいよ今日は固めたり
+ああ惟神々々
+神の守りの深くあれ
+恩頼の幸くあれ』</p>
+            <p class="ja-classical-line">天津女雄の神は、馬上豊に御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『筑紫の宮居を立ち出でて
+紫微天界の旅枕
+御樋代神の御尾前を
+守り仕へて今此処に
+いそいそ進み来て見れば
+言霊穢れ固まりて
+八十の曲津見生れ出で
+深溪川と身を変じ
+吾等が旅ゆく道の辺を
+さへぎりゐたるゆゆしさに
+ウ声に生れし神柱
+鋭敏鳴出の神は奮ひ起ち
+力限りに言霊を
+天地も破れよと宣り給ふ
+強き御稜威に辟易し
+八十の曲津は忽ちに
+雲と変じて空高く
+風のまにまに散り失せぬ
+ああ惟神言霊の
+水火の力の尊さよ</p>
+            <p class="ja-classical-line">吾等は未だ村肝の
+心の曇り晴れざれば
+如何に言霊宣るとても
+草木の梢ゆるぐより
+外に功は無かりける
+結びの水火の清まりし
+鋭敏鳴出の神のけなげにも
+宣り上げ給ふ言霊は
+わが魂線の底までも
+沁みわたりつつ天地に
+ひそめる曲のかげもなく
+雲を霞と逃げ去りぬ
+ああ惟神々々
+今日より心を改めて
+生言霊を研ぎすませ
+東の宮居に朝夕を
+仕へまつりて天界の
+神業に仕へ百神の
+日々の幸をば祈るべし
+駒は勇みて鬣を</p>
+            <p class="ja-classical-line">前後左右に振りながら
+花咲く野辺をしやんしやんと
+進み行くこそ楽しけれ
+わが行く先は遥なり
+行手に如何なる曲神の
+さやらむ例ありとても
+言霊清き鋭敏鳴出の
+神の先頭に立ちまさば
+吾等は何の怖れなく
+従ひゆくこそ畏けれ
+ああ惟神々々
+天界の旅に幸あれよ
+天界の旅に幸あれよ』</p>
+            <p class="ja-classical-line">ここに香具比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『見渡せば大野の奥に雲たちて
+御空の月はかくろひにけり
+昼月のかげを包みし黒雲は
+曲津見の水火の凝れるなるらむ
+吾駒は勇み進めど大空の
+月日の光はうすらぎにつつ
+曲神は行手にさやり居るならむ
+天地にはかに曇らひにけり
+高野比女の御後に従ひわれは今
+大野の旅を続けけるかも
+曲津見は深溪川と変じつつ
+わが行く道にさやりけるかな
+鋭敏鳴出の神の言霊幸はひて
+雲となりつつ曲津は失せけり
+主の神の神言を受けて帰りゆく
+道にさやりし曲津ぞ忌々しき』</p>
+            <p class="ja-classical-line">梅咲比女の神は御歌うたひ給ふ。</p>
+            <p class="ja-classical-line">『十柱の神の乗らせる白駒の
+蹄の音のいさましきかも
+地稚き荒野ケ原を渉りゆく
+駒の蹄はふかく残れり
+駒並めて東の宮居に帰りゆく
+わが旅立ちの幸かれと祈る
+わが行かむ道をさへぎり曲津見は
+深溪川となりて居しはや
+鋭敏鳴出の生言霊にやらはれて
+あはれ曲津は消え失せにけり
+山も野も一度に暗くなりにけり
+月日を包みし醜の黒雲に
+この辺り曲神等は黒雲の
+網を張りつつ悩むるなるらむ
+とにもあれかくにもあれや言霊の
+水火を続けて聖所に帰らむ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Suzukohime no Kami chants a sacred poem.</p>
+          <p class="en-p">Though clouds of curtains wrap tenfold and twentyfold,
+What is there to fear for a body that dwells in Kami?
+On today's journey of a body that exists together with the Lord Kami,
+Whatever obstructs shall perish away.
+If the ten pillars of Kami setting forth intend to obstruct,
+The deities of Magatsumi who wait and pine in vain—
+Awe-struck by the divine word of Kamunagara,
+We are returning to the sacred place.
+Though they spread traps of various wiles,
+We shall break through and advance upon the water and fire of Kototama.
+Since Mikuni is a divine land of love and faith,
+Falsehood shall not be permitted, evil shall not be permitted.
+While the crooked deities fabricate falsehood as truth,
+Trying to obstruct the Kami of Makoto—
+How pitiful must their hearts be, that the wiles
+Of the deities of Magatsumi are suddenly shattered.</p>
+          <p class="en-p">Uzukohime no Kami chants a sacred poem.</p>
+          <p class="en-p">On the path where we are protected by the Kami of Unarizu,
+We deem there is no Magatsumi to obstruct us.
+Strong though the calamities of Magatsumi may be,
+We shall open our way and advance by the Kototama of U.
+Since I too am a goddess who has become the voice of U,
+How could I fear the wiles of Maga?
+The dark clouds that obscure only the sun and moon of the vast sky
+Were the figures of Yasomagatsumi.
+Sealing the vast sky, the eighty Magatsumi
+Are blocking even the light of the sun and moon.
+Wait a while, proclaiming the noble Kototama,
+We shall scatter the foul dark clouds in all directions.
+Along the borders of the path where I go forth, hundreds and thousands of flowers
+Blooming in splendor flourished in the spring.
+Riding side by side across the spring fields,
+I think proudly of our journey.
+How joyful it is to go forth side by side on horseback
+Through the spring fields where birds sing and butterflies dance.
+Even the deep valleys where the wiles of Magatsumi were schemed
+have vanished away into the living Kototama.</p>
+          <p class="en-p">Should there be any Maga obstructing the path where I go forth,
+I shall trample them to pieces beneath my horses' hooves and advance.</p>
+          <p class="en-p">Sabatakohime no Kami chants a sacred poem.</p>
+          <p class="en-p">Continuing the distant journey through Tōno far away,
+The joy of drawing closer to the sacred place day by day.
+Even the blowing wind is exceedingly gentle, and the voices of a hundred birds
+Are clear and pure throughout the vernal spring.
+Even the foul dark clouds that enshrouded the vast sky,
+Restlessly swirling and gathering about—
+The blessings of the water and fire of the Kami of Shinatobe
+Shall blow and scatter the curtain of dark clouds.
+Though Magatsumi strive to obstruct the path ahead,
+Taking the form of mountains, valleys, and clouds—
+Joyful is the body that lives and works
+In Mikuni where there is not a single thing to fear.
+To be handed down unto the very end of ten thousand generations,
+The journey of Kototama that shall illuminate the divine majesty.
+Though the August Spirit sets forth on a journey of ten thousand leagues,
+When I look at the moon, it is not lonely at all.
+How hateful are the clouds that enshrouded
+The moonlight wherein the spirit of my spouse is hidden.
+By the Kototama of the divine word of Sabatakohime no Kami,
+We shall divide and scatter the clouds and mists of the august sky.</p>
+          <p class="en-p">As she chanted thus, the Kami of Shina perhaps granted her prayer; the wind of Shinatobe suddenly blew forth, scattering the clouds and mists in all directions, and the formidable dark clouds vanished without a trace.</p>
+          <p class="en-p">Gazing upon this state, Hanakohime no Kami chants a sacred poem.</p>
+          <p class="en-p">How the clouds in the august sky have scattered and vanished
+By the Kototama of the divine word of Sabatakohime no Kami!
+As the dark clouds of the distant sky scatter away,
+The deities of the sun and moon are shining brightly.
+Even the hundred flowers blooming fully upon the earth
+Wear smiling faces, adoring the sun and moon.
+The voices of a hundred birds are also heard clearly
+Ever since the clouds of the august sky were blown away.
+The sound of the hooves of the white steeds continuing their journey of Mikuni
+Resounds with increasing clarity.
+On a spring day when even the wind blowing over the fields is fragrant,
+How joyful it is to advance with steeds abreast.</p>
+          <p class="en-p">Sayakohime no Kami chants a sacred poem.</p>
+          <p class="en-p">The dark clouds scattered by the wind of Shinatobe
+Turn into boulders to obstruct the way.
+The clouds that finished scattering gather once more
+In the distant vast sky, becoming mountain peaks;
+Billowing and surging, surging and billowing as peaks of clouds,
+Magatsumi obstruct the path ahead.
+Strong though the fury of Magatsumi may be,
+We shall ride over them with our horses' hooves and advance.
+Amidst the beautiful and pure Mikuni,
+How ominous indeed is the fury of Magatsumi!
+Through the merit of the Kami of Unarizu, the heart deep within
+Has grown strong and robust.
+My heart swells and expands, filling heaven and earth,
+How valiant it felt, brimming and overflowing!
+Now, no matter what kind of Maga obstruction may arise,
+What is there to fear for us who dwell in Kami?</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">寿々子比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『雲の幕十重に二十重に包むとも
+何か怖れむ神に在る身は
+主の神とともにある身の今日の旅
+さやらむものは亡びゆくべし
+十柱の神の出で立ちさやらむと
+待ち佗ぶるならむ曲津見の神は
+惟神神の神言を畏みて
+吾等は聖所に帰りゆくなり
+さまざまの奸計の罠を張るとても
+破りて進まむ言霊の水火に
+天界は愛と信との神国なれば
+虚偽は許さじ悪はゆるさじ
+曲神は偽を誠とかまへつつ
+真言の神にさやらむとすも
+浅ましき心なるかも曲津見の
+奸計のわざは忽ち破れぬ』</p>
+            <p class="ja-classical-line">宇都子比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『鋭敏鳴出の神に守られゆく道に
+さやらむ曲津見はなしと思へり
+曲津見の災如何に強くとも
+ウの言霊にひらき進まむ
+われも亦ウ声になりし女神なれば
+曲津の奸計を如何で怖れむ
+大空の月日をのみし黒雲は
+八十曲津見の姿なりける
+大空を封じて八十の曲津見は
+月日の光をさへぎりてをり
+待てしばし貴の言霊宣り上げて
+醜の黒雲四方に散らさむ
+わが伊行く道の傍へに百千花
+咲きにほひつつ春栄えけり
+春の野に駒を並べて進みゆく
+わが旅立ちを勇ましく思ふ
+鳥うたひ胡蝶は舞へる春の野を
+駒を並べて伊行くたのしさ
+曲津見の奸計たくみし深溪川も
+生言霊に消え失せにけり</p>
+            <p class="ja-classical-line">わが伊行く道にさやらむ曲津あらば
+駒の蹄に蹶散らし進まむ』</p>
+            <p class="ja-classical-line">狭別比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『はろばろと遠野の旅を続けつつ
+日々に聖所に近づく楽しさ
+吹く風もいと軟かに百鳥の
+声はさやけく澄みわたる春
+大空をつつみし醜の黒雲も
+おちつかぬがにたち迷ひつつ
+科戸辺の神の御水火の幸はひて
+吹き散らすらむ黒雲の幕を
+山となり溪川となり雲となり
+曲津見は行手にさやらむとすも
+恐るべきもの一つなき天界に
+生きてはたらく身は楽しけれ
+万世の末の末まで語り伝へ
+御稜威照らさむ言霊の旅を
+瑞御霊万里の旅に立たせども
+月をし見れば淋しからずも
+わが岐美の御霊こもりし月光を
+つつみし雲の憎らしきかも
+狭別比女神の神言の言霊に
+御空の雲霧さわけ散らさむ』</p>
+            <p class="ja-classical-line">斯くうたひ給へば、科戸の神も諾ひ給ひけむ、科戸辺の風俄に吹き出でて、四方八方に雲霧を吹き散らし、さしもの黒雲は跡かたもなく消え失せにける。</p>
+            <p class="ja-classical-line">この状を眺めて花子比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『狭別比女神の神言の言霊に
+御空の雲は散り失せしはや
+久方の空の黒雲散りにつつ
+月日の神はかがやき給へり
+地の上に咲き足らひたる百花も
+笑まひ顔なり月日をがみて
+百鳥の声もさやかに聞ゆなり
+御空の雲の吹き散りしより
+天界の旅をつづくる白駒の
+蹄の音も冴えわたりつつ
+野辺を吹く風さへ薫る春の日を
+駒を並べて進む楽しさ』</p>
+            <p class="ja-classical-line">小夜子比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『科戸辺の風に散りにし黒雲は
+巌となりて道にさやらむ
+散りはてし雲は彼方の大空に
+伊寄り集ひて峰となりつつ
+もうもうと湧き立ち湧き立ち雲の峰と
+なりて行手にさやる曲津見
+曲津見の猛びは如何に強くとも
+駒の蹄にかけて進まむ
+美しき清き天界の中にして
+由々しきかもよ曲津見の猛びは
+鋭敏鳴出の神の功に村肝の
+心はつよく太らひにけり
+わが心ふくれひろごり天地に
+充ち足らひつつ勇みけるはや
+この上は如何なる曲津のさやるとも
+何かおそれむ神にあるわれは』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Amatsumeo no Kami chants a sacred poem as follows:</p>
+          <p class="en-p">'Following the divine word of Takanohime,</p>
+          <p class="en-p">pleasant is this journey of the heavenly land we tread.</p>
+          <p class="en-p">Even upon this journey where Magakami watches for our weakness,</p>
+          <p class="en-p">we shall advance in peace through the living kototama.</p>
+          <p class="en-p">Through the merit of Unarizu no Kami, Magakami</p>
+          <p class="en-p">has vanished like clouds and mist.</p>
+          <p class="en-p">By the blessing of the divine word of Umesakuhime,</p>
+          <p class="en-p">how fragrant is the wind that blows!</p>
+          <p class="en-p">Through the enduring blessing of Kaguhime's mitama,</p>
+          <p class="en-p">there is indeed the scent of the nuts of Kagu.</p>
+          <p class="en-p">By the kototama of the divine word of Suzukohime,</p>
+          <p class="en-p">this heaven and earth have grown clear and pure.</p>
+          <p class="en-p">Asakahime is Omokatsukami,</p>
+          <p class="en-p">and she is truly a deity who faces and strikes down the adversary.</p>
+          <p class="en-p">The divine word of Uzukohime has a kototama</p>
+          <p class="en-p">that is exceedingly beautiful and rings out clearly.</p>
+          <p class="en-p">With the blessing of Sawakehime's kototama,</p>
+          <p class="en-p">the clouds of the august sky have blown away and scattered.</p>
+          <p class="en-p">By the blessing of Hanakohime's living kototama,</p>
+          <p class="en-p">a hundred trees and grasses are filled with flowers.'</p>
+          <p class="en-p">Sayokohime proclaims the majestic kototama,</p>
+          <p class="en-p">whereby the midday moon has clearly appeared.</p>
+          <p class="en-p">In this manner, the deities each chant their sacred poems, and gently swaying in their saddles, they advance day and night across the vast field of Ōnogahara, where the spring wind blows.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">天津女雄の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『高野比女神の神言に従ひて
+ゆく天界の旅は楽しも
+曲神の隙をねらへるこの旅も
+生言霊に安く進まむ
+鋭敏鳴出の神の功に曲神は
+雲を霞と逃げ失せにけり
+梅咲比女神の神言の幸はひに
+吹き来る風も香ばしきかな
+香具比女の御魂幸はひ非時に
+香具の木の実の香りこそすれ
+寿々子比女神の神言の言霊に
+澄み清まりぬこの天地は
+朝香比女神は面勝神にして
+またも射向ふ神にましける
+宇都子比女神の神言は言霊も
+いと美しく冴え渡りけり
+狭別比女神の言霊幸はひて
+御空の雲は吹き散りにける
+花子比女生言霊の幸はひに
+百の木草は花満ちにけり</p>
+            <p class="ja-classical-line">小夜子比女宣らせる稜威の言霊に
+真昼の月はあらはれにける』</p>
+            <p class="ja-classical-line">斯くの如く、神々は各自に御歌うたはせ給ひつつ、馬上ゆたかに揺られながら春風渡る大野ケ原を、夜を日についで進ませ給ふ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c02.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 2: Demon の渓流 [1919]</span>
+      </a>
+      <a href="c04.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 4: Monster しの巌 Mountain [1921]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

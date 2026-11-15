@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: 報告 Festival [1923] - Volume 76 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 76 Table of Contents</a>
+      <span>Volume 76</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 76 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: 報告 Festival [1923]</h1>
+      <p class="chapter-title-ja">報告祭〔1923〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As the spring yōki drifted and cherry blossoms bloomed in aukuwaranman splendor, around midday when cherry hanabira scattered quietly upon the garden surface like hitohirafutahira, aligning their horse bits in the pure courtyard of the Miya at Takachiho, the delegation of the kami Takanohime returned hither with radiant miomo, joyous and auspicious.</p>
+          <p class="en-p">Then the kami Miwakeo, upon beholding the form of Himegami, rejoiced with uchiyoroko, and coming forth reverently to greet her and soothe the fatigue of their chiyōto journey, busily directed the shiyoshin to prepare a banquet of kuwangei in the betsuden, working mamemame with diligence.</p>
+          <p class="en-p">Hereupon, the delegation of the kami Takanohime finished misogihara before the ōmahe of the ōmiya, performed the saiten of iyahi, and pronounced the futonorito.</p>
+          <p class="en-p">Arranging various delicacies of sea, river, mountain, and field upon eightfold leg-desks like mountains, the ten kami took their seats in the ceremonial hall while the other kami knelt in reverence at the rear seats, participating in this auspicious saiten of the day, worshipping heaven, worshipping earth, and rejoicing.</p>
+          <p class="en-p">The kami Takanohime clapped her hands before the august presence and spoke thus: 'Awakening with awe in the majestic mahoraba of the Shibi Heavenly Realm, at the bedrock beneath Mount Takachiho, where the august pillars are driven deep and the cross-timbers tower high in Takamanohara, before the great presence of the Lord Ōkami who abides eternally and immovably, we, the august substitute vessels of Takanohime and others, with trembling awe, reverence, and trepidation declare. Now, this heavenly realm—being a land born forth through the broad, thick, great august grace of the Lord Ōkami and the august divine might of the red, direct, and true living Kototama, making no division between sea and land, nor any distinction between mountain and river, receiving such broad and thick blessings and standing in everlasting prosperity—we have deeply realized and widely comprehended that to stand in the world even for a single moment without the grace of the Lord Ōkami is impossible, and desiring to tremble with awe, fear, and reverence ever more before that august solemnity, we chose an auspicious day of a felicitous month, traversed paths of ten thousandri astride the backs of horses, stepping over tree roots and rock bases to tread securely, and ascending to the heavenly Takamiya while layering the pillow of grass upon our travel lodgings, we paid our worship, received the pure, red, and noble august divine decree directly from the august mouth of the Ōmikami, and—pulling tight the reins of the heart's steed lest we leak or forget even a single word, receiving it upon our necks without forgetting it for an instant, embracing it in the depths of our liver-hearts and hoarding it in our breasts—we have lived on while reverently tasting His great august grace; yet, with awe-inspiring reverence, the Lord Ōmikami has newly granted us, as the chief priest of the Miya of Takachiho this time, the kami Eimei-Narude, and as his assistant pillar, the kami Amatsumeno. Ah, wonderful, wonderful! From today onward, may the Miya of Takachiho flourish ever more beautifully and purely—just as the flowers of Yayuki bloom in full, and just as the maples of autumn are dyed in crimson—and unable to contain our joy as we measure and ponder this, each of our august substitute vessel kami and others performed purification in the gem-spring, finished reciting the august auspicious words of gratitude, and once again mounting our horses, with the brave neighing of horses across the endless great plains, through the return journey where night succeeded day, even the tangled wicked deeds of the myriad tsukumitsumi obstructing our path—through the deep and thick august protection of the Lord Ōmikami—were left without loss or mishap, and at the auspicious hour of this auspicious day, we have returned to this Miya where the Lord Ōmikami is enshrined. Wishing to repay even a thousandth part of that boundless joy, we humbly arrange and offer various delicacies of sea, river, mountain, and field upon a hundred-toru desk like a yokoyama, and we pray with awe and trepidation that Thou wilt graciously listen and assent with deep sympathy and detail, that the presiding kami serving in this Miya may serve without ever violating or opposing the august will, illuminating and serving by the light of the true words granted by the Ōmikami, and serving without sin, defilement, or error with deep sympathy and detail.'</p>
+          <p class="en-p">Separately we speak: we humbly pray with awe and trepidation—bending our knees like deer, piercing our necks like wild boars—that the kunitsukami of the myriad plain countries surrounding the Miya of Takachiho as its center may each exert and diligence themselves in their daily duties without slackening or idling, developing and prospering this heavenly realm ever more, so that they may never let fall the noble august name which is the mahoraba of the Shibi Heavenly Realm, striving and striving to make it active. May the divine spirits of Aumakara bless us! May the divine spirits of Aumakara bless us!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">春の陽気は漂ひて、桜花爛漫と咲き乱れ、庭の面に一弁二弁と静に桜の花弁の散りこぼれたる真昼頃、高地秀の宮居の清庭に駒の轡を並べて、高野比女の神一行は御面輝かせ、目出度く此所に帰り給ひければ、胎別男の神は比女神の姿を見るより打喜び、恭しく出で迎へて長途の旅の労を犒ふべく、別殿に歓迎の馳走の準備に忙しく諸神を督して、忠実々々しく立ち働き給ひける。</p>
+            <p class="ja-classical-line">茲に高野比女の神一行は、大宮居の大前に禊祓ひを終り、感謝の祭典を行ひ太祝詞を宣らせ給ふ。</p>
+            <p class="ja-classical-line">海河山野の種々の美味物を八足の机代に置き足はし、十柱の神は式場に列座し其他の神々は末座に拝跪して、今日の目出度き祭典に列し給ひつつ、天を拝し地を拝し歓ばせ給ふ。</p>
+            <p class="ja-classical-line">高野比女の神は御前に拍手して、</p>
+            <p class="ja-classical-line">『掛巻も畏き紫微天界の真秀良場なる高地秀山の下津岩根に、宮柱太敷立て高天原に千木高知りて、堅磐常磐に鎮まりいます主の大神の大前に、御樋代の神高野比女等、慎み敬ひ畏み畏みも白さく。抑此の天界は主の大神の広き厚き大御恵と、赤き直き正しき生言霊の御稜威に依りて、鳴り出で給ひし国土にしあれば、海と陸との別ちなく山と河との差別なく、広き厚き恩頼を蒙りて、弥遠永に立栄ゆるものにしあれば、一日片時も主の大神の御恵に離れては、世に立つべからざる事の由を、深く悟り広く究めて、弥益々に其畏さに戦慄き恐れ敬ひ奉らむとして、過ぎつる吉月の吉日を選み、万里の道を遥々と駒の背に跨り、岩根木根踏み佐久美て天津高宮に、草枕旅の宿りを重ねつつ詣で奉り、大御神の御口自から清き赤き貴き大神宣を承り、唯一言も洩らさじ忘れじと心の駒の手綱引締め、頸に受けて束の間も忘るる事なく、村肝の心に抱き胸に秘め、大御恵を忝けなみつつありしが、畏れ多くも主の大御神より高地秀の宮居の宮司として、此度新に鋭敏鳴出の神、其添柱として天津女雄の神を授け給ひぬ。天晴れ天晴れ今日よりは高地秀の宮居は弥生の花の咲き満つるが如く、秋の楓の紅に染むるが如く、弥美はしく弥清しく栄えまさむ事を、思ひ量りて嬉しみに堪へず、各自の御樋代神等は玉の泉に禊を修め、感謝言の神嘉言を宣り終へて、再び駒に跨りつ十柱の神等は果しも知らぬ大野原の駒の嘶き勇ましく、夜を日に次ぎて帰らむ道に、さやりたる八十曲津見の曲業も、主の大御神の深き厚き御守りに、喪なく事なく今日の吉日の吉時に、主の大御神を祭りたる此の宮居に帰りける、其嬉しさの千重の一重だも報い奉らむとして、海河山野の種々の美味物を百取の机代に横山の如く置き足はして奉る状を、〓__GT_13105__怜に委曲に聞食相諾ひ給ひて、此の宮居に仕へ奉る司神等は大御心に違ひ奉らず逆ひ奉らず、大御神の授け給ひし真言の光を照らし仕へ、罪穢過なく〓__GT_13105__怜に委曲に仕へしめ給へと畏み畏みも願ぎ奉る。</p>
+            <p class="ja-classical-line">言別けて白さく、高地秀の宮居を真中として、四方を廻れる稚国土原の、国津神等は各自に日々の業務を励しみ勤めて緩ぶ事なく、怠る事なく、此の天界を弥益に拓かせ栄えしめ給ひて、紫微天界の真秀良場たる貴き御名を落さじと、励み励み活動かしめ給へと、鹿児自物膝折伏せ、宇自物頸根突貫きて畏み畏みも願ぎ奉らくと白す。惟神霊幸倍坐世惟神霊幸倍坐世』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Takanohime-no-Kami finished the Norito before the Ōmahe, quietly descended from the Mimahe, took her seat at the Nahorahi banqueting place together with the Shiyoshin, and while keeping her hands joined in Gatsushiyō for a long time, chanted a Miuta.</p>
+          <p class="en-p">Though long and arduous was the travel by the tail of the Ashibiki yamadori, through the grace of the Kami we have safely fared. Far away to the Miya of Tsukushi we led our horses abreast, and if it had not been for the thick grace of the Lord Kami upon us who came on pilgrimage in Kamunagara, this Tabida would have been indeed difficult. It was a perilous journey, going through the wide and endless young Kunihara. The Magakami lurked everywhere, drawing their Tegusune and waiting in ambush. Such a perilous journey has ended without mishap, and lo, today we have returned to the Mimahe! Even the bustling journey of the Tohashira was thus painful, she thought of her dear Kimi. Now for the first time I realize the hardships of my Kimi's journey—how foolish I was! I have realized that whatever happens should be left to the heart of the Kami, and that we are beings destined to live thus. The Lord Kami has descended the Unarizu-no-Kami to the Sugado as the master of the Miya!</p>
+          <p class="en-p">The Tianjin Meo-no-Kami who descended as the Sohebashira to the office of Unarizu-no-Kami: Upon the peaks of Takachifu the breath of spring drifts, and cherries bloom now at their height. In the Eastern Miya, where the uguisu sings with tranquil voice among the treetops of the cherry trees: when I look back upon it from the long journey of the pillow of grass, spring is deep within this pure courtyard. Both sacred trees and grasses stand forth with fresh reiki, looking as if they would celebrate the spring of the heavenly realm.</p>
+          <p class="en-p">Unarizu-no-Kami chants a Miuta.</p>
+          <p class="en-p">Serving as an offering to the Mihishiro Kami, at last I have come to this Sugado! Serving in the Eastern Miya, I think: there is no such Sugado elsewhere in the world. The mountains of Takachifu are filled to the brim with blooming cherry blossoms, and all is tranquil. Coming here, I have for the first time known how refreshing is the spring scenery of the heavenly realm. Compared to the pine garden of the Western Miya, the Eastern Miya is magnificent. While the Western Miya's heart is calm and settled, the Eastern Miya's heart flutters. Embracing this fluttering heart, would that I might serve in the Miya of Takachifu and solidify the land! Even in the hearts of the Mihishiro's Hime-gami, bright and clear is the height of the cherry blossoms. Let the flowers bloom out of season, let them scatter not, let them wither not—the flowers that bloom in the garden of the living Kami.</p>
+          <p class="en-p">As luck would have it, a single cherry petal flutteringly fell and floated upon the wine cup held by Asakahime-no-Kami, who sat among the banqueting guests; seeing this, Asakahime-no-Kami smiled and chanted a Miuta.</p>
+          <p class="en-p">Is it a single petal of my Kimi's pure heart, this cherry blossom floating in my wine cup? Thinking of it as the heart of my Kimi, I cannot cast it aside; let me partake of the flower together with the wine.</p>
+          <p class="en-p">Chanting thus, she gulped down the sacred wine upon which the flower petal floated,</p>
+          <p class="en-p">As the petal of my Kimi's deep heart, together with the sacred wine I have drained it! Chosen as the Mihishiro Kami, thinking of it as my Kimi's water and fire, this flower-wine I drank. If it be so, as the Mihishiro-no-Kami I shall go forth seeking the dwelling place of my Kimi!</p>
+          <p class="en-p">Umesakihime-no-Kami chants a Miuta.</p>
+          <p class="en-p">The plum blossoms have already finished scattering, and the cherry blossoms have begun to scatter anew before the Mimahe of the Kami. The state of the world passing on, I have seen fully in the flowers of the plum and the cherry. I set forth in the morning when the white plum was in bud, and have returned in the spring when the cherry blossoms scatter. From today, changing my heart, in the Great Miya morning and evening I will offer true words. I am in awe, having realized the truth that all things in the universe are born from Kototama. All day long before the Mimahe of the Kami, let me serve by offering Futoshi-Norito and Kototama. Morning and evening Norito are not enough; both night and day they are Norito that should be mutually recited. All things in the universe flourishing by the majesty of Kototama—again, Kototama was truly the power.</p>
+          <p class="en-p">Kaguhime-no-Kami chants a Miuta.</p>
+          <p class="en-p">The tokoyo no kagu no konomi also were born into being through the precious water and fire of Kototama. Since I too am a Kami born from the fruit of Kagu, Kototama is precious. If I do not hear the voice of Kototama, even for a moment my body feels suffering. The water and fire of Kototama create the air and bring forth a hundred lives. The righteous water and fire of the Kami-spirit open up the heavenly realm, while clouded water and fire wound the heavenly realm. The heart of the village-liver, clouded and turbid, is what makes the water and fire of Kototama resound. The Miya of Takachifu, where the Lord Kami is enshrined eternally, is pure; when Kototama is clear, even the wind blowing across the treetops blows refreshingly, and Kototama rings out clearly and purely. The river water of Seminogawa flowing across the surface of the garden is also crystal clear, transparently clear; amidst the pines of the tokoyogi, the view of the cherry blossoms blooming in full is doubly magnificent.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高野比女の神は大前の祝詞を終り、しづしづと御前を下り諸神と共に、直会の席に着かせ給ひ、合掌久しうしつつ御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『足引の山鳥の尾の長旅も
+神の恵にやすくをはれり
+遥々と筑紫の宮居に駒並べて
+詣で来つるも惟神われ等は
+主の神の厚き恵しなかりせば
+此の旅立ちは難かりしものを
+広々と果しも知らぬ地稚き
+国原を行く危き旅なりし
+曲津神は到る処にさやらむと
+手組脛引きて待構へたりき
+斯の如危き旅も恙なく
+今日を御前に帰り来しはや
+十柱の賑はしき旅も斯の如
+苦しきものをと背の岐美を思ふ
+背の岐美の旅の艱みを今更に
+悟りけるかな愚かしき吾も
+何事も神の心の儘にして
+生るべきものと悟らひにけり
+主の神は宮居の司と鋭敏鳴出の
+神を聖所に降したまひぬ</p>
+            <p class="ja-classical-line">鋭敏鳴出の神の司の添柱と
+降り来ませる天津女雄の神
+高地秀の峰に春の気漂ひて
+今をさかりと桜咲くなり
+桜木の梢にうたふ鶯の
+声長閑なる東の宮居はも
+草枕長の旅より帰り見れば
+この清庭に春はふかめり
+御木も草も瑞気立ちつつ若やぎて
+天界の春を言祝ぎ顔なる』</p>
+            <p class="ja-classical-line">鋭敏鳴出の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『御樋代神御供に仕へ漸くに
+此の聖所にわれ来つるかも
+東の宮居に仕へて思ふかな
+これの聖所はまた世になしと
+高地秀の山は隈なく桜木の
+花咲き満ちて長閑なりけり
+此処に来て始めて知りぬ天界の
+春の景色のさわやかなるを
+西の宮居の松の神苑に比ぶれば
+華美なるも東の宮居は
+西の宮居は心静かに落付けど
+東の宮居は心ときめく
+ときめける心抱きて高地秀の
+宮居に仕へつ国土固めばや
+御樋代の比女神等の心にも
+似て晴れ晴れし桜の盛りは
+非時に花は散らざれ萎れざれ
+生きたる神の庭に咲く花は』</p>
+            <p class="ja-classical-line">折もあれ桜の花弁は、ひらひらと直会の席に列なり給ふ朝香比女の神の持たせる御盃の上に、一弁落ち来り浮びたれば、朝香比女の神はほほ笑みつつ御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『背の岐美の清き心の一弁か
+わが盃に浮ける桜は
+背の岐美の心と思へば捨てられじ
+花もろともにいただかむかな』</p>
+            <p class="ja-classical-line">斯く歌ひながら花弁の浮ける神酒をぐつと飲み下し給ひ、</p>
+            <p class="ja-classical-line">『背の岐美の深き心の花弁と
+神酒諸共に飲み干しにけり
+御樋代の神と選まれ背の岐美の
+水火と思ひて飲みし花酒よ
+斯くならば吾は御樋代神として
+岐美の在所をたづね行くべし』</p>
+            <p class="ja-classical-line">梅咲比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『梅の花ははや散り果てて桜花
+また散り初めぬ神の御前に
+移り行く世の有様をまつぶさに
+梅と桜の花に見しはや
+白梅のつぼめる朝を立ち出でて
+桜花散る春を帰れり
+今日よりは心改めて大宮居に
+朝な夕なを真言捧げむ
+言霊に森羅万象は生るてふ
+由を悟りし吾は畏し
+終日を神の御前に太祝詞
+言霊捧げて仕へまつらな
+朝夕の祝詞は愚か夜も昼も
+かたみに宣るべき祝詞なりけり
+言霊の稜威に栄ゆる森羅万象は
+又言霊ぞ力なりける』</p>
+            <p class="ja-classical-line">香具比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『非時の香具の木の実も言霊の
+尊き水火に生り出でしはや
+吾も亦香具の木の実ゆ生れたる
+神にしあらば言霊たふとし
+言霊の声を聞かずば片時も
+苦しさ覚ゆる吾体なりけり
+言霊の水火に空気を造り出し
+百の生命を生み出だすなり
+正しかる神魂の水火は天界を拓き
+曇れる水火は天界を傷ふ
+村肝の心曇りて濁りたる
+言霊の水火は鳴り出づるなり
+主の神を常磐に祀りし高地秀の
+宮居は清しも言霊澄めば
+吹き渡る梢の風も爽かに
+言霊清く鳴り響くなり
+庭の面を流るる瀬見の川水も
+澄みきり澄みきり透き徹りつつ
+常磐木の松の木の間に咲き満つる
+桜の眺めは殊更目出度き』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Suzukohime-no-Kami chants a divine poem.</p>
+          <p class="en-p">Having traveled far and wide across distant paths of travel,
+How joyous it is today to proclaim the Iyahigoto!
+In the Kamikuni where the Kototama were born from water and fire,
+Verily, it is the pure Kototama that is my very Inochi!
+Without the Hataraki of the Kototama, even for a fleeting moment,
+It was a Kamikuni that could neither live nor flourish.
+May all the will and thoughts that I possess
+Be the light of the living Kototama!
+A Kamikuni where the righteous living Kototama shines
+Must guard even the very tips of its words.
+The shape of the mountain of Takachiho, opened by Akitsuo-no-Kami,
+Remains forever alive and enduring.
+Gazing morning and evening upon the mountain of Takachiho,
+To serve alongside my lordly Kimi,
+That mountain of Takachiho, which could not be seen during the long journey,
+Oh, how my heart yearns for it all the more intensely!
+This Miya was built by my lordly Kimi,
+Being a precious Miya, it is doubly magnificent.
+To make this Miyama our strength morning and evening,
+And to live together with my lordly Kimi,</p>
+          <p class="en-p">Weeping while deeply realizing the hardships
+Of my lordly Kimi as we piled travel upon travel on our Kusamakura journey.]</p>
+          <p class="en-p">Uzukohime-no-Kami chants a divine poem.</p>
+          <p class="en-p">From today onwards, will Unarizu-no-Kami appear
+And serve as the chief of the Miya?
+With Amatsumeo-no-Kami also coming forth, the daily service
+Of the great Miya shall be renewed.
+After the divine Mihishiro's journey, it was the entrustment
+Of the office of Harawakeotoko-no-Kami.
+O Harawakeotoko-no-Kami, from today onwards assist the divine work
+Of the office of Unarizu-no-Kami!
+The eight pillars of the Mihishiro deities shall gather in the sacred hall
+All day long to proclaim the Kototama.
+If the water and fire of the Kototama cease, all things in creation
+In the Kamikuni will wither and fade away.
+The Mihishiro deities are not merely the bearers of divine offspring,
+They were verily the channels of the living Kototama!
+That the Mihishiro of Akitsuo-no-Kami was thus appointed
+Was solely for the purpose of sustaining the living Kototama.
+What is meant by a Mihishiro is an age of life; it is not merely
+The office of giving birth to the deities of the Kunitama.
+Until today, not even knowing my own service,
+How shameful it is that I only longed for Kimi!]</p>
+          <p class="en-p">Sawabakuhime-no-Kami chants a divine poem.</p>
+          <p class="en-p">As I listen to the Kototama of Uzukohime-no-Kami,
+I too have awakened to the office of the Mihishiro.
+Even the heavenly sun, which parts the clouds and mist to rise,
+Was born forth solely from the Kototama of the Lord!
+Both the moon, the sun, and the stars, when thought of as the water and fire
+Of the Kototama, how reverend they are!
+Both grasses and trees, birds and beasts, are a Kamikuni nurtured
+By the water and fire of the Kototama.
+The blooming and scattering of cherry blossoms, and the blowing wind as well,
+Have all become the water and fire of the Kototama.
+As for my own body too, blessed by the fortune of the living Kototama,
+I am a person born to serve the Kototama.
+If there were no fortune in the water and fire of the Kototama,
+This Kamikuni would instantly perish.
+That I returned safely without any misfortune after traveling from afar
+Is also the fortune of the Kototama.
+To forget such revered and majestic Kototama
+And neglect the Norito—how could that ever be right?
+If the Kikon becomes turbid, the heart will become turbid;
+If the heart becomes turbid, the Kototama will be defiled.</p>
+          <p class="en-p">If we purify the body and purify the heart to serve,
+The living Kototama will naturally shine of themselves.
+The essential service of the deities is superior to morning and evening
+Shinto purification rites.
+A Miya without a master is suddenly lonely,
+For there is no Norito of the living Kototama.
+The Norito proclaimed by Harawakeotoko-no-Kami
+Became weak and somewhat turbid.
+The loneliness of a Miya where the Mihishiro deity is not present
+Was just like a Miya where the Lord deity does not reside.]</p>
+          <p class="en-p">Hanakohime-no-Kami chants a divine poem.</p>
+          <p class="en-p">The cherry blossoms on Mount Takachiho, blooming in their utmost splendor,
+Are perhaps but a life of a brief moment.
+Though we lament, the blossoms do not stay on the branches,
+And as the softly blowing wind begins to scatter them,
+Wondering if the nightstorm is scattering the blossoms, I simply
+Support myself upon the living Kototama.
+Even as I sustained them, praying that the flowers would not scatter for a moment,
+My own Kototama has grown strangely weak.
+Though the nightstorm does not blow, the cherry blossoms on the branches,
+When their time arrives, come tumbling down.
+Gazing upon the petals of the garden that have fallen and scattered,
+Even stepping on them makes me feel a sense of reluctance.
+The changing state of the world was thus realized
+In the cherry blossoms of the Miya on Takachiho.
+Though the blossoms fall, young leaves sprout anew upon the branches,
+And with fresh eyes, summer will flourish.
+In the garden where the cherry blossoms have fallen, red and white,
+How charming the peonies blooming in fragrance are!
+Yet even so, as summer deepens, the petals of the red peonies
+Will crumble away one by one.</p>
+          <p class="en-p">From the day the buds of the red peonies unfold and begin to bloom,
+Three days pass, and it is a world where they scatter once more.
+The white plum blossoms in the pristine garden have finished scattering,
+And in their wake, round, greenish fruits have been born.
+White plum blossoms open, scatter, and bear fruit,
+Teaching us the manner of a world that continually changes.]</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">寿々子比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『はろばろと遠の旅路を重ね来て
+目出度く今日は感謝言宣る
+言霊の水火に生り出でし天界に
+澄める言霊の吾生命かも
+言霊の活用なくば束の間も
+生きて栄えぬ天界なりけり
+わがもてる意志想念も悉く
+生言霊の光なるらむ
+正しかる生言霊の光る天界は
+言葉のはしも慎むべきなり
+顕津男の神の拓きし高地秀の
+山の姿は生き通しなり
+高地秀の山を朝夕眺めつつ
+吾背の岐美と仕へ奉るも
+長旅に見え得ざりし高地秀の
+山の一しほ恋しき吾なり
+此の宮居は吾背の岐美の築きたる
+貴の宮居ぞ殊更うるはし
+朝夕にこれの神山を力とし
+吾背の岐美となして生くるも</p>
+            <p class="ja-classical-line">草枕旅を重ねて背の岐美の
+艱みを深く悟りつつ泣くも』</p>
+            <p class="ja-classical-line">宇都子比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『今日よりは鋭敏鳴出の神現れまして
+宮居の司と仕へますかも
+天津女雄の神も出でまして大宮居の
+日々の仕へも革まるべし
+御樋代神旅なるあとは胎別男の
+神の司の依さしなりけり
+胎別男の神よ今日より鋭敏鳴出の
+神の司の神業補けよ
+御樋代の八柱神は聖殿に
+終日集ひて言霊宣るべし
+言霊の水火止まれば天界の
+森羅万象は枯れ萎むなり
+御樋代の神は御子生みのみならず
+生言霊の樋代なりしよ
+顕津男の神の御樋代と任けられしも
+生言霊を補くるためなりき
+樋代とは生代の意ぞ国魂の
+神生むのみの司にあらずも
+今日までは吾勤めさへ知らずして
+岐美をのみ恋ひしことの恥かしき』</p>
+            <p class="ja-classical-line">狭別比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『宇都子比女神の言霊聞くにつけ
+吾も悟りぬ御樋代の司を
+雲霧を別けて昇らす天津日も
+主の言霊ゆ生り出でましける
+月も日も星も悉言霊の
+水火と思へば尊きろかも
+草も木も鳥も獣も言霊の
+水火に育つる天界なりけり
+桜花咲くも散らすも吹く風も
+皆言霊の水火なりにけり
+吾身又生言霊の幸はひに
+生れて言霊に仕へ奉る身よ
+言霊の水火の幸はひ無かりせば
+この天界は直に亡びむ
+遥々と旅を重ねて曲もなく
+帰りしわれも言霊の幸なり
+斯の如尊き稜威の言霊を
+忘れて祝詞を怠るべしやは
+気魂の濁らば心濁るべし
+心濁らば言霊汚れむ</p>
+            <p class="ja-classical-line">身を清め心清めて仕へなば
+生言霊は自と光るべし
+神々の要の勤は朝夕の
+禊の神事にまさるものなし
+主なき宮居は頓に淋しけれ
+生言霊の祝詞なければ
+胎別男の神の宣らする言霊の
+祝詞は弱くうすら濁りぬ
+御樋代神いまさぬ宮居の淋しさは
+主の神坐さぬ如くなりけり』</p>
+            <p class="ja-classical-line">花子比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『高地秀山今を盛りと咲き匂ふ
+桜もしばしの命なるかも
+惜しめども花は梢に止まらず
+そよ吹く風にも散り初めにつつ
+夜嵐の花散らすかと吾はただ
+生言霊に支へて居るも
+束の間も花散らざれと支へつる
+吾言霊も怪しくなりぬ
+夜嵐は吹かねど梢の桜花
+時の来つればこぼれ落ちつつ
+落ち散りし庭の花弁眺めつつ
+踏むさへ惜しく思はるるかも
+移り行く世の有様を高地秀の
+宮居の桜に悟らひしはや
+花は散れど梢に若葉もえ立ちて
+眼あたらしく夏をさかえむ
+桜花散りたる庭に紅く白く
+匂へる牡丹のあでやかなるも
+さりながら又夏更けて丹牡丹の
+花は一弁々々くづれむ</p>
+            <p class="ja-classical-line">丹牡丹の蕾ほぐれて咲き初めし
+日より三日経て又散る世なるも
+清庭の白梅の花散り果てて
+跡に青々つぶら実生れり
+白梅は開きて散りて実を結び
+移り行く世の態を教ゆも』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec04">
+        <div class="sec-header">
+          <span class="para-num">&sect; 4</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Sayokohime-no-kami chants a miuta:</p>
+          <p class="en-p">'Continuing our journey from afar, layer upon layer, today we make kaherigoto before the ōmahe. From kefu onward, to purify the mitama, you must not neglect the morning and evening miwaza of misogi. To illuminate the kamikuni with pure kototama through misogi is the duty of Mihishirogami. Morning and evening go without saying, and whenever you have leisure, cleanse yourselves and declare the noble kototama. In the kuni where kototama shines, helps, and sustains life, how could you ever neglect the ikukototama? With the iki of kototama clear and serene, ametsuchi shall flourish iyatohonaga. Both moon and sun shine across the living kototama; that which grows cloudy is solely due to the iki of maga.'</p>
+          <p class="en-p">Thus the Tohashira-no-kamigami, having completed the saujiyō of the gekau haukokusai at the ōmiya, took their places at the rite of nahorahi. While confessing the shinri of kototama learned during this riyokau, each withdrew to their respective chambers to rest peacefully for the remainder of the day. Just at that moment, as a hazy spring breeze blew gently, the cherry blossoms throughout the courtyard scattered over the surface of the pure garden like snow or a sudden shower, their order lost like counted numbers, until the garden became a single mat of flowers. Reluctant to part, numerous butterflies came flying, dancing and playing low above the ground.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">小夜子比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『はろばろと遠の旅路を重ねつつ
+今大前に復命せり
+今日よりは神魂を清むと朝夕の
+禊の神事怠らざるべし
+禊して吉き言霊に天界を
+照らすは御樋代神の勤めよ
+朝夕は言ふも更なり暇あらば
+禊て貴の言霊宣らばや
+言霊の天照り助け生くる国土に
+怠るべしやは生言霊を
+言霊の水火澄みきらひて天地は
+弥遠永に栄えますべし
+月も日も生言霊に照り渡る
+曇るは曲津の水火にこそあれ』</p>
+            <p class="ja-classical-line">斯の如く十柱の神々は、下向の報告祭を大宮に奏上し終りて、直会の式に列し給ひ、此度の旅行にて学び得たる言霊の真理を告白しながら、各自の居間に就かせ安々と今日の一日を休らはせ給ひける。折しもあれ、ぼやぼやと吹き来る春風に満庭の桜は雪の如く夕立の如く、算を乱して清庭の面に散り敷きければ、庭は一面の花筵となりて、名残惜しげに数多の胡蝶来りて、低く舞ひ遊び戯れ居たりける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: 露の宿 [1922]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: 外苑の逍遥 [1924]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
