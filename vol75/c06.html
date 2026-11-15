@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: 白駒の嘶 [1900] - Volume 75 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 75 Table of Contents</a>
+      <span>Volume 75</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 75 &bull; Chapter 6</span>
+      <h1 class="chapter-title-en">Chapter 6: 白駒の嘶 [1900]</h1>
+      <p class="chapter-title-ja">白駒の嘶〔1900〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Moving in response to the Kototama of the Kami Ureshiho, the hayakoma that had gathered dyed the surroundings pure white, and, setting their ranks in order, formed a circle of the moon upon the broad place on the ridge of Tamamoyama, as if celebrating the auspicious birth of the kuni of Manazuru, neighing and prancing around for a hitotoki.</p>
+          <p class="en-p">The Kami Akitsuo, looking upon this scene, in the excess of His joy, caused a miuta to be chanted:</p>
+          <p class="en-p">The kuni of Manazuru now begins,
+And the hayakoma make a circle in this yuniha and dance,
+HAHOFUHEHI, proclaiming the ikukototama,
+Ah, the hayakoma dance in the sugado,
+HAHOFUHEHI, their clear neighing echoes
+Through the momotanichidani of Tamamoyama,
+Shaking their manes valiantly and waving their tails,
+The horses are emboldened on this auspicious day.</p>
+          <p class="en-p">The Kami Makotoizu caused a miuta to be chanted:</p>
+          <p class="en-p">The neighing of the hayakoma grows high,
+Echoing in yomo, the kuni of Manazuru,
+Rejoicing in the yukute of the kuni of Manazuru,
+Did they come climbing up, ah, the hayakoma,
+Escorting and helping the kamigami, the hayakoma
+Have gathered in this joy, have they not?</p>
+          <p class="en-p">The Kami Tamanohime caused a miuta to be chanted:</p>
+          <p class="en-p">The hayakoma, upon the itadaki of the mountain of Tamamo,
+Climbing up, proclaim the noble Kototama,
+Born from the ikukototama of HAHOFUHEHI,
+How pure indeed is the neighing of the horses.</p>
+          <p class="en-p">The Kami Ikuyohime caused a miuta to be chanted:</p>
+          <p class="en-p">As the beginning of the kuni of Manazuru, the hayakoma
+Came climbing up, according to the will of the Kami,
+Feeling the merit of the Mizumitama Kami,
+While the neighing of the horses rings clear.</p>
+          <p class="en-p">The Kami Chikamio caused a miuta to be chanted:</p>
+          <p class="en-p">The horse I rode also joining in, upon the ridge of Tamamoyama,
+Proclaiming the Kototama,
+Crossing Arakaha and looking far across Ōno,
+The hayakoma that helped me, ah.</p>
+          <p class="en-p">The Kami En'yahiko caused a miuta to be chanted:</p>
+          <p class="en-p">Tamamoyama, growing ever clear, the white horses decorating
+Beneath the trees of the evergreen,
+The white horses untarnished by the dust of the heavenly realm,
+How exceptionally beautiful is the gloss of their hair.</p>
+          <p class="en-p">The Kami Ureshiho caused a miuta to be chanted:</p>
+          <p class="en-p">The hayakoma too, rejoicing at the founding of the kuni,
+Came climbing up to this sugado,
+When the kamigami are also emboldened, the hayakoma too,
+Being emboldened, neigh with a clear voice.</p>
+          <p class="en-p">The Kami Minashihiko caused a miuta to be chanted:</p>
+          <p class="en-p">Though there is no imperial bridge on Tamamoyama, the hayakoma
+Have climbed up to the ikukototama,
+The hayakoma helping the divine work of creating the kuni,
+When I hear their neighing, there is the voice of the Kami.</p>
+          <p class="en-p">The Kami Omitama caused a miuta to be chanted:</p>
+          <p class="en-p">All the words of life living in the heavenly realm
+Being blessings of the Kototama, how noble it was,
+Forming a circle of the moon, the horses valiantly
+Dance around and continue to neigh.</p>
+          <p class="en-p">The Kami Tamakibari caused a miuta to be chanted:</p>
+          <p class="en-p">Of all things possessing life, tamakibaru,
+There is none that does not rejoice at the founding of the kuni,
+Celebrating the prosperity of the kuni of Manazuru,
+Do the horses grow bold and their neighing rise high?
+If I look out, in the distant august sky purple
+Clouds trail and the wind blows clear and bright,
+Both mountains and fields, by the blessing of the ikukototama,
+Revived today—how auspicious it is!
+May the Lord God descend and succor us,
+May this kunihara be eternal!
+Illuminating the jade dew on the green of the evergreen pine,
+The moon shines bright and clear.</p>
+          <p class="en-p">The Kami Musubiai caused a miuta to be chanted:</p>
+          <p class="en-p">Binding together the Kami and the horses, we walk the path,
+There are no ugly deities obstructing our path in the corners,
+Though the ugly deities may hide themselves, we shall scatter them
+With the hooves of the hayakoma and advance with ease,
+The merit of the hayakoma is high, climbing upon the ridge
+Of Tamamoyama to celebrate the divine age.</p>
+          <p class="en-p">The Kami Umasumo caused a miuta to be chanted:</p>
+          <p class="en-p">Looking out, the kuni of Manazuru is a beautiful kuni,
+An origin imperial land, a land enjoyed by the Kami,
+Both moon and sun shine purely in Manazuru,
+Do they view the kuni from upon the ridge of the mountain?
+At the pure shrine on the ridge of Tamamoyama,
+It is pure to pray for the prosperity of the kuni,
+Kneeling in the yuniha together with the hayakoma,
+We do indeed pray for the prosperity of the divine age.</p>
+          <p class="en-p">The Kami Makotoizu caused a miuta to be chanted thrice:</p>
+          <p class="en-p">If we look far across the plain of heaven, both moon and sun
+Are shining with all the light they possess,
+The moon shining clear and bright beyond the clouds of the great sky
+Must be the Mizumitama,
+The achievement of the shining of the heavenly sun
+Was the light of the spirit of rigor.</p>
+          <p class="en-p">The Kami Machiaihiko caused a miuta to be chanted:</p>
+          <p class="en-p">The august majesty of the Kototama, how awe-inspiring is Tamanohime,
+To what shall I compare today's joy?
+Worshiping with bowed head the face of Tamanohime rejoicing,
+I too prosper,
+The kuni of Manazuru has wondrously been born,
+The joy of today, for which we waited and waited,
+A karyōbinga sings of spring on the plum tree's tip,
+How pure is the wind of the mountain of Tamamo;
+The roaring of thunder has ceased and the lightning
+Has hidden in the depths of the august sky,
+The stormy wind that stirred the tips of the evergreens has also
+Stopped, and how tranquil is Tamamoyama;
+The falling rain has cleared away without a trace,
+And the moon in the august sky shines brightly;
+The shaking of the aragane that roared unseasonably
+Has completely stopped;
+Thus grown calm, the prosperity of the kuni of Manazuru
+Shall have no limit;
+The uguisu singing on the tip of the white plum
+Its singing voice is pure, giving a feeling of spring.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">宇礼志穂の神の言霊に感じて集り来れる駿馬は、あたりを真白に染めながら、列を正し玉藻山の尾の上の広所に月の輪をつくりて、真鶴の国土の生り出でし瑞祥を祝ふものの如く、嘶き廻ること一時に及べり。</p>
+            <p class="ja-classical-line">顕津男の神はこの態をみそなはして、喜びの余り御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『真鶴の国始まりぬ駿馬は
+これの斎庭に輪をつくり躍るも
+ハホフヘヒ生言霊を宣りながら
+あはれ駿馬聖所に舞ふも
+ハホフヘヒの嘶き清く玉藻山の
+百谿千谷に響きわたらふ
+鬣を勇ましくふり尾をふりて
+駒はいさみぬ今日のよき日に』</p>
+            <p class="ja-classical-line">真言厳の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『駿馬の嘶き高くなり出でて
+四方にひびかふ真鶴の国
+真鶴の国の前途を寿ぎて
+のぼり来にけむあはれ駿馬
+神々を送り助けて駿馬は
+この喜びに集ひぬるかも』</p>
+            <p class="ja-classical-line">玉野比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『駿馬は玉藻の山の頂上に
+のぼりて貴の言霊宣るも
+ハホフヘヒの生言霊ゆ生れたる
+駒のいななき清くもあるかな』</p>
+            <p class="ja-classical-line">生代比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『真鶴の国のはじめと駿馬は
+のぼり来にけむ神のまにまに
+瑞御霊神の功に感じけむ
+駒のいななき冴え渡りつつ』</p>
+            <p class="ja-classical-line">近見男の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『わが乗りし駒も交りて玉藻山の
+これの尾の上に言霊宣るも
+荒河を渡り大野を遠く越えて
+われを助けし駿馬あはれ』</p>
+            <p class="ja-classical-line">圓屋比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『玉藻山清く冴えつつ常磐樹の
+樹下をかざる白き駒はや
+天界の塵にそまらぬ白駒の
+毛の艶ことに美しきかも』</p>
+            <p class="ja-classical-line">宇礼志穂の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『駿馬も国土の創始を嬉しみて
+のぼり来にけむこれの聖所に
+神々も勇み給へば駿馬も
+勇みて嘶く声のさやけき』</p>
+            <p class="ja-classical-line">美波志比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『玉藻山の御橋なけれど駿馬は
+生言霊にのぼり来つるも
+国土生みの神業を助くる駿馬の
+嘶き聞けば神の声あり』</p>
+            <p class="ja-classical-line">産玉の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『天界に生けることごと言霊の
+幸にしあれば尊かりけり
+月の輪をつくりて駒は勇ましく
+躍りまはるも嘶きつづくも』</p>
+            <p class="ja-classical-line">魂機張の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『たまきはる生命あるものことごとく
+国土の創始を喜ばぬはなし
+真鶴の国の栄えを寿ぎつ
+駒は勇むか嘶き高し
+見渡せば遠の御空に紫の
+雲たなびきて風澄みきらふ
+山も野も生言霊の幸ひに
+甦りたる今日ぞ目出度き
+主の神の天降り給ひて助けます
+この国原はとこよにもがも
+常磐樹の松のみどりの玉露を
+照らして月は澄みきらひたり』</p>
+            <p class="ja-classical-line">結比合の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『神と駒と結び合せて道を行く
+隈手にさやる醜神もなし
+醜神はよし忍ぶとも駿馬の
+蹄に蹴散らし安く進まむ
+駿馬の功は高し玉藻山の
+尾の上にのぼりて神世を寿ぐ』</p>
+            <p class="ja-classical-line">美味素の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『見渡せば真鶴の国はうまし国
+元津御国よ神の食す国よ
+月も日も清くかがよふ真鶴の
+山の尾の上に国見するかも
+玉藻山尾の上の清き神社に
+祈るも清し国の栄えを
+駿馬と共に斎庭にひざまづき
+神世の栄えを祈りこそすれ』</p>
+            <p class="ja-classical-line">真言厳の神は三度御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『天の原ふりさけ見れば月も日も
+光のかぎりを光りけるかも
+大空の雲のあなたに澄みきらふ
+月こそ瑞の御霊なるらむ
+天津日の輝き給ふ功績は
+厳の御霊の光なりけり』</p>
+            <p class="ja-classical-line">待合比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『言霊の御稜威かしこき玉野比女の
+今日のよろこび何にたとへむ
+玉野比女の喜び給ふ顔を
+伏し拝みつつわれも栄ゆる
+真鶴の国はつばらに生り出でぬ
+待ちに待ちたる今日の嬉しさ
+迦陵頻伽梅の梢に春うたふ
+玉藻の山の風の清しも
+いかづちの轟き止みて稲妻は
+御空の奥にかくろひにけり
+常磐樹の梢をもみし荒風も
+とまりて静けき玉藻山はも
+降りしきる雨はあとなく霽れにつつ
+御空の月はかがやき給へり
+非時に鳴り轟きしあらがねの
+地のさゆれもひたと止りぬ
+かくの如静まりかへりし真鶴の
+国の栄は極みなからむ
+白梅の梢にうたふ鶯の
+啼く音清しも春心地して</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">In the spring mountains where the green of Momokigi buds forth, / Fragrant and pure are the flowers of the white plum. / How clearly marked is the fragrance of the white plum blossoms, / Born of the divine water and fire of the Lord Kami! / Does the steed congratulate the founding of the land? / Its neighing, too, is all the more pure.</p>
+          <p class="en-p">The jade spring overflows purely to become a waterfall, / Blessing and moistening this land. / The jade spring overflows to become a waterfall of a thousand streams, / As if hanging a sash upon the mountain of Tamamo. / Soaring equally with the mountain of Takateru, / The mountain of Tamamo is youthful and fresh. / Treading the water and fire of Kototama in a cross, / We shall forge and solidify them ever more firmly. / By the voice of the Aouei Kami, the land prospers and shines endlessly. / The rigorous Kototama of Kakokukeki gleams, / Illuminating this land radiantly.</p>
+          <p class="en-p">Upon the dew of the treetops of Momokigi, / The moon of the eternal firmament is deigning to lodge. / In this land of neither night nor day, / The sun and moon deign to shine at once. / Though the moon sometimes waxes and sometimes wanes, / Its appearance today is perfectly round. / Round and round, the moon-boat shining in the sacred sky, / Far away is the cloud-realm through which it traverses.' Thus the Kamigami each chanted congratulatory poems, solemnly advancing with proper dignity to the sacred place of Tamanomiyai, and here they devoutly prayed for the accomplishment of the divine work of creating the land and giving birth to Kami, with voices of living Kototama ringing pure and solemn.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">百木々の緑萠え立つ春の山に
+匂ふも清し白梅の花
+主の神の御水火に生れし白梅の
+花のかをりのしるくもあるかな
+駿馬は国の創始を寿ぐか
+そのいななきも一入清し
+玉泉清くあふれて滝となり
+この国原をうるほしひたさむ
+玉泉あふれて千条の滝となり
+玉藻の山に襷かくるも
+高照の山にひとしく聳えたる
+玉藻の山は稚くあたらし
+言霊の水火を十字にふみなして
+いやかたらかに造り固めむ
+アオウエイ神の御声に国原は
+栄え栄えて果なく美し
+カコクケキ厳の言霊かがやきて
+この国原をかたらに照らふ
+百木々の梢の露に久方の
+御空の月は宿らせ給へり</p>
+            <p class="ja-classical-line">夜もなく昼なきこれの国原に
+月日は一度にかがやき給ふ
+或は盈ち或いは虧くる月ながら
+今日の姿はまろかりにけり
+まるまると御空に輝く月舟の
+渡らふ雲井ははろけかりけり』</p>
+            <p class="ja-classical-line">斯く神々は各自に祝ぎ歌をうたひ給ひ、再び玉野宮居の聖所に威儀を正して進ませ給ひ、茲に国土生み神生みの神業成就を、生言霊の声も清しく祈らせ給ふぞ畏けれ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c05.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 5: Mountain 上の祝辞 [1899]</span>
+      </a>
+      <a href="c07.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 7: 瑞の Kotodama [1901]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
