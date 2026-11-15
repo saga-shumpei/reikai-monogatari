@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3: 離れ Island [1984] - Volume 79 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 79 Table of Contents</a>
+      <span>Volume 79</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 79 &bull; Chapter 3</span>
+      <h1 class="chapter-title-en">Chapter 3: 離れ Island [1984]</h1>
+      <p class="chapter-title-ja">離れ島〔1984〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Uraraka was snatched away by a monster of human face and dragon body in the lake, and while being carried away through the dark clouds for a while to somewhere with the speed of a shooting star, she was let down before a certain gate of purple walls and blue tiles, and when she suddenly looked around, it was right before the front gate of the capital of the dragon gods floating flush with the lake water.</p>
+          <p class="en-p">Countless dragon gods of human face and dragon body, crying 'Oo, oo', draped their bodies in garments of algae, leaving only their faces exposed, sat in rows by the hundreds and thousands on both sides of the gate to welcome her.</p>
+          <p class="en-p">The king of the dragon gods sings in a clear voice:
+'Ah, how pitiful, how pitiful,
+Waited upon for a hundred, a thousand years,
+The beloved daughter of the ancestral deities of the land,
+Urarakahime is welcomed here now,
+From this day forth, becoming the ruler of the capital of dragons,
+All of our clans
+Shall have this appearance of human face and dragon body
+Reborn into human forms,
+And make all the dragon gods
+Revive into the figures of the earthly deities,
+So that the blessings of heaven and earth
+May shine even into the depths of the lake,
+O Uraraka no Hime!
+Oo, oo.
+Ah, how bright and joyful,
+The iron gates of the capital of dragons now
+Have begun to open as clearly and brightly
+As if they opened simultaneously in heaven and earth,
+Ah, how reverend!
+
+Ah, how bright and joyful,
+Ah, how wonderful is this coming forth!'</p>
+          <p class="en-p">With this, each played various kinds of music to express their welcome, and the dragon gods stood up all at once, appearing and disappearing on land and in the lake, dancing wildly to voices that seemed enough to shatter heaven and earth.</p>
+          <p class="en-p">Uraraka, overwhelmed by the utterly unfamiliar spectacle, could not dispel her sense of doubt for a little while, unable to forget tsuyao, her beloved elder brother, and remained silently looking down while worrying about the safety of her parents.</p>
+          <p class="en-p">The king of the dragon gods smiled gently, took Uraraka's hand softly, and said:
+'This island, which you may find mysterious,
+Is the capital where the dragon gods dwell.
+Without you, the dragon gods forever
+Would maintain this wretched form—
+Only the head is born human, while the body
+Is this wretched shape of a dragon.'</p>
+          <p class="en-p">Hereupon Uraraka made up her mind that there was no help for it anymore, and resolved to wed this wretched tribe of human face and dragon body, and to bear human descendants, and bravely tried to sever her romantic feelings toward Tsuyao, but somehow a shred of attachment remained at the bottom of her heart.</p>
+          <p class="en-p">'Could I have imagined it would not be Tsuyao no Kimi,
+But the lord of the capital of dragons?
+If it be thus, what is there to lament? From this day forth,
+I shall serve the lord of the capital of dragons.
+My nursing father and mother, surely, surely,
+Must be lamenting over my absence.
+And he who is the very life within my heart,
+Surely he too must be lamenting.
+Yet comforting myself with the thought that this is a divine work
+To save the multitude of the dragon gods,
+I never realized until this very moment
+That such a capital existed beneath the water.
+If this be a dream, let me awaken quickly; I have been lured
+Into an unfamiliar land.
+Welcomed by ten thousand dragon gods,
+I feel as though I am treading a dream road.
+O king of the dragon gods and all you clansmen,
+I am from this day the ruler of the land.
+As one who has abandoned parents and abandoned love,
+How could I falter in this island country?
+
+If I had no power to assent to these words,
+I would set off on a journey to Yomi.
+Though lowly, I am the child of the ancestral deities of the land,
+How could I possibly fear you dragon gods?'</p>
+          <p class="en-p">The king of the dragon gods knelt before Uraraka where she stood straight and said:
+'How grateful are your sacred words, O Uraraka no Kimi,
+Which shall never waver though ages pass.
+The savior god of the dragon gods,
+Who bore such wretched forms, has descended from heaven.
+With the fulfillment of a hundred-year prayer, I now
+Have met the savior god at last.
+Until now, reviled by the lake demons and the earthly deities,
+We lived without affliction.
+From this day forth, renewing our true hearts,
+We shall humbly serve the divine works of heaven and earth.
+The island root of Ryūgū, connected to Mount Ibuki,
+Shall be our eternal dwelling place.
+Your lordship shall appear from today as the younger princess of Ryūgū,
+To protect us and watch over us,
+And as long as the younger princess of Ryūgū is here,
+This island root shall remain peaceful.'</p>
+          <p class="en-p">Uraraka sings:
+'The great sky is high and boundless, the lake bottom
+Is deep and vast; by the divine majesty,
+Let all the tribes of fish, without exception, submit
+To my virtue, and I shall guard them in peace.
+Born as the child of the earthly deities, to become the ruler
+Of this island—is this the will of the gods?
+Is the moonlight seen on this island not a light
+Equal to that seen on Mount Mizukami?
+Let both moon and sun shine without a shadow; the lord of the island
+Roots of Ryūgū is here.
+When night falls, the moon shines brightly in the sky,
+To peacefully illuminate this island root.
+When morning comes, the heavenly sun shines brilliantly,
+To illuminate even the depths of the lake.
+Let the moon shine clear, let the stars twinkle, let the sands
+Of the lake bottom gleam, let the fish live!
+After a hundred years, would that I could turn
+The unsightly bodies of the dragon gods into human forms.
+Wedded now as the queen of the dragon gods,
+I think to bear perfect children.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">麗子は人面竜身の湖中の怪物にさらはれ、黒雲の中を暫し何処ともなく、一瀉千里的の速力にて運ばれつつ、とある紫壁蒼瓦の門前におろされ、ふと辺りを見れば湖水すれすれに浮べる竜神の都の表門前なりける。</p>
+            <p class="ja-classical-line">数多の人面竜身の竜神族は、「ウオーウオー」と叫びながら、身体に藻の衣を纒ひ、顔面のみを出して幾百千ともなく、門の両側に端坐し迎へ居たり。</p>
+            <p class="ja-classical-line">竜神の王は声もさはやかに歌ふ。</p>
+            <p class="ja-classical-line">『あはれあはれ
+百年千年相待ちし
+国津御祖の愛娘
+麗子姫を今此処に
+迎へまつりぬ今日よりは
+竜の都の王となりて
+われ等が一族悉に
+人面竜身のこの姿を
+人の姿に生み直し
+竜神族を悉く
+国津神等のみすがたに
+よみがへらせて天地の
+恵を湖の中までも
+照らさせ給へ麗子の姫よ
+ウオーウオー
+あなさやけおけ
+竜の都の鉄門は今や
+天と地との一時に
+開けし如くさやさやに
+開け初めけりあな尊</p>
+            <p class="ja-classical-line">あなさやけおけ
+あな面白の出でましよ』</p>
+            <p class="ja-classical-line">と、各自くさぐさの音楽を奏で、歓迎の意を表し、竜神族は一斉に立ち上り、陸に湖に出没して踊り狂ふその声、天地も崩るるばかりに思はれける。</p>
+            <p class="ja-classical-line">麗子はあまりの変りたる光景に、稍暫し不審の念晴れやらず、艶男の恋しき兄の事は忘れられず、父母の安否を気遣ひながら黙然と俯いて居る。</p>
+            <p class="ja-classical-line">竜神の王は莞爾として、麗子の手をそつと握り、</p>
+            <p class="ja-classical-line">『いぶかしくおぼしめすらむ此島は
+竜神族の棲める都よ
+君なくば竜神族はいつまでも
+このあさましき姿保たむ
+頭のみ人と生れて身体は
+このあさましき竜の姿よ』</p>
+            <p class="ja-classical-line">ここに麗子は最早詮なしと決心の臍をかため、人面竜身のあはれなる此族と嫁ぎ、人間の子孫を生み了せむものと、雄々しくも艶男に対する恋心を断ち切らむとしたが、どうやら心の底に一片の名残が残つて居た。</p>
+            <p class="ja-classical-line">『思ひきや艶男の君にあらずして
+竜の都の君なりしはや
+かくならば何を嘆かむ今日よりは
+竜の都の君に仕へむ
+垂乳根の父と母とはさぞやさぞ
+わがなきあとを嘆かせ給はむ
+わが思ふ心の中の生命なる
+君もさぞかし嘆かせ給はむ
+さりながら竜神族のもろもろを
+助くる神業と思ひて慰む
+水の中にかかる都のある事を
+悟らざりしよ今の今まで
+夢なれば早く醒めかしわれは今
+見しらぬ国土に誘はれ来つ
+千万の竜神族に迎へられ
+夢路を辿る心地するかも
+竜神の王よもろもろ族たち
+われは今日より国土の君ぞや
+親を捨て恋を捨てたるわれにして
+如何でひるまむ此島国に</p>
+            <p class="ja-classical-line">わが言葉諾ふ力なかりせば
+われは黄泉に旅だちなさむ
+賤しけれど国の御祖の御子なるぞ
+汝竜神を如何で恐れむ』</p>
+            <p class="ja-classical-line">竜神の王は、麗子の直立せる前に跪きて、</p>
+            <p class="ja-classical-line">『有難しうららの君の御言明
+幾代経るとも違はざるべし
+あさましき姿を持てる竜神の
+救ひの神は天降りましけり
+百年の願叶ひてわれは今
+救ひの神にあひにけるかも
+今までは湖の悪魔と国津神に
+貶すまれつつ禍なしけり
+今日よりは本津心に改めて
+天地の神業に仕へまつらむ
+伊吹山に続く竜宮島ケ根は
+われらが永久の住処なるぞや
+汝が君は今日より竜宮の弟姫と
+あらはれましてわれらを守らせ
+竜宮の弟姫これにある限り
+此の島ケ根は安けかるべし』</p>
+            <p class="ja-classical-line">麗子は歌ふ。</p>
+            <p class="ja-classical-line">『大空は高く涯なし湖底は
+深く広しも神の御稜威に
+もろもろの魚族残らずわが徳に
+まつろひ来れ安く守らむ
+国津神の御子と生れて此島の
+君となりしは神の心か
+此島に見る月光も水上山に
+見るも等しき光ならずや
+月も日も隈なく照らせ竜宮の
+島根の君はここにありけり
+夜されば御空に月は輝きて
+此の島ケ根を安く照らさむ
+朝されば天津日光は煌々と
+湖の底ひも明し給はれ
+月も冴えよ星も瞬け湖底の
+真砂も照れよ魚族も生きよ
+みぐるしき竜神族の身体を
+百年の後に人となさばや
+われは今竜神の君と嫁ぎつつ
+全き御子を生まむと思ふ</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Since I descended to this isle, even the trees and grasses have suddenly increased their light.'</p>
+          <p class="en-p">To such a place, from far in the distance, the dragon gods came carrying a mikoshi adorned with gold, silver, menau, ruri, shiyako, sango, suishiyō, and the like, lowering it with a heavy thud right in front of where Otohime stood and prostrating themselves.</p>
+          <p class="en-p">The king of the dragon gods, pointing to this palanquin, turned toward Otohime and sang:</p>
+          <p class="en-p">'Come, ride the august okago; having passed a momotose and a chitose, this is a palanquin crafted for you, my lord.</p>
+          <p class="en-p">A mikoshi that has not been used even hitotabi; I will offer it to you as my magokoro.</p>
+          <p class="en-p">Using our hearts through a momotose and a chitose, we crafted the palanquin with arayuru treasures.</p>
+          <p class="en-p">Other than you, my lord, we think there is no kami upon the earth who should ride this palanquin.'</p>
+          <p class="en-p">Uraraka, with eyes wide in a kiyōi beyond all iguwai, said:</p>
+          <p class="en-p">'Did I ever think that in such a Shimane there would be a palanquin of such uraraka treasures?</p>
+          <p class="en-p">Since it is a palanquin imbued with the hearts of the dragon gods, I too shall not refuse; shall I board it and proceed?'</p>
+          <p class="en-p">The king of the dragon gods greatly rejoiced and sang:</p>
+          <p class="en-p">'How arigata are the mikotonori of Otohimegami;</p>
+          <p class="en-p">to hear them is the inochi of wagami.</p>
+          <p class="en-p">This mikoshi, crafted in exchange even for our inochi;</p>
+          <p class="en-p">pray, board it quickly, O Otohime no Kami.</p>
+          <p class="en-p">The momogami must surely rejoice, now that our devotion through momochitose has been rewarded.'</p>
+          <p class="en-p">Here Urarakahime, feeling as though in a yumemi within a dream, opened the iron doors of the mikoshi, stepped swiftly inside, and assumed a posture of standing firm and motionless; yet there was no anxiety of her head touching the ceiling, for it was a mikoshi of the utmost height and breadth, and the dragon god tribe carrying the long poles were a multitude countless by hundreds.</p>
+          <p class="en-p">The king of the dragon gods stood before the mikoshi, waving heihoku to lead the vanguard, and proceeded toward a palace far in the distance.</p>
+          <p class="en-p">The dragon gods raised a unanimous cry of 'Oooh, oooh,' and with a vigor as if to shake heaven and earth, advanced solemnly and in orderly procession.</p>
+          <p class="en-p">Going about twenty chō or so, there stood majestically a large tower gate adorned with seven treasures. Dragon gods clad in white garments instantly swung open the iron doors to the left and right. The mikoshi solemnly passed into the gate. The voices of kalavinka drifted from the treetops here and there, and its solemnity was beyond the power of language to express; the mikoshi was reverently lowered at the entrance of the Great Dragon Hall.</p>
+          <p class="en-p">The king of the dragon gods sang:</p>
+          <p class="en-p">'This indeed is the mansion where I dwell, an eternal realm;</p>
+          <p class="en-p">come, advance as far as the inner hall.</p>
+          <p class="en-p">The great hall, fashioned by the artisans of a momotose,</p>
+          <p class="en-p">has been awaiting your august appearance.</p>
+          <p class="en-p">A great hall that has at last been built;</p>
+          <p class="en-p">first, do you, O inochi, dwell within and govern it.'</p>
+          <p class="en-p">Uraraka opened the door of the mikoshi, and in a pure and clear figure, calmly stepped out into the pure courtyard, following behind the king of the dragon gods to advance deep into the inner hall.</p>
+          <p class="en-p">From this time forth, Uraraka was hailed as Otohime of the Dragon Palace, gave the name of Ōryūmihiko no Mikoto to the king of the dragon gods, and came to shine brightly as the ruler of this isle.</p>
+          <p class="en-p">Uraraka, unawares, was invited by the dragon gods and became the ruler of the isle.</p>
+          <p class="en-p">Leaving her traces upon this isle, she was revered as Otohimegami of the Dragon Palace.</p>
+          <p class="en-p">Without the meritorious deeds of this kami, the fish tribes within the sea would never flourish through eternity.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">此島にわれ天降りてゆ木も草も
+俄に光増しにけらしな』</p>
+            <p class="ja-classical-line">かかる所へ、遥か向ふの方より竜神たちは、金、銀、瑪瑙、瑠璃、硨磲、珊瑚、水晶等にて飾りたてたる神輿を担ぎ来り、弟姫の立たせる前にどつかとおろし平伏する。</p>
+            <p class="ja-classical-line">竜神の王は此輿を指し弟姫に向ひ、</p>
+            <p class="ja-classical-line">『いざ御駕籠召しませ百年千年経て
+つくりし輿よ君のみために
+一度も用ひし事のなき神輿
+君に捧げむわれの真心
+百年も千年も心用ひつつ
+所在宝につくりし輿はや
+此輿は君ならずして地の上に
+召すべき神はあらじと思ふ』</p>
+            <p class="ja-classical-line">麗子は意外の意外に、驚異の眼をみはりながら、</p>
+            <p class="ja-classical-line">『思ひきやかかる島根にかくの如
+うるはしき宝の輿のありとは
+竜神の心をこめし輿なれば
+われもいなまじ乗りてや進まむ』</p>
+            <p class="ja-classical-line">竜神の王は大いに喜び歌ふ。</p>
+            <p class="ja-classical-line">『有難し弟姫神の御言明
+聞くは吾身の生命なりけり
+生命にもかへて作りし此神輿
+早く召しませ弟姫の神
+百神もさぞ喜ばむ百千年の
+心づくしも今報はれて』</p>
+            <p class="ja-classical-line">ここに麗子姫は、夢に夢見る心地して、神輿の鉄門を開き、さつと立ち入り、直立不動の姿勢をとれども、さりとて頭の天井につかふる憂ひもなく、最も高く広き神輿なりければ、長柄の棒を担ぐ竜神族は、幾百人とも数へ切れぬ多人数なりける。</p>
+            <p class="ja-classical-line">竜神の王は神輿の前に立ち、幣帛を振りながら先頭をなし、遥か彼方の御殿をさして進み行く。</p>
+            <p class="ja-classical-line">竜神等は、「ウオーウオー」と一斉に声を揃へ、天地を揺がさむばかりの勢にて、粛々と行列正しく前進する。</p>
+            <p class="ja-classical-line">行くこと約二十町ばかり、ここに七宝を以て飾られたる大楼門が巍然として建つて居る。白衣をつけし竜神たちは、左右に鉄門をぱつと開いた。神輿は粛々として門内に潜り入る。迦陵頻伽の声、彼方此方の木々の梢ゆ伝はり来り、その荘厳さ言語のつくすべきにあらず、神輿は大竜殿の玄関に恭しくおろされた。</p>
+            <p class="ja-classical-line">竜神の王は歌ふ。</p>
+            <p class="ja-classical-line">『これこそはわが住む館よとこたちよ
+いざ進みませ奥の殿まで
+百年の匠になりし大殿は
+汝が出でまし待ちて居たるも
+漸くに建ち上りたる大殿よ
+先づ汝が命住みて治めよ』</p>
+            <p class="ja-classical-line">麗子は神輿の戸を開き、清楚たる姿にて、悠々清庭に立ち出で、竜神の王のしりへについて奥殿深く進み入る。</p>
+            <p class="ja-classical-line">これより麗子は、竜宮の弟姫と称へられ、竜神の王に大竜身彦の命と名を与へ、此島の司として輝き渡る事となりける。</p>
+            <p class="ja-classical-line">麗子は思はず知らず竜神に
+招かれ島の司となりける
+此島に跡をたれつつ竜宮の
+弟姫神と仰がれにける
+此神のいさをしなくば海中の
+魚族永久に栄えざるべし。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c02.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 2: Love の追跡 [1983]</span>
+      </a>
+      <a href="c04.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 4: 救ひの Ship [1985]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

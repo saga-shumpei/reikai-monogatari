@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 宴遊会 [1996] - Volume 79 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 79 Table of Contents</a>
+      <span>Volume 79</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 79 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 宴遊会 [1996]</h1>
+      <p class="chapter-title-ja">宴遊会〔1996〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The divine couple, Ōmioya, rejoiced that Adeyaka had returned safely from the Shimane of the Dragon, bringing his wife along, and they summoned the amata Kunitsukami to hold a banquet of shiyukuga.</p>
+          <p class="en-p">In the Sugado of Minakamiyama, many Yahirodono were built, and the Kunitsukamitachi were there to conduct the matsurigoto of the land, however tentatively.</p>
+          <p class="en-p">Among the Kami who served as the Shitenō of the Mioya no Kami were the five pillars: Masago, Shirasago, Iwakene, Minaoto, and Seoto; among them, Iwakene oversaw all the matsurigoto, and his keni was such that it seemed to overwhelm even the Mioya no Kami.</p>
+          <p class="en-p">The seichi of Minakamiyama was a teien exceeding one hauichiri in size, encompassing the wide Ōigaha that flowed at its foot.</p>
+          <p class="en-p">Here, the Kamigami rejoiced at the return of the Miko of Adeyaka, and onomōnomo sang, danced, and revelled, becoming intoxicated on the wine of tree fruits, while the spirit of Tenchikakushin drifted in all directions.</p>
+          <p class="en-p">Yamagamihiko, wishing to celebrate the joy of this day, sang while wandering through the flower garden.</p>
+          <p class="en-p">'Even this aged body, which I once thought would surely die, has been revived by meeting Adeyaka. Though Adeyaka has returned, it is sad that his younger sister, Uruwako, remains in the Shimane of the Dragon. It was worth the long wait, and I am happy to see the face of my child today. The peaks of Minakamiyama are clear, and the brilliance of the Tianjin-hi shines across this auspicious day. Feeling as though everything has been restored, I contemplate the prosperity of living life. I have spent many long years in the village of Uramizu, toward the land of Ashihara. Having succeeded to the footprints of my father, I have spent eighty years as the administrator of the land. From this day, when the Miko of Adeyaka has returned, the village of Uramizu shall also prosper in peace. Feeling as though I have been born anew from the depths of the earth, it seems I have met this banquet today. My wife has aged, and I have aged, but from this day forth, I shall spend my remaining years with my child as my strength.'</p>
+          <p class="en-p">Kawakami-hime sings.</p>
+          <p class="en-p">'Meeting this unprecedented joy today, I have grown younger by some thirty years. Until today, I had suffered, struggled, and grown weary, and it seemed my body would surely die. In the wide garden, the wisteria waves are fragrant, and the mountain roses bloom. The purple irises are in bloom.'</p>
+          <p class="en-p">First, the ceremony of shiyukuga was concluded simply, and onomōnomo began to stroll through the teien, following the banks of the Ōigaha as they pleased.</p>
+          <p class="en-p">Adeyaka mounted a chestnut horse, and Kakitsubata mounted a white horse, and as they strolled along the riverbank, they sang while admiring the mountain roses blooming in profusion.</p>
+          <p class="en-p">The song of Adeyaka.</p>
+          <p class="en-p">'The bottom of the Ōigaha, where frogs croak, is clear, and the mountain roses reflect in gold. The mountain roses fragrant on the banks of the Ōigaha sway at the bottom of the water in the wind blowing over the river. I shall pluck them with Adeyaka, where the frogs croak, the mountain roses on the banks of the Ōigaha. Though the tree frogs croak in regret, the mountain rose flowers scatter heartlessly in the river wind.'</p>
+          <p class="en-p">Kakitsubata sings.</p>
+          <p class="en-p">'Watching the mountain roses in their prime, I think the village of Ōi is good. Frogs are croaking in the river water; it is fitting, for the mountain roses on the bank are now in their prime. Spring is deep, the water of the Ōigaha is warming, and the mountain roses at the bottom of the water shift languidly.'</p>
+          <p class="en-p">Adeyaka sings.</p>
+          <p class="en-p">'I shall stop my horse and gaze for a while at the mountain roses in their prime, fragrant on the banks of the Ōigaha. Because the rapids of the mountain river strike the rocks, the mountain roses float and sink as they flow. The mountain roses blooming on the shore of the river that flows through my garden are pure. The spring twilight by the river is moving; the mountain roses, which resembled my younger sister, have withered. The mountain roses are blooming even at the bottom of the water; be careful as you drink, my spirited horse. At the sound of the horse's hooves, the mountain rose flowers seem about to scatter recklessly. The mist flows over the Ōigaha, and they bloom in eight layers; the Minakamiyama roses are reflected in the water. While blocking the bank where I water my spirited horse, the mountain roses bloom in profusion.'</p>
+          <p class="en-p">The two left the riverbank of mountain roses and urged their horses toward the place where the wisteria waves were blooming, and from horseback, Adeyaka sang again in abundance.</p>
+          <p class="en-p">'The wisteria waves that I planted to serve as a memento for ten thousand generations have begun to bloom. The appearance of the wisteria flowers fragrant at the foot of Minakamiyama resembles thee. Watching the purple of the wisteria flowers, I think of thee; thy color, too, is purple. Because the color of the purple is deep, the wisteria flowers resemble Kakitsubata exactly. It is pleasant to be drenched in the spring rain; thou, whose color deepens, art truly Kakitsubata. The wisteria blooming on the opposite bank of the Ōigaha does not distance its fragrance from me.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">大御祖の神夫婦は、艶男が妻まで率ゐて、竜の島根より恙なく帰り来りしを喜び、数多の国津神を呼び集へて、ここに祝賀の宴を開く事とはなりぬ。</p>
+            <p class="ja-classical-line">水上山の清所には八尋殿数多建てられ、国津神等はここに国の政治を、はつはつながら執り行ひ居たりき。</p>
+            <p class="ja-classical-line">御祖の神の四天王と仕へたる神に、真砂、白砂、岩ケ根、水音、瀬音の五柱あり、中に岩ケ根は総ての政治を総轄し、その権威御祖の神を圧するばかりけり。</p>
+            <p class="ja-classical-line">水上山の聖地は、麓を流るる大井川を広く取り込み、方一里に余る庭園なりける。</p>
+            <p class="ja-classical-line">茲に神々は艶男の御子の帰り来れるを喜びて、各自歌ひ舞ひ踊り狂ひ、木の実の酒に酔ひしれて、天地革新の気四方に漂ふ。</p>
+            <p class="ja-classical-line">山神彦は今日の喜びを祝すべく、花園をさまよひながら歌ふ。</p>
+            <p class="ja-classical-line">『一度は死なまく思ひし老の身も
+蘇りたり艶男に会ひて
+艶男は帰れど妹の麗子は
+竜の島根にあるは悲しき
+待ちわびしその甲斐ありて嬉しくも
+今日はわが子の顔を見るかな
+水上山尾の上は晴れて天津日の
+輝き渡る今日ぞめでたき
+何もかもよみがへりたる心地して
+生きの生命の栄えを思ふ
+葭原の国のかたへの浦水の里に
+われは久しく年ふりにけり
+吾父のみあとを継ぎて八十年を
+国の司と過ぎにけるかも
+艶男の御子の帰りし今日よりは
+浦水の里も安く栄えむ
+地底より生れ出でたる心地して
+今日の宴にあひにけらしな
+妻も老いわれも老いたり今日よりは
+わが子を力に余世を送らむ』</p>
+            <p class="ja-classical-line">川神姫は歌ふ。</p>
+            <p class="ja-classical-line">『例なき今日の喜びにあふ吾は
+三十年ばかり若返りにけり
+今日までは悩み苦しみ疲れはて
+吾身死なまくなりにけらしな
+広庭に藤波かをり山吹匂ふ
+紫色なすかきつばた咲く』</p>
+            <p class="ja-classical-line">先づ祝賀の式は簡単にすまされ、各自思ひ思ひに大井川の岸辺を伝ひて、庭園を逍遥する事となりぬ。</p>
+            <p class="ja-classical-line">艶男は粟毛の駒に跨り、燕子花は白馬に跨り、川の辺を逍遥しながら、咲き乱れたる山吹の花を愛でつつ歌ふ。</p>
+            <p class="ja-classical-line">艶男の歌。</p>
+            <p class="ja-classical-line">『蛙なく大井の川の底清く
+黄金に映ゆる山吹の花
+大井川岸に匂へる山吹は
+川吹く風に水底にさゆれつ
+艶人と共に手折らむ蛙鳴く
+大井川辺の山吹の花
+雨蛙惜しみて鳴けど山吹の
+花はすげなく川風に散る』</p>
+            <p class="ja-classical-line">燕子花は歌ふ。</p>
+            <p class="ja-classical-line">『山吹の花の盛りを眺めつつ
+大井の里はよしと思へり
+川水に蛙鳴くなりうべしこそ
+岸の山吹今盛りなり
+春深み大井の川の水ぬるみ
+ゆたにうつろふ水底の山吹』</p>
+            <p class="ja-classical-line">艶男は歌ふ。</p>
+            <p class="ja-classical-line">『駒とめて暫し眺めむ大井川
+岸に匂へる盛りの山吹を
+山川の岩打つ水の瀬を速み
+浮きつ沈みつ山吹流るる
+わが庭を流るる川の汀辺に
+咲く山吹は清しかりけり
+川の辺の春の暮れこそあはれなれ
+わが妹に似し山吹萎れつ
+山吹は水底にさへも咲きて居り
+心して飲めわが乗る駿馬
+駒いさむ足の響きに山吹の
+花は果敢なく散らむとするも
+大井川霞ながれて八重に咲く
+水上山吹水に写れり
+駿馬に水飼ふ岸をふさぎつつ
+岸の山吹咲き乱れたり』</p>
+            <p class="ja-classical-line">二人は山吹の川辺を後に、藤波の花咲く方へと駒を進め、馬上より艶男はまた豊かに歌ふ。</p>
+            <p class="ja-classical-line">『万世のかたみにせむとわが植ゑし
+藤波の花咲き出でにけり
+水上山麓に匂ふ藤波の
+花のすがたは汝に似しかも
+藤波の花の紫見つつ思ふ
+汝が色かも紫にして
+紫の色深ければ藤波の
+花はさながら燕子花に似たるも
+濡るる身は楽しかりけり春雨に
+色ます汝はかきつばたなる
+大井川の向つ岸辺に咲く藤も
+匂ひはわれを隔てざりけり』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kakitsubata looks at the blooming kakitsubata flowers at her feet and sings gracefully.</p>
+          <p class="en-p">Kakitsubata: 'In the garden where the kakitsubata bloom, I dwell with you, and my thoughts turn to the Shimane of the dragon. As I gaze upon the wisteria flowers in the garden where the kakitsubata bloom, I see that spring has deepened. Coming here, I feel an unexpected shame, and the color of my face reddens like the kakitsubata. To serve my parents purely, I shall assist in your Matsuri, O kakitsubata. In this garden where both mountains and rivers have changed so greatly, I stand with you and contemplate our prosperity. My horse paws the ground, perhaps longing for the flowers that scatter on the opposite shore. Is it not a joy to cross the Ōigaha on horseback and become intoxicated by the flowers on the far bank? Surely my horse, too, is eager to cross the shallows of the Ōi River in this spring of warming waters.'</p>
+          <p class="en-p">Adeyaka sings.</p>
+          <p class="en-p">Adeyaka: 'Having crossed over to the unexpected Shimane of the dragon, I have found you, whom I did not anticipate. Does the red camellia bloom in celebration of our love, pledged for a thousand generations like the jewel camellia? I think to pluck a single branch of the red camellia, adorn my bedside with it, and sleep through the night. When I think of the joy of being held by your jewel-like skin, my heart drifts in the spring.'</p>
+          <p class="en-p">At this place, the five deities—Iwagane, Masago, Shirasago, Minaoto, and Seoto—arrive with their horses quickened, and Iwagane sings.</p>
+          <p class="en-p">Iwagane: 'Seeing the figure of my Lord through the trees, I hurried here to join in the festivities. Forgive me, for I have interrupted the happy union of you two. Having crossed the swift currents of the Ōigaha, you are truly valiant to have your horse tread here now. Though I am intoxicated by the sacred Miki of the feast, I have not forgotten my sense of restraint. The Kahamizu, flowing as it strikes against the Iwagane, scatters and shatters like jewels. Be that as it may, the clouds and mists of the Miyakata have cleared, and the Kahamizu is pure. The clouds of lamentation that deeply shrouded the Miyakata have scattered, and the mists have cleared. O, how profound is the blessing and good fortune of the Lord God; the clear, pure water flows eternally.'</p>
+          <p class="en-p">Adeyaka responds to this.</p>
+          <p class="en-p">Adeyaka: 'Compared to the Shimane of the dragon where I once went, this flower garden is truly pure. Surrounded by the fine maidens of the dragon god, I was troubled by an unexpected dream. The clouds and mists of my troubled heart have cleared away, and now I hear the joyful sound of water. It is a happy day, for the various Kunitsukami have gathered together to celebrate me.'</p>
+          <p class="en-p">Kakitsubata sings.</p>
+          <p class="en-p">Kakitsubata: 'My horse has begun to neigh, as if to speak to me, who was raised upon the waves. Protected by the mighty power of the hundred gods, I desire to serve in the land of the Lord. Even if my jewel-like life should perish, I shall never leave this divine garden.'</p>
+          <p class="en-p">Masago sings.</p>
+          <p class="en-p">Masago: 'The waves of the Ōi River, flowing clear and pure, reveal even the Masago at the bottom. I am happy to meet at this celebratory mat, having served my Lord for so long. The water of the Ōi River, flowing eternally, is the life of the Kunitsukami. Though I am happy to meet you, Lord Adeyaka, I still feel a longing for Lady Reiko. Though the sun of heaven shines brightly, it is lonely not to see the pure shadow of the Princess. Yet, I am reborn, holding a heart that has opened the heavens and earth at once.'</p>
+          <p class="en-p">Shirasago sings.</p>
+          <p class="en-p">Shirasago: 'What divine plan is this, that the Princess has come to the village of the Shirasago by the bay? The attire of Princess Kakitsubata is pure, reflected in the mirror of the water. O, pitiful Princess, wearing purple robes and straddling the back of a horse. The hundred gods have gathered with courage, praying that this day may last for an eternity.'</p>
+          <p class="en-p">Minaoto sings.</p>
+          <p class="en-p">Minaoto: 'The sound of the water breaking against the rocks of the Ōigaha surely echoes at your pillow, my Lord. Reflecting the shadow of the great hall, the Kahamizu is a pure village that flows eternally. Please dwell in the village of Uramizu forever and protect our happiness. When I see the shadow of the yamabuki blooming by the river, I feel that spring has deepened all the more. Though the yamabuki flowers bloom, they do not bear fruit, so I think I shall not pluck them for the Princess. After the wisteria flowers scatter, the beans, which are firmer, will ripen and bear children. May you give birth to a sincere child and bring eternal prosperity to this village.'</p>
+          <p class="en-p">Kakitsubata responds to this.</p>
+          <p class="en-p">Kakitsubata: 'The words of Minaoto are reasonable; I shall not think of the yamabuki, but rather admire the white wisteria. The white wisteria flowers bloom, and the purple wisteria also blooms; it is a beautiful riverside. Though the kakitsubata blooms at the water's edge, why is it lonely that there are no butterflies playing? My Lord, who protects me morning and evening, cherishes me.'</p>
+          <p class="en-p">Minaoto sings.</p>
+          <p class="en-p">Minaoto: 'Moved by your magnificent words, my own words have come to an end. Though spring still lingers, your words have made my body grow warm.'</p>
+          <p class="en-p">Seoto sings.</p>
+          <p class="en-p">Seoto: 'The Lord Adeyaka, for whom I waited so long, has returned happily, treading upon the crests of the waves. While listening to the sound of the rapids of the Ōigaha, I waited anxiously, wondering if it might be you, my Lord. How many years have I served the mountain above the water, and how I have grown close to this river water! The spring view of the wide garden, where hundreds of thousands of flowers bloom in profusion, is magnificent. As a flower of the divine garden where hundreds of thousands of flowers bloom, you shine by the riverside.'</p>
+          <p class="en-p">Thus, the gods each sang their celebratory songs, and today's auspicious banquet was brought to a close.</p>
+          <p class="en-p">The sun of heaven tilts toward the western mountains, the curtain of twilight wraps around the four quarters, and the voice of the evening crow is heard high and far away.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">燕子花は足下に匂ふ燕子花の花を見て、しとやかに歌ふ。</p>
+            <p class="ja-classical-line">『かきつばた匂へる庭に君と居て
+思ふは竜の島根なりけり
+かきつばた匂へる庭に藤波の
+花をし見れば春は深めり
+ここに来て思はぬ恥をかきつばた
+わが面の色赤らみにけり
+父母に清く仕へむかきつばた
+君の政治をあななひ奉りて
+山も川もいたく変れる此園に
+君と立ち居て栄えをおもふ
+わが駒は足掻きしてをり向つ岸に
+乱るる花を慕ふなるらむ
+大井川駒に渡りて向つ岸の
+花に酔はむも楽しからずや
+水ぬるむ春の大井の川の瀬を
+駒も勇みて渡るなるらむ』</p>
+            <p class="ja-classical-line">艶男は歌ふ。</p>
+            <p class="ja-classical-line">『思はざる竜の島根に渡り行きて
+思はぬ汝を得たるわれ哉
+玉椿の八千代を契る恋仲を
+祝ぎて匂ふか紅椿花
+紅椿一枝手折りて床の辺に
+かざして一夜を寝ねむとぞ思ふ
+玉の肌に抱かるる身の楽しさを
+思へば春の心ただよふ』</p>
+            <p class="ja-classical-line">かかる所へ、岩ケ音、真砂、白砂、水音、瀬音の五柱は、駒をはやめて入り来り、岩ケ根は歌ふ。</p>
+            <p class="ja-classical-line">『わが君の御姿木の間ゆ透し見て
+われも遊ぶと急ぎ来にけり
+二柱楽しき仲をさまたぐる
+われを許せよ礼なき吾を
+大井川速瀬渡りて今ここに
+駒をうたせる君ぞ勇まし
+われは今宴の神酒に酔ひつれど
+たしなみ心忘れざりけり
+岩ケ根をかみて流るる川水の
+しぶきは玉と散りて砕けつ
+兎にもあれ角にもあれや御館の
+雲霧はれて川水清し
+御館を深く包みしなげかひの
+雲は散りたり霧は晴れたり
+あな尊神の恵の幸深く
+永久に流るる清水真清水』</p>
+            <p class="ja-classical-line">艶男はこれに答へて、</p>
+            <p class="ja-classical-line">『わが行きし竜の島根に比ぶれば
+此花園は清しかりけり
+竜神の細乙女に囲まれて
+われは思はぬ夢になやみし
+悩みてし心の雲霧はれわたり
+今は嬉しき水音を聞く
+国津神もろもろ伊寄り集ひ来て
+われを寿ぐ今日ぞ嬉しき』</p>
+            <p class="ja-classical-line">燕子花は歌ふ。</p>
+            <p class="ja-classical-line">『わが駒は嘶きそめぬ波の上に
+そだちしわれに語らむとして
+百神の強き力に守られて
+われは御国に仕へむとぞ思ふ
+よしやよしわが玉の緒は亡するとも
+此神苑ははなれざるべし』</p>
+            <p class="ja-classical-line">真砂は歌ふ。</p>
+            <p class="ja-classical-line">『水清く流るる大井の川波は
+底の真砂も見え透きにけり
+わが君に長く仕へて今日の日の
+祝ひの蓆にあふぞ嬉しき
+永久に流るる大井の川水は
+国津神等の生命なりけり
+艶男の君にまみえて嬉しけれど
+なほ恨めしき麗子の君よ
+天津日はうららに照れど姫御子の
+清しきかげを見ぬぞ淋しき
+さりながら天地一度に開けたる
+心いだきてわれよみがへる』</p>
+            <p class="ja-classical-line">白砂は歌ふ。</p>
+            <p class="ja-classical-line">『如何ならむ神の経綸かしら砂の
+浦水の里に姫は来ませり
+燕子花姫の命のよそほひは
+水の鏡にうつりて清し
+紫の御衣まとひて駒の背に
+跨り給ふあはれ姫神よ
+百神は勇みつどひて今日の日を
+常世もがもと祈りけるかな』</p>
+            <p class="ja-classical-line">水音は歌ふ。</p>
+            <p class="ja-classical-line">『大井川岩にくだくる水音は
+君が枕に響きこそすれ
+大殿の影をうつして川水は
+永久に流るる清しき里なり
+永久に浦水の里にましまして
+われらが幸を守らせ給へ
+川の辺に咲く山吹のかげ見れば
+春はいよいよ深みたるかも
+山吹の花は咲けども実らねば
+姫の為には手折らじと思ふ
+藤波の花散るあとにいや固き
+豆は実りて御子を生むなり
+まめやかな御子を生まして此里の
+永久の栄えを来させ給へ』</p>
+            <p class="ja-classical-line">燕子花はこれに答へて、</p>
+            <p class="ja-classical-line">『水音の御言うべなり山吹の
+花は思はじ白藤めでつつ
+白藤の花も匂へり紫の
+藤も匂へりうましき川の辺
+かきつばた汀に咲けど何故か
+あそぶ蝶々なきが淋しき
+蝶々はわが背の君の朝宵に
+われをかばひていつくしみますも』</p>
+            <p class="ja-classical-line">水音は歌ふ。</p>
+            <p class="ja-classical-line">『めでたかる君の言葉にあてられて
+われ言の葉もつきはてにけり
+春はまだ残れど君の言の葉に
+わが身体はあつくなりけり』</p>
+            <p class="ja-classical-line">瀬音は歌ふ。</p>
+            <p class="ja-classical-line">『待ちわびし艶男の君は波の秀を
+踏みて嬉しく帰りましけり
+大井川水瀬の音を聞きながら
+もしや君かと待ちわびしはや
+水上の山に仕へて幾年を
+此川水に親しみしはや
+百千花咲き乱れたる広庭の
+春の眺めは華やかなりけり
+百千花咲ける神苑の花として
+君は川辺に光らせ給へる』</p>
+            <p class="ja-classical-line">斯く神々は、各自祝歌を歌ひ、今日のめでたき宴席は閉ぢられた。</p>
+            <p class="ja-classical-line">天津日は西山に傾き、黄昏の幕四辺を包み、夕烏の声高く遠く聞え来る。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: 再生の歓び [1995]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: 共鳴の庭 [1997]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
