@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 忍ケ丘 [1961] - Volume 78 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 78 Table of Contents</a>
+      <span>Volume 78</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 78 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: 忍ケ丘 [1961]</h1>
+      <p class="chapter-title-ja">忍ケ丘〔1961〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">As Asakahime-no-Kami and Her retinue advanced across the endless burnt moor on horseback, behold, right in the middle of the moor there was a small hill, and several thousand evergreen pine trees remained unburned by the flames of the wild fire, growing lush and green.</p>
+          <p class="en-p">Here, wishing to rest from the fatigue of their long journey, the retinue tethered their horses one by one to the trunks of the evergreen trees, and at the very moment they were surveying the boundless great moor of Nohara, sad voices came drifting to their ears one after another; whereupon Asakahime-no-Kami could not suppress Her wonder, and chanted a sacred poem while looking around on all sides.</p>
+          <p class="en-p">Not the voices of a hundred birds, nor the neighing of fleet-footed horses, do strange voices sound.
+Stealthily, voices of lamentation and grief are heard.
+Are they the Kunitsukami lurking in hiding?
+Having their bodies burned by the flames of the unleashed wild fire,
+is it the voices of the Kunitsukami lamenting?
+If the Kunitsukami dwell in the vicinity hereof,
+come forth quickly, and I shall comfort you.
+I am the Mihishirogami who descended from Amatsutakamiya;
+be at ease in your hearts.
+I shall subdue and destroy the Magakami,
+and I am the Kami who protects the peace of the Kunitsukami.</p>
+          <p class="en-p">As She chanted thus, digging into the southern side of the hill, having made this place their peaceful abode and permanent dwelling, opening up the fields in the vicinity, and living a peaceful life while planting and raising crops, several tens of male and female Kunitsukami, like ants emerging from a hole, gathered one after another before the divine word, performed profound reverence and worship for a long time, and replied in song,</p>
+          <p class="en-p">We are indeed the throng of Kunitsukami dwelling eternally at the roots of this island.
+Morning and evening, oppressed by the Magakami of Guronos and Gorosu, we dwell in holes.
+Although the Magatsuba fled before the divine majestic awe,
+my mother of the hahasoha tree was injured.
+My mother was enveloped in smoke, and her hair like braids
+was completely burned and she is suffering.
+Thinking even whether the thread-like life might be coming to an end,
+our mother of the hahasoha tree has been suffering greatly.
+By the grace of the Lord God, may our mother's
+suffering be healed directly.</p>
+          <p class="en-p">Asakahime-no-Kami heard this and took pity upon them,</p>
+          <p class="en-p">The body of your mother, burned by fire and injured,
+that she may be healed straightway, come forth hither.
+Even the land where the fierce Magatsumi dwell shall from today onward
+prosper, peaceful and joyful.</p>
+          <p class="en-p">As She chanted thus, Nozuchihiko of the Kunitsukami hurriedly crawled into an earthen hole, lifted his aged mother, whose hair was burned and blistered and who was suffering and agonizing, upon his back, drew near the divine presence with tears, and spoke:</p>
+          <p class="en-p">Our mother of the hahasoha tree has been injured,
+to the extent that even the span of her life cannot be measured.</p>
+          <p class="en-p">As Asakahime-no-Kami immediately declaimed a numerical spell and breathed upon her, the aged mother's burned and blistered head and face settled and recovered before one's eyes just as before, and her hair grew lush and black like lacquer in the twinkling of an eye, like that of a young woman.</p>
+          <p class="en-p">The aged mother could not contain her joy, and chanted:</p>
+          <p class="en-p">Having been burned by the mysterious wild fire and suffering,
+I have become peaceful as I was originally.
+Helped by the precious grace of the Amatsukami,
+our spirits have also been revived.
+The grace of the Himegami I shall never forget
+as long as heaven and earth endure.</p>
+          <p class="en-p">Nozuchihiko chanted a song of thanksgiving.</p>
+          <p class="en-p">I, Nozuchihiko, for a long time in this hill,
+have seen the true fire for the first time since I lived.
+In this true fire burning with the light of the Amatsukami,
+all the Magatsuhi shall perish and disappear.
+My mother, through the blessing of the living Kototama,
+has indeed become at ease in her divine spirit.
+When shall I ever forget this grace?
+I have looked up at the light of the Mihishirogami.</p>
+          <p class="en-p">Asakahime-no-Kami chanted a sacred poem.</p>
+          <p class="en-p">Wishing to avert the daily calamities of the Kunitsukami,
+I set fire to the great moor.
+Thinking of the suffering of your mother, burned by the true fire that I set,
+it is truly pitiful.
+However strong the calamities of the Magatsumi may be,
+proclaim the heavenly numerical spell and exorcise them.
+One, two, three, four, five, six, seven, eight, nine, ten,
+proclaim the Kototama even to a hundred, a thousand, and ten thousand.</p>
+          <p class="en-p">Nozuchihiko chants:</p>
+          <p class="en-p">How wondrous is the divine proclamation of the heavenly deities!
+We shall convey it to the Kunitsukami and live.
+In the very midst of the endless great moor,
+this is the hill designated as our eternal dwelling place!
+Upon the branches of the evergreen pines growing on this hill,
+creanes come and rest from time to time.
+Revering this auspicious evergreen pine as our deity,
+the Kunitsukami have served and worshipped it.
+From today onward, altering the old customs,
+we shall serve and worship the Lord Ōkami.
+How wondrous the divine age has become! Descending from the high-sun palace
+of the distant heavens,
+there is no bound to our joy as the dark clouds
+clear away from the august sky and the Kami has descended!
+Even the Magatsumi who damage the labor of cultivation
+shall have no means to dwell in the burnt moor.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">朝香比女の神の一行は、際限もなき焼野ケ原を馬背に跨り進ませ給ふ折もあれ、野原の真中に小さき丘ありて、常磐樹の松数千本、野火の焔にも焼かれず、青々と茂り居たりける。</p>
+            <p class="ja-classical-line">茲に一行は長途の疲れを休めむと、駒を一々常磐樹の幹に繋ぎつつ、際限もなき大野ケ原を国見し給ひける折しも、いづくともなく悲しき声つぎつぎに聞え来るにぞ、朝香比女の神は怪しみに堪へず、四辺を見まはしながら御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『百鳥の声にもあらず駿馬の
+嘶きならず怪しき声すも
+ひそびそと歎き悲しむ声すなり
+国津神等のひそみゐるにや
+放ちたる野火の焔に身を焼かれ
+国津神等の歎く声にや
+国津神これの近処に住みまさば
+とくに出でませよ慰めくれむ
+吾こそは天津高宮ゆ天降りてし
+御樋代神よ心安かれ
+曲神をきため亡ぼし国津神の
+安きを守る吾は神なり』</p>
+            <p class="ja-classical-line">斯く歌ひたまふや、丘の南側を穿ちて此処を安処と永住し、附近の野辺を拓きて、穀物を植ゑ育てつつ、安き生活を送り来りし数十柱の国津神の男女は、蟻の穴を出づるがごとく、つぎつぎに神言の前に集り来り、恭敬礼拝久しうし、歌もて答へらく、</p>
+            <p class="ja-classical-line">『吾こそはこの島ケ根に永久に住む
+国津神等の群なりにけり
+朝夕にグロノス、ゴロスの曲神に
+虐げられて穴に住むなり
+神々の御稜威に曲津は逃げしかども
+吾ははそはの母傷つけり
+吾母は煙にまかれかしらべの
+髪ことごとく焼かれてなやめり
+玉の緒の命も如何と思ふまで
+ははそはの母はなやませ給ひぬ
+主の神の恵みによりて吾母の
+なやみを直に癒やさせ給はれ』</p>
+            <p class="ja-classical-line">朝香比女の神はこれを聞きて憐れみ給ひ、</p>
+            <p class="ja-classical-line">『火に焼けて傷つきし汝が母の身を
+ただに癒やさむここに出でませ
+曲津見の伊猛る国土も今日よりは
+安く楽しく栄えゆくべし』</p>
+            <p class="ja-classical-line">斯く歌ひ給ふや、国津神の野槌彦は、急ぎ土穴にむぐり入り、頭髪の焼け爛れて苦しみ悶ゆる老母を背に負ひ、御前に涙ながらに進み寄り、</p>
+            <p class="ja-classical-line">『ははそはの母は傷つき給ひけり
+命のほどもはかられぬまでに』</p>
+            <p class="ja-classical-line">朝香比女の神は、直ちに数歌を宣り給ひつつ伊吹き給へば、老母の焼け爛れたる頭部顔面は元の如くに見る見るをさまり、頭髪は漆の如く黒々と瞬く間に若き女の如く生ひ立ちにける。</p>
+            <p class="ja-classical-line">老母は嬉しさに堪へず、</p>
+            <p class="ja-classical-line">『不思議なる野火に焼かれてなやみてし
+吾もとのごと安くなりぬる
+天津神の貴の恵みに助けられて
+吾気魂はよみがへりつも
+比女神の恵みは永久に忘れまじ
+天と地との続く限りは』</p>
+            <p class="ja-classical-line">野槌彦は感謝の歌をうたふ。</p>
+            <p class="ja-classical-line">『野槌彦われは久しくこの丘に
+生きて始めて真火を見たりき
+天津神の光と燃ゆるこの真火に
+すべての曲津は亡び失すらむ
+わが母は生言霊の幸はひに
+神魂安けくなりにけらしな
+この恵いつの世にかは忘れむや
+御樋代神の光り仰ぎつ』</p>
+            <p class="ja-classical-line">朝香比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『国津神の日々の禍除かむと
+大野ケ原に火を放ちつる
+吾放つ真火に焼かれて汝が母の
+なやみし思へばあはれなりけり
+曲津見の禍如何に強くとも
+天の数歌宣りて祓へよ
+一二三四五六七八九十
+百千万と言霊宣らさへ』</p>
+            <p class="ja-classical-line">野槌彦は歌ふ。</p>
+            <p class="ja-classical-line">『有難し天津御神の神宣
+国津神等に伝へて生きむ
+果しなき大野ケ原のただ中に
+永久の住処と定めし丘かも
+この丘に生ふる常磐の松ケ枝に
+鶴の来りて時々休むも
+めでたかる常磐の松を神として
+国津神等は斎きまつりし
+今日よりは昔の手振改めて
+主の大神を斎きまつらむ
+有難き神世となりけり久方の
+高日の宮ゆ神天降りまして
+嬉しさの限りなきかな黒雲の
+御空晴れつつ神は天降れり
+耕しの業を損ふ曲津見も
+焼野ケ原に棲む術なけむ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Nuzuchihime, squatting behind Nuzuchihiko, chanted a song of gratitude.</p>
+          <p class="en-p">Illumined by the august divine majesty of the Lord God,
+My mother's illness has truly subsided;
+From today onward, the number-songs taught by Kami
+Shall I praise and serve morning and evening;
+May the Kunitsukami dwelling eternally upon this hill
+Likewise praise the august divine majesty of Kami forever;
+Aligning the heavenly number-songs of the divine admonition,
+Proclaiming them aloud, we shall exorcise the Magatsuhi;
+This hill is called Shinobugaoka,
+For we dwell here enduring the fury of the Magatsuhi;
+Ten years ago, seeking to open up this island,
+Ah, we crossed over from the Dragon Island;
+Being full of rocks and its soil barren,
+The Dragon Island was the dwelling place of the hideous Magatsuhi;
+Avoiding the fierceness of the Magatsumi, we moved to this island,
+Only to be invaded by the Magatsuhi once again.</p>
+          <p class="en-p">Ubugamihiko no Kami chanted an august poem.</p>
+          <p class="en-p">We knew not that the Kunitsukami already dwelt
+Upon this desolate island of the Magatsumi;
+In the dwellings of the Kunitsukami, we beheld
+The sublimity of the precious shigumi of the Lord God;
+Where do the divine ministers of Ashiharahime of the Mihishiro dwell,
+Making our hearts so filled with uncertainty?
+Since it is an island that has grown overly desolate,
+Even the Mihishirogami must have remained silent;
+Through the merit of our lord, the burns
+Of these Kunitsukami have instantly subsided;
+By the awesome divine majesty of Kototama, the light
+Of the number-songs keeps Kami alive for eternity;
+Having traversed the boundless plains of Senri,
+We have arrived at the hill where the Kunitsukami dwell;
+How fine is the prospect of Shinobugaoka,
+Where the ever-green pines grow lush and dense;
+What gleams far away on the horizon like pond water?
+I think I will urge my horse with a whip and go to see it with my own eyes.</p>
+          <p class="en-p">Nuzuchihiko chanted a song.</p>
+          <p class="en-p">That which gleams white in the distant horizon
+Is none other than the marsh where the great serpent dwelt;
+Morning and evening, the great serpent lurks within the marsh,
+And spits forth black smoke;
+We pray that all the Kami may subdue
+The great serpent lurking at the bottom of the marsh through Their august divine majesty.</p>
+          <p class="en-p">Kiritsuhiko no Kami chanted an august poem.</p>
+          <p class="en-p">Gronos and Goros as well must be lurking in the marsh,
+Polluting the roots of this island;
+If there is yet a moment as twilight falls,
+I shall whip my steed and advance.</p>
+          <p class="en-p">Asakahime no Kami chanted an august poem.</p>
+          <p class="en-p">The path to advance toward the border of the marsh is still far;
+Let it be tomorrow, since evening is near;
+Be that as it may, let us sleep tonight at Shinobugaoka
+And nurture boundless courage.</p>
+          <p class="en-p">Kiritsuhiko no Kami chanted an august poem.</p>
+          <p class="en-p">Revering the divine words of my lord, come now,
+Let us postpone the subjugation of the Magatsumi until tomorrow;
+To sweep away the hundred sufferings of the Kunitsukami,
+How promising tomorrow's advance will be;
+The light of the midday moon has gradually
+Cast its precious radiance upon us;
+Though the sun of Ame may hide among the waves,
+By the light of the moon, the night is bright.</p>
+          <p class="en-p">Tachisehime no Kami chanted an august poem.</p>
+          <p class="en-p">Even the island roots where black clouds surged out of season
+Have been purified by the living Kototama;
+Driving away the hideous Magakami lurking at the bottom of the marsh,
+Tomorrow we shall advance toward the sacred place.</p>
+          <p class="en-p">Amehalehime no Kami chanted an august poem.</p>
+          <p class="en-p">Both heaven and earth are clearly cleared tonight;
+Shall we wait for the dawn at Shinobugaoka?
+The sun of Ame has gradually slanted into the sea,
+And the curtain of twilight draws near;
+Making the light of the moon in the vast sky our strength,
+We shall sleep the brief night at the edge of the wilderness;
+Upon this hill where many Kunitsukami have gathered,
+Together with our horses, we shall guard the night.</p>
+          <p class="en-p">Nuzuchihiko chanted a song.</p>
+          <p class="en-p">O five august Kami, rest your hearts in peace
+And repose within the mansion where I dwell;
+In the sublimity of the forms of Kami who have descended,
+The Kunitsukami remain filled with awe;
+Even to raise their faces and bow down in prostration is too fearful,
+The Kunitsukami say as they bow their heads low;
+From today onward, illumined by the merit of Kami,
+The Kunitsukami shall prosper in peace;
+I, now serving as the director of this gathering,
+Shall attend daily to the labor of cultivation;
+May grain fill the roots of this island to overflowing,
+And grant prosperity to the Kunitsukami;
+From today onward, upon the summit of Shinobugaoka,
+Shall we respectfully serve the shrine of Kami.</p>
+          <p class="en-p">Ubugamihiko no Kami chanted an august poem.</p>
+          <p class="en-p">Just are the words of the Kunitsukami; serve herein
+The precious shrine of the Lord God;
+Revering the Lord God morning and evening,
+Proclaim the living Kototama morning and evening;
+At the dawn when you revere the august spirit of the Lord God,
+Even a hundred Magatsumi will not dare to approach.</p>
+          <p class="en-p">Nuzuchihiko chanted a song.</p>
+          <p class="en-p">How grateful is the divine proclamation of the attendant Kami;
+Reverently shall I revere and serve Them;
+Cutting through the ever-green trees growing lush upon this hill,
+I shall serve the shrine;
+When spring comes, many true cranes gather,
+Building nests in the treetops and bearing their young and leaving;
+Leaving behind the ever-green trees where the true cranes nest,
+I shall select sacred pillars and build a palace.</p>
+          <p class="en-p">Asakahime no Kami chanted an august poem.</p>
+          <p class="en-p">O hundred Kami, O Kunitsukami, come now,
+Tonight let us fall into a peaceful slumber;
+Perhaps weary, the swift horses neigh
+And stamp their feet in the shade of the pine trees;
+O horse, O horse, rest quickly, for tomorrow once again
+I shall borrow your strength.</p>
+          <p class="en-p">Thus chanting, the attendant Kami, the Kunitsukami, and the five steeds, illumined by the moonlit hill, wove dreams of peace.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">野槌姫は野槌彦のしりへに蹲りつつ、感謝の歌を詠む。</p>
+            <p class="ja-classical-line">『有難き神の御稜威に照らされて
+母の病はをさまりにけり
+今日よりは神の伝へし数歌を
+朝な夕なに称へ奉らむ
+この丘に永久に住まへる国津神も
+神の御稜威を永久に称へむ
+御諭しの天の数歌日並べて
+宣りあげにつつ曲津を祓はむ
+この丘は忍ケ丘と称ふなり
+曲津の荒びを忍びて住めば
+この島を拓かむとして十年前
+竜の島より渡り来しはや
+竜の島は岩石多く地瘠せて
+醜の曲津の棲処なりける
+曲津見の猛びを避けて此島に
+移りつまたも曲津に侵されし』</p>
+            <p class="ja-classical-line">初頭比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『国津神のはや住ますとは知らざりき
+この荒れはてし曲津見の島に
+主の神の貴の経綸の尊さを
+国津神等の住居に見しかな
+御樋代の葦原比女の神司は
+いづくにますか心もとなや
+あまりにも荒れはてにつる島なれば
+御樋代神も黙しゐにけむ
+わが公の功にこれの国津神の
+火傷は忽ちをさまりしはや
+言霊の御稜威畏く数歌の
+光は神を永久に生かせる
+果しなき千里の野辺を渉り来て
+国津神住む丘に着きぬる
+常磐樹の松の青々茂りたる
+忍ケ丘の眺めよろしも
+目路遠く輝くものは池水か
+一鞭馳せて見とどけむと思ふ』</p>
+            <p class="ja-classical-line">野槌彦は歌ふ。</p>
+            <p class="ja-classical-line">『目路はろか白く輝く鏡こそ
+大蛇の棲みし沼なりにけり
+朝夕に大蛇は沼に潜みつつ
+黒き煙を吐きいだすなり
+沼底にひそむ大蛇を諸神の
+御稜威にきため給へと祈るも』</p>
+            <p class="ja-classical-line">起立比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『グロノスもゴロスも沼に潜みゐて
+この島ケ根を汚すなるらむ
+黄昏にまた間もあれば一走
+駒に鞭うち吾進まばや』</p>
+            <p class="ja-classical-line">朝香比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『沼の辺に進まむ道はいや遠し
+明日にせよかし夕べ近ければ
+兎も角も今宵は忍ケ丘に寝ねて
+無限の勇気を養はむかな』</p>
+            <p class="ja-classical-line">起立比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『吾公の神言畏みいざさらば
+曲津見の征伐を明日に延ばさむ
+国津神の百のなやみを払ふべく
+進まむ明日のたのもしきかな
+昼月のかげは漸く吾上に
+貴の光を投げさせ給へり
+天津日は波間にかくれ給ふとも
+月の光に夜は明るき』</p>
+            <p class="ja-classical-line">立世比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『時じくに黒雲湧きし島ケ根も
+生言霊に清まりしはや
+沼の底に潜める醜の曲神を
+退ひて進まむ明日は聖所へ』</p>
+            <p class="ja-classical-line">天晴比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『天も地も清く晴れたり今宵はも
+忍ケ丘にあかつき待たむか
+天津日は漸く海に傾きつ
+黄昏の幕迫り来るかも
+大空の月の光を力とし
+荒野の果てに小夜を眠らむ
+国津神数多集へるこの丘に
+駒もろともに夜を守らむ』</p>
+            <p class="ja-classical-line">野槌彦は歌ふ。</p>
+            <p class="ja-classical-line">『五柱の尊き神よ心安く
+わが住む館に休らはせませ
+天降りましし神の姿の尊さに
+国津神等は畏みてをり
+顔を上げて伏し拝むさへ畏しと
+国津神等は俯ぶしにつつ
+今日よりは神の功に照らされて
+国津神たち安く栄えむ
+吾は今これの集ひの司とし
+耕しの業に日々を仕ふる
+穀物これの島根にみちみちて
+国津神等の栄えをたまへ
+今日よりは忍ケ丘の頂に
+神の御舎つかへ奉らむ』</p>
+            <p class="ja-classical-line">初頭比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『国津神の言葉宜なり主の神の
+貴の御舎ここにつかへよ
+主の神をあした夕なに斎きつつ
+生言霊を朝夕に宣れ
+主の神の御霊を斎きしあかつきは
+百の曲津見もさやらざるべし』</p>
+            <p class="ja-classical-line">野槌彦は歌ふ。</p>
+            <p class="ja-classical-line">『有難し御供の神の神宣
+畏み斎き仕へ奉らむ
+この丘に生ひ茂りたる常磐樹を
+伐り透しつつ御舎つかへむ
+春されば数多の真鶴集ひ来て
+梢に巣ぐひ子を生みてゆくも
+真鶴の巣ぐふ常磐樹を残し置きて
+御柱選りて宮居を造らむ』</p>
+            <p class="ja-classical-line">朝香比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『百神よ国津神たちいざさらば
+今宵は安く眠りにつかむ
+駿馬は疲れけるにや嘶きて
+松の樹かげに足掻きして居り
+駒よ駒早く休めよ明日はまた
+汝が力を吾は借るべし』</p>
+            <p class="ja-classical-line">斯く歌ひ給ふや、御供の神も国津神も五頭の駒も、月下の丘に照らされながら、平和の夢を結びける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: 焼 Field の行進 [1960]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: 焼 Field の Moon [1962]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

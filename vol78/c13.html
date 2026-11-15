@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: Spring Field の進行 [1969] - Volume 78 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 78 Table of Contents</a>
+      <span>Volume 78</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 78 &bull; Chapter 13</span>
+      <h1 class="chapter-title-en">Chapter 13: Spring Field の進行 [1969]</h1>
+      <p class="chapter-title-ja">春野の進行〔1969〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The vast high plateau to the west of Nakanogaha had been scorched black by the power of the true fire unleashed by Asakahime no Kami, leaving not a single withered leaf upon the earth and becoming bright and clear; yet to the east, marked by the dividing line of Nakanogaha, it was a wilderness of wild grasses where great serpents inhabited and strange animals lurked, and as midnight approached, they harmed all the crops or injured the young and old of the Kunitsukami, so that it had not yet reached the realm of complete peace.</p>
+          <p class="en-p">Here Ashiharahime no Kami, who is the deity of Mihishiro, built a sacred palace of purification on a small hill called Sakuragaoka at the foot of Mount Takashi, surrounded the perimeter of the hill with a moat to prevent the invasion of evil deities, and was protecting the Kunitsukami of the surrounding area. Therefore, even in this Shimagene, which has an expanse of five thousand squareri, the Kunitsukami and various living creatures who bathe in the grace of Mihishiro no Kami and live in peace number only about four or five squareri. In short, the sphere where the authority of Mihishiro no Kami reaches is but about one-thousandth of the entire island.</p>
+          <p class="en-p">Having spent a night admiring the moon in the forest amid the fields where ever-verdant pines grew lushly, the eleven male and female deities together with the party of Naganozuchihiko, the elder of the Kunitsukami, set forth with the dawn, each on horseback, heading straight and at full speed toward the sacred place of Sakuragaoka far to the east.</p>
+          <p class="en-p">Shinmaibiko no Kami stood at the very fore, and while on horseback, chanted thus:</p>
+          <p class="en-p">'What a propitious day is this today! Setting forth from afar from the palace of Takachifu, whose name is exalted as the true supreme realm of Shibi-Tenkai, the eight deities who appeared manifest as the divine commanders of Asakahime, stirring up their stern and valiant hearts, crossing over myriad ri of mountain and field, traversing myriad ri of ocean waves, descending from heaven to this very island-root of the reed-plains where the earth was yet young—when you cut and brought forth the flint, wondrous in the world, flash by flash the sparks of fire scatter in all four directions, and at the moment they suddenly catch fire upon the roots of the grasses in the wild moor, fanned by the sea breeze crossing the ocean waves, they suddenly sweep and burn up the thickets of the wilderness in a single stretch of a thousand ri.</p>
+          <p class="en-p">The Magatsumi of Guronosu and Gorosu, wrapped in smoke and burned by fire, with no means whatsoever of what to do, hid deep within the waters at the bottom of their eternal dwelling place, the Gross Swamp. Asakahime leisurely crossed the burned wilderness, made her night's lodging of dewdrops as she arrived at Oshigaoka at dusk, and waiting for the dawn, she entrusted four deities with the conquest of the Magatsu; whereupon the four deities, advancing valiantly, caused the Magatsu lurking in the depths of that deep swamp to face them, and as they respectfully recited the Amatsu-Norito and proclaimed the living Kototama, even those stubborn Magatsu faltered and retreated, though suffering yet persistently.</p>
+          <p class="en-p">Suddenly a roaring voice was heard, "Uuuu-", so sharp that even heaven and earth seemed to split asunder; while the deities performed their divine exploits, the Magatsumi raised clouds, made rain fall, manifested their true forms as dragon-serpents, and fled away like a mist toward the valleys of Mount Takashi. Here the four deities, before the august presence of Asakahime who dwelt at Oshigaoka, proclaimed in every detail the full account of their exploits; and the Himegami, rejoicing at their achievements, together with Zuchihiko, secretly spun the threads of her divine providence as she intended to advance to the pure courtyard of Sakuragaoka.</p>
+          <p class="en-p">Turning the wide stream of Nakanogaha that blocked the way into dry land by the light of the Kototama, and thinking to cross over to the east of the river, we respectfully went forth to meet them, following Ashiharahime no Kami, and offering our utmost gratitude for the immense grace by which she punished the Magatsumi of this Shimagene; and as dusk quickly drew near, spending a night of the moon in the shade of the pines in the forest amid the fields, talking together each as our heart fancied, the state in which we rejoiced and took pleasure was a joy and delight like unto the opening of the Heavenly Rock Cave. The eastern sky grew tinged with madder, and splitting the purple clouds, the Amatsu-Hi ascended in abundant prosperity; the singing voices of a hundred birds and a thousand birds chanted the eternal spring, while the white plum blossoms blooming and fragrant here and there, wonderfully escorted by Kalavinkas and with true cranes singing, the eleven deities, accompanied by Zuchihiko, traversed the wild moor, heading straight for the palace of Sakuragaoka—how valiant is their advance! Ah, kannagara kamukamu, reverently and deeply honoring the divine true words and grand providence of the Gods, morning and evening we perform purification, and through the blessing of the living Kototama, to go forth opening up the new land of Toyo-Ashihara—this indeed is a joy. As Sakuragaoka draws near, the blowing breeze is fragrant, and deep in the distant moor it burns bright—'</p>
+          <p class="en-p">The JSON format is strictly maintained.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">中野河以西の大高原は、朝香比女の神が放ち給へる真火の力によりて黒焦となり、地上一片の枯葉も留めず、晴々しくなりけれども、中野河を劃して以東は草莽々の原野にして彼方此方に大蛇棲息し又は異様の動物潜伏して、深夜になれば総ての作物に害を与へ或は国津神の老幼を傷つけるなど、未だ全く平安の域に達せざりける。</p>
+            <p class="ja-classical-line">茲に御樋代の神とまします葦原比女の神は、鷹巣の山の麓なる桜ケ丘と言へる小山に瑞の御舎を造り給ひ、邪神の襲来を防ぐために丘の周囲に濠を繞らし、附近一帯の国津神を守り給ひつつありける。故に五千方里の広袤を有する此島ケ根も、御樋代神の恵に浴し其生を安んずる国津神及び諸々の生物は約四五方里に過ぎず。要するに御樋代神の権威の及ぶところは全島の千分の一位のものなり。</p>
+            <p class="ja-classical-line">常磐の松生ひ繁る野中の森に月を愛でながら、一夜を明し給ひたる女男十一柱の神及び国津神の長野槌彦の一行は、夜の明くると共に各自馬上にて遥か東方なる桜ケ丘の聖所を指して一目散に進む事となりけり。</p>
+            <p class="ja-classical-line">真以比古の神は真先に立ち、馬上ながら歌はせ給ふ。</p>
+            <p class="ja-classical-line">『今日は如何なる吉き日ぞや
+紫微天界の真秀良場と
+其名も高き高地秀の
+宮居をはろばろ立ち出でし
+八柱神と現れませる
+朝香の比女の神司
+厳の雄心振り起し
+万里の山野を打ち渉り
+万里の海原横ぎりつ
+地まだ稚き葦原の
+これの島根に天降りまし
+世にも珍し燧石
+切り出でたまへばピカピカと
+四方に飛び散る火の光り
+忽ち荒野の草の根に
+パツと燃えつく折もあれ
+海原渡る潮風に
+吹きあふられて忽ちに
+荒野ケ原の叢を
+一潟千里に焼き尽し</p>
+            <p class="ja-classical-line">グロノス、ゴロスの曲津見は
+煙にまかれ火に焼かれ
+何とせむ術なきままに
+永久の棲処のグロス沼
+水底深く忍びけり
+朝香の比女は悠々と
+焼野ケ原を打ち渉り
+忍ケ丘に夕暮を
+着かせたまひつ一夜の
+露の宿りをなしたまひ
+明くるを待ちて四柱の
+神に曲津の征服を
+依さしたまへば四柱は
+勇み進んで出でたまひ
+さしもに深き沼底に
+潜める曲津に向はせて
+天津祝詞を奏上し
+生言霊を宣りつれば
+遉の曲津も辟易し
+苦しみながらも執拗に</p>
+            <p class="ja-classical-line">立ち退かむとはせざりしが
+忽ち聞ゆる唸り声
+ウウウーと天地も
+さけなむばかり鋭敏鳴出の
+神の功に曲津見は
+雲をば起し雨降らし
+竜蛇の正体現はして
+鷹巣の山の谷の間を
+目ざして霞と逃げさりぬ
+茲に四柱神々は
+忍ケ丘におはします
+朝香の比女の御前に
+一伍一什の物語
+宣らせたまへば比女神は
+其功績を嘉しまし
+野槌の彦と諸共に
+桜ケ丘の清庭に
+進みゆかむと密やかに
+経綸の糸を繰りたまふ
+道に当りし中野河の</p>
+            <p class="ja-classical-line">広き流れを言霊の
+光に陸地となしたまひ
+河の東に渡らむと
+思ほす折しも吾々は
+葦原比女神に従ひて
+謹み出迎奉り
+此島ケ根の曲津見を
+罰めたまひし鴻恩を
+心の限り感謝しつ
+はや黄昏に近づけば
+野中の森の松かげに
+月の一夜を明かしつつ
+思ひ思ひに語り合ひ
+歓ぎ楽しむ其状は
+天の岩戸の開けたる
+嬉しき楽しき思ひなり
+東の空は茜さし
+紫雲をわけて天津日は
+豊栄昇りたまひける
+百鳥千鳥のなく声は</p>
+            <p class="ja-classical-line">常世の春をうたひつつ
+処々に咲き香ふ
+白梅の花美はしく
+迦陵頻伽に送られて
+真鶴うたふ大野原を
+十一柱の神々は
+野槌の彦を従へて
+荒野ケ原を渉りつつ
+桜ケ丘の御舎を
+さして進むぞ勇ましき
+ああ惟神々々
+神の真言の御経綸
+吾等は謹み敬ひて
+朝な夕なを禊しつ
+生言霊の幸はひに
+豊葦原の新国土を
+開きゆくこそ楽しけれ
+桜ケ丘も近づきて
+吹き来る風も芳ばしく
+遠野の奥に燃え立てる</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kagerohi bountifully wafts the scent of flowers across the fields.</p>
+          <p class="en-p">Ah, may there be light in the stern miiki of the kamunagara kototama, and may there be life in our kototama.</p>
+          <p class="en-p">Ashiharahime no Kami chants a miuta.</p>
+          <p class="en-p">Aha, aha, the god of light has appeared, sweeping away the clouds of Ashihara, enduring and guarding for twenty years, this land of Ashihara lives on! Through the achievements of the mikoto of Asakahime no Kami, it opens forth as Toyoashihara. The Nakatsumikuni of Ashihara was a shikodo where Magatsumi raged morning and night. Even this shikokuni shall open as the yasukuni of Toyoashihara through the ikukototama, by the morning when Akitsuo no Kami descends, this Ashihara must be opened! The flint granted by Asakahime no Kami is indeed the light that opens Ashihara. Had I also possessed this flint twenty years ago, this Ashihara would have flourished! Though there are many Kunitsukami, they were destroyed by the cunning wiles of Magatsumi. That the Kunitsukami near Sakuragaoka Shrine barely preserved their lives,</p>
+          <p class="en-p">from today onward, the Kunitsukami shall be born and nurtured like the stars of the vast sky! O Kunitsukami, bear children, bear children, flourish and flourish, this Ashihara is peaceful from today! This is the day to welcome Yatsuhirahime no Kami, who led the four pillars of gods and descended.</p>
+          <p class="en-p">Asakahime no Kami, rich upon her steed, chants a miuta.</p>
+          <p class="en-p">This island possessed by Ashiharahime no Kami, I burned to ashes entirely at my own will. Thinking it an island without a master, I unleashed true fire to drive away Magatsumi, and as I advanced, seeing that the Kunitsukami dwelt here, I realized that Ashiharahime resides here. As I journeyed along the way, intending to attend upon the august presence of Akitsuo no Kami, I happened to stop by this island root connected by fate, and met the mi히shiro no Kami! The purity of Ashiharahime no Kami, born from the fruit of the Tokoyo no Kagu no Ki. The kimi who descended from Takamiya, where the master god dwells eternally, is Yatsuhirahime no Kami, distributing Yatsuhirahime no Kami to the lands, the master god who brings forth the kunidama is truly wonderful! The mi히shiro no Kami are all divine pillars born of the miiki of the master god. With such precious mi히shiro no Kami, Mizunomitama granted the divine will to give birth to the kunidama.</p>
+          <p class="en-p">To create a great family nation, the master god caused Akitsuo no Kami alone to be engaged. The mi히shiro is the child of the master god, and the kunidama is indeed the child of Mizunomitama. O Ashiharahime no Kami, waiting for a good day, give birth to Mizunomitama and the kunidama! I too, advancing to the presence of Akitsuo no Kami, intend to give birth to the kunidama. Advancing into the Western lands where the crooked god rages afar, I go forth with sorrow.</p>
+          <p class="en-p">Hatsuhikohiko no Kami chants a miuta.</p>
+          <p class="en-p">The fields of early summer also feel like the spring Yayoi, and kagerohi rises in the depths of Ohara. To advance with horses aligned across the field where kagerohi burns is also a joy toward Sakuragaoka! The breath of the wind lazily blowing upon my face makes my eyes feel drowsy indeed. Just as a fine steed slows its pace and slumbers, advancing while parting the grass of the great plain. Rocked gently on the back of the steed, unawares, it is a journey through the spring fields that invites slumber.</p>
+          <p class="en-p">Naryamahiko no Kami chants a miuta.</p>
+          <p class="en-p">The joy of welcoming Asakahime no Kami, who descended from the high and eminent mountains of Hikosakata! When I look up, the peak of the mountain of Takasu welcomes us, wearing a robe of purple clouds. Listening to the breath of the drowsy wind blowing along the field path, even the slowness of our advancing steeds, spending the whole night without sleep, playing on the moon boat, invites drowsiness.</p>
+          <p class="en-p">Eishunuhime no Kami chants a miuta.</p>
+          <p class="en-p">Serving as an attendant to Ashiharahime no Kami, I went out and welcomed Asakahime no Kami. When I look up, shining above Asakahime no Kami is Toshinaridesu no Kami! Toshinaridesu no Kami does not reveal an august form, but hastens into the shadow and guards us. I have no guardian deity for my kimi; how shall I open this Ashihara? Nevertheless, since it is a land where the sun of ikukototama shines, it will surely open peacefully. Pondering back and forth in bewilderment, twenty years have passed without a single achievement.</p>
+          <p class="en-p">Tachitachihiko no Kami chants a miuta.</p>
+          <p class="en-p">Having gone through the creation of Sano Island and Wanli Island root, Asakahime no Kami has come hither! Asakahime no Kami must have gone forth to assist in the divine work of Ashiharahime no Kami. Serving Asakahime no Kami morning and night, though unable to grasp the light of the true word, Asakahime no Kami, who maintains an unfathomable and majestic august presence, is indeed the august light.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">陽炎豊に花の香を
+野辺一面に送るなり
+ああ惟神言霊の
+厳の御水火に光あれ
+わが言霊に生命あれ』</p>
+            <p class="ja-classical-line">葦原比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『天晴れ天晴れ光の神はあれましぬ
+葦原の雲吹き払ひつつ
+二十年を忍び忍びて守りてし
+この葦原の国土は生きたり
+朝香比女神の神言の功績に
+豊葦原と開けゆくなり
+葦原の中津神国は曲津見の
+朝夕荒ぶ醜処なりける
+醜国も豊葦原の安国と
+開け行くかも生言霊に
+顕津男の神の天降らす朝迄に
+開きおくべしこの葦原を
+朝香比女神の賜ひし燧石こそ
+葦原を開く光なりける
+此燧石二十年前に吾もたば
+この葦原は栄えしものを
+国津神数多あれども曲津見の
+醜の奸計に滅されける
+桜ケ丘宮の近くの国津神は
+纔に命保ちけるはも</p>
+            <p class="ja-classical-line">今日よりは国津神等大空の
+星のごとくに生み育つべし
+国津神よ御子を生め生め栄えよ栄え
+この葦原は今日より安けし
+四柱の神を率ゐて天降らしし
+八柱比女神を迎ふる今日かな』</p>
+            <p class="ja-classical-line">朝香比女の神は馬上豊に御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『葦原比女神の領有ぐこの島を
+吾恣に焼き払ひけり
+主なき島と思ひて曲津見を
+払ひ退ふと真火を放ちし
+進み来れば国津神等の住めるを見て
+葦原比女のおはすと悟りし
+顕津男の神の御許に侍らふと
+吾は旅行く道すがらにて
+由縁ある此島ケ根に立寄りて
+御樋代神に会ひにけらしな
+非時の香具の木の実ゆ生れませる
+葦原比女の神の清しさ
+主の神の永久にまします高宮ゆ
+天降りし公は八十比女の神
+国々に八十比女神を配りおきて
+国魂生ます主の神天晴れ
+御樋代の神は何れも主の神の
+水火に生れし神柱なる
+かくのごと尊き御樋代神をもて
+国魂生ますと瑞霊たまひぬ</p>
+            <p class="ja-classical-line">大家族国をつくると主の神は
+顕津男の神独りを依させり
+御樋代は主の神の御子国魂は
+瑞の御霊の御子なりにけり
+葦原比女神よ吉き日を待たせつつ
+瑞の御霊と国魂生みませ
+吾も亦顕津男の神の御許に
+進みて国魂生まむとぞ思ふ
+遥々と曲神の荒ぶ西方の
+国土に進まむ吾なやみつつ』</p>
+            <p class="ja-classical-line">初頭比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『初夏の野も春弥生の心地して
+大原の奥に陽炎立つも
+陽炎の燃え立つ野辺を駒並めて
+進むも楽し桜ケ丘へ
+ぼやぼやと吾面を吹く風のいきに
+吾目ねむたくなりにけらしな
+駿馬も歩みをゆるめて眠るごと
+大野の草を分けつつ進めり
+駒の背にゆるく揺られて知らず識らず
+ねむけ催す春野の旅なり』</p>
+            <p class="ja-classical-line">成山比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『久方の高地秀山ゆ天降りましし
+朝香の比女神迎ふる嬉しさ
+仰ぎ見れば鷹巣の山の頂は
+紫雲の衣をつけて迎ふる
+野路を吹くねむたき風の息づかひ
+聞きつつ進む駒の遅きも
+終夜眠りもやらず月舟の
+下びに遊びて睡気催す』</p>
+            <p class="ja-classical-line">栄春比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『葦原比女神の御供に仕へつつ
+朝香比女の神の出でまし迎へし
+仰ぎ見れば朝香の比女の御上に
+光らせたまへり鋭敏鳴出の神は
+鋭敏鳴出の神は御姿現はさず
+蔭にいそひて守らせたまへる
+吾公に守り神なし如何にして
+この葦原を拓きますらむ
+さりながら生言霊の天照らす
+国土にしあれば安く開けむ
+とつおひつ思案に暮れて二十年を
+功績もなく過ぎにけらしな』</p>
+            <p class="ja-classical-line">起立比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『狭野の島と万里の島ケ根造りをへし
+朝香の比女神ここに来ませり
+葦原比女神の神業を補ふと
+出でましにけむ朝香比女の神は
+朝香比女神に朝夕仕へつつ
+真言の光を悟り得ざるも
+奥底のわからぬ御稜威を保ちます
+朝香比女の神は御光なりけり』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Yasakahime no Kami chanted this divine poem:</p>
+          <p class="en-p">'Leaving the noble miyai of Sakuragaoka,
+I went forth to welcome Asakahime no Kami in the field.
+Beholding the divine instructions of Asakahime no Kami,
+My eyes have grown strangely dazzled.
+Asakahime no Kami, whose kototama shines across the heavens,
+Has truly manifested as living light.
+Though it is early summer, the land of Ashihara is cold with wind,
+And the cherry blossoms are in their fullest glory.
+White plum blossoms, peaches, and cherry blossoms all at once
+Fragrantly adorn the sacred precinct of Sakuragaoka.
+To comfort you on this trying journey,
+I shall guide you to the sacred place where flowers bloom in abundance.'</p>
+          <p class="en-p">Tatsuyohime no Kami chanted this divine poem:</p>
+          <p class="en-p">'Plum, cherry, and peach all blooming at once, they say,
+How I yearn to gaze upon this rare and wondrous landscape!
+Serving in the entourage of my lord,
+How joyous to advance to the sacred precinct fragrant with a hundred flowers!
+Mists rise dimly over the mountain fields in all four directions,
+And the blowing wind encompasses the scent of flowers.
+How delightful is the traveler's lodging on a grass-pillow pillow,
+Meeting the spring in the height of floral splendor!'</p>
+          <p class="en-p">Ameharehime no Kami chanted this divine poem:</p>
+          <p class="en-p">'My lord, crossing the wild plains of banri,
+Do you come forth to give birth to the kunitama?
+Until the Kunitamagami appears, in your entourage
+I have followed to serve you.
+Though the western lands are distant,
+I resolve to advance by the divine virtue of the Kami.
+To gaze upon the scenic beauty of this floating isle of Ashihara
+And ponder the prosperity of the land,
+That radiance shining deep in the distant Tono,
+Is it cloud or is it mountain cherry?'</p>
+          <p class="en-p">Ikiikihiko no Kami chanted this divine poem:</p>
+          <p class="en-p">'To the sacred precinct where distant vistas make one mistake clouds for blossoms,
+I shall guide you onward.
+The beauty of the sacred miyai of Sakuragaoka,
+I desire to show to the five pillars of Kami.
+If we hasten the legs of our swift horses, by twilight
+We shall surely be able to return to Sakuragaoka.
+Though evening falls, the moonlight is clear and bright,
+So let us press forward steadily toward Sakuragaoka.'</p>
+          <p class="en-p">Thus the Kami, passing the long hours of the day upon horseback by alternately chanting divine poems, before the twilight of that day gradually arrived at the sacred precinct of Sakuragaoka, received the reverent bows of the many waiting Kunitsukami and others, ascended to the newly constructed Yahirodono, and, admiring the moon and praising the night cherry blossoms, spent the short spring night.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">八栄比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『桜ケ丘の貴の宮居を立ち出でて
+朝香比女の神を野に迎へける
+朝香比女神の神言を仰ぎてゆ
+吾目眩しくなりにけらしな
+言霊の天照り渡す朝香比女の
+神は光にましましにけり
+初夏なれど葦原の国土は風寒く
+桜の花は真盛りなりけり
+白梅と桃と桜の一時に
+桜ケ丘の聖所に匂へり
+せめてもの旅を慰めまつるべく
+花咲きみつる聖所に導びかむ』</p>
+            <p class="ja-classical-line">立世比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『梅桜桃も一度に咲くと言ふ
+珍の景色を眺めまほしけれ
+吾公の御供に仕へて百花の
+薫る聖所に進む楽しさ
+もやもやと四方の山野に霞立ちて
+吹き来る風は花の香包めり
+草枕旅の宿りの楽しさは
+花の盛りの春にあふなり』</p>
+            <p class="ja-classical-line">天晴比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『吾公は万里の荒野を渉りつつ
+国魂生まむと来りますかも
+国魂神あれますまでは御供に
+吾仕へむと従ひ来りし
+西方の国土は遥けしさりながら
+神の御稜威に進まむと思ふ
+葦原のこの浮島の風光を
+眺めて国土の栄を偲ぶも
+遠方の遠野の奥に輝ける
+眺めは雲かも山桜かも』</p>
+            <p class="ja-classical-line">霊生比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『目路遠く雲か花かとまがふなる
+聖所に吾は導きゆかむ
+桜ケ丘の宮の聖所の美はしさを
+五柱神に見せたくぞ思ふ
+駿馬の脚を急げば黄昏に
+桜ケ丘に帰り得べけむ
+夕されど月の光のさやかなれば
+桜ケ丘にひたに進まむ』</p>
+            <p class="ja-classical-line">かく神々は馬上にて日長の退屈さに交々御歌詠ませつつ、其日の黄昏るる前、漸くにして桜ケ丘の聖所に着きたまひ、迎へまつる数多の国津神等の敬礼をうけ、新しく築かれし八尋殿に上りて、月を賞め夜桜を讃へながら、短き春の一夜を過させたまひける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c12.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 12: Moon 下の宿り [1968]</span>
+      </a>
+      <a href="c14.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 14: Flower 見の宴 [1970]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

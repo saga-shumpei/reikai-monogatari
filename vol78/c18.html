@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 18: Kami 嘉言 [1974] - Volume 78 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 78 Table of Contents</a>
+      <span>Volume 78</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 78 &bull; Chapter 18</span>
+      <h1 class="chapter-title-en">Chapter 18: Kami 嘉言 [1974]</h1>
+      <p class="chapter-title-ja">神嘉言〔1974〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The dark vapors of evil and falsehood having accumulated so densely that black clouds blocked Ametsuchi and the island of Gross was brought to the very verge of Baukoku, through the descent of Asakahime no Kami, who was one of the eight Yahashiramihishirogami descending from the Miya of Takachiho as the time of Ama arrived, Ametsuchi was purified and not a single speck of Kazechiri remained within Kokunai; thus, the island country of Gross was renamed Ashiharashinkoku, and the Kunitsukami were promoted and commanded to administer the divine work closely beside the divine pillar of Ashiharahime no Kami. Hereupon, the newly revived land of Ashihara, because the Magatsukami of Guronosu and Gorosu had fled and vanished before the light of Ikukototama and the power of true fire, had its Miya moved to Shinogaoka, which is the center of the land, and an eight-fathom hall was urgently constructed so that she might preside over the Kunitsukami. The Jūyō divine banners fluttered and billowed in the spring breeze, the light of sun and moon shone with exceptional beauty into Ama and illuminated the earth, and from all four quarters and eight directions the Kunitsukami as well as all living creatures of fur, feather, insect, and fin gathered at the sacred site of Shinogaoka to celebrate and revere the establishment of the new land.</p>
+          <p class="en-p">Hereupon, Ashiharahime no Kami, leading the Amatsukami and others who had been newly entrusted with divine missions, enshrined the Lord God, erecting thick palatial pillars at Shinogaoka, performed ritual purification before the sacred presence, and solemnly chanted the initial divine words of the country. Those divine words were thus declared:</p>
+          <p class="en-p">'With trembling awe and reverence even before the dread and majestic lower rock-roots of Shinogaoka, where thick great palatial pillars are erected and chigi rise high into Takamanohara, before the grand presence of the Lord God who abides as the pacification of the land, I, Ashiharahime no Kami, serving as the Kunitsukami pillar of the land of Ashihara, with trembling awe and deep reverence humbly declare: whereas this divine land was formerly still immature in its soil, its national form unsettled, and the foul and evil water and fire of Magatsumi blocked Ametsuchi, with mists and clouds deep and the light of the celestial sun failing to reach the earth, so that all trees and grasses as well as the five grains failed to ripen abundantly, endangering the living souls of the Kunitsukami and causing this immature land to wither and perish in its second leaf; yearning by any means whatsoever to create and consolidate this blessed land of divine entrustment, morning and evening I broke my heart, wrung out my lifeblood, gazed up at Ama and bowed down to the earth, lamenting—at such a time, Asakahime no Kami, who had pure palatial pillars erected in the precious sacred sanctuary of Mount Takachiho, unexpectedly descended to this immature land, and with the light of Ikukototama and the power of true fire burned up completely the dwelling places of the foul Magatsumi. Now that wind and dust have entirely subsided and the shadows of Magatsumi have been scattered and caused to vanish like morning and evening mists blown away by morning and evening breezes, I wish to move the Miya of Sakuragaoka, which was biased toward the east of the land, to this sacred site which is the true heartland of the country, enshrine the divine spirit of the Lord God eternally, fix the national banner and move the government office, and devote myself with a pure heart and concentrated water and fire of true words to the divine work of generating the land and generating kami. Therefore, taking the descent of Asakahime no Kami as our occasion, on this auspicious day and fortunate hour we hold the grand festival of the birth of the new land, summoning the divine spirits of the eight million Amatsukami and others, and offering various delicious foods growing in the mountains and fields of this land, arranged abundantly upon tables of a hundred legs, praying with trembling awe and reverence that You may graciously hear, accept, and consent, and that through ages and eightfold ages, without movement and without change, You may cause this new land to flourish and prosper lushly like an evergreen Iwashika-yasawagi, guarding and blessing it in the guardianship of the night and the guardianship of the sun—thus humbly and fearfully I pray and declare.</p>
+          <p class="en-p">Splendid, splendid, the glorious and prosperous land of abundant reeds,
+The divine realm has truly been born!
+Erecting thick palatial pillars for the Lord God,
+How joyous is this day of our service!
+Even the island roots whose tangled clouds once blocked Ametsuchi
+Have cleared away completely, and sun and moon shine brightly.
+The long months and years of twenty springs enveloped it all,
+And at last the black clouds of the foul ones have cleared away.
+Selecting the Kunitsukami endowed with light,
+We entrust them as guardian kami of the land.
+May the grace of the Lord God eternally
+Cause the new land of Ashihara to shine!
+Amatsukami and Kunitsukami, each and every one,
+Conform strictly to the trust placed in you!
+The rock door of eternal Ama has now opened,
+The darkness of Tokoyo is likewise dawning away.
+Moving the Miya of Sakuragaoka anew to this ground,
+We shall govern and rule this new land;
+Shinogaoka, situated in the very center of the land of Ashihara,
+Is truly fitting for the Great Office!'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">妖邪の気鬱積して黒雲天地を塞ぎ、殆ど亡国に瀕したるグロスの島は、天の時到りて、高地秀の宮居より天降りませる八柱御樋代神の一柱なる朝香比女の神の御降臨によりて、天地清まり、国内一点の風塵も止めざるに至りたれば、茲にグロスの島国を葦原新国と改称し、国津神を抜擢して葦原比女の神の国津柱の御側近く神業を司らしめ給ふ事とはなりぬ。茲に新しく蘇りたる葦原の国土はグロノス、ゴロスの曲津神、生言霊の御光と真火の功に逃げ失せければ、国土の中心なる忍ケ丘に宮居を移し給ひ、八尋殿を急ぎ見建て給ひて、国津神の上に臨ませ給ふ事とはなりぬ。十曜の神旗は春風に翩翻として翻り、日月の光は殊更に美はしく天に輝き地に照らひ、四方八方より国津神を初めとし禽獣虫魚の生きとし生けるものの限り、忍ケ丘の聖場に集まり来りて、新しき国土の成立を寿ぎ祝ひ奉る事とはなりぬ。</p>
+            <p class="ja-classical-line">茲に葦原比女の神は新に言依さし給へる天津神等を率ゐて、忍ケ丘に宮柱太しき立て主の大神を斎き祭り給ひ、大御前に潔斎して国の初めの神嘉言を奏し給ひける。其神嘉言に言ふ。</p>
+            <p class="ja-classical-line">『掛巻も綾に畏き忍ケ丘の下津岩根に大宮柱太しき立て、高天原に千木高知りて、国の鎮めと鎮まりたまふ主の大神の大御前に、葦原の国の国津柱と仕へまつる葦原比女の神、謹み敬ひ畏み畏みも白す、抑々これの神国は、未だ地稚く、国形定まらず、曲津見の醜の悪しき水火は天地に塞がり、雲霧深く、天日の光は地に届かず、総ての木草を初め、五穀等豊に稔らず、国津神等の生の命を危からしめ、これの稚国土は二葉にして枯果てむとしけるが故に、如何にもして神の依さしの美国を造り固めばやと、朝な夕なに心を砕き血潮をしぼり天を仰ぎ地に俯して歎かひける折もあれ、高地秀山の貴の聖所に宮柱清しく立てて仕へませる朝香の比女神の端なくもこの稚国土に天降りまし、生言霊の御光と真火の功に曲津見の醜の棲処を焼き尽しまし、今は全く風塵治まりて、曲津見の影も朝の御霧夕の御霧を朝風夕風の吹き払ふ如く散らせ失ひ給ひければ、国土の東に偏在れる桜ケ丘の宮居を国土の真秀良場なるこれの聖所に移し、主の大神の神霊を永久に斎きまつりて、国の御旗を定め政所を移して国土生み、神生みの神業に心清しく真言の水火を凝らして仕へまつらむと思ふが故に、朝香比女の神の天降り給ひしを機会に、今日の佳辰の吉時に新しき国土の生れの御祭りを取行ひ、天津神八百万の神等の神霊を招ぎ奉りて、この国の山野に生ふる種々の美味物を百足の机代に置き足はして供へまつる有様を、平らけく安らけく聞召し相諾ひたまひて、これの新国土を千代に八千代に動くことなく変る事なく、五十橿八桑枝のごとく茂栄に栄えしめ給ひ夜の守り日の守りに守り幸へ給へと、恐こみ恐こみも祈願奉らくと白す。</p>
+            <p class="ja-classical-line">天晴れ天晴れ豊葦原と栄えます
+神の御国は生れけるはや
+主の神の大宮柱太知りて
+仕へまつらむ今日ぞ目出度き
+群雲の天地を塞ぎし島ケ根も
+隈なく晴れて月日はかがよふ
+二十年の長き月日を包みてし
+醜の黒雲晴れ渡りけり
+光ある国津神等を選りあげて
+国の守の神と依さしぬ
+主の神の恵は永久に葦原の
+新しき国土を光らさせたまへ
+天津神国津神等は各も各も
+任けのまにまにならはせたまへ
+久方の天の岩戸は開けたり
+常世の闇も明け渡りつつ
+桜ケ丘の宮居をこの地に新しく
+移して治めむこの新国土を
+葦原の国土の中央の忍ケ丘は
+大政所にふさはしきかな</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Renaming Shinogaoka to Tokiwagaoka,
+I shall open the divine service of Miyo,
+Transmitting the flint bestowed by Kami for Yorozuyo,
+We shall establish it as the seal of Hitsugi,
+All Kunitsukamira and Ikimono alike,
+Shall be revived on this auspicious day of Kefu,
+The voice of joy echoes through Ametsuchi,
+As if trembling, the Kuni of Ashihara has shaken,
+For the achievement of establishing the immovable foundation of Kuni for Yorozuyo,
+Ametsuchi has quaked in joy,
+While Ametsuchi trembled with the voice of joy,
+The foundation of the immovable Kuni has solidified,
+By the merit of the divine words of Asakahime,
+The Ashihara Kuni is born anew and tenderly.'</p>
+          <p class="en-p">Asakahime no Kami chants a song of congratulation.</p>
+          <p class="en-p">'The foundation of the Ashihara Kuni having solidified,
+The sun and moon of Misora shine bright and clear,
+The Ame is pure and the Chi is likewise immaculate,
+May this newly born Kuni flourish unto Toha,
+Far and wide traversing the arano and crossing the seas,
+How we meet upon this auspicious day of Kuni's consolidation,
+Seeing afresh and hearing afresh past faults directly as Nahohi,
+Even sinful Kami have been forgiven,
+Even Amatsukami having forgiven, here becoming Kunitsukami,
+They have revived unto Toha,
+Selecting the pure Mitama of Kunitsukami,
+The awesomeness of Kami who caused them to descend,
+Celebrating the birth of the new Kuni,
+They offered the living Kototama.'</p>
+          <p class="en-p">Just as she thus causes the song to be chanted, from the heavenly Misora, waving the ten-lights divine banner, followed by numerous attendant Kami, riding upon purple clouds and descending to this place, was the majestic figure of the messenger Kami of the Lord God, Toshinaderu no Kami.</p>
+          <p class="en-p">Asakahime no Kami, astonished at this spectacle, while clasping her hands in reverent worship, chants a song.</p>
+          <p class="en-p">'Toshinaderu no Kami, awesome even to name,
+has descended on this auspicious day of Kefu,
+By the merit of Toshinaderu no Kami, pillowing on grass,
+My journey as I go is peaceful indeed,
+Even this island where Magatsumi raged wildly,
+has been purified by the merit of the Lord,
+Along the paths of my journey proceeding through the fiercely raging Kuni of Magatsumi,
+Pray protect the borders of my way,
+Without the help of Toshinaderu no Kami,
+My setting forth would surely lack light.'</p>
+          <p class="en-p">Toshinaderu no Kami descends before the Grand Shrine, and clapping his hands reverently,</p>
+          <p class="en-p">'To the Lord God dwelling in this new shrine,
+I shall speak a divine decree,
+Dividing the distant cloud-paths, the divine proclamation,
+Reverently have I come hither,
+I pray that for a thousand and eight thousand generations,
+you shall protect the Ashihara Kuni and make it flourish,
+Having watched over the departure of Asakahime no Kami,
+Auspicously today has it been manifested,
+Celebrating the birth of the new Kuni
+through the divine words of Ashiharahime no Kami,
+Though the Chi is tender and the Kuni is tender, Toshinaderu no Kami
+shall eternally protect it without fail,
+Open this tender Kuni with a peaceful heart,
+I shall add my strength and protect it.'</p>
+          <p class="en-p">Ashiharahime no Kami, in wild joy, chants a song.</p>
+          <p class="en-p">'Did I think that Toshinaderu no Kami,
+the noble Kami, would descend to this new Kuni?
+If it were I, devoid of strength, protect me day and night,
+Toshinaderu no Kami,
+The cloud and mist of Ametsuchi cleared away, and anew
+by the divine majesty of Kami was the Kuni born,
+Reverencing the two pillars, Asakahime and Toshinaderu no Kami,
+I shall serve them eternally,
+O two pillars of Kami, stay your Mitama forever
+in this new Kuni,
+Myriads of living things of Kunitsukami,
+Reviving upon this auspicious day of Kefu.'</p>
+          <p class="en-p">Nozuchihiko no Kami chants a celebratory song.</p>
+          <p class="en-p">'The Kuni of Ashihara born in the light
+of the Kami, awe-inspiring even to name,
+Though the Kuni of Ashihara is tender, living by the grace
+of the Lord Kami, it shall flourish more and more,
+By the merit of Asakahime and Toshinaderu no Kami,
+The dark clouds of the ugly ones have cleared away,
+Transferring the shrine of Sakuragaoka to this place,
+Today, when the divine Kuni is made known, is truly auspicious,
+All the Kunitsukami having gathered here,
+Rejoice and celebrate the foundation of the Kuni,
+Chosen by my Lord, from this day of Kefu
+I shall serve as a heavenly divine Kami,
+Blowing away the sins and defilements of the Kuni of Kokotaku,
+I shall serve for a thousand and eight thousand generations,
+From this day forth, this endless new Kuni
+Shall be opened together with the Kunitsukami,
+Purifying the water and fire of Ametsuchi, from this day forth,
+We shall open the land of the living Kuni and the Miyo of Kami,
+The clouds and mist of many years now clear away here,
+To serve my Lord closely as well.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">忍ケ丘を常磐ケ丘と改めて
+神世のまつり開かむと思ふ
+万世に神の賜ひし燧石を
+伝へて日継の印と定めむ
+もろもろの国津神等も生物も
+今日のよき日を蘇るかな
+歓びの声は天地に響かひて
+動ぐがごとし葦原の国土は
+万世も動がぬ国土の礎を
+立てし功に天地は動げり
+歓びの声に天地は動ぎつつ
+動がぬ国土の基礎固まりぬ
+朝香比女神の神言の功績に
+葦原国土は稚く生れし』</p>
+            <p class="ja-classical-line">朝香比女の神は寿ぎの御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『葦原の国土の礎固まりて
+御空の月日も冴え渡りける
+天清く地又浄く生れたる
+この新国土は永久に栄えよ
+遥々と荒野を渉り海越えて
+国土の固めの吉日にあふかな
+過を直日に見直し聞き直し
+罪なる神も許したまひぬ
+天津神もゆるされここに国津神と
+なりて永久に蘇りませり
+国津神の清き神魂を選り抜きて
+依さしたまへる神の畏さ
+新しき国土の生れをことほぎて
+生言霊を奉りける』</p>
+            <p class="ja-classical-line">かく歌はせ給ふ折しも天津御空より十曜の神旗を振翳し、数多の従神をしたがへて紫の雲に乗り此場に天降り給ひしは、主の大神の御使ひ神なる鋭敏鳴出の神の雄姿に在しましける。</p>
+            <p class="ja-classical-line">朝香比女の神はこの光景に驚きたまひ、合掌敬拝しつつ御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『掛巻くも畏き鋭敏鳴出の神は
+今日の吉日に天降りましける
+鋭敏鳴出の神の功に草枕
+吾行く旅は安けかりけり
+曲津見の伊猛り狂ひしこの島も
+公の功に清まりにける
+曲津見の伊猛る国を進みゆく
+吾道の辺を守らせたまへ
+鋭敏鳴出の神の助けのなかりせば
+吾旅立ちに光あらまじを』</p>
+            <p class="ja-classical-line">鋭敏鳴出の神は大宮の前に降らせ給ひ、恭しく拍手しながら、</p>
+            <p class="ja-classical-line">『掛巻くもこれの新宮におはします
+主の大神にのりごと申さむ
+久方の雲路をわけて神宣
+畏み吾はここに来つるも
+願はくは千代に八千代に葦原の
+国土を守りて栄あらせよ
+朝香比女神の出立ち守らひつ
+目出度く今日を現はれにける
+葦原比女神の神言に新しき
+国土の生れをことほぎまつるも
+地稚く国土稚けれど鋭敏鳴出の
+神は非時守りまつらむ
+心安くこの稚国土を開きませ
+吾は力を添へて守らむ』</p>
+            <p class="ja-classical-line">葦原比女の神は驚喜しながら御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『思ひきやこの新国土に鋭敏鳴出の
+尊き神の天降りますとは
+力なき吾にありせば昼夜を
+守らせたまへ鋭敏鳴出の神
+天地の雲霧晴れて新しく
+神の御稜威に国土は生れし
+朝香比女鋭敏鳴出の神の二柱を
+斎きまつりて永久に仕へむ
+二柱の神よ御魂を永遠に
+この新国土に止めたまはれ
+国津神百千万の生けるもの
+今日の吉日に蘇りつつ』</p>
+            <p class="ja-classical-line">野槌比古の神は祝歌をうたひ給ふ。</p>
+            <p class="ja-classical-line">『掛まくも綾に尊き神々の
+光に生れし葦原の国土よ
+葦原の国土稚けれど主の神の
+恵みに生きていよよ栄えむ
+朝香比女鋭敏鳴出の神の功績に
+醜の黒雲晴れ渡りける
+桜ケ丘の宮居をここに移しまして
+神国を知らさす今日ぞ目出度き
+国津神もろもろここに集まりて
+国土の基礎を寿ぎ祝ふ
+吾公に選まれわれは今日の日ゆ
+天津御神となりて仕へむ
+許々多久の国の罪穢れ吹き払ひ
+仕へまつらむ千代に八千代に
+果しなきこの新国土を今日よりは
+国津神等と共に開かむ
+天地の水火を清めて今日よりは
+生国原と神世を開かむ
+長年の雲霧ここに晴れ渡り
+公に親しく仕へまつるも』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kami Takahiko deigns to chant a celebratory song.</p>
+          <p class="en-p">'Purifying the heart and cleansing the body deep within our breasts,
+Reverently and respectfully shall we serve in the divine land.
+Chanting aloud the living Kototama morning and evening,
+I shall pray for the prosperity of the land.
+Without neglecting the divine waza of Kamunagara misogi,
+We shall purify and clear the water and fire of Ametsuchi.
+According to the awe-inspiring Mikotonori of Kami Ashiharahime,
+Behold this Sugado that has become Tokiha Hill.
+Morning and evening in the Tokiha palace of Tokiha Hill,
+Will I chant the living Kototama and serve.
+Because Tenkai is a land of love and goodness,
+How could we ever neglect the living Kototama?
+Under the protection of Kami Asakahime and Kami Unarizu,
+May the age of Kami Ashiharahime be peaceful.
+Thou, the Kamuzukasa born of the Miiki of the Lord God,
+Kami Ashiharahime is the very light.
+The ugly clouds that shrouded the light of Kami Ashiharahime
+Have cleared away, bringing such joy to kefu!
+O Ashihara, ever enduring through eternity and age upon age,
+Prosper ever more, according to the will of Kami.'</p>
+          <p class="en-p">Kami Teruhiko deigns to chant an imperial song.</p>
+          <p class="en-p">'Through the august achievements of the three great Kami,
+The land of Ashihara has now been born.
+The island of Gurosu has vanished without a trace, and the land
+Of Ashihara has been newly born.
+To the goddess of the new Kunitsu pillar,
+Shall I render service and offer true words.
+While living in the fields and ruling over the Kunitsu Kami,
+How I pined in longing for this auspicious day!
+To be looked upon by the august eyes of Kami Ashiharahime,
+And to serve in the rank of Amatsuhiko,
+When the hearts of the Kunitsu Kami grew turbid and in the vast sky
+Ugly black clouds rose up to block the way,
+If Amatsuhiko and the Kunitsu Kami, without division,
+Grow close to one another and open up the land,
+From the hearts of Amatsuhiko and the Kunitsu Kami
+Black clouds welled up into the sky, yet—
+When Amatsuhiko and the Kunitsu Kami illuminate their innermost hearts,
+Then shall the land prosper.'</p>
+          <p class="en-p">Kami Kiyohiko deigns to chant an imperial song.</p>
+          <p class="en-p">'We celebrate the prosperity for a thousand ages
+Of the newly born new land.
+All the Kunitsu Kami, inspired with courage,
+Rejoice in the birth of the land.
+This august achievement is equal to the morning sun
+Rising and making the peak of Mount Takasu shine.
+In this Mahoraba of the new land where both moon and sun shine clear,
+We proclaim the divine Kamigoto.
+The heart of joy congeals to become a song,
+And turning into Kototama, it resounds forth.'</p>
+          <p class="en-p">Kami Haruhiko deigns to chant a celebratory song.</p>
+          <p class="en-p">'In the distant sky where moon and sun also shine, I, Haruhiko,
+Shall celebrate the new land.
+The prosperity of the land newly born
+By the divine august might shall surely endure forever.
+Together with Ametsuchi, this endless land
+Of Ashihara has had its foundation set upon this very kefu!
+Just like the luxuriant branches of the yusuriha tree, ever succeeding one another,
+Shall the Kunimitama of the land of Ashihara rule.
+Before long, now, the Akitsuo no Kami will descend from heaven
+And bestow upon us the Kunimitama.'</p>
+          <p class="en-p">At this, the Amatsukami, while chanting congratulatory addresses on the new revival of the land of Ashihara and praising the great divine work of moving the palace of Sakuragaoka to the central area of Shinobugaoka, each offered their felicitations and prayed for the future prospects of the new land. Moreover, although the celebratory songs of the five deities newly appointed to the offices of the Kunitsu Kami and of the Kunitsu Kami themselves were countless in number, since they are excessively long, they have been omitted here.</p>
+          <p class="en-p">Just as the dictation of this present chapter was beginning,</p>
+          <p class="en-p">An extra edition arrived announcing that His Imperial Highness the Crown Prince had been born, which revived the souls of our people and filled them with joy, a truly awe-inspiring event.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">高比古の神は祝歌を詠ませ給ふ。</p>
+            <p class="ja-classical-line">『村肝の心を清め身を浄め
+つつしみ敬ひ神国に仕へむ
+朝夕に生言霊を宣りあげて
+国土の栄を吾は祈らむ
+惟神禊の神事を怠らず
+天地の水火を清め澄まさむ
+葦原比女神の畏き神宣に
+常磐ケ丘となりし聖所よ
+常磐ケ丘の常磐の宮居に朝な夕な
+生言霊を宣りて仕へむ
+天界は愛と善との国故に
+生言霊を怠るべけむや
+朝香比女の神鋭敏鳴出の神の守ります
+葦原比女の神世は安けれ
+主の神の御水火に生れし神司
+葦原比女の神は光よ
+葦原比女の神の光をつつみたる
+醜雲晴れし今日の目出度さ
+葦原やいや永久に弥長に
+栄えましませ神のまにまに』</p>
+            <p class="ja-classical-line">照比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『三柱の大神等の御功に
+葦原の国土今生れたり
+グロスの島は跡なく消えて葦原の
+国土新しく生れましける
+新しき国津柱の比女神に
+つかへて真言を捧げまつらむ
+野にありて国津神等ををさめつつ
+今日の吉日を待ち佗びしはや
+葦原比女の神の御目に見出され
+天津神位に仕へまつるも
+国津神の心濁りて大空に
+醜の黒雲立ち塞ぎける
+天津神国津神等は隔てなく
+親しみあひて国土開かばや
+天津神と国津神等の心より
+御空に黒雲湧き立ちしかも
+天津神と国津神等は村肝の
+心をてらして国土は栄えむ』</p>
+            <p class="ja-classical-line">清比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『新しく生れましにける新国土の
+千代の栄を寿ぎまつる
+もろもろの国津神等は勇みたち
+国土の生れをことほぎまつれり
+御功は鷹巣の山の頂を
+光らして昇る朝日に等しも
+月も日も清く輝く新国土の
+この真秀良場に神嘉言宣る
+喜びの心は凝りて歌となり
+言霊となりて鳴り出でにけり』</p>
+            <p class="ja-classical-line">晴比古の神は祝歌をうたひ給ふ。</p>
+            <p class="ja-classical-line">『久方の空に月日も晴比古の
+吾は祝はむ新しき国土を
+新しく神の御稜威に生れたる
+国土の栄は久しかるらむ
+天地と共に果なき葦原の
+国土の礎定めし今日かも
+樛の木のいやつぎつぎに葦原の
+国土の国魂知しめすらむ
+やがて今顕津男の神天降りまして
+国魂神を授けたまはむ』</p>
+            <p class="ja-classical-line">茲に天津神々は葦原の国土の新に蘇りたる祝辞や、桜ケ丘の宮居を忍ケ丘の中心地に移し給ひし大神業を謳歌しながら各自言祝ぎたまひ、新国土の前途を祈らせ給ひける。又新に国津神の司に任命されたる五柱の神及び国津神等の祝ぎ歌は数限りなくあれども、余り長ければ茲に省略しおく事とせり。</p>
+            <p class="ja-classical-line">本章を口述し初むる折しも</p>
+            <p class="ja-classical-line">皇太子殿下御誕生遊ばさる</p>
+            <p class="ja-classical-line">との号外来り、我国民の魂を蘇らせ歓喜せしめたるぞ畏けれ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c17.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 17: 天任地命 [1973]</span>
+      </a>
+      <a href="c19.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 19: Spring Field の御行 [1975]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: 鏡の沼 [1964] - Volume 78 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 78 Table of Contents</a>
+      <span>Volume 78</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 78 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: 鏡の沼 [1964]</h1>
+      <p class="chapter-title-ja">鏡の沼〔1964〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The entourage of Ubugamihiko no Kami spurred their steeds forward, setting their sights upon the Gross Swamp shining in the Amatsu sun, amidst the endless expanse of burnt wilderness. Just then, an old hag, smeared with blood, lay stretched out by the roadside, and with her breath failing, she joined her palms toward the Yohashiragami, frequently begging for salvation; whereupon Ubugamihiko no Kami stopped his steed, turned toward the old hag from the saddle, and proclaimed with a clear voice:</p>
+          <p class="en-p">By the roadside where Magatsumi advances on the journey,
+What dost thou lament, old hag here?
+If I look well, thy face is wretched,
+With sores of blood; I shall ask the reason.
+By the power of water and fire of Kototama, thy lamentation
+I shall straightway save; tell me thy name.</p>
+          <p class="en-p">The old hag answered with failing breath and a song:</p>
+          <p class="en-p">I am none other than a small, nameless Kunitsukami
+Lurking and dwelling in the depths of the wilderness.
+The great Orochi dwelling in the Gross Swamp, in this wise,
+Has wounded me and fled away.
+Heal thou this illness, Amatsukami,
+Having subdued and restrained the Orochi.
+Even though Amatsukami proceed, it is to no avail;
+The swamp-side after the departure of Magami
+Is one whom I call the pheasant of the burnt field.
+Both husband and child have all been slain.
+The Magatsu lurking at the bottom of the swamp, hearing
+That Amatsukami had issued forth, fled away, did they not?
+From here onward, there are many traps of the ugly Magami;
+Do not proceed, if it be perilous.</p>
+          <p class="en-p">Ubugamihiko no Kami majestically proclaimed a sacred poem:</p>
+          <p class="en-p">Thou art indeed the avatar of Gorosu, Kannagara.
+Wouldst thou make my keen eyes grow dim?
+Fearing the crooked words of Guronosu,
+It must be thy mind to stop me.
+Though Guronosu and Gorosu should have no power
+To face against the Kototama of Kami,
+Thou now changest thy form to a pheasant old hag
+And wouldst stop our divine host.
+
+One, two, three, four, five, six, seven, eight, nine, ten,
+A hundred thousand, ten million
+Of the Kototama of Kami, prospering,
+The true form of the pheasant old hag,
+Who is the avatar of this crooked deity,
+Manifest thou, Kannagara.
+I pray, striking forth purely
+The Kototama of the true word of water and fire.
+Ah, Kannagara, Kami, Kami,
+Let there be light in the living Kototama,
+Let there be life in my Kototama.</p>
+          <p class="en-p">As he thus chanted, the old hag, who was called a pheasant, suddenly transformed into a triangular, three-headed serpent; spitting flames and vomiting black smoke from her three mouths, she writhed and whirled back and forth, left and right, and fled away like a flash of lightning toward the Gross Swamp, turning clouds into haze.</p>
+          <p class="en-p">Tachitachihiko no Kami, while filled with wonder, chanted a sacred poem:</p>
+          <p class="en-p">Even the avatar of the cunning Orochi, by the living Kototama
+Of thy Kami, has fled and vanished.
+Magatsumi dons various and sundry forms,
+And would block the path we go.
+Fearing the setting forth of the divine host, Magatsumi
+Could it be that she thus changed her shape?
+Wounded, that face of hers is burning,
+It must have become the aftermath of being scorched by wildfires.
+Guronosu and Gorosu, too, being burned by wildfires,
+Must be lurking at the water's bottom, suffering.
+If it be so, the fierce roaring of the ugly Magami
+Also arouses pity and stirs hesitation in my heart.
+Nevertheless, that hesitation stirring
+In my heroic heart must also be the providence of Magami.
+Without serving to the very end the divine summoning
+Of the Mihashira, how should we return?
+Are the various traps a falsehood?
+The words of the avatar of Gorosu are suspicious.</p>
+          <p class="en-p">Tachiyohime no Kami chanted a sacred poem:</p>
+          <p class="en-p">Fascinating departure of this day! Magatsumi
+Has come out to welcome us on the road.
+Under the sun of heaven, Gorosu changes his form
+And acts with such bravado in welcoming us.
+Though I know not what craftiness there may be,
+We, who are one with Kami, shall not fear.
+What should be feared is the cloudiness
+Of hesitation stirring within the mind.
+Come now, then, fearing the divine words of the public,
+We shall simply advance on the single path.</p>
+          <p class="en-p">Amatsuharahime no Kami chanted a sacred poem:</p>
+          <p class="en-p">The heavens are clear, the great earth is wide, and across the distant moor
+Heat waves rise and the spring wind blows across.
+Upon the back of the steed advancing as the spring wind blows,
+How comforting is my spirit!
+Feeling as though walking through a spring field, let us not think of this
+As the departure for a punitive battle against Magatsumi.
+This battle, carried out with leisurely grace,
+Will make the ruin of the crookedness seem like a dream.
+My tightly strung heart also suddenly relaxes;
+Ever since I beheld the form of the crooked Maga of Gorosu,
+If we ponder matters variously, Magatsumi
+Will surely appear while changing her form.
+If I gaze far out across the distant moor, here and there
+The breath of the crooked deity, black clouds, rises up.
+Deep within the spring field where heat waves surge,
+It is suspicious that black clouds should rise.
+As far as the eye can see, the burnt field is broad; though the shadows
+Of ugly clouds are visible, they do not gather into masses.
+Come now, we shall proceed to the Gross Swamp;
+My spirited steed also bursts forth in valor.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">初頭比古の神の一行は、際限もなき焼野ケ原の中央に、天津日に輝くグロスの沼を目あてに駒を速めて進ませ給ひける。折しもあれ、血にまみれたる老媼の一人路傍に横はり、息も絶え絶えに四柱神に向つて両手を合せ、救ひを乞ふ事頻なりければ、初頭比古の神は駒を止め、馬上より老媼に向ひ、声も涼しく宣らせ給ふ。</p>
+            <p class="ja-classical-line">『曲津見の征途に進む道の辺に
+何を悩むかこれの老媼は
+よく見れば汝が面は無惨しく
+血のただれあり理由聞かむ
+言霊の水火の力に汝が悩み
+ただに救はむ名をなのれかし』</p>
+            <p class="ja-classical-line">老媼は息も絶え絶えに歌もて答ふ。</p>
+            <p class="ja-classical-line">『吾こそは荒野の奥に潜み住む
+名もなき小さき国津神ぞや
+グロス沼に棲まへる大蛇はかくのごと
+吾を傷つけ逃げ去りにけり
+この病癒させたまへ天津神
+大蛇の言向け取り止めたまひて
+天津神進ませたまふも詮なけれ
+曲神の去りしあとの沼辺は
+吾こそは焼野の雉子と言へるもの
+夫も子も皆殺されにけり
+沼底にひそみし曲津は天津神の
+出でましと聞きて逃げ失せしはや
+この先は醜の曲神の罠多し
+進ませたまふな危かりせば』</p>
+            <p class="ja-classical-line">初頭比古の神は儼然として御歌宣らせ給ふ。</p>
+            <p class="ja-classical-line">『汝こそはゴロスの化身よ惟神
+吾さとき目を濁さむとするか
+グロノスの曲の言葉を畏みて
+吾を止めむ心なるべし
+グロノスもゴロスも神の言霊に
+射向ふ力あらざるべきを
+汝は今雉子老媼と身を変じ
+吾神軍を止めむとすも。</p>
+            <p class="ja-classical-line">一二三四五六七八九十
+百千万千万の
+神の言霊幸はひて
+これの曲神の化身なる
+雉子の老媼の正体を
+現はせたまへ惟神
+真言の水火の言霊を
+清く打ち出で願ぎまつる
+ああ惟神々々
+生言霊に光あれ
+吾言霊に生命あれ』</p>
+            <p class="ja-classical-line">かく歌ひたまふや、雉子と言へる老媼は忽ち三角三頭の長蛇と変じ、三箇の口より火焔を吐き黒煙を吐き、前後左右にのたうち廻り、グロス沼の方をさして一目散に雲を霞と逃げ去りにける。</p>
+            <p class="ja-classical-line">起立比古の神は驚きながら御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『巧なる大蛇の化身も汝が神の
+生言霊に逃げ失せにけり
+曲津見はいろいろさまざまに身をやつし
+吾行く道を遮らむとすも
+神軍の出立ち恐れ曲津見は
+かくも姿を変じたりけむ
+傷つきし彼の面は燃えさかる
+野火に焼かれしあとなりにけむ
+グロノスもゴロスも野火にやかれつつ
+水底に潜みて苦しみ居るらむ
+かくなれば醜の曲神の雄猛びも
+憐れ催し躊躇心わく
+さりながら吾雄心に躊躇の
+わくも曲神の経綸なるべし
+御樋代の神の依さしを飽くまでも
+仕へまつらで帰るべきやは
+数々の罠のありとは偽りか
+ゴロスの化身の言の葉怪し』</p>
+            <p class="ja-classical-line">立世比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『面白き今日の首途よ曲津見は
+吾等を道に伊迎へまつりぬ
+天日の下にゴロスは身を変じ
+吾等を迎ふることの雄々しさ
+何事の奸計あるかは知らねども
+神と倶なる吾等は恐れじ
+恐るべきものは心にわきたてる
+躊躇心の曇なりける
+いざさらば公の神言を畏みて
+ただ一筋の道進むのみ』</p>
+            <p class="ja-classical-line">天晴比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『天清く大地は広く遠の野に
+陽炎立ちて春風渡れり
+春風に吹かれて進む駒の背の
+吾気魂の心地よきかも
+春の野を行く心地して曲津見の
+罰めの戦の首途と思へじ
+綽々として余裕ある此戦
+曲の滅びは夢のごとけむ
+張り切りし心も俄にゆるみけり
+ゴロスの曲津の姿見しより
+種々に心しゆかばや曲津見は
+身を変じつつ現はれ来らむ
+遠の野をふりさけ見れば彼方此方に
+曲神の息か黒雲立ちたつ
+陽炎のもえ立つ春野の奥にして
+黒雲立つは怪しかりけり
+見の限り焼野は広し醜雲の
+影は見ゆれどかたまりもせず
+いざさらばグロスの沼に進むべし
+吾駿馬も勇み出でつつ』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Hereupon the four deities hastened toward the marsh of Gurosu, and when they stood upon the shore and looked out, it was a vast marsh measuring almost tenri across from east to west and twentyri from north to south; therefore the four deities divided the perimeter of the marsh into four parts, took their positions one by one in the east, west, south, and north, simultaneously chanted the Amatsunorito, and proclaimed the seventy-five sounds of the Kototama,</p>
+          <p class="en-p">'One, two, three, four, five, six, seven, eight, nine, ten, a hundred, a thousand, ten thousand, myriads of deities, join this Kototama host, aid us, protect us,'</p>
+          <p class="en-p">as they earnestly proclaimed thus, indeed even the crooked deities of Guronosu and Gorosu could not withstand the power of the Kototama, and while suffering and writhing, they blew forth water bubbles like a great volcanic eruption from the bottom of the marsh, becoming a gigantic evil dragon with six horns and six heads; Guronosu rose high above the water surface, while Gorosu reverted to a long and great serpentine body with three angles and three heads, writhing about the water surface, and at last raising black clouds they soared high into the midair, heading toward the direction of Mount Takasu, making a sound like the roaring of thunder, and galloped away and vanished. For that reason, the water of the marsh for the most part turned into clouds and danced up into the august sky, and the force with which it descended to the earth again as rain was like hundreds and thousands of Nakatsu Waterfalls of Mount Takateru gathered together, wide and violent, resulting in a dreadful spectacle where one could hardly stand up calmly at all. That the great serpent thus fled away so frail was due to the power of the U-sound of the deity Toshininaru-no-Kami, who secretly protected Asakahime-no-Kami, and how awe-inspiring it was.</p>
+          <p class="en-p">The four deities each hastened their mounts and, galloping along the road they had originally come, finally gathered in the shade of the umbrella pines, and while talking and laughing together about the brave and dreadful battle situation, they caused the curtain of loud laughter to continue.</p>
+          <p class="en-p">The deity Hatsuhikohiko-no-Kami recited an august poem.</p>
+          <p class="en-p">Even in the age of the gods when the myriad gods fluttered down, we heard not of such a matchless
+Battle against the crooked deities have we now confronted!
+Thanks to the blessing of the Kototama of the four deities,
+The deities of Magatsumi have slightly abated.
+Nevertheless, the persistence of the deity of the great serpent,
+Easily perishes not by the living Kototama.
+The Magatsumi cowered before the Kototama of the U-sound,
+Which was like a hundred thunders roaring all at once.
+By the Kototama of Toshininaru-no-Kami who guards the deity of the August Mitoshiro,
+It fled away and vanished!
+The crooked deity of the marsh of Gurosu, renowned in name,
+Fled away and vanished, making this day its very last!
+Were the crooked deities burned and injured by the wildfire?
+When I looked upon their faces, they were festering.
+The terrifying gigantic evil dragon of six horns and six heads
+Writhingly moved about upon the surface of the water;
+Becoming a long snake of three heads and three angles,
+Gorosu of Magatsumi showed its belly stark white!
+The countless dragon-serpent deities, both large and small,
+Their crazed state was indeed a sight to behold!
+Facing the first expedition against the crooked deities,
+How filled with dread we were, wondering how it would turn out!</p>
+          <p class="en-p">The deity Tachihikohiko-no-Kami recited an august poem.</p>
+          <p class="en-p">While raising wild waves like mountain ranges,
+How pitiful the Magatsumi that rose up in a frenzy!
+Water pillars thrusting into heaven and of a fountain
+Is the sport of the Magakuni, just like vomiting forth!
+The water gushing forth from the painful breath of the crooked deity
+Has ascended high into the august sky!
+Such a brave battle we have never witnessed
+Before the peerless power of the living Kototama!</p>
+          <p class="en-p">The deity Tatsusehime-no-Kami recited an august poem.</p>
+          <p class="en-p">As a goddess, for a brief moment I too wondered what would become of it,
+Alarmed by the violence of the crooked deities!
+From the moment the crooked deities fled away, the surface of the marsh
+Has shone and glittered like a mirror!
+Let us rename this marsh the Mirror Marsh
+And make it the solace of this land of food!
+The foul weeds that grew thick and wild
+Have also been burned away, and only the marsh shines!
+Had there not been the true fire held by the deity of the Mitoshiro,
+This Magatsumi would not have perished!
+I have realized for the first time in today's battle
+The august hardship of the deity of the Mitoshiro of Ashirahime!
+In this island where there is no space left to put hand or foot,
+The manliness of the presence of the deity of the Mitoshiro!</p>
+          <p class="en-p">The deity Asobehime-no-Kami recited an august poem.</p>
+          <p class="en-p">The Magatsumi rode upon black clouds and fled away,
+And the august sky afterward has cleared up completely!
+The details of the exploits of the Kototama host
+I shall report back to our Lord's command.
+The exploits of our Lord are noble, and have granted light
+To the punitive host against the crooked deities!
+Divine light shone even brighter from the august sky of Shinonogaoka,
+And the crooked deities have perished!
+The sacred place where the deity Ashirahime resides
+Would have been attacked by the crooked deities once again!
+Supported by the wide flow of the Nakanogawa,
+The wildfire must have stopped right here!
+Crossing the sky of the riverbed of Nakanogawa, the Magatsumi
+Shall fix their dwelling place upon Mount Takasu!
+Be that as it may, hurrying to Shinonogaoka,
+I shall offer my report before the august presence of our Lord.</p>
+          <p class="en-p">When she thus chanted, the deity Hatsuhikohiko-no-Kami spoke,</p>
+          <p class="en-p">Accepting the Kototama of the deity Asobehime,
+Come, let us return to Shinonogaoka!</p>
+          <p class="en-p">Hereupon the four deities aligned their stirrups and made a triumphant return to the main camp of Asakahime-no-Kami at Shinonogaoka, how joyous it was.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">茲に四柱の神々はグロスの沼をさして急がせ給ひ、汀に立ちて眺め給へば、殆んど東西十里南北二十里に余る大沼なりければ、四柱の神は沼の周囲を四分し、東西南北に一柱づつ陣どり一斉に天津祝詞を奏上し、七十五声の言霊を宣りあげ、</p>
+            <p class="ja-classical-line">『一二三四五六七八九十、百千万千万の神、この言霊軍に加はりたまへ、援けたまへ、守らせたまへ』</p>
+            <p class="ja-classical-line">と一生懸命に宣り上げ給ふにぞ、遉にグロノス、ゴロスの曲神も言霊の力に敵し兼ね、苦しみ悶えながら沼底より大噴火の如き水泡を吹き出し、六角六頭の巨大なる悪竜となり、グロノスは水面高く立ち昇り、ゴロスは三角三頭の長大なる蛇身と還元し、水面をのたうち廻り、遂には黒雲を起し中天高く立ちのぼり、鷹巣の山の方面さして雷鳴のとどろく如き音響を立てて馳け出し逃げ失せける。其為に沼の水は大半雲となりて御空に舞ひ昇り、再び雨となつて地に下る勢は、高照山の中津滝を数百千集めたるが如く、広く激しく、到底晏然として起立し得ざる凄まじき光景とはなりにける。斯の如く大蛇の脆くも逃げ失せたるは、朝香比女の神を蔭ながら守らせたまふ鋭敏鳴出の神のウ声の力なりけるぞ畏けれ。</p>
+            <p class="ja-classical-line">四柱の神は各自駒を速めて元来し道を駈りつつ傘松の蔭にやうやくにして集はせ給ひ、勇ましく凄まじかりし戦況を互に語り合ひつつ哄笑の幕をつづかせ給ひける。</p>
+            <p class="ja-classical-line">初頭比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『千早振る神世も聞かず例なき
+曲津の軍に向ひぬるかな
+四柱の神の言霊の幸はひに
+曲津見の神は稍おとろへぬ
+さりながら大蛇の神の執拗さ
+生言霊に容易に亡びず
+百雷の一度に轟く如くなる
+ウ声の言霊にひるむ曲津見
+御樋代の神を守らす鋭敏鳴出の
+神の言霊に逃げ失せにけり
+名にし負ふグロスの沼の曲神も
+今日を限りと逃げ失せにけり
+曲神は野火に焼かれて傷つきしか
+その面見れば糜爛れゐたりぬ
+恐ろしき六角六頭の巨大なる
+悪竜水の面にのたうち廻りし
+三頭三角の長蛇となりて曲津見の
+ゴロスは腹を真白く見せたり
+大き小さき数限りなき竜蛇神の
+狂へるさまは見物なりけり</p>
+            <p class="ja-classical-line">初めての曲津の征途に向ひつつ
+如何になるかと危ぶみしはや』</p>
+            <p class="ja-classical-line">起立比古の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『山岳の如き荒浪立てながら
+狂ひ立ちたる曲津見あはれ
+水柱天に冲して噴水の
+吐き出す如き曲津のすさびよ
+曲神の苦しき息より迸る
+水は御空に高くのぼりぬ
+かくのごと勇ましき軍は見ざりけり
+生言霊の比なき力に』</p>
+            <p class="ja-classical-line">立世比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『女神吾もいかがなるよと束の間は
+危ぶみにけり曲津の荒びに
+曲神の逃げ去りしより沼の面は
+鏡の如く光りかがやけり
+この沼を鏡の沼と改めて
+この食国のしめりとなさばや
+莽々と生え繁りたる醜草も
+焼き払はれて沼のみ照れる
+御樋代神の持たせる真火のなかりせば
+この曲津見は亡びざりけむ
+葦原比女の御樋代神の御艱み
+今日の戦にはじめて覚りぬ
+手も足も出す隙もなき此島に
+御樋代神のおはす雄々しさ』</p>
+            <p class="ja-classical-line">天晴比女の神は御歌詠ませ給ふ。</p>
+            <p class="ja-classical-line">『曲津見は黒雲に乗りて逃げゆきし
+あとの御空は晴れ渡りけり
+言霊の軍の功詳細に
+わが公許に復命せむ
+吾公の功尊し曲神の
+罰めの軍に光をたまへり
+神光は忍ケ丘の御空より
+いや輝きて曲津亡びけり
+葦原比女神のまします聖場は
+またもや曲津に襲はれにけむ
+中野河の広き流れにささへられ
+野火はここにて止まりにけむ
+曲津見は中野河原の空渡り
+鷹巣の山に棲処定めむ
+兎も角も忍ケ丘に急ぎつつ
+公が御前に復命申さむ』</p>
+            <p class="ja-classical-line">かく歌ひ給へば、初頭比古の神は、</p>
+            <p class="ja-classical-line">『天晴比女神の言霊諾ひて
+いざや帰らむ忍ケ丘に』</p>
+            <p class="ja-classical-line">茲に四柱の神は轡を並べて、忍ケ丘の朝香比女の神の本営に凱旋し給ひけるこそ、目出度けれ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: 四 Kami 出陣 [1963]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 邪 Kami Conquest [1965]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
