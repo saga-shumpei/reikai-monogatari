@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 三つ盃 [2009] - Volume 80 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 80 Table of Contents</a>
+      <span>Volume 80</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 80 &bull; Chapter 5</span>
+      <h1 class="chapter-title-en">Chapter 5: 三つ盃 [2009]</h1>
+      <p class="chapter-title-ja">三つ盃〔2009〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">From the vicinity of the mansion of the Laughing Hag of Shinobigaoka, a strange Unki rose, and while one watched, the Mocking Hag carried her 'laughter' upon her back, becoming two balls of fire, and vanished into the distant southern sky; seeing this, the Satobitotachi wondered if the wicked hag had fled, yet they were troubled, asking what would become of the three Otome who were held captive.</p>
+          <p class="en-p">Following the two hags, a Seirei named Nasubi, who was the leader of the Satobito and whose color was black, came leading many Seirei, and as six Seirei, both male and female, stood silently in the mansion which was now but an empty shell of the hag, Nasubi raised his voice to its limit from the Kadoguchi:</p>
+          <p class="en-p">Nasubi: 'What has become of the Laughing Hag of this house? I saw her riding upon a strange cloud as she went. There is a human presence within the house; who is it? Pray, state your name, for I am Nasubi.'</p>
+          <p class="en-p">Startled by this voice, the three, Yama, Kawa, and Umi, ran out to the Kadoguchi:</p>
+          <p class="en-p">Yama, Kawa, and Umi: 'How rare, you have come well; the master of this house has fled, riding upon a cloud. The Laughing Hag, who oppressed and tormented the Satobito, has vanished, leaving only white waves behind. For long Toshitsuki, as long as the tail of a Yamadori, we have endured in the mansion of the hag.'</p>
+          <p class="en-p">Nasubi sings:</p>
+          <p class="en-p">Nasubi: 'Though she was the administrator of this village, the Laughing Hag was a Sudama who did no good. From this day forth, the Satobitotachi shall also rejoice and dwell in Shinobigaoka, shining. Not only the Laughing Hag, but even the Mocking Hag has fled from Shinobigaoka. Is it not true that the Satobito have all had their Inochi, the thread of jewels, taken by her laughter?'</p>
+          <p class="en-p">Yama answers this:</p>
+          <p class="en-p">Yama: 'I, too, was caught in the hands of the Laughing Hag and lost my Inochi. From this day forth, the Satobito of Shinobigaoka shall rejoice and celebrate the world. In any case, Nasubi-dono, pray proceed to the inner chamber, for there are Maraudo present.'</p>
+          <p class="en-p">The Seirei called Nasubi says:</p>
+          <p class="en-p">Nasubi: 'I know not what manner of Maraudo they are, but I shall meet and speak with them for now. From this day forth, the ugly clouds and mists shall be blown away, and the sun and moon shall shine side by side. The clouds of this village have cleared, ever since the Laughing Hag and the Mocking Hag fled.'</p>
+          <p class="en-p">So singing, he proceeded into the inner chamber, and while bowing to the three men, he said:</p>
+          <p class="en-p">Nasubi: 'I wish to hear what manner of Seirei the three Maraudo who are in this mansion might be. I am the Seirei called Nasubi, who dwells forever in Shinobigaoka.'</p>
+          <p class="en-p">Fuyuo sings:</p>
+          <p class="en-p">Fuyuo: 'I am the child of the rocky root, shining upon the mountain above the waters. The two standing here are my retainers, Kuma and Tora, who are known to the world as men of great courage. Fearing the Kototama of the God of the Mihishiro, we planned our journey. I am the one who fell into the poisonous fangs of the Oni-baba, was made to drink the tea of the Mizuhashirigusa, and became an Oni. The three male children have all been in the world of Seirei, enduring the hag.'</p>
+          <p class="en-p">Kawa sings:</p>
+          <p class="en-p">Kawa: 'By the power of the three men of great courage, the two hags have fled and vanished. If this be so, the Satobito of Shinobigaoka shall surely spend their days in joy. My heart, too, has become bright, ever since the ugly black clouds were blown away.'</p>
+          <p class="en-p">Nasubi answers this:</p>
+          <p class="en-p">Nasubi: 'It has become a blessed age; the village of Shinobigaoka has instantly become a paradise.'</p>
+          <p class="en-p">Umi sings:</p>
+          <p class="en-p">Umi: 'While being gazed upon by the eyes of the hag all day long, I have endured against my will. It seems I have spent my time in the mansion of the hag of Shinobigaoka as a Mizuhashiri-oni, enduring this world. If this be so, there is nothing left to fear; Nasubi-dono, pray rejoice.'</p>
+          <p class="en-p">The Satobito came flocking to the garden, and upon hearing that the two hags had fled, they stood up with courage, and the voices of their cheers were enough to shake heaven and earth. From among the crowd, a female named Mizuna, wearing long sleeves, stood in the center of the wide garden and danced with graceful gestures. The crowd joined in, matching their hand-clapping and foot-stomping, and with faces full of joy, they formed a ring of the moon and danced wildly.</p>
+          <p class="en-p">Mizuna and the crowd sing:</p>
+          <p class="en-p">Mizuna and the crowd: 'Ah, how grateful, how grateful. The ugly black clouds that wrapped around Shinobigaoka have cleared away. By the blessing of the wind of Shinato, the ugly god, the Laughing Hag-san, and her younger sister, the Mocking Hag-san, have fled like clouds and mist, and now it is a pure garden of the Gods. We Satobito, all of us, had our precious Inochi stolen, and having ended up as Mizuhashiri-oni, shameful to the world, with no way to return our resentment, we were used at the tip of the chin according to the will of the Laughing Hag. We spent our days until today in suffering and agony, together with our tears. Fuyuo-dono and his followers, who dwell on the mountain above the waters, have appeared and driven away the demons of the village.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">忍ケ丘の笑ひ婆の館の辺りより、怪しき雲気立昇ると見る間に、空中を譏り婆アが「笑ひ」を背に負ひ、二つの火の玉となつて、遥か南の空に消えたるを見て、里人等は意地悪き婆の逃げ去りしならむ、さるにても囚はれ居る三人の乙女は如何にと案じ煩ひつつ、二人の婆の次に位＠する里人の頭なる色の黒き「茄子」と言ふ精霊は数多の精霊を引連れ来り、男女六人の精霊が婆が抜け殻の館に黙然として立ち居たるにぞ、茄子は門口より力限りの声を張上げて、</p>
+            <p class="ja-classical-line">『この宿の笑ひ婆さんは如何なりし
+怪しき雲に乗り行くを見し。
+家の内に人の気するなり何人か
+名乗らせ給へ吾は茄子よ』</p>
+            <p class="ja-classical-line">此声にハツと気がつき、山、川、海の三人は門口に走り出で、</p>
+            <p class="ja-classical-line">『珍しくよく出でますも此家の
+主は雲に乗りて逃げたり。
+里人を虐げ艱めし笑ひ婆は
+あと白浪と消え失せにける。
+山鳥の尾の長々しき年月を
+忍び来にけり婆さんが館に』</p>
+            <p class="ja-classical-line">茄子は歌ふ。</p>
+            <p class="ja-classical-line">『此里の司ながらも笑ひ婆は
+よきことをせぬ魍魎なりしよ。
+今日よりは里人等も喜びて
+忍ケ丘に光りて住むべし。
+笑ひ婆一人のみかは譏りまで
+忍ケ丘を逃げ去りしはや。
+里人は何れも笑ひに玉の緒の
+生命とられし人のみならずや』</p>
+            <p class="ja-classical-line">山は之に答へて、</p>
+            <p class="ja-classical-line">『吾も亦笑ひ婆アの手にかかり
+生命亡せにしものなりにけり。
+今日よりは忍ケ丘の里人は
+歓ぎ喜び世を寿がむ。
+兎も角も茄子の君よ奥の間に
+進ませ給へ客人いませば』</p>
+            <p class="ja-classical-line">茄子といへる精霊は、</p>
+            <p class="ja-classical-line">『何人の客人なるか知らねども
+吾は一先づ会ひて語らむ。
+今日よりは醜の雲霧吹き払ひ
+月日並びて輝き渡らむ。
+此里の雲は晴れたり笑ひ婆
+譏り婆アの逃げ去りしより』</p>
+            <p class="ja-classical-line">と歌ひつつ奥の一間に進み入り、三人の男子に向ひ目礼しながら、</p>
+            <p class="ja-classical-line">『此館におはす三人の客人は
+何れの精霊か聞かまほしけれ。
+吾こそは忍ケ丘に永遠に住む
+茄子と申す精霊なりけり』</p>
+            <p class="ja-classical-line">冬男は歌ふ。</p>
+            <p class="ja-classical-line">『吾こそは水上の山に輝ける
+巌根が末の御子なりにける。
+これに立つ二人は家臣熊、虎と
+世にひびきたる大丈夫なるよ。
+御樋代の神の神言を畏みて
+旅行く道を謀らはれける。
+鬼婆の毒牙にかかり水奔草の
+茶を飲まされて鬼となりし吾。
+三柱の男の子は何れも精霊の
+世界にありて婆をきためし』</p>
+            <p class="ja-classical-line">川は歌ふ。</p>
+            <p class="ja-classical-line">『三柱の大丈夫の君の力にて
+二人の婆は逃げ失せにけり。
+斯くならば忍ケ丘の里人は
+世を楽しみて送るなるらむ。
+吾とても心明るくなりにけり
+醜の黒雲吹き散りしより』</p>
+            <p class="ja-classical-line">茄子は之に答えて、</p>
+            <p class="ja-classical-line">『ありがたき御世となりけり忍ケ丘の
+里は忽ち楽園となりぬ』</p>
+            <p class="ja-classical-line">海は歌ふ。</p>
+            <p class="ja-classical-line">『終日を婆の眼に射られつつ
+心ならずも忍び来にける。
+水奔鬼となりて此世を忍ケ丘の
+婆の館に過ぎにけらしな。
+斯くならば恐るるものは更になし
+茄子の君よ喜びたまへ』</p>
+            <p class="ja-classical-line">里人は庭一面に群がり来り、二人の婆アの逃げ去りしと聞くより勇み立ち、歓呼の声は天地を揺がすばかりなりける。群衆の中より「水菜」と言へる女身は長袖を纏ひながら、広庭の中央に立ち、身振り品よく踊り舞ふ。群衆は之に和して手拍子足拍子を揃へ、満面喜びに充ちながら、月の輪を作り踊り狂ひけり。</p>
+            <p class="ja-classical-line">『アア有難し有難し
+忍ケ丘を包みたる
+醜の黒雲晴れ行きぬ
+科戸の風の幸はひに
+醜神笑ひ婆アさんも
+妹の譏り婆アさんも
+雲を霞と逃げ行きて
+今は清しき神の苑
+吾等里人ことごとく
+惜しき生命を奪はれて
+世に愧かしき水奔鬼
+精霊の身となり果てて
+恨みを返す術もなく
+笑ひ婆さんの意の儘に
+頤の先にて使はれつ
+艱み苦しみ今日が日まで
+涙と共に暮れにけり
+水上の山にあれませる
+冬男主従現れまして
+里の悪魔を退けまし</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">On this day when the Ametsuchi are clear, the Satobito gather here, and rejoice with all their hearts. How promising, how promising! From this day forth, these Kunibito, who are spirits of Furaufushi, shall enjoy the spring of Tokoyo. They shall enjoy the spring of Tokoyo. O Kami of Fuyuo, O Tomogami, settle in Kakihatokiha and govern these Satobito. We pray to you with all our hearts. We pray to you with all our hearts.</p>
+          <p class="en-p">Thus, Mizuna sang in a voice resonant and clear, her spirit seemingly transported elsewhere, and finished the song with a joyful air.</p>
+          <p class="en-p">Thus, as the night dawned amidst great Kuwanki, Onomōnomo returned to their dwellings in the Ihaya.</p>
+          <p class="en-p">Here, Nasubi turned to the six Onokōmina, and thinking that the old hags might return, he sought to fortify their Nejiro in the meantime; he encouraged the six Onokōmina to hold a Ketsukonshiki in the Iukai, and so it was decided that Fuyuo would take Otome-yama as his wife, Kumakō would take Otome-kawa, and Torakō would take Otome-umi, and they would hold a grand Ketsukonshiki in the Iukai.</p>
+          <p class="en-p">Here, utilizing the mansion of the old hags, the Ketsukonshiki of the three couples was auspiciously held. Nasubi served as the go-between, and Nasubi sang a celebratory song.</p>
+          <p class="en-p">In the Iukai, a triple wedding cup is exchanged, a rarity indeed, and how auspicious it is. From this day forth, as the Kami of Fuyuo dwells here, these Satobito shall be at peace. May the three Otome, each having found a husband, flourish in Shinobigaoka. May the Satobito also celebrate today's joy and enjoy the spring of Tokoyo. I, too, feel happy on this day that I have become the go-between for this wedding. On behalf of the Satobito, I shall respectfully celebrate today's joy. This hill, once shrouded in the darkness of the path to Tokoyo, has cleared up with the descent of the Lord. The two demon hags who plagued this village seem to have vanished without a trace. Even if the demon hags return, the Satobito shall join forces to repel them. Though there are eighty days, this auspicious day is truly one to be celebrated as a day of life and a day of fulfillment.</p>
+          <p class="en-p">Although the wedding in the Iukai was thus held, as it was a world of will and thought, the ceremony was extremely simple, requiring none of the tedious formalities of the manifest world.</p>
+          <p class="en-p">Fuyuo sings to his wife, the Mountain.</p>
+          <p class="en-p">Having endured this winter, cold with the blowing of the withered leaves, I have met the spring. May you preserve the scent of flowers forever, in the crimson heart of the Otome of the mountain. Did I ever think that, while possessing the body of a Seirei, I would meet such an Otome? The clouds over Shinobigaoka have cleared after many years, and the sun and moon shine in the heart of the Otome. Deceived by the laughing hag of this hill, I have met this happy, auspicious day.</p>
+          <p class="en-p">The Mountain sings.</p>
+          <p class="en-p">Living at the foot of Mizukami-yama, how happy I am to meet you, my lord Fuyuo. Becoming a Seirei and pledging to be husband and wife in the vicinity of Shinobigaoka, I am filled with joy. From this day forth, taking you, my lord Fuyuo, as my husband, I shall govern these Satobito in peace.</p>
+          <p class="en-p">Kumakō sings to his wife, the River.</p>
+          <p class="en-p">It is I who have emerged from Shimizugaoka, where I had long hidden as a Seirei. Having torn the arms from the demon hag, I have come here to meet you, Hime. Enduring the bitter trials, we exchanged cups on the hill of joy. May the dream of being united with the Otome-kawa, whose beauty is rare, last into Tokoyo. May the knot of our thousand-year pledge, like the kelp, never untie in our hearts.</p>
+          <p class="en-p">His wife, the River, sings.</p>
+          <p class="en-p">My heart is satisfied with the valiant figure of Kumakō, who has been determined as my husband. Because you are a man of great courage, you were able to crush even the strength of the demon hag. You, my lord, who chased away the laughter and mockery of the demon hag, are a mighty warrior. From this day forth, there shall be nothing in the world to fear, for the shadows of the two hags have vanished.</p>
+          <p class="en-p">Torakō sings.</p>
+          <p class="en-p">How many years of hardship I have endured in the vicinity of Shinobigaoka, only to pledge our union as husband and wife. Though it is the world of the dead, all that grows on the earth is no different from the manifest world. The path of husband and wife is no different from the heart of the manifest world. On the wide garden where the demon hag fled, we have married to build a country.</p>
+          <p class="en-p">The Sea sings.</p>
+          <p class="en-p">On this hill where the ugly weeds were sparse, how peacefully we have met. May our lives, like the thread of jewels, be preserved long, and may I enjoy the world with you, my lord. With the deep protection of the Lord Kami, we have met with joy that shall last for a thousand generations.</p>
+          <p class="en-p">With the two demon hags having fled this village, and after injecting a breath of fresh air into the hearts of the villagers and holding the Ketsukonshiki of the three couples, this hill village, though in the spirit world, transformed into a garden of blooming flowers; with not a single person complaining, the world was governed in peace.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">天地晴れたる今日の日を
+里人此処に集まりて
+心限りに歓ぐなり
+ああたのもしや、たのもしや
+不老不死なる精霊の
+此国人は今日よりは
+常世の春を楽しまむ
+常世の春を楽しまむ
+冬男の神よ供神よ
+堅磐常磐に鎮まりて
+此里人を治めまし
+偏に願ひ奉る
+偏に願ひ奉る』</p>
+            <p class="ja-classical-line">と水菜は音吐朗々として精霊の気分も何処へやら、愉快気に歌ひ終る。</p>
+            <p class="ja-classical-line">斯くして歓喜の中に其夜は明け放れたれば、各自巌窟の住家へ帰り行く。</p>
+            <p class="ja-classical-line">茲に茄子は六人の男女に向ひ、又もや婆の帰り来るやも計られざれば、今の間に根城を堅め置かむと、六人の男女に幽界の結婚式を挙げむ事を勧誘しければ、冬男は乙女の山を、熊公は乙女の川を、虎公は乙女の海を妻と定め、盛大なる幽界の結婚式を挙ぐることとはなりぬ。</p>
+            <p class="ja-classical-line">茲に婆の館を利用して、三夫婦の結婚式は目出度く挙げられたり。媒酌役は茄子の司にして茄子は祝歌を歌ふ。</p>
+            <p class="ja-classical-line">『幽界に例もあらぬ三つ組の
+嫁ぎの盃かはす目出度さ。
+今日よりは冬男の神のましませば
+此里人は安けかるべし。
+三柱の乙女は何れも夫もちて
+忍ケ丘に栄えましませ。
+里人も今日の喜び寿ぎて
+常世の春を楽しむなるらむ。
+吾も亦これの嫁ぎの媒酌人と
+なりたる今日を嬉しく思へり。
+里人にかはりて今日の喜びを
+恭しくも寿ぎ奉らむ。
+常世行く闇につつまる此丘も
+君の天降りに晴れ渡りけり。
+此里にさやりし二人の鬼婆は
+行方知れずとなりにけらしな。
+鬼婆の再び帰り来るとも
+里人力を協せてこばまむ。
+八十日日はあれども今日の吉き日こそ
+生く日足る日と祝ひこそすれ』</p>
+            <p class="ja-classical-line">茲に幽冥界の結婚は行はれたれど、意志想念の世界なれば、現界の如く諄々しき式もいらず極めて簡単に挙式は終れり。</p>
+            <p class="ja-classical-line">冬男は妻の山に向ひ歌ふ。</p>
+            <p class="ja-classical-line">『木枯の吹きて冷たき此冬を
+凌ぎて吾は春に逢ひぬる。
+ときじくに花の香りを保てかし
+山なる乙女の紅き心に。
+思ひきや精霊の身を持ちながら
+斯かる乙女に見合ひせむとは。
+年月を忍ケ丘の雲晴れて
+乙女の胸に月日照るなり。
+此丘の笑ひ婆アに謀られて
+今日は嬉しき吉き日に逢ひぬ』</p>
+            <p class="ja-classical-line">山は歌ふ。</p>
+            <p class="ja-classical-line">『水上山の麓に住みし吾にして
+冬男の君にまみゆる嬉しさ。
+精霊となりて忍ケ丘の辺に
+妹背を契ると思へば嬉し。
+今日よりは冬男の君を夫として
+此里人を安く治めむ』</p>
+            <p class="ja-classical-line">熊公は妻の川に対して歌ふ。</p>
+            <p class="ja-classical-line">『精霊となりて久しくひそみたる
+清水ケ丘を出でし吾なり。
+鬼婆の腕をむしりて吾此処に
+来りて姫に見合ひぬるかな。
+苦しかるうきめ忍びて喜びの
+丘に盃とりかはしける。
+眉目形たぐひ稀なる乙女川と
+結びし夢は常世にもがも。
+長かれと千代の契りを結び昆布
+ほどけずあれや互ひの心に』</p>
+            <p class="ja-classical-line">妻の川は歌ふ。</p>
+            <p class="ja-classical-line">『吾夫と定まりにける熊公の
+雄々しき姿に心足らへり。
+大丈夫の君にしあれば鬼婆の
+強きもただにくじき給ひし。
+鬼婆の笑ひ、譏りを追ひ退けし
+吾背の君は猛者なりけり。
+今日よりは恐るる事は世になけむ
+二人の婆のかげはかくれて』</p>
+            <p class="ja-classical-line">虎公は歌ふ。</p>
+            <p class="ja-classical-line">『幾年の艱みを忍ケ丘の辺に
+妹背の契り結びけるはや。
+幽世といへども地上に生ふるもの
+皆現世とかはりなきかな。
+男女妹背の道も現世の
+心と更にかはりなきかな。
+鬼婆の逃げたる跡の広庭に
+国を造ると嫁ぎけるかも』</p>
+            <p class="ja-classical-line">海は歌ふ。</p>
+            <p class="ja-classical-line">『醜草のまばらなりける此丘に
+身も安らけく見合ひせしかな。
+玉の緒の生命永くも保てかし
+吾背の君と世を楽しまむ。
+主の神の貴の守りの深くして
+千代万代の喜びに逢ふも』</p>
+            <p class="ja-classical-line">茲に鬼婆の二人まで此里を逃げ去り、村人の心に清新の空気を注入したる上、三組の結婚式を挙げられ、霊界ながら此丘の里は百花爛漫の花園と変り、一人の不平をいふものもなく、世は安らけく治まりにける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c04.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 4: 姉妹婆 [2008]</span>
+      </a>
+      <a href="c06.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 6: Autumn Field の Journey [2010]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

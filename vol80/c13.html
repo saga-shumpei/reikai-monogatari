@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: 樹下の囁き [2017] - Volume 80 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 80 Table of Contents</a>
+      <span>Volume 80</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 80 &bull; Chapter 13</span>
+      <h1 class="chapter-title-en">Chapter 13: 樹下の囁き [2017]</h1>
+      <p class="chapter-title-ja">樹下の囁き〔2017〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The five who had been revived, a party of five, rested under the shade of a tree at the foot of Kuwaenzan, and while gazing at the surrounding scenery, Akio sang in the morning sky.</p>
+          <p class="en-p">Akio: 'Having traveled through the days of autumn, now here / I see the morning dew shining.
+Harassed by various Onibaba,
+My soul's valor ceases not.
+In the beautiful morning view, my soul
+Is reviving and showing its valor.
+What are the ugly schemes of the Onibaba to me,
+When they vanish in the rising morning sun?
+Magatsumi fears the light and relies on the dark night,
+How pathetic it is to act with Itake.
+In the light of the Asatsuhi,
+Who shines brilliantly, the host of Suihonki perishes.
+While bathing in the dew, the tips of the Kigi
+Maintain the Rurikuō in the shadow of the morning sun.
+Where is the shadow of the Nonoshiri-baba,
+Who raised black clouds and afflicted me?
+With a loathsomeness that makes one's hair stand on end,
+The ugly Onibaba utters her jeering voice.
+While bathing in the pleasant mountain breeze of an autumn morning,
+How enjoyable is the Sumika of the Maga.
+
+Softly, the Chibanamomobana blow and pass,
+The sound of the wind is clear, and my soul prospers.
+Even where the Shirahagi bloom in abundance,
+It is a mystery that demons dwell at the foot of this mountain.
+Is it the color of the clear sky, or have the colors of the Kusaki
+On the Yamahada turned a shade of blue?
+I shall subdue and harmonize all the attacking ugly Maga
+With the Ikukototama.
+How pathetic is the end of the Nonoshiri-baba,
+Who raised black clouds in the Ōzora and raged.
+Though it be high, I shall finish climbing the mountain,
+Take the fire seed, and establish the land.
+I saw a dream of standing by a river of blood,
+And realized the depth of the demons' schemes.
+Both moon and sun shine clearly in the sky,
+How pure is the rest of this morning.
+While bathing in the light of the shining Amatsuhi,
+I shall advance toward the summit.
+As the voices of the birds become clear, the mountain sleeves,
+The autumn wind blowing is cool.'</p>
+          <p class="en-p">The pine tree sings.</p>
+          <p class="en-p">Pine: 'When I see the Shirahagi flowers blooming in the fields and mountains,
+I wonder if the demons' hearts are disturbed by the wind.
+Though they have a gentle appearance, it is sad
+To see the disorder of the Shirahagi flowers.
+Is the Nonoshiri-baba like the Shirahagi,
+Which scatters so easily in the blowing wind?
+The Kusaki of the autumn mountains are all turning autumn colors,
+And trembling in the north wind.
+Perhaps the Onibaba is like the Ochiha,
+Which scatters in the wind, so frail.
+What does the Ho-susuki beckon with its weak strength,
+As it is knocked down by the autumn wind?'</p>
+          <p class="en-p">The bamboo tree sings.</p>
+          <p class="en-p">Bamboo: 'I wish to hear the whereabouts of the five maidens
+Whom I met at the Onibaba's mansion.
+Though I am a spirit, I shall not forget
+The promise to protect my journey.
+Although the flames of Kuwaenzan pierce the heavens,
+The autumn wind blows at the foot of this mountain.
+It is a mountain of fire that occasionally roars
+And rains burning stones in all directions.
+I think we five shall not leave this mountain
+Until the fire seed is in our hands.
+The summit of this mountain is wrapped in clouds,
+Are the evil beasts and poisonous snakes gathering there?'</p>
+          <p class="en-p">The plum tree sings.</p>
+          <p class="en-p">Plum: 'When I see the Ominaeshi swaying in the wind,
+I think of the attire of the noble maidens.
+At the foot of the mountain where Hagi and Kikyo bloom in purple,
+How pleasant it is to rest, bathed in the morning sun.
+Now that I have come, the summit of the mountain of fire
+Is ever more distant and ever more high.
+As you go through this mountain where various Magatsukami gather,
+Be mindful, while proclaiming the Kototama.'</p>
+          <p class="en-p">The cherry tree sings.</p>
+          <p class="en-p">Cherry: 'In this mountain, which is said to be the territory of the Onibaba,
+Strange things happen one after another.
+Even so, if we advance with a sincere heart,
+We shall climb over any hardship with ease.
+If we possess one fire seed from Kuwaenzan,
+This land should be at peace.
+Having come from far away, leaving the mountains above the water,
+Today we face the army of the Majin.
+I saw a dream of the Warai-baba and the Nonoshiri-baba,
+And furthermore, the Okori-baba.
+Even hearing the name "baba" is detestable,
+And I have come to think of it as filthy.'</p>
+          <p class="en-p">Akio sings.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">蘇りたる五人の一行は、火炎山の麓の籠り樹の蔭に息を休ませながら、辺りの風光を見やりつつ、朝明けの空に秋男は歌ふ。</p>
+            <p class="ja-classical-line">『秋の日の旅を重ねて今此処に
+あしたの露の光れるを見つ。
+いろいろの鬼婆たちにさやられて
+わが魂の雄猛びやまずも。
+うるはしき朝の眺めに吾魂は
+よみがへりつつ雄猛びするも。
+鬼婆の醜のたくみも何かあらむ
+昇る朝日に消え失せぬれば。
+曲津見は光を恐れ闇の夜を
+たのみて伊猛るはあはれなるかな。
+赫々と輝き給ふ朝津日の
+光に亡びぬ水奔鬼の群。
+木々の梢露を浴びつつ瑠璃光の
+光保てり朝日のかげに。
+黒雲を起してわれを艱めてし
+譏り婆アのかげいづらなる。
+髪の毛もよだつばかりの嫌らしさ
+譏り声出す醜の鬼婆。
+心地よき秋のあしたの山風を
+浴みつつ楽し曲津の棲処も。</p>
+            <p class="ja-classical-line">さやさやに千花百花吹きて行く
+風の音清くわが魂栄ゆる。
+白萩の所せきまで咲き匂ふ
+此山もとに不思議や鬼棲む。
+澄みきらふ空の色かも山肌の
+草木の色は青みだちたり。
+攻め来る醜の曲津を悉く
+生言霊に言向け和さむ。
+大空に黒雲起し荒びたる
+譏り婆アのはてあはれなる。
+高くとも登り了せむ山の上の
+火種をとりて国土を定めむ。
+血の川の側に立ちたる夢を見て
+鬼のたくみの深きを悟りぬ。
+月も日も御空に清く照り渡る
+今朝の休らひ清しきろかも。
+照り渡る天津日のかげ浴びながら
+われは進まむ頂さして。
+鳥の声清しくなりて山の袖
+吹く秋風は涼しかりけり。</p>
+            <p class="ja-classical-line">何事も神の御旨に従ひて
+登らむ山に曲津のあるべき。
+西を吹く風にあふられ山袖の
+尾花は地に靡き伏したり。
+奴婆玉の闇に伊猛る鬼婆を
+生言霊の剣に放らむ』</p>
+            <p class="ja-classical-line">松は歌ふ。</p>
+            <p class="ja-classical-line">『野に山に咲く白萩の花見れば
+鬼の心か風にみだるる。
+優しかる姿ながらも白萩の
+花の乱れを見るは憂れたし。
+吹く風にもろく散りゆく白萩の
+花にも似たる譏り婆かも。
+秋山の草木はいづれも紅葉して
+北吹く風に打ちふるふなり。
+果敢なきは風に散り行く病葉の
+すがたに似たる鬼婆なるかも。
+穂薄は何を招くか力弱く
+秋吹く風に倒されにつつ』</p>
+            <p class="ja-classical-line">竹は歌ふ。</p>
+            <p class="ja-classical-line">『鬼婆の館に会ひし五人乙女の
+行方はいづこ聞かまほしけれ。
+精霊の身にしあれどもわが旅路
+守ると言ひし事は忘れじ。
+火炎山焔は天に冲すれど
+此山裾は秋風そよぐ。
+時々は唸りをたてて焼石を
+四方に降らせる火炎の山かな。
+火の種の手に入るまでは此山を
+われ等五人は離れじと思ふ。
+此山の頂雲に包まれぬ
+悪獣毒蛇の集ひ居るにや』</p>
+            <p class="ja-classical-line">梅は歌ふ。</p>
+            <p class="ja-classical-line">『女郎花風にゆらげるさま見れば
+貴の乙女のよそほひ思ふ。
+萩桔梗紫匂ふ山裾に
+朝日をあびて憩ふ楽しさ。
+来てみれば火炎の山の頂は
+いよいよ遥けくいよいよ高し。
+もろもろの曲神集ふ此山は
+心して行け言霊宣りつつ』</p>
+            <p class="ja-classical-line">桜は歌ふ。</p>
+            <p class="ja-classical-line">『鬼婆の縄張といふこの山は
+怪しき事のみ次々起るも。
+さはあれど誠心に進みなば
+如何なる艱みも安くのぼらむ。
+火炎山火種の一つ持つならば
+此国原は安けかるべし。
+はろばろと水上の山を立ち出でて
+今日は魔神の軍に向ふも。
+笑ひ婆と譏り婆アのその上に
+瘧婆アの夢を見しかな。
+婆といふ名を聞くさへも忌はしく
+汚らはしくも思はれにける』</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'With the Masurao's Yatakegokoro stirred up,
+Let us ascend the Sanchiyō of Kuwaen.'</p>
+          <p class="en-p">Singing thus, with Matsu and Take in the Sentō, and Ume and Sakura in the rear, they climb the Kabeta Yōchiyō Sakamichi, carving out their path Hitoashi by Hitoashi.</p>
+          <p class="en-p">Akio sings:</p>
+          <p class="en-p">'Untokodotsukoi, dotsukoishiyo.
+Though the mountain of Kuwaen be steep,
+Though the fury of the Akuma be strong,
+How could a Masurao fear?
+Exerting a firm heart,
+I climb this Kifuhan.
+Obana sways, and Momobana,
+To the right and left of my walking feet,
+Fragrant and pure, the sound of insects,
+Is heard so clearly.
+Ah, how brave, how brave!
+Since the beginning when Ametsuchi opened,
+An unprecedented mountain climb.
+Though Mauriyōdokujiya may lurk,
+With the sword of Ikukototama,
+I shall cut through and clear the Yoshihara,
+To solidify the foundation of the Mikuni.
+Up to the Kuwakō on the mountain ridge,
+With Yamatodama that will not cease to advance,
+Advance, advance, come, advance!
+
+Amatsumisora is ever high,
+Looking down upon the Chijiyō,
+The Kogane Nobe, bathed in the light
+Of the Amatsubi, sparkles,
+Shining as far as the eye can see.
+Though the path I walk is long,
+Someday I shall climb the Kuwaen-yama.
+And upon its summit, holding
+A single spark of fire,
+I shall save the people of the world universally.
+Ah, Kamunagara, Kamunagara,
+May fortune be with our party.
+Amatsukami and Kunitsukami,
+All the hundred gods, hear me.
+Ah, Kamunagara, Kamunagara,
+Advancing according to the will of the gods,
+Untokodotsukoi, dotsukoishiyo.'</p>
+          <p class="en-p">Singing thus, Akio, making nothing of the Kifuhan, climbs on valiantly.</p>
+          <p class="en-p">Matsu sings:</p>
+          <p class="en-p">'As I climb, the summit appears ever more distant,
+Oh, the Kuwaen-yama that makes the heart uneasy.
+Is it a mysterious mountain? Though I walk and walk,
+It is a high peak that knows no end.
+Has the Akugami caused an obstruction? My feet
+Have grown heavy and I cannot move them forward.
+In any case, let us rest our breath here,
+Shall we climb on, Akio-wakagimi?'</p>
+          <p class="en-p">Saying this, he sits heavily upon a rock that protrudes about a shaku from the ground, gasping for breath. The party follows suit, sitting heavily upon the kayagusa, trying to calm their rough breathing.</p>
+          <p class="en-p">Akio sings:</p>
+          <p class="en-p">'Though I walk and walk, this mountain that knows no end,
+How mysterious it is, receding further and further.
+I know not if it be a mountain of demons or a mountain of hell,
+But it is a suspicious mountain that gradually recedes.
+Have I fallen into the trap of the Magatsukami once again?
+This mountain climb that makes the heart uneasy.'</p>
+          <p class="en-p">Take sings:</p>
+          <p class="en-p">'Your words are correct, Wakagimi. If this mountain
+Be the dwelling of the Warai-baba.
+Strange is this mountain climb; forever
+We go and return to the same place.
+My eyes seem to be dazzled, and though my heart
+Burns with impatience, the path makes no progress.'</p>
+          <p class="en-p">Ume sings:</p>
+          <p class="en-p">'When I rub my eyes and look well,
+The position of my body has not changed in the least.
+Perhaps we have only been moving our feet
+While standing in the shade of the Komori-gi.'</p>
+          <p class="en-p">Sakura sings:</p>
+          <p class="en-p">'Though I think of how I might climb,
+The fury of the Magatsu is a strong obstruction.
+I wish to climb while singing
+The Kazauta that the Amatsukami bestowed upon me.
+Oh, Warai-baba who fled when struck by the Kazauta,
+There can be no weapon that surpasses this.'</p>
+          <p class="en-p">Akio sings:</p>
+          <p class="en-p">'That may be so. From here on, I shall
+Sing the celestial Kazauta of Kototama and climb.
+Hitotsu, Futatsu, Mittsu, Yottsu, Itsutsu, Muttsu, Nanatsu, Yattsu, Kokonotsu, Tō, Momo, Chi, Yorozu,
+May the eight million gods protect me.
+Helped by the severe power of Kototama,
+I shall finish climbing to the Sanchiyō of the mountain.'</p>
+          <p class="en-p">Just as he sings this, from the direction of the treetops of the Komori-gi,</p>
+          <p class="en-p">'Atsuhahahaha,
+
+Itsuhihihihi,
+
+Utsufufufu,
+
+Foolish ones, have you realized it? I am the master of the Mizuhashiri-oni who has lived for years at Shinobugaoka, the Warai-baba. How dare you wander into my dwelling! Now that it has come to this, you are mine. Oh, how pathetic you are.
+
+Itsuhihihihi,
+
+Assuming a stern appearance and acting grand by conquering demons, how ridiculous, how stupid. Will you surrender completely because you cannot succeed, or will you hang yourselves and die? What is your answer?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『大丈夫の弥猛心を引き立てて
+いざや登らむ火炎の山頂』</p>
+            <p class="ja-classical-line">と歌ひながら、松、竹を先頭に、梅、桜を殿とし、壁立つ羊腸の坂道を、一歩々々刻みつつ登り行く。</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『ウントコドツコイ、ドツコイシヨ
+火炎の山はさかしとも
+悪魔の猛びは強くとも
+如何で恐れむ大丈夫の
+固き心を発揮して
+此急坂を登るなり
+尾花は靡き百花は
+わが行く足の右左
+清く匂ひて虫の音も
+いとさやさやに聞ゆなり
+ああ勇ましや勇ましや
+天地開けし始めより
+例もあらぬ山登り
+魍魎毒蛇は潜むとも
+生言霊の剣もて
+斬り放らひつ葭原の
+神国の基礎を固むべく
+山の尾の上の火口まで
+進まにやおかぬ大和魂
+進めよ進め、いざ進め</p>
+            <p class="ja-classical-line">天津御空はいや高し
+地上を伏して眺むれば
+黄金の野辺は天津日の
+光りを浴びてきらきらと
+目路の限りを光るなり
+わが行く道は遠けれど
+いつかは登らむ火炎山
+その頂に輝ける
+火種を一つ戴きて
+世人を普く救ふべし
+ああ惟神々々
+わが一行に幸あれや
+天津神たち国津神
+百の神たち聞し召せ
+ああ惟神々々
+神のまにまに進み行く
+ウントコドツコイ、ドツコイシヨ』</p>
+            <p class="ja-classical-line">と歌ひながら秋男は急坂をものともせず、雄々しく登り行く。</p>
+            <p class="ja-classical-line">松は歌ふ。</p>
+            <p class="ja-classical-line">『登り行けば頂ますます遠く見えて
+心もとなき火炎の山かも。
+不思議なる山にもあるか行けど行けど
+はてしも知らぬ高き峰なり。
+悪神の妨げなせるか吾足は
+重たくなりて開きかねつつ。
+兎も角も此処に息をば休めつつ
+登り行かむか秋男若君』</p>
+            <p class="ja-classical-line">と言ひつつ、地上より一尺ばかり頭を突き出し覗ける岩にどつかと腰を掛け、ハアハアと息をはづませ居る。一行はこれに倣ひて、萱草の上にどつかと腰を下し、荒き鼻息を止めむとして居る。</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『行けど行けど果しも知らぬ此山は
+不思議なるかな追々遠のく。
+魔の山か地獄の山か知らねども
+次第に遠のくいぶかしの山。
+曲神のまたもや罠にかかりしか
+心もとなきこの山登り』</p>
+            <p class="ja-classical-line">竹は歌ふ。</p>
+            <p class="ja-classical-line">『若君の仰せ宜なり此山は
+譏り婆アの棲処なりせば。
+怪しきは此山登りいつまでも
+同じ所を行きつ戻りつ。
+まなかひは眩みたるらし村肝の
+心焦てど道捗らず』</p>
+            <p class="ja-classical-line">梅は歌ふ。</p>
+            <p class="ja-classical-line">『わが眼こすりこすりてよく見れば
+わが身の位置は少しも変らず。
+籠り樹のかげに佇み足ばかり
+われらは動かし居たりけむかも』</p>
+            <p class="ja-classical-line">桜は歌ふ。</p>
+            <p class="ja-classical-line">『如何にしてわれ登らむと思へども
+曲津の猛びの妨げ強し。
+皇神のわれにたまひし数歌を
+うたひうたひて登りたく思ふ。
+数歌にうたれて逃げし鬼婆よ
+これに勝りし武器はあらじな』</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『さもあらむ吾はこれより言霊の
+天の数歌うたひ登らむ。
+一二三四五六七八九十百千万
+八千万の神守らせ給へ。
+言霊の厳の力に助けられ
+登り了せむ山の頂』</p>
+            <p class="ja-classical-line">斯く歌ふ折しも、籠り樹の梢の方より、</p>
+            <p class="ja-classical-line">『アツハハハハハ</p>
+            <p class="ja-classical-line">イツヒヒヒヒヒ</p>
+            <p class="ja-classical-line">ウツフフフフフ</p>
+            <p class="ja-classical-line">うつけ者、思ひ知りたか、吾こそは忍ケ丘に年古く棲みし水奔鬼の司、笑ひ婆アぞや、よくものめのめと吾棲処へ迷うてうせたな。もう斯くなればこつちのもの、てもさてもいぢらしいものだワイ。</p>
+            <p class="ja-classical-line">イツヒヒヒヒヒ</p>
+            <p class="ja-classical-line">厳めしい姿致して、偉さうに鬼を征服するなどとは、をこがましや、あた阿呆らしや、とても叶はずきつぱりと降参致すか、首でも吊つて往生するか、返答如何に。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Utsufufufufu.</p>
+          <p class="en-p">Fuyuo: 'How foolish are the ones who have fallen into the trap of the Takumi I have laid in advance. Truly, what a pitiful creature this Gaki is; he shall vanish like dew upon the mountain of Kuwaen. I shall shatter both the Inochi of the Tama-no-o and the Inochi of the Mitama, causing them to suffer and agonize. There shall be no day as pleasant as this Kefu, now that I have avenged the grudge of the Gaki of Fuyuo.'</p>
+          <p class="en-p">Akio sings:</p>
+          <p class="en-p">'I am a Masurao who shall not cease until I have conquered the Magatsumi that opposes me to the end. Since I am a Miko of the Kami who governs the rocky foundations, I shall not retreat even a single Hitoashi. Thinking of the shame of my Oyaoya, I shall not retreat a single Hitoashi from the Sumika of the Maga. I shall conquer the laughing crone, the one called the governor of the Magakami, and the mocking crone.'</p>
+          <p class="en-p">A strange voice was heard again from the Jiyujiyō:</p>
+          <p class="en-p">Gyahahahaha.</p>
+          <p class="en-p">Magaonisama: 'This is Tsukimi-ga-oka. I am the Magaonisama, the mocking crone, who is the younger sister of the laughing crone, the governor of the Suihonki who has tormented you, and the one who mocks all Yogoto and Magakoto. Cleanse your ears well and listen. Since it has come to this, I shall not let you escape; prepare yourselves and surrender to the Gunmon of this crone. Since this life of the world cannot be maintained for long, offer it cleanly to me, become my subordinates, and faithfully perform evil. If you disobey, I have no choice but to twist and crush your bodies and Mitama, trample them to pieces, and show you infinite misery. Watsuhahahaha, Watsuhahahaha.'</p>
+          <p class="en-p">The unpleasantness of the crone's voice, as if it were shattering, was such that goosebumps rose all over their bodies.</p>
+          <p class="en-p">Akio, his sense of suspicion not clearing, suddenly looked up at the vast sky, and the brilliant light of the Amatsu-hi that had been there until now had vanished without a trace; the entire sky was blocked by black clouds, a gloomy atmosphere locked the four directions, and strange noises grew louder one after another.</p>
+          <p class="en-p">The party of five, thinking this was their moment of life-or-death, were chanting the Ama-no-kazauta with all their might.</p>
+          <p class="en-p">Having fallen once again into the trap of the Magakami, the five are pitifully enveloped in darkness.</p>
+          <p class="en-p">The Takumi of the Akugami is deep, sevenfold and eightfold, as the curtain of black clouds wraps around them and attacks.</p>
+          <p class="en-p">Feeling as if they were climbing a steep slope, they were wandering in the same place in the shadow of the trees.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">ウツフフフフフ</p>
+            <p class="ja-classical-line">かねてわがたくみ置きたる計略の
+罠にかかりし愚者かな。
+さてもさても憐れな者よ此餓鬼は
+火炎の山の露と消ゆべし。
+玉の緒の生命と霊魂の生命をば
+共に砕きて苦しめ悩めむ。
+今日の如く心地よき日はなかるべし
+冬男の餓鬼の恨み晴らせば』</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『どこまでもわれに仇なす曲津見を
+征討めでやむべき大丈夫われは。
+かくならば一歩も退かじ巌ケ根の
+神の司の御子にしあれば。
+祖先の恥と思へば一歩も
+曲津の棲処は退かざらむ。
+曲神の司と言へる笑ひ婆
+譏り婆アを征討めて止まむ』</p>
+            <p class="ja-classical-line">樹上より怪しき声再び聞えて、</p>
+            <p class="ja-classical-line">『ギヤツハハハハハ</p>
+            <p class="ja-classical-line">此方は月見ケ丘にて、其方たちを悩めし水奔鬼の司、笑ひ婆アが妹の善事曲事一切を譏り婆アの曲鬼様だ。しつかりと耳を浚へて聞け。</p>
+            <p class="ja-classical-line">もうかうなる上は遁しはせぬ、覚悟極めて婆アが軍門に降れ。いづれ保てぬ此世の生命、綺麗さつぱり此方に奉り、わが幕下となつて忠実に悪を働け。それに背くとあれば止むを得ず、汝が身体霊魂を捻り潰し、踏み砕き、無限の憂目を見せて呉れむ、ワツハハハハハ、ワツハハハハハ』</p>
+            <p class="ja-classical-line">と砕ける如き婆アの声の嫌らしさ、身体一面に粟を生ずるばかりなりける。</p>
+            <p class="ja-classical-line">秋男は不審の念晴れやらず、ふと大空を仰げば、今まで煌々たる天津日の光は跡形もなく、満天黒雲塞がり、陰鬱の気四方を鎖し、次々怪しき物音高まり来る。</p>
+            <p class="ja-classical-line">一行五人はここぞ一生懸命と、力限りに天の数歌を奏上しつつありける。</p>
+            <p class="ja-classical-line">曲神のまたもや罠に陥りて
+あはれ五人は闇に包まる。
+悪神の計略は深し七重八重
+黒雲の幕包みて攻め来る。
+急坂を登る心地し樹のかげの
+同じ所にうろつき居たりし。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c12.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 12: Night 見還 [2016]</span>
+      </a>
+      <a href="c14.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 14: 報哭婆 [2018]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

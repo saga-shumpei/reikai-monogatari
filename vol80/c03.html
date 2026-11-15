@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3: 復活 [2007] - Volume 80 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 80 Table of Contents</a>
+      <span>Volume 80</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 80 &bull; Chapter 3</span>
+      <h1 class="chapter-title-en">Chapter 3: 復活 [2007]</h1>
+      <p class="chapter-title-ja">復活〔2007〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Watching the dead body of Fuyuo, who had finally lost his Inochi after falling into the Keiriyaku of the laughing hag, the hag laughed aloud, sticking out her long tongue like that of an ox.</p>
+          <p class="en-p">Ahahahaha-tsuha, ihihihihi, ufuhuhuhu-tsufu, ehehehehe, ohohohoho-tsuho, how Omoshiro, how Kokochi, she said, while beating and tormenting the Mitama and Karatama of Fuyuo with a whip of thorns.</p>
+          <p class="en-p">As the exhausted Fuyuo cried out in Himei, begging for help, a Baufūu suddenly arose.</p>
+          <p class="en-p">Thunder roared and lightning flashed across the Tenchi, and from the darkness appeared an Araotoko who deceived the demons.</p>
+          <p class="en-p">The Futari stood out here, grabbed the hag by her neck, and threw her down onto the Daichi with a thud.</p>
+          <p class="en-p">Thrown down, the Warai-baba shook her chin three or four times and said, 'Ahahahaha-tsuha, how insolent. Are you not the Gaki of Kumakō and Torakō, who also lost their bodies after falling into my Keiriyaku? Are you wandering in the Shinrin of Shimizugaoka as Sudama? How truly, truly Kokochi it is. What is this Arisama? Your Kimono is torn, your obi is cut, is your head a bird's Sugomo? Are your Teashi like the Arakaha of a pine tree? What a dismal sight to behold. Do not Temuka to this Baba-sama and Kōkuwai later, you Gaki who know not the value of Inochi.'</p>
+          <p class="en-p">As she cursed them recklessly, the spirits of Kumakō and Torakō flared up like a raging fire, and clenching their demon-like fists, they struck the fallen hag from both sides with all their might.</p>
+          <p class="en-p">Thinking the hag would flinch, they were surprised as she laughed aloud again, sticking out her long tongue and wagging her chin with such spite.</p>
+          <p class="en-p">Looking closely, the fists of the two were festering and bleeding, a miserable sight to behold, and the hag laughed again, saying, 'You blind fools of Kumakō and Torakō, my body is here. You are striking the sharp rock face recklessly and hurting your own fists, you reckless ones. From now on, I will not let you be if you do such foolish things.'</p>
+          <p class="en-p">She cursed them with foul language, saying, 'Do you think you can stay in the Yūmeikai after opposing the Warai-baba-san, whose name is famous in Oshigaoaka?' Torakō and Kumakō stood in anger, and when they pulled the hag's hands from both sides with all their might, even the hag was overwhelmed.</p>
+          <p class="en-p">Grimacing and saying, 'This is unbearable,' she turned into a ball of fire and fled, running through the distant sky back to Oshigaoka. Fuyuo finally stood up, his heart finally calmed, and looking around, he saw a wonder: Kumakō and Torakō, his vassals who served the mountain of Minakami, were kneeling before his face with smiles, saying, 'Young Lord, you are safe,' while shedding tears and bowing.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">笑ひ婆アの計略に
+かかりて遂に生命をば
+落せし冬男の亡骸を
+眺めて婆アはからからと
+打ち笑ひつつ牛のよな
+長き舌をば吐き出し
+アハハハハツハ、イヒヒヒヒ
+ウフフフフツフ、エヘヘヘヘ
+オホホホホツホ面白や
+心地よやなと言ひながら
+冬男が霊魂と身体を
+茨の鞭もて打ち叩き
+虐げければ疲れたる
+冬男は悲鳴をあげながら
+助けてくれよと叫ぶ折
+忽ち起る暴風雨
+雷轟きいなづまは
+天地に閃き渡りつつ
+闇の中より現はれし
+鬼をあざむく荒男</p>
+            <p class="ja-classical-line">二人は此処に立ち出でて
+婆の素つ首ひつつかみ
+大地にどつと投げつける
+投げつけられて笑ひ婆
+顎を三つ四つしやくりつつ
+アハハハハツハちよこざいな
+貴様も俺の計略に
+かかりて身亡せし熊公と
+虎公の餓鬼にあらざるや
+清水ケ丘の森林に
+魍魎となりて彷徨ふか
+さつてもさても心地よや
+その有様は何の事
+着物はちぎれ帯は切れ
+頭は鳶の巣籠りか
+手足は松の荒皮か
+見るもいぶせき姿かな
+この婆アさまに手向ふて
+後で後悔致すなよ
+生命知らずの餓鬼どもと</p>
+            <p class="ja-classical-line">無性矢鱈に罵れば
+熊公、虎公の精霊は
+烈火の如く憤り
+鬼の蕨（拳）を固めつつ
+倒れし婆を左右より
+力限りに打ち据ゆる
+婆アはひるむと思ひきや
+またカラカラと打ち笑ひ
+長き舌をばはみ出して
+顎をしやくれる憎らしさ
+よくよく見れば両人の
+拳は爛れて血は流れ
+見るかげもなき惨状に
+婆アはまたまた笑ひつつ
+熊公、虎公の盲ども
+俺の体は此処にある
+貴様は尖つた巌角を
+無性矢鱈に打ち叩き
+拳を痛る向ふ見ず
+もうこれからは馬鹿な事</p>
+            <p class="ja-classical-line">致すとこのまま置かぬぞや
+忍ケ丘に名も高き
+笑ひ婆さんに敵対ふて
+幽冥界に居れるかと
+口汚なくも罵りぬ
+虎公、熊公怒り立ち
+婆の両手を左右より
+力限りに引つぱれば
+さすがの婆も辟易し
+こりやたまらぬと顔しかめ
+火団となりて驀地
+遥かの空を駈けながら
+忍ケ丘へと逃げ帰る
+冬男はやうやう起き上り
+やつと心も落ちつきて
+辺りを見ればこは不思議
+水上の山に仕へたる
+わが家臣の熊公と
+虎公二人がにこやかに
+わが顔前に跪き</p>
+            <p class="ja-classical-line">若君御無事と言ひながら
+涙垂らして拝みゐる。</p>
+            <p class="ja-classical-line">以下精霊の言葉なり。</p>
+            <p class="ja-classical-line">冬男『草枕旅を重ねてゆくりなく
+此丘の辺に身亡せけるかな。
+幽界の神となりてゆ何故か
+わが身は軽くなりにけらしな。
+汝こそは水上の山に仕へたる
+家臣熊公、虎公ならずや』</p>
+            <p class="ja-classical-line">熊公『忍ケ丘笑ひ婆アに謀られて
+生命亡せにし熊公なりける』</p>
+            <p class="ja-classical-line">虎公『われもまた笑ひの婆に謀られ
+毒茶を飲みて亡せし虎公よ。
+若君の精霊危く見えしより
+笑ひ婆アに手向ひにける。
+昔よりこれの大野に彷徨へる
+心汚なき婆にてありける。
+忍ケ丘に住む精霊は悉く
+笑ひ婆アに殺されしものぞ。
+われらまた国土開かむと巌ケ根の
+君の命の仰せに出て来し。
+漸くに忍ケ丘に辿りつき
+水奔草の茶に倒されぬ。
+此恨みいつの世にかは晴らさむと
+熊公とともに時を待ち居し』</p>
+            <p class="ja-classical-line">冬男は歌ふ。</p>
+            <p class="ja-classical-line">『ゆくりなくも家臣二人に出会ひたる
+われはにはかに心勇むも。
+汝が行方父は日夜に探ねつつ
+如何なりしと煩ひしはや。
+ちちのみの父の御言を被りて
+国土開かむと吾は来つるも。
+われもまた笑ひ婆アの偽りに
+現身の生命捨てにけらしな』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Kumakō sings:</p>
+          <p class="en-p">If it be so, shall we three, master and servants, unite our hearts and destroy the hag? She is a hag who cannot be dealt with by one or two simple tricks, for she knows any method beforehand. Yet, in this very moment, while she suffers from her two injured arms, I shall destroy her.</p>
+          <p class="en-p">Fuyuo sings:</p>
+          <p class="en-p">How amusing, how brave it is to destroy the enemy who steals the Inochi of the Kunitsukami. Should I leave the laughing hag, who boasts of being the head of the Suihonki, without taking her spirit's Inochi? I think to take the Inochi of the laughing hag and ward off a hundred calamities from the Kunitsukami.</p>
+          <p class="en-p">Torakō: 'I agree with the Mikotoba of Wakagimi; I too shall add my strength to the Kita of the hag. If the three Mihashira of Masurao unite their strength, destroying the hag should be easy. Come then, let us depart from Shimizugaoka and advance straight to the mansion of the hag.'</p>
+          <p class="en-p">With this, the three reached an Itsuketsu, and once again they proceeded along the Noji where the Suihonsau grew so thick as to be Tokorose, pointing toward Shinobugaoka, the Sumika of the hag.</p>
+          <p class="en-p">With Kumakō in the Sentō, Fuyuo in the middle, and Torakō serving as the rear guard, they advanced along the Noji where the Yoshigusa and Suihonsau were overgrown to the point of being Tokorose, being swayed by the blowing wind, and as is the custom of Seirei, they advanced while singing a song of conquest in a staggering manner.</p>
+          <p class="en-p">The song of Kumakō:</p>
+          <p class="en-p">Ah, how brave, how brave!
+In the center of Ōnogahara,
+On the summit of Shinobugaoka,
+Which is wide and opens low,
+Lives the laughing hag of old.
+We go forth to Kita and drive away
+The Magatsumi who takes pleasure
+In taking the Inochi of the Kunitsukami.
+Today my heart is also brave.
+Though the blowing wind smells of raw flesh,
+Though many Ijichi dwell there,
+Though poisonous insects swarm,
+Why should we fear?
+We are rare Masurao in the world.
+When we were in the manifest world,
+We were warriors known to the world
+As peerless heroes of all time.
+Even though we are now Seirei,
+The power of our souls shall not wane.
+If the hag is also a spirit of the same
+Mitama, why should we fear?
+With the fists of our Yamototake-gokoro,
+We shall strike and beat her head,
+Ward off the calamities of both the manifest and hidden worlds,
+And become gods of the Yūmei,
+To pass down our names for long.
+Ah, how amusing, how amusing!
+The time to clear our daily grudges
+Has finally come around.
+Though Shinobugaoka is wide,
+Though the Suihonsau is thick,
+Though many enemies may come,
+We shall not fear; we shall advance
+Bathed in the blessings of the gods
+Who dwell in the mountains of the water's edge.
+Ah, how amusing, how brave!
+Now is the time to avenge our enemy,
+Now is the time to destroy the hag.
+Fortunately, as the darkness is deep,
+Even the hag, as she is, may be sleeping
+Without knowing of our approach.
+Her left and right arms are torn off
+By the strong power of the two,
+And we shall aim for the gap
+While she suffers in agony.
+Advance, advance, come, advance,
+Until the laughing hag is destroyed.</p>
+          <p class="en-p">Fuyuo sings:</p>
+          <p class="en-p">The hag who deceived and killed all the travelers crossing Ōnohara is hateful.
+I too was lured by the poisonous hand of the hag
+And had my jewel-like Inochi stolen.
+Though the Inochi of a Seirei remains,
+The Inochi of my manifest body
+Can no longer return to my hometown.
+If it be so, the three of us shall unite our hearts
+And destroy the laughing hag.
+Advance with the care of Murakimo,
+For the hag's underlings wait on the road.
+Unexpectedly, I was deceived by the demon hag of Shinobugaoka
+Who went around offering tea.
+Three noble maidens must also have fallen
+Into the poisonous hands of the demon hag and perished.
+I shall save the Inochi of the three maidens
+And illuminate the darkness of Shinobugaoka.</p>
+          <p class="en-p">Torakō, while serving as the rear guard, sings:</p>
+          <p class="en-p">The time has come
+To open the rock-door of heaven and earth.
+Now is the time
+To clear the grudges of a hundred thousand.
+The time has come
+To dispel all sufferings.
+Serving the King, the Lord,
+at the divine mansion of the mountain of the water's edge,
+Born as the child of the firm rock-root,
+To serve the Wakagimi,
+Is this not also the blessing of the gods of heaven and earth?
+Having spent years at Shimizugaoka
+Turning into a demon of grudge
+And watching for the Inochi of the hag,
+It was worth it, and now I am
+Being pushed by a strong power
+And advancing; how brave it is.
+Ah, I am
+A fallen warrior who traveled like the Wakagimi,
+Was deceived by the laughing hag,
+And had my Inochi taken.
+Together with Kumakō, I spent years
+Living at Shimizugaoka.
+The time has finally become full,
+It has become a good day
+To Kita the hag; how brave.
+Even though I am in the body of a Seirei,
+I know not why, but I feel a very strong
+Power added to me
+As I advance through Ōnogahara.
+Fortunately, there is no moon in the sky,
+And it is a dark night without even the light of stars;
+Today's departure is amusing.
+Thinking that I will clear my grudge
+Before the eyes of the laughing hag
+Whom I have resented for years,
+I am happy.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">熊公は歌ふ。</p>
+            <p class="ja-classical-line">『かくならば主従三人村肝の
+心協せて婆亡ぼさむか。
+一筋や二筋縄に行かぬ婆よ
+如何なる手段も先に知るれば。
+さりながら二つの腕を痛めたる
+これの刹那に亡ぼしくれむ』</p>
+            <p class="ja-classical-line">冬男は歌ふ。</p>
+            <p class="ja-classical-line">『面白しああ勇ましも国津神の
+生命を奪ふ仇亡ぼさむ。
+水奔鬼の頭と誇れる笑ひ婆
+みたまの生命取らで置くべき。
+笑ひ婆の生命をとりて国津神の
+百の災除かむと思ふ』</p>
+            <p class="ja-classical-line">虎公『若君の御言葉うべよ吾もまた
+婆アの征討に力を添へむ。
+三柱の大丈夫力を協せなば
+婆亡ぼすはたやすかるべし。
+いざさらば清水ケ丘を立ち出でて
+婆の館にひたに進まむ』</p>
+            <p class="ja-classical-line">と茲に三人は協議一決し、再び水奔草の所狭きまで生ひ茂る野路を伝ひて、婆の棲処なる忍ケ丘を指して進み行く。</p>
+            <p class="ja-classical-line">熊公は先頭に、冬男は中に、虎公は殿をつとめながら、葭草と水奔草の所狭きまで茂れる野路を、吹く風になぶられながら、精霊の常として、ひよろりひよろりと征服歌を歌ひつつ進み行く。</p>
+            <p class="ja-classical-line">熊公の歌。</p>
+            <p class="ja-classical-line">『ああ勇ましや勇ましや
+大野ケ原の真中に
+広くて低く開けたる
+忍ケ丘の頂上に
+古く棲みたる笑ひ婆
+国津神らの生命をば
+とりて楽しむ曲津見を
+征討め払ふと出でて行く
+今日は心も勇むなり
+吹き来る風はなまぐさく
+イヂチは数多すむとても
+毒虫むらがり来るとも
+何か恐れむ吾々は
+世にも稀なる荒男
+現世界に在りし日は
+古今無雙の豪傑と
+世に聞えたるつはものぞ
+如何に精霊なればとて
+魂の力は衰へじ
+婆アも同じ精霊の</p>
+            <p class="ja-classical-line">みたまなりせば吾々は
+如何で恐れむ大丈夫の
+弥猛心の拳もて
+彼が首を打ち叩き
+現幽二界の災を
+払ひて幽冥の神となり
+長く其名を伝ふべし
+ああ面白や面白や
+日頃の恨みを晴らすべき
+時は漸く廻りけり
+忍ケ丘は広くとも
+水奔草は茂くとも
+敵は数々来るとも
+吾等は恐れじ水上の
+山に鎮まる神々の
+恵を浴びて進むべし
+ああ面白や勇ましや
+仇を報ずる今や時
+婆を亡ぼす今や時
+幸ひ闇の深ければ</p>
+            <p class="ja-classical-line">さすがの婆もわが行くを
+知らずに眠り居るならむ
+左右の腕は両人の
+強き力にむしられて
+なやみ苦しむその隙を
+狙つてつけ入る計略
+進めや進め、いざ進め
+笑ひ婆アの亡ぶまで』</p>
+            <p class="ja-classical-line">冬男は歌ふ。</p>
+            <p class="ja-classical-line">『大野原いゆく旅人悉く
+謀り殺せし婆は憎らし。
+われもまた婆の毒手に誘はれ
+玉の生命を奪はれにける。
+精霊の生命はあれど現身の
+生命は最早故郷に帰れず。
+かくならば三人が心一にして
+笑ひ婆アを亡ぼしくれむ。
+村肝の心配りて進めかし
+婆アの手下道にし待てば。
+ゆくりなく忍ケ丘の鬼婆に
+茶をふれまはれ謀らはれける。
+三人の貴の乙女も鬼婆の
+毒手にかかりて亡せしなるらむ。
+三人の乙女の生命救ひつつ
+忍ケ丘の闇を照らさむ』</p>
+            <p class="ja-classical-line">虎公は殿をつとめながら歌ふ。</p>
+            <p class="ja-classical-line">『天地の
+岩戸開くる時は来ぬ
+百千々の
+恨みを晴らす時は今
+もろもろの
+なやみをやらふ時は来ぬ
+水上山の神館
+王の君に仕へたる
+心も固き巌ケ根の
+御子と生れます若君に
+仕へ奉りて進み行くも
+天地の神の御恵か
+清水ケ丘に年月を
+恨みの鬼となりはてて
+婆アの生命を窺ひし
+その甲斐ありて今吾は
+強き力に押されつつ
+進み行くこそ勇ましき
+ああ吾は
+若君の如旅行きて</p>
+            <p class="ja-classical-line">笑ひ婆アにたばかられ
+生命とられし落武者よ
+これの恨みを晴らさむと
+熊公と共に年月を
+清水ケ丘に暮したり
+いよいよ時は満ちにけり
+いよいよ婆アを征討むべき
+よき日となりぬ勇ましや
+吾精霊の身ながらも
+何かは知らずいと強き
+力添はりし心地して
+大野ケ原を進み行く
+幸ひ空に月もなく
+星かげもなき闇の夜の
+今日の出で立ち面白や
+年月重ね恨みたる
+笑ひ婆アの目の前に
+恨み晴らすと思へば嬉しき』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Singing thus, around the middle of the night, the three Seirei arrived at the front of the house of the laughing old woman of Shinobugaoka.</p>
+          <p class="en-p">The three stood quietly outside the broken door, and when they peered at the Yōsu within, they saw the old woman suffering and writhing as if her Tamashihi were about to break, due to the pain of being pulled by two people until her Riyōte were nearly torn off, and she was raising a voice of Umeki, groaning 'un-un'. When they looked closely at the three Otome, they wondered how this could be, thinking they were perhaps nursing her, but they were like the Nidaime of the old woman.</p>
+          <p class="en-p">Three Otome: 'Ahahahaha-tsuha, ihihihihi, ufuhuhuhu-tsufu, ehehehehe, ohohohoho-tsuho, how Omoshiro! The laughing old woman-san, her Gashifu is too strong, and having taken Kazukagi of Jinmei, she created the village of Shinobu and remained as its ruler, but has her Tenun already run out? She was cleverly escaped by the Masurao called Fuyuo from the mountain of Minakami where she stayed Sakuya, and in her Munen, she stomped her Jidanda, chased after him, reached Shimizugaoka, made a Fukaku, and fled back, only to have her Saiu Teashi torn off, and now she is in this Arisama, unable to Miugo and suffering; what is the meaning of this? We three Otome were also deceived by the laughing old woman-san, and finally became ghosts of the Yūmei, and even to the houses of our beloved parents, there is no way to return, how miserable! Hoping for something aimless, thinking, "When will this grudge be cleared?" we waited, and the days and months were worth it; today, the death of the Omoshiro ghost-hag is already at hand. Ah, how Omoshiro, how reliable! There will surely be no precedent for the laughing old woman-san to be resurrected anymore. Even if the heaven falls and the earth splits, there shall be no precedent for the old woman-san to be resurrected again; in this moment, we shall press down on the old woman-san's sleeping neck, and though we are but frail Otome, we shall clear our daily grudges. Ah, how Omoshiro, how reliable! Ahahahaha-tsuha, ihihihihi, ufuhuhuhu-tsufu, ehehehehe, ohohohoho-tsuho, how Omoshiro!'</p>
+          <p class="en-p">Singing and laughing thus, the three stood at the bedside. Although the laughing old woman reached the peak of fury, in this situation where she could no longer move even a bit, knowing that she was in the hands of the three Otome, whether they boiled and ate her or grilled and ate her, the cunning old woman pretended not to hear, enduring the pain and masking it with laughter.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">斯く歌ひながら、真夜中頃三人の精霊は、忍ケ丘の笑ひ婆の家の表に着きにける。</p>
+            <p class="ja-classical-line">三人は破れ戸の外にそつと佇み、内の様子を窺へば、婆は両手のむしれるばかり二人に引かれたる痛みに、霊魂も断れむばかり苦しみ悶え、うんうんと呻吟の声をあげ居たり。三人の乙女はとよく見れば、こはそも如何に、介抱なし居るやと思ひきや、婆の二代目の如く、</p>
+            <p class="ja-classical-line">『アハハハハツハ、イヒヒヒヒ
+ウフフフフツフ、エヘヘヘヘ
+オホホホホツホ面白や
+主の笑ひ婆アさんは
+あまりに我執が強くして
+数限りなく人命を
+奪ひて忍の里をつくり
+司となりて居たりしが
+最早天運つきけるか
+昨夜泊りし水上の山の
+冬男と言へる大丈夫に
+うまく此場を逃げられて
+その無念さに地団駄を
+踏みつつ後を追ひかけて
+清水ケ丘に辿りつき
+不覚をとりて逃げ帰り
+左右の手足をむしられて
+身動きならず苦しめる
+此有様は何事ぞ
+われら三人の乙女らも</p>
+            <p class="ja-classical-line">笑ひ婆さんに謀られて
+遂に幽冥の鬼となり
+恋しき父母の家にさへ
+帰るよしなきみじめさよ
+この恨み
+いつかは晴らしくれむぞと
+当なき事を頼みつつ
+待ちし月日の甲斐ありて
+今日は嬉しき鬼婆の
+早くも知死期となりにけり
+ああ面白や、たのもしや
+笑ひ婆さんの蘇る
+ためしは最早あらざらめ
+天落ち地は割るるとも
+婆さんの再び蘇る
+ためしはあらじ今の間に
+婆さんの寝首を押へつけ
+かよわき乙女の身ながらも
+日頃の恨み晴らすべし
+ああ面白し、たのもしし</p>
+            <p class="ja-classical-line">アハハハハツハ、イヒヒヒヒ
+ウフフフフツフ、エヘヘヘヘ
+オホホホホツホ面白し』</p>
+            <p class="ja-classical-line">と歌ひつ笑ひつ、三人は枕辺に立つて居る。笑ひ婆は怒り心頭に達すれど、最早びくとも動かぬ此場合、煮いて喰ふと焼いて食はうと、三人乙女の手の中にあるを知る故に、狡猾なる婆は聞えぬ振を装ひ、痛さを耐へて笑ひにまぎらし居たりける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c02.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 2: 行倒 [2006]</span>
+      </a>
+      <a href="c04.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 4: 姉妹婆 [2008]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

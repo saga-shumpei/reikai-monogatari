@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: Night 見還 [2016] - Volume 80 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 80 Table of Contents</a>
+      <span>Volume 80</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 80 &bull; Chapter 12</span>
+      <h1 class="chapter-title-en">Chapter 12: Night 見還 [2016]</h1>
+      <p class="chapter-title-ja">夜見還〔2016〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Shihen was antan, without a sound; the Ten hung low with eūn, and not a single ichijin of wind stirred. The heat was as if one were walking in a fuchiu, an inutsu kūki surged, and zenshin was soaked in aburaase; amidst such indescribable suffering, there was one man advancing through a wilderness overgrown with Yoshigusa and Suihonsau.</p>
+          <p class="en-p">Akio: 'Ah, how suspicious, how suspicious. Departing from Minakamiyama, through ikuyo of Kusamakura, witnessing kazukazu of strange occurrences, and as twilight fell, I advanced to the foot of the mountain of kuwaen. Just as I arrived, a daifunkuwa reaching to the Ten suddenly ceased, and a curtain of ankoku wrapped around Shihen. Before I could even see, the Suihonki of the mocking hag and the laughing hag, while parting the curtain of darkness, laughed and cursed at the kazukazu of strange occurrences. We, unable to bear it in our hearts, thrust ourselves toward the darkness, and unexpectedly, we fell into a hole in the Chisoko of Yachihiro, and there were moments of suffering and writhing.'</p>
+          <p class="en-p">Akio: 'Following us, the four of Matsu, Take, Ume, and Sakura also lost their Inochi in Utsushiyo. Even here, the voice of a strange hag. Just as I wondered about the suspicion, I thought my Kototama had quickly departed this place. Yet, I walk alone through such a strange wilderness, sadly and lonely. Ah, Kannagara-tamachi-hae-mase. If the Lord God dwells in this world, I pray that You make clear my path ahead, blow away the evil spirits of heaven and earth, and show me the way.'</p>
+          <p class="en-p">Akio: 'The heaven and earth are silent, the wind has died, and from my entire body, sweat like boiling water oozes out; the itching and suffering are unbearable. Is this hell or Yachimata? There is nothing but that which I cannot comprehend.'</p>
+          <p class="en-p">Akio: 'If this is truly the path of the Yūmei, then I must meet my younger brother. Fuyuotoko, I miss you, I yearn for you. If you are living as a spirit, I pray you understand my sad heart and come to me. To avenge your enemies, I was deceived by the devil hag and cast away my precious Inochi. When I think of it, when I think of it, it is hateful. The mocking hag and the laughing hag, even if this is the Yūkai, I shall annihilate these devils, and I shall purify the entire spirit world, making it the noble gate to the Kingdom of Heaven.'</p>
+          <p class="en-p">Akio: 'Ah, Kannagara-tamachi-hae-mase. I pray for Your divine grace. Even if Takamitsuyama is far, and the mountain of kuwaen is steep.'</p>
+          <p class="en-p">Akio: 'How could I falter, as long as the Inochi of my soul remains? Look upon the Yamotokoro of a brave man who will not cease to climb. If the Lord God dwells in heaven and earth, I pray that You listen in detail to my petitions.'</p>
+          <p class="en-p">As he sang thus and advanced, he suddenly came upon a great river where muddy water the color of blood was flowing. Akio stood on the riverbank, wondering how he might cross this muddy water, tilting his head, crossing his arms, and while exhaling a deep sigh, he sang softly.</p>
+          <p class="en-p">Akio: 'Having followed the lonely path of the Yūkai, I have come to the riverside where blood flows. The water flowing torrentially is entirely mixed with foul odors, and my chest is stifled. I shall not think of crossing this polluted river of blood, no matter what happens. It is sad to think of the destiny of human life; my standing tears flow as a river.'</p>
+          <p class="en-p">Just as he sang this, while rustling the withered leaves of the Yoshigusa nearby, a gaunt old woman appeared before Akio, leaning on a staff of goosefoot and bent at the waist, looking up and down at his Zenshin, and laughed aloud, 'Gera-gera.'</p>
+          <p class="en-p">Hag: 'This hag is a wakemitama of the mocking hag whose Inochi you took. How well you have wandered here; this river is a collection of pus, blood, and phlegm.'</p>
+          <p class="en-p">Akio: 'Did I think that in the Mahoroba of the Shibi-Tenkai, there would be a hell in these Yoshigusa? Very well, even if I continue this journey through hell, I shall advance toward Takamitsuyama.'</p>
+          <p class="en-p">Hag: 'This hag is a Suihonki called Malaria. I enjoy stopping the wretches who come here. Every wretch who comes, without exception, I make them suffer from malaria and die, what joy.'</p>
+          <p class="en-p">Hag: 'Though you are a spirit, by the grace of this hag, you shall shake with malaria.'</p>
+          <p class="en-p">Akio: 'If it comes to this, I shall not fear; I shall cut off the Inochi of the spirit of the Malaria Hag.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">四辺黯澹として声もなく、天低う妖雲垂れ下りて一陣の風もなし。蒸し暑き事釜中を行くが如く、陰鬱の空気漲り、全身脂汗にじみ、形容し難き苦しき中を、葭草と水奔草の生ひ茂る荒野ケ原を進みゆく一人の男ありけり。</p>
+            <p class="ja-classical-line">『ああいぶかしやいぶかしや
+水上山を立ち出でて
+幾夜を重ぬる草枕
+怪しき事の数々を
+目撃しつつ黄昏に
+火炎の山の麓まで
+進み来れる折もあれ
+天に冲する大噴火
+忽ちとどまり暗黒の
+幕は四辺を包むよと
+見るまもあらず譏り婆
+笑ひ婆アの水奔鬼
+闇の幕をば距てつつ
+怪しき事の数々に
+笑ひ罵るにくらしさ
+われ等は腹に据ゑかねて
+闇に向つてつき込めば
+思ひがけなや八千尋の
+地底の穴に陥りて
+苦しみもだゆる折もあれ</p>
+            <p class="ja-classical-line">続いて落ち込む松、竹、梅
+桜の四人も現世の
+生命は空しくなりにけり
+此処にも怪しき婆の声
+いぶかしさよと思ふ折
+わが言霊はいち早く
+この場を去りしと思ひきや
+かかる怪しき大野原
+悲しく淋しく一人ゆく
+ああ惟神々々
+神の此世にましまさば
+わが行く先を明らかに
+天地の妖気を吹き払ひ
+示させ給へと願ぎまつる
+天地静かに風死して
+わが身体の全部より
+熱湯の汗はにじみ出で
+痒さ苦しさ堪へがたし
+ここは地獄か八衢か
+合点の行かぬ事ばかり</p>
+            <p class="ja-classical-line">正しく幽冥の道ならば
+わが弟に出会ふならむ
+冬男恋しや、なつかしや
+精霊となりて生くるなら
+われの悲しき心根を
+思ひ計りて来れかし
+汝の仇を討たむとて
+悪魔の婆に謀らはれ
+尊き生命を捨てにけり
+思へば思へば憎らしや
+譏り婆アに笑ひ婆
+たとへ幽界なればとて
+これの悪魔を殲滅し
+精霊界を悉く
+清め澄まして天国の
+貴の門戸となさしめむ
+ああ惟神々々
+恩頼を願ぎまつる
+高光山は遠くとも
+火炎の山はさかしとも</p>
+            <p class="ja-classical-line">如何でひるまむ霊魂の
+生命のあらむ其限り
+登らなおかぬ大丈夫の
+弥猛心をみそなはし
+天地に神のいますなら
+わが願ぎ言を詳細に
+聞し召さへと願ぎまつる』</p>
+            <p class="ja-classical-line">斯くうたひつつ前進すれば、血の如き色を為せる濁水の流るる大川につと行き当りたり。秋男は如何にしてこの濁水を渡らむかと、岸辺に佇み、頭を傾け、腕を組み、太き溜息吐きながら、微に歌ふ。</p>
+            <p class="ja-classical-line">『幽界の淋しき道をたどり来て
+血潮流るる川辺に来りぬ。
+滔々と流るる水は悉く
+悪臭交りて胸ふさがりぬ。
+汚れたる此の血の川を渡らむと
+われは思はじ如何になるとも。
+人の身の宿世思へば悲しけれ
+わがたつ涙川と流れつ』</p>
+            <p class="ja-classical-line">斯く歌ふ折しも、傍の葭草の枯葉をそよがせながら、痩せこけた老婆、藜の杖をつき海老腰になりながら、秋男の前に現はれ来り、全身を見上げ見下し、「ゲラゲラ」と打ち笑ひ、</p>
+            <p class="ja-classical-line">『この婆はそちが生命を奪ひたる
+譏り婆アの分けみたまぞや。
+よくもまあ迷ひ来しよなこの川は
+膿血と痰の集りなるぞや』</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『思ひきや紫微天界の真秀良場の
+この葭草に地獄ありとは。
+よしやよし地獄の旅を続くるとも
+われは進まむ高光山へ』</p>
+            <p class="ja-classical-line">婆アは顎をしやくりながら、</p>
+            <p class="ja-classical-line">『この婆は瘧と申す水奔鬼
+此処に来る奴なやめて楽しむ。
+来る奴は一人も残らずわが為めに
+瘧を病みて死ぬる嬉しさ。
+其方は精霊なれどこの婆の
+恵みによりて瘧をふるへよ』</p>
+            <p class="ja-classical-line">秋男は冷然として、</p>
+            <p class="ja-classical-line">『かくなればわれは恐れじ瘧婆の
+霊の生命を伐り放るべし』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The old hag raised her eyes in anger at this song, pursed her lips, and drawing close to Akio, she gripped both of his hands with her ice-cold hands, and with a spiteful look, spoke.</p>
+          <p class="en-p">Onibaba: 'You Akio, you brat, who do you think I am? I am the master of the River of Blood, the Okoribaba of the Suihonki. Come now, from here on I shall take the life of your spirit and give you a water burial in the River of Blood. Be grateful.'</p>
+          <p class="en-p">Akio spoke.</p>
+          <p class="en-p">Akio: 'What are you doing, you demon hag, clutching both my hands with your ice-cold, skinny arms? Seeing your ugly face, I am moved to nausea.'</p>
+          <p class="en-p">The old hag spoke.</p>
+          <p class="en-p">Onibaba: 'How dare you, to say you are moved to nausea upon seeing my face! Hey, you bag of dung, you spittoon, you tank of urine, I am not a demon to listen to such Taiheiraku. Come now, I shall peel off your Kahagoromo, pull out your arms, cut your bones, and use you as the Ranguhi in the river shallows. That is the least I can do for your sake, a Tsumihorobo. Giyahahahaha, oh my, what a difficult, blue-black, sad-looking face you have, ihihihihi.'</p>
+          <p class="en-p">Akio was cornered and at a loss for what to do, when the four spirits of Pine, Bamboo, Plum, and Cherry appeared on the scene. Seeing Akio being tormented by Okoribaba, they were startled and surrounded the old hag, speaking.</p>
+          <p class="en-p">Spirits: 'How strange, an ogre has appeared here, looking just like the mocking hag. If we look closely, you are holding the hands of our lord Akio and tormenting him, you wicked hag.'</p>
+          <p class="en-p">Akio spoke in a thin voice, his face contorted.</p>
+          <p class="en-p">Akio: 'I am being tormented by this hag; you four must save me.'</p>
+          <p class="en-p">Pine replied.</p>
+          <p class="en-p">Pine: 'Seeing the distress of our young lord, how could we four stand by? With all the strength we possess, we shall strike down upon this hag's head. Bamboo, Plum, Cherry, come, let us strike and torment this hag in a single breath.'</p>
+          <p class="en-p">The four clenched their fists at once and struck at the hag's face, but strangely, the hag did not budge, and blood began to flow from the four's fists, the pain being unbearable. Okoribaba laughed coldly.</p>
+          <p class="en-p">Onibaba: 'Giyahahahaha, who do you think you are dealing with? I am the guardian of the Suihon-grass, harder than rock, who has established a dwelling by this river and waited for you to wander here. I am one of the party of the Laughing Hag and the Mocking Hag. Now that it has come to this, prepare yourselves. If you do not accept your fate, I shall show you even more painful sights. Now, what is your answer? Ihihihihi, oh, how pleasant this is.'</p>
+          <p class="en-p">The five were cornered and at a loss for what to do, when suddenly a ball of fire came advancing, shaking the sky, and fell to the side of the river with a thunderous sound. At this event, the shadow of Okoribaba vanished like clouds and mist without a trace, and when they looked closely, they found that the five master and servants were lying at the bottom of the pit that the Mocking Hag of the foot of Mt. Kaen had created as before.</p>
+          <p class="en-p">Akio sang.</p>
+          <p class="en-p">Akio: 'How suspicious, that I thought I had died, falling into the devil's trap, was a mistake. If there is life in my body, from here I shall climb up this pit.'</p>
+          <p class="en-p">Pine sang.</p>
+          <p class="en-p">Pine: 'How grateful I am for the blessing of the gods, for it seems I have not perished. Encouraging the heart of the evergreen pine, I shall repay the grudge of my lord Akio. I thought the life of the jewel-cord was lost, but by the grace of the gods, I am alive.'</p>
+          <p class="en-p">Bamboo sang.</p>
+          <p class="en-p">Bamboo: 'I am safe, I am alive; I shall climb up the bottom of the hole and act once more. As long as there is life in the jewel-cord, I shall drive away the demons that cause disaster. If I do not carry out my original intention to the end, the heart of a brave man will not be cleared.'</p>
+          <p class="en-p">Plum sang.</p>
+          <p class="en-p">Plum: 'In any case, I am so happy to have been revived that my words have failed me.'</p>
+          <p class="en-p">Cherry sang.</p>
+          <p class="en-p">Cherry: 'The scheme of the Mocking Hag who dwells at the foot of Mt. Kaen has been broken in vain. The evil demon made a pit in the darkness, intending to torment our party. As long as I, a man, have life, I shall destroy the evil for the sake of the Land of the Gods.'</p>
+          <p class="en-p">Akio sang.</p>
+          <p class="en-p">Akio: 'Now then, while chanting the living Kototama, let us ascend this deep hole. One, two, three, four, five, six, seven, eight, nine, ten. A hundred, a thousand, ten thousand, eight million gods, protect us.'</p>
+          <p class="en-p">As he finished chanting, the ground gradually swelled up, and they returned to the shade of the trees as before.</p>
+          <p class="en-p">Akio sang.</p>
+          <p class="en-p">Akio: 'Because the grace of the gods of heaven and earth is deep, we have returned to life at the original place. From now on, the five of us will unite our hearts and attack and ascend to the fortress of evil.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">婆アはこの歌に眼を釣り上げ、口を尖らし、秋男が側近く寄り添ひ、氷の如き冷き手にて、秋男の左右の手をグツと握り、憎々しげに、</p>
+            <p class="ja-classical-line">『こりや秋男の餓鬼、俺を何方と心得てゐるか。血の川の主、水奔鬼の瘧婆アといふは此方の事だ。さア、これからは其方の霊の生命をとり、血の川に水葬してやらう。有難く思へ』</p>
+            <p class="ja-classical-line">秋男は、</p>
+            <p class="ja-classical-line">『何をするか氷の如き痩腕に
+われの両手を離さぬ鬼婆。
+鬼婆の醜き姿一目見て
+われは吐き気を催しにけり』</p>
+            <p class="ja-classical-line">婆アは、</p>
+            <p class="ja-classical-line">『何をこしやくな、俺の顔を見て吐気を催すとはよくも言へたものだ。やい糞袋、痰壺、小便のタンク奴、左様な太平楽を聞く鬼さんぢやないぞ。サアこれから其方の皮衣をはぎ、腕をぬき、骨を引き切り、川瀬の乱杭に使つてやらうぞ。それがせめても貴様にとつての幸ひ、罪滅しといふものだ。ギヤハハハハー、あのまあむづかしい、青黒い、悲しさうな顔わいのう、イヒヒヒヒ』</p>
+            <p class="ja-classical-line">秋男は進退これ谷まりて如何ともする術なく、途方にくれたる折もあれ、松、竹、梅、桜四人の精霊は此場に現れ来り、秋男が瘧婆アに苦しめられてゐる体を見て、驚きながらバラバラと婆アを取りかこみ、</p>
+            <p class="ja-classical-line">『はて不思議譏り婆アによく似たる
+ここにも鬼が現れしぞや。
+よく見れば秋男の君の手をつかみ
+苦しめ居るか悪たれ婆ア奴』</p>
+            <p class="ja-classical-line">秋男は細き声にて顔をしかめながら、</p>
+            <p class="ja-classical-line">『この婆に苦しめられてゐるところ
+汝等四人はわれを救へよ』</p>
+            <p class="ja-classical-line">松は応へて、</p>
+            <p class="ja-classical-line">『若君の悩みを見つつ如何にして
+われ等四人もだし居るべき。
+わが力あらむ限りをこの婆の
+頭上にくはへて打ち据ゑて見む。
+竹よ梅よ桜よ来れ此の婆を
+只一息に打ちなやまさむ』</p>
+            <p class="ja-classical-line">四人は一度に拳を固め、婆アの面部をめがけて打ち据ゆれば、如何はしけむ、婆アはビクともせず、四人の拳よりは血潮タラタラと流れ出で、痛き事堪へ難し。瘧婆は冷笑し、</p>
+            <p class="ja-classical-line">『ギヤハハハハ、この方を何方様と心得てゐるか。岩より固き水奔草の司、この川の辺に棲処を固め、先に廻つて汝等が迷ひ来るを待つてゐた。笑ひ婆アや譏り婆アの一味の者だよ。もうかうなる上は覚悟を致せ。往生致さねば此上辛き目見せてくれむ。さあ返答はどうぢや。イヒヒヒヒ、てもさても心地よやな』</p>
+            <p class="ja-classical-line">五人はここに進退維谷まり、如何はせむと案じわづらふ折もあれ、忽ち空をどよもして進み来る一炷の火団、轟然たる響とともにこの川の辺に落下したり。この出来事に、瘧婆アの影は雲霧と消えて跡形もなく、よくよく見れば、依然として火炎山の麓の譏り婆が造り置きたる陥穽の底に主従五人横たはり居たるなりけり。</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『いぶかしや悪魔の罠に陥りて
+死せしと思ひしは過なりしよ。
+身体の生命ありせばこれよりは
+この陥穽を伝ひ上らむ』</p>
+            <p class="ja-classical-line">松は歌ふ。</p>
+            <p class="ja-classical-line">『有難し神の恵の幸はひに
+われは罷らずありにけらしな。
+常磐木の松の心をはげまして
+冬男の君の仇を酬はむ。
+玉の緒の生命失せしと思ひしを
+神の恵みに生きてありけり』</p>
+            <p class="ja-classical-line">竹は歌ふ。</p>
+            <p class="ja-classical-line">『大丈夫われ生きてありけり穴の底を
+伝ひ上りて再び活動かむ。
+玉の緒の生きの生命のある限り
+災をなす鬼をやらはむ。
+飽くまでも初心を貫徹なさざれば
+益荒猛男の胸の晴るべき』</p>
+            <p class="ja-classical-line">梅は歌ふ。</p>
+            <p class="ja-classical-line">『兎も角も蘇りたる嬉しさに
+われは言葉も絶え果てにけり』</p>
+            <p class="ja-classical-line">桜は歌ふ。</p>
+            <p class="ja-classical-line">『火炎山麓にすめる譏り婆アの
+たくみ果敢なく破れけるかな。
+曲鬼は闇に陥穽作り居て
+わが一行をなやまさむとせり。
+男の子われ生きの生命の続く限り
+神国の為めに曲亡ぼさむ』</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『いざさらば生言霊を宣りながら
+上りゆかなむこの深穴を。</p>
+            <p class="ja-classical-line">一二三四五六七八九十</p>
+            <p class="ja-classical-line">百千万八百万の神</p>
+            <p class="ja-classical-line">守らせ給へ』</p>
+            <p class="ja-classical-line">と、宣り終るや、地底は次第にふくれ上り、以前の樹蔭にたちかへりける。</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『天地の神の恵みの深ければ
+元津場所に生きかへりたり。
+これからは五人心を協せつつ
+曲の砦に攻めて上らむ』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c11.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 11: Fire 炎 Mountain [2015]</span>
+      </a>
+      <a href="c13.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 13: 樹下の囁き [2017]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

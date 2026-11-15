@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 2: 行倒 [2006] - Volume 80 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 80 Table of Contents</a>
+      <span>Volume 80</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 80 &bull; Chapter 2</span>
+      <h1 class="chapter-title-en">Chapter 2: 行倒 [2006]</h1>
+      <p class="chapter-title-ja">行倒〔2006〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Over the Noji path where suihonsau grew in thick profusion, Fuyuo wandered far and wide; striking against a broad okabe, he climbed it intending to rest his breath. Just at that time the sky turned to tasoga, and a vaguely, softly warm wind disgustingly licked about his shihen as it blew past. As he happened to stop by a certain waraya upon this hill, a shiraga old woman emerged from within, brimming with a smile, and stood near the door of the gate. Fuyuo raised a tired voice and said, 'I am a traveler on a journey. Please grant me a single night's lodging from the dew.' When he so spoke, the old woman smiled broadly and said, 'I am an old woman called "Warahi." Come, come, please stay the night. Ahahaha-ha-ha, ihihihi-hi.'</p>
+          <p class="en-p">'Ufufufu-fu-fu, ehehehe-he, ohohoho-ho-ho, how omoshiro, how charming!' she cried, tumbling down and lying prostrate. Without even casting an eye upon the strange old woman, Fuyuo was praying to Kami; at that moment, the old woman abruptly sat up and said, 'Mitariotome await in the back; please proceed quickly!' No sooner had she spoken than Fuyuo dragged his fatigued feet into the back room; as he advanced, fushigi indeed, mitari maidens, deceiving even gems by their beauty, gazed upon Fuyuo's face, arraying sweet kotoba before him, and argued among themselves, 'Now that you have come here, we shall not let you return to Mototsumikuni!' Thus each shot her soya of love. Fuyuo's shintai was utterly exhausted, and he fell asleep knowing neither zengo.</p>
+          <p class="en-p">The miotome of Yama, Kawa, and Umi stroked and rubbed Fuyuo's zenshin, spending the night in tefutefunannan, until the single night's dream awoke. Fuyuo, rubbing his eyes, arose from his fushido and looked around; the mitari otomera were smiling cheerfully. Fuyuo, while marvelling at this spectacle, asked:</p>
+          <p class="en-p">Fuyuo: 'Exhausted by my journey, I requested a single night's lodging, yet the surrounding air somehow bears an uninviting presence that does not sit well with my heart. The old woman who seemed to be the mistress of this place laughed incessantly. In contrast to her, three alluring otomera repeat sweet words at my side and press themselves upon me—what is the meaning of this? Having received the divine word at the sacred sanctuary of Mount Takamitsu, I am about to advance; I must leave this place as quickly as possible, even for a single moment, and proceed according to my mission.'</p>
+          <p class="en-p">When he spoke thus, the mitari otomera shook their heads from side to side and said:</p>
+          <p class="en-p">Miotome: 'Today, when you, for whom we have longed day after day, have finally arrived, how could we easily let you return? First of all, please drink some tea. The tea we offer is a wondrous medicine of eternal youth and immortality. If you drink this hot water, instantly your heart will become refreshed, and your fatigue will be cleanly cured.'</p>
+          <p class="en-p">Saying thus, the elder daughter Yama drew hot water into a wooden bowl and presented it before Fuyuo; Fuyuo, whose throat was parched from the day's fatigue, had no time to think of anything, and gulped it down as if greedily devouring it. Its taste was somehow fragrant, yet it possessed a foul odor. Startled for a moment, thinking, 'Could this perchance be tea made from the leaves of suihonsau?', he nevertheless assumed a nonchalant air, worshipped the heavens and worshipped the earth, and with the utmost strength of his voice, chanted the vivid Kototama:</p>
+          <p class="en-p">'Hito, futa, mi, yo, itsu, muyu, nana, ya, kokonotsu, tari, momo, chi, yoru.
+May the myriads of Kami save me!'</p>
+          <p class="en-p">The moment he proclaimed it, instantly the house, the laughing old woman, and the mitari daughters vanished without a trace into smoke, leaving only a hill where white birch trees grew sparsely amidst sprouting weeds.</p>
+          <p class="en-p">Fuyuo was astonished anew, and while singing the Heavenly Number Song of the vivid Kototama, he once again pressed forward through the damp plain where reeds and suihonsau grew densely to the point of leaving no space, relying on his leather garments. Fuyuo sang along the way:
+
+'Ah, how suspicious, how suspicious!
+As the day reached tasoga, I finally
+Reached a single hill,
+And standing before the front
+Of a mere semblance of a dilapidated house, I inquired;
+From within, a shiraga laughing old woman
+Appeared and granted me
+A single night's lodging.
+Seeking to rest from the fatigue of travel,
+I advanced toward the inner room,
+Where three strange otomera
+Wooed me in various ways;
+Unknowingly I fell asleep,
+Yet at the unpleasantness of the surrounding air,
+Just as I was feeling suspicious, the night dawned,
+And the voices of birds were heard nearby.
+When I drank the tea offered by the maidens,
+My condition became increasingly ill;
+Fearing it might perchance be poisonous water,
+I worshipped the sky and worshipped the earth,'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">水奔草の生ひ茂る
+野路を遥々渉りつつ
+広き丘辺に突き当り
+息休めむと上りゐる
+頃しも空は黄昏れて
+ぼやぼやぼやと生温き
+風は腮辺をいやらしく
+なめてゆくなりこの丘の
+ふとある藁屋に立ち寄れば
+中より出でし白髪の
+婆さんは笑みを湛へつつ
+門の戸近く佇めり
+冬男は疲れし声をあげ
+われは旅ゆくものなるぞ
+一夜の露の宿りをば
+許させ給へといひければ
+婆さんはにつこと打ち笑ひ
+わたしは「笑ひ」といふ婆よ
+サアサア御泊りなさいませ
+アハハハハツハ、イヒヒヒヒ</p>
+            <p class="ja-classical-line">ウフフフフツフ、エヘヘヘヘ
+オホホホホツホ面白や
+あなをかしやと転び伏す
+あやしき婆に目もやらず
+神を念じて居たる折
+婆はむつくと起き上り
+三人乙女が奥に待つ
+早く通させ給へよと
+いふより冬男は奥の間に
+疲れし足を引きずりて
+進めば不思議や三人の
+玉を欺く乙女等が
+冬男の顔を打ち眺め
+甘き言葉を並べたて
+此処に来ませし上からは
+元津御国へ帰さじと
+各自に論ひ
+恋の征矢をば放ちける
+冬男は身体くたぶれて
+前後も知らず寝ねければ</p>
+            <p class="ja-classical-line">山、川、海の三乙女は
+冬男の全身を撫でさすり
+喋々喃々夜を明し
+一夜の夢は覚めにける
+冬男は眼をこすりつつ
+臥床を起き出で眺むれば
+三人の乙女はにこやかに
+笑みを湛へて居たりける
+冬男はこれの光景を
+怪しみながら問ひけらく
+『われは旅行にくたぶれて
+一夜の宿を願ひしが
+辺りの空気は何となく
+心に染まぬけはひなり
+これの主とおぼえたる
+婆さんはしきりに笑ふなり
+それに引き替へあでやかな
+乙女三人がわが側に
+甘き言葉を繰り返し
+われに迫るは何事ぞ</p>
+            <p class="ja-classical-line">高光山の聖場に
+神の御言をかがふりて
+進まむわれよ一時も
+早くこの場を立ち出でて
+任けのまにまに進むべし』
+語れば三人の乙女等は
+頸を左右に振りながら
+『日頃焦れて待ち居たる
+君の来りし今日こそは
+如何でたやすく帰さむや
+先づ先づお茶を召し上れ
+われ等が勧むる茶の湯こそ
+不老と不死の妙薬ぞ
+この湯を飲めば忽ちに
+汝の心は爽かに
+疲れも清く治まらむ』</p>
+            <p class="ja-classical-line">と言ひつつ姉娘の山は、木製の椀に湯を汲み、冬男の前に差出しけるにぞ、一日の疲れに喉の乾きたる冬男は、何を考ふる暇もなく、貪る如くグツと飲み下せば、その味はひ何となく香ばしけれど臭みあり。若しや水奔草の葉もて作りたる茶には非ずやと、一時は驚きけるが、何喰はぬ体を装ひ、天を拝し地を拝し、声を限りに、</p>
+            <p class="ja-classical-line">『一二三四五六七八九十百千万</p>
+            <p class="ja-classical-line">千万の神救はせ給へ』</p>
+            <p class="ja-classical-line">と生言霊を宣るや、忽ち家も、笑ひ婆も、三人の娘も、あとかたなく煙と消え失せ、白樺の木が疎に、雑草の萌ゆる丘の上なりける。</p>
+            <p class="ja-classical-line">冬男は今更の如く驚き、生言霊の天の数歌をうたひながら、再び葭草や水奔草の所狭きまで生ひ茂れる湿つぽい平原を、皮衣を力に進みゆく。冬男は道々歌ふ。</p>
+            <p class="ja-classical-line">『ああ訝しや訝しや
+日も黄昏れて漸くに
+一つの丘にたどりつき
+形ばかりのあばら家の
+表に立ちて訪へば
+中より白髪の笑ひ婆
+現はれ来り一夜さの
+宿りを許したりければ
+旅の疲れを休めむと
+奥の間さして進み入り
+三人のあやしき乙女等に
+種々様々くどかれて
+知らず知らずに眠りしが
+辺りの空気の不快さに
+いぶかる折しも夜は明けて
+近くに聞ゆる鳥の声
+乙女の勧むる茶を飲めば
+益々気分悪しくなり
+若しや毒湯に非ずやと
+御空を拝し地を拝し</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">When the Kazūta of Ama was chanted, the old woman, the daughter, and the house itself turned into smoke and vanished. Gazing intently at the aftermath, I was startled to realize it was a forest of Shirakaba where Zatsusau grew. Fleeing down from Shinobigaoka, I headed east once more. On the long journey, my throat grew parched, and though I wished to drink, the pond water and river water, tainted with the Dokuki of Suihonsau, offered no way for us to partake. Lamenting, I proceeded along the long Noji; there was no Semusube to be found. My head ached, my legs grew weary, and my Seiriyoku faded suddenly; it is sorrowful to see the light in my eyes dim one by one. Was the woman of Yazen truly not a Suihonki? The more I think, the more suspicious it becomes.</p>
+          <p class="en-p">As he sang this while moving forward, he saw another small hill lying across his path. Fuyuo, one way or another, reached that hill, hoping that if there were water, he might moisten his throat and rest his breath. Summoning his Yūki into his exhausted Karatama, he arrived at the edge of the small hill around the time of Tasogare that day.</p>
+          <p class="en-p">Fuyuo sang in a faint voice:</p>
+          <p class="en-p">Crossing the field where Shikogusa grows, gasping and panting, I have finally reached this hill. If there were Mashimizu on this hill, I would moisten my parched throat and be revived. Even if Mashimizu were to spring forth, there is no way to search for it on the Noji without a path in the Tasogare. Having been made to drink Dokuchiya by a mysterious woman, this evening is more painful than death for me. Kokukoku, my Karatama swells up, and now I have reached the point where I cannot Miugo. Alone in the dark Arano leading to Tokoyo, I am writhing in sorrow. Thinking of my Furusato, I feel longing; thinking of my Chichihaha, I feel the sorrow of a journey at dusk. The loneliness of me, traveling alone, is like the feeling of living in the depths of the mountains. If the life of my Tama no o should end, what shall I do? There is no way for my Furusato to know. Saved by the power of the majesty of Kototama, I have barely escaped with my life. Coming here, I feel lonely, thinking that my dew-like life might vanish. Having slept one night on the hill where Suihonki gather, I have shortened my life of Tama.</p>
+          <p class="en-p">Just as he was singing this,</p>
+          <p class="en-p">Ahahahaha! Ihihihihi! Ufufufufu! Ehehehehe!</p>
+          <p class="en-p">I am the laughing hag of Shinobigaoka. To think you have managed to flee all the way here. I am the laughing hag of the land of Yomi, who laughs at the suffering of men. Your state, with both body and soul exhausted, is truly amusing to behold. I am the laughing hag, who envies the sincerity of the people of the world morning and night. You must have seen the three daughters; those are the women who perished by the Dokuchiya. At this final moment, when the life of your Tama no o is about to end, promise to become my husband. Though I may look foul, my soul shines like a jewel. If you consent to my words, from now on, I shall let your life of Tama live in peace.</p>
+          <p class="en-p">She appeared suddenly in the darkness while raising a repulsive voice. Fuyuo, who was on the verge of death, gritted his teeth in frustration at having fallen into the hag's trap, and sang with his dying breath:</p>
+          <p class="en-p">Even if my life should end, would I ever submit to a foul hag like you? Even if my Karatama should perish, my soul shall live on to torment you. Born in the noble mansion above the water, I am a true Kunitsukami. You are the ghost hag of the Suihonki, known by reputation; leave this place at once.</p>
+          <p class="en-p">The hag opened her pale blue mouth, which was split to her ears, and while sticking out a tongue like that of an ox, she said:</p>
+          <p class="en-p">Gahahahatsuha, gihihihihi, gufufufufutsuhu, gehehehehe, giyohohohohotsuho, what pathetic cowards you are. You are mere Utsusori who fell for my schemes and sold off your precious, precious life of Tama cheaply. If you dislike it, then dislike it; I shall not ask again. Giyahahahaha! I will drag you back to Shinobigaoka, call together my entire clan, and after you are gone, I will take your soul's life once more and satisfy my grudge. Giyahahahaha! How delightful this is.</p>
+          <p class="en-p">Fuyuo, gritting his teeth in deep regret, sang:</p>
+          <p class="en-p">Even if my life should end, I am not one to succumb to a demon like you. I, too, shall be reborn as a demon and take your lives to torment you. I am the son of the King of Mount Mizukami, which excels and surpasses the land of Ashihara. I am not the end of a lowly demon like you; I possess the power of majesty.</p>
+          <p class="en-p">Singing thus, he gasped his last and collapsed on the spot, passing away.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">天の数歌宣りつれば
+婆さんも娘も其家も
+煙となりて消え果てし
+あとをよくよく眺むれば
+雑草生ふる白樺の
+林と知るより驚きて
+忍ケ丘を逃げ下り
+再び東に向ふなり
+長途の旅に喉乾き
+水を飲まむと思へども
+水奔草の毒気をば
+含める池水川水は
+われ等が口に入るよしも
+なくなく進む長の野路
+何と詮術なかりけり
+頭は痛み足だるみ
+勢力頓に衰へて
+わが目の光りつぎつぎに
+うすれ行くこそ悲しけれ
+夜前の女は正しくや</p>
+            <p class="ja-classical-line">水奔鬼には非ざるか
+思へば思へばいぶかしや』</p>
+            <p class="ja-classical-line">と歌ひつつ進み行けば、又もや小さき丘、行手に横はるを見る。冬男は兎も角も其の丘にたどりつき、水でもあらば、喉を潤し息を休めむと、疲れし身体に勇気を鼓して、其日の黄昏るる頃、小さき丘の辺に着きたり。</p>
+            <p class="ja-classical-line">冬男は声細々と歌ふ。</p>
+            <p class="ja-classical-line">『あへぎあへぎ醜草生ふる野を渉り
+漸くこれの丘に着きぬる。
+この丘に真清水あれば乾きたる
+喉うるほして蘇らむを。
+真清水はよし湧くとても黄昏の
+道なき野路をさがすよしなし。
+あやしかる女に毒茶を飲まされて
+われは死ぬより苦しき宵なり。
+刻々にわが身体ははれ上り
+身動きならぬ今となりけり。
+常世ゆく闇の荒野に只一人
+われは悲しくもだえ居るなり。
+故郷を思へば恋し父母を
+思へば悲し旅の夕暮。
+只一人旅ゆくわれの淋しさは
+野山の奥に住む心地なり。
+玉の緒の生命きれなば如何にせむ
+わが故郷にしらす由なく。
+言霊の厳の力に救はれて
+生命からがら逃げ来つるかも。</p>
+            <p class="ja-classical-line">此処に来て露の生命の消ゆるかと
+思へば淋しき吾身なるかも。
+水奔鬼の集へる丘に一夜寝て
+玉の生命を縮めたりけり』</p>
+            <p class="ja-classical-line">かく歌ふ折しも、</p>
+            <p class="ja-classical-line">『アハハハハー
+イヒヒヒヒー
+ウフフフフー
+エヘヘヘヘー</p>
+            <p class="ja-classical-line">われこそは忍ケ丘の笑ひ婆よ
+よくも此処まで逃げ来つるかな。
+この婆は人の艱みを見て笑ふ
+黄泉の国の笑ひ婆ぞや。
+身も魂も疲れ果てたる汝が態
+見るにつけても可笑しくぞある。
+われこそは笑ひの婆よ世の人の
+まめやかなるを朝夕ねたむ。
+三人の娘を汝は見たるべし
+あれは毒茶に見亡せし女よ。
+玉の緒の生命きれなむこの間際に
+わが夫となる約束をせよ。
+この婆はきたなく見ゆれど魂は
+玉の如くに輝き居るぞや。
+わが言葉諾ふなれば今よりは
+玉の生命を安く生かさむ』</p>
+            <p class="ja-classical-line">と、いやらしき声を張上げながら、闇の中にハツと姿を現はした。瀕死の境にある冬男は、婆の罠にかかりし残念さに、歯を喰ひしばりながら息もきれぎれに歌ふ。</p>
+            <p class="ja-classical-line">『わが生命たとへ死すとも汝が如き
+きたなき婆に従ふべきやは。
+身体はよし罷るとも霊魂は
+生きて汝を苦しめて見む。
+水上の貴の館に生れたる
+われは正しき国津神ぞや。
+汝こそは音に聞くなる水奔鬼の
+幽霊婆よとく此処を去れ』</p>
+            <p class="ja-classical-line">婆は耳まで裂けた真青の口を開き、牛の如き舌を吐き出しながら、</p>
+            <p class="ja-classical-line">『ガハハハハツハ、ギヒヒヒヒ、グフフフフツフ、ゲヘヘヘヘ、ギヨホホホホツホ、てもさてもいぢらしい腰抜け野郎ども、この方が計略にかかり、大事の大事の玉の生命の安売致したウツソリども、嫌なら嫌でもう頼まぬ。ギヤハハハハー、忍ケ丘につれ帰り、一族郎党呼び集め、汝が亡きあとの霊魂の生命を再び取り上げて、恨みを晴らさでおくものか、ギヤハハハハー、てもさても心地よやな』</p>
+            <p class="ja-classical-line">冬男は無念の歯を喰ひしばりながら、</p>
+            <p class="ja-classical-line">『わが生命如何になるとも汝の如き
+悪魔に靡くわれには非ず。
+吾も亦鬼と生れて汝等が
+生命を奪ひなやめてくれむ。
+葭原の国土の秀でて勝れたる
+水上山の王の息子ぞ。
+汝が如きいやしき鬼の果てならず
+われには厳の力ありけり』</p>
+            <p class="ja-classical-line">かく歌ひながら息も絶え絶えに、其場に打伏したるまま身亡せにける。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c01.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 1: 独り Journey [2005]</span>
+      </a>
+      <a href="c03.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 3: 復活 [2007]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

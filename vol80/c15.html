@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 15: 憤死 [2019] - Volume 80 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 80 Table of Contents</a>
+      <span>Volume 80</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 80 &bull; Chapter 15</span>
+      <h1 class="chapter-title-en">Chapter 15: 憤死 [2019]</h1>
+      <p class="chapter-title-ja">憤死〔2019〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Akio stands in the shade of the trees as before, and taking this place as his final stand, he proclaims the Ikukototama.</p>
+          <p class="en-p">Akio: 'In Takaamahara appearing,
+By the Mikoto of the Lord Ōkami,
+Born of the Kototama of the sound A,
+The Kamubashira of the Mizu no Mitama,
+Akitsuo’s divine Kuniguni,
+Having traveled through, the Kototama’s
+Iki he condensed to create Kami,
+For the Isaoshi of creating the Kunitsuchi,
+Both the Ōunabara and the Kunitsuchi,
+Were created in detail and with grace.
+Among them, the vast and boundless sea,
+Floating in the very center,
+Among the many Shimajima,
+Especially the vast Yoshihara,
+Yoshiharaguni is that which was born,
+From the precious Oniki of the Lord Kami.
+Yamakahakusaki and Hitogusa,
+Even to the ends of birds and beasts,
+All were the Mitamamono born,
+From the Oniki of the Lord Kami.
+In this Keshikuni, peacefully,
+Living the life granted in this world,
+Not only humans but also the Mitama of the Yoyomogi,
+There shall be none who do not receive the blessing.
+By the Mikoto of Asagirihime,
+Sent by the Lord Ōkami,
+Our father’s Iwakane,
+At the sacred site of Mizukamiyama,
+Has built a precious mansion.
+He is the ruler who shall govern,
+All of the Kunihara of Yosan.
+I am the third child of Iwakane,
+A Kunitsukami named Akio.
+The lions and bears lurking on the peaks,
+The wolves and venomous snakes,
+And even the Warai-baba,
+Are all under the command of my father’s Mikoto.
+If, by my Kototama, there should be,
+Any who come to oppose me,
+In this world, let alone the Yoyomogi,
+To the ends of anywhere, I shall never,
+Absolutely permit a place to dwell.
+You, Magatsumi and Magatsubi,
+To the Kototama I strike forth,
+Incline your ears and open your eyes,
+Sweep away the clouds and mists of your hearts,
+Return to the heart of sincerity,
+And serve in obedience to Kami.
+Ah, Kannagara-kamu-kamu,
+Taking the Great Heart of the Mitama of the Ōkami,
+As one's own heart,
+Here Akio reverently,
+Proclaims and transmits for your sake:
+One, two, three, four, five, six, seven, eight, nine, ten,
+Hundred, thousand, ten thousand, eighty million Kami,
+Protect us and bless us.
+May there be power in my Kototama,
+May there be light in my Kototama.'</p>
+          <p class="en-p">Thus he sings with a clear voice. Perhaps the Magatsukami were also softened in heart by this Kototama, for a fragrant breeze blew comfortably, shaking the ominaeshi on the mountainside, the voice of the kalavinka chirping on the branches became exceptionally clear, and the sound of insects gathering in the small grasses sang most beautifully.</p>
+          <p class="en-p">The pine sings:</p>
+          <p class="en-p">Pine: 'How grateful I am, for in the Kototama of Lord Akio,
+I feel as if heaven and earth are opening.
+Even to speak of it is awe-inspiring, for in the strict Kototama,
+My own Mitama stands up in vigor.
+Since the Kototama of my glorious Lord is pure,
+Even the Magatsu shall surely come to submit.'</p>
+          <p class="en-p">The bamboo sings:</p>
+          <p class="en-p">Bamboo: 'The black clouds that wrapped the great sky have scattered and vanished,
+And the sun and moon are clearing across the heavens.
+Because the Kototama proclaimed by my Lord brings fortune,
+The wind blowing over Yoshihara has calmed.
+My heart has become clear, I know not why,
+And I think of the fortune of my journey ahead.
+Though the mountain of flames heard of in legend is steep,
+If I proclaim the Kototama, I shall climb it with ease.
+I have heard that fierce beasts gather at the summit,
+And guard the seeds of fire.
+Even the mischief of Warai-baba and the mocking hag,
+Have become but a wind blowing over the fields.
+The hag who raged at Tsukimigaoka the previous night,
+Alas, has hidden her shadow.'</p>
+          <p class="en-p">The plum sings:</p>
+          <p class="en-p">Plum: 'In the strict Kototama proclaimed aloud,
+The clouds and mists of the four directions of heaven and earth are clearing.
+The Kototama of the divine breath of the Chihayaburu Kami,
+Is the power that washes this world.
+I think there can be nothing more precious,
+Than the Ikukototama in this world.
+A wind of peace rises in the mountains and fields,
+And the blooming and fruiting of flowers is the fortune of the Kototama.
+I did not know my Lord was so precious,
+Oh, the living Kototama of the Kami Akio.'</p>
+          <p class="en-p">The cherry sings:</p>
+          <p class="en-p">Cherry: 'Having encountered various hardships, we,
+Have realized the power of the Ikukototama.
+Even if tens of thousands of enemies appear, I shall not fear,
+For my Lord’s Kototama rings out clearly.
+I hear that this heaven and earth were born,
+From the Isaoshi of the five great father-sounds of A-O-U-E-I.
+Now, have I realized the preciousness of the power of Kami,
+Foolish as I am.
+Repeating my travels with a grass pillow, at the foot of the mountain,
+In the shade of the dense trees, I realized the Way.
+What does it matter how Mizuhashiri-oni schemes,
+When I carry the sword of Kototama?
+Though the sword of Kototama I carry may rust,
+My Lord possesses a sharp power.'</p>
+          <p class="en-p">Here, Akio resolves himself, gaining strength from the preciousness of the merit of the Ikukototama, and standing at the head, he climbs upward while singing, tracing the wall-like mountain surface to the right and left.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">秋男は以前の樹蔭に立ちて此処を先途と生言霊を宣る。</p>
+            <p class="ja-classical-line">『高天原に現れませる
+主の大神の神言もて
+ア声の言霊に生れませる
+瑞の御霊の神柱
+顕津男の神国々を
+経巡り給ひて言霊の
+水火を凝らして神を生み
+国土を生ませる功績に
+大海原も国土も
+〓__GT_13105__怜に委曲に生りましぬ
+中にも広き万里の海
+其真中に浮びたる
+島々数多ある中に
+別けて広けき葭の島
+葭原国は主の神の
+貴の御水火に生るものぞ
+山河草木も人草も
+鳥獣のはしまでも
+皆主の神の御水火に
+生り出で給ひし御賜物</p>
+            <p class="ja-classical-line">この食国に安々と
+生を享けたる現世の
+人のみならず幽世の
+身魂ことごと御恵みを
+被らぬもの無かるべし
+主の大神の遣はせし
+朝霧比女の神言もちて
+吾等の父の巌ケ根は
+水上山の聖場に
+貴の館を構へまし
+予讃の国原悉く
+治し食すべき司なり
+吾は巌ケ根第三子
+秋男と名づくる国津神よ
+尾の上に潜む獅子熊も
+虎狼も毒蛇も
+笑ひ婆アも悉く
+父の命の配下ぞや
+吾言霊にもしやもし
+敵対ひ来る事あらば</p>
+            <p class="ja-classical-line">此世は愚か幽世の
+何処の果にも棲処をば
+絶対的に許すまじ
+汝曲津見曲鬼よ
+吾打出す言霊に
+耳を傾け目を開き
+心の雲霧打ち払ひ
+誠の心に立帰り
+神に従ひ奉るべし
+ああ惟神々々
+瑞の御霊の大神の
+大御心を心とし
+茲に秋男は慎みて
+汝等が為に宣り伝ふ
+一二三四五六七八九十
+百千万八千万の神
+守り給へ幸へ給へ
+吾言霊に力あれ
+吾言霊に光あれ』</p>
+            <p class="ja-classical-line">と声も爽かに歌ふ。曲神もこの言霊に心和らぎたるか、山腹の女郎花を揺がせて香ばしき風心地よく吹き通り、梢に囀る迦陵頻伽の声一入清しく、小草にすだく虫の音もいと美はしく啼きにける。</p>
+            <p class="ja-classical-line">松は歌ふ。</p>
+            <p class="ja-classical-line">『ありがたし秋男の君の言霊に
+天地開く心地するなり。
+掛巻も畏し厳の言霊に
+吾魂もいきり立つなり。
+栄えある君の言霊清しけれ
+曲津も必ず服従ひ来らむ』</p>
+            <p class="ja-classical-line">竹は歌ふ。</p>
+            <p class="ja-classical-line">『大空を包みし黒雲散り失せて
+月日は空に澄み渡りけり。
+吾君の宣らす言霊幸はひて
+葭原を吹く風は凪ぎたり。
+何となく心清しくなりにきて
+吾行先の幸を思ふも。
+音に聞く火炎の山は峻しけれど
+言霊宣れば安く登れむ。
+頂に猛き獣が屯して
+火種を守ると吾は聞きけり。
+笑ひ婆、譏り婆アのいたづらも
+野辺吹く風となりにけるかな。
+先の夜に月見ケ丘に荒みたる
+婆アはあはれ影隠しける』</p>
+            <p class="ja-classical-line">梅は歌ふ。</p>
+            <p class="ja-classical-line">『高らかに宣らせる厳の言霊に
+天地四方の雲霧晴れ行く。
+千早振る神の伊吹の言霊は
+此世を洗ふ力なりけり。
+世の中に生言霊をおいて外に
+尊きものはあらじと思ふ。
+山に野に平和の風の吹き起り
+花咲き実るも言霊の幸。
+斯くまでも尊き君と知らざりき
+秋男の神の生ける言霊よ』</p>
+            <p class="ja-classical-line">桜は歌ふ。</p>
+            <p class="ja-classical-line">『種々の艱みに遇ひて吾々は
+生言霊の力覚りぬ。
+幾万の敵現はるも恐れざらむ
+君が言霊清く響けば。
+アオウエイ五大父音の功績に
+此天地は生り出でしと聞く。
+今となりて神の力の尊さを
+覚りけるかな愚なる吾は。
+草枕旅を重ねて山裾の
+茂樹の蔭に道を覚りぬ。
+水奔鬼如何にたくむも何かあらむ
+言霊剣帯ぶる吾身は。
+吾帯ぶる言霊剣は錆びぬれど
+君は鋭き力持たせり』</p>
+            <p class="ja-classical-line">茲に秋男は意を決し、生言霊の功の尊さに力を得、自ら先頭に立ちて、壁立つ山肌を右に左に伝ひながら歌ひつつ登り行く。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">'Though the mountain of Kuwaen be steep, / Through the Momokusachigusa I shall go. / Though they block and hinder my path, / What of this Yamamichi shall I fear? / With the sword of Ikukototama, / I shall slash and sweep to the left and right, / And climb, purifying the path ahead. / At the Kuwakō of this summit, / It is said that Shishiō, Kumaō, Toraō, / Wolves, and Orochi gather, / Guarding it through the Chiuya. / No matter how fierce the beasts may be, / By the sword of the Kototama / Bestowed by Kami, I shall make them Matsuro. / Shall I not seize and bring back / The fire-seed of the Shigumi of Kami? / Though this Yamamichi is steep / And difficult to traverse, with all my Magokoro, / Exhausting my body and soul, / For the sake of Kami and for the sake of the world, / To us who advance, / What Magatsu can possibly hinder us? / Pine, Bamboo, Plum, and Cherry, / Take heart and follow me. / Though once I was caught off guard, / My Mitama, having fully realized / The power of the Ikukototama, / No longer fears anything. / Ah, how brave, how Omoshiro! / In the Saukutsu where the Magami gather, / With the Kototamatsurugi drawn, / I shall advance steadily.'</p>
+          <p class="en-p">Climbing while treading upon the Ihane and Kine, the mountain of Kuwaen is indeed pure. Looking down, the white clouds at the foot of the mountain play abundantly and sway in the wind. Having climbed this mountain that towers into the sky of white clouds, I shall look upon the shape of the lands in the four directions. Is that the figure of Mount Takamitsu, hazily shimmering in the distant spring sky? Mount Takamitsu is venerable, for it is the sacred ground where the Kami of the Mihishiro resides. How solemn is the figure of the mountain of Takamitsu, where Asagirihime-sama dwells eternally. If we advance a little longer, we shall reach the summit; let us rest our breath here for a while.</p>
+          <p class="en-p">So singing, they spread out the daylilies by the roadside, sat down heavily, and while Pine, Bamboo, Plum, and Cherry all looked out over the four directions below, each sang in turn.</p>
+          <p class="en-p">Pine sings:</p>
+          <p class="en-p">'At the foot, a hundred trees grow thick, and in this vicinity, / Only daylilies have grown. / When I climb and look from this high mountain that pierces the clouds, / Even my own breath is painful. / The land of Ashihara is entirely wrapped in white clouds, / As if it were the surface of the sea. / When I look at Mount Takamitsu, / Which stands hazily in the sky yonder, it is venerable. / Is it a mountain from which venerability naturally springs, / As the residence of the Mihishiro Kami?'</p>
+          <p class="en-p">Bamboo sings:</p>
+          <p class="en-p">'The blowing wind also pierces my body with a chill, / And I feel as if my body has become light. / When I follow behind the young lord and climb, / Even the sound of insects has ceased to be heard. / This place on Mount Kuwaen is finally the seventh station, / Yet there is no sound of birds or insects. / Because there are no other plants or trees / Swaying in the wind on the field of pampas grass, there is no scent of flowers either.'</p>
+          <p class="en-p">Plum sings:</p>
+          <p class="en-p">'It is a sacred place with a fine view, / To the extent that it does not look like a mountain where the Magatsu-kami gather. / The Magatsu-kami must be dwelling in groups at the foot, / With the line of white clouds as their boundary. / As far as the eye can see, it is a wilderness where reeds grow thick, / And the mountain of Mizukami floats above the clouds. / I yearn for the Iwanekane-tsukasa / That dwells on the summit of the far-off Mount Mizukami. / Although I have encountered various hardships of Magatsu, / I have finally climbed to this place. / The mountain wind blows from beneath my feet; / When I think of it, it is indeed a high mountain. / This mountain, where lions, bears, tigers, wolves, and even Orochi dwell, / Spews Kuwaen. / It is terrifying to hear that when night falls, the light of the flames / Illuminates the fields for over a hundred ri. / I wish to follow the young lord, take the fire-seed for the sake of the country, / And descend the mountain.'</p>
+          <p class="en-p">Cherry sings:</p>
+          <p class="en-p">'Though you have the sword of Kototama, be careful, / For the preparations of the Magatsu are strict. / The Magatsu-mi must be waiting, / Constructing their final defenses to trap us. / You must climb with all your strength in your soul, / For the dwelling of the Magatsu is near.'</p>
+          <p class="en-p">Just as they were singing thus, suddenly a rain of large rocks fell from the summit, making a sound like a hundred thunderbolts falling, and the danger as they descended upon the five was beyond compare. The five, taking this as their final stand, dodged the rain of rocks and barely reached the summit, whereupon the fierce beasts and poisonous snakes, thinking them to be formidable enemies, glared with angry eyes, sharpened their fangs, and roared and bellowed with their mouths wide open as they bit at the five. The five heroes, thinking, 'How insolent, no matter what Magatsu hinders us, shall we not take the fire-seed?', approached the burning fire, and the group of fierce beasts and poisonous snakes, having watched them, attacked with all their might, grabbed the five heroes in their mouths, swung them around, and immediately threw them into the Kuwakō, and the sound of their triumphant songs and roars was like a hundred thunderbolts becoming one and rumbling. Thus, the poor five heroes were burned by the intense fire, turned into white bones, were tossed about by the breath of the Kuwaen, danced high into the sky, and fell back to the ground.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">『火炎の山は峻しとも
+百草千草吾行く手
+うづめ塞ぎて妨ぐる
+此山路も何かあらむ
+生言霊の剣もて
+右に左に斬りなびけ
+行く手を清めて登るべし
+此の頂の火口には
+獅子王、熊王、虎王や
+狼、大蛇集まりて
+昼夜に守り居ると聞く
+如何なる猛き獣も
+神の賜ひし言霊の
+剣にかけて服従はし
+神の経綸の火の種を
+奪ひ帰らで置くべきや
+此山路は峻しくて
+行き艱めども真心の
+限りを尽し身を尽し
+神の御為め世の為めに</p>
+            <p class="ja-classical-line">進む吾等にさやるべき
+如何なる曲津もあるべきや
+松、竹、梅よ桜ども
+心勇みて従ひ来れ
+一度は不覚はとりつれど
+生言霊の力をば
+覚り切りたる吾身魂
+最早恐るる事もなし
+ああ勇ましや面白や
+魔神の集ふ巣窟に
+言霊剣抜きつれて
+吾はすくすく進むなり。</p>
+            <p class="ja-classical-line">岩根木根踏みさくみつつ登り行く
+火炎の山は清しくもあるかな。
+見下せば山の麓に白雲は
+豊かに遊びて風にゆるげり。
+白雲の空に聳えし此山に
+登りて四方の国形見むかな。
+久方の春の御空にぼんやりと
+霞むは高光山の姿か。
+高光の山は尊し御樋代の
+神の坐します聖場なりせば。
+朝霧比女永遠に坐します高光の
+山の姿のおごそかなるかも。
+今暫し進めば頂上に達すべし
+暫しを此処に息休まさむ』</p>
+            <p class="ja-classical-line">と歌ひつつ路の辺の萱草を打敷き、どつかと臀を下し、松、竹、梅、桜も、ともに眼下の四方を見渡しながら各自に歌ふ。</p>
+            <p class="ja-classical-line">松は歌ふ。</p>
+            <p class="ja-classical-line">『麓辺は百樹茂らひこの辺り
+萱草ばかり生ひにけるかな。
+雲を抜くこの高山に登り見れば
+吾息さへも苦しかりけり。
+葭原の国原ことごと白雲に
+包まれさながら海原の如し。
+ぼんやりと彼方の空に峙てる
+高光山を見れば尊し。
+自ら尊さの湧く山なれや
+御樋代神の御舎として』</p>
+            <p class="ja-classical-line">竹は歌ふ。</p>
+            <p class="ja-classical-line">『吹く風もいと冷え冷えと身にしみて
+身は軽々となりし心地す。
+若君の後に従ひ登り見れば
+早虫の音も聞えずなりぬ。
+火炎山の此処は漸く七合目よ
+されど鳥の音虫の音もなし。
+尾花野に風に靡きて其他の
+草木なければ花の香もなし』</p>
+            <p class="ja-classical-line">梅は歌ふ。</p>
+            <p class="ja-classical-line">『曲神の集ふ山とは見えぬまで
+眺めよろしき聖所なりけり。
+曲神は白雲の線を限りにて
+麓に群がり棲めるなるらむ。
+見の限り葭草茂る原野なり
+水上の山は雲の上に浮く。
+みはるかす水上山の頂に
+います巌ケ根司恋しき。
+種々の曲の艱みに遇ひながら
+漸く此処に登り来つるも。
+山風は足の下より吹き来る
+思へば高き山にもあるかな。
+獅子熊や虎狼や大蛇まで
+棲む此の山は火炎吐くなり。
+夜されば焔の光百里余の
+野辺を照らすと聞くも凄まじ。
+若君に従ひ奉り国の為に
+火種を取りて山降らばや』</p>
+            <p class="ja-classical-line">桜は歌ふ。</p>
+            <p class="ja-classical-line">『言霊の剣あれども心せよ
+曲津の備へ厳しくありせば。
+曲津見は最後の備へを構へつつ
+吾きためむと待てるなるべし。
+魂に力をこめて登るべし
+曲津の棲処早近ければ』</p>
+            <p class="ja-classical-line">斯く歌ふ折しも、山上より忽ち大岩石の雨、百雷の落ち来る如き音響を立てて、五人が身辺に下り来る其危険さ、譬ふるものなし。五人は此処を先途と岩の雨を潜り、辛うじて頂上に達しければ、猛獣毒蛇は強敵こそ御座むなれと、目を怒らせ牙をとぎ、大口開けて咆哮怒号しながら、五人に向つて噛みつき来る。五人の勇者は、何猪口才な、如何なる曲津の妨ぐるとも、火種を取らねば置くべきかと、驀地に燃ゆる火の傍に近寄りたるを見すましたる猛獣毒蛇の群は、生命限りに襲ひ来たり、五人の勇者を口にくはへて各自に振り廻し、忽ち火口に投じ、凱歌を挙げて唸り嘯く声は、百雷の一つになりて轟くが如し。斯くしてあはれ五人の勇者は、猛烈なる火に焼かれ、白骨となりて火焔の息に翻弄され、高く天に舞ひ上り再び地上に落ち来りけり。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c14.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 14: 報哭婆 [2018]</span>
+      </a>
+      <a href="c16.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 16: Fire の Lake [2020]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

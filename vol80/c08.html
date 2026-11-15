@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 8: Moon と Gloom [2012] - Volume 80 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 80 Table of Contents</a>
+      <span>Volume 80</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 80 &bull; Chapter 8</span>
+      <h1 class="chapter-title-en">Chapter 8: Moon と Gloom [2012]</h1>
+      <p class="chapter-title-ja">月と闇〔2012〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">The area south of Tsukimigaoka is the wilderness of demons, which may well be called the territory of the Suihonki of the Mocking Hag. The Mocking Hag appeared at this entrance, and in an attempt to hinder the departure of the party, she exhausted her full power for a trial of strength; she raised black clouds, enveloped the moon in the center of the sky to create darkness, and exerted herself to the utmost to mock and scatter them in order to steal the courage of the party, but she was struck down by the Ikukototama of Akio, and she retreated, rolling up her banners and sheathing her spears.</p>
+          <p class="en-p">Once again, the clouds in the Ōzora were blown away by the wind of Shinado, and the moon, a bright mirror as before, shone brilliantly; the sacred ground of Tsukimigaoka became so bright that even the crawling of ants could be seen.</p>
+          <p class="en-p">Akio, emboldened, sings:</p>
+          <p class="en-p">How amusing, the Mocking Hag, the minister of ugliness, / Has vanished like clouds before my Kototama. / O foolish hag who exhausted all your magic / To raise black clouds in the Ōzora. / The schemes of the hag who used her full power / Have crumbled and vanished before the Ikukototama. / How auspicious this evening, cleared so brightly / That even the shadows of insects on Tsukimigaoka are visible. / According to the words of the Mocking Hag, my younger brother / Was killed by the Laughing Hag. / Yet, the words of a demon are not to be trusted; / They are surely a means to deceive me. / The depths of the evil god's power have been revealed, / And my soul shines ever more brightly. / Illuminated by the moon's mirror in the Ōzora, / The demon must have vanished like mist. / Resting on the hill where the patrinia blooms, / I have seen the wildness of the Mocking Hag. / Since she is a hag who hides her form and only raises her voice, / The depths of her magic are easily seen.</p>
+          <p class="en-p">She raised her unpleasant voice to threaten us, / But how shallow is the hag. / From here on, taking the two hags as my opponents, / I shall go forward to the mountain of Takamitsu. / It is a world of amusing dreams, looking at the moon; / On the hill, Magatsu spreads a curtain of darkness. / The curtain of darkness was easily torn, and the demon hag / Fled for her life. / On the hill where bush clovers, bellflowers, and patrinia bloom, / The shifting moon is surely a mirror. / I shall gather the dew of the bush clover to moisten my throat, / For the river water is entirely mixed with poison. / The dew dripping from the tips of the leaves of the Suihon-grass / Becomes a river, and the water is terrifying. / The Suihon-grass, growing thick among the reeds, / Is a detestable plant. / The poisonous dragon lurking among the grasses, / I shall advance, pouring my heart into the Ijichi. / In any case, on this night when heaven and earth have cleared at once, / I shall advance with the power of the moon's mirror.</p>
+          <p class="en-p">Autumn has passed, and the wind blowing over the fields is cool, / But be careful, for it is mixed with poison. / How cowardly is the Mocking Hag, / Who sheathed her spears and fled so helplessly.</p>
+          <p class="en-p">Matsu sings:</p>
+          <p class="en-p">The moonlight clear upon the pine tree trembles, / Perhaps it is the form of the wind blowing over the fields. / The path of the wind is visible even to the night eye, / And the treetops on the hill are waving. / I heard the antics of the amusing Mocking Hag / Through the curtain of darkness. / For a moment, my soul also trembled, / From the time I was wrapped in the twenty-fold darkness. / Even as the curtain of darkness wrapped around me, / My soul trembled and was on the verge of vanishing.</p>
+          <p class="en-p">Take sings:</p>
+          <p class="en-p">How weak-hearted you are, Matsu-kimi; I merely / Pretended to be the wind blowing through the sky. / I waited, sharpening the tip of my bamboo spear, / To strike at the target of the voice in the darkness. / Hearing the hag's whereabouts coming from above and below, / From the right and the left, I could not distinguish them. / Struck down by the Ikukototama of my lord, / The demon was broken so easily. / I am emboldened, thinking that this / Is the extent of her magical workings. / I must harden my heart and advance / Through the fields where the Suihon-grass grows thick. / Though the moonlight is bright, I shall wait for the dawn / To advance through the plain of ugliness.</p>
+          <p class="en-p">Ume sings:</p>
+          <p class="en-p">The amusing Mocking Hag appeared, / And while vomiting mud, she fled back. / How cowardly is the hag who hides in the darkness / And utters mocking words. / The Laughing Hag and the Mocking Hag, what amusing / Ugliness of the reed plains where demons dwell. / Even if Magatsu lurks in the vastness of the reed plains, / I shall continue the conquest to the end. / Fearing the Ikukototama of my lord, / The Mocking Hag has vanished as expected. / Though her form has vanished once, surely at some time / The Mocking Hag will appear again. / I, too, think I shall mock her in return / And strike terror into the heart of the demon hag. / If she is to mock, let her mock as much as she likes; / I shall listen to it as the sleep-talking of a vile hag. / Look at her state, struck by the Ikukototama, / She flees without a trace of form or shadow.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">月見ケ丘以南は、譏り婆の水奔鬼が縄張とも称すべき魔の原野なり。譏り婆は此入口に現はれ、一行の出発を妨げむとして、小手調べの為全力を尽し、黒雲を起し、天心の月を包みて闇となし、且一行の心胆を奪はむと極力譏り散らしけるが、秋男の生言霊に打ちまくられ、旗を巻き鉾を納めて退却したりける。</p>
+            <p class="ja-classical-line">再び大空の雲は、科戸の風に吹きまくられ、以前の如き明鏡の月皎々と輝き渡りて、月見ケ丘の清地は、蟻の這ふさへ見ゆるまで明くなりける。</p>
+            <p class="ja-classical-line">秋男は勇みたち歌ふ。</p>
+            <p class="ja-classical-line">『面白や醜の司の譏り婆は
+わが言霊に雲と消えたり。
+魔力の限りつくして大空に
+黒雲起せし婆もしれ者よ。
+全力を尽せし婆の計略も
+生言霊に脆く消えたり。
+月見ケ丘の虫の影さへ見ゆるまで
+晴れ渡りたる今宵めでたし。
+譏り婆の言葉によれば弟は
+笑ひ婆アに殺されしとや。
+さりながら悪魔の言葉は当にならじ
+われを謀るの手段なるらむ。
+悪神の力の底も見えにけり
+わが魂はいよいよかがよふ。
+大空の月の鏡に照らされて
+悪魔は霧と消え失せにけむ。
+女郎花匂へる丘に休らひて
+譏り婆アの荒び見しかな。
+影かくし声のみかくる婆なれば
+その魔力の底も見ゆめり。</p>
+            <p class="ja-classical-line">いやらしき声を張りあげ吾等をば
+嚇す婆アの浅はかなるも。
+これよりは二人の婆を相手とし
+いむかひ行かむ高光の山へ。
+面白き夢の世なるよ月を見る
+丘に曲津は闇の幕張る。
+闇の幕はもろく破れて鬼婆は
+生命からがら逃げ失せにける。
+萩桔梗女郎花咲く丘の上に
+うつろふ月は鏡なるかも。
+萩の露むすびて喉を潤ほさむ
+川水ことごと毒の混れば。
+水奔草の葉末の露のしたたりて
+川となりぬる水は恐ろし。
+葭原のよし草の間に生ひ茂る
+水奔草はいまはしき草よ。
+草の間に忍び棲まへる毒竜や
+イヂチに心注ぎて進まむ。
+兎も角も天地一度に晴れし夜の
+月の鏡を力に進まむ。</p>
+            <p class="ja-classical-line">秋さりて野辺吹く風は涼しけれど
+心せよかし毒の混れば。
+果敢なくも鉾を納めて逃げ去りし
+譏り婆アの卑怯なるかな』</p>
+            <p class="ja-classical-line">松は歌ふ。</p>
+            <p class="ja-classical-line">『松に澄む月の光はさゆらげり
+野辺吹く風のすがたなるらむ。
+風の道夜目にも見えて丘の上の
+茂樹の梢波うちにけり。
+面白き譏り婆アのわざをぎを
+暗闇の幕透して聞きぬ。
+一時はわが魂も戦きぬ
+二十重の闇に包まれしより。
+闇の幕われを包みしたまゆらに
+魂はをののき消えむとせしも』</p>
+            <p class="ja-classical-line">竹は歌ふ。</p>
+            <p class="ja-classical-line">『心弱き松の君かなわれはただ
+空吹く風とうそぶきて居し。
+闇の声目当に突かむと竹槍の
+穂を磨きつつわれは待ち居し。
+上下に右に左に聞え来る
+婆の在処を分けがてに居し。
+わが君の生言霊にうち出され
+脆くも鬼は破れけるかな。
+魔力のあらむ限りのはたらきは
+かくやと思ひわれは勇むも。
+肝むかふ心かためて進むべし
+水奔草のしげれる野辺を。
+月光はさやかなれども夜の明くるを
+待ちて進まむ醜の草原』</p>
+            <p class="ja-classical-line">梅は歌ふ。</p>
+            <p class="ja-classical-line">『面白き譏り婆アが現はれて
+泥を吐きつつ逃げ帰りけり。
+暗闇の中にまぎれて譏り言
+ぬかす婆アの卑怯なるかな。
+笑ひ婆、譏り婆アと面白き
+鬼の棲むなる醜の葭原よ。
+葭原の広きに曲津は潜むとも
+われは飽くまで征討めでおくべき。
+吾君の生言霊に怖ぢ恐れ
+さすがの譏り婆アも消えたり。
+一度は姿消ゆれど何時か亦
+譏り婆アは現はれ来らむ。
+われも亦譏り散らして鬼婆の
+度肝を抜いてくれむとぞ思ふ。
+譏る事ならばひるまじ何処までも
+人の悪口好きな吾なり。
+譏り婆いくらなりとも譏れかし
+悪たれ婆アの寝言と聞かむ。
+ざまを見ろ生言霊にやらはれて
+影も形もなきつつ逃げ行く。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">I shall pursue the old hag to the very end, and I will not rest until I have mocked her to death. Upon the branch of the kōrigi tree, the hag has grown small, and she must be trembling as she hears my Kototama. Since she too is a fool, she must be hiding in the form of an insect. I have witnessed the wretchedness of the amusing hag; though her form is unseen, her voice is broken.</p>
+          <p class="en-p">Sakura sings:</p>
+          <p class="en-p">By the Ikukototama of my Lord, the black clouds of the Ōzora have cleared, and the moon peeps through. Bathing my head in the moon of the full night, I raise a war cry upon Tsukimigaoka. The sound of insects has suddenly grown high and clear, as they lick the dew beneath the moon. The light of Rurikuō shines, and the dew upon the blades of grass has begun to sparkle here and there. Upon this pure Tsukimigaoka, the mocking hag has appeared with such audacity. Yet, I am astonished at the cowardice of the Onibaba who hides her form. With a 'Gyahahaha' sound, she squeezed out a most unpleasant voice, attempting to chill our livers. The words of the Magaoni are weak and powerless; how could I, a Masurao, ever be daunted? The depths of the Onibaba's power have been revealed; let us advance until she is destroyed and lost. In this hill where Hagi, Kikiyō, and Ominaheshi bloom, I entrust my lodging to the dew of a single night.</p>
+          <p class="en-p">Having traveled far across the Ōno of ugliness, I grow close to the moon that shines like a mirror. In any case, I shall not sleep this night, but wait for the dawn to advance toward the mountain of Kuwaen. The mountain of Kuwaen, heard of in rumors, is the Mototsusumika where the Onibaba gathers her Teshita.</p>
+          <p class="en-p">Akio sings:</p>
+          <p class="en-p">As it is a night of Getsumei, the colors and Iroka of the flowers of the hundred grasses of autumn are clearly visible. Until the dawn, Warera shall rest here and wait, admiring the flowers and the moon. The clarity of the moon, shimmering in the dew of the Hosusuki swaying in the wind upon the hill. The night on Tsukimigaoka is tranquil, with the Hana-susuki swaying and bowing in the wind. In this night where there is no one to be found, I wish to hear whom the Hosusuki is beckoning. The form of the Hosusuki, left to the blowing of the wind, resembles a weak person. Heavy with the dew, the head of the Obana bows to the ground, shedding tears. Just like this, the mocking hag must have fallen and wept upon some field. It is the middle of the night, with the Hosusuki swaying to the right and left, scattering tears of dew. The Hosusuki must be beckoning while bathed in dew, not only on this hill but also by the roadside.</p>
+          <p class="en-p">How regrettable it is that this pleasant autumn sky should fade as the Hosusuki sways in the wind. As the night deepens, the Hosusuki beckons to me most lonely on this desolate hill. Watching the graceful form of the Hana-susuki swaying in the wind, I think of my wife at home. On the hill where the voices of insects are most clear, the Hosusuki of midnight sends flower waves. Each time the midnight wind rustles the pines, the Obana of the hill turns its sleeves. The flowers of the Hosusuki, with sleeves fluttering in the wind that blows them away, are still heavy with dew.</p>
+          <p class="en-p">Matsu sings:</p>
+          <p class="en-p">The dew resting upon the blooming flowers of the small grasses also shimmers in the moonlight tonight. The sound of insects swarming in the thickets of the eight-thousand grasses must be heard by the moon, growing ever higher. While wringing out my sleeves wet with the night dew, I have climbed up, parting the Obana. As evening falls and the autumn wind rustles, when I climb this hill, the moon shines upon the pines. I deeply know autumn by the sound of the blowing wind, in this lodging of dew on Tsukimigaoka. A night of the moon where the shadows of autumn leaves, dyed in light and dark, appear as a single hue. Though wrapped in Kurokumo, the flowers of the white lily appear to be pure white. The Onibaba, too, must be longing for the scenery of Tsukimigaoka and coming to see it night after night.</p>
+          <p class="en-p">Take sings:</p>
+          <p class="en-p">The dew on the tips of the leaves has scattered in the howling wind, and even the hem of my garment has become damp. I know not if it be the dew of the Onibaba's tears, but my sleeves have grown heavy. Is the life of the dew so fleeting? If the wind blows, the shadow of the Onibaba will simply scatter away. It is clear to see the white jewels of dew shining beneath the moon of this hill. Deceived by the Onibaba, I have spent the night on Tsukimigaoka without choice.</p>
+          <p class="en-p">Ume sings:</p>
+          <p class="en-p">The sound of the wind blowing over the tips of the reeds in the reed field is perhaps muddied. A single old pine stands sharply on the hill, and under the moon, the color of its leaves is dark. The moon crosses to the west, drawing the shadow of the pine upon the red clay of the hill. Tomorrow, I shall cross over the Ōno of ugliness and tread upon the roots of rocks and trees. I shall avoid the lowlands where reed grasses grow thick and pass through the fields where Susuki grows. On high ground, the Hosusuki sways, and in the low ground, it is damp and the reed grasses grow thick.</p>
+          <p class="en-p">Sakura sings:</p>
+          <p class="en-p">The eastern sky has grown white, faintly, and the light of the moon heading west has grown thin. Soon, I shall rely on the light of the sun rising in its glory as my strength and advance to the south. The Kuwaen-yama, towering in the southern sky, is faintly visible, and the haze hangs in layers. While wearing a belt of haze, the Kuwaen-yama seems to be harboring many Magaoni. The eastern sky has brightened one after another, and the many stars have hidden themselves.</p>
+          <p class="en-p">From this point on, the party decided to head toward the Kuwaen-yama region, traveling along the somewhat high wilderness while singing the propaganda song and advancing southward.</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">どこまでも婆アの後を追跡し
+譏り殺してやらねば置かぬ。
+籠り木の梢に婆は小さくなりて
+わが言霊を震ひ聞くらむ。
+彼も亦しれものなれば其姿
+虫と変じて忍び居るらむ。
+面白き婆アの荒びを見たりけり
+姿なけれどくだけたる声』</p>
+            <p class="ja-classical-line">桜は歌ふ。</p>
+            <p class="ja-classical-line">『わが君の生言霊に大空の
+黒雲晴れて月は覗けり。
+望の夜の月を頭に浴びながら
+月見ケ丘に雄猛びするかな。
+虫の音も俄かに高く冴えにけり
+月のしたびに露をなめつつ。
+瑠璃光のひかり照して草の葉の
+露はあちこち輝きそめたり。
+此清き月見ケ丘におほけなくも
+譏り婆アは現はれにけり。
+さりながら姿かくせる鬼婆の
+その卑怯さにあきれかへりぬ。
+ギヤハハハハとさもいやらしき声絞り
+われ等が肝を冷さむとせし。
+曲鬼の言葉は弱く力なし
+如何でひるまむ大丈夫われは。
+鬼婆の力の底は見えにけり
+いざや進まむ亡び失すまで。
+萩桔梗女郎花咲く此丘に
+一夜の露の宿りたのむも。</p>
+            <p class="ja-classical-line">はろばろと醜の大野を渉り来て
+鏡と冴ゆる月に親しむ。
+兎も角も今宵は眠らず暁を
+待ちて火炎の山に進まむ。
+音に聞く火炎の山は鬼婆の
+手下集むる元津棲処と』</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『月明の夜なれば秋の百草の
+花の色香もさやに見えけり。
+明くるまで吾等は此処に休らひて
+花と月とを賞めて待つべし。
+丘の上に風に靡ける穂薄の
+露にかがよふ月のさやけさ。
+花薄風にゆれつつ打ち靡く
+月見ケ丘の夜は静けし。
+これといふ人もなき夜に穂薄の
+誰を招くか聞かまほしけれ。
+吹く風の吹きのままなる穂薄の
+姿は弱き人に似しかも。
+露しげく保つ尾花の頭重み
+地にうつぶして涙垂らせり。
+かくの如譏り婆アもいづれかの
+野辺にうち伏し泣き伏しにけむ。
+穂薄の右に左にさゆれつつ
+涙の露を散らす夜半なり。
+穂薄は此丘のみか道の辺に
+露を浴びつつ招き居るらむ。</p>
+            <p class="ja-classical-line">心地よき此秋空を穂薄の
+風に靡きて暮れ行く惜しさよ。
+小夜更けてわびしき丘に穂薄は
+いと淋しげに吾を招けり。
+花薄風になびける優姿を
+見つつ思ふも家なるつまを。
+虫の声いとも冴えたる丘の上に
+花波寄する夜半の穂すすき。
+夜半の風松をそよがす度毎に
+丘の尾花は袖かへすなり。
+吹き払ふ風に袂を靡かせつ
+なほ露しげき穂すすきの花』</p>
+            <p class="ja-classical-line">松は歌ふ。</p>
+            <p class="ja-classical-line">『咲き匂ふ小草の花に置く露も
+今宵は月の光にかがよふ。
+八千草の茂みにすだく虫の音は
+いよいよ高く月も聞くらむ。
+夜の露にぬるる袂を絞りながら
+尾花を分けてのぼり来しはや。
+夕さりて秋風そよぐ此丘に
+のぼれば松に月はさゆるる。
+吹く風の音につくづく秋を知る
+月見ケ丘の露のやどりに。
+淡く濃く染め出したる紅葉の
+かげ一色に見ゆる月の夜。
+黒雲に包まれたれどしら百合の
+花は真白く見えにけらしな。
+鬼婆も月見ケ丘の風光に
+憧れて夜な夜な来り見るらむ』</p>
+            <p class="ja-classical-line">竹は歌ふ。</p>
+            <p class="ja-classical-line">『吹き荒ぶ風に葉末の露ちりて
+わが裳裾まで湿らひにける。
+鬼婆の涙の露か知らねども
+わが衣手は重くなりぬる。
+はかなきは露の生命か風吹かば
+ただに散りゆく鬼婆の影。
+此丘の月のしたびに輝ける
+露の白玉見るもさやけし。
+鬼婆に唆されて是非もなく
+月見ケ丘に夜を明しける』</p>
+            <p class="ja-classical-line">梅は歌ふ。</p>
+            <p class="ja-classical-line">『葭原の葭の葉末を吹きて来し
+風の響きは濁らへるかも。
+丘の上に一本老松くつきりと
+月下にたちて葉の色黒めり。
+丘の上の赤土の上に松の影
+描きて月は西渡り行く。
+明日の日は醜の大野をのり越えて
+岩の根木の根踏みさくみ行かむ。
+葭草の生ひ茂りたる低所
+さけて通らむ薄生ふる野を。
+高き地は穂薄なびき低き地は
+しめりて葭草茂らへるかも』</p>
+            <p class="ja-classical-line">桜は歌ふ。</p>
+            <p class="ja-classical-line">『ほのぼのと東の空は白みけり
+西行く月のかげうすらぎて。
+やがて今豊栄のぼる日の光を
+力とたのみ南に進まむ。
+南の空に聳ゆる火炎山は
+ほのかに見えて霞棚引く。
+火炎山かすみの帯をしめながら
+曲鬼数多かかへ居るらし。
+東の御空つぎつぎ明らみて
+数多の星はかくろひにけり』</p>
+            <p class="ja-classical-line">これより一行は、火炎山方面さして、やや高き原野を伝ひながら、宣伝歌をうたひ南進する事となりぬ。</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c07.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 7: Moon 見ケ丘 [2011]</span>
+      </a>
+      <a href="c09.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 9: 露の路 [2013]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 10: 五乙女 [2014] - Volume 80 | Reikai Monogatari</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --border: #334155;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+      --font-ja: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .nav-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+    }
+    .nav-top a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .nav-top a:hover { color: var(--accent-hover); text-decoration: underline; }
+    .chapter-header { text-align: center; margin-bottom: 3rem; }
+    .vol-badge {
+      display: inline-block; background: rgba(56, 189, 248, 0.1); color: var(--accent);
+      padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .chapter-title-en {
+      font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; font-family: var(--font-serif);
+    }
+    .chapter-title-ja { font-size: 1.1rem; color: var(--text-muted); font-family: var(--font-ja); }
+    .sec-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .para-num { font-weight: 700; color: var(--accent); font-size: 1.1rem; font-family: var(--font-serif); }
+    .lang-en { margin-bottom: 1.75rem; }
+    .en-p {
+      margin-bottom: 1rem; font-size: 1.05rem; color: #e2e8f0; text-align: justify; white-space: pre-line;
+    }
+    .en-p:last-child { margin-bottom: 0; }
+    .lang-ja {
+      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.7);
+      border-radius: 8px; padding: 1.25rem; font-family: var(--font-ja);
+    }
+    .ja-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .ja-classical { margin-bottom: 0.5rem; }
+    .ja-classical-line {
+      font-size: 0.95rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 0.5rem; white-space: pre-line;
+    }
+    .ja-classical-line:last-child { margin-bottom: 0; }
+    .ja-modern-details {
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border);
+    }
+    .ja-modern-summary {
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--accent); padding: 0.35rem 0.75rem;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 6px; user-select: none; transition: all 0.2s ease; outline: none;
+    }
+    .ja-modern-summary:hover {
+      background: rgba(56, 189, 248, 0.16); border-color: var(--accent); color: var(--accent-hover);
+    }
+    .ja-modern-summary::marker, .ja-modern-summary::-webkit-details-marker { display: none; }
+    .summary-icon { font-size: 0.85rem; line-height: 1; }
+    .summary-text { letter-spacing: 0.03em; }
+    .summary-arrow { display: inline-block; font-size: 0.65rem; transition: transform 0.2s ease; margin-left: 0.15rem; }
+    .summary-arrow::after { content: "▶"; }
+    .ja-modern-details[open] .summary-arrow { transform: rotate(90deg); }
+    .ja-modern-details[open] .ja-modern { margin-top: 0.85rem; padding-top: 0.25rem; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    .ja-modern-p {
+      font-size: 0.95rem; color: #94a3b8; line-height: 1.8; margin-bottom: 0.75rem; text-align: justify; white-space: pre-line;
+    }
+    .ja-modern-p:last-child { margin-bottom: 0; }
+    .footer-nav {
+      display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .footer-btn {
+      display: flex; flex-direction: column; padding: 1rem 1.5rem; background: var(--card-bg);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.2s; flex: 1;
+    }
+    .footer-btn.prev { text-align: left; }
+    .footer-btn.next { text-align: right; }
+    .footer-btn:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+    .nav-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .nav-title { font-weight: 600; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-top">
+      <a href="index.html">&larr; Volume 80 Table of Contents</a>
+      <span>Volume 80</span>
+    </nav>
+    <header class="chapter-header">
+      <span class="vol-badge">Volume 80 &bull; Chapter 10</span>
+      <h1 class="chapter-title-en">Chapter 10: 五乙女 [2014]</h1>
+      <p class="chapter-title-ja">五乙女〔2014〕</p>
+    </header>
+    <main>
+      <section class="sec-card" id="sec01">
+        <div class="sec-header">
+          <span class="para-num">&sect; 1</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Itsukau stopped by a small, humble house in Morikage, and seeing five maidens with smiles filling their faces, they welcomed the party in and urged them to rest their travel-weariness in this dilapidated house. The names of these maidens are Akikaze, Nowaki, Yufugiri, Asagiri, and Akisame.</p>
+          <p class="en-p">Akikaze: 'Though it is autumn, sweat has broken out from the weariness of travel; pray, rest yourselves in this dilapidated house. The sound of the pines and the rustling of the bush clover in the wind, how they echo in this chilly autumn. In this mansion where the autumn wind blows through, pray, wipe away your sweat for a while.'</p>
+          <p class="en-p">Akio replied to this:</p>
+          <p class="en-p">Akio: 'Though it is autumn and cool, I have grown sweaty; shall I rest here in this Morikage? Having rested for a hitotoki in this mansion, I think to nourish my strength. I pray you, permit me but a hitotoki of rest in this mansion purely.'</p>
+          <p class="en-p">While saying this, he led the party, and as they passed through the brushwood door and entered the interior, it was a change from the dilapidated house seen from the front; there were beautiful, spacious living rooms, lined up without number, and he said:</p>
+          <p class="en-p">Akio: 'Who would have thought that in this dilapidated house there would be such beautiful, spacious living rooms? Having rested for a while in this mansion, I shall advance to the mountain of blazing fire.'</p>
+          <p class="en-p">Matsu sang:</p>
+          <p class="en-p">Matsu: 'Dividing the grass and following the slope, my feet have felt a slight weariness. Resting my breath in this house, I shall advance while calling forth my soul to life. What a mysterious mansion this is; the number of living rooms is contrary to the expectation from the front. I am anxious, wondering if perhaps I have fallen into the schemes of the hag of slander.'</p>
+          <p class="en-p">Take sang:</p>
+          <p class="en-p">Take: 'If this is the mansion of the hag of slander, it is fortunate; it is fortunate if it is in the midst of the day. If the hag of slander lurks in this house, I shall fight to the limit of my life. That five maidens stand at the front of this house is also one mystery. It does not seem like a mansion where a hag lurks; do such gentle maidens live here?'</p>
+          <p class="en-p">Ume sang while tilting her head:</p>
+          <p class="en-p">Ume: 'Have I entered the trap of an Akugami? Somehow my soul does not feel at ease. If I knew this to be the dwelling of the Yasomagatsu-Kami, I would fight with all my might. Is the Akugami pretending to be a gentle maiden and watching for our lives? Everything in this house is mysterious; there are no windows, yet it is bright below.'</p>
+          <p class="en-p">Sakura sang:</p>
+          <p class="en-p">Sakura: 'If I doubt, there will be no end to it; I do not think this house is the dwelling of the Magatsu. Maidens appeared at the front of the dilapidated house and welcomed me with smiles filling their faces. There is no Magatsu to hinder this journey, which proceeds by the shining words of the Imperial Kami.'</p>
+          <p class="en-p">Just as they were singing thus, the four maidens, led by Akikaze, came in, and while drawing tea into trays, they held them high above their eyes and offered the tea of their hearts to the guests resting in the dilapidated house.</p>
+          <p class="en-p">Akikaze: 'This tea is a sweet medicine that flourishes on the high fields of the mountain of the spring. For that reason, people everywhere call it spring tea and drink it morning and evening with pleasure. Please drink this tea; the weariness of your long journey should be eased at once.'</p>
+          <p class="en-p">Akio, while feeling suspicious, said:</p>
+          <p class="en-p">Akio: 'The fragrance of this tea is somehow suspicious; I shall wait for a while before I sip it.'</p>
+          <p class="en-p">Akikaze, while changing her expression slightly, said:</p>
+          <p class="en-p">Akikaze: 'You speak of mysterious things; this tea is the tea of the spring, and it is the life of man.'</p>
+          <p class="en-p">Akio replied:</p>
+          <p class="en-p">Akio: 'Somehow, because I am stingy with my life, I do not wish to drink tea that I do not know.'</p>
+          <p class="en-p">The maiden called Nowaki said in a cool voice:</p>
+          <p class="en-p">Nowaki: 'Does the guest doubt our sincere hearts and refuse to accept our pure and gentle hearts? How could there be poison in this tea, which we have made by purifying and refining it morning and evening?'</p>
+          <p class="en-p">Matsu sang:</p>
+          <p class="en-p">Matsu: 'It is not that I do not accept the pure hearts of the maidens, but pray, wait for a while. I do not like hot tea as it burns my tongue; I shall drink it after waiting for it to cool.'</p>
+          <p class="en-p">Yufugiri, while stretching up from behind, said:</p>
+          <p class="en-p">Yufugiri: 'Do you doubt the pure hearts of the maidens and refuse to accept our sincerity? It is regrettable if you think this is tea of water-running grass and hesitate. We built this mansion at the foot of the autumn mountain where bush clover and bellflowers bloom, and waited for you. I am one of the five maidens serving the Mihishiro-Kami, and I am no mysterious thing.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">一行は森蔭の小やかなる家に立寄り見れば、五人の乙女、笑を満面に浮べて一行を迎へ入れ、旅の疲れを此の破家に休ませ給へと勧める。此女の名は、秋風、野分、夕霧、朝霧、秋雨といふ。</p>
+            <p class="ja-classical-line">『秋ながら旅の疲れに汗出でぬ
+この破家に休ませ給へ。
+松のひびき萩吹く風のさやさやに
+響きてさむき秋なりにけり。
+秋風の吹き通るなる此館に
+暫しは汗をぬぐはせ給へ』</p>
+            <p class="ja-classical-line">秋男はこれに答へて、</p>
+            <p class="ja-classical-line">『秋されば涼しきものを汗ばみぬ
+この森蔭に休らひ行かむか。
+一時をこれの館に休らひて
+吾は力を養はむとぞ思ふ。
+願はくば只一時の休らひを
+これの館に清く許せよ』</p>
+            <p class="ja-classical-line">といひながら一行を引連れ、柴の戸をくぐりて奥に入るや、表より見たる破家に引替へて、美はしき広き居間、幾つともなく並び居たりしに、</p>
+            <p class="ja-classical-line">『思ひきやこの破家に斯の如
+美しき広き居間のあるとは。
+暫くをこれの館に休らひつ
+勇み火炎の山に進まむ』</p>
+            <p class="ja-classical-line">松は歌ふ。</p>
+            <p class="ja-classical-line">『草を分け坂を辿りて吾足は
+軽き疲れを覚えけるかな。
+この家に息を休めて魂を
+よび生かしつつ進み行くべし。
+不思議なる館なるかも表とは
+案に相違の居間の数々。
+もしやもし譏り婆アのたくらみに
+かかりしものかと案じらるるも』</p>
+            <p class="ja-classical-line">竹は歌ふ。</p>
+            <p class="ja-classical-line">『譏り婆の館なりしは幸ひよ
+幸ひ真昼のことにありせば。
+此家に譏り婆アがひそむなら
+生命かぎりに戦ひて見む。
+此家の表に乙女五柱
+立てるも一つの不思議なりけり。
+鬼婆の潜める館と思はれず
+斯かる優しき乙女住むやを』</p>
+            <p class="ja-classical-line">梅は小首を傾けながら歌ふ。</p>
+            <p class="ja-classical-line">『悪神の罠に入りしか何となく
+吾魂は落着かぬかも。
+八十曲津神の住家と知るならば
+力限りに戦ひて見む。
+悪神は優しき乙女と見せかけて
+吾等が生命を窺ひ居るにや。
+不思議なる事ばかりなり此家は
+窓もあらずに下に明るし』</p>
+            <p class="ja-classical-line">桜は歌ふ。</p>
+            <p class="ja-classical-line">『疑へば限りなからむ此家を
+吾は曲津の住家と思はず。
+破家の表に乙女あらはれて
+笑を湛へて吾を迎へし。
+皇神の御言かがふり出でで行く
+この旅立にさやる曲津なし』</p>
+            <p class="ja-classical-line">斯く歌ひ居る折しも、秋風を先頭に四人の乙女は入り来り、盆に茶を汲みながら、目の上高く差上げ、破家に憩はせ給ふ客人に心ばかりの茶を奉る。</p>
+            <p class="ja-classical-line">『これの茶は泉の山の高畑に
+栄えて甘き薬なりけり。
+それ故に普く人は泉茶と
+称へて朝夕楽しみ飲むなり。
+これの茶を召上りませ長旅の
+疲れは頓に休まるべきを』</p>
+            <p class="ja-classical-line">秋男は怪しみながら、</p>
+            <p class="ja-classical-line">『何処となくこの茶の香りは怪しけれ
+暫く時を待ちてすすらむ』</p>
+            <p class="ja-classical-line">秋風は稍顔色を変へながら、</p>
+            <p class="ja-classical-line">『不思議なることを宣らすよこれの茶は
+泉の茶にて人の生命よ』</p>
+            <p class="ja-classical-line">秋男は答ふ。</p>
+            <p class="ja-classical-line">『何となく吾は生命の惜しさ故
+見知らぬ茶湯は飲みたくはなし』</p>
+            <p class="ja-classical-line">野分といふ乙女は涼しき声にて、</p>
+            <p class="ja-classical-line">『客人は吾等が真心疑ひて
+清き優しき心を受けずや。
+朝に夕に清めすまして作りたる
+これの茶の湯に毒のあるべき』</p>
+            <p class="ja-classical-line">松は歌ふ。</p>
+            <p class="ja-classical-line">『乙女等の清き心を受けぬには
+吾あらねども暫しを待たせよ。
+あつき湯は吾は好まず舌やかむ
+ぬるむを待ちて吾は飲むべし』</p>
+            <p class="ja-classical-line">夕霧は後よりのび上りながら、</p>
+            <p class="ja-classical-line">『乙女等の清き心を疑ひて
+吾等の誠をうけ給はずや。
+水奔草の茶湯と思ひて客人は
+ためらひ給ふと思へば怨めし。
+萩桔梗匂へる秋の山裾に
+館造りて君等を待ちしよ。
+吾こそは御樋代神に仕へたる
+五乙女にて怪しきものならず』</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec02">
+        <div class="sec-header">
+          <span class="para-num">&sect; 2</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Take sings:</p>
+          <p class="en-p">Take: 'Though I know not if thou art a Kami-Otome of the Mihishiro, there is a strange mark upon thy face. From time to time, the ears of the maiden move; I truly think thee a Keshin of a fox or raccoon dog. The color of the tea has changed little by little, and it has become like ink. This tea must be a poisonous brew made of Suihonsau that steals one's Inochi.'</p>
+          <p class="en-p">Asagiri sings:</p>
+          <p class="en-p">Asagiri: 'If it be so, there is no help for it now; though we appear as maidens, we are Magatsukami.'</p>
+          <p class="en-p">Akisame sings:</p>
+          <p class="en-p">Akisame: 'Since you have seen through us, guest, there is no help for it; prepare yourself. Though it appears to be an Abaraya, it is a Gankutsu of Toha; there is no path of escape now.'</p>
+          <p class="en-p">Ume sings in a harsh voice:</p>
+          <p class="en-p">Ume: 'Because I knew of your Takumi, I came to break this Gankutsu. You are a wicked creature who disguises yourself as an Otomego and plots according to the commands of an Onibaba.'</p>
+          <p class="en-p">Sakura, while angry, says:</p>
+          <p class="en-p">Sakura: 'Koriya, you Magatsu, if you are going to be like that, there is no choice. I shall unleash my Kototama to the fullest.'</p>
+          <p class="en-p">Akio sings:</p>
+          <p class="en-p">Akio: 'Knowing that this was a Gankutsu of Magatsu, I was lured and entered here on purpose. All of you who appear as Otomego are slaves waiting to steal the Inochi of others with Suihonsau. You were made into Oni after being forced to drink Suihonsau by the Kikuri-baba. Listen well to my Kototama with a calmed heart; do you not hold a grudge against the Kikuri-baba?'</p>
+          <p class="en-p">Akikaze, with a slightly clouded face, says:</p>
+          <p class="en-p">Akikaze: 'The guest's words are correct; I too was deceived by the Kikuri-baba. This area is the territory of the Kikuri-baba, and we are those who are ordered about by her. In the bitterness of having our Inochi of the Tama-no-o stolen, we became Oni who torment people. The four Otome who are here have all followed the same fate as I. The Kikuri-baba is wounded and resting in the inner room; please destroy her. If you defeat the Kikuri-baba, we shall also add our strength to yours. Though she is a powerful Onibaba, she has been groaning since last night, saying she is unwell.'</p>
+          <p class="en-p">Matsu sings:</p>
+          <p class="en-p">Matsu: 'Struck by the living Kototama of my Lord, the Baba must be suffering from her wounds. It is interesting; now that I have heard such secrets, we shall add our strength to the Otome. To hear such an interesting thing, that the Onibaba is groaning in this mansion. If so, with all our might and at the top of our voices, we shall attack and torment her with living Kototama.'</p>
+          <p class="en-p">Here, the five members of Akio's party and the five Otome exchanged firm handshakes, surrounded the living room where the Kikuri-baba was lurking from all four sides, and let out a great voice that seemed to shatter even heaven and earth:</p>
+          <p class="en-p">'One, two, three, four, five, six, seven, eight, nine, ten, one hundred, one thousand, eighty million Kami, destroy the Suihonsau-Oni known as the Kikuri-baba who lurks in this mansion, without leaving a trace, by my Kototama. Himorogi! May there be power in my Kototama, may there be light in my Kototama. A-O-U-E-I, Ka-Ko-Ku-Ke-Ki.'</p>
+          <p class="en-p">As they recited the Kototama of seventy-five sounds one after another, even the formidable Suihonsau-Oni could not endure it; she raged wildly, running back and forth in the narrow room, raised a scream, and rose up once again. With a desperate, terrifying expression, she flew at Akio, but without a word, he clenched his fists and struck the Baba's face repeatedly, defeating her. Unable to endure the pain, the Baba suddenly pushed open the window door,</p>
+          <p class="en-p">And suddenly flew out of the Gankutsu. While exhaling strange clouds and vapors, she headed toward the vast sky as if turning clouds into mist, and while raining down blood-smoke, she fled away into the white clouds. Ah, how fearful is the power of the Kototama of Himorogi! The Suihonsau-Oni, the Kikuri-baba, thus left the spirits of the five Otome in the Gankutsu of ugliness and fled to move on to her second strategy; it is truly terrifying.</p>
+          <p class="en-p">The five Otome were filled with smiles, felt relieved, and while shouting 'Uo-uo,' they knew not where to place their dancing hands and feet.</p>
+          <p class="en-p">Akikaze sings:</p>
+          <p class="en-p">Akikaze: 'I am the daughter of the Kunitsukami born in Izumigaoka. The four Otome are also children of the same village, and we were deceived by this Onibaba. Having been made to drink the tea of Suihonsau, we became Suihonsau-Oni. We offered this tea to the guest and urged him to join forces with us, did we not?'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">竹は歌ふ。</p>
+            <p class="ja-classical-line">『御樋代の神の乙女か知らねども
+汝が面にあやしきふしあり。
+折々に乙女の耳は動くなり
+まさしく狐狸の化身と思ふ。
+茶の色は次第々々に変り行きて
+墨の如くになりにけらしな。
+此茶こそ水奔草にてつくりたる
+生命を奪ふ毒湯なるべし』</p>
+            <p class="ja-classical-line">朝霧は歌ふ。</p>
+            <p class="ja-classical-line">『斯くなれば最早詮なし吾々は
+乙女と見ゆれど曲津神なり』</p>
+            <p class="ja-classical-line">秋雨は歌ふ。</p>
+            <p class="ja-classical-line">『客人に看破られたるその上は
+最早詮なし覚悟召されよ。
+破家と見ゆれど永遠の巌窟よ
+最早逃れる道はあるまじ』</p>
+            <p class="ja-classical-line">梅は声もあらあらしく歌ふ。</p>
+            <p class="ja-classical-line">『吾とても汝が謀計を知りし故
+これの巌窟を破らむと来つる。
+乙女子の姿を装ひ鬼婆の
+命に従ひ謀る曲もの』</p>
+            <p class="ja-classical-line">桜は怒りながら、</p>
+            <p class="ja-classical-line">『コリヤ曲津もうかうなれば是非もなし
+吾言霊に飽くまで放らむ』</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『吾も亦曲津の巌窟と知りしゆゑ
+殊更に此処に誘はれ入りぬ。
+乙女子と見ゆるは何れも水奔鬼の
+生命奪ふと待てる奴なり。
+譏り婆に水奔草を飲まされて
+汝等は鬼となりしものなり。
+吾言霊心鎮めて聞けよかし
+譏り婆アに怨み持たずや』</p>
+            <p class="ja-classical-line">秋風は稍顔を曇らせて、</p>
+            <p class="ja-classical-line">『客人の言葉は宜よ吾も亦
+譏り婆アに謀られにけり。
+この辺りは譏り婆アの縄張よ
+吾等は彼に頤使さるるもの。
+玉の緒の生命とられし悔しさに
+人を艱むる鬼とはなりぬ。
+此処に居る四人の乙女も悉く
+吾と等しき運命たどりし。
+奥の間に譏り婆アは傷つきて
+休らひ居りぬ亡ぼし給へ。
+譏り婆をきため給はば吾等亦
+君に力を添へ奉るべし。
+力強き鬼婆ながら昨夜より
+不快なりとて呻吟き居るなり』</p>
+            <p class="ja-classical-line">松は歌ふ。</p>
+            <p class="ja-classical-line">『吾君の生言霊に打出され
+婆はいたでに悩むなるらむ。
+面白し斯くも秘密を聞く上は
+乙女に吾等は力を添へむ。
+面白き事を聞くかな鬼婆は
+これの館に呻吟き居るとは。
+斯くならば力の限り声かぎり
+生言霊に攻め艱まさむ』</p>
+            <p class="ja-classical-line">茲に秋男の一行五人と五柱の乙女、互に堅き握手を交はし、譏り婆の潜める居間を四方より取巻き、天地も破るるばかりに大音声を発し、</p>
+            <p class="ja-classical-line">『一二三四五六七八九十
+百千万八千万の神
+此の館に潜みたる
+譏り婆なる水奔鬼を
+吾言霊にくまもなく
+亡ぼし給へ惟神
+吾言霊に力あれ
+吾言霊に光あれ
+アオウエイ
+カコクケキ』
+と次々に七十五声の言霊宣れば
+さすがの水奔鬼も堪りかね
+狭き室内を右往左往に荒れ狂ひ
+悲鳴を挙げて又もや再び起上り
+死物狂ひの形相凄じく
+秋男に向つて飛びかかるを
+ものをも言はず拳を固め
+婆の横面を打ちすゑ打ちすゑきためければ
+さしもの婆も痛さに堪へ兼ねてや
+窓の戸にはかに押開けて</p>
+            <p class="ja-classical-line">忽ち巌窟内を飛出し
+怪しき雲気を吐きながら
+雲を霞と大空さして
+血煙の雨を降らせつつ
+跡白雲と逃げ行きぬ
+ああ惟神言霊の
+厳の力ぞ畏けれ
+譏り婆アの水奔鬼は
+斯くして五人の乙女の精霊を
+醜の巌窟に残し置き
+第二の作戦に移らむと
+逃げ行きしこそ恐ろしき。</p>
+            <p class="ja-classical-line">五乙女は満面に笑を湛へ、胸撫で下し、「ウオウオ」と叫びつつ、手の舞ひ足の踏む所を知らぬばかりなりける。</p>
+            <p class="ja-classical-line">秋風は歌ふ。</p>
+            <p class="ja-classical-line">『吾こそは泉ケ丘に生れたる
+国津神等の娘なりけり。
+四柱の乙女も同じ里の子よ
+この鬼婆に謀られしもの。
+水奔草の茶を飲まされて吾々は
+水奔鬼とはなりにけらしな。
+客人に此茶をささげ吾と共に
+力協すと勧めけるかな。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-card" id="sec03">
+        <div class="sec-header">
+          <span class="para-num">&sect; 3</span>
+        </div>
+        <div class="lang-en">
+          <p class="en-p">Thinking back, it was the beginning of spring. We, the five maidens, departed from the village of Izumi, and as we were proceeding to make a pilgrimage to Takamitsuyama, we were overcome by the fatigue of the journey and thirst in our throats. Just as we were suffering, we saw a small house in the shade of the forest. When we, the five maidens, approached and looked, an old woman with white hair was living there. She beckoned to us, saying, 'First of all, do partake of this astringent tea,' and in our joy, we rested for a while. Not knowing it was tea of Suihonsau, we drank it all at once. Suddenly, our heads began to ache, our hands, feet, and bodies swelled up, and seeing our state where we could not move, the old woman laughed with a grin.</p>
+          <p class="en-p">Old Woman: 'You have fallen into my trap. The life, the jewel-string of you maidens, shall end this very day. Take the lives of all the Kunitsukamira of Yoshihara, and make them into true demons of Kakuriyo. If you disobey my words, I shall raise a whip of thorns, tear your entire bodies apart, and make you suffer bitter fates.' Terrified by her threatening words, we did as she taught us and spent sad days. Akio-no-kimi is a person of the manifest world, so the power of his Kototama is strong. Since we are beings in the spirit world, our Kototama should have power, yet the light of Kototama does not emerge, and we suffer, only weeping in our hearts.</p>
+          <p class="en-p">O Lord, we pray before the presence of Akio-no-kami, who is the child of the Iwagane shining on the mountain above the waters, to save us. We, the five maidens, have been content to serve as the tools of the demon hag, and having waited and waited for the arrival of a strong spirit, the time to clear our grudge has come. Ah, how reliable, how pleasant! We planned to make your entire party suffer at the sacred ground of Tsukimigaoka, but the Soshiri-baba was struck by the living Kototama in reverse, and barely escaping with her life, she is now groaning in a single room. Thinking this moment is our chance, we, the five maidens, plotted together, thinking we would take our revenge.</p>
+          <p class="en-p">From the beginning, there was no way for the strength of maidens to resist her. It was to such a place that you, your party, whose bodies are of the manifest world, arrived, and in our joy, we intended to offer you the water of Suihonsau, knowing it was poison. Please do not be angry, for we think of you as our strength. We believe that if you appear in Kakuriyo with us and strike and punish the demon hag, you will remove the calamities of the spirit world. Please forgive us, Akio-no-kami. Before you and the gods in your retinue, we reveal our sincerity and offer our apologies. The other maidens, too, were like abandoned boats with no island to cling to, but in the joy of this auspicious day, they have been revived. How noble!</p>
+          <p class="en-p">We offer our heartfelt gratitude. From here on, you shall proceed to the mountain of flames while singing the heavenly number-song of Kototama. What the Soshiri-baba fears and avoids above all is Kototama. I shall follow behind, and while watching over your departure from the shadows, I shall offer the strength of my arm. Please proceed.'</p>
+          <p class="en-p">Saying this, the five maidens turned into white smoke and vanished. When they looked closely, the party was sitting and crouching in the midst of the overgrown weeds in the shade of the forest. The ruined house and the rocky cave had left no trace, and there was only the chirping of small birds and the sound of insects crying.</p>
+          <p class="en-p">Akio sings:</p>
+          <p class="en-p">'Since I saw this mysterious dream, I have realized the suffering state of the demon hag. The ruined house and the rocky cave have completely vanished, and the sound of the wind blowing over the field is clear.'</p>
+        </div>
+        <div class="lang-ja">
+          <div class="ja-label ja-label-classical">原文（近代文語）</div>
+          <div class="ja-classical">
+            <p class="ja-classical-line">思へば春の初めなり
+吾等五人の乙女等は
+泉の里を立ち出でて
+高光山に詣でむと
+進み来れる折もあれ
+旅の疲れに咽喉かわき
+苦しむ折しも森蔭の
+一つの小さき家を見て
+吾等五人の乙女等は
+立寄り見れば白髪の
+一人の婆さんが住ひ居て
+先づ先づ渋茶を召がれよと
+手招きしたる嬉しさに
+暫く息を休めつつ
+水奔草の茶と知らず
+吾等は一度に飲み乾しぬ
+俄に頭は痛み出し
+手足身体腫れ上り
+身動きならぬ状態を見て
+婆はニツコと打ち笑ひ</p>
+            <p class="ja-classical-line">吾計略にかかりしよ
+汝乙女の玉の緒の
+生命は最早今日かぎり
+葭原の国津神等の生命を
+残らず取りて幽界の
+真正の鬼となせよかし
+吾の言葉に反きなば
+茨の鞭を振り上げて
+汝が全身打ち破り
+つらき目見せて呉れむずと
+威しの言葉に怖ぢ恐れ
+彼が教ふるままにして
+悲しき月日を送り来ぬ
+秋男の君は現世の
+人にしあれば言霊の
+力は強し吾々は
+精霊界にある身なれば
+其言霊に力あるべき
+言霊の光は出でず苦しみぬ
+心の中にて泣くばかり</p>
+            <p class="ja-classical-line">救はせ給へ水上の
+山に輝く巌ケ根の
+御子とあれます秋男神の
+御前に願ひ奉る
+五人乙女は鬼婆の
+頤使に甘んじ仕へつつ
+強き身魂の来訪を
+待ちに待ちたる甲斐ありて
+恨みを晴らす時は来ぬ
+ああたのもしや心地よや
+月見ケ丘の聖場に
+汝等が一行悉く
+艱まし呉れむと計画みしを
+譏り婆アは逆しらに
+生言霊に打出され
+生命からがら逃げ帰り
+一間に呻吟き居たりしゆ
+此時こそは幸ひと
+五人乙女は諜し合せ
+仇を打たむと思へども</p>
+            <p class="ja-classical-line">素より乙女の力には
+手向ふ由もなかりけり
+かかる処へ現身の
+身体もたす汝一行
+来らせ給ふ嬉しさに
+毒と知りつつ水奔草の
+湯を勧めむとしたりけり
+必ず怒らせ給ふなかれ
+君を力と思ふが故に
+吾等と共に幽界に
+現はれまして鬼婆を
+討ち罰めつつ霊界の
+禍ひ除くと思へばなり
+許させ給へ秋男神
+御供の神の御前に
+真心あらはし詫び奉る
+外の乙女も同じ心の捨小舟
+取りつく島もなかりしが
+今日の吉き日の喜びに
+蘇りけりあら尊</p>
+            <p class="ja-classical-line">偏に感謝し奉る
+是より君は言霊の
+天の数歌うたひつつ
+火炎の山に進みませ
+譏り婆さんの第一に
+恐れて忌むは言霊よ
+吾は後より蔭ながら
+君の出で立ち送りつつ
+一臂の力を添へ奉らむ
+進ませ給へ』</p>
+            <p class="ja-classical-line">と言ひながら、五人の乙女は白煙となりて消え失せにけり。よくよく見れば、森蔭の雑草の生ひ茂る中に一行は腰を下してうづくまり居つ。破家の蔭も巌窟も跡形なく、小鳥の囀り、虫の啼く音ばかりなりける。</p>
+            <p class="ja-classical-line">秋男は歌ふ。</p>
+            <p class="ja-classical-line">『不思議なる夢を見しより鬼婆の
+悩める状態を覚らひにけり。
+破家も巌窟も全く消え失せて
+野辺吹く風の音さやかなり』</p>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+    <footer class="footer-nav">
+      <a href="c09.html" class="footer-btn prev">
+        <span class="nav-sub">&larr; Previous</span>
+        <span class="nav-title">Chapter 9: 露の路 [2013]</span>
+      </a>
+      <a href="c11.html" class="footer-btn next">
+        <span class="nav-sub">Next &rarr;</span>
+        <span class="nav-title">Chapter 11: Fire 炎 Mountain [2015]</span>
+      </a>
+    </footer>
+  </div>
+</body>
+</html>
